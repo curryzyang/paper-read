@@ -1,12 +1,12 @@
 # 日报 · 2026-07-03
 
-- 生成时间：2026-07-03 15:16:18
+- 生成时间：2026-07-03 23:48:00
 - 当次推荐总数：10
 - 精读区：10
 - 速读区：0
 
 ## 今日简报
-今日共推荐10篇论文，建议精读1篇，速读9篇。最值得优先看的主题是**深度学习理论**，即评分最高的《From Approximation to Emergence: A Theory of Deep Learning》，该专著从近似、优化、泛化到涌现提供了统一的理论框架，适合深入研读。其他速读涵盖编程示例鲁棒性、脑电压力检测、反事实解释、近似最近邻搜索、LLM架构推断、认知诊断、ECG识别、肿瘤分类及电池数据发现等方向。
+今日共推荐10篇论文。建议精读1篇：《From Approximation to Emergence: A Theory of Deep Learning》（评分2.874），该专著系统梳理了深度学习从近似到涌现的理论演进，适合理论研究者作为框架性参考。其余9篇可速读，重点关注LBE对鲁棒性的新视角（2.454）、EEG压力检测的频域流形方法（2.279）以及高维网格ANN的缩放规律（2.199）。
 
 ## 精读区
 1. [From Approximation to Emergence: A Theory of Deep Learning](/2026/07/03/260701311v1-from-approximation-to-emergence-a-theory-of-deep-learning) （2.9/10）

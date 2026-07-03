@@ -9,7 +9,7 @@
 - 链接：[arXiv / Source](http://arxiv.org/abs/2607.01286v1) · [PDF](https://arxiv.org/pdf/2607.01286v1)
 
 ## TLDR
-IonSense-QKG is a metadata framework that enriches lithium-ion battery dataset records with quantum-relevant attributes and introduces a Quantum Readiness Score to rank datasets for near-term hybrid quantum-classical machine learning workflows.
+IonSense-QKG is a metadata framework that enriches lithium-ion battery dataset records with quantum-relevant fields and a heuristic Quantum Readiness Score to help researchers discover datasets suitable for near-term hybrid quantum-classical machine learning.
 
 ## Abstract
 Public lithium-ion battery datasets are increasingly used for state-of-health estimation, remaining-useful-life prediction, anomaly detection, electrochemical diagnostics, second-life analytics, and battery safety research. However, these datasets vary substantially in chemistry, modality, scale, label quality, sequence structure, access status, and preprocessing complexity. These differences directly affect whether a dataset is feasible for near-term hybrid quantum-classical machine-learning workflows.

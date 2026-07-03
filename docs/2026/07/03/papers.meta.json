@@ -1,7 +1,7 @@
 {
   "label": "2026-07-03",
   "date": "2026-07-03",
-  "generated_at": "2026-07-03T15:16:18",
+  "generated_at": "2026-07-03T23:48:00",
   "count": 10,
   "papers": [
     {
@@ -18,7 +18,7 @@
       "abstract": "Deep learning has outgrown any single mathematical explanation. From Approximation to Emergence develops a unified, proof-oriented account of modern deep learning theory, tracing a path from the classical foundations of approximation, optimization, and generalization to the contemporary mechanisms of overparameterization, robustness, generative modeling, transformers, in-context learning, scaling laws, interpretability, alignment, and emergence. Rather than presenting isolated results, the book organizes a broad literature into a coherent research narrative: each theory is examined through the object it controls, the assumptions that make it valid, and the phenomena it leaves unexplained. Written for researchers, graduate students, and mathematically trained practitioners, this monograph offers a rigorous map of deep learning theory as it stands today: powerful, incomplete, and increasingly centered on the question of how learned mechanisms arise from scale, data, architecture, and training.",
       "url": "http://arxiv.org/abs/2607.01311v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01311v1",
-      "tldr": "This monograph offers a unified, proof-oriented synthesis of deep learning theory, tracing a path from classical approximation, optimization, and generalization to modern mechanisms such as overparameterization, robustness, generative modeling, transformers, in-context learning, scaling laws, interpretability, alignment, and emergence, while critically examining each theory's assumptions and limitations.",
+      "tldr": "This monograph presents a unified, proof-oriented synthesis of deep learning theory, tracing the path from classical approximation, optimization, and generalization to modern phenomena such as overparameterization, emergence, and interpretability while systematically comparing the assumptions, mechanisms, and limitations across theoretical frameworks.",
       "affiliations": [
         "Sun Yat-sen University"
       ],
@@ -41,7 +41,7 @@
       "abstract": "Programming-by-example systems infer programs from a small set of input-output examples. Robust PBE work usually models wrong examples as samples from a stochastic noise process and then minimizes an expected or empirical loss. This paper studies a different failure mode: an adversary who sees the synthesizer and chooses the examples whose corruption most damages the returned program. We formalize fixed-set worst-case corruption for finite PBE version spaces, implement exact-within-bounded-pool and heuristic corruption searches for a string-transformation DSL, and introduce version-space partition aggregation (VPA), a defense that synthesizes on disjoint example groups and votes by semantic signatures. The central claim is deliberately bounded and partly negative: low-margin PBE tasks have an adversarial robustness dimension that random-typo and noisy-PBE evaluations miss, while semantic partition aggregation helps only when the clean semantics keep a partition vote margin, which often fails on realistic tasks. Evidence from curated/generated DSL tasks, accepted public SyGuS PBE_SLIA slices, SYNTRA Playgol v2, and noisy-PBE objective baselines supports that boundary. One curated edit flips all 8 spike tasks while 200-trial typo, DSL-pool, and distance-matched random controls succeed on 10.3%, 11.0%, and 16.7%; generated margin-1 rows flip under budget 1 yet VPA recovers them; on public SyGuS the vote margin is near one, so an adaptive attacker drives VPA accuracy to zero; accepted public SyGuS slices move across exact-within-pool budget boundaries; and Playgol shows positive paired-bootstrap gaps against typo and same-pool random controls on the 141 accepted rows. A small exact-output prompt harness over 20 controlled margin-1 tasks shows the same qualitative clean-to-attacked pattern across local and API models, while it is treated as a scope check, not a broad LLM benchmark.",
       "url": "http://arxiv.org/abs/2607.01280v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01280v1",
-      "tldr": "This paper formalizes fixed-set worst-case corruption in programming-by-example, showing that low-margin tasks are vulnerable to targeted attacks that stochastic noise models miss, and proposes a defense (version-space partition aggregation) that recovers only when the clean semantics retain a partition vote margin.",
+      "tldr": "The paper introduces fixed-set adversarial corruption for programming-by-example and demonstrates that low-margin tasks are vulnerable to targeted attacks that bypass typical noisy-PBE defenses, while the proposed version-space partition aggregation (VPA) defense only recovers when the clean semantics keep a vote margin, a condition rarely met in practice.",
       "affiliations": [
         "University of Waterloo"
       ],
@@ -68,12 +68,12 @@
       "abstract": "Cross-subject EEG stress detection remains challenging because discriminative stress-related patterns are both subject-dependent and frequency-specific. Conventional Riemannian methods model spatial covariance mainly in the time domain, overlooking neural oscillations that are critical for high-level cognitive state decoding, while standard temporal tokenization often fragments inter-slice temporal coherence. To address these limitations, we propose \\method{}, an Intra-Inter Riemannian Manifold Attention Network for EEG-based stress detection. \\method{} constructs spatial covariance matrices independently at each frequency point and maps them to the SPD tangent space, preserving channel-wise geometry together with frequency-specific discriminative cues. It further introduces frequency cluster aggregation to select informative spectral components and reduce redundancy by forming compact, data-driven frequency clusters aligned with EEG rhythms. Finally, an intra-inter slice attention module adaptively integrates local slice-level spectral dynamics and global temporal context across EEG sequences. Experiments on three datasets show that \\method{} consistently outperforms five state-of-the-art baselines, achieving up to 82.78\\% balanced accuracy while remaining efficient with only 1.60M parameters and 31.95M FLOPs.",
       "url": "http://arxiv.org/abs/2607.01279v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01279v1",
-      "tldr": "I\\textsuperscript{2}RiMA introduces a frequency-aware Riemannian manifold attention network that constructs per-frequency spatial covariance matrices and uses intra-inter slice attention to capture both local spectral and global temporal dependencies, achieving state-of-the-art cross-subject EEG stress detection.",
+      "tldr": "I²RiMA proposes a frequency-aware Riemannian manifold attention network that constructs per-frequency covariance matrices and integrates intra-inter slice temporal attention to capture both local spectral and global temporal EEG features, achieving state-of-the-art cross-subject stress detection performance.",
       "affiliations": [
-        "Capital Normal University",
-        "Karlsruhe Institute of Technology"
+        "Karlsruhe Institute of Technology",
+        "Capital Normal University"
       ],
-      "affiliations_text": "Capital Normal University, Karlsruhe Institute of Technology",
+      "affiliations_text": "Karlsruhe Institute of Technology, Capital Normal University",
       "score": 2.2790428199232555,
       "score_text": "2.3"
     },
@@ -94,7 +94,7 @@
       "abstract": "Counterfactual explanations explain machine learning predictions by identifying minimal input changes that would alter a model's decision. Although many existing methods successfully generate prediction-changing alternatives, they often produce unrealistic or infeasible recommendations due to a lack of explicit mechanisms for incorporating domain knowledge and intervention constraints. Neuro-symbolic AI offers a promising direction by combining data-driven predictive models with symbolic reasoning capable of representing human-understandable rules and feasible actions. This paper presents PACE, a modular neuro-symbolic framework for generating feasibility-aware counterfactual explanations. The framework separates prediction and reasoning into two components: a neural predictive model for classification and a symbolic reasoning layer that enforces domain-specific constraints during counterfactual generation. By explicitly modeling feasible interventions, the framework produces explanations consistent with domain knowledge while remaining interpretable and actionable. The approach is model-agnostic and adaptable to domains requiring realistic decision support. A case study is conducted on the Adult Income dataset, combining a multilayer perceptron classifier with Answer Set Programming (ASP) rules encoding feasible modifications to education, occupation, and working hours while preserving immutable attributes. Results highlight the trade-off between counterfactual validity and plausibility and show that symbolic constraints yield explanations that better satisfy domain-specific feasibility requirements, illustrating the potential of neuro-symbolic methods for transparent, feasibility-aware counterfactual explanation in explainable AI.",
       "url": "http://arxiv.org/abs/2607.01306v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01306v1",
-      "tldr": "PACE is a modular neuro-symbolic framework that integrates neural predictive models with symbolic reasoning via Answer Set Programming to generate feasible, actionable counterfactual explanations that enforce domain-specific constraints.",
+      "tldr": "PACE is a modular neuro-symbolic framework that integrates neural prediction with Answer Set Programming constraints to generate feasible, minimal counterfactual explanations that respect domain knowledge, as demonstrated on the Adult Income dataset.",
       "affiliations": [
         "Norwegian University of Life Sciences",
         "University of Klagenfurt"
@@ -123,10 +123,10 @@
       "abstract": "Grid-based approaches to approximate nearest neighbor (ANN) search have been absent from modern scaling analyses. We present a systematic characterization of a multiprobe grid algorithm with respect to dataset size $N$ and dimensionality $d$. Our experiments reveal a previously unreported $d$-scaling crossover on the GloVe embedding family, in which multiprobe grid search maintains an approximately constant dimensional scaling exponent while other graph-, tree-, and partitioning-based methods exhibit degrading throughput. The advantage comes with near-linear query scaling in $N$, but also with lower indexing cost than competing ANN methods. Our results suggest that grid-based methods such as multiprobe grid may be competitive in rebuild-heavy or high-dimensional settings where indexing cost and dimensional robustness dictate performance. More broadly, recent work has formalized self-attention as an ANN operation. Thus, the $N$- and $d$-scaling properties of ANN algorithms may guide cost analysis of efficient transformer architectures. Code is available at: https://github.com/weiz345/MultiProbeANN.",
       "url": "http://arxiv.org/abs/2607.01283v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01283v1",
-      "tldr": "This paper presents the first systematic scaling analysis of grid-based approximate nearest neighbor search, revealing a previously unreported dimensional scaling crossover where multiprobe grids maintain constant scaling efficiency in high dimensions while other methods degrade, offering competitive performance with lower indexing costs.",
+      "tldr": "This paper reveals that multiprobe grid-based approximate nearest neighbor search exhibits a robust dimensional scaling crossover and near-linear query scaling, making it particularly competitive in high-dimensional and rebuild-heavy settings.",
       "affiliations": [],
       "affiliations_text": "Unknown affiliation",
-      "score": 2.1991253266179807,
+      "score": 2.1991253328179985,
       "score_text": "2.2"
     },
     {
@@ -148,7 +148,7 @@
       "abstract": "In practice, most commercial LLM providers do not publicly release details of underlying LLM architectures. However, prior work has shown that given limited API access to an LLM (namely, top-$k$ logits and/or a logit bias function), one can recover certain architectural details of an LLM, such as the hidden dimension of the feed-forward network. Perhaps in response to these results, most commercial LLM providers have restricted their APIs to expose only the single logit for each decoded token, and they no longer give users the ability to bias logits. We show that even under current restrictive APIs, several architectural parameters are still recoverable. We present NightVision, an attack that uses restrictive black-box API access to estimate the hidden dimension, depth, and parameter count of an LLM. Algorithmically, NightVision relies on a novel common set prompting technique in which multiple prompts expose log probabilities for the same set of output tokens; a spectral analysis of these results is used to infer hidden dimension. NightVision additionally uses end-to-end time to first token (TTFT) measurements and the estimated hidden dimension to estimate depth and parameter count. We empirically evaluate NightVision on 32 open-source LLMs, recovering hidden dimension to within 23% average relative error across all models (9% on MoE models), and depth and parameter count to within 53% for models exceeding three billion parameters. We run extensive ablations to demonstrate how these accuracies scale with token budget and model properties. Overall, our results suggest that current LLM APIs are not sufficiently restricted to fully obfuscate the architectural details of their underlying models.",
       "url": "http://arxiv.org/abs/2607.01313v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01313v1",
-      "tldr": "Even with restrictive APIs that only expose a single logit per token and no logit bias, NightVision successfully infers an LLM's hidden dimension (within 23% average relative error), depth, and parameter count using common-set prompting and timing side channels.",
+      "tldr": "NightVision recovers LLM hidden dimension, depth, and parameter count from restrictive APIs that expose only a single log probability and response timing, achieving 23% average error on hidden dimension across 32 open-source models.",
       "affiliations": [
         "Pittsburgh Supercomputing Center",
         "Carnegie Mellon University"
@@ -171,7 +171,7 @@
       "abstract": "The research proposes a multilayer Q-matrix-embedded neural network for cognitive diagnosis (M-QCDNet), which integrates the structural interpretability of cognitive diagnostic models (CDMs) with the deep learning neural network (NN). M-QCDNet structures the item-skill relationship using the Q-matrix as a structural prior, ensuring latent mastery profiles remain interpretable and consistent with cognitive theory, followed by the proposed loss function with an L2 penalty to penalize skills not aligned with the Q-matrix and to balance predictive performance and structural alignment. Corresponding evaluation matrices, the interpretable alignment-based metrics that quantify the degree to which predicted skill activations correspond to item-level skills, were further developed. M-QCDNet offers practical benefits for classroom practice, enabling early detection of learning difficulties and supporting mastery-based interventions. By embedding diagnostic validity into model design, M-QCDNet bridges psychometric transparency and neural flexibility, advancing interpretable, fair, and actionable AI for cognitive diagnostics.",
       "url": "http://arxiv.org/abs/2607.01278v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01278v1",
-      "tldr": "The paper introduces M-QCDNet, a multilayer neural network that embeds the Q-matrix as a structural prior to ensure interpretable latent skill profiles aligned with cognitive theory, using a regularized loss function and novel alignment metrics to balance predictive performance with psychometric interpretability.",
+      "tldr": "M-QCDNet embeds the Q-matrix as a structural prior across multiple neural network layers, using regularization and novel alignment-based metrics to ensure that latent skill representations remain both predictive and psychometrically interpretable for cognitive diagnosis.",
       "affiliations": [
         "Columbia University"
       ],
@@ -201,16 +201,10 @@
       "abstract": "In light of strides in Arti cial Intelligence (AI) and its wide spread application, challenges persist in the interpretability of AI models, particularly within specialized domains like healthcare, such as electro cardiograph (ECG) recognition. Rather than relying solely on end-to-end convolutional neural networks, this paper introduces a novel approach using a domain knowledge-based graph convolution network for ECG recognition. Key landmarks points of PRQST, vital to ECG interpreta tion, are incorporated as domain knowledge. The double-stream directed graph is employed to model both intra and inter ECG cycles. Speci cally, spatial directed graphs capture the positional relationships among key points, while temporal directed graphs delineate temporal dependencies between adjacent cycles in extended ECG sequences. Experimental re sults on the First Chinese ECG Intelligent Competition dataset, which speci cally classify ECG into nine categories, prove the e cacy of the proposed model. The overall average F1 score is 88.1%, the average F1 score of rare categories is 76.3%, both outperform the state-of-the-art models. The introduction of domain knowledge did enhance the detec tion performance, especially for rare categories.",
       "url": "http://arxiv.org/abs/2607.01282v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01282v1",
-      "tldr": "This paper proposes a domain knowledge-based temporal-spatial graph convolution network that models intra- and inter-cycle ECG relationships using key landmarks (PRQST) within a double-stream directed graph, achieving state-of-the-art F1 scores of 88.1% overall and 76.3% on rare categories.",
-      "affiliations": [
-        "China Mobile Research Institute",
-        "China Mobile GBA (Greater Bay Area) Innovation Institute",
-        "Chinese Academy of Sciences",
-        "Beijing Jiaotong University",
-        "Purple Mountain Laboratory"
-      ],
-      "affiliations_text": "China Mobile Research Institute, China Mobile GBA (Greater Bay Area) Innovation Institute, Chinese Academy of Sciences, Beijing Jiaotong University, Purple Mountain Laboratory",
-      "score": 1.5545136115313536,
+      "tldr": "This paper introduces a domain knowledge-based temporal-spatial graph convolution network for ECG recognition that models intra- and inter-cycle relationships using double-stream directed graphs with key PRQST landmarks, achieving state-of-the-art F1 scores, especially for rare categories.",
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 1.5545136137944353,
       "score_text": "1.6"
     },
     {
@@ -233,7 +227,7 @@
       "abstract": "NA methylation profiling has become a powerful approach for central nervous system (CNS) tumor classification, yet important challenges remain regarding cross-cohort transferability, methodological correctness, and robust multiclass evaluation. In this work, we propose a novel and methodologically rigorous machine-learning approach for methylation-based CNS tumor classification that combines Sparse Random Projection for dimensionality reduction with multinomial logistic regression for classification. We evaluate the proposed approach in the same general experimental setting established by a widely used reference classifier. On the 2,801-sample reference cohort, our method achieves a mean accuracy of 96\\% under stratified 3-fold cross-validation. On the independent 1,104-sample clinical evaluation cohort, it reaches 86\\% accuracy at the 91-class level and 93\\% when predictions are evaluated at the methylation class family level. These results improve upon the corresponding state-of-the-art reference figures of 82\\% class-level concordance and 88\\% family-level concordance, yielding absolute gains of approximately 4 and 5 percentage points, respectively. This improvement is clinically relevant: in a diagnostic setting, a 5-point increase in correct tumor classification can directly affect cancer subtype assignment and, in turn, influence treatment selection and downstream clinical decision-making. Our results show that the proposed model, grounded in stronger methodological practice in machine learning, consistently outperforms the previous state of the art across evaluation settings and can materially improve the reliability of CNS tumor classification.",
       "url": "http://arxiv.org/abs/2607.01307v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01307v1",
-      "tldr": "This paper presents a novel machine learning method combining Sparse Random Projection and multinomial logistic regression for DNA methylation-based central nervous system tumor classification, achieving clinically significant improvements in accuracy over the prior state-of-the-art.",
+      "tldr": "A novel machine learning pipeline combining Sparse Random Projection with multinomial logistic regression outperforms the state-of-the-art DNA methylation-based CNS tumor classifier, achieving class-level accuracy of 86% and family-level accuracy of 93% on an independent cohort.",
       "affiliations": [
         "Universidade Federal de Pelotas",
         "Hospital de Clínicas de Porto Alegre"
@@ -257,7 +251,7 @@
       "abstract": "Public lithium-ion battery datasets are increasingly used for state-of-health estimation, remaining-useful-life prediction, anomaly detection, electrochemical diagnostics, second-life analytics, and battery safety research. However, these datasets vary substantially in chemistry, modality, scale, label quality, sequence structure, access status, and preprocessing complexity. These differences directly affect whether a dataset is feasible for near-term hybrid quantum-classical machine-learning workflows.\n  This paper presents IonSense-QKG, a quantum-readiness metadata framework for lithium-ion battery dataset discovery. Starting from the EV-Battery-IonSense index, the proposed framework enriches public battery dataset records with quantum-relevant metadata, including task type, sensing modality, chemistry, label availability, sequence type, preprocessing requirements, candidate quantum encodings, estimated qubit range, and NISQ feasibility. A transparent Quantum Readiness Score is introduced to rank datasets as candidate resources for future hybrid quantum-classical battery benchmarks. The score is intended as a dataset-selection heuristic, not as evidence of quantum advantage.\n  The framework demonstrates query-based discovery over enriched metadata to identify datasets suitable for compact quantum feature maps, quantum time-series workflows, limited-label anomaly detection, and future battery-health benchmarking. The released artifact includes metadata tables, scoring scripts, robustness checks, link-checking utilities, and SQL-style query examples. IonSense-QKG positions dataset selection as a data-management problem and provides a reproducible foundation for data-centric quantum battery analytics.",
       "url": "http://arxiv.org/abs/2607.01286v1",
       "pdf_url": "https://arxiv.org/pdf/2607.01286v1",
-      "tldr": "IonSense-QKG is a metadata framework that enriches lithium-ion battery dataset records with quantum-relevant attributes and introduces a Quantum Readiness Score to rank datasets for near-term hybrid quantum-classical machine learning workflows.",
+      "tldr": "IonSense-QKG is a metadata framework that enriches lithium-ion battery dataset records with quantum-relevant fields and a heuristic Quantum Readiness Score to help researchers discover datasets suitable for near-term hybrid quantum-classical machine learning.",
       "affiliations": [
         "Amrita Vishwa Vidyapeetham"
       ],
