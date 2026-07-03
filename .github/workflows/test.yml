@@ -3,20 +3,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-report:
+  smoke-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      #  with:
-      #    repository: ${{ vars.REPOSITORY }}
-      #    ref: ${{ vars.REF }}
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v7.1.4
 
-
-      - name: Run script
+      - name: Check secrets and external APIs
         env:
           ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
           ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
@@ -27,7 +23,36 @@ jobs:
           export DEBUG=true
           if [ -n "$CUSTOM_CONFIG" ]; then
             printf "%b\n" "$CUSTOM_CONFIG" > config/custom.yaml
-            echo "Use custom config: "
+            echo "Use custom config:"
             cat config/custom.yaml
           fi
-          uv run src/zotero_arxiv_daily/main.py
+          uv run python - <<'PY'
+          import os
+          from hydra import compose, initialize_config_dir
+          from openai import OpenAI
+          from pyzotero import zotero
+
+          required = ["ZOTERO_ID", "ZOTERO_KEY", "OPENAI_API_KEY", "OPENAI_API_BASE"]
+          missing = [name for name in required if not os.getenv(name)]
+          if missing:
+              raise SystemExit(f"Missing required secrets: {', '.join(missing)}")
+
+          with initialize_config_dir(config_dir=os.path.abspath("config"), version_base=None):
+              cfg = compose(config_name="default")
+
+          print("Testing Zotero credentials...")
+          zot = zotero.Zotero(str(cfg.zotero.user_id), "user", str(cfg.zotero.api_key))
+          items = zot.items(limit=1)
+          print(f"Zotero OK, fetched {len(items)} item(s).")
+
+          print("Testing OpenAI-compatible LLM endpoint...")
+          client = OpenAI(api_key=str(cfg.llm.api.key), base_url=str(cfg.llm.api.base_url))
+          model = str(cfg.llm.generation_kwargs.model)
+          response = client.chat.completions.create(
+              model=model,
+              messages=[{"role": "user", "content": "Reply with OK."}],
+              max_tokens=8,
+          )
+          content = response.choices[0].message.content or ""
+          print(f"LLM OK, model={model}, response={content[:40]!r}")
+          PY
