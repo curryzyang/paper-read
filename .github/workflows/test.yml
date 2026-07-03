@@ -26,9 +26,20 @@ jobs:
         run: |
           export DEBUG=true
           if [ -n "$CUSTOM_CONFIG" ]; then
-            printf "%b\n" "$CUSTOM_CONFIG" > config/custom.yaml
-            echo "Use custom config:"
-            cat config/custom.yaml
+            printf "%b\n" "$CUSTOM_CONFIG" > /tmp/custom.yaml
+            if uv run python - <<'PY'
+          from omegaconf import OmegaConf
+          try:
+              OmegaConf.load("/tmp/custom.yaml")
+          except Exception as exc:
+              detail = str(exc).splitlines()[0] if str(exc) else repr(exc)
+              print(f"::warning::Ignoring invalid CUSTOM_CONFIG and using checked-in config/custom.yaml. Details: {type(exc).__name__}: {detail}")
+              raise SystemExit(1)
+          PY
+            then
+              cp /tmp/custom.yaml config/custom.yaml
+              echo "Use CUSTOM_CONFIG from repository variables."
+            fi
           fi
           uv run python - <<'PY'
           import os
