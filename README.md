@@ -55,6 +55,14 @@ web:
   language: Chinese
 ```
 
+If you use `CUSTOM_CONFIG`, keep it as a partial override (not a full replacement).
+At minimum, ensure `executor.source` exists:
+
+```yaml
+executor:
+  source: ["arxiv"]   # or ["arxiv", "biorxiv", "medrxiv"]
+```
+
 ## Run Locally
 
 ```bash
