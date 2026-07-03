@@ -1,0 +1,15 @@
+# PACE: A Neuro-Symbolic Framework for Plausible and Actionable Counterfactual Explanations
+
+- 区域：精读区
+- 排名：4
+- 匹配度：2.2/10
+- 来源：arxiv
+- 作者：Pavel Iakovets, Liyanapathiranage Sudeepika Wajirakumari Samarathunga, Martin Thomas Horsch, Fadi Al Machot
+- 机构：Norwegian University of Life Sciences, University of Klagenfurt
+- 链接：[arXiv / Source](http://arxiv.org/abs/2607.01306v1) · [PDF](https://arxiv.org/pdf/2607.01306v1)
+
+## TLDR
+PACE is a modular neuro-symbolic framework that integrates neural predictive models with symbolic reasoning via Answer Set Programming to generate feasible, actionable counterfactual explanations that enforce domain-specific constraints.
+
+## Abstract
+Counterfactual explanations explain machine learning predictions by identifying minimal input changes that would alter a model's decision. Although many existing methods successfully generate prediction-changing alternatives, they often produce unrealistic or infeasible recommendations due to a lack of explicit mechanisms for incorporating domain knowledge and intervention constraints. Neuro-symbolic AI offers a promising direction by combining data-driven predictive models with symbolic reasoning capable of representing human-understandable rules and feasible actions. This paper presents PACE, a modular neuro-symbolic framework for generating feasibility-aware counterfactual explanations. The framework separates prediction and reasoning into two components: a neural predictive model for classification and a symbolic reasoning layer that enforces domain-specific constraints during counterfactual generation. By explicitly modeling feasible interventions, the framework produces explanations consistent with domain knowledge while remaining interpretable and actionable. The approach is model-agnostic and adaptable to domains requiring realistic decision support. A case study is conducted on the Adult Income dataset, combining a multilayer perceptron classifier with Answer Set Programming (ASP) rules encoding feasible modifications to education, occupation, and working hours while preserving immutable attributes. Results highlight the trade-off between counterfactual validity and plausibility and show that symbolic constraints yield explanations that better satisfy domain-specific feasibility requirements, illustrating the potential of neuro-symbolic methods for transparent, feasibility-aware counterfactual explanation in explainable AI.

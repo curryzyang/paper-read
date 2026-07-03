@@ -1,1 +1,14 @@
 - [首页](/README)
+
+- 2026-07-03
+  - [日报](/2026/07/03/README)
+  - [精读 · From Approximation to Emergence: A Theory of Deep Learning](/2026/07/03/260701311v1-from-approximation-to-emergence-a-theory-of-deep-learning)
+  - [精读 · Fixed-Set Robustness in Programming by Example: Example Corruption and Semantic Partition Recovery](/2026/07/03/260701280v1-fixed-set-robustness-in-programming-by-example-example-corruption-and-semantic-partition-recovery)
+  - [精读 · I\textsuperscript{2}RiMA: Spectral Riemannian Representation with Temporal Attention for Mental Stress Detection based on EEG Signals](/2026/07/03/260701279v1-itextsuperscript2rima-spectral-riemannian-representation-with-temporal-attention-for-mental-stress-detection-based-on-eeg-signals)
+  - [精读 · PACE: A Neuro-Symbolic Framework for Plausible and Actionable Counterfactual Explanations](/2026/07/03/260701306v1-pace-a-neuro-symbolic-framework-for-plausible-and-actionable-counterfactual-explanations)
+  - [精读 · Scaling Laws for Grid-Based Approximate Nearest Neighbor Search in High Dimensions](/2026/07/03/260701283v1-scaling-laws-for-grid-based-approximate-nearest-neighbor-search-in-high-dimensions)
+  - [精读 · Black-Box Inference of LLM Architectural Properties with Restrictive API Access](/2026/07/03/260701313v1-black-box-inference-of-llm-architectural-properties-with-restrictive-api-access)
+  - [精读 · Multilayer Q-Matrix-Embedded Neural Network for Cognitive Diagnosis (M-QCDNet): Structure-Aware Deep Learning Architecture for Psychometric Interpretability](/2026/07/03/260701278v1-multilayer-q-matrix-embedded-neural-network-for-cognitive-diagnosis-m-qcdnet-structure-aware-deep-learning-architecture-for-psychometric-interpretability)
+  - [精读 · Domain Knowledge Based Temporal-Spatial Graph Convolution Network for ECG Recognition](/2026/07/03/260701282v1-domain-knowledge-based-temporal-spatial-graph-convolution-network-for-ecg-recognition)
+  - [精读 · A Novel Machine Learning Approach for Central Nervous System Tumor Classification from DNA Methylation](/2026/07/03/260701307v1-a-novel-machine-learning-approach-for-central-nervous-system-tumor-classification-from-dna-methylation)
+  - [精读 · IonSense-QKG: A Quantum-Readiness Metadata Framework for Lithium-Ion Battery Dataset Discovery](/2026/07/03/260701286v1-ionsense-qkg-a-quantum-readiness-metadata-framework-for-lithium-ion-battery-dataset-discovery)
