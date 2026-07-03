@@ -17,10 +17,11 @@ jobs:
 
       - name: Check secrets and external APIs
         env:
-          ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
-          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          ZOTERO_ID: ${{ secrets.ZOTERO_ID || vars.ZOTERO_ID }}
+          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY || vars.ZOTERO_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || vars.OPENAI_API_BASE || 'https://api.deepseek.com/v1' }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL || 'deepseek-chat' }}
           CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
         run: |
           export DEBUG=true
@@ -31,42 +32,68 @@ jobs:
           fi
           uv run python - <<'PY'
           import os
+          import traceback
           from hydra import compose, initialize_config_dir
           from openai import OpenAI
           from pyzotero import zotero
 
+          def fail(message: str, exc: Exception | None = None) -> None:
+              detail = message
+              if exc is not None:
+                  detail = f"{message} Details: {type(exc).__name__}: {exc}"
+              print(f"::error::{detail}")
+              summary = os.getenv("GITHUB_STEP_SUMMARY")
+              if summary:
+                  with open(summary, "a", encoding="utf-8") as handle:
+                      handle.write("### Smoke test failed\n\n")
+                      handle.write(detail + "\n")
+              if os.getenv("DEBUG", "").lower() == "true" and exc is not None:
+                  traceback.print_exception(type(exc), exc, exc.__traceback__)
+              raise SystemExit(1)
+
           required = ["ZOTERO_ID", "ZOTERO_KEY", "OPENAI_API_KEY"]
           missing = [name for name in required if not os.getenv(name)]
           if missing:
-              raise SystemExit(f"::error::Missing required secrets: {', '.join(missing)}")
+              fail(f"Missing required secrets or repository variables: {', '.join(missing)}")
 
-          with initialize_config_dir(config_dir=os.path.abspath("config"), version_base=None):
-              cfg = compose(config_name="default")
+          try:
+              with initialize_config_dir(config_dir=os.path.abspath("config"), version_base=None):
+                  cfg = compose(config_name="default")
+          except Exception as exc:
+              fail(
+                  "Hydra config compose failed. Check CUSTOM_CONFIG syntax and any ${oc.env:...} variables. ",
+                  exc,
+              )
 
           print("Testing Zotero credentials...")
           try:
               zot = zotero.Zotero(str(cfg.zotero.user_id), "user", str(cfg.zotero.api_key))
               items = zot.items(limit=1)
           except Exception as exc:
-              raise SystemExit(f"::error::Zotero API check failed. Verify ZOTERO_ID and ZOTERO_KEY read permission. Details: {exc}")
+              fail("Zotero API check failed. Verify ZOTERO_ID and ZOTERO_KEY read permission.", exc)
           print(f"Zotero OK, fetched {len(items)} item(s).")
 
           print("Testing OpenAI-compatible LLM endpoint...")
-          model = str(cfg.llm.generation_kwargs.model)
-          base_url = str(cfg.llm.api.base_url)
+          try:
+              model = str(cfg.llm.generation_kwargs.model)
+              base_url = str(cfg.llm.api.base_url)
+              api_key = str(cfg.llm.api.key)
+          except Exception as exc:
+              fail("LLM config read failed. Verify llm.api.key, llm.api.base_url, and llm.generation_kwargs.model.", exc)
+
           print(f"LLM config: base_url={base_url}, model={model}")
           try:
-              client = OpenAI(api_key=str(cfg.llm.api.key), base_url=base_url)
+              client = OpenAI(api_key=api_key, base_url=base_url)
               response = client.chat.completions.create(
                   model=model,
                   messages=[{"role": "user", "content": "Reply with OK."}],
                   max_tokens=8,
               )
           except Exception as exc:
-              raise SystemExit(
-                  "::error::LLM API check failed. For DeepSeek use OPENAI_API_BASE=https://api.deepseek.com/v1 "
-                  "and model=deepseek-chat in CUSTOM_CONFIG or OPENAI_MODEL=deepseek-chat. "
-                  f"Details: {exc}"
+              fail(
+                  "LLM API check failed. For DeepSeek use OPENAI_API_BASE=https://api.deepseek.com/v1 "
+                  "and OPENAI_MODEL=deepseek-chat, or set the same values in CUSTOM_CONFIG.",
+                  exc,
               )
           content = response.choices[0].message.content or ""
           print(f"LLM OK, model={model}, response={content[:40]!r}")

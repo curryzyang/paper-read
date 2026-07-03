@@ -23,10 +23,11 @@ jobs:
 
       - name: Generate static report
         env:
-          ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
-          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          ZOTERO_ID: ${{ secrets.ZOTERO_ID || vars.ZOTERO_ID }}
+          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY || vars.ZOTERO_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || vars.OPENAI_API_BASE || 'https://api.deepseek.com/v1' }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL || 'deepseek-chat' }}
           CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
         run: |
           if [ -n "$CUSTOM_CONFIG" ]; then
