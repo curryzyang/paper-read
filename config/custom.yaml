@@ -6,9 +6,9 @@ zotero:
 llm:
   api:
     key: ${oc.env:OPENAI_API_KEY}
-    base_url: ${oc.env:OPENAI_API_BASE}
+    base_url: ${oc.env:OPENAI_API_BASE,https://api.deepseek.com/v1}
   generation_kwargs:
-    model: gpt-4o-mini
+    model: ${oc.env:OPENAI_MODEL,deepseek-chat}
 
 source:
   arxiv:

@@ -35,27 +35,39 @@ jobs:
           from openai import OpenAI
           from pyzotero import zotero
 
-          required = ["ZOTERO_ID", "ZOTERO_KEY", "OPENAI_API_KEY", "OPENAI_API_BASE"]
+          required = ["ZOTERO_ID", "ZOTERO_KEY", "OPENAI_API_KEY"]
           missing = [name for name in required if not os.getenv(name)]
           if missing:
-              raise SystemExit(f"Missing required secrets: {', '.join(missing)}")
+              raise SystemExit(f"::error::Missing required secrets: {', '.join(missing)}")
 
           with initialize_config_dir(config_dir=os.path.abspath("config"), version_base=None):
               cfg = compose(config_name="default")
 
           print("Testing Zotero credentials...")
-          zot = zotero.Zotero(str(cfg.zotero.user_id), "user", str(cfg.zotero.api_key))
-          items = zot.items(limit=1)
+          try:
+              zot = zotero.Zotero(str(cfg.zotero.user_id), "user", str(cfg.zotero.api_key))
+              items = zot.items(limit=1)
+          except Exception as exc:
+              raise SystemExit(f"::error::Zotero API check failed. Verify ZOTERO_ID and ZOTERO_KEY read permission. Details: {exc}")
           print(f"Zotero OK, fetched {len(items)} item(s).")
 
           print("Testing OpenAI-compatible LLM endpoint...")
-          client = OpenAI(api_key=str(cfg.llm.api.key), base_url=str(cfg.llm.api.base_url))
           model = str(cfg.llm.generation_kwargs.model)
-          response = client.chat.completions.create(
-              model=model,
-              messages=[{"role": "user", "content": "Reply with OK."}],
-              max_tokens=8,
-          )
+          base_url = str(cfg.llm.api.base_url)
+          print(f"LLM config: base_url={base_url}, model={model}")
+          try:
+              client = OpenAI(api_key=str(cfg.llm.api.key), base_url=base_url)
+              response = client.chat.completions.create(
+                  model=model,
+                  messages=[{"role": "user", "content": "Reply with OK."}],
+                  max_tokens=8,
+              )
+          except Exception as exc:
+              raise SystemExit(
+                  "::error::LLM API check failed. For DeepSeek use OPENAI_API_BASE=https://api.deepseek.com/v1 "
+                  "and model=deepseek-chat in CUSTOM_CONFIG or OPENAI_MODEL=deepseek-chat. "
+                  f"Details: {exc}"
+              )
           content = response.choices[0].message.content or ""
           print(f"LLM OK, model={model}, response={content[:40]!r}")
           PY
