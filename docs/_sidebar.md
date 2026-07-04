@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-07-04
+  - [日报](/2026/07/04/README)
 - 2026-07-03
   - [日报](/2026/07/03/README)
   - [精读 · From Approximation to Emergence: A Theory of Deep Learning](/2026/07/03/260701311v1-from-approximation-to-emergence-a-theory-of-deep-learning)
