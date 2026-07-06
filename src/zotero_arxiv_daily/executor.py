@@ -115,6 +115,7 @@ class Executor:
             for p in tqdm(reranked_papers):
                 p.generate_tldr(self.openai_client, self.config.llm)
                 p.generate_affiliations(self.openai_client, self.config.llm)
+                p.generate_detailed_reading(self.openai_client, self.config.llm)
         logger.info("Publishing web report...")
         publish_daily_report(reranked_papers, self.config, self.openai_client)
         logger.info("Web report published successfully")

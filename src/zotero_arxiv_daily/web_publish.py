@@ -84,11 +84,31 @@ def _json_safe_paper(paper: Paper, section: str, paper_path: str, rank: int) -> 
         "url": paper.url,
         "pdf_url": paper.pdf_url,
         "tldr": paper.tldr,
+        "detailed_reading": paper.detailed_reading,
         "affiliations": paper.affiliations,
         "affiliations_text": _affiliations_text(paper.affiliations),
         "score": paper.score,
         "score_text": _score_text(paper.score),
     }
+
+
+def _detailed_reading_block(reading: dict[str, str] | None) -> str:
+    if not reading:
+        return "## 中文解读\n\n暂无可展示的详细解读。"
+
+    sections = [
+        ("### 一、研究动机", "motivation", "暂无可提取到论文动机。"),
+        ("### 二、方法（Method）", "method", "暂无可提取到方法细节。"),
+        ("### 三、结果（Result）", "result", "暂无可提取到结果说明。"),
+        ("### 四、结论（Conclusion）", "conclusion", "暂无可提取到结论。"),
+        ("### 五、方法论与关键细节", "key_details", "暂无可提取到关键细节。"),
+    ]
+
+    lines = ["## 中文解读"]
+    for title, key, fallback in sections:
+        content = reading.get(key) or fallback
+        lines.extend([title, _markdown_escape(content), ""])
+    return "\n".join(lines)
 
 
 def _paper_markdown(paper: Paper, section_label: str, rank: int) -> str:
@@ -123,6 +143,8 @@ def _paper_markdown(paper: Paper, section_label: str, rank: int) -> str:
             "",
             "## Abstract",
             abstract or "No abstract available.",
+            "",
+            _detailed_reading_block(paper.detailed_reading),
             "",
         ]
     )
