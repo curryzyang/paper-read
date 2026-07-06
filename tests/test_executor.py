@@ -240,3 +240,120 @@ def test_run_no_papers_generates_empty_report(config, monkeypatch, tmp_path):
     payload = report_jsons[0].read_text(encoding="utf-8")
     assert '"deep_dive": []' in payload
     assert '"quick_skim": []' in payload
+
+
+def test_run_generates_detailed_reading_for_deep_only(config, monkeypatch, tmp_path):
+    """Only deep-read papers should trigger detailed reading when toggle is on."""
+    from omegaconf import open_dict
+
+    from tests.canned_responses import (
+        make_sample_paper,
+        make_stub_openai_client,
+        make_stub_zotero_client,
+    )
+
+    with open_dict(config):
+        config.executor.source = ["arxiv"]
+        config.executor.reranker = "api"
+        config.web.output_dir = str(tmp_path / "docs")
+        config.web.archive_dir = str(tmp_path / "archive")
+        config.web.deep_count = 1
+        config.web.detailed_reading = True
+
+    detail_calls = []
+
+    def track_detailed(self, *_args, **_kwargs):
+        detail_calls.append(self.title)
+        self.detailed_reading = {
+            "motivation": "Motivation",
+            "method": "Method",
+            "result": "Result",
+            "conclusion": "Conclusion",
+            "key_details": "Details",
+        }
+        return self.detailed_reading
+
+    stub_zot = make_stub_zotero_client()
+    monkeypatch.setattr("zotero_arxiv_daily.executor.zotero.Zotero", lambda *a, **kw: stub_zot)
+
+    stub_client = make_stub_openai_client()
+    monkeypatch.setattr("zotero_arxiv_daily.executor.OpenAI", lambda **kw: stub_client)
+    monkeypatch.setattr("zotero_arxiv_daily.reranker.api.OpenAI", lambda **kw: stub_client)
+    monkeypatch.setattr("zotero_arxiv_daily.protocol.Paper.generate_detailed_reading", track_detailed)
+
+    import zotero_arxiv_daily.retriever.arxiv_retriever  # noqa: F401
+
+    from zotero_arxiv_daily.retriever.base import registered_retrievers
+
+    monkeypatch.setattr(
+        registered_retrievers["arxiv"],
+        "retrieve_papers",
+        lambda self: [
+            make_sample_paper(title="Deep Paper"),
+            make_sample_paper(title="Quick Paper"),
+            make_sample_paper(title="Quick Paper2"),
+        ],
+    )
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.base.sleep", lambda _: None)
+
+    executor = Executor(config)
+    monkeypatch.setattr(executor.reranker, "rerank", lambda papers, _corpus: papers)
+    executor.run()
+
+    assert detail_calls == ["Deep Paper"]
+
+
+def test_run_skips_detailed_reading_when_disabled(config, monkeypatch, tmp_path):
+    """No detailed reading calls when the toggle is off."""
+    from omegaconf import open_dict
+
+    from tests.canned_responses import (
+        make_sample_paper,
+        make_stub_openai_client,
+        make_stub_zotero_client,
+    )
+
+    with open_dict(config):
+        config.executor.source = ["arxiv"]
+        config.executor.reranker = "api"
+        config.web.output_dir = str(tmp_path / "docs")
+        config.web.archive_dir = str(tmp_path / "archive")
+        config.web.deep_count = 1
+        config.web.detailed_reading = False
+
+    detail_calls = []
+
+    def track_detailed(self, *_args, **_kwargs):
+        detail_calls.append(self.title)
+        return {
+            "motivation": "x",
+            "method": "y",
+            "result": "z",
+            "conclusion": "w",
+            "key_details": "v",
+        }
+
+    stub_zot = make_stub_zotero_client()
+    monkeypatch.setattr("zotero_arxiv_daily.executor.zotero.Zotero", lambda *a, **kw: stub_zot)
+
+    stub_client = make_stub_openai_client()
+    monkeypatch.setattr("zotero_arxiv_daily.executor.OpenAI", lambda **kw: stub_client)
+    monkeypatch.setattr("zotero_arxiv_daily.reranker.api.OpenAI", lambda **kw: stub_client)
+    monkeypatch.setattr("zotero_arxiv_daily.protocol.Paper.generate_detailed_reading", track_detailed)
+
+    import zotero_arxiv_daily.retriever.arxiv_retriever  # noqa: F401
+
+    from zotero_arxiv_daily.retriever.base import registered_retrievers
+
+    monkeypatch.setattr(
+        registered_retrievers["arxiv"],
+        "retrieve_papers",
+        lambda self: [make_sample_paper(title="P1"), make_sample_paper(title="P2")],
+    )
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.base.sleep", lambda _: None)
+
+    executor = Executor(config)
+    monkeypatch.setattr(executor.reranker, "rerank", lambda papers, _corpus: papers)
+    executor.run()
+
+    assert detail_calls == []

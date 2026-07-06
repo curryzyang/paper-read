@@ -111,7 +111,7 @@ def _detailed_reading_block(reading: dict[str, str] | None) -> str:
     return "\n".join(lines)
 
 
-def _paper_markdown(paper: Paper, section_label: str, rank: int) -> str:
+def _paper_markdown(paper: Paper, section_label: str, rank: int, include_detailed_reading: bool = False) -> str:
     title = _markdown_escape(paper.title)
     authors = _authors_text(paper.authors)
     abstract = _markdown_escape(paper.abstract)
@@ -144,10 +144,12 @@ def _paper_markdown(paper: Paper, section_label: str, rank: int) -> str:
             "## Abstract",
             abstract or "No abstract available.",
             "",
-            _detailed_reading_block(paper.detailed_reading),
-            "",
         ]
     )
+    if include_detailed_reading:
+        lines.append(_detailed_reading_block(paper.detailed_reading))
+        lines.append("")
+    return "\n".join(lines)
 
 
 def _fallback_daily_brief(deep_papers: list[Paper], quick_papers: list[Paper]) -> str:
@@ -361,7 +363,7 @@ def publish_daily_report(
             else:
                 quick_records.append(record)
             (day_dir / f"{slug}.md").write_text(
-                _paper_markdown(paper, section_label, rank),
+                _paper_markdown(paper, section_label, rank, include_detailed_reading=bool(paper.detailed_reading)),
                 encoding="utf-8",
             )
 

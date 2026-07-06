@@ -53,6 +53,18 @@ web:
   deep_count: 10
   quick_count: 15
   language: Chinese
+  detailed_reading: true  # Generate structured Chinese detailed reading for deep-read section only.
+```
+
+`detailed_reading` 开关说明：
+- `true`（默认）：精读区生成“研究动机/方法/结果/结论/关键细节”五段中文解读，速读区不生成。
+- `false`：全部文章仅保留 TL;DR，不输出中文详细解读。
+
+关闭开关示例（放在 `CUSTOM_CONFIG`）：
+
+```yaml
+web:
+  detailed_reading: false
 ```
 
 If you use `CUSTOM_CONFIG`, keep it as a partial override (not a full replacement).
