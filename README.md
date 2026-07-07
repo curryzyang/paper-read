@@ -89,6 +89,20 @@ python -m http.server 8000
 
 Visit `http://127.0.0.1:8000`.
 
+一键预览（推荐）：
+
+```bash
+chmod +x scripts/preview.sh
+./scripts/preview.sh         # 默认 8010 端口
+./scripts/preview.sh 8011    # 指定端口
+```
+
+如果你希望只生成报告文件并快速确认（不打开浏览器），可设置：
+
+```bash
+PREVIEW_OPEN_BROWSER=0 ./scripts/preview.sh
+```
+
 ## GitHub Pages
 
 Enable Pages in repository settings and publish from the default branch root.
