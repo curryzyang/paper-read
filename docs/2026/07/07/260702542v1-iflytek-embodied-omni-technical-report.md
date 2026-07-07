@@ -1,0 +1,15 @@
+# iFLYTEK-Embodied-Omni Technical Report
+
+- 区域：精读区
+- 排名：3
+- 匹配度：2.6/10
+- 来源：arxiv
+- 作者：Yuan Zhang, Jingfei Ni, Guanchen Lu, Shiqi Zhang, Qingshan Xu, Chi Liu, Xin Nie, Wenjie Xu, Lin Gao, Zhiyuan Cheng, Mingxin Zhou, Jiajia Wu, Diyuan Liu, Jia Pan, Chao Ji
+- 机构：Unknown affiliation
+- 链接：[arXiv / Source](http://arxiv.org/abs/2607.02542v1) · [PDF](https://arxiv.org/pdf/2607.02542v1)
+
+## TLDR
+iFLYTEK-Embodied-Omni is a unified multimodal foundation model that jointly models vision, language, and action with a brain-cerebellum architecture, achieving an average success rate of 89.6% on zero-shot embodied tasks.
+
+## Abstract
+General-purpose embodied agents must understand multimodal instructions, anticipate how their environment will evolve, and produce precise control actions over extended horizons. Existing approaches typically specialize in visual-language reasoning, video-based world modeling, or action generation, while cascaded pipelines that first synthesize future observations and then infer actions can introduce interface bottlenecks and compound prediction errors. We present iFLYTEK-Embodied-Omni, a unified multimodal foundation model that jointly models vision(videos and images), language, and action within a single Omni framework. Its modality-specific visual-language, video-generation, and action-generation components communicate through shared multimodal self-attention. This design establishes brain-cerebellum collaboration: the vision-language modeland video generation model form a high-level brain for instruction understanding, task planning, progress tracking, and future visual-state prediction, whereas the action generation modelserves as a low-level cerebellum that directly converts planned subgoals and shared multimodal context into executable action chunks. To develop these capabilities, we combine action-annotated and action-free embodied videos from human demonstrations and robot interactions with embodied reasoning, embodied perception, and general-purpose image-text data to construct a comprehensive dataset. We further adopt a four-stage strategy that progressively trains the VLM, VGM, and AGM before jointly fine-tuning the complete model.
