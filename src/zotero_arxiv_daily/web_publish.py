@@ -104,7 +104,7 @@ def _detailed_reading_block(reading: dict[str, str] | None) -> str:
         ("### 五、方法论与关键技术细节", "key_details", "暂无可提取到关键细节。"),
     ]
 
-    lines = ["## 中文解读"]
+    lines = ["## 精读解读（中文）"]
     for title, key, fallback in sections:
         content = reading.get(key) or fallback
         lines.extend([title, _markdown_escape(content), ""])
