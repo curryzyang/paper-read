@@ -1,12 +1,12 @@
 # 日报 · 2026-07-07
 
-- 生成时间：2026-07-07 07:40:38
+- 生成时间：2026-07-07 20:03:01
 - 当次推荐总数：10
-- 精读区：10
-- 速读区：0
+- 精读区：10 / 10
+- 速读区：0 / 15
 
 ## 今日简报
-今日共10篇论文，建议精读3篇，速读7篇。最值得优先看的是时间序列基础模型与联邦学习结合（QuantFlow）、具身智能统一框架（iFLYTEK-Embodied-Omni）及物理信息图神经网络（Physics-Informed GNN），分别聚焦隐私保护预测、多模态动作生成和鲁棒状态估计，创新性强。
+今日共推荐 10 篇论文，建议优先阅读精读区论文。
 
 ## 精读区
 1. [QuantFlow: A Federated Mamba-Based Post-Transformer Foundation Model for Time-Series Forecasting](/2026/07/07/260702632v1-quantflow-a-federated-mamba-based-post-transformer-foundation-model-for-time-series-forecasting) （2.7/10）
