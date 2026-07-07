@@ -94,14 +94,14 @@ def _json_safe_paper(paper: Paper, section: str, paper_path: str, rank: int) -> 
 
 def _detailed_reading_block(reading: dict[str, str] | None) -> str:
     if not reading:
-        return "## 中文解读\n\n暂无可展示的详细解读。"
+        return "## 精读解读（中文）\n\n暂无可展示的详细解读。"
 
     sections = [
         ("### 一、研究动机", "motivation", "暂无可提取到论文动机。"),
-        ("### 二、方法（Method）", "method", "暂无可提取到方法细节。"),
+        ("### 二、技术方案（Method）", "method", "暂无可提取到方法细节。"),
         ("### 三、结果（Result）", "result", "暂无可提取到结果说明。"),
         ("### 四、结论（Conclusion）", "conclusion", "暂无可提取到结论。"),
-        ("### 五、方法论与关键细节", "key_details", "暂无可提取到关键细节。"),
+        ("### 五、方法论与关键技术细节", "key_details", "暂无可提取到关键细节。"),
     ]
 
     lines = ["## 中文解读"]
@@ -126,40 +126,49 @@ def _paper_markdown(paper: Paper, section_label: str, rank: int, include_detaile
         links.append(f"[PDF]({pdf_url})")
     links_text = " · ".join(links) if links else "No link available"
 
-    return "\n".join(
-        [
-            f"# {title}",
-            "",
-            f"- 区域：{section_label}",
-            f"- 排名：{rank}",
-            f"- 匹配度：{_score_text(paper.score)}/10",
-            f"- 来源：{paper.source}",
-            f"- 作者：{authors}",
-            f"- 机构：{affiliations}",
-            f"- 链接：{links_text}",
-            "",
-            "## TLDR",
-            tldr,
-            "",
-            "## Abstract",
-            abstract or "No abstract available.",
-            "",
-        ]
-    )
+    lines = [
+        f"# {title}",
+        "",
+        f"- 区域：{section_label}",
+        f"- 排名：{rank}",
+        f"- 匹配度：{_score_text(paper.score)}/10",
+        f"- 来源：{paper.source}",
+        f"- 作者：{authors}",
+        f"- 机构：{affiliations}",
+        f"- 链接：{links_text}",
+        "",
+        "## TLDR",
+        tldr,
+        "",
+        "## Abstract",
+        abstract or "No abstract available.",
+        "",
+    ]
     if include_detailed_reading:
-        lines.append(_detailed_reading_block(paper.detailed_reading))
-        lines.append("")
+        lines.extend(["", _detailed_reading_block(paper.detailed_reading)])
     return "\n".join(lines)
 
 
-def _fallback_daily_brief(deep_papers: list[Paper], quick_papers: list[Paper]) -> str:
-    if not deep_papers and not quick_papers:
+def _fallback_daily_brief(
+    papers: list[Paper],
+    deep_papers: list[Paper],
+    quick_papers: list[Paper],
+    deep_target: int,
+    quick_target: int,
+) -> str:
+    if not papers:
         return "今日没有检索到新的候选论文。"
     top_titles = "；".join(p.title for p in deep_papers[:3])
-    total = len(deep_papers) + len(quick_papers)
+    shortage = []
+    if len(deep_papers) < deep_target:
+        shortage.append(f"精读只取到{len(deep_papers)}篇，目标{deep_target}篇")
+    if len(quick_papers) < quick_target:
+        shortage.append(f"速读只取到{len(quick_papers)}篇，目标{quick_target}篇")
+    extra = " " + "；".join(shortage) if shortage else ""
+    total = len(papers)
     if top_titles:
-        return f"今日共推荐 {total} 篇论文，其中精读 {len(deep_papers)} 篇、速读 {len(quick_papers)} 篇。建议优先阅读：{top_titles}。"
-    return f"今日共推荐 {total} 篇论文，主要进入速读区，可按匹配度从高到低快速浏览。"
+        return f"今日共推荐 {total} 篇论文，其中精读 {len(deep_papers)} 篇、速读 {len(quick_papers)} 篇。建议优先阅读：{top_titles}。{extra}"
+    return f"今日共推荐 {total} 篇论文，主要进入速读区，可按匹配度从高到低快速浏览。{extra}"
 
 
 def _generate_daily_brief(
@@ -169,9 +178,11 @@ def _generate_daily_brief(
     openai_client: OpenAI,
     llm_config: DictConfig,
     language: str,
+    deep_target: int,
+    quick_target: int,
 ) -> str:
     if not papers:
-        return _fallback_daily_brief(deep_papers, quick_papers)
+        return _fallback_daily_brief(papers, deep_papers, quick_papers, deep_target, quick_target)
 
     payload = []
     for paper in papers:
@@ -205,7 +216,7 @@ def _generate_daily_brief(
             return content.strip()
     except Exception as exc:
         logger.warning(f"Failed to generate daily brief: {exc}")
-    return _fallback_daily_brief(deep_papers, quick_papers)
+        return _fallback_daily_brief(papers, deep_papers, quick_papers, deep_target, quick_target)
 
 
 def _daily_readme(
@@ -213,6 +224,8 @@ def _daily_readme(
     brief: str,
     deep_records: list[dict[str, Any]],
     quick_records: list[dict[str, Any]],
+    deep_target: int,
+    quick_target: int,
 ) -> str:
     date_label = run_dt.strftime("%Y-%m-%d")
 
@@ -233,8 +246,8 @@ def _daily_readme(
             "",
             f"- 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
             f"- 当次推荐总数：{len(deep_records) + len(quick_records)}",
-            f"- 精读区：{len(deep_records)}",
-            f"- 速读区：{len(quick_records)}",
+            f"- 精读区：{len(deep_records)} / {deep_target}",
+            f"- 速读区：{len(quick_records)} / {quick_target}",
             "",
             "## 今日简报",
             brief,
@@ -341,6 +354,8 @@ def publish_daily_report(
         key=lambda p: float(p.score if p.score is not None else float("-inf")),
         reverse=True,
     )
+    requested_deep_count = deep_count
+    requested_quick_count = quick_count
     deep_papers = sorted_papers[:deep_count]
     quick_papers = sorted_papers[deep_count : deep_count + quick_count]
 
@@ -362,13 +377,30 @@ def publish_daily_report(
                 deep_records.append(record)
             else:
                 quick_records.append(record)
+            should_show_detailed = section == "deep" and bool(paper.detailed_reading)
             (day_dir / f"{slug}.md").write_text(
-                _paper_markdown(paper, section_label, rank, include_detailed_reading=bool(paper.detailed_reading)),
+                _paper_markdown(paper, section_label, rank, include_detailed_reading=should_show_detailed),
                 encoding="utf-8",
             )
 
-    brief = _generate_daily_brief(sorted_papers, deep_papers, quick_papers, openai_client, config.llm, language)
-    readme = _daily_readme(run_dt, brief, deep_records, quick_records)
+    brief = _generate_daily_brief(
+        sorted_papers,
+        deep_papers,
+        quick_papers,
+        openai_client,
+        config.llm,
+        language,
+        requested_deep_count,
+        requested_quick_count,
+    )
+    readme = _daily_readme(
+        run_dt,
+        brief,
+        deep_records,
+        quick_records,
+        requested_deep_count,
+        requested_quick_count,
+    )
     (day_dir / "README.md").write_text(readme, encoding="utf-8")
 
     meta = {

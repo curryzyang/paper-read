@@ -109,11 +109,15 @@ class Executor:
         if len(all_papers) > 0:
             logger.info("Reranking papers...")
             reranked_papers = self.reranker.rerank(all_papers, corpus)
-            paper_limit = int(self.config.get("web", {}).get("daily_total", self.config.executor.max_paper_num))
-            reranked_papers = reranked_papers[:paper_limit]
-            detailed_reading_enabled = bool(self.config.get("web", {}).get("detailed_reading", True))
             deep_count = int(self.config.get("web", {}).get("deep_count", 10))
+            quick_count = int(self.config.get("web", {}).get("quick_count", 15))
+            requested_total = deep_count + quick_count
+            paper_limit = int(self.config.get("web", {}).get("daily_total", self.config.executor.max_paper_num))
+            if paper_limit < requested_total:
+                paper_limit = requested_total
+            reranked_papers = reranked_papers[:paper_limit]
             logger.info("Generating TLDR and affiliations...")
+            detailed_reading_enabled = bool(self.config.get("web", {}).get("detailed_reading", True))
             for idx, p in enumerate(tqdm(reranked_papers)):
                 p.generate_tldr(self.openai_client, self.config.llm)
                 p.generate_affiliations(self.openai_client, self.config.llm)

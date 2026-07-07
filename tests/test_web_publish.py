@@ -55,3 +55,52 @@ def test_publish_daily_report_generates_empty_day(config, tmp_path, monkeypatch)
     assert payload["quick_skim"] == []
     readme = (tmp_path / "docs" / "2026" / "07" / "03" / "README.md").read_text(encoding="utf-8")
     assert "今日没有检索到新的候选论文" in readme
+
+
+def test_publish_daily_report_includes_detailed_reading_for_deep_papers(config, tmp_path, monkeypatch):
+    monkeypatch.setenv("DPR_RUN_DATE", "20260703")
+    _configure_web(config, tmp_path)
+    papers = [
+        make_sample_paper(
+            title="Deep Paper",
+            url="https://arxiv.org/abs/2607.99999v1",
+            pdf_url="https://arxiv.org/pdf/2607.99999v1",
+            score=9.9,
+            detailed_reading={
+                "motivation": "想解决一个具体问题。",
+                "method": "先预处理，再进行核心建模。",
+                "result": "给出更好的指标。",
+                "conclusion": "证明方法有效。",
+                "key_details": "用了Transformer并调整了损失函数。",
+            },
+        )
+    ]
+
+    publish_daily_report(papers, config, make_stub_openai_client())
+    day_dir = tmp_path / "docs" / "2026" / "07" / "03"
+    paper_files = sorted(p for p in day_dir.glob("*.md") if p.name != "README.md")
+    assert len(paper_files) == 1
+    content = paper_files[0].read_text(encoding="utf-8")
+    assert "## 精读解读（中文）" in content
+    assert "### 二、技术方案（Method）" in content
+
+
+def test_publish_daily_report_shows_shortage_when_candidates_not_enough(config, tmp_path, monkeypatch):
+    monkeypatch.setenv("DPR_RUN_DATE", "20260703")
+    _configure_web(config, tmp_path)
+    papers = [
+        make_sample_paper(
+            title=f"Limited Paper {i:02d}",
+            url=f"https://arxiv.org/abs/2607.{i:05d}v1",
+            pdf_url=f"https://arxiv.org/pdf/2607.{i:05d}v1",
+            score=float(i),
+            tldr=f"TLDR {i}",
+        )
+        for i in range(12)
+    ]
+
+    publish_daily_report(papers, config, make_stub_openai_client())
+    readme = (tmp_path / "docs" / "2026" / "07" / "03" / "README.md").read_text(encoding="utf-8")
+
+    assert "精读区：10 / 10" in readme
+    assert "速读区：2 / 15" in readme

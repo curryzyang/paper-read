@@ -3,18 +3,27 @@ from omegaconf import DictConfig
 from ..protocol import Paper, CorpusPaper
 import numpy as np
 from typing import Type
+
+
 class BaseReranker(ABC):
     def __init__(self, config:DictConfig):
         self.config = config
 
     def rerank(self, candidates:list[Paper], corpus:list[CorpusPaper]) -> list[Paper]:
         corpus = sorted(corpus,key=lambda x: x.added_date,reverse=True)
+        if len(corpus) == 0:
+            for candidate in candidates:
+                candidate.score = 0.0
+            return sorted(candidates, key=lambda x: x.score, reverse=True)
         time_decay_weight = 1 / (1 + np.log10(np.arange(len(corpus)) + 1))
         time_decay_weight: np.ndarray = time_decay_weight / time_decay_weight.sum()
-        sim = self.get_similarity_score([c.abstract for c in candidates], [c.abstract for c in corpus])
+        candidate_texts = [c.abstract or "" for c in candidates]
+        corpus_texts = [c.abstract or "" for c in corpus]
+        sim = self.get_similarity_score(candidate_texts, corpus_texts)
         assert sim.shape == (len(candidates), len(corpus))
-        scores = (sim * time_decay_weight).sum(axis=1) * 10 # [n_candidate]
-        for s,c in zip(scores,candidates):
+        raw_scores = (sim * time_decay_weight).sum(axis=1) * 10
+        raw_scores = np.nan_to_num(raw_scores, nan=0.0, posinf=0.0, neginf=0.0)
+        for s,c in zip(raw_scores,candidates):
             c.score = s
         candidates = sorted(candidates,key=lambda x: x.score,reverse=True)
         return candidates
