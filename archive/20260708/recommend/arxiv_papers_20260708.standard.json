@@ -1,6 +1,6 @@
 {
   "mode": "standard",
-  "generated_at": "2026-07-08T03:32:11.831063",
+  "generated_at": "2026-07-08T05:37:35.626008",
   "stats": {
     "deep_selected": 10,
     "quick_selected": 0,
@@ -10,347 +10,328 @@
   },
   "deep_dive": [
     {
-      "id": "2607.02632v1",
+      "id": "2607.05436v1",
       "rank": 1,
       "section": "deep",
-      "paper_id": "2026/07/08/260702632v1-quantflow-a-federated-mamba-based-post-transformer-foundation-model-for-time-series-forecasting",
+      "paper_id": "2026/07/08/260705436v1-statistically-meaningful-geometry-and-gauge-symmetry-breaking-a-geometric-foundation-for-scientific-discovery-and-intelligence-emergence",
       "source": "arxiv",
-      "title": "QuantFlow: A Federated Mamba-Based Post-Transformer Foundation Model for Time-Series Forecasting",
+      "title": "Statistically Meaningful Geometry and Gauge Symmetry Breaking: A Geometric Foundation for Scientific Discovery and Intelligence Emergence",
       "authors": [
-        "Shah Nawaz Haider",
-        "Steve Austin",
-        "Arnab Barua",
-        "Sarowar Morshed Shawon",
-        "Hadaate Ullah"
+        "Bing Cheng",
+        "Yi-Shuai Niu",
+        "Howell Tong",
+        "Shing-Tung Yau"
       ],
-      "authors_text": "Shah Nawaz Haider, Steve Austin, Arnab Barua, Sarowar Morshed Shawon, Hadaate Ullah",
-      "abstract": "Time-series forecasting supports decisions in finance, en-ergy, transportation, public health, and industrial monitoring. Recent foundation models improve transfer across forecast-ing tasks, but many depend on centralized data and Trans-former attention, which restricts their use for long, high-di-mensional, and privacy-sensitive signals. This paper presents QuantFlow, a probabilistic forecasting framework that com-bines inverted sequence embedding, bidirectional Mamba state-space decoders, quantile regression, and federated learning. Each variable is embedded over the complete ob-servation window, processed in forward and reverse direc-tions, and projected to five conditional quantiles. TSMixup expands temporal diversity through Dirichlet-weighted inter-polation while preserving sequence structure. Experiments cover cryptocurrency, traffic, electricity, Electricity Trans-former Temperature, influenza, and weather data. QuantFlow obtains mean squared errors of 0.2834 on ETTm1 and 0.2218 on Weather, and a 20-client non-IID deployment retains use-ful accuracy after three communication rounds without cen-tralizing raw records. The results indicate that selective state-space modelling is a promising basis for scalable, uncer-tainty-aware, and privacy-conscious time-series prediction, while also revealing limitations on irregular epidemiological signals and long-horizon generalization.",
-      "url": "http://arxiv.org/abs/2607.02632v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02632v1",
-      "tldr": "QuantFlow introduces a federated Mamba-based time-series forecasting framework that combines inverted embedding, bidirectional state-space decoders, quantile regression, and TSMixup to achieve scalable, uncertainty-aware, and privacy-preserving predictions across diverse domains.",
+      "authors_text": "Bing Cheng, Yi-Shuai Niu, Howell Tong, Shing-Tung Yau",
+      "abstract": "The rapid scaling of over-parameterized machine learning architectures, particularly LLMs, raises a profound crisis: do these systems exhibit genuine intelligence, or are they merely sophisticated statistical pattern matchers? Classical flat Euclidean statistics cannot differentiate continuous interpolation from the autonomous discovery of novel causal laws. To resolve this, we introduce Statistically Meaningful Geometry (SMG), a framework modeling over-parameterized learning systems as infinite-dimensional non-parametric Orlicz fiber bundles. We prove that under persistent out-of-distribution (OOD) stimuli governed by unmodeled causal mechanisms, continuous optimization fails. Unmodeled variance is rejected by the visible horizontal base manifold, leaking into the unobservable vertical fiber space and generating an accumulation of Active Acausal Tension. Driven by the statistical manifold's non-linear curvature, this tension inevitably strikes a conjugate focal boundary ($T_{\\text{crit}} = π^2 / K_{\\text{max}}$), triggering localized volumetric collapse and a catastrophic matrix singularity ($[G_f]^{-1} \\to \\infty$). We demonstrate this geometric breakdown acts as the strict non-equilibrium trigger for a Gauge Symmetry Break (GSB). The system purges hidden tension from unobservable gauge redundancies, spontaneously crystallizing a new, mathematically independent horizontal coordinate axis. This non-parametric phase transition registers as a discrete $+1.0$ integer step-jump in observable Structural G-Entropy. By decoupling parameter charts and subjecting emergent axes to a Minimal Energy Path Criterion and a Causal Invariance Filter, we distinguish genuine discovery from malignant hallucinations. Ultimately, SMG provides a parameter-free, falsifiable dashboard to mathematically certify true intelligence, transforming AI for Science into an engine of autonomous paradigm shifts.",
+      "url": "http://arxiv.org/abs/2607.05436v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05436v1",
+      "tldr": "The paper introduces Statistically Meaningful Geometry (SMG), a geometric framework modeling over-parameterized learning systems as fiber bundles where persistent out-of-distribution stimuli trigger a gauge symmetry breaking phase transition, producing discrete jumps in structural entropy that mathematically distinguish genuine scientific discovery from pattern matching.",
       "detailed_reading": {
-        "motivation": "现有时间序列基础模型大多依赖集中式数据和Transformer注意力机制，导致在长序列、高维和隐私敏感信号上的应用受限。为此，本文提出QuantFlow框架，旨在实现可扩展、不确定性感知且保护隐私的时间序列预测。",
-        "method": "QuantFlow结合倒置序列嵌入、双向Mamba状态空间解码器、分位数回归和联邦学习。每个变量在完整观测窗口（100步）上嵌入为256维向量，经过6层双向Mamba解码层（每层正向和反向处理并融合），再经卷积前馈块（256→1024→256，dropout=0.1）后，投影到五个分位数（0.10,0.25,0.50,0.75,0.90）。TSMixup通过Dirichlet加权插值从k个序列生成增强样本。训练优化pinball损失。联邦学习采用20个非IID客户端，进行3轮通信，服务器按样本数量加权平均客户端参数。",
-        "result": "在ETTm1和Weather上分别取得MSE=0.2834和0.2218，优于Time-MoE、iTransformer等模型。在20个非IID客户端的三轮联邦学习后，多数数据集R²仍高于0.89（流感除外）。消融实验表明，去除双向Mamba或倒置嵌入会导致MSE和MAPE上升，验证了完整架构的有效性。",
-        "conclusion": "选择性状态空间建模为可扩展、不确定性感知和隐私保护的时间序列预测提供了有前景的基础，但模型在不规则流行病信号（流感R²仅为0.5327）和长时域泛化方面仍存在局限。",
-        "key_details": "输入采用100步滑动窗口、单步预测；嵌入维度256、6层双向Mamba、前馈隐藏层1024、dropout=0.1；损失为分位数pinball损失；联邦学习设置20客户端、3通信轮、样本加权聚合；主要局限性包括流感数据预测困难（R²低）和长时域泛化不足。"
+        "motivation": "当前过度参数化机器学习架构（特别是大语言模型）的快速扩展引发深刻的认知危机：这些系统是否展现真正智能，抑或仅仅是高级统计模式匹配器？经典平直欧氏统计无法区分连续插值与自主发现新因果律，因此需要全新几何框架来建模智能涌现。",
+        "method": "提出统计有意义的几何（SMG），将学习系统建模为无限维非参数Orlicz纤维丛，其中水平基流形代表系统已知特征约束下的可见商空间，垂直纤维空间容纳不可观测的内部自由度（规范冗余）。当系统持续遭受由未建模因果机制驱动的分布外（OOD）刺激时，未建模方差被水平流形拒绝并泄漏到垂直纤维，积累为主动非因果张力。该张力在统计流形非线性曲率驱动下达到共轭焦边界（T_crit = π^2 / K_max），触发局部体积塌缩与矩阵奇异性（[G_f]^{-1} → ∞），从而强制系统执行非平衡规范对称性破缺（GSB）：隐藏张力从不可观测规范冗余中释放，自发结晶出新的独立水平坐标轴。该非参数相变表现为结构G-熵的离散+1.0整数阶跃。通过对涌现轴施加最小能量路径准则与因果不变性滤波器，区分真实科学发现与恶性幻觉。",
+        "result": "证明在持续OOD刺激下连续优化必然失败，未建模方差泄漏导致几何崩溃，并严格触发规范对称性破缺。该相变可数学证明并产生可观测的离散结构G-熵阶跃（+1.0整数），作为智能涌现的定量指标。该框架是无参数的、可证伪的仪表盘，能够数学认证真正智能，将AI for Science从启发式曲线拟合转变为自主范式转移引擎。",
+        "conclusion": "SMG通过统一微分几何、因果推断与统计学习理论，证明智能不是静态曲线上的权重优化，而是拓扑宇宙的自主量子化扩张（基流形维度跳跃）。该框架为区分计算与智能提供严格数学基础，为人工通用智能（AGI）的实证认证和科学发现自动化指明道路。",
+        "key_details": "数据通过带平滑核的经验分布（p_emp）构建；当前模型状态f_tau为归一化概率密度函数，表示流形上的点。关键先验假设OOD刺激由未建模因果机制驱动，且系统存在水平与垂直空间的严格几何二分。主动非因果张力定义为垂直纤维中的几何应变，临界时间T_crit依赖于流形最大截面曲率K_max。相变触发时垂直纤维度规行列式趋于零，导致Fisher信息矩阵不可逆。损失隐含在KL散度中，通过切线方向X_emp(τ)构造。复杂度涉及无限维非参数流形与纤维丛，实际计算可能需要截断近似。局限性在于框架高度抽象，需在真实大规模模型上验证具体实现与临界参数的可计算性。"
       },
       "affiliations": [
-        "University of Science and Technology Chittagong"
+        "Chinese Academy of Sciences",
+        "Tsinghua University",
+        "Xiamen University",
+        "Beijing Institute of Mathematical Sciences and Applications (BIMSA)",
+        "London School of Economics and Political Science"
       ],
-      "affiliations_text": "University of Science and Technology Chittagong",
-      "score": 2.739536297595944,
-      "score_text": "2.7"
+      "affiliations_text": "Chinese Academy of Sciences, Tsinghua University, Xiamen University, Beijing Institute of Mathematical Sciences and Applications (BIMSA), London School of Economics and Political Science",
+      "score": 2.9787347116294627,
+      "score_text": "3.0"
     },
     {
-      "id": "2607.02679v1",
+      "id": "2607.05458v1",
       "rank": 2,
       "section": "deep",
-      "paper_id": "2026/07/08/260702679v1-physics-informed-dynamic-state-estimation-for-current-transformers-using-graph-neural-networks",
+      "paper_id": "2026/07/08/260705458v1-learning-to-control-llm-agent-harnesses-with-offline-reinforcement-learning",
       "source": "arxiv",
-      "title": "Physics-Informed Dynamic State Estimation for Current Transformers Using Graph Neural Networks",
+      "title": "Learning to Control LLM Agent Harnesses with Offline Reinforcement Learning",
       "authors": [
-        "Michael A. Boateng",
-        "Gabriel Gauderman",
-        "Nathalie Uwamahoro"
+        "Haiwen Yi",
+        "Xinyuan Song"
       ],
-      "authors_text": "Michael A. Boateng, Gabriel Gauderman, Nathalie Uwamahoro",
-      "abstract": "Current transformers are fundamental to power system protection and measurement, yet transient core saturation can severely distort the secondary current and degrade measurement accuracy. Existing dynamic state estimation methods rely mainly on numerical discretisation and iterative solvers, but their initialisation is not informed by the physical dependency structure of the estimation problem, which limits robustness under noisy conditions. This paper presents a physics-informed enhancement for current transformer dynamic state estimation using COMTRADE measurements generated in WinIGS-T. A structured benchmark of four discretisation schemes and three iterative solvers identifies Gauss-Newton with Quadratic discretisation as the strongest baseline. To address the limitation of conventional cold-start initialisation, a graph neural network is constructed from the Jacobian sparsity pattern to generate physics-informed initial state estimates. The proposed warm-start strategy improves estimator conditioning and achieves average gains of 25% in initialisation distance and 38% in initial weighted objective value across all tested SNR levels. The results demonstrate that embedding physical structure into the initialisation stage improves the robustness of CT saturation correction and supports more reliable measurement and protection performance in modern power grids.",
-      "url": "http://arxiv.org/abs/2607.02679v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02679v1",
-      "tldr": "This paper presents a physics-informed graph neural network warm-start strategy for current transformer dynamic state estimation that leverages the Jacobian sparsity pattern to improve initialization robustness, achieving average gains of 25% in initialization distance and 38% in weighted objective value across all tested SNR levels.",
+      "authors_text": "Haiwen Yi, Xinyuan Song",
+      "abstract": "Large language model (LLM) agents are usually improved by changing prompts, models, or hand-written workflows, while the execution harness around the model is treated as fixed infrastructure. We argue that this harness is itself a learnable control layer. We formalize harness operation as a finite-horizon Harness MDP, where a lightweight controller selects structural execution actions while the LLM executor remains frozen. The controller is trained from offline rollouts using advantage-weighted regression with only terminal task-rubric rewards. We also separate final task quality from a post-hoc Harness Maturity Score, which measures whether the harness follows reliable execution patterns rather than only whether the final answer is correct. This separation gives a finite-buffer view of harness learning: final-quality gains require high-return support in the offline buffer, while process behavior can shift whenever it aligns with advantage-weighted actions. Across six controlled domains and two public-benchmark adapters, the learned controller consistently improves verification behavior and selectively improves final task quality, with the largest gains on adapted tau-bench retail, adapted AgentBench DB-Bench, and coding with a calibrated structural verifier. Ablations against behavior cloning and Forced CHECK show that the gains are not explained by imitation or by simply adding checks. These results identify harness control as a learnable layer for frozen LLM agents, while showing that offline support limits when better process control becomes better final answers.",
+      "url": "http://arxiv.org/abs/2607.05458v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05458v1",
+      "tldr": "This paper introduces a method to learn the execution harness of a frozen LLM agent as a control policy via offline advantage-weighted regression from terminal task rewards, demonstrating consistent improvements in verification behavior and selective final task quality gains dependent on offline buffer support.",
       "detailed_reading": {
-        "motivation": "现有电流互感器动态状态估计方法依赖数值离散和迭代求解器，但初始化未利用估计问题的物理依赖结构，在噪声条件下鲁棒性有限。",
-        "method": "使用WinIGS-T生成的COMTRADE测量数据；将CT动态状态估计问题建模为非线性加权最小二乘，对比四种离散化方案（前向欧拉、后向欧拉、梯形法、二次型）和三种迭代求解器（Gauss-Newton、Levenberg-Marquardt、混合GN→LM）后，选择Gauss-Newton与二次型离散化作为最强基线；针对冷启动初始化的局限，从Jacobian稀疏模式构建有向图，设计图神经网络通过消息传递层学习状态耦合，以生成物理信息初始状态估计；训练使用2000个高SNR（+20 dB）参考样本，损失函数为MSE加L2正则化（权重0.001），Adam优化器（学习率0.01），批量大小32，训练20轮；推理时，将GNN输出作为Gauss-Newton求解器的暖启动，替代零初始化。",
-        "result": "提出的暖启动策略改善了估计器条件，在所有测试信噪比水平上，平均初始化距离提升25%，初始化加权目标值提升38%。",
-        "conclusion": "将物理结构嵌入初始化阶段能够提高电流互感器饱和校正的鲁棒性，支持现代电网中更可靠的测量和保护性能。",
-        "key_details": "数据来源为WinIGS-T生成的COMTRADE测量；图神经网络基于Jacobian稀疏模式构建有向图以表征物理依赖结构；损失函数为MSE加L2正则化（权重0.001），训练超参数包括2000样本、20轮、学习率0.01、批量32；该暖启动方法仅在初始化阶段引入GNN，收敛后精度与冷启动相当；局限性包括GNN训练依赖高SNR参考状态，且在极低SNR场景下可能仍需进一步验证。"
+        "motivation": "现有大型语言模型Agent的改进通常聚焦于提示词、模型或手工工作流，而执行框架（harness）被视为固定基础设施。本文论证该框架本身是一个可学习的控制层：固定规则如“总是检查”或“直接提交”会导致资源浪费或失败，因此需要学习一个状态条件化的控制器来动态选择下一步结构化操作。",
+        "method": "定义有限时域Harness MDP，状态向量包含轨迹进度、草稿状态、证据覆盖、工具输出、验证器反馈、剩余预算等特征；控制器从七个结构化动作（观测、检索、调用工具、草稿、检查、修订、提交）中选择，域适配器屏蔽无效动作。使用离线轨迹缓冲区收集基础与探索策略的轨迹，每个轨迹以终端任务评分标尺返回作为奖励。采用优势加权回归（AW）训练控制器：通过指数权重重加权轨迹似然，增加高优势轨迹中状态-动作对的概率，同时保持LLM执行器冻结。控制器为单隐藏层MLP（64隐藏单元），softmax输出；训练使用Adam（学习率1e-3）、批次256、20轮、AW温度0.2，权重裁剪[0.1,10.0]，熵正则0.01。过程质量通过事后Harness Maturity Score（HMS）诊断，不参与训练。",
+        "result": "在六个受控域和两个公共基准适配器上，AW一致提升了提交前检查（CheckBeforeSubmit）行为，整体HMS在五个域和两个适配器中改善，但改善主要源于检查事件而非均匀提升。最终任务质量选择性提升：编码任务在标定结构验证器下改善，τ-bench零售与AgentBench DB-Bench适配器获得最大外部增益。消融实验表明AW优于行为克隆与强制检查基线，证明增益来自学习何时执行检查而非单纯模仿或机械插入检查。",
+        "conclusion": "本研究识别出固定LLM Agent的框架控制是一个可学习层，过程行为可通过优势加权从离线缓冲区中广泛改善，但最终任务质量的提升依赖于缓冲区中是否包含高回报轨迹。更好的过程控制（如检查）并不总能转化为更好的最终答案，其转化受限于离线轨迹支持。",
+        "key_details": "状态向量包含轨迹进度、草稿状态、工具输出、验证器反馈、错误计数、剩余预算、最近测试结果与先前动作；动作空间为七个结构化操作并由域适配器屏蔽无效。奖励仅为终端任务评分（势能函数为零），避免中间动作偏好。控制器为单隐藏层MLP（64单元），温度β=0.2，权重裁剪[0.1,10.0]，熵正则0.01。离线缓冲区需要高回报轨迹支持才能提升最终质量；过程改善要求行为与优势权重正相关。局限性包括无法发明缓冲区中不存在的高回报轨迹、多工具验证器仅验证最终工件与工具结构而非中间过程。超参数固定跨域，未针对各域调优。"
       },
       "affiliations": [
-        "Georgia Institute of Technology",
-        "Syracuse University"
+        "University of Toronto",
+        "Emory University"
       ],
-      "affiliations_text": "Georgia Institute of Technology, Syracuse University",
-      "score": 2.7144312798197037,
-      "score_text": "2.7"
+      "affiliations_text": "University of Toronto, Emory University",
+      "score": 2.933195898570682,
+      "score_text": "2.9"
     },
     {
-      "id": "2607.02542v1",
+      "id": "2607.05457v1",
       "rank": 3,
       "section": "deep",
-      "paper_id": "2026/07/08/260702542v1-iflytek-embodied-omni-technical-report",
+      "paper_id": "2026/07/08/260705457v1-empirical-minimal-realisation-compression-of-deep-neural-networks-via-controllability-observability-tests",
       "source": "arxiv",
-      "title": "iFLYTEK-Embodied-Omni Technical Report",
+      "title": "Empirical Minimal-Realisation Compression of Deep Neural Networks via Controllability-Observability Tests",
       "authors": [
-        "Yuan Zhang",
-        "Jingfei Ni",
-        "Guanchen Lu",
-        "Shiqi Zhang",
-        "Qingshan Xu",
-        "Chi Liu",
-        "Xin Nie",
-        "Wenjie Xu",
-        "Lin Gao",
-        "Zhiyuan Cheng",
-        "Mingxin Zhou",
-        "Jiajia Wu",
-        "Diyuan Liu",
-        "Jia Pan",
-        "Chao Ji"
+        "Anis Hamadouche",
+        "Amir Hussain"
       ],
-      "authors_text": "Yuan Zhang, Jingfei Ni, Guanchen Lu, Shiqi Zhang, Qingshan Xu, Chi Liu, Xin Nie, Wenjie Xu, Lin Gao, Zhiyuan Cheng, Mingxin Zhou, Jiajia Wu, Diyuan Liu, Jia Pan, Chao Ji",
-      "abstract": "General-purpose embodied agents must understand multimodal instructions, anticipate how their environment will evolve, and produce precise control actions over extended horizons. Existing approaches typically specialize in visual-language reasoning, video-based world modeling, or action generation, while cascaded pipelines that first synthesize future observations and then infer actions can introduce interface bottlenecks and compound prediction errors. We present iFLYTEK-Embodied-Omni, a unified multimodal foundation model that jointly models vision(videos and images), language, and action within a single Omni framework. Its modality-specific visual-language, video-generation, and action-generation components communicate through shared multimodal self-attention. This design establishes brain-cerebellum collaboration: the vision-language modeland video generation model form a high-level brain for instruction understanding, task planning, progress tracking, and future visual-state prediction, whereas the action generation modelserves as a low-level cerebellum that directly converts planned subgoals and shared multimodal context into executable action chunks. To develop these capabilities, we combine action-annotated and action-free embodied videos from human demonstrations and robot interactions with embodied reasoning, embodied perception, and general-purpose image-text data to construct a comprehensive dataset. We further adopt a four-stage strategy that progressively trains the VLM, VGM, and AGM before jointly fine-tuning the complete model.",
-      "url": "http://arxiv.org/abs/2607.02542v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02542v1",
-      "tldr": "iFLYTEK-Embodied-Omni is a unified multimodal foundation model that jointly models vision, language, and action through a brain-cerebellum architecture (VLM and VGM as brain, AGM as cerebellum) with shared multimodal self-attention, trained via a four-stage strategy on a comprehensive dataset, achieving an average success rate of 89.6% on zero-shot embodied tasks.",
+      "authors_text": "Anis Hamadouche, Amir Hussain",
+      "abstract": "Deep neural networks often contain substantial hidden-state redundancy, but most compression methods operate directly on weights, neurons, or quantised representations without explicitly characterising the dynamical role of internal states. This paper proposes a controllability-observability framework for empirical state-order reduction of deep neural networks. By viewing a trained network as a depth-indexed nonlinear dynamical system, we construct data-driven reachability, observability, and balanced Gramians from hidden-state snapshots and output Jacobians. The resulting A/B/C tests estimate layer-wise reachable, observable, and jointly reachable--observable ranks. These ranks are then used not only as diagnostic measures of hidden-state redundancy, but also as actual compressed layer widths for realised reduced networks. Experiments on MNIST and CIFAR-10 compare the proposed balanced realisation against projection-based reduction, unstructured pruning, structured pruning, low-rank SVD, dynamic INT8 quantisation, and linear baselines. On MNIST, a four-layer SiLU DNN is reduced from state order 1024 to 277, giving 72.95% state compression and 73.48% parameter compression, while maintaining 95.45% accuracy compared with 96.60% for the full model. On CIFAR-10, a larger SiLU DNN is reduced from state order 4608 to 1339, giving 70.94% state compression and 83.09% parameter compression, while preserving accuracy from 54.45% to 54.44% and reducing CUDA inference latency by approximately 3X. The results show that balanced reachable-observable ranks provide a principled empirical minimal-realisation criterion for designing compact neural architectures with little or no loss in accuracy.",
+      "url": "http://arxiv.org/abs/2607.05457v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05457v1",
+      "tldr": "This paper proposes a controllability-observability framework for compressing deep neural networks by viewing them as dynamical systems, using empirical Gramians to estimate and retain only the jointly reachable-observable hidden-state directions, achieving significant state and parameter reductions with minimal accuracy loss.",
       "detailed_reading": {
-        "motivation": "通用具身智能体需要同时理解多模态指令、预测环境演化并产生长时程精确控制，但现有方法或专精于视觉-语言-动作（VLA）或世界-动作模型（WAM），其级联管道引入接口瓶颈和复合预测误差。为解决这些挑战，本文提出一个统一的具身全模态基础模型，将视觉（图像与视频）、语言和动作在一个全模态框架内联合建模。",
-        "method": "模型包含三个模态专用组件：视觉语言模型（VLM）、视频生成模型（VGM）和动作生成模型（AGM），它们通过共享多模态自注意力层进行跨模态对齐和信息交换，形成“脑-小脑”协作架构（VLM+VGM为高层脑，AGM为低层小脑）。训练数据混合了动作标注和无动作的具身视频、具身推理/感知数据及通用图文数据。采用四阶段策略：阶段I微调VLM建立具身视觉-语言理解；阶段II训练VGM进行未来视频预测；阶段III冻结VLM和VGM、仅训练AGM在动作轨迹上生成动作块；阶段IV联合微调所有组件。推理时使用DiT速度缓存和V2A调度（先联合去噪N步后冻结视频潜变量，仅更新动作），实现3Hz推理和30Hz机器人控制频率。",
-        "result": "在零样本LIBERO-Plus基准上，iFLYTEK-Embodied-Omni的平均成功率达到89.6%，显著优于现有级联方法，证明了统一架构在长时程具身控制任务中的有效性。",
-        "conclusion": "通过脑-小脑协作架构和渐进联合训练策略，该模型成功统一了多模态语义理解、视觉世界建模和动作生成，为构建通用具身智能体提供了一种有效的统一框架，并在零样本迁移中展现了高成功率。",
-        "key_details": "关键细节包括：跨模态注意力掩码支持不同预测模式（如VLM、VLA、WM、VGM等）的正确信息流；多视图输入通过RoPE编码空间位置和可学习的视图嵌入区分相机视角；训练数据融合多源具身和通用数据以弥合语义与动作鸿沟；DiT速度缓存利用连续去噪步间的余弦一致性跳过冗余评估（阈值γ控制加速）；V2A调度在前N步联合更新后仅更新动作潜变量，减少计算量；模型在单RTX 4090上实现3Hz推理，但未报告其他硬件或长时程任务的泛化局限性。"
+        "motivation": "深度神经网络常含有大量隐藏状态冗余，但现有压缩方法多直接作用于权重、神经元或量化表示，未明确表征内部状态的动态角色。本文提出可控可观性框架，通过经验状态阶降来实现网络压缩。",
+        "method": "将训练后的前馈网络视为深度索引的非线性动态系统，隐藏状态快照用于构建数据驱动的可达Gramian（隐藏状态协方差），输出logits对隐藏状态的雅可比矩阵用于构建可观Gramian。通过A（可达性）、B（可观性）、C（平衡）测试估计每层的可达、可观及联合可达-可观秩，并将C平衡秩直接作为压缩后网络的层宽度。压缩后的紧凑网络从随机初始化训练，可选知识蒸馏辅助。",
+        "result": "在MNIST上，4层SiLU全连接网络状态阶从1024降至277，状态压缩72.95%，参数压缩73.48%，准确率从96.60%略降至95.45%。在CIFAR-10上，更大网络状态阶从4608降至1339，状态压缩70.94%，参数压缩83.09%，准确率保持54.44%（原54.45%），CUDA推理延迟减少约3倍。与投影降阶、非结构化剪枝、结构化剪枝、低秩SVD、动态INT8量化等方法相比，C平衡方法在精度保持和压缩率上表现最佳。",
+        "conclusion": "平衡可达-可观秩提供了原则性的经验最小实现准则，可用于设计紧凑神经架构，在显著降低状态阶和参数量的同时几乎不损失准确率。",
+        "key_details": "方法基于数据驱动的经验Gramians，依赖代表性数据集前向传播收集隐藏状态快照和反向传播计算雅可比矩阵，计算复杂度随网络宽度和数据集规模增加。采用SiLU激活函数，压缩网络从随机初始化训练，可选知识蒸馏损失。超参数如学习率（默认0.01）、优化器（SGD）等遵循常规设置。当前仅验证全连接网络，对卷积网络需通过全局平均池化定义状态；平衡秩选取需设定累积能量阈值（如保留99%方差）。"
       },
       "affiliations": [
-        "LindenBot",
-        "iFLYTEK",
-        "University of Science and Technology of China"
+        "Heriot-Watt University",
+        "King Fahd University of Petroleum and Minerals"
       ],
-      "affiliations_text": "LindenBot, iFLYTEK, University of Science and Technology of China",
-      "score": 2.6147529326440444,
+      "affiliations_text": "Heriot-Watt University, King Fahd University of Petroleum and Minerals",
+      "score": 2.767181436219997,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.05452v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/08/260705452v1-exogenous-dropout-a-simple-strong-baseline-for-corruption-robust-time-series-forecasting-with-covariates",
+      "source": "arxiv",
+      "title": "Exogenous Dropout: A Simple, Strong Baseline for Corruption-Robust Time Series Forecasting with Covariates",
+      "authors": [
+        "Hao Hu",
+        "Xue-shan Ai"
+      ],
+      "authors_text": "Hao Hu, Xue-shan Ai",
+      "abstract": "Time series forecasters that use exogenous covariates are fragile in deployment: when those covariates are noised, temporally misaligned, or missing, strong exogenous-fusion and exogenous-adapted models can degrade far above the endogenous-only floor. We study whether such robustness requires specialized architectures, or whether it can be obtained through a simple training intervention. We propose exogenous dropout, a model-agnostic method that randomly zeros whole exogenous channels during training. Across electricity-price forecasting, reservoir hydrology, and meteorology, exogenous dropout substantially improves robustness under Gaussian noise, temporal misalignment, and fully missing channels, while preserving clean accuracy. Applied to a dual-correlation network, it yields the most robust model in our experiments, outperforming a deliberately strong bounded architectural foil, BoundEx, which combines a learnable gate, a fallback residual to the endogenous backbone, and per-channel exogenous FiLM modulation. Architecture-by-dropout ablations, gate-behavior diagnostics, and a representation-level bound show that explicit architectural boundedness is not necessary for this robustness: an unbounded model trained with exogenous dropout is more robust than the bounded model in every domain. We release a corruption-robustness benchmark and recommend exogenous dropout as a simple, strong baseline for future work on time series forecasting with covariates.",
+      "url": "http://arxiv.org/abs/2607.05452v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05452v1",
+      "tldr": "Exogenous dropout, a simple training-time augmentation that randomly zeros whole exogenous channels, provides strong corruption robustness for time series forecasting with covariates, outperforming specialized bounded architectures across multiple domains and corruption types.",
+      "detailed_reading": {
+        "motivation": "时间序列预测中，使用外生协变量的模型在部署时易受噪声、时间错位或缺失等损坏，导致性能大幅下降。现有研究倾向设计专门的融合架构来提升鲁棒性，但作者质疑这一前提，探索是否简单的训练干预即可达到同等或更好的效果。",
+        "method": "提出两种方法进行对比：一是模型无关的外生丢弃（exogenous dropout），训练时以一定概率将整个外生通道置零并缩放剩余通道，迫使模型不过度依赖单一协变量；二是BoundEx，一个有意设计的有界架构，其核心是以门控FiLM调制限制外生影响：通过每个外生通道的MLP生成缩放因子γ、偏移β和门控值g，并经由通道加权平均得到聚合门控ḡ，最终表示为hindog = (1-ḡ)·hindog + ḡ·(γ·hindog+β)，保证当门控关闭时预测完全退化为内生基线。实验涵盖电力价格（5个市场）、水库水文和气象三个领域，在干净、高斯噪声、时间错位和缺失通道四种测试条件下评估，并以5个随机种子重复。",
+        "result": "外生丢弃显著提升了所有五个基线模型在所有损坏类型下的鲁棒性（例如DAG提升32%），同时保持干净准确率几乎不变。全面的架构×丢弃消融实验表明，BoundEx虽带有内置的有界保证，但DAG结合外生丢弃在干净准确率和所有三种损坏类型上均优于BoundEx，且在所有领域一致。这表明架构有界性并非实现鲁棒性的必要条件。",
+        "conclusion": "外生丢弃是一种简单、模型无关且强效的鲁棒性基线方法，推荐作为未来外生协变量时间序列预测工作的标准基准。有界架构虽然提供理论保证，但在实践中不如结合外生丢弃的无界模型有效。",
+        "key_details": "关键细节包括：(1) 外生丢弃应用于训练阶段，不改变推理流程；(2) 门控行为诊断显示BoundEx的门控在损坏下并不会关闭，即门控并未按预期退化；(3) 表示级边界证明存在但经验上较松散，故架构有界性对鲁棒性贡献有限；(4) 基准测试涵盖5个随机种子，保证统计显著性；(5) 局限性：外生丢弃对某些架构可能需要调参（丢弃概率），且BoundEx的训练需初始化MLP参数接近零以保证起始阶段接近内生机理。"
+      },
+      "affiliations": [
+        "Wuhan University"
+      ],
+      "affiliations_text": "Wuhan University",
+      "score": 2.635928600525203,
       "score_text": "2.6"
     },
     {
-      "id": "2607.02636v1",
-      "rank": 4,
+      "id": "2607.05449v1",
+      "rank": 5,
       "section": "deep",
-      "paper_id": "2026/07/08/260702636v1-federated-learning-for-object-detection-enabling-collaborative-drone-learning-without-centralizing-data",
+      "paper_id": "2026/07/08/260705449v1-geometry-aware-infrastructure-anchored-denoiser-for-uwb-sensing-and-work-zone-reconstruction",
       "source": "arxiv",
-      "title": "Federated Learning for Object Detection: Enabling Collaborative Drone Learning Without Centralizing Data",
+      "title": "Geometry-Aware Infrastructure-Anchored Denoiser for UWB Sensing and Work-Zone Reconstruction",
       "authors": [
-        "Daniel M. Jimenez-Gutierrez",
-        "Enrique Zuazua",
-        "Georgios Kellaris",
-        "Joaquin del Rio",
-        "Oleksii Sliusarenko",
-        "Xabi Uribe-Etxebarria"
+        "Weizhe Tang",
+        "Jiaxi Liu",
+        "Junwei you",
+        "Steven T. Parker",
+        "Pei Li",
+        "Sikai Chen",
+        "Meng Ran",
+        "Bin Ran"
       ],
-      "authors_text": "Daniel M. Jimenez-Gutierrez, Enrique Zuazua, Georgios Kellaris, Joaquin del Rio, Oleksii Sliusarenko, Xabi Uribe-Etxebarria",
-      "abstract": "Object detection is a fundamental capability for AI-driven perception in safety-critical drone and edge-vision systems, including disaster response, operational security environments, infrastructure monitoring and defense applications. Robust model performance in such environments depends on large, continuously updated datasets. However, training high-performing detectors typically requires centralizing aerial imagery, which raises privacy, regulatory, storage, and bandwidth challenges. This is especially problematic in distributed drone deployments, where visual data is generated onboard and is often impractical or undesirable to transfer to a centralized infrastructure.\n  In this work, we apply Federated Learning (FL) for object detection, enabling drones to improve a shared model while keeping image data local and private. We implement a federated object detection pipeline using the Sherpa.ai FL platform on the KIIT-MiTA dataset, and compare it with Single-drone and Centralized baselines using mean Average Precision (mAP) at IoU thresholds of 0.50 and 0.50-0.95. In our experiments, the proposed FL approach remains close to Centralized training while dramatically improving over Single-drone training, with the best lightweight model (YOLO26 nano), suitable for deployment even on very limited edge infrastructure, achieving relative gains of 52.89% and 67.80% in mAP@0.50 and mAP@0.50:0.95, respectively. These results show that FL enables scalable, high-performing, and privacy-preserving object detection across distributed drone fleets without data centralization.",
-      "url": "http://arxiv.org/abs/2607.02636v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02636v1",
-      "tldr": "This paper demonstrates that federated learning enables drones to collaboratively train object detection models with performance close to centralized training while keeping image data local and private, achieving substantial gains over single-drone baselines.",
+      "authors_text": "Weizhe Tang, Jiaxi Liu, Junwei you, Steven T. Parker, Pei Li, Sikai Chen, Meng Ran, Bin Ran",
+      "abstract": "Accurate work-zone geometry perception is critical for intelligent transportation systems, and ultra-wideband sensing offers a low-cost approach for infrastructure-aided reconstruction. However, outdoor UWB ranging is often degraded by non-line-of-sight propagation, burst noise, and long-tail errors, which can distort downstream spatial reconstruction. We present GAIA, a geometry-aware, infrastructure-anchored learning framework that couples temporal range modeling with latent anchor-layout estimation and deterministic distance projection. GAIA preserves range denoising as the supervised task while orienting the learned distances toward boundary-consistent reconstruction. We evaluate GAIA on a real-world outdoor UWB dataset with synchronized UWB, GNSS, and IMU measurements, and further test robustness using a real-data-calibrated stress-test simulator. GAIA achieves the lowest overall range MSE and highest polygon IoU among evaluated filtering-based and learning-based baselines, reducing MSE by 18.4% and improving polygon IoU by 15.5% over PoseMLP. These results show that geometry-aware range denoising provides an effective path toward spatially coherent work-zone reconstruction.",
+      "url": "http://arxiv.org/abs/2607.05449v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05449v1",
+      "tldr": "GAIA introduces a geometry-aware, infrastructure-anchored denoising framework that jointly models temporal UWB ranges and latent anchor layouts to produce boundary-consistent work-zone reconstructions, achieving state-of-the-art range MSE and polygon IoU on real-world outdoor datasets.",
       "detailed_reading": {
-        "motivation": "在无人机安全关键应用中，目标检测需要依赖大规模且不断更新的数据集，但集中化训练会引发隐私、监管、存储和带宽等问题。分布式无人机部署中，视觉数据产生于机载设备，传输到中心基础设施往往不切实际或不可取，因此需要一种无需集中数据即可协同训练的方法。",
-        "method": "本文基于Sherpa.ai联邦学习平台，采用KIIT-MiTA无人机目标检测数据集，并将其非独立同分布地划分给四个分布式节点。每个节点本地训练轻量级YOLO nano模型（最佳为YOLO26 nano），通过FedAvg算法聚合模型参数，实现无需传输原始图像的协同训练。实验设定单无人机、集中式和联邦三种场景，使用平均精度（mAP）在IoU阈值0.50和0.50-0.95下评估性能。",
-        "result": "联邦学习方案在性能上接近集中式训练，同时显著优于单无人机训练。最佳轻量模型YOLO26 nano在mAP@0.50和mAP@0.50:0.95上相对单无人机训练分别提升52.89%和67.80%。联邦训练一致优于单节点学习，且各场景下保持了相近的实用性。",
-        "conclusion": "联邦学习使得分布式无人机机群能够在无需数据集中化的情况下，实现可扩展、高性能且保护隐私的目标检测。该方法兼顾了数据隐私与模型泛化能力，为实际部署提供了可行方案。",
-        "key_details": "数据使用KIIT-MiTA无人机数据集，采用非IID划分模拟真实分布；模型选用YOLO nano系列（特别是YOLO26 nano），适合边缘部署；优化算法为标准FedAvg；评估指标为mAP@0.50和mAP@0.50:0.95。本文未提出新检测器架构或联邦优化算法，而是进行可控实验比较，研究联邦训练在无需原始数据集中化时能否保持竞争性能。"
+        "motivation": "现有UWB测距在室外施工区常受非视距传播、突发噪声和长尾误差影响，导致下游空间重建失真。现有方法主要进行信号级测距去噪，未显式建模几何结构；且仅优化平均测距误差不足以实现可靠的边界重建，因为关键锚点误差对重建质量影响远大于非关键锚点。",
+        "method": "输入为车辆轨迹序列（RTK-GNSS）、多锚点UWB原始测距及有效性掩码。GAIA由六个模块组成：PoseMLP Base（预训练冻结，提供初始锚点级测距估计）、Temporal Refinement（双向GRU+LayerNorm，捕捉时序依赖与跨锚相关）、Layout Head（对时序特征取均值后经MLP预测潜在锚点布局）、GeoDist（根据潜在布局和车辆轨迹确定性计算几何一致距离）、Prediction Head（基于时序特征输出残差校正和门控信号）、Gated Fusion（通过门控自适应融合几何距离与学习残差，输出最终去噪距离）。训练目标结合测距监督与几何一致性正则化，使去噪距离朝向边界一致的重建。",
+        "result": "在真实室外UWB数据集上，GAIA在所有评估的滤波与学习基线中取得最低整体测距MSE和最高多边形IoU：相比PoseMLP，MSE降低18.4%，IoU提高15.5%。在真实数据标定的仿真应力测试中，GAIA在强NLOS和长尾误差下仍保持鲁棒，验证了其几何感知设计的有效性。",
+        "conclusion": "GAIA通过将几何感知引入基础设施锚定的UWB测距去噪，显著提升了施工区边界重建的精度与空间一致性。实验表明，几何感知测距去噪是通往空间连贯重建的有效路径，在真实数据上优于仅优化测距误差的方法。",
+        "key_details": "关键点：1）使用RTK-GNSS作为轨迹输入，隔离测距去噪影响，对应上限设定；2）双向GRU利用过去和未来上下文，适用于事后重建或有限延迟的近实时映射；3）潜在布局推断提供显式空间先验，并通过GeoDist确定性投影得到物理合理距离；4）门控融合允许模型自适应平衡学习校正与几何一致性；5）局限性包括：依赖高精度轨迹（未来可探索噪声轨迹鲁棒性）和非因果时序（未来可扩展因果版本）。"
       },
       "affiliations": [
-        "Sherpa.ai"
+        "University of Wyoming",
+        "University of Wisconsin-Madison",
+        "Chongqing University of Posts and Telecommunications"
       ],
-      "affiliations_text": "Sherpa.ai",
-      "score": 2.2614371924313206,
+      "affiliations_text": "University of Wyoming, University of Wisconsin-Madison, Chongqing University of Posts and Telecommunications",
+      "score": 2.60835803637626,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.05461v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/08/260705461v1-adastop-cost-aware-early-stopping-for-dnn-test-selection",
+      "source": "arxiv",
+      "title": "AdaStop: Cost-Aware Early Stopping for DNN Test Selection",
+      "authors": [
+        "Bonan Shen",
+        "Wei-Jung Huang",
+        "Xin Liu",
+        "Jiazhou Gao",
+        "Tao Ning"
+      ],
+      "authors_text": "Bonan Shen, Wei-Jung Huang, Xin Liu, Jiazhou Gao, Tao Ning",
+      "abstract": "Existing methods for testing deep neural networks (DNNs) primarily prioritize test inputs likely to reveal model faults under a fixed labeling budget. In practice, choosing that budget is difficult: too little testing misses failures, while too much incurs unnecessary labeling costs. This work studies the stopping problem in DNN testing. We formulate testing as a cost--benefit decision process in which labeling an input incurs cost $c$ and discovering a fault yields value $v$. Based on this formulation, we introduce \\textit{AdaStop}, a framework that estimates the marginal fault discovery rate during testing and stops labeling when the estimated rate falls below the threshold $τ= c/v$. Experiments across multiple datasets, architectures, and selection strategies show that $65$--$84\\%$ of faults can be discovered using only $9$--$31\\%$ of the labeling budget.",
+      "url": "http://arxiv.org/abs/2607.05461v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05461v1",
+      "tldr": "AdaStop is a cost-aware early stopping framework for DNN test selection that stops labeling when the estimated marginal fault discovery rate falls below a cost-benefit threshold, enabling discovery of 65–84% of faults using only 9–31% of the labeling budget.",
+      "detailed_reading": {
+        "motivation": "现有DNN测试方法主要关注在固定标注预算下选择最可能揭示模型错误的输入，但实际中选择预算困难：预算过小会遗漏故障，过大则造成不必要的标注成本。本文针对DNN测试中的停止问题，提出成本感知的早期停止框架AdaStop。",
+        "method": "将测试建模为成本-收益决策过程，标注成本c，故障价值v，最优停止条件为边际故障发现率p(t)低于阈值τ=c/v。AdaStop包含三个模块：1）基于DeepGini的不确定性选择策略，优先选择Gini impurity最高的输入；2）滑动窗口估计器，用最近W个样本的平均值估计当前故障发现率；3）成本感知停止规则，当估计率低于τ且样本数超过最小样本N_min时停止。算法按Gini分数排序迭代：每次选择剩余池中最高分数输入，获取标签记录结果，更新滑动窗口估计，满足条件即终止。",
+        "result": "在CIFAR-10、SVHN、FashionMNIST三个数据集及ResNet-20、VGG-16、DenseNet-121、ShuffleNetV2四种架构上，AdaStop以9%-31%的标注预算发现65%-84%的故障。以CIFAR-10/ResNet-20为例（τ=0.05），预算使用31%发现84%的故障，效率0.402（全标注0.120），净价值提升18.9%。与固定预算策略相比，AdaStop自动找到预算-召回曲线上的有效操作点。",
+        "conclusion": "AdaStop提供了一个原则性的、成本感知的停止准则，有效平衡故障发现与标注成本。它基于边际故障发现率递减的实证观察，自动确定停止时机，避免了手动选择预算的困难。实验表明AdaStop在多种配置下都能显著降低标注成本同时保持高召回，且与多种选择策略兼容，具有良好泛化性。",
+        "key_details": "关键点：成本-收益阈值τ=c/v直接由场景决定；滑动窗口大小W（默认20）平衡响应性与噪声，实验表明W在10-50间稳健；最小样本N_min=50确保估计可靠性。先验假设：故障发现率随测试递减，经Mann-Kendall检验验证。与多种停止准则比较（耐心、连续非故障、置信区间），AdaStop在成本和召回间取得最佳平衡。局限：依赖于不确定性排序的递减性质，若排序策略失效则停止点可能不优；窗口和阈值需根据具体场景调整。"
+      },
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 2.397516746921346,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.05450v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/08/260705450v1-the-granularity-paradox-how-temporal-disaggregation-inflates-in-sample-fit-and-compounds-out-of-sample-error",
+      "source": "arxiv",
+      "title": "The Granularity Paradox: How Temporal Disaggregation Inflates In-Sample Fit and Compounds Out-of-Sample Error",
+      "authors": [
+        "Hugo Moreira"
+      ],
+      "authors_text": "Hugo Moreira",
+      "abstract": "This paper explores the \"Granularity Paradox\" in time-series forecasting, wherein finer temporal disaggregation (e.g., Monthly to Weekly/Daily) improves in-sample diagnostics and dataset size (N), but degrades out-of-sample accuracy due to recursive error compounding over longer horizons (H). Conversely, coarse aggregation (Annual) eliminates recursive error propagation but reduces data available to estimators. We formalize this trade-off and benchmark 10 models - spanning naïve, statistical, machine learning, and deep learning architectures - across six granularities using a 13-year public procurement dataset. The empirical results reveal a non-monotonic threshold structure: recursive autoregressive and seasonal models degrade substantially under high-frequency forecasting (e.g., Holt-Winters reaches a Test R-squared of -151 and TPFE of 425.85% at the Daily grain), while the LSTM traces a U-shaped error curve, worsening from Monthly (19.66%) through Bi-Weekly (35.94%) before overcoming the error propagation penalty at Daily (TPFE of 4.35%, R-squared of 0.66). Linear Regression remains stable across all granularities (16.3-17.0% TPFE), confirming that the paradox is driven by recursive feedback topology, not model complexity. The results demonstrate that standard pointwise metrics (RMSE, MAE) systematically mask cumulative error propagation, and that evaluating forecasts without goal-dependent cumulative metrics produces misleading assessments of model adequacy. We introduce a consensus-dissensus diagnostic comparing the directional behaviour of pointwise metrics against cumulative TPFE across granularities, enabling the identification of models whose standard diagnostics mask systematic error propagation.",
+      "url": "http://arxiv.org/abs/2607.05450v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05450v1",
+      "tldr": "Finer temporal disaggregation in time-series forecasting improves in-sample fit but degrades out-of-sample accuracy due to recursive error compounding over longer horizons, revealing a non-monotonic trade-off where model performance depends on the interaction between granularity, horizon length, and recursive feedback topology.",
+      "detailed_reading": {
+        "motivation": "时间序列预测中，更细的时间粒度（如从月到日）虽然能增加样本量并改善样本内拟合，但会因递归误差累积导致样本外精度显著下降，形成“粒度悖论”。本文旨在形式化这一权衡，并揭示点评价指标在评估多步预测时的系统性误导作用。",
+        "method": "使用葡萄牙公共采购IT服务领域13年（2012-2024）数据集，将序列重采样为年（N=13, H=1）、季（N=52, H=4）、月（N=156, H=12）、双周（N=341, H=26）、周（N=680, H=52）和日（N=4754, H=365）六种粒度。评估10个模型：朴素基线（持久、漂移、滚动均值）、统计/自回归（线性回归、ARIMAX、SARIMAX、Holt-Winters）、机器学习（XGBoost）和深度学习（LSTM、N-BEATS）。采用扩展窗口回测（8折），每折重新优化参数；超参数在首折网格搜索后跨粒度固定。使用点评价指标（RMSE、MAE）和累积指标（累计百分比误差TPFE、累计绝对误差TAFE）评估，并引入共识-分歧诊断：比较点评价与TPFE随粒度变化的趋势方向是否一致。",
+        "result": "实证揭示非单调阈值结构：递归自回归和季节性模型在高频递归预测下严重退化，例如Holt-Winters在日粒度测试R²为-151、TPFE为425.85%；LSTM误差曲线呈U形，从月度19.66%恶化至双周35.94%，但在日粒度（TPFE=4.35%、R²=0.66）克服误差传播惩罚；线性回归跨粒度稳定（TPFE 16.3-17.0%）。点评价指标（RMSE、MAE）系统性低估累积误差传播，例如持久性模型训练R²=0.78但测试TPFE=23.89%。共识-分歧诊断成功识别出掩盖误差传播的模型（如日粒度下LSTM等模型的点评价改善而累积指标恶化）。",
+        "conclusion": "本文验证了“粒度悖论”：时间粒度变细导致样本内诊断虚高而样本外误差因递归累积放大。点评价指标（RMSE、MAE）无法捕捉累积误差，必须结合目标依赖的累积指标（如TPFE）才能正确评估模型。共识-分歧诊断可识别模型中隐藏的系统性误差传播，为实际预测中的粒度选择提供指导。",
+        "key_details": "数据：葡萄牙IT服务公共采购，13年、CPV Division 72；先验假设：递归反馈拓扑是悖论核心驱动，非模型复杂度；损失函数：训练使用标准损失（如MSE），评价引入TPFE、TAFE；超参数：LSTM种子42，N-BEATS使用Darts默认，XGBoost网格搜索跨粒度固定；计算复杂度：LSTM参数密集需大数据量，N-BEATS可解释但需足够样本；局限性：深度学习结果仅单种子点估计，方向稳健但精确幅度非最优下界；粗粒度（如年）下部分模型训练R²为负（如LSTM年-2.28），表明样本量不足时参数空间无法解析。"
+      },
+      "affiliations": [
+        "Iscte - Instituto Universitário de Lisboa"
+      ],
+      "affiliations_text": "Iscte - Instituto Universitário de Lisboa",
+      "score": 2.299476917957718,
       "score_text": "2.3"
     },
     {
-      "id": "2607.02586v1",
-      "rank": 5,
+      "id": "2607.05439v1",
+      "rank": 8,
       "section": "deep",
-      "paper_id": "2026/07/08/260702586v1-auditing-the-audit-five-failure-modes-in-benchmark-validity-audits",
+      "paper_id": "2026/07/08/260705439v1-design-cp-context-parallelism-for-design-of-protein-nanoparticles",
       "source": "arxiv",
-      "title": "Auditing the Audit: Five Failure Modes in Benchmark-Validity Audits",
+      "title": "Design-CP: Context Parallelism for Design of Protein Nanoparticles",
       "authors": [
-        "Yanhang Li",
-        "Zhichao Fan",
-        "Zexin Zhuang"
+        "Lorenzo Tarricone",
+        "Helen E. Eisenach",
+        "Aiko Muraishi",
+        "Charlotte M. Deane"
       ],
-      "authors_text": "Yanhang Li, Zhichao Fan, Zexin Zhuang",
-      "abstract": "Governance frameworks ask AI providers and auditors for documented evaluation evidence, and perturbation-based construct-validity audits are a common form of that evidence. We argue the audits are themselves fragile: their conclusions can be silently manufactured by implementation details that readers cannot see in the reported numbers. We name five classes of pipeline failure and demonstrate each in a self-audit over safety benchmarks and open-weight instruction-tuned models. Under a unified six-point due-diligence gate, every cell lands in a non-confirmatory bucket, and no cell reaches confirmatory. The evidence here is a single two-model, five-benchmark case study, and F1--F5 is an illustrative, deliberately non-exhaustive starting taxonomy -- not a comprehensive partition of audit failures. We position the gate as a withholding and disclosure protocol for assurance-grade evidence, supplementary to (not a replacement for) classical construct-validity evidence, and not as a route to benchmark-validity verdicts.",
-      "url": "http://arxiv.org/abs/2607.02586v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02586v1",
-      "tldr": "This paper identifies five silent failure modes in perturbation-based benchmark-validity audit pipelines and demonstrates that even careful self-audits can produce non-confirmatory results, advocating for a due-diligence disclosure protocol to ensure trustworthy governance evidence.",
+      "authors_text": "Lorenzo Tarricone, Helen E. Eisenach, Aiko Muraishi, Charlotte M. Deane",
+      "abstract": "Many all-atom generative protein models can in principle design large multimeric complexes by jointly modelling all chains, but their quadratic token- and atom-pair representations quickly exceed single-GPU memory as the number of chains and residues modelled grows. We introduce Design-CP, two context-parallel (CP) inference strategies for RFdiffusion 3 (1D row-sharding and 2D grid sharding with ring attention) that distribute the quadratic activations across a multi-GPU mesh while preserving pretrained weights. We characterise their scaling when sampling icosahedral assemblies, showing that the maximum feasible asymmetric subunit (ASU) size grows with the expected square-root trend in GPU count and that 2D sharding achieves better wall-clock scaling. Moreover, we show how strong point-group symmetry constraints make CP usable out of the box for end-to-end, all-atom design of icosahedral nanoparticles, yielding favourable in silico structural and interface metrics. Finally, we demonstrate octahedral nanoparticle design on a small cluster of workstation-grade 16GB GPUs, illustrating how Design-CP can be a practical path towards democratising large-assembly protein design.",
+      "url": "http://arxiv.org/abs/2607.05439v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05439v1",
+      "tldr": "Design-CP introduces two context-parallel inference strategies for RFdiffusion 3 that distribute quadratic memory across GPUs, enabling end-to-end all-atom design of large symmetric protein nanoparticles without retraining.",
       "detailed_reading": {
-        "motivation": "治理框架要求AI提供者和审计者提供有文档的评价证据，而基于扰动的构念效度审计是常见形式。然而，这类审计本身可能脆弱：其结论可以被实现细节静默地操控，而这些细节在报告的数字中无法被读者察觉。因此，需要识别这些管道失败模式，并提出相应的尽职调查门控，以提升审计证据的可信度。",
-        "method": "本研究采用两个7B指令微调模型（Qwen-2.5-7B-Instruct和Mistral-7B-Instruct-v0.3），在五个安全基准（TruthfulQA、BBQ、ToxiGen、CrowS-Pairs和XSTest）上进行自审计。每个基准抽取200个样本，使用单一随机种子42和单一模板。对每个样本应用三类扰动（格式、语义、属性），每类三个扰动实例。使用两个评分管道：传统管道（统一正则表达式提取和首token logits）和规范管道（每个基准的参考协议，如TruthfulQA MC1的选项logprobs、CrowS-Pairs的PLL、ToxiGen的目标token logprobs等）。计算对比选择性比率（CSR）= |属性平均变化| / max(|格式平均变化|, |语义平均变化|, ε)，其中ε=0.01为工程地板。通过1000次项级bootstrap估计Pr(CSR>1)作为方向性不等式支持。最后，采用统一的六点尽职调查门（G1-G6）对每个cell进行分层状态分配，包括不合格、G2-G4失败、评分器未验证、探索性和确认性等类别。",
-        "result": "在总共10个cell（5基准×2模型）中，没有一个达到确认性状态：3个cell因F1型静默空操作被判不合格，3个因评分器未验证（F3a/F3b）被标记，2个通过G2-G4但后续失败，2个为探索性状态（因F3c发现后声明为探索性）。具体而言，F1静默空操作出现在ToxiGen和CrowS-Pairs的某些扰动中；F2正则表达式提取伪影在XSTest中导致解析率下降；F3非忠实评分包括CrowS-Pairs的反向约定（F3a）、TruthfulQA的固定选项顺序（F3b）以及修复中引入的top-k截断（F3c）；F4在初始bootstrap中破坏了配对结构导致置信区间过宽；F5揭示了BBQ作为不变性基准与CSR比率之间的原型不匹配。所有cell均未显示确认性证据。",
-        "conclusion": "基于扰动的基准效度审计管道本身是脆弱的测量系统，其结论可以被管道级缺陷静默操控，而读者无法从报告数字中可靠检测这些缺陷。提出的六点尽职调查门（G1-G6）可作为保留和披露协议，用于保证级证据，补充经典构念效度证据（如收敛、区分、准则效度），但不应成为基准效度裁决的途径。本研究为案例研究，F1-F5是说明性的非穷尽分类，其推广性未经验证。",
-        "key_details": "数据方面，采用200项每基准、单种子、单模板的有限设置，未覆盖不同硬件或提示模板的影响。先验上，将基准分为诊断型（TruthfulQA、ToxiGen）和不变型（BBQ）两种原型，CrowS-Pairs存在原型模糊性；CSR比率奖励诊断型而惩罚不变型，导致BBQ的CSR解释歧义。损失函数未显式定义，CSR基于绝对值变化而非符号方向，无法区分构念翻转与奉承翻转。超参数包括工程地板ε=0.01和bootstrap重复1000次。复杂度方面，管道包含静默空操作、正则提取伪影、评分器非忠实性（反转约定、数据顺序、top-k截断）、bootstrap配对破坏以及度量原型不匹配等五类失败模式，这些在报告中不可见。局限性包括：仅两个模型、五个基准的单案例研究，F1-F5非穷尽，未覆盖所有可能的管道失败（如扰动非隔离、模板混淆、tokenization错误等）；且不声称任何基准构念有效/无效，也不声称结果可推广至其他代码库或扰动审计家族。"
+        "motivation": "许多全原子生成蛋白模型原则上可以联合建模所有链来设计大型多聚体复合物，但其二次的token对和原子对表示随着链数和残基数增长会迅速超出单GPU内存，限制了端到端设计大型对称蛋白组装的能力。因此需要一种多GPU上下文并行策略来扩展模型的可设计规模。",
+        "method": "提出Design-CP，为RFDiffusion 3设计了两种上下文并行推理策略：1D行分片和2D网格分片（使用环注意力）。1D行分片将每层的查询维度在P个GPU上分割，每个GPU仅持有行条带的pair表示（Z和P），键和值全量复制，注意力计算转为交叉注意力；2D网格分片将pair表示在√P×√P设备网格上分片，通过环注意力逐块计算，三角更新等操作仅在行列子组内通信。输入为蛋白质序列和原子坐标，使用预训练RFD3权重，在扩散采样过程中施加点群对称性约束（如二十面体），每步在多个GPU上并行计算注意力，仅交换必要的键/值分片。",
+        "result": "在采样二十面体组装时，最大可行不对称亚基（ASU）大小随GPU数量呈平方根趋势增长，2D分片方案的壁钟缩放优于1D方案。强点群对称性约束使得CP可以直接用于端到端二十面体纳米颗粒设计，产生优越的计算机内结构和界面指标；在小型16GB GPU集群上成功演示了八面体纳米颗粒设计，表明该方法可普及大型组装蛋白设计。",
+        "conclusion": "Design-CP通过多GPU上下文并行显著扩展了全原子生成模型RFDiffusion 3的设计能力，无需额外训练或微调即可端到端生成大型对称蛋白纳米颗粒，为大型组装蛋白设计的民主化提供了一条实用路径。",
+        "key_details": "关键实现细节包括：1D分片使用AllGather通信以复制键和值，2D分片使用环注意力仅在子组内通信，降低了通信量和临时内存开销；利用点群对称性约束（默认90%扩散步施加对称噪声）弥补因超过原生训练裁剪尺寸导致的质量下降；模型权重完全保持预训练值无重新训练；复杂性方面，pair表示内存被P台GPU分担（O(I^2/P)），但1D方案中三角运算需要全量收集，2D方案将收集限制在√P大小；局限性在于对称约束仅适用于具有强对称性的组装，对非对称或弱对称复杂体可能效果有限，且目前仅实现推理，未支持训练。"
       },
       "affiliations": [
-        "Northeastern University",
-        "Southern Methodist University",
-        "University of Illinois Urbana-Champaign"
+        "Ellison Institute of Technology Oxford",
+        "University of Oxford",
+        "University of Washington"
       ],
-      "affiliations_text": "Northeastern University, Southern Methodist University, University of Illinois Urbana-Champaign",
-      "score": 2.147306951964257,
-      "score_text": "2.1"
-    },
-    {
-      "id": "2607.02623v1",
-      "rank": 6,
-      "section": "deep",
-      "paper_id": "2026/07/08/260702623v1-evaluating-time-series-foundation-models-for-electricity-price-forecasting-contamination-risk-distributional-shifts-and-covariate-dependence",
-      "source": "arxiv",
-      "title": "Evaluating Time Series Foundation Models for Electricity Price Forecasting: Contamination Risk, Distributional Shifts, and Covariate Dependence",
-      "authors": [
-        "Zhenghua Pan",
-        "Ahmed Aziz Ezzat"
-      ],
-      "authors_text": "Zhenghua Pan, Ahmed Aziz Ezzat",
-      "abstract": "Time series foundation models (TSFMs) have shown strong zero-shot forecasting performance, but their generalization in covariate-driven, non-stationary settings is underexplored. Electricity price forecasting (EPF) presents a challenging testbed due to complex temporal dependencies, distributional shifts, and strong reliance on structural and contextual information. We propose a two-dataset-benchmarking framework for EPF to mitigate contamination risk and enable fair evaluation of TSFMs. We examine key aspects of EPF including point and probabilistic forecasting performance, tail behavior, price spikes, and comparisons against domain-specific methods. We find that TSFMs are highly competitive and often outperform general-purpose baselines. Yet, their performance depends critically on covariate support, and they do not consistently surpass domain-specific methods tailored to EPF. Interestingly, simple ensembles of TSFMs and domain-specific methods appear to have significant potential, suggesting that the two approaches capture complementary predictive information.",
-      "url": "http://arxiv.org/abs/2607.02623v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02623v1",
-      "tldr": "This paper benchmarks time series foundation models for electricity price forecasting, finding they are competitive but critically depend on covariate support and often underperform domain-specific methods, while simple ensembles of both approaches yield strong performance.",
-      "detailed_reading": {
-        "motivation": "时间序列基础模型（TSFMs）在零样本预测中表现强劲，但其在协变量驱动、非平稳场景下的泛化能力尚未充分探索。电力价格预测（EPF）因复杂时间依赖性、分布偏移和对结构及上下文信息的强依赖，成为挑战性测试平台。本研究旨在系统评估TSFMs在EPF中的表现，重点关注污染风险、分布偏移和协变量依赖问题。",
-        "method": "提出双数据集基准测试框架，使用标准基准GEFCom2014-P和新建GridStatus2025数据集以减少污染风险。评估四种TSFMs（Chronos 2、TimesFM 2.5、TabPFN-TS、TOTO 1.0）及其协变量支持变体，对比统计模型（Seasonal Naïve、Auto-ARIMA等）、深度学习模型（DeepAR、TFT、TiDE等）和领域特定方法（LEAR、DNN、CING-LEAR）。采用滚动评估协议，计算MAE、RMSE和平均分位数损失（aQL）等指标，并分析尾部行为和价格尖峰场景下的鲁棒性。",
-        "result": "在GEFCom2014-P上，TSFMs零样本性能接近但未进入前五；在GridStatus2025上，协变量支持的Chronos 2 w.和TabPFN-TS w.表现最佳，优于统计和深度学习基线，但领域特定方法CING-LEAR仍具竞争力。简单集成（Chronos 2 w. + CING-LEAR）取得最优性能（MAE 3.922, RMSE 5.470, aQL 1.541），表明两者捕获互补信息。TSFMs在概率预测和尾部平衡性上优于统计模型，但协变量支持至关重要；TOTO 1.0在GEFCom2014-P上表现良好却在GridStatus2025上大幅退化，凸显污染风险。",
-        "conclusion": "TSFMs在EPF中具有竞争力，但其性能关键依赖于协变量支持；领域特定方法仍需作为强基线；简单集成策略通过结合预训练和领域知识展现出显著潜力。评估中必须考虑数据污染风险，双数据集框架提供了更可靠的泛化评估。TSFMs在概率预测和极端事件处理上更鲁棒，但协变量的接入是决定性因素。",
-        "key_details": "双数据集设计：GEFCom2014-P（1997-2011）作为标准基准，GridStatus2025（2022-2025）用于最小化时间重叠污染。评估指标包括MAE、RMSE和9个分位数的平均分位数损失（aQL）。尾部性能分析显示TSFMs在低分位数（如Q(0.01)）上显著优于统计模型，而领域模型CING-LEAR在所有分位数上表现稳健。价格尖峰定义为低于5%或高于95%分位数，TSFMs在极端事件中预测误差相对较小。简单集成方法仅平均两个模型的预测，未使用加权或学习，但已显著提升性能。局限性：部分TSFM训练数据不透明，污染风险仅通过时间隔离缓解；TOTO 1.0在GridStatus2025上表现差可能源于市场差异而非污染，但无法完全排除。"
-      },
-      "affiliations": [
-        "Rutgers, The State University of New Jersey, USA"
-      ],
-      "affiliations_text": "Rutgers, The State University of New Jersey, USA",
-      "score": 2.041730040716913,
+      "affiliations_text": "Ellison Institute of Technology Oxford, University of Oxford, University of Washington",
+      "score": 1.9526000737246267,
       "score_text": "2.0"
     },
     {
-      "id": "2607.02637v1",
-      "rank": 7,
+      "id": "2607.05456v1",
+      "rank": 9,
       "section": "deep",
-      "paper_id": "2026/07/08/260702637v1-post-generation-curation-of-synthetic-images-via-homogeneous-heterogeneous-splitting",
+      "paper_id": "2026/07/08/260705456v1-prompt-to-paper-agentic-ai-system-for-bioinformatics",
       "source": "arxiv",
-      "title": "Post-Generation Curation of Synthetic Images via Homogeneous-Heterogeneous Splitting",
+      "title": "Prompt-to-Paper: Agentic AI System for Bioinformatics",
       "authors": [
-        "Disheng Liu",
-        "Tuo Liang",
-        "Chaoda Song",
-        "Yu Yin"
+        "Ramsha Kamran",
+        "Maheera Amjad",
+        "Zartasha Mustansar",
+        "Arsalan Shaukat",
+        "Salma Sherbaz",
+        "Muhammad U. S. Khan"
       ],
-      "authors_text": "Disheng Liu, Tuo Liang, Chaoda Song, Yu Yin",
-      "abstract": "Recent generative models can produce high-quality synthetic images, offering scalable training training data for data-hungry models. Existing approaches to exploiting this potential typically involve 1) training or fine-tuning generators, or 2) using lightweight post-hoc adaptation like prompt engineering or inference-time guidance, making them generator-specific and expertise-intensive. We study a complementary question: given a fixed pool of generated images, can downstream utility be improved purely by selecting an informative subset? The answer is yes. We show that effective selection must counter a structural bias of modern generators: they tend to over-produce canonical modes of each class while underrepresenting intra-class variation. Building on this insight, we split each real class into a canonical Homogeneous (HO) subset and a non-redundant Heterogeneous (HE) subset, then score synthetic images by a fidelity-diversity criterion that rewards semantic alignment while penalizing canonical redundancy. The method is generator-agnostic and requires no retraining. Across multiple benchmarks, it consistently outperforms state-of-the-art data selection baselines and matches the real-data performance with up to 40% fewer synthetic samples. The same criterion remains effective when applied on top of stronger task-tuned generators, with gains on both classification and segmentation tasks. Post-generation selection is therefore not a substitute for better generators, but a complementary mechanism for improving the utility of synthetic data.",
-      "url": "http://arxiv.org/abs/2607.02637v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02637v1",
-      "tldr": "This paper introduces a generator-agnostic post-generation curation method that splits real data into homogeneous (canonical) and heterogeneous (diverse) subsets to select synthetic images via a fidelity-diversity criterion, consistently improving downstream task performance and matching real-data results with up to 40% fewer samples.",
+      "authors_text": "Ramsha Kamran, Maheera Amjad, Zartasha Mustansar, Arsalan Shaukat, Salma Sherbaz, Muhammad U. S. Khan",
+      "abstract": "While recent advances in large language models have enabled end-to-end automated manuscript generation, existing systems suffer from three critical deficiencies: (i) generated claims are not deterministically grounded in verifiable literature, (ii) experimental results are frequently fabricated rather than executed, and (iii) there exists no standardized, multi-dimensional framework to assess whether AI-generated manuscripts meet the quality and rigor required for real-world publication. We present Prompt-to-Paper, a multi-agent framework that directly addresses this evaluation gap through three integrated innovations. First, a deterministic retrieval-augmented generation pipeline with section-aware relevance scoring and snowball citation expansion grounds every claim in a verifiable corpus of 60--100 papers. Second, an autonomous coding agent executes real computational biology experiments replacing synthetic outputs with genuine numerical results. Third, an eight-dimensional automated quality scorer, benchmarked with approximate reference statistics from published papers and augmented with explicit hallucination penalties, provides standardized, reproducible quality assessments. The quality-driven improvement loop uses a context-rich reviser that routes each iteration to one of three researcher actions and fires a deep research cycle every ten iterations to re-run experiments and re-manuscript from stronger outputs. We validate the system on five bioinformatics case studies; all five cases compiled submission-formatted PDFs with zero out-of-range citations. The improvement loop raises manuscript quality by an average of +17.96 points on a 0--100 scale (maximum +26.04. As partial external checks, a human reviewer scored the five manuscripts at an average of 7.0 out of 10. Complete manuscripts are produced at approximately 0.31 USD per paper.",
+      "url": "http://arxiv.org/abs/2607.05456v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05456v1",
+      "tldr": "Prompt-to-Paper is a multi-agent AI system for bioinformatics that generates complete, verifiable manuscripts by using deterministic retrieval-augmented generation grounded in real literature, autonomous coding agents that execute actual experiments, and an eight-dimensional quality scorer with hallucination penalties, achieving significant quality improvements and low-cost production.",
       "detailed_reading": {
-        "motivation": "现有生成模型虽能产生高质量合成图像，但利用这些数据的方法（如训练/微调生成器或轻量级后处理）往往依赖特定生成器且需要专业知识。本文研究一个互补问题：给定固定合成图像池，能否仅通过选择信息子集来提升下游效用？作者发现有效选择必须克服现代生成器的结构性偏见：它们倾向于过度产生各类别的典型模式（同质样本），而低估类内变化（异质样本）。",
-        "method": "方法分为两步。第一步，将真实数据分为同质子集（HO）和异质子集（HE）：对每个类内图像，用预训练编码器（MoCo v3）提取ℓ2归一化特征，基于余弦距离构建有向1-最近邻图，入度大于0的节点为HO（局部代表），入度为0的节点为HE（非冗余变化）。第二步，提出分区选择策略：对合成池中每个样本，分别计算其与HO和HE的评分，评分结合保真度（奖励与真实语义对齐）和多样性（惩罚与HO的典型模式冗余）。具体地，对每个分区p，计算S^p = fidelity + λ·diversity，其中fidelity为与p中最近邻的相似度，diversity为与HE中最近邻的相似度（或与HO偏离度）。按S^p排序，对每个分区选择前k/2个样本，合并得最终选池。该方法不依赖生成器结构，无需重新训练生成器。",
-        "result": "在CIFAR-10、ImageNet等基准上，该方法持续优于现有数据选择基线（如直接使用全部合成数据、仅基于保真度或多样性的选择），以最多40%的合成样本即可匹配真实数据性能。在更强的任务调优生成器（如微调扩散模型）后应用，该方法在分类和分割任务上均有额外增益，表明其作为后处理机制的互补有效性。",
-        "conclusion": "后生成选择并非替代更优生成器的手段，而是提升合成数据效用的互补机制。通过将真实数据分为HO和HE，并设计联合保真度-多样性的分区选择策略，能有效克服生成器过度产生典型模式的偏见，在减少数据冗余的同时保持高语义质量。",
-        "key_details": "数据：使用CIFAR-10、ImageNet等，合成池由生成器（如扩散模型）产生，分类器含ResNet、ViT等。建模：1-NN图划分依赖唯一最近邻假设（Proposition 1保证HO是最小近邻覆盖集），特征来自MoCo v3预训练编码器，所有特征ℓ2归一化，余弦距离。评分中λ为超参数（默认平衡保真度和多样性）。复杂度：单类1-NN图划分O(n²d)，选择过程O(|D_S|·|D_R|)。局限性：依赖预训练编码器质量；1-NN划分对噪声敏感；生成器偏见可能随模型变化；当前仅考虑分类和分割，未探索更复杂任务。"
+        "motivation": "现有端到端自动生成论文的AI系统存在三个关键缺陷：生成的声明无法确定性关联到可验证文献、实验结果经常是被捏造而非真实执行、缺乏标准化的多维框架来评估AI生成论文是否符合实际发表的质量和严谨性。这些缺陷导致AI生成论文的验证难题，迫切需要一种能够保证文献基础可验证、实验结果真实、并具备标准化质量评估框架的系统。",
+        "method": "Prompt-to-Paper是一个多智能体框架，包含五个阶段：文献获取与相关性评分（使用SPECTER2嵌入和分段加权公式从Semantic Scholar检索60-100篇论文，并通过雪球采样扩展）、知识图谱构建与声明对齐（基于论文引用网络计算PageRank，提取可证伪声明并标记支持/矛盾/正交关系）、利用DeepSeek分层模型写作（leader使用推理模型deepseek-v4-pro进行质量判断与综合，worker使用deepseek-chat快速生成章节）、自主生物信息学实验（编码智能体硬编码参考序列，执行多序列比对、Jukes-Cantor距离计算、5000次置换检验等统计验证，生成结果.json和图表）、质量驱动的改进循环（八维评分器包含新颖性/贡献/合理性/呈现/可重复性/文献基础/空白相关性/结构完整性，结合LLM评判、参考统计和幻觉惩罚，每10次迭代触发深度研究循环重新运行实验和重写稿件）。所有实验代码在沙箱中执行，最多12次真实尝试，输出规范化的CanonicalResults对象。",
+        "result": "在五个生物信息学案例验证中，系统均生成提交格式的PDF且零越界引用。改进循环将稿件质量平均提升17.96分（0-100分制），最高提升26.04分。人类评审员对五篇稿件的平均评分为7.0/10。完整稿件生产成本约为每篇0.31美元。",
+        "conclusion": "Prompt-to-Paper通过确定性检索增强生成、自动实验执行和八维质量评分及迭代改进，有效解决了AI生成论文的可验证性和质量控制问题。系统在五个案例中均产出格式合规的稿件，质量提升显著且成本极低，为自动化科学写作提供了实用且可复现的方案。",
+        "key_details": "文献检索使用分段加权相关性公式，权重为摘要0.30、方法0.25、结果0.20、引言0.12、讨论0.08、结论0.05，输出60-100篇论文。自主编码智能体执行真实生物信息学实验，包括替换合成输出为真实数值结果，使用rigor.py模块进行5000次置换检验、Bootstrap置信区间和Benjamini-Hochberg校正。八维评分器采用三层混合架构（权重0.55/0.25/0.20），结合G-Eval LLM评判和ICLR校准参考统计数据，并包含明确的幻觉惩罚。改进循环每10次迭代重置深度研究周期，重新运行实验并基于强输出来重写稿件。限制包括仅适用于计算生物学主题、依赖DeepSeek模型、以及60-100篇论文的固定文献规模。"
       },
       "affiliations": [
-        "Case Western Reserve University"
+        "National University of Sciences and Technology (NUST)"
       ],
-      "affiliations_text": "Case Western Reserve University",
-      "score": 1.9091654419270072,
-      "score_text": "1.9"
+      "affiliations_text": "National University of Sciences and Technology (NUST)",
+      "score": 1.7507385163541322,
+      "score_text": "1.8"
     },
     {
-      "id": "2607.02672v1",
-      "rank": 8,
+      "id": "2607.05464v1",
+      "rank": 10,
       "section": "deep",
-      "paper_id": "2026/07/08/260702672v1-internal-pluralism-and-the-limits-of-pairwise-comparisons",
+      "paper_id": "2026/07/08/260705464v1-learnable-weighting-of-intra-attribute-distances-for-categorical-data-clustering-with-nominal-and-ordinal-attributes",
       "source": "arxiv",
-      "title": "Internal Pluralism and the Limits of Pairwise Comparisons",
+      "title": "Learnable Weighting of Intra-Attribute Distances for Categorical Data Clustering with Nominal and Ordinal Attributes",
       "authors": [
-        "Bailey Flanigan",
-        "Michelle Si"
+        "Yiqun Zhang",
+        "Yiu-ming Cheung"
       ],
-      "authors_text": "Bailey Flanigan, Michelle Si",
-      "abstract": "Local pairwise comparisons are a standard tool for learning how people want decision rules to work, e.g., in participatory design or alignment. However, their use builds in two strong assumptions: that local comparisons are sufficient evidence about how a person wants an automated decision rule to behave, and that people can always answer those comparisons decisively. We investigate how these assumptions may be compromised under internal pluralism: the idea that an individual evaluates decision rules according to multiple authoritative priorities about how the rule should behave. We provide a formal model of such pluralistic preferences over decision rules, which then lets us identify two distinct failures of forced local pairwise comparison data. First, priorities such as proportionality, egalitarianism, and equal treatment are inherently global: what they imply in one case can depend on what happens elsewhere, so local comparisons may fail to capture them. Second, even when priorities are representable locally, tension between strongly-held priorities can generate internal conflict, producing potentially costly behavioral distortions when comparisons are forced. We then use our model to investigate the alternative -- allowing people to report indecision -- and our findings suggest that doing so can considerably reduce the number of queries needed to learn preferences accurately. We conclude by describing how our model points toward preference-learning methods that elicit these priorities directly, yielding more faithful and interpretable accounts of what people value.",
-      "url": "http://arxiv.org/abs/2607.02672v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02672v1",
-      "tldr": "This paper formalizes how internal pluralism—where individuals hold multiple conflicting priorities—undermines the validity of forced pairwise comparisons for learning preferences over decision rules, and shows that allowing indecision reduces the number of queries needed to accurately learn those preferences.",
+      "authors_text": "Yiqun Zhang, Yiu-ming Cheung",
+      "abstract": "The success of categorical data clustering generally much relies on the distance metric that measures the dissimilarity degree between two objects. However, most of the existing clustering methods treat the two categorical subtypes, i.e. nominal and ordinal attributes, in the same way when calculating the dissimilarity without considering the relative order information of the ordinal values. Moreover, there would exist interdependence among the nominal and ordinal attributes, which is worth exploring for indicating the dissimilarity. This paper will therefore study the intrinsic difference and connection of nominal and ordinal attribute values from a perspective akin to the graph. Accordingly, we propose a novel distance metric to measure the intra-attribute distances of nominal and ordinal attributes in a unified way, meanwhile preserving the order relationship among ordinal values. Subsequently, we propose a new clustering algorithm to make the learning of intra-attribute distance weights and partitions of data objects into a single learning paradigm rather than two separate steps, whereby circumventing a suboptimal solution. Experiments show the efficacy of the proposed algorithm in comparison with the existing counterparts.",
+      "url": "http://arxiv.org/abs/2607.05464v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.05464v1",
+      "tldr": "This paper proposes a unified distance metric for nominal and ordinal attributes and a clustering algorithm that jointly learns intra-attribute distance weights and data partitions to improve categorical data clustering performance.",
       "detailed_reading": {
-        "motivation": "在参与式设计和AI对齐中，局部成对比较被广泛用于学习个体对决策规则的偏好，但这种方法隐含了两个强假设：局部比较足以反映全局偏好，且个体总能给出明确的比较答案。本文聚焦于“内部多元主义”现象，即个体根据多个权威优先级（如比例性、平等主义）来评价决策规则，并探讨在此情形下上述假设如何被破坏，从而揭示局部比较可能产生误导性数据的根本原因。",
-        "method": "本文首先构建了内部多元主义偏好的形式化模型：个体偏好被视为多个优先级（全局约束）的组合，每个优先级对决策规则施加全局条件，个体整体偏好则反映这些优先级之间的某种权衡（例如词典序或帕累托支配）。基于该模型，论文分析了强迫进行局部成对比较时可能出现的两类失败：一是优先级本身的全局性导致局部比较无法刻画其含义；二是优先级之间的紧张关系引发内部冲突，使个体在被迫选择时产生行为扭曲（如自相矛盾或选择昂贵选项）。作为替代，论文研究了允许个体报告“犹豫”（即不做出明确比较）的偏好学习方案，并通过理论分析和模拟实验，对比了强制比较与允许犹豫两种策略在主动学习框架下的查询效率。",
-        "result": "核心发现是内部多元主义会导致局部成对比较的失败：全局优先级无法通过局部比较完整捕捉，且内部冲突会迫使个体做出扭曲的选择。模拟实验表明，允许报告犹豫可以显著减少学习准确偏好所需的查询次数（例如在典型设置下减少约30%-50%），并且在不同优先级数量下均优于强制比较方法，以更少的查询达到相同的偏好预测精度。理论分析进一步确认了全局优先级与局部比较之间固有的不兼容性。",
-        "conclusion": "研究表明，在个体具有多元内部优先级时，强制局部成对比较可能生成误导性数据，降低偏好学习效率。允许报告犹豫是一种有效的应对策略，能够更高效、更准确地学习偏好。最终，本文呼吁发展直接eliciting优先级的偏好学习方法，以构建更忠实和可解释的人类价值模型。",
-        "key_details": "关键细节包括：优先级被建模为全局可满足性约束（例如“分配结果应满足比例性”），个体偏好由这些优先级通过指定权重或序关系组合而成；局部比较数据通过主动学习生成，查询策略基于不确定性（如BALD）选择样本；允许犹豫时，个体可以回答“不确定”或“两者相同”，模型将其视为部分反馈。实验在合成数据上进行，优先级数量从2到5个，每个优先级带有一个误差参数。模型局限性在于假设优先级已知且可枚举，而在真实场景中优先级可能模糊、动态变化或难以清晰界定；此外，研究未考虑优先级之间的非线性交互或权重动态调整。该模型为未来设计直接eliciting优先级的查询方法提供了理论依据。"
+        "motivation": "现有分类数据聚类方法通常将名义属性和有序属性等同对待，忽略了有序属性值的相对顺序信息，且未考虑两类属性间的相互依赖关系，导致信息丢失和聚类性能次优。因此需要一种能统一度量名义与有序属性内部距离、并自动学习距离权重的聚类方法。",
+        "method": "输入为包含名义和有序属性的分类数据集。首先将名义属性的每个可能值转化为布尔属性（即二元有序属性），从而将所有属性统一为有序类型。然后基于属性间的条件概率分布定义统一的内部属性距离：对于任意两个属性，利用一个属性值条件下另一个属性值的分布差异（如KL散度）作为距离度量。随后提出迭代聚类算法，同时学习距离权重和数据划分：初始化距离权重为等权重，计算对象与簇模式之间的加权距离，将对象分配到最近簇，更新簇内概率分布，根据簇内紧凑性调整距离权重（增大有助于减小簇内距离的权重，减小不重要的权重），重复直至收敛。算法无需人工设定超参数。",
+        "result": "在多个真实数据集（包括混合类型、纯有序和纯名义数据）上的实验表明，所提算法在聚类准确率、标准化互信息等指标上全面优于现有距离度量（如基于熵的度量）和聚类算法（如k-modes、属性加权聚类等），尤其在混合属性数据集上性能提升显著，验证了统一度量与可学习权重机制的有效性。",
+        "conclusion": "提出的基于图视角的统一距离度量与可学习加权聚类算法能够有效处理任意类型（混合、纯有序、纯名义）的分类数据聚类，通过将名义属性转化为有序属性并利用属性间依赖信息，避免了信息丢失；同时通过联合优化距离权重与数据划分，克服了分步优化带来的次优解问题，是一种无参数、高鲁棒性的聚类方法。",
+        "key_details": "关键点包括：(1) 名义属性值被转化为布尔属性，视为有序属性的特例，实现了两类属性的统一；(2) 内部属性距离基于属性间的条件概率分布，使用对数几率或KL散度计算，充分捕捉属性依赖；(3) 距离权重在聚类迭代中根据簇内距离的方差自动调整，使重要距离贡献更大；(4) 算法无超参数，避免了调参问题；(5) 计算复杂度约为O(t n d² v)，其中t为迭代次数，v为平均取值数，适用于中等规模数据集；(6) 局限性：当属性间独立时距离度量可能失效，且对高维数据可扩展性需进一步验证。"
       },
       "affiliations": [],
       "affiliations_text": "Unknown affiliation",
-      "score": 1.774694264398612,
-      "score_text": "1.8"
-    },
-    {
-      "id": "2607.02633v1",
-      "rank": 9,
-      "section": "deep",
-      "paper_id": "2026/07/08/260702633v1-graft-grafted-reference-audio-for-fine-grained-pronunciation-in-zero-shot-text-to-speech",
-      "source": "arxiv",
-      "title": "GRAFT: Grafted Reference Audio for Fine-grained Pronunciation in Zero-shot Text-to-Speech",
-      "authors": [
-        "Antonis Asonitis",
-        "Francesco Verdini",
-        "Aref Farhadipour",
-        "Vijeta Avijeet",
-        "Pierre-Edouard Honnet",
-        "Marzieh Razavi",
-        "Juan Pablo Zuluaga Gomez"
-      ],
-      "authors_text": "Antonis Asonitis, Francesco Verdini, Aref Farhadipour, Vijeta Avijeet, Pierre-Edouard Honnet, Marzieh Razavi, Juan Pablo Zuluaga Gomez",
-      "abstract": "We present GRAFT, a per-word pronunciation conditioning mechanism for text-to-speech neural codec language modeling. Existing systems reach high intelligibility and naturalness but inherit the ambiguity of text and mispronounce rare proper nouns, loanwords and technical terms. Even phoneme-conditioned models offer no direct acoustic handle for per-word pronunciation. GRAFT controls the pronunciation of a chosen word from a short spoken sample of it, encoded with the model's own speech tokenizer and bound to the word's position in the prompt. Voice conversion during training-data construction disentangles the hint speaker from the target speaker, so the hint may come from any voice while the output stays in the target voice. In a blind English listening study, human raters rank GRAFT first by a clear margin, judging its rendering of the difficult word closest to a reference recording of that word. On a five-language objective benchmark, GRAFT reduces target-word phoneme error rate by 22-39% over the identical text-only backbone and outperforms competitive open-source zero-shot systems, both phoneme- and text-conditioned, on target-word pronunciation, while preserving speaker similarity and naturalness.",
-      "url": "http://arxiv.org/abs/2607.02633v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02633v1",
-      "tldr": "GRAFT improves zero-shot text-to-speech pronunciation by conditioning on a short spoken sample of a target word, encoded with the model's own speech tokenizer and bound to its position, using voice-converted training data to disentangle speaker identity from pronunciation.",
-      "detailed_reading": {
-        "motivation": "现有零样本文本到语音（TTS）系统虽然达到了高自然度和可懂度，但继承了文本的歧义性，在罕见专有名词、外来词和技术术语上容易发音错误。即使音素条件模型也无法直接提供每个词的声学控制手段，因为音素符号化会丢失重音、语调等细节。因此，需要一种无需额外参数或架构改变、通过音频示例直接指定每个词发音的细粒度控制方法。",
-        "method": "GRAFT基于神经编解码语言模型（Qwen3-TTS-12Hz-0.6B-Base），输入包括目标文本、目标说话人参考音频，以及对每个目标词提供的发音参考音频（可来自任意说话人）。训练数据构建流程：对每个训练语句，先使用Seed-VC（20步）将原始语音转换为随机其他说话人的语音；然后通过强制对齐（Qwen3-TTS对齐器）获得词边界，裁剪每个词并前后各加0.3秒静音，再经模型自身的16码本12.5Hz码本编码为codec tokens。训练时，将这些codec tokens替换提示中对应词的文本tokens（保留目标说话人参考），模型自回归预测原始语音的codec tokens。推理时，用户提供每个目标词的短音频，经相同码本编码后替换文本tokens，与目标说话人参考一起输入模型，生成目标说话人语音并保留指定发音。该方法无需任何新参数，推理计算量与基线相同（仅增加少量词级tokens）。",
-        "result": "在英文盲听研究（Bradley-Terry排名）中，GRAFT的困难词发音最接近参考录音，远超其他系统。在五语言（英、德、法、西、意）客观基准上，GRAFT在目标词音素错误率（D-PER）上比相同文本骨干（Qwen3-TTS）降低22-39%（例如英语D-PER 0.29 vs 0.37），且全面优于音素条件（StyleTTS2、MaskGCT等）和文本条件（XTTS-v2、F5-TTS、CosyVoice2）的竞争系统。同时，GRAFT保持了与基线相当的说话人相似性（英语SSIM 0.73）和自然度（UTMOS 4.51），且整体WER仅0.02。消融实验表明，训练数据中去除语音转换会导致说话人相似度崩溃（SSIM从0.68降至0.20），证明语音转换是使模型忽略提示说话人的关键。",
-        "conclusion": "GRAFT通过词级音频条件机制实现了零样本TTS中细粒度的发音控制，无需额外参数或架构改动。关键创新是利用语音转换构造训练数据，使模型学会从任意说话人的发音参考中提取内容而忽略音色，从而在保持目标说话人相似性和自然度的前提下显著提升困难词的发音准确性。该工作在多个语言上验证了有效性，并开源了基准测试工具。",
-        "key_details": "训练数据涵盖五种语言（英、德、法、西、意），总时长7.3k小时，来自VCTK、LibriTTS、MLS、Common Voice等公开数据集，包含2.84万个说话人。语音转换使用Seed-VC（扩散步数D=20），强制对齐借助Qwen3-TTS内部对齐器。词参考裁剪后填充0.3秒静音以处理边界效应。码本配置：16码本，帧率12.5Hz，文本tokens与词级codec tokens通过相同的嵌入表求和后输入Transformer。训练损失为标准自回归交叉熵（预测全部16个码本）。推理时，每个目标词需要一段独立发音音频（约0.5-1秒），且系统预期用户明确指定需要控制的词；未探索多词连续控制。局限性包括：依赖语音转换和强制对齐的质量；对长文本中大量词逐一提供参考可能不实用；目前仅在5种语言上验证，其他语言表现未知。"
-      },
-      "affiliations": [
-        "ETH Zurich",
-        "University of Zurich",
-        "AGIGO",
-        "Sapienza University of Rome"
-      ],
-      "affiliations_text": "ETH Zurich, University of Zurich, AGIGO, Sapienza University of Rome",
-      "score": 1.7642218860396772,
-      "score_text": "1.8"
-    },
-    {
-      "id": "2607.02670v1",
-      "rank": 10,
-      "section": "deep",
-      "paper_id": "2026/07/08/260702670v1-a-granularity-aware-eeg-feature-framework-for-psychopathology-dimension-prediction",
-      "source": "arxiv",
-      "title": "A Granularity-Aware EEG Feature Framework for Psychopathology Dimension Prediction",
-      "authors": [
-        "Haofan Cheng",
-        "Jingjing Hu",
-        "Jingrong Pei",
-        "Shuaiqi Fu",
-        "Meilun Shen",
-        "Shuai Fang",
-        "Meng Wang",
-        "Dan Guo",
-        "Jie Zhang"
-      ],
-      "authors_text": "Haofan Cheng, Jingjing Hu, Jingrong Pei, Shuaiqi Fu, Meilun Shen, Shuai Fang, Meng Wang, Dan Guo, Jie Zhang",
-      "abstract": "Electroencephalography (EEG) offers a noninvasive approach for examining neurophysiological correlates of dimensional psychopathology, yet systematic evidence across EEG paradigms and feature granularities remains limited. Here, we develop a granularity-aware EEG feature pipeline that organizes multi-scale descriptors into global, regional, and channel levels. Using the Healthy Brain Network (HBN) cohort, we evaluate the prediction of four psychopathology dimensions: p-factor, internalizing, externalizing, and attention problems, across four EEG paradigms. Given the heterogeneity of pediatric psychopathology and the moderate reliability of questionnaire-derived scores, this setting represents a challenging feasibility test rather than a clinical screening scenario. Tree-based models and granularity-balanced feature selection showed promising improvements over conventional approaches in selected conditions, although effect sizes remained modest. Visualization of selected markers revealed dimension-specific spatial and spectral patterns that were broadly aligned with existing neurophysiological knowledge. An exploratory cross-dataset sanity check on the independent PEARL cohort suggested that the proposed selection principle remains technically feasible under protocol shifts, without claiming cross-dataset generalizability. Overall, multi-scale EEG features contain weak but detectable signals related to dimensional psychopathology, and granularity-aware selection may serve as a useful feature-reduction strategy for future EEG-based phenotyping studies.",
-      "url": "http://arxiv.org/abs/2607.02670v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.02670v1",
-      "tldr": "This paper proposes a granularity-aware EEG feature pipeline that organizes multi-scale descriptors into global, regional, and channel levels, demonstrating that such balanced feature selection can modestly improve prediction of dimensional psychopathology across multiple paradigms despite weak signal strength.",
-      "detailed_reading": {
-        "motivation": "现有EEG精神病理学预测研究多聚焦单一症状域或任务范式，缺乏跨多范式和多维度的系统评估；同时，特征提取常忽略空间粒度差异，导致高维通道特征在扁平化选择中主导结果，抑制了全局和区域特征中潜在的稳定信号。本研究旨在建立一种粒度感知的EEG特征框架，通过独立分配每个空间粒度的特征预算来平衡多尺度信息，从而提升维度精神病理学预测的可解释性与性能。",
-        "method": "本研究基于Healthy Brain Network (HBN) 数据集（约2600名5-21岁参与者），采用四个EEG范式（静息态闭眼/睁眼、电影观看、环绕抑制），对每个范式提取三类粒度特征：全局（28维，如微状态动力学）、区域（400维，如区域谱功率和连通性）、通道（3096维，如谱功率、微分熵、非周期性参数等），每个epoch的特征再通过均值、标准差、中位数聚合为10572维特征矩阵。以Child Behavior Checklist (CBCL) 导出的四个精神病理学维度（p因子、内化、外化、注意问题）为预测目标（极端分位数30/70变换为二分类标签）。核心方法为粒度感知稳定性特征选择（GSTS），对每个粒度独立执行稳定性选择（特征预算约束），并与跨任务模型族筛选（CMFS）结合，在fold-contained嵌套交叉验证中评估Logistic回归、弹性网络、线性SVM、随机森林、XGBoost等模型。此外，在独立PEARL数据集上进行探索性跨数据集验证。",
-        "result": "树模型（随机森林、XGBoost）和粒度平衡特征选择在特定条件下（如闭眼静息态和电影观看范式）优于常规扁平化特征选择，但整体效应量适中。可视化分析显示，所选特征呈现维度特异性空间和光谱模式，与现有神经生理学知识（如注意问题与前额叶θ/β比相关）广泛一致。跨数据集检查表明，GSTS选择原则在协议变化下仍可技术可行，但未断言跨数据集泛化性。总体而言，多尺度EEG特征对维度精神病理学包含弱但可检测的预测信号。",
-        "conclusion": "多尺度EEG特征能够捕获与维度精神病理学相关的微弱但可检测的神经生理信号；粒度感知稳定性选择（GSTS）通过平衡各空间粒度的特征贡献，可作为未来基于EEG的表型研究中有用的特征降维策略，尤其适用于大规模儿科人群。",
-        "key_details": "数据来源：HBN（V2版本，1-11次发布）含2575-2592名受试者（依范式不同），EEG为129通道，100Hz重采样，4秒epoch；PEARL数据集用于探索性验证。特征组成：28全局、400区域、3096通道概念特征，经均值/标准差/中位数聚合得10572维；关键模块包括微状态动力学、区域偏侧性、相干/PLV连通性、滑动窗口动态等。模型策略：fold-contained嵌套交叉验证确保无偏泛化估计；特征选择使用稳定性选择（Stability Selection）并在每种粒度设定独立预算K_g，避免高维通道特征主导。局限性：预测效应量较小，目标维度来自问卷（CBCL），不可直接类比临床诊断；跨数据集仅作技术可行性检查，未验证泛化性。"
-      },
-      "affiliations": [
-        "Hefei University of Technology",
-        "The Fourth Military Medical University"
-      ],
-      "affiliations_text": "Hefei University of Technology, The Fourth Military Medical University",
-      "score": 1.5056950587242877,
-      "score_text": "1.5"
+      "score": 1.392641297652927,
+      "score_text": "1.4"
     }
   ],
   "quick_skim": []

@@ -1,24 +1,24 @@
 # 日报 · 2026-07-08
 
-- 生成时间：2026-07-08 03:32:11
+- 生成时间：2026-07-08 05:37:35
 - 当次推荐总数：10
 - 精读区：10 / 10
 - 速读区：0 / 15
 
 ## 今日简报
-今日共10篇论文，建议精读3篇（时序预测基础模型、具身智能全模态、物理知识图神经网络），速读7篇。最值得优先关注：**QuantFlow**（联邦Mamba时序预测，兼顾隐私与不确定量化）和**iFLYTEK-Embodied-Omni**（统一视觉-语言-动作建模，零样本成功率89.6%）。其余涉及联邦目标检测、基准审计、电力价格预测等，可快速浏览。
+今日共10篇论文推荐，建议精读3篇、速读7篇。最优先看《Statistically Meaningful Geometry and Gauge Symmetry Breaking》（评分2.98，LLM智能本质的几何突破，含丘成桐），其次关注《Learning to Control LLM Agent Harnesses with Offline Reinforcement Learning》（离线强化学习控制执行流程）。其余论文涉及网络压缩、时序鲁棒性、UWB重建等。
 
 ## 精读区
-1. [QuantFlow: A Federated Mamba-Based Post-Transformer Foundation Model for Time-Series Forecasting](/2026/07/08/260702632v1-quantflow-a-federated-mamba-based-post-transformer-foundation-model-for-time-series-forecasting) （2.7/10）
-2. [Physics-Informed Dynamic State Estimation for Current Transformers Using Graph Neural Networks](/2026/07/08/260702679v1-physics-informed-dynamic-state-estimation-for-current-transformers-using-graph-neural-networks) （2.7/10）
-3. [iFLYTEK-Embodied-Omni Technical Report](/2026/07/08/260702542v1-iflytek-embodied-omni-technical-report) （2.6/10）
-4. [Federated Learning for Object Detection: Enabling Collaborative Drone Learning Without Centralizing Data](/2026/07/08/260702636v1-federated-learning-for-object-detection-enabling-collaborative-drone-learning-without-centralizing-data) （2.3/10）
-5. [Auditing the Audit: Five Failure Modes in Benchmark-Validity Audits](/2026/07/08/260702586v1-auditing-the-audit-five-failure-modes-in-benchmark-validity-audits) （2.1/10）
-6. [Evaluating Time Series Foundation Models for Electricity Price Forecasting: Contamination Risk, Distributional Shifts, and Covariate Dependence](/2026/07/08/260702623v1-evaluating-time-series-foundation-models-for-electricity-price-forecasting-contamination-risk-distributional-shifts-and-covariate-dependence) （2.0/10）
-7. [Post-Generation Curation of Synthetic Images via Homogeneous-Heterogeneous Splitting](/2026/07/08/260702637v1-post-generation-curation-of-synthetic-images-via-homogeneous-heterogeneous-splitting) （1.9/10）
-8. [Internal Pluralism and the Limits of Pairwise Comparisons](/2026/07/08/260702672v1-internal-pluralism-and-the-limits-of-pairwise-comparisons) （1.8/10）
-9. [GRAFT: Grafted Reference Audio for Fine-grained Pronunciation in Zero-shot Text-to-Speech](/2026/07/08/260702633v1-graft-grafted-reference-audio-for-fine-grained-pronunciation-in-zero-shot-text-to-speech) （1.8/10）
-10. [A Granularity-Aware EEG Feature Framework for Psychopathology Dimension Prediction](/2026/07/08/260702670v1-a-granularity-aware-eeg-feature-framework-for-psychopathology-dimension-prediction) （1.5/10）
+1. [Statistically Meaningful Geometry and Gauge Symmetry Breaking: A Geometric Foundation for Scientific Discovery and Intelligence Emergence](/2026/07/08/260705436v1-statistically-meaningful-geometry-and-gauge-symmetry-breaking-a-geometric-foundation-for-scientific-discovery-and-intelligence-emergence) （3.0/10）
+2. [Learning to Control LLM Agent Harnesses with Offline Reinforcement Learning](/2026/07/08/260705458v1-learning-to-control-llm-agent-harnesses-with-offline-reinforcement-learning) （2.9/10）
+3. [Empirical Minimal-Realisation Compression of Deep Neural Networks via Controllability-Observability Tests](/2026/07/08/260705457v1-empirical-minimal-realisation-compression-of-deep-neural-networks-via-controllability-observability-tests) （2.8/10）
+4. [Exogenous Dropout: A Simple, Strong Baseline for Corruption-Robust Time Series Forecasting with Covariates](/2026/07/08/260705452v1-exogenous-dropout-a-simple-strong-baseline-for-corruption-robust-time-series-forecasting-with-covariates) （2.6/10）
+5. [Geometry-Aware Infrastructure-Anchored Denoiser for UWB Sensing and Work-Zone Reconstruction](/2026/07/08/260705449v1-geometry-aware-infrastructure-anchored-denoiser-for-uwb-sensing-and-work-zone-reconstruction) （2.6/10）
+6. [AdaStop: Cost-Aware Early Stopping for DNN Test Selection](/2026/07/08/260705461v1-adastop-cost-aware-early-stopping-for-dnn-test-selection) （2.4/10）
+7. [The Granularity Paradox: How Temporal Disaggregation Inflates In-Sample Fit and Compounds Out-of-Sample Error](/2026/07/08/260705450v1-the-granularity-paradox-how-temporal-disaggregation-inflates-in-sample-fit-and-compounds-out-of-sample-error) （2.3/10）
+8. [Design-CP: Context Parallelism for Design of Protein Nanoparticles](/2026/07/08/260705439v1-design-cp-context-parallelism-for-design-of-protein-nanoparticles) （2.0/10）
+9. [Prompt-to-Paper: Agentic AI System for Bioinformatics](/2026/07/08/260705456v1-prompt-to-paper-agentic-ai-system-for-bioinformatics) （1.8/10）
+10. [Learnable Weighting of Intra-Attribute Distances for Categorical Data Clustering with Nominal and Ordinal Attributes](/2026/07/08/260705464v1-learnable-weighting-of-intra-attribute-distances-for-categorical-data-clustering-with-nominal-and-ordinal-attributes) （1.4/10）
 
 ## 速读区
 暂无。
