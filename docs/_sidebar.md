@@ -1,5 +1,17 @@
 - [首页](/README)
 
+- 2026-07-09
+  - [日报](/2026/07/09/README)
+  - [精读 · NEST: Tackling Dataset-Level Distribution Shifts via Regime-Oriented Mixture-of-Experts](/2026/07/09/260706607v1-nest-tackling-dataset-level-distribution-shifts-via-regime-oriented-mixture-of-experts)
+  - [精读 · TriRoute: Unified Learned Routing for Joint Adaptive Attention, Experts, and KV-Cache Allocation](/2026/07/09/260706601v1-triroute-unified-learned-routing-for-joint-adaptive-attention-experts-and-kv-cache-allocation)
+  - [精读 · D2PO: Optimizing Diffusion Samplers via Dynamic Preference](/2026/07/09/260706609v1-d2po-optimizing-diffusion-samplers-via-dynamic-preference)
+  - [精读 · Deep Reinforcement Learning for Reliability Based Bi-Objective Portfolio Optimization](/2026/07/09/260706610v1-deep-reinforcement-learning-for-reliability-based-bi-objective-portfolio-optimization)
+  - [精读 · STAGformer: A Spatio-temporal Agent Graph Transformer for Micro Mobility Demand Forecasting](/2026/07/09/260706614v1-stagformer-a-spatio-temporal-agent-graph-transformer-for-micro-mobility-demand-forecasting)
+  - [精读 · Inertia-1: An Open Exploration of Wearable Motion Foundation Models](/2026/07/09/260706617v1-inertia-1-an-open-exploration-of-wearable-motion-foundation-models)
+  - [精读 · Creating Power Distribution Network Layouts Using Generative Adversarial Networks and Image-Based Representations](/2026/07/09/260706622v1-creating-power-distribution-network-layouts-using-generative-adversarial-networks-and-image-based-representations)
+  - [精读 · WHERE to Generate Matters: Budget-Aware Synthetic Augmentation for Label Skewed Federated Learning](/2026/07/09/260706616v1-where-to-generate-matters-budget-aware-synthetic-augmentation-for-label-skewed-federated-learning)
+  - [精读 · Fingerprint, Not Blueprint: How Positional Schemes Set the Default Spectral Algebra of Attention](/2026/07/09/260706621v1-fingerprint-not-blueprint-how-positional-schemes-set-the-default-spectral-algebra-of-attention)
+  - [精读 · A Quiet Failure in Calibrated Virtual Screening: Marginal Conformal Prediction Under-Covers the Minority Class, and a Class-Conditional Fix Recovers It](/2026/07/09/260706605v1-a-quiet-failure-in-calibrated-virtual-screening-marginal-conformal-prediction-under-covers-the-minority-class-and-a-class-conditional-fix-recovers-it)
 - 2026-07-08
   - [日报](/2026/07/08/README)
   - [精读 · Statistically Meaningful Geometry and Gauge Symmetry Breaking: A Geometric Foundation for Scientific Discovery and Intelligence Emergence](/2026/07/08/260705436v1-statistically-meaningful-geometry-and-gauge-symmetry-breaking-a-geometric-foundation-for-scientific-discovery-and-intelligence-emergence)

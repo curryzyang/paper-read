@@ -1,0 +1,327 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-09T05:56:15.596046",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 0,
+    "daily_total": 10,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.06607v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706607v1-nest-tackling-dataset-level-distribution-shifts-via-regime-oriented-mixture-of-experts",
+      "source": "arxiv",
+      "title": "NEST: Tackling Dataset-Level Distribution Shifts via Regime-Oriented Mixture-of-Experts",
+      "authors": [
+        "Lanhao Li",
+        "Bingshu Xie",
+        "Lijun Sun",
+        "Xin Xue",
+        "Haoyi Zhou",
+        "Jianxin Li"
+      ],
+      "authors_text": "Lanhao Li, Bingshu Xie, Lijun Sun, Xin Xue, Haoyi Zhou, Jianxin Li",
+      "abstract": "Accurate long-term forecasting in complex systems is frequently compromised by dataset-level distribution shifts, where diverse underlying behavioral modes and evolving system states drive the dynamic multivariate time-series. While existing methods predominantly focus on local temporal shifts, they fail to explicitly model the global structural challenge where datasets are composites of distinct operational regimes. In this paper, we propose NEST, a specialized framework designed to model and recompose these evolving structures through a two-phase dense MoE architecture. NEST first facilitates structural specialization by partitioning the dataset into distinct operational regimes through unsupervised clustering in a principled moment-entropy space. We introduce a regime-oriented router mechanism that generates initial expert weights based on temporal content, subsequently refined through geometric modulation to regime centroids. Crucially, rather than acting as monolithic predictors, individual experts function as specialized kernels that capture regime-specific dynamics by evolving unique variate-attention patterns. Extensive evaluations on diverse benchmarks, including heterogeneous network traffic and physical phenomena, demonstrate that NEST consistently achieves state-of-the-art performance. Our code and datasets are available at https://github.com/Aaralshin/NEST",
+      "url": "http://arxiv.org/abs/2607.06607v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06607v1",
+      "tldr": "NEST proposes a two-phase mixture-of-experts framework that identifies distinct operational regimes via moment-entropy clustering and uses regime-oriented routing to dynamically recompose specialized experts for accurate long-term time series forecasting under dataset-level distribution shifts.",
+      "detailed_reading": {
+        "motivation": "现有方法主要关注局部时间偏移，未能显式处理数据集级别的分布偏移，其中复杂系统的时间序列由不同运行状态组成，导致长期预测性能下降。",
+        "method": "提出NEST两阶段稠密混合专家框架。第一阶段：通过无监督聚类在矩-熵空间（均值、方差、SVD熵）对数据切片（长度L+H）进行分区，识别不同运行状态，并训练对应状态专家（变体注意力模块）捕获状态特定变量依赖；同时训练共享专家保留全局知识。第二阶段：冻结专家池，训练面向状态的router，先基于输入时间内容通过Transformer编码器和线性头生成初始权重，再通过输入到状态质心的欧式距离计算几何调制因子（逆二次函数加软化因子α）调整权重，最终与共享专家权重（Sigmoid生成）组合得到预测。",
+        "result": "在异构网络流量和物理现象（如电离层总电子含量）等基准上，NEST一致取得最先进性能；注意力多态性和权重置换分析验证了其变量依赖重组能力。",
+        "conclusion": "NEST通过显式建模和重组运行状态的结构性变化，有效解决数据集级分布偏移，在长期预测中实现SOTA性能。",
+        "key_details": "数据切片跨越历史窗口和预测窗口（L+H）用于状态发现，推理时仅用历史窗口L避免数据泄漏；使用MSE损失训练；超参数包括状态数M和软化因子α；复杂度来自两阶段训练和无监督聚类；局限性是矩-熵特征对状态可分性的依赖，以及假设历史窗口统计量足以代表未来状态。"
+      },
+      "affiliations": [
+        "Beihang University"
+      ],
+      "affiliations_text": "Beihang University",
+      "score": 3.153771990246612,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.06601v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706601v1-triroute-unified-learned-routing-for-joint-adaptive-attention-experts-and-kv-cache-allocation",
+      "source": "arxiv",
+      "title": "TriRoute: Unified Learned Routing for Joint Adaptive Attention, Experts, and KV-Cache Allocation",
+      "authors": [
+        "Andrii Balashov",
+        "Olena Ponomarova"
+      ],
+      "authors_text": "Andrii Balashov, Olena Ponomarova",
+      "abstract": "Conditional computation can decouple language model quality from per-token inference cost, yet leading techniques act on a single axis in isolation: Mixture-of-Experts (MoE) sparsifies the FFN, Mixture-of-Depths (MoD) skips whole transformer blocks, and KV-cache quantization compresses attention memory. We argue these three decisions (attention resolution, expert selection, and cache bit-width) are strongly coupled and should be made jointly: a token rare enough to warrant full attention may also need high-precision caching regardless of which expert processes it. We introduce TriRoute, a single lightweight controller shared across all three axes that, for every token at every layer, emits a coordinated policy: (i) an attention mode (skip/local/full), (ii) a sparse set of FFN experts (with a null expert recovering MoD), and (iii) a KV-cache bit-width. The controller trains end-to-end via a heterogeneous relaxation (Gumbel-Softmax with straight-through estimation for categorical decisions and load-balanced top-k gating for experts) under a Lagrangian budget constraint that turns the average compute and memory cost into a controllable knob. We identify a cross-axis routing-collapse cascade in naive joint training, where collapse on one axis propagates to the others, and address it with per-axis normalization and a coupling-aware balancing loss. On decoder-only models from 160M to 1.3B parameters at compute-optimal token counts, TriRoute Pareto-dominates the best independent MoD+MoE+KV-quantization combination at matched inference FLOPs and memory, while better preserving tail-case robustness on rare entities, code, and arithmetic that pure perplexity optimization erodes. Post-hoc analysis reveals interpretable structure: the controller allocates full attention and high-precision cache to sentence-initial positions, rare subwords, and named entities, while cheaply routing function words.",
+      "url": "http://arxiv.org/abs/2607.06601v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06601v1",
+      "tldr": "TriRoute introduces a single learned controller that jointly decides attention mode, expert selection, and KV-cache bit-width for every token at every layer, using heterogeneous relaxation and coupling-aware balancing to achieve Pareto-dominant efficiency and tail-case robustness over independent MoD+MoE+KV-quantization combinations.",
+      "detailed_reading": {
+        "motivation": "现有条件计算方法（如MoE、MoD和KV缓存量化）各自独立地作用于单一轴，但注意力分辨率、专家选择和缓存位宽这三个决策高度耦合，需要联合进行。本文提出TriRoute，一个轻量级控制器，为每个token每层输出协调策略，以在固定推理预算下更有效地分配计算和内存。",
+        "method": "TriRoute采用单一控制器，对每个token每层输出三个决策：注意力模式（跳过/局部/全局）、稀疏专家集（含空专家模拟MoD）和KV缓存位宽（2/4/8/16比特）。控制器通过端到端训练，使用异构松弛：类别决策用Gumbel-Softmax和直通估计，专家选择用负载平衡top-k门控。训练时引入拉格朗日预算约束将平均计算和内存成本变为可控旋钮，并通过每轴归一化和耦合感知平衡损失解决跨轴路由崩溃级联问题。模型在160M-1.3B参数的仅解码器架构上训练，使用计算最优token数。",
+        "result": "在匹配推理FLOPs和内存时，TriRoute帕累托支配最佳独立MoD+MoE+KV量化组合，并在稀有实体、代码和算术等尾案例上更好保留鲁棒性，而纯困惑度优化会损伤这些尾案例。后验分析显示控制器学习到可解释结构：在句首位置、稀有子词和命名实体上分配全注意力和高精度缓存，而功能词则廉价路由。",
+        "conclusion": "联合学习注意力、专家和缓存分配比三个独立手动调优机制更优，TriRoute提供了一种在固定推理预算下按需分配计算和内存的原理性方法。",
+        "key_details": "关键细节包括：异构松弛（Gumbel-Softmax与直通估计用于注意力模式与位宽，负载平衡top-k用于专家选择）；跨轴路由崩溃级联通过每轴归一化和耦合感知平衡损失缓解；单一预算约束通过在线调整拉格朗日乘子实现；训练时温度退火；注意力模式包含跳过、局部窗口和全局三种；KV位宽离散为2/4/8/16；算法复杂度与标准MoE相当，但需要额外控制器参数（轻量级）。局限性在于控制器需要端到端训练，且在大规模部署中可能增加调度复杂度。"
+      },
+      "affiliations": [
+        "Ukrainian State University of Science and Technologies"
+      ],
+      "affiliations_text": "Ukrainian State University of Science and Technologies",
+      "score": 2.6406595838826394,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.06609v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706609v1-d2po-optimizing-diffusion-samplers-via-dynamic-preference",
+      "source": "arxiv",
+      "title": "D2PO: Optimizing Diffusion Samplers via Dynamic Preference",
+      "authors": [
+        "Jinkyu Kim",
+        "Jinyoung Choi",
+        "Bohyung Han"
+      ],
+      "authors_text": "Jinkyu Kim, Jinyoung Choi, Bohyung Han",
+      "abstract": "We propose D2PO (Dynamic Direct Preference Optimization), a principled framework for optimizing diffusion sampling policies with respect to timestep schedules and classifier-free guidance (CFG) weights. Our work is motivated by a fundamental limitation of existing student-teacher regression frameworks; low-NFE student samplers are trained to mimic high-NFEteachers, often sacrificing high-frequency texture fidelity while preserving coarse global structures, thereby misaligning the sampler with perceptual quality. D2PO addresses this challenge by reformulating sampler optimization as a preference-based alignment problem, leveraging the Direct Preference Optimization (DPO) framework. To make DPO applicable to diffusion samplers, we model the sampling policy as an energy-based model (EBM), transforming preference comparisons into tractable energy differences. We further introduce a novel energy formulation derived directly from the pretrained score network, enabling preference evaluation in perturbed spaces that jointly capture structural consistency and fine-grained details. Moreover, we introduce dynamic preferences, where the preferred samples used for alignment progressively improve as the sampling policies are learned. This self-improving mechanism replaces rigid static teacher supervision with an iterative, preference-guided refinement process, providing progressively stronger alignment signals. Extensive experiments demonstrate that D2PO aligns diffusion samplers with perceptual quality more faithfully, unlocking the full potential of high-quality teachers and consistently outperforming conventional regression-based schedulers under low-NFE constraints.",
+      "url": "http://arxiv.org/abs/2607.06609v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06609v1",
+      "tldr": "D2PO optimizes diffusion samplers by reformulating the sampling policy as a preference-based alignment problem via an energy-based model and dynamic self-improving preferences, overcoming the perceptual quality limitations of static student-teacher regression under low-NFE constraints.",
+      "detailed_reading": {
+        "motivation": "现有的学生-教师回归框架在低NFE学生模仿高NFE教师时，优先保持粗粒度结构而牺牲高频纹理保真度，导致采样器与感知质量对齐不足，尤其在教师-学生NFE差距大时退化严重。",
+        "method": "D2PO将采样策略优化重新表述为基于偏好的对齐问题，利用DPO框架。首先将确定性采样策略建模为能量基模型（EBM），使偏好比较转化为可处理的能量差异。从预训练得分网络导出新的能量公式，在多个噪声水平上计算得分差异，同时捕获结构一致性和细粒度细节。引入动态偏好机制：每步训练中，用当前策略的密集时间步生成胜者样本，用稀疏时间步生成败者样本，代替静态教师监督；通过最大化胜者相对败者的能量差并保持接近参考策略的KL约束来更新策略。",
+        "result": "大量实验表明D2PO更忠实地对齐扩散采样器与感知质量，在低NFE约束下始终优于LD3等传统回归式调度器，充分释放高质量教师的潜力，生成的图像在纹理和结构上均更优。",
+        "conclusion": "D2PO通过动态偏好对齐而非静态回归，消除了固定教师误差限制，使采样器能自我改进并有效探索高质量路径，为极低NFE下的高性能扩散采样提供了可行框架。",
+        "key_details": "关键细节包括：基于得分的能量度量从预训练噪声预测网络导出，在多个噪声水平权衡结构一致性与高频细节；动态偏好对由同一策略的不同计算量生成，实现自改进；仅优化低维采样参数（时间步和CFG权重），不修改骨干网络；训练中交替生成偏好对并优化DPO损失，无需额外奖励模型；在较大教师-学生NFE差距下优势更明显，但对极端低步数可能仍有挑战。"
+      },
+      "affiliations": [
+        "Ulsan National Institute of Science and Technology",
+        "Seoul National University"
+      ],
+      "affiliations_text": "Ulsan National Institute of Science and Technology, Seoul National University",
+      "score": 2.6132489951373437,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.06610v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706610v1-deep-reinforcement-learning-for-reliability-based-bi-objective-portfolio-optimization",
+      "source": "arxiv",
+      "title": "Deep Reinforcement Learning for Reliability Based Bi-Objective Portfolio Optimization",
+      "authors": [
+        "Sounaq Das",
+        "Tanmay Sen",
+        "Raghu Nandan Sengupta",
+        "Aditya Gupta"
+      ],
+      "authors_text": "Sounaq Das, Tanmay Sen, Raghu Nandan Sengupta, Aditya Gupta",
+      "abstract": "Portfolio optimization under uncertainty is inherently a multi-objective decision problem involving complex interactions among return, risk, market dynamics, and practical investment constraints. Existing reliability based portfolio optimization approaches primarily rely on static optimization frameworks and often fail to capture sequential decision making, tail risk, and market frictions such as transaction costs. To address these limitations, we propose a deep reinforcement learning framework for multi-objective reliability based portfolio optimization (MORP-DRL). The proposed framework jointly optimizes expected return and downside risk using three complementary risk measures: variance, Conditional Value-at-Risk (CVaR), and Entropic Value-at-Risk (EVaR). To model uncertainty and heavy-tailed market behavior, asset returns are represented using GARCH(1,1), Extreme Value Theory, and a t-copula dependence structure, while realistic scenarios are generated through quasi-Monte Carlo simulation. A Proximal Policy Optimization (PPO) based strategy is developed under practical constraints including transaction costs and portfolio bounds, and is benchmarked against NSGA-II. Experiments on ten global equity indices across pre-COVID, COVID, and post-COVID market regimes demonstrate that MORP-DRL achieves competitive risk-return performance, reduced downside risk during periods of market stress, and scalability to high-dimensional portfolio settings.",
+      "url": "http://arxiv.org/abs/2607.06610v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06610v1",
+      "tldr": "The paper proposes a deep reinforcement learning framework (MORP-DRL) that jointly optimizes expected return and downside risk using variance, CVaR, and EVaR under transaction costs and reliability constraints, demonstrating competitive risk-return performance and reduced tail risk across market regimes.",
+      "detailed_reading": {
+        "motivation": "现有基于可靠性的投资组合优化方法主要依赖静态优化框架，无法捕捉序列决策过程、尾部风险以及交易成本等市场摩擦，导致在动态市场环境中的表现不佳。为了克服这些局限性，本文提出一种深度强化学习框架，用于多目标可靠性投资组合优化。",
+        "method": "使用十个全球股票指数在COVID前、中、后三个市场时期的数据，首先通过GARCH(1,1)、极值理论和t-copula依赖结构对资产收益的不确定性和重尾行为进行建模，然后利用拟蒙特卡洛模拟生成现实场景。构建三个基于不同风险度量（方差、条件风险价值CVaR和熵风险价值EVaR）的可靠性约束双目标优化模型，并引入比例交易成本。采用近端策略优化（PPO）算法作为深度强化学习策略，在交易成本和投资组合边界等实际约束下学习动态资产配置策略，并与经典多目标进化算法NSGA-II进行对比。训练和推理流程包括定义状态（历史收益、当前权重等）、动作（权重调整）、奖励（考虑风险和交易成本后的净收益）以及PPO的迭代更新。",
+        "result": "在三个市场时期（COVID前、中、后）的实验中，MORP-DRL框架相对于等权重基准和NSGA-II方法实现了具有竞争力的风险-收益表现，尤其在市场压力时期显著降低了下行风险。此外，该框架在FTSE100指数的高维投资组合设置中展现出良好的可扩展性，PPO和NSGA-II均能有效处理高维问题，但资产配置特征存在差异。",
+        "conclusion": "本文提出的基于深度强化学习的多目标可靠性投资组合优化框架（MORP-DRL）成功地将可靠性约束、交易成本和多种尾部风险度量整合到统一的序列决策框架中，在动态市场条件下比传统静态优化方法和现有DRL方法表现更优，为实际投资管理提供了有效的工具。",
+        "key_details": "关键细节包括：(1) 使用GARCH(1,1)、极值理论和t-copula联合建模来准确刻画收益的波动聚集和尾部依赖；(2) 采用拟蒙特卡洛模拟生成高维低差异场景，提高可靠性估计效率；(3) PPO算法使用截断的替代目标函数稳定训练，并处理连续动作空间；(4) 在奖励函数中显式纳入比例交易成本，通过权重的绝对变化计算；(5) 设定两个可靠性水平（β1和β2）分别约束收益和风险，置信度通常取0.95；(6) 实验覆盖三个不同市场制度，验证模型对不同波动环境的适应性；(7) 与NSGA-II的对比显示PPO在尾部风险控制上的优势，但NSGA-II在帕累托前沿多样性上可能更好；(8) 局限性：依赖历史数据训练，可能对快速结构变化敏感；未考虑流动性约束和非线性交易成本。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Kanpur",
+        "McKinsey and Company",
+        "Indian Institute of Management Amritsar",
+        "Indian Statistical Institute Kolkata"
+      ],
+      "affiliations_text": "Indian Institute of Technology Kanpur, McKinsey and Company, Indian Institute of Management Amritsar, Indian Statistical Institute Kolkata",
+      "score": 2.4828324512395747,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2607.06614v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706614v1-stagformer-a-spatio-temporal-agent-graph-transformer-for-micro-mobility-demand-forecasting",
+      "source": "arxiv",
+      "title": "STAGformer: A Spatio-temporal Agent Graph Transformer for Micro Mobility Demand Forecasting",
+      "authors": [
+        "Ye Zihao"
+      ],
+      "authors_text": "Ye Zihao",
+      "abstract": "Accurate station-level demand forecasting is essential for the efficient operation of bike-sharing systems, yet it remains challenging due to complex spatio-temporal dependencies and the large scale of urban networks. This paper presents STAGformer, a Spatio-Temporal Agent Graph Transformer that achieves efficient global modeling with linear computational complexity. The model introduces a two-step agent attention mechanism, where a small set of learnable spatial and temporal agent tokens first aggregate global information and then broadcast it back to individual stations and time steps, effectively capturing long-range interactions while reducing the quadratic cost of standard self-attention to O(NT). STAGformer integrates four core modules: a spatio-temporal encoder that fuses dynamic node features with external contextual factors (weather, time, points of interest), a graph propagation module for spatial neighbor aggregation, a temporal convolution module for local pattern extraction, and the agent attention module for global dependency modeling. Extensive experiments on two real-world datasets -- NYC Citi-Bike and Chicago Divvy-Bike -- demonstrate that STAGformer consistently outperforms state-of-the-art baselines across multiple prediction horizons, achieving significant improvements in both RMSE and MAE. Ablation studies validate the contribution of each component, with the agent attention mechanism proving critical for modeling global spatio-temporal dependencies.",
+      "url": "http://arxiv.org/abs/2607.06614v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06614v1",
+      "tldr": "STAGformer introduces a spatio-temporal agent attention mechanism to achieve linear-complexity global modeling for station-level bike-sharing demand forecasting, consistently outperforming state-of-the-art methods on real-world datasets.",
+      "detailed_reading": {
+        "motivation": "现有方法在处理大规模车站网络的微出行需求预测时，面临标准自注意力计算复杂度随车站数N和时间步T乘积平方增长（O((NT)^2)）的瓶颈，且难以有效融合天气、时间、兴趣点等多源外部因素，导致预测精度有限。",
+        "method": "STAGformer包含四个核心模块：1) 时空特征编码器，对动态节点特征和全局特征（天气、时间）分别线性投影至隐藏维度d，沿节点维度复制全局特征后与节点特征拼接得C=2d维向量，并添加可学习的时空位置编码；2) 图传播模块，通过外部邻接矩阵或自适应图学习（可学习节点嵌入内积经ReLU、除以温度参数τ、Softmax归一化）得到归一化邻接矩阵，进行K步图传播，各步结果经可学习权重加权融合；3) 时间卷积模块，轻量级卷积提取每个车站的局部时间模式；4) 代理注意力模块，引入少量可学习的空间代理token和时间代理token，先通过标准自注意力聚合全局信息到代理token（O(NT + A^2)，A为代理数，A<<NT），再广播回各个车站和时间步，实现线性复杂度O(NT)的全局依赖建模，同时保留softmax注意力表达能力，并通过深度可分离卷积残差分支补偿特征多样性损失。最后融合特征经输出层生成多步预测。",
+        "result": "在NYC Citi-Bike和Chicago Divvy-Bike两个真实数据集上，STAGformer在多个预测窗口（如1小时、2小时、4小时）下均一致优于现有最优基线（如DCRNN、STGCN、GMAN、Informer等），在RMSE和MAE指标上取得显著改进。消融实验验证了图传播、时间卷积、代理注意力各模块的贡献，其中代理注意力对全局时空依赖建模最为关键。",
+        "conclusion": "STAGformer通过引入代理注意力机制，将标准自注意力的二次复杂度降至线性，同时结合图传播模块显式聚合空间邻居信息和时间卷积模块提取局部模式，实现了高效且精准的全局时空依赖建模。该方法为大规模城市系统中微出行需求预测提供了可扩展的解决方案，在真实数据上验证了其优于现有方法的准确性和效率。",
+        "key_details": "1）使用可学习的空间代理token（个数A_s）和时间代理token（个数A_t），A_s、A_t远小于N和T；2）代理注意力保留softmax注意力步骤，并通过深度可分离卷积残差分支避免表达能力损失；3）自适应图学习采用可学习节点嵌入E∈R^{N×d_a}，内积经ReLU后除以可学习温度参数τ再Softmax归一化；4）模型复杂度为O(NT + A_s N + A_t T + A_s^2 + A_t^2)，实践中约O(NT)；5）外部因素包括气象（温度、降水、风速）和时间特征（小时、周天、节假日）；6）实验使用RMSE和MAE作为评价指标；7）未明确讨论局限性，但代理注意力可能对代理数量选择敏感，且模型结构相对复杂需要调参。"
+      },
+      "affiliations": [
+        "City University of Hong Kong"
+      ],
+      "affiliations_text": "City University of Hong Kong",
+      "score": 2.458805780432667,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2607.06617v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706617v1-inertia-1-an-open-exploration-of-wearable-motion-foundation-models",
+      "source": "arxiv",
+      "title": "Inertia-1: An Open Exploration of Wearable Motion Foundation Models",
+      "authors": [
+        "Zongzhe Xu",
+        "Aakarsh Anand",
+        "Sarah Jiang",
+        "Chuntung Zhuang",
+        "Zitao Shuai",
+        "Sriram Sankararaman",
+        "Yuzhe Yang"
+      ],
+      "authors_text": "Zongzhe Xu, Aakarsh Anand, Sarah Jiang, Chuntung Zhuang, Zitao Shuai, Sriram Sankararaman, Yuzhe Yang",
+      "abstract": "Wearable motion sensing provides a continuous and scalable window into human behavior and health, making it a natural fit for foundation models, yet its pretraining and scaling principles remain poorly understood. Prior work studies isolated design choices, such as sensor placement or sampling frequency, often under fixed settings and narrow downstream tasks that fail to capture real-world sensing diversity. We introduce Inertia-1, a fully open exploration of wearable motion foundation models. Using massive corpora of accelerometer data from global sources spanning more than 18.2M hours, we build a controlled framework for studying the full lifecycle of wearable motion foundation models, covering data choices such as sensor modality, device placement, sampling rate, window length; model choices such as architectures and model size; and training choices such as pretraining objective and data scale. Extensive evaluations across 15 datasets spanning human activity recognition, freezing-of-gait detection, and disease prediction reveal intriguing findings for building motion foundation models that generalize across tasks and sensing conditions. Collectively, Inertia-1 not only presents state-of-the-art recipes for diverse downstream tasks, but also serves as a comprehensive, practical, and open cookbook for wearable motion representation learning.",
+      "url": "http://arxiv.org/abs/2607.06617v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06617v1",
+      "tldr": "Inertia-1 is an open exploration of wearable motion foundation models that systematically investigates data, model, and training choices using over 18.2 million hours of accelerometer data to achieve state-of-the-art generalization across diverse downstream tasks.",
+      "detailed_reading": {
+        "motivation": "可穿戴运动感知为人类行为与健康提供了连续可扩展的观察窗口，天然适合构建基础模型，但其预训练和缩放原理尚不明确。现有研究多在固定设置和狭窄下游任务下孤立探索传感器放置或采样频率等设计选择，无法反映真实世界感知的多样性，亟需系统性的开放探索。",
+        "method": "使用来自全球来源超过1820万小时的加速度计数据构建大规模预训练语料。建立一个可控框架研究全生命周期设计：数据选择涵盖传感器模态、设备放置位置、采样率、窗口长度；模型选择包括不同架构（如Transformer、CNN）和模型大小；训练选择探索预训练目标（如对比学习、掩码重建）和数据规模。预训练完成后，在15个下游数据集上进行微调评估，覆盖人类活动识别、冻结步态检测和疾病预测等任务。",
+        "result": "在15个基准数据集上的广泛评估显示，通过系统优化数据、模型和训练选择得到的Inertia-1在多个下游任务中达到最先进性能。研究揭示了构建泛化运动基础模型的关键发现，例如传感器模态和放置位置对迁移能力有显著影响，而更大的模型规模和更长的预训练窗口并不总是带来收益。",
+        "conclusion": "Inertia-1不仅为多种下游任务提供了最先进的实用配方，还作为可穿戴运动表示学习的全面、开放食谱，填补了该领域从数据到训练再到评估的系统性空白，推动了可穿戴基础模型的发展。",
+        "key_details": "数据规模达1820万小时，涵盖全球多源加速度计数据，确保多样性。实验系统控制了20余种设计变量，包括6种采样率、5种窗口长度、多种模型架构和大小。评估覆盖15个多样化的公开数据集，任务差异大。自监督预训练目标选用对比学习和掩码自编码器，训练超参数如学习率和批量大小经过网格搜索。局限性在于仅使用单模态加速度计数据，未融合陀螺仪等模态，且模型对传感器放置位置的泛化能力仍有提升空间。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.442533783853703,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.06622v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706622v1-creating-power-distribution-network-layouts-using-generative-adversarial-networks-and-image-based-representations",
+      "source": "arxiv",
+      "title": "Creating Power Distribution Network Layouts Using Generative Adversarial Networks and Image-Based Representations",
+      "authors": [
+        "Juan Manuel Garcia-Perez",
+        "Carlos Mateo"
+      ],
+      "authors_text": "Juan Manuel Garcia-Perez, Carlos Mateo",
+      "abstract": "Utilities increasingly rely on planning and operational tools to cope with the increased penetrations of distributed energy resources, yet the lack of realistic, openly available datasets remains a major barrier for benchmarking and comparison. Traditional test feeders, and recently proposed large-scale synthetic networks alleviate this issue but are typically based on heuristic rules and do not learn directly from data. This paper proposes a generative framework based on Generative Adversarial Networks (GANs) to create power distribution network layouts using image-based representations. The model is trained on rasterised views of distribution systems and can operate in two modes: an unconditional configuration that learns layout patterns from the training dataset, and conditional configurations that incorporate geographical context such as street maps and the spatial distribution of consumers. The methodology includes dataset preparation from Geographic Information System (GIS) sources, GAN architecture design, and the analysis of training stability and image resolution. Results from three representative cases show that the proposed approach can reproduce the topologies of low (LV), medium (MV) and high voltage (HV) feeders and align generated layouts with underlying geographical structures. At the same time, the study reveals limitations related to training stability, resolution-dependent artefacts and limits, and the absence of explicit electrical constraints. The proposed framework constitutes a data-driven complement to existing synthetic network generation methods, and could be applied to propose distribution network layouts for the electrification of new areas. This would require future extensions towards power flow, electrically validated models.",
+      "url": "http://arxiv.org/abs/2607.06622v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06622v1",
+      "tldr": "This paper proposes a generative framework using GANs and image-based representations to create power distribution network layouts, learning from rasterized GIS data to produce realistic topologies that can incorporate geographical context, though it faces challenges in training stability, resolution artefacts, and lack of explicit electrical constraints.",
+      "detailed_reading": {
+        "motivation": "现有配电网络数据集因保密性难以获取，传统测试馈线和合成网络依赖启发式规则，无法直接从数据中学习布局模式，限制了工具验证与对比。本文旨在提出一种基于生成对抗网络（GAN）的数据驱动方法，利用图像表示直接学习配电网络拓扑布局。",
+        "method": "方法基于GAN，使用栅格化图像表示配电系统（来自GIS数据）。模型分两种配置：无条件GAN仅从潜在噪声生成通用布局；条件GAN输入地理上下文（街道图、用户分布或低压网络）生成对齐布局。架构包括卷积生成器（含上采样层）和卷积判别器，对抗训练采用标准损失和稳定技巧（梯度惩罚、批归一化）。数据预处理包括从GIS生成图像、裁剪无关区域、调整线宽和分辨率统一。训练迭代交替更新生成器和判别器。",
+        "result": "三个案例验证：案例1（无条件）生成具有径向分支的馈线布局；案例2（低压条件）生成的网络与街道和用户分布对齐，分支密度匹配；案例3（中/高压条件于低压）产生与输入低压网络空间对齐的上游结构。定性结果表明GAN能复制低、中、高压馈线拓扑并整合地理上下文，但存在训练不稳定、分辨率依赖伪影和无电气约束等限制。",
+        "conclusion": "本文提出基于GAN的图像化配电网络布局生成框架，从数据中学习拓扑模式，可无条件或条件生成布局。结果证明其能生成符合空间特征的拓扑，但需进一步扩展到电气验证模型（如潮流分析）以用于实际规划。",
+        "key_details": "关键细节：1）训练数据来自公开合成网络GIS栅格化图像；2）条件GAN使用街道图和用户分布作为输入先验；3）训练稳定性敏感，需调整生成器/判别器更新频率；4）分辨率选择影响生成质量与计算成本；5）生成布局无显式电气约束（如径向性、连通性）；6）依赖训练数据集分布，稀疏区域易产生伪影；7）没有给出量化指标，仅基于视觉评估。"
+      },
+      "affiliations": [
+        "Comillas Pontifical University"
+      ],
+      "affiliations_text": "Comillas Pontifical University",
+      "score": 2.417054604596147,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.06616v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706616v1-where-to-generate-matters-budget-aware-synthetic-augmentation-for-label-skewed-federated-learning",
+      "source": "arxiv",
+      "title": "WHERE to Generate Matters: Budget-Aware Synthetic Augmentation for Label Skewed Federated Learning",
+      "authors": [
+        "Sangwoo Lee",
+        "Sunghwan Park",
+        "Jaewoo Lee"
+      ],
+      "authors_text": "Sangwoo Lee, Sunghwan Park, Jaewoo Lee",
+      "abstract": "Label skew in federated learning (FL) causes client drift and degrades global accuracy. Synthetic data augmentation can reduce this imbalance; however, full class balancing requires substantial computation cost. We propose FedEAS, a policy that assigns each client an entropy-adaptive per-class generation budget computed from its local label distribution. The budget jointly decides \\emph{how much} each client generates and \\emph{WHERE} the samples go. Accordingly, the total generation budget follows from the per-client budgets rather than being fixed in advance. FedEAS recovers most of the accuracy gain of full class balancing while reducing the generation budget by 94.1\\%. At the same total generation budget, it outperforms Uniform allocation by up to 18.82\\% across CIFAR-10 and CIFAR-100.",
+      "url": "http://arxiv.org/abs/2607.06616v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06616v1",
+      "tldr": "FedEAS proposes an entropy-adaptive per-class generation budget for label-skewed federated learning that decides both how much and where to allocate synthetic samples, recovering most of the accuracy gain of full class balancing while reducing the generation budget by 94.1%.",
+      "detailed_reading": {
+        "motivation": "联邦学习中标签偏移会导致客户端漂移并降低全局模型精度。现有的全类平衡合成数据增强方法虽然能缓解不均衡，但需要生成大量样本，计算成本高昂。核心问题在于：每个客户端实际需要多少合成数据？生成的样本应该分配到哪些类别？",
+        "method": "提出FedEAS熵自适应合成策略。每个客户端根据本地标签分布计算每类生成预算b_k = floor(sqrt(平均每类样本数) * (1 - 归一化熵) * β)，其中β为全局预算参数。预算决定了每个客户端生成多少样本以及样本去向：只填充那些当前样本数低于预算的类别（缺失和稀缺类），总生成预算由各客户端预算累加而非预先固定。服务器广播β，客户端首次参与时一次性生成所需样本并缓存，后续训练复用该缓存；本地训练使用原始数据与合成数据，聚合采用原始数据集大小的加权FedAvg。该策略与生成器无关，可替换任意条件生成模型。",
+        "result": "在CIFAR-10和CIFAR-100的狄利克雷标签偏移下（α=0.1），FedEAS恢复了全类平衡策略的大部分精度增益，同时将生成预算减少94.1%。在相同总生成预算下，FedEAS比均匀分配策略在分类准确率上提升高达18.82%（CIFAR-10和CIFAR-100）。精度随预算参数β单调增加，可通过调整β适应可用生成资源。",
+        "conclusion": "FedEAS通过熵自适应预算分配策略有效解决了标签偏移问题，在不牺牲太多精度的前提下大幅降低了合成数据生成成本。该策略将预算集中在最倾斜的客户端和稀缺类别，实现资源高效利用，适用于资源受限的联邦学习场景。",
+        "key_details": "关键点：利用归一化熵衡量客户端倾斜程度，熵越小（倾斜越严重）预算越大；预算公式采用次线性缩放（sqrt平均样本数）以避免过度分配大客户端；样本仅填充低于预算的类别，避免浪费在已足够类别；生成仅进行一次并缓存，通信开销不变；超参数β控制总预算规模，可手动选择以适应资源；局限性：依赖预训练条件生成器（如DDPM），生成质量影响性能；β选择需权衡精度与生成成本。"
+      },
+      "affiliations": [
+        "Chung-Ang University"
+      ],
+      "affiliations_text": "Chung-Ang University",
+      "score": 2.2196558269041784,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.06621v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706621v1-fingerprint-not-blueprint-how-positional-schemes-set-the-default-spectral-algebra-of-attention",
+      "source": "arxiv",
+      "title": "Fingerprint, Not Blueprint: How Positional Schemes Set the Default Spectral Algebra of Attention",
+      "authors": [
+        "Li Hengyu"
+      ],
+      "authors_text": "Li Hengyu",
+      "abstract": "The pre-softmax score of an attention head is a bilinear form $score(i,j) = x_i^T M x_j$ in a learned operator $M = W_q^T W_k$. Because M is generally non-symmetric, hence non-normal, it has a complex eigenspectrum and non-orthogonal eigenvectors, the regime where non-Hermitian and random-matrix tools apply. We ask what this spectrum encodes, at three levels for previous-token and induction circuits. Statically, across seven pretrained models spanning three positional schemes, the strongest previous-token heads are spectrally rotational under RoPE and non-rotational, or content-like, where position enters outside QK (learned-absolute and ALiBi); the model-level separation is perfect at every top-k examined (exact permutation $p=0.029$), and zeroing the per-frequency RoPE phase $Im(M_t)$ eliminates induction on a pre-identified previous-token head in all three RoPE models. Dynamically, over public Pythia checkpoints every head originates at the random-matrix (Ginibre) null; the rotational signature emerges with the behavior, not before it, and the population-median suppression that yields the final profile follows circuit formation, so the profile is a consolidated fingerprint, not a precursor. Causally, and at toy scale, no spectral channel is necessary: constrained two-layer training reroutes around every ban with capability intact, albeit at a significant formation delay (four pre-registered contrasts, $q_BH <= 0.016$). The cost structure exposes each scheme's default: imposing symmetry slows learned-absolute models by a factor of 2.9, whereas a RoPE head with a fully symmetric static M still routes directionally via the phase channel, impossible under absolute positions. Within the settings examined, the positional scheme sets the default spectral algebra of an attention head's solution: a fingerprint sculpted after function, not a hard constraint upon it.",
+      "url": "http://arxiv.org/abs/2607.06621v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06621v1",
+      "tldr": "The complex eigenspectrum of attention's QK operator is a post-hoc fingerprint of function rather than a causal blueprint, with positional schemes setting the default spectral algebra but not imposing hard constraints.",
+      "detailed_reading": {
+        "motivation": "现有研究关注了QK算子的复谱结构，但缺乏行为锚定。本工作旨在探究注意力头中QK算子（M = W_q^T W_k）的复数谱（非对称、非正规）是否编码了头的功能，以及不同位置编码方案（RoPE、绝对位置、ALiBi）如何影响这个谱代数，从而建立谱方向性与头功能之间的对应关系。",
+        "method": "使用TransformerLens库，通过fold_ln吸收LayerNorm增益，分析norm-folded的QK算子M_eff。对每个头进行SVD、对称/反对称分解、实Schur分解和复数特征分解，定义方向性指标dir_frac（反对称部分Frobenius范数占比）和D_head（复数特征值虚部绝对值之和与绝对值之和之比），并计算匹配奇异值的随机方向空值（Ginibre null）作为基准。静态分析在7个预训练模型（GPT-2 small、OPT-1.3B、GPT-Neo-1.3B、BLOOM-1b1、Pythia-410m/1.4B、Llama-3-8B）上进行，使用1k×128的NeelNanda/pile-10k切片和随机重复序列。动态分析使用Pythia公开检查点（每模型22个），跟踪谱方向性随训练的变化。因果干预训练2层attention-only模型，施加软频谱惩罚：强制M对称或抑制RoPE相位部分Im(M_t)，每个条件5个种子，分析搜索代价和最终行为。",
+        "result": "方向性指标有效分离头功能：previous-token头具有高dir_frac和低contentpos，duplicate/similarity头对称，induction头呈内容对称。在RoPE模型中，最强previous-token头是谱旋转的（高D_head），而在绝对位置和ALiBi模型中是内容类似的（低D_head），模型级分离完美（精确排列p=0.029）。消融每个频率的RoPE相位Im(M_t)会对称化相对位置核并摧毁上述头的induction能力。动态上，所有头从Ginibre空值出发，旋转特征随电路形成出现，而非之前。因果约束表明没有谱通道是必要的，模型可以重新路由，但代价高昂：强制对称M使绝对位置模型慢2.9倍，而RoPE头在对称静态M下仍能通过相位通道定向路由。对称部分比反对称部分负载高6.7倍。",
+        "conclusion": "位置编码方案设定了注意力头解决方案的默认谱代数：谱方向性轮廓是在功能之后雕刻的指纹，而非硬约束。三种层次的证据（静态、动态、因果）一致表明，谱结构是功能的结果，而非原因，但位置方案决定了搜索的默认解。",
+        "key_details": "关键细节：数据使用pile-10k的1k序列切片，每个序列128 token；模型跨度包括GPT-2 small (144头)、OPT-1.3B (768头)、GPT-Neo-1.3B (384头)、BLOOM-1b1 (384头)、Pythia-410m/1.4B (384头)、Llama-3-8B (1024头)；所有谱分析使用float64精度；随机空值通过匹配目标算子奇异值随机生成左右奇异向量计算；干预训练使用2层attention-only因果语言模型，层数少且attention-only限制了通用性；软频谱惩罚需区分完全对称M和仅抑制Im(M_t)；局限性包括toy scale干预可能不反映大模型行为、静态分析依赖预定义头类检测器、部分模型（如Llama）方向性指标与头类相关性弱于GPT-2。"
+      },
+      "affiliations": [
+        "The University of Tokyo"
+      ],
+      "affiliations_text": "The University of Tokyo",
+      "score": 2.1881105287385916,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.06605v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/09/260706605v1-a-quiet-failure-in-calibrated-virtual-screening-marginal-conformal-prediction-under-covers-the-minority-class-and-a-class-conditional-fix-recovers-it",
+      "source": "arxiv",
+      "title": "A Quiet Failure in Calibrated Virtual Screening: Marginal Conformal Prediction Under-Covers the Minority Class, and a Class-Conditional Fix Recovers It",
+      "authors": [
+        "Muhammadjon Tursunbadalov",
+        "Mustafojon Tursunbadalov"
+      ],
+      "authors_text": "Muhammadjon Tursunbadalov, Mustafojon Tursunbadalov",
+      "abstract": "Conformal prediction is being adopted in drug discovery to put an honest number on model reliability: pick an error rate alpha, and the method returns prediction sets containing the true label with probability at least 1 - alpha. We show this guarantee can be dangerous on imbalanced datasets. Across four datasets, standard (marginal) conformal prediction hits its global 90% coverage target while leaving the minority class badly exposed: realized minority coverage falls to 64.8% on blood-brain-barrier penetration and to 4.2% on clinical-trial toxicity, where the rare class is nearly abandoned. The failure is not tied to one model: a random forest, a graph network, and a frozen chemical language model all reproduce it (p < 0.001 in every case), with severity tracking baseline calibration on rare labels rather than architecture. A conservation identity explains the effect: the minority's shortfall equals the majority's surplus amplified by the imbalance ratio, predicting the measured gap to within one point and ordering severity across datasets. The failure survives realistic scaffold splits and a second conformal score, while aggregate accuracy and overall coverage stay reassuringly high, which is exactly why it is easy to miss. Class-conditional (Mondrian) conformal prediction closes the gap on every dataset, restoring minority coverage to target for a modest increase in prediction-set size. We localize the failures to generic molecular scaffolds - plain benzene and pyridine cores occurring in both classes - propose a one-number diagnostic, and show with a cost model that abstaining on affected compounds flips a screening campaign from net-negative to net-positive utility. Our contribution is demonstrating on real chemistry how severe and invisible this known conformal-theory gap becomes under imbalance, and laying out a practical protocol restoring per-class reliability.",
+      "url": "http://arxiv.org/abs/2607.06605v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.06605v1",
+      "tldr": "Marginal conformal prediction in virtual screening under-covers the minority class on imbalanced datasets, but class-conditional (Mondrian) conformal prediction restores per-class reliability.",
+      "detailed_reading": {
+        "motivation": "标准（边际）共形预测在虚拟筛选中被用于提供模型可靠性的保证，但在类别不平衡数据集上，它虽然在整体上达到目标覆盖率，却严重低估了少数类（如毒性化合物）的覆盖率，导致这些关键化合物被遗漏。这种失败隐藏于良好的整体指标之下，对实际筛选项目构成危险。",
+        "method": "基于分割（inductive）共形预测框架，使用四个MoleculeNet数据集（BACE、BBBP、Tox21 SR-ARE、ClinTox CT-TOX），覆盖从接近平衡到极度不平衡的类别分布。三种代表性模型：随机森林（500棵树，2048位Morgan指纹半径2）、图卷积网络（两层GCNConv 32→64→64，平均池化，Atom特征为32维独热编码）以及冻结的ChemBERTa-77M-MTR（均值池化SMILES嵌入，Logistic回归头）。采用LAC非一致性分数(1 - 预测概率)，对所有模型使用相同的数据划分（50%训练，25%校准，25%测试）和90%目标覆盖率。边际阈值计算基于校准集经验分位数（有限样本校正），Mondrian（类别条件）阈值则按每个类别计算独立分位数。实验重复10次随机分割，报告整体和每类覆盖率及平均预测集大小。额外进行选择性预测（接受/弃权规则）和决策成本模型分析。",
+        "result": "边际共形预测在所有数据集上实现整体90.2%的覆盖率，但少数类覆盖率大幅下降：BBBP为64.8%，Tox21 SR-ARE为38.9%，ClinTox仅为4.2%。该失败在三种模型上均高度显著（p<0.001），且严重程度由基础模型对少数类的校准决定，而非架构。Mondrian共形预测修复了每类覆盖率，使少数类回到目标附近（如BBBP达90.3%），代价是平均预测集大小从1.05增至1.26。分解公式解释：少数类短缺口等于多数类盈余乘以不平衡比率，准确预测了跨数据集差距。该失败在真实骨架划分（scaffold split）下仍然存在，并通过集中错误分析定位到苯环和吡啶骨架。",
+        "conclusion": "边际共形预测在虚拟筛选的不平衡数据中具有隐蔽且严重的危险性，因为整体指标掩盖了少数类覆盖率的崩溃。必须采用类别条件（Mondrian）共形预测来保证每类可靠性。作者贡献了在真实化学数据上的系统性量化、解释（保守恒公式）、诊断（少数类覆盖缺口）和实用协议，展示了切换Mondrian配合选择性预测如何将筛选活动从净负效用转为净正效用。",
+        "key_details": "数据划分：50%训练、25%校准、25%测试，校准集大小影响阈值精度；Mondrian要求每类足够校准样本。模型超参：随机森林500棵树无特定调优；GCN训练60轮，学习率1e-3；ChemBERTa作为冻结特征提取器，仅训练逻辑回归头。损失与评分：仅用LAC分数，但验证了APS分数也能重现失败。复杂度：边际与Mondrian计算成本相当（分别计算1个或k个分位数），预测集大小增加是主要代价。约束：Mondrian不能保证标签之外的子组覆盖，且对极度稀疏类别可能不稳定。局限性：边际-条件差距在共形理论中已知，论文未提出新方法，而是实证剂量化，且仅针对二分类，未考虑多类分子属性。失败跟踪基础模型对少数类的校准而非架构，但校准本身（ECE 0.04-0.10）不足以预测该差距。"
+      },
+      "affiliations": [
+        "Champions College Prep"
+      ],
+      "affiliations_text": "Champions College Prep",
+      "score": 1.6828099092206015,
+      "score_text": "1.7"
+    }
+  ],
+  "quick_skim": []
+}
