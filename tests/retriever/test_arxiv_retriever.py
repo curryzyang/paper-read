@@ -63,6 +63,62 @@ def test_arxiv_retriever(config, mock_feedparser, monkeypatch):
     assert set(p.title for p in papers) == set(e.title for e in new_entries)
 
 
+def test_arxiv_category_string_is_supported_and_debug_uses_daily_total(config, monkeypatch):
+    mock_entries = [
+        {"id": f"oai:arXiv.org:2607.{i:05d}v1", "title": f"Paper {i}", "arxiv_announce_type": "new"}
+        for i in range(30)
+    ]
+    mock_feed = SimpleNamespace(entries=mock_entries, feed={"title": "arxiv feed"})
+    parsed_urls: list[str] = []
+
+    def _patched_parse(url):
+        parsed_urls.append(url)
+        return mock_feed
+
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.feedparser.parse", _patched_parse)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.base.sleep", lambda _: None)
+
+    fake_results = [
+        SimpleNamespace(
+            title=e["title"],
+            authors=[SimpleNamespace(name="A")],
+            summary="test",
+            pdf_url=f"https://arxiv.org/pdf/{e['id'].removeprefix('oai:arXiv.org:')}",
+            entry_id=f"https://arxiv.org/abs/{e['id'].removeprefix('oai:arXiv.org:')}",
+            source_url=lambda pid=e["id"].removeprefix("oai:arXiv.org:"): f"https://arxiv.org/e-print/{pid}",
+        )
+        for e in mock_entries
+    ]
+
+    class FakeClient:
+        def __init__(self, **kw):
+            pass
+
+        def results(self, search):
+            paper_ids = set(search.id_list)
+            return (r for r in fake_results if r.entry_id.removeprefix("https://arxiv.org/abs/") in paper_ids)
+
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.arxiv.Client", FakeClient)
+
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_html", lambda paper: None)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_pdf", lambda paper: None)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_tar", lambda paper: None)
+
+    from omegaconf import open_dict
+
+    with open_dict(config):
+        config.source.arxiv.category = "eess.SY"
+        config.executor.debug = True
+        config.web.daily_total = 25
+
+    retriever = ArxivRetriever(config)
+    papers = retriever.retrieve_papers()
+
+    assert parsed_urls
+    assert "https://rss.arxiv.org/atom/eess.SY" in parsed_urls[0]
+    assert len(papers) == 25
+
+
 def test_run_with_hard_timeout_returns_value():
     result = _run_with_hard_timeout(
         _sleep_and_return, ("done", 0.01), timeout=1, operation="test op", paper_title="paper"

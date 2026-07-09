@@ -110,12 +110,12 @@ def _extract_text_from_tar_worker(source_url: str, paper_id: str, paper_title: s
 class ArxivRetriever(BaseRetriever):
     def __init__(self, config):
         super().__init__(config)
-        if self.config.source.arxiv.category is None:
+        if self.categories is None:
             raise ValueError("category must be specified for arxiv.")
 
     def _retrieve_raw_papers(self) -> list[ArxivResult]:
         client = arxiv.Client(num_retries=10, delay_seconds=10)
-        query = '+'.join(self.config.source.arxiv.category)
+        query = '+'.join(self.categories)
         include_cross_list = self.config.source.arxiv.get("include_cross_list", False)
         # Get the latest paper from arxiv rss feed
         feed = feedparser.parse(f"https://rss.arxiv.org/atom/{query}")
@@ -128,8 +128,9 @@ class ArxivRetriever(BaseRetriever):
             for i in feed.entries
             if i.get("arxiv_announce_type", "new") in allowed_announce_types
         ]
-        if self.config.executor.debug:
-            all_paper_ids = all_paper_ids[:10]
+        debug_limit = self._get_debug_limit(self.config)
+        if debug_limit is not None:
+            all_paper_ids = all_paper_ids[:debug_limit]
 
         # Get full information of each paper from arxiv api
         bar = tqdm(total=len(all_paper_ids))

@@ -56,3 +56,18 @@ def test_biorxiv_requires_category(config):
         config.source.biorxiv = {"category": None}
     with pytest.raises(ValueError, match="category must be specified"):
         BiorxivRetriever(config)
+
+
+def test_biorxiv_category_string_is_supported_and_debug_uses_daily_total(config, mock_biorxiv_api, monkeypatch):
+    with open_dict(config.source):
+        config.source.biorxiv = {"category": "bioinformatics, genomics"}
+    with open_dict(config.executor):
+        config.executor.debug = True
+    with open_dict(config.web):
+        config.web.daily_total = 1
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.base.sleep", lambda _: None)
+
+    retriever = BiorxivRetriever(config)
+    papers = retriever.retrieve_papers()
+    assert len(papers) == 1
+    assert papers[0].title == "A biorxiv paper"
