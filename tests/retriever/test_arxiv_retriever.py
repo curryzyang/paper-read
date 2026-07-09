@@ -64,11 +64,17 @@ def test_arxiv_retriever(config, mock_feedparser, monkeypatch):
 
 
 def test_arxiv_category_string_is_supported_and_debug_uses_daily_total(config, monkeypatch):
-    mock_entries = [
-        {"id": f"oai:arXiv.org:2607.{i:05d}v1", "title": f"Paper {i}", "arxiv_announce_type": "new"}
-        for i in range(30)
-    ]
-    mock_feed = SimpleNamespace(entries=mock_entries, feed={"title": "arxiv feed"})
+    def _entry(idx: int) -> SimpleNamespace:
+        return SimpleNamespace(
+            id=f"oai:arXiv.org:2607.{idx:05d}v1",
+            title=f"Paper {idx}",
+            get=lambda key, default=None, idx=idx: {
+                "arxiv_announce_type": "new",
+            }.get(key, default),
+        )
+
+    mock_entries = [_entry(i) for i in range(30)]
+    mock_feed = SimpleNamespace(entries=mock_entries, feed=SimpleNamespace(title="arxiv feed"))
     parsed_urls: list[str] = []
 
     def _patched_parse(url):
@@ -80,12 +86,12 @@ def test_arxiv_category_string_is_supported_and_debug_uses_daily_total(config, m
 
     fake_results = [
         SimpleNamespace(
-            title=e["title"],
+            title=e.title,
             authors=[SimpleNamespace(name="A")],
             summary="test",
-            pdf_url=f"https://arxiv.org/pdf/{e['id'].removeprefix('oai:arXiv.org:')}",
-            entry_id=f"https://arxiv.org/abs/{e['id'].removeprefix('oai:arXiv.org:')}",
-            source_url=lambda pid=e["id"].removeprefix("oai:arXiv.org:"): f"https://arxiv.org/e-print/{pid}",
+            pdf_url=f"https://arxiv.org/pdf/{e.id.removeprefix('oai:arXiv.org:')}",
+            entry_id=f"https://arxiv.org/abs/{e.id.removeprefix('oai:arXiv.org:')}",
+            source_url=lambda pid=e.id.removeprefix("oai:arXiv.org:"): f"https://arxiv.org/e-print/{pid}",
         )
         for e in mock_entries
     ]
