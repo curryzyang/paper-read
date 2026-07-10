@@ -1,0 +1,730 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-10T06:36:21.089844",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.07718v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707718v1-llt-local-linear-transformer-for-pde-operator-learning",
+      "source": "arxiv",
+      "title": "LLT: Local Linear Transformer for PDE Operator Learning",
+      "authors": [
+        "Oded Ovadia",
+        "Eli Turkel"
+      ],
+      "authors_text": "Oded Ovadia, Eli Turkel",
+      "abstract": "Neural operators have become a common approach for learning PDE solution maps and accelerating numerical simulations. Transformer-based neural operators are of particular interest, since attention can learn long-range dependencies in the computational domain. However, standard attention has two major limitations when applied to PDEs: it scales quadratically with the number of computational nodes, and it lacks an explicit bias toward local interactions. To address these issues, we introduce Local Linear Transformer (LLT) for PDE operator learning. The architecture combines linear global attention with local spatial mixing, and incorporates coordinate and geometry information. We evaluate LLT on several PDE problems, including elasticity, plasticity, airfoil flow, pipe flow, and Darcy flow. The reference data for these problems span finite-element, finite-volume, and finite-difference discretizations on structured and unstructured meshes. Compared with other neural-operator and transformer baselines from prior studies, LLT achieves competitive or lower relative $L_2$ error across these problems. On matched structured discretizations, wall-clock time per training iteration is reduced by factors of 1.8 to 2.5 relative to Transolver. We also scale the approach and apply it to a three-dimensional car aerodynamics dataset with 32,186 unstructured mesh points per sample. Together, these results indicate that LLT provides an accurate and computationally efficient operator for PDE problems across discretizations, mesh types, and problem settings.",
+      "url": "http://arxiv.org/abs/2607.07718v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07718v1",
+      "tldr": "LLT (Local Linear Transformer) efficiently learns PDE solution operators by combining linear global attention with local spatial mixing, achieving competitive accuracy and reduced training time across multiple PDE problems and discretization types.",
+      "detailed_reading": {
+        "motivation": "标准自注意力机制在处理偏微分方程（PDE）时存在两个主要局限：计算复杂度随节点数二次增长，且缺乏对局部交互的显式偏置。许多PDE解具有强局部结构，而全局注意力将计算浪费在弱或无关的交互上。因此需要一种同时具备高效全局通信和局部混合能力的算子架构。",
+        "method": "LLT架构以点集为输入，首先通过几何感知嵌入层将坐标、输入场值、距离编码（相对参考集）和傅里叶坐标嵌入拼接并经过MLP映射为固定维特征。编码器由L个预归一化残差块堆叠而成，每个块包含混合层和前馈网络（SwiGLU）。混合层结合两条路径：全局路径使用核化线性注意力（特征映射φ(z)=elu(z)+1，复杂度O(N d_h^2)）实现近线性全局信息交换；局部路径在结构化网格上采用depthwise-separable卷积（k×k核+1×1点卷积），在非结构化网格上使用基于半径邻域图的掩蔽注意力。两条路径通过可学习系数α加权融合。解码器将编码器输出与初始嵌入通过跳跃连接合并，经MLP生成预测解场。",
+        "result": "在弹性、塑性、翼型流、管道流和达西流五个标准PDE问题上，LLT相比其他神经算子和Transformer基线取得了竞争性或更低的相对L2误差。在匹配的结构化离散化上，每训练迭代的壁钟时间相比Transolver减少了1.8至2.5倍。此外，模型成功扩展至三维汽车空气动力学数据集（每个样本32186个非结构网格点），证明了其在大规模问题上的适用性。",
+        "conclusion": "LLT通过结合线性全局注意力与显式局部混合，在保持高精度的同时显著降低了计算成本，为不同离散化格式、网格类型和问题设置下的PDE算子学习提供了一种准确且计算高效的方案。",
+        "key_details": "数据包括来自有限元、有限体积和有限差分求解器的参考解，覆盖结构化和非结构化网格。评价指标为相对L2误差。超参数包括傅里叶频带数B、参考集大小R、层数L、注意力头数n_h、特征维度D、局部卷积核大小k（结构化）或邻域半径（非结构化）。线性注意力使用elu+1特征映射避免softmax归一化，但已有研究指出此类方法可能在某些情况下降低性能（文中引用相关讨论）。模型对不同网格类型采用不同的局部混合策略，体现了对几何结构的适应性。复杂度方面，全局注意力近线性（O(N d_h^2)），局部路径与节点数成线性关系，整体效率较高。局限性之一是线性注意力的潜在性能退化风险，且局部路径需根据网格类型预先定义邻接关系。"
+      },
+      "affiliations": [
+        "Tel Aviv University"
+      ],
+      "affiliations_text": "Tel Aviv University",
+      "score": 3.4391160129547615,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.07763v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707763v1-unlocking-temporal-generalization-in-hamiltonian-video-dynamics-models",
+      "source": "arxiv",
+      "title": "Unlocking Temporal Generalization in Hamiltonian Video Dynamics Models",
+      "authors": [
+        "Eli Laird",
+        "Corey Clark"
+      ],
+      "authors_text": "Eli Laird, Corey Clark",
+      "abstract": "World models are typically trained to predict discrete-time physical dynamics with a fixed step size baked into the model weights, preventing prediction at variable temporal resolutions. This matters for hierarchical planning, sim-to-real transfer, and scientific or game-engine applications that must query the same dynamics at multiple timescales. Hamiltonian Generative Networks (HGN) offer a principled path forward, grounding predictions in a continuous-time energy function that is, in principle, independent of the observation frame rate. In practice, however, their temporal generalization breaks down in non-conservative settings. We show that in externally forced, dissipative environments, HGN rollouts at step sizes beyond the training regime fail due to distinct failure modes, including latent magnitude growth driven by an unconstrained action-force map, and global truncation error accumulation from an under-resolved integrator. We identify a targeted fix for each mechanism and demonstrate stable dynamics prediction at temporal resolutions well outside the training distribution. In a detailed analysis, we recommend several strategies for enabling temporal generalization in continuous-time video generation.",
+      "url": "http://arxiv.org/abs/2607.07763v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07763v1",
+      "tldr": "This paper identifies and fixes two failure modes—latent magnitude growth from unconstrained action-force maps and global truncation error accumulation from under-resolved integrators—in Hamiltonian Generative Networks to enable stable temporal generalization to unseen step sizes in non-conservative video dynamics models.",
+      "detailed_reading": {
+        "motivation": "现有世界模型通常以固定步长预测离散时间物理动态，无法在可变时间分辨率下泛化，这限制了其在分层规划、模拟到现实迁移以及多时间尺度科学仿真中的应用。Hamiltonian生成网络（HGN）虽基于连续时间能量函数提供了原则性方案，但在非保守环境中（如外部强迫和耗散系统）时间泛化能力会退化。本文旨在系统识别HGN在超出训练步长范围时失效的机制，并提出针对性修复方法以实现稳定预测。",
+        "method": "采用基于Hamiltonian生成网络（HGN）的框架，包括卷积编码器将像素帧映射到潜在相空间（位置q和动量p）、参数化可分离Hamiltonian函数H=T(p)+V(q)和阻尼系数γ，以及作用力映射G(a)构成端口-Hamiltonian预测器。使用修改的勒普弗拉格积分器在时间步长下对称折叠阻尼和驱动力。训练时通过变分下界（ELBO）优化，从初始潜在状态展开整个轨迹而不重新编码。推理时引入子步协议：将每个观测步长分为N个子步（保持总冲量不变），用以区分积分器截断误差和表示学习失败。数据来自强迫阻尼弹簧振荡器（64×64 RGB图像），训练步长0.4，共50,000条50帧序列。",
+        "result": "识别出两种主要失败模式：能量幅度增长（因未约束的作用力映射G(a)导致潜在状态振幅发散，产生高频伪影）和相位漂移累积（因全局截断误差使预测轨迹逐渐失相）。对G施加谱归一化约束可消除幅度发散；推理时采用子步（如N=4，等效步长≈训练步长）可消除相位漂移，在评估步长1.5下恢复准确预测。像素级指标（MAE、PSNR、SSIM、LPIPS）显示子步策略使外推性能接近训练水平，证明失效主要源于积分器而非学习到的Hamiltonian。",
+        "conclusion": "本文证明了在外部强迫和耗散环境中，HGN在超出训练步长的外推预测中因能量爆发和积分器误差而失败，并提供了针对性的修复方法（谱归一化作用力映射和推理时子步）。通过详细分析，建议在连续时间视频生成中采用约束驱动力和自适应积分策略以实现时间泛化。该工作为构建可跨时间分辨率泛化的物理感知世界模型提供了实用指导。",
+        "key_details": "数据为强迫阻尼弹簧振荡器（质量0.5，刚度2.0，阻尼0.1，固有频率2 rad/s，周期≈3.14），采样步长0.4，动作空间三值（向上力、无力、向下力）。先验为各向同性的单位高斯分布。损失函数为变分ELBO，包含重建项和KL散度项（β_KL=1）。超参数：学习率5e-4至5e-5余弦衰减，优化器Adam。谱归一化约束G矩阵的谱范数≤1，保证每步能量注入有界。勒普弗拉格积分器有条件稳定性（dt < 2/ω），推理时子步可降低全局截断误差但增加计算量。局限性：实验仅在单一弹簧振荡器上验证，视觉指标无法直接测量物理状态误差；谱归一化可能限制可学习的力范围；子步策略依赖推理时计算资源。"
+      },
+      "affiliations": [
+        "Southern Methodist University"
+      ],
+      "affiliations_text": "Southern Methodist University",
+      "score": 3.2887883371641786,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.07745v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707745v1-list-lipschitz-scaling-training-for-robust-and-calibrated-neural-networks",
+      "source": "arxiv",
+      "title": "LiST: Lipschitz Scaling Training for Robust and Calibrated Neural Networks",
+      "authors": [
+        "Arthur Chiron",
+        "Franck Mamalet",
+        "Thomas Massena",
+        "Thomas Deltort",
+        "Mathieu Serrurier"
+      ],
+      "authors_text": "Arthur Chiron, Franck Mamalet, Thomas Massena, Thomas Deltort, Mathieu Serrurier",
+      "abstract": "While accuracy, robustness, and calibration are all essential for reliable neural networks, they are often studied separately; developing models that satisfy all three simultaneously remains a central challenge. Lipschitz-constrained models guarantee robustness by design, yet the manual selection of the Lipschitz constraint L governs the resulting accuracy-robustness trade-off, and their calibration properties remain largely underexplored. In this work, we highlight a theoretical and empirical link between the enforced Lipschitz constraint and Temperature Scaling, a state-of-the-art calibration method. Specifically, we find that for a given training scheme, there exists a non-trivial value L* that yields an out-of-the-box calibrated network, and that calibration acts as a principled criterion to select a well-defined operating point on the accuracy-robustness Pareto front. Leveraging these insights, we introduce Lipschitz Scaling Training (LiST), a novel training paradigm that iteratively adjusts the global Lipschitz constant to reach this operating point. Through a margin parameter in the training loss, LiST further enables the construction of a fully calibrated Pareto front, allowing users to navigate the accuracy-robustness trade-off while remaining calibrated throughout. At convergence, LiST also enables the reintegration of calibration data into training, improving sample efficiency without sacrificing calibration. We validate LiST on CIFAR-10/100 and Tiny-ImageNet, demonstrating competitive accuracy and robustness against constrained and unconstrained baselines, while remaining calibrated out of the box. Code is available at GitHub.",
+      "url": "http://arxiv.org/abs/2607.07745v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07745v1",
+      "tldr": "The paper introduces LiST, a training paradigm that dynamically adjusts the Lipschitz constant to produce neural networks that are simultaneously robust and well-calibrated by leveraging the duality between Lipschitz constraints and temperature scaling.",
+      "detailed_reading": {
+        "motivation": "准确率、鲁棒性和校准是可靠神经网络的三大核心属性，但现有研究通常独立处理它们，难以同时满足三者。Lipschitz约束网络通过设计保证鲁棒性，但手动选择Lipschitz常数L会导致准确率-鲁棒性权衡，且其校准性质未被充分探索，缺乏自动确定最优L的原则性标准。",
+        "method": "LiST利用温度缩放（TS）与Lipschitz常数之间的结构对偶性，通过在校准集上计算温度缩放因子T*作为反馈信号，在训练每个epoch动态调整全局Lipschitz常数L，使其收敛到内在校准点L*（满足T*=1）。训练损失为带温度τ和偏移ξ的交叉熵，其中τ被吸收进L的缩放，ξ用于控制准确率-鲁棒性权衡，通过改变ξ可构建完全校准的Pareto前沿。收敛后冻结L*，可将校准数据重新整合到训练中。网络采用逐层光谱归一化约束每层的Lipschitz常数，确保全局L可控。",
+        "result": "在CIFAR-10/100和Tiny-ImageNet上，LiST训练的模型在保持开箱校准（ECE显著降低）的同时，取得了与约束（1-Lipschitz基线）和未约束基线竞争的准确率和鲁棒性（认证鲁棒准确率CRA和实证鲁棒准确率ERA）。关键发现是存在最优L*使得T*=1，且校准可作为选择Pareto前沿上操作点的原则性标准。",
+        "conclusion": "LiST是一种动态训练范式，通过自适应调整Lipschitz常数自动找到内在校准点，产生同时具有确定性鲁棒性和开箱校准的模型，并允许用户通过边缘参数ξ在保持校准的同时探索准确率-鲁棒性权衡。收敛后重新整合校准数据可提升样本效率而不牺牲校准。",
+        "key_details": "数据：CIFAR-10/100和Tiny-ImageNet，使用标准数据增强。先验：利用TS与L的对偶性，假设存在L*使T*=1。损失：带温度τ和偏移ξ的交叉熵，τ被吸收进L缩放（即训练中L隐式包含1/τ）。超参：L通过反馈T*动态调整，ξ为可调参数。复杂度：LiST每次epoch需在校准集上计算T*（O(N_cal)），额外开销小。约束：过低的L导致模型无法拟合尖锐后验，造成不可避免的欠置信；仅适用于Lipschitz约束网络。"
+      },
+      "affiliations": [
+        "IRIT",
+        "IRT Saint Exupéry",
+        "Airbus",
+        "SNCF"
+      ],
+      "affiliations_text": "IRIT, IRT Saint Exupéry, Airbus, SNCF",
+      "score": 3.054592724743199,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.07769v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707769v1-principled-analysis-of-deep-reinforcement-learning-evaluation-and-design-paradigms",
+      "source": "arxiv",
+      "title": "Principled Analysis of Deep Reinforcement Learning Evaluation and Design Paradigms",
+      "authors": [
+        "Ezgi Korkmaz"
+      ],
+      "authors_text": "Ezgi Korkmaz",
+      "abstract": "Starting from the utilization of deep neural networks to approximate the state-action value function that led to winning one of the most challenging games, to algorithmic advancements that allowed solving problems without even explicitly stating the rules of the challenge at hand, reinforcement learning research has been the center of remarkable scientific progress for the past decade. In this paper, we focus on the key ingredients of this research progress and we analyze the canonical evaluation and design paradigms in reinforcement learning. We introduce the theoretical foundations of scaling laws in reinforcement learning and show that the asymptotic performance of reinforcement learning algorithms does not have a monotone relationship between performance rankings and data-regimes. We conduct large-scale experiments and our results demonstrate that a line of reinforcement learning research under the canonical design and evaluation paradigms resulted in incorrect conclusions. Our analysis and results provide a core analysis on scaling, capacity and complexity of deep reinforcement learning.",
+      "url": "http://arxiv.org/abs/2607.07769v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07769v1",
+      "tldr": "This paper theoretically and empirically demonstrates that standard evaluation and design paradigms in deep reinforcement learning can lead to incorrect conclusions due to non-monotonic scaling relationships with data.",
+      "detailed_reading": {
+        "motivation": "当前深度强化学习的评价与设计范式可能存在系统性偏差，导致研究结论不可靠。本文旨在通过理论分析与大规模实验，揭示规范范式下算法性能排名与数据区域之间的非单调关系，从而纠正错误结论。",
+        "method": "首先建立强化学习缩放定律的数学理论基础，推导算法渐近性能与数据规模的关联形式。然后设计大规模实验，在多种任务（如Atari、MuJoCo等）上比较不同深度强化学习算法（如DQN、PPO、SAC等）在不同数据规模（从少样本到极大样本）下的性能表现，记录排名随数据量的变化。通过对比分析，检验现有评价范式下结论的稳定性。",
+        "result": "实验表明，强化学习算法的渐近性能与数据区域之间不存在单调关系：在数据量较小时排名靠前的算法，在大数据量下性能可能落后；反之亦然。这意味着大量基于单一数据规模的对比研究得出了误导性结论，整体上规范评价范式存在重大缺陷。",
+        "conclusion": "当前深度强化学习的标准评价与设计范式未能考虑缩放效应，导致许多公开结论不可靠。研究者应重新审视这些范式，引入基于缩放定律的多尺度评估方法，以确保算法比较和设计选择的鲁棒性。",
+        "key_details": "关键细节包括：缩放定律的理论推导基于统计学习理论，假设模型容量与数据规模匹配；实验覆盖了从少量（如10万帧）到海量（如2亿帧）的数据量范围；性能排名反转现象在多个任务中一致出现；该方法揭示了现有基准（如Atari 100k）的局限性，但结论可能受限于训练计算资源和环境多样性，未来需在更广泛领域验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.8665568446432466,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.07743v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707743v1-architecture-generalization-with-metanca",
+      "source": "arxiv",
+      "title": "Architecture Generalization with MetaNCA",
+      "authors": [
+        "Meet Barot",
+        "Daniel Berenberg",
+        "Sina Khajehabdollahi"
+      ],
+      "authors_text": "Meet Barot, Daniel Berenberg, Sina Khajehabdollahi",
+      "abstract": "Self-organization is an emergent property of life, driven by the collective behavior of individual components acting on local information. Biological neurons, through local interactions transmitted through synapses, are able to learn efficiently and can adapt their connections over an organism's lifespan. Motivated by these desirable properties of adaptability and local interaction, neural cellular automata (NCA) models have been successful at learning morphogenesis solely through local update rules, demonstrating stability over many updates and robustness to perturbations. In this work, we introduce Meta Neural Cellular Automata (MetaNCA), a framework that learns local rules which self-organize the weights of artificial neural networks. A learned rule network iteratively updates the weights of a task network using only local interactions on the computation graph. We propose a novel Weight Transformer architecture for the local rule network, which uses linear attention to aggregate signals from neighboring weights and hidden states. Once trained, the rule network generates task networks of diverse architectures without backpropagation. We show that MetaNCA generates weights for feedforward MLPs, CNNs, and ResNets on MNIST and CIFAR-100, scaling to networks of 2 million parameters. We further show that MetaNCA generalizes to architectures not seen during meta-training, and that architectural diversity in the training phase strengthens this generalization.",
+      "url": "http://arxiv.org/abs/2607.07743v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07743v1",
+      "tldr": "MetaNCA introduces a neural cellular automaton that learns local weight update rules via a Weight Transformer with linear attention, enabling it to generate weights for diverse neural network architectures without backpropagation and generalize to architectures unseen during meta-training.",
+      "detailed_reading": {
+        "motivation": "反向传播训练神经网络存在内存消耗大、需要固定架构和大量样本等缺陷，而生物神经元通过局部交互和突触自适应实现高效学习。受神经细胞自动机（NCA）通过局部规则展现稳定和鲁棒性的启发，本文提出MetaNCA框架，旨在学习一种纯粹基于局部交互的规则，能够自组织生成任意架构人工神经网络的权重，并实现对未见架构的泛化，从而突破传统全局权重生成方法对特定架构的依赖。",
+        "method": "输入为MNIST和CIFAR-100数据集，任务网络包括MLP、CNN和ResNet等架构。MetaNCA由一个局部规则网络（Weight Transformer）构成：对于任务网络中的每个权重w及其隐藏状态h，定义其在前向（后突触）和后向（前突触）方向上的邻域权重和隐藏状态；使用两个独立的线性注意力模块（ELU特征映射+旋转位置编码）分别聚合前向和后向邻域信息，得到前向信号a_f和后向信号a_b；将[w, h, a_f, a_b]拼接为感知向量，输入一个MLP头，输出增量Δw和Δh，用于更新当前权重和隐藏状态。训练时，对任务网络进行T=10次局部规则迭代更新，每次随机更新80%的权重（模拟异步更新），计算任务网络在分类任务上的交叉熵损失，通过反向传播经过任务网络和局部规则网络的更新轨迹来更新局部规则网络参数φ（使用Muon优化器）；任务网络自身不通过反向传播更新，仅由局部规则网络生成。",
+        "result": "在MNIST和CIFAR-100上，MetaNCA生成了MLP、CNN和ResNet的权重，可扩展至200万参数。对于MLP，在三种训练架构（不同隐藏层宽度）下，生成的网络在未见过的宽度组合上取得与训练架构相近的测试准确率（例如热力图中(30,0)和(0,30)接近80%）。对于CNN，在两个训练架构（核大小3和5）下，生成的网络在核心小4（未见）上也表现出良好性能，平均准确率与训练架构相当。实验表明，训练时包含更多架构多样性（从3种增加到5种MLP）能提升对更广未见过架构的泛化能力。",
+        "conclusion": "MetaNCA是第一个能够学习单一局部更新规则、并在未见于训练阶段的多样化任务网络架构（MLP、CNN、ResNet）上自组织生成权重（达百万级参数）的方法。该方法通过纯粹基于计算图邻域的局部交互实现跨架构泛化，为克服反向传播的架构固定性和高内存消耗提供了一条新路径。",
+        "key_details": "局部规则网络仅依赖于计算图的局部拓扑（前向和后向邻域），不关心全局架构，因此天然支持跨架构泛化。使用线性注意力（ELU特征映射+旋转位置编码）实现邻域聚合，复杂度与邻域大小线性关系。隐藏状态初始化为正弦位置编码（包含层索引、前/后神经元索引、卷积核位置等），为规则提供架构先验。训练时随机dropout部分邻域向量，以减少对特定邻居的依赖，增强鲁棒性。每次迭代随机更新80%权重，模拟异步更新，提升稳定性。局限性：每个权重均需维护隐藏状态，对于极大网络（如数亿参数）内存开销较高；当前仅在分类任务（MNIST、CIFAR-100）上验证，未在更大规模数据集或更复杂架构（如Transformer）上测试；跨架构泛化的边界尚不明确，可能受限于训练架构的多样性。超参数方面，更新步数T=10，优化器Muon，具体学习率等未详细给出。"
+      },
+      "affiliations": [
+        "Independent Scholar",
+        "Mythos Scientific"
+      ],
+      "affiliations_text": "Independent Scholar, Mythos Scientific",
+      "score": 2.7019702274345967,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.07758v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707758v1-scalable-and-trustworthy-earth-observation-foundation-models",
+      "source": "arxiv",
+      "title": "Scalable and Trustworthy Earth Observation Foundation Models",
+      "authors": [
+        "Syed Usama Imtiaz",
+        "Mitra Nasr Azadani",
+        "Nasrin Alamdari"
+      ],
+      "authors_text": "Syed Usama Imtiaz, Mitra Nasr Azadani, Nasrin Alamdari",
+      "abstract": "Foundation models (FMs) have transformed machine learning from isolated task-specific model development toward general-purpose models pretrained on broad data and adapted to multiple downstream tasks. Earth observation (EO) is an important domain for this paradigm because satellite and airborne archives are large, high-revisit, and increasingly multimodal, while reliable field labels are often sparse. Remote sensing foundation models (RSFMs) cannot be transferred reliably/optimally without domain-specific adaptation. This is because EO data are governed by measurement physics and operational decision constraints. This chapter reviews the design principles arising from these domain-specific constraints. It first defines the FMs paradigm in remote sensing (RS), then synthesizes the current model landscape, pretraining objectives, architecture designs, downstream adaptation and trustworthiness requirements. The chapter also incorporates recent benchmark evidence showing that no single geospatial foundation model is universally best and that inconsistent evaluation remains a major issue to fair comparison and reliable deployment. In addition, two brief environmental monitoring case studies; physics-informed spectral targeted masking for harmful algal bloom prediction and reinforcement learning for adaptive environmental monitoring station selection to illustrate the FMs domain-guided principles in practice. This chapter posits that next-generation RSFMs should be evaluated not only by benchmark accuracy, but also by modality-aware transfer and physically plausible representations for trustworthy EO decisions.",
+      "url": "http://arxiv.org/abs/2607.07758v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07758v1",
+      "tldr": "This paper reviews the design principles for scalable and trustworthy Earth observation foundation models, emphasizing that next-generation models must be evaluated not only by benchmark accuracy but also by modality-aware transfer and physically plausible representations to ensure reliable and trustworthy remote sensing decisions.",
+      "detailed_reading": {
+        "motivation": "地球观测数据具有多模态、多分辨率、光谱丰富、强时空动态和地理参考等独特属性，而传统计算机视觉模型无法直接捕捉这些物理约束和操作决策需求。同时，遥感领域标注稀疏但数据量巨大，亟需专门设计的大规模基础模型以充分挖掘无标注数据中的领域结构信息。",
+        "method": "本文系统综述遥感基础模型的设计原则，涵盖预训练目标（掩码图像建模、对比学习、多任务监督、视觉-生成学习）、架构设计（波段编码、传感器令牌、时空位置嵌入、多模态融合模块）、下游适应策略（线性探测、参数高效微调、提示）以及可信度评估（不确定性量化、物理一致性检查）。并通过两个案例说明：1）物理引导的掩码光谱建模，在有害藻华预测中利用诊断波长的掩码策略迫使编码器学习与生物光学过程相关的表示；2）强化学习用于自适应环境监测站点选择，在预算限制下优化采样位置以支持后续决策。",
+        "result": "综述指出，没有任何单一地理空间基础模型在所有任务上通用最优；不一致的评估标准是当前公平比较和可靠部署的主要障碍。不同模型在场景分类、语义分割、变化检测、视觉问答及环境参数回归等任务上各有优劣，且预训练数据域（如RGB vs. 多光谱）、空间分辨率和时间采样对迁移表现有显著影响。",
+        "conclusion": "下一代遥感基础模型不应仅依据基准准确率评估，而应通过模态感知的迁移能力和物理上合理的表征来实现可信的地球观测决策。模型设计必须匹配目标问题的传感器物理、光谱结构、时空动态和操作约束。",
+        "key_details": "关键细节包括：1）遥感数据与自然图像的差异（多模态、多分辨率、光谱连续、时间采样因卫星轨道而异）驱动了专用架构设计；2）预训练策略中，掩码建模需针对光谱诊断波段而非均匀随机，对比学习中的正样本定义需谨慎（避免掩盖真实变化）；3）评估挑战包括空间自相关导致的准确率高估、跨年份/区域泛化测试的缺失；4）案例展示了物理先验（如藻华吸收特征）如何指导掩码策略，以及强化学习如何平衡监测成本与信息增益；5）局限性在于当前模型对传感器变更、大气校正差异敏感，且生成式输出需经辐射定标验证。"
+      },
+      "affiliations": [
+        "Florida State University"
+      ],
+      "affiliations_text": "Florida State University",
+      "score": 2.67230658763277,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.07719v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707719v1-recolora-spectrum-aware-recursive-consolidation-for-continual-llm-fine-tuning",
+      "source": "arxiv",
+      "title": "ReCoLoRA: Spectrum-Aware Recursive Consolidation for Continual LLM Fine-Tuning",
+      "authors": [
+        "Wentao Lu"
+      ],
+      "authors_text": "Wentao Lu",
+      "abstract": "Parameter-efficient fine-tuning adapts a large language model to one task cheaply, but across a task sequence LoRA-style methods keep stacking low-rank updates on the same frozen weight, so each new task tends to overwrite the previous ones. We present ReCoLoRA (Recursive Consolidation of Low-Rank Adapters), a spectrum-aware framework for continual fine-tuning: adapters are initialized from a randomized SVD of the pretrained weight, per-layer effective ranks are selected by an elbow criterion, and the principal subspace is adapted before residual capacity is opened. Before each new task, ReCoLoRA re-decomposes the current effective weight, rather than the original one, into a frozen residual, a slowly updated principal component, and a fresh adapter (recursive consolidation), so every task starts from the model that has already absorbed its predecessors. On a six-task continual GLUE sequence over four 7-8B backbones, ReCoLoRA attains the best final average score on three of the four backbones against rank-swept LoRA, PiSSA, AdaLoRA, and DoRA baselines while training fewer parameters; an oracle-routed task-bank variant serves as an upper bound under full task isolation. Code: https://github.com/bhqy666/ReCoLoRA.",
+      "url": "http://arxiv.org/abs/2607.07719v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07719v1",
+      "tldr": "ReCoLoRA introduces a spectrum-aware recursive consolidation framework for continual LLM fine-tuning that re-decomposes the current effective weight into frozen residual, slow principal, and fresh adapter components before each new task, achieving superior final average scores on continual GLUE benchmarks with fewer parameters than prior LoRA-based methods.",
+      "detailed_reading": {
+        "motivation": "现有的参数高效微调方法（如LoRA）在连续任务序列中，会不断在相同的冻结权重上堆叠低秩更新，导致新任务覆盖旧任务的知识，引发灾难性遗忘。ReCoLoRA旨在利用预训练权重的谱结构，通过递归巩固机制缓解遗忘，同时保持参数效率。",
+        "method": "ReCoLoRA以预训练权重矩阵为输入，首先使用随机SVD分解每个权重，得到近似主奇异向量和奇异值。基于肘部准则（结合奇异值比值和能量比阈值ρ=0.8）为每层选择有效秩，并生成秩掩码以区分主成分和残差子空间。训练分两阶段：第一阶段仅训练主成分适配器（ΔW_p），第二阶段通过调度系数γ(t)逐步激活残差适配器（ΔW_r），且残差参数使用较低学习率。在连续任务中，递归巩固机制在每个新任务前重新分解当前有效权重（W_eff = W_res + W_slow + ΔW_fast），其中W_slow由顶SVD得到并以慢速更新，W_res为冻结残差，ΔW_fast初始化为接近零的快速适配器，任务结束后通过SVD将更新合并入下一轮巩固。推理时直接使用单一合并模型。",
+        "result": "在包含六个GLUE任务的连续序列上，使用Qwen3-8B、Llama-3.1-8B-Instruct、Mistral-7B-v0.3和InternLM2.5-7B-Chat共四个7-8B骨干模型，ReCoLoRA在三个骨干上取得了最佳最终平均分，且训练参数远少于最强的rank-256基线。RecLoRA-TaskBank变体（每任务隔离分支，oracle路由）在Qwen3-8B上达到0.8957平均分和0.0000平均遗忘，作为遗忘下界。",
+        "conclusion": "ReCoLoRA通过谱感知的递归巩固机制，在主成分子空间和残差子空间上分阶段适应，并持续将已完成任务的知识折叠进模型，有效缓解了连续微调中的灾难性遗忘，在多个大语言模型上优于LoRA、PiSSA、AdaLoRA、DoRA等基线。",
+        "key_details": "关键细节包括：随机SVD使用高斯矩阵Ω进行投影，复杂度O(d_out d_in r)；肘部准则公式为r* = argmax(σ_r/σ_{r+1})且能量比≥ρ（值0.8），但能量归一化限于截断谱避免过大的full-matrix分母；主任务中每层有效秩范围为[8,16]，TaskBank分支使用rank-32分配且活跃肘部秩更小；分阶段训练时γ(t)在阶段边界前为0，之后逐步增加；递归巩固中慢成分W_slow以极低学习率更新，快成分ΔW_fast初始化为零且秩约为肘部秩+3；局限性在于TaskBank需要oracle任务标识才能路由评估，且递归巩固引入了额外SVD计算开销。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.6666356343103392,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.07762v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707762v1-trustworthy-machine-learning-through-the-lens-of-combinatorial-optimization-survey-and-research-perspectives",
+      "source": "arxiv",
+      "title": "Trustworthy Machine Learning through the Lens of Combinatorial Optimization: Survey and Research Perspectives",
+      "authors": [
+        "Thibaut Vidal",
+        "Julien Ferry"
+      ],
+      "authors_text": "Thibaut Vidal, Julien Ferry",
+      "abstract": "Modern machine learning (ML) increasingly relies on complex models whose behavior is difficult to characterize beyond empirical performance metrics. Across a wide range of tasks, including prediction, generation, and decision-making, models with similar empirical performance can exhibit markedly different properties in terms of their transparency, interpretability, robustness, fairness, privacy, and certifiability. This survey highlights how optimization- and certification-oriented reasoning can provide a useful framework for reasoning about such differences, supporting tasks ranging from model training and selection to auditing and certification. We review and synthesize recent advances at the intersection of combinatorial optimization (CO) and trustworthy ML, covering both training and post-training tasks, including interpretable model learning, explanation generation, robustness analysis, fairness auditing, model compression, and privacy attacks and protections. Across these domains, CO formulations offer additional capabilities over purely heuristic approaches, e.g., gradient-based ones, notably global guarantees, formal certificates, and explicit treatment of trade-offs. While scalability remains an important challenge, continued progress in solvers and hybrid algorithms suggests a growing role for CO in the design and deployment of trustworthy ML systems.",
+      "url": "http://arxiv.org/abs/2607.07762v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07762v1",
+      "tldr": "This survey explores how combinatorial optimization provides a framework for trustworthy machine learning, offering global guarantees and formal certificates for tasks like interpretable learning, explanation, robustness, fairness, and privacy, while discussing scalability challenges and research perspectives.",
+      "detailed_reading": {
+        "motivation": "现代机器学习模型日益复杂，仅凭经验性能指标难以全面刻画其行为，模型在透明度、可解释性、鲁棒性、公平性、隐私和可认证性等可信赖属性上可能存在显著差异。组合优化能够提供全局保证、形式化证书和显式权衡处理，弥补纯启发式方法的不足，因此有必要系统梳理CO在可信ML中的应用。",
+        "method": "本文采用结构化、子领域驱动的方法，通过组合机器学习与整数规划/组合优化的关键词搜索，结合各可信赖维度（透明性、可解释性、公平性、鲁棒性、隐私）的特定术语进行文献筛选，并以高被引工作和综述为锚点进行前后向引用拓展。最终覆盖了可解释模型学习、解释生成、鲁棒性分析、公平审计、模型压缩、隐私攻击与保护等训练和训练后任务，并提炼了MILP、SAT、SMT、CP、MaxSAT等多种CO范式的代表性模型和算法策略。",
+        "result": "组合优化方法在多个可信ML任务中展现出优于纯启发式（如梯度方法）的能力：提供全局最优性保障、形式化证书以及显式的权衡分析；例如在稀疏回归和稀疏SVM中，CO公式能精确控制特征数量并达到更优的泛化性能；在鲁棒性验证和公平审计中可输出可认证的边界。尽管可扩展性仍是主要挑战，但现代求解器（MILP等）的加速（三至六个数量级）和混合算法的发展使得CO在可信ML中的实际应用前景广阔。",
+        "conclusion": "组合优化为可信机器学习提供了一个强力的方法论框架，能够系统处理透明度、可解释性、公平性、鲁棒性和隐私等关键维度，在模型训练、选择、审计和认证中实现全局最优性和形式化保证。未来需进一步解决可扩展性瓶颈，并推动CO与深度学习、大模型的深度融合。",
+        "key_details": "方法论上，CO建模依赖于精确的数学公式（如决策变量、目标函数和约束），并利用分支定界、切平面、预求解、分解等技术求解。关键细节包括：对于稀疏回归，采用big-M或视角重构的MISOCP松弛以获得紧界；对于决策树学习，利用动态规划或MIP精确全局优化；鲁棒性验证通过MIP或SMT编码对抗扰动约束；公平审计通过约束违反的优化检测差异。局限性方面，CO方法在处理超高维数据（p>10^5）或大规模神经网络时仍面临扩展性挑战，且依赖问题结构的凸性/线性特征。"
+      },
+      "affiliations": [
+        "Polytechnique Montreal"
+      ],
+      "affiliations_text": "Polytechnique Montreal",
+      "score": 2.589524617182616,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.07753v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707753v1-a-transdiagnostic-space-of-disorder-like-phenotypes-in-reinforcement-learning-agents",
+      "source": "arxiv",
+      "title": "A Transdiagnostic Space of Disorder Like Phenotypes in Reinforcement Learning Agents",
+      "authors": [
+        "Hari Prasad"
+      ],
+      "authors_text": "Hari Prasad",
+      "abstract": "Modelling psychological disorders in artificial agents offers both a testbed for computational psychiatry and a lens on the failure modes of affective control. Prior work induces one or two disorders in a reinforcement learning (RL) agent by hand-tuned reward shaping, labels the behaviour post hoc, and reports single runs. We recast disorder modelling as dose-controllable manipulation of cognitive appraisal signals in an appraisal-guided PPO agent, expressing seven disorders (anxiety, mania, obsessive-compulsive checking, depression, impulsivity, addiction, and post-traumatic stress) each as a single knob grounded in a computational psychiatry account, with each symptom measured by a preregistered assay mapped to a recognised paradigm. Across more than a thousand runs (10 seeds, four controls, 95% confidence intervals) every disorder shows a graded, monotone dose-response that no control reproduces. Beyond these induced effects, three findings emerge that were not written into the reward: the disorders self-organise into a two-dimensional affective space in which mania mirrors anxiety; removing a knob remits reward distortion disorders (mania, checking, addiction) but not avoidance disorders (anxiety, PTSD), which instead recover under a graded exposure curriculum; and two simultaneous knobs interact nonadditively, yielding testable comorbidity predictions. Appraisal weights thus parameterise a controllable space of affective phenotypes in which the same knobs that induce a disorder can model its treatment. We also show that three disorder knobs (depression, addiction, anxiety) transfer to a three-dimensional pixel environment (MiniWorld) with a standard convolutional agent and no appraisal critic, with cross-assay dissociation confirmed across both domains, indicating the framework is not specific to grid worlds or to PPO's appraisal critic.",
+      "url": "http://arxiv.org/abs/2607.07753v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07753v1",
+      "tldr": "This paper introduces a dose-controllable appraisal-guided reinforcement learning framework that induces seven psychological disorders in agents, revealing emergent transdiagnostic structure (a two-dimensional affective space), treatment dissociations between reward-distortion and avoidance disorders, and nonadditive comorbidity interactions.",
+      "detailed_reading": {
+        "motivation": "现有强化学习障碍模型存在三个缺陷：手动调参而非基于机制、事后标签而非预先注册测量、单次运行缺乏方差和对照。本文提出通过认知评估引导的PPO代理进行剂量可控的障碍建模，以克服这些局限，并探索跨诊断的涌现结构。",
+        "method": "采用AG-PPO架构，包括卷积编码器、Actor、Critic和Next-Reward Estimator。每步计算六个评估维度（动机相关性、目标一致性、确定性、新颖性、应对潜力、预期），输入Critic并塑造奖励。七种障碍各对应一个可调参数（焦虑/狂躁操作应对潜力，强迫症检查奖励，抑郁移动代价，冲动降低折扣因子，成瘾非习惯化奖励，PTSD创伤电击），奖励函数为r'_t = r_t - sum w_i g(ζ) - 移动代价 + 检查奖励 + 药物奖励 - 电击奖励。训练使用PPO剪辑损失和值损失，Next-Reward网络最小化预测误差。在多个网格世界（动态障碍、熔岩间隙、趋避冲突、时间选择、成瘾、创伤）和MiniWorld像素环境中进行1000+次运行（10种子、4对照、95%置信区间）。",
+        "result": "七种障碍均呈现梯度单调的剂量-响应曲线，且无对照复现。涌现结果包括：障碍自组织成二维情感空间（狂躁与焦虑镜像）；移除障碍旋钮消除奖励扭曲障碍（狂躁、强迫症、成瘾）但无法消除回避障碍（焦虑、PTSD），后者需分级暴露课程恢复；双旋钮组合产生非加性交互，提供可检验的共病预测。三个障碍旋钮（抑郁、成瘾、焦虑）成功迁移至MiniWorld像素环境，并在两个领域间维持跨测定分离。",
+        "conclusion": "评估权重参数化了一个可控的情感表型空间，同一旋钮既可诱导障碍也可模拟治疗。框架具有跨领域迁移性，不限于网格世界或AG-PPO的评估评价器，为计算精神病学提供可剂量控制的测试平台。",
+        "key_details": "数据：使用四个威胁/空间网格世界和三个专用环境（趋避冲突、时间选择、成瘾、创伤），以及MiniWorld三维像素环境；先验：每个障碍旋钮基于计算精神病学文献（如Rachman强迫症、Redish成瘾、Treadway抑郁）；损失：PPO剪辑代理损失 + 值函数MSE + Next-Reward预测MSE；超参：10随机种子，4对照条件（标准PPO、Critic噪声随机评估、PPO+RND内在动机、无塑造的评估Critic），95%置信区间；复杂度/约束：AG-PPO包含额外评估评价器和Next-Reward网络，增加计算开销；局限性：环境为简化的网格世界和人工任务，评估维度手工设计，可能限制复杂场景泛化。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.3612568534381233,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.07740v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/10/260707740v1-jet-long-efficient-long-context-extension-with-dynamic-bifocal-rope",
+      "source": "arxiv",
+      "title": "Jet-Long: Efficient Long-Context Extension with Dynamic Bifocal RoPE",
+      "authors": [
+        "Haozhan Tang",
+        "Zerui Wang",
+        "Yuxian Gu",
+        "Song Han",
+        "Han Cai"
+      ],
+      "authors_text": "Haozhan Tang, Zerui Wang, Yuxian Gu, Song Han, Han Cai",
+      "abstract": "Modern LLMs are increasingly deployed in long-context applications such as retrieval-augmented generation, repository-level coding, and agentic workflows whose accumulated reasoning and tool traces routinely push the input an order of magnitude past the pretraining window, making zero-shot context extension the dominant deployment path for open-weight checkpoints. Most existing zero-shot methods fix a single rescaling factor up front, so an aggressive factor sacrifices short-context fidelity while a conservative one breaks down at long contexts. We propose Jet-Long, a tuning-free zero-shot method that pairs a local RoPE-faithful window with a long-range window whose rescaling factor adapts dynamically to the current sequence length, recovering the base model exactly at short inputs while extrapolating cleanly at long ones. An inclusion-exclusion attention merge and an on-the-fly RoPE correction rotation make the bifocal construction essentially free at inference; fused into a single CuTe kernel, long-context prefill reaches up to $1.39\\times$ FA2 throughput on H100 (approaching the Hopper-only FA4), and single-batch generation incurs $\\le 4\\%$ overhead at every length. On Qwen3-1.7B/4B/8B up to 128K context, Jet-Long leads RULER by $+4.79$/$+2.18$/$+2.03$~pp over the strongest baseline at 1.7B/4B/8B, achieves the best overall accuracy on HELMET-RAG (a benchmark identified by HELMET as the most efficient predictor of downstream long-context performance) and attains the lowest PG-19 perplexity. Jet-Long also generalizes to hybrid attention architectures such as Jet-Nemotron for further long-context improvement without retraining, and remains hyperparameter-resilient for ease of deployment.",
+      "url": "http://arxiv.org/abs/2607.07740v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07740v1",
+      "tldr": "Jet-Long introduces a tuning-free, zero-shot context extension method using dynamic bifocal RoPE that adaptively rescales a remote window based on sequence length, preserving short-context fidelity while achieving superior long-context performance and efficiency.",
+      "detailed_reading": {
+        "motivation": "现代大语言模型在检索增强生成、仓库级代码理解和多步智能体工作流等长上下文应用中，输入长度常常超过预训练窗口，驱动零样本上下文扩展成为主流部署方式。现有零样本方法大多固定单一缩放因子，激进因子牺牲短上下文保真度，保守因子则在长上下文时失效。因此需要一种无需微调、能动态适应序列长度的方法，在短输入时精确恢复基模型行为，在长输入时干净外推。",
+        "method": "Jet-Long是一种无需调优的双焦点旋转位置编码方法。它包含一个保持经典RoPE的局部窗口（大小w0）和一个远程窗口，远程窗口的重缩放因子动态依赖于当前序列长度L：定义组大小G = max(1, ceil(L / w_pretrained))，远程位置映射为f(x) = floor(x / G)。推理时，通过包含-排除注意力合并将三个FlashAttention调用（全远程、局部仅RoPE、局部仅重映射）组合，并用LogSumExp稳定；生成时通过实时RoPE校正旋转实现，KV缓存保持不变。整个计算融合为单个CuTe核，长上下文预填充可达1.39倍FA2吞吐量（接近仅Hopper的FA4），单批生成开销不超过4%。",
+        "result": "在Qwen3-1.7B/4B/8B模型上测试至128K上下文，Jet-Long在RULER基准上比最强基线分别高出+4.79/+2.18/+2.03个百分点；在HELMET-RAG（被HELMET识别为最有效下游长上下文性能预测的基准）上取得最佳或并列最佳总体准确率；在PG-19上达到最低困惑度。该方法还泛化至混合注意力架构（如Jet-Nemotron），无需重新训练即可进一步提升长上下文性能，且超参数鲁棒。",
+        "conclusion": "Jet-Long通过动态双焦点RoPE解决了固定缩放因子的保真度-外推权衡，无需微调即可在短上下文精确恢复基模型、在长上下文干净外推。推理时的高效融合实现几乎零开销，并在多个模型和基准上超越现有零样本方法。该方法适用于纯RoPE和混合注意力架构，为无需训练的长上下文部署提供了实用且高效的解决方案。",
+        "key_details": "方法关键点：动态组大小G=max(1, ceil(L/w_pretrained))确保每个远程旋转角度落在预训练网格上，最大化位置分辨率；包含-排除注意力合并通过三个FlashAttention调用实现，配合LogSumExp稳定；生成时KV缓存不变，通过实时RoPE校正旋转进行解耦；融合CuTe核使预填充接近FA4吞吐量（H100上1.28-1.39× FA2）。超参数仅w0（局部窗口大小），实验表明其选择鲁棒。局限：离散分组在极端长上下文下可能引入轻微量化误差，但动态分组已最小化压缩。数据基于Qwen3 (1.7B/4B/8B)和Jet-Nemotron架构，无训练损失或长上下文数据需求。"
+      },
+      "affiliations": [
+        "NVIDIA"
+      ],
+      "affiliations_text": "NVIDIA",
+      "score": 2.313713284623455,
+      "score_text": "2.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.07754v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707754v1-image-classification-via-a-quantum-inspired-strategy-involving-a-mixture-of-experts",
+      "source": "arxiv",
+      "title": "Image classification via a quantum-inspired strategy involving a mixture of experts",
+      "authors": [
+        "Kumari Jyoti",
+        "Rohith Babu",
+        "Apoorva D. Patel"
+      ],
+      "authors_text": "Kumari Jyoti, Rohith Babu, Apoorva D. Patel",
+      "abstract": "Pattern recognition problems arise in a variety of physical image processing situations, and convolutional neural networks are a popular scheme for the required feature extraction and classification tasks. The classical networks use diffusion-based smearing and block-wise pooling to downsample the image data and capture important structural features. In this work, we propose and demonstrate a more efficient quantum-inspired strategy involving a mixture of experts. It is a hybrid classical-quantum framework. The quantum part consists of amplitude encoding of the images, convolution using local unitary operations, multiple experts processing the same image with different parameters, and feature extraction using quantum stabiliser codes. The classical part then jointly processes the features extracted by different experts using a standard fully connected neural network for image class prediction. Using MNIST and Fashion-MNIST datasets as benchmarks, we demonstrate that the joint expert analysis outperforms the individual expert one, as well as reduces the failure rate of image class prediction by around a factor of two. The overhead of our quantum-inspired strategy is only moderate on GPU workstations, which makes our proposal a practical alternative to existing classical schemes. We also point out how the quantum part of our framework can be executed on a quantum processor.",
+      "url": "http://arxiv.org/abs/2607.07754v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07754v1",
+      "tldr": "This paper presents a hybrid classical-quantum image classification framework that uses a mixture of experts with quantum amplitude encoding, unitary convolution, and stabiliser code feature extraction, achieving improved performance and reduced failure rates on MNIST and Fashion-MNIST datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Science"
+      ],
+      "affiliations_text": "Indian Institute of Science",
+      "score": 2.226606933264941,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.07724v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707724v1-uncertainty-gated-selection-for-block-sparse-attention",
+      "source": "arxiv",
+      "title": "Uncertainty-gated selection for block-sparse attention",
+      "authors": [
+        "Thomas Rossi"
+      ],
+      "authors_text": "Thomas Rossi",
+      "abstract": "Block-sparse attention scales long-context language models by replacing the O(N^2) softmax with a per-query top-k selection over key blocks. This cutoff is myopic: when the k-th and (k+1)-th blocks are nearly tied in score, the selector commits without spending extra budget, and a dropped block carrying answer evidence is unrecoverable downstream. We propose a value-of-information router that measures, for each query, how decisively the top-k cut was made, and doubles the kept set for the queries where that gap is smallest; the rule is backbone-agnostic and stacks with existing block-scoring methods such as Quest. On LongBench-v2 medium at n=215 (the entire dataset subset), router-on-Quest reaches paired recall 0.75 vs. top-k 0.47 -- +28 pp over the SSA-style baseline (McNemar p<0.01) -- and lands within 2 pp of dense on RULER NIAH multikey at the same context. The lift reproduces on four models from three architectures (Qwen2.5, Mistral-Nemo, Qwen3.6). At 128K, the router preserves 0.81 and 0.89 of dense accuracy on Qwen2.5-7B-1M and Qwen3.6 (vs. SSA-style top-k at 0.09 on the former) while the fused selection-plus-kernel pipeline runs at 0.62x and 0.80x dense wall time.",
+      "url": "http://arxiv.org/abs/2607.07724v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07724v1",
+      "tldr": "This paper introduces an uncertainty-gated router that improves block-sparse attention by selectively doubling the kept key blocks for queries with uncertain top-k cutoffs, achieving significant recall gains and near-dense accuracy across models while maintaining efficiency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Eonpass"
+      ],
+      "affiliations_text": "Eonpass",
+      "score": 2.222865241933361,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.07720v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707720v1-omni-sleep-a-sleep-foundation-model-via-hierarchical-contrastive-learning-of-cns-ans-dynamic",
+      "source": "arxiv",
+      "title": "Omni-Sleep: A Sleep Foundation Model via Hierarchical Contrastive Learning of CNS--ANS Dynamic",
+      "authors": [
+        "Zhoujie Hou",
+        "Song Wang",
+        "Kexin Lou",
+        "Mo Wang",
+        "Chen Wei",
+        "Quanying Liu"
+      ],
+      "authors_text": "Zhoujie Hou, Song Wang, Kexin Lou, Mo Wang, Chen Wei, Quanying Liu",
+      "abstract": "Sleep physiology arises from the coordinated dynamics of the central nervous system (CNS) and autonomic nervous system (ANS), as reflected by multimodal polysomnography signals including EEG, EOG, EMG, ECG, and respiration. However, existing sleep foundation models often fuse heterogeneous biosignals in a topology-agnostic manner, overlooking their physiological organization. We introduce Omni-Sleep, a sleep foundation model that uses the CNS/ANS partition as a physiological prior for topology-constrained representation learning. Omni-Sleep learns structured representations through three objectives: intra-system consistency, which captures shared subsystem-level factors within neural and cardio-respiratory signals; inter-system synchronization, which aligns subsystem trajectories to model brain--body dynamics; and latent-space masked temporal modeling, which captures long-horizon sleep dynamics. Pre-trained on over 100,000 hours of multi-center multimodal PSG data, Omni-Sleep is evaluated on sleep staging and multi-disease classification. Across datasets and modality-ablation settings, Omni-Sleep outperforms strong foundation-model baselines, showing improved label efficiency, cross-dataset generalization, and robustness to missing modalities. These results highlight the value of physiological hierarchy for generalizable sleep representation learning. Code is available at https://github.com/AutoBrain-sleep/OmniSleep.",
+      "url": "http://arxiv.org/abs/2607.07720v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07720v1",
+      "tldr": "Omni-Sleep introduces a sleep foundation model that leverages a physiological CNS–ANS hierarchy via hierarchical contrastive learning, achieving superior sleep staging and multi-disease classification with improved robustness and label efficiency across large-scale multimodal polysomnography data.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.2038531858100012,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.07748v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707748v1-selective-left-shift-turning-test-time-compute-and-difficulty-based-curation-into-training-data-for-low-resource-code-generation",
+      "source": "arxiv",
+      "title": "Selective Left-Shift: Turning Test-Time Compute and Difficulty-based Curation into Training Data for Low-Resource Code Generation",
+      "authors": [
+        "Didula Samaraweera",
+        "Anjana Supun",
+        "Srinath Perera"
+      ],
+      "authors_text": "Didula Samaraweera, Anjana Supun, Srinath Perera",
+      "abstract": "Large Language Models achieve strong code generation for high resource languages like Python and Java but suffer sharp performance drops on Low-Resource Programming Languages~(LRPLs) such as Julia. Improving Small Language Models~(SLMs) for these languages faces a trilemma: Supervised Fine-Tuning~(SFT) is bottlenecked by data scarcity, inference-time scaling is too expensive for deployment, and Reinforcement Learning from scratch yields near zero advantages. We propose a three-phase pipeline that resolves this trilemma by decoupling syntax acquisition from algorithmic reasoning. First, we \\emph{left-shift} inference-time compute to an offline data synthesis engine that uses iterative compiler and test feedback to generate verified training examples. Second, we fine-tune an SLM on this synthetic, verified data to embed strong syntactic priors. Third, we apply Reinforcement Learning with Verifiable Reward~(RLVR) grounded by language-agnostic Input/Output tests, where the SFT prior constrains exploration away from syntax errors. Applied to Qwen3-8B, our pipeline improves pass@1 by up to +7.6 points on MultiPL-E and +14.2 points on the Agnostics LiveCodeBench for Julia compared to SOTA results. Furthermore, the pipeline only used $\\frac{1}{3}$ data and $\\frac{1}{6}$ cost over the previous state-of-the-art. We further demonstrate that the pipeline generalizes to Ballerina achieving 49.7\\% MultiPL-E Pass@1, a language with near-zero pretraining representation. Ablations confirm that both the SFT phase and execution-grounded rewards are necessary for stable training.",
+      "url": "http://arxiv.org/abs/2607.07748v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07748v1",
+      "tldr": "A three-phase pipeline that decouples syntax acquisition from algorithmic reasoning by left-shifting inference-time compute to offline data synthesis, then applying supervised fine-tuning and reinforcement learning with difficulty-curated data, achieves state-of-the-art code generation for low-resource languages like Julia and Ballerina while using significantly less data and cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "WSO2"
+      ],
+      "affiliations_text": "WSO2",
+      "score": 2.1074946894386084,
+      "score_text": "2.1"
+    },
+    {
+      "id": "2607.07759v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707759v1-ai-integrated-models-for-assessing-agricultural-resilience",
+      "source": "arxiv",
+      "title": "AI-integrated models for assessing agricultural resilience",
+      "authors": [
+        "Joshua R. Waite",
+        "Dana Golden",
+        "Brett Indelicato",
+        "Kevin Camp",
+        "Mojdeh Saadati",
+        "Shannon Regan",
+        "Patrick Schnable",
+        "Baskar Ganapathysubramanian",
+        "Carlos Messina",
+        "Suzanne Thornsbury",
+        "Soumik Sarkar"
+      ],
+      "authors_text": "Joshua R. Waite, Dana Golden, Brett Indelicato, Kevin Camp, Mojdeh Saadati, Shannon Regan, Patrick Schnable, Baskar Ganapathysubramanian, Carlos Messina, Suzanne Thornsbury, Soumik Sarkar",
+      "abstract": "Agricultural supply chains are vulnerable to disruptions through linked biophysical and economic systems. We develop an AI-powered tool that integrates economic models (GTAP) with biophysical models (APSIM) to analyze supply chain shocks, enabling policymakers and market participants to assess cross-disciplinary impacts through queries and responses written in natural language.",
+      "url": "http://arxiv.org/abs/2607.07759v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07759v1",
+      "tldr": "This paper introduces an AI-powered framework that integrates economic (GTAP) and biophysical (APSIM) models to assess agricultural supply chain resilience through natural language queries.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stony Brook University",
+        "Iowa State University",
+        "University of Florida"
+      ],
+      "affiliations_text": "Stony Brook University, Iowa State University, University of Florida",
+      "score": 2.0924689640993717,
+      "score_text": "2.1"
+    },
+    {
+      "id": "2607.07773v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707773v1-graph-regularized-deep-learning-for-eeg-based-emotion-recognition-with-psychologically-grounded-label-structure",
+      "source": "arxiv",
+      "title": "Graph-Regularized Deep Learning for EEG-Based Emotion Recognition with Psychologically-Grounded Label Structure",
+      "authors": [
+        "Dongyang Kuang",
+        "Zizheng Ma",
+        "Yushan Zhang",
+        "Xiaocong Zeng"
+      ],
+      "authors_text": "Dongyang Kuang, Zizheng Ma, Yushan Zhang, Xiaocong Zeng",
+      "abstract": "EEG-based emotion recognition is critical for mental health monitoring and affective brain-computer interfaces, yet existing deep learning approaches often treat emotion classes as isolated labels, ignoring their psychological interdependencies. We propose a graph-regularized learning framework that conceptualizes emotions as nodes in a graph where edges encode proximity based on dimensional emotion theories. We adapt three complementary regularization strategies--Graph Label Smoothing (intuitive soft labeling), Commuting distance on graph via Graph Laplacian (spectral graph theory), and Sliced Wasserstein Distance (optimal transport on graph)--ordered by increasing computational complexity. These strategies penalize model predictions that deviate from the established emotion topology. Our framework is evaluated across three representative backbone architectures: AudioTransformer (pure transformer), Conformer (CNN-transformer hybrid), and DCGNN (causal graph neural network), demonstrating architecture-agnostic benefits. Experiments on SEED-IV (4 classes) and SEED-V (5 classes) datasets show consistent improvements: best case up to +5.42% accuracy and 39% reduction in psychologically implausible misclassifications. Ultimately, our framework help raise the upper bound of performance achievable with standard approaches. Code will be released.",
+      "url": "http://arxiv.org/abs/2607.07773v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07773v1",
+      "tldr": "This paper introduces a graph-regularized deep learning framework for EEG-based emotion recognition that models emotions according to psychological theory, achieving consistent accuracy improvements and fewer psychologically implausible misclassifications across multiple architectures.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sun Yat-sen University"
+      ],
+      "affiliations_text": "Sun Yat-sen University",
+      "score": 2.0064391131502135,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.07775v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707775v1-idiobionics-the-unification-of-privacy-and-intelligent-robotic-prostheses",
+      "source": "arxiv",
+      "title": "Idiobionics: The Unification of Privacy and Intelligent Robotic Prostheses",
+      "authors": [
+        "Kwesi Afari Darfoor",
+        "Patrick M. Pilarski",
+        "Bailey Kacsmar"
+      ],
+      "authors_text": "Kwesi Afari Darfoor, Patrick M. Pilarski, Bailey Kacsmar",
+      "abstract": "The human body is at the center of a growing family of technologies designed to tightly and persistently couple biological and digital systems. Robotic prostheses are a representative example of this tight coupling. Also referred to as bionic limbs, robotic prostheses are devices that support people who have lost limbs in pursuing daily life activities such as walking and grasping objects. Bionic limbs are now perceptive and responsive owing to their integration with advanced sensors and artificial intelligence-based control approaches. Consequently, such robotic prostheses can now be viewed as semiautonomous wearable robotic systems that can co-adapt with their users. However, the same sensing and control advancements that increase the capability of robotic prostheses also introduce threat vectors that could be exploited by malicious entities to violate the privacy of users. To fully realize the benefits of next-generation bionic limbs, we maintain it is important to directly understand and address these privacy risks and the barriers they might present to user adoption. This paper therefore introduces a new line of inquiry we term idiobionics to holistically investigate issues at the intersection of privacy and intelligent bionic limbs. As the main contribution of this paper, we define idiobionics, ground it in related literature, and provide preliminary evidence showing and discussing potential adversarial attacks that could exploit intelligent bionic limb designs. We then contribute a curated list of open research questions within idiobionics that are relevant to researchers in wearable robotics and other human-facing autonomous systems. We expect that idiobionics research will help unlock the full potential of robotic prostheses and related bionic devices.",
+      "url": "http://arxiv.org/abs/2607.07775v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07775v1",
+      "tldr": "This paper introduces \"idiobionics\" as a new interdisciplinary field that unifies privacy considerations with the design and advancement of intelligent robotic prostheses, demonstrating through preliminary evidence that activity inference attacks are feasible and outlining key research directions to address these privacy risks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Alberta",
+        "Alberta Machine Intelligence Institute"
+      ],
+      "affiliations_text": "University of Alberta, Alberta Machine Intelligence Institute",
+      "score": 1.9257625984337663,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.07721v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707721v1-context-graphs-for-proactive-enterprise-agents",
+      "source": "arxiv",
+      "title": "Context Graphs for Proactive Enterprise Agents",
+      "authors": [
+        "Avinash Kumar"
+      ],
+      "authors_text": "Avinash Kumar",
+      "abstract": "Retrieval-Augmented Generation (RAG) and agentic frameworks have advanced enterprise AI considerably, yet agents remain fundamentally reactive: they wait for a human query before acting. This paper argues that genuine enterprise productivity gains require proactive agents: systems that surface relevant, actionable information to workers before they ask. We propose the Context Graph, a live relational data structure that models enterprise entities, their relationships, and state transitions over time. Built on this graph, we define a Delta Detection Engine that continuously monitors state changes, a Proactivity Scorer that ranks candidate insights by urgency, relevance, and persona-fit, and a Surfacing Layer powered by an LLM that delivers ranked notifications with grounded explanations. We formalize each component, derive a unified Proactivity Score function, and provide a complete end-to-end Python implementation using NetworkX and the Anthropic Claude API. Evaluation across three generic enterprise case studies (contract lifecycle management, engineering incident response, and sales pipeline hygiene) demonstrates that context-graph-driven proactivity achieves Precision@5 of 0.83, a false positive rate of 0.11, and reduces mean time to surface from 47 minutes (reactive baseline) to under 30 second.",
+      "url": "http://arxiv.org/abs/2607.07721v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07721v1",
+      "tldr": "The paper introduces Context Graphs as a live relational data structure for enterprise entities, enabling proactive agents that detect state changes, rank insights by urgency and relevance, and deliver actionable notifications before human queries, as demonstrated by evaluations showing improved Precision@5 and a reduction in mean time to surface from 47 minutes to under 30 seconds.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 1.9100906739506553,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.07766v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707766v1-alignment-plausibility-a-new-standard-for-assuring-ai-in-healthcare",
+      "source": "arxiv",
+      "title": "Alignment Plausibility: A New Standard for Assuring AI in Healthcare",
+      "authors": [
+        "Gwydion Williams",
+        "Sara Zannone",
+        "Bilal A Mateen"
+      ],
+      "authors_text": "Gwydion Williams, Sara Zannone, Bilal A Mateen",
+      "abstract": "Large language models (LLMs) have become significant providers of mental health support, yet they remain products of an attention economy whose operational and commercial targets favour sustained engagement over the friction that effective psychological support often requires. Developers' safety responses have been largely reactive, addressing the most visible and acute harms while subtler, longer-term patterns of risk (e.g., dependency, boundary erosion, the amplification of distorted beliefs) receive less attention. We contend that making LLMs structurally safe requires alignment organised at three levels that mirror how society assures the safety of human clinical practice: 1) explicit value specification grounded in the codified normative commitments of clinical practice; 2) training that embeds those values in the model; and 3) oversight that detects drift and longer-term harm during deployment, much as clinical supervision does for human practice. Organising alignment in this way yields a construct we call alignment plausibility - a structured demonstration that a system's values, training regime, and oversight mechanisms are together consistent with safe and positive outcomes. We propose alignment plausibility as a regulatory construct (by drawing analogy to the established construct of biological plausibility) for AI in health: a principled way to argue for, or against, trust that systems are aligned to positive health outcomes, will cause no harm even where capable of doing so, and will ultimately lead to patient benefit.",
+      "url": "http://arxiv.org/abs/2607.07766v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07766v1",
+      "tldr": "This paper proposes \"alignment plausibility\" as a new regulatory standard for AI in healthcare, organizing safety around three levels—value specification, training, and oversight—that mirror clinical practice to ensure LLMs are structurally safe and beneficial.",
+      "detailed_reading": null,
+      "affiliations": [
+        "PATH",
+        "UCL"
+      ],
+      "affiliations_text": "PATH, UCL",
+      "score": 1.9089656720886121,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.07756v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707756v1-the-importance-of-encoder-choicea-tabular-image-study",
+      "source": "arxiv",
+      "title": "The Importance of Encoder Choice:A Tabular-Image Study",
+      "authors": [
+        "Ilia Koloiarov",
+        "Diego Coello de Portugal Mecke",
+        "Vijaya Krishna Yalavarthi",
+        "Tom Hanika",
+        "Lars Schmidt-Thieme"
+      ],
+      "authors_text": "Ilia Koloiarov, Diego Coello de Portugal Mecke, Vijaya Krishna Yalavarthi, Tom Hanika, Lars Schmidt-Thieme",
+      "abstract": "Multimodal learning usually requires a dedicated encoder per modality. When a tabular modality is involved, prior work has been mostly using a \\emph{plain MLP} as the encoder. Yet if it were a strong encoder, the tabular domain would not be ``the last unconquered castle for deep learning''. This study evaluates state-of-the-art tabular models as encoders in the image-tabular setting for the first time. An obstacle stands out. In-Context Learning models, among the best performing methods in the tabular domain, require labels to process instances, making it non-trivial to embed training and test instances the same way. We addressed this problem across multiple models of this family. With this study, we would like to highlight the importance of encoder factor in the multimodal learning.",
+      "url": "http://arxiv.org/abs/2607.07756v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07756v1",
+      "tldr": "This study reveals that the choice of tabular encoder critically impacts multimodal learning performance and addresses the context-query representation shift in in-context learning tabular foundation models for image-tabular fusion.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Hildesheim"
+      ],
+      "affiliations_text": "University of Hildesheim",
+      "score": 1.7661988443123378,
+      "score_text": "1.8"
+    },
+    {
+      "id": "2607.07716v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707716v1-towards-the-explainability-of-temporal-graph-networks-via-memory-backtracking-and-topological-attribution",
+      "source": "arxiv",
+      "title": "Towards the Explainability of Temporal Graph Networks via Memory Backtracking and Topological Attribution",
+      "authors": [
+        "Yazheng Liu",
+        "Xi Zhang",
+        "Sihong Xie",
+        "Hui Xiong"
+      ],
+      "authors_text": "Yazheng Liu, Xi Zhang, Sihong Xie, Hui Xiong",
+      "abstract": "Temporal graphs are ubiquitous in real-world applications and Temporal Graph Networks (TGNs) have achieved superior predictive accuracy. Understanding which historical events drive model predictions can enhance trustworthiness of TGNs. Existing explanation methods overlook the memory module, the core component that records and updates node histories, leaving the influence of past events unexplored. To address this, we attribute TGNs predictions through the topology attribution tree and memory backtracking tree. The topology attribution tree captures the influence of neighbors and their memory vectors, then the memory backtracking tree quantifies how historical events shape node memory vectors. We apply the LRP in TGNs, ensuring that the total contribution of events equals the logits of model. Finally, top-k selection may be unfaithful due to the nonlinear mapping from logits to probabilities, we design optimization objectives to identify the important events. Experiments on nine temporal graph datasets, spanning node property prediction, link prediction tasks and graph classification tasks, show that our method provides faithful explanations and outperforms state-of-the-art baselines. The code is available at https://github.com/yazhengliu/MemExplainer",
+      "url": "http://arxiv.org/abs/2607.07716v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07716v1",
+      "tldr": "This paper introduces MemExplainer, a method that explains Temporal Graph Network predictions by using topology attribution and memory backtracking trees to trace the influence of historical events on node memories, and demonstrates its superior faithfulness and performance across multiple temporal graph tasks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 1.69279200479611,
+      "score_text": "1.7"
+    },
+    {
+      "id": "2607.07760v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707760v1-adversarial-social-epistemology-for-assemblies-of-humans-and-large-language-models",
+      "source": "arxiv",
+      "title": "Adversarial Social Epistemology for Assemblies of Humans and Large Language Models",
+      "authors": [
+        "Mihnea C. Moldoveanu",
+        "Joel A. C. Baum"
+      ],
+      "authors_text": "Mihnea C. Moldoveanu, Joel A. C. Baum",
+      "abstract": "We outline an adversarial social epistemology (ASE) for densely interactive communicative landscapes in which public assertions are scaffolded by chains of testimony, inference, institutional certification, and tacit trust. In such landscapes, agents have incentives and affordances to distort, color, omit, fabricate, or strategically under-specify information for private, reputational, rhetorical, or material gains. We argue that these phenomena are not adequately captured by familiar descriptions of epistemic bubbles, echo chambers, or misinformation diffusion. What requires explanation is how communicative agents exploit the commitments and entitlements that normally make scaffolded assertions trustworthy. We provide language that delivers the requisite analysis, outline mechanisms that subvert trust in scaffolded public communications, and outline machinery for auditing and redressing trust breaches arising from subverting the auditability of inferential chains, drawing on epistemic networks, enriched with an inferentialist semantics for interpreting assertions.",
+      "url": "http://arxiv.org/abs/2607.07760v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07760v1",
+      "tldr": "This paper develops an adversarial social epistemology that explains how humans and large language models exploit the inferential commitments and trust structures underlying scaffolded assertions in networked communication, and proposes epistemic machines to detect and redress such adversarial maneuvers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Toronto"
+      ],
+      "affiliations_text": "University of Toronto",
+      "score": 1.6285431804989114,
+      "score_text": "1.6"
+    },
+    {
+      "id": "2607.07761v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707761v1-aligning-clinical-needs-and-ai-capabilities-a-survey-on-llms-for-medical-reasoning",
+      "source": "arxiv",
+      "title": "Aligning Clinical Needs and AI Capabilities: A Survey on LLMs for Medical Reasoning",
+      "authors": [
+        "Qi Peng",
+        "Jiatong Li",
+        "Sirui Huang",
+        "Yiyang Jiang",
+        "Kaisong Gong",
+        "Ronger Ding",
+        "Shijie Ye",
+        "Changmeng Zheng",
+        "Yi Cai",
+        "Xiaobo Yang",
+        "Jin Huang",
+        "Xiao-Yong Wei",
+        "Qing Li"
+      ],
+      "authors_text": "Qi Peng, Jiatong Li, Sirui Huang, Yiyang Jiang, Kaisong Gong, Ronger Ding, Shijie Ye, Changmeng Zheng, Yi Cai, Xiaobo Yang, Jin Huang, Xiao-Yong Wei, Qing Li",
+      "abstract": "Large language models (LLMs) have emerged as important tools in healthcare, showing growing potential for clinical reasoning and patient care. This survey examines recent progress in medical LLMs, focusing on reasoning applications and requirements. We present a dual-view approach that connects clinical practice with computational methods. On the clinical side, we establish a five-level competency scheme following Miller's Pyramid, progressing from knowledge recall to dynamic case management. On the computational side, we link deductive, inductive, and abductive reasoning patterns to common medical goals and tasks. We also introduce a benchmark dataset spanning five levels of medical reasoning capability and report results on 18 state-of-the-art models, revealing that medical specialist models excel in diagnosis-centric tasks while general models lead in decision support and dialogue. We conclude by discussing current progress and open challenges, including data limitations, hallucination, and grounding issues, and outline directions toward safer, more reliable, and workflow-ready systems.",
+      "url": "http://arxiv.org/abs/2607.07761v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07761v1",
+      "tldr": "This survey proposes a dual-view framework linking clinical competency levels to computational reasoning types, introduces a five-level benchmark evaluated on 18 models, and discusses challenges toward safer, workflow-ready medical LLMs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sichuan University",
+        "Hong Kong University",
+        "University of Toronto",
+        "The Hong Kong Polytechnic University",
+        "Peking Union Medical College Hospital",
+        "South China University of Technology"
+      ],
+      "affiliations_text": "Sichuan University, Hong Kong University, University of Toronto, The Hong Kong Polytechnic University, Peking Union Medical College Hospital, South China University of Technology",
+      "score": 1.6236810550545773,
+      "score_text": "1.6"
+    },
+    {
+      "id": "2607.07725v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707725v1-shift-survival-prediction-from-incomplete-and-heterogeneous-genomic-data",
+      "source": "arxiv",
+      "title": "SHIFT: Survival Prediction from Incomplete and Heterogeneous Genomic Data",
+      "authors": [
+        "Muhammet Sami Yavuz",
+        "Ayhan Can Erdur",
+        "Sabri Mustafa Kahya",
+        "Benedikt Wiestler",
+        "Jana Lipkova"
+      ],
+      "authors_text": "Muhammet Sami Yavuz, Ayhan Can Erdur, Sabri Mustafa Kahya, Benedikt Wiestler, Jana Lipkova",
+      "abstract": "Genomic prediction models often fail to transfer across institutions because sequencing panels differ across sites, creating structural feature missingness at deployment. Existing approaches to this challenge typically restrict analysis to genes shared across cohorts, exclude patients with incomplete profiles, or rely on test-time imputation, all of which can reduce robustness and limit the use of multi-center data. We propose Survival prediction Handling Incomplete Features using Transformer (SHIFT), a missingness-aware survival model that directly predicts from incomplete genomic inputs without test-time imputation. SHIFT represents each genomic feature separately and uses masked self-attention, along with a feature-availability mask, so that predictions are based only on observed inputs. Further, we introduce variable-rate feature masking during training to improve robustness to heterogeneous missingness patterns. We evaluate the approach on glioblastoma and lung squamous cell carcinoma with external validation across multiple cohorts, including a challenging setting with severe cross-cohort panel mismatch. Across these settings, SHIFT shows strong generalization and compares favorably with standard survival baselines and imputation-based approaches, while using a single model across differing feature sets. We also find that incorporating patients from incomplete cohorts during development can improve performance on external data, suggesting that partially observed cohorts need not be excluded from model building. These results support missingness-aware modeling as a practical strategy for multi-center survival prediction in precision oncology.",
+      "url": "http://arxiv.org/abs/2607.07725v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07725v1",
+      "tldr": "SHIFT is a missingness-aware transformer-based survival model that uses masked self-attention and variable-rate feature masking to directly predict from incomplete genomic inputs without test-time imputation, achieving strong generalization across heterogeneous cohorts.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TUM University Hospital",
+        "Munich Center for Machine Learning (MCML)",
+        "Technical University of Munich (TUM)",
+        "University of California Irvine"
+      ],
+      "affiliations_text": "TUM University Hospital, Munich Center for Machine Learning (MCML), Technical University of Munich (TUM), University of California Irvine",
+      "score": 1.278939638086014,
+      "score_text": "1.3"
+    },
+    {
+      "id": "2607.07717v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/10/260707717v1-who-gets-missed-in-the-tail-thresholded-subgroup-underdiagnosis-in-long-tailed-chest-x-ray-classification",
+      "source": "arxiv",
+      "title": "Who Gets Missed in the Tail? Thresholded Subgroup Underdiagnosis in Long-Tailed Chest X-ray Classification",
+      "authors": [
+        "Ha-Hieu Pham",
+        "Hai-Dang Nguyen",
+        "Dang P. M. Cao",
+        "Thanh-Huy Nguyen",
+        "Min Xu",
+        "Trung-Nghia Le",
+        "Ulas Bagci",
+        "Huy-Hieu Pham"
+      ],
+      "authors_text": "Ha-Hieu Pham, Hai-Dang Nguyen, Dang P. M. Cao, Thanh-Huy Nguyen, Min Xu, Trung-Nghia Le, Ulas Bagci, Huy-Hieu Pham",
+      "abstract": "In chest X-ray (CXR) classification, acceptable ranking performance can still leave rare-positive patients below threshold, especially within subgroups. We study this pre-deployment fairness problem as an audit question: after a long-tailed multi-label CXR model is converted from scores into decisions, who is missed? Across VinDr-CXR and MIMIC-CXR/CXR-LT, we use a diagnostic ladder to separate class-level long-tail losses, subgroup-aware weighting, group robustness, and threshold selection. On VinDr-CXR, group-tail weighting followed by tail-aware thresholding reduces tail FNR from 0.665 to 0.269, sex worst-group FNR from 0.705 to 0.157, and age worst-group FNR from 0.822 to 0.133, while macro-mAP increases from 0.611 to 0.635. On MIMIC-CXR/CXR-LT, the same score-to-threshold comparison reduces tail FNR from 0.866 to 0.741 and lowers worst-group FNR across sex, age, race, and insurance; residual missed-positive rates nevertheless remain high. Paired bootstrap contrasts on VinDr support the thresholded FNR reductions, and GroupDRO reference runs indicate that aggregate group robustness alone does not remove rare subgroup misses in this setting. The study supports a narrow audit claim: rare-label fairness in CXR depends jointly on the finding, subgroup, and operating threshold, not on label frequency or ranking metrics alone.",
+      "url": "http://arxiv.org/abs/2607.07717v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.07717v1",
+      "tldr": "This paper demonstrates that fairness in long-tailed chest X-ray classification depends on the joint effect of the specific finding, patient subgroup, and operating threshold, rather than solely on label frequency or ranking performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northwestern University",
+        "Vietnam National University",
+        "VinUniversity",
+        "University of Science",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Northwestern University, Vietnam National University, VinUniversity, University of Science, Carnegie Mellon University",
+      "score": 0.7871435984285741,
+      "score_text": "0.8"
+    }
+  ]
+}
