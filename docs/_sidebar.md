@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-07-11
+  - [日报](/2026/07/11/README)
 - 2026-07-10
   - [日报](/2026/07/10/README)
   - [精读 · LLT: Local Linear Transformer for PDE Operator Learning](/2026/07/10/260707718v1-llt-local-linear-transformer-for-pde-operator-learning)
