@@ -1,0 +1,749 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-13T08:22:52.477122",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.08899v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708899v1-learning-enabled-parameter-synthesis-for-nonlinear-systems-from-signal-temporal-logic",
+      "source": "arxiv",
+      "title": "Learning-enabled Parameter Synthesis for Nonlinear Systems from Signal Temporal Logic",
+      "authors": [
+        "Alex Beaudin",
+        "Hanna Krasowski",
+        "Eric Palanques-Tost",
+        "Calin Belta",
+        "Murat Arack"
+      ],
+      "authors_text": "Alex Beaudin, Hanna Krasowski, Eric Palanques-Tost, Calin Belta, Murat Arack",
+      "abstract": "Signal Temporal Logic (STL) is increasingly used to describe interpretable objectives and constraints for optimal control and learning methods, especially when no target time series data is available. In this work, we propose to synthesize parameters for nonlinear systems that robustly satisfy continuous-time STL specifications for uncertain initial conditions. To this end, we use gradient-based optimization along with set-based reachability verification to efficiently learn in high-dimensional parameter spaces while providing provable satisfaction guarantees for the optimized parameters. We demonstrate the effectiveness and scalability of our method on three systems with up to 18 parameter dimensions.",
+      "url": "http://arxiv.org/abs/2607.08899v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08899v1",
+      "tldr": "This paper proposes a scalable learning-enabled approach that combines gradient-based optimization with set-based reachability verification to synthesize parameters for nonlinear systems such that they robustly satisfy continuous-time Signal Temporal Logic specifications under uncertain initial conditions, providing provable satisfaction guarantees.",
+      "detailed_reading": {
+        "motivation": "现有的参数合成方法要么提供形式化保证但可扩展性差（符号方法），要么可扩展但缺乏保证（仿真方法）。本文旨在结合两者，提出一种可扩展且可验证的参数合成方法，为非线性系统从信号时序逻辑规范中合成参数，使其鲁棒满足连续时间规范并处理不确定初始条件。",
+        "method": "方法分为三个阶段：初始化、基于SGD的参数合成和连续域验证。初始化阶段从参数空间采样候选，评估离散鲁棒性并选择top q个。参数合成阶段使用残差神经ODE（Neural ODE）增广系统动力学，以平滑目标函数；采用SlackReLU损失函数（基于条件风险价值CVaR）近似优化最差情况鲁棒性，并引入反例缓存和边界重采样机制；使用AdaBelief优化器更新参数θ、神经ODE参数ζ和松弛变量ν。连续域验证阶段使用基于集合的可达性分析（如Wetzlinger2021）计算可达集，并通过集合STL模型检查验证规范φ在连续时间上对所有初始条件成立。",
+        "result": "在三个不同系统上验证了方法的有效性和可扩展性：12状态PD控制四旋翼（合成系统参数与控制增益）、18参数基因网络（复杂STL规范）以及Laub-Loomis酶活性模型（标准验证基准）。结果表明，该方法能够成功合成满足STL规范的参数，并通过可达性分析提供连续时间保证，可扩展至18参数维度和12状态维度。",
+        "conclusion": "本文提出了一种结合学习与验证的神经符号参数合成方法，在保持梯度优化可扩展性的同时，通过后验集合验证提供形式化满足保证。该方法克服了符号方法可扩展性差和仿真方法缺乏保证的局限，为非线性系统的STL参数合成提供了实用且可靠的方案。",
+        "key_details": "关键细节包括：残差神经ODE（Neural ODE）用于增广系统动力学，其参数ζ受L2正则化约束以平滑目标函数；SlackReLU损失基于CVaR，超参数α控制鲁棒性尾部分数，小α逼近最差情况但训练不稳定；反例缓存模块保留历史违规初始条件，与边界重采样共同提升优化效率；初始化阶段对R个候选按最差鲁棒性排序选择q个并行训练；验证步骤使用集合可达性分析工具（如Wetzlinger2021），其复杂度随系统维度增长但较符号方法更高效；局限性包括对系统可微性和可达性分析工具适用性的依赖，以及验证步骤的计算开销可能随参数维度进一步增加。"
+      },
+      "affiliations": [
+        "University of California, Berkeley",
+        "Boston University",
+        "University of Maryland, College Park"
+      ],
+      "affiliations_text": "University of California, Berkeley, Boston University, University of Maryland, College Park",
+      "score": 3.5164547460781783,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.08925v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708925v1-safeexplorer-an-unbiased-policy-gradient-for-reinforcement-learning-with-recovery-interventions",
+      "source": "arxiv",
+      "title": "SafeExplorer: An Unbiased Policy Gradient for Reinforcement Learning with Recovery Interventions",
+      "authors": [
+        "Elham Daneshmand",
+        "Majid Khadiv",
+        "Glen Berseth",
+        "Hsiu-Chin Lin"
+      ],
+      "authors_text": "Elham Daneshmand, Majid Khadiv, Glen Berseth, Hsiu-Chin Lin",
+      "abstract": "Training reinforcement-learning agents directly on physical robots makes every fall costly, since a fall can damage the platform and cannot be undone like a simulator reset; the goal is therefore to minimize falls during training rather than trade them off against return, as constrained Markov decision process (MDP) formulations do. A standard mitigation hands control to a separate recovery policy whenever the agent leaves a designer-specified safe region (a subset of state space it should stay within), but the resulting mixed-policy rollouts silently bias every on-policy update, and the importance-sampling correction that would remove this bias is ill-defined whenever the recovery policy is deterministic. We address this bias with a drop-in modification of proximal policy optimization (PPO). Its core is an unbiased policy-gradient estimator that uses the score function only at safe timesteps and never evaluates the recovery policy's density, so it stays valid even when the recovery policy is deterministic, exactly where importance sampling breaks, and it empirically dominates importance sampling even when the recovery policy is stochastic. Because the recovery policy still makes credit assignment slow near the safe-region boundary, two further components accelerate learning: a closed-form value for recovery-triggering states when dynamics and recovery are deterministic, and an imitation loss that copies recovery actions only when recovery succeeds. On a three-environment, five-seed benchmark, the resulting algorithm reduces training-time falls by factors of 233x, 48x, and 26x on HalfCheetah, Ant, and Unitree Go1 over standard PPO, while matching or exceeding PPO's final reward, and on Ant, where the recovery policy is unreliable, it is the only method that reaches 80% of the best final reward.",
+      "url": "http://arxiv.org/abs/2607.08925v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08925v1",
+      "tldr": "SafeExplorer introduces an unbiased policy-gradient estimator for reinforcement learning with recovery interventions that corrects the bias from mixed-policy rollouts without requiring importance sampling, enabling orders-of-magnitude reductions in training-time falls while matching or exceeding final reward.",
+      "detailed_reading": {
+        "motivation": "在真实机器人上训练强化学习代理时，每次跌倒都可能损坏硬件且无法像仿真那样重置，因此目标是最小化训练期间的跌倒次数。现有方法使用独立恢复策略在代理离开安全区域时接管控制，但这种混合策略的轨迹会引发生策略梯度更新中的偏差，而重要性采样修正对确定性恢复策略无效。我们旨在消除这一偏差，同时保持训练安全性和样本效率。",
+        "method": "我们提出SafeExplorer，一种基于PPO的无偏策略梯度算法。核心是推导了混合策略的无偏梯度定理，该梯度仅使用安全时间步的得分函数，从不评估恢复策略密度，因此适用于确定性恢复。此外，当动力学和恢复均为确定性时，我们为恢复触发状态提供了闭式价值表达式，作为评论家的密集监督信号。最后，我们引入一个结果门控兼容正则化器，仅在恢复成功时引导主策略模仿恢复动作，避免学习失败行为。训练中使用安全区域调度（半径从0增长到上限），主策略在安全区域内采样，恢复策略在区域外采样，并用masked梯度更新主策略参数。",
+        "result": "在三个环境（HalfCheetah、Ant、Unitree Go1）和五个随机种子的基准测试中，SafeExplorer相比标准PPO将训练时跌倒次数分别减少233倍、48倍和26倍，同时最终奖励不低于甚至超过PPO。在Ant上，当恢复策略不可靠时，SafeExplorer是唯一实现最佳最终奖励80%以上的方法。与其他基线（如奖励整形、CMDP、JSRL）相比，SafeExplorer在安全性和最终性能之间取得了最佳平衡。",
+        "conclusion": "SafeExplorer通过无偏梯度估计、闭式价值和结果门控模仿损失，将恢复策略从偏差源转化为信号源。该算法在保持训练安全性的同时显著提升了学习效率，适用于真实机器人上的强化学习训练。实验证明其在多种连续控制任务中有效，特别是当恢复策略不可靠时仍能取得良好性能。",
+        "key_details": "安全区域定义为状态空间中到标称构型的距离子集，其半径随训练过程线性增长。确定性恢复下重要性采样比的分母为零，因此无法定义，而我们的masked梯度绕过这一限制。无偏梯度定理（定理1）适用于任意混合策略，包括安全区域干预、Jump-Start RL和屏蔽RL。闭式价值（命题1）假设动力学和恢复均确定性，提供分析师的价值目标。兼容正则化器仅在恢复段成功结束（即最终状态安全）时启用，避免学习失败行为。实验使用5个独立种子，环境包括HalfCheetah、Ant和Unitree Go1，最大步数1000。局限性包括依赖恢复策略的质量和安全区域设计的领域知识，且理论分析限于无限折扣视界。"
+      },
+      "affiliations": [
+        "Université de Montréal",
+        "McGill University",
+        "Technical University of Munich"
+      ],
+      "affiliations_text": "Université de Montréal, McGill University, Technical University of Munich",
+      "score": 2.980082489838456,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.08843v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708843v1-how-are-linear-representations-learned-exact-solutions-to-the-dynamics-of-abstraction",
+      "source": "arxiv",
+      "title": "How are linear representations learned? Exact solutions to the dynamics of abstraction",
+      "authors": [
+        "William W. Yang",
+        "Andrew M. Saxe",
+        "Peter E. Latham"
+      ],
+      "authors_text": "William W. Yang, Andrew M. Saxe, Peter E. Latham",
+      "abstract": "In artificial and biological neural networks, concepts are often encoded as consistent linear directions in representation space. In deep learning, this idea is known as the linear representation hypothesis and underpins many interpretability and control methods based on linear probes, from concept detection to activation steering. Yet while prior work has studied whether such directions should exist $\\textit{after}$ training, the dynamics of how they emerge $\\textit{during}$ training remain poorly understood. Here, we develop a framework to study the alignment of concept directions during training - a process we call \"abstraction\". In a minimal linear network setting, we obtain exact solutions for the full trajectory of abstraction. These solutions reveal key analytic principles governing abstraction: (i) data and target geometry jointly determine abstraction at the end-of-learning, (ii) abstraction improves with network depth, and (iii) initialization scale controls the maximum abstraction reached during training. Extending our theory to nonlinear networks, we analyze how the choice of nonlinearity affects abstraction dynamics: erf networks approximate the linear theory, while abstraction in ReLU networks depends less on target geometry and more on input geometry. Across both, we prove a striking attenuation law: both nonlinearities weaken abstraction in activations relative to preactivations. We find evidence for this law in open models (DINOv3, Gemma 4) and apply our theory to improve linear probe generalization in LLMs. Together, our results provide a dynamical theory of abstraction with implications for interpretability and control.",
+      "url": "http://arxiv.org/abs/2607.08843v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08843v1",
+      "tldr": "This paper provides an exact dynamical theory of how linear concept representations (abstraction) emerge during training, revealing key principles in linear and nonlinear networks including the roles of data/target geometry, depth, initialization, and an attenuation law whereby nonlinearities weaken abstraction in activations relative to preactivations.",
+      "detailed_reading": {
+        "motivation": "尽管线性表示假说在深度学习中广泛用于可解释性与控制，但概念方向在训练过程中如何涌现（即“抽象”过程）的动力学尚不清楚。现有理论仅关注训练收敛后的存在性，而真实网络的抽象轨迹往往呈现非单调、未能达到完美的特性，亟需一个动力理论进行解释。",
+        "method": "以最小二乘线性网络为解析原型，假设输入与目标由两个二元潜变量（形状与颜色）生成，并遵循2FS块结构核。通过可变投影读出假设（即读出权重始终最优）简化损失，推导隐层表示核的矩阵Riccati方程，获得抽象余弦相似度的精确轨迹解析解。随后推广到任意深度线性网络及无限宽非线性网络（erf与ReLU），利用神经切线核分析非线性对抽象动力学的影响。",
+        "result": "精确解揭示：数据与目标几何联合决定学习结束时的抽象水平；网络深度增加可提升抽象；初始化尺度控制训练中能达到的最大抽象。在非线性网络中，erf网络近似线性理论，而ReLU网络降低目标几何影响、更依赖输入几何；且两类非线性均导致激活中的抽象弱于预激活（衰减定律）。该定律在DINOv3和Gemma 4等开放模型中得到验证，并用于改进大语言模型线性探针的泛化。",
+        "conclusion": "本研究建立了抽象训练动力学的理论框架，为理解神经网络中线性表示的形成提供了基本规律（深度正效应、初始化和非线性衰减等），对可解释性方法（如线性探针）和控制策略（如激活操控）具有直接指导意义。",
+        "key_details": "关键简化：假设数据核满足2FS块结构（仅五个参数），并采用变量投影读出（快速最优读出）。求解时利用矩阵Riccati方法，将两层线性网络的隐核动力学封闭。关键发现：深度线性网络中抽象随层数单调提升；非线性衰减定律源于激活函数对特征方向的扰动；局限性包括仅考虑两个二元概念、线性读出正则化假设、以及无限宽非线性近似可能偏离有限宽度行为。"
+      },
+      "affiliations": [
+        "University College London"
+      ],
+      "affiliations_text": "University College London",
+      "score": 2.917622717592966,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.08789v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708789v1-adaptive-bayes-exactly-tracks-information-over-intrinsic-time",
+      "source": "arxiv",
+      "title": "Adaptive Bayes exactly tracks information over intrinsic time",
+      "authors": [
+        "Akshay Balsubramani"
+      ],
+      "authors_text": "Akshay Balsubramani",
+      "abstract": "Bayesian and multiplicative-weights updates reweight experts, models, or actions from sequential feedback. We show that the regret of any such update obeys an exact information-accounting identity. On each round, the learner's excess loss to any chosen comparator is the sum of an immediate payment for the uncertainty exposed by the round and a reduction in the information distance from the learner's current weights to the comparator. The cumulative payment defines a pathwise uncertainty clock, the \\emph{intrinsic time} of the realized sequence. Summing one-step balances yields two exact adaptive decompositions of cumulative regret, one for each natural way of composing the update across rounds. Because the decompositions are exact rather than upper bounds, favorable stochastic or low-noise regimes appear as self-bounding properties of the realized intrinsic time, not as slack in worst-case analyses. The same calculus covers Hedge, optimistic and side-information variants, continuous priors, boosting, online convex optimization, contextual bandits, and repeated games: the pathwise account is the same in every case.",
+      "url": "http://arxiv.org/abs/2607.08789v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08789v1",
+      "tldr": "Bayesian and multiplicative-weights updates satisfy an exact information-accounting identity for regret, where each round’s excess loss decomposes into an immediate payment for uncertainty and a reduction in information-distance to the comparator, cumulatively defining an intrinsic time that yields exact instead of worst-case regret bounds across a wide range of sequential decision-making settings.",
+      "detailed_reading": {
+        "motivation": "现有贝叶斯和乘法权重更新在序列反馈中的遗憾分析通常采用上界，未能精确揭示更新过程的信息结构。本文旨在建立一个精确的信息核算恒等式，将超额损失分解为即时支付和信息距离减少，从而为自适应算法提供统一框架。",
+        "method": "基于一步信息平衡恒等式，将每轮超额损失拆分为即时支付δ_t(c)和信息距离减少项。通过两种方式累积：先验回火更新从原始先验π和累计得分C_t以当前温度η_t重计算后验p_t；局部更新仅从当前权重p_t和当前得分c_t更新。学习率调度包括平方根时钟（η_t ∝ 1/√V_{t-1}）和压力目标（解方程∑ p_t(i) e^{-η_t(c_t(i)-a_t)}=1）。该恒等式适用于Hedge、乐观变体、边信息（通过复合损失c_t=ℓ_t+u_t）等。关键步骤为每轮计算当前分布p_t，观察损失c_t，更新累积量并调度下一温度。",
+        "result": "对于任意比较器ρ和任意时间T，累计遗憾R_T^c(ρ)精确等于内在时间支付∑ η_t Q_t(c)加温度变化漂移D_T加终端比较器信息B_T(ρ)。内在时间V_T(c)=∑ Q_t(c)完全由算法和路径决定。平方根时钟调度可实现O(√V_T)遗憾，压力目标调度可实现自我界定的更紧速率。该恒等式覆盖了Hedge、乐观更新、上下文赌博机、重复博弈等多种算法，且无近似松弛。",
+        "conclusion": "贝叶斯和乘法权重更新本质上遵循一个精确的信息核算，将遗憾分解为可解释的组件。这种视角统一了看似不同的在线学习算法和权衡（如困难/容易序列、一阶/二阶界、不同比较器类等），并为设计自适应算法提供了清晰原理。",
+        "key_details": "内在时间增量Q_t(c)定义为有限温度下当前分布的倾斜累积量，可通过一阶条件计算；平方根调度使用常数C=1/√2；压力目标调度中a_t为自由能水平；先验回火更新需每次完全重计算，复杂度为O(K)；局部更新更高效但需实时求解η_t；二次松弛W_t(c)=1/2∑ Var_{i~p_t}(c_t(i))作为Q_t(c)的近似；算法要求损失c_t使得指数矩有限；局限性包括未处理无限专家集或连续非凸问题，但框架可扩展。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.8999091522401326,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.08773v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708773v1-interval-certifications-for-multilayered-perceptrons-via-lattice-traversal",
+      "source": "arxiv",
+      "title": "Interval Certifications for Multilayered Perceptrons via Lattice Traversal",
+      "authors": [
+        "Merkouris Papamichail",
+        "Konstantinos Varsos",
+        "Giorgos Flouris",
+        "João Marques-Silva"
+      ],
+      "authors_text": "Merkouris Papamichail, Konstantinos Varsos, Giorgos Flouris, João Marques-Silva",
+      "abstract": "In this work we present a rigorous theoretical framework to a foundational problem of AI safety, namely adversarial robustness. In particular, we show that the adversarial robustness problem can be reduced to a lattice traversal problem. Each element of this lattice corresponds to an interval, i.e., an axis-aligned hyper-rectangle, containing an input point $\\mathbf{x}$. Consider a multilayered perceptron classifier (MLP). An interval $I$ constitutes a sound certification if $\\mathbf{x} \\in I$ and $\\mathbf{x}$ can be freely perturbed in $I$ without changing the MLP's prediction. Complementarily, an interval $I$ constitutes a complete certification if $\\mathbf{x} \\in I$ and when $\\mathbf{x}$ moves outside of $I$ the MLP's prediction is guaranteed to change. While the sound certification problem corresponds to the well-studied adversarial robustness, complete certifications have not been examined in the literature. We develop lattice traversal operators, which we apply in a refine & verify iterative scheme. Using formal MLP verifiers, sound maximality and complete minimality are guaranteed. Moreover, we examine objective optimization problems. There we discover some interesting asymmetries. For complete certifications, the minimum solution is obtained in polynomial oracle calls. This does not hold for sound certifications, where we prove strong intractability results. Additionally, we examine optimization problems in symmetric intervals (i.e., $\\ell_\\infty$-spheres), where we provide logarithmic algorithms. Finally, we present an empirical evaluation, using the novel ParallelepipedoNN system.",
+      "url": "http://arxiv.org/abs/2607.08773v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08773v1",
+      "tldr": "This paper provides a rigorous theoretical framework for adversarial robustness in multilayered perceptrons by reducing it to a lattice traversal problem, enabling the computation of maximally sound and minimally complete interval certifications through novel lattice traversal operators and a refine-and-verify scheme.",
+      "detailed_reading": {
+        "motivation": "现有对抗鲁棒性方法主要依赖凸松弛或MILP求解，但缺乏对区间认证最大性/最小性的保证，且完全认证（complete certification）尚未被研究。本文旨在建立严格的区间认证理论框架，并将鲁棒性问题归约为格遍历问题，以同时处理声音认证（sound certification）和完全认证。",
+        "method": "将MLP分类器的对抗鲁棒性建模为格遍历问题，其中每个格元素对应一个包含输入点x的轴对齐超矩形（区间）。定义声音认证（区间内任意扰动不改变预测）和完全认证（区间外任意移动必然改变预测）。开发格遍历算子（lattice traversal operators），结合细化-验证（refine & verify）迭代方案，利用形式化MLP验证器（如Marabou）保证声音区间的最大性和完全区间的最小性。针对对称区间（ℓ∞球），提出对数复杂度优化算法。实现ParallelepipedoNN系统进行实验。",
+        "result": "完全认证的最小化问题可在多项式次oracle调用内求解，而声音认证的最优化问题被证明是强NP难（intractable）。对称区间（ℓ∞球）的优化问题存在对数时间算法。实验表明，ParallelepipedoNN系统能够有效计算最大声音区间和最小完全区间，且相比现有方法提供非平凡性保证。",
+        "conclusion": "本文建立了区间认证的严格理论框架，揭示了声音认证与完全认证在优化复杂性上的本质不对称性。通过格遍历和形式化验证，首次实现了最大声音区间和最小完全区间的计算，并为对称区间提供了高效算法，推动了对抗鲁棒性认证的理论与实用进展。",
+        "key_details": "输入为MLP分类器及输入点x；建模为区间格（轴对齐超矩形）上的遍历；核心模块包括格遍历算子、形式化验证器（MILP oracle）以及细化-验证循环；优化目标为最小边缘长度（即ℓ∞半径）；复杂度方面，完全认证问题可在O(poly)次oracle调用内解决，声音认证为NP-hard；局限性在于当前工作主要基于理论分析，实验规模可能受限，且依赖外部验证器的效率。"
+      },
+      "affiliations": [
+        "Foundation for Reasearch and Technology - Hellas, Heraklion, Greece",
+        "Catalan Institution for Research and Advanced Studies, Barcelona, Spain",
+        "University of Lleida, Lleida, Spain",
+        "University of Crete, Heraklion, Greece"
+      ],
+      "affiliations_text": "Foundation for Reasearch and Technology - Hellas, Heraklion, Greece, Catalan Institution for Research and Advanced Studies, Barcelona, Spain, University of Lleida, Lleida, Spain, University of Crete, Heraklion, Greece",
+      "score": 2.8769497229187593,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.08781v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708781v1-reward-transport-property-control-in-flow-matching-via-noise-space-alignment",
+      "source": "arxiv",
+      "title": "Reward Transport: Property Control in Flow Matching via Noise-Space Alignment",
+      "authors": [
+        "Kehan Guo",
+        "Yili Shen",
+        "Yujun Zhou",
+        "Yue Huang",
+        "Chujie Gao",
+        "Shiyi Du",
+        "Xiangliang Zhang"
+      ],
+      "authors_text": "Kehan Guo, Yili Shen, Yujun Zhou, Yue Huang, Chujie Gao, Shiyi Du, Xiangliang Zhang",
+      "abstract": "The coupling in flow matching -- the rule pairing noise vectors with data points -- is typically treated as a computational choice. We show that this coupling can instead serve as an alignment interface: by matching noise and data according to a target molecular property, it embeds controllable structure directly into the learned flow field. Building on this view, we introduce Reward Transport, which uses optimal transport coupling at training time to align a scalar noise-space coordinate with molecular rewards; at inference, varying this coordinate steers the generated distribution without requiring an oracle, reward model, gradient guidance, or additional computation. In the coupling-preserving limit, thresholding this coordinate recovers the Cross-Entropy Method's truncated reward distribution, providing a principled, continuously adjustable distribution-level control knob. Empirically, on ZINC-250K and GuacaMol, sweeping the scalar induces monotone control of logP and consistent QED control over its operating range; most tellingly, the same knob produces opposite structural responses for different targets, growing molecules for logP but shrinking them for QED, which rules out a generic size bias. The interface is complementary to classifier-free guidance and conditional flow matching, while a negative result under epsilon-prediction diffusion clarifies where coupling-level alignment is structurally absent. Code: https://github.com/KehanGuo2/reward-transport",
+      "url": "http://arxiv.org/abs/2607.08781v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08781v1",
+      "tldr": "Reward Transport reframes the noise-data coupling in flow matching as a property-alignment interface, enabling inference-time distribution control via a single scalar coordinate without oracles or extra computation.",
+      "detailed_reading": {
+        "motivation": "流匹配中的噪声-数据耦合通常仅被视为计算选择，但本研究将其重新定义为对齐接口：通过根据目标分子属性匹配噪声与数据，可控结构可直接嵌入学习到的流场，无需推理时额外计算或模型修改。",
+        "method": "使用单调最优运输耦合，将噪声向量按均值池化后的L2范数排序，分子按目标属性（logP或QED）排序，然后秩匹配配对，形成1D最优运输方案。方向嵌入MLP将排序键（归一化后的s）作为额外输入注入网络。训练时每个epoch重采样噪声并构建耦合，采用插值路径上的MSE和交叉熵联合损失。推理时用户指定标量s值，从相应噪声积分得到生成分子。",
+        "result": "在ZINC-250K和GuacaMol上，调整单个标量s可实现logP的单调控制（范围3.14 logP单位，增加137%）和QED的一致控制。相同旋钮对logP和QED产生相反的结构响应：logP对应分子原子数从12增至23，QED对应原子数从23减至16，排除了通用大小偏差。Spearman秩相关分别为logP 0.57、QED 0.22。",
+        "conclusion": "流匹配中的耦合可作为对齐接口，通过最优运输以训练仅用属性信息的方式实现推理时分布级别的可控生成。该方法与无分类器引导和条件流匹配互补，提供了一个原理清晰、连续可调的分布控制旋钮。",
+        "key_details": "数据采用SELFIES表示的分子序列，属性为logP和QED。排序键为噪声平均池化的L2范数，方向嵌入为两层的GELU MLP。损失函数为MSE加交叉熵（λ=1），且对包含填充位的位置均计算。每epoch需对全部数据排序，但计算成本在分子数据集上可接受。局限性：控制质量依赖于耦合保持度（ρ_per），QED的ρ较低（0.22）导致控制不如logP精确；在ε-prediction扩散设置中，因缺乏耦合级对齐而无法工作。"
+      },
+      "affiliations": [
+        "University of Notre Dame",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "University of Notre Dame, Carnegie Mellon University",
+      "score": 2.8489836694460857,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.08780v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708780v1-sticky-routing-training-moe-models-for-memory-efficient-inference",
+      "source": "arxiv",
+      "title": "Sticky Routing: Training MoE Models for Memory-Efficient Inference",
+      "authors": [
+        "Ali Kayyam"
+      ],
+      "authors_text": "Ali Kayyam",
+      "abstract": "Mixture-of-Experts (MoE) models activate only a sparse subset of experts per token, yet consecutive tokens frequently activate different experts -- causing constant weight swapping between slow storage and fast memory on edge devices. Existing remedies are either system-level (caching heuristics) or post-hoc (router fine-tuning), leaving the root cause unchanged during pretraining. We propose StickyMoE, a differentiable routing consistency loss that penalises abrupt expert switches between adjacent tokens, encouraging the router to maintain the same expert assignment across semantically coherent spans. StickyMoE requires no architectural changes, adds a single hyperparameter lambda, and unlike post-hoc methods, allows expert representations and routing decisions to co-adapt from the first training step. Experiments on small-scale MoE language models show that StickyMoE reduces the expert switch rate by up to 60% with less than 4% perplexity degradation, Pareto-dominating post-hoc fine-tuning on the quality-locality frontier. Routing temporal locality is most efficiently instilled at training time.",
+      "url": "http://arxiv.org/abs/2607.08780v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08780v1",
+      "tldr": "StickyMoE introduces a differentiable routing consistency loss that penalizes abrupt expert switches between adjacent tokens during pretraining, reducing expert switch rates by up to 60% and cache misses by up to 3.92× with minimal perplexity degradation, thereby enabling memory-efficient MoE inference without architectural changes.",
+      "detailed_reading": {
+        "motivation": "MoE模型在边缘设备上存在严重的专家交换问题：由于路由器独立地为每个token选择专家，相邻token频繁激活不同专家，导致推理时不断从慢速存储加载专家权重到快速内存，造成显著的延迟瓶颈。现有解决方案要么是系统级的缓存启发式方法，只能被动利用局部性；要么是后处理的路由器微调方法，但专家表示已在训练中固化，无法从根本上解决不匹配问题。因此，需要一种在预训练阶段就显式优化路由时间局部性的方法。",
+        "method": "提出StickyMoE方法，其核心是添加一个可微分的路由一致性损失函数：对于每个MoE层，计算相邻token的softmax门控概率向量之间的L2距离，并在序列长度和层数上平均，形成一致性损失L_cons。总训练损失为L_CE + λ L_cons + μ L_bal，其中L_CE为标准交叉熵语言建模损失，L_bal为负载均衡损失，λ为单个超参数（如λ=0.1）。方法不改变MoE架构，仅需在训练时计算该损失并反向传播，梯度同时更新路由器权重和隐藏表示，使得专家表示与路由决策从训练第一步起共同适应局部一致性。还提出了一个软-硬变体，添加段级锚定约束以应对长程漂移。训练数据使用WikiText-2，模型为小型（4层，4专家）和中型（6层，8专家）MoE语言模型。",
+        "result": "在小型MoE模型上，StickyMoE将专家切换率降低高达60%，且困惑度退化小于4%；在中型模型上，不仅降低了切换率，还改善了困惑度（优于基线）。缓存未命中次数减少最多3.92倍。在质量-局部性前沿上，StickyMoE优于后处理微调方法（ReMoE）和简化的Oracle-MoE实现，实现了Pareto优势。专家利用率熵保持在1.92比特以上（最大2.0比特），证明一致性损失未导致专家坍塌。",
+        "conclusion": "路由时间局部性最有效的注入方式是在训练阶段。StickyMoE通过简单的可微损失实现了显著的专家切换率和缓存未命中降低，无需修改架构，且与系统级方法互补。实验表明，协同训练专家表示和路由决策比后处理微调更有效，为边缘设备上的高效MoE推理提供了一种实用且通用的解决方案。",
+        "key_details": "数据：使用WikiText-2训练小/中型MoE语言模型。损失：L_cons为相邻门控向量的L2距离（取值[0,2]），λ为超参数（实验中使用λ=0.1或其他值），与交叉熵和负载平衡损失联合优化。超参：仅λ一个额外超参数，负载平衡损失权重μ保持标准值。复杂度：计算开销可忽略（仅增加一个向量距离计算），无需存储额外参数。局限性：方法需要从零训练，无法直接应用于预训练好的MoE检查点；软-硬变体可能增加少量训练复杂度；长序列上的局部性保持需要进一步验证（但软-硬变体已部分解决）。"
+      },
+      "affiliations": [
+        "BrainChip Inc."
+      ],
+      "affiliations_text": "BrainChip Inc.",
+      "score": 2.8050725222627246,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.08837v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708837v1-prompt-driven-exploration",
+      "source": "arxiv",
+      "title": "Prompt-Driven Exploration",
+      "authors": [
+        "Sunshine Jiang",
+        "John Marangola",
+        "David Zhang",
+        "Raghuram Kowdeed",
+        "Ruiyang Luo",
+        "Nitish Dashora",
+        "Richard Li",
+        "Pulkit Agrawal",
+        "Zhang-Wei Hong"
+      ],
+      "authors_text": "Sunshine Jiang, John Marangola, David Zhang, Raghuram Kowdeed, Ruiyang Luo, Nitish Dashora, Richard Li, Pulkit Agrawal, Zhang-Wei Hong",
+      "abstract": "Exploration is essential to RL since a policy cannot improve by repeatedly sampling the behaviors it already prefers. Standard methods inject stochasticity in the action space, but such jitter only yields rollouts close to the original. Escaping a weak policy often requires global perturbations that action noise cannot produce. Large language models (LLMs) and vision-language-action (VLA) models offer a pathway: they condition the policy on a natural language prompt, and since the rollout follows from it, modifying the prompt induces global changes. The challenge is finding prompts that induce useful global changes. With a weak policy that rarely succeeds, reward is too sparse to select on. Our idea is to refine prompts from the rollouts themselves: a vision-language model (VLM) reasons over the rollout video, diagnoses how the policy responded, and rewrites the prompt to elicit better behavior next time. This procedure realizes posterior sampling, a classical RL exploration framework, at the level of prompts: the VLM maintains an implicit distribution over useful prompts and updates it from observed rollouts. We call this strategy Prompt-Driven Exploration (PDE). Across manipulation and reasoning tasks, PDE enables RL to learn successful policies even from zero-reward starts, and improves sample efficiency more broadly. Our website is available at https://xinyunsunshine.github.io/prompt-rl.",
+      "url": "http://arxiv.org/abs/2607.08837v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08837v1",
+      "tldr": "Prompt-Driven Exploration (PDE) uses a vision-language model to iteratively refine natural language prompts from policy rollouts, enabling reinforcement learning to escape weak initial policies by inducing global behavioral changes rather than relying on action-level noise.",
+      "detailed_reading": {
+        "motivation": "标准强化学习的探索通过在动作空间注入随机性来实现，但这仅能产生局部的行为扰动，难以从表现差的初始策略中逃脱。大型语言模型和视觉-语言-动作模型使得策略能够依据自然语言提示进行全局行为改变，但如何自动发现能引发有用改变的提示仍是一个挑战。",
+        "method": "本文提出提示驱动探索（PDE）方法，它利用视觉语言模型（VLM）作为提示采样器，维护一个隐式的提示分布。在每次迭代中，VLM根据任务的规范提示和已收集的轨迹历史，采样一个新的提示并执行策略，得到的轨迹和奖励被加入历史以更新提示分布。RL更新采用Proximal Policy Optimization (PPO)，并引入混合采样（以一定概率从规范提示和VLM采样的提示中选择）和混合反向传播（在PPO比率中使用两种提示下动作概率的平均值），使得探索性提示的 rollout 也能改进规范提示下的策略性能。",
+        "result": "在LIBERO、LIBERO-PRO和ManiSkill等机器人操控任务上，PDE使从近乎零成功率的弱初始策略出发的RL能够成功学习，并取得比动作空间探索高得多的成功率和样本效率。分析表明VLM的更新有效地将提示分布向能引发成功行为的提示方向移动。此外，在LLM代码生成任务上，PDE同样提升了样本效率，验证了其通用性。",
+        "conclusion": "PDE通过利用预训练VLM的语言和视觉先验，在提示空间进行后验采样式的探索，使得RL能够低成本地实现全局行为变化，从而克服动作空间探索的局限性。该方法简单且与现有RL算法兼容，为弱初始策略下的强化学习提供了一种有效的探索策略。",
+        "key_details": "关键细节包括：(1) 使用预训练的视觉语言模型（如GPT-4o）作为提示采样器，利用其语言先验生成合理的候选提示；(2) 混合采样系数α随训练进度逐渐增加，以逐步将训练聚焦到规范提示；(3) 混合反向传播损失迫使动作在探索提示和规范提示下都具有较高的概率，从而实现知识迁移；(4) 方法依赖VLM对轨迹的理解和改写能力，可能存在计算开销较大及对VLM质量敏感的局限性。"
+      },
+      "affiliations": [
+        "Massachusetts Institute of Technology",
+        "Improbable AI Lab",
+        "MIT-IBM Computing Research Lab"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology, Improbable AI Lab, MIT-IBM Computing Research Lab",
+      "score": 2.803202599739622,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.08864v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708864v1-observer-design-for-a-class-of-systems-described-by-differential-algebraic-equations-and-parameter-identification-of-an-unmeasured-disturbance",
+      "source": "arxiv",
+      "title": "Observer Design for a Class of Systems Described by Differential-Algebraic Equations and Parameter Identification of an Unmeasured Disturbance",
+      "authors": [
+        "Olga Oskina",
+        "Alexey Bobtsov"
+      ],
+      "authors_text": "Olga Oskina, Alexey Bobtsov",
+      "abstract": "This paper addresses the problem of observer design for a class of linear descriptor systems affected by a certain class of unknown unmatched disturbances. The objective is to estimate the components of the state vector, as well as the unknown parameters of the unmeasured disturbance. To solve this problem, structural assumptions are introduced under which an observer for the dynamic part of the state vector is constructed. Then, based on the obtained state estimate, the disturbance signal is reconstructed, and its unknown parameters are identified. A new parameterization method is proposed for a class of disturbance input signals that depend nonlinearly on unknown parameters, making it possible to obtain a linear regression in the corresponding unknowns. Numerical simulations are presented to demonstrate the effectiveness of the proposed procedures.",
+      "url": "http://arxiv.org/abs/2607.08864v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08864v1",
+      "tldr": "This paper proposes an observer for linear descriptor systems with unknown unmatched disturbances, enabling state estimation and parameter identification of the disturbance via a novel parameterization that linearizes the problem despite nonlinear dependence on unknown parameters.",
+      "detailed_reading": {
+        "motivation": "针对一类受未知不匹配扰动影响的线性描述符系统，现有状态估计方法常因简化系统结构而丢失信息，导致估计精度下降。本文旨在同时估计状态向量分量和未测量扰动的未知参数，以支撑后续扰动补偿与控制设计。",
+        "method": "系统建模为微分-代数方程，状态向量分为动态和代数两部分。通过结构假设（代数方程可解、输出方程无直接扰动通道、特定可观测性条件）将系统降阶为不含扰动项的微分方程。设计未知输入观测器：采用坐标变换避免输出和输入的导数，通过滤波器重构导数信号。基于状态估计，利用输出方程重构扰动信号。针对扰动信号中未知参数非线性嵌入形式（如指数函数组合），提出基于延迟扩展和DREM混合的参数化方法：引入多个已知延迟，构造扩展回归矩阵和向量，通过行列式运算和代数变换提取仅含未知参数的线性组合，最终得到关于新参数向量的线性回归方程。采用递归最小二乘算法估计该线性参数，再通过代数关系恢复原始未知参数。",
+        "result": "在数值仿真中，对于包含两个指数扰动分量的示例系统，所提观测器能有效估计动态状态分量，扰动信号重构准确，未知参数θ1和θ2的估计值收敛至真值（θ1=-0.1, θ2=-0.3）。仿真验证了从状态估计到扰动重构再到参数辨识的完整流程的有效性。",
+        "conclusion": "本文提出了一种针对线性描述符系统的观测器设计及扰动参数辨识方法，通过结构假设和延迟参数化技术，将非线性参数估计问题转化为线性回归，成功实现了同时估计状态和扰动未知参数的目标。该方法拓展了描述符系统在扰动环境下状态估计的应用可能性。",
+        "key_details": "关键点包括：1）假设扰动由已知基函数与未知指数参数的组合构成，且可通过多个延迟线性参数化；2）观测器设计需要输出无直接扰动通道（C5=0）且(C3, B2a)满秩条件；3）避免微分使用一阶滤波器（λ_f=10³）重建导数，并需等待观测器（T_obs）和滤波器（T_fil）瞬态衰减后再启动辨识；4）DREM扩展需ℓ个延迟，并额外引入一个延迟（ℓ+1）构造标量回归；5）超参数包括观测器增益L（使M_a-LC3为Hurwitz）、滤波器参数λ_f、延迟集合{D_j}及协方差矩阵初值；6）局限性：要求信号光滑且扰动形式满足延迟参数化结构，不规则分量δ0仅被假定有界但未详细处理。"
+      },
+      "affiliations": [
+        "ITMO University"
+      ],
+      "affiliations_text": "ITMO University",
+      "score": 2.7923143159432318,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.08774v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/13/260708774v1-cogniconsole-externalizing-inference-time-control-as-a-formal-abstraction-for-reliable-llm-interactions",
+      "source": "arxiv",
+      "title": "CogniConsole: Externalizing Inference-Time Control as a Formal Abstraction for Reliable LLM Interactions",
+      "authors": [
+        "Vanessa Figueiredo",
+        "Wilter Franceschi"
+      ],
+      "authors_text": "Vanessa Figueiredo, Wilter Franceschi",
+      "abstract": "Reliability in large language model (LLM) systems is typically framed as a function of model capability. We challenge this by demonstrating that reliability is significantly influenced by \\emph{inference-time control} -- the computational layer governing task framing and context selection. We introduce \\emph{CogniConsole}, an architectural instantiation that externalizes this control into a structured interface combining programmatic coordination with bounded prompt-based reasoning. Through \\emph{controllability-oriented probes} ($N=489$) in a multi-step interactive environment, we show that increasing structural scaffolding -- from unstructured to fully scaffolded -- \\textbf{systematically reduces output variance and failure rates under a fixed model architecture}. Our results indicate that many observed failure modes, such as context drift and inconsistent constraint adherence, arise from under-specified control rather than insufficient capability. This work provides an empirical basis for treating inference-time control as a first-class abstraction, opening new directions for designing and evaluating LLM systems beyond scaling alone.",
+      "url": "http://arxiv.org/abs/2607.08774v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08774v1",
+      "tldr": "CogniConsole proposes that treating inference-time control as an explicit, externalized abstraction—rather than relying solely on model capability—systematically reduces output variance and failure rates in large language models, as demonstrated through structured scaffolding in multi-step interactive tasks.",
+      "detailed_reading": {
+        "motivation": "现有LLM系统通常将可靠性问题归因于模型能力不足，但作者指出，许多失败模式（如上下文漂移、约束不一致）实际上源于推理时控制层的欠规范。当前控制结构被隐式嵌入在单一提示中，导致内部目标冲突和输出不稳定。因此，作者提出将推理时控制外部化为一种形式化抽象，以提高LLM交互的可靠性。",
+        "method": "作者设计了CogniConsole架构，该架构通过程序化协调与有界提示推理相结合来外部化控制。首先，定义控制规范，包括行为角色、显著输入、全局约束、决策协议和输出契约。其次，通过控制台（执行基质）和任务盒（任务范围控制策略）进行分解，每个任务盒包含多个节点，每个节点强制执行单一决策阶梯。决策阶梯是输入到输出的有序决策协议。推理时，用户输入触发节点图遍历，每个节点加载相关记忆并激活单个有界提示进行处理。输出经边界校验后，有效输出更新记忆并可能路由到下一节点，无效输出则触发边界恢复。硬模糊逻辑分离确保确定性计算（路由、验证）与概率性语义推理（分类、生成）分开。记忆作为选择性重激活，仅存储与活动节点相关的短期和长期状态。模型路由允许不同节点调用不同大小的模型。",
+        "result": "通过在多步交互环境中部署可控性探针（N=489），作者展示了从非结构化提示到完全结构化的CogniConsole控制架构的变化，在固定模型架构下，输出方差和失败率系统性降低。具体地，增加结构脚手架减少了上下文漂移和约束不一致等失败模式，表明这些失败主要源于控制不足而非模型能力不足。",
+        "conclusion": "推理时控制应被视为一个独立的一等计算层，而非模型能力的副产品。CogniConsole作为概念验证，表明通过外部化控制结构可以显著提升LLM系统的可靠性，并为超越模型缩放的设计与评估提供了新方向。",
+        "key_details": "数据来源为多步交互环境下的489个控制探针，使用固定模型参数（未微调）。关键模块包括控制台（执行环、路由、记忆）、任务盒（边界、节点图、输出契约）和单一决策阶梯约束。核心机制包括硬模糊逻辑分离（确定性路由 vs. 概率推理）、选择性STM/LTM记忆（仅存储决策相关状态）以及模型路由（节点可调用不同规模模型）。推理流程为：输入→节点激活→单阶梯有界提示生成→边界校验→记忆更新→下一节点或用户响应。局限性：架构为概念验证，需要更大规模和更复杂任务的验证；未探讨控制结构学习或自动优化；依赖人工设计任务盒与节点图。"
+      },
+      "affiliations": [
+        "University of Regina",
+        "Orbital Sea"
+      ],
+      "affiliations_text": "University of Regina, Orbital Sea",
+      "score": 2.687289691134488,
+      "score_text": "2.7"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.08861v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708861v1-convergence-of-fictitious-play-for-fully-coupled-fbsdes-in-finite-player-stochastic-differential-games",
+      "source": "arxiv",
+      "title": "Convergence of fictitious play for fully coupled FBSDEs in finite-player stochastic differential games",
+      "authors": [
+        "Adam Andersson",
+        "Kristoffer Andersson",
+        "Per Ljung"
+      ],
+      "authors_text": "Adam Andersson, Kristoffer Andersson, Per Ljung",
+      "abstract": "In this article we investigate the theoretical convergence properties of the fictitious-play approximation procedure applied to coupled FBSDE systems for finite-player non-zero-sum stochastic differential games. Under one set of assumptions, the convergence is shown to be geometric. Under an additional structural assumption, the geometric convergence rate further improves to a super-exponential rate in a special class of games. To the best of our knowledge, this provides the first convergence analysis of fictitious play for fully coupled FBSDEs. A numerical experiment with a linear-quadratic interbank borrowing and lending problem confirms the geometric convergence.",
+      "url": "http://arxiv.org/abs/2607.08861v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08861v1",
+      "tldr": "This paper establishes the first convergence analysis of fictitious play for fully coupled forward-backward stochastic differential equations (FBSDEs) in finite-player non-zero-sum stochastic differential games, proving geometric convergence generally and super-exponential convergence under additional structural assumptions.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.6338208626724717,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.08784v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708784v1-hero-a-heterogeneity-aware-benchmark-library-for-federated-continual-learning",
+      "source": "arxiv",
+      "title": "HERO: A Heterogeneity-Aware Benchmark Library for Federated Continual Learning",
+      "authors": [
+        "Thinh T. H. Nguyen",
+        "Le-Tuan Nguyen",
+        "Minh-Duong Nguyen",
+        "Nhi Trinh",
+        "Anh Tran Nam Nguyet",
+        "Dung D. Le",
+        "Kok-Seng Wong"
+      ],
+      "authors_text": "Thinh T. H. Nguyen, Le-Tuan Nguyen, Minh-Duong Nguyen, Nhi Trinh, Anh Tran Nam Nguyet, Dung D. Le, Kok-Seng Wong",
+      "abstract": "Federated continual learning (FCL) evaluates how distributed clients learn from changing data streams while retaining previously learned knowledge. Existing evaluations are difficult to compare because they often change datasets, task splits, client data splits, task orders, backbones, memory assumptions, and reporting rules simultaneously. We introduce \\textbf{HERO}, a heterogeneity-aware benchmark library for FCL. HERO builds benchmark streams by separating three choices that are often coupled, namely the task split, the client data split, and the client task sequence. In HERO-Core, the main comparable benchmark, $α$ controls client data skew and $ρ$ controls task-order mismatch. We evaluate representative FCL methods on CIFAR-100 and TinyImageNet using final average accuracy, average forgetting, and bottom-10\\% client accuracy. We also include a graph-based Domain-IL portability case study on OGB-MolPCBA, where scaffold-domain granularity changes the input distribution while the prediction task remains fixed. Our results show that method behavior changes across easy and heterogeneous settings, that average accuracy can hide weak bottom-client performance, that task-order mismatch favors different strategies from synchronized evaluation, and that the same HERO interface can expose domain-shift difficulty beyond image-based FCIL. HERO releases benchmark streams, configurations, method implementations, and reporting scripts to support reproducible and setting-aware FCL evaluation.",
+      "url": "http://arxiv.org/abs/2607.08784v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08784v1",
+      "tldr": "HERO is a heterogeneity-aware benchmark library for Federated Continual Learning that decouples task split, client data split, and client task sequence to enable controlled, reproducible, and setting-aware evaluation, as demonstrated on image-based FCIL and graph-based Domain-IL benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "VinUniversity"
+      ],
+      "affiliations_text": "VinUniversity",
+      "score": 2.5056940224366286,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2607.08918v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708918v1-a-machine-learning-surrogate-for-component-criticality-ranking-in-interdependent-power-communication-networks",
+      "source": "arxiv",
+      "title": "A Machine Learning Surrogate for Component Criticality Ranking in Interdependent Power-Communication Networks",
+      "authors": [
+        "Sohini Roy",
+        "Xheni Hylviu"
+      ],
+      "authors_text": "Sohini Roy, Xheni Hylviu",
+      "abstract": "Cyber-physical power systems are vulnerable to cascading failures caused by tight interdependencies between power and communication infrastructures. Evaluating these failures over large N-k contingency sets with a high-fidelity simulator is computationally prohibitive for resilience planning. Using the previously published Modified Implicative Interdependency Model (MIIM) as the ground-truth cascade simulator, this paper develops a machine-learning surrogate that predicts contingency severity from leakage-free structural features and derives a component-criticality ranking for prioritized hardening analysis. On the IEEE 118-bus system, the Gradient Boosting surrogate achieves Spearman correlations of 0.849 for per-contingency severity prediction and 0.853 for per-component criticality ranking, while remaining stable across three independently sampled datasets. MIIM-derived component criticality itself reproduces only to a Spearman of approximately 0.85 under the present sampling pipeline, and the surrogate operates at this empirical ceiling to within sampling variation. Topological centrality measures on the full interdependent network provide meaningful baselines (Spearman 0.60-0.69), and feature ablation shows that the surrogate's advantage is driven primarily by inter-layer dependency information. These results support a two-stage workflow in which the surrogate rapidly ranks candidate components and MIIM is reserved for selective verification.",
+      "url": "http://arxiv.org/abs/2607.08918v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08918v1",
+      "tldr": "This paper develops a machine-learning surrogate (Gradient Boosting) that predicts cascade severity and ranks component criticality in interdependent power-communication networks, achieving Spearman correlations over 0.85 and demonstrating that inter-layer dependency information is key to its performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Nevada, Las Vegas"
+      ],
+      "affiliations_text": "University of Nevada, Las Vegas",
+      "score": 2.489450188898196,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2607.08782v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708782v1-director-accelerating-distributed-moe-serving-via-online-proactive-expert-placement",
+      "source": "arxiv",
+      "title": "Director: Accelerating Distributed MoE Serving via Online Proactive Expert Placement",
+      "authors": [
+        "Qianli Liu",
+        "Kaibin Guo",
+        "Zicong Hong",
+        "Peng Li",
+        "Fahao Chen",
+        "Haodong Wang",
+        "Jian Lin",
+        "Song Guo"
+      ],
+      "authors_text": "Qianli Liu, Kaibin Guo, Zicong Hong, Peng Li, Fahao Chen, Haodong Wang, Jian Lin, Song Guo",
+      "abstract": "Expert parallelism has become the prevailing paradigm to serve Mixture-of-Experts (MoE) models. Its efficiency depends on the communication and computation latencies of the GPUs, which are linked to the placement of experts in the GPUs. Existing works for optimizing expert placement focus on leveraging past requests' expert activation patterns. However, they demonstrate deficiencies facing diverse and rapidly changing request patterns, calling for an online, proactive approach. Implementing such an approach requires addressing several challenges: the uncertainty associated with incoming requests' expert activation, the cost of expert migration, and the NP-hard complexity in optimization. Therefore, we present Director, a new distributed MoE serving system that minimizes end-to-end latency via prediction-driven, online expert placement. Director uses either a lightweight cascaded predictor or a low-bit quantized replica for expert activation patterns of incoming requests. An online migration module then enacts the changes with near-zero downtime by executing migrations in compute-bound phases, keeping disruption bounded. At its core, a relaxation-based expert placement optimizer operates under capacity constraints, runs in polynomial time, and achieves a $(1+ε)$ approximation ratio. Finally, we implement a prototype and demonstrate, through extensive experiments, a reduction in end-to-end latency of $11\\sim55\\%$ for popular MoE models (e.g., Mistral, DeepSeek and Qwen) compared to existing work.",
+      "url": "http://arxiv.org/abs/2607.08782v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08782v1",
+      "tldr": "Director introduces a prediction-driven, online proactive expert placement system that minimizes end-to-end latency in distributed Mixture-of-Experts serving by using cascaded predictors or quantized replicas, near-zero-downtime migration, and a polynomial-time optimizer with a (1+ε) approximation ratio, achieving 11–55% latency reduction over existing methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hong Kong University of Science and Technology",
+        "Xi’an Jiaotong University",
+        "Shandong University",
+        "Sun Yat-Sen University"
+      ],
+      "affiliations_text": "The Hong Kong University of Science and Technology, Xi’an Jiaotong University, Shandong University, Sun Yat-Sen University",
+      "score": 2.3809348652616857,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.08844v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708844v1-the-weighted-connected-p-median-problem",
+      "source": "arxiv",
+      "title": "The Weighted Connected p-Median Problem",
+      "authors": [
+        "Murat Elhüseyni",
+        "Burak Kocuk",
+        "Miklós Krész"
+      ],
+      "authors_text": "Murat Elhüseyni, Burak Kocuk, Miklós Krész",
+      "abstract": "The connected p-median problem is defined as a variant of the classical p-median problem when the facility nodes induce a connected subgraph. In this paper, we introduce the weighted version of the above problem when the weight of the facility connection in the objective function is defined by the minimum weight spanning tree of the facility nodes. This approach is motivated by the sink node selection in distributed sensor networks, in which the collected information is shared among the sink nodes through the minimum spanning tree. The weights of the graph determining the network topology of the candidate sink nodes as connection costs are distinguished from the standard access costs of the p-median problem. The fixed deployment costs for the setup of facilities are also considered. The objective is to minimize the overall cost as the sum of deployment cost, access cost and connection cost. We show that the problem is NP-hard and propose three mixed-integer linear programming (MILP) formulations adapted from the traveling salesperson problem literature. Since these formulations are poorly scalable with respect to network size, we develop a four-phase matheuristic method based on linear programming rounding. We conduct an extensive computational study to evaluate the performance of the MILP formulations and 22 variants of the matheuristic under different parameter settings. The results indicate that the MILP models perform effectively on small instances but struggle to solve medium- and large-scale instances within a two-hour time limit. In contrast, several matheuristic variants consistently produce high-quality solutions within minutes. Finally, we analyze the impact of network structure, size, density, and the parameter $p$ on solution quality, providing further insights for network design.",
+      "url": "http://arxiv.org/abs/2607.08844v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08844v1",
+      "tldr": "This paper introduces the weighted connected p-median problem, motivated by sink node selection in distributed sensor networks, and proposes mixed-integer linear programming formulations and a matheuristic to minimize the sum of deployment, access, and connection costs, demonstrating that the matheuristic efficiently yields high-quality solutions for large-scale instances.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Szeged",
+        "University of Primorska",
+        "Yeditepe University",
+        "Sabancı University"
+      ],
+      "affiliations_text": "University of Szeged, University of Primorska, Yeditepe University, Sabancı University",
+      "score": 2.355518665885313,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.08883v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708883v1-optimizing-against-safety-representations-activation-guided-adversarial-suffixes-and-the-geometry-of-refusal",
+      "source": "arxiv",
+      "title": "Optimizing Against Safety Representations: Activation-Guided Adversarial Suffixes and the Geometry of Refusal",
+      "authors": [
+        "Ege Çakar",
+        "Hannah Guan",
+        "Kayden Kehe"
+      ],
+      "authors_text": "Ege Çakar, Hannah Guan, Kayden Kehe",
+      "abstract": "Behavioral alignment in large language models often masks fragile internal safety representations. Recent work suggests that refusal behavior is mediated by low-dimensional directions in activation space. This raises questions about how such representations are structured, localized, and accessed by optimization. We study adversarial suffix attacks as a probe of representational alignment. We introduce Activation-Guided GCG, which replaces output-based objectives with losses that directly target a model's internal refusal direction. Across several objective variants, we find that suppressing refusal globally across all layers and positions is more effective than targeting a single layer-position pair. This suggests that safety representations are distributed across the forward pass rather than causally localized to a single site. We further introduce Soft-GCG, a continuous relaxation of discrete suffix optimization using Gumbel-Softmax. Soft-GCG achieves a 33 $\\times$ speedup over standard GCG while improving attack success rates. Evaluating across model scales, we find that smaller models remain vulnerable while larger models resist both activation- and suffix-based attacks at our compute-constrained settings, consistent with larger and better safety trained models being harder to jailbreak. Together, our results clarify how safety mechanisms are encoded and can be broken in contemporary models. These insights provide concrete guidance for designing more robust and representation-aware alignment strategies.",
+      "url": "http://arxiv.org/abs/2607.08883v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08883v1",
+      "tldr": "This paper introduces Activation-Guided GCG and Soft-GCG to probe and exploit the distributed geometry of safety representations in LLMs, showing that suppression of refusal across all layers is most effective and that smaller models remain more vulnerable than larger, better-aligned ones.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvard University"
+      ],
+      "affiliations_text": "Harvard University",
+      "score": 2.354446869413413,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.08872v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708872v1-parallel-versions-of-the-mesh-adaptive-direct-search-algorithm",
+      "source": "arxiv",
+      "title": "Parallel versions of the mesh adaptive direct search algorithm",
+      "authors": [
+        "Sébastien Le Digabel",
+        "Antoine Lesage-Landry",
+        "Samuel Mendoza",
+        "Christophe Tribes"
+      ],
+      "authors_text": "Sébastien Le Digabel, Antoine Lesage-Landry, Samuel Mendoza, Christophe Tribes",
+      "abstract": "This work surveys the different parallel variants of the mesh adaptive direct search (MADS) algorithm for constrained blackbox optimization. These problems can inherently imply high computational costs due to the possible large number of variables and multi-modality of the search space. In addition, the potential time-intensive nature and time heterogeneity of the blackboxes defining the problem prompts the need for efficient implementations. Parallelism emerges as an actionable solution to mitigate computation time, as modern computer systems rely on multi-core architecture. The reviewed methods employ diverse levels of parallelism and distinct parallel strategies to effectively tackle each aspect outlined above. The manuscript details the practical implementations, provides computational results, and offers insights into the advantages and limitations of each MADS parallel method.",
+      "url": "http://arxiv.org/abs/2607.08872v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08872v1",
+      "tldr": "This paper surveys parallel variants of the mesh adaptive direct search (MADS) algorithm for constrained blackbox optimization, detailing their implementations, computational performance, and trade-offs to guide users in selecting the appropriate parallelization strategy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Group for Research in Decision Analysis (GERAD)",
+        "Polytechnique Montréal"
+      ],
+      "affiliations_text": "Group for Research in Decision Analysis (GERAD), Polytechnique Montréal",
+      "score": 2.3294103025104187,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.08783v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708783v1-liebn-batch-normalization-over-lie-groups",
+      "source": "arxiv",
+      "title": "LieBN: Batch Normalization over Lie Groups",
+      "authors": [
+        "Ziheng Chen",
+        "Yue Song",
+        "Rui Wang",
+        "Xiao-Jun Wu",
+        "Nicu Sebe"
+      ],
+      "authors_text": "Ziheng Chen, Yue Song, Rui Wang, Xiao-Jun Wu, Nicu Sebe",
+      "abstract": "Manifold-valued measurements are prevalent in various machine learning tasks. Recent advances have extended Deep Neural Networks (DNNs) to operate on manifolds, accompanied by normalization techniques tailored to different geometries, collectively referred to as Riemannian normalization. However, most existing Riemannian normalization methods are either designed for specific manifolds or fail to effectively normalize manifold-valued sample distributions. To address these limitations, we propose LieBN, a framework for Riemannian Batch Normalization (RBN) over Lie groups. Our approach leverages the theoretically convenient left- and right-invariant metrics, which naturally exist in every Lie group, and provides theoretical guarantees for controlling the Riemannian mean and variance. We instantiate LieBN across nine distinct geometries: four on the Symmetric Positive Definite (SPD) manifold, one on the group of rotation matrices, and four on the manifold of full-rank correlation matrices. Notably, among the SPD metrics, we introduce a novel right-invariant metric and extend three existing Lie group structures via matrix power deformation. Extensive experiments on different manifolds validate the effectiveness of our framework. The code is available at https://github.com/GitZH-Chen/LieBN.git.",
+      "url": "http://arxiv.org/abs/2607.08783v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08783v1",
+      "tldr": "LieBN introduces a general Riemannian batch normalization framework for Lie groups that leverages invariant metrics to effectively normalize manifold-valued data across diverse geometries.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.3265192404193886,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.08776v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708776v1-a-unified-approach-to-interpreting-knowledge-distillation-for-large-language-models-via-interactions",
+      "source": "arxiv",
+      "title": "A Unified Approach to Interpreting Knowledge Distillation for Large Language Models via Interactions",
+      "authors": [
+        "Qingzhuo Wang",
+        "Ruiyang Qin",
+        "Zhenxin Qin",
+        "Wen Shen",
+        "Zhihua Wei"
+      ],
+      "authors_text": "Qingzhuo Wang, Ruiyang Qin, Zhenxin Qin, Wen Shen, Zhihua Wei",
+      "abstract": "Despite the success of knowledge distillation (KD) in Large Language Models (LLMs), the underlying mechanism behind its efficacy remains unclear. In this paper, we propose a unified approach to explore the common mechanism of various KD methods using interactions. Specifically, we decompose the output score of the LLM into the sum of numerous interactions. Each interaction represents a nonlinear relationship involving a set of input variables (e.g., words). Based on the decomposed interactions, we discover that the common mechanism underlying various KD methods is the sparsification of interactions, i.e., student models retain fewer interactions for inference while suppressing other interactions to zero effects. Furthermore, we discover that the performance variance across different KD methods arises from their capabilities in handling complex interactions. A KD method typically yields better performance if it enables the student model to achieve higher sparsity of complex interactions. Motivated by these insights, we propose a plug-and-play loss function called Complex Interaction Penalty (CIP) to explicitly enforce the sparsity of complex interactions during the distillation process. Extensive experiments demonstrate that integrating CIP consistently improves the performance of diverse KD methods on both in-domain and out-of-distribution benchmarks.",
+      "url": "http://arxiv.org/abs/2607.08776v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08776v1",
+      "tldr": "This paper reveals that knowledge distillation for large language models works by sparsifying interactions (especially complex ones) and proposes the Complex Interaction Penalty (CIP) loss to explicitly enforce this sparsity, thereby improving distillation performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tongji University"
+      ],
+      "affiliations_text": "Tongji University",
+      "score": 2.186775293758024,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.08894v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708894v1-gats-graph-augmented-tree-search-with-layered-world-models-for-efficient-agent-planning",
+      "source": "arxiv",
+      "title": "GATS: Graph-Augmented Tree Search with Layered World Models for Efficient Agent Planning",
+      "authors": [
+        "Maureese Williams",
+        "Dymitr Nowicki"
+      ],
+      "authors_text": "Maureese Williams, Dymitr Nowicki",
+      "abstract": "Large Language Model (LLM) agents have shown promise in multi-step planning tasks, but existing approaches like LATS (Language Agent Tree Search) and ReAct rely heavily on LLM inference during planning, leading to high computational costs and stochastic behavior. We present \\textbf{GATS} (Graph-Augmented Tree Search), a planning framework that combines systematic UCB1-based tree search with a layered world model to eliminate LLM calls during inference while achieving superior planning performance. Our three-layer world model integrates: (L1) exact symbolic action matching, (L2) statistics learned from execution logs, and (L3) LLM-based prediction for unknown actions. On synthetic planning tasks with branching paths and dead-ends, GATS achieves \\textbf{100\\% success rate} compared to 92 % for LATS and 64\\% for ReAct. On a comprehensive stress test spanning 12 challenging scenarios -- including coding workflows, web navigation, and long-horizon tasks -- GATS maintains \\textbf{100\\% success} while LATS drops to 88.9 % and ReAct to 23.9%. GATS requires \\textbf{zero LLM calls per task} during planning (vs. 37 per task for LATS) and produces deterministic plans with zero variance across runs. Our results demonstrate that systematic search with learned world models can substantially outperform LLM-guided exploration for agent planning.",
+      "url": "http://arxiv.org/abs/2607.08894v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08894v1",
+      "tldr": "GATS introduces a graph-augmented tree search with a layered world model that eliminates inference-time LLM calls, achieving 100% success rates on planning tasks while being deterministic and computationally efficient.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Institute for Cybernetics of NAS of Ukraine"
+      ],
+      "affiliations_text": "Institute for Cybernetics of NAS of Ukraine",
+      "score": 2.159687100215721,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.08786v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708786v1-accelerating-gpu-inference-of-large-language-models-with-moderately-unstructured-sparse-weight-matrices",
+      "source": "arxiv",
+      "title": "Accelerating GPU Inference of Large Language Models with Moderately Unstructured Sparse Weight Matrices",
+      "authors": [
+        "Tao Lu",
+        "Haoyu Wang",
+        "Zonghui Wang",
+        "Keshen Xiang",
+        "Jiaheng Zhang",
+        "Wenzhi Chen"
+      ],
+      "authors_text": "Tao Lu, Haoyu Wang, Zonghui Wang, Keshen Xiang, Jiaheng Zhang, Wenzhi Chen",
+      "abstract": "With the growing deployment of large language models (LLMs), LLM inference cost has become a key challenge. Pruning techniques that introduce sparsity into weight matrices can accelerate inference. However, maintaining model quality typically limits pruning to moderate unstructured sparsity (around 50\\%). At these sparsity levels, none of the existing GPU kernels for sparse matrix multiplication (SpMM) can outperform their dense counterparts. This paper proposes an efficient GPU inference method for LLMs with moderate sparsity. We propose a three-layer matrix storage format comprising: (i) a Sparse-TC layer enabling sparse tensor cores to accelerate SpMM; (ii) a Slot-Filling layer using parallel differential distance for matrix compression while supporting low-cost on-chip decoding; (iii) a lightweight Residual Layer ensuring correct SpMM computation. Building on this format, we design a SpMM kernel that jointly utilizes sparse tensor cores and CUDA cores. This design enables an efficient execution pipeline and overlaps on-chip computation with memory access. Evaluations show that our work is the first to outperform dense matrix multiplication on modern GPUs equipped with high-bandwidth memory (HBM). It achieves up to 1.64x kernel-level speedup over SpInfer (EuroSys'25, Best paper) and up to 1.41x end-to-end speedups over FlashLLM (VLDB'24). Our source code: https://github.com/moui0/cudac.",
+      "url": "http://arxiv.org/abs/2607.08786v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08786v1",
+      "tldr": "The paper proposes a three-layer storage format and a hybrid SpMM kernel leveraging sparse tensor cores and CUDA cores to achieve, for the first time, faster-than-dense GPU inference for large language models with moderate unstructured sparsity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University",
+        "National University of Singapore"
+      ],
+      "affiliations_text": "Zhejiang University, National University of Singapore",
+      "score": 2.0104767026710824,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.08779v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708779v1-signed-symmetric-quantization-for-few-bit-integers",
+      "source": "arxiv",
+      "title": "Signed Symmetric Quantization for Few-Bit Integers",
+      "authors": [
+        "Ian Colbert",
+        "Eashan Dash",
+        "Pablo Monteagudo-Lago",
+        "Juan Amboage",
+        "Srinidhi N",
+        "Giuseppe Franco",
+        "Nicholas J. Fraser",
+        "Arun Ramachandran"
+      ],
+      "authors_text": "Ian Colbert, Eashan Dash, Pablo Monteagudo-Lago, Juan Amboage, Srinidhi N, Giuseppe Franco, Nicholas J. Fraser, Arun Ramachandran",
+      "abstract": "The signed integer alphabet contains one more negative representable value than positive. Yet, by convention, the standard symmetric integer quantizer fixes its scale to be strictly positive, which assigns this extra representable value to the negative tail and can force clipping of positive outliers. In this work, we show that, at few-bit precision, such clipping is a non-trivial source of quantization error. Asymmetric quantization addresses this problem with a zero point, shifting the grid toward the observed data range; however, this flexibility is well-known to carry a runtime penalty. For example, in llama.cpp on an AMD EPYC(TM) \"Turin\" CPU, a 4-bit symmetric format uses up to 9% less memory with up to 2.45$\\times$ higher throughput than its asymmetric counterpart. We highlight signed symmetric quantization as a third option that retains the runtime profile of symmetric quantization without the penalty of the asymmetric format: our signed absmax grid places the extra representable value on the dominant-outlier tail through a principled and lightweight sign selection rule while keeping the zero point at zero. Our theoretical analysis offers two main results. First, we establish the signed absmax grid as conditionally bound-optimal on $\\ell_2$ quantization error, and show that the condition holds for 88-99% of weight groups across pre-trained large language models (LLMs) at low bit widths. Second, we show that negating the scale of a standard symmetric quantizer is analytically equivalent to a unit zero point shift on the same signed integer alphabet. We empirically validate our proposal on models from the Qwen3, Qwen3.5, and Llama3 families, and observe improvement in perplexity and downstream few-shot accuracy over the standard unsigned symmetric quantizer at no extra inference cost",
+      "url": "http://arxiv.org/abs/2607.08779v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08779v1",
+      "tldr": "Signed symmetric quantization leverages a principled sign selection rule to place the extra negative representable value of the signed integer alphabet on the dominant-outlier tail, improving few-bit quantization error without the runtime penalty of asymmetric quantization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AMD"
+      ],
+      "affiliations_text": "AMD",
+      "score": 1.9029400788743893,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.08778v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708778v1-ilens-interpretable-llm-guided-mixture-of-experts-for-neuroimaging-survival-analysis",
+      "source": "arxiv",
+      "title": "iLENS: Interpretable LLM-Guided Mixture-of-Experts for Neuroimaging Survival Analysis",
+      "authors": [
+        "Farica Zhuang",
+        "Seong Woo Han",
+        "Zixuan Wen",
+        "Shu Yang",
+        "Yize Zhao",
+        "Li Shen"
+      ],
+      "authors_text": "Farica Zhuang, Seong Woo Han, Zixuan Wen, Shu Yang, Yize Zhao, Li Shen",
+      "abstract": "Alzheimer's Disease (AD) is a complex neurodegenerative disorder that continues to impact millions of people worldwide. Predicting AD conversion during the prodromal stage remains critical for disease understanding and patient care. As such, survival models are widely used for AD risk prediction, yet they are typically static predictors with limited interpretability and no capacity for natural language reasoning. In this work, we propose iLENS, an interpretable large language model (LLM) guided framework based on mixture-of-experts (MoE) for survival prediction in AD conversion. Our approach uses LLM to synthesize structured neuroimaging measurements and unstructured information to guide expert routing. Our framework demonstrates competitive predictive performance and capability in patient subtyping. Furthermore, our framework provides transparent, biologically grounded rationales for its routing decisions, bridging the gap between high-performance survival analysis and interpretable clinical decision support.",
+      "url": "http://arxiv.org/abs/2607.08778v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08778v1",
+      "tldr": "iLENS introduces an interpretable LLM-guided mixture-of-experts framework for Alzheimer's disease survival analysis that leverages natural language reasoning to route patients to specialized experts, achieving competitive predictive performance and transparent, biologically grounded subtyping.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pennsylvania",
+        "Yale University"
+      ],
+      "affiliations_text": "University of Pennsylvania, Yale University",
+      "score": 1.5011737790973716,
+      "score_text": "1.5"
+    },
+    {
+      "id": "2607.08915v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708915v1-pattern-aware-graph-neural-networks-for-handling-missing-data",
+      "source": "arxiv",
+      "title": "Pattern-Aware Graph Neural Networks for Handling Missing Data",
+      "authors": [
+        "Minett Tran",
+        "Taehee Jeong"
+      ],
+      "authors_text": "Minett Tran, Taehee Jeong",
+      "abstract": "Missing data is ubiquitous in real-world datasets. Traditional methods either discard incomplete samples or apply imputation techniques that ignore potentially informative missingness patterns, implicitly assuming that missingness occurs randomly. However, missingness patterns might provide additional information. We propose pattern-aware graph neural networks that explicitly encode which features are missing alongside observed values. We used four encoding strategies -- learned embeddings, frozen random embeddings, statistical features, and hierarchical representations -- across seven UCI datasets with naturally occurring missingness. Our Pattern-aware methods achieve substantial improvements over baselines, with an average improvement of 17\\% in balanced accuracy and 22\\% in F1-macro across all datasets. The benefits vary significantly by dataset: annealing shows dramatic improvement (+80\\% balanced accuracy), while hepatitis and soybean show minimal gains (+4--5\\%). Notably, even simple random pattern embeddings perform comparably to learned embeddings (0.650 vs 0.663 balanced accuracy), suggesting that distinguishing between patterns may be more important than task-specific optimization. Our ablation study reveals that attention mechanisms, while helpful, are not critical when pattern information is available -- simple mean aggregation with pattern awareness achieves 0.640 balanced accuracy compared to 0.645 for attention-based variants.",
+      "url": "http://arxiv.org/abs/2607.08915v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08915v1",
+      "tldr": "Pattern-aware graph neural networks that explicitly encode missingness patterns achieve substantial improvements over traditional methods (17% balanced accuracy, 22% F1-macro) across diverse datasets, with simple random embeddings performing nearly as well as learned ones, indicating that distinguishing patterns matters more than task-specific optimization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "San Jose State University"
+      ],
+      "affiliations_text": "San Jose State University",
+      "score": 1.4159160189492372,
+      "score_text": "1.4"
+    },
+    {
+      "id": "2607.08785v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/13/260708785v1-dadada-a-dataset-for-data-pricing-in-data-marketplaces",
+      "source": "arxiv",
+      "title": "DaDaDa: A Dataset for Data Pricing in Data Marketplaces",
+      "authors": [
+        "Qiheng Sun",
+        "Hongwei Zhang",
+        "Junxu Liu",
+        "Xiaokai Mao",
+        "Jinfei Liu",
+        "Kui Ren",
+        "Haibo Hu"
+      ],
+      "authors_text": "Qiheng Sun, Hongwei Zhang, Junxu Liu, Xiaokai Mao, Jinfei Liu, Kui Ren, Haibo Hu",
+      "abstract": "High-quality data drives machine learning advances across industries. Recognizing the value of data, data transactions are increasingly common, giving rise to many data marketplaces, e.g., AWS Marketplace, Databricks, and Datarade. However, determining the appropriate prices for data products remains a significant challenge due to the unique properties of data products. Traditional pricing methods in economics can be categorized into the cost approach, the income approach, and the sales comparison approach. The cost approach fails in data pricing due to near-zero marginal cost from data replication, and the income approach fails due to inherently unpredictable data revenue. The sales comparison approach remains viable, yet its application is hindered by the absence of standardized pricing benchmarks for data products across marketplaces. To address this challenge, we introduce \\texttt{DaDaDa}, the first dataset for data product pricing, containing metadata for 16,147 data products from 9 major data marketplaces worldwide. \\texttt{DaDaDa} enables the training of pricing models, thereby establishing price benchmarks for new data products. In addition, \\texttt{DaDaDa} can be utilized for other important tasks in data markets, such as data product classification and retrieval. Experiments and a retrieval prototype demonstrate the effectiveness of \\texttt{DaDaDa} for pricing, classification, and retrieval of data products. The dataset and code are available at https://github.com/ZJU-DIVER/DaDaDa.",
+      "url": "http://arxiv.org/abs/2607.08785v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.08785v1",
+      "tldr": "DaDaDa is the first real-world dataset of 16,147 data products from 9 major marketplaces, enabling sales-comparison-based pricing models, classification, and retrieval to address the lack of standardized pricing benchmarks in data marketplaces.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hong Kong Polytechnic University",
+        "Zhejiang University"
+      ],
+      "affiliations_text": "The Hong Kong Polytechnic University, Zhejiang University",
+      "score": 1.0450459398606942,
+      "score_text": "1.0"
+    }
+  ]
+}
