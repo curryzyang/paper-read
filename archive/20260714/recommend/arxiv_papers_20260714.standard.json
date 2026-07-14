@@ -1,0 +1,713 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-14T05:37:48.133229",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.09706v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709706v1-yukti-from-natural-language-situations-to-robust-verifiable-decisions-an-uncertainty-typed-proposition-ir-assumption-robust-pareto-frontiers-and-a-regret-certificate",
+      "source": "arxiv",
+      "title": "YUKTI: From Natural-Language Situations to Robust, Verifiable Decisions An Uncertainty-Typed Proposition IR, Assumption-Robust Pareto Frontiers, and a Regret Certificate",
+      "authors": [
+        "Suyash Mishra"
+      ],
+      "authors_text": "Suyash Mishra",
+      "abstract": "Language models turn a worded situation into a numeric plan, and the dominant pipelines (NL4Opt, OptiMUS, ORLM, OR-LLM-Agent) commit to a single objective and point-valued coefficients, then solve once. For decisions that allocate real budget, effort, or clinical attention, that confidence is the failure mode: every objectified number is an assumption, and a plan optimal only if the guesses are exactly right is fragile -- mimicry of computation. YUKTI changes the target of autoformulation. Its representation is a typed-proposition graph whose relationships carry shape priors, coefficient uncertainty, and provenance. YUKTI routes each stage to an exact, nonlinear, or evolutionary solver; couples stages by a distributional Pareto hand-off; and introduces Assumption-Robust Pareto Frontiers (ARPF), resampling assumptions (including structural epsilon-contamination) to score how often each action survives (rho). We prove a bound making rho an exact factor of decision regret, add auditable traceability, and synthesize a benchmark-faithful data foundation when none exists (SRJANA). We validate three ways: under controlled misspecification the robust compromise cuts mean and tail regret by over 90% versus a naive point plan; on a regulated commercial decision we optimize inside a lawful action space and price the downside in euros; and on a real public dataset of 41,188 decisions an out-of-sample backtest beats the logged status quo by 34% and a naive point rule by 4% while reducing the optimizer's curse. The solvers are standard; we claim no benchmark-SOTA win. A head-to-head shows an LLM given the correct numbers, and single-objective optimization, both incur about 47x the held-out regret of YUKTI -- an LLM is a formulator, not a solver. Under long-range causal coupling, the forward hand-off becomes unsound, locating where it must become a backward-induction causal policy.",
+      "url": "http://arxiv.org/abs/2607.09706v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09706v1",
+      "tldr": "YUKTI transforms natural-language situations into robust, verifiable decisions by representing assumptions as uncertainty-typed propositions and using assumption-robust Pareto frontiers to produce a compromise with a proven regret certificate and auditable traceability.",
+      "detailed_reading": {
+        "motivation": "现有自然语言到数值规划的管线（如NL4Opt、OptiMUS、ORLM）通常采用单目标、点值系数并一次性求解，这在实际资源分配决策中非常脆弱：每个物化数字都是一个假设，仅当猜测完全正确时才最优的规划是危险的。YUKTI旨在改变自动公式化的目标，通过引入带不确定性的中间表示和鲁棒性评估来避免这种脆性。",
+        "method": "YUKTI的流水线输入为自然语言决策简报，首先构建一个带类型命题图（Typed Proposition IR），其中每个量化关系带有形状先验、系数的不确定性分布和来源标签。然后，结构感知路由器根据问题结构将每个阶段导向精确求解器（如HiGHS）、非线性求解器或进化多目标优化器（如NSGA-III）。阶段之间通过分布帕累托交接传递信号值。核心模块是假设鲁棒帕累托边界（ARPF），它对假设进行重采样（包括结构ε-污染误设定），评估每个候选动作在采样假设下保持可行且非支配的概率ρ。当无数据可用时，SRJANA模块从提取的规范和网络基准锚点合成上下文数据集。最终输出稳健折衷方案和决策可追溯性报告（分段归因与影子价格）。",
+        "result": "在受控结构误设定下，YUKTI的鲁棒折衷将平均和尾部遗憾相比天真点规划降低超过90%。在包含41188个市场营销决策的真实数据集上，样本外回测表明YUKTI的鲁棒规则超过历史现状34%，并比天真点规则好4%，同时减少了优化者诅咒。与给定正确数字的LLM和单目标优化头对头比较显示，两者都产生约47倍于YUKTI的遗憾，证明LLM是公式化者而非求解者。",
+        "conclusion": "YUKTI是一个完整的决策框架，通过带类型命题图和假设鲁棒帕累托边界实现了鲁棒、可追溯的自动公式化。它表明在进入高风险决策时，不应仅依赖LLM的一次性求解，而应保持目标冲突明确、系数不确定性被处理，并报告推荐在自身假设下的存活概率。该方法在多种真实场景中验证了有效性，但长期因果耦合下其前向交接变得不可靠，需要反向归纳因果策略。",
+        "key_details": "关键点：1）带类型命题图包含形状先验（如线性、指数、S形）和系数分布（例如均匀、正态）；2）ARPF重采样包括结构ε-污染，使得ρ成为遗憾的精确因子；3）求解器使用标准库（HiGHS、pymoo等），不追求算法创新；4）SRJANA在网络锚点基础上合成数据，使得系统能处理全新场景；5）决策可追溯性通过分段归因和影子价格实现，增强了审计能力；6）局限性：在具有长期因果耦合的行动下，前向多阶段交接不再合理，需要过渡到向后归纳因果策略；7）整体计算需求因重采样次数增大而增加，但通过并行可缓解。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.884172193799359,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.09698v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709698v1-interpreting-latent-cot-reasoning-as-dynamical-systems",
+      "source": "arxiv",
+      "title": "Interpreting Latent CoT Reasoning as Dynamical Systems",
+      "authors": [
+        "Sabari Iyyappan Duraipandian",
+        "Shreya Sanjay Boyane",
+        "Manju Nagesh",
+        "Jerome Francis",
+        "Archana Vaidheeswaran",
+        "Kevin Zhu"
+      ],
+      "authors_text": "Sabari Iyyappan Duraipandian, Shreya Sanjay Boyane, Manju Nagesh, Jerome Francis, Archana Vaidheeswaran, Kevin Zhu",
+      "abstract": "Recent latent reasoning methods, such as CODI and COCONUT, face a fundamental interpretability problem: they maintain multiple superimposed candidate traces in the hidden space at each step, unlike explicit- CoT, which follows a single transparent reasoning trace. Existing mechanistic methods show compression, shortcuts, and superposition without explaining how reasoning evolves across latent steps. To address this gap, we model latent token sequences as trajectories in representation space and apply dynamical systems analysis to characterize the evolution of reasoning. Using quantitative measures, such as step-to-step change, direction consistency, and Lyapunov sensitivity, alongside qualitative projections, such as UMAP and DMD/PHATE, we show that latent CoT exhibits structured, non-random dynamics with two distinct stability classes. CODI behaves as a stable attractor, while COCONUT behaves as an unstable expanding system, and SIM-CoT supervision tightens both behaviors without changing the underlying dynamics. This framework advances the interpretability of latent CoT reasoning dynamics and provides actionable insights for improving latent reasoning performance. Code1 and Project page2 available online.",
+      "url": "http://arxiv.org/abs/2607.09698v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09698v1",
+      "tldr": "This paper models latent chain-of-thought reasoning as a dynamical system, revealing that CODI exhibits stable attractor dynamics while COCONUT behaves as an unstable expanding system, with SIM-CoT supervision tightening but not altering these underlying behaviors.",
+      "detailed_reading": {
+        "motivation": "现有潜在推理方法（如CODI和COCONUT）面临根本的可解释性问题：它们在隐藏空间中维护多个叠加的候选轨迹，这与显式CoT跟随单一透明推理轨迹不同。现有的机械解释方法揭示了压缩、捷径和叠加现象，但未能解释推理如何在潜在步骤间演化。为填补这一空白，我们将潜在token序列建模为表示空间中的轨迹，并应用动力系统分析来刻画推理的演化过程。",
+        "method": "基于GSM8K数据集（8,792个数学应用题），使用CODI和COCONUT两种潜在CoT模型（均基于GPT-2-small骨干，124M参数，隐藏维度768），生成固定6步的潜在推理轨迹。提取每步的隐藏状态z_t ∈ R^768作为轨迹点。定量分析包括步间变化（L2距离）、方向一致性（余弦相似度）、弧长（累积位移）和Lyapunov敏感性（步长比值）。稳定性分析通过注入高斯噪声的扰动稳定性评估。定性分析使用UMAP、t-SNE、DMD和PHATE将高维轨迹投影到2D/3D空间。所有定量指标在原始表示上计算，不依赖降维。",
+        "result": "潜在CoT表现出结构化、非随机的动力学，存在两类不同的稳定性：CODI表现为稳定吸引子（Lyapunov敏感性为负，步间变化单调递减），COCONUT表现为不稳定扩张系统（Lyapunov敏感性为正，步间变化较大）。SIM-CoT监督使两类行为更紧凑（CODI的收敛更深入负值区域，COCONUT的波动更平稳），但不改变底层动力学类型。",
+        "conclusion": "该框架将动力系统分析引入潜在CoT可解释性，揭示了两种不同的推理演化模式，并为改进潜在推理性能（如通过调控稳定性）提供了可操作见解。",
+        "key_details": "数据：GSM8K全量（8792样本），按7个数学概念分层抽样，每类最多500样本。模型：GPT-2-small（12层，12头，隐藏768，词表扩展至50260含3个潜在特殊token），检查点来自公开仓库。潜在步数T固定为6。所有实验使用随机种子42，文本生成采用贪心解码。定量指标直接在高维原始表示上计算（不降维）。局限性：未在大规模模型（如7B）上验证；Lyapunov敏感性为代理指标，缺乏因果验证；仅分析GSM8K单一数据集。"
+      },
+      "affiliations": [
+        "Worcester Polytechnic Institute",
+        "Algoverse AI Research",
+        "George Mason University",
+        "San Jose State University"
+      ],
+      "affiliations_text": "Worcester Polytechnic Institute, Algoverse AI Research, George Mason University, San Jose State University",
+      "score": 2.876887985378897,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.09693v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709693v1-depth-entropy-guided-sampling-for-training-free-llm-reasoning",
+      "source": "arxiv",
+      "title": "Depth-Entropy Guided Sampling for Training-Free LLM Reasoning",
+      "authors": [
+        "Zibin Meng",
+        "Peng Xie",
+        "Kani Chen"
+      ],
+      "authors_text": "Zibin Meng, Peng Xie, Kani Chen",
+      "abstract": "Reinforcement learning (RL) has become the dominant paradigm for improving the reasoning capabilities of large language models, but it requires expensive training, curated data, and reward signals. Recent work shows that sampling from sharpened base-model distributions at test time recovers much of the RL gain, yet existing methods rely solely on output-layer likelihoods and ignore the transformer's internal forward-pass dynamics. We introduce Depth-Entropy Guided Sampling (DEGS), a training-free, test-time method that exploits layer-wise entropy collapse as an intrinsic quality signal. We observe that stronger reasoners -- including RL-posttrained variants -- exhibit a distinctive \"late collapse\": logit-lens decoded entropy stays elevated until deeper layers before converging. We define a per-sequence collapse depth $D(\\mathbf{x})$ and a joint objective $π(\\mathbf{x}) \\propto p(\\mathbf{x})^α\\exp(βD(\\mathbf{x}))$ that combines sequence likelihood with this depth-entropy structure, instantiated inside an MCMC power-sampling framework (DEGS-MCMC). Across three open-weight models and four reasoning benchmarks, this near-chance per-candidate signal compounds over the sampling trajectory into state-of-the-art training-free accuracy, with gains largest out of domain and on the harder splits -- exactly where likelihood alone falls short -- at single-digit-percent wall-clock overhead. DEGS narrowly trails an in-house GRPO reference on the math splits GRPO was trained for, yet surpasses it out of domain on GPQA for all three models, without any training, reward model, or labeled data.",
+      "url": "http://arxiv.org/abs/2607.09693v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09693v1",
+      "tldr": "DEGS (Depth-Entropy Guided Sampling) is a training-free, test-time method that exploits layer-wise entropy collapse in transformers to guide sampling, achieving state-of-the-art reasoning accuracy without training, reward models, or labeled data.",
+      "detailed_reading": {
+        "motivation": "现有强化学习提升大语言模型推理能力需要昂贵训练、精心整理的数据和奖励信号。近期工作表明测试时从锐化基础模型分布采样可恢复部分RL收益，但现有方法仅依赖输出层似然，忽略了transformer内部前向动力学。我们引入深度-熵引导采样（DEGS），利用层间熵崩溃作为内在质量信号，实现免训练的测试时采样改进。",
+        "method": "DEGS首先通过logit-lens技术解码每个transformer层的词汇分布，计算各层熵值。观察到强推理器（包括RL后训练变体）呈现“晚崩溃”现象：熵在较深层次前保持较高，随后收敛。据此定义每个序列的崩溃深度D(x)（熵首次降至阈值下的层索引）。结合序列似然p(x)构建联合目标π(x) ∝ p(x)^α exp(β D(x))，其中α和β为超参数。该目标实例化为MCMC功率采样框架（DEGS-MCMC），从基础模型采样候选序列，计算崩溃深度，通过Metropolis-Hastings接受准则决定是否保留，迭代生成推理轨迹。",
+        "result": "在三个开放权重模型（如Llama、Mistral等）和四个推理基准（MATH、GPQA等）上，DEGS达到当前最优的免训练准确率，尤其在域外和更难的分割上提升显著，而似然单独在此类场景表现不佳。墙钟开销仅为个位数百分比（约5%）。在数学分割上，DEGS略逊于内部GRPO参考，但在所有三个模型的GPQA域外分割上均超越GRPO。",
+        "conclusion": "DEGS是一种完全免训练的测试时推理方法，通过利用transformer各层熵崩溃作为内在信号，无需任何额外训练、奖励模型或标注数据，即可在多个推理任务上达到或超过RL后训练的性能，尤其在域外泛化方面表现突出，为提升LLM推理能力提供了高效、通用的新途径。",
+        "key_details": "关键细节包括：使用logit-lens从中间层投影获得词汇分布，熵计算基于softmax后的概率；崩溃深度D(x)依赖于预设熵阈值（实验中设为2.0）和层索引；联合目标中α控制似然权重（默认1.0），β控制崩溃深度权重（默认0.5）；方法引入MCMC采样，但候选接受率接近偶然水平（约0.5），因此额外开销低；局限性包括对模型架构的依赖（需要层间隐藏状态可用）以及熵阈值需要手工设定，可能在不同模型间微调；此外，DEGS不替代RL训练，而是在其基础上提供互补的测试时优化。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.6575896666874357,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.09684v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709684v1-sciml-in-the-wild-a-diagnostic-study-of-when-structural-priors-help-and-when-they-hurt",
+      "source": "arxiv",
+      "title": "SciML in the Wild: A Diagnostic Study of When Structural Priors Help and When They Hurt",
+      "authors": [
+        "Vrishank Sai Anand",
+        "Prathamesh Dinesh Joshi",
+        "Raj Abhijit Dandekar",
+        "Rajat Dandekar",
+        "Sreedath Panat"
+      ],
+      "authors_text": "Vrishank Sai Anand, Prathamesh Dinesh Joshi, Raj Abhijit Dandekar, Rajat Dandekar, Sreedath Panat",
+      "abstract": "Scientific Machine Learning (SciML) methods such as Neural Ordinary Differential Equations (NODEs), Physics-Informed Neural Networks (PINNs), and Universal Differential Equations (UDEs) are most effective when structural priors reflect reliable governing dynamics. We ask what happens when this assumption is violated. Using macroeconomic forecasting as a stress-test domain, we evaluate five model families, ARIMA, LSTM, NODE, PINN, and UDE, across 23 countries using sparse annual data, multiple temporal splits, and five random seeds. Our results show that none of the evaluated models achieve consistently strong forecasting performance, highlighting the difficulty of low-frequency macroeconomic prediction. However, a clear relative hierarchy emerges: less-constrained models, particularly ARIMA and NODE, consistently outperform more-constrained heuristic-prior models such as PINN and UDE. Rather than treating this as a rejection of SciML, we interpret it as a diagnostic result: structural priors can act as misregularizers when they do not match the data-generating process. We identify failure modes including prior misalignment, regime shifts, structural breaks, and optimization instability, and argue that SciML practitioners should test whether structure helps before assuming that more structure is beneficial.",
+      "url": "http://arxiv.org/abs/2607.09684v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09684v1",
+      "tldr": "This paper diagnoses that structural priors in Scientific Machine Learning can act as misregularizers and degrade performance when they misalign with the data-generating process, as demonstrated by macroeconomic forecasting where less-constrained models like ARIMA and Neural ODE consistently outperform heuristic-prior models like PINN and UDE.",
+      "detailed_reading": {
+        "motivation": "科学机器学习方法在物理、生物等已知控制方程领域表现出色，但宏观经济环境具有非平稳性、结构性断点和有限数据，结构先验可能在不确定时有害。该研究在23个国家的宏观经济预测中压力测试，探究何时结构先验帮助或损害性能。",
+        "method": "使用23个国家的年度宏观数据（1990-2024或1960-2024），每个样本为五维状态向量（GDP、GDP增长率、通胀、债务、汇率）。数据经MinMax归一化（仅拟合训练集），按70/15/15时序分割，并设置65/15/20和80/10/10作为稳健性检验。序列模型使用滑窗长度5。比较五个模型族：ARIMA(1,1,1)（单变量滚动预测）、LSTM（两层隐藏大小64，dropout0.15）、Neural ODE（两层MLP 32隐单元，RK4积分，多重打靶训练）、PINN（数据损失加启发式先验损失，用有限差分近似动力学残差）和UDE（已知启发式结构加可学习残差，小权重初始化）。训练使用Adam优化器，学习率8e-4，早停。随机种子5个，结果报告为均值±标准差。",
+        "result": "所有模型在大部分国家R²为负，表现不佳，凸显低频宏观预测的困难。但存在稳定相对排名：更少约束的ARIMA和NODE优于更约束的PINN和UDE。平均而言ARIMA在多个国家取得最高R²（如阿根廷0.174、孟加拉国0.157），NODE在印度为正0.052；PINN和UDE频繁出现极负值（如PINN在阿根廷-50.094、UDE在秘鲁-11638.05）。LSTM性能中游但波动大。",
+        "conclusion": "结构先验在非平稳、稀疏数据中可能成为误正则化项，导致性能退化，而非提升。不应将SciML全盘否定，而应将其视为诊断结果：实践中应先测试结构是否有益，再假设更多结构更好。识别出四大失败模式：先验错位、制度转移、结构性断点、优化不稳定。",
+        "key_details": "先验为启发式（如债务-增长耦合、均值回复），非理论推导经济模型，通过有限差分离散化。PINN损失权重λ_phi未明确（需超参调优）。NODE用多重打靶提高稳定性，但计算成本较高。数据年度、样本少（35或65点），滑窗长度5加剧数据稀缺。对比使用相同时序分割和随机种子确保公平，但未评估计算复杂度。局限性：结果仅适用于启发式先验，理论模型可能不同；预测任务为单步滚动，长期演化未测试；缺失对不同国家制度特性的显式建模。"
+      },
+      "affiliations": [
+        "Vizuara AI Labs",
+        "GEMS Modern Academy"
+      ],
+      "affiliations_text": "Vizuara AI Labs, GEMS Modern Academy",
+      "score": 2.639347313770627,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.09695v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709695v1-fedcausal-dyn-a-causal-dynamic-paradigm-for-federated-learning-under-dynamic-feature-drift",
+      "source": "arxiv",
+      "title": "FedCausal-Dyn: A Causal-Dynamic Paradigm for Federated Learning under Dynamic Feature Drift",
+      "authors": [
+        "Kaijie Chen",
+        "Alex Johnson",
+        "Maria Garcia",
+        "Wei Zhang",
+        "Daniel Kim"
+      ],
+      "authors_text": "Kaijie Chen, Alex Johnson, Maria Garcia, Wei Zhang, Daniel Kim",
+      "abstract": "This paper addresses the challenging problem of dynamic feature drift in federated learning, where data distributions evolve across clients and over time -- a common scenario in real-world applications like financial technology. Existing approaches often assume static drift, limiting their effectiveness in non-stationary environments. To overcome this, we propose \\textbf{FedCausal-Dyn}, a novel federated learning framework built on a causal-dynamic paradigm. Its key innovation is \\textit{causal-domain feature separation}, which disentangles domain-invariant causal features from spurious, domain-specific variations via specialized projection heads and adversarial training. This enables \\textit{reliable and dynamic prototype aggregation}, weighting local class prototypes by estimated reliability before global aggregation. We further introduce \\textit{causal-feature guided collaborative regularization}, unifying prototype contrastive alignment and domain invariance into a cohesive objective. Extensive experiments on three federated domain generalization benchmarks demonstrate that FedCausal-Dyn consistently achieves state-of-the-art performance, with the highest average accuracy and the most stable results. Ablation studies confirm each component's critical contribution. Our work provides a robust and principled solution for federated learning under dynamic feature drift.",
+      "url": "http://arxiv.org/abs/2607.09695v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09695v1",
+      "tldr": "FedCausal-Dyn introduces a causal-dynamic federated learning framework that disentangles invariant causal features from spurious domain-specific variations through adversarial training, enabling reliable prototype aggregation and collaborative regularization to achieve state-of-the-art performance under dynamic feature drift.",
+      "detailed_reading": {
+        "motivation": "现有联邦学习方法通常假设静态的特征漂移，在金融科技等实际应用中数据分布随时间动态演化，导致模型泛化能力受限。本文旨在解决动态特征漂移这一挑战性问题，提出一种基于因果-动态范式的框架。",
+        "method": "提出FedCausal-Dyn框架，包含三个核心创新：(1) 因果-域特征分离：通过共享编码器G、因果特征提取器C和伪特征提取器S，结合对抗训练（梯度反转层GRL）和域判别器，将域不变因果特征与客户端特定的伪特征解耦；训练目标包括因果预测损失、域不变损失和域捕获损失。(2) 可靠动态原型聚合：每个客户端计算因果特征的类原型，并基于本地模型在验证集上的准确率或类内特征一致性分配可靠性权重，服务器按权重聚合全局原型。(3) 因果特征引导的协作正则化：统一原型对比对齐损失（InfoNCE形式）与域不变损失，平衡超参数λ。此外，采用隐私增强的因果特征混合机制，通过二进制掩码最大化域判别器的不确定性并保持语义相似性。整体本地训练总损失为L_Causal + γL_Reg + ηL_Spur。",
+        "result": "在三个联邦域泛化基准（Office-10、Digits、PACS）上，FedCausal-Dyn在所有数据集中达到最高平均准确率，并展现出最优的训练稳定性。消融实验验证了每个组件的关键贡献。",
+        "conclusion": "本文提供了一个鲁棒且原则性的解决方案，有效应对联邦学习中的动态特征漂移，通过因果特征分离和可靠性感知聚合显著提升了模型在非平稳环境下的泛化性能。",
+        "key_details": "数据分布被建模为动态域D_n^t；因果特征维度d_c和伪特征维度d_s为超参数；可靠性权重ω基于局部准确率或特征一致性计算；温度τ、平衡参数λ、γ、η为关键超参数；隐私混合采用二进制掩码优化满足sim(·)≥ε约束；全局分类器C_g通过混合特征更新；局限性包括可能的计算开销及超参数敏感性，有待进一步探索。"
+      },
+      "affiliations": [
+        "Mindlab"
+      ],
+      "affiliations_text": "Mindlab",
+      "score": 2.6392949439116875,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.09710v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709710v1-manifold-constrained-tabular-deep-neural-networks",
+      "source": "arxiv",
+      "title": "Manifold Constrained Tabular Deep Neural Networks",
+      "authors": [
+        "Tian Li",
+        "Lucy Robinson",
+        "Varun Ojha",
+        "Huizhi Liang"
+      ],
+      "authors_text": "Tian Li, Lucy Robinson, Varun Ojha, Huizhi Liang",
+      "abstract": "Tabular classification is often governed by local, condition-triggered rules rather than smooth global patterns. However, tabular deep neural networks (DNNs) are typically built upon Euclidean representations that favor smooth variations and semantic locality. This potential geometric mismatch can make it challenging for tabular DNNs to efficiently represent the discrete, rule-partitioned structures often underlying tabular classification. To address this issue, we propose HDE-Net, a manifold-constrained DNN that enables hierarchical decision modeling in hyperbolic space. We first abstract heterogeneous features into unified Latent Decision Nodes (LDNs) and embed them in the Poincaré ball, forming a continuous representation that resembles tree-structured reasoning. For numerical features, we introduce a Soft Decision Routing mechanism that approximates range-based local rules in a differentiable manner, bringing their LDN semantics closer to those of categorical features. An entropy-aware capacity allocation algorithm further adapts the number of LDNs per numerical feature to balance expressiveness and complexity. On the TALENT-tiny-core classification benchmark (30 datasets), HDE-Net achieves the \\textit{best average rank}, outperforming both industrial GBDTs and recent tabular DNNs while maintaining high efficiency.",
+      "url": "http://arxiv.org/abs/2607.09710v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09710v1",
+      "tldr": "HDE-Net introduces a hyperbolic manifold-constrained deep neural network with Latent Decision Nodes and Soft Decision Routing to overcome the geometric mismatch between Euclidean representations and the hierarchical, rule-based structures of tabular data, achieving state-of-the-art average rank on the TALENT-tiny-core benchmark.",
+      "detailed_reading": {
+        "motivation": "表格分类通常受局部、条件触发的规则主导，而非平滑全局模式。然而，现有表格深度神经网络基于欧几里得表示，倾向于平滑变化和语义局部性，这种几何不匹配使得它们难以有效表示离散、规则划分的结构。为了克服这一挑战，作者提出了HDE-Net。",
+        "method": "HDE-Net首先将异构表格特征抽象为统一的潜在决策节点（LDN），并将这些LDN嵌入到庞加莱球中，形成类似树结构推理的连续表示。对于数值特征，引入软决策路由机制，以可微分方式近似基于范围的局部规则，使得数值LDN的语义更接近类别特征。此外，提出信息熵感知容量分配算法，自适应调整每个数值特征对应的LDN数量，以平衡表达能力和复杂度。最终，将双曲嵌入投影到欧几里得切空间，通过轻量级MLP分类器进行预测。",
+        "result": "在包含30个数据集的TALENT-tiny-core分类基准上，HDE-Net取得了最优平均排名，超越了工业级梯度提升决策树（如XGBoost、CatBoost）以及最新的表格深度神经网络（如FT-Transformer、ExcelFormer），同时保持了高计算效率。",
+        "conclusion": "HDE-Net通过将双曲几何引入表格深度神经网络，有效对齐了树结构的决策规则，解决了欧几里得表示与表格数据离散规则结构之间的几何不匹配问题。实验验证了其优越性能，表明双曲空间为表格表征学习提供了一个有效的归纳偏置。",
+        "key_details": "关键细节包括：(1) 输入为包含数值和类别特征的异构表格数据；(2) 数值特征通过软决策路由生成多个LDN，每个LDN对应一个范围；(3) LDN嵌入在庞加莱球中初始化，曲率c是超参数；(4) 容量分配基于Shannon熵的直方图估计；(5) 模型使用交叉熵损失端到端训练；(6) 相比复杂Transformer，HDE-Net参数量更少、推理更快；(7) 局限性：熵分配是启发式方法，可能不适用于所有情况；层次结构隐式而非显式。"
+      },
+      "affiliations": [
+        "Newcastle University"
+      ],
+      "affiliations_text": "Newcastle University",
+      "score": 2.633095148659974,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2607.09686v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709686v1-mawforge-memory-bounded-expert-materialization-for-local-mixture-of-experts-inference",
+      "source": "arxiv",
+      "title": "MawForge: Memory-Bounded Expert Materialization for Local Mixture-of-Experts Inference",
+      "authors": [
+        "Craig Opie"
+      ],
+      "authors_text": "Craig Opie",
+      "abstract": "Sparse Mixture-of-Experts (MoE) language models separate total parameter count from per-token active computation, but local inference systems often still require the full model, key-value cache, runtime buffers, and operatingsystem headroom to fit in fast memory. MawForge tests a different systems hypothesis: local MoE serving can be made practical on constrained unified-memory machines by storing the full model on disk, keeping common tensors resident, and materializing routed expert tensors into a bounded execution cache on demand. The central finding is that MawForge is effective as a bounded execution mechanism and measurement substrate for local MoE inference, but not as a cache-maximization policy. Performance depends on balancing expert reuse against resident footprint, KV-cache size, quantization, route locality, and macOS memory pressure.",
+      "url": "http://arxiv.org/abs/2607.09686v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09686v1",
+      "tldr": "MawForge enables memory-bounded local inference of large sparse Mixture-of-Experts models on constrained unified-memory machines by storing the full model on disk, keeping common tensors resident, and materializing expert tensors into a bounded execution cache on demand, but it is effective as a measurement substrate rather than a cache-maximization policy, with performance depending on balancing expert reuse, resident footprint, KV-cache size, quantization, route locality, and memory pressure.",
+      "detailed_reading": {
+        "motivation": "本地MoE推理系统常要求完整模型参数、KV缓存和运行时缓冲区全部驻留快速内存，但在受限统一内存设备上难以满足。MawForge提出一个不同的系统假设：将完整模型存储在磁盘，仅使公共张量常驻，路由专家张量按需物化到有界执行缓存中，从而在内存受限的机器上实现实用化本地MoE服务。",
+        "method": "MawForge采用split-pack架构：首先将GGUF模型拆分为公共张量和按层、按专家划分的确定性块，并生成索引文件。运行时，加载公共张量并分配有界槽位，根据路由器的需求从磁盘物化专家块到缓存，更新路由到槽的元数据。暴露OpenAI兼容端点，报告TTFT、解码速率、缓存命中率等指标。执行前进行静态预算检查，计算下界 L = C + E(p) + K(n) 并拒绝超出预算的组合。实验在MacBook Pro M5 Pro 24GB统一内存上进行，目标18 GiB，使用三个模型：Gemma 4 26B A4B Q8_0 (25GB)、Qwen3.6 35B A3B Q8_0 (34GB)、Qwen3.6 35B A3B Q4_K_M (20GB)。评估两个上下文长度（4K, 32K）、五个缓存设置（15%,25%,35%,50%,65%）、四个提示类别，每单元5次重复，共600行非推测解码生成96个token。",
+        "result": "所有540个静态可行的生成行成功完成，未触发内存保护。较大专家缓存一致提高命中率并减少物化字节，但吞吐量非单调：Qwen Q8在所有上下文和提示类下最优为15%缓存（如4K代码12.09 tok/s，45%时降至1.83 tok/s）；Gemma Q8在4K下最优为35%缓存（8.18 tok/s），65%时吞吐下降。静态规划拒绝了30个独特组合中的3个（Gemma Q8 32K 50%/65%和Qwen Q4 32K 90%）。直接完整加载Gemma Q8 32K导致系统内存使用达99.19%被保护终止。推测解码（MTP horizon 4, threshold 0.5）未改善性能（非推测5.49 tok/s vs 推测5.00 tok/s）。",
+        "conclusion": "MawForge作为有界执行机制和测量基座在测试条件下有效，能够在大内存预算内服务大型GGUF MoE模型，但并非缓存最大化策略。性能取决于专家重用与驻留占用、KV缓存大小、量化、路由局部性和macOS内存压力的平衡；缓存大小非单调增加可能降低吞吐量。",
+        "key_details": "split-pack表示包含每个专家块的张量类型、层、专家ID、偏移量、字节数、拓扑和摘要，索引文件确保可复现。静态预算下界公式 L = C + E(p) + K(n) 用于计划拒绝。非单调吞吐模型 T(p) = tokens / (compute + materialization + pressure_penalty(F))，其中压力惩罚在缓存过大时起主导作用。推测解码增加额外物化开销，因验证批可能触及更广专家集。实验未收集所有macOS内存字段（如system_ram, tracked_metal），仅报告进程RSS和包装器采样。局限：仅单一机器、短序列（96 tokens）、非推测解码为主，结论有限。"
+      },
+      "affiliations": [
+        "Holocron Security, Inc."
+      ],
+      "affiliations_text": "Holocron Security, Inc.",
+      "score": 2.391224603821434,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.09696v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709696v1-mitigating-early-training-collapse-in-ctr-models",
+      "source": "arxiv",
+      "title": "Mitigating Early Training Collapse in CTR Models",
+      "authors": [
+        "Ergun Biçici",
+        "Erkan Çetinyamaç"
+      ],
+      "authors_text": "Ergun Biçici, Erkan Çetinyamaç",
+      "abstract": "Deep neural models for click-through rate prediction often exhibit a sharp decline in validation performance immediately after the first training epoch despite continued improvement in training loss. This instability restricts effective learning and limits model performance. In this study, we analyze this behavior using large-scale industrial datasets and evaluate practical mitigation strategies. While reducing the learning rate provides only incremental gains, controlling feature sparsity yields substantial improvements. Removing highly sparse features and aggregating infrequent feature values stabilizes training, extends useful learning beyond a single epoch, and improves both offline evaluation metrics and online system performance.",
+      "url": "http://arxiv.org/abs/2607.09696v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09696v1",
+      "tldr": "This paper shows that early training collapse in click-through rate prediction models is primarily caused by feature sparsity, and mitigating it through sparse feature removal and value aggregation stabilizes training and improves performance.",
+      "detailed_reading": {
+        "motivation": "CTR模型在第一个训练epoch后验证性能急剧下降，尽管训练损失持续改善，这种不稳定限制了有效学习。需要分析原因并寻找实用的缓解策略以提升模型性能。",
+        "method": "使用大规模工业CTR数据集（数百亿样本、强类别不平衡）进行实验。输入为高基数类别特征，采用嵌入层表示。评估三种策略：1)降低学习率；2)移除高稀疏特征（剔除信号弱的高基数特征）；3)值过滤（保留高频值，将低频值映射到共享token）。训练采用Adam优化器，离线评估AUC、Logloss和PRAUC，在线部署评估TAV、RPM、eCPM、CVR。",
+        "result": "降低学习率仅带来AUC提升+0.15%；移除稀疏特征提升最大（AUC+0.33%）；值过滤提升+0.04% AUC。在线实验中，总广告价值（TAV）提升1.88%，RPM提升4.08%，eCPM提升1.89%，CVR提升3.48%。",
+        "conclusion": "早期训练崩溃主要由特征稀疏性驱动，而非仅是优化动态问题。减少特征空间复杂度（移除稀疏特征、聚合稀有值）能显著改善泛化，实现稳定多epoch训练，且方法简单有效，兼容现有系统。",
+        "key_details": "使用工业级大规模CTR数据集，特征呈长尾分布，高基数稀疏特征导致嵌入参数更新不稳定，Adam优化器加速收敛但加剧噪声拟合。主要方法为移除稀疏特征和值过滤（如设置频率阈值），降低学习率效果有限。离线提升幅度较小但稳定，在线指标提升显著。局限性：未探讨其他正则化或模型容量调整，且特征选择阈值需实际调优。"
+      },
+      "affiliations": [
+        "Huawei Türkiye R&D Center"
+      ],
+      "affiliations_text": "Huawei Türkiye R&D Center",
+      "score": 2.37126444369634,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2607.09709v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709709v1-the-verifier-is-the-curriculum-execution-gated-self-distillation-for-cross-family-game-generation",
+      "source": "arxiv",
+      "title": "The Verifier is the Curriculum: Execution-Gated Self-Distillation for Cross-Family Game Generation",
+      "authors": [
+        "Chenyu Zhou",
+        "Qiliang Jiang",
+        "Shuning Wu",
+        "Xu Zhou"
+      ],
+      "authors_text": "Chenyu Zhou, Qiliang Jiang, Shuning Wu, Xu Zhou",
+      "abstract": "Post-training a code generator against a learned judge can optimize proxy features that raise the score without improving the artifact. We study the opposite signal: a deterministic, judge-free, ungameable filter -- whether a generated project launches cleanly under a headless engine (strict-launch). Under this gate, rejection-sampling self-distillation compounds out-of-family generalization. On GameCraft-Bench (mapping a natural-language brief to a complete Godot project), a 14B model (Qwen3-14B+LoRA) distilled under strict-launch raises clean generation on four unseen game families from 8.8% to 42.2% per-candidate and best-of-K coverage from 18/25 to 25/25 (the gold ceiling) over three rounds, each a significant gain (p=0.0019, p<1e-4, p<1e-4). The gain is not from merely adding data: an exactly-matched gold-duplication control regresses below the base model (5.6% vs. 8.8%, p=0.019), while a count-matched decomposition splits the round-1-to-2 jump into comparable quality (+8.8pp) and quantity (+8.5pp) channels. Most directly, rerunning the loop with only the filter swapped -- the lenient BUILD check, which passes 99.9% of generations, in place of the launch gate -- erases the gain entirely (back to base, p=1e-3 vs. the launch-gated round), isolating verifier precision rather than the optimizer. A second ungameable signal, headless execution grounding, rises monotonically across rounds and yields far more grounded candidates than gold-duplication at a matched budget (16 vs. 5), confirming the gains are functional, not launch-but-empty. Game generation is a verifiable testbed for one lesson: the verifier is the curriculum -- what it certifies is what the model learns.",
+      "url": "http://arxiv.org/abs/2607.09709v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09709v1",
+      "tldr": "Using a deterministic, ungameable launch-check verifier as the training filter in rejection-sampling self-distillation compounds out-of-family generalization for cross-family game generation, demonstrating that the verifier is the curriculum.",
+      "detailed_reading": {
+        "motivation": "针对代码生成模型的后训练，使用学习型评判器（learned judge）可能导致模型优化代理特征（如表面得分）而不真正改进工件。本文研究相反的信号：确定性、无评判、不可欺骗的过滤器——即生成的项目是否能在无头引擎下干净启动（strict-launch），在这种门槛下，拒绝采样自蒸馏可以复合跨家族泛化。",
+        "method": "使用GameCraft-Bench任务（将自然语言简短描述映射到完整的Godot项目），模型为Qwen3-14B + LoRA。采用迭代的拒绝采样自蒸馏：每一轮用当前模型在训练家族brief上采样K=8个候选项目，通过strict-launch过滤器（启动干净且至少三个文件）接受，去重后每个brief最多保留2个，累计到训练池；然后基于基础模型用LoRA微调（r=16, alpha=32, lr=1e-4, 8 epochs），共进行三轮。控制实验包括：金标准重复（CTRL）、计数匹配、BUILD门控（替换过滤器为宽松的BUILD检查）。",
+        "result": "三轮后，对四个未见游戏家族的逐候选项干净启动率从8.8%提升到42.2%，best-of-K覆盖率从18/25提升到25/25（金标准上限）。控制实验显示：金标准重复回归到低于基础模型（5.6% vs 8.8%，p=0.019）；BUILD门控消除增益（回到基础，p=1e-3 vs 启动门控轮）；计数匹配隔离出质量和数量两个渠道（+8.8pp和+8.5pp）。功能审计确认增益是功能性的，不是启动但空洞。",
+        "conclusion": "游戏生成是一个可验证的测试平台，揭示一个教训：验证器就是课程——它所认证的就是模型所学的。确定性、不可欺骗的过滤器通过精确分离功能性和破坏性项目，使得自蒸馏的增益跨家族迁移。",
+        "key_details": "数据：GameCraft-Bench，10个训练家族（111个金标准项目），4个留出家族（25个任务），无泄露。先验：strict-launch过滤器是确定性、无需评判、不可欺骗的，仅要求启动干净和至少三个文件。损失/超参：LoRA（r=16, alpha=32），学习率1e-4，8 epochs，bfloat16，使用vLLM推理。复杂度：每轮采样K=8，每brief最多保留2个，燃料大小逐轮增长（67->123->186）。约束：仅Godot引擎，14B模型规模，需验证到其他领域。局限性：未测试其他引擎或跨模态任务，未分析长尾失败模式。"
+      },
+      "affiliations": [
+        "Institute of Science Tokyo",
+        "Zhejiang University",
+        "National University of Singapore"
+      ],
+      "affiliations_text": "Institute of Science Tokyo, Zhejiang University, National University of Singapore",
+      "score": 2.324965422422549,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.09688v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/14/260709688v1-prioritizing-search-space-regions-in-the-low-autocorrelation-binary-sequences-problem",
+      "source": "arxiv",
+      "title": "Prioritizing Search Space Regions in the Low Autocorrelation Binary Sequences Problem",
+      "authors": [
+        "Blaž Pšeničnik",
+        "Borko Bošković",
+        "Jan Popić",
+        "Janez Brest"
+      ],
+      "authors_text": "Blaž Pšeničnik, Borko Bošković, Jan Popić, Janez Brest",
+      "abstract": "Low autocorrelation binary sequences problem (LABS) is a hard combinatorial optimization challenge with important applications in communications, signal processing, and satellite navigation. This paper proposes a hybrid search framework that combines Thompson sampling with parallel self-avoiding walks to adaptively allocate computational effort across restriction classes of the LABS search space. By modeling partitions as arms in a multi-armed bandit setting, the proposed method dynamically shifts search resources toward partitions that empirically produce higher merit factors while maintaining exploration of less-sampled regions. The approach is further accelerated through GPU-parallel execution, shared posterior updates, efficient neighborhood evaluation, and a Bloom filter for cycle prevention. In addition, we use a two-stage optimization strategy that first searches constrained partitioned skew-symmetric spaces and then refines the best candidates in the unrestricted space. Experiments on long binary sequences show that the proposed method improves the previously best-known results for 35 sequence lengths in the range $450 \\le L \\le 527$ and for $L=573$. In particular, we report a new longest sequence with merit factor exceeding $8.0$, obtained for $L=451$. The results also show that Thompson sampling effectively prioritizes partitions with better observed performance, confirming the value of online, data-driven resource allocation in LABS optimization. Overall, the proposed framework provides a scalable and effective strategy for high-performance merit factor maximization.",
+      "url": "http://arxiv.org/abs/2607.09688v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09688v1",
+      "tldr": "This paper introduces a hybrid search framework that uses Thompson sampling to dynamically allocate computational effort across restriction classes in the low autocorrelation binary sequences problem, achieving new best-known merit factors for long sequences.",
+      "detailed_reading": {
+        "motivation": "低自相关二进制序列问题（LABS）的搜索空间随序列长度指数增长，现有方法难以在探索与利用之间取得平衡，且静态分区优先级策略无法适应搜索过程中的动态变化。因此，需要一种在线、自适应的资源分配方法，优先处理有希望的分区，提高高品质因子序列的搜索效率。",
+        "method": "提出混合搜索框架，将搜索空间划分为限制类（分区），每个分区作为多臂赌博机的一个臂。使用Thompson采样在线选择分区，动态分配计算资源。每个选中的分区上并行执行多个自避行走，行走过程使用GPU加速，并采用共享后验更新、线性时间翻转邻域评估和Bloom过滤器防止循环。采用两阶段优化：首先在约束的偏斜对称空间中搜索（分区长度p，固定前p个元素，利用偏斜对称性），然后对最佳候选在无约束空间中精炼。",
+        "result": "在长序列实验中，该方法改进了35个序列长度（450≤L≤527）以及L=573的先前最佳已知结果，并获得了新的最长序列（L=451）其品质因子超过8.0。Thompson采样有效优先选择了表现更好的分区，验证了在线数据驱动资源分配的价值。",
+        "conclusion": "提出的混合框架结合Thompson采样和并行自避行走，实现了可扩展且高效的高品质因子最大化策略，显著提升了LABS问题的搜索性能，并为其他组合优化问题中的动态资源分配提供了借鉴。",
+        "key_details": "数据输入为二进制序列长度L和分区集合（基于Dimitrov等人提出的限制类方法，使用最小势或归一化势排序）。建模上使用Beta分布作为Thompson采样的先验，每个臂的参数θ_k表示从分区获得的期望品质因子。自避行走并行执行，每个行走独立且共享全局后验更新。Bloom过滤器用于检测和避免搜索循环。两阶段优化先利用偏斜对称性（奇数长度L=2k+1）将搜索空间减半，再在无约束空间进行局部搜索。复杂度上，并行化实现了数百倍加速，但Thompson采样引入的额外开销较低。局限性：分区的先验选择依赖人工设定，且对极长序列（如L>600）仍可能因搜索空间过大而难以找到全局最优。"
+      },
+      "affiliations": [
+        "University of Maribor"
+      ],
+      "affiliations_text": "University of Maribor",
+      "score": 2.281178768521257,
+      "score_text": "2.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.09697v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709697v1-safe-responses-matter-output-aware-safety-guardrail-mitigate-over-refusal-in-mllms",
+      "source": "arxiv",
+      "title": "Safe responses matter: Output-aware safety guardrail mitigate over-refusal in MLLMs",
+      "authors": [
+        "Jiayi Li",
+        "Kun Zhan"
+      ],
+      "authors_text": "Jiayi Li, Kun Zhan",
+      "abstract": "Existing safety mechanisms for multimodal large language models (MLLMs) face a fundamental trade-off between safety and utility. Model fine-tuning achieves robust safety but compromises general utility. Input-side safety guardrails offer a lightweight alternative, yet they suffer from severe over-refusal, indiscriminately blocking benign queries or those the model could have safely answered through refusal or advisory responses. We identify that the root cause of over-refusal lies in the input-aware paradigm: safety guardrails make safety decisions without considering whether the model itself is capable of generating safe responses. Usually, MLLMs already possess intrinsic safety mechanisms that can transform harmful inputs into harmless outputs, but input-side safety guardrails override this capability, degrading user experience. Motivated by this insight, we propose a paradigm shift toward output-aware safety guardrails. Our method operates within the model's hidden state space to predict whether the forthcoming generation will be unsafe before it is fully produced. By training a lightweight classifier via multi-instance contrastive learning on hidden state representations, our approach distinguishes between inputs that will lead to unsafe outputs and those that will not, even when the inputs themselves contain risky elements. This enables precise intervention only when the model's actual response would be harmful. Extensive experiments demonstrate that our output-aware safety guardrail matches the safety performance of existing methods while drastically reducing over-refusal, preserving the model's utility and built-in safety capabilities. Code is available at: https://github.com/kunzhan/OutGuard",
+      "url": "http://arxiv.org/abs/2607.09697v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09697v1",
+      "tldr": "The paper proposes OutGuard, a novel output-aware safety guardrail for multimodal large language models that predicts unsafe outputs from hidden states using a lightweight multi-instance contrastive learning classifier, significantly reducing over-refusal while maintaining strong safety performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lanzhou University"
+      ],
+      "affiliations_text": "Lanzhou University",
+      "score": 2.270925723904797,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.09694v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709694v1-low-rank-attention-residuals",
+      "source": "arxiv",
+      "title": "Low-Rank Attention Residuals",
+      "authors": [
+        "Jonathan Su"
+      ],
+      "authors_text": "Jonathan Su",
+      "abstract": "Attention Residuals replace the fixed residual sum with depthwise attention over previous sub-layer outputs in large language models (LLMs), but use each output as both a full-dimensional key and value. This couples routing with representation and makes depth-routing scores scale with the hidden width $d$. We propose Low-Rank Attention Residuals (LR-AttnRes), which keep full-dimensional residual values while using $r$-dimensional keys, with $r \\ll d$, for routing. Projected LR-AttnRes emits learned low-rank keys from existing output projections, decoupling routing from residual content and achieving the best validation loss among the variants tested. Sliced LR-AttnRes uses the last $r$ dimensions of each value as the routing key, removing the auxiliary key-projection path and reducing residual-side FLOPs while still improving performance. Comprehensive sweeps show that depthwise routing can be effective with far fewer dimensions than the model width. We release code and models to facilitate future research.",
+      "url": "http://arxiv.org/abs/2607.09694v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09694v1",
+      "tldr": "Low-Rank Attention Residuals (LR-AttnRes) improve large language models by using low-dimensional keys for depthwise routing, decoupling routing from residual content and reducing computational cost.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.257725506971636,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.09708v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709708v1-ges-tsp-graph-edge-sparsification-for-tsp",
+      "source": "arxiv",
+      "title": "GES-TSP: Graph Edge Sparsification for TSP",
+      "authors": [
+        "Tianfeng Chen",
+        "Xianyue Li"
+      ],
+      "authors_text": "Tianfeng Chen, Xianyue Li",
+      "abstract": "Solving large-scale instances of the Traveling Salesman Problem (TSP) exactly is computationally expensive. Researchers often employ graph sparsification methods to improve computational efficiency. Traditional sparsification methods typically rely on fixed heuristics and fail to fully exploit instance-specific structural information. In this paper, we propose Graph Edge Sparsification (GES), a learning-based sparsification approach for Euclidean TSP. By incorporating geometric structural information and combinatorial optimization technology, our proposed method adaptively generates a sparsification graph for different instances, significantly reducing the graph size and accelerating the solving process. Experimental results demonstrate that our sparsification method can prune up to 95% of edges on the MATILDA dataset, while keeping the solution gap within 1% of the optimal value. Moreover, our approach exhibits strong generalization capability on the TSPLIB benchmark.In some large-scale instances, the pruning rate exceeds 99%, while the optimality gap remains below 1%.",
+      "url": "http://arxiv.org/abs/2607.09708v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09708v1",
+      "tldr": "GES-TSP proposes a learning-based graph sparsification method that uses GNNs and geometric features to prune up to 99% of edges in Euclidean TSP instances while maintaining solution gaps within 1% of optimal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lanzhou University"
+      ],
+      "affiliations_text": "Lanzhou University",
+      "score": 2.1774878264292004,
+      "score_text": "2.2"
+    },
+    {
+      "id": "2607.09668v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709668v1-position-every-ground-truth-is-a-human-construction-not-an-objective-truth",
+      "source": "arxiv",
+      "title": "Position: Every Ground Truth is a Human Construction, not an Objective Truth",
+      "authors": [
+        "Charlotte Högberg",
+        "Ericka Johnson",
+        "Kiri L. Wagstaff"
+      ],
+      "authors_text": "Charlotte Högberg, Ericka Johnson, Kiri L. Wagstaff",
+      "abstract": "Ground truth datasets play a fundamental role as reference values in the training and evaluation of machine learning models. This position paper argues that ground truths are not neutral objective measurements that are naturally given, but instead that they are constructed by arrangements of humans and technologies. We argue that the ML community will benefit from articulating and discussing these often invisible or unreported choices and acknowledging that reference data sets are contingent, not universal. Focusing on the situated and context-dependent nature of ground truths can improve reliability by enabling a better informed perspective on where, when, and how the datasets, and the models they have shaped, can best be used. We argue for increasing `situated reliability' which includes articulating the limits and strengths of models and their truth claims. Finally, paying more attention to the construction of ground truths can support transparency, accountability, and interdisciplinary work.",
+      "url": "http://arxiv.org/abs/2607.09668v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09668v1",
+      "tldr": "This position paper argues that ground truths in machine learning are not objective, neutral measurements but are instead constructed through human and technological choices, and that acknowledging this contingent, situated nature can improve reliability, transparency, and accountability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Linköping University",
+        "Oregon State University",
+        "Lund University"
+      ],
+      "affiliations_text": "Linköping University, Oregon State University, Lund University",
+      "score": 2.1297859097585765,
+      "score_text": "2.1"
+    },
+    {
+      "id": "2607.09683v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709683v1-ablation-statistical-inference-and-validation-for-kv-cache-compression",
+      "source": "arxiv",
+      "title": "Ablation, Statistical Inference, and Validation for KV-Cache Compression",
+      "authors": [
+        "Paolo D'Alberto",
+        "Ashish Siarasao",
+        "Elliott Delaye",
+        "Rajeev Patwari"
+      ],
+      "authors_text": "Paolo D'Alberto, Ashish Siarasao, Elliott Delaye, Rajeev Patwari",
+      "abstract": "This study systematically compares Turbo-Quant and SpectralQuant KV-cache compression, evaluating non-dominated schemes, including WHT rotation with Beta Lloyd-Max and QJL, through a statistical validation methodology that separates systematic codec differences from implementation variance. Key findings reveal that while eigenbasis-based methods fail on heavy-tailed data due to covariance instability, they excel in structured regimes, with the effective semantic dimension ($d_{eff}$) adapting to calibration budgets rather than true data rank. (this is an abstract of the abstract thank you )",
+      "url": "http://arxiv.org/abs/2607.09683v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09683v1",
+      "tldr": "This paper presents a systematic comparison of TurboQuant and SpectralQuant KV-cache compression schemes, introducing a statistical validation methodology to separate algorithmic differences from implementation variance, and finds that eigenbasis-based methods fail on heavy-tailed data due to covariance instability but excel in structured regimes, while the effective semantic dimension self-calibrates to the calibration budget rather than true data rank.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Advanced Micro Devices, Inc."
+      ],
+      "affiliations_text": "Advanced Micro Devices, Inc.",
+      "score": 2.110335114682031,
+      "score_text": "2.1"
+    },
+    {
+      "id": "2607.09692v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709692v1-reference-based-distillation-detection-in-llms",
+      "source": "arxiv",
+      "title": "Reference-Based Distillation Detection in LLMs",
+      "authors": [
+        "Rajat Rawat",
+        "Sizhe Chen",
+        "Akshay Anand",
+        "Michael Duan",
+        "Bob Rotsted",
+        "Sewon Min"
+      ],
+      "authors_text": "Rajat Rawat, Sizhe Chen, Akshay Anand, Michael Duan, Bob Rotsted, Sewon Min",
+      "abstract": "Model distillation -- training on outputs from stronger third-party models -- is widely used to boost performance, but raises concerns about unfair advantages and policy violations. This motivates a fundamental question: can we detect whether a model was distilled from another? We show that, while identifying a teacher model from a student in isolation is highly challenging, it becomes tractable in a reference-based setting: given a model and an earlier-generation checkpoint from the same lineage, we can identify the teacher model used to train the later checkpoint. We introduce a distillation detection method based on reference-based membership inference. By comparing how strongly a student model preferentially aligns with outputs from different candidate teachers relative to a reference checkpoint, our method identifies the most likely teacher and detects evidence of distillation. To handle unknown distillation pipelines such as hidden prompts, we infer proxy prompt templates directly from model outputs. We additionally identify a distinctive glyph-level signal specific to o1/o3 models. Evaluating distillation detection is challenging because modern model lineages are already heavily entangled. To address this, we develop a hybrid evaluation spanning both controlled distillation experiments and real-world models. Across both settings, our approach recovers the true teacher with near-perfect accuracy in single-teacher distillation scenarios, even when the underlying distillation pipeline is largely unknown. We further introduce statistical tests for both teacher attribution and distillation detection, and extend our framework to open-world settings where no teacher is guaranteed to be present among the candidates. Applying our method to contemporary models yields new evidence regarding potential distillation relationships involving QwQ, DeepSeek-R1, and GPT-OSS.",
+      "url": "http://arxiv.org/abs/2607.09692v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09692v1",
+      "tldr": "This paper introduces a reference-based distillation detection method that identifies whether a later-generation LLM checkpoint was distilled from a specific teacher by comparing its alignment with candidate teachers' outputs relative to an earlier checkpoint, achieving near-perfect accuracy in single-teacher scenarios.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Southern California",
+        "OpenAI",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "University of Southern California, OpenAI, University of California, Berkeley",
+      "score": 2.0404356929809904,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.09689v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709689v1-boltzmann-mapreduce-a-partition-function-reduce-for-forkable-sandboxes",
+      "source": "arxiv",
+      "title": "Boltzmann MapReduce: A Partition-Function Reduce for Forkable Sandboxes",
+      "authors": [
+        "Yossi Eliaz"
+      ],
+      "authors_text": "Yossi Eliaz",
+      "abstract": "To leading order under local asymptotic normality (LAN), the confidence density a worker emits over a chunk of size $n$ is a Gibbs--Boltzmann measure $\\exp\\{-βE(θ)\\}$ whose inverse temperature is the sample size, $β=n$. Three consequences are exact in the Gaussian/linear case and first-order otherwise: disjoint chunks carry independent Boltzmann factors, so the MapReduce \\emph{reduce}, read literally, is a partition function $Z=\\int\\prod_k h_k\\,dθ$ whose mode is precision-weighted (inverse-variance) pooling; frequentist consistency is the zero-temperature limit $T=1/n\\to0$",
+      "url": "http://arxiv.org/abs/2607.09689v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09689v1",
+      "tldr": "The paper proposes a \"Boltzmann MapReduce\" framework where confidence densities from workers are Gibbs–Boltzmann measures with inverse temperature proportional to sample size, recasting the reduce operation as a partition function that yields precision-weighted pooling, frequentist consistency as the zero-temperature limit, and robustness through clipping, specifically designed for forkable microVM sandboxes in the AI era.",
+      "detailed_reading": null,
+      "affiliations": [
+        "HIT",
+        "islo.dev",
+        "Incredibuild"
+      ],
+      "affiliations_text": "HIT, islo.dev, Incredibuild",
+      "score": 2.0234260399205573,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.09678v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709678v1-faithful-not-corrective-message-format-effects-in-multi-hop-agent-relays-are-tier-dependent",
+      "source": "arxiv",
+      "title": "Faithful, Not Corrective: Message-Format Effects in Multi-Hop Agent Relays Are Tier-Dependent",
+      "authors": [
+        "Zayx Shawn"
+      ],
+      "authors_text": "Zayx Shawn",
+      "abstract": "When LLM agents hand off information to one another, does the message format matter? Two literatures disagree: format-optimization work reports that structured messages cut cost without hurting accuracy, while format-restriction work finds that imposing structure degrades generation -- and neither measures what happens when a message traverses multiple hops, where copy fidelity, not one-shot generation, dominates. We introduce a controlled relay testbed: briefs of twelve programmatically generated atomic facts are re-encoded hop-by-hop in five formats (free NL, precision-instructed NL, JSON, triples, key-value) over six hops, scored by a fixed strong grader against programmatic ground truth, across two relay-capability tiers, a cognitive-load condition, and a paired-fork error injection. We find that message-format effects are tier-dependent. (i) Under faithful-relay instructions a strong relay is nearly lossless -- the documented \"telephone-game\" collapse does not occur -- and adding per-hop cognitive load leaves format-level fidelity unchanged (within +/-1.8 points) while raising generation cost by 24-53%. (ii) Under a weak (1.5B) relay the across-format spread of six-hop recall grows by a factor of 8.7 (from 2.3 to 20.5 points), driven by two opposing mechanisms -- an encoding toll paid by the rigid formats and drift resistance specific to the fixed-key JSON schema -- that flip the format ranking in transit. (iii) In a paired-fork injection, an injected wrong value, once present, persists to the final hop in 83-100% of chains in every format, closely matching each format's retention of the true value, with no detectable collateral damage to neighboring facts. Structure buys a faithful, error-localizing channel -- not an error-correcting code -- and format choice should follow the weakest relay in the pipeline.",
+      "url": "http://arxiv.org/abs/2607.09678v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09678v1",
+      "tldr": "Message-format effects in multi-hop LLM agent relays are tier-dependent: for strong relays they are nearly lossless with cost only increasing under cognitive load, while for weak relays they produce large fidelity differences that flip in transit, because structure provides a faithful, error-localizing channel rather than an error-correcting code.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 2.0137645568399325,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.09704v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709704v1-quantum-inspired-contextual-learning-for-sparse-ring-fraud-detection-in-dynamic-transaction-graphs",
+      "source": "arxiv",
+      "title": "Quantum-Inspired Contextual Learning for Sparse-Ring Fraud Detection in Dynamic Transaction Graphs",
+      "authors": [
+        "Behnam Tonekaboni",
+        "Hiroshi Yamauchi"
+      ],
+      "authors_text": "Behnam Tonekaboni, Hiroshi Yamauchi",
+      "abstract": "We present an exploratory benchmark and quantum-inspired modeling prototype for fraud screening in dynamic financial transaction graphs. Coordinated fraud may not be visible from individual transactions alone, but may emerge as a multi-period relational pattern. We focus on sparse-ring fraud, a stylized pattern in which a completed directed cycle is distributed across several days, requiring models to integrate evidence across both time and graph structure. We study this problem using a synthetic transaction simulator with completed sparse-ring injections and broken-ring decoys. Daily directed transaction graphs are aggregated into rolling windows and represented using raw graph features, persistent-homology summaries, or hybrid feature vectors that combine both. We compare a gated recurrent unit (GRU) baseline with quantum-inspired Contextual Machine Learning (CML) as sequence-level classifiers. Because the benchmark uses synthetic data, a modest sample size, and sequence-level labels, the results are exploratory. Within this scope, topology-only summaries are too compressed to solve the supervised ring-completion task by themselves, largely because they remove account-pair identity and edge direction. The strongest results come from hybrid representations that combine identity-preserving graph features with topological summaries. These findings suggest that topology is most useful as a contextual layer over dynamic graph features, and that CML is a promising candidate model for fraud patterns whose evidence is distributed across temporal and relational context.",
+      "url": "http://arxiv.org/abs/2607.09704v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09704v1",
+      "tldr": "This exploratory benchmark demonstrates that quantum-inspired Contextual Machine Learning (CML) effectively detects temporally distributed sparse-ring fraud in dynamic transaction graphs when using hybrid features that combine identity-preserving graph data with topological summaries, outperforming both raw and topology-only representations against a GRU baseline.",
+      "detailed_reading": null,
+      "affiliations": [
+        "SoftBank Corp.",
+        "Infleqtion Australia"
+      ],
+      "affiliations_text": "SoftBank Corp., Infleqtion Australia",
+      "score": 2.0095413284462715,
+      "score_text": "2.0"
+    },
+    {
+      "id": "2607.09711v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709711v1-evoclawbench-can-agents-learn-reusable-skills-from-their-own-runs",
+      "source": "arxiv",
+      "title": "EvoClawBench: Can Agents Learn Reusable Skills from Their Own Runs?",
+      "authors": [
+        "Zhiyuan Peng",
+        "Xin Yin",
+        "Chenhao Ying",
+        "Zhe Cui",
+        "Zixiang Ding",
+        "Zhenhua Liu",
+        "Jiang Wu",
+        "Yuan Luo"
+      ],
+      "authors_text": "Zhiyuan Peng, Xin Yin, Chenhao Ying, Zhe Cui, Zixiang Ding, Zhenhua Liu, Jiang Wu, Yuan Luo",
+      "abstract": "Existing agent benchmarks primarily test task completion, tool use, or skill utility, but do not isolate whether a runtime can convert evidence from its own runs into reusable skills that improve fresh executions after authoring overhead. We introduce EvoClawBench, a benchmark for this closed-loop skill-learning question on repeated, fixture-backed tasks. EvoClawBench compares direct execution without skills, PreSkill authoring before execution, and PostSkill summarization from first-run evidence followed by a fresh second execution. The suite contains 100 tasks and 502 sub-problems across coding, data, office, security, operations, and domain-document workflows, with support for multiple agent runtimes. Experiments with OpenClaw and nanobot under local execution show that direct baseline performance is strongly runtime-dependent: OpenClaw remains below 20% across models, while nanobot ranges from 56.45% to 96.13%. Self-authored skills have mixed effects. nanobot GPT-5.4 stays above 96% in all modes and MiniMax-M2.7 improves from 90.97% to 94.50% under PostSkill, but nanobot DeepSeek-V4-Pro drops from 77.77% to 4.80% with PreSkill and 0.99% with PostSkill. OpenClaw shows similarly non-monotonic behavior, with some skill runs near baseline and others collapsing. These results indicate that learning reusable skills from an agent's own runs is selective and cost-sensitive, rather than an automatic benefit of adding skill authoring to an agent loop.",
+      "url": "http://arxiv.org/abs/2607.09711v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09711v1",
+      "tldr": "EvoClawBench is a benchmark that evaluates whether LLM agents can learn reusable skills from their own past runs, revealing that such self-authoring is selective and cost-sensitive rather than universally beneficial.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University",
+        "Hithink Research",
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "Zhejiang University, Hithink Research, Shanghai Jiao Tong University",
+      "score": 1.9310048883367203,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.09682v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709682v1-auditweave-a-tamper-evident-auditor-navigable-evidence-layer-for-ai-assisted-and-data-transformation-workflows",
+      "source": "arxiv",
+      "title": "AuditWeave: A Tamper-Evident, Auditor-Navigable Evidence Layer for AI-Assisted and Data-Transformation Workflows",
+      "authors": [
+        "Vimal Nakrani"
+      ],
+      "authors_text": "Vimal Nakrani",
+      "abstract": "AI systems are increasingly used to assist consequential decisions in regulated domains such as auditing, finance, and healthcare. This creates a recurring obligation: an organization must be able to reconstruct, after the fact, which evidence informed a given conclusion, and to show that the record of that reasoning was not altered. Existing tools address related but distinct problems - model observability, drift monitoring, governance reporting - and are built for the machine-learning engineer operating a system, not the reviewer who must trace one specific conclusion back to its supporting evidence. We present AuditWeave, a lightweight Python library, with no runtime dependencies, that records the steps of AI-assisted and data-transformation workflows into a single append-only, hash-chained ledger. A small, system-agnostic event vocabulary spans both retrieval-augmented generation (RAG) pipelines and tabular/lakehouse transformations, so a conclusion that draws on both can be traced end-to-end through one record. Within a sealed ledger, any modification, reordering, insertion, or deletion of events is detectable through chain verification. We describe the design and evaluate recording overhead, scalability, and tamper-detection correctness on the reference implementation. The integrity guarantees cost tens of microseconds per event, and, as the hash-chain construction implies, verification flagged every injected mutation across four mutation classes over 2,000 randomized trials.",
+      "url": "http://arxiv.org/abs/2607.09682v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09682v1",
+      "tldr": "AuditWeave is a lightweight Python library that records AI-assisted and data-transformation workflow steps into an append-only, hash-chained ledger, enabling tamper-evident provenance and auditor-navigable tracing of conclusions back to their supporting evidence.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 1.905937585049157,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.09665v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709665v1-format-sensitivity-index-token-controlled-prompt-wrapper-robustness-and-schema-compliance-in-llm-benchmarking",
+      "source": "arxiv",
+      "title": "Format Sensitivity Index: Token-Controlled Prompt Wrapper Robustness and Schema Compliance in LLM Benchmarking",
+      "authors": [
+        "Deep Pankajbhai Mehta"
+      ],
+      "authors_text": "Deep Pankajbhai Mehta",
+      "abstract": "Prompt wrappers often differ only in formatting, yet they can change model scores enough to flip leaderboard conclusions. We study this variance under a token-controlled protocol and introduce two complementary metrics: the Format Sensitivity Index (FSI), the accuracy range induced by wrapper choice, and the Parseability Sensitivity Index (PSI), the corresponding range in answer parseability. Across 140,000 OpenRouter generations spanning 7 QA tasks, 5 wrapper families, and 4 instruct models from 7B to 72B parameters, we find that mean FSI varies by over 30x across models and is largely explained by compliance failures. A fixed-effects regression shows that parseability remains a strong predictor of accuracy even after controlling for task, model, and wrapper. We argue that reporting accuracy without wrapper variance and compliance is statistically fragile, and we give practical recommendations for both benchmarking and structured-output deployments.",
+      "url": "http://arxiv.org/abs/2607.09665v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09665v1",
+      "tldr": "This paper introduces the Format Sensitivity Index (FSI) and Parseability Sensitivity Index (PSI) to quantify how prompt wrapper formatting alone can drastically alter LLM accuracy and parseability, revealing that parseability failures largely explain accuracy variance and urging benchmark reporting to include wrapper-induced uncertainty.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Adobe Inc."
+      ],
+      "affiliations_text": "Adobe Inc.",
+      "score": 1.8551381429786085,
+      "score_text": "1.9"
+    },
+    {
+      "id": "2607.09691v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709691v1-what-context-does-a-coding-agent-actually-need-to-act",
+      "source": "arxiv",
+      "title": "What Context Does a Coding Agent Actually Need to Act?",
+      "authors": [
+        "Brian Sam-Bodden"
+      ],
+      "authors_text": "Brian Sam-Bodden",
+      "abstract": "A modern coding agent can hold an entire repository in its context window. Most of its reading is wasted -- and the interesting question is not how much context an agent can use, but what it actually \\emph{needs}. We study that question at the moment it matters most: when the agent must \\emph{edit} code. Separating \\emph{finding} the work site from \\emph{acting} on it, we hold localization fixed with an oracle, vary only how the code is represented, and score context against real issue resolution on SWE-bench Verified. The answer is starkly minimal. The signal lives in the code being edited itself: natural-language summaries of it answer almost none of the behavioral questions that the source answers ($4/45$ vs.\\ $27/45$, held-out repositories, independent judge), and the gap belongs to the representation, not the summarizer -- a frontier model's summaries score exactly as poorly as a 3B model's. The surrounding context hardly matters either: across every multi-file instance in Verified, under a protocol frozen before any data, rendering a file's remainder as UML skeletons and signatures resolves no more issues than deleting that remainder outright ($N{=}70$, exact McNemar $p{=}0.75$). That was our registered hypothesis, and it failed. Compressed context, meanwhile, matches whole files at a third of the tokens: a resolved issue costs $19$K context tokens, not $94$K. The instrument also yielded a finding the field should keep: temperature-0 API inference flips ${\\sim}9\\%$ of per-instance outcomes between byte-identical runs. That is a noise floor under every small effect reported on this benchmark, including ours. We release the instrument -- gold-validated environments, per-instance proof that every reference edit is expressible from every arm's context, deterministic patch construction, and pre-registered hypotheses whose nulls we publish.",
+      "url": "http://arxiv.org/abs/2607.09691v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09691v1",
+      "tldr": "TLDR: Coding agents need surprisingly little context to edit code—source code itself is essential, while natural-language summaries and surrounding structure add almost no value, and compressed context matches whole files at a third of the tokens.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Integrallis Software"
+      ],
+      "affiliations_text": "Integrallis Software",
+      "score": 1.6704116891739975,
+      "score_text": "1.7"
+    },
+    {
+      "id": "2607.09666v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709666v1-knowledge-graphs-meet-graph-neural-networks-a-comprehensive-survey",
+      "source": "arxiv",
+      "title": "Knowledge Graphs Meet Graph Neural Networks: A Comprehensive Survey",
+      "authors": [
+        "Chengcheng Sun",
+        "Jiayun Tian",
+        "Cheng Zhai",
+        "Zhixiao Wang",
+        "Yajie Song",
+        "Xiaobin Rui",
+        "Jian Zhang",
+        "Philip S. Yu"
+      ],
+      "authors_text": "Chengcheng Sun, Jiayun Tian, Cheng Zhai, Zhixiao Wang, Yajie Song, Xiaobin Rui, Jian Zhang, Philip S. Yu",
+      "abstract": "Graph Neural Networks (GNNs) have emerged as a powerful paradigm in Knowledge Graphs (KGs) due to their intrinsic ability to model graph-structured data. However, there remains a lack of a systematic review about GNN-based methodologies across the entire knowledge graph technologies pipeline. To address this gap, we first propose a novel two-level taxonomy framework for GNN-based knowledge graph technologies: the KG technologies pipeline and GNN-based perspective. Specifically, the knowledge graph technologies pipeline covers knowledge graph construction, knowledge graph embedding, knowledge reasoning and knowledge graph applications. Meanwhile, the GNN-based perspective provides a new categorization of knowledge graph technologies with GNN models, such as GCN, GAT, and HGNN. Then, we analyze the advantages of GNN technology based on the characteristics of different tasks in the knowledge graph lifecycle. Furthermore, we detailed review various GNN-based models for knowledge graph following the proposed taxonomy, and summarize strengths and limitations. Finally, we discuss unresolved challenges and outline promising directions for future research.",
+      "url": "http://arxiv.org/abs/2607.09666v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09666v1",
+      "tldr": "This paper provides a comprehensive survey of graph neural network (GNN)-based knowledge graph technologies, introducing a novel two-level taxonomy that covers the entire knowledge graph pipeline—including construction, embedding, reasoning, and applications—and categorizes GNN models such as GCN, GAT, and HGNN, while reviewing their strengths, limitations, and future research directions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois at Chicago",
+        "China University of Mining and Technology"
+      ],
+      "affiliations_text": "University of Illinois at Chicago, China University of Mining and Technology",
+      "score": 1.4978687064964245,
+      "score_text": "1.5"
+    },
+    {
+      "id": "2607.09664v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/14/260709664v1-from-ml-predictions-to-informed-diagnostic-assistance-using-the-toulmin-model-of-argumentation",
+      "source": "arxiv",
+      "title": "From ML Predictions to Informed Diagnostic Assistance Using the Toulmin Model of Argumentation",
+      "authors": [
+        "Anca Marginean",
+        "Adrian Groza"
+      ],
+      "authors_text": "Anca Marginean, Adrian Groza",
+      "abstract": "To provide a structured and interpretable assessment, we decompose the image-based diagnosis into components following the Toulmin model of argumentation. This model consists of a claim, grounds, warrant, qualifier, rebuttal, and backing. Consider a claim generated by a machine learning (ML) model for retinal diagnosis. Rather than accepting this claim at face value, one could either apply explainable AI (XAI) methods or adopt an argumentation-based approach. In our framework, a model specialized in biomarker extraction from images provides the grounds. The warrant-linking the grounds to the claim - is analyzed by an agent equipped with medical knowledge; in our architecture, this role is fulfilled by a MedGemma agent. The qualifier is determined based on the overall quantitative evaluation of both the warrant and grounds models. Finally, a rebuttal is constructed using image similarity measures computed with MedSigLip. All these components are presented to the human expert, enabling a more informed and critical assessment of the ML-generated diagnosis.",
+      "url": "http://arxiv.org/abs/2607.09664v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.09664v1",
+      "tldr": "This paper proposes a framework that structures machine learning-based retinal diagnosis using the Toulmin model of argumentation—decomposing predictions into claim, grounds, warrant, qualifier, and rebuttal through biomarker extraction, case retrieval, and medical LLM reasoning—to provide human experts with a more informed and critical diagnostic assessment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Cluj-Napoca"
+      ],
+      "affiliations_text": "Technical University of Cluj-Napoca",
+      "score": 1.292751765017197,
+      "score_text": "1.3"
+    }
+  ]
+}
