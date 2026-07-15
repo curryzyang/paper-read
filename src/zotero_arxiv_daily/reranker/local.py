@@ -20,11 +20,15 @@ class LocalReranker(BaseReranker):
             warnings.filterwarnings("ignore", category=FutureWarning)
 
         encoder = SentenceTransformer(self.config.reranker.local.model, trust_remote_code=True)
-        if self.config.reranker.local.encode_kwargs:
-            encode_kwargs = self.config.reranker.local.encode_kwargs
+        document_encode_kwargs = dict(self.config.reranker.local.get("encode_kwargs") or {})
+        query_encode_config = self.config.reranker.local.get("query_encode_kwargs")
+        if query_encode_config:
+            query_encode_kwargs = dict(query_encode_config)
         else:
-            encode_kwargs = {}
-        s1_feature = encoder.encode(s1,**encode_kwargs,show_progress_bar=True)
-        s2_feature = encoder.encode(s2,**encode_kwargs,show_progress_bar=True)
+            # Backward-compatible fallback for older custom configurations.
+            query_encode_kwargs = dict(document_encode_kwargs)
+            query_encode_kwargs["prompt_name"] = "query"
+        s1_feature = encoder.encode(s1,**query_encode_kwargs,show_progress_bar=True)
+        s2_feature = encoder.encode(s2,**document_encode_kwargs,show_progress_bar=True)
         sim = encoder.similarity(s1_feature, s2_feature)
         return sim.numpy()

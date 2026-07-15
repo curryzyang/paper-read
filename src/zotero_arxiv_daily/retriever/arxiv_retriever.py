@@ -21,6 +21,15 @@ PDF_EXTRACT_TIMEOUT = 180
 TAR_EXTRACT_TIMEOUT = 180
 
 
+def _as_bool(value: object) -> bool:
+    """Normalize YAML booleans and environment-variable strings safely."""
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+    return bool(value)
+
+
 def _download_file(url: str, path: str) -> None:
     with requests.get(url, stream=True, timeout=DOWNLOAD_TIMEOUT) as response:
         response.raise_for_status()
@@ -116,7 +125,7 @@ class ArxivRetriever(BaseRetriever):
     def _retrieve_raw_papers(self) -> list[ArxivResult]:
         client = arxiv.Client(num_retries=10, delay_seconds=10)
         query = '+'.join(self.categories)
-        include_cross_list = self.config.source.arxiv.get("include_cross_list", False)
+        include_cross_list = _as_bool(self.config.source.arxiv.get("include_cross_list", False))
         # Get the latest paper from arxiv rss feed
         feed = feedparser.parse(f"https://rss.arxiv.org/atom/{query}")
         if 'Feed error for query' in feed.feed.title:

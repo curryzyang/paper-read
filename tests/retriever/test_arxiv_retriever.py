@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import feedparser
 
-from zotero_arxiv_daily.retriever.arxiv_retriever import ArxivRetriever, _run_with_hard_timeout
+from zotero_arxiv_daily.retriever.arxiv_retriever import ArxivRetriever, _as_bool, _run_with_hard_timeout
 import zotero_arxiv_daily.retriever.arxiv_retriever as arxiv_retriever
 
 
@@ -16,6 +16,14 @@ def _sleep_and_return(value: str, delay_seconds: float) -> str:
 
 def _raise_runtime_error() -> None:
     raise RuntimeError("boom")
+
+
+def test_as_bool_handles_environment_strings():
+    assert _as_bool(True) is True
+    assert _as_bool("true") is True
+    assert _as_bool("TRUE") is True
+    assert _as_bool("false") is False
+    assert _as_bool("0") is False
 
 
 def test_arxiv_retriever(config, mock_feedparser, monkeypatch):

@@ -28,13 +28,18 @@ Set repository secrets:
 - `OPENAI_API_KEY`
 - `OPENAI_API_BASE`
 
-Optionally set repository variable `CUSTOM_CONFIG` with YAML overrides. A minimal
-example:
+Set repository variables:
+
+- `INCLUDE_CROSS_LIST`（可选；设置为 `true` 以包含 arXiv cross-list 论文，默认为 `false`）
+- `CUSTOM_CONFIG`（可选的 YAML 覆盖配置）
+
+`CUSTOM_CONFIG` 的最小示例：
 
 ```yaml
 source:
   arxiv:
     category: ["cs.AI", "cs.CV", "cs.LG", "cs.CL"]
+    include_cross_list: false  # 也可由 Repository Variable INCLUDE_CROSS_LIST 控制
 
 zotero:
   include_path: null
@@ -47,6 +52,10 @@ llm:
 executor:
   source: ["arxiv"]
   reranker: local
+
+reranker:
+  # 默认只使用最相似的 20 篇 Zotero 文献计算分数；设为 null 可恢复全库平均。
+  top_k: 20
 
 web:
   daily_total: 25

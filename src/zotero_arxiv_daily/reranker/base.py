@@ -21,12 +21,44 @@ class BaseReranker(ABC):
         corpus_texts = [c.abstract or "" for c in corpus]
         sim = self.get_similarity_score(candidate_texts, corpus_texts)
         assert sim.shape == (len(candidates), len(corpus))
-        raw_scores = (sim * time_decay_weight).sum(axis=1) * 10
+
+        top_k = self._get_top_k(len(corpus))
+        if top_k < len(corpus):
+            # Keep only the strongest semantic matches so unrelated Zotero
+            # papers do not dilute a candidate's score. Recency still weights
+            # the selected matches through time_decay_weight.
+            top_indices = np.argpartition(sim, -top_k, axis=1)[:, -top_k:]
+            selected_sim = np.take_along_axis(sim, top_indices, axis=1)
+            selected_weights = time_decay_weight[top_indices]
+            raw_scores = (
+                (selected_sim * selected_weights).sum(axis=1)
+                / selected_weights.sum(axis=1)
+            ) * 10
+        else:
+            raw_scores = (sim * time_decay_weight).sum(axis=1) * 10
         raw_scores = np.nan_to_num(raw_scores, nan=0.0, posinf=0.0, neginf=0.0)
         for s,c in zip(raw_scores,candidates):
             c.score = s
         candidates = sorted(candidates,key=lambda x: x.score,reverse=True)
         return candidates
+
+    def _get_top_k(self, corpus_size: int) -> int:
+        default_top_k = 20
+        if self.config is None:
+            configured_top_k = default_top_k
+        else:
+            reranker_config = getattr(self.config, "reranker", None)
+            if reranker_config is None:
+                configured_top_k = default_top_k
+            else:
+                configured_top_k = reranker_config.get("top_k", default_top_k)
+
+        if configured_top_k is None:
+            return corpus_size
+        top_k = int(configured_top_k)
+        if top_k < 1:
+            raise ValueError("reranker.top_k must be at least 1 or null")
+        return min(top_k, corpus_size)
     
     @abstractmethod
     def get_similarity_score(self, s1:list[str], s2:list[str]) -> np.ndarray:

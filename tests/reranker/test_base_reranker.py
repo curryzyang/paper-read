@@ -18,6 +18,14 @@ class StubReranker(BaseReranker):
         return self._sim
 
 
+class TopKStubReranker(StubReranker):
+    def __init__(self, sim_matrix: np.ndarray, top_k: int):
+        super().__init__(sim_matrix)
+        self.config = type("Config", (), {
+            "reranker": {"top_k": top_k},
+        })()
+
+
 def test_rerank_scores_and_sorts():
     corpus = make_sample_corpus(3)
     papers = [make_sample_paper(title=f"Paper {i}") for i in range(2)]
@@ -63,6 +71,18 @@ def test_rerank_single_candidate_single_corpus():
     ranked = reranker.rerank(papers, corpus)
     assert len(ranked) == 1
     assert ranked[0].score is not None
+
+
+def test_rerank_uses_top_k_matches_without_dilution():
+    corpus = make_sample_corpus(3)
+    papers = [make_sample_paper(title="P")]
+    sim = np.array([[0.95, 0.90, -0.90]])
+
+    reranker = TopKStubReranker(sim, top_k=2)
+    ranked = reranker.rerank(papers, corpus)
+
+    # The unrelated third paper must not lower the score when top_k=2.
+    assert ranked[0].score > 8.0
 
 
 def test_get_reranker_cls_unknown():

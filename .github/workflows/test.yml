@@ -22,6 +22,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || vars.OPENAI_API_BASE || 'https://api.deepseek.com/v1' }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL || 'deepseek-chat' }}
+          INCLUDE_CROSS_LIST: ${{ vars.INCLUDE_CROSS_LIST || 'false' }}
           CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
         run: |
           export DEBUG=true
