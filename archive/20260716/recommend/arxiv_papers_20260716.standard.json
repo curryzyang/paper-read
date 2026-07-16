@@ -1,0 +1,762 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-16T05:20:04.104751",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.13226v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713226v1-overcoming-slow-kolmogorov-width-decay-in-parametric-optimal-control-via-neural-network-surrogates",
+      "source": "arxiv",
+      "title": "Overcoming slow Kolmogorov width decay in parametric optimal control via neural network surrogates",
+      "authors": [
+        "Hendrik Kleikamp",
+        "Martin Lazar",
+        "Juan Ricardo Muñoz"
+      ],
+      "authors_text": "Hendrik Kleikamp, Martin Lazar, Juan Ricardo Muñoz",
+      "abstract": "In this paper we deal with parametric, linear-quadratic optimal control problems in which the solution can be uniquely characterized by the optimal final time adjoint state. As a motivating example, we establish theoretical results showing that for distributed control of the heat equation, the manifold of final time adjoints over the parameter space exhibits a slow decay of its Kolmogorov width if this was already the case for the parameter-dependent target states. Traditional linear reduced-order models would thus require a large reduced space in order to guarantee a sufficient accuracy, making them inefficient in this application. To overcome the limitation of linear models, we discuss a nonlinear surrogate based on U-Nets that maps parametric fields to approximate final time adjoints. We show that a suitable a posteriori error estimator remains applicable to the U-Net approximation and can be used to certify the surrogate results. Through two extensive numerical experiments, we show the potential of the U-Net surrogate and compare it with several linear and nonlinear methods from the literature. The results show that the U-Net consistently achieves the highest accuracy among the methods considered while requiring significantly fewer training samples.",
+      "url": "http://arxiv.org/abs/2607.13226v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13226v1",
+      "tldr": "This paper proposes a U-Net-based nonlinear surrogate model to overcome the slow Kolmogorov width decay in parametric optimal control problems, achieving higher accuracy than traditional linear methods with fewer training samples.",
+      "detailed_reading": {
+        "motivation": "传统线性降阶模型受限于Kolmogorov N-宽度衰减缓慢，导致参数化最优控制问题中需要高维降阶空间才能保证精度，效率低下。本文旨在通过基于U-Net的非线性代理克服这一限制。",
+        "method": "针对参数化线性二次最优控制问题，利用最优解由最终时刻伴随状态唯一表征的特性，构建U-Net代理模型映射参数场到最终时刻伴随。输入为参数化目标状态等场变量，输出为最终时刻伴随。U-Net采用编码器-解码器结构，包含下采样、上采样和跳跃连接，使用均方误差损失函数训练。训练数据通过对参数采样并求解高保真全阶模型生成。训练后代理可快速预测任意参数下的伴随状态，进而恢复最优控制。此外，该代理可与基于残差的后验误差估计结合，用于认证近似解的质量。",
+        "result": "在热方程分布控制和具有参数相关扩散场的局部控制两个数值实验中，U-Net代理在精度上一致优于线性降阶模型（如RBM）、卷积自编码器等多种文献方法，且所需训练样本显著减少。实验表明U-Net有效克服了Kolmogorov宽度限制，达到了最高的逼近精度。",
+        "conclusion": "基于U-Net的非线性代理能够有效克服参数化最优控制问题中因Kolmogorov宽度衰减缓慢导致的线性降阶模型局限性，在保持高精度的同时大幅降低计算成本。结合后验误差估计，所得代理结果可被认证，为实际应用提供可靠保障。",
+        "key_details": "理论分析表明，当目标状态流形Kolmogorov宽度衰减慢时，最终时刻伴随流形同样衰减慢，这解释了线性ROM的局限性。U-Net架构中的跳跃连接有助于保留空间细节，损失函数为均方误差。后验误差估计基于残差，可直接应用于U-Net近似。训练数据通过求解全阶模型生成，样本需求低于传统方法。局限性包括对数据质量和网络训练稳定性的依赖，以及泛化至未见参数的能力。"
+      },
+      "affiliations": [
+        "University of Dubrovnik",
+        "University of Graz",
+        "Universidad de Chile"
+      ],
+      "affiliations_text": "University of Dubrovnik, University of Graz, Universidad de Chile",
+      "score": 5.479885570720872,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2607.13175v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713175v1-steingate-tail-sensitive-safe-reinforcement-learning-via-stein-discrepancy",
+      "source": "arxiv",
+      "title": "SteinGate: Tail-Sensitive Safe Reinforcement Learning via Stein Discrepancy",
+      "authors": [
+        "Yassine Chemingui",
+        "Chenhua Fan",
+        "Honghao Wei",
+        "Janardhan Rao Doppa"
+      ],
+      "authors_text": "Yassine Chemingui, Chenhua Fan, Honghao Wei, Janardhan Rao Doppa",
+      "abstract": "Safe reinforcement learning typically enforces safety by bounding expected cumulative costs, a criterion that often fails to detect rare but catastrophic tail events. To overcome these limitations, this paper introduces SteinGate, a boundary-aware distributional safety certificate that replaces fragile tail fitting with a robust consistency check using Kernelized Stein Discrepancy while accounting for boundary atoms induced by clipped costs. SteinGate evaluates whether observed policy rollout costs remain consistent with a safe reference distribution, providing a non-parametric safety certificate. This certificate is used to dynamically adapt the learning regime: favoring reward-improving policy updates when rollouts remain consistent with the safe reference and switching to recovery behavior when the cost tail deviates. Experiments on continuous-control benchmarks demonstrate that SteinGate significantly reduces both the frequency and severity of constraint violations during training while maintaining competitive returns relative to state-of-the-art baselines.",
+      "url": "http://arxiv.org/abs/2607.13175v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13175v1",
+      "tldr": "SteinGate introduces a tail-sensitive safety certificate for safe reinforcement learning that uses Kernelized Stein Discrepancy to compare policy rollout costs to a safe reference distribution, dynamically switching between reward-maximization and safety-recovery modes to significantly reduce constraint violations while maintaining competitive returns.",
+      "detailed_reading": {
+        "motivation": "现有安全强化学习通常依赖期望累计成本约束，但该准则无法检测罕见但灾难性的尾部事件，策略可能通过平衡少量灾难性失败与大量安全轨迹来满足约束，导致风险掩盖。",
+        "method": "提出SteinGate框架，使用核化斯坦散度（KSD）进行分布一致性检查，替代脆弱的尾部拟合，并考虑截断成本导致的边界原子（零成本和安全阈值处的概率质量）。定义阈值归一化截断成本，构建混合离散连续参考分布；通过KSD比较当前策略rollout成本分布与安全参考分布，得到非参数安全证书；该证书作为bang-bang控制器：当rollout与安全参考一致时启用奖励最大化模式，否则切换至安全恢复模式。",
+        "result": "在连续控制基准（如Safety Gym）上，与期望约束和尾部建模基线相比，SteinGate显著降低了训练期间约束违反的频率和严重性，同时保持具有竞争力的累计回报。",
+        "conclusion": "SteinGate通过分布比较而非显式尾部建模来认证尾部风险，避免了直接尾部估计的高方差和脆弱性，提供了一种更稳定和有效的安全约束方法。",
+        "key_details": "使用截断成本导致边界原子，论文提出混合参考模型和分裂散度来处理。KSD避免了密度估计，仅需参考分布的分数函数和策略样本。安全证书用于切换控制，并有理论保证：在信任区域条件下，策略更新以高概率保持风险预算。参考分布需预先指定，样本大小影响KSD估计精度，方法未深入探讨参考分布的学习或自适应调整。"
+      },
+      "affiliations": [
+        "Washington State University"
+      ],
+      "affiliations_text": "Washington State University",
+      "score": 5.348064147466499,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2607.13042v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713042v1-automatic-differentiation-from-scratch-how-pytorch-computes-gradients-in-physics-informed-neural-networks",
+      "source": "arxiv",
+      "title": "Automatic Differentiation from Scratch: How PyTorch Computes Gradients in Physics-Informed Neural Networks",
+      "authors": [
+        "Abdeladhim Tahimi"
+      ],
+      "authors_text": "Abdeladhim Tahimi",
+      "abstract": "This paper traces, with explicit numerical values, how PyTorch's automatic differentiation (AD) engine computes gradients for Physics-Informed Neural Network (PINN) training -- a setting that requires two levels of differentiation: computing the physics derivative $\\hat{y}'(t)=d\\hat{y}/dt$ through the network, and computing parameter gradients $\\nabla_θL$ of a loss that itself depends on $\\hat{y}'(t)$. Using a 1-3-3-1 multilayer perceptron and the initial value problem $y'(t)+y(t)=0$, $y(0)=1$, we trace the complete pipeline at every node: the computational graph built during the forward pass, the reverse-mode backward traversal that computes all 22 parameter gradients in a single pass, and the graph-on-graph mechanism by which \\texttt{create\\_graph=True} enables correct differentiation through the physics-informed residual. Every adjoint value is verified against the hand derivations of Tahimi (2026), connecting the $P/Q$ sensitivity framework to the vector--Jacobian products used by PyTorch's autograd engine.",
+      "url": "http://arxiv.org/abs/2607.13042v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13042v1",
+      "tldr": "This paper provides a detailed, numerically explicit trace of PyTorch’s automatic differentiation engine for Physics-Informed Neural Networks, explaining how it computes both physics derivatives and parameter gradients through a computational graph, reverse-mode traversal, and the graph-on-graph mechanism enabled by `create_graph=True`.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "Universidade Federal de Alagoas (UFAL)"
+      ],
+      "affiliations_text": "Universidade Federal de Alagoas (UFAL)",
+      "score": 5.232526220606198,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2607.13108v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713108v1-stkan-kolmogorov-arnold-networks-for-spatio-temporal-forecasting",
+      "source": "arxiv",
+      "title": "STKAN: Kolmogorov-Arnold Networks for Spatio-Temporal Forecasting",
+      "authors": [
+        "Sicong Lai",
+        "Yuehong Hu",
+        "Siru Zhong",
+        "Si Qiao",
+        "Yuxuan Liang",
+        "Guangyin Jin"
+      ],
+      "authors_text": "Sicong Lai, Yuehong Hu, Siru Zhong, Si Qiao, Yuxuan Liang, Guangyin Jin",
+      "abstract": "Real-world traffic data exhibit heterogeneous spatial correlations and nonlinear temporal dynamics, posing substantial challenges for accurate spatio-temporal forecasting. Existing approaches have developed increasingly sophisticated graph, attention, and decomposition architectures, while the influence of the underlying nonlinear function approximator has received comparatively less attention. In this work, we propose STKAN, a spatio-temporal forecasting architecture that introduces Taylor-polynomial Kolmogorov--Arnold Network modules into spatial and temporal token mixing. STKAN first constructs high-level spatial representations through a learnable soft node-group assignment mechanism, applies group-wise spatial mixing, and subsequently models temporal dependencies over the compressed sequence. Spatial and temporal self-attention layers are further employed to capture long-range interactions. Experiments on five traffic forecasting benchmarks show that STKAN achieves competitive performance and performs better than the evaluated MLP-based variant in the tested settings. These results suggest that the design of nonlinear function approximators can serve as a useful complement to architectural design in spatio-temporal forecasting.",
+      "url": "http://arxiv.org/abs/2607.13108v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13108v1",
+      "tldr": "STKAN introduces Taylor-polynomial Kolmogorov-Arnold Network modules into spatial and temporal token mixing for spatio-temporal forecasting, achieving competitive performance on traffic benchmarks.",
+      "detailed_reading": {
+        "motivation": "现有时空预测方法主要关注图、注意力、分解等架构设计，而底层非线性函数逼近器（如MLP的固定激活函数）的选择对性能的影响未得到充分研究。本文旨在探究非线性函数逼近器设计的作用，并引入泰勒多项式Kolmogorov-Arnold网络作为替代参数化方案。",
+        "method": "STKAN以历史交通数据（长度L_in，节点N，通道C_in）为输入，首先通过全连接层、可学习空间嵌入和时间嵌入（时间-日、星期）构建初始表示，再通过补丁卷积降低时间分辨率。核心步骤包括：1) 可学习软节点分组，通过未归一化矩阵A经softmax得到G个组的分配权重；2) 空间KAN块，对分组后的空间token进行泰勒多项式KAN混合（沿组维度），随后MLP通道混合，再通过分组权重还原到节点级；3) 时间KAN块，对节点级表示沿压缩时间维度进行泰勒多项式KAN混合，再用MLP通道混合；4) 时空融合块，分别使用空间自注意力和时间自注意力捕捉长期依赖。最后通过线性预测头输出未来H步预测。",
+        "result": "在PEMS04、PEMS07、PEMS08、PEMS-BAY和METR-LA五个交通预测基准上，STKAN取得了具有竞争力的预测精度，在所有测试设置中均优于评估的MLP基变体。消融实验表明泰勒KAN混合器、自适应空间分组和注意力组件各自对模型有贡献。",
+        "conclusion": "非线性函数逼近器的设计可作为架构设计之外的有用补充。KAN层通过可学习单变量函数提供不同归纳偏置，在时空预测任务中能有效替代MLP的固定激活函数，为进一步提升预测性能提供了新方向。",
+        "key_details": "关键实现细节包括：可学习软分组矩阵初始化为未归一化参数，通过softmax归一化；泰勒多项式KAN层使用多项式阶数K（实验设为3），可学习系数θ直接优化，未约束为解析导数；空间和时间注意力使用缩放点积注意力，隐藏维度d_h设为64；损失函数为MAE；优化器Adam，学习率0.001；数据按6:2:2或7:1:2划分；分组数G为节点数的1/4；局限性：分组机制可能丢失细粒度空间信息，多项式阶数需调参。"
+      },
+      "affiliations": [
+        "Chang'an University",
+        "The Hong Kong University of Science and Technology (Guangzhou)",
+        "China University of Geosciences"
+      ],
+      "affiliations_text": "Chang'an University, The Hong Kong University of Science and Technology (Guangzhou), China University of Geosciences",
+      "score": 5.102777281308209,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2607.13054v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713054v1-autonomous-uav-route-planning-for-coverage-maximization-in-environmental-monitoring-a-systematic-literature-review",
+      "source": "arxiv",
+      "title": "Autonomous UAV Route Planning for Coverage Maximization in Environmental Monitoring: A Systematic Literature Review",
+      "authors": [
+        "Sebastian Jouannet-Contreras",
+        "Carola Figueroa-Flores"
+      ],
+      "authors_text": "Sebastian Jouannet-Contreras, Carola Figueroa-Flores",
+      "abstract": "Environmental monitoring with unmanned aerial vehicles (UAVs) requires route planning methods that maximize covered area while handling energy limits, operational constraints, and geometric complexity. This paper reports the protocol and preliminary results of an ongoing systematic literature review (SLR) on autonomous UAV route planning for coverage-oriented environmental monitoring. The review follows the PRISMA 2020 framework and searches Scopus and Web of Science for studies published between 2015 and 2026. The protocol focuses on path planning, coverage path planning, and informative path planning, with emphasis on algorithmic families, coverage and energy metrics, obstacle handling, geometric environment representations, and environmental constraints. At the current stage, 562 records have been identified, 161 duplicates have been removed, and 401 unique records have been screened by title, abstract, and keywords. From these, 247 studies were retained for full-text eligibility assessment (235 eligible and 12 borderline records to be resolved during full-text review). A preliminary analysis of the retained studies suggests strong concentration on coverage-oriented formulations, multi-UAV coordination, and energy-aware optimization, while fewer studies explicitly address weather, uncertainty, or obstacle-rich environments. Most retained studies rely on simulation-based validation, highlighting a potential simulation-to-reality gap, and recent publications show increasing interest in reinforcement learning, hybrid optimization, and geometry-aware planning. These early findings indicate an active but fragmented research landscape and support the need for a structured synthesis to identify mature techniques and unresolved gaps for realistic environmental monitoring missions.",
+      "url": "http://arxiv.org/abs/2607.13054v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13054v1",
+      "tldr": "This systematic literature review on autonomous UAV route planning for coverage maximization in environmental monitoring, following the PRISMA 2020 framework and analyzing 401 records, finds a strong research focus on coverage-oriented formulations, multi-UAV coordination, and energy-aware optimization, but identifies gaps in addressing weather, uncertainty, obstacle-rich environments, and a simulation-to-reality gap.",
+      "detailed_reading": {
+        "motivation": "环境监测中无人机路线规划需最大化覆盖面积，同时处理能量限制、操作约束和几何复杂性。现有文献增长迅速但碎片化，难以比较假设、指标和验证实践，因此需要进行系统文献综述以识别成熟技术和未解决缺口。",
+        "method": "本综述遵循PRISMA 2020框架，在Scopus和Web of Science中检索2015至2026年间发表的英文期刊文章和会议论文。搜索词组合三组概念：UAV相关描述、路径/路线/轨迹/覆盖规划概念、覆盖最大化或环境监测术语。经敏感性检查后移除第四组能量/障碍物等约束词。纳入标准包括提出或评估UAV路线规划方法、报道指标和评估设置；排除仅关注低层控制、通信、硬件，或覆盖非目标/约束/指标，或非UAV平台等研究。筛选流程：识别562条记录，去除161重复，401条经标题/摘要/关键词筛选，保留247篇供全文评估（235合格+12待定）。初步分析基于关键词辅助扫描，记录核心趋势。",
+        "result": "初步保留的247篇研究中，196篇（约79%）关注覆盖导向公式，118篇涉及多无人机，96篇提及能量感知，92篇涉及几何建模，58篇涉及障碍物，44篇涉及天气/不确定性。方法论上，启发式/构造式（63篇）和元启发式（63篇）相当，学习式42篇，精确优化19篇。验证方面，147篇基于仿真，46篇包含实地实验。近年（2023-2026）约62%的文献显示对强化学习、混合优化和几何感知规划兴趣增加。",
+        "conclusion": "该领域活跃但碎片化，对覆盖效率、协调和能量感知规划兴趣强烈，但不确定性丰富和几何约束场景仍相对未充分探索。完成全面筛选和质量评估后，将能更严谨地综合算法趋势、评估指标和开放研究空白，指导未来结合计算几何和智能优化的UAV覆盖规划模型设计。",
+        "key_details": "数据来源为Scopus和Web of Science（与IEEE Xplore和ACM数字图书馆内容高度重叠）；时间范围2015-2026；排除标准包括覆盖非目标/约束/指标、非UAV平台、仅有概念未评估等；当前阶段由单审稿人进行筛选，通过事先明确定义纳入/排除标准和记录决策来减轻偏倚，边界记录由第二作者讨论解决；初步模式基于标题/摘要/关键词的词汇信号，而非全文编码，需在后续阶段替换为验证的全文编码；全文评估阶段将使用双审稿人编码并报告Cohen's κ一致性。局限性：发表偏倚倾向正面性能声称；术语异质性通过基于目标函数的纳入规则缓解。当前仅报告到标题/摘要/关键词筛选阶段，全文质量评估和结构化提取尚在计划中。"
+      },
+      "affiliations": [
+        "Universidad del Bío-Bío"
+      ],
+      "affiliations_text": "Universidad del Bío-Bío",
+      "score": 4.583228076069939,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.13046v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713046v1-what-your-model-threw-away-and-why-youll-want-it-back-masking-fingerprinting-and-privacy-from-discarded-geometry",
+      "source": "arxiv",
+      "title": "What Your Model Threw Away and Why You'll Want It Back: Masking, Fingerprinting, and Privacy from Discarded Geometry",
+      "authors": [
+        "Zachary P. Bradshaw"
+      ],
+      "authors_text": "Zachary P. Bradshaw",
+      "abstract": "We develop a framework for the information discarded by machine learning models whose inputs carry a Lie group action. Given a representation $π$ of a Lie group $G$ on a space $V$ and a learned function $f\\colon V \\to \\mathbb{R}$, we define two objects measuring the symmetry invisible to $f$. The null fiber at a point $x \\in V$ is the set $N_G(f,x) = \\{g \\in G : f(π(g^{-1}) \\cdot x) = f(x)\\}$ of group elements whose inverse action on $x$ is undetectable by $f$. When $N_G(f,x)$ is independent of $x$, it coincides with the stabilizer $\\mathrm{Stab}_G(f)$, the largest subgroup of $G$ under which $f$ is invariant. For smooth maps to $\\mathbb{R}$, the preimage theorem guarantees that null fibers have dimension at least $\\dim G - 1$ at generic inputs, regardless of architecture. For compact groups acting on themselves, the Peter--Weyl theorem yields a spectral characterization of both objects in terms of the Fourier coefficient matrices of $f$. We show that null fiber elements can be computed efficiently via Newton iteration on the orbit map, at a cost comparable to a few gradient evaluations. Applications to data masking, model fingerprinting, and privacy-preserving computation are developed and tested experimentally on molecular property prediction under $\\mathrm{SO}(3)$ and spherical image classification under the Möbius group $\\mathrm{PSL}(2, \\mathbb{C})$. The framework applies uniformly to classical neural networks and variational quantum circuits.",
+      "url": "http://arxiv.org/abs/2607.13046v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13046v1",
+      "tldr": "This paper introduces a framework for quantifying the symmetry information discarded by machine learning models with Lie group actions, defining null fibers and stabilizers, and demonstrates its applications to data masking, model fingerprinting, and privacy-preserving computation.",
+      "detailed_reading": {
+        "motivation": "机器学习模型在处理带有李群作用的数据时丢弃了输入中的几何信息。为推广空空间理论到表示论设置，论文区分了全局不变性（稳定子）和逐点不变性（零纤维），并揭示了在非交换群上两者通常不同。这一框架可用于数据掩蔽、模型指纹识别和隐私保护等实际场景，无需稳定子非平凡。",
+        "method": "定义李群G表示π下的零纤维N_G(f,x)和稳定子Stab_G(f)。利用Peter-Weyl定理给出紧群上函数的傅里叶表征：稳定子条件为f̂(λ)ρ_λ^†(g)=f̂(λ)对所有λ成立，零纤维条件为f(g^{-1}h_0)=f(h_0)的标量方程。提出基于牛顿迭代的轨道图算法，以O(1)次模型评估精确计算零纤维元素。实验在SO(3)分子性质预测和PSL(2,C)球面图像分类上验证，框架统一适用于经典神经网络和变分量子电路。",
+        "result": "对光滑实值函数，预像定理保证通用输入处零纤维维度至少为dim G - 1，与架构无关。傅里叶表征显示稳定子是零纤维的交集，且当傅里叶系数满秩时稳定子仅为平凡群。实验中，零纤维掩蔽使球面图像视觉不可识别，但分类器预测保持不变；分子性质预测下也能有效掩盖输入。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "零纤维定义依赖于李群作用和光滑性；稳定子是闭子群但不必正规。理论推导基于紧群上的Peter-Weyl定理，要求输入空间承载群表示。牛顿迭代算法在轨道图上执行，每次迭代需梯度计算，收敛至精确零纤维元素。复杂度与模型评估次数相当，但需注意光滑性假设和紧群条件；非紧群情况需额外处理。局限性包括对非光滑模型或离散群不直接适用，且实验未报告量化指标（如保真度）。"
+      },
+      "affiliations": [
+        "QodeX Quantum, Inc."
+      ],
+      "affiliations_text": "QodeX Quantum, Inc.",
+      "score": 4.464353301783703,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2607.13154v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713154v1-worlds-in-one-demo-a-synthetic-data-engine-for-learning-open-world-mobile-manipulation",
+      "source": "arxiv",
+      "title": "Worlds in One Demo: A Synthetic Data Engine for Learning Open-World Mobile Manipulation",
+      "authors": [
+        "Lingxiao Guo",
+        "Huanyu Li",
+        "Guanya Shi"
+      ],
+      "authors_text": "Lingxiao Guo, Huanyu Li, Guanya Shi",
+      "abstract": "Learning open-world mobile manipulation policies requires vast data to achieve spatial generalization, long-horizon robustness, and scene generalization. Current prevailing data collection paradigms, teleoperation and UMI, demand prohibitive human effort and cost at scale. To scale beyond the limits of manual data collection, we seek to maximize the value of each human demonstration by scalable data generation. To this end, we introduce WANDA: learning open-World mobile mANipulation from one demonstration via a synthetic DAta engine. WANDA first reconstructs background Gaussian splats and robot-object interaction trajectories from source RGBD observations, as a world substrate for later planning and rendering. It then rearranges contact-rich robot-object interaction segments into extensive spatial configurations, utilizing whole-body motion planning to chain them into new trajectories. To enhance long-horizon robustness, it applies Corrective State Expansion to increase the robot and object state diversity at different stages of mobile manipulation. To unlock cross-environment generalization, trajectories are synthesized on diverse generated 3D worlds from everyday photos. Furthermore, we synthesize photo-realistic observations by compositing rendered robot and object meshes with Gaussian splatting backgrounds. We evaluate our approach on extensive simulation and real-world tasks in various scenes. Experiments show that policies trained with WANDA achieve long-horizon robustness, broad spatial generalization and cross-environment generalization from one real demonstration. Moreover, WANDA naturally supports cross-embodiment data generation, validated by zero-shot deployment on another mobile manipulator with a distinct morphology.",
+      "url": "http://arxiv.org/abs/2607.13154v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13154v1",
+      "tldr": "WANDA is a synthetic data engine that, from a single human demonstration, reconstructs and generates diverse 3D worlds, rearranges robot-object interaction segments into new trajectories with spatial and state diversity, and renders photo-realistic observations, enabling open-world mobile manipulation policies to achieve long-horizon robustness, broad spatial generalization, cross-environment generalization, and zero-shot cross-embodiment transfer.",
+      "detailed_reading": {
+        "motivation": "学习开放世界移动操作策略需要大量数据以实现空间泛化、长程鲁棒性和场景泛化，但当前主流的数据收集范式（遥操作和UMI）在规模上需要过高的人力和成本。为超越手动数据收集的限制，本文旨在通过可扩展的数据生成来最大化每次人类演示的价值，从而提出WANDA方法，从单个演示中学习开放世界移动操作。",
+        "method": "WANDA首先从源RGBD观测中重建背景高斯溅射（使用MAtCha）和机器人-物体交互轨迹（使用BundleSDF），作为后续规划与渲染的世界基底。然后，将接触丰富的机器人-物体交互片段重新排列到大量空间配置中，利用全身运动规划（RRT-Connect和逆运动学）将它们链接成新轨迹。为增强长程鲁棒性，采用校正状态扩展，在移动操作的不同阶段增加机器人和物体状态多样性（物体状态扩展模拟导航漂移，机器人状态扩展通过锥形采样和关节扰动扩大状态覆盖）。为解锁跨环境泛化，从日常照片（单张输入）使用Marble生成多样化3D世界，并在这些世界上合成新轨迹。最后，通过将渲染的机器人/物体网格与高斯溅射背景合成，进行因子化渲染以生成逼真的视觉观测。",
+        "result": "实验表明，WANDA训练的策略从单个真实演示实现了长程鲁棒性、广泛空间泛化和跨环境泛化。在仿真中，Bigym任务上使用100个生成演示达到与40-60个人工演示相当的性能（约50倍样本效率）；BEHAVIOR Challenge上使用1360个生成演示训练的π0.5取得0.67的Q-score，远超200个人工演示的0.38。在真实世界中，五个长程移动操作任务（LunchBox、Utensil、DropTrash、Pour、Fridge）从单个演示取得平均54.8%的成功率，并展示了零样本跨形态泛化（在另一形态移动操作手上直接部署）。",
+        "conclusion": "WANDA通过合成数据引擎最大化单个演示的价值，成功实现从单个演示学习开放世界移动操作策略，在空间泛化、长程鲁棒性和场景泛化上显著超越了传统数据收集方法。该方法自然支持跨形态数据生成，为大规模机器人学习提供了高效、可扩展的范式。",
+        "key_details": "关键细节：1) 背景重建使用MAtCha（稀疏视图2D高斯溅射），无需高精度SLAM，通过前向运动学对齐相机高度；2) 物体重建使用BundleSDF同时跟踪6D姿态和重建网格，支持铰接物体；3) VLM（Gemini 3.1 Pro）指导初始配置采样，利用常识从场景图像推断可操作区域；4) 校正状态扩展包含物体状态扩展（扰动物体姿态后重新IK）和机器人状态扩展（导航起始锥形采样、臂关节随机扰动、锥形摆线EE轨迹）；5) 因子化渲染：背景用高斯溅射快速渲染，前景用Isaac Sim渲染（带光照随机化），避免大型场景渲染开销；6) 局限性：需要手工编辑物体交互片段，碰撞检测可能失败，生成质量受重建精度限制，未建模动力学效应可能导致物理不一致。"
+      },
+      "affiliations": [
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Carnegie Mellon University",
+      "score": 4.396966472630869,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.13048v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713048v1-uncertainty-aware-sequential-decision-rules-for-event-triggered-llm-invocation-in-streaming-systems",
+      "source": "arxiv",
+      "title": "Uncertainty-Aware Sequential Decision Rules for Event-Triggered LLM Invocation in Streaming Systems",
+      "authors": [
+        "Zhaohui Wang"
+      ],
+      "authors_text": "Zhaohui Wang",
+      "abstract": "Streaming inference pipelines increasingly pair lightweight fast models with Large Language Models (LLMs) that provide rich semantic understanding at substantial cost. The central question of when to invoke the LLM has received limited formal treatment. We cast this as a risk-based sequential stopping problem, where a trigger policy fires when a risk functional over the observation history exceeds a threshold. Within this framework, we prove six results: a minimum inter-event time bound excluding trigger chattering; optimality of threshold policies via smooth pasting; approximate SPRT guarantees under estimated parameters; O(sqrt(T log T)) regret for stationary streams, extending to O(sqrt((C_T + 1) T log T)) under C_T changepoints; O(1/sqrt(T)) convergence of online gradient descent for adaptive thresholds; and a calibration-to-miss-rate transfer inequality. Several classical trigger families, including event-triggered, optimal stopping, SPRT, CUSUM, and Bayesian triggers, can be expressed as special cases of this framework. On turbofan degradation data (CMAPSS) with real LLM calls, we empirically verify the theoretical assumptions, ablate the risk function design, compare against six baselines including a RouteLLM-style router and contextual bandits, and analyze cost sensitivity and LLM failure modes. The results confirm sublinear regret, with alpha < 1 for all principled triggers; high diagnostic quality, with 92.9 percent of 1600 LLM diagnoses reaching grounding score >= 0.75 under our rubric; and that anomaly-score-driven risk functions dominate alternatives by roughly an order of magnitude on the Pareto AUC.",
+      "url": "http://arxiv.org/abs/2607.13048v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13048v1",
+      "tldr": "This paper proposes a risk-based sequential decision framework for triggering Large Language Model (LLM) invocations in streaming systems, proving theoretical guarantees (including regret bounds, calibration transfer, and avoidance of trigger chattering) and unifying classical trigger families (event-triggered, optimal stopping, SPRT, CUSUM, Bayesian) under a threshold policy on a risk functional, with empirical validation on turbofan degradation data.",
+      "detailed_reading": {
+        "motivation": "流式推理系统需要在轻量级快速模型和昂贵大型语言模型（LLM）之间取得平衡，LLM虽能提供丰富的语义理解但成本高昂。现有工作对何时调用LLM这一核心问题缺乏正式处理。本文将此问题形式化为基于风险的序列停止问题，旨在为LLM在流式系统中的调用提供理论框架。",
+        "method": "本文提出一个统一的风险函数阈值策略框架，其中触发策略π在风险函数R(历史)超过阈值θ时调用LLM。快速模型采用GRU双头网络，分别输出预测和异方差不确定性估计。风险函数通过聚合异常分数、预测不确定性和时间上下文构建。阈值可通过在线梯度下降（OGD）或LinUCB自适应更新，并支持事件触发、最优停止、SPRT、CUSUM及贝叶斯触发等经典触发器作为特例。在CMAPSS涡轮风扇退化数据集和CIC-IDS2017网络入侵数据集上评估，算法流程为每步：快速模型处理输入生成预测与不确定性，更新风险，若风险超过阈值则调用LLM获取诊断并自适应调整阈值。",
+        "result": "理论结果包括最小事件间隔（排除颤振）、阈值策略的最优性、近似SPRT保证、静态流下次线性后悔界O(√(T log T))、非静态流下扩展为O(√((C_T+1)T log T))、在线梯度下降的O(1/√T)收敛率，以及校准到遗漏率的转移不等式。实验证实所有原则性触发器的后悔值均为次线性（α<1），LLM诊断质量高（1600次诊断中92.9%达到接地分数≥0.75），异常分数驱动的风险函数在Pareto AUC上优于其他方案约一个数量级，并与六个基线（包括RouteLLM风格路由器和上下文老虎机）比较，验证了成本敏感性和LLM故障模式。",
+        "conclusion": "本文提出的统一风险框架为流式系统中何时调用LLM提供了形式化的决策理论基础，理论结果和经验验证共同确认了该框架在后悔下界、诊断质量和自适应阈值方面的有效性。该框架能够将多种经典触发机制作为特例统一，并支持在线自适应调整阈值以适应非平稳流。",
+        "key_details": "快速模型通过最小化异方差损失训练，不确定性估计方法包括方差头、MC Dropout（20次前向）、深度集成（5个模型）和温度缩放。阈值自适应采用OGD（步长η/√t，有界次梯度G，域直径D）或LinUCB。理论结果基于有界增量、风险下鞅、单调性等假设，并经过CMAPSS数据验证。校准到遗漏率转移不等式表明，对于ε-校准的不确定性估计u_t∈[0,1]，触发阈值为θ_u时遗漏关键事件的联合概率≤θ_u+ε。工作局限性包括未考虑硬实时调度、最坏情况执行时间和队列响应时间等系统级时序问题。"
+      },
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 4.293657261199683,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.13047v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713047v1-targeted-recovery-of-weight-space-mechanisms-from-neural-networks",
+      "source": "arxiv",
+      "title": "Targeted Recovery of Weight-Space Mechanisms From Neural Networks",
+      "authors": [
+        "Antoine Vigouroux",
+        "Lee Sharkey"
+      ],
+      "authors_text": "Antoine Vigouroux, Lee Sharkey",
+      "abstract": "Parameter decomposition (PD) decomposes neural networks into interpretable computational components that faithfully reflect the original network's operations. However, scaling PD to large models requires vast compute, making it a costly and risky endeavor. Here we propose targeted PD (tPD), which identifies only the components that process specific inputs of interest -- from isolated prompts to large subtasks -- by introducing a high-rank catch-all component that handles all non-target data. We validate tPD on toy models and on transformer language models trained on The Pile, where it recovers reproducible, mechanistically faithful circuits. We extract a CSS-only submodel of a 4-block transformer using 7% of the FLOPs of its published decomposition, and in a 12-block transformer we surgically ablate and rewire memorized sequences, with negligible side effects on other inputs.",
+      "url": "http://arxiv.org/abs/2607.13047v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13047v1",
+      "tldr": "The paper introduces targeted parameter decomposition (tPD), which efficiently identifies interpretable neural network components for specific inputs of interest by introducing a high-rank catch-all component for non-target data, enabling scalable mechanistic interpretability with reduced compute.",
+      "detailed_reading": {
+        "motivation": "全参数分解（PD）将神经网络分解为可解释的计算组件，但扩展到大型模型需要巨大计算量，成本高昂且风险高。因此提出针对性参数分解（tPD），仅识别处理特定输入（从孤立提示到大型子任务）的机制，通过引入高秩catch-all组件处理所有非目标数据，大幅降低计算需求。",
+        "method": "tPD使用两个并行数据流：目标数据集（需解释的输入）和非目标流（模型原始训练分布采样）。分解模型由rank-1子组件和全秩catch-all组件Δ组成，其中Δ定义为原始权重与子组件之和的残差。训练时，目标数据必须仅由稀疏子组件重建（Δ组件被对抗性消融0-100%），而非目标数据则始终使用Δ组件及可选的子组件。重要性最小化损失同时作用于两个流，确保非目标机制被移入Δ，而处理目标数据的子组件不干扰非目标数据。为保持机械忠实，还通过对抗性消融（同时消融非活动组件和Δ）最大化重建损失，迫使模型输出在混合权重矩阵下不变。",
+        "result": "在玩具模型（TMCC）上，tPD针对3个输入特征的目标仅需500步收敛（全模型需2500步），且正确恢复地面真相机制。在4-block Pile transformer上，针对'import numpy as'和'import pandas as'的分解，不同随机种子间V向量（输入方向）高度相似，嵌套目标分解中77个子组件有69个匹配。提取CSS-only子模型（1638个组件，占全分解7% FLOPs），其CSS数据KL散度约0.6，其他语言KL≥2。在12-block transformer（85M参数）上，消融np/pd特定子组件可精准擦除对应知识（KL<1e-2），通过交换U方向可重写记忆（import numpy as预测为pd），且副作用极小。",
+        "conclusion": "tPD是PD的针对性变体，能以极低成本恢复机械忠实的分解，支持子组件消融和重写等干预，适用于窄范围可解释性（电路定位、遗忘、编辑）。但需注意：子组件仅处理目标数据激发的激活子空间，编辑案例较为简单（短记忆序列），冗余机制可能被Δ吸收，且当前模型规模仍远小于前沿模型。",
+        "key_details": "数据：目标数据需精心选择以完整捕获感兴趣行为，非目标数据来自原始训练分布（如The Pile）。先验：假设机制可分解为rank-1子组件，每个子组件实现单一功能角色。损失：包括重建损失、重要性最小化损失（L0稀疏性）、以及对抗性消融损失（确保机械忠实）。超参：子组件槽位数可远小于全模型（如TMCC从100降至5），Δ对抗性消融比例每批次随机0-100%。复杂度：tPD计算成本仅为全分解的一小部分（4-block transformer用7% FLOPs），但子组件可能不直接等价于全分解组件。局限性：神经网络常使用冗余机制，tPD可能丢失部分机制；编辑实验仅针对短记忆序列，世界知识编辑需要更复杂工程；尚未在更大模型上验证。"
+      },
+      "affiliations": [
+        "Goodfire",
+        "MATS"
+      ],
+      "affiliations_text": "Goodfire, MATS",
+      "score": 4.178404766700249,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.13067v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/16/260713067v1-a-3dgs-driven-dynamic-viewpoint-and-vibrotactile-framework-for-subsea-teleoperation-validated-via-fnirs",
+      "source": "arxiv",
+      "title": "A 3DGS-Driven Dynamic Viewpoint and Vibrotactile Framework for Subsea Teleoperation Validated via fNIRS",
+      "authors": [
+        "Fang Xu",
+        "Tianyu Zhou",
+        "Ruitong Tian",
+        "Md Jahidul Islam",
+        "Jing Du"
+      ],
+      "authors_text": "Fang Xu, Tianyu Zhou, Ruitong Tian, Md Jahidul Islam, Jing Du",
+      "abstract": "Teleoperating remotely operated vehicles (ROVs) in flooded, cluttered infrastructure is fundamentally limited by narrow 2D egocentric views and subsea communication latency. We present a multimodal teleoperation architecture built on a ROS-Unity framework that decouples proactive spatial planning from reactive boundary avoidance. The system replaces static camera feeds with a Dynamic Adaptive Viewpoint System (DAVS), which uses continuous optimization and real-time 3D Gaussian Splatting (3DGS) to synthesize an occlusion-free exocentric viewpoint from onboard state estimation. To further reduce sensory workload, a torso-mounted vibrotactile suit maps local obstacle clearance to intuitive haptic proximity cues. The architecture was evaluated in a controlled human-subject study (N = 30) using a BlueROV2 navigating a complex simulated underwater facility. A 3 x 4 repeated-measures design compared three interaction modalities (Egocentric, Haptic, Exocentric) under four communication delays (0.0-1.0 s). Performance was quantified using behavioral measures and functional near-infrared spectroscopy (fNIRS) to assess task-evoked prefrontal activation. Results show that reactive haptic feedback improves path adherence under minimal delay, whereas the 3DGS-driven exocentric visualization provides superior resilience under severe latency (0.5-1.0 s), significantly outperforming the other modalities. fNIRS further revealed a cognitive disengagement effect: increasing latency during conventional egocentric teleoperation overloaded working memory and reduced prefrontal activation, whereas the proactive spatial context provided by DAVS sustained executive control. These findings demonstrate that spatially grounded, multimodal assistance can substantially improve operator performance and cognitive endurance during latency-degraded underwater teleoperation.",
+      "url": "http://arxiv.org/abs/2607.13067v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13067v1",
+      "tldr": "A multimodal teleoperation framework combining a 3D Gaussian Splatting–driven dynamic exocentric viewpoint and torso-mounted vibrotactile cues significantly improves operator performance and sustains prefrontal executive control under severe communication latency, as validated by fNIRS in a human-subject study.",
+      "detailed_reading": {
+        "motivation": "水下遥操作受限于狭窄的2D自我中心视图和通信延迟，导致操作者需持续进行空间推断，增加认知负荷。为解决此感知瓶颈，提出一种多模态框架，将主动空间规划与反应性边界避免解耦。",
+        "method": "该架构基于ROS-Unity框架，包含实时MonoGS SLAM和动态自适应视角系统(DAVS)。MonoGS通过单目RGB图像以10Hz进行6-DOF位姿估计和3D高斯泼溅地图构建。DAVS在包围ROV的球面上候选视角中优化，通过最小化遮挡成本、最大化深度熵并施加平滑性约束，合成无遮挡的外部视角。同时，躯干固定的振动触觉背心将局部障碍清除映射为反应性触觉提示，通过非线性函数将距离转换为强度。实验采用3×4重复测量设计，30名参与者分别使用自我中心、触觉和外部视角三种模态，在0.0至1.0秒四种通信延迟下导航BlueROV2在模拟水下设施中。",
+        "result": "行为结果显示，触觉反馈在最小延迟下改善路径遵循，而3DGS驱动的外部视角在严重延迟(0.5-1.0秒)下显著优于其他模态，具有更好的延迟韧性。fNIRS神经生理学测量揭示了认知脱离效应：传统自我中心遥操作在延迟下导致前额叶激活崩溃，表明工作记忆过载；而外部视角维持了前额叶执行控制，证明空间基础辅助能保持操作者的认知耐力。",
+        "conclusion": "空间基础的多模态辅助（特别是3DGS驱动的外部视角）能显著提升操作者在水下遥操作中的性能，并在高延迟下维持认知功能。该框架通过解耦主动规划与反应性避免，有效减轻了操作者的感知和认知负荷。",
+        "key_details": "关键细节包括：MonoGS使用单目RGB和单目深度估计约束无纹理环境中的几何；DAVS优化权重α=1.0, β=0.3, γ=0.8, δ=0.5，平滑滤波系数0.3；触觉映射使用指数γ>1的强度函数和门控函数；视觉-触觉延迟严格低于20毫秒；实验排除联合外部+触觉条件以避免跨通道干扰；局限性包括模拟环境、未验证真实水下场景、样本量有限等。"
+      },
+      "affiliations": [
+        "University of Florida"
+      ],
+      "affiliations_text": "University of Florida",
+      "score": 4.167595522708158,
+      "score_text": "4.2"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.13043v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713043v1-beyond-backbone-backpropagation-a-decoupled-strategy-for-efficient-transfer-learning",
+      "source": "arxiv",
+      "title": "Beyond Backbone Backpropagation: A Decoupled Strategy for Efficient Transfer Learning",
+      "authors": [
+        "Daniel Vila-Cruz",
+        "Laura Morán-Fernández",
+        "Verónica Bolón-Canedo"
+      ],
+      "authors_text": "Daniel Vila-Cruz, Laura Morán-Fernández, Verónica Bolón-Canedo",
+      "abstract": "Deep learning models achieve state-of-the-art image classification but face deployment challenges due to computational costs and energy demands. We propose a lightweight training strategy that adapts normalization layers of the model to the new domain and decouples feature extraction from classifier optimization, reducing overhead by precomputing features only once. A redesigned classifier head with margin-based weighted loss further minimizes ambiguity without end-to-end backpropagation. Evaluated across four CNN architectures (ResNet18, ResNet50, MobileNet, DenseNet121), three Transformer models (ViT, Swin and DeiT) and three medical datasets (Brain Cancer MRI, BreakHis and PatchCamelyon), our approach significantly reduces the required training time with only a marginal accuracy trade-off, often matching or surpassing baseline performance. This efficiency translates to reducing CO2 by orders of magnitude, offering a practical and environmentally sustainable solution for resource-constrained clinical or prototyping environments.",
+      "url": "http://arxiv.org/abs/2607.13043v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13043v1",
+      "tldr": "The paper proposes a decoupled transfer learning strategy that adapts normalization layers and precomputes features once, significantly reducing training time and energy consumption while maintaining competitive accuracy across CNN and transformer architectures on medical image datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade da Coruña"
+      ],
+      "affiliations_text": "Universidade da Coruña",
+      "score": 4.088943454616246,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.13124v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713124v1-shortopd-recovering-pruned-llms-with-short-to-long-on-policy-distillation",
+      "source": "arxiv",
+      "title": "ShortOPD: Recovering Pruned LLMs with Short-to-Long On-Policy Distillation",
+      "authors": [
+        "Qingyu Zhang",
+        "Qianhao Yuan",
+        "Hongyu Lin",
+        "Yaojie Lu",
+        "Xianpei Han",
+        "Le Sun",
+        "Xiang Li",
+        "Ming Xu",
+        "Jiarui Li",
+        "Xiuyin Zhao"
+      ],
+      "authors_text": "Qingyu Zhang, Qianhao Yuan, Hongyu Lin, Yaojie Lu, Xianpei Han, Le Sun, Xiang Li, Ming Xu, Jiarui Li, Xiuyin Zhao",
+      "abstract": "Structured pruning is a hardware-friendly way to compress LLMs, but it is mostly validated on multiple-choice recognition tasks, while the same compressed checkpoints can collapse on the free-form generation that deployment actually requires. Two observations trace this gap. First, greedy \\textsc{pass}@$1$ nearly vanishes after compression, yet \\textsc{pass}@$k$ recovers substantially under repeated sampling: useful generations are demoted, not erased. Second, the recoverable regime fails mainly through suffix repetition. Recovery should therefore train on the compressed model's own on-policy states with dense token-level supervision, which On-Policy Distillation (OPD) provides by reusing the pre-compression model as a frozen teacher. However, long on-policy rollouts spend early recovery budget on low-information repetitive suffixes, delaying loss descent. To mitigate this waste, we propose \\textbf{\\shortopd}, a short-to-long OPD schedule that detects teacher-confirmed repetitive suffixes, treats the surviving prefix as each rollout's effective length, and allocates future rollout budgets to the effective lengths the policy can currently use. Across math, code, and open-ended generation, \\shortopd\\ raises the compressed model's score to about $9\\times$ its unrecovered value and $1.6$--$4.4\\times$ standard recovery recipes (SFT w/o KD, KD, and SeqKD), and it matches a fixed $8192$-token rollout horizon within two points using a quarter of the training time ($8.5$ vs.\\ $35.9$ hours) and $71\\%$ fewer rollout tokens. We hope this recipe helps move structured pruning beyond marginal gains on perplexity and multiple-choice benchmarks, a step closer to deployment-ready generation quality.",
+      "url": "http://arxiv.org/abs/2607.13124v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13124v1",
+      "tldr": "ShortOPD is an efficient method for recovering pruned large language models that uses a short-to-long on-policy distillation schedule to avoid wasting computation on repetitive suffixes, achieving up to 9× improvement in generation scores with 71% fewer rollout tokens and 4× faster training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chinese Academy of Sciences",
+        "ByteDance",
+        "University of Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Chinese Academy of Sciences, ByteDance, University of Chinese Academy of Sciences",
+      "score": 3.9926183632886425,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.13059v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713059v1-gpusimbench-towards-scalable-and-reliable-gpu-accelerated-simulators-in-embodied-ai",
+      "source": "arxiv",
+      "title": "GPUSimBench: Towards Scalable and Reliable GPU-Accelerated Simulators in Embodied AI",
+      "authors": [
+        "Huzhenyu Zhang",
+        "Shenghai Yuan",
+        "Wenrui Yan",
+        "Li Ma",
+        "Hengjie Li",
+        "Jingcheng Pang",
+        "Dmitry Yudin"
+      ],
+      "authors_text": "Huzhenyu Zhang, Shenghai Yuan, Wenrui Yan, Li Ma, Hengjie Li, Jingcheng Pang, Dmitry Yudin",
+      "abstract": "Data-driven embodied AI is rapidly transitioning into a paradigm that scales training through massively parallel simulation, where GPU-accelerated simulators serve as the foundational data infrastructure. However, as computational throughput scales, the underlying trade-offs between parallel efficiency, physical fidelity, and execution determinism remain largely unexamined, hindering the development of reliable robot learning. In this paper, we expose the hidden limits of mainstream GPU-based robotic simulators (e.g., Isaac Lab, Genesis) by introducing GPUSimBench, which focuses on scalability, physical consistency, and computational determinism. First, GPUSimBench establishes a physical grounding evaluation with a controlled inclined-plane task, quantifying the distributional alignment between simulated dynamics and their real-world counterparts. Second, we benchmark parallel scalability by measuring throughput and memory footprints across scaling environment counts. Crucially, beyond standard performance metrics, we unveil and quantify the inherent non-determinism introduced by GPU-batched execution, characterized by significant run-to-run and inter-environment variability even under identical initial conditions. Finally, we identify four empirical regimes of stochasticity within current simulator stacks, highlighting that unbounded scaling can compromise reproducibility without explicit constraints.",
+      "url": "http://arxiv.org/abs/2607.13059v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13059v1",
+      "tldr": "GPUSimBench exposes hidden scalability, physical consistency, and non-determinism trade-offs in GPU-accelerated robotic simulators to enable more reliable and reproducible robot learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanyang Technological University",
+        "AXXX",
+        "Shanghai AI Laboratory",
+        "MIRAI",
+        "Nanjing University"
+      ],
+      "affiliations_text": "Nanyang Technological University, AXXX, Shanghai AI Laboratory, MIRAI, Nanjing University",
+      "score": 3.9688383132323772,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.13221v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713221v1-audited-selective-verification-for-risk-controlled-n-1-thermal-contingency-screening-under-deployment-shift",
+      "source": "arxiv",
+      "title": "Audited Selective Verification for Risk-Controlled N-1 Thermal Contingency Screening under Deployment Shift",
+      "authors": [
+        "Jayakumar Manoharan"
+      ],
+      "authors_text": "Jayakumar Manoharan",
+      "abstract": "Real-time N-1 contingency screening in an energy management system trades assurance against cost: verifying every credible outage with full power flow is too slow, while fast linear-sensitivity screening gives no statistical guarantee and can silently pass unsafe operating points, especially when a controller drives the system into unfamiliar regimes. This paper introduces Audited Selective Verification, a risk-budgeted screening and triage layer for any controller's output (optimization, model-predictive, or learned). A cheap surrogate proposes which outages to skip; an online audit runs full power flow on a small random sample each window; and a calibrated threshold certifies a thermal-violation-rate bound for the skipped set at a chosen budget and confidence, with a corresponding bound for the unverified trusted subset. Validity rests on real verification and the audit rather than on surrogate accuracy, so it holds under arbitrary deployment shift. It is a risk-budgeted screen, not a replacement for deterministic verification when policy requires checking every credible contingency. On three public transmission systems up to 1354 buses, the realized violation rate stays within budget, standard deterministic and calibrated screens become unsafe under shift, and the method cuts full power-flow studies by 29 to 75 percent per real-time operating point.",
+      "url": "http://arxiv.org/abs/2607.13221v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13221v1",
+      "tldr": "This paper introduces Audited Selective Verification, a risk-budgeted N-1 thermal contingency screening method that uses an online audit of full power flow solves to certify a violation-rate bound for skipped contingencies, providing distribution-free guarantees robust to deployment shift from black-box controllers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Electric Power Research Institute (EPRI)"
+      ],
+      "affiliations_text": "Electric Power Research Institute (EPRI)",
+      "score": 3.8828325351819597,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.13110v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713110v1-a-hybrid-mamba-for-audio-visual-navigation",
+      "source": "arxiv",
+      "title": "A Hybrid Mamba for Audio-Visual Navigation",
+      "authors": [
+        "Yi Wang",
+        "Yinfeng Yu"
+      ],
+      "authors_text": "Yi Wang, Yinfeng Yu",
+      "abstract": "Since the paradigm centered on convolutional neural networks and recurrent architectures was established in 2020, the fundamental backbone networks for audio-visual navigation have undergone no essential changes for more than five years, making them inadequate to support efficient representation of dynamic multimodal sequences. This paper proposes Samba(A Hybrid Mamba for Audio-Visual Navigation). It uses the adaptive selection-enabled Mamba State Encoder (M-SE) to replace conventional GRUs for temporal aggregation, and constructs an Audio Mamba Encoder (AME) to remedy the limitations of convolutional operators in capturing global time-frequency dependencies in spectrograms. Experiments demonstrate that Samba exhibits exceptional generalization performance when facing unheard sound sources and unseen scenes. On the Matterport3D dataset, it improves the navigation success rate (SR) by 11.3\\% compared with existing state-of-the-art models, and the performance gain is even more pronounced on the Replica dataset, which features finer scene structures. Such modernized architectural reconstruction unlocks stronger embodied representation capabilities at a lower computational cost, thereby providing a highly robust technical pathway for paradigm evolution in the field of audio-visual navigation.",
+      "url": "http://arxiv.org/abs/2607.13110v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13110v1",
+      "tldr": "Samba introduces a hybrid Mamba architecture for audio-visual navigation that replaces traditional GRUs with an adaptive Mamba State Encoder and employs a bidirectional Audio Mamba Encoder to capture global time-frequency dependencies, achieving state-of-the-art navigation success rates on Matterport3D and Replica datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xinjiang University"
+      ],
+      "affiliations_text": "Xinjiang University",
+      "score": 3.8534601372720214,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.13056v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713056v1-hribench-benchmarking-interaction-centric-human-robot-collaboration",
+      "source": "arxiv",
+      "title": "HRIBench: Benchmarking Interaction-Centric Human-Robot Collaboration",
+      "authors": [
+        "Chang Liu",
+        "Jiawei Zhang",
+        "Tao Zhang",
+        "Ye Wang",
+        "Hongyu Zhou",
+        "Qin Jin"
+      ],
+      "authors_text": "Chang Liu, Jiawei Zhang, Tao Zhang, Ye Wang, Hongyu Zhou, Qin Jin",
+      "abstract": "Current vision-language-action (VLA) benchmarks primarily evaluate isolated manipulation skills while leaving human-robot interaction structure largely unmodeled. However, real-world collaboration fundamentally requires coordination under shared agency, including intent understanding, temporal synchronization, protocol adherence, and safe interaction in dynamic environments. To address this gap, we introduce HRIBench, a diagnostic benchmark for intent-aware human-robot collaboration based on executable interaction scenarios. HRIBench represents collaborative tasks as structured scenario scripts that explicitly model agent roles, temporal dependencies, coordination constraints, and human behavior distributions. Building on this abstraction, HRIBench defines three representative interaction roles: Instructor, Collaborator, and Intruder, covering intent communication, joint coordination, and robustness under human intervention. The benchmark contains 13 role-conditioned tasks with over 650 evaluation episodes generated from diverse interaction trajectories and scene variations. Beyond binary task success, HRIBench introduces interpretable interaction-centric metrics spanning synchronization, responsiveness, protocol compliance, and safety. We evaluate adapted policies based on GR00T, pi0.5, and ACT under a unified protocol. Results show that current foundation robot policies struggle substantially in collaborative settings despite strong manipulation ability, revealing major limitations in temporal coordination and intent-aware behavior. Fine-tuning on HRIBench consistently improves collaborative performance. In a real-world adaptation study, simulation data generated by HRIBench improves GR00T N1.5's physical-task success rate from 0.10 to 0.43, demonstrating the benchmark's value for advancing interaction-centric robot learning.",
+      "url": "http://arxiv.org/abs/2607.13056v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13056v1",
+      "tldr": "HRIBench is a diagnostic benchmark for human-robot collaboration that evaluates robot policies on intent-aware interaction tasks using structured scenario scripts, revealing that current VLA models struggle in collaborative settings despite strong manipulation skills.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beijing Normal University",
+        "Renmin University of China"
+      ],
+      "affiliations_text": "Beijing Normal University, Renmin University of China",
+      "score": 3.8062970636952413,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.13072v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713072v1-hro-hierarchical-room-to-object-framework-for-zero-shot-object-goal-navigation-with-large-language-models",
+      "source": "arxiv",
+      "title": "HRO: Hierarchical Room-to-Object Framework for Zero-Shot Object Goal Navigation with Large Language Models",
+      "authors": [
+        "Luyuan Jia",
+        "Yinfeng Yu"
+      ],
+      "authors_text": "Luyuan Jia, Yinfeng Yu",
+      "abstract": "Zero-shot object-goal navigation aims to enable an intelligent agent to explore and navigate to objects of unknown categories in an unfamiliar environment without specific target training. In zero-shot navigation tasks, pre-trained large models are usually employed to leverage their prior knowledge for guiding the agent's navigation. However, existing zero-shot object-goal navigation methods based on large language models (LLMs) merely utilize LLMs as flat reasoning tools to directly associate objects or regions. They lack the hierarchical spatial cognition modeling of human-like room semantics to object localization, which leads to strong blindness in exploration, insufficient accuracy in semantic association, and failure to fully unleash the common-sense reasoning potential of LLMs. This paper proposes an LLM-driven hierarchical room-to-object (HRO) framework for zero-shot object-goal navigation, which guides the agent to explore and navigate to the target object in a coarse-to-fine manner. Experiments on Gibson and HM3D datasets verify that our HRO framework achieves superior success rate and generalization over existing LLM-based methods, underscoring LLMs' strong potential for zero-shot object-goal navigation.",
+      "url": "http://arxiv.org/abs/2607.13072v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13072v1",
+      "tldr": "The HRO framework introduces a hierarchical, LLM-driven coarse-to-fine approach for zero-shot object goal navigation, using room-type inference and semantic affinity scoring to outperform existing flat reasoning methods on Gibson and HM3D datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xinjiang University"
+      ],
+      "affiliations_text": "Xinjiang University",
+      "score": 3.7358527054166095,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.13060v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713060v1-a-bayesian-framework-for-the-uncanny-valley-in-humanoid-robot-design",
+      "source": "arxiv",
+      "title": "A Bayesian framework for the uncanny valley in humanoid robot design",
+      "authors": [
+        "Shimon Honda",
+        "Rin Shibano",
+        "Hideyoshi Yanagisawa"
+      ],
+      "authors_text": "Shimon Honda, Rin Shibano, Hideyoshi Yanagisawa",
+      "abstract": "The uncanny valley is a long-standing empirical rule in humanoid robot design: making robots more human-like can reduce, rather than increase, affinity. Yet existing guidelines, such as adopting robot-like appearances, avoiding excessive realism, and reducing cross-modal mismatches, remain difficult to use for algorithmic design because they are not expressed as manipulable variables. Here, we propose a hierarchical Bayesian generative model that operationalizes these guidelines as mathematical design variables. The model represents affinity toward humanoid robots as posterior-weighted negative category-conditional surprise and explains category ambiguity and perceptual mismatch as increases in surprise. It maps uncanny-valley mechanisms onto four variables: deviation from the predicted robot-category mean, inconsistency in human likeness across modalities, prediction uncertainty, and observational uncertainty. Simulations showed that category ambiguity and appearance--motion mismatch can produce affinity reductions, and that uncertainty reshapes the valley. In a human-subject experiment with robot--human morphing images, we manipulated prediction uncertainty using blurred prior robot stimuli and observational uncertainty using blurred evaluation stimuli. Increased observational uncertainty attenuated the decrease in familiarity ratings at intermediate human likeness, whereas low prediction uncertainty increased ratings for robot-like appearances. This framework turns empirical uncanny-valley heuristics into a computational basis for algorithmically evaluating and optimizing humanoid robot appearance and behavior.",
+      "url": "http://arxiv.org/abs/2607.13060v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13060v1",
+      "tldr": "This paper proposes a hierarchical Bayesian generative model that operationalizes uncanny valley heuristics into mathematical design variables, showing through simulations and a human experiment that prediction and observational uncertainty shape affinity toward humanoid robots.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Tokyo"
+      ],
+      "affiliations_text": "The University of Tokyo",
+      "score": 3.706473524969155,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.13188v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713188v1-concurrent-image-understanding-and-generation-self-correcting-coupled-markov-jump-processes",
+      "source": "arxiv",
+      "title": "Concurrent Image Understanding and Generation: Self-Correcting Coupled Markov Jump Processes",
+      "authors": [
+        "Minh-Quan Le",
+        "Armand Comas",
+        "Alexandros Lattas",
+        "Stylianos Moschoglou",
+        "Pedro Vélez",
+        "Amit Raj",
+        "Aaron Germuth",
+        "Thabo Beeler",
+        "Dimitris Samaras",
+        "Di Qiu"
+      ],
+      "authors_text": "Minh-Quan Le, Armand Comas, Alexandros Lattas, Stylianos Moschoglou, Pedro Vélez, Amit Raj, Aaron Germuth, Thabo Beeler, Dimitris Samaras, Di Qiu",
+      "abstract": "Human cognition does not separate understanding and generation. A teacher at a whiteboard speaks and draws $\\textit{together}$, each modality reshapes the other. In this paper, we bring this coupled loop to artificial systems. Masked Diffusion Models (MDMs) are ideally suited to this task, yet existing samplers either decode text and image interleavedly or independently update them in parallel branches that share only previous-step history, but not the other modality's latest decisions $\\textit{within}$ the same step; combined with MDMs' inability to remask, cross-modal contradictions are neither detected nor repaired. We introduce $\\textbf{Self-Correcting Coupled Markov Jump Processes (SC-CMJP)}$, a framework in which one modality's transition rates are functionals of the other modality's confidence score, as weighted by cross-modal attention. Furthermore, a remasking jump retracts commitments the moment cross-modal evidence turns against them. In conjunction with SC-CMJP, we introduce $\\texttt{CO}_\\texttt{2}\\texttt{Jump}$ (Self-$\\underline{\\text{CO}}$rrecting $\\underline{\\text{CO}}$upled $\\underline{\\text{Jump}}$), a novel training-free single-pass sampler for joint multimodal geneneration. For training and evaluation purposes, we have created and will release three large-scale joint multimodal generation corpora: $\\text{JEdit-1M}$, $\\text{JMaze-200K}$, $\\text{JNono-200K}$, with matching in- and out-of-distribution benchmarks. $\\texttt{CO}_\\texttt{2}\\texttt{Jump}$ achieves best joint performance for image understanding and editing as well as visual reasoning (maze and nonogram solving). The performance of the sampler scales monotonically with the number of denoising steps, evidence that the benefits of cross-modal coupling $\\textit{compound}$ across the trajectory. Project page: https://coupled-jump.github.io",
+      "url": "http://arxiv.org/abs/2607.13188v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13188v1",
+      "tldr": "This paper introduces Self-Correcting Coupled Markov Jump Processes (SC-CMJP) and the training-free CO2Jump sampler, which enable concurrent text and image generation by coupling cross-modal transition rates and incorporating remasking for self-correction, achieving state-of-the-art on joint image understanding, editing, and visual reasoning tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stony Brook University",
+        "Google DeepMind"
+      ],
+      "affiliations_text": "Stony Brook University, Google DeepMind",
+      "score": 3.7015551863686986,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.13103v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713103v1-disentangling-knowledge-states-with-ability-and-proficiency-modeling-for-knowledge-tracing",
+      "source": "arxiv",
+      "title": "Disentangling Knowledge States with Ability and Proficiency Modeling for Knowledge Tracing",
+      "authors": [
+        "Duantengchuan Li",
+        "Yingqian Bi",
+        "Jinsong Chen",
+        "Rui Zhang",
+        "Mingwen Tong"
+      ],
+      "authors_text": "Duantengchuan Li, Yingqian Bi, Jinsong Chen, Rui Zhang, Mingwen Tong",
+      "abstract": "Knowledge tracing (KT) aims to predict students' future performance by modeling their evolving knowledge states from historical interactions. Existing KT methods usually treat the raw interaction sequence as a unified behavioral process, overlooking the phase-specific nature of learning behaviors. Our preliminary observations show that students are more likely to correctly answer previously failed knowledge concepts after sufficient practice, suggesting a transition from ability-building to proficiency-oriented learning. Motivated by this, we propose Phase-Aware Knowledge Tracing (PAKT), a KT framework that decomposes student interactions into ability and proficiency phases based on the tailored decomposition mechanism. To effectively exploit the decomposed sequences, we design a multi-branch Transformer with a type-aware readout module to jointly capture phase-specific and holistic knowledge states. We further provide a causal analysis to reveal the confounding bias caused by entangling complex learning behaviors in phase-agnostic KT models. Extensive experiments on six public benchmarks demonstrate that our method consistently outperforms representative baselines, with a maximum AUC gain of 1.33% and an average gain of 0.82%.",
+      "url": "http://arxiv.org/abs/2607.13103v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13103v1",
+      "tldr": "PAKT introduces a phase-aware decomposition of student learning sequences into ability and proficiency phases, modeled via a multi-branch Transformer with a type-aware readout module, to improve knowledge tracing performance by consistently outperforming baselines across six benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hubei University of Technology",
+        "Wuhan University",
+        "Central China Normal University"
+      ],
+      "affiliations_text": "Hubei University of Technology, Wuhan University, Central China Normal University",
+      "score": 3.548792147725525,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.13120v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713120v1-codiffgrn-rethinking-gene-regulatory-network-inference-via-the-beeline-kgc-benchmark-and-co-evolutionary-discrete-diffusion",
+      "source": "arxiv",
+      "title": "CoDiffGRN: Rethinking Gene Regulatory Network Inference via the BEELINE-KGC Benchmark and Co-evolutionary Discrete Diffusion",
+      "authors": [
+        "Jiaze Song",
+        "Runhao Zhao",
+        "Minghao Xu",
+        "Bin Cui",
+        "Wentao Zhang"
+      ],
+      "authors_text": "Jiaze Song, Runhao Zhao, Minghao Xu, Bin Cui, Wentao Zhang",
+      "abstract": "Inferring gene regulatory networks (GRNs) from single-cell transcriptomic data is crucial for biological discovery, yet existing approaches suffer from a fundamental misalignment with real-world needs. Researchers typically seek a small set of high-confidence regulatory interactions for experimental validation, often involving previously unseen genes. However, current benchmarks rely on transductive splits with global classification metrics, while prevailing models struggle to generalize under inductive settings. To bridge this gap, we reformulate GRN inference as an inductive, ranking-centric graph completion problem and introduce \\textbf{\\benchmark}, a new benchmark that incorporates an inductive gene-holdout split together with knowledge graph completion metrics to better evaluate top-ranked predictions. Building on this, we propose \\textbf{\\method}, the first co-evolutionary discrete diffusion framework that jointly models biologically coherent discretized gene expression states and regulatory interactions for robust inductive generalization and improved top-ranked regulatory discovery. We further introduce TF-ALL Subgraph Sampling (TASS) for scalable training. Extensive experiments on {\\benchmark} show that {\\method} establishes new state-of-the-art performance, significantly outperforming existing methods in novel regulatory discovery, and ablation studies further verify the effectiveness of our design.",
+      "url": "http://arxiv.org/abs/2607.13120v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13120v1",
+      "tldr": "CoDiffGRN introduces a co-evolutionary discrete diffusion framework and the BEELINE-KGC benchmark to reformulate gene regulatory network inference as an inductive, ranking-centric graph completion problem, achieving state-of-the-art performance in novel regulatory discovery.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Defense Technology",
+        "Peking University"
+      ],
+      "affiliations_text": "National University of Defense Technology, Peking University",
+      "score": 3.4756819878579526,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.13101v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713101v1-tssm-triaxial-state-space-model-for-global-station-weather-forecasting-with-temporal-variable-historical-modeling",
+      "source": "arxiv",
+      "title": "TSSM: Triaxial State Space Model for Global Station Weather Forecasting with Temporal-Variable-Historical Modeling",
+      "authors": [
+        "Songru Yang",
+        "Zili Liu",
+        "Tao Han",
+        "Ben Fei",
+        "Fenghua Ling",
+        "Lei Bai",
+        "Chang Liu",
+        "Xiangyang Ji",
+        "Zhenwei Shi",
+        "Zhengxia Zou"
+      ],
+      "authors_text": "Songru Yang, Zili Liu, Tao Han, Ben Fei, Fenghua Ling, Lei Bai, Chang Liu, Xiangyang Ji, Zhenwei Shi, Zhengxia Zou",
+      "abstract": "Global Station Weather Forecasting (GSWF) is pivotal for localized and extreme weather prediction over key regions. Despite efforts to exploit look-back windows, existing methods show limited accuracy gains and struggle with extreme events and error accumulation. These limitations stem from overreliance on short-term patterns, which are insufficient to capture chaotic weather dynamics, especially under partial observations. To address this problem, we propose a novel Triaxial State Space Model (TSSM) with a history-enhanced Temporal-VariableHistorical paradigm, which incorporates period-aligned historical weather data to compensate for long-term, large-scale periodic, and full-window weather patterns beyond the temporal lookback window. Specifically, TSSM stacks historical samples into period-aligned batches, where forecasting is causally supported by historical and current observations. Temporal, variable, and historical scanning are designed to capture axial temporal dependencies, variable correlations, and historical evolution. This structure is hierarchically shared to model seasonal to extreme events while alleviating misalignment across historical patterns. TSSM achieves SOTA performance on Weather-5K, the largest station weather dataset to date, with 10% and 61% gains in accuracy and extreme event metrics, and obtains 95% best or second-best results on human-involved datasets. Its advantages are more pronounced in long-horizon and iterative forecasting, reaching a 37.5% gain at 240h and up to 103.5% under a 48h times 5 iterative setting. Moreover, TSSM retains > 90% performance under up to 80% missing observations, compared with < 43% for baselines, demonstrating robustness and practical potential for reliable GSWF in global in-situ observation networks.",
+      "url": "http://arxiv.org/abs/2607.13101v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13101v1",
+      "tldr": "TSSM proposes a triaxial state space model that leverages period-aligned historical weather data across temporal, variable, and historical axes to achieve state-of-the-art performance in global station weather forecasting, with significant gains in accuracy, extreme event prediction, long-horizon forecasting, and robustness to missing observations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Chinese University of Hong Kong",
+        "Shanghai Artificial Intelligence Laboratory",
+        "Beihang University",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "The Chinese University of Hong Kong, Shanghai Artificial Intelligence Laboratory, Beihang University, Tsinghua University",
+      "score": 3.404100190366321,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.13045v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713045v1-federated-explainable-artificial-intelligence-roles-architectures-evaluation-and-open-challenges",
+      "source": "arxiv",
+      "title": "Federated Explainable Artificial Intelligence: Roles, Architectures, Evaluation, and Open Challenges",
+      "authors": [
+        "Masoume Gholizade",
+        "Fabrizio Ruffini",
+        "Pietro Ducange",
+        "Francesco Marcelloni"
+      ],
+      "authors_text": "Masoume Gholizade, Fabrizio Ruffini, Pietro Ducange, Francesco Marcelloni",
+      "abstract": "Federated Learning (FL) has emerged as a key paradigm for privacy-preserving collaborative model training across distributed and heterogeneous data sources. By keeping raw data local, FL addresses data confidentiality concerns, yet it does not resolve the opacity of modern machine learning models. In parallel, Explainable Artificial Intelligence (XAI) has gained attention for improving transparency, trust, and accountability, particularly in high-stakes domains. Their intersection has given rise to Federated Explainable Artificial Intelligence (FedXAI) paradigm, which aims to jointly satisfy privacy and explainability requirements. This survey provides a systematic review of FedXAI, highlighting the transition of explainability from a post-hoc tool to an integral component of the FL lifecycle. We show how explainability supports aggregation, personalization, robustness, coordination, and system-level decision making. To organize the literature, we introduce a taxonomy that classifies FedXAI methods by the role of explainability, model and explainer types, explanation scope, integration level, FL settings, and data heterogeneity. We review approaches ranging from model-agnostic explanations to interpretable federated models and explainability-aware aggregation mechanisms. We also examine evaluation practices and discuss the lack of standardized benchmarks and metrics for measuring explanation quality, stability, privacy leakage, and computational overhead. Finally, we identify key challenges, including explainability under non-IID data, explanation-centric security threats, communication-efficient XAI, continual FedXAI, and the integration of domain knowledge and regulatory constraints. By consolidating existing work and identifying key gaps, this survey serves as a reference framework for designing trustworthy, transparent, and privacy-preserving federated AI systems.",
+      "url": "http://arxiv.org/abs/2607.13045v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13045v1",
+      "tldr": "This survey systematically reviews Federated Explainable AI (FedXAI), proposing a taxonomy and lifecycle perspective that shifts explainability from a post-hoc tool to an integral component of federated learning for privacy-preserving, transparent, and trustworthy AI systems.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pisa"
+      ],
+      "affiliations_text": "University of Pisa",
+      "score": 3.2827072854333728,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.13155v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713155v1-hedgehog-hierarchical-evaluation-of-drug-generators-through-rigorous-filtration",
+      "source": "arxiv",
+      "title": "HEDGEHOG: Hierarchical Evaluation of Drug Generators Through Rigorous Filtration",
+      "authors": [
+        "Daria A. Ryabchenko",
+        "Pavel Gurevich",
+        "Shamil Kadyrov",
+        "Daria Frolova",
+        "Kseniia Fedisheva",
+        "Sergei A. Nikolenko",
+        "Alexander Shapeev",
+        "Marina A. Pak"
+      ],
+      "authors_text": "Daria A. Ryabchenko, Pavel Gurevich, Shamil Kadyrov, Daria Frolova, Kseniia Fedisheva, Sergei A. Nikolenko, Alexander Shapeev, Marina A. Pak",
+      "abstract": "Generative molecular models can support early drug discovery by proposing new candidate compounds de novo. In practice, useful candidates must balance target-relevant activity, synthetic accessibility, physicochemical properties, and other multiparameter design constraints. However, metrics commonly used to evaluate molecular generators only weakly reflect whether the generated compounds are medicinally plausible and suitable for downstream computation. This can produce false positives in model evaluation, incorrect assumptions, and inefficient use of computational resources. We introduce HEDGEHOG, a unified six-stage filtration benchmark that is inspired by industrial hit identification workflows: (i) preprocessing; (ii) physicochemical descriptor screening; (iii) structural alerts and graph-sanity checks; (iv) synthesis feasibility; (v) docking and binding affinity estimation; and (vi) three-dimensional pose and interaction checks. We evaluate 23 molecular generators across three model classes under a standardized protocol. Across 230,000 generated molecules, only 0.65% of initial molecules survive all stages. Our results expose a central limitation of current molecular generators: molecules that appear acceptable under isolated criteria rarely satisfy medicinal chemistry, synthesis, docking, and 3D pose filters simultaneously.",
+      "url": "http://arxiv.org/abs/2607.13155v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13155v1",
+      "tldr": "HEDGEHOG introduces a six-stage filtration benchmark for molecular generators that mimics industrial hit identification, revealing that only 0.65% of generated molecules survive all stages and exposing the gap between standard evaluation metrics and practical medicinal chemistry requirements.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Skolkovo Institute of Science and Technology",
+        "Ligand Pro"
+      ],
+      "affiliations_text": "Skolkovo Institute of Science and Technology, Ligand Pro",
+      "score": 2.7698131229009544,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.13058v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/16/260713058v1-power-from-potential-a-survey-of-electrostatic-actuators-for-haptics",
+      "source": "arxiv",
+      "title": "Power from Potential: A Survey of Electrostatic Actuators for Haptics",
+      "authors": [
+        "Ahad M. Rauf",
+        "Ran Zhou",
+        "Eric Acome",
+        "Madeline Balaam",
+        "Sean Follmer",
+        "Teng Han",
+        "Craig Shultz",
+        "Daniel Leithinger"
+      ],
+      "authors_text": "Ahad M. Rauf, Ran Zhou, Eric Acome, Madeline Balaam, Sean Follmer, Teng Han, Craig Shultz, Daniel Leithinger",
+      "abstract": "As haptic interfaces integrate more seamlessly into wearables and everyday environments, they increasingly require actuators that are soft, thin, silent, and energy efficient. However, conventional motors and temperature-responsive polymers often struggle to deliver these properties due to their bulky form factors and high power consumption. High-Voltage Electrostatic Actuators (HVEAs), which generate force by applying an electric field to localized charge concentrations using high voltages and ultra-low currents, have recently emerged as a compelling alternative due to their fast, silent, and low-power operation within highly customizable and compliant form factors.\n  This paper presents a focused review of HVEAs for haptics, examining four major classes: electrostatic switchable adhesives, dielectric elastomer actuators, soft electrohydraulic actuators, and electrokinetic pumps. For each class, we describe their mechanisms that enable haptic output; characterize their bandwidths, force densities, and spatial scalability; and evaluate their versatility for rendering cutaneous and kinesthetic feedback across wearable and world-grounded interfaces. Through this cross-technology analysis, we identify common design constraints and emerging strategies for improving ergonomics, streamlining fabrication, and integrating self-sensing. We conclude by outlining where HVEAs are uniquely positioned to advance haptic interaction and highlighting key research directions needed to translate these technologies into practical systems.",
+      "url": "http://arxiv.org/abs/2607.13058v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13058v1",
+      "tldr": "This survey reviews four classes of high-voltage electrostatic actuators for haptics, analyzing their mechanisms, performance, and applications to enable soft, silent, and energy-efficient haptic interfaces.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University",
+        "University of Illinois at Urbana-Champaign",
+        "Chinese Academy of Science",
+        "Artimus Robotics",
+        "Cornell University",
+        "KTH Royal Institute of Technology"
+      ],
+      "affiliations_text": "Stanford University, University of Illinois at Urbana-Champaign, Chinese Academy of Science, Artimus Robotics, Cornell University, KTH Royal Institute of Technology",
+      "score": 2.6169322897060137,
+      "score_text": "2.6"
+    }
+  ]
+}
