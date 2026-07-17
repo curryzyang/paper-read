@@ -1,0 +1,15 @@
+# Semantic Audio-driven Understanding for Dynamic Humanoid Whole Body Control
+
+- 区域：速读区
+- 排名：1
+- 匹配度：4.2/10
+- 来源：arxiv
+- 作者：J. M. A. Marcelo, M. Brienza, E. Bugli, L. Comito, D. Nardi, D. D. Bloisi, V. Suriani
+- 机构：International University of Rome, Sapienza University of Rome
+- 链接：[arXiv / Source](http://arxiv.org/abs/2607.14182v1) · [PDF](https://arxiv.org/pdf/2607.14182v1)
+
+## TLDR
+This paper introduces a multi-modal orchestration framework that processes live audio streams (music or speech) to enable humanoid robots to autonomously select and execute appropriate whole-body motion skills in real time, moving beyond pre-scripted behaviors.
+
+## Abstract
+Recent advances in humanoid robotics and reinforcement learning have enabled the acquisition of highly expressive whole-body motion policies. However, most robotic performances remain based on pre-scripted sequences or externally triggered behaviors, limiting autonomy and responsiveness to dynamic environments. In this work, we introduce a novel multi-modal orchestration framework for semantic audio-driven humanoid control, enabling robots to autonomously select and execute appropriate motion skills in real time. The system processes continuous audio streams and routes them into music or speech branches. Music input is handled via audio fingerprinting and semantic embeddings to retrieve track identity and temporal alignment, allowing dynamic mapping between musical segments and motion policies. Speech input is grounded into a discrete library of imitation-learned skills, enabling direct human-robot interaction. Both modalities share a unified interface that schedules skill execution over a reinforcement learning control pipeline. We validate the approach in simulation and on a Unitree G1 humanoid, showing robust sim-to-real transfer and consistent audio-conditioned policy selection. Supplementary materials are available at the following site: https://lab-rococo-sapienza.github.io/semantic-WBC/

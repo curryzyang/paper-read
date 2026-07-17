@@ -1,0 +1,821 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-17T06:05:44.143895",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.14233v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714233v1-ligo-pinn-learned-initialization-via-gated-optimization-to-alleviate-convergence-failures-in-physics-informed-neural-networks",
+      "source": "arxiv",
+      "title": "LIGO-PINN: Learned Initialization via Gated Optimization to Alleviate Convergence Failures in Physics Informed Neural Networks",
+      "authors": [
+        "Nilay Anurag",
+        "Shital Adhikari",
+        "Taniya Kapoor",
+        "Nikhil Muralidhar"
+      ],
+      "authors_text": "Nilay Anurag, Shital Adhikari, Taniya Kapoor, Nikhil Muralidhar",
+      "abstract": "Physics-informed neural networks (PINNs) have had a broad research impact in modeling domains governed by partial differential equations (PDE). However, PINNs have been shown to perform poorly, sometimes even converging to trivial solutions, in challenging PDE domains, or when generalizing to unseen but related PDE domains. Previously proposed solutions detail hyperparameter tuning to reduce loss imbalance between data-driven and physics guided losses, curriculum learning based training strategies, or dynamic re-sampling of hard collocation points. These methods face certain pitfalls: hyperparameter tuning is expensive, designing a training curriculum is ambiguous in multi-parameter PDE settings, and dynamic resampling still fails in complex PDE settings. Complementary to this line of thinking, we believe the initial PINN network weights also play a crucial role in the emergence of catastrophic failures during training, yet the effect of PINN weight initialization has been surprisingly under-investigated. To this end, we propose a framework for Learned Initialization via Gated Layerwise Optimization (LIGO-PINN) to overcome PINN convergence failures. Through rigorous evaluation on 1D and 2D PDE domains, including a challenging 2D fluid dynamics setting, we demonstrate that our methodology outperforms state-of-the-art methods designed to alleviate PINN failures, achieving a 91.5% average performance improvement across six baselines and 81% over the strongest baseline. We also verify that LIGO-PINN generalizes to 3D unstructured domains. Finally, we analyze training dynamics across all three PDE domains to explain both LIGO-PINN's improvement and the convergence failure of traditional PINNs. Code: https://github.com/scailab/ligo-pinn\n  Keywords: Machine Learning, Physics-Informed Neural Networks, Deep Learning, PDE Modeling",
+      "url": "http://arxiv.org/abs/2607.14233v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14233v1",
+      "tldr": "LIGO-PINN uses learned initialization via gated layerwise optimization to significantly improve convergence and performance of Physics-Informed Neural Networks, achieving up to 91.5% improvement over baselines across PDE domains.",
+      "detailed_reading": {
+        "motivation": "现有的物理信息神经网络(PINNs)在求解偏微分方程(PDE)时，尤其是在复杂PDE域或泛化到未见过但相关的PDE域时，常常收敛失败，甚至收敛到平凡解。现有的解决方法如超参数调优、课程学习和动态重采样各自存在代价高、设计模糊或仍失败等缺陷。尽管初始权重对训练失败可能至关重要，但其影响却被惊人地忽视了。",
+        "method": "LIGO-PINN通过门控逐层优化学习网络权重的初始化，以缓解PINN的收敛失败。具体而言，首先设计一个门控机制自适应地控制每一层参数更新的幅度，从而平衡各层梯度流并避免梯度消失/爆炸。然后利用一个与目标PDE相关的预训练任务（如从同一PDE类中生成的数据）进行多轮学习，获得更好的初始权重。最后，将该初始化应用于目标PINN，并使用标准的数据损失和物理方程损失进行联合训练。整个流程在1D、2D（包括流体动力学）和3D非结构化域上进行评估。",
+        "result": "在六个基线方法上，LIGO-PINN实现了平均91.5%的性能提升，相对于最强基线提升81%。在二维流体动力学等挑战性设置中，该方法显著减少了收敛失败，并成功泛化到3D非结构化域。通过分析训练动态，发现LIGO-PINN能避免传统PINN中出现的梯度路径问题，从而解释了性能改进。",
+        "conclusion": "LIGO-PINN通过有效学习初始化解决了PINN在复杂PDE中的收敛失败问题，并显著提升性能。该工作强调了初始权重对PINN成功训练的重要性，为缓解收敛失败提供了新的思路，且代码已开源。",
+        "key_details": "关键点包括：1) 门控逐层优化机制，用于平衡各层梯度并控制更新幅度；2) 预训练阶段利用相关PDE数据学习初始化；3) 损失函数由数据驱动项和PDE物理方程项组成；4) 超参数包括门控阈值、预训练步数、学习率等，需要针对不同PDE调整；5) 在1D、2D和3D问题中验证，复杂度随维度增加；6) 局限性可能包括预训练需要额外计算成本，以及门控设计对特定PDE的敏感性需要进一步探索。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 6.6916978945922825,
+      "score_text": "6.7"
+    },
+    {
+      "id": "2607.14180v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714180v1-renew-towards-learning-world-models-and-repairing-model-exploitation-from-preferences",
+      "source": "arxiv",
+      "title": "RENEW: Towards Learning World Models and Repairing Model Exploitation from Preferences",
+      "authors": [
+        "Logan Mondal Bhamidipaty",
+        "Mykel Kochenderfer",
+        "Subramanian Ramamoorthy"
+      ],
+      "authors_text": "Logan Mondal Bhamidipaty, Mykel Kochenderfer, Subramanian Ramamoorthy",
+      "abstract": "World models are widely used in offline reinforcement learning (RL) to improve sample efficiency and generate experience beyond a fixed dataset. However, they are vulnerable to model exploitation where data coverage is thin. Prior work addresses this either by collecting more expert demonstrations, which is often expensive, unsafe, or unavailable, or by conservative algorithms that avoid uncertain regions, which limits generalization. We propose instead to repair exploitation directly using human preferences over imagined rollouts, leveraging the strong intuitive physics that allows humans to easily spot egregious dynamics hallucinations. We formalize this as Dynamics Learning from Human Feedback (DLHF), a Bradley-Terry preference loss over trajectory log-likelihoods under a learned dynamics model. Unfortunately, naive DLHF is sample inefficient, so we introduce RENEW, which uses epistemic uncertainty to focus finetuning where the model is most exploitable. We evaluate on several Jumanji and classic control environments and find that while naive DLHF requires an outsize preference budget, RENEW makes the framework practical by improving sample efficiency, limiting catastrophic forgetting, and reducing exploitation in pretrained world models. Taken together, our results provide initial evidence that preferences can supervise world model dynamics directly, offering a new approach to addressing exploitation in offline model-based RL.",
+      "url": "http://arxiv.org/abs/2607.14180v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14180v1",
+      "tldr": "RENEW introduces a method to repair world model exploitation in offline reinforcement learning by using human preferences over trajectory rollouts to directly supervise dynamics learning, with an active querying strategy that focuses on high-uncertainty regions to improve sample efficiency and reduce catastrophic forgetting.",
+      "detailed_reading": {
+        "motivation": "离线强化学习中，世界模型在数据稀疏区域易受模型利用（model exploitation）影响，导致策略利用不准确的过渡产生虚假高回报。现有方法要么收集昂贵的专家演示，要么采用保守算法限制泛化，而本文提出利用人类偏好直接修复模型，因为人类能轻易发现动态幻觉。",
+        "method": "本文提出动力学学习从人类反馈（DLHF）框架，使用Bradley-Terry偏好损失优化轨迹对数似然，以直接监督世界模型动态。具体步骤：在无奖励设定下，定义轨迹段关于动态模型的对数似然，替代标准奖励模型；通过人类对两个想象轨迹的物理合理性比较进行偏好标注；优化对数似然的交叉熵损失。为提升样本效率，提出RENEW算法：基于预训练模型，用集成分歧（ensemble disagreement）计算每个状态-动作对的认知不确定性，按不确定性比例采样起始状态生成轨迹对，收集偏好，再通过DLHF损失微调模型，迭代多轮直到预算耗尽。",
+        "result": "在Jumanji和经典控制环境中，普通DLHF需要约1M偏好标签才能与1K监督过渡误差相当，而RENEW在仅1600标签下即可有效降低预训练模型的预测误差和认知不确定性。对比实验中，RENEW在Sliding Tile 3x3上最终验证ℓ1误差比均匀查询减半，避免了Sokoban上的灾难性遗忘，在多种任务中均优于普通DLHF。",
+        "conclusion": "本文证明了二进制人类偏好可以直接监督世界模型动态，为离线基于模型的RL中的模型利用问题提供了新方法。RENEW通过主动偏好查询提升了样本效率，限制了灾难性遗忘，并有效减少了预训练世界模型中的利用风险。",
+        "key_details": "关键细节：使用Bradley-Terry偏好模型，轨迹对数似然作为偏好函数；认知不确定性采用集成分歧度量；主动查询迭代多轮，每轮微调后重新计算不确定性；不使用原始离线数据作为训练信号，仅作为起始状态池；局限性是未在高维连续状态空间中充分评估，且偏好质量依赖人类直觉；复杂度包括维护模型集成（如5个集成成员）和实时计算不确定性，偏好预算需预先设定。"
+      },
+      "affiliations": [
+        "Stanford University",
+        "University of Edinburgh"
+      ],
+      "affiliations_text": "Stanford University, University of Edinburgh",
+      "score": 5.088786027293583,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2607.14171v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714171v1-branching-policy-optimization-sandbox-native-language-agent-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Branching Policy Optimization: Sandbox-Native Language Agent Reinforcement Learning",
+      "authors": [
+        "Bowei He",
+        "Yankai Chen",
+        "Xiaokun Zhang",
+        "Xue Liu"
+      ],
+      "authors_text": "Bowei He, Yankai Chen, Xiaokun Zhang, Xue Liu",
+      "abstract": "Reinforcement learning has emerged as the dominant paradigm for training large language model (LLM) agents that interact with executable sandboxes. State-of-the-art algorithms such as PPO, RLOO, and GRPO inherit their rollout topology from RLHF: for each prompt, N independent trajectories are sampled from the initial state, and an advantage is computed by subtracting a group baseline. This design ignores a defining property of agent sandboxes. They are deterministic, snapshottable, and resumable from any intermediate state. We argue that this property enables a fundamentally different rollout topology: rather than N independent trees of depth T, one can construct a single tree of N leaves whose siblings share prefixes, and therefore share variance. We instantiate this idea as Branching Policy Optimization (BPO), a sandbox-native RL algorithm that (i) adaptively snapshots the sandbox at high-entropy decision points along a backbone trajectory, (ii) forks K alternative actions per branch point and rolls out each to termination, and (iii) computes per-step advantages from sibling returns rather than from independent prompts. We prove this estimator is unbiased and has strictly lower variance than the trajectory-level baseline, with the reduction equal to the prefix-explained portion of return variance. On WebShop, ALFWorld, and SWE-bench Verified with Qwen2.5-7B and Llama-3.1-8B backbones, BPO improves success by 3.6--6.1 absolute points over GRPO and RLOO at matched compute, halves gradient-norm variance, and matches the best baseline using 38% fewer policy updates.",
+      "url": "http://arxiv.org/abs/2607.14171v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14171v1",
+      "tldr": "Branching Policy Optimization (BPO) is a sandbox-native reinforcement learning algorithm that leverages the deterministic, snapshottable properties of agent environments to construct a tree of rollouts with shared prefixes, yielding unbiased, lower-variance advantage estimates that improve training efficiency and success rates on benchmarks like WebShop, ALFWorld, and SWE-bench.",
+      "detailed_reading": {
+        "motivation": "现有的强化学习算法如PPO、RLOO和GRPO在训练语言智能体时，继承自RLHF的独立轨迹采样拓扑结构，忽略了沙盒环境具有确定性、可快照和从任意中间状态恢复的关键属性。这种设计导致优势估计方差主要由仅条件于初始状态的回报方差主导，对于长程智能体任务而言方差过大，限制了学习效率和效果。",
+        "method": "BPO算法首先为每个提示从策略采样一条主干轨迹；然后依据每一步的熵值选择M个决策点作为分支点，在每个分支点对沙盒进行快照并分叉出K个替代动作，每个分叉展开到终止，构建一棵总节点数为N（K×M）的轨迹树；接着在分支点处使用留一兄弟基线计算局部优势，并通过折扣因子λ=0.95沿共享前缀向前传播；最后使用标准PPO-clip目标函数优化策略，并包含KL正则项。训练过程中不依赖值函数，分支预算由熵驱动调度器分配并限制最小间距64步以避免聚集。",
+        "result": "在WebShop、ALFWorld和SWE-bench Verified基准上，使用Qwen2.5-7B和Llama-3.1-8B骨干网络，BPO在等计算量下比GRPO和RLOO绝对提升3.6–6.1个成功率百分点；梯度范数方差减半；以38%更少的策略更新步数即可达到最佳基线同等性能。",
+        "conclusion": "通过利用沙盒的快照-恢复原语构建轨迹树并引入兄弟基线优势估计，BPO实现了比独立轨迹基线显著更低的方差，且在多个智能体任务上取得一致改进，证明了沙盒原生RL算法在减少方差和提升样本效率方面的有效性，为训练语言智能体提供了新范式。",
+        "key_details": "关键方法细节包括：(1) 分支点选择基于当前策略的熵值，避免使用值函数置信度，以保证不依赖值网络；(2) 每个分支点分叉K个动作，K和分支点数量M是超参数，总样本N=K×M与GRPO匹配；(3) 沙盒快照操作假设具有保真性（Assumption 1），快照开销远小于完整展开，且在实际沙盒（如Docker、解释器）中可行；(4) 优势估计理论证明无偏且方差严格小于轨迹级基线，方差缩减量等于由前缀解释的回报方差部分（Theorem 2）；(5) 折扣因子λ=0.95控制下游信号对上游的传播强度，熵分支调度设有最小间距64步以避免聚集；(6) 局限：可能受限于非确定性沙盒或快照开销过大的环境。"
+      },
+      "affiliations": [
+        "City University of Hong Kong",
+        "McGill Univeristy",
+        "Mohamed bin Zayed University of Artificial Intelligence"
+      ],
+      "affiliations_text": "City University of Hong Kong, McGill Univeristy, Mohamed bin Zayed University of Artificial Intelligence",
+      "score": 4.799247759776039,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2607.14177v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714177v1-adaptive-control-of-motor-position-controlled-flexible-joint-robots-with-uncertain-joint-stiffness",
+      "source": "arxiv",
+      "title": "Adaptive Control of Motor-Position-Controlled Flexible Joint Robots with Uncertain Joint Stiffness",
+      "authors": [
+        "Annika Kirner",
+        "Grazia Zambella",
+        "Igor Kovacevic",
+        "Hannes Höppner",
+        "Jee-Hwan Ryu",
+        "Christian Ott"
+      ],
+      "authors_text": "Annika Kirner, Grazia Zambella, Igor Kovacevic, Hannes Höppner, Jee-Hwan Ryu, Christian Ott",
+      "abstract": "Model-based control of flexible joint robots with position-controlled actuators relies on accurate knowledge of the joint compliance. In practice, precise stiffness models are often unavailable as the properties of physical elastic elements vary with operating conditions and slowly change over time due to wear and aging. To improve model-based control of these systems, we propose an adaptive control approach in this work, which updates an estimate of the uncertain, nonlinear torque-deflection relation of each joint. As opposed to classical adaptive control approaches for non-elastic robots, we rely on an implicit control law and a control-input-dependent regressor matrix to account for the uncertain joint stiffness. We analyze robustness of the approach against errors induced by the motor position controller. Experimental results on a flexible joint with nonlinear stiffness characteristics demonstrate the effectiveness of the proposed approach.",
+      "url": "http://arxiv.org/abs/2607.14177v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14177v1",
+      "tldr": "This paper presents an adaptive control method for motor-position-controlled flexible joint robots that estimates uncertain nonlinear joint stiffness online using an implicit control law and a control-input-dependent regressor, with robustness to motor position controller errors and experimental validation.",
+      "detailed_reading": {
+        "motivation": "在电机位置控制的柔性关节机器人中，模型基控制依赖精确的关节刚度模型，但实际中刚度因操作条件变化、磨损和老化而缓慢改变，导致控制性能下降。为解决这一问题，本文提出一种自适应控制方法，在线更新每个关节的不确定非线性扭矩-变形关系估计。",
+        "method": "针对n自由度柔性关节机器人，连杆侧动力学为M(q)ddq + C(q,dq)dq + g(q) = ψ(θ_d - q + e_θ)，其中θ_d为电机命令位置。假设弹性扭矩ψ可分解为已知回归矩阵Y(θ_d - q)与常参数向量k的乘积：ψ = Y k。基于Slotine和Li的刚性机器人自适应控制器，定义滑模变量s = de + K_p e，期望扭矩τ_d = M(q)ddq_r + C(q,dq)dq_r + g(q) - K_s s。然后通过隐式控制律求解θ_d：Y(θ_d - q) k_hat = τ_d，其中k_hat是k的在线估计。参数更新律根据李雅普诺夫设计，使跟踪误差收敛。对于线性回归和特殊立方回归，隐式控制律有解析解。此外，分析了电机位置控制器误差e_θ非零时的鲁棒性，基于L2和小增益定理给出稳定性条件。",
+        "result": "在具有非线性刚度特性的柔性关节实验台上进行验证，结果表明所提自适应控制器能够有效提高连杆侧轨迹跟踪性能，相比无自适应情况，跟踪误差显著减小。鲁棒性分析显示，当电机位置控制器误差在一定界限内时，系统仍能保持稳定。",
+        "conclusion": "提出了一种针对电机位置控制柔性关节机器人的自适应控制器，能够在线适应不确定的非线性关节刚度。该方法通过隐式控制律和输入相关回归矩阵处理刚度不确定性，实验验证了其在非线性刚度关节上的有效性，为实际应用中应对刚度变化提供了可行的方案。",
+        "key_details": "关键点包括：1) 基于回归矩阵的参数化假设，需要根据机械设计选取足够丰富的基函数来近似真实扭矩-变形关系；2) 控制律隐式求解，对于线性情况可显式反解，对于立方情况可用Cardano公式解析求解；3) 参数更新律无显式损失函数，通过李雅普诺夫方法推导确保收敛；4) 增益矩阵K_p和K_s(t)需正定且K_s(t)连续有界；5) 鲁棒性分析假设电机位置误差足够小且内环控制器时间尺度足够快；6) 局限性包括依赖已知回归结构、未考虑惯量不确定性、以及参数常数的假设，实际中可能需要近似。"
+      },
+      "affiliations": [
+        "Korea Advanced Institute of Science & Technology",
+        "Berliner Hochschule für Technik",
+        "TU Wien"
+      ],
+      "affiliations_text": "Korea Advanced Institute of Science & Technology, Berliner Hochschule für Technik, TU Wien",
+      "score": 4.757041374940091,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2607.14176v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714176v1-low-latency-relay-selection-in-nr-v2x-vehicular-communications-via-graph-isomorphism-networks-with-edge-features",
+      "source": "arxiv",
+      "title": "Low-Latency Relay Selection in NR-V2X Vehicular Communications via Graph Isomorphism Networks with Edge Features",
+      "authors": [
+        "Giambattista Amati",
+        "Federica Mangiatordi",
+        "Emiliano Pallotti",
+        "Simone Angelini",
+        "Pierpaolo Salvo",
+        "Paola Vocca"
+      ],
+      "authors_text": "Giambattista Amati, Federica Mangiatordi, Emiliano Pallotti, Simone Angelini, Pierpaolo Salvo, Paola Vocca",
+      "abstract": "Reliable, low-latency uplink connectivity is a key requirement for C-V2X networks in dense urban environments, where fast channel variations and blockages often degrade direct vehicle-to-infrastructure links. Multi-hop relaying can restore coverage, but relay-link activation under radio, capacity, and routing constraints results in an NP-hard optimisation problem, typically solved via Mixed-Integer Linear Programming (MILP), whose runtime scales poorly with graph size. This paper introduces an edge-aware Learning-to-Optimise framework for real-time relay selection. Each V2X snapshot is modelled as a directed graph: node features encode vehicle state and traffic demand, while edge features capture radio-link capacity. An offline MILP oracle generates optimal relay configurations that supervise a Graph Isomorphism Network with Edge Features (GINE), enabling edge-level relay activation through a single forward pass, with tightly bounded inference latency. To bridge learning and exact optimisation, we also propose a hybrid GINE-Pruned MILP (GP-MILP) strategy in which GINE predictions prune the MILP search space. Experiments on a large-scale dataset generated via an OSM-SUMO-GEMV$^2$ pipeline show that GINE closely matches MILP decisions at the link level (accuracy 0.9589), F1-score (0.9544) on validation) and yields consistent end-to-end connectivity gains over a 1-hop MILP baseline (up to 9.2% with four RSUs and 12% with two RSUs). Inference latency remains tightly bounded, with all evaluated instances completing within 5~ms. Moreover, GP-MILP preserves MILP-equivalent solutions (same objective value) while achieving solver runtimes below 30~ms for more than 98%) of the graph instances, making MILP-grade optimisation compatible with stringent NR-V2X latency budgets.",
+      "url": "http://arxiv.org/abs/2607.14176v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14176v1",
+      "tldr": "This paper introduces an edge-aware Learning-to-Optimise framework using Graph Isomorphism Networks with Edge Features (GINE) to achieve low-latency, near-optimal multi-hop relay selection in NR-V2X vehicular communications, supervised by a MILP oracle and further combined with a hybrid pruning strategy to enable MILP-grade solutions within stringent latency budgets.",
+      "detailed_reading": {
+        "motivation": "在密集城市环境中，C-V2X网络需要可靠低延迟的上行连接，但快速信道变化和阻塞常导致车辆到基础设施的直接链路性能下降。多跳中继可恢复覆盖，然而在无线、容量和路由约束下的中继链路激活问题是一个NP-hard优化问题，传统混合整数线性规划（MILP）求解器运行时间随图规模增长而急剧增加，无法满足实时性要求。",
+        "method": "提出一种边缘感知的学习优化框架。每个V2X快照建模为有向图，节点特征编码车辆状态与流量需求，边特征编码无线链路容量（如基于瞬时SNR的香农容量）。离线MILP oracle生成最优中继配置作为监督信号，训练包含3层消息传递的图同构网络（GINE），该网络通过边特征投影（EdMLP）显式融入无线属性，实现边级中继激活的单一前向传播推理。同时提出混合GP-MILP策略，利用GINE预测剪枝MILP搜索空间以加速精确求解。训练采用类别加权二元交叉熵损失，权重α由训练集正负样本比例设置。",
+        "result": "GINE在链路级决策上与MILP oracle高度一致，验证集准确率0.9589，F1分数0.9544。相比单跳MILP基线，端到端连接增益可达9.2%（4个RSU场景）和12%（2个RSU场景）。推理延迟严格受限，所有实例在5ms内完成。GP-MILP保持与MILP等价的目标值，且98%以上的图实例求解时间低于30ms，满足NR-V2X严格延迟预算。",
+        "conclusion": "提出的GINE和GP-MILP方法能在极低延迟下逼近MILP最优中继决策，实现实时多跳中继选择，在保证连接性能的同时将求解延迟降低数个数量级，使精确优化在NR-V2X实时场景中变得可行。",
+        "key_details": "数据集通过OSM-SUMO-GEMV^2管线生成罗马Porta Pia区域1km²密集城市场景，包含449500个图快照，节点特征包含位置、类型和流量需求，边特征为基于香农容量模型的无线链路容量。GINE使用3层消息传递，边特征通过两层MLP（ReLU、Dropout）投影后加入节点更新。损失函数中α = N_neg / N_pos以平衡正负样本。MTZ约束用于消除路由环路。局限性：GINE推断时未显式强制执行流量守恒等全局约束，但经验上表现良好；数据生成依赖离线MILP，大规模场景下标注成本高。"
+      },
+      "affiliations": [
+        "University of Rome Tor Vergata (UniRoma2)",
+        "Fondazione Ugo Bordoni (FUB)"
+      ],
+      "affiliations_text": "University of Rome Tor Vergata (UniRoma2), Fondazione Ugo Bordoni (FUB)",
+      "score": 4.613072582263435,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.14245v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714245v1-information-theoretic-adaptive-cooling-for-deterministic-mppi-via-entropy-feedback",
+      "source": "arxiv",
+      "title": "Information-Theoretic Adaptive Cooling for Deterministic MPPI via Entropy Feedback",
+      "authors": [
+        "Shuqi Wang",
+        "Wenrong Sun",
+        "Tao Han",
+        "Yue Gao",
+        "Xiang Yin"
+      ],
+      "authors_text": "Shuqi Wang, Wenrong Sun, Tao Han, Yue Gao, Xiang Yin",
+      "abstract": "This paper investigates deterministic optimal control using Model Predictive Path Integral (MPPI) control, a sampling-based and derivative-free framework well suited for systems with complex dynamics and nonsmooth objectives. In deterministic MPPI, the temperature must be driven to zero to recover the true optimum, yet the design of an effective cooling schedule remains a fundamental challenge. Existing methods typically rely on predefined open-loop schedules, which limit the efficiency and robustness of the algorithm. To overcome this limitation, we propose an Information-Theoretic Adaptive Cooling (ITAC) framework that uses the Shannon entropy of the importance weights as an online feedback signal to regulate the temperature. The proposed mechanism adapts the cooling rate to the current sampling state, enabling fast progress when the weights are diffuse and cautious cooling when they become concentrated. We prove asymptotic convergence of the resulting scheme to the deterministic optimum, and further derive a critical entropy threshold that leads to a smooth barrier against premature weight collapse. Experiments on nonsmooth signal temporal logic motion-planning tasks show that ITAC improves sampling efficiency and achieves substantially faster convergence than state-of-the-art baselines without sacrificing the derivative-free nature of MPPI.",
+      "url": "http://arxiv.org/abs/2607.14245v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14245v1",
+      "tldr": "This paper introduces Information-Theoretic Adaptive Cooling (ITAC), a framework that uses Shannon entropy of importance weights as online feedback to adaptively regulate temperature in deterministic MPPI, achieving faster convergence and improved sampling efficiency without sacrificing the derivative-free nature of the algorithm.",
+      "detailed_reading": {
+        "motivation": "在确定性MPPI控制中，温度必须降至零以恢复真正最优，但现有冷却调度为预定义开环方式，限制了效率和鲁棒性。因此需要一种自适应冷却机制来平衡收敛速度与防止权重过早崩溃。",
+        "method": "提出信息论自适应冷却（ITAC）框架，以重要性权重的香农熵作为在线反馈信号调节温度。具体地，定义归一化采样熵Ĥ，并采用自适应冷却调度λ_{j+1}=Γ(Ĥ_j)λ_j，其中Γ为Ĥ的递减函数。框架证明渐近收敛到确定性最优，并推导出关键熵阈值作为防止权重崩溃的光滑屏障。在非光滑信号时序逻辑运动规划任务中验证。",
+        "result": "实验表明ITAC显著提高采样效率，收敛速度相比现有基线提升高达73%。在非光滑信号时序逻辑任务上验证了稳定性和加速效果。",
+        "conclusion": "ITAC框架通过熵反馈自适应调节冷却速率，有效平衡了探索与利用，保证了渐近最优性，同时维持了MPPI无导数优化的优势，适用于复杂动力学和非光滑代价问题。",
+        "key_details": "关键点：采用香农熵作为冷却速率的反馈信号；推导临界熵阈值防止玻璃化；理论证明渐近收敛至最优；冷却函数Γ需满足递减且值域(0,1)；保持R=λΣ^{-1}恒定以维持自由能结构；方法保持无导数特性，适用于非光滑代价。"
+      },
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "The Hong Kong University of Science and Technology"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, The Hong Kong University of Science and Technology",
+      "score": 4.5702435677383315,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.14262v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714262v1-stochastic-filtering-for-quorum-sensing-in-robot-swarms-under-anonymous-communication",
+      "source": "arxiv",
+      "title": "Stochastic Filtering for Quorum Sensing in Robot Swarms under Anonymous Communication",
+      "authors": [
+        "Fabio Oddi",
+        "Andreagiovanni Reina",
+        "Vito Trianni"
+      ],
+      "authors_text": "Fabio Oddi, Andreagiovanni Reina, Vito Trianni",
+      "abstract": "Quorum Sensing (QS) is a key capability for robot swarms, useful for coordination of activities at the group level. Effective communication is instrumental for individuals to estimate the quorum level of the entire swarm. Anonymous communication protocols where individuals exchange local information without revealing unique identities are helpful to support quorum estimates by sampling information from neighbours and maintain scalability of the QS process. However, because anonymous protocols cannot distinguish message sources, repeated messages from the same sender may be double-counted, thereby biasing collective quorum estimates. In this study, we introduce a stochastic filtering protocol inspired by $k$-priority sampling to improve estimate stability (\\ANTk), and we compare it with a baseline anonymous protocols (\\AN) and a randomised variant designed to improve accuracy (\\ANT). We find that the baseline protocol \\AN provides a parsimonious and fast solution, but remains highly inaccurate due to double-counting bias. The \\ANT variant improves accuracy but suffers from information inertia, resulting in slower convergence. Finally, actively filtering the message buffer via the \\ANTk protocol successfully decreases temporary errors and stabilises the estimate, at the cost of an increased time of recovery from errors.",
+      "url": "http://arxiv.org/abs/2607.14262v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14262v1",
+      "tldr": "The paper introduces a stochastic filtering protocol (ANTk) inspired by k-priority sampling to mitigate double-counting bias in anonymous communication for robot swarm quorum sensing, achieving more stable estimates at the cost of slower error recovery.",
+      "detailed_reading": {
+        "motivation": "在匿名通信的机器人集群中，群体感知（QS）对于群体协同至关重要，但匿名协议无法区分消息来源，导致相同发送者的重复消息被重复计数，引入估计偏差。现有基线协议（AN）虽简单快速，但因重复计数而不准确；改进协议（ANT）通过随机打乱缓冲区提高准确性，但存在信息惯性导致收敛慢。因此需要一种随机滤波协议来提高估计稳定性。",
+        "method": "本研究提出基于k优先级采样的随机滤波协议ANTk。输入包括N个机器人，每个机器人维护一个容量为B_M的缓冲区，存储匿名消息（仅含状态位b_c）。基线AN采用FIFO替换；ANT为每条消息分配随机超时t，按剩余超时降序插入；ANTk在计算群体比例时忽略缓冲区中超时最小的k条消息（假设为冗余重复），再判断是否达到阈值τ。仿真在ARGoS平台上进行，使用Kilobot模型（速度1cm/s，通信范围10cm，频率2Hz），设置HD25、LD25、HD100三种密度场景，测试不同k值（1, N/5, 2N/5）、超时Tm和阈值τ。",
+        "result": "实验结果表明：基线AN因重复计数导致系统性偏差，需要远大于阈值的多数才能触发检测，且存在错误肯定；ANT提高了消息多样性，缩小了不确定区域，但增加了检测延迟；ANTk通过过滤近过期消息，显著降低了临时错误率Er（尤其在密集场景下），但平均恢复时间Tr增加。例如，在HD25场景中，ANTk（k=1）相比ANT将错误率降低约30%，但恢复时间延长约50%。",
+        "conclusion": "本研究揭示了匿名通信下群体感知的内在权衡：基线AN简单快速但易受偏差影响；ANT通过多样性提高准确性但牺牲速度；ANTk随机滤波在稳定性和响应性之间取得平衡，能有效降低临时错误但增加恢复代价。这些发现表明，匿名QS协议需要在消息多样性、估计精度和动态响应之间根据应用需求选择合适的策略。",
+        "key_details": "关键细节包括：1）数据：机器人静态承诺状态（是/否），使用随机路点移动模型并加入碰撞避免；2）协议参数：缓冲区大小B_M=N-1，最小消息数B_m=5，超时范围Tm=60~360s，k值三种取值；3）评价指标：消息多样性M（唯一消息比例）、准确率（Q≥0.8或≤0.2的阈值）、中位延迟Tc、错误率Er和恢复时间Tr（利用Weibull分布拟合）；4）局限性：匿名通信无法完全消除空间相关性导致的重复计数，ANTk的滤波会降低有效样本量，且恢复时间随k增大而增加，实际部署需根据场景调整参数。"
+      },
+      "affiliations": [
+        "Max Planck Institute of Animal Behavior",
+        "University of Konstanz",
+        "National Research Council",
+        "Sapienza University of Rome"
+      ],
+      "affiliations_text": "Max Planck Institute of Animal Behavior, University of Konstanz, National Research Council, Sapienza University of Rome",
+      "score": 4.418730106169555,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.14236v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714236v1-never-too-late-for-force-accelerating-vla-post-training-with-reactive-force-injection",
+      "source": "arxiv",
+      "title": "Never Too Late for Force: Accelerating VLA Post-Training with Reactive Force Injection",
+      "authors": [
+        "Yi Wang",
+        "Wendi Chen",
+        "Zimo Wen",
+        "Han Xue",
+        "Xueqi Li",
+        "Wenye Yu",
+        "Zhijie Chen",
+        "Hao Yang",
+        "Jun Lv",
+        "Chuan Wen",
+        "Cewu Lu"
+      ],
+      "authors_text": "Yi Wang, Wendi Chen, Zimo Wen, Han Xue, Xueqi Li, Wenye Yu, Zhijie Chen, Hao Yang, Jun Lv, Chuan Wen, Cewu Lu",
+      "abstract": "Pretrained vision-language-action (VLA) policies provide strong language-conditioned manipulation knowledge, but they remain largely vision-driven and can struggle once manipulation enters contact states where the scene is occluded, depth is ambiguous, or small force errors push execution off the offline demonstration distribution. We present LIFT (Late Reactive Injection of Force for VLA Post-Training), a force-aware post-training framework that adds contact reactivity to a pretrained VLA policy while preserving its general manipulation knowledge. LIFT grafts a reactive action expert beside the original action expert, initializes it from pretrained action weights, and injects recent 6D end-effector force through causal force memory and zero-initialized cross attention, enabling actions to be refreshed during execution. To address the policy-dependent distribution shift of contact feedback, LIFT further couples reactive force injection with an online DAgger loop that trains on a mixture of offline task-alignment data and human-corrected online rollouts. Across towel folding, book insertion, and Hanoi ring placement, LIFT learns faster and reaches higher performance than vision-only post-training, while ablations show that reactive force memory and online corrective data are both important for robust contact-rich manipulation. Our code and data will be publicly available.",
+      "url": "http://arxiv.org/abs/2607.14236v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14236v1",
+      "tldr": "LIFT introduces reactive force injection via causal force memory and zero-initialized cross attention into pretrained VLA policies, enabling faster and more effective post-training for contact-rich manipulation while preserving general manipulation knowledge.",
+      "detailed_reading": {
+        "motivation": "预训练的视觉-语言-动作（VLA）策略在下游任务中普遍依赖视觉信息，然而一旦操作进入接触阶段，场景遮挡、深度模糊或微小力误差会导致执行偏离离线演示分布。因此，亟需在VLA后训练阶段引入力反馈，以增强策略在接触状态下的实时反应能力。",
+        "method": "LIFT框架在预训练VLA的动作专家旁嫁接一个初始化自原权重的反应性动作专家，通过因果力记忆编码最近6D末端力，并使用零初始化的交叉注意力将其注入反应性专家，实现动作块内的因果解码与实时更新。训练采用两阶段：阶段一在离线视觉任务对齐数据上训练并屏蔽力路径；阶段二通过在线DAgger循环收集力纠正数据，与离线数据按1:1比例混合，使用加性流匹配目标联合训练，并对力路径施加选择性掩码以处理异质数据。",
+        "result": "在毛巾折叠、书本插入和汉诺塔环放置三个真实操作任务上，LIFT相比纯视觉在线DAgger后训练方法，学习更快且峰值性能更高：毛巾折叠达到0.825成功率（样本数2.8K），书本插入达到0.6（样本数4.6K）。消融实验表明去除反应力记忆或在线DAgger均导致性能下降，验证了关键设计的必要性。",
+        "conclusion": "力反馈能够显著加速VLA后训练并提升接触式操作任务的最终性能，而因果力记忆和零初始化交叉注意力机制可以保留预训练先验，在线DAgger则缓解了力分布的策略依赖漂移，使框架兼具快速反应和泛化保持能力。",
+        "key_details": "因果力记忆通过因果编码器将近期力序列对齐到动作时间戳，确保每个动作使用最新的力测量；零初始化交叉注意力的输出投影初始化为零，使模型在训练开始时输出与预训练VLA等价；Shifted causal attention配合拷贝的权重实现初始化等价；训练时通过力掩码使无力样本不更新力编码器，且离线/在线数据按1:1采样平衡先验保持与纠正学习；代码与数据将开源。"
+      },
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "Southern University of Science and Technology",
+        "Shanghai Innovation Institute",
+        "Noematrix Ltd."
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, Southern University of Science and Technology, Shanghai Innovation Institute, Noematrix Ltd.",
+      "score": 4.412996578084339,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.14185v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714185v1-closed-loop-knowledge-dynamics-an-operational-framework-for-saturation-and-escape",
+      "source": "arxiv",
+      "title": "Closed-Loop Knowledge Dynamics: An Operational Framework for Saturation and Escape",
+      "authors": [
+        "Xuening Wu",
+        "Shan Yu",
+        "Shenqin Yin"
+      ],
+      "authors_text": "Xuening Wu, Shan Yu, Shenqin Yin",
+      "abstract": "Feedback-driven loops support iterative improvement in large language models, reinforcement learning, and autonomous discovery, yet their gains often diminish under repeated internal feedback. We study why closed-loop knowledge systems saturate and what external information can move them beyond their current attractors. We introduce a three-level operational framework in which knowledge states $x_t$ evolve through transition kernels $K_θ$ indexed by a structural parameter $θ$. The governing structure is defined as the observational equivalence class of $θ$ induced by these kernels, while attractors and basins are properties of the fixed-$θ$ dynamics. A structural intervention changes $θ$ and produces a detectable kernel discrepancy on pre-specified probe states, making structural change falsifiable. Using a Lyapunov drift condition, we show that stable internal dynamics approach bounded stability regions with exponentially attenuated transients and a noise-controlled residual floor. We characterize escape through a metric condition on intervention-induced attractor displacement and a baseline-relative KL lower bound for increasing escape probability. This analysis also explains why conditional mutual information alone cannot certify escape: it measures variation among intervention-conditioned updates rather than departure from the no-intervention law. Case studies in LLM code repair, sparse-reward reinforcement learning, and Bayesian optimization use matched continuation controls to illustrate how feedback strength and alignment affect quality-improving escape. Our contribution is an operational connection among stability tools, measurable intervention effects, and cross-domain diagnostics.",
+      "url": "http://arxiv.org/abs/2607.14185v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14185v1",
+      "tldr": "This paper introduces an operational framework for closed-loop knowledge dynamics that distinguishes saturation due to stable internal feedback from genuine escape via structural interventions, using Lyapunov drift, attractor displacement, and KL divergence conditions to diagnose when external information can move a system beyond its current attractor.",
+      "detailed_reading": {
+        "motivation": "反馈驱动的循环在大语言模型、强化学习和自主发现中支持迭代改进，但其收益在重复内部反馈下往往递减。论文旨在理解闭环知识系统为何饱和，以及哪些外部信息能促使其超越当前吸引子，从而为跨系统设计改进提供理论基础。",
+        "method": "论文提出一个三层次操作框架：知识状态x_t通过结构参数θ索引的转移核K_θ演化，其中θ定义观测等价类作为治理结构，吸引子和盆地是固定θ动力学性质。结构干预通过改变θ并在预设探针状态上产生可检测核差异来定义，使结构变化可证伪。稳定动力学使用Lyapunov漂移条件分析，证明期望Lyapunov值以指数衰减瞬态和噪声控制残差界逼近有界稳定区域。逃逸条件通过干预诱导吸引子位移的度量充分条件和基线相对KL散度下界刻画以增加逃逸概率。案例研究使用匹配持续控制分离内部迭代和外部反馈效果。",
+        "result": "稳定内部动力学在Lyapunov漂移条件下以指数衰减和噪声累积残差界收敛到有界稳定区域。逃逸需要外部输入导致吸引子位移超过度量阈值，且逃逸概率增加要求基线相对KL下界满足信息预算。条件互信息不能单独证明逃逸，因其仅衡量干预条件更新间的变异性而非偏离无干预律。案例表明反馈强度和一致性调节质量改进型逃逸的成功率。",
+        "conclusion": "论文贡献在于连接稳定性工具、可测量干预效应和跨领域诊断的操作性框架，通过可验证的饱和与逃逸条件指导干预设计，适用于LLM代码修复、稀疏奖励强化学习和贝叶斯优化等系统。",
+        "key_details": "框架核心是Lyapunov函数V和漂移条件ρ, σ，其中ρ<1保证收缩，σ控制噪声界，导出残差界σ/(1-ρ)。结构变化可证伪需预设探针分布μ和反馈律ν，使用核的1-Wasserstein距离度量差异，并设定最小效应规模ε_G。案例中匹配持续控制确保比较公平。局限性包括噪声常数σ假设的简化，以及条件互信息无法区分结构变化与状态波动，未来需探索非平稳或非马尔可夫动力学扩展。"
+      },
+      "affiliations": [
+        "Fudan University",
+        "Independent Researcher",
+        "Pfizer"
+      ],
+      "affiliations_text": "Fudan University, Independent Researcher, Pfizer",
+      "score": 4.410033914446974,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.14200v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/17/260714200v1-augmentations-for-robust-and-efficient-imitation-learning-in-streamed-video-games",
+      "source": "arxiv",
+      "title": "Augmentations for Robust and Efficient Imitation Learning in Streamed Video Games",
+      "authors": [
+        "Somjit Nath",
+        "Abdelhak Lemkhenter",
+        "Pallavi Choudhury",
+        "Chris Lovett",
+        "Katja Hofmann",
+        "Sergio Valcarcel Macua",
+        "Lukas Schäfer"
+      ],
+      "authors_text": "Somjit Nath, Abdelhak Lemkhenter, Pallavi Choudhury, Chris Lovett, Katja Hofmann, Sergio Valcarcel Macua, Lukas Schäfer",
+      "abstract": "Imitation learning is an appealing way to scale game-playing agents to complex 3D environments by training policies to map visual observations to actions from human demonstrations. However, these demonstrations are expensive to collect and modern game-playing is often done through streaming in which network delay and compression introduce spatiotemporally correlated visual artifacts that can cause a covariance shift at test time. To address these challenges, we propose streaming augmentations that mimic four types of artifacts commonly encountered during streaming with low-bandwidth network connection: pixelated blocks and scrubs, global blur, and ghosting. We instantiate our approach on top of predictive inverse dynamics models (PIDM), which combine future-state conditioning with an inverse dynamics policy in a learned latent space, and evaluate the impact of our augmentations across three tasks in modern 3D video games. Under stable streaming conditions, agents trained with spatiotemporal augmentations achieve up to 41% higher evaluation performance compared to agents trained without augmentations under an identical data budget. When network lag is introduced, agents trained with augmentations degrade by only 7.45% vs 49.82% of the original performance for agents trained only with the original data. These results clearly indicate that spatiotemporal augmentations tailored for the streaming setting are a simple yet powerful tool to train robust and efficient game-playing agents.",
+      "url": "http://arxiv.org/abs/2607.14200v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14200v1",
+      "tldr": "This paper proposes streaming augmentations that simulate common video streaming artifacts to train imitation learning agents that are robust and efficient under both stable and laggy streaming conditions in modern 3D video games.",
+      "detailed_reading": {
+        "motivation": "模仿学习通过从人类演示中训练策略将视觉观察映射到动作，是扩展复杂3D环境游戏代理的有吸引力的方式，但演示数据收集成本高昂，且现代游戏常通过流式传输，网络延迟和压缩引入时空相关的视觉伪影，导致测试时协变量偏移，影响代理性能。",
+        "method": "本文提出流式增强（streaming augmentations），模拟四种低带宽网络流中常见的伪影：像素化块和划痕、全局模糊、鬼影。在预测逆动力学模型（PIDM）基础上实现，该模型使用冻结的预训练视觉骨干（Theia）编码帧为潜在特征，并通过轻量级MLP作为逆动力学策略预测动作。增强按帧块（chunk，50-100帧）应用，参数通过正弦曲线和淡入淡出机制在块内平滑调制，确保伪影时空连贯。训练时预计算10个增强变体，以0.2概率采样原始轨迹。",
+        "result": "在稳定流条件下，使用时空增强的代理在相同数据预算下性能比无增强代理提升高达41%；在网络延迟引入时，增强代理性能仅下降7.45%，而无增强代理下降49.82%。在三个现代3D游戏任务中，组合标准增强和流式增强进一步提升了样本效率和鲁棒性。",
+        "conclusion": "为流式设置量身定制的时空增强是训练鲁棒且高效的游戏代理的简单而强大的工具，能有效应对演示数据稀缺和流式伪影导致的分布偏移问题。",
+        "key_details": "采用30个人类演示数据集，使用冻结的Theia视觉骨干和轻量MLP；增强块大小50-100帧，淡入淡出3帧，预计算M=10个增强变体，采样概率p_orig=0.2；预计算增强增加存储但保证可复现性；局限性：依赖演示质量，可能对未模拟的伪影类型泛化不足。"
+      },
+      "affiliations": [
+        "McGill University, Mila",
+        "Microsoft"
+      ],
+      "affiliations_text": "McGill University, Mila, Microsoft",
+      "score": 4.276316031295025,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.14182v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714182v1-semantic-audio-driven-understanding-for-dynamic-humanoid-whole-body-control",
+      "source": "arxiv",
+      "title": "Semantic Audio-driven Understanding for Dynamic Humanoid Whole Body Control",
+      "authors": [
+        "J. M. A. Marcelo",
+        "M. Brienza",
+        "E. Bugli",
+        "L. Comito",
+        "D. Nardi",
+        "D. D. Bloisi",
+        "V. Suriani"
+      ],
+      "authors_text": "J. M. A. Marcelo, M. Brienza, E. Bugli, L. Comito, D. Nardi, D. D. Bloisi, V. Suriani",
+      "abstract": "Recent advances in humanoid robotics and reinforcement learning have enabled the acquisition of highly expressive whole-body motion policies. However, most robotic performances remain based on pre-scripted sequences or externally triggered behaviors, limiting autonomy and responsiveness to dynamic environments. In this work, we introduce a novel multi-modal orchestration framework for semantic audio-driven humanoid control, enabling robots to autonomously select and execute appropriate motion skills in real time. The system processes continuous audio streams and routes them into music or speech branches. Music input is handled via audio fingerprinting and semantic embeddings to retrieve track identity and temporal alignment, allowing dynamic mapping between musical segments and motion policies. Speech input is grounded into a discrete library of imitation-learned skills, enabling direct human-robot interaction. Both modalities share a unified interface that schedules skill execution over a reinforcement learning control pipeline. We validate the approach in simulation and on a Unitree G1 humanoid, showing robust sim-to-real transfer and consistent audio-conditioned policy selection. Supplementary materials are available at the following site: https://lab-rococo-sapienza.github.io/semantic-WBC/",
+      "url": "http://arxiv.org/abs/2607.14182v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14182v1",
+      "tldr": "This paper introduces a multi-modal orchestration framework that processes live audio streams (music or speech) to enable humanoid robots to autonomously select and execute appropriate whole-body motion skills in real time, moving beyond pre-scripted behaviors.",
+      "detailed_reading": null,
+      "affiliations": [
+        "International University of Rome",
+        "Sapienza University of Rome"
+      ],
+      "affiliations_text": "International University of Rome, Sapienza University of Rome",
+      "score": 4.209014403514092,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.14249v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714249v1-midiff-tackling-sparsity-and-imbalance-in-mobile-usage-generation-via-multivariate-imaging-diffusion",
+      "source": "arxiv",
+      "title": "MIDiff: Tackling Sparsity and Imbalance in Mobile Usage Generation via Multivariate-Imaging Diffusion",
+      "authors": [
+        "Yilai Liu",
+        "Shiyuan Zhang",
+        "Hongyang Du"
+      ],
+      "authors_text": "Yilai Liu, Shiyuan Zhang, Hongyang Du",
+      "abstract": "Mobile usage traces are critical for tasks such as user behavior prediction and app recommendation, yet their use is constrained by privacy restrictions and costly large-scale data collection. Although generative models perform well on general time series, their application to mobile usage data remains challenging because (i) limited user activity causes severe sparsity, (ii) heterogeneous variable types complicate joint modeling, and (iii) functional differences across apps create pronounced usage imbalance. To address these challenges, we propose Multivariate-Imaging Diffusion (MIDiff), a diffusion-based framework operating in an imaging space defined by Cross-Gramian Angular Sum Field (C-GASF). C-GASF transforms sparse multivariate sequences into correlation images, while MIDiff employs Triple Attention in a U-Net to preserve temporal consistency and variable dependencies. Experiments show that MIDiff achieves state-of-the-art performance across fidelity metrics. In particular, it obtains a Discriminative Accuracy (DA) of 0.1526, compared with 0.3476 for the strongest baseline, ZITS-VAE, demonstrating its effectiveness in generating realistic and diverse mobile usage traces. Our code is available at https://github.com/YilaiLiu-HKU/MIDiff.",
+      "url": "http://arxiv.org/abs/2607.14249v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14249v1",
+      "tldr": "MIDiff is a diffusion-based framework that uses Cross-Gramian Angular Sum Field (C-GASF) to transform sparse, heterogeneous mobile usage data into correlation images and employs Triple Attention in a U-Net to effectively generate realistic and diverse traces while overcoming challenges of temporal sparsity, cross-channel heterogeneity, and long-tail usage imbalance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Hong Kong"
+      ],
+      "affiliations_text": "The University of Hong Kong",
+      "score": 3.8838413149565385,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.14252v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714252v1-memora-embodied-action-memory-from-egocentric-videos-for-reasoning-and-planning",
+      "source": "arxiv",
+      "title": "MEMORA: Embodied Action Memory from Egocentric Videos for Reasoning and Planning",
+      "authors": [
+        "Zihao Yu",
+        "Xiu Yuan",
+        "Chongjie Zhang"
+      ],
+      "authors_text": "Zihao Yu, Xiu Yuan, Chongjie Zhang",
+      "abstract": "Long-horizon robot planning requires more than predicting what actions will do next; it also requires memory of the embodied experience that makes future goals interpretable. People do not plan from the present scene alone: they draw on remembered places, object-state changes, prior procedures, and regularities revealed through repeated action. We formulate Embodied Action Memory (EAM) as the capability to form, maintain, and use such experience as a persistent memory state for later decisions. MEMORA realizes EAM with a formation-consolidation-retrieval lifecycle and four typed stores: Environment Memory, Entity Memory, Activity Memory, and Inferred Knowledge. Online editing maintains object identities and state histories as new observations arrive; offline consolidation abstracts repeated experience into reusable procedures and participant-specific regularities. MEMORA-Bench evaluates this lifecycle on 45 hours of EPIC-KITCHENS-100 extension video across 18 participants through memory-grounded planning, including previously unseen goals, and a complementary memory-assessment task. Across four open-weight language models, full MEMORA--combining editing, typed stores, and consolidation--achieves the strongest aggregate results among the evaluated memory conditions. It improves memory-assessment accuracy by up to 20.5 points over the strongest controlled baseline and improves out-of-distribution Robot-Grounded Plan score by up to 16.6% relative. A qualitative two-task robot deployment study further illustrates how memory-grounded language plans can interface with downstream control, while the overall results show that editable, consolidated memory can supply remembered context for robot planning. Project page: https://yuzihaowashu.github.io/MEMORA/",
+      "url": "http://arxiv.org/abs/2607.14252v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14252v1",
+      "tldr": "MEMORA introduces a typed memory lifecycle with online editing and offline consolidation that improves robot planning and memory assessment by up to 20.5% over baselines, using egocentric video to build persistent, actionable embodied memory.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Washington University in St. Louis"
+      ],
+      "affiliations_text": "Washington University in St. Louis",
+      "score": 3.8716745566862434,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.14192v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714192v1-long-term-user-engagement-optimization-through-model-agnostic-downstream-rewards-learning",
+      "source": "arxiv",
+      "title": "Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning",
+      "authors": [
+        "Dingsu Wang",
+        "Filip Ryzner",
+        "Kelly He",
+        "Armando Ordorica",
+        "David Woo",
+        "Aditya Mantha",
+        "Liyao Lu",
+        "Usha Amrutha Nookala",
+        "Haoran Guo",
+        "Jiacong He",
+        "Olafur Gudmundsson",
+        "Matt Chun",
+        "Krystal Benitez",
+        "Dhruvil Deven Badani",
+        "Yijie Dylan Wang"
+      ],
+      "authors_text": "Dingsu Wang, Filip Ryzner, Kelly He, Armando Ordorica, David Woo, Aditya Mantha, Liyao Lu, Usha Amrutha Nookala, Haoran Guo, Jiacong He, Olafur Gudmundsson, Matt Chun, Krystal Benitez, Dhruvil Deven Badani, Yijie Dylan Wang",
+      "abstract": "As recommender systems mature in the past few years, their optimization objectives have evolved from a primary focusing on short-term behavioral signals to a broader emphasis on long-term user engagement and retention. However, directly optimizing retention is difficult because return signals are sparse, delayed, and only partially attributable to earlier recommendations. Prior work has addressed this challenge with sequential modeling and reinforcement learning, but these approaches typically require task specific reward engineering, substantial computational overhead, and surface specific implementations that are difficult to generalize. In this paper, we present a unified, model-agnostic downstream reward framework for optimizing long-term user value in large-scale recommendation systems. First, we formulate the downstream reward learning problem and develop an offline screening framework to identify session level behaviors that are both observable early and predictive of future retention. We then propose several model-agnostic downstream rewards signals derived from observed user action patterns across multiple sources. We further discuss the engineering effort to productionize the proposed rewards derivations and challenges we faced when adding them to our ranking models. Online A/B experiments demonstrate consistent improvements in engagement and retention-related metrics, and the framework has been deployed across multiple Pinterest surfaces, including Homefeed, Related Pins, Search, and Notifications.",
+      "url": "http://arxiv.org/abs/2607.14192v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14192v1",
+      "tldr": "This paper proposes a unified, model-agnostic downstream reward framework that derives session-level behavioral signals as proxy rewards to optimize long-term user engagement and retention in large-scale recommendation systems, demonstrating consistent improvements in online A/B experiments across multiple Pinterest surfaces.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pinterest"
+      ],
+      "affiliations_text": "Pinterest",
+      "score": 3.839109256537557,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.14183v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714183v1-open-aoe-an-open-egocentric-manipulation-dataset-and-toolchain-for-embodied-learning",
+      "source": "arxiv",
+      "title": "Open-AoE: An Open Egocentric Manipulation Dataset and Toolchain for Embodied Learning",
+      "authors": [
+        "Zishuo Li",
+        "Bowen Yang",
+        "Changtao Miao",
+        "Kai Zhu",
+        "Hao Chen",
+        "Qingze Guan",
+        "Zhengxing Wu",
+        "Wanke Zhan",
+        "Yang Sun",
+        "Zhiyi Huang",
+        "Zitong Shan",
+        "Zhenchao Jin",
+        "Jiadong Hong",
+        "Taowen Wang",
+        "Yushi Feng",
+        "You Liu",
+        "Yibo Wang",
+        "Yifan Yang",
+        "Zhaowen Zhou",
+        "Man Luo",
+        "Hao Cheng",
+        "Bo Zhang",
+        "Jianshu Li",
+        "Jiansheng Cai",
+        "Guocai Yao",
+        "Jize Zhang",
+        "Chenhao Lin",
+        "Renjing Xu",
+        "Lequan Yu",
+        "Chao Shen",
+        "Chunhua Shen",
+        "Zhe Li"
+      ],
+      "authors_text": "Zishuo Li, Bowen Yang, Changtao Miao, Kai Zhu, Hao Chen, Qingze Guan, Zhengxing Wu, Wanke Zhan, Yang Sun, Zhiyi Huang, Zitong Shan, Zhenchao Jin, Jiadong Hong, Taowen Wang, Yushi Feng, You Liu, Yibo Wang, Yifan Yang, Zhaowen Zhou, Man Luo, Hao Cheng, Bo Zhang, Jianshu Li, Jiansheng Cai, Guocai Yao, Jize Zhang, Chenhao Lin, Renjing Xu, Lequan Yu, Chao Shen, Chunhua Shen, Zhe Li",
+      "abstract": "Egocentric videos of human manipulation provide scalable supervision for embodied intelligence, yet existing resources rarely combine low-cost continuous capture, manipulation-level structured annotations, and reusable tools for robot learning. We present Open-AoE, an open, community-oriented egocentric manipulation dataset and toolchain spanning the full pipeline from smartphone capture to model training. Its first release contains approximately 2,000 hours of manipulation video collected in natural environments by 500+ contributors using 400+ smartphones. The dataset provides text annotations, MANO-based hand poses, camera trajectories, and temporally localized atomic actions. Open-AoE further includes a data processing pipeline that transforms raw recordings into structured samples through temporal action segmentation, semantic annotation, hand reconstruction, and camera trajectory reconstruction. Meanwhile, we provide a separate downstream toolchain supports visualization, cross-embodiment retargeting, model-specific data conversion, and training recipes for VLA policies, WAMs, and World Models. By integrating scalable capture, structured processing, and downstream adaptation, Open-AoE reduces the barriers to both data contribution and reuse, providing practical open infrastructure for embodied model training, human-to-robot transfer, and world modeling.",
+      "url": "http://arxiv.org/abs/2607.14183v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14183v1",
+      "tldr": "Open-AoE provides a large-scale, open-source egocentric manipulation dataset and end-to-end toolchain, from smartphone capture to downstream model training, enabling scalable human-to-robot transfer for embodied learning.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6838723829455864,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.14123v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714123v1-position-explainability-research-must-prioritize-foundations-over-ad-hoc-methods",
+      "source": "arxiv",
+      "title": "Position: Explainability Research Must Prioritize Foundations over Ad-hoc Methods",
+      "authors": [
+        "Michal Moshkovitz",
+        "Suraj Srinivas",
+        "Lesia Semenova",
+        "Nave Frost",
+        "Cyrus Rashtchian",
+        "Valentyn Boreiko",
+        "Shichang Zhang",
+        "Himabindu Lakkaraju",
+        "Cynthia Rudin",
+        "Jennifer Wortman Vaughan"
+      ],
+      "authors_text": "Michal Moshkovitz, Suraj Srinivas, Lesia Semenova, Nave Frost, Cyrus Rashtchian, Valentyn Boreiko, Shichang Zhang, Himabindu Lakkaraju, Cynthia Rudin, Jennifer Wortman Vaughan",
+      "abstract": "Despite the proliferation of Explainable AI (XAI) techniques -- from feature attributions to sparse autoencoders -- explanations rarely influence real-world workflows. In practice, they are often generated and discarded without guiding meaningful action. This gap reflects foundational shortcomings: research has not yet established methodologies for integrating explanations into end-to-end, human-in-the-loop systems. This position paper argues that the machine learning community must pivot from ad-hoc XAI methods toward addressing foundational & structural challenges, including unclear problem formulations, underspecified evaluation objectives, and the absence of pipelines for explanation-driven feedback. We support this claim through an analysis of recent ICML, NeurIPS, and ICLR papers and a survey of XAI practitioners, revealing recurring issues that limit cumulative progress. We conclude by outlining a practical checklist designed to shift XAI toward a more human-centered, action-oriented paradigm. By emphasizing foundational clarity over the development of ad-hoc methods, we hope to provide a roadmap for integrating explanations into actionable, feedback-driven AI systems.",
+      "url": "http://arxiv.org/abs/2607.14123v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14123v1",
+      "tldr": "The paper argues that the machine learning community must shift from developing ad-hoc explainability methods to addressing foundational challenges—such as unclear problem formulations, underspecified evaluation objectives, and lack of feedback pipelines—to make explanations actionable and human-centered.",
+      "detailed_reading": null,
+      "affiliations": [
+        "eBay Research",
+        "Microsoft Research",
+        "Duke University",
+        "Harvard University",
+        "Google Research",
+        "Bosch",
+        "Rutgers University",
+        "Amazon"
+      ],
+      "affiliations_text": "eBay Research, Microsoft Research, Duke University, Harvard University, Google Research, Bosch, Rutgers University, Amazon",
+      "score": 3.605035082979731,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.14271v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714271v1-local-additive-feature-attribution-a-mathematical-taxonomy-and-reporting-checklist",
+      "source": "arxiv",
+      "title": "Local Additive Feature Attribution: A Mathematical Taxonomy and Reporting Checklist",
+      "authors": [
+        "Rebecca Afriyie Sarpong",
+        "Daniel Commey"
+      ],
+      "authors_text": "Rebecca Afriyie Sarpong, Daniel Commey",
+      "abstract": "Feature-attribution methods are central to explainable artificial intelligence. Their assumptions are expressed in several mathematical languages: cooperative-game values, path integrals, gradient operators, perturbation distributions, and backpropagation rules. This survey proposes a common framework for local additive feature attribution. It organizes Shapley, path-based, gradient/backpropagation, perturbation, and CAM-style methods around five specification choices: value function, reference, path, perturbation distribution, and conservation rule. It then compares these methods through an axiom-by-method matrix and links common failure modes, including baseline sensitivity, off-manifold perturbations, sanity-check failures, adversarial manipulation, and method disagreement, to the assumptions that produce them. Finally, the survey proposes a ten-item reporting checklist for studies that use local additive attributions. The central message is that attribution results are meaningful only relative to the mathematical assumptions under which they are defined, and that those assumptions should be reported.",
+      "url": "http://arxiv.org/abs/2607.14271v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14271v1",
+      "tldr": "This paper presents a mathematical taxonomy and reporting checklist for local additive feature attribution, emphasizing that attribution results are meaningful only relative to the five specification choices (value function, reference, path, perturbation distribution, and conservation rule) and their underlying assumptions, which must be explicitly reported.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5807442872387507,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.14127v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714127v1-explainable-geospatial-ai-for-satellite-ground-station-siting-using-lidar-derived-terrain-intelligence",
+      "source": "arxiv",
+      "title": "Explainable Geospatial AI for Satellite Ground Station Siting Using LiDAR-Derived Terrain Intelligence",
+      "authors": [
+        "Shohini Sarkar",
+        "Smithi Mahendran",
+        "Rishi Chudasama",
+        "Varun Mannam",
+        "Arav Luthra",
+        "Yuvraj Rekhi",
+        "Vivek Nadig",
+        "Arsh Goenka"
+      ],
+      "authors_text": "Shohini Sarkar, Smithi Mahendran, Rishi Chudasama, Varun Mannam, Arav Luthra, Yuvraj Rekhi, Vivek Nadig, Arsh Goenka",
+      "abstract": "Representative clutter height (RCH) is a key parameter in radio propagation and interference analysis because it captures the dominant height of local obstructions that drive terminal clutter loss. Current practice often relies on fixed clutter heights assigned to land use classes in Recommendation ITU-R P.452-18, but this misses within class variation and can lead to conservative exclusion zones and poor site ranking for low Earth orbit ground station siting and spectrum coordination. We present an interpretable, globally deployable machine learning framework for predicting RCH from open geospatial data. The model is trained using LiDAR derived labels from the U.S. Geological Survey 3D Elevation Program and inference time features from global land-cover, terrain, demographic, thermal, and optical remote sensing products. We define RCH using a robust 75th percentile clutter height statistic, evaluate multiple regressors, and select LightGBM for its accuracy, efficiency, and compatibility with feature attribution analysis. The final model achieves a mean absolute error of 1.79m and an R^2=0.765, reducing absolute error by more than 60% relative to the ITU baseline. Beyond aggregate fit, we evaluate domain facing criteria relevant to RF planning, including meter scale error, tolerance band accuracy, over and under estimation tails, agreement with ITU clutter height regimes, and SHAP-based physical plausibility. SHAP identifies tree canopy cover, land-cover semantics, and spectral reflectance as the most influential predictors. Studies on segmentation derived features, non-forest ablations, and land-cover matched international validation show that open geospatial data can improve clutter modeling at scale without sacrificing interpretability or deployability.",
+      "url": "http://arxiv.org/abs/2607.14127v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14127v1",
+      "tldr": "The paper presents an interpretable, globally deployable machine learning framework that predicts representative clutter height from open geospatial data using LiDAR-derived labels, achieving a mean absolute error of 1.79 meters and reducing error by over 60% relative to traditional fixed ITU-R clutter defaults for satellite ground station siting and spectrum coordination.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Maryland, College Park"
+      ],
+      "affiliations_text": "University of Maryland, College Park",
+      "score": 3.4649676088240877,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.14157v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714157v1-certified-domain-consistency-for-multi-domain-retrieval-label-free-per-domain-contamination-control-with-conformal-risk-guarantees",
+      "source": "arxiv",
+      "title": "Certified Domain Consistency for Multi-Domain Retrieval: Label-Free Per-Domain Contamination Control with Conformal Risk Guarantees",
+      "authors": [
+        "Jayakumar Manoharan"
+      ],
+      "authors_text": "Jayakumar Manoharan",
+      "abstract": "Retrieval over corpora that mix several domains often returns relevant but wrong-domain evidence that ranking metrics miss and that conformal risk control bounds only marginally, under-covering the worst domains. This work introduces C3R, a drop-in control layer that, from an inferred domain posterior and no query-time label, certifies a per-domain contamination budget where feasible and otherwise abstains rather than silently violating; on the hardest domains it guarantees a reduction, not a tight bound. The core is a two-split scheme built on risk-controlling prediction sets, whose finite-sample transfer bound crosses from the inferred to the true domain with fully estimable slack, supports heterogeneous budgets, and inverts for deployment. Population validity rests on this bound and a controlled simulation; across a thousand resampled calibrations the certificate never violates (a stability result) while marginal control violates the most-contaminated domain in every draw, and soft demotion retains more recall than the strongest calibrated cascade at equal certified contamination. The method replicates across open testbeds including an independent one from public federal regulations, and an LLM-judged downstream probe indicates wrong-authority grounding rises with contamination and falls under control. The layer is frozen-stack and reranker-agnostic.",
+      "url": "http://arxiv.org/abs/2607.14157v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14157v1",
+      "tldr": "C3R introduces a label-free, drop-in control layer that certifies per-domain contamination budgets in multi-domain retrieval with finite-sample conformal risk guarantees, abstaining rather than silently violating on hard domains and achieving zero violations across thousands of calibrations while retaining more recall than alternative methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Electric Power Research Institute (EPRI)"
+      ],
+      "affiliations_text": "Electric Power Research Institute (EPRI)",
+      "score": 3.3864594989792804,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.14160v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714160v1-qfirenet-a-quantum-enhanced-u-net-for-wildfire-segmentation-from-sentinel-2-imagery",
+      "source": "arxiv",
+      "title": "QFireNet: A Quantum-Enhanced U-Net for Wildfire Segmentation from Sentinel-2 Imagery",
+      "authors": [
+        "Jaiman Munshi",
+        "Tanvi Tewary",
+        "Sawyer Bloom",
+        "Aidan Chu",
+        "Chetan Maviti",
+        "Kyon Winston-Bey",
+        "Harshit Badjatia",
+        "Farhan Kittur",
+        "Vardhan Madhavarapu",
+        "Varun Kota",
+        "Joshua Kwon",
+        "Nazia Rangwala-Vohra",
+        "Franz Klein"
+      ],
+      "authors_text": "Jaiman Munshi, Tanvi Tewary, Sawyer Bloom, Aidan Chu, Chetan Maviti, Kyon Winston-Bey, Harshit Badjatia, Farhan Kittur, Vardhan Madhavarapu, Varun Kota, Joshua Kwon, Nazia Rangwala-Vohra, Franz Klein",
+      "abstract": "Wildfire detection from satellite imagery is a semantic image segmentation problem that has proven to be difficult due to challenges such as class imbalance, feature complexity, and atmospheric interference. In this paper, we build on the foundational U-Net image segmentation model to develop a quantum-hybrid solution in hopes of more effectively modeling the high-dimensional spectral feature space of the Sen2Fire dataset. We inject a variational quantum circuit in the bottleneck portion of U-Net, specifically the QuFeX and QB-Net ansatzes. We test a classical Feature Pyramid Network (FPN) for further comparative analysis of the model, and we also explore classical improvements to the U-Net model and its training process, including a compression of parameters, alternative loss functions, and uniform mixing of input data. Our primary finding is that under matched conditions, both QB-Net (with an $F_1$ score of 31.18) and QuFeX ($F_1 = 30.79$) outperformed the classical U-Net baseline results ($F_1 = 28.71$). Additionally, the classical FPN achieved a comparable score of 31.13. A crucial finding was that data mixing removed a significant domain shift between the geographically-separated train and test sets, which boosted the classical FPN $F_1$ score to 39.76. We validate the architecture's robustness and generalizability to the wildfire detection problem via cross-dataset transfer on the California Burned Areas (CaBuAr) dataset. Overall, we find that quantum machine learning has potential to provide an advantage in the problem of wildfire image segmentation, and further experiments will continue to validate and expand upon this finding.",
+      "url": "http://arxiv.org/abs/2607.14160v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14160v1",
+      "tldr": "QFireNet demonstrates that integrating variational quantum circuits into the U-Net bottleneck improves wildfire segmentation from Sentinel-2 imagery compared to classical baselines, and that data mixing mitigates domain shift to further boost performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Maryland, College Park"
+      ],
+      "affiliations_text": "University of Maryland, College Park",
+      "score": 3.147455197783498,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.14191v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714191v1-teddy-a-pediatric-foundation-model-for-risk-forewarning-from-icd-coded-diagnostic-histories",
+      "source": "arxiv",
+      "title": "TEDDY: A Pediatric Foundation Model for Risk Forewarning from ICD-Coded Diagnostic Histories",
+      "authors": [
+        "Matthew Brady Neeley",
+        "Jorge Botas",
+        "Johnathan Jia",
+        "Lin Yao",
+        "Daniel Palacios",
+        "Benjamin Choi",
+        "Zhandong Liu",
+        "Hyun-Hwan Jeong"
+      ],
+      "authors_text": "Matthew Brady Neeley, Jorge Botas, Johnathan Jia, Lin Yao, Daniel Palacios, Benjamin Choi, Zhandong Liu, Hyun-Hwan Jeong",
+      "abstract": "Pediatric electronic health records capture developmentally structured clinical trajectories, yet their potential for generative healthcare foundation models remains largely unexplored. Here we present TEDDY (Temporal Event Decoder for Disease in Youth), a 1.84-million-parameter decoder transformer trained on approximately 73 million ICD-10 diagnoses from 1.6 million children at a single pediatric institution. TEDDY models longitudinal diagnosis trajectories and visit timing. Predictions were made before visit codes were revealed, limited to first occurrences, and evaluated against sex- and age-matched controls. Across 797 disease-onset prediction tasks spanning 16 ICD-10 chapters, TEDDY achieved a median AUC of 72.0%, outperforming same-data DenseNet (50.0%), CNN (57.2%), RNN (60.1%), and LSTM (62.7%) baselines on 96-99% of tasks. Performance held across sex and age and was strongest among lower-prevalence diagnoses; 202 of the 225 rarest conditions (90%) had 95% confidence intervals above chance. Predictive signal remained detectable more than two years before first recorded diagnosis, with median AUCs of 59.7% in the unrestricted analysis and 64.4% in a fixed-cohort sensitivity analysis. In asthma and attention-deficit/hyperactivity disorder benchmarks, AUCs were 79.3% and 84.7%, compared with 62.7% and 71.7% for the strongest comparators, including a general-purpose language model three orders of magnitude larger. Visit-timing predictions had a 3.0-day mean absolute restricted mean survival-time error over 365 days, although median and long-tail return intervals remained miscalibrated. Together, these results establish pediatric diagnostic histories as a substrate for compact generative models supporting broad, rare-disease, and long-horizon risk forecasting without population-scale data or billion-parameter models.",
+      "url": "http://arxiv.org/abs/2607.14191v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14191v1",
+      "tldr": "TEDDY, a compact decoder transformer trained on pediatric ICD-10 diagnostic histories, achieves strong performance in forecasting a wide range of disease onsets and visit timing, including rare conditions, without requiring population-scale data or billion-parameter models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Baylor College of Medicine"
+      ],
+      "affiliations_text": "Baylor College of Medicine",
+      "score": 3.10299603293596,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.14125v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714125v1-carprt-class-aware-zero-shot-prompt-reweighting-for-black-box-vision-language-models",
+      "source": "arxiv",
+      "title": "CARPRT: Class-Aware Zero-Shot Prompt Reweighting for Black-Box Vision-Language Models",
+      "authors": [
+        "Ruijiang Dong",
+        "Zesheng Ye",
+        "Jianzhong Qi",
+        "Lei Feng",
+        "Feng Liu",
+        "Gang Niu",
+        "Masashi Sugiyama"
+      ],
+      "authors_text": "Ruijiang Dong, Zesheng Ye, Jianzhong Qi, Lei Feng, Feng Liu, Gang Niu, Masashi Sugiyama",
+      "abstract": "Pre-trained vision-language models (VLMs) enable zero-shot image classification by computing the similarity score between an image and textual descriptions, typically formed by inserting a class label (e.g., \"cat\") into a prompt (e.g., \"a photo of a\"). Since the score for a given image-class pair is sensitive to the choice of prompt, existing studies ensemble multiple prompts using a weighting vector to aggregate scores across different prompts. Yet, in current strategies, the weighting vector assigned to each prompt is shared across all classes, implicitly assuming that prompts are conditionally independent of classes, which often does not hold in practice, as a prompt like \"an aerial view of\" might be apt for \"airport\" but ill-suited for \"apple\". To address this, we propose class-aware zero-shot prompt reweighting (CARPRT). This scoring scheme adjusts the weighting vector for each class label by capturing the class-specific relevance of different prompts in a training-free manner. For each class label and every available prompt, we quantify their class-specific relevance by averaging image-text relevance scores over images predicted to that class under the given prompt. These estimates are then normalized to derive class-specific weights. Evaluations on standard image classification benchmarks show that CARPRT outperforms existing class-independent reweighting methods, confirming that modeling prompt-class dependencies is crucial for effective zero-shot prediction and even broader VLM-based application settings that rely on prompt ensembling. Our code is available at https://github.com/tmlr-group/CARPRT.",
+      "url": "http://arxiv.org/abs/2607.14125v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14125v1",
+      "tldr": "CARPRT proposes a class-aware zero-shot prompt reweighting method for vision-language models that adjusts prompt weights per class by estimating class-specific relevance, outperforming existing class-independent reweighting approaches.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.874997071147056,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.14190v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714190v1-a-temporal-machine-learning-based-time-to-event-model-for-predicting-als-progression-and-healthcare-utilization",
+      "source": "arxiv",
+      "title": "A Temporal Machine Learning-Based Time-to-Event Model for Predicting ALS Progression and Healthcare Utilization",
+      "authors": [
+        "Zongliang Yue",
+        "Qi Li",
+        "Terry Heiman-Patterson",
+        "Frank Bearoff",
+        "Zhaohui Qin",
+        "Huanmei Wu"
+      ],
+      "authors_text": "Zongliang Yue, Qi Li, Terry Heiman-Patterson, Frank Bearoff, Zhaohui Qin, Huanmei Wu",
+      "abstract": "Amyotrophic lateral sclerosis (ALS) is a progressive and heterogeneous neurodegenerative disease in which predicting clinically meaningful milestones, such as assistive device use, remains challenging. We developed a time-to-event, digital-twin-inspired framework that integrates longitudinal ALS Functional Rating Scale-Revised (ALSFRS-R) trajectories with survival modeling to support individualized prediction of functional decline and assistive device utilization. We constructed a harmonized longitudinal dataset by integrating diagnosis records, ALSFRS-R assessments, activities of daily living, and demographic information, followed by preprocessing to ensure data quality, temporal alignment, and cohort consistency. Correlation-based clustering identified coherent functional domains spanning bulbar, upper limb, axial, lower limb, and respiratory systems. Generalized additive mixed models characterized nonlinear, domain-specific functional decline across all domains. In addition, a temporal machine learning model was developed to predict longitudinal functional decline and capture stage-dependent disease progression. Cox proportional hazards modeling further identified lower limb function, particularly walking and stair climbing, as the strongest predictors of earlier wheelchair access. Building on these results, we implemented a digital twin-inspired temporal machine learning-based time-to-event (TTE) model that generates individualized survival curves and dynamically predicts wheelchair-free survival. This framework provides a scalable, interpretable, and clinically actionable approach for linking ALS progression with personalized decision support, with applications in proactive care planning, clinical trial stratification, and precision medicine.",
+      "url": "http://arxiv.org/abs/2607.14190v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14190v1",
+      "tldr": "This paper introduces a digital-twin-inspired temporal machine learning time-to-event model that integrates longitudinal ALSFRS-R trajectories with survival analysis to predict individualized functional decline and healthcare utilization, specifically wheelchair-free survival, in ALS patients.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Auburn University",
+        "Fisk University",
+        "Emory University",
+        "Temple University"
+      ],
+      "affiliations_text": "Auburn University, Fisk University, Emory University, Temple University",
+      "score": 2.8289729338928375,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.14205v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714205v1-privacy-leakage-in-federated-learning-in-radiology-reports-a-comparative-evaluation-of-tokenizer-driven-privacy-risks",
+      "source": "arxiv",
+      "title": "Privacy Leakage in Federated Learning in Radiology Reports: A Comparative Evaluation of Tokenizer-Driven Privacy Risks",
+      "authors": [
+        "Santhosh Parampottupadam",
+        "Andres Martinez",
+        "Dimitrios Bounias",
+        "Sinem Sav",
+        "Klaus Maier-Hein",
+        "Ralf Floca"
+      ],
+      "authors_text": "Santhosh Parampottupadam, Andres Martinez, Dimitrios Bounias, Sinem Sav, Klaus Maier-Hein, Ralf Floca",
+      "abstract": "Federated learning (FL) enables multi-institutional training on clinical text without sharing raw data, but gradient inversion can reconstruct sensitive information from shared model updates. The extent of this leakage for radiology reports, and the role of tokenizer design, remains unclear. We quantify gradient-based text reconstruction in FL and compare privacy risk across three tokenizers with the model architecture held fixed. Six FL clients trained a GPT-2-style transformer (sequence length 32) on public radiology corpora (368,751 diagnostic reports, 98,206 discharge summaries, 1,500 MIMIC-CXR free-text reports) using the GPT-2, RadBERT, and LLaMA-2 tokenizers at batch sizes of 64, 128, and 256. Assuming an active malicious server that modifies the shared architecture before distribution, we applied analytic gradient inversion and measured reconstruction fidelity over five runs. Exact sentence reconstruction ranged from 31% to 44% across tokenizers (30.6-43.5% across the 27 tokenizer x dataset x batch-size cells). At batch size 64 on the Discharge dataset, accuracy was 42.1% (GPT-2), 42.3% (RadBERT), and 39.4% (LLaMA-2), decreasing to 37.3%, 37.2%, and 34.3% at batch size 256. S-BLEU declined as batch size grew (GPT-2: 0.44 to 0.33; RadBERT: 0.48 to 0.35). RadBERT yielded the highest reconstruction fidelity and recovered the most clinical terms (18.1% of a 1,440-term reference vocabulary, vs 12.5% for GPT-2 and 9.4% for LLaMA-2), yet no tokenizer prevented leakage. Substantial portions of report text are therefore recoverable from FL gradients even at larger batch sizes and with domain-specific tokenizers. Tokenizer design influences leakage severity and is a privacy-relevant decision, not only a utility one; safeguards such as secure aggregation and differential privacy are likely necessary to meet HIPAA and GDPR requirements for FL in radiology NLP.",
+      "url": "http://arxiv.org/abs/2607.14205v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14205v1",
+      "tldr": "This paper demonstrates that gradient inversion attacks on federated learning of radiology reports can reconstruct substantial portions of text, with tokenizer design (particularly domain-specific ones like RadBERT) significantly influencing the severity of leakage, and that no tokenizer fully prevents this risk, underscoring the need for additional privacy safeguards such as differential privacy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Heidelberg University",
+        "Bilkent University",
+        "German Cancer Research Center (DKFZ)",
+        "Heidelberg University Hospital"
+      ],
+      "affiliations_text": "Heidelberg University, Bilkent University, German Cancer Research Center (DKFZ), Heidelberg University Hospital",
+      "score": 2.7755715366839837,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.14174v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/17/260714174v1-how-much-of-a-10-k-matters-aggregation-dependent-value-of-full-text-versus-risk-factor-sentiment",
+      "source": "arxiv",
+      "title": "How Much of a 10-K Matters? Aggregation-Dependent Value of Full-Text versus Risk-Factor Sentiment",
+      "authors": [
+        "Sanggyu Sean Choi"
+      ],
+      "authors_text": "Sanggyu Sean Choi",
+      "abstract": "Financial sentiment extraction has largely relied on news text and supervised extraction against return labels alone, leaving 10-K filings -- and volatility, the target risk disclosure is arguably best suited to informing -- comparatively unexplored. We extend a supervised lexicon-learning approach to 10-K filings and their Item 1A risk-factor sections, training sentiment scores against both return and volatility labels at three levels of aggregation: sector, portfolio, and individual firm. Across 1,383 filings from 94 Nasdaq-100 technology constituents (2006--2023), we evaluate the resulting twelve sentiment metrics on classification accuracy, correlation with realised market outcomes, and qualitative lexical content. Full-filing text produces more accurate sentiment at the sector and portfolio level for both targets, but this reverses at the individual-firm level, where the narrower Item 1A section performs better -- an effect we attribute to the interaction between document volume and the amount of independent training signal available at each level of aggregation. A Loughran-McDonald dictionary baseline is consistently, strongly negatively correlated with price at every level tested, underscoring the value of a supervised approach for regulatory disclosure text. These findings, and the design choices they motivate, establish the sentiment-generation methodology underlying a subsequent, larger-scale, multi-source system.",
+      "url": "http://arxiv.org/abs/2607.14174v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.14174v1",
+      "tldr": "Supervised sentiment from full 10-K text outperforms that from the Item 1A risk-factor section at the sector and portfolio level, but the reverse holds at the individual-firm level, with a dictionary baseline showing persistent negative correlation with price.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Edinburgh"
+      ],
+      "affiliations_text": "University of Edinburgh",
+      "score": 2.459535893576013,
+      "score_text": "2.5"
+    }
+  ]
+}
