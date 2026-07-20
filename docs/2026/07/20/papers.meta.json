@@ -1,0 +1,755 @@
+{
+  "label": "2026-07-20",
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T06:27:50",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2607.15457v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715457v1-robust-peak-cost-constrained-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Robust Peak-cost Constrained Reinforcement Learning",
+      "authors": [
+        "Shilpa Mukhopadhyay",
+        "Sourav Ganguly",
+        "Santosh Mohan Rajkumar",
+        "Honghao Wei",
+        "Debdipta Goswami",
+        "Arnob Ghosh"
+      ],
+      "authors_text": "Shilpa Mukhopadhyay, Sourav Ganguly, Santosh Mohan Rajkumar, Honghao Wei, Debdipta Goswami, Arnob Ghosh",
+      "abstract": "We study robust peak-cost constrained reinforcement learning (RP-CRL), where the objective is to maximize expected reward while controlling the maximum cost encountered along a trajectory. This setting is motivated by safety-critical applications in which a single large violation can be catastrophic and therefore cannot be adequately captured by the standard CMDP framework based on expected cumulative cost. Existing reachability-constrained RL methods adopt Lagrangian-based approaches, yet the underlying duality properties of peak-cost constrained MDPs remain unclear. We show that, unlike standard CMDPs, peak-cost constrained MDPs may not admit zero duality gap. We further consider a robust formulation to address simulator-to-real-world mismatch in the transition dynamics. To solve this problem, we develop a surrogate optimization framework and a robust value estimation method based on integral probability metrics. We prove that, with appropriate hyperparameter choices, the surrogate solution attains the same robust reward value as the original problem while violating the constraint by at most epsilon. Experiments show that the proposed method effectively enforces safety under dynamics perturbations while retaining strong reward performance.",
+      "url": "http://arxiv.org/abs/2607.15457v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15457v1",
+      "tldr": "The paper introduces a robust peak-cost constrained reinforcement learning framework to maximize reward while limiting the maximum trajectory cost, reveals that peak-cost MDPs may not have zero duality gap, and proposes a surrogate optimization method with integral probability metric-based robust value estimation that ensures safety under dynamics perturbations with bounded constraint violation.",
+      "detailed_reading": {
+        "motivation": "现有约束强化学习（CMDP）基于期望累积成本，无法捕捉单次大违规带来的灾难性后果，而峰值成本约束（如最大即时成本低于阈值）更符合安全关键应用。现有基于可达性的方法采用拉格朗日对偶，但尚未证明对偶间隙为零；同时缺乏对模拟到真实动力学失配的鲁棒性。",
+        "method": "构建鲁棒峰值成本约束MDP，采用基于积分概率指标（IPM）的矩形不确定性集描述动力学扰动。提出代理优化问题min_π max{ max_P J_r^{π,P}/β, (max_{P,s∈S^{π,P}} V_{c,peak}^{π,P}(s)-b) }，其中峰值成本价值函数通过折扣递归定义并采用Log-Sum-Exp平滑max操作。算法为Actor-Critic框架：actor使用PPO裁剪目标，critic分别对奖励和峰值成本进行IPM鲁棒化TD误差估计，TD误差中加入ρ||w_{2:d}||_2项；利用GAE计算优势函数。",
+        "result": "理论证明峰值成本约束MDP即使在两状态场景下也可能不具备零对偶间隙（与标准CMDP本质不同）。代理优化在β≥C_max/ϵ时，最优解可达到与原鲁棒问题相同的鲁棒奖励值，且约束违反不超过ϵ。实验表明方法在动力学扰动下能有效保持峰值成本约束，同时获得高奖励。",
+        "conclusion": "本文首次揭示峰值成本约束MDP对偶间隙非零，提出了鲁棒峰值成本约束RL的代理优化框架和基于IPM的鲁棒价值估计方法，理论保证与实验验证共同说明该方法在模拟到真实迁移中具有可靠的安全性。",
+        "key_details": "关键点：1) 对偶间隙非零原因在于峰值成本约束不满足状态-动作占用度量的凸性；2) IPM鲁棒贝尔曼算子形式为L_P V = (1-γ)c + γ V + ρ||w_{2:d}||_2；3) 代理目标中β控制约束违反容忍度，需满足β≥C_max/ϵ；4) 采用LSE近似max以保证可微；5) 不确定性集基于IPM通用距离，适用于连续状态空间；6) 局限性：理论保证依赖于矩形不确定性集假设，且β选择可能需要领域知识。"
+      },
+      "affiliations": [
+        "The Ohio State University",
+        "NJIT",
+        "Washington State University"
+      ],
+      "affiliations_text": "The Ohio State University, NJIT, Washington State University",
+      "score": 5.396034914842753,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2607.15329v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715329v1-co-design-of-aeroelastic-systems-with-deep-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Co-Design of Aeroelastic Systems with Deep Reinforcement Learning",
+      "authors": [
+        "Yao Cheng Li",
+        "Urban Fasel"
+      ],
+      "authors_text": "Yao Cheng Li, Urban Fasel",
+      "abstract": "Control co-design considers the physical system and its controller together, enabling the strong coupling between system design and control to be uncovered and exploited. This is especially relevant in aeroelastic flight systems, where structural, aerodynamic, and control design choices jointly determine manoeuvrability and efficiency. This paper presents a model-free nested co-design framework for aeroelastic systems using deep reinforcement learning, in which a design-conditioned control policy is trained with proximal policy optimisation while an outer loop updates a distribution over candidate design parameters. The approach is evaluated on three case studies of increasing complexity: a spring-mass-damper system, a pitch-plunge-flap aerofoil, and a highly flexible high-aspect-ratio glider performing a thermal-soaring mission in a stochastic environment. Across these case studies, the framework is shown to progressively concentrate the design search towards high-performing regions and to outperform policies trained on randomly sampled designs. The results also show that reward shaping plays an important role in enabling stable learning in partially observed and stochastic environments. In the final glider case, the method jointly addresses wing design, flight control, and mission-level behaviour in the presence of aeroelastic coupling and atmospheric uncertainty. These results highlight the potential of model-free co-design for complex aeroelastic systems in which design, control, and mission objectives are tightly coupled.",
+      "url": "http://arxiv.org/abs/2607.15329v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15329v1",
+      "tldr": "This paper presents a model-free nested co-design framework using deep reinforcement learning to jointly optimize aeroelastic system design and control, demonstrating improved performance across three case studies, including a flexible glider performing thermal soaring under uncertainty.",
+      "detailed_reading": {
+        "motivation": "气动弹性飞行系统中结构、气动与控制设计强耦合，共同决定机动性与效率，但传统方法常将系统设计与控制分开优化，无法充分发掘耦合潜力。本研究旨在利用深度强化学习开发一种模型自由的嵌套协同设计框架，用于联合优化高展弦比柔性滑翔机的气动弹性设计、飞行控制与任务行为，特别是在热力翱翔这一高不确定性与部分观测环境中。",
+        "method": "方法采用嵌套协同设计框架：外层循环维护一个多元高斯分布作为候选设计参数的先验，每次迭代从分布中采样设计参数并分配给多个并行环境；内层循环使用近端策略优化算法训练一个以设计参数为条件的控制策略，该策略在给定状态和设计参数下输出动作，并在每个环境中收集轨迹。内层循环进行N_inner次PPO更新（不训练至收敛以降低计算成本），然后外层根据累计奖励更新设计参数分布（通过性能加权或剪枝机制将搜索聚焦于高性能区域）。框架在三个复杂度递增的案例上评估：弹簧-质量-阻尼器、俯仰-沉浮-襟翼翼型以及一个在随机热力场中执行热力翱翔任务的高柔性高展弦比滑翔机。其中滑翔机模型使用Mujoco实现低保真度但完全参数化的气动弹性动力学仿真。",
+        "result": "在三个案例中，所提框架均能逐步将设计搜索集中在高性能区域，且训练出的设计条件策略显著优于基于随机采样设计训练的策略。在滑翔机案例中，框架成功联合优化了机翼设计（如展弦比、刚度）、飞行控制策略与任务级热力搜索行为，展示了在气动弹性耦合与大气不确定性下的稳健性能。实验还表明，奖励塑造对于在部分观测和随机环境中实现稳定学习至关重要，缺失中间导向奖励时策略容易陷入局部最优。",
+        "conclusion": "本研究证明模型自由的嵌套协同设计框架能够有效解决气动弹性系统中的强耦合优化问题，将系统设计、控制与任务目标统一优化。该方法在热力翱翔场景中取得了优于分离设计的效果，为高柔性飞行器的敏捷与高效设计提供了新途径。未来工作可扩展至更高保真度模型、多任务场景以及与其他优化范式（如贝叶斯优化）的结合。",
+        "key_details": "关键细节包括：设计参数维度随案例增加，滑翔机案例中涉及机翼展弦比、弯曲刚度、扭转刚度等连续参数；初始设计分布为多元高斯，外层更新采用基于性能的加权最大似然估计（类似期望最大化），每次外环迭代剪枝低性能分布以加速收敛；PPO超参数如裁剪因子ε=0.2、学习率3e-4、步长N_step=2048、内环迭代N_inner=80、并行环境数N_env=8；奖励塑造在滑翔机案例中引入高度改变惩罚和热力接近奖励以引导探索；局限性包括模型依赖低保真度仿真（忽略高阶气动弹性效应）、模型自由方法的高样本复杂度、以及奖励函数设计需要领域知识。计算复杂度方面，内环不训练至收敛显著降低了总训练步数，但总交互样本量仍达到千万量级。"
+      },
+      "affiliations": [
+        "Imperial College London"
+      ],
+      "affiliations_text": "Imperial College London",
+      "score": 4.942594672748614,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2607.15412v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715412v1-regularity-aware-stochastic-mgda-with-adaptive-conflict-avoidant-update-direction-control",
+      "source": "arxiv",
+      "title": "Regularity-Aware Stochastic MGDA with Adaptive Conflict-Avoidant Update Direction Control",
+      "authors": [
+        "Chentong Huang",
+        "Lisha Chen"
+      ],
+      "authors_text": "Chentong Huang, Lisha Chen",
+      "abstract": "Multi-objective learning (MOL) aims to optimize multiple objectives simultaneously. The multi-gradient descent algorithm (MGDA) is a workhorse that iteratively updates along a common descent or conflict-avoidant (CA) direction across objectives. In stochastic settings, however, the vanilla stochastic MGDA method, SMG, lacks a fast convergence rate because mini-batch sampling introduces noise in the gradients. This causes bias in the update direction, which is controlled by the CA direction continuity. In this paper, we show that the CA direction is $1/2$-Holder continuous with respect to the Jacobian matrix, and the exponent $1/2$ cannot be improved in the worst case. This leads to a suboptimal convergence rate for vanilla stochastic MGDA in prior works. Nevertheless, under additional regularity conditions, we show this can be improved to Lipschitz continuity. Based on this insight, we propose a stochastic multi-objective regularity-aware (MoRe) method that exploits the Lipschitz continuity of the CA direction when the subproblem is regular, and switches to a fixed scalarization weight otherwise. Intuitively, the proposed algorithm employs CA direction update when the gradient conflict is large, and linear scalarization update otherwise. Theoretically, our method improves the convergence rate of SMG in the nonconvex setting from $\\widetilde{\\mathcal O}(T^{-1/4})$ to $\\widetilde{\\mathcal O}(T^{-1/2})$, where $\\widetilde{\\mathcal O}(\\cdot)$ hides logarithmic factors. Meanwhile, we also establish the per-iterate conflict-avoidance guarantees. Empirically, experiments demonstrate its effectiveness in multi-task performance and verify convergence behavior consistent with the established theoretical rate.",
+      "url": "http://arxiv.org/abs/2607.15412v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15412v1",
+      "tldr": "The paper proposes a regularity-aware stochastic multi-gradient descent method (MoRe) that achieves an improved convergence rate of \\(\\widetilde{\\mathcal O}(T^{-1/2})\\) from \\(\\widetilde{\\mathcal O}(T^{-1/4})\\) by exploiting Lipschitz continuity of the conflict-avoidant direction under nondegeneracy and switching to linear scalarization otherwise, with per-iterate conflict-avoidance guarantees.",
+      "detailed_reading": {
+        "motivation": "现有随机多梯度下降（SMG）方法在多目标学习中因小批量梯度噪声导致冲突避免（CA）方向偏差，收敛率仅为O~(T^{-1/4})。研究表明CA方向仅满足1/2-Hölder连续性，最坏情况下不可改进，但该连续性限制了算法在随机设置下的稳定性与速率。本文旨在探索CA方向何时能获得更强的Lipschitz连续性，并设计利用正则性的算法以加速收敛。",
+        "method": "输入为从小批量Z_t采样得到的随机梯度矩阵Q_t。建模为求解CA方向子问题：min_{λ∈Δ^M} ||Q_tλ||^2，得到方向d_t=-Q_tλ*。关键模块是检测子问题是否满足μ-非退化条件：当||Q_t^⊤Q_t P||_F或相关量保证CA方向Lipschitz连续时，使用CA方向更新；否则切换到固定标量化权重（如等权重）。训练流程中，采用小批量大小|Z_t|=Θ(t+1)和步长α=Θ(T^{-1/2})，迭代更新参数x_{t+1}=x_t+α d_t。该算法称为MoRe（多目标正则性感知）。",
+        "result": "理论证明在非凸经验目标上，MoRe的收敛率达到O~(T^{-1/2})，显著优于SMG的O~(T^{-1/4})。同时建立了逐次迭代的CA方向距离上界，保证冲突避免能力。实验在多任务学习基准上验证了MoRe在模型性能和收敛行为上与理论一致，实际收敛速率匹配O~(T^{-1/2})。",
+        "conclusion": "本文通过精细分析CA方向连续性，揭示了非退化条件下Lipschitz连续性的存在，并据此提出MoRe算法。该算法自适应切换CA方向与标量化更新，在理论上将随机MOL的收敛率从O~(T^{-1/4})提升至O~(T^{-1/2})，同时保持冲突避免性质，实验证实其有效性和理论匹配。",
+        "key_details": "关键点包括：1）μ-非退化条件定义（投影矩阵P=I-M^{-1}11^⊤，以及梯度矩阵Q的相关条件），该条件使CA方向成为Lipschitz连续；2）证明若子问题不合格，CA方向仅为1/2-Hölder连续且sharp；3）小批量大小随迭代t线性增长，步长α=O(T^{-1/2})，收敛率中隐藏对数因子；4）算法需在每次迭代检测非退化条件，可能增加开销；5）限制优化器为p×M梯度矩阵，未考虑高维模型或结构化先验，且只针对经验目标，未讨论泛化界。"
+      },
+      "affiliations": [
+        "University of Rochester"
+      ],
+      "affiliations_text": "University of Rochester",
+      "score": 4.460791600470443,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2607.15330v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715330v1-xiaomi-robotics-1-scaling-vision-language-action-models-with-over-100k-hours-of-real-world-trajectories",
+      "source": "arxiv",
+      "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+      "authors": [
+        "Xiaomi Robotics Team",
+        "Jun Guo",
+        "Piaopiao Jin",
+        "Jason Li",
+        "Peiyan Li",
+        "Yingyan Li",
+        "Futeng Liu",
+        "Wanli Peng",
+        "Optimus Qin",
+        "Yifei Su",
+        "Nan Sun",
+        "Qiao Sun",
+        "Runze Suo",
+        "Heyun Wang",
+        "Yunhong Wang",
+        "Rujie Wu",
+        "Caoyu Xia",
+        "Lina Zhang",
+        "Jack Zhao",
+        "Guoliang Chen",
+        "Wenlong Chen",
+        "Xinze He",
+        "Bin Li",
+        "Qing Li",
+        "Zhuorong Li",
+        "Heng Qu",
+        "Wenxuan Song",
+        "Diyun Xiang",
+        "Yifan Xie",
+        "Peiran Xu",
+        "Hangjun Ye",
+        "Wen Ye",
+        "Han Zhao",
+        "Quanyun Zhou"
+      ],
+      "authors_text": "Xiaomi Robotics Team, Jun Guo, Piaopiao Jin, Jason Li, Peiyan Li, Yingyan Li, Futeng Liu, Wanli Peng, Optimus Qin, Yifei Su, Nan Sun, Qiao Sun, Runze Suo, Heyun Wang, Yunhong Wang, Rujie Wu, Caoyu Xia, Lina Zhang, Jack Zhao, Guoliang Chen, Wenlong Chen, Xinze He, Bin Li, Qing Li, Zhuorong Li, Heng Qu, Wenxuan Song, Diyun Xiang, Yifan Xie, Peiran Xu, Hangjun Ye, Wen Ye, Han Zhao, Quanyun Zhou",
+      "abstract": "We present Xiaomi-Robotics-1, a foundational vision-language-action (VLA) model capable of (1) following diverse language instructions to perform a wide range of mobile manipulation tasks in unseen environments out-of-the-box, and (2) efficiently adapting to novel downstream tasks with minimal fine-tuning data. We propose a two-stage training recipe consisting of pre-training and post-training. During pre-training, we imbue the model with broad and generalizable action-generation capabilities by training on over 100k hours of real-world manipulation trajectories collected via UMI devices. Crucially, we develop a scalable auto-labeling pipeline that annotates trajectory clips with natural languages describing scene state transitions, providing rich and precise conditioning for action learning. During post-training, we aim to align these capabilities with robot embodiments and imperative instructions that humans naturally use to prompt robots. Extensive experiments demonstrate strong scaling behavior. Xiaomi-Robotics-1 consistently improves with increased data scales and model sizes during pre-training. This scaling behavior directly transfers to post-training, where a stronger pre-training model yields better out-of-the-box real-robot performance in unseen environments. Furthermore, Xiaomi-Robotics-1 serves as a strong robot foundation policy that can be efficiently fine-tuned on complex, dexterous tasks with high data efficiency. Across multiple simulation benchmarks, Xiaomi-Robotics-1 outperforms state-of-the-art methods. Notably, it establishes a new state-of-the-art with a 57.6% success rate on RoboCasa365, surpassing the previous best of 46.6%. Furthermore, it achieves an average score of 20.07 on RoboDojo, significantly outperforming the prior state-of-the-art (13.07). Code and model checkpoints will be released. Project page: https://robotics.xiaomi.com/xiaomi-robotics-1.html",
+      "url": "http://arxiv.org/abs/2607.15330v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15330v1",
+      "tldr": "Xiaomi-Robotics-1 is a foundational vision-language-action model trained on over 100k hours of real-world trajectories that achieves strong scaling behavior and state-of-the-art performance across multiple mobile manipulation benchmarks through a two-stage pre-training and post-training recipe.",
+      "detailed_reading": {
+        "motivation": "现有机器人策略受限于真实世界中数据采集的瓶颈，手动遥操作数据收集缓慢且缺乏多样性，难以像大语言模型那样通过规模化训练获得通用和可泛化的能力。为突破这一瓶颈，需要构建大规模、多样化的真实世界操作轨迹数据集，并设计两阶段训练方法，使模型既能零样本执行未见环境中的多种任务，又能高效微调适应新任务。",
+        "method": "使用UMI手持夹爪在多种场景（家庭、商业、工业、户外等）中收集超过10万小时的真实操作轨迹。开发自动标注流水线：将轨迹切分为等长片段，利用预训练视觉语言模型Qwen3.5-27B自动标注片段中场景状态变化的自然语言描述，并通过生产者-消费者流水线加速约两周完成全量标注。模型采用Mixture-of-Transformers架构：一个预训练的Qwen3-VL视觉语言模型（VLM）负责编码观测和语言指令，并通过Choice Policies机制直接生成候选动作块以加速收敛；一个扩散Transformer（DiT）以VLM的KV缓存和机器人状态为条件，通过流匹配（flow matching）预测动作块。训练分两阶段：预训练阶段在UMI轨迹数据上联合优化流匹配损失、VLM回归损失（L1损失+得分回归）和视觉语言数据的下一词预测损失（权重λ=0.1），采样比为1:9；后训练阶段使用约1万小时的跨本体数据（包括7200小时自采移动机械臂/双臂数据、1000小时人工标注UMI数据及开源数据集），将模型输出的动作从UMI夹爪动作对齐到机器人本体动作，并将语言条件从状态转换描述转换为人类常用的指令式语言。推理时，从随机噪声初始化动作块，通过5步欧拉积分（步长0.2）进行去噪。",
+        "result": "预训练阶段：模型验证动作误差随数据规模和模型大小增加而持续降低，体现了良好的缩放行为。后训练阶段：更强的预训练模型在未知环境中的零样本真实机器人评估中成功率更高。在模拟基准上：RoboCasa365上达到57.6%成功率（此前最佳46.6%），RoboDojo平均得分20.07（此前最佳13.07），在RoboCasa和VLABench上也超越先前最先进方法。在多个复杂灵巧任务上微调后平均成功率达75%。",
+        "conclusion": "通过两阶段训练（预训练+后训练）在超10万小时真实操作轨迹上训练的Xiaomi-Robotics-1模型，实现了零样本泛化到未见环境、高效微调适应新任务，并在多个模拟基准上取得最先进结果。该工作验证了机器人领域规模化训练的有效性，表明继续扩大数据和模型规模有望进一步提升性能。",
+        "key_details": "自动标注流水线采用生产者-消费者架构，CPU工作线程负责切分片段到内存文件系统，客户端线程并行发送数百个标注请求，极大提升效率。训练时视觉语言数据与UMI轨迹的采样比为1:9，VLM与DiT之间在注意力计算上排除了VLM的动作相关token，避免DiT直接拷贝VLM输出而产生捷径。流匹配时间步τ服从Beta(1.5,1)分布，更侧重噪声较大的时间步训练；推理步长Δτ=0.2。损失中λ=0.1。模型参数规模有三种变体：2.6B、5.1B、10.5B。局限性：UMI数据与真实机器人本体存在域差异，自动标注质量依赖VLM能力，且后训练阶段仍需一定量人工标注数据。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.316080343246557,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.15395v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715395v1-neurocommitssm-decision-centric-shared-autonomy-for-safe-assistive-manipulation-via-eeg-emg-et-commit-readiness",
+      "source": "arxiv",
+      "title": "NeuroCommitSSM: Decision-Centric Shared Autonomy for Safe Assistive Manipulation via EEG-EMG-ET Commit Readiness",
+      "authors": [
+        "Tipu Sultan",
+        "Param Sangani",
+        "Kody Cool",
+        "Pascal Sikorski",
+        "Guangping Liu",
+        "Hadi Akbarpour",
+        "Madi Babaiasl"
+      ],
+      "authors_text": "Tipu Sultan, Param Sangani, Kody Cool, Pascal Sikorski, Guangping Liu, Hadi Akbarpour, Madi Babaiasl",
+      "abstract": "We present NeuroCommitSSM, a decision-centric framework that models when to execute, not just what to do, for safe commit-to-execute control in assistive robotic manipulation. NeuroCommitSSM predicts a continuous commit-readiness score c_t in [0,1] from synchronized electroencephalography (EEG), electromyography (EMG), and eye-tracking (ET), and converts it into discrete commit events through dwell and hysteresis filtering. A three-state finite-state supervisor, HOLD-ASSIST-COMMIT (HAC), gates execution by requiring both a sustained commit-readiness signal from the neural model and real-time perception and robot-state feasibility, including target visibility, inverse kinematics solvability, and collision-free planning, before initiating motion. We evaluate the framework on N=32 subjects performing five activities of daily living (ADL) tasks aligned with the International Classification of Functioning, Disability and Health (ICF), using leave-one-subject-out (LOSO) cross-validation and seven sensor-dropout scenarios (S0-S6). NeuroCommitSSM achieves 0.950 action-balanced accuracy with 0.75 false commit events per 1000 REST windows (FP/1k REST), and maintains low false commits and stable state transitions under sensor loss. For example, in the EEG-only condition, it achieves 0.785 balanced accuracy and 0.29 FP/1k REST, whereas the Temporal Convolutional Network baseline produces 99.95 FP/1k REST under the same condition. Hardware-in-the-loop (HIL) validation on a Kinova Gen3 arm shows that feasibility-checked execution reduces false starts and decision instability without sacrificing task success. Supplementary materials, including code, datasets, videos, and additional analyses, are available at https://madibabaiasl.github.io/NeuroCommitSSM/.",
+      "url": "http://arxiv.org/abs/2607.15395v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15395v1",
+      "tldr": "NeuroCommitSSM presents a decision-centric shared autonomy framework that predicts a continuous commit-readiness score from synchronized EEG, EMG, and eye-tracking signals, and gates execution through a HOLD-ASSIST-COMMIT supervisor with dwell/hysteresis filtering and real-time feasibility checks, achieving low false activations and stable state transitions under sensor dropout for safe assistive robotic manipulation.",
+      "detailed_reading": {
+        "motivation": "现有辅助机器人共享控制系统主要关注解码用户意图（what），但缺乏对执行时机（when）的安全建模，导致静止期错误触发（false triggers）和决策不稳定问题。多模态生理信号（EEG/EMG/ET）的非平稳性与高被试差异性使得将意图置信度直接阈值化触发动作不可靠，需要一种决策中心的框架来最小化误激活并融合机器人可行性检查。",
+        "method": "构建同步EEG/EMG/ET数据集（N=32被试，5个ICF对齐ADL任务），通过隐半马尔科夫模型（HSMM）标注REST/ACTION窗口。NeuroCommitSSM使用神经生理学感知编码器和熵正则化多模态融合预测连续commit分数c_t∈[0,1]，再经驻留/迟滞滤波（dwell/hysteresis）转换为离散commit事件。三状态有限状态机HAC（HOLD-ASSIST-COMMIT）要求同时满足持续commit信号和实时感知/机器人状态可行性（目标可见性、逆运动学可解性、无碰撞规划）才执行动作。采用留一被试交叉验证（LOSO）和7种传感器丢失场景（S0-S6）评估。",
+        "result": "NeuroCommitSSM在全部传感器下达到0.950动作平衡准确率，每1000个REST窗口仅0.75次错误commit事件（FP/1k REST）。传感器丢失时仍保持低误报（如仅EEG：0.785平衡准确率，0.29 FP/1k REST），而时序卷积网络（TCN）基线在相同条件下产生99.95 FP/1k REST。在Kinova Gen3机械臂的硬件在环（HIL）验证显示，可行性检查的执行减少了误启动和决策抖动，且不牺牲任务成功率。",
+        "conclusion": "NeuroCommitSSM通过决策中心的commit感知框架显著降低了静止期错误触发和状态切换不稳定性，将意图解码与机器人可行性检查统一在HAC监督器中，实现了安全辅助操作。同时发布了首个同步EEG/EMG/ET的ICF对齐ADL意图解码数据集及LOSO基准，为鲁棒共享控制提供了新范式。",
+        "key_details": "数据方面：32名被试（男性22人，女性10人，年龄18-46岁），完成5个ICF对齐ADL任务（时钟、瓶子、风扇、植物、挥手），每会话90-120分钟。建模使用HSMM标注REST/ACTION窗口，熵正则化融合处理传感器丢失，驻留/迟滞滤波参数需校准（论文中未明确具体阈值）。HAC监督器包含HOLD/ASSIST/COMMIT状态，可行性检查依赖无标记RGB-D感知管道（RANSAC几何估计），无先验CAD模型。评估指标以FP/1k REST和flaps/min为核心，LOSO交叉验证保证被试间泛化。局限性：实验为实验室仿真环境，未在真实残疾用户及长期使用中验证；传感器丢失场景为人工模拟，真实环境噪声可能更复杂；计算复杂度未详细报告。"
+      },
+      "affiliations": [
+        "Saint Louis University"
+      ],
+      "affiliations_text": "Saint Louis University",
+      "score": 4.083143980204299,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.15449v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715449v1-relevant-and-irrelevant-a-renormalization-group-analysis-of-transformer-attention",
+      "source": "arxiv",
+      "title": "Relevant and Irrelevant: A Renormalization Group Analysis of Transformer Attention",
+      "authors": [
+        "Parviz Haggi-Mani",
+        "Irina Rish"
+      ],
+      "authors_text": "Parviz Haggi-Mani, Irina Rish",
+      "abstract": "Using the language of Wilsonian renormalization group theory (RG), we treat the Transformer's attention mechanism as a perturbation of the trained MLP residual-stack fixed point and ask whether it constitutes a relevant, marginal, or irrelevant operator. We derive a fixed-point shift formula and obtain four testable predictions for the fixed-point geometry, effective rank profile, layer specificity, and perturbation decay spectrum. Testing these on synthetic Markov chain sequences with controlled correlation length, we find: (1) For large chains(long correlation), attention is strongly relevant: it closes a residual loss gap the MLP cannot bridge and drives a phase transition in representation space, with effective rank jumping above input dimensionality at layer 1 and stabilizing at a high-dimensional plateau. (2) For short chains(short correlation), attention is irrelevant: the Transformer converges to the same loss and fixed-point geometry as the MLP, though it contracts perturbations faster. (3) The transition is dominated by the first-layer head (L0H0), which accounts for more than 4 times the representational shift of any subsequent head, consistent with the prediction that the relevant operator acts before the MLP begins integrating out positional variation. (4) Perturbation decay experiments reveal a regime reversal: in the long correlation regime the Transformer selectively preserves slow Markov modes (5.4 times the dynamic range in decay length vs. 1.3 times for the MLP); in the short correlation regime it suppresses all modes faster than the MLP, with no spectral selectivity. Together, these results show that the relevance of attention is not a property of the architecture but of the spectral structure of the data-generating process, and that a first-order RG perturbation framework provides a predictive account of that difference.",
+      "url": "http://arxiv.org/abs/2607.15449v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15449v1",
+      "tldr": "Using renormalization group theory, this paper shows that the relevance of attention in Transformers is not a fixed architectural property but depends on the correlation length of the data, with attention acting as a relevant perturbation for long-range correlations and an irrelevant one for short-range correlations, as predicted by a first-order RG fixed-point shift formula.",
+      "detailed_reading": {
+        "motivation": "使用重正化群理论将Transformer的注意力机制视为对训练好的MLP残差堆栈固定点的微扰，探究注意力是相关、边缘还是无关算子，并检验其相关性是否取决于数据生成过程的谱结构。",
+        "method": "数据为来自马尔可夫链的合成序列，词汇大小16，通过参数α控制相关长度ξ（短ξ≈1.2，长ξ≈6.7），序列长度T=64，采用one-hot编码。模型包括纯MLP残差堆栈基线（无注意力，6层，隐藏维度4d，GELU激活，层归一化）和匹配的Transformer（在每层MLP前加预层归一化单头自注意力，无位置编码）。训练使用BERT风格掩码标记预测（15%掩码率），交叉熵损失，Adam优化器（学习率3e-4，批量32），训练10000步，每一步使用新序列。测量量为有效秩（基于奇异值谱熵）和核漂移（1-CKA）。理论推导固定点位移公式δ = -M*^{-1}(a+b)，获得四个可测试预测，通过比较MLP和Transformer在不同ξ下的测量量进行实验验证。",
+        "result": "长相关（长ξ）下注意力是强相关的：它弥补了MLP无法弥补的残差损失差距，并在表示空间中驱动相变，有效秩在第1层跳至高于输入维度并稳定在高维平台。短相关（短ξ）下注意力是无关的：Transformer收敛到与MLP相同的损失和固定点几何，但更快抑制微扰。层特异性实验表明第一层头（L0H0）占表示转变的4倍以上，相关算子在MLP开始整合位置变异之前起作用。微扰衰减实验显示长ξ下Transformer选择性地保留缓慢马尔可夫模式（衰减长度动态范围5.4倍 vs MLP的1.3倍）；短ξ下它比MLP更快地抑制所有模式，无光谱选择性。",
+        "conclusion": "注意力的相关性不是架构属性，而是数据生成过程谱结构的属性。一阶RG微扰框架能预测这种差异，表明该理论方法可用于理解Transformer表示动力学。",
+        "key_details": "数据使用马尔可夫链合成，通过α控制相关长度；模型超参为嵌入维度64，6层，1头；训练使用掩码语言建模损失和Adam优化器；理论假设小位移和M*可逆，长ξ下可能接近分岔点；无位置编码使注意力成为唯一新归纳偏置；局限性包括仅分析单头注意力和合成数据，真实Transformer涉及复杂交互。"
+      },
+      "affiliations": [
+        "Mila -- Quebec AI Institute",
+        "Université de Montréal"
+      ],
+      "affiliations_text": "Mila -- Quebec AI Institute, Université de Montréal",
+      "score": 4.075008128630657,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.15440v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715440v1-stochastic-reset-pathfinding-path-level-regret-for-cascading-bandits-over-graph-paths",
+      "source": "arxiv",
+      "title": "Stochastic Reset Pathfinding: Path-Level Regret for Cascading Bandits over Graph Paths",
+      "authors": [
+        "Guni Sharon",
+        "Wei Zhang"
+      ],
+      "authors_text": "Guni Sharon, Wei Zhang",
+      "abstract": "We introduce Stochastic Reset Pathfinding (SRP), an episodic learning problem on a known directed graph with unknown stationary edge success probabilities. In each episode, the agent commits to a source-to-goal path, and any edge failure during execution resets it to the source. SRP captures settings such as entanglement distribution in quantum repeater networks, payment routing on the Lightning Network, and delivery in unreliable mesh networks. We show that the global-reset structure makes the optimal policy open-loop, placing SRP within the combinatorial cascading bandit (CCB) framework. We propose a Log-Dijkstra meta-algorithm with UCB (PathUCB) and Thompson Sampling (PathTS) instantiations. Our main technical result is a path-level regret bound for PathUCB that decomposes regret over suboptimal paths via a per-path complexity C(pi) combining each edge's prefix and suffix reliability. The bound is complementary to the edge-level CCB bound and more informative on structured graphs with polynomially many source-to-goal paths. Experiments on quantum-network, layered-DAG, grid-world, and Erdos-Renyi domains support the theory and show that PathTS typically achieves the best empirical performance among the algorithms tested. We then exhibit an adversarial instance on which PathTS fails to converge, consistent with a known exponential obstruction for combinatorial Thompson Sampling on multiplicative-reward problems. We recommend PathTS as the practical default while cautioning that adversarial instances exist.",
+      "url": "http://arxiv.org/abs/2607.15440v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15440v1",
+      "tldr": "This paper introduces Stochastic Reset Pathfinding (SRP), an episodic learning problem on a known graph with unknown edge success probabilities where any failure resets to the source, proposes Log-Dijkstra-based UCB and Thompson Sampling algorithms, and proves a path-level regret bound for PathUCB that decomposes regret via per-path complexity.",
+      "detailed_reading": {
+        "motivation": "许多现实世界的网络决策问题（如量子中继网络中的纠缠分发、闪电网络中的支付路由、不可靠mesh网络中的投递）要求代理遍历一个已知有向图，其中边的成功概率未知且静止，任何边失败都会导致代理从源节点重新开始。现有方法（如随机最短路径强化学习）因为全局重置结构使得最优策略是开环的而不适用，因此需要将问题建模为组合级联bandit并发展新的路径级遗憾分析。",
+        "method": "本文提出Log-Dijkstra元算法：在每个回合t，基于当前边成功概率估计值p̂_e(t)，使用Dijkstra算法在权重w_t(e) = -log p̂_e(t)上计算从源v_s到目标v_g的最短路径作为选择路径π_t；随后尝试遍历π_t，按顺序观察每条边的结果直到第一次失败或全部成功，并更新前K条边的估计。算法有两种实例：PathUCB采用UCB估计，初始设p̂_e=1，对已探索边使用clip(̄p_e + sqrt(ρ ln t / N_e), p_min, 1)以保持乐观；PathTS采用Beta-Bernoulli后验采样，从Beta(α_e, β_e)中采样后clip到p_min，默认先验为Beta(1,1)。元算法循环执行选择、遍历、更新过程，直至T个回合结束。",
+        "result": "主要理论结果是PathUCB的路径级遗憾界：R(T) ≤ ∑_{π∉Ψ^*} (C(π)^2 ln T) / Δ(π)，其中C(π)是路径复杂度，结合每条边的前缀可靠性（观测到该边的概率）和后缀可靠性（估计误差对后续边的影响），Δ(π)是路径π与最优路径的可靠性差距。实验在量子网络、分层有向无环图、网格世界和Erdos-Renyi随机图四个领域上进行，显示PathTS通常取得最佳经验性能，而PathUCB次之；但存在一个对抗实例使得PathTS线性遗憾，验证了组合Thompson Sampling在乘性奖励上的指数障碍。",
+        "conclusion": "本文形式化并解决了随机重置寻路问题，证明了开环策略的最优性，将其归入组合级联bandit框架，并设计出基于Log-Dijkstra的PathUCB和PathTS算法。PathUCB提供了新颖的路径级遗憾界，优于边级界；PathTS在实践中表现优异，但存在对抗脆弱性。推荐PathTS作为默认选择，同时建议用户注意其在对实例下的风险。",
+        "key_details": "关键细节包括：边成功概率下界p_min > 0确保权重有限；PathUCB探索参数ρ ≥ 2足够保证遗憾界；PathTS使用无信息Beta(1,1)先验，采样后下界裁剪到p_min作为安全网；路径复杂度C(π)依赖前缀可靠性和后缀影响，分解遗憾时考虑了观测概率和下游误差传播；算法的计算复杂度由Dijkstra主导，适合路径数量为多项式的图；局限性在于PathTS缺乏理论遗憾界且存在对抗失败实例，PathUCB的界保守且依赖p_min已知；实验中的对抗实例使用三路径构造，乘性奖励导致TS指数级探索困难。"
+      },
+      "affiliations": [
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Texas A&M University",
+      "score": 4.071217811854862,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.15322v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715322v1-a-distributed-cluster-economic-dispatch-scheme-for-cross-regional-microgrids-induced-by-well-designed-communication-weights",
+      "source": "arxiv",
+      "title": "A Distributed Cluster Economic Dispatch Scheme for Cross-regional Microgrids Induced by Well-designed Communication Weights",
+      "authors": [
+        "Yalin Zhang",
+        "Zhongxin Liu",
+        "Yulin Chen",
+        "Donglian Qi",
+        "Zengqiang Chen"
+      ],
+      "authors_text": "Yalin Zhang, Zhongxin Liu, Yulin Chen, Donglian Qi, Zengqiang Chen",
+      "abstract": "A large-scale microgrid typically consists of several cross-regional subgrids aggregated by a virtual power plant (VPP). However, current consensus based schemes can-not guarantee the feature of differential demand between subgrids. Thus, distributed cluster consensus control induced by communication weights is investigated in this paper to solve the ED problem of a large-scale microgrid, which can achieve the expected cluster via well-designed communication weights. A communication weight matrix design method for a directed and connected graph based on eigenvector centrality is designed, which enables the adjacency matrix of the communication network to have a given leading eigenvector and allows agents in each cluster to have the same eigenvector center value. Based on this, a distributed cluster ED scheme, namely a leader-follower cluster consensus controller, is designed to drive marginal cost (MC) to achieve multiconsensus, thus allocating power among DGs. In addition, the power deficit of each subgrid collected by a VPP can be allocated to utility grids according to predetermined ratios, thus maintaining power supply-demand balance of each subgrid. For this scheme, it should be emphasized that the weighted network used is directed and connected; meanwhile, leader information only can be accessed by a few clusters. Correspondingly, relevant simulations are attached to verify the effectiveness of the designed scheme.",
+      "url": "http://arxiv.org/abs/2607.15322v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15322v1",
+      "tldr": "This paper proposes a distributed cluster economic dispatch scheme for cross-regional microgrids that uses eigenvector centrality to design communication weights, enabling marginal cost multi-consensus and satisfying differential power demand ratios among subgrids.",
+      "detailed_reading": {
+        "motivation": "当前基于共识的微电网经济调度方案无法保证跨区域子电网之间的差异化需求，尤其是各子电网对不同类型公用事业电网的电价和功率比例需求不同。因此，需要研究一种分布式集群经济调度方案，通过设计通信权重来实现子电网间的差异化调度，满足各子电网的独特需求。",
+        "method": "首先，基于特征向量中心性设计有向连通图的通信权重矩阵，使每个集群内的智能体具有相同的特征向量中心值，从而诱导出预期的集群结构。其次，设计领导者-跟随者集群共识控制器，其中领导者接收虚拟电厂提供的期望电价信息，跟随者与邻居交换边际成本信息，驱动各子电网内所有分布式发电单元的边际成本收敛到该子电网对应的电价凸组合值。同时，构造功率缺额估计方案，通过分布式多共识控制器将子电网的功率缺额按虚拟电厂预设的比例分配给各公用事业电网，维持供需平衡。整个方案采用有向连通加权网络，领导者信息仅由少数集群访问。",
+        "result": "仿真验证了所提方案的有效性：在包含多个子电网和公用事业电网的大规模微电网系统中，各子电网内分布式发电单元的边际成本实现了多共识，收敛到虚拟电厂设定的不同电价值；功率缺额按预设比例在公用事业电网间精确分配，保证了各子电网的功率供需平衡。与现有共识方案相比，本方案成功实现了子电网间的差异化经济调度。",
+        "conclusion": "本文针对虚拟电厂聚合的大规模跨区域微电网，提出了一种基于通信权重设计的分布式集群经济调度方案。该方案利用特征向量中心性设计通信权重矩阵，结合领导者-跟随者控制器，有效解决了边际成本多共识和功率缺额按比例分配问题。仿真结果证明了方案的有效性，为含虚拟电厂的跨区域微电网集群经济调度提供了新的解决方案。",
+        "key_details": "关键细节包括：1) 通信网络为有向连通图，通过特征向量中心性设计权重矩阵，使得各集群内智能体具有相同的特征向量中心值，这是实现多共识的基础；2) 控制器采用领导者-跟随者结构，领导者接收虚拟电厂的期望电价信号，仅少数集群需要直接接收；3) 功率缺额估计采用分布式平均一致性算法，分配比例由虚拟电厂根据子电网特性预先设定；4) 方案假设通信拓扑固定且已知，虚拟电厂仅与部分集群通信；5) 局限性在于未考虑通信时延、拓扑切换或节点故障等实际情况，未来可考虑鲁棒性和自适应扩展。"
+      },
+      "affiliations": [
+        "Nankai University",
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Nankai University, Zhejiang University",
+      "score": 4.058133261317873,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.15323v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715323v1-distributed-cooperative-control-of-besss-in-ac-and-dc-hybrid-microgrid-and-its-energy-internet-paradigm",
+      "source": "arxiv",
+      "title": "Distributed Cooperative Control of BESSs in AC and DC Hybrid Microgrid and Its Energy Internet Paradigm",
+      "authors": [
+        "Yalin Zhang",
+        "Zhongxin Liu",
+        "Zengqiang Chen"
+      ],
+      "authors_text": "Yalin Zhang, Zhongxin Liu, Zengqiang Chen",
+      "abstract": "An AC and DC hybrid microgrid, which inherits advantages of AC and DC microgrids and discards some disadvantages, is considered to be the most promising power network structure and gradually applied in the community. Usually, the AC subgrid and the DC subgrid are interconnected by Bidirectional Interlink Power Converters (BILPCs). Besides, in view of the different droop characteristics of AC subgrid and the DC subgrid, it is necessary to design a suitable distributed secondary controller for an AC and DC hybrid microgrid. Accordingly, this paper proposes a flexible and scalable distributed control framework for an AC and DC hybrid battery energy storage system (ADHB) with BILPCs in an Energy Internet (EI) paradigm. An ADHB governed by multi agent systems via a cloud server can reach the State-of-Charge balance, proportional power sharing, frequency and voltage restoration. The proposed control framework provides the group play-and-plug by adding or removing an inter-MASs interaction link. For a single BILPC in an ADHB, active/reactive power, frequency and voltage are adjusted by an AC BESS. For the parallel BILPCs in EI, a decentralized secondary control scheme is proposed. Communication delay issues and stability are analysed. Then, the relevant simulation results verify the correctness of the proposed scheme.",
+      "url": "http://arxiv.org/abs/2607.15323v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15323v1",
+      "tldr": "This paper proposes a flexible and scalable distributed control framework for AC/DC hybrid battery energy storage systems in an Energy Internet paradigm, enabling state-of-charge balance, proportional power sharing, and frequency/voltage restoration through multi-agent systems with cloud server support.",
+      "detailed_reading": {
+        "motivation": "现有AC/DC混合微电网控制方案缺乏对大尺度集群的可扩展灵活解决方案，且多数二级控制器需与实体位于同一位置，无法实现远程控制。本文旨在设计一种基于云服务器的分布式远程控制框架，以实现异构BESS的SoC均衡、功率比例分配和频率电压恢复，并支持组即插即拔。",
+        "method": "提出一种基于多智能体系统（MAS）的分布式二级控制框架，通过云服务器远程管理AC/DC混合BESS（ADHB）。框架中，每个BESS对应一个智能体，采用有向通信图交换状态信息。将AC和DC BESS的下垂控制简化为动力学模型，并引入BILPC作为子网互联设备。控制目标包括SoC平衡、有功/无功比例分配、频率/电压恢复。对于单个BILPC，通过AC BESS调节有功/无功功率、频率和电压；对于并行BILPC，提出分散式二级控制方案，利用AC子网状态变量调节。分析了通信延迟和稳定性。",
+        "result": "仿真结果验证了所提分布式控制框架的正确性。在异构AC/DC混合BESS场景下，实现了所有电池的SoC均衡、子网内外的比例功率分配以及频率和电压恢复至参考值。该方案支持基于组的即插即拔，通过添加或移除MAS间交互链路可灵活扩展。",
+        "conclusion": "本文提出的分布式协同控制框架为AC/DC混合BESS在能源互联网范式下的远程管理提供了有效方案。该框架具有灵活性和可扩展性，能够处理异构电池组，实现多目标控制，并支持组即插即拔。未来可进一步研究通信延迟对系统稳定性的影响。",
+        "key_details": "数据方面，每个BESS的输入包括SoC、有功/无功功率、频率和电压测量值，控制输出为参考频率和电压。先验假设所有BESS为异构，且下垂增益与容量相关。损失函数隐含于控制目标中，通过分布式一致性协议实现。超参数包括通信拓扑、耦合增益、延迟上界。复杂度方面，框架为分布式，可扩展至大规模集群。局限性在于依赖通信网络，实际通信延迟和丢包可能影响性能，且未考虑网络攻击等安全性问题。"
+      },
+      "affiliations": [
+        "Nankai University"
+      ],
+      "affiliations_text": "Nankai University",
+      "score": 4.005789466123071,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.15420v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/20/260715420v1-harnessing-gpu-acceleration-in-large-scale-process-optimization",
+      "source": "arxiv",
+      "title": "Harnessing GPU Acceleration in Large-Scale Process Optimization",
+      "authors": [
+        "Boxun Huang",
+        "David Y. Shu",
+        "Michel Schanen",
+        "Mihai Anitescu",
+        "Rahul Gandhi",
+        "Sungho Shin"
+      ],
+      "authors_text": "Boxun Huang, David Y. Shu, Michel Schanen, Mihai Anitescu, Rahul Gandhi, Sungho Shin",
+      "abstract": "This paper presents a proof-of-concept workflow for equation-oriented process optimization that runs entirely on a GPU. Process optimization models often incorporate complex interconnected unit operations, dynamics, and uncertainties, resulting in large nonlinear programs that can be computationally demanding for conventional CPU-based solvers. Although emerging GPU-based solvers offer substantial computational benefits, their application to process optimization has been limited by the lack of GPU-compatible process modeling tools. We address this gap by prototyping the GPU-compatible process optimization models using an existing GPU-capable optimization software stack, including ExaModels (algebraic modeling system), MadNLP (optimization solver), and cuDSS (linear solver). ExaModels formulates the process optimization problem in a GPU-compatible way by exposing its repeated algebraic structure, while MadNLP and cuDSS solve the resulting nonlinear program on the GPU. This workflow is demonstrated on a CO2 absorber design problem under feed uncertainty, in which a shared column diameter is minimized subject to equilibrium and hydraulic constraints in all scenarios. For the largest case with 5,000 scenarios and 1.5 million variables, the GPU workflow achieves a speedup of approximately 21\\times over a single-threaded CPU baseline using JuMP, Ipopt, and MA57.",
+      "url": "http://arxiv.org/abs/2607.15420v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15420v1",
+      "tldr": "This paper demonstrates a proof-of-concept GPU-resident workflow for equation-oriented process optimization, achieving a 21× speedup over CPU solvers on a large-scale CO2 absorber design problem under feed uncertainty.",
+      "detailed_reading": {
+        "motivation": "大规模过程优化问题常因包含复杂互联单元操作、动态和不确定性而生成大型非线性规划，传统CPU求解器计算负担重。新兴GPU求解器虽有显著加速潜力，但缺乏GPU兼容的过程建模工具，因此需要开发全GPU驻留的工作流以填补这一技术空白。",
+        "method": "本文提出一种全GPU驻留的方程导向过程优化工作流，使用ExaModels.jl作为代数建模系统，通过生成器语法暴露重复的代数结构（如MESH方程）来构建GPU兼容的优化模型；然后利用MadNLP.jl作为优化求解器，cuDSS作为稀疏线性求解器，在NVIDIA H200 GPU上完成函数评估、自动微分、KKT系统组装和稀疏线性代数，避免CPU-GPU间频繁数据传输。案例为CO2吸收塔直径最小化问题，考虑进料不确定性，包含共享设计变量（塔径）和各场景下的阶段操作变量，约束包括物料平衡、相平衡、热量平衡、压力关系和水力学限制，模型规模随场景数线性增长，最大达150万变量和105万等式约束。",
+        "result": "在5000场景、约150万变量的最大案例中，GPU工作流（ExaModels/MadNLP/cuDSS）求解耗时为33.3秒，相比单线程CPU基线（JuMP/Ipopt/MA57）的695.5秒获得约20.9倍加速，相比CPU版ExaModels/MadNLP/MA57的707.8秒获得约21.3倍加速。迭代次数相近（例如5000场景下GPU迭代81次，CPU JuMP/Ipopt迭代80次），表明加速主要归因于更低的每迭代计算成本。",
+        "conclusion": "本文证明了全GPU驻留工作流在基于场景的不确定性过程优化中的可行性和可扩展性。通过暴露MESH约束的重复结构，GPU加速在足够大的场景集下能够超越CPU单线程性能，实现数量级加速。未来工作将扩展到更详细的吸收塔模型和完整流程，并进一步利用GPU中的场景块结构优化KKT系统求解。",
+        "key_details": "数据来源：从7个实测基线案例通过随机凸组合生成场景，所有场景位于测量凸包内。先验假设：气相为理想气体混合物，液相为理想液体混合物，水-汽平衡使用拉乌尔定律，CO2-汽平衡使用亨利定律，温度依赖的平衡常数采用Kent-Eisenberg相关性。目标函数：最小化共享塔径。超参数：CPU运行采用单线程、单BLAS线程，Julia 1.12.1，CUDA v6.1.0，求解器容忍度均为10⁻⁸。复杂度：问题规模随场景数|Ω|线性增长，每个场景引入约300个变量和210个等式约束（基于10级平衡级模型）。局限性：小场景集（如|Ω|=1或10）时GPU固定启动开销占比大，未体现加速；目前仅针对原型吸收塔问题，尚未推广至完整流程或多组件详细模型。"
+      },
+      "affiliations": [
+        "Argonne National Laboratory",
+        "Massachusetts Institute of Technology",
+        "Shell Technology Center"
+      ],
+      "affiliations_text": "Argonne National Laboratory, Massachusetts Institute of Technology, Shell Technology Center",
+      "score": 3.9813927325840663,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.15456v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715456v1-looped-latent-attention-cross-loop-kv-compression-for-looped-transformers",
+      "source": "arxiv",
+      "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
+      "authors": [
+        "James O' Neill",
+        "Fergal Reid"
+      ],
+      "authors_text": "James O' Neill, Fergal Reid",
+      "abstract": "Looped, weight-tied Transformers reduce parameters by reusing a block, but decoding still stores a separate K/V cache for every recurrence step. We show that this loop-indexed cache is highly structured. For a fixed token, layer and head, K/V vectors trace a short low-rank trajectory across loops, while the head and layer axes remain much flatter. We introduce Looped Latent Attention (LLA), a post-training cache codec that stores compact K and V latents and reconstructs loop-specific K/V vectors only when attention reads them. The default per-head codec compresses recurrence, while LLA-2D also folds heads into one latent for the extreme-compression regime. The codec is initialized from SVD of teacher activations and refined with KL and attention-output distillation. At matched cache budget, per-head LLA outperforms head-axis MLA, cross-layer sharing, KV quantization and final-loop reuse, showing that the recurrent cache is low-rank but not safely collapsible to a single state. The same axis advantage holds on Ouro-2.6B-Thinking and transfers to Huginn-3.5B, where an SVD codec remains near-lossless to 32x in decoder-independent evaluation. The cache reduction is exact. On one H200, the latent-store path increases measured Ouro-1.4B batch capacity at 4k context from 32 to 768 sequences at 21.3x compression. For long math rollouts, on-policy refinement on student-generated prefixes raises MATH-500 at 4x from 0.43 to 0.66 and reduces no-answer generations.",
+      "url": "http://arxiv.org/abs/2607.15456v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15456v1",
+      "tldr": "Looped Latent Attention (LLA) compresses the loop-indexed KV cache of weight-tied Transformers by exploiting its low-rank structure across recurrent steps, achieving high compression ratios that outperform head, layer, and precision baselines.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8257025373208937,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.15313v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715313v1-position-quantum-program-generation-must-prioritize-validity-over-probabilistic-scaling",
+      "source": "arxiv",
+      "title": "Position: Quantum Program Generation Must Prioritize Validity Over Probabilistic Scaling",
+      "authors": [
+        "Junhao Song",
+        "Yu Zhou",
+        "William Knottenbelt",
+        "Yudong Cao"
+      ],
+      "authors_text": "Junhao Song, Yu Zhou, William Knottenbelt, Yudong Cao",
+      "abstract": "The scaling hypothesis assumes that increasing model parameters yields emergent reasoning capabilities. This position paper argues that applying this probabilistic paradigm to generic quantum circuit synthesis is a directional error. Unlike natural languages, quantum circuits require strict adherence to mathematical constraints that manifest a significant syntax-semantics gap. Training on unverified quantum programs means that models learn syntax but fail to capture the physical semantics of the Hilbert space. Since the valid subset of circuit designs decays exponentially with the number of qubits, post-hoc filtering is mathematically intractable. We propose a pivot from human-centric copilots to verifier-centric agents. We integrate hierarchical constraints, topological masks, and symbolic proxies directly into generation. Our analysis suggests that scale alone cannot bridge the validity gap. Verification-aware architectures offer a viable path for modular quantum program generation. These considerations point toward generation methods that encode task-specific rules of quantum information, rather than relying on imitation alone.",
+      "url": "http://arxiv.org/abs/2607.15313v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15313v1",
+      "tldr": "This position paper argues that quantum program generation must prioritize validity over probabilistic scaling, as the exponential sparsity of valid circuits and syntax-semantics gap make post-hoc filtering intractable, necessitating verifier-centric generation architectures.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.641231439871881,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.15421v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715421v1-qzach-vit-quantization-aware-intrinsic-explanations-with-recursive-attribution-stabilized-optimization",
+      "source": "arxiv",
+      "title": "qZACH-ViT: Quantization-Aware Intrinsic Explanations with Recursive Attribution-Stabilized Optimization",
+      "authors": [
+        "Athanasios Angelakis"
+      ],
+      "authors_text": "Athanasios Angelakis",
+      "abstract": "Compact medical-image classifiers need efficiency and interpretable evidence, yet these goals are often addressed separately. We introduce qZACH-ViT, a quantization-aware extension of the zero-token (CLS-token-free), position-free ZACH-ViT backbone with recursive intrinsic patch-level class evidence. We also introduce Recursive Attribution-Stabilized Optimization (RASO), which norm-matches classification and attribution gradients and removes attribution components that conflict with classification. We evaluate four controlled conditions on seven MedMNIST datasets using 50 training images per class and ten fixed seeds, completing 280 runs. All 210 qZACH-ViT checkpoints are converted to executable mixed-precision ONNX INT8 graphs containing 16 signed INT8 MatMulInteger projections with INT32 accumulation. Deployed mixed-precision INT8 qZACH-ViT with Adam improves the FP32 ZACH-ViT baseline mean on all seven datasets, with a mean paired gain of 0.0313 in the dataset-specific primary metric; qZACH-ViT with RASO yields a mean gain of 0.0368. Across 964,920 source-to-INT8 test comparisons, prediction agreement is 99.9751\\%, with a mean absolute primary-metric change of 0.000133 and a maximum of 0.004386. Across 3,600 matched intrinsic maps, mean cosine similarity is 0.999955, mean rank correlation is 0.9944, and mean top-10\\% overlap is 0.9692. ONNX artifacts are 70.0\\% smaller than source checkpoints and provide $1.41\\times$ and $2.39\\times$ end-to-end CPU speedups with one and four threads. RASO significantly reduces sufficiency error and improves input-noise stability over Adam with the same attribution loss, but does not dominate every predictive or explainable artificial intelligence (XAI) metric. These results establish qZACH-ViT as a deployable compact intrinsically explainable model and RASO as a targeted stability-oriented optimization procedure.",
+      "url": "http://arxiv.org/abs/2607.15421v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15421v1",
+      "tldr": "qZACH-ViT is a quantization-aware intrinsically explainable vision transformer that, combined with Recursive Attribution-Stabilized Optimization (RASO), improves accuracy over the FP32 baseline and achieves over 99.97% prediction agreement and high intrinsic map similarity when deployed as mixed-precision INT8 ONNX graphs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Amsterdam UMC",
+        "UniBw"
+      ],
+      "affiliations_text": "Amsterdam UMC, UniBw",
+      "score": 3.616805781359061,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.15460v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715460v1-stochastic-multi-segment-scheduling-of-variable-speed-pumped-storage-hydropower-for-energy-and-ancillary-services-provision",
+      "source": "arxiv",
+      "title": "Stochastic Multi-Segment Scheduling of Variable-Speed Pumped Storage Hydropower for Energy and Ancillary Services Provision",
+      "authors": [
+        "Kyung-bin Kwon",
+        "SangWoo Park",
+        "Dam Kim"
+      ],
+      "authors_text": "Kyung-bin Kwon, SangWoo Park, Dam Kim",
+      "abstract": "Variable-speed pumped storage hydropower (VS-PSH) offers long-duration energy storage alongside ancillary services in competitive electricity markets. However, its operation and scheduling are challenged by head-dependent nonlinearities, discrete mode transitions, and energy-continuity constraints. This study proposes a stochastic framework for VS-PSH that employs a multi-segment bidding structure to generate market-consistent energy and synchronized reserve offers in compliance with market rules. The framework explicitly incorporates physical constraints, including head-dependent capability limits, discrete pumping and generating modes, as well as state-of-charge (SoC) and head dynamics, within a stochastic mixed-integer linear programming (MILP) formulation. Price uncertainty is represented through a scenario-based modeling approach that scales base-case prices and allows variations in (dis)charging incentives. The stochastic MILP produces optimal energy and mode schedules that maintain feasible SoC trajectories across scenarios and ensure physically feasible operating strategies. Case studies under different levels of price variability demonstrate the operational feasibility and market applicability of the proposed framework, showing effective coordination between energy arbitrage and reserve provision under uncertainty. These results highlight the operational and economic value of VS-PSH as a grid-scale energy storage resource.",
+      "url": "http://arxiv.org/abs/2607.15460v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15460v1",
+      "tldr": "This paper proposes a stochastic multi-segment scheduling framework for variable-speed pumped storage hydropower that uses a mixed-integer linear programming formulation to co-optimize energy and synchronized reserve offers under price uncertainty while explicitly modeling head-dependent constraints, discrete modes, and state-of-charge dynamics.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chungnam National University",
+        "New Jersey Institute of Technology",
+        "Pacific Northwest National Laboratory"
+      ],
+      "affiliations_text": "Chungnam National University, New Jersey Institute of Technology, Pacific Northwest National Laboratory",
+      "score": 3.485040301593647,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.15422v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715422v1-robust-silicone-pour-casting-and-sensor-embedding-procedures-for-soft-robotic-actuators",
+      "source": "arxiv",
+      "title": "Robust Silicone Pour Casting and Sensor Embedding Procedures for Soft Robotic Actuators",
+      "authors": [
+        "Harshit Thakker",
+        "Paul Dela Cruz",
+        "Mostafa Mo. Massoud",
+        "Jacqueline Libby"
+      ],
+      "authors_text": "Harshit Thakker, Paul Dela Cruz, Mostafa Mo. Massoud, Jacqueline Libby",
+      "abstract": "Soft robots are well-suited for applications such as rehabilitation and surgery that require adaptable and safe interaction with their environment. However, the challenges of reproducible and scalable fabrication of soft robots limit their real-world deployment. Various fabrication methods have been introduced, but many are labor-intensive and prone to human error. Therefore, traditional two-part pour casting remains an attractive option. This paper presents procedures for robust, repeatable, and scalable fabrication of soft pneumatic actuators using two-part pour casting. The presented methods prevent internal cavity clogging and ensure air-tight sealing. Additionally, a robust sensor embedding procedure for thin-film flex sensors is presented, which allows for accurate and repeatable data acquisition. Finite Element Modeling (FEM) of the soft actuator is performed to analyze stress and deformation from internal pressure loadings. Pneumatic actuation experiments with PID pressure control are performed. Automated image processing is used to calibrate the embedded flex sensor to bending angle measurements. Staircase and sinusoidal profile actuation experiments validate the performance of the fabricated actuator. Angle response experiments for the staircase input show repeatable performance, and the sinusoidal input shows a small amount of hysteresis consistent with viscoelastic response to pneumatic actuation of soft actuators. Simulated and real-world bending angles show comparable response. These methods provide a repeatable and robust fabrication procedure, validated across two operators and 24 successful fabrications, along with benchmark simulations and experimental testing. These benchmarks will enable more widespread adoption of soft robotics.",
+      "url": "http://arxiv.org/abs/2607.15422v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15422v1",
+      "tldr": "This paper presents robust, repeatable, and scalable silicone pour casting and sensor embedding procedures for soft pneumatic actuators, validated across multiple operators and 24 successful fabrications.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stevens Institute of Technology"
+      ],
+      "affiliations_text": "Stevens Institute of Technology",
+      "score": 3.453835345275464,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.15433v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715433v1-from-hyperplanes-to-hyperellipsoids-characterizing-the-inherent-interpretability-of-linear-and-single-qubit-mixed-state-binary-classification-models",
+      "source": "arxiv",
+      "title": "From hyperplanes to hyperellipsoids: characterizing the inherent interpretability of linear and single-qubit mixed-state binary classification models",
+      "authors": [
+        "Kaitlin Gili"
+      ],
+      "authors_text": "Kaitlin Gili",
+      "abstract": "We characterize and compare the inherent interpretability offerings of a standard linear model with a single qubit mixed state model for the task of supervised binary classification. A side by side comparison reveals that a single qubit mixed state model for binary classification is just the ``ellipsoid version\" of standard linear model classification. More precisely, rather than learning a hyperplane to classify data, we learn a hyperellipsoid. We discuss the consequences of the geometric inductive biases of both models, as well as how each model contains a different feature importance inductive bias. This short characterization offers an accessible route to quantum machine learning (ML) ideas for readers who have zero background in quantum and are only familiar with linear classification in ML. In support of ML pedagogy, we encourage instructors to utilize this piece to smoothly introduce quantum ML ideas into the undergraduate ML classroom.",
+      "url": "http://arxiv.org/abs/2607.15433v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15433v1",
+      "tldr": "This paper shows that a single-qubit mixed-state binary classification model is essentially the \"ellipsoid version\" of a standard linear model, learning a hyperellipsoid instead of a hyperplane, and provides an accessible pedagogical bridge to quantum machine learning concepts.",
+      "detailed_reading": null,
+      "affiliations": [
+        "QodeX Quantum"
+      ],
+      "affiliations_text": "QodeX Quantum",
+      "score": 3.3110037584971086,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.15293v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715293v1-structure-of-the-circular-dyadic-convolution-error",
+      "source": "arxiv",
+      "title": "Structure of the Circular-Dyadic Convolution Error",
+      "authors": [
+        "Ben Fauber",
+        "Alireza Moradzadeh"
+      ],
+      "authors_text": "Ben Fauber, Alireza Moradzadeh",
+      "abstract": "Dyadic and circular convolution can both be computed in $O(N\\log N)$ time using the Hadamard transform and the FFT-computed discrete Fourier transform (DFT), respectively. The Hadamard transform is preferable for its real-valued sign flips, yet its substitution for the DFT introduces algebraic error. We present three complementary results that characterize this error. First, we identify exact error cancellation: two input and two output positions are universally error-free, and no reordering of the output can eliminate this error. Second, the error operator is nearly full rank, while its null space has only logarithmic dimension. Third, the expected error is governed by a single alignment scalar, with a closed-form expression obtained by averaging over random filters. In general, the substitution error asymptotically doubles the output energy, except for filters in the universal zero-error subspace, which incur no error. Collectively, these results show that the substitution error is structured, predictable, and governed by alignment.",
+      "url": "http://arxiv.org/abs/2607.15293v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15293v1",
+      "tldr": "The paper characterizes the substitution error when using the Hadamard transform in place of the FFT for convolution, showing that the error is structured, predictable, and governed by alignment, with universal zero-error positions and a nearly full-rank error operator.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NVIDIA"
+      ],
+      "affiliations_text": "NVIDIA",
+      "score": 3.2336270946348704,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.15430v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715430v1-six-sigma-quality-management-of-additive-manufacturing",
+      "source": "arxiv",
+      "title": "Six-sigma Quality Management of Additive Manufacturing",
+      "authors": [
+        "Hui Yang",
+        "Prahalad Rao",
+        "Timothy Simpson",
+        "Yan Lu",
+        "Paul Witherell",
+        "Abdalla R. Nassar",
+        "Edward Reutzel",
+        "Soundar Kumara"
+      ],
+      "authors_text": "Hui Yang, Prahalad Rao, Timothy Simpson, Yan Lu, Paul Witherell, Abdalla R. Nassar, Edward Reutzel, Soundar Kumara",
+      "abstract": "In this paper, we propose to design, develop, and implement the new DMAIC methodology for Six-Sigma quality management of AM. First, we define the specific quality challenges arising from AM layer-wise fabrication and mass customization (even one-of-a-kind production). Second, we present a review of AM metrology and sensing techniques, from materials through design, process, environment, to post-build inspection. Third, we contextualize a framework for realizing the full potential of data from AM systems, and emphasize the need for analytical methods and tools. We propose and delineate the utility of new data-driven analytical methods, including deep learning, machine learning, and network science, to characterize and model the interrelationships between engineering design, machine setting, process variability and final build quality. Fourth, we present the methodologies of ontology analytics, design of experiments (DOE) and simulation analysis for AM system improvements. In closing, new process control approaches are discussed to optimize the action plans, once an anomaly is detected, with specific consideration of lead time and energy consumption.",
+      "url": "http://arxiv.org/abs/2607.15430v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15430v1",
+      "tldr": "The paper proposes a novel DMAIC-based Six-Sigma quality management framework for additive manufacturing that integrates data-driven analytics, metrology, and process control to address challenges like layerwise fabrication and mass customization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Pennsylvania State University",
+        "National Institute of Standards and Technology",
+        "University of Nebraska–Lincoln"
+      ],
+      "affiliations_text": "The Pennsylvania State University, National Institute of Standards and Technology, University of Nebraska–Lincoln",
+      "score": 3.1744231153947453,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.15447v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715447v1-llm4ehr-aligning-clinical-time-series-with-medical-event-sequences-via-large-language-models",
+      "source": "arxiv",
+      "title": "LLM4EHR: Aligning Clinical Time Series with Medical Event Sequences via Large Language Models",
+      "authors": [
+        "Jingteng Li",
+        "Alexander Capstick",
+        "Louise Rigny",
+        "Iona Biggart",
+        "Neil J Sebire",
+        "Payam Barnaghi"
+      ],
+      "authors_text": "Jingteng Li, Alexander Capstick, Louise Rigny, Iona Biggart, Neil J Sebire, Payam Barnaghi",
+      "abstract": "Recent research in clinical machine learning, focusing on outcome predictions in intensive care unit (ICU), has shifted from bespoke supervised models to foundation models, utilising modern representation learning methods. Here, foundation models are pre-trained on mixtures of complex clinical data modalities, useful for various downstream tasks. Existing works often utilise Electronic Health Records (EHR) to provide rich and diverse patient observations to train clinical foundation models. However, existing methods do not sufficiently explore the shared temporal structures between clinical events and time series (TS) observations recorded in EHRs. This limitation potentially leads to less robust and adaptive clinical foundation models, resulting in reduced performance on downstream tasks. To fully exploit this temporal structure, we propose LLM4EHR, a new clinical foundation model trained on ICU EHR data. Combining domain adapted large language models with a transformer TS encoder, we pre-trained LLM4EHR by temporally aligning the EHR events and TS. For this, we propose a regularised contrastive objective to learn robust EHR TS representations conditioned on EHR event embeddings produced by the domain adapted LLM. Supported by an ablation study, we find that learnt EHR TS embeddings from LLM4EHR improve performance on various downstream clinical tasks with competitive performance. Further, we empirically demonstrate that LLM4EHR learns transferable clinical TS embeddings that can be deployed to new cohorts via k-shot adaptation. These findings provide a step towards building more generalisable and performant clinical foundation models.",
+      "url": "http://arxiv.org/abs/2607.15447v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15447v1",
+      "tldr": "LLM4EHR introduces a clinical foundation model that temporally aligns electronic health record (EHR) events and time series via a contrastive learning objective guided by a domain-adapted large language model, improving downstream task performance and cross-dataset transferability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UK Dementia Research Institute",
+        "University College London",
+        "Great Ormond Street Hospital",
+        "Imperial College London"
+      ],
+      "affiliations_text": "UK Dementia Research Institute, University College London, Great Ormond Street Hospital, Imperial College London",
+      "score": 3.146553179655382,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.15448v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715448v1-vtap-gripper-synergizing-fingertip-sensing-and-a-visuo-tactile-active-palm-for-dexterous-in-hand-manipulation",
+      "source": "arxiv",
+      "title": "VTAP Gripper: Synergizing Fingertip Sensing and a Visuo-Tactile Active Palm for Dexterous In-Hand Manipulation",
+      "authors": [
+        "Yuhao Zhou",
+        "Sheeraz Athar",
+        "Zhixian Hu",
+        "Binghao Huang",
+        "Yunzhu Li",
+        "Juan Wachs",
+        "Yu She"
+      ],
+      "authors_text": "Yuhao Zhou, Sheeraz Athar, Zhixian Hu, Binghao Huang, Yunzhu Li, Juan Wachs, Yu She",
+      "abstract": "This paper presents a tactile-reactive gripper that integrates a Visuo-Tactile Active Palm (VTAP) and compliant, reconfigurable fingers equipped with tactile array sensors. The design exploits structured finger-palm synergy and multi-modal perception to achieve both robust grasping and fine manipulation. The actuated bi-modal palm seamlessly combines long-range visual localization with contact-rich tactile feedback, substantially extending the system's manipulation capability. To bridge the embodiment gap between human hand motion and the heterogeneous three-finger structure, we further propose a staged, gesture-conditioned retargeting framework for dexterous teleoperation. Extensive experiments validate the system across a range of challenging tasks: reactive grasping of YCB and fragile objects, in-hand syringe reorientation and plunger actuation, singulation of clustered objects down to 3 mm in diameter, and vision-tactile peg-in-hole insertion. Results demonstrate that high manipulation performance can be achieved through coordinated finger-palm interaction and multi-modal sensing, without resorting to high degrees of freedom anthropomorphic designs. The VTAP gripper and its retargeting framework offer a practical reference architecture for dexterous gripper design, manipulation, and contact-rich data collection in support of learning-based approaches. Project webpage: https://yuhochau.github.io/vtap/.",
+      "url": "http://arxiv.org/abs/2607.15448v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15448v1",
+      "tldr": "The VTAP Gripper integrates a visuo-tactile active palm with compliant, tactile-sensor-equipped fingers and a staged retargeting framework to achieve robust grasping and fine in-hand manipulation through structured finger-palm synergy and multi-modal sensing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Purdue University",
+        "Columbia University"
+      ],
+      "affiliations_text": "Purdue University, Columbia University",
+      "score": 3.041166377944875,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.15394v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715394v1-a-transportable-threshold-based-framework-for-interpretable-classification-of-medical-data",
+      "source": "arxiv",
+      "title": "A Transportable Threshold-Based Framework for Interpretable Classification of Medical Data",
+      "authors": [
+        "Antony Garcia",
+        "Adrian Noriega",
+        "Gabrielle Britton",
+        "Xinming Huang"
+      ],
+      "authors_text": "Antony Garcia, Adrian Noriega, Gabrielle Britton, Xinming Huang",
+      "abstract": "Black-box models limit the adoption of artificial intelligence in medicine due to their lack of interpretability and reproducibility. We introduce a statistically grounded framework that provides fully interpretable, rule-based clinical classification using the Bernoulli Naïve Bayes (BNB) model. The method applies supervised $χ^2$-guided statistical binarization to continuous variables, identifying thresholds that maximize association with clinical outcomes within the training data. This transformation allows BNB to operate effectively on continuous medical data without sacrificing its inherent transparency. The approach was evaluated on three benchmark datasets, Pima Indians Diabetes, Wisconsin Breast Cancer, and Heart Failure Prediction, achieving area-under-the-curve (AUC) scores of 0.800 for the Pima analysis, 0.984 for Wisconsin Breast Cancer, and 0.919 for Heart Failure Prediction. In addition to discrimination, probabilistic reliability was assessed using leakage-safe cross-validated calibration analysis including Brier score, calibration intercept/slope, and post-hoc beta calibration, which improved probability calibration across datasets. These results suggest that a statistically interpretable framework can achieve performance comparable to more complex models while providing explicit, clinically meaningful decision rules and calibrated risk estimates. To illustrate this transparency concretely, a complete worked example demonstrates that model inference can be reproduced using only a reference table and basic arithmetic, without access to software or proprietary tools. This work offers a practical approach to supporting trustworthy and generalizable AI in real-world healthcare settings.",
+      "url": "http://arxiv.org/abs/2607.15394v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15394v1",
+      "tldr": "This paper presents a transportable, interpretable classification framework that uses supervised chi-square-guided binarization to apply Bernoulli Naïve Bayes to continuous medical data, achieving high AUC scores while providing transparent, rule-based decision rules and calibrated risk estimates.",
+      "detailed_reading": null,
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.985188641851369,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.15369v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715369v1-on-the-computational-complexity-of-bilevel-integer-linear-programming",
+      "source": "arxiv",
+      "title": "On the Computational Complexity of Bilevel Integer Linear Programming",
+      "authors": [
+        "Nagisa Sugishita",
+        "Margarida Carvalho"
+      ],
+      "authors_text": "Nagisa Sugishita, Margarida Carvalho",
+      "abstract": "We investigate the computational complexity of bilevel integer linear programming. While Jeroslow~(1985) established that the decision version of this problem is $Σ^p_2$-complete when restricted to binary variables, we prove that this $Σ^p_2$-completeness persists even for general integer variables, settling a question that remained open for over 40 years. Furthermore, we analyze the impact of various structural assumptions on computational complexity. Notably, we strengthen the result of Köppe et al.~(2010) by proving polynomial-time solvability whenever the total number of upper- and lower-level variables is fixed, without any additional assumptions.",
+      "url": "http://arxiv.org/abs/2607.15369v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15369v1",
+      "tldr": "This paper proves that bilevel integer linear programming remains Σ^p_2-complete for general integer variables, settling a 40-year open question, and strengthens a prior result by showing polynomial-time solvability when the total number of upper- and lower-level variables is fixed without requiring boundedness.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.8942824731032375,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2607.15414v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715414v1-ai-trading-evaluating-large-language-models-for-technical-market-analysis",
+      "source": "arxiv",
+      "title": "AI Trading: Evaluating Large Language Models for Technical Market Analysis",
+      "authors": [
+        "Geofrey Ntale"
+      ],
+      "authors_text": "Geofrey Ntale",
+      "abstract": "Large Language Models (LLMs) have emerged as powerful tools for processing the heterogeneous information environments of modern financial markets. This paper presents a systematic, comparative evaluation of five prominent LLMs: GPT-4 Turbo, Claude 3 Opus, Gemini 1.5 Pro, Llama 3 70B, and the domain-specialized FinGPT, with respect to their capacity for technical market analysis. The evaluation spans four structured tasks: candlestick pattern recognition from OHLCV data, directional signal generation (BUY/SELL/HOLD), backtesting of signal quality through a simulated execution pipeline, and financial report comprehension. Our experimental framework employs rigorous quantitative metrics, including Sharpe ratio, maximum drawdown, Sortino ratio, information coefficient, F1-score, and BLEU score. Findings from simulated backtesting indicate that GPT-4 Turbo achieves the highest annualized return and Sharpe ratio among general-purpose models, while FinGPT demonstrates competitive risk-adjusted performance due to domain-specific fine-tuning. Both models outperform a passive S&P 500 benchmark under the tested conditions. The study identifies persistent failure modes across all evaluated models, including numerical hallucination, context-window limitations, and inconsistent performance in sideways market regimes. We conclude that while LLMs hold genuine promise within AI trading systems, robust deployment requires careful task decomposition, rigorous backtesting protocols, and domain-aware fine-tuning strategies.",
+      "url": "http://arxiv.org/abs/2607.15414v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15414v1",
+      "tldr": "This paper systematically evaluates five large language models (GPT-4 Turbo, Claude 3 Opus, Gemini 1.5 Pro, Llama 3 70B, and FinGPT) on technical market analysis tasks, finding that GPT-4 Turbo achieves the highest returns and Sharpe ratio among general-purpose models while domain-specialized FinGPT offers competitive risk-adjusted performance, but all models suffer from failure modes like numerical hallucination and inconsistent behavior in sideways markets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Georgia Institute of Technology",
+      "score": 2.829402989059066,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.15365v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715365v1-induction-heated-resonant-reactors-for-electrified-thermochemistry",
+      "source": "arxiv",
+      "title": "Induction-heated resonant reactors for electrified thermochemistry",
+      "authors": [
+        "Connor Cremers",
+        "Chenghao Wan",
+        "Calvin H. Lin",
+        "Zhennan Ru",
+        "Kesha Tamakuwala",
+        "Ariana B. Hofelmann",
+        "Dolly Mantle",
+        "Matthew W. Kanan",
+        "Juan Rivas-Davila",
+        "Jonathan A. Fan"
+      ],
+      "authors_text": "Connor Cremers, Chenghao Wan, Calvin H. Lin, Zhennan Ru, Kesha Tamakuwala, Ariana B. Hofelmann, Dolly Mantle, Matthew W. Kanan, Juan Rivas-Davila, Jonathan A. Fan",
+      "abstract": "We present induction-heated resonant reactors, a new concept in electrified thermochemistry in which the reactor itself serves as a volumetric electromagnetic resonator heated through resonant wireless power transfer. We use the Swiss roll resonator as a model system and show that it can be designed to support uniform volumetric heating profiles and enhanced heat transfer characteristics, creating opportunities for process intensification in scaled systems. Compared to conventional (i.e., non-resonant) induction heating systems, resonant reactors can achieve exceptionally high system efficiencies through the combination of near-unity power-to-heat efficiencies and low thermal losses, both enabled by the utilization of resonant energy transfer. These concepts demonstrate how the integration of electromagnetic power transduction with thermochemical reaction engineering enables new opportunities for utilizing green electricity in sustainable chemical conversion.",
+      "url": "http://arxiv.org/abs/2607.15365v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15365v1",
+      "tldr": "This paper introduces induction-heated resonant reactors that use the reactor itself as a volumetric electromagnetic resonator for efficient, uniform heating via resonant wireless power transfer, enabling enhanced process intensification and high system efficiencies for electrified thermochemistry.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University"
+      ],
+      "affiliations_text": "Stanford University",
+      "score": 2.7567654815702527,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2607.15446v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/20/260715446v1-who-became-financially-vulnerable-after-covid-19-a-population-level-machine-learning-analysis-using-meps-data",
+      "source": "arxiv",
+      "title": "Who Became Financially Vulnerable After COVID-19? A Population-Level Machine Learning Analysis Using MEPS Data",
+      "authors": [
+        "Alexey Kresin",
+        "Zien Cheng",
+        "Ammar Ahad",
+        "Ebiyomare Kelvin",
+        "Manish Sivaratri",
+        "Prabhjeet Singh",
+        "Omar Aljawfi",
+        "Olabisi Ojo",
+        "Nawar Shara"
+      ],
+      "authors_text": "Alexey Kresin, Zien Cheng, Ammar Ahad, Ebiyomare Kelvin, Manish Sivaratri, Prabhjeet Singh, Omar Aljawfi, Olabisi Ojo, Nawar Shara",
+      "abstract": "The cost of healthcare remains a concern in the United States and may have been influenced by disruptions associated with the COVID-19 pandemic. This study examines healthcare financial vulnerability before and after the pandemic using Medical Expenditure Panel Survey (MEPS) data from 2019 and 2021. High financial burden was defined as out-of-pocket healthcare expenditures exceeding 10% of family income. Survey-weighted subgroup analyses were performed to obtain nationally representative estimates across demographic and socioeconomic groups.\n  Descriptive analyses were complemented by interpretable logistic regression and machine learning models. Logistic regression was used to estimate adjusted odds ratios, while random forest and gradient boosting models were used to evaluate predictive performance. Temporal generalization assessed whether models trained on pre-pandemic data remained predictive when applied to post-pandemic observations.\n  Financial vulnerability was strongly associated with poverty status, insurance coverage, and prescription drug spending. Subgroup analyses indicated persistent disparities across population groups, with some evidence of increased burden among vulnerable populations in 2021. Despite these differences, models trained on pre-pandemic data exhibited only modest reductions in predictive performance when evaluated on post-pandemic data, suggesting that the principal predictors of healthcare financial vulnerability remained relatively stable over time.\n  These findings provide a population-level assessment of healthcare financial vulnerability during the COVID-19 period and demonstrate the value of combining interpretable statistical modeling with machine learning for population health research. The results may support future population health surveillance, risk stratification, and healthcare policy research aimed at reducing financial barriers to care.",
+      "url": "http://arxiv.org/abs/2607.15446v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.15446v1",
+      "tldr": "Using MEPS data and machine learning models, this study finds that healthcare financial vulnerability persisted after COVID-19, with strong associations to poverty, insurance coverage, and prescription drug spending, and that pre-pandemic predictors remained relatively stable for post-pandemic prediction.",
+      "detailed_reading": null,
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.609155926359107,
+      "score_text": "2.6"
+    }
+  ],
+  "errors": []
+}
