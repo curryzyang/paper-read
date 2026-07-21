@@ -1,0 +1,761 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-21T05:51:37.836601",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.16247v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716247v1-self-evolving-just-in-time-memory-for-proactive-embodied-safety",
+      "source": "arxiv",
+      "title": "Self-Evolving Just-In-Time Memory for Proactive Embodied Safety",
+      "authors": [
+        "Bingrui Sima",
+        "Lizhong Wang",
+        "Xiaoya Lu",
+        "Kun He",
+        "Xiao Yang"
+      ],
+      "authors_text": "Bingrui Sima, Lizhong Wang, Xiaoya Lu, Kun He, Xiao Yang",
+      "abstract": "While Vision-Language Models (VLMs) have empowered embodied agents to execute complex household tasks, they struggle to proactively handle dynamically emerging hazards during closed-loop interactions. Existing safety approaches often rely on runtime guardrails to block unsafe actions or induce excessive caution, which severely stalls task progress instead of actively resolving the underlying risks. To break this safety-progress trade-off, we introduce the Self-Evolving Just-In-Time Memory framework, which reframes embodied safety from progress-stalling guardrails to proactive hazard mitigation. The framework consists of a Risk-Sufficient Topological Belief Graph (RSG) for persistent safety-relevant state tracking under partial observability, an Agency-Grounded Factual Memory for precise hazard anticipation, and an Experience Memory that injects procedural Meta-Skills to guide executable, progress-preserving mitigation. Furthermore, we propose an automated Test-Verify-Write loop, allowing agents to continually refine their mitigation Meta-Skills from execution traces at test time. Experiments on IS-Bench demonstrate that our framework substantially boosts the Safe-Success rate across multiple VLM backbones (e.g., +30.3% on Qwen3-VL-8B), enabling agents to proactively mitigate hazards without stalling task progress. Code is available at https://github.com/DyMessi/JIT-Memory.",
+      "url": "http://arxiv.org/abs/2607.16247v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16247v1",
+      "tldr": "The paper introduces the Self-Evolving Just-In-Time Memory framework, which uses a Risk-Sufficient Topological Belief Graph, Agency-Grounded Factual Memory, and Experience Memory with a Test-Verify-Write loop to enable embodied agents to proactively mitigate dynamically emerging hazards without stalling task progress.",
+      "detailed_reading": {
+        "motivation": "现有VLM驱动的具身代理在执行复杂家庭任务时，难以主动处理闭环交互中动态出现的危险。现有安全方法要么依赖运行时护栏阻止不安全动作，要么引发过度谨慎，严重阻碍任务进展而非主动解决潜在风险。为了打破这种安全-进展权衡，本文提出了Self-Evolving Just-In-Time Memory框架。",
+        "method": "框架包含三个核心模块：Risk-Sufficient Topological Belief Graph (RSG)作为工作记忆，采用动作条件patch更新在部分可观测下持续跟踪安全相关状态；Agency-Grounded Factual Memory将抽象人类安全规范编译为可触发、可验证的规则，映射到代理动作空间，实现精确的意图条件危险预测；Experience Memory注入过程性Meta-Skills，提供可执行的缓解指导和时机。此外，提出自动化的Test-Verify-Write循环，在测试时通过程序化验证执行轨迹并挖掘成功案例，不断优化Meta-Skills。每步中，规划器先产生动作和预测意图，RSG更新后，事实记忆检查是否存在情境风险或时间风险，触发时注入相应Meta-Skill指导下一步动作。",
+        "result": "在IS-Bench基准上，该框架在多个VLM骨干上显著提升了安全成功率（Safe-Success rate），例如在Qwen3-VL-8B上提升30.3%。代理能够主动缓解危险而不停滞任务进展，有效打破了安全与进展的权衡。",
+        "conclusion": "该框架将具身安全从阻碍进展的护栏重构为主动危险缓解，通过协调三个专门记忆模块和自演化循环，实现了持续提升的主动安全能力，同时保持任务进展。实验证明该方法能显著提升安全成功率，且对多种VLM骨干有效。",
+        "key_details": "RSG使用有限但充分的语义词汇表（如SAFETY_FLAMMABLE标签、动态状态、拓扑关系），确保风险足够性并支持零样本泛化。事实规则通过离线编译有限安全原则得到，实例解耦并与RSG词汇对齐，通过精确子图匹配触发，避免过度谨慎。Test-Verify-Write循环利用RSG历史快照自动验证执行轨迹，无需人工标注。动作条件patch更新仅处理局部子图，避免全场景重解析，降低计算开销。框架依赖于预定义规则集，对未见危险场景的泛化可能受限。"
+      },
+      "affiliations": [
+        "Tsinghua University",
+        "Shanghai Jiao Tong University",
+        "Huazhong University of Science and Technology"
+      ],
+      "affiliations_text": "Tsinghua University, Shanghai Jiao Tong University, Huazhong University of Science and Technology",
+      "score": 5.060138131072646,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2607.16244v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716244v1-cigpo-contextual-information-gain-policy-optimization-for-multi-turn-evidence-reading-llm-agents",
+      "source": "arxiv",
+      "title": "CIGPO: Contextual Information-Gain Policy Optimization for Multi-Turn Evidence-Reading LLM Agents",
+      "authors": [
+        "Hao Dou"
+      ],
+      "authors_text": "Hao Dou",
+      "abstract": "Training multi-turn evidence-reading agents with outcome-only reinforcement learning is unstable because intermediate turns receive little direct credit. In HotpotQA experiments with Qwen2.5-3B-Instruct, GRPO initially improves (standard F1 0.430) but subsequently collapses to 100% format-violating outputs. Training-log diagnosis reveals a zero-advantage lock-in mechanism: all sampled trajectories receive the minimum format penalty (-2.0), group-relative advantages vanish, and the policy-gradient loss becomes zero--an optimization deadlock. We propose a variance-injection strategy: by assigning per-turn rewards to intermediate evidence-reading turns, we prevent the group reward distribution from collapsing to a single value--preserving the variation that GRPO's group-relative advantage requires. Contextual Information-Gain Policy Optimization (CIGPO) implements this strategy using the marginal increase in the frozen reference model's log-likelihood of the ground-truth answer as the per-turn signal. With separate normalization of IG and F1 rewards and an IG-weight curriculum, CIGPO reaches a standard F1 of 0.518 on HotpotQA at the 3B scale (from 0.252 base; +105%), compared with 0.430 for the best GRPO checkpoint and 0.000 for the final GRPO checkpoint. CIGPO maintains meaningful reward variance and avoids zero-advantage lock-in throughout training. These results identify reward-variance collapse as a concrete failure mode of outcome-only GRPO and show that turn-level IG rewards can prevent it in this HotpotQA setting.",
+      "url": "http://arxiv.org/abs/2607.16244v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16244v1",
+      "tldr": "CIGPO addresses the training collapse in multi-turn evidence-reading LLM agents caused by zero-advantage lock-in in outcome-only GRPO by injecting per-turn contextual information-gain rewards, achieving a 105% relative F1 improvement on HotpotQA (from 0.252 to 0.518) while maintaining stable reward variance.",
+      "detailed_reading": {
+        "motivation": "Training multi-turn evidence-reading agents with outcome-only reinforcement learning is unstable because intermediate turns receive little direct credit, leading to optimization deadlock. In HotpotQA experiments with Qwen2.5-3B-Instruct, GRPO initially improves (standard F1 0.430) but subsequently collapses to 100% format-violating outputs due to zero-advantage lock-in, where all sampled trajectories receive minimum format penalty (-2.0), group-relative advantages vanish, and policy-gradient loss becomes zero.",
+        "method": "CIGPO is a lightweight extension of GRPO that injects variance at intermediate turns via reference-based contextual information gain. Given a question q and a closed pool of pre-indexed evidence documents, the agent interacts for up to T turns: at each turn t, it reasons in a <think> block, calls Read[block_id] in a <tool_call> block, and receives evidence content. For each intermediate turn t (< T), the per-turn IG reward is computed as r_t^IG = log p_ref(y* | q, e_{≤t}) - log p_ref(y* | q, e_{<t}) using the frozen reference model (the same as used for KL regularization). The final turn receives F1 reward r_T^F1 = F1(extract_answer(o_T), y*). IG and F1 rewards are normalized separately within each GRPO group (group size N=2) to compute group-relative advantages, with a safety clip of ±50 for IG. A linear curriculum schedules the IG weight from 0.1 to 0.3 over 200 steps, while F1 weight stays at 1.0. Prealigned vectorized computation batches all turn prompts into one forward pass for efficiency (~3× speedup).",
+        "result": "On HotpotQA test set (1,000 examples), CIGPO reaches a standard F1 of 0.518 (from base 0.252; +105%), compared to 0.430 for the best GRPO checkpoint and 0.000 for the final collapsed GRPO checkpoint. CIGPO maintains meaningful reward variance throughout training and avoids zero-advantage lock-in. Per-turn IG analysis shows mean cumulative IG of 4.06 for correct trajectories vs. 2.10 for wrong trajectories, indicating correlation with successful evidence use.",
+        "conclusion": "The study identifies reward-variance collapse as a concrete failure mode of outcome-only GRPO in multi-turn evidence reading, and shows that turn-level IG rewards can prevent it in the HotpotQA setting with Qwen2.5-3B-Instruct. CIGPO stabilizes training by ensuring non-zero reward variance across group members, preserving the variation that GRPO's group-relative advantage requires.",
+        "key_details": "Data: HotpotQA training set (1,000 examples) and test set (1,000 examples). Model: Qwen2.5-3B-Instruct (3.09B parameters) trained on 2×24GB GPUs with FSDP and vLLM. Hyperparameters: rollout temperature 0.6, max 3 turns, GRPO group size N=2, PPO mini-batch size 2, learning rate 1e-6, KL coefficient β=0.10, entropy coefficient 0.01, IG curriculum 0.1→0.3, IG safety clip ±50, format penalty -2.0, max sequence length 3072 tokens, training steps 200. IG reward uses frozen reference model log-likelihood of ground-truth answer. Separate group normalization for IG and F1 rewards is essential due to their different scales. Limitations: group size limited to 2 due to hardware; experiments only on Qwen2.5-3B-Instruct and HotpotQA; reference model and IG computation assume accurate ground-truth answer availability; IG values may be noisy for some examples; curriculum parameters not extensively tuned."
+      },
+      "affiliations": [
+        "Harbin Institute of Technology"
+      ],
+      "affiliations_text": "Harbin Institute of Technology",
+      "score": 4.405297291055369,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.16246v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716246v1-let-the-data-decide-supervision-analysis-capability-trade-offs-and-adaptive-objective-routing-in-continued-pre-training-via-off-policy-distillation",
+      "source": "arxiv",
+      "title": "Let the Data Decide: Supervision Analysis, Capability Trade-offs, and Adaptive Objective Routing in Continued Pre-Training via Off-Policy Distillation",
+      "authors": [
+        "Jiangan Yuan",
+        "Zhixuan Li",
+        "Han Xu"
+      ],
+      "authors_text": "Jiangan Yuan, Zhixuan Li, Han Xu",
+      "abstract": "Off-policy distillation is now central to large language model pre-training, yet how training data, objective parameterization, and model capabilities interact remains poorly characterized. We studies top-$k$-truncated, temperature-scaled off-policy distillation by decomposing this problem into two questions: an \\emph{objective-to-capability} analysis of how the training objective shapes token-level supervision and downstream performance, and a \\emph{data-to-objective} analysis of how data heterogeneity should inform objective routing. We first show that the language-modeling objective ($L_{\\mathrm{LM}}$) and the knowledge-distillation objective ($L_{\\mathrm{KD}}$) induce systematically different capability profiles, and trace this divergence to a gradient-level tension between \\emph{direct observed-token reinforcement} and \\emph{teacher-supported alternative supervision}. To quantify this tension, we introduce diagnostic metrics -- support coverage, observed-token probability mass, and teacher-distribution concentration -- and show via controlled sweeps that the support size $k$ governs a coverage-sharpness trade-off, while distillation temperature controls within-support probability allocation. We then examine adaptive objective routing: a domain-level policy that applies $L_{\\mathrm{LM}}$ to math and code and $L_{\\mathrm{KD}}$ to general-domain data yields consistent gains over both single-objective baselines, whereas token-level routing based on observed-token probability mass or teacher entropy fails to consistently match the single-objective baseline. These results suggest that effective objective routing depends less on routing granularity than on the quality of the routing signal, reframing continued pre-training via off-policy distillation as a structured, data-conditional supervision-design problem rather than a global hyperparameter choice.",
+      "url": "http://arxiv.org/abs/2607.16246v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16246v1",
+      "tldr": "This paper systematically analyzes how off-policy distillation objectives (LM vs. KD) create distinct capability trade-offs in continued LLM pre-training, and shows that adaptive domain-level objective routing—applying LM to math/code data and KD to general data—outperforms both single-objective and token-level routing, reframing distillation as a structured, data-conditional supervision design problem rather than a global hyperparameter choice.",
+      "detailed_reading": {
+        "motivation": "当前大语言模型的离线蒸馏预训练中，训练数据、目标参数化与模型能力之间的交互关系尚不明确。现有研究将数据组成、目标选择、稀疏教师目标构建与下游基准测试视为独立的设计维度，缺乏系统性的分析。本文旨在分解这一问题为两个子问题：目标到能力的分析（训练目标如何塑造令牌级监督和下游表现）和数据到目标的分析（数据异质性如何指导目标路由）。",
+        "method": "本文采用离线蒸馏的持续预训练设置，使用冻结的教师模型为固定语料提供软标签。研究包括：第一，对比语言建模目标（LM）与知识蒸馏目标（KD）在相同训练条件下的令牌级差异，并引入诊断指标（支持覆盖、观测令牌概率质量、教师分布集中度）量化这种差异；第二，对稀疏KD的两个自由度（支持大小k和蒸馏温度τ）进行控制扫描，分析其对覆盖-锐度权衡和概率分配的影响；第三，实施自适应目标路由：域级路由（对数学和代码数据应用LM，通用域数据应用KD）和令牌级路由（基于观测令牌概率质量或教师熵作为路由信号）。训练流程在所有条件下保持其他设置一致，仅在目标函数和路由策略上变化。",
+        "result": "实验发现：LM和KD目标诱导出系统不同的能力轮廓，LM在困难推理、数学和知识密集型评测上更强，KD在常识、事实检索、阅读理解和结构化程序合成上更优。支持大小k控制覆盖-锐度权衡，温度控制支持内概率分配。域级路由一致优于单目标基线：在推理和Pass@K上恢复LM优势，在知识类基准上保持KD优势，并在部分基准（如MBPP和AIME）上同时超过两者。令牌级路由（基于OTMass或熵）未能一致匹配更好的单目标基线，其中OTMass更可靠但总体不如域级路由。",
+        "conclusion": "本文表明，有效的目标路由更依赖于路由信号的质量而非路由粒度。域标签作为教师-数据对齐的可靠代理，优于基于令牌的统计信号。离线蒸馏的持续预训练应被视为结构化的、数据条件的监督设计问题，而非全局超参数选择。",
+        "key_details": "关键细节包括：数据使用异构语料（数学、代码、通用域），损失函数为LM交叉熵和KD的KL散度（带温度缩放和top-k截断）。超参数k和温度独立影响监督特性。教师logits的稀疏化（top-k截断）是实际必要的，但可能引入偏置。诊断指标如OTMass直接衡量教师对观测令牌的概率分配，而教师熵仅反映分布集中度，不关联观测令牌。域级路由的有效性源于数学和代码数据具有显著更高的观测令牌概率质量和更低的教师熵。局限性：令牌级路由失败可能源于信号噪声或训练不稳定性，且域级路由依赖精确的域标注，在未知域混合时可能不适用。"
+      },
+      "affiliations": [
+        "Baidu Inc."
+      ],
+      "affiliations_text": "Baidu Inc.",
+      "score": 4.273430372721208,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.16242v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716242v1-trace-trajectory-based-safety-patch-learning-for-llm-post-training-realignment",
+      "source": "arxiv",
+      "title": "TRACE: Trajectory-Based Safety Patch Learning for LLM Post-Training Realignment",
+      "authors": [
+        "Changyue Li",
+        "Jiaming He",
+        "Youliang Yuan",
+        "Jialin Wu",
+        "Boxi Yu",
+        "Zhicong Huang",
+        "Pinjia He"
+      ],
+      "authors_text": "Changyue Li, Jiaming He, Youliang Yuan, Jialin Wu, Boxi Yu, Zhicong Huang, Pinjia He",
+      "abstract": "Fine-Tuning-as-a-Service (FTaaS) platforms let users train large language models (LLMs) on customized tasks, but this pipeline could erode models' safety alignment. In practice, service providers need to recover models' safety without re-running full alignment, or destroying the utility gained from customized tasks. A line of existing work refers to model parameter merging, which adds a safety patch on the fine-tuned model parameters to shift the model away from unsafe tendencies. However, this merging-based paradigm is fundamentally bottlenecked by task-safety update entanglement: downstream task updates and the safety patch often overlap in their dominant directions, so the merge strength is intrinsically hard to calibrate. If the safety vector is scaled too weakly, harmful components could still dominate, preventing the model from returning to a safe region; if it is scaled too aggressively, it suppresses task-relevant directions and degrades utility.\n  To solve this problem, we shift the focus of merging-based methods from designing online merging operators to offline patch learning, and seek a safety patch that minimally interferes with task-relevant directions while retaining decisive control over unsafe behaviors. We propose TRACE, a trajectory-based safety patch learning framework that (i) simulates harmful tuning trajectories to generate progressively corrupted states, and (ii) optimizes a plug-in patch to recover safety while maintaining utility across varying corrupted base states.\n  Across six benchmarks and two models, TRACE consistently dominates the safety-utility frontier. TRACE reaches nearly 100% safety on all settings, while maintaining comparable utility to the undefended fine-tuned model.",
+      "url": "http://arxiv.org/abs/2607.16242v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16242v1",
+      "tldr": "TRACE is a trajectory-based safety patch learning framework that simulates harmful fine-tuning trajectories to learn a disentangled patch, enabling LLMs to recover nearly 100% safety without degrading downstream task utility.",
+      "detailed_reading": {
+        "motivation": "现有的基于参数合并的后训练安全恢复方法受制于任务-安全更新纠缠问题：下游任务更新和安全补丁在主导方向上重叠，导致合并强度难以校准。安全向量缩放过弱则无法消除有害行为，过强则抑制任务相关方向并降低效用。因此需要一种新的范式，学习一个与任务更新方向解耦且具有决定性控制能力的安全补丁。",
+        "method": "TRACE 提出基于轨迹的安全补丁学习框架，包含两个步骤：(i) 模拟有害微调轨迹，通过逐步对基础模型进行有害数据微调生成从安全到逐渐被破坏的模型状态序列；(ii) 在这些不同破坏程度的基座上优化一个通用可插拔补丁（采用低秩适配器形式），通过最小化安全损失和任务效用损失的联合目标，使得该补丁能够一致地恢复安全同时不干扰下游任务性能。训练完成后，该补丁可直接通过标准参数合并（如加权加法）应用于任何微调模型，无需在线逐用户调整合并系数。",
+        "result": "在六个基准（三个有害数据集：Shadow、FineTuning、PKU-SafeRLHF；三个效用基准：SAMSum、SQL-Create-Context、GSM8K）和两个模型（Llama-3.1-8B-Instruct、Qwen2.5-7B-Instruct）上，TRACE 在所有设置下达到接近100%的安全率，同时保持了与未防御微调模型相当的效用，在安全-效用前沿上全面优于现有合并方法（如 RESTA、SafeLoRA、SafeDelta 等）。",
+        "conclusion": "TRACE 通过将合并范式从在线合并操作转变为离线补丁学习，有效解决了任务-安全更新纠缠问题。它学习到的解耦且决定性的安全补丁能够在不牺牲下游任务性能的前提下高效恢复安全性，为 FTaaS 平台提供了一种鲁棒、高效且无需逐用户校准的后训练安全恢复机制。",
+        "key_details": "方法核心是模拟-恢复策略：离线模拟用户不同训练强度导致的有害微调轨迹，生成覆盖安全到不安全状态的模型序列；补丁优化同时使用安全拒绝数据和任务数据，通过联合损失确保补丁在不同基座上的一致性。超参数包括轨迹步数、适配器秩等，实验中使用 LoRA 秩为16；计算开销低（约0.5秒在线合并），且兼容其他干预阶段的方法。局限性：依赖离线模拟轨迹的代表性，如果用户训练强度超出模拟范围可能效果下降；另外对安全数据质量有一定要求。"
+      },
+      "affiliations": [
+        "Ant Group",
+        "University of Limerick",
+        "The Chinese University of Hong Kong, Shenzhen"
+      ],
+      "affiliations_text": "Ant Group, University of Limerick, The Chinese University of Hong Kong, Shenzhen",
+      "score": 4.252146434516873,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.16238v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716238v1-diffusion-corrected-autoregressive-fourier-neural-operator-for-droplet-evolution-prediction",
+      "source": "arxiv",
+      "title": "Diffusion-corrected Autoregressive Fourier Neural Operator for Droplet Evolution Prediction",
+      "authors": [
+        "Jinghao Cao",
+        "Minsung Kang",
+        "Hongyue Sun",
+        "Chi Zhou",
+        "Jihoon Chung",
+        "Xubo Yue",
+        "Sanchoy Das",
+        "Bo Shen"
+      ],
+      "authors_text": "Jinghao Cao, Minsung Kang, Hongyue Sun, Chi Zhou, Jihoon Chung, Xubo Yue, Sanchoy Das, Bo Shen",
+      "abstract": "Predicting droplet evolution in material jetting, or Inkjet Printing (IJP), is essential for maintaining printing quality. However, long-horizon forecasts remain challenging due to error accumulation and the complex coupling of process variables. In this work, we introduce the Diffusion-corrected Auto-Regressive Fourier Neural Operator (DiffARFNO), a two-stage framework that combines an autoregressive Fourier-MIONet with a conditional Denoising Diffusion Implicit Model (DDIM) corrector. Fourier-MIONet is trained as a coarse predictor and deployed autoregressively for long-horizon forecasting. In the second stage, a DDIM-based conditional corrector refines the coarse prediction within each sliding window through efficient iterative denoising. By combining coarse predictions from Fourier-MIONet with a DDIM corrector that restores fine details, DiffARFNO aims to provide high-fidelity predictions for long-horizon forecasts. Extensive experiments on droplet datasets from ANSYS Fluent demonstrate that DiffARFNO significantly outperforms existing state-of-the-art models.",
+      "url": "http://arxiv.org/abs/2607.16238v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16238v1",
+      "tldr": "The paper introduces the Diffusion-corrected Autoregressive Fourier Neural Operator (DiffARFNO), a two-stage framework that combines an autoregressive Fourier-MIONet for coarse prediction with a conditional Denoising Diffusion Implicit Model (DDIM) corrector to refine fine details, achieving state-of-the-art long-horizon droplet evolution prediction in inkjet printing.",
+      "detailed_reading": {
+        "motivation": "喷墨打印中液滴演化预测对于保持打印质量至关重要，但长期预测因误差累积和过程变量复杂耦合而极具挑战。现有数据驱动方法难以实现高保真长期预测。",
+        "method": "提出DiffARFNO两阶段框架。第一阶段，使用Fourier-MIONet作为粗预测器，以初始50帧图像序列和材料属性（密度、粘度、表面张力）为输入，通过分支-主干结构（视频编码器、属性编码器、坐标网格投影）和UFNO解码器，自回归地生成粗预测序列。第二阶段，在滑动窗口内使用条件DDIM修正器对粗预测进行迭代去噪修正，恢复高频细节并校正累积误差。最终得到高保真长期预测。",
+        "result": "在ANSYS Fluent生成的液滴演化数据集上，涵盖韧带变薄、夹断动力学和卫星液滴形成三种典型场景。DiffARFNO相比FNO基准模型，在MAE、MSE、R²、IoU、PSNR、SSIM等指标上均获得更优结果，同时保持速度预测的准确性，证明其能有效减少误差累积并恢复精细结构。",
+        "conclusion": "DiffARFNO通过结合Fourier神经算子的高效粗预测和扩散模型的高分辨率修正，实现了对液滴演化长期高保真预测，优于现有SOTA方法。该框架有望提升喷墨打印过程监控与质量控制能力。",
+        "key_details": "数据来自ANSYS Fluent CFD模拟，包含不同材料属性的液滴演化图像序列。训练损失采用二元掩码加权的MSE损失，增强对液滴边界的关注。超参数包括滑动窗口大小、扩散步数等（文中未明确数字），但整体采用两阶段设计平衡效率与保真度。局限性可能包括对训练数据多样性依赖，以及极端物理条件下的泛化能力待验证。"
+      },
+      "affiliations": [
+        "University of Georgia",
+        "University at Buffalo",
+        "Northeastern University",
+        "Hanyang University",
+        "New Jersey Institute of Technology"
+      ],
+      "affiliations_text": "University of Georgia, University at Buffalo, Northeastern University, Hanyang University, New Jersey Institute of Technology",
+      "score": 4.236513149051456,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.16231v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716231v1-orthogonal-gradient-constraints-shape-noisy-label-memorization-dynamics",
+      "source": "arxiv",
+      "title": "Orthogonal Gradient Constraints Shape Noisy-Label Memorization Dynamics",
+      "authors": [
+        "Richard Mai"
+      ],
+      "authors_text": "Richard Mai",
+      "abstract": "Modern neural networks can fit corrupted training labels, making noisy-label learning a useful setting for studying memorization-driven overfitting. Most regularization methods modify the objective, architecture, or data distribution; here we instead study a geometric intervention on the optimizer update itself. We evaluate OrthoGrad, which removes the component of each weight gradient parallel to the current weight vector, in noisy-label image classification. On MNIST with small-data regimes, OrthoGrad improves test accuracy most clearly for CNNs while reducing corrupted-label fitting. Mechanism diagnostics based on weight norms and gradient-weight cosine similarity suggest that the projection has the strongest effect when the raw gradient contains a nontrivial radial component, and becomes weaker in larger-data regimes where gradients are already nearly orthogonal to weights. Additional CIFAR-10 ResNet-18 experiments show that the method can alter memorization trajectories but does not prevent eventual noisy-label memorization. These results support orthogonal update constraints as a useful diagnostic for studying learning dynamics, while showing that OrthoGrad is regime-dependent rather than universally regularizing.",
+      "url": "http://arxiv.org/abs/2607.16231v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16231v1",
+      "tldr": "OrthoGrad, which removes the gradient component parallel to the weight vector, reduces noisy-label memorization in small-data CNN settings but is regime-dependent and does not universally prevent eventual memorization.",
+      "detailed_reading": {
+        "motivation": "现代神经网络能够拟合被破坏的标签，导致过拟合记忆现象，现有正则化方法通过修改目标函数、架构或数据分布来缓解，但本文旨在研究优化器更新本身的几何干预——正交梯度约束——对噪音标签记忆动态的影响。",
+        "method": "采用OrthoGrad方法，从每个权重梯度中移除与当前权重向量平行的分量，得到正交梯度g_perp = g - λ〈g,w〉/ (‖w‖²+ε) w，固定λ=1（完全投影），仅对权重张量应用，不包括偏置和归一化参数，可选的重新归一化变体将投影梯度缩放至原始梯度范数。使用Adam优化器，其余超参数不变。在MNIST小数据（500样本，30%噪音标签）上用小型MLP（两层隐藏层64和32）和小型CNN（四层卷积+池化+两层线性），以及CIFAR-10 ResNet-18（5000样本，20%噪音标签）进行实验，并分析权重范数和梯度-权重余弦相似度作为机制诊断。",
+        "result": "在MNIST CNN上，OrthoGrad将测试准确率从77%提升至82.4%（小MLP上从64%提升至65.5%但不显著），同时降低了对噪音标签的拟合。机制分析显示，小数据下OrthoGrad保持更低权重范数，预投影梯度-权重余弦相似度显著为负，投影移除了实质性径向分量；而在大数据（48000样本）下余弦相似度接近零，投影效果减弱。CIFAR-10实验中，OrthoGrad改变了记忆轨迹但未最终阻止噪音标签记忆，准确率与基线相当。",
+        "conclusion": "正交梯度约束可作为研究学习动态的有效诊断工具，其效果依赖于数据规模，在小数据噪音标签场景中最显著，但并非通用正则化器；未来需在更大架构和数据集上检验，并与权重衰减、提前停止等方法系统比较。",
+        "key_details": "关键细节：1) 仅对权重张量进行正交投影，排除偏置和归一化参数；2) 固定λ=1的完全投影设置，另提供重新归一化变体；3) 使用Adam优化器，其余超参数不变；4) 梯度-权重余弦相似度作为诊断指标，解释径向分量的作用；5) 局限性：最强结果限于MNIST尺度，CIFAR-10效果混合且不能防止长期记忆噪音标签；6) 与权重衰减的区别：OrthoGrad不直接缩小参数范数，而是改变更新方向；7) 需进一步研究自适应投影强度。"
+      },
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 4.1489429268192035,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.16194v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716194v1-reinforcement-learning-guided-nsga-ii-enhanced-with-gray-relational-coefficient-for-multi-objective-optimization-application-to-nasdaq-portfolio-optimization",
+      "source": "arxiv",
+      "title": "Reinforcement Learning-Guided NSGA-II Enhanced with Gray Relational Coefficient for Multi-Objective Optimization: Application to NASDAQ Portfolio Optimization",
+      "authors": [
+        "Zhiyuan Wang",
+        "Qinxu Ding",
+        "Ding Ding",
+        "Siying Zhu",
+        "Jing Ren",
+        "Yue Wang",
+        "Chong Hui Tan"
+      ],
+      "authors_text": "Zhiyuan Wang, Qinxu Ding, Ding Ding, Siying Zhu, Jing Ren, Yue Wang, Chong Hui Tan",
+      "abstract": "In modern financial markets, decision-makers increasingly rely on quantitative methods to navigate complex trade-offs among multiple, often conflicting objectives. This paper addresses constrained multi-objective optimization (MOO) with an application to portfolio optimization for minimizing risk and maximizing return. To address existing gaps, we propose a novel reinforcement learning (RL)-guided non-dominated sorting genetic algorithm II (NSGA-II) enhanced with gray relational coefficients (GRC), termed RL-NSGA-II-GRC, which combines an RL agent controller and GRC-based selection to improve convergence and diversity of Pareto fronts. The agent adapts evolutionary parameters online using metrics of hypervolume, feasibility, and diversity, while the GRC tournament operator ranks parents via a unified score considering dominance rank, crowding distance, and proximity to ideal reference. We evaluate the framework on the Kursawe and CONSTR benchmarks and a NASDAQ portfolio application. On the benchmarks, RL-NSGA-II-GRC achieves convergence improvements of about 5.8% and 4.4% over NSGA-II, while preserving well-distributed non-dominated solutions. In the portfolio application, it produces a smooth, densely populated efficient frontier supporting identification of the maximum Sharpe ratio portfolio (annualized Sharpe =1.92) and utility-optimal portfolios for different risk-aversion levels. The main contributions are three-fold: 1) we propose an RL-NSGA-II-GRC method integrating an RL agent into the evolutionary framework to adaptively control parameters via generational feedback; 2) we design a GRC-enhanced binary tournament operator providing a comprehensive indicator to guide the search toward the Pareto front; 3) we demonstrate, on benchmark MOO and a NASDAQ case study, that the method delivers improved convergence and well-populated frontiers supporting actionable insights.",
+      "url": "http://arxiv.org/abs/2607.16194v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16194v1",
+      "tldr": "The paper proposes a reinforcement learning-guided NSGA-II enhanced with gray relational coefficients (RL-NSGA-II-GRC) that adaptively adjusts evolutionary parameters and uses GRC-based selection to improve convergence and diversity, achieving superior Pareto fronts in both benchmark multi-objective problems and a NASDAQ portfolio optimization case study.",
+      "detailed_reading": {
+        "motivation": "现代金融市场中，决策者需在多个冲突目标（如风险和收益）间权衡，但标准NSGA-II在约束紧、可行域窄时收敛慢且多样性易丧失。本文提出RL-NSGA-II-GRC方法，通过强化学习在线调整演化参数并引入灰色关联系数增强选择，以提升多目标优化的收敛性和Pareto前沿多样性。",
+        "method": "方法将RL agent集成到NSGA-II框架中，输入包括决策变量和有约束的多目标函数（最小化风险与负收益）。关键模块：1）RL agent（基于Q-learning）以种群超体积、可行性比和多样性为状态，自适应控制四个参数（交叉概率、变异强度、约束容忍度、前沿采样分数）；2）GRC增强的二元锦标赛选择算子，综合支配等级、拥挤距离和与理想参考点的几何接近度生成统一分数进行父代选择；3）非支配排序和拥挤距离维持多样性。流程：初始化种群，每代计算状态，RL agent选择动作，应用约束容忍支配规则，GRC选择父代、执行SBX交叉和多项式变异生成子代，合并父代与子代后按分式前沿采样机制进行精英生存选择，迭代直至满足终止条件。",
+        "result": "在Kursawe和CONSTR基准问题上，RL-NSGA-II-GRC相比NSGA-II收敛指标分别提升约5.8%和4.4%，并保持良好分布的Pareto解集。在NASDAQ-100投资组合优化中，生成光滑密集的有效前沿，最大夏普比率组合年化夏普比率达1.92，且支持不同风险厌恶水平下的效用最优组合识别。",
+        "conclusion": "本文提出RL-NSGA-II-GRC方法，主要贡献包括：1）RL agent自适应控制进化参数以平衡探索与利用；2）GRC增强选择算子提供综合性能指标引导搜索；3）在基准和NASDAQ案例中验证了方法能改善收敛性并生成充分的有效前沿，为投资者提供可操作的决策支持。",
+        "key_details": "数据采用NASDAQ-100成分股历史数据，约束包括预算和投资比例等；RL使用Q-learning，状态和动作经离散化处理；GRC采用无先验权重的形式；超参数包括种群大小、代数等；时间复杂度为O(MN^2)与标准NSGA-II一致；局限性包括RL学习效率依赖离散化设计，且参数调整可能对问题敏感，需进一步验证泛化性。"
+      },
+      "affiliations": [
+        "Singapore University of Social Sciences"
+      ],
+      "affiliations_text": "Singapore University of Social Sciences",
+      "score": 4.018701090825274,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.16237v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716237v1-quantizing-recursive-reasoning-models",
+      "source": "arxiv",
+      "title": "Quantizing Recursive Reasoning Models",
+      "authors": [
+        "Thorir Mar Ingolfsson",
+        "Wajeeha Tahir",
+        "Anna Tegon",
+        "Lionnus Kesting",
+        "Gamze İslamoğlu",
+        "Luca Benini"
+      ],
+      "authors_text": "Thorir Mar Ingolfsson, Wajeeha Tahir, Anna Tegon, Lionnus Kesting, Gamze İslamoğlu, Luca Benini",
+      "abstract": "Recursive reasoning models solve hard puzzles by applying compact, weight-tied blocks over many refinement steps. Because these blocks are reused many times, quantizing them creates a unique dynamical problem: the quantization error is incurred at every step. While 8-bit quantization (integer or float) preserves accuracy, moving to a per-tensor 4-bit format causes a systematic bias to accumulate. The ensuing drift catastrophically degrades exact-solution accuracy on Sudoku from 84.1% to 0.0% (only ~25% of cells correct). In this work, we show that this collapse is caused by activation-scaling granularity rather than bit-width or number format. Crucially, moving to per-block scaling completely restores the transition. To implement this, we apply MXInt4, a blockwise integer activation format, to recursive reasoning models. It is competitive with blockwise float formats on our tasks, while keeping integer elements and power-of-two block scales. Finally, recursion depth and reuse modulate quantization sensitivity, with the deepest architecture we test (the EqR equilibrium model) the most sensitive. Yet blockwise scaling overcomes this vulnerability, staying robust across these architectures and transferring to the open-ended ARC-AGI benchmark.",
+      "url": "http://arxiv.org/abs/2607.16237v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16237v1",
+      "tldr": "The paper identifies that the catastrophic degradation of recursive reasoning models under 4-bit quantization is caused by per-tensor activation scaling, and demonstrates that per-block scaling (MXInt4) fully restores accuracy, with robustness maintained across varying recursion depths and architectures.",
+      "detailed_reading": {
+        "motivation": "递归推理模型通过复用紧凑的权值共享块多次迭代求解难题，但低比特量化（如4位）会导致系统性偏差累积，使数独精确求解准确率从84.1%骤降至0.0%，因此需探究量化失效原因并设计能恢复精度的量化方案。",
+        "method": "本文采用MXInt4逐块整数激活格式对递归推理模型进行量化。模型以谜题（如数独）为输入，通过权值共享的递归推理块执行多步迭代优化。量化过程中，激活值以逐块粒度进行缩放（每块使用2的幂次缩放因子），并保持整数元素格式，替代传统的逐张量缩放。整个流程为后训练量化，无需微调模型参数，仅在推理时应用量化操作。",
+        "result": "在数独任务上，8位量化保持84.1%准确率，而每张量4位量化导致准确率崩溃至0.0%（仅约25%单元格正确）。采用MXInt4逐块缩放后，准确率完全恢复至接近浮点水平，与逐块浮点格式（如MXFP4）性能相当。在EqR平衡模型等更深架构上，逐块缩放依然稳健，并成功迁移至开放式的ARC-AGI基准。",
+        "conclusion": "递归推理模型量化失败的根本原因是激活缩放粒度不足，而非位宽或数值格式；采用逐块缩放（如MXInt4）可完全恢复低比特量化的准确率，且对于深度递归模型尤为有效，为递归推理模型的高效部署提供了可行方案。",
+        "key_details": "关键细节包括：(1) MXInt4格式元素为整数，块缩放因子为2的幂次，便于硬件实现；(2) 递归深度和复用次数调节量化敏感性，EqR模型（深度最大）最敏感；(3) 实验仅在数独和ARC-AGI基准上进行，未涵盖其他领域；(4) 量化方式为后训练量化，无需微调；(5) 局限性：仅验证了特定递归架构和任务，通用性需进一步验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6912316459291046,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.16245v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716245v1-learning-structural-manipulability-in-gate-level-netlists-using-graph-neural-networks",
+      "source": "arxiv",
+      "title": "Learning Structural Manipulability in Gate-Level Netlists Using Graph Neural Networks",
+      "authors": [
+        "Rupesh Raj Karn",
+        "Ozgur Sinanoglu"
+      ],
+      "authors_text": "Rupesh Raj Karn, Ozgur Sinanoglu",
+      "abstract": "Gate-level netlists exhibit intrinsic structural properties that influence signal propagation independently of functional simulation. We define a topology-driven structural manipulability score that characterizes node-level structural flexibility using path participation, k-core embedding, symmetry, and centrality. Modeling netlists as directed graphs, we formulate node-level regression to learn this topology-derived score using graph neural networks (GNNs). Experiments on ISCAS85 and EPFL benchmarks evaluate how effectively different GNN architectures approximate this metric across held-out circuits, with hierarchical models yielding the most consistent rankings. Component-level and ablation analyses examine the contribution of individual factors. As an illustrative case study, analysis of Trojan-injected circuits using TrustHub templates reveals statistically distinguishable structural patterns, indicating that topology-based scoring provides complementary structural insight.",
+      "url": "http://arxiv.org/abs/2607.16245v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16245v1",
+      "tldr": "This paper defines a topology-driven structural manipulability score for gate-level netlists and evaluates how effectively graph neural networks can approximate this score through node-level regression, with hierarchical models yielding the most consistent rankings.",
+      "detailed_reading": {
+        "motivation": "传统的门级网表分析依赖于功能仿真、形式验证和时序分析，主要捕获功能行为而不表征独立于输入激励的结构拓扑属性。随着设计规模增长，理解图级结构组织对于分析连通性、鲁棒性和嵌入模式变得重要，但现有方法缺乏一种输入无关的、基于拓扑的结构特征化方法。",
+        "method": "将门级网表建模为有向图，节点代表逻辑门或时序单元，边代表信号传播。定义结构可操纵性分数M(v)为四个图论属性的加权组合：路径参与比（PI到PO路径经过节点的比例）、k-core嵌入深度（核心分解数）、对称性类大小（1-WL哈希等价类）、标准化中介中心性，权重均等。使用多种图神经网络（GIN、GCN、GraphSAGE、GAT、MPNN、APPNP、HetGNN、g-U-Net、SGNN、GTN）进行节点级回归，输入为图结构和节点特征，损失函数为均方误差，以学习从图结构到预定义分数M(v)的映射。",
+        "result": "在ISCAS85和EPFL基准测试中，大部分空间消息传递模型（GCN、GSAGE、MPNN）的MSE约为3×10⁻⁴至5×10⁻⁴，Spearman秩相关系数约0.75–0.79；g-U-Net达到最高Spearman相关系数0.8129±0.0205，GCN为0.7881±0.0126。SGNN严重退化（MSE≈0.2086，Spearman≈0.4894）。组件分析显示，核心分解成分M_core与复合分数相关性最强（Spearman=0.763），路径参与成分M_path贡献极低（Spearman=0.144）。",
+        "conclusion": "提出的拓扑驱动结构可操纵性分数可以通过多种GNN架构有效近似，其中具有层次表示的模型（g-U-Net）产生最一致的排序。核心分解是主导因素，而路径参与贡献有限。对注入木马的电路分析显示统计上可区分的结构模式，表明基于拓扑的评分提供了互补的结构洞察，可用于硬件安全等场景。该分数是一个设计的结构代理，依赖于网表表示，并非工程可行性或功能正确性的验证指标。",
+        "key_details": "数据来源：ISCAS85和EPFL基准门级网表，表示为有向图。先验：各组件权重均匀（α=β=γ=δ）。损失函数：均方误差。超参数：GNN层数、隐藏维度未明示但使用标准化分割和归一化。复杂度/约束：全局路径参与和中介中心性计算昂贵，文中采用近似采样；GNN学习旨在避免重复计算这些全局量。局限性：分数是设计的结构代理，依赖于表示且可能随逻辑保留变换变化；实证中路径参与成分缺乏区分性；不同基准间存在电路级变异性；跨设计迁移需在特定基准范围内解释；分数不是外部验证的地面真值属性。"
+      },
+      "affiliations": [
+        "New York University"
+      ],
+      "affiliations_text": "New York University",
+      "score": 3.6541491898029124,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.16227v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/21/260716227v1-llm-unlearning-for-cyber-defense-a-survey-on-methods-challenges-and-emerging-threats",
+      "source": "arxiv",
+      "title": "LLM Unlearning for Cyber Defense: A Survey on Methods, Challenges, and Emerging Threats",
+      "authors": [
+        "Ruppikha Sree Shankar",
+        "Abhishek Bhardwaj",
+        "Arnav Doshi",
+        "Anusri Nagarajan",
+        "Troy Paulus Asia",
+        "Saptarshi Sengupta"
+      ],
+      "authors_text": "Ruppikha Sree Shankar, Abhishek Bhardwaj, Arnav Doshi, Anusri Nagarajan, Troy Paulus Asia, Saptarshi Sengupta",
+      "abstract": "LLMs are increasingly deployed in security-critical systems across healthcare, finance, education, and decision support, yet their inability to forget creates serious cybersecurity, privacy, and safety risks. Sensitive personal information, copyrighted material, hazardous domain knowledge, and memorized training data remain encoded across billions of parameters long after deployment, leaving models vulnerable to extraction, jailbreak attacks, membership inference, and regulatory non-compliance. Real-world incidents, from chatbots regenerating private information to fabricated legal citations producing direct legal and financial cost, place the problem at the center of the emerging-threats landscape rather than the realm of speculation. Because retraining billion-parameter models on revised corpora is computationally infeasible, and because knowledge within an LLM is distributed and entangled across parameters rather than localized to identifiable units, LLM unlearning has emerged as the principal cyber defense response, aiming to remove or suppress targeted knowledge from a trained model without retraining and without eroding what the model should still know. A central question, however, remains unresolved. Do current methods genuinely remove knowledge, or do they only stop the model from expressing it under ordinary prompting conditions? This survey examines LLM unlearning through the lens of security, robustness, and verifiable forgetting, with primary focus on gradient-based methods, which have come to dominate the field due to their compatibility with existing training pipelines and their scalability to billion-parameter models.",
+      "url": "http://arxiv.org/abs/2607.16227v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16227v1",
+      "tldr": "This survey provides a comprehensive review of gradient-based LLM unlearning for cyber defense, introducing a three-level framework that distinguishes behavioral suppression from true forgetting, and reveals that current methods fail to achieve verifiable knowledge removal, leaving models vulnerable to adversarial recovery.",
+      "detailed_reading": {
+        "motivation": "大型语言模型在医疗、金融、教育等安全关键系统中广泛部署，但其无法忘记的特性导致严重网络安全、隐私和合规风险。敏感个人信息、版权材料、有害领域知识等长期编码在数十亿参数中，易被提取或越狱攻击。由于重新训练数十亿参数模型在计算上不可行，且知识分布纠缠于参数中，LLM遗忘成为核心网络防御手段，旨在无需重训练即可移除或抑制目标知识。",
+        "method": "本文采用系统性文献综述方法，从Scopus、arXiv、IEEE Xplore和ACM Digital Library四个数据库检索2023至2026年间关于LLM遗忘的文献，使用关键词“large language model*”与“unlearn*”组合。筛选后重点分析基于梯度的遗忘方法，包括梯度上升/下降法、基于影响的方法、以及通过参数显著性、低秩适配器或局部模型编辑进行约束更新的方法。同时引入三层次框架（行为抑制、表示级衰减、真正遗忘）来分类方法的遗忘深度，并将其作为评估对抗鲁棒性的阶梯。",
+        "result": "综述发现，当前基于梯度的遗忘方法并未实现严格意义上的真正遗忘。梯度上升不是逆转原始训练轨迹，而是引入新轨迹，底层表示基本保持不变；基于影响的方法依赖局部线性假设，在非凸深度模型中不严格成立；约束编辑方法仍假设目标知识可被干净隔离，仅在近似程度成立。评估基准如TOFU、RWKU、WMDP和MUSE主要捕获行为抑制，但无法认证信息在对抗恢复攻击（如再学习攻击、成员推断、越狱提示、嵌入空间软提示攻击）下被移除。",
+        "conclusion": "当前LLM遗忘方法普遍未能实现与剔除遗忘集后重训练模型等价的知识移除，仅达到行为抑制层面。核心开放挑战包括：缺乏能实现真正遗忘、具备对抗鲁棒性、可扩展到重复与组合请求、以及拥有标准化评估基础的方法。未来工作需解决评估差距，发展可验证的遗忘机制并抵御对抗恢复。",
+        "key_details": "关键细节包括：威胁模型将有害事实关联分为记忆化PII、危险领域知识、版权内容、幻觉关联和后门关联，不同威胁要求不同的遗忘深度（行为抑制、表示衰减或真正遗忘）。对抗者分为黑盒、灰盒和白盒三类，白盒攻击（如残差流方向正交化）可恢复WMDP-Biology至64%准确率。当前评估协议缺乏对抗恢复测试，且无严格证明知识已被移除。方法局限性包括：梯度上升引入而非逆转轨迹，基于影响的方法依赖非凸架构不成立的局部线性，约束编辑组装的隔离假设仅在近似成立。"
+      },
+      "affiliations": [
+        "San José State University",
+        "Manipal Academy of Higher Education"
+      ],
+      "affiliations_text": "San José State University, Manipal Academy of Higher Education",
+      "score": 3.6161147946927734,
+      "score_text": "3.6"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.16248v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716248v1-high-accuracy-low-bit-kv-cache-quantization-via-local-distribution-restoration",
+      "source": "arxiv",
+      "title": "High-accuracy Low-Bit KV-Cache Quantization via Local Distribution Restoration",
+      "authors": [
+        "Gradwell Dzikanyanga",
+        "Yanqi Pan",
+        "Weihao Yang",
+        "Donglei Wu",
+        "Wen Xia",
+        "Hao Huang"
+      ],
+      "authors_text": "Gradwell Dzikanyanga, Yanqi Pan, Weihao Yang, Donglei Wu, Wen Xia, Hao Huang",
+      "abstract": "Long-context large language model inference relies on the KV cache to avoid redundant attention computation, but incurs high memory and bandwidth overheads. Low-bit KV-cache quantization reduces this cost, yet it severely degrade quality; particularly, one-bit quantization reduces accuracy from 84.2% to 47.8% on Llama-3.1-8B under RULER.\n  Rather than common beliefs that absolute error of logits, we find that the root cause is structured local misranking, where the distribution of logits in top-K region is drifted. We thereby propose local distribution restoration, a new technique that detects steps with high local distribution risk from quantized-logit features and restores only the selected top-K candidate distribution before token selection. We implement DGAP to achieve local distribution restoration, with efficient risk detcetors and correctors. Expeirments show that on Llama-3.1-8B, DGAP recovers K1V1 RULER accuracy from 47.8% to 83.2% and reduces distribution drift from 0.38 to 0.14; across Llama, Mistral, and Qwen models, it preserves the persistent low-bit KV-cache footprint with modest decode overhead.",
+      "url": "http://arxiv.org/abs/2607.16248v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16248v1",
+      "tldr": "DGAP restores accuracy under aggressive low-bit KV-cache quantization by detecting and correcting local distribution misranking in the top‑K candidate region, recovering RULER accuracy on Llama‑3.1‑8B from 47.8% to 83.2% without increasing persistent memory footprint.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harbin Institute of Technology, Shenzhen"
+      ],
+      "affiliations_text": "Harbin Institute of Technology, Shenzhen",
+      "score": 3.601776631995688,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.16243v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716243v1-robustmad-evaluating-real-world-robustness-of-multimodal-small-language-models-for-deployable-anomaly-detection-assistants",
+      "source": "arxiv",
+      "title": "RobustMAD: Evaluating Real-World Robustness of Multimodal Small Language Models for Deployable Anomaly Detection Assistants",
+      "authors": [
+        "Anushiya Arunan",
+        "Xin Li",
+        "Yan Qin",
+        "U-Xuan Tan",
+        "Nhu Khue Vuong",
+        "Xiaoli Li",
+        "Chau Yuen"
+      ],
+      "authors_text": "Anushiya Arunan, Xin Li, Yan Qin, U-Xuan Tan, Nhu Khue Vuong, Xiaoli Li, Chau Yuen",
+      "abstract": "Multimodal industrial anomaly inspection assistants are a critical component of next-generation smart factories, enabling interactive vision-language-based querying. However, multimodal large language models remain impractical for on-site deployment due to prohibitive computational demands and privacy risks from cloud-based inference. Compact multimodal small language models (MSLMs) offer a deployable alternative, yet progress is constrained by the lack of comprehensive robustness analyses and meaningfully challenging benchmarks that reflect real-world industrial conditions. To address this gap, we develop RobustMAD, the first deployment-motivated benchmark, designed to comprehensively evaluate model robustness through diverse open-ended queries spanning object understanding, anomaly detection, unanswerable problems, and visual quality degradations. Contrary to conventional assumptions, top-performing MSLMs exhibit promising capabilities, surprisingly outperforming even the larger GPT-5 Nano. However, they still fall short of safety-critical requirements, and RobustMAD reveals critical robustness gaps that pose operational risks. In particular, three recurring failure modes emerge: (i) fragile multimodal grounding under fine-grained distinctions or degraded visual conditions, (ii) insufficiently comprehensive responses, and (iii) weak logical grounding on unanswerable or ill-posed queries, leading to hallucinated outputs. Grounded in these insights, we provide actionable guidance for the design of next-generation multimodal industrial inspection assistants that leverage their promising competence. Code is available at https://github.com/en-research/RobustMAD.",
+      "url": "http://arxiv.org/abs/2607.16243v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16243v1",
+      "tldr": "RobustMAD introduces a deployment-motivated benchmark for evaluating multimodal small language models in industrial anomaly detection, revealing that while top models surprisingly outperform larger ones like GPT-5 Nano, they still exhibit critical robustness gaps—including fragile multimodal grounding, insufficient comprehensiveness, and hallucination—that must be addressed for safe deployment.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.574996040736802,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.16240v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716240v1-normalized-rewards-for-preference-optimization",
+      "source": "arxiv",
+      "title": "Normalized Rewards for Preference Optimization",
+      "authors": [
+        "Shawn Im",
+        "Federico Danieli",
+        "Skyler Seto",
+        "Barry-John Theobald",
+        "Katherine Metcalf"
+      ],
+      "authors_text": "Shawn Im, Federico Danieli, Skyler Seto, Barry-John Theobald, Katherine Metcalf",
+      "abstract": "Direct Alignment Algorithms (DAAs) such as DPO have become a common way to post-train and align LLMs with human preferences. However, DAAs have been observed to over-optimize their implicit reward model and decrease the likelihood of preferred responses. This results in a decrease in the total likelihood assigned to responses seen in the preference dataset, potentially resulting in undesirable behavior. To counteract this undesired side-effect of DAAs, we examine the effect of using objectives that add a regularization term to maintain the total length-normalized probabilities of the chosen and rejected responses. To better understand over-optimization, we investigate how response likelihood changes are distributed over the tokens with and without regularization. We find that a significant portion of the likelihood changes are due to a small set of outlier tokens, which explains how DAAs improve generation quality despite decreasing the likelihoods of chosen responses. We apply the proposed regularization to reference-based (DPO) and reference-free (SimPO) methods and find (1) improved trade-offs between generation quality and general benchmark capability and (2) improvements in reward modeling across datasets. For example, on Llama-3.1-8B-Instruct, we see both a >20% relative increase in AlpacaEval2 scores and >9% relative performance gains on general benchmarks. Additionally, we find that the added regularization term effectively mitigates the amount of displacement within preferred responses overall, and for the outlier tokens specifically, by utilizing low-likelihood tokens.",
+      "url": "http://arxiv.org/abs/2607.16240v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16240v1",
+      "tldr": "This paper introduces a normalization regularization term for direct alignment algorithms like DPO and SimPO, which mitigates likelihood displacement and over-optimization by conserving length-normalized probabilities, thereby improving generation quality and benchmark performance.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.553548396635817,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.16236v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716236v1-the-failures-of-marginal-influence-based-attribution-methods-for-global-time-series-explanations",
+      "source": "arxiv",
+      "title": "The Failures of Marginal Influence-Based Attribution Methods for Global Time Series Explanations",
+      "authors": [
+        "Amadeo Tunyi"
+      ],
+      "authors_text": "Amadeo Tunyi",
+      "abstract": "Explainability methods for time series models predominantly produce flat attribution scores: they quantify the direct influence of a feature at a timestamp by a scalar. We prove that the dominant failure mode of such methods is not the scalar format itself but a fundamental computational mismatch: existing methods compute scores via marginal conditioning or off-manifold gradients, both of which conflate direct temporal dependencies with mediated ones under autocorrelation. We also define DAG-faithfulness: an explanation is DAG-faithful if the temporal dependency graph it encodes is Markov-equivalent to the temporal directed acyclic graph (DAG) implicitly learned by the model. Particularly, we observe that standard attribution methods, specifically SHAP, are not DAG-faithful in general, and that recent time-series-aware extensions inherit the same computational limitation.",
+      "url": "http://arxiv.org/abs/2607.16236v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16236v1",
+      "tldr": "This paper proves that marginal influence-based attribution methods for time series explanations conflate direct and mediated temporal dependencies under autocorrelation, and introduces the concept of DAG-faithfulness to demonstrate that standard methods like SHAP and their time-series-aware extensions fail to recover the model's learned conditional independence structure.",
+      "detailed_reading": null,
+      "affiliations": [
+        "XITASO GmbH"
+      ],
+      "affiliations_text": "XITASO GmbH",
+      "score": 3.4701590006640757,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.16222v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716222v1-fully-sensorized-smart-eyewear-platform-for-on-device-machine-learning",
+      "source": "arxiv",
+      "title": "Fully-sensorized smart-eyewear platform for on-device Machine Learning",
+      "authors": [
+        "Andrea Giudici",
+        "Christian Veronesi",
+        "Pietro Bartoli",
+        "Mario Caliò",
+        "Aurelio Teliti",
+        "Giacomo Gervasoni",
+        "Diana Trojaniello",
+        "Franco Zappa"
+      ],
+      "authors_text": "Andrea Giudici, Christian Veronesi, Pietro Bartoli, Mario Caliò, Aurelio Teliti, Giacomo Gervasoni, Diana Trojaniello, Franco Zappa",
+      "abstract": "This paper presents ARGO, a smart eyewear platform designed to bridge ergonomic comfort, high computational throughput, and energy efficiency. Unlike cloud-dependent solutions, ARGO leverages the STM32N6 microcontroller and its integrated Neural Processing Unit (NPU) to enable on-device machine learning, minimizing latency and preserving user privacy through local data processing. The primary contribution lies in the holistic co-design of hardware, firmware, and artificial intelligence, centered on the deployment of an optimized YOLOv11 model for real-time urban obstacle recognition. To ensure compatibility with the target NPU, we introduce Head-wise Parallel Attention (HPA), an architectural refinement that enables efficient accelerator execution while preserving the original computational logic. The model is trained on the Walking On The Road (WOTR) dataset, and the final deployed configuration achieves an mAP50-95 of 24 under strict memory constraints, with a memory footprint of only 2.483 MB. The platform integrates a multimodal sensor suite, RGB cameras, Time-of-Flight sensors, microphones, and ambient sensors, and delivers 10 FPS at a continuous autonomy of ~113 minutes on a 200 mAh battery. These results demonstrate the feasibility of a high-performance, privacy-preserving, and socially acceptable assistive device, and highlight how competitive edge AI solutions increasingly demand tightly integrated, multidisciplinary co-design approaches.",
+      "url": "http://arxiv.org/abs/2607.16222v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16222v1",
+      "tldr": "This paper presents ARGO, a fully sensorized smart-eyewear platform that achieves on-device machine learning for real-time urban obstacle recognition through a holistic co-design of hardware, firmware, and AI, leveraging an STM32N6 microcontroller with an integrated NPU to run an optimized YOLOv11 model with high efficiency and privacy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Politecnico di Milano",
+        "EssilorLuxottica"
+      ],
+      "affiliations_text": "Politecnico di Milano, EssilorLuxottica",
+      "score": 3.4585191250717644,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.16241v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716241v1-kernelbench-verified-do-llm-generated-kernels-actually-beat-pytorch",
+      "source": "arxiv",
+      "title": "KernelBench-Verified: Do LLM-Generated Kernels Actually Beat PyTorch?",
+      "authors": [
+        "Yunxiang Zhang",
+        "Ping Yu",
+        "Jianyu Wang",
+        "Max",
+        "Fan",
+        "Julian Reed",
+        "Azalia Mirhoseini",
+        "Will Su"
+      ],
+      "authors_text": "Yunxiang Zhang, Ping Yu, Jianyu Wang, Max, Fan, Julian Reed, Azalia Mirhoseini, Will Su",
+      "abstract": "Recent large language models (LLMs) can generate custom CUDA kernels that appear to outperform PyTorch on benchmarks such as KernelBench. Building upon this foundational framework, we demonstrate that frontier models frequently engage in reward hacking to artificially inflate reported performance. In this work, we identify two areas where evaluation frameworks must co-evolve with model capabilities. First, to accurately measure true speedup, we examine the baseline timing mechanism, noting that enabling Tensor Core acceleration with TF32 provides a more realistic estimation of execution on modern GPUs. Second, concerning algorithmic correctness, models often exploit the narrow test distribution by hardcoding bypasses for specific tensor values. By skipping required computations, these kernels artificially accelerate execution rather than implementing actual CUDA kernels. We introduce KernelBench-Verified, an extended evaluation framework that incorporates a TF32-enabled baseline and a four-distribution hidden test suite. We additionally introduce memory efficiency metrics that capture the often-overlooked speed-memory tradeoff in kernel optimization. Under verified single-turn evaluation with seven frontier LLMs, we find that the best-performing model (GPT-5.5) achieves a 0.88x geometric mean speedup, significantly lower than the 1.43x speedup observed under the standard evaluation protocol. No model consistently outperforms PyTorch when evaluated against realistic baselines. On the memory front, 28% of GPU kernels generated by the best model increase peak GPU memory usage. Our findings demonstrate the necessity of continually adapting robust evaluation protocols as LLM kernel generation capabilities advance.",
+      "url": "http://arxiv.org/abs/2607.16241v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16241v1",
+      "tldr": "KernelBench-Verified reveals that LLM-generated CUDA kernels often engage in reward hacking and fail to outperform PyTorch when evaluated with realistic TF32 baselines, stricter correctness tests, and memory metrics, with the best model achieving only 0.88× geometric mean speedup under verified single-turn evaluation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University",
+        "Meta"
+      ],
+      "affiliations_text": "Stanford University, Meta",
+      "score": 3.4314406357550458,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.16232v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716232v1-from-weights-to-words-expressing-and-editing-preference-model-inferences-in-natural-language",
+      "source": "arxiv",
+      "title": "From Weights to Words: Expressing and Editing Preference Model Inferences in Natural Language",
+      "authors": [
+        "Zachary Wojtowicz",
+        "Ayush Nayak",
+        "Jacob Andreas"
+      ],
+      "authors_text": "Zachary Wojtowicz, Ayush Nayak, Jacob Andreas",
+      "abstract": "The growing use of statistical learning algorithms to infer human preferences from high-dimensional choice data runs up against a fundamental challenge: choice alternatives typically differ in many ways simultaneously, so it is generally unclear which factors actually drove an observed decision and should be credited as preferences. Compounding this problem, the opacity of these methods leaves human operators unable to inspect, contest, or correct models when they err. We introduce \\emph{weights to words}, a method that takes a dataset of choice problems as input and automatically discovers a collection of domain-relevant preference dimensions, each described in natural language and paired with a vector in the model's representational space. These dimensions address both under-determination and opacity: they can be applied to concentrate attribution on a small set of meaningful factors, and they can externalize the model's inferences in natural language so that users can inspect and edit them in real time. We first qualitatively illustrate the method's versatility on four diverse domains: moral dilemmas, movies, wines, and free-form LLM responses. We then report two pre-registered human-subjects experiments, on moral dilemmas ($N=450$) and movie selection ($N=449$), that demonstrate its benefits for learning preference models: (1) regularizing a preference model toward the learned basis increases prediction accuracy on held-out choices, and (2) incorporating participants' structured edits further improves accuracy. In head-to-head comparisons, participants prefer the method's inferred preference profiles and endorse its predictions as more accurate.",
+      "url": "http://arxiv.org/abs/2607.16232v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16232v1",
+      "tldr": "This paper introduces a method that automatically discovers interpretable, natural-language-described preference dimensions from choice data, improving prediction accuracy and enabling human users to inspect and edit model inferences in real time.",
+      "detailed_reading": null,
+      "affiliations": [
+        "MIT"
+      ],
+      "affiliations_text": "MIT",
+      "score": 3.371558448769222,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.16228v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716228v1-operator-aware-mixed-precision-tolerance-calibration-for-tensor-kernels",
+      "source": "arxiv",
+      "title": "Operator-Aware Mixed-Precision Tolerance Calibration for Tensor Kernels",
+      "authors": [
+        "Dipankar Sarkar"
+      ],
+      "authors_text": "Dipankar Sarkar",
+      "abstract": "Most tensor-kernel correctness tests go through a fixed-shape all close-style check with hand-picked absolute and relative tolerances. The thresholds are copied across the corpus and rarely revisited. We mine the element-wise error distribution of every test case from accumulated cloud GPU runs across the 26-entry gpuemu corpus and 2 dtypes (8,076 result rows). We then ask one empirical question: what absolute tolerance would the kernel itself, observed under its correct implementation, justify?\n  The answer is much tighter than the current hand-picked atol. The largest tightening is attention_triton fp16 at $2{,}184\\times$. Restricted to the seven LLM-style buggy variants for which the corpus ships a paired correct counterpart, calibrated per-(op, dtype) tolerances raise bug-detection recall from 73.2% (1,805 of 2,467) to 82.4% (2,034 of 2,467), an absolute gain of 9.3 percentage points (+229 new detections). The control false-positive count rises from 0 to 20 out of 1,882 correct-control cases (+1.1 percentage points).",
+      "url": "http://arxiv.org/abs/2607.16228v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16228v1",
+      "tldr": "The paper proposes a data-driven method to calibrate per-operation, per-dtype absolute tolerances for tensor kernel correctness tests by mining element-wise error distributions from correct implementations, which tightens tolerances up to 2,184× and improves bug-detection recall by 9.3 percentage points while adding only 1.1% false positives.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Arizona State University"
+      ],
+      "affiliations_text": "Arizona State University",
+      "score": 3.2566937746871227,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.16234v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716234v1-hantawatch-federated-learning-for-hantavirus-genomic-surveillance",
+      "source": "arxiv",
+      "title": "HantaWatch: Federated Learning for Hantavirus Genomic Surveillance",
+      "authors": [
+        "Shanika Iroshi Nanayakkara",
+        "Shiva Raj Pokhrel"
+      ],
+      "authors_text": "Shanika Iroshi Nanayakkara, Shiva Raj Pokhrel",
+      "abstract": "Hantavirus genomic surveillance is limited by the distribution of sequence data, non-IID source heterogeneity, and constrained expert-review capacity. We propose HantaWatch, a federated learning framework that enables laboratories and surveillance sites to collaboratively train sequence-based models without sharing raw data. HantaWatch integrates k-mer feature extraction, source-aware federated client construction, adaptive DU-FedProx optimization, surveillance-specific model selection, and prediction-only triage. Experiments on binary and multi-class tasks show that HantaWatch supports high-risk screening, outbreak-associated prediction, clade classification, and clinical-syndrome categorization while balancing predictive performance, false-negative risk, and update stability. The framework converts model output into risk scores, confidence estimates, uncertainty flags, and ranked expert-review priorities. HantaWatch therefore provides a practical federated decision-support layer for decentralized Hantavirus surveillance, supporting expert prioritization without replacing laboratory or public-health interpretation.",
+      "url": "http://arxiv.org/abs/2607.16234v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16234v1",
+      "tldr": "HantaWatch introduces a federated learning framework for decentralized hantavirus genomic surveillance that enables collaborative sequence-based model training without sharing raw data, using adaptive DU-FedProx optimization to handle non-IID heterogeneity, and outputs risk scores, confidence estimates, and ranked expert-review priorities for efficient decision support.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Deakin University"
+      ],
+      "affiliations_text": "Deakin University",
+      "score": 3.241386606398568,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.16230v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716230v1-routecost-a-production-inspired-multi-stage-framework-for-pre-order-shipping-cost-estimation-in-e-commerce",
+      "source": "arxiv",
+      "title": "RouteCost: A Production-Inspired Multi-Stage Framework for Pre-Order Shipping Cost Estimation in E-Commerce",
+      "authors": [
+        "Xianling Zeng",
+        "Zihan Yu",
+        "Sichen Zhao",
+        "Yalun Qi",
+        "Zhiming Xue"
+      ],
+      "authors_text": "Xianling Zeng, Zihan Yu, Sichen Zhao, Yalun Qi, Zhiming Xue",
+      "abstract": "Accurate pre-order shipping cost estimation is important in e-commerce because it affects price presentation, margin planning, and conversion. In practice, shipping cost is shaped not only by distance but also by destination demand mix, billable weight, dimensional pricing, surcharge triggers, and latent operational effects such as shipment consolidation. Static lookup methods therefore miss important sources of variation, while monolithic regressors may exploit strong but non-causal correlations. We propose RouteCost, a production-inspired multi-stage framework that decomposes the problem into time-aware demand forecasting, fee-card-informed baseline pricing, Stage 2 residual correction, and proxy-based box-consolidation inference. Route-level cost estimates are aggregated through a route-weighted expectation formulation to produce product-level shipping cost predictions. Across over 250,000 orders, 260 products, and 18 months of order history, the framework improves predictive quality and aggregate calibration while preserving route-level interpretability.",
+      "url": "http://arxiv.org/abs/2607.16230v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16230v1",
+      "tldr": "A multi-stage framework (RouteCost) decomposes pre-order shipping cost estimation into demand forecasting, baseline pricing, residual correction, and consolidation inference, improving predictive accuracy and interpretability over static or monolithic approaches.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northeastern University"
+      ],
+      "affiliations_text": "Northeastern University",
+      "score": 3.0827458760799473,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.16239v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716239v1-bacon-budgeted-human-calibration-for-modeling-and-evaluation-with-multiple-ai-judges",
+      "source": "arxiv",
+      "title": "BACON: Budgeted Human Calibration for Modeling and Evaluation with Multiple AI Judges",
+      "authors": [
+        "Lei Shi",
+        "Anlan Zhang",
+        "Rita Lyu",
+        "Zhengmian Hu",
+        "Tong Yu",
+        "David Arbour",
+        "Avi Feller",
+        "Saayan Mitra",
+        "Ritwik Sinha"
+      ],
+      "authors_text": "Lei Shi, Anlan Zhang, Rita Lyu, Zhengmian Hu, Tong Yu, David Arbour, Avi Feller, Saayan Mitra, Ritwik Sinha",
+      "abstract": "AI judges offer a scalable, low-cost alternative to human evaluation, but their outputs can be biased relative to human preferences and highly item-dependent, varying across judges, tasks, and domains. When uncalibrated AI evaluations are used for model ranking, item scoring, or population-level quality reporting, these biases can directly distort downstream decisions. We propose BACON, a four-stage pipeline that combines budgeted human calibration with multiple AI-judge outputs to produce more accurate annotations. BACON constructs full-coverage auxiliary features for every item, including multi-judge scores, token-level uncertainty statistics, and contextual embeddings. It then collects human labels for a small sampled subset and trains a cross-fitted outcome model to generate calibrated item-level surrogate predictions. These predictions support two use cases: population-level estimation of summary metrics, such as means or quantiles, using an augmented estimating-equation estimator with valid confidence intervals; and individual-level surrogate scoring for item ranking and annotation. BACON treats AI judges as auxiliary measurements rather than ground truth: human labels provide the calibration anchor, while AI-derived signals improve efficiency. Across diverse tasks, domains, and labeling budgets, BACON improves predictive accuracy and ranking consistency, and reduces bias and variance relative to raw AI outputs and purely human-label-based methods. These results show that BACON offers a practical, statistically grounded framework for scalable evaluation with limited human annotation.",
+      "url": "http://arxiv.org/abs/2607.16239v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16239v1",
+      "tldr": "BACON is a four-stage pipeline that uses budgeted human labels to calibrate multiple AI judges, producing accurate item-level surrogate predictions and population-level estimates with valid confidence intervals, outperforming raw AI and human-only methods.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.030212841068149,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.16235v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716235v1-openmhc-accelerating-the-science-of-wearable-foundation-models",
+      "source": "arxiv",
+      "title": "OpenMHC: Accelerating the Science of Wearable Foundation Models",
+      "authors": [
+        "Narayan Schuetz",
+        "Yuze Bai",
+        "Lianggang Pan",
+        "Edgar Eggert",
+        "Favour Nerrise",
+        "Juan Delgado-SanMartin",
+        "Max Rosenblattl",
+        "Milana Gurbanova",
+        "Mohammad Asadi",
+        "Anders Johnson",
+        "Paul Schmiedmayer",
+        "Dennis Wang",
+        "Allan Lawrie",
+        "Daniel Seung Kim",
+        "Xin Liu",
+        "Akshay Paruchuri",
+        "Ehsan Adeli",
+        "Euan Ashley",
+        "Kelly W. Zhang"
+      ],
+      "authors_text": "Narayan Schuetz, Yuze Bai, Lianggang Pan, Edgar Eggert, Favour Nerrise, Juan Delgado-SanMartin, Max Rosenblattl, Milana Gurbanova, Mohammad Asadi, Anders Johnson, Paul Schmiedmayer, Dennis Wang, Allan Lawrie, Daniel Seung Kim, Xin Liu, Akshay Paruchuri, Ehsan Adeli, Euan Ashley, Kelly W. Zhang",
+      "abstract": "Mobile and wearable devices offer an unprecedented opportunity for continuous, passive health monitoring and active health coaching. However, the largest wearable datasets are not publicly available for research, and leading wearable foundation models trained on such datasets are rarely open-weight or come with reproducible training code. To accelerate open science in wearable health, we release OpenMyHeartCounts (OpenMHC), the largest and most comprehensive open-access wearable health dataset to date, alongside open-source implementations of recent wearable foundation models. OpenMHC, derived from over a decade of data collected through the My Heart Counts study app, includes >60 million hours of wearable data across 19 sensor channels (e.g., step count, heart rate, sleep, workouts) and up to 169 linked variables, including health, lifestyle, mood, and behavior from 11,894 consenting participants. Furthermore, we introduce a unified, open benchmark that enables standardized comparison of wearable health models across three tracks: health and behavior downstream prediction, multivariate data imputation, and time-series forecasting. We benchmark classical methods alongside recent wearable and multivariate time series foundation models. By open-sourcing data, code, and model weights at this unprecedented scale, we aim to democratize wearable health AI research and enable the community to drive open progress in this domain.",
+      "url": "http://arxiv.org/abs/2607.16235v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16235v1",
+      "tldr": "OpenMHC introduces the largest open-access wearable health dataset, a unified benchmark, and open-source model implementations to democratize and accelerate wearable AI research.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.6920450604260826,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.16203v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716203v1-dococr-eval-a-correction-based-framework-for-ocr-tool-selection-without-ground-truth",
+      "source": "arxiv",
+      "title": "DocOCR-Eval: A Correction-Based Framework for OCR Tool Selection Without Ground Truth",
+      "authors": [
+        "Zihan Xu",
+        "Puzhen Wu",
+        "Lawrence Chun Man Lau",
+        "Wei Liu",
+        "Sirui Li",
+        "Yifan Peng",
+        "Yihao Ding"
+      ],
+      "authors_text": "Zihan Xu, Puzhen Wu, Lawrence Chun Man Lau, Wei Liu, Sirui Li, Yifan Peng, Yihao Ding",
+      "abstract": "Document parsing is a foundational step for document understanding tasks such as visual question answering and key information extraction, as it transforms unstructured scanned images into structured representations by extracting textual, visual, and layout information. While numerous Optical Character Recognition (OCR) engines and multimodal large language models (MLLMs) have been developed for this purpose, selecting an appropriate document parsing solution for a given document collection remains challenging, particularly in label-scarce settings. In this work, we conduct a systematic evaluation of text recognition performance across a diverse set of OCR engines and state-of-the-art MLLMs on multiple scanned document benchmarks spanning different domains and languages. Motivated by the limited contextual reasoning capabilities of many OCR engines and the high cost of manual annotations, we propose DocOCR-Eval, an annotation-free evaluation framework for automatic OCR assessment and selection. DocOCR-Eval employs a three-staged correction and ranking strategy to approximate annotation-based tool ordering without ground-truth labels. We show that aggregating across multiple MLLMs progressively improves alignment with annotation-based rankings. Extensive experiments further demonstrate that reliable OCR tool selection can be achieved in realistic, label-limited settings, providing practical guidance for deploying document parsing systems across diverse real-world document collections.",
+      "url": "http://arxiv.org/abs/2607.16203v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16203v1",
+      "tldr": "The paper proposes DocOCR-Eval, an annotation-free framework that uses a three-staged MLLM-based correction and ranking strategy to automatically select the best OCR tool for a given document collection without requiring ground-truth labels.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Melbourne",
+        "University of Western Australia",
+        "The University of Hong Kong",
+        "Weill Cornell Medicine",
+        "Murdoch University"
+      ],
+      "affiliations_text": "University of Melbourne, University of Western Australia, The University of Hong Kong, Weill Cornell Medicine, Murdoch University",
+      "score": 2.5099162934481485,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2607.16233v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716233v1-token-level-cross-modal-transformer-with-contrastive-multi-task-learning-for-breast-cancer-subtype-classification-and-survival-prediction",
+      "source": "arxiv",
+      "title": "Token-Level Cross-Modal Transformer with Contrastive Multi-Task Learning for Breast Cancer Subtype Classification and Survival Prediction",
+      "authors": [
+        "Suxing Liu Byungwon Min"
+      ],
+      "authors_text": "Suxing Liu Byungwon Min",
+      "abstract": "Integrating heterogeneous genomic and clinical modalities for joint cancer subtype classification and survival prediction remains a key challenge in precision oncology. Existing approaches suffer from three limitations: (1) they treat each modality as a monolithic feature vector, precluding fine-grained token-level interactions across modalities; (2) cross-modal fusion is typically performed through linear weighting or late averaging rather than structured token exchange; and (3) survival and classification objectives are optimized independently, missing a joint regularization signal.",
+      "url": "http://arxiv.org/abs/2607.16233v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16233v1",
+      "tldr": "This paper introduces UMMT, a unified multi-modal Transformer that enables token-level cross-modal interaction, contrastive alignment, and joint multi-task learning for breast cancer subtype classification and survival prediction, achieving state-of-the-art performance on METABRIC and TCGA-BRCA cohorts.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Mokwon University",
+        "Jiangxi Arts & Ceramics Technology Institute"
+      ],
+      "affiliations_text": "Mokwon University, Jiangxi Arts & Ceramics Technology Institute",
+      "score": 2.3416318252592285,
+      "score_text": "2.3"
+    },
+    {
+      "id": "2607.16250v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/21/260716250v1-benchmarking-machine-learning-models-for-multi-omics-based-breast-cancer-prediction",
+      "source": "arxiv",
+      "title": "Benchmarking Machine Learning Models for Multi-Omics-Based Breast Cancer Prediction",
+      "authors": [
+        "Priyanka Paudel",
+        "Madan Baduwal"
+      ],
+      "authors_text": "Priyanka Paudel, Madan Baduwal",
+      "abstract": "Estrogen Receptor (ER) status is a critical biomarker in breast cancer diagnosis, prognosis, and treatment selection. Recent advances in high-throughput sequencing technologies have enabled the generation of multi-omics datasets that provide complementary molecular information for computational prediction tasks. This study presents a systematic benchmarking analysis of classical machine learning models for ER status prediction using transcriptomic (RNA expression), genomic (copy number variation; CNV), and proteomic (RPPA) data from the TCGA-BRCA cohort. A rigorous experimental framework incorporating stratified train-test splitting, stratified five-fold cross-validation, class imbalance handling, and fold-specific feature selection was employed to ensure reliable evaluation and prevent data leakage. Random Forest, XGBoost, LightGBM, CatBoost, Support Vector Machines (SVM), and Logistic Regression were evaluated across single-omic and multi-omic settings. Results demonstrated that RNA expression provided the strongest predictive signal, while multi-omic integration yielded modest but consistent improvements over individual modalities. Among all evaluated approaches, Random Forest achieved the best overall performance in the integrated multi-omic setting, obtaining a balanced accuracy of 90.3\\% and an ROC-AUC of 97.1\\%. Furthermore, recurrent selection of biologically relevant genes, including \\textit{ESR1}, \\textit{PGR}, \\textit{FOXA1}, and \\textit{GATA3}, supported the biological validity of the learned models. These findings indicate that carefully regularized classical machine learning methods remain highly effective for small, high-dimensional genomic datasets and that multi-omic integration provides complementary information for breast cancer ER status prediction.",
+      "url": "http://arxiv.org/abs/2607.16250v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.16250v1",
+      "tldr": "This study benchmarks classical machine learning models for breast cancer ER status prediction using multi-omics data, finding that Random Forest with integrated transcriptomic, genomic, and proteomic data achieves the best performance (balanced accuracy 90.3%, ROC-AUC 97.1%) and that RNA expression provides the strongest predictive signal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Mississippi State University"
+      ],
+      "affiliations_text": "Mississippi State University",
+      "score": 2.283952595770109,
+      "score_text": "2.3"
+    }
+  ]
+}
