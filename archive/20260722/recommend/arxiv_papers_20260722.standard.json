@@ -1,0 +1,722 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-22T06:08:15.497729",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.18286v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718286v1-preference-conditioned-multi-objective-reinforcement-learning-for-runtime-tunable-transit-signal-priority",
+      "source": "arxiv",
+      "title": "Preference-Conditioned Multi-Objective Reinforcement Learning for Runtime-Tunable Transit Signal Priority",
+      "authors": [
+        "Philip-Roman Adam",
+        "Stefanie Schmidtner"
+      ],
+      "authors_text": "Philip-Roman Adam, Stefanie Schmidtner",
+      "abstract": "Transit signal priority (TSP) requires balancing competing objectives: reducing bus delay while limiting adverse impacts on non-bus traffic and avoiding extreme waits for a subset of vehicles. Existing reinforcement-learning (RL) approaches to TSP typically encode transit-aware features (e.g., occupancy and schedule deviation) but optimize a fixed reward or fixed scalarization, which limits operational flexibility when agency priorities change across time-of-day or disruption conditions. We present a preference-conditioned TSP controller, $π(a \\mid s,w)$, that selects the next signal phase under minimum/maximum green and transition-feasibility constraints and can be tuned at runtime via a preference parameter $w$ to trade off bus-priority emphasis against overall traffic delay without retraining. We implement this on top of IntersectionZoo by introducing a constrained signal-control/TSP wrapper, and we extend scenario generation with bus-prevalence augmentation and timetable-based bus insertion to address sparse transit-priority events during training. Experiments against fixed-time control, a rule-based TSP overlay, and fixed-weight PPO specialists show that a single learned conditioned policy spans a smooth empirical trade-off frontier across runtime preferences, outperforms fixed-time and rule-based baselines, and maintains constraint feasibility, while tail-delay diagnostics reveal that non-bus externalities remain limited for moderate preference settings but can increase substantially under high bus-priority weights. The source code of this work is available at https://github.com/urbanAIthi/morl-tsp.",
+      "url": "http://arxiv.org/abs/2607.18286v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18286v1",
+      "tldr": "This paper proposes a preference-conditioned multi-objective reinforcement learning approach for transit signal priority that enables runtime tuning of the bus-priority vs. overall traffic delay trade-off via a single preference parameter without retraining, and demonstrates superior performance over fixed-time and rule-based baselines while respecting operational constraints.",
+      "detailed_reading": {
+        "motivation": "现有基于强化学习的公交信号优先方法通常优化固定奖励或固定标量化，缺乏运行时调整能力；当机构优先级因时段或中断条件变化时，需要重新训练，操作灵活性有限。为此，本文提出一种偏好条件控制器，支持运行时通过偏好参数连续调节公交优先级与整体交通延迟的权衡。",
+        "method": "在IntersectionZoo平台上实现约束信号控制/TSP包装器，构建标准化基准测试环境。输入包括信号状态、交通特征（车道密度、队列、延迟）和公交特征（固定尺寸的公交槽编码，含最近两辆公交距离），以及运行时偏好参数w（公交优先权重）。控制器π(a|s,w)使用Envelope Q-Learning训练，学习偏好条件动作价值函数Q(s,a,w)，通过最大化w^T Q选择下一相位，并在最小绿灯20s、最大绿灯50s和转换可行性约束下执行。训练时采用偏好课程（初始w~U(0.1,0.9)，后扩展至[0,1]），奖励向量包含公交延迟和全车辆延迟，并加入非公交尾部延迟CVaR惩罚（α=0.1，阈值120s，权重0.25）。推理时仅需改变w即可调整权衡。",
+        "result": "在三个交叉口案例（NYC10802, LA2114, CHI2412）上，偏好条件策略在11点偏好扫描中覆盖平滑的经验权衡前沿，超体积指标优于固定时间和基于规则的TSP基线，且与固定权重PPO专家相比，单个策略即可实现连续权衡而无需重新训练。尾部延迟诊断显示，适中偏好（w=0.5）下非公交外部性有限，高公交权重（w=0.7）下非公交车辆尾部延迟显著增加。",
+        "conclusion": "偏好条件多目标强化学习方法实现了运行时可调的公交信号优先控制，单个策略在连续偏好空间内提供平滑权衡，避免了重新训练，且性能优于传统基线和固定权重专家策略。该方法在保持约束可行的同时，能有效管理非公交交通的负外部性，适用于机构优先级动态变化的场景。",
+        "key_details": "关键细节包括：使用Envelope Q-Learning训练偏好条件Q函数，Q网络为4层MLP（256单元）；采用最小绿灯20s、最大绿灯50s、黄灯转换3s，决策间隔4s，动作不可行时施加120.0惩罚；输入观测含每车道2个公交槽的距离编码（0-250m归一化）；训练时偏好课程和3次梯度更新/环境步；局限为仅评估单交叉口、未使用车辆占用/时刻偏差特征、仿真假设可能限制实际部署。"
+      },
+      "affiliations": [
+        "Technische Hochschule Ingolstadt"
+      ],
+      "affiliations_text": "Technische Hochschule Ingolstadt",
+      "score": 5.241683244116403,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2607.18309v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718309v1-spatio-temporal-prediction-of-unsteady-airfoil-aerodynamics-using-augmented-graph-neural-ordinary-differential-equations-with-exogenous-controls",
+      "source": "arxiv",
+      "title": "Spatio-Temporal Prediction of Unsteady Airfoil Aerodynamics Using Augmented Graph Neural Ordinary Differential Equations with Exogenous Controls",
+      "authors": [
+        "Henrik Lange",
+        "Reik Thormann",
+        "Philipp Bekemeyer"
+      ],
+      "authors_text": "Henrik Lange, Reik Thormann, Philipp Bekemeyer",
+      "abstract": "Unsteady aerodynamic phenomena, such as gusts, turbulence, and fluid-structure interactions affect an aircraft during flight. For design, optimisation and certification, it is indispensable to quantify such unsteady aerodynamic effects. Industry-standard computational fluid dynamics methods, such as solving the unsteady Reynolds-averaged Navier-Stokes equations or the linearized frequency domain method, are either computationally expensive or restricted by assumptions like linearity. Once trained, machine learning methods are capable of computing non-linear relationships very fast, making them suitable as surrogate models. By autoregressively applying graph neural networks (GNNs), operating on a discretised spatial domain, spatio-temporal predictions can be made. However, autoregressive GNNs suffer from error accumulation leading to unstable rollouts over time. Here we show that combining GNNs with augmented Neural Ordinary Differential Equations yields temporally stable predictions of the surface forces on a pitching airfoil. We found that our approach, called GNODE, based on Graph Neural Ordinary Differential Equations, provides temporally more stable, spatially smoother, and overall more accurate results than an autoregressive GNN baseline. Tests are conducted on a dataset consisting of a simulations of a pitching airfoil, including transonic shocks, transient behaviour and dynamic non-linearities. Augmenting GNODEs with additional latent dimensions improves the expressivity and accuracy by capturing underlying history effects. The developed method demonstrates an approach that is suitable to model non-linear spatio-temporal systems with exogenous inputs.",
+      "url": "http://arxiv.org/abs/2607.18309v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18309v1",
+      "tldr": "This paper introduces GNODE, an augmented graph neural ordinary differential equation framework that achieves temporally stable and accurate spatio-temporal predictions of unsteady airfoil aerodynamics under exogenous control inputs.",
+      "detailed_reading": {
+        "motivation": "非定常气动力预测对飞行器设计、优化与认证至关重要，但高保真URANS方法计算成本极高，线性化方法仅适用于小扰动，而自回归图神经网络存在误差累积导致长时间预测不稳定的缺陷。因此需要一种能够稳定、准确预测非定常时空气动场的替代模型。",
+        "method": "本方法提出GNODE框架，将图神经网络（GNN）与神经常微分方程（Neural ODE）结合。数据来源于URANS模拟的二维俯仰翼型表面网格节点上的流场变量（如压力系数）及控制输入（俯仰角、角速度）。空间域构建为图结构（节点为网格点，边基于邻接关系），编码器将节点特征映射到潜在空间，处理器采用多层消息传递机制更新节点表示，解码器映射回物理量。时间演化通过神经常微分方程建模，使用ODE求解器从初始状态积分至目标时刻，并引入额外潜在维度（状态增强）以捕捉历史效应。训练过程以监督方式最小化预测与参考数据之间的均方误差。",
+        "result": "在包含跨声速激波、瞬态行为和非线性的俯仰翼型数据集上，GNODE相较于自回归GNS基线在长时间稳定性、空间平滑性和总体预测精度上表现更优。增强维度有效减少了预测与参考数据之间的相位滞后，并提升了激波位置和幅值的捕捉能力，表明该方法在复杂非定常流动建模中具有优势。",
+        "conclusion": "GNODE框架成功实现了对具有外源输入的非线性时空系统（如非定常气动力）的高效替代建模，克服了自回归方法的误差累积问题，为快速、准确的气动力预测提供了新途径，有望应用于工程设计优化与认证分析。",
+        "key_details": "数据基于URANS模拟（NACA 64A010翼型正弦俯仰运动，多种减缩频率与振幅）。损失函数为预测与真实节点值的均方误差。关键超参数包括潜在维度（如4维）、消息传递层数（6层）及学习率。状态增强通过添加冗余潜在变量提升表达力，但增加模型复杂度。局限性：模型泛化至未见运动参数或三维构型的能力尚未验证，且依赖于网格拓扑结构。"
+      },
+      "affiliations": [
+        "Airbus Operations",
+        "German Aerospace Center (DLR)"
+      ],
+      "affiliations_text": "Airbus Operations, German Aerospace Center (DLR)",
+      "score": 4.722461889980307,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2607.18290v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718290v1-sechkan-kolmogorov-arnold-networks-with-hyperbolic-secant-functions",
+      "source": "arxiv",
+      "title": "SechKAN: Kolmogorov-Arnold Networks with Hyperbolic Secant Functions",
+      "authors": [
+        "Hoang-Thang Ta"
+      ],
+      "authors_text": "Hoang-Thang Ta",
+      "abstract": "In recent years, Kolmogorov-Arnold Networks (KANs) have attracted increasing attention due to their effectiveness in machine learning and scientific computing tasks, offering a new paradigm for neural network design. In this paper, we present SechKAN, a KAN architecture based on hyperbolic secant (sech) functions. The hyperbolic secant basis is used for its smooth bell-shaped form, localized responses, and stable gradients. We employ 1D linear transformations to reduce the number of parameters, allowing SechKAN to remain comparable to multilayer perceptrons (MLPs) in model size. Experimental results indicate the effectiveness of SechKAN in function fitting, PDE problems, and image classification tasks on benchmark datasets, including MNIST, Fashion-MNIST, CIFAR-10, and CIFAR-100. SechKAN achieves superior performance compared to MLPs and other KAN variants while maintaining a similar number of parameters. However, its running time, while better than that of other KAN variants, is slightly longer than that of MLPs.",
+      "url": "http://arxiv.org/abs/2607.18290v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18290v1",
+      "tldr": "SechKAN proposes a Kolmogorov-Arnold Network using hyperbolic secant functions with parameter-efficient linear transformations, achieving superior performance on function fitting, PDE problems, and image classification compared to MLPs and other KAN variants while maintaining a similar number of parameters.",
+      "detailed_reading": {
+        "motivation": "现有KANs参数过多、训练时间长，且B-spline等基函数在GPU上效率不高，亟需一种参数高效、GPU友好的新架构，在保持模型大小与MLP相当的同时提升性能。",
+        "method": "提出SechKAN架构，核心是使用双曲正割(sech)函数作为基函数，其光滑钟形、局部响应和稳定梯度特性有利于训练。每层先进行可选数据归一化（Norm1），再应用G个sech基函数得到含网格维度的表示，随后通过1D线性变换（网格投影）将最后一维从G压缩至1以大幅减少参数量。之后经过可选归一化（Norm2）、激活函数（如SiLU）和特征投影得到输出，同时采用跳跃连接将归一化后的输入直接加至输出。整个模型保持与MLP相当的参数量。",
+        "result": "在函数拟合、PDE问题（Navier-Stokes和浅水方程）以及图像分类（MNIST、Fashion-MNIST、CIFAR-10、CIFAR-100）基准测试上，SechKAN在参数量相当的情况下取得了优于MLP及其他KAN变体的性能。运行时间虽优于其他KAN变体，但略长于MLP。",
+        "conclusion": "SechKAN通过sech基函数和1D线性变换实现了参数高效、性能优越的KAN架构，验证了其在多项任务中的有效性，但仍存在训练时间略慢于MLP的局限。",
+        "key_details": "关键设计包括：sech函数光滑、有界且无穷可微，有助于稳定梯度但可能引发梯度消失；网格大小G控制基函数数量，影响模型容量；使用两步归一化（Norm1和Norm2）和跳跃连接提升训练稳定性；参数量减少策略为1D网格投影，使每层参数量与MLP相当；实验中对网格大小、激活函数和归一化策略进行了消融分析，提供了配置指南；局限性在于推理时间仍稍长于MLP，且对sech基函数的梯度行为需谨慎调参。"
+      },
+      "affiliations": [
+        "University of Information Technology",
+        "Vietnam National University"
+      ],
+      "affiliations_text": "University of Information Technology, Vietnam National University",
+      "score": 4.635070060968094,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.18314v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718314v1-interactive-training-2-auditable-control-plane-for-live-model-training",
+      "source": "arxiv",
+      "title": "Interactive Training 2: Auditable Control Plane for Live Model Training",
+      "authors": [
+        "Wentao Zhang",
+        "Xuanhe Pan",
+        "Han Zhou",
+        "Yang Lu",
+        "Yuntian Deng"
+      ],
+      "authors_text": "Wentao Zhang, Xuanhe Pan, Han Zhou, Yang Lu, Yuntian Deng",
+      "abstract": "Experiment trackers show how training is progressing, but changing a live run still usually requires trainer-specific code. We present Interactive Training 2, an open-source control plane for steering training through a shared protocol. Training applications declare which settings and actions they expose, humans and automated controllers submit requests through the same interface, and the training loop validates and applies them at safe control points. A customized Aim workspace combines live metrics and controls with a chronological record of requests and outcomes. We demonstrate the system across five NLP and reinforcement-learning workflows. The released code and traces provide a reusable foundation for auditable human- and agent-guided training.",
+      "url": "http://arxiv.org/abs/2607.18314v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18314v1",
+      "tldr": "Interactive Training 2 introduces an open-source control plane with a shared protocol that enables humans and automated controllers to audibly steer live model training through typed settings and actions applied at safe control points, demonstrated across multiple NLP and reinforcement learning workflows.",
+      "detailed_reading": {
+        "motivation": "现有实验追踪器虽能显示训练进展，但修改正在运行的训练仍需编写训练器特定的回调或逻辑，缺乏通用接口。研究者希望根据实时行为（如损失曲线、评估结果）灵活调整学习率、数据平衡或保存检查点，但现有工具碎片化，无法统一实现可审计的人工或自动化干预。",
+        "method": "提出Interactive Training 2，一个开源控制平面，通过共享协议实现训练实时干预。训练应用注册类型化设置（knob）和结构化动作（action），例如学习率、评估、保存检查点；人类、脚本或LLM代理通过同一HTTP API提交请求；训练循环在显式控制点（如session.step()调用）验证并应用请求，并记录成功或失败结果。系统基于Python的TrainingSession，可选LLM代理执行计划（接收任务和设置列表）、行动（根据实时指标调用注册动作）和反思（总结教训用于下一轮）。集成Aim作为监控和控制UI，提供实时指标、请求队列和事件日志。支持HuggingFace回调、优化器包装和直接PyTorch循环三种集成方式，在五个工作流（情感分类、数据混合、层级GPT、Muon-AdamW GPT、RLVR计数）中验证。",
+        "result": "核心发现：同一协议可表示多种类型更改（如学习率、27个层级学习率、混合权重、课程难度）；每个请求产生记录结果（如save_checkpoint请求返回action_result和checkpoint_saved事件）；后续回合能利用先前反思（如情感分类R8反思不对称类别权重后R9/R10采用该策略，Muon-AdamW R4反思动量未尝试后R5降低动量值）。五个工作流均记录多轮分数提升：情感分类验证损失从0.354降至0.220，情感混合Macro-F1从0.568增至0.656，层级GPT验证损失从5.346降至5.055，Muon-AdamW GPT验证损失从4.797降至4.429，RLVR计数最难准确率从0.032增至0.232。",
+        "conclusion": "Interactive Training 2将实时训练干预从实验特定逻辑转化为可复用接口，使训练应用定义可修改项和安全应用点，控制器通过共享协议提交请求，日志记录完整决策序列。这种分离简化了训练转向、复用和跨框架检查，为交互式训练工具以及人类与自动代理监督学习提供了基础。",
+        "key_details": "数据/输入：训练任务自带数据集，控制平面不涉及数据增强。建模：关键模块包括TrainingSession（管理设置、动作、请求队列和事件日志）、注册knob（类型、范围、步长）、action（命令和参数）、LLM代理（GPT-5.5高推理努力，三阶段流程）。训练流程：session.step()在控制点记录指标、运行控制器、处理请求、调用处理函数、返回StepControl（指示停止、评估、保存等）。损失函数：由训练任务定义，控制平面不修改损失。超参：控制点频率（如每100步调用eval/controller）、请求队列处理方式（非阻塞HTTP返回ID，后续查询结果）。复杂度：训练循环等待LLM响应，不支持迟到的响应；自定义动作需应用自行检查；高安全性场景需额外批准门、资源预算和回滚策略。局限性：LLM响应延迟影响训练；代理无法保证安全最优动作。"
+      },
+      "affiliations": [
+        "University of Waterloo",
+        "University of Wisconsin-Madison"
+      ],
+      "affiliations_text": "University of Waterloo, University of Wisconsin-Madison",
+      "score": 4.5996448006136,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.18294v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718294v1-uncertainty-quantification-for-ai-driven-crash-simulation-surrogates-a-comparative-study-of-monte-carlo-dropout-and-deep-ensemble-on-open-source-bumper-beam-benchmark",
+      "source": "arxiv",
+      "title": "Uncertainty Quantification for AI-Driven Crash Simulation Surrogates: A Comparative Study of Monte Carlo Dropout and Deep Ensemble on Open-Source Bumper Beam Benchmark",
+      "authors": [
+        "Sudeep Chavare"
+      ],
+      "authors_text": "Sudeep Chavare",
+      "abstract": "Machine learning surrogate models are increasingly being explored in engineering product development to augment simulation-driven design, offering near-instantaneous predictions that complement computationally expensive high-fidelity analyses. However, a critical gap limits their adoption in safety-critical workflows: a point prediction without an accompanying uncertainty estimate cannot tell an engineer when the model should not be trusted. This work presents a systematic, head-to-head comparison of two widely used uncertainty quantification approaches -- Monte Carlo Dropout and Deep Ensembles -- applied to an open-source surrogate pipeline built on NVIDIA PhysicsNeMo. A key contribution is the use of concrete dropout, a built-in PhysicsNeMo capability that eliminates the dropout rate as a manual hyperparameter by learning it end-to-end during training, directly addressing the most common criticism of Monte Carlo Dropout-based uncertainty quantification. Automotive crash simulation is used as the application domain, with a steel bumper beam impact problem serving as the benchmark. Both methods are evaluated on identical held-out simulations and compared on point accuracy, uncertainty band calibration, and computational cost. The results reveal a fundamental trade-off between accuracy and calibration that challenges the common assumption that deep ensembles are the default gold standard for surrogate uncertainty quantification. The findings demonstrate that well-calibrated, hyperparameter-free uncertainty estimates are achievable within a fully open-source engineering workflow at a fraction of the computational cost of ensemble approaches.",
+      "url": "http://arxiv.org/abs/2607.18294v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18294v1",
+      "tldr": "This paper compares Monte Carlo Dropout with learned concrete dropout rates and Deep Ensembles for uncertainty quantification in crash simulation surrogates, finding that concrete dropout offers well-calibrated, hyperparameter-free uncertainty estimates at a fraction of the computational cost, challenging the assumption that deep ensembles are the default gold standard.",
+      "detailed_reading": {
+        "motivation": "机器学习代理模型在工程设计中能提供快速预测，但缺乏不确定性估计限制了其在安全关键工作流中的采用，因为点预测无法告知工程师何时模型不可信。本研究旨在通过系统比较蒙特卡洛丢弃和深度集成两种不确定性量化方法，为AI驱动的碰撞模拟代理提供可校准的不确定性估计，以促进其工业应用。",
+        "method": "基于OpenRadioss生成钢制保险杠梁碰撞模拟数据，设计变量为两个组件厚度，通过拉丁超立方采样生成90个设计点（85训练/5测试）。代理模型采用NVIDIA PhysicsNeMo框架中的GeoTransolver架构，输入5维特征（节点坐标+厚度），输出303维位移轨迹（101时间步×3分量）。不确定性量化方法比较：蒙特卡洛丢弃使用具体丢弃（25个可学习丢弃率层，初始p=0.10，训练时联合优化丢弃率与网络权重，推理时50次随机前向传播）和深度集成（10个独立初始化的确定性GeoTransolver，每个训练200轮，取均值与方差）。两种方法共享相同架构、数据集、优化器（AdamW，lr 1e-4，余弦退火）和批次大小（2），唯一区别是丢弃层的存在与否。",
+        "result": "蒙特卡洛丢弃在五个保留测试算例上平均相对L2误差4.50%，±2σ带的经验覆盖率达到100%（所有时间步的真实值均在带内），平均带宽13.75mm，且带宽与预测准确性呈正相关（最差算例带宽最大）。深度集成平均相对L2误差2.48%（优于丢弃），但平均覆盖率仅81.2%，平均带宽6.48mm，表现出过自信（带窄且覆盖不足），且一个异常成员（种子3）误差6.69%贡献了部分不确定性。核心发现是准确性与校准之间的权衡：丢弃虽精度稍低但校准良好，集成精度高但校准差，挑战了深度集成是代理不确定性量化黄金标准的常见假设。",
+        "conclusion": "本研究证明，在完全开源的工作流程中，使用具体丢弃的蒙特卡洛方法能以远低于深度集成的计算成本（单次训练约2.6小时 vs. 集成约10小时）获得良好校准、无需手动调整超参数的不确定性估计。这些发现表明，对于安全关键工程应用，校准良好的不确定性比单纯的精度更重要，为工业采用提供了可信的路径。",
+        "key_details": "关键方法论细节：具体丢弃通过连续松弛使丢弃率可学习，避免了手动调整超参数；深度集成需要10倍训练成本，且存在收敛到次优解的可能性。实现细节：数据标准化，损失函数为相对L2损失（丢弃模型额外加熵正则化，lambda=1e-3）；使用单节点（节点1806）X方向位移历史作为工程KPI；校准度量采用±2σ带内的经验覆盖率与平均带宽。局限性：仅针对单一基准问题（保险杠梁）和单一KPI节点，未考虑多节点或多输出不确定性；集成模型使用10个成员，可能不足以代表典型工程折衷；计算资源为免费Colab T4/Pro A100，可能限制可重复性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.454860652864005,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2607.18306v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718306v1-gradient-energy-guided-block-wise-perturbations-for-sharpness-aware-minimization",
+      "source": "arxiv",
+      "title": "Gradient-Energy Guided Block-Wise Perturbations for Sharpness-Aware Minimization",
+      "authors": [
+        "Zhen Huang",
+        "Jiaxin Deng",
+        "Junbiao Pang"
+      ],
+      "authors_text": "Zhen Huang, Jiaxin Deng, Junbiao Pang",
+      "abstract": "Sharpness-Aware Minimization (SAM) improves generalization by minimizing the worst-case loss in a local parameter neighborhood. Standard SAM implicitly allocates its global perturbation budget across parameter blocks according to instantaneous minibatch gradient norms. Such an allocation can be noisy and may not reflect the sensitivity that blocks accumulate throughout training. We propose Gradient-Energy Adaptive Radius SAM (GEAR-SAM), which maintains an exponential moving average (EMA) of squared block gradients as a lightweight, curvature-related sensitivity signal and allocates the fixed SAM budget through a closed-form constrained optimization. GEAR-SAM preserves the global SAM radius, requires no Hessian-vector products or explicit Fisher estimation, and adds only scalar state beyond SAM. Experiments on image classification, transfer learning, noisy-label learning, and partition studies demonstrate improved generalization and robustness across architectures and tasks. More broadly, GEAR-SAM provides a dynamic view of sharpness-aware optimization: a fixed perturbation budget should be redistributed as the sensitivity of functional network blocks evolves during training.",
+      "url": "http://arxiv.org/abs/2607.18306v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18306v1",
+      "tldr": "GEAR-SAM improves Sharpness-Aware Minimization by using an exponential moving average of squared block gradients to dynamically and stably allocate a fixed perturbation budget across network blocks, leading to better generalization and robustness.",
+      "detailed_reading": {
+        "motivation": "标准SAM通过瞬时梯度范数隐式分配全局扰动预算，这种分配易受小批量噪声干扰且无法反映参数块在训练过程中的累积敏感性。本文提出基于梯度能量的自适应半径分配方法，利用历史梯度二阶矩作为持久灵敏度信号，在保持全局预算不变的前提下动态调整各功能块的扰动半径。",
+        "method": "将网络划分为功能块（如残差组、分类头部），每个训练迭代中计算各块小批量梯度的平方范数（梯度能量），通过指数移动平均（EMA）维护历史敏感性分数。根据闭式约束优化：在全局扰动预算ρ²下最大化线性替代目标，得到各块分配半径r_b=ρ·s_b/√(∑_j s_j²)，确保全局预算不变。在每个块内沿梯度方向施加扰动后计算损失，完成参数更新。该方法仅需为每个块维护一个标量EMA状态，无需Hessian或显式Fisher计算。",
+        "result": "在CIFAR-10/100图像分类、迁移学习、噪声标签学习等任务上，GEAR-SAM优于标准SAM及多种变体（ASAM、GSAM等），在不同网络架构（ResNet、VGG、DenseNet等）中一致提升测试准确率和泛化鲁棒性。分区研究验证了基于功能块的划分粒度对性能的有效性。",
+        "conclusion": "固定全局扰动预算应根据网络功能块在训练过程中的敏感性动态重新分配。GEAR-SAM通过轻量的历史梯度能量代理实现了合理的动态分配，为锐度感知优化提供了训练过程中块敏感性演化的视角，是一种简单且高效的改进策略。",
+        "key_details": "关键点包括：1）使用EMA累积的梯度能量作为曲率相关代理，其理论基础来自梯度二阶矩与经验Fisher及期望Hessian的联系；2）块划分遵循功能单元原则（如残差块、归一化层与权重层同块），避免分割归一化参数；3）闭式分配公式具有尺度不变性，不引入额外超参数（仅EMA衰减系数β，默认0.9）；4）每块仅存储一个标量状态，计算开销极低；5）局限性：未显式建模跨块Hessian交互，且基于一阶方向进行扰动，代理信号在远离稳定点时混合一阶与二阶贡献。"
+      },
+      "affiliations": [
+        "Beijing University of Technology"
+      ],
+      "affiliations_text": "Beijing University of Technology",
+      "score": 4.353930429550557,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.18288v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718288v1-multi-timescale-latent-action-drl-for-joint-optimization-in-edge-cloud-networks",
+      "source": "arxiv",
+      "title": "Multi-Timescale Latent-Action DRL for Joint Optimization in Edge-Cloud Networks",
+      "authors": [
+        "Vo Phi Son",
+        "Van-Dinh Nguyen",
+        "Ngoc Hung Nguyen",
+        "Trinh Van Chien",
+        "Symeon Chatzinotas"
+      ],
+      "authors_text": "Vo Phi Son, Van-Dinh Nguyen, Ngoc Hung Nguyen, Trinh Van Chien, Symeon Chatzinotas",
+      "abstract": "Load imbalance across edge and cloud layers degrades latency performance in hierarchical edge-cloud computing (HECC) systems under dynamic task arrivals and heterogeneous resources, leading to severe queuing delays and inefficient resource utilization. To address this challenge, we study a joint service placement, computational delegation, and power control (JSCP) problem to minimize the average end-to-end (e2e) latency. The resulting JSCP problem is a mixed-integer nonconvex and NP-hard optimization problem due to the strong coupling between discrete and continuous variables. To enable tractable optimization and stable system adaptation, we exploit the inherent difference in decision dynamics and decompose the problem into long-term system configuration and short-term resource allocation subproblems. Based on this formulation, we propose a two-timescale multi-layer deep reinforcement learning framework with a latent action space (2T-MDRL-LA) to jointly optimize service placement, user association, computational delegation, task offloading, and user transmit power. A latent action representation based on a variational autoencoder is introduced to efficiently compress the high-dimensional combinatorial action space. Simulation results demonstrate that the proposed framework effectively adapts to dynamic network conditions and achieves near-optimal performance compared to branch-and-bound solutions. It achieves up to a 20.8% reduction in average e2e latency and a 13% improvement in resource utilization over the scheme without the computational delegation, while converging approximately 50% faster than conventional proximal policy optimization.",
+      "url": "http://arxiv.org/abs/2607.18288v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18288v1",
+      "tldr": "The paper proposes a two-timescale deep reinforcement learning framework with a latent action space to jointly optimize service placement, computational delegation, and power control in hierarchical edge-cloud networks, achieving near-optimal latency and resource utilization with faster convergence.",
+      "detailed_reading": {
+        "motivation": "在分层边缘-云计算系统中，动态任务到达和异构资源导致边缘和云层之间的负载不平衡，从而显著增加端到端延迟并降低资源利用率。现有方法常忽略计算委派或无法处理高维组合动作空间，缺乏一个统一的可扩展优化框架。",
+        "method": "该研究构建了联合服务放置、计算委派和功率控制（JSCP）问题，并将其分解为长期系统配置和短期资源分配两个子问题。提出两时间尺度多层深度强化学习框架（2T-MDRL-LA），利用变分自编码器（VAE）对长期离散动作空间进行潜在表示压缩，并结合映射表实现高效探索；短期连续动作采用近端策略优化（PPO）进行稳定更新。系统输入为当前网络状态（包括任务队列、信道条件和资源状态），输出为服务放置、用户关联、计算委派、任务卸载和发射功率的联合决策。训练过程采用两时间尺度交替更新：长期决策每时间槽更新一次，短期决策每子时间槽更新一次。",
+        "result": "仿真结果表明，所提框架能有效适应动态网络条件，与分支定界最优解相比实现近优性能，平均端到端延迟降低高达20.8%，资源利用率提升13%，且收敛速度比传统PPO快约50%。",
+        "conclusion": "该工作通过两时间尺度分解和潜在动作空间压缩，有效解决了分层边缘-云计算系统中联合优化的可扩展性和稳定适应性问题，显著提升延迟和资源效率。",
+        "key_details": "关键方法论细节包括：利用决策动态差异将NP-hard混合整数非凸问题分解为长期配置和短期分配子问题；VAE用于将高维组合动作映射为低维潜在表示再通过解码器映射回原始动作空间，从而缩小探索空间；PPO作为基础算法确保更新稳定性并支持连续控制；系统考虑M/M/c队列模型以刻画动态负载；仿真假设大量用户、边缘节点和服务的场景；局限性包括未考虑用户移动性和无线信道的大规模衰落变化，且VAE训练可能引入额外开销。"
+      },
+      "affiliations": [
+        "University of Luxembourg",
+        "Trinity College Dublin",
+        "Phenikaa University",
+        "VinUniversity",
+        "Hanoi University of Science and Technology"
+      ],
+      "affiliations_text": "University of Luxembourg, Trinity College Dublin, Phenikaa University, VinUniversity, Hanoi University of Science and Technology",
+      "score": 4.237059867460951,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.18293v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718293v1-one-student-many-teachers-multi-task-on-policy-distillation-via-soft-prompt-privileged-context",
+      "source": "arxiv",
+      "title": "One Student, Many Teachers: Multi-Task On-Policy Distillation via Soft-Prompt Privileged Context",
+      "authors": [
+        "Yingzi Ma",
+        "Zichen Zhu",
+        "Ming Jiang",
+        "Chaowei Xiao"
+      ],
+      "authors_text": "Yingzi Ma, Zichen Zhu, Ming Jiang, Chaowei Xiao",
+      "abstract": "On-policy self-distillation (OPSD) teaches large language models new skills through a teacher that shares the student's backbone and supervises its own rollouts. Existing teachers either inject privileged context at the input -- inducing post-hoc rationalization -- or fine-tune weights, accumulating drift and forgetting across tasks. We propose \\method, whose teacher differs from the student only by a learnable soft prompt: trained on $(x, y_\\text{gold})$ pairs with the backbone frozen, the prompt yields a task-specific teacher that preserves the student's exact representational geometry. \\method\\ extends naturally to multi-task settings by routing each example in a merged corpus to its corresponding soft-prompt teacher, allowing a single student to absorb knowledge from $K$ teachers in parallel; at inference, all prompts are discarded. On Qwen3-1.7B-Base and Phi-4-mini-instruct across four tasks (Science, Tool Use, Biology, Math), the single-task variant (OPD with a PT teacher) matches or exceeds full fine-tuning while training orders of magnitude fewer parameters, and the multi-task variant achieves the best overall average ($56.2$ on Qwen3-1.7B-Base) while preserving general-capability benchmarks -- in contrast to sequential SFT, which degrades both.",
+      "url": "http://arxiv.org/abs/2607.18293v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18293v1",
+      "tldr": "PromptSD introduces a soft-prompt-tuned teacher for on-policy distillation that preserves the student's representational geometry, enabling a single student to absorb knowledge from multiple tasks in parallel without catastrophic forgetting, achieving state-of-the-art results on four tasks while training orders of magnitude fewer parameters than full fine-tuning.",
+      "detailed_reading": {
+        "motivation": "现有在线策略自蒸馏方法中，教师模型要么在输入中注入特权上下文导致事后合理化，要么微调权重导致多任务间漂移和遗忘。为了在保持学生表示几何不变的前提下提供可吸收的监督信号并支持多任务并行蒸馏，本文提出基于软提示的教师构建方案。",
+        "method": "提出PromptSD框架。对于每个任务k，冻结学生模型πθ的骨干参数，训练一组可学习的连续软提示P_k，在(x, y_gold)对上通过标准监督微调优化，得到任务特定教师π_{θ+P_k*}，其与学生共享所有Transformer参数仅输入端不同。多任务蒸馏时，合并所有任务数据集并保留任务标签k，每次学生更新时将样本路由到对应教师。学生通过在线策略逆KL散度在其自身推演上更新，梯度来自教师分布。推理时丢弃所有软提示，仅使用学生模型。",
+        "result": "在Qwen3-1.7B-Base和Phi-4-mini-instruct上对Science、Tool Use、Biology、Math四个任务的实验表明：单任务变体匹配或超越全微调及LoRA，且是唯一教师准确率超过学生自身的配置；多任务变体取得最高平均分56.2（Qwen3-1.7B-Base），同时保持MMLU-Pro、HellaSwag、TruthfulQA等通用能力基准，而顺序SFT则导致训练任务能力和通用能力均退化。",
+        "conclusion": "软提示教师自然满足在线策略蒸馏的三个期望：中等初始重叠、可被学生吸收的能力差距、无事后合理化。多任务PromptSD通过并行路由有效避免灾难性遗忘，并推导出教师设计原则：教师家族应与任务类型匹配（SFT用于能力注入，RL用于激发），教师规模不如是否携带新知识重要。",
+        "key_details": "数据：四个任务（Science、Tool Use、Biology、Math）的(x, y_gold)对，来自标准基准或定制数据集。损失：教师用标准监督交叉熵训练软提示，学生用在线逆KL散度L(θ)=KL[π_s||π_t]更新。超参：软提示为可学习连续向量，长度默认？实验使用Qwen3-1.7B-Base和Phi-4-mini-instruct，提示长度未明确。复杂度：仅训练软提示参数（远少于全微调），推理无额外开销。约束：需任务标签路由，依赖标注数据训练教师。局限性：软提示数量随任务线性增长；方法假设冻结骨干足够表达不同任务，可能在任务差异极大时受限。"
+      },
+      "affiliations": [
+        "University of Wisconsin--Madison",
+        "Johns Hopkins University",
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "University of Wisconsin--Madison, Johns Hopkins University, Nanyang Technological University",
+      "score": 4.159465929703192,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.18284v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718284v1-compressing-what-matters-neuron-importance-meets-data-aware-low-rank-approximation-for-language-model-compression",
+      "source": "arxiv",
+      "title": "Compressing What Matters: Neuron Importance Meets Data-Aware Low Rank Approximation for Language Model Compression",
+      "authors": [
+        "Athanasios Ntovas",
+        "Alexandros Doumanoglou",
+        "Petros Drakoulis",
+        "Dimitris Zarpalas"
+      ],
+      "authors_text": "Athanasios Ntovas, Alexandros Doumanoglou, Petros Drakoulis, Dimitris Zarpalas",
+      "abstract": "To excel at their domain large language models are comprised of billions of parameters. Yet this comes at the cost of huge memory requirements restricting their applicability in resource-constrained environments. To address the problem of neural network (NN) compression Singular Value Decomposition (SVD) has played a key role as a fundamental component for matrix compression through decomposition. To minimize compression error and to maximize the efficacy of the compressed model on the downstream tasks previous works focused on low-rank approximation of the NN's weight matrices either from the perspective of parameter importance or per-layer functional equivalence. While previous works studied the aforementioned perspectives in isolation in this work we are investigating the effectiveness of an approach that combines ideas from these two perspectives in a single objective. In parallel to this an important aspect that affects the compression quality is the distribution of the compression rate across layers and NN parameters. Earlier works mostly considered distributing the compression rate uniformly across layers and network weights or relied on computationally expensive heuristic search. Contrary to them in this work we propose an enhanced and computationally efficient algorithm for dynamic compression rate allocation. Experimental results support the efficacy of the proposed approach which performs on par or substantially better than the previous state-of-the-art especially under high compression ratios.",
+      "url": "http://arxiv.org/abs/2607.18284v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18284v1",
+      "tldr": "This paper proposes a language model compression method that combines neuron importance with data-aware low-rank approximation and an efficient dynamic compression rate allocation algorithm, achieving performance on par with or better than prior state-of-the-art, especially under high compression ratios.",
+      "detailed_reading": {
+        "motivation": "大语言模型参数量巨大导致高内存需求，限制了在资源受限环境中的应用。先前基于奇异值分解的压缩方法要么从参数重要性角度，要么从逐层功能等价角度进行低秩近似，但未结合两者；同时压缩率分配常采用均匀分配或昂贵的启发式搜索。本文旨在结合这两种视角并提出高效的动态压缩率分配算法。",
+        "method": "该方法将参数重要性（神经元重要性）与数据感知的低秩近似结合为统一目标，对权重矩阵进行低秩分解。具体而言，通过计算神经元重要性得分加权到低秩近似损失中，同时利用少量校准数据感知输出分布。此外，提出一种计算高效的动态压缩率分配算法，基于各层对最终任务的重要性得分自适应分配压缩预算，避免均匀分配或昂贵搜索。整个流程包括：为每层计算重要性、根据预算分配压缩率、执行带重要性加权的SVD分解，最后微调恢复性能。",
+        "result": "实验结果表明，该方法在多个语言模型压缩任务上性能与先前最优方法持平或显著超越，特别是在高压缩比场景下优势明显。例如在困惑度（perplexity）和下游任务准确率等指标上均有提升，证明了综合视角与动态分配的有效性。",
+        "conclusion": "提出的结合神经元重要性和数据感知低秩近似的压缩框架，以及高效的动态压缩率分配算法，有效提升了大型语言模型的压缩效率与任务性能，尤其适用于高压缩比场景，为资源受限环境下的模型部署提供了可行方案。",
+        "key_details": "关键细节包括：1）统一目标中融合了神经元重要性权重与数据感知的重建误差，使用校准数据计算输入激活；2）动态压缩率分配算法基于重要性评分进行迭代调整，复杂度低；3）方法无需额外训练，仅需少量校准数据和一次前向传播计算重要性；4）局限性在于校准数据的选择可能影响压缩效果，且动态分配需一定计算开销。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.146329944372061,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.18291v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/22/260718291v1-dual-domain-fused-lstm-modeling-for-efficient-time-dependent-reliability-analysis",
+      "source": "arxiv",
+      "title": "Dual-domain fused LSTM modeling for efficient time-dependent reliability analysis",
+      "authors": [
+        "Yixin Zhang",
+        "Mingyang Li",
+        "Zichao Jiang"
+      ],
+      "authors_text": "Yixin Zhang, Mingyang Li, Zichao Jiang",
+      "abstract": "Time-dependent reliability analysis is crucial for ensuring the long-term safety and performance of engineering systems under uncertainties. However, traditional surrogate model methods often struggle to incorporate time-independent random variables and capture their complex interactions with time-dependent stochastic processes. To overcome this limitation, this paper proposes a dual-domain fused long short-term memory (DDF-LSTM) model for efficient and accurate time-dependent reliability analysis. A novel network architecture is developed to jointly process information from both time-dependent and time-independent domains. Specifically, the time-independent variables are embedded into the initial hidden states, and a fully connected layer is introduced to map both LSTM outputs and time-independent variables into the final output space. Furthermore, an improved loss function is designed to emphasize the model's sensitivity to minimum responses, thereby improving the precision of failure probability estimation. The proposed method effectively captures the dependencies among random variables, stochastic processes, and the temporal behavior of limit state functions. Once trained, the DDF-LSTM model enables efficient Monte Carlo simulation to estimate time-dependent failure probabilities with minimal computational cost. Four case studies validate the proposed method's enhanced computational efficiency and predictive accuracy.",
+      "url": "http://arxiv.org/abs/2607.18291v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18291v1",
+      "tldr": "The paper proposes a dual-domain fused LSTM (DDF-LSTM) model that integrates time-independent variables into the LSTM's initial hidden states and uses an improved loss function to efficiently and accurately estimate time-dependent failure probabilities.",
+      "detailed_reading": {
+        "motivation": "传统的代理模型方法在时间相关可靠性分析中难以有效融合时间不变随机变量和时变随机过程，且现有LSTM通过拼接方式处理静态变量会导致信息冗余和梯度不稳定问题。为了解决这一局限性，本文提出一种双域融合LSTM模型。",
+        "method": "首先通过拉丁超立方采样生成时不变随机变量样本，并利用扩展最优线性估计（EOLE）对时变随机过程进行谱分解，得到离散时间节点上的过程实现。随后将时不变变量嵌入LSTM的初始隐藏状态和细胞状态，取代零初始化，为序列处理提供一致的上下文基础。之后LSTM逐时间步处理时变输入矩阵，其隐藏状态输出与时不变变量共同送入一个全连接层，融合得到最终响应预测。训练时采用改进的损失函数，增加对最小响应值的敏感性权重，以提升低失效概率估计精度。训练完成后，利用该代理模型对大规模蒙特卡洛样本进行快速预测，从而实现时变失效概率的高效计算。",
+        "result": "通过四个案例验证，提出的DDF-LSTM方法相较于传统代理模型和基于拼接的LSTM方法，在计算效率上显著提升（仅需少量训练样本），并在失效概率估计精度上保持或优于对比方法，尤其是在低概率失效区域表现更稳健。",
+        "conclusion": "所提出的双域融合LSTM框架有效捕获了时不变随机变量、时变随机过程与极限状态函数时间行为之间的复杂依赖关系，实现了端到端的统一建模，为工程系统长期安全评估提供了一种高效且精确的可靠性分析工具。",
+        "key_details": "数据生成采用LHS和EOLE分别生成时不变和时变输入，保证训练覆盖效率；融合策略将时不变变量直接注入初始隐藏状态，避免了特征冗余和梯度问题；损失函数设计为最小响应敏感型，增强了对失效边界附近的关注；模型规模由LSTM隐层维度和全连接层决定，训练后MCS评估几乎无额外成本；当前方法假设时变过程可通过谱分解近似，对于强非高斯或非平稳过程可能需要更复杂的生成策略。"
+      },
+      "affiliations": [
+        "Sun Yat-sen University"
+      ],
+      "affiliations_text": "Sun Yat-sen University",
+      "score": 4.1440772617665385,
+      "score_text": "4.1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.18282v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718282v1-alas-additive-learnable-alpha-stable-kernels-for-flexible-bayesian-optimization",
+      "source": "arxiv",
+      "title": "ALAS: Additive Learnable Alpha-Stable Kernels for Flexible Bayesian Optimization",
+      "authors": [
+        "Weibo Huang",
+        "Cheng Hua"
+      ],
+      "authors_text": "Weibo Huang, Cheng Hua",
+      "abstract": "Bayesian Optimization is widely used for expensive black-box optimization, yet its success often depends on choosing a kernel that matches the objective's unknown structure. In this work, we propose ALAS, a flexible Gaussian Process kernel family built from symmetric $α$-stable spectral components. By learning the stability parameter $α$, ALAS adapts its effective smoothness from data, capturing both smooth trends and sharp irregularities. We present two parameterizations: ALAS, a single stationary component with joint spectral modulation, and ALAS-Sep, a separable variant that learns dimension-wise tail behavior to improve robustness on approximately decomposable objectives. Experiments on standard benchmarks and real-world surrogates demonstrate strong and robust performance across diverse settings.",
+      "url": "http://arxiv.org/abs/2607.18282v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18282v1",
+      "tldr": "ALAS introduces a Gaussian process kernel family based on learnable symmetric α-stable spectral components that adapts effective smoothness via the stability parameter α, and a separable variant for high-dimensional robustness, achieving strong empirical performance across diverse Bayesian optimization tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University",
+      "score": 4.067080383668652,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.18308v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718308v1-agentic-calibration-of-grey-box-simulation-models-an-llm-driven-alternative",
+      "source": "arxiv",
+      "title": "Agentic Calibration of Grey-Box Simulation Models: An LLM-Driven Alternative",
+      "authors": [
+        "David Gómez-Guillén",
+        "Mireia Diaz",
+        "Josep Lluis Arcos",
+        "Jesús Cerquides"
+      ],
+      "authors_text": "David Gómez-Guillén, Mireia Diaz, Josep Lluis Arcos, Jesús Cerquides",
+      "abstract": "Calibration of grey-box simulation models is a constrained optimization problem in which model evaluations are expensive, the parameter space can be high-dimensional, and the search must respect plausibility constraints. Although the simulation code is fully available to the analyst, the joint effect of multiple parameters remains difficult to predict analytically. Classical optimizers such as Nelder--Mead (NM) are simple to deploy but sample-inefficient, particularly under constraints. Modern Bayesian Optimization methods achieve competitive solutions with far fewer evaluations but require non-trivial modeling machinery for constraint handling. We introduce an agentic calibration method in which a large language model acts as the optimizer, with constraints incorporated as a plain-language section of the system prompt. We evaluate the agentic method, NM, and Bayesian Optimization (BO) on an anal cancer simulation model under both unconstrained and clinically constrained calibration. Under unconstrained calibration, the agentic method achieves substantially lower best error than BO and NM, while requiring fewer model evaluations. Under constrained calibration, the agentic method reaches comparable error levels and both outperform NM. These results are obtained at the cost of increased inference time per iteration. Agentic calibration achieves competitive performance with substantially fewer model evaluations, and constraint handling is essentially free at the modeller-facing interface through simple textual specifications rather than additional modelling machinery. The main trade-off lies in increased per-iteration inference cost, making the approach particularly suitable when simulation time dominates. Beyond performance, the per-iteration rationale makes the search auditable and explainable, so its decisions can be scrutinised and justified to third parties.",
+      "url": "http://arxiv.org/abs/2607.18308v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18308v1",
+      "tldr": "**Summary:** This paper introduces an LLM-driven agentic calibration method for grey-box simulation models that achieves competitive or superior performance with far fewer evaluations than Nelder–Mead or Bayesian Optimization, handles constraints via plain‑language prompts, and trades increased per‑iteration inference cost for auditable, explainable search.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CIBERESP",
+        "Autonomous University of Barcelona (UAB)",
+        "Catalan Institute of Oncology-IDIBELL",
+        "IIIA-CSIC"
+      ],
+      "affiliations_text": "CIBERESP, Autonomous University of Barcelona (UAB), Catalan Institute of Oncology-IDIBELL, IIIA-CSIC",
+      "score": 4.053332806995408,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.18323v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718323v1-cost-accounting-for-reactive-computational-graphs-exhaustive-sweeps-sequential-mutation-and-the-backward-locality-gap",
+      "source": "arxiv",
+      "title": "Cost Accounting for Reactive Computational Graphs: Exhaustive Sweeps, Sequential Mutation, and the Backward-Locality Gap",
+      "authors": [
+        "Abdallah Khemais"
+      ],
+      "authors_text": "Abdallah Khemais",
+      "abstract": "Exhaustive site-by-site interventions on a neural network's computational graph -- activation-patching sweeps, circuit-discovery searches, systematic ablation studies -- mutate the graph at every candidate site, and their cost is dominated by recomputation after each mutation. On a reactive graph engine whose invalidation provably touches exactly the downstream cone of a mutated node, we give a complete cost accounting for such workloads. First, the aggregate speedup of an exhaustive sweep over independent full recomputations is not a universal constant: if per-layer weight varies regularly with depth at Karamata index q, the ratio converges to (q+2)/(q+1) when weight concentrates near the output and to q+2 near the input, recovering 2 only in the depth-uniform case; a wall-clock corollary predicts a ceiling of about 1.79, below 2, until interpreter overhead is compiled away. Second, we prove the exact cost of a sequence of persistent mutations, never undone between insertions: the interleaved cost exceeds the isolated sum by an exact overcount summed over comparable site pairs, with closed-form extremes over insertion orders, while batched application is order-independent and sub-additive, costing exactly the union of the sites' cones plus the fresh nodes. Third, we prove the exact mirror of forward locality for the backward pass, showing it collapses the aggregate speedup to 1 under backpropagation on architectures without long skip connections. Every identity is validated on NeuroDSL, a reactive graph engine in Julia: measured sweep ratios converge to the predicted limits under four cost profiles; the training-mode ratio collapses to 1 at the predicted rate; and all 18 per-graft sequential costs and the batched total match the closed forms at zero tolerance across three insertion orders.",
+      "url": "http://arxiv.org/abs/2607.18323v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18323v1",
+      "tldr": "This paper provides a complete cost accounting for exhaustive sweep, sequential mutation, and batched mutation workloads on reactive computational graphs, deriving exact speedup ratios that depend on the distribution of computational weight across depth, closed-form costs for persistent mutations, and a backward-locality gap that collapses the sweep speedup to 1 under backpropagation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Sousse"
+      ],
+      "affiliations_text": "University of Sousse",
+      "score": 3.944758200852455,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.18295v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718295v1-on-the-limits-of-support-preserving-alignment-and-bounded-filtering",
+      "source": "arxiv",
+      "title": "On the Limits of Support-Preserving Alignment and Bounded Filtering",
+      "authors": [
+        "Aryan Dutt",
+        "Rui Mao",
+        "Anupam Chattopadhyay"
+      ],
+      "authors_text": "Aryan Dutt, Rui Mao, Anupam Chattopadhyay",
+      "abstract": "We study whether alignment schemes that reshape a base model's output distribution, combined with bounded safety filters, can drive the probability of harmful behavior to zero in modern large language models. Recent research suggests that harmful behaviors can persist under preference-based alignment and that external filtering can be computationally hard in the worst case, but it remains unclear whether practical alignment pipelines that largely preserve internal representations can eliminate harmful behavior entirely rather than merely suppressing its most visible forms. We formalize this setting using support-preserving alignment operators together with bounded filtering algorithms under black-box, white-box, and statistical-query access, and analyze their ability to approximate an ideal eliminator that removes all harmful mass. Building on this framework, we provide computational and information-theoretic arguments indicating that, under these constraints, bounded filtering may fail to eliminate all harmful outputs supported by the base model's distribution. To evaluate these limits empirically, we analyze a range of state-of-the-art open-weight and hosted LLMs accessed via OpenRouter under bounded black-box, white-box, and statistical-query filters on adversarial prompts drawn from curated cybersecurity scenarios and PKU-SafeRLHF. Across models, filter classes, and query budgets, the estimated harmful-output rate decreases with additional filtering compute but consistently plateaus above zero, suggesting a persistent empirical harm floor.",
+      "url": "http://arxiv.org/abs/2607.18295v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18295v1",
+      "tldr": "This paper shows that even with sophisticated alignment methods and computationally bounded safety filters, harmful outputs from large language models cannot be fully eliminated, consistently plateauing above zero across various models and filter types.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "Nanyang Technological University",
+      "score": 3.741383527493018,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.18292v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718292v1-reliability-scales-inversely-bigger-models-compound-mistakes-faster-via-a-hidden-auto-regressive-risk-regime",
+      "source": "arxiv",
+      "title": "Reliability Scales Inversely: Bigger Models Compound Mistakes Faster via a Hidden Auto-Regressive Risk Regime",
+      "authors": [
+        "Kushal Chakrabarti"
+      ],
+      "authors_text": "Kushal Chakrabarti",
+      "abstract": "As language models scale, answers start truer but degrade faster: scaling buys capability but erodes reliability. The knowledge-gap account - more data, retrieval, or scale - misses an auto-regressive risk residual that scale sharpens: the model commits to a low-probability token, conditions on it as established, and snowballs. We track this through per-position disagreement $δ= \\log p_M - \\log p_O$ against a stronger same-family oracle, whose second moment splits exactly into bias$^2$ $\\mathrm{KL}(p_M \\,\\|\\, p_O)^2$ and risk $\\mathrm{Var}[δ]$. We present four findings: (i) under scaling, the knowledge gap falls $\\approx$$6\\times$ while knowledge degradation grows $11$-$39\\times$; (ii) at a fabrication, felt uncertainty $H(p_M)$ relaxes quickly while oracle-referenced risk persists up to $17\\times$ longer, leaving a confident-but-precarious risk regime that bridges consecutive fabrications ($+69\\%$ at $14$B); (iii) this regime is causal - an on-policy, fixed-$\\mathrm{KL}$ variance contraction cuts web-verified hallucination by $35$-$74\\%$ across three model families; and, (iv) it structurally evades self-monitoring, with $p_M$-only detectors (e.g. semantic entropy) firing $\\approx$$30\\%$ less ($p<10^{-16}$) on the risky branch holding nearly $4\\times$ more fabrications. Bigger models snowball mistakes faster, through a failure mode that is dominant, self-perpetuating, causal and invisible to the model itself.",
+      "url": "http://arxiv.org/abs/2607.18292v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18292v1",
+      "tldr": "As language models scale, their reliability degrades faster than their capability improves due to a hidden auto-regressive risk regime—where committing to a low-probability token causes mistakes to snowball, evading self-monitoring detection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Obviously Wrong, LLC"
+      ],
+      "affiliations_text": "Obviously Wrong, LLC",
+      "score": 3.7270456631643007,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.18302v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718302v1-a-better-start-for-language-models-domain-conditional-position-offsets",
+      "source": "arxiv",
+      "title": "A Better Start for Language Models: Domain-Conditional Position Offsets",
+      "authors": [
+        "Ye Qiao"
+      ],
+      "authors_text": "Ye Qiao",
+      "abstract": "Autoregressive language models are least accurate at the beginning of a sequence, where little context forces reliance on a generic pretraining prior. We show that this cold-start penalty is domain dependent and reduce it with a domain-conditional position offset: a single learned vector added to the embedding activation at the first sequence positions while all model weights remain frozen. The offset trains in minutes on roughly one hundred documents, switches between domains without added sequence state, and has no measurable latency overhead. Across eight Mamba, GPT-NeoX, and Llama models spanning 410M to 8B parameters, it reduces held-out in-domain perplexity by up to 27%; the effect persists at 70B, and one position captures most of the benefit. A matched, converged direct logit-bias correction reaches at most only 7.9% and leaves later-token loss unchanged, showing that the offset propagates through model state rather than merely recalibrating the output prior. A tuned LoRA reaches lower perplexity but uses two to three orders of magnitude more parameters and an active low-rank weight path, while soft prompts add sequence positions. With wrong-domain controls, offsets improve retrieval reranking and domain classification when decisions depend on early in-domain tokens, For the few-shot reasoning whose signal occurs later, the results maintains unchanged. Position-aware prefill application also help generation tasks, whereas naive application at every cached decoding step causes repetition. The offset is therefore not the strongest adapter, but a lightweight, hot switchable tool for short in-domain scoring and calibration.",
+      "url": "http://arxiv.org/abs/2607.18302v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18302v1",
+      "tldr": "Domain-conditional position offsets, a single learned vector added to the first few token positions while freezing all model weights, reduce in-domain perplexity by up to 27% across various language models with minimal parameters and no latency overhead.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Irvine"
+      ],
+      "affiliations_text": "University of California, Irvine",
+      "score": 3.6893217634428686,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.18305v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718305v1-the-information-shadow-measuring-structural-limits-on-what-language-models-can-learn",
+      "source": "arxiv",
+      "title": "The Information Shadow: Measuring Structural Limits on What Language Models Can Learn",
+      "authors": [
+        "Priyansh Srivastava",
+        "Romit Chatterjee"
+      ],
+      "authors_text": "Priyansh Srivastava, Romit Chatterjee",
+      "abstract": "Some limits on what language models know are not gaps in data coverage but structural properties of learning from text. We introduce the information shadow: the region of phenomena that a text-trained learner cannot acquire regardless of scale, comprising (I) structures language cannot express, (II) functions that are statistically non-identifiable from the training distribution, and (III) functions that are representable but unreachable by gradient-based training. We give each type a probe that is decisive because the premise of the shadow is, in that setting, provable. For Type I, Language Compression Residuals compare a text learner, which sees only a lossy text-like encoding of the signal, against a full-signal learner, which sees the underlying signal directly. The text learner sits at a computable expressibility ceiling while the full-signal learner pulls away by a gap that stays flat across 300x more data, so the deficit is a property of the channel, not of training. For Type II, the Counterfactual Distinction Test trains models on data exactly consistent with two incompatible rules. Across a provable string task and a language-like agreement task, behavior on counterfactuals is set by the model's inductive bias, while 5% disambiguating data steers the learned rule bidirectionally to either target (r = +/-1.0, p < 1e-10). For Type III, Basin Escape Mapping exhibits a function that is representable at 100% (by hand construction) yet reached 0% of the time by standard training and instantly from a nearby initialization, with width scaling providing no help (p = 1.6 x 10^-14). Each effect is isolated by a control that rules out a capacity or modality artifact. We release the probe suite and discuss implications for benchmark design, capability auditing, and shadow-aware uncertainty.",
+      "url": "http://arxiv.org/abs/2607.18305v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18305v1",
+      "tldr": "The paper introduces the \"information shadow\"—a set of structural limits on what language models can learn that persist regardless of scale, encompassing phenomena language cannot express, statistically non-identifiable functions, and representable but unreachable functions—and provides provable probes to detect each type.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.623475817290857,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.18280v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718280v1-beyond-single-dimensional-compression-the-compound-sparsity-frontier-of-large-language-models",
+      "source": "arxiv",
+      "title": "Beyond Single-Dimensional Compression: The Compound Sparsity Frontier of Large Language Models",
+      "authors": [
+        "Chao Han",
+        "Haozhe Hu",
+        "Xiaoyu Shen"
+      ],
+      "authors_text": "Chao Han, Haozhe Hu, Xiaoyu Shen",
+      "abstract": "Large language models (LLMs) are often compressed through static parameter pruning or dynamic token-level computation, yet aggressive sparsification can trigger rapid performance degradation beyond an essential sparsity boundary. This work asks \\emph{whether combining these two mechanisms can delay such degradation by distributing the compression burden}. We study a minimalist compound sparsity framework that first applies low-rank approximation and channel pruning to obtain a statically compressed backbone, and then introduces lightweight routers for per-token dynamic layer skipping. This design enables independent control of parameter sparsity and token-level computation sparsity. Experiments across language understanding and modeling benchmarks show that compound sparsity consistently outperforms single-mechanism compression under the same total sparsity, delaying the decay point on understanding tasks and preserving stronger modeling performance. Further analysis reveals cross-dimensional interference between parameter pruning and token skipping, and shows that near-balanced allocation is most effective under a fixed sparsity budget. These results demonstrate that compound compression provides a practical way to improve LLM compression, while revealing a broader cross-dimensional sparsity boundary that ultimately limits further compression. Code will be available at https://github.com/EIT-NLP/LLM-Pruning.",
+      "url": "http://arxiv.org/abs/2607.18280v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18280v1",
+      "tldr": "This paper introduces a compound sparsity framework that combines static parameter pruning with dynamic token skipping, demonstrating that distributing compression across both dimensions delays performance degradation and achieves better trade-offs than single-mechanism compression.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Eastern Institute of Technology"
+      ],
+      "affiliations_text": "Eastern Institute of Technology",
+      "score": 3.587847620540006,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.18287v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718287v1-bearingnas-obtaining-in-sensor-intelligent-fault-diagnosis-systems-for-bearings-using-a-laptop",
+      "source": "arxiv",
+      "title": "BearingNAS: Obtaining In-Sensor Intelligent Fault Diagnosis Systems for Bearings Using a Laptop",
+      "authors": [
+        "Andrea Mattia Garavagno",
+        "Edoardo Ragusa",
+        "Paolo Gastaldo",
+        "Antonio Frisoli",
+        "Rodolfo Zunino"
+      ],
+      "authors_text": "Andrea Mattia Garavagno, Edoardo Ragusa, Paolo Gastaldo, Antonio Frisoli, Rodolfo Zunino",
+      "abstract": "This paper introduces BearingNAS, a Hardware-Aware Neural Architecture Search (HW-NAS) framework designed to shift the intelligence directly onto the sensor die via in-sensor processing. BearingNAS frames the search as a constrained optimization problem targeting extreme micro-budgets (4 to 8 kiB of RAM and 16 to 32 kiB of Flash). To eliminate the reliance on expensive discrete GPUs, we propose a lightweight, derivative-free search strategy paired with a single data-flow search space that leverages a decaying kernel growth formulation to prevent parameter explosion. We evaluate our framework on the Case Western Reserve University (CWRU) bearing benchmark, optimizing architectures for three STMicroelectronics targets: two commodity microcontrollers and the LSM6DSO16IS Intelligent Sensor Processing Unit (ISPU). Running entirely on a laptop CPU, the search converges in less than an hour. The resulting best in-sensor architecture achieves a highly competitive diagnostic accuracy of 99.50\\% on the ISPU. These results demonstrate the viability of shifting the machine learning workload inside the sensor package, enabling low-cost, production-scale bearing fault diagnosis.",
+      "url": "http://arxiv.org/abs/2607.18287v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18287v1",
+      "tldr": "BearingNAS introduces a hardware-aware neural architecture search framework that runs entirely on a laptop CPU to design ultra-lightweight in-sensor bearing fault diagnosis models (4–8 kiB RAM, 16–32 kiB Flash), achieving 99.50% accuracy on an intelligent sensor processing unit within under an hour.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Genoa",
+        "Sant'Anna School of Advanced Studies"
+      ],
+      "affiliations_text": "University of Genoa, Sant'Anna School of Advanced Studies",
+      "score": 3.532225849040124,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.18285v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718285v1-edge-efficient-transformer-for-end-to-end-rf-spectrum-monitoring",
+      "source": "arxiv",
+      "title": "Edge-Efficient Transformer for End-to-End RF Spectrum Monitoring",
+      "authors": [
+        "Zhifan Song",
+        "Haralampos-G. Stratigopoulos",
+        "Hassan Aboushady"
+      ],
+      "authors_text": "Zhifan Song, Haralampos-G. Stratigopoulos, Hassan Aboushady",
+      "abstract": "We present E-SpecFormer (Edge Spectrum monitoring Transformer) for end-to-end automatic modulation and covert channel (CC) recognition. We introduce LiTAN (Linear Tanh Attention Network), a Softmax- and LayerNorm-free attention mechanism that reduces complexity while increasing accuracy in RF tasks. E-SpecFormer is parameterized in four scalable variants (Nano, Small, Medium, Large) to accommodate diverse hardware constraints. Using the RadioML2018 dataset for modulation recognition, the Nano variant achieves 86.5% average accuracy for Signal-to-Noise Ratios (SNRs)>0 dB, and on the hardware Trojan (HT)-based CC dataset it reaches 94.2% accuracy, both with fewer than 10k parameters and up to speed of 92 μs per frame on FPGA/CPU co-execution, surpassing state-of-the-art edge models at a fraction of their cost. These results establish E-SpecFormer as an edge-efficient solution for real-time spectrum intelligence on Internet of Things (IoT) devices. GitHub link to the repository: https://github.com/zsniko/E-SpecFormer.",
+      "url": "http://arxiv.org/abs/2607.18285v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18285v1",
+      "tldr": "E-SpecFormer, an edge-efficient Transformer family with a novel Softmax- and LayerNorm-free linear attention mechanism (LiTAN), achieves state-of-the-art accuracy for end-to-end automatic modulation and covert channel recognition on RF spectrum monitoring with minimal parameters and low latency on FPGA/CPU, enabling real-time IoT deployment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sorbonne Université"
+      ],
+      "affiliations_text": "Sorbonne Université",
+      "score": 3.5189938779785197,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.18283v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718283v1-fedcc-a-low-resource-federated-adaptation-of-foundation-models-for-robust-corpus-callosum-localization-in-fetal-ultrasound-images",
+      "source": "arxiv",
+      "title": "FedCC: A Low-Resource Federated Adaptation of Foundation Models for Robust Corpus Callosum localization in Fetal Ultrasound Images",
+      "authors": [
+        "Alessandro Di Matteo",
+        "Sara Moccia",
+        "Giuseppe Rizzo",
+        "Gianpaolo Grisolia",
+        "Ricciarda Raffaelli",
+        "Lorenzo Vasciaveo",
+        "Francesco D'Antonio",
+        "Maria Chiara Fiorentino"
+      ],
+      "authors_text": "Alessandro Di Matteo, Sara Moccia, Giuseppe Rizzo, Gianpaolo Grisolia, Ricciarda Raffaelli, Lorenzo Vasciaveo, Francesco D'Antonio, Maria Chiara Fiorentino",
+      "abstract": "Accurate localization of the corpus callosum (CC) in fetal ultrasound (US) images is crucial for the early identification of neurodevelopmental abnormalities. However, this task remains highly challenging due to the intrinsic limitations of US imaging, including low contrast, speckle noise, and the considerable anatomical variability of the CC. We propose FedCC, a federated learning (FL)-based framework for CC localization in fetal US images, specifically designed for realistic multi-center and resource-constrained clinical settings without requiring data sharing. The framework integrates a frozen DINOv2 backbone with a lightweight YOLO-based detection head. To enable parameter-efficient adaptation, Low-Rank Adaptation (LoRA) modules are incorporated, allowing only a small subset of parameters to be optimized and exchanged among clients. This strategy substantially reduces both computational and communication overhead, making the framework suitable for low-resource environments. The proposed approach was evaluated on a multi-center dataset comprising 10,970 ultrasound frames acquired from 58 pregnant women during routine neurosonographic examinations across three clinical sites using heterogeneous imaging devices. The proposed framework achieved strong performance in the federated setting. In particular, the combination of DINOv2 and LoRA under the FedAvg strategy achieved an average mAP@50 of 0.857 and an F1-score of 0.803, outperforming both full fine-tuning and encoder-freezing baselines. Notably, the proposed approach reduced the number of trainable parameters to 2.9M compared with 24.4M in full fine-tuning, corresponding to an approximately 8.5$\\times$ reduction in communication cost. These findings represent a promising step toward scalable, privacy-preserving, and clinically deployable AI systems for fetal neurosonography.",
+      "url": "http://arxiv.org/abs/2607.18283v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18283v1",
+      "tldr": "FedCC introduces a low-resource federated learning framework that combines a frozen DINOv2 backbone with LoRA adapters and a lightweight YOLO head to enable robust, privacy-preserving corpus callosum localization in fetal ultrasound across heterogeneous clinical sites while drastically reducing trainable parameters and communication costs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Department of Obstetrics and Gynaecology",
+        "Università degli Studi \"G. D'Annunzio\" Chieti - Pescara",
+        "Università di Foggia",
+        "Sapienza Università di Roma",
+        "Università di Verona"
+      ],
+      "affiliations_text": "Department of Obstetrics and Gynaecology, Università degli Studi \"G. D'Annunzio\" Chieti - Pescara, Università di Foggia, Sapienza Università di Roma, Università di Verona",
+      "score": 3.4818785948414597,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.18289v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718289v1-towards-principled-continual-anomaly-detection-a-systematic-framework-and-benchmark-scenarios",
+      "source": "arxiv",
+      "title": "Towards Principled Continual Anomaly Detection: A Systematic Framework and Benchmark Scenarios",
+      "authors": [
+        "Kamil Faber",
+        "Mateusz Smendowski",
+        "Roberto Corizzo"
+      ],
+      "authors_text": "Kamil Faber, Mateusz Smendowski, Roberto Corizzo",
+      "abstract": "Continual anomaly detection (CAD) studies how models can adapt to evolving data distributions while retaining performance on previously observed regimes. CAD benchmarks, however, depend critically on how tasks are defined, filtered, ordered, and validated. In tabular domains, task boundaries are rarely given, and arbitrary splits can create unlearnable, redundant, or overly transferable tasks that obscure genuine continual-learning behavior. To this end, we introduce a systematic framework for reproducible benchmark scenario design from existing tabular anomaly-detection datasets. The framework discovers candidate tasks, filters unsuitable tasks, and derives principled orderings that expose diverse dynamics. The framework allows us to deliver five benchmark-ready scenarios from three large-scale cybersecurity anomaly detection datasets, yielding both single-dataset and multi-dataset CAD settings.",
+      "url": "http://arxiv.org/abs/2607.18289v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18289v1",
+      "tldr": "This paper introduces a systematic framework for constructing and validating continual anomaly detection benchmark scenarios from tabular data, delivering five principled scenarios with diverse task orderings from three cybersecurity datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AGH University of Krakow",
+        "American University"
+      ],
+      "affiliations_text": "AGH University of Krakow, American University",
+      "score": 3.437412653477761,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.18304v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718304v1-td-dpo-difference-aware-preference-optimization-for-mitigating-sycophancy-in-clinical-autism-intervention-dialogue",
+      "source": "arxiv",
+      "title": "TD-DPO: Difference-Aware Preference Optimization for Mitigating Sycophancy in Clinical Autism Intervention Dialogue",
+      "authors": [
+        "Shuzhong Lai",
+        "Junhong Lai",
+        "Chenxi Li",
+        "Qing Zhou",
+        "Haifeng Li",
+        "Gang Pan",
+        "Lin Yao",
+        "Yueming Wang"
+      ],
+      "authors_text": "Shuzhong Lai, Junhong Lai, Chenxi Li, Qing Zhou, Haifeng Li, Gang Pan, Lin Yao, Yueming Wang",
+      "abstract": "The sycophancy of large language models can increase the safety risk in intervention dialogue for autistic children. Supervised fine-tuning can somewhat reduce sycophancy, but relying solely on positive examples is often insufficient to identify and correct failure patterns. We observe that sycophancy behaviors can often be localized to a limited span within the model response. In this regime, sequence-level preference optimization can over-update preference-irrelevant tokens and degrade intervention ability. To address this, we propose the \\textbf{M}inimal \\textbf{E}dit \\textbf{D}ata \\textbf{A}ugmentation (MEDA) strategy to construct controlled, stable, minimal edit preference pairs and \\textbf{T}oken-level \\textbf{D}ifference \\textbf{D}irect \\textbf{P}reference \\textbf{O}ptimization (TD-DPO), which upweights difference tokens between chosen and rejected responses while downweighting shared tokens to suppress background drift. Extensive experiments across multiple backbones and evaluators show that TD-DPO achieves a better trade-off between sycophancy mitigation and intervention ability retention in our offline settings, highlighting its potential as a practical alignment approach for autism intervention.",
+      "url": "http://arxiv.org/abs/2607.18304v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18304v1",
+      "tldr": "TD-DPO introduces a token-level difference-aware preference optimization method with minimal-edit data augmentation to reduce sycophancy in large language models for autism intervention dialogues while preserving intervention capabilities.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University School of Medicine",
+        "Children's Hospital Zhejiang University School of Medicine",
+        "Zhejiang University",
+        "State Key Laboratory of Brain-Machine Intelligence",
+        "Nanhu Brain-Computer Interface Institute"
+      ],
+      "affiliations_text": "Zhejiang University School of Medicine, Children's Hospital Zhejiang University School of Medicine, Zhejiang University, State Key Laboratory of Brain-Machine Intelligence, Nanhu Brain-Computer Interface Institute",
+      "score": 3.390360707391935,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.18278v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718278v1-falcon-discover-discovering-concentrated-false-confidence-regions-for-calibration",
+      "source": "arxiv",
+      "title": "FALCON-Discover: Discovering Concentrated False-Confidence Regions for Calibration",
+      "authors": [
+        "Filippo Cenacchi",
+        "Longbing Cao",
+        "Runze Yang"
+      ],
+      "authors_text": "Filippo Cenacchi, Longbing Cao, Runze Yang",
+      "abstract": "Calibration is usually evaluated in aggregate, but the most dangerous failures are often local: predictions that remain highly confident despite being wrong. We study this failure mode as false-confidence concentration, the extent to which confident errors occupy compact, discoverable regions of prediction space. We introduce FALCON-Discover, a post-hoc, model-agnostic framework that ranks predictions using discrepancy signals from confidence, local support, neighborhood agreement, and perturbation stability. Across seven binary tabular datasets, four seeds, five-fold cross-fitting, and strong learners including XGBoost and CatBoost, we find that false-confidence concentration is recurrent but regime-dependent. At the main confidence threshold, discrepancy-based ranking substantially outperforms the strongest validation-selected calibration or trust-scoring baseline in the strongest regimes, while raw confidence recovers little dangerous-error mass. The best detector varies across datasets: learned discrepancy is strongest when multiple cues must be combined, whereas stability-centered ranking works best when local decisional fragility dominates. These results show that dangerous overconfidence is better treated as a family-level discovery problem than as a single-score calibration problem, and motivate calibration strategies that explicitly target regions where confidence, support, and stability diverge.",
+      "url": "http://arxiv.org/abs/2607.18278v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18278v1",
+      "tldr": "FALCON-Discover introduces a post-hoc, model-agnostic framework that identifies compact regions of false-confidence—where models are highly confident yet wrong—by ranking predictions based on discrepancies between confidence, local support, neighborhood agreement, and perturbation stability, and shows across multiple tabular datasets that this discrepancy-based ranking substantially outperforms raw confidence and trust-score baselines in recovering dangerous errors, establishing false-confidence concentration as a family-level discovery problem.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Macquarie University"
+      ],
+      "affiliations_text": "Macquarie University",
+      "score": 3.3717786857643994,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.18279v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/22/260718279v1-beyond-output-space-calibration-spectral-evidence-bundling-for-selective-reliability-estimation-in-time-series-classification",
+      "source": "arxiv",
+      "title": "Beyond Output-Space Calibration: Spectral Evidence Bundling for Selective Reliability Estimation in Time-Series Classification",
+      "authors": [
+        "Filippo Cenacchi",
+        "Longbing Cao",
+        "Runze Yang"
+      ],
+      "authors_text": "Filippo Cenacchi, Longbing Cao, Runze Yang",
+      "abstract": "Post-hoc calibration for time-series classification usually remaps output scores, but deployment decisions such as trust, abstention, and review depend on whether a confident prediction is supported by the current temporal signal. We address three time-series reliability gaps: identical confidence values can hide different temporal support, average calibration can miss false high-confidence errors, and output-space recalibration offers limited input-linked auditability. We introduce a validation-gated fixed-label reliability policy that keeps the backbone prediction unchanged while estimating whether it should be trusted. The method combines output-side cues with whole-sample spectral descriptors, including band energy, entropy, peak dominance, period support, and phase stability, to form a scalar reliability estimate and diagnostic band-level evidence. A validation gate enables spectral conditioning only when correctness ranking improves without breaching FalseConf@0.9 or AURC tolerances; otherwise it reverts to the safer output-space baseline. Across eight heterogeneous UCR/UEA datasets, eight time-series backbone families, and standard recalibrators, the unconstrained method improves fixed-label selective-reliability metrics on the matched evaluation subset, raising Corr-AURC from 0.693 to 0.779. The validation-gated policy further improves Corr-AURC to 0.786 and reduces FalseConf@0.9 to 0.094. These results suggest that reliability estimation for time-series classifiers benefits from bundling output confidence with spectral evidence, while validation gating prevents unsupported spectral conditioning.",
+      "url": "http://arxiv.org/abs/2607.18279v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.18279v1",
+      "tldr": "This paper introduces SEB-Cal, a validation-gated reliability estimation method for time-series classification that augments output confidence with deterministic whole-sample spectral descriptors (band energy, entropy, peak dominance, phase stability) to selectively estimate prediction trustworthiness, improving correctness-aware selective-reliability metrics like Corr-AURC from 0.693 to 0.786 and reducing false high-confidence errors.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Macquarie University"
+      ],
+      "affiliations_text": "Macquarie University",
+      "score": 3.3144390152085634,
+      "score_text": "3.3"
+    }
+  ]
+}
