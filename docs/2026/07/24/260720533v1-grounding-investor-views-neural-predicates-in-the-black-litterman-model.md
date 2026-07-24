@@ -1,0 +1,15 @@
+# Grounding Investor Views: Neural Predicates in the Black-Litterman Model
+
+- 区域：速读区
+- 排名：3
+- 匹配度：4.0/10
+- 来源：arxiv
+- 作者：Marcos Florencio
+- 机构：Unknown affiliation
+- 链接：[arXiv / Source](http://arxiv.org/abs/2607.20533v1) · [PDF](https://arxiv.org/pdf/2607.20533v1)
+
+## TLDR
+This paper proposes using neural predicates to systematically generate Black-Litterman views from financial data, providing a structured, interpretable, and differentiable approach that replaces subjective uncertainty elicitation.
+
+## Abstract
+Portfolio construction under the Black-Litterman model requires investors to specify views on asset returns alongside explicit uncertainty estimates -- a process that remains largely subjective and difficult to scale. We propose a formal approach in which neural predicates serve as a structured, probabilistic mechanism for view generation. In our formulation, structured financial analysis data is processed through a compositional hierarchy of neural predicates whose outputs -- probability distributions over market stances -- are mapped to the pick matrix $\mathbf{P}$, the view return vector $\mathbf{q}$, and the view uncertainty matrix $\boldsymbolΩ$ of the Black-Litterman model. View confidence is derived from predicate output distributions, providing a data-driven alternative to subjective uncertainty elicitation. The resulting approach is interpretable, in the sense that any portfolio weight can be traced back through the predicate's logical chain to the underlying data, and fully differentiable, enabling end-to-end learning.
