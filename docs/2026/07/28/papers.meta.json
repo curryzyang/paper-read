@@ -1,0 +1,709 @@
+{
+  "label": "2026-07-28",
+  "date": "2026-07-28",
+  "generated_at": "2026-07-28T05:23:34",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2607.22541v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722541v1-sde-guided-monte-carlo-reinforcement-learning-a-stochastic-maximum-principle-approach-for-robust-decision-making-in-noisy-environments",
+      "source": "arxiv",
+      "title": "SDE Guided Monte Carlo Reinforcement Learning: A Stochastic Maximum Principle Approach for Robust Decision Making in Noisy Environments",
+      "authors": [
+        "Juncai Wang"
+      ],
+      "authors_text": "Juncai Wang",
+      "abstract": "This work investigates whether the qualitative optimality conditions of the SMP can serve as guiding heuristics for designing robust tabular RL algorithms. We propose the \\textbf{SDE-MC-AC} framework, which establishes a set of SMP-inspired correspondences: the potential field gradient is mapped to potential-based reward shaping, the diffusion coefficient to a softmax temperature, and the value function gradient magnitude to the episode-averaged absolute temporal-difference (TD) error. Crucially, we derive an SMP-motivated adaptive temperature schedule that scales exploration stochastically in response to local value uncertainty. The resulting Monte Carlo Actor-Critic agent integrates potential-shaped rewards, entropy regularization, and adaptive temperature control within episodic updates. We conduct a set of five principled experiments in a minimal, fixed maze testbed under three canonical noise regimes (perceptual, dynamic goal, action) to test five falsifiable hypotheses derived from the SMP. Our results provide evidence for (i) an inverted-U optimal stochasticity curve, (ii) the robust failure prevention of the adaptive schedule under non-stationary noise, (iii) convergence acceleration by potential field guidance, (iv) cross-noise generalization, and (v) the indispensability of the combined SDE components through systematic ablation. Trajectory visualizations reveal a characteristic ``macroscopically deterministic, microscopically stochastic'' navigation pattern consistent with the SDE model. The study demonstrates that even a heuristic transposition of the SMP into a discrete MDP can yield significant empirical gains, thereby opening a bridge between rigorous stochastic optimal control and practical robust reinforcement learning.",
+      "url": "http://arxiv.org/abs/2607.22541v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22541v1",
+      "tldr": "This paper introduces the SDE-MC-AC framework, a heuristic adaptation of the stochastic maximum principle to discrete tabular reinforcement learning that uses potential-based reward shaping and adaptive temperature control to achieve robust performance under various noise regimes.",
+      "detailed_reading": {
+        "motivation": "传统强化学习在面对环境随机扰动时样本效率低下且策略脆弱，尤其是蒙特卡罗方法因其高方差和延迟适应而加剧这一问题。随机最大值原理（SMP）为连续时间控制扩散提供了必要最优性条件，但其直接数值求解在在线离散强化学习中计算上不可行。本文旨在探究SMP的定性最优性条件能否作为设计鲁棒表格强化学习算法的启发式指导，从而在严格随机最优控制与实用鲁棒强化学习之间建立桥梁。",
+        "method": "提出SDE-MC-AC框架，将SMP的定性概念启发式映射到离散MDP组件：势场梯度映射为基于势的奖励塑形（势函数保证不改变最优策略集），扩散系数映射为softmax策略温度，值函数梯度幅度映射为回合平均绝对TD误差。算法结合蒙特卡罗Actor-Critic，在回合更新中整合势成形奖励、熵正则化和自适应温度控制。自适应温度调度由公式τ←clip(τ_min+η·|δ|, τ_min, τ_max)实现，其中|δ|为回合平均绝对TD误差，使得探索强度随局部值不确定性随机调整。在固定迷宫环境中，定义三个噪声类型（感知噪声、动态目标、动作噪声）进行测试。",
+        "result": "五个原则性实验验证了五个假设：存在倒U型最优随机性曲线（唯一最优温度）；自适应温度调度在非平稳噪声下显著降低灾难性失败率；势场引导加速收敛并防止失败；框架在三种噪声间表现出跨噪声泛化能力；系统消融表明势场和自适应温度缺一不可。与确定性Q学习、线性DQN和普通MC-Actor-Critic相比，SDE-MC-AC在路径效率、成功率上更优，且轨迹显示“宏观确定性，微观随机性”的SDE一致导航模式。",
+        "conclusion": "即使是对SMP的启发式迁移，也能在离散MDP中取得显著的实证收益，证明了定性最优性条件可有效指导鲁棒RL算法设计。该工作为结合严格随机最优控制与实用鲁棒强化学习提供了新的途径，并验证了SMP启发的组件（势场引导与自适应探索）在噪声环境中的有效性。",
+        "key_details": "方法基于表格MDP，状态和动作离散；势函数通过奖励塑形注入先验知识，由定理保证最优策略不变；自适应温度使用clip(τ_min+η·|δ|, τ_min, τ_max)更新，其中的|δ|为回合平均绝对TD误差，超参数包括τ_min、τ_max、η；算法复杂度与标准MC-Actor-Critic相当；消融实验证实两个核心组件独立必要；局限性包括仅在固定迷宫环境中验证，未扩展到连续状态/动作空间，且启发式映射缺少严格收敛保证。"
+      },
+      "affiliations": [
+        "Florida State University"
+      ],
+      "affiliations_text": "Florida State University",
+      "score": 5.136889525193037,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2607.22558v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722558v1-major-minor-lq-mean-field-games-with-erroneous-initial-information-distributed-error-estimation-and-strategy-modification",
+      "source": "arxiv",
+      "title": "Major-Minor LQ Mean Field Games with Erroneous Initial Information: Distributed Error Estimation and Strategy Modification",
+      "authors": [
+        "Yuxin Jin",
+        "Haotian Wang",
+        "Wang Yao",
+        "Xiao Zhang"
+      ],
+      "authors_text": "Yuxin Jin, Haotian Wang, Wang Yao, Xiao Zhang",
+      "abstract": "This paper studies major-minor linear-quadratic mean field games (MMLQMFGs) with erroneous initial information under a constrained observation structure. Each minor agent observes only its own state and the major agent's state, while the major agent observes its own state and the states of a subset of minor agents; neither side observes the mean field state directly. We show that the initial-information errors propagate linearly through the game dynamics and lead to explicit deviations in the major state, the actual mean field, and the agents' internally updated mean field states. Based on this structure, we formulate distributed error identification as a parameter-estimation problem from discrete-time local observations and construct maximum-likelihood estimators for unknown initial errors. We then propose an estimate-based strategy modification at an intermediate time by reconstructing the current mean field from the estimated errors and switching to the corresponding control law. We also characterize the resulting estimation errors and show that, in the present symmetric setting, the major agent's estimation precision depends on the number of observed minor agents but not on their identities. Numerical results illustrate the proposed method.",
+      "url": "http://arxiv.org/abs/2607.22558v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22558v1",
+      "tldr": "This paper studies major-minor linear-quadratic mean field games with erroneous initial information under constrained observations, deriving linear error propagation, formulating distributed maximum-likelihood estimation for unknown initial errors, and proposing an estimate-based one-shot strategy modification to correct the control law.",
+      "detailed_reading": {
+        "motivation": "在major-minor线性二次型均场博弈中，由于初始均场信息错误且观测结构受限（minor仅观测自身和major，major仅观测自身和部分minor，均不直接观测均场），现有标准模型假设理想信息，未能处理此类偏差。本文旨在解决这一实际问题，分析误差传播并提出分布式误差估计与策略修正方法。",
+        "method": "本文考虑包含一个major和大量minor的LQ均场博弈，各agent动力学由线性随机微分方程描述，代价函数为二次型。在正确信息下有已知反馈控制律。当初始均场信息错误时，证明误差在系统中线性传播，并推导出major状态、实际均场与agent内部更新均场之间的显式偏差。基于此，将分布式误差识别转化为从离散时间局部观测中估计未知初始误差的参数估计问题，为每个minor构造关于其私有误差和公共误差分量的最大似然估计，为major构造公共误差分量的最大似然估计。然后提出在中间时刻基于估计值的策略修正：各agent利用估计误差重构当前均场，并切换到对应控制律。",
+        "result": "本文建立了初始信息误差的线性传播关系，表明误差通过动力学线性演化。最大似然估计方法能够有效识别误差，并且major的估计精度仅取决于其观察到的minor数量，而非其具体身份。数值实验验证了所提方法的有效性，在误差修正后性能接近完美信息情形。",
+        "conclusion": "本文针对初始信息错误下的major-minor LQ均场博弈，提出了分布式误差估计与策略修正框架。通过将误差识别转化为参数估计并利用一次策略切换，有效补偿了初始信息偏差，保证了系统的鲁棒性。理论分析揭示了误差传播的结构性及估计精度的对称性，为实际应用提供了理论基础。",
+        "key_details": "关键细节包括：误差传播推导基于线性系统结构，得出显式线性偏差公式；估计器为最大似然估计，利用了离散时间局部观测的似然函数；策略修正仅在中间单一时间点进行一次切换，不改变原控制律结构；对称设定下，major的Fisher信息矩阵仅取决于观测minor的数量而非身份，导致估计精度仅与数量相关；方法复杂度低，但假设系统为LQ且对称，限制了非对称或非线性场景的适用性。"
+      },
+      "affiliations": [
+        "Beihang University"
+      ],
+      "affiliations_text": "Beihang University",
+      "score": 4.418074233099936,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.22582v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722582v1-branch-amp-price-amp-cut-for-the-time-dependent-vehicle-routing-problem-with-time-windows-tdvrptw",
+      "source": "arxiv",
+      "title": "Branch \\&amp; Price \\&amp; Cut for the Time-Dependent Vehicle Routing Problem with Time Windows (TDVRPTW)",
+      "authors": [
+        "Florian Rascoussier",
+        "Romain Billot",
+        "Lina Fahed",
+        "Christine Solnon"
+      ],
+      "authors_text": "Florian Rascoussier, Romain Billot, Lina Fahed, Christine Solnon",
+      "abstract": "In urban contexts, travel times vary strongly with the time of day and traffic conditions. The Time-Dependent Vehicle Routing Problem with Time Windows (TDVRPTW) extends the classical VRPTW by making travel times depend on departure time, with the objective of minimizing the total travel time of at most $k$ vehicle routes serving customers within strict time windows. Exact resolution of this realistic yet understudied problem currently relies on the Branch \\& Price approach of Dabia et al. (2013), in which a Column Generation scheme decomposes the problem into a set-partitioning master problem and a resource-constrained shortest-path pricing problem solved by dynamic programming. This work, conducted within the MAMUT project (Machine Learning and Matheuristics for Urban Transport), aims to advance the state of the art for the exact and explainable resolution of the TDVRPTW. We propose to reimplement and revisit the pioneering Branch \\& Price algorithm by transferring recent advances made on the single-vehicle variant (TDTSPTW) to the multi-vehicle setting, notably an exact anytime extension of A* and a Large Neighborhood Search guided by dynamic programming for the pricing sub-problem. We further explore the integration of data mining and machine learning to guide column generation by exploiting knowledge from previously computed routes. The goal is a high-performance and interpretable solver that meets the requirements of real-world urban transport while preserving guarantees on solution quality.",
+      "url": "http://arxiv.org/abs/2607.22582v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22582v1",
+      "tldr": "This paper reimplements and advances the exact Branch & Price algorithm for the time-dependent vehicle routing problem with time windows by transferring recent advances from the single-vehicle variant (anytime A* and DP-guided large neighborhood search) and integrating machine learning to guide column generation, aiming for a high-performance, interpretable solver.",
+      "detailed_reading": {
+        "motivation": "当前对具有时间依赖旅行时间和时间窗的车辆路径问题（TDVRPTW）的精确求解主要依赖Dabia等人（2013）的分支定价方法，但该实现未开源且未充分利用单车辆变体（TDTSPTW）的最新进展以及数据驱动技术，限制了求解性能与可解释性。",
+        "method": "基于Dantzig-Wolfe分解的列生成框架，主问题为集合划分线性规划，子问题为带资源约束的最短路径定价问题。对子问题采用双向动态规划，并引入单车辆TDTSPTW中验证有效的精确任意时间A*扩展算法和大邻域搜索（LNS）DP方法进行求解；同时探索利用数据挖掘和机器学习技术从已计算路径中提取模式来引导列生成过程。整体嵌入分支定价剪切框架实现精确求解。",
+        "result": "本工作旨在将单车辆TDTSPTW的最新成果迁移至多车辆TDVRPTW，预期在标准基准实例上相比Dabia等人（2013）的方法获得更优的求解时间或可证最优解规模，具体对比结论有待实验验证，但初步方向表明任意时间A*和LNS-DP能显著加速定价问题求解。",
+        "conclusion": "通过重新实现并改进Dabia等人的分支定价算法，结合精确任意时间A*、大邻域搜索DP以及机器学习引导列生成，有望在保持解质量保证的前提下，显著提升TDVRPTW的精确求解效率与可解释性，满足城市交通实际需求。",
+        "key_details": "数据输入为具有时间窗和分段线性时间依赖旅行时间的客户集；关键模块包括双向DP定价算法、任意时间A*启发式（提供上界和下界）、基于DP的大邻域搜索（用于探索新路径）、以及模式挖掘/ML模型（用于筛选有潜力路径）；训练/推理流程中DL和ML用于在线学习列生成策略；复杂度取决于状态空间剪枝与搜索深度；局限性在于框架依赖Dantzig-Wolfe分解，大规模实例下子问题求解仍可能成为瓶颈。"
+      },
+      "affiliations": [
+        "IMT Atlantique",
+        "INSA Lyon"
+      ],
+      "affiliations_text": "IMT Atlantique, INSA Lyon",
+      "score": 4.3946472656353555,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.22551v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722551v1-mirror-descent-methods-for-quasar-convex-optimization-problems-with-non-smooth-inequality-constraints",
+      "source": "arxiv",
+      "title": "Mirror Descent Methods for Quasar Convex Optimization Problems With Non-Smooth Inequality Constraints",
+      "authors": [
+        "Mohammad Alkousa"
+      ],
+      "authors_text": "Mohammad Alkousa",
+      "abstract": "In this paper, we consider constraint optimization problems subject to non-smooth convex functional (inequality-type) constraints, wherein the objective function is non-smooth and quasar convex. We propose and analyze two groups of algorithms, each consisting of a standard version and a modified variant, that operate by switching between two types of iteration points: productive and non-productive. Within each group, we develop distinct mirror descent-type algorithms for both deterministic and stochastic settings, and we establish their convergence rates.",
+      "url": "http://arxiv.org/abs/2607.22551v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22551v1",
+      "tldr": "This paper presents two groups of mirror descent algorithms, including deterministic and stochastic variants, for solving non-smooth quasar convex optimization problems with non-smooth inequality constraints and establishes their convergence rates.",
+      "detailed_reading": {
+        "motivation": "非光滑quasar凸函数在机器学习中广泛应用，例如线性动力学系统学习和相位恢复，但现有研究多集中于光滑情形，非光滑带功能约束的问题尚未充分探索。本文旨在填补这一空白，提出有效的镜面下降算法。",
+        "method": "考虑问题min_{g(x)<=0, x in Q} f(x)，其中f为γ-quasar凸且非光滑，g凸非光滑。提出两组镜面下降算法，每组包括标准版和修改版，在确定性和随机设置下均适用。算法基于productive（满足g<=ε）和non-productive（不满足）步骤切换：productive步使用f的子梯度更新，non-productive步使用g的子梯度更新。步长h_k自适应为Θ_0(∑_{i=0}^k M_i^2)^{-1/2}，其中M_i为当前子梯度的对偶范数。最终输出productive迭代中f值最小的点。",
+        "result": "对于确定性算法（Group I定理1），迭代复杂度为O(max{M_f^2, M_g^2} Θ_0^2 (1+1/γ)^2 / ε^2)，输出点同时满足f(hat{x})-f(x*)≤ε和g(hat{x})≤ε。随机设置类似，建立了相应的收敛速率。",
+        "conclusion": "本文提出了两类针对非光滑quasar凸约束优化问题的镜面下降算法，在确定性和随机环境中均建立了收敛保证，扩展了quasar凸优化的理论框架至更实际的带约束场景。",
+        "key_details": "关键假设包括：f为γ-quasar凸（γ∈(0,1]），f和g均为Lipschitz连续（常数M_f, M_g），Bregman散度有界（≤Θ_0^2）。步长自适应且非增，通过productive/non-productive机制处理约束。算法需要已知Θ_0，但无需问题精确解信息。随机设置中使用无偏随机子梯度。局限性可能包括对于大规模问题的计算成本以及对Θ_0的依赖。"
+      },
+      "affiliations": [
+        "Innopolis University"
+      ],
+      "affiliations_text": "Innopolis University",
+      "score": 4.356917296538223,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.22601v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722601v1-the-combined-van-and-mopeds-routing-problem-with-time-windows-formulation-variants-and-solution-methods",
+      "source": "arxiv",
+      "title": "The Combined Van-and-Mopeds Routing Problem with Time Windows: Formulation, Variants, and Solution Methods",
+      "authors": [
+        "Pedro Lameiras",
+        "Alexandre P. Francisco",
+        "Adriano Serrano",
+        "Cátia Vaz"
+      ],
+      "authors_text": "Pedro Lameiras, Alexandre P. Francisco, Adriano Serrano, Cátia Vaz",
+      "abstract": "We introduce and study the Combined Van-and-Mopeds Routing Problem with Time Windows (CVMRPTW), a novel variant of the heterogeneous fleet vehicle routing problem motivated by last-mile parcel delivery in dense European cities. In the CVMRPTW, a single van serves as a mobile base from which on-demand mopeds are deployed to reach customers located in areas inaccessible or inefficient for vans. The primary objective is to minimise the number of mopeds used while guaranteeing that all delivery time windows are met. We propose a Mixed-Integer Linear Programming (MILP) formulation that captures vehicle synchronisation, capacity tracking, and time-window compliance through 22 structured constraint families, and extend it to three operationally motivated variants: the standard model, the active-waiting-van variant, and the common-depot variant. A lexicographic two-stage optimisation framework allows secondary objectives-route duration, combined travel time, and combined distance-to be optimised without sacrificing the primary objective. Three graph-sparsification preprocessing techniques reduce the number of variables and constraints by up to 25%. For instances beyond the practical limits of exact solvers, we develop the Cluster-Based Combined Routing (CBCR) heuristic, which decomposes the problem into a clustering phase, a cluster-level exact solve, and a route-reconstruction phase. Computational experiments on real-world instances derived from OpenStreetMap data for Lisbon and Stuttgart show that the MILP solves instances with up to 48 customers to feasibility within one hour, and that the CBCR heuristic extends tractability to instances with up to 80 customers under favourable conditions.",
+      "url": "http://arxiv.org/abs/2607.22601v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22601v1",
+      "tldr": "This paper introduces the Combined Van-and-Mopeds Routing Problem with Time Windows (CVMRPTW) for last-mile delivery in dense cities, proposing a MILP formulation with 22 constraint families, three operational variants, a lexicographic optimization framework, graph-sparsification preprocessing, and a Cluster-Based Combined Routing heuristic that scales to 80 customers.",
+      "detailed_reading": {
+        "motivation": "城市最后一英里配送中，传统货车因狭窄街道、陡坡和低排放区无法到达大量客户，亟需一种结合货车和机动灵活摩托车的异构车队方案。本文受里斯本Dingoo公司运营场景启发，针对硬时间窗约束下最小化摩托车使用数量的组合路径优化问题，填补了现有车辆路径问题（如CTBRP）中多摩托车、动态结合节点和硬时间窗同时考虑的空白。",
+        "method": "提出CVMRPTW的混合整数线性规划（MILP）公式，包含22类约束族覆盖流守恒、车辆同步、容量追踪和时间窗满足；模型基于有向加权图，货车和摩托车各有独立边集和旅行时间，结合节点由优化内生确定。开发两阶段词典优化框架，首先最小化摩托车数量，然后在不牺牲主要目标下优化路线持续时间、总旅行时间或总距离。引入三种图稀疏化预处理技术（基于时间窗、可达性和容量约束裁剪边）将变量和约束减少最多25%。对于超过MILP求解能力的大规模实例（超过48客户），提出基于聚类的组合路由（CBCR）启发式：先通过k-medoids聚类将客户分组，再对每个聚类精确求解MILP，最后重建全局路线。实验使用基于OpenStreetMap的里斯本和斯图加特真实数据，利用Gurobi 12.0.2求解。",
+        "result": "在真实实例测试中，MILP能在1小时内求解最多48个客户的实例并达到可行性；CBCR启发式在有利条件下将可处理规模扩展到最多80个客户。图稀疏化预处理平均减少25%的决策变量和约束。新提出的性能指标（平均摩托车负载、平均同步比）为评估方案质量提供了量化依据。",
+        "conclusion": "本文首次为结合货车与摩托车的城市配送问题（CVMRPTW）提供了完整的数学模型和求解方案，证明MILP和CBCR启发式能在实际规模下有效优化摩托车数量和次要目标，为城市物流运营商制定灵活、低成本的最后一英里配送策略提供了理论支撑和实用工具。",
+        "key_details": "数据来源：通过OpenStreetMap提取里斯本和斯图加特的真实道路网络和客户分布。先验假设：所有客户具有硬时间窗，货车容量约50包裹，摩托车容量4-6包裹，且摩托车的装载遵循LIFO顺序（模型简化中未显式建模）。目标函数：主目标最小化摩托车使用数量，次目标按优先级可选最小化总路线时长、总旅行时间或总距离。超参：CBCR中聚类数由客户数量动态确定。复杂度：问题属NP-hard，MILP解空间随客户数指数增长，精确求解受限于48客户。局限性：CBCR在客户分布松散或时间窗紧凑时性能下降；模型未考虑实时交通变化或动态需求。"
+      },
+      "affiliations": [
+        "INESC-ID Lisboa",
+        "Instituto Politécnico de Lisboa",
+        "Universidade de Lisboa",
+        "Dingoo"
+      ],
+      "affiliations_text": "INESC-ID Lisboa, Instituto Politécnico de Lisboa, Universidade de Lisboa, Dingoo",
+      "score": 4.342839697776411,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.22543v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722543v1-route-based-map-matching-via-a-structured-codebook-and-token-sequence-decoding",
+      "source": "arxiv",
+      "title": "Route Based Map Matching via a Structured Codebook and Token Sequence Decoding",
+      "authors": [
+        "Takara Sakai"
+      ],
+      "authors_text": "Takara Sakai",
+      "abstract": "This study proposes an efficient and computationally light route based map matching method for GPS track data on urban expressway networks. The key idea is to exploit a symbolic structure of named lines and named junctions that link level map matching leaves unused. We represent each candidate route as a sequence of line and junction names, take the set of such sequences as a route codebook, and formulate map matching as scored alignment of a probe trajectory against members of the codebook. Probes become token sequences via a mesh quantizer, a precomputed grid mapping each coordinate to a line or junction token, and the decoder returns a member of the codebook by construction. The codebook is indexed by a DAFSA $\\times$ Levenshtein automaton, a fuzzy lookup technique from approximate string matching and speech recognition; the per query decoding cost is orders of magnitude lower than a brute force scan. We evaluate the method on a deformed replica of the Tokyo Metropolitan Expressway topology. The method recovers the exact route at moderate GPS noise and continues to identify the line and junction sequence under heavy noise; a sensitivity analysis maps the mesh resolution operating range. Real probe evaluation, channel model calibration, and a head to head HMM comparison are left to a forthcoming version.",
+      "url": "http://arxiv.org/abs/2607.22543v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22543v1",
+      "tldr": "This paper proposes a route-based map matching method for urban expressways that represents candidate routes as token sequences of named lines and junctions, converts GPS probes to token sequences via a mesh quantizer with no per-query link computations, and efficiently decodes the best-matching route using a DAFSA × Levenshtein automaton index.",
+      "detailed_reading": {
+        "motivation": "传统基于逐链路的地图匹配方法在城市高速公路网中面临两个结构性问题：交叉口的单次误识别会传播至整个轨迹，且多层立体结构使得相邻链路在GPS噪声下难以区分。本文提出将匹配单元从链路提升至路线，利用城市高速公路网特有的命名线路和命名交叉口的符号结构，避免局部决策的误差传播。",
+        "method": "首先，为路网中每条链路附加结构语义标签（线路名、交叉口名、出入口名），构成有限词汇表T（包括IN@*、OUT@*、LINE_*、JCT_*四类）。将每条候选路线R的链路标签序列经过去重规范化得到令牌序列Φ(R)，所有候选路线的令牌序列构成路由码本C。探测轨迹通过网格量化器转换为观测令牌序列o：将路网预先栅格化为网格，每个网格单元存储其覆盖的线路或交叉口令牌，探测点通过整数除法定位网格并查表获得令牌，无需实时计算链路距离。解码器对每个码本成员c计算与观测o的比对得分S(o,c)，采用动态规划，包含匹配（加log P(o|t)）、观测跳过（插入噪声惩罚）、路线跳过（删除惩罚）三种操作。解码结果取得分最高的码本成员对应的路线。为提升效率，码本通过DAFSA和Levenshtein自动机索引，将模糊查找转化为产品自动机上的最短路径搜索，每个查询的解码成本比暴力扫描低多个数量级。",
+        "result": "在东京首都高速公路的变形复制网络（760条链路、695个节点、15条命名线路、24个交叉口、102个匝道）上的合成实验表明：在中度GPS噪声下，方法能精确恢复真实路线；在强噪声下仍能识别线路和交叉口序列。网格分辨率敏感性分析确定了有效运行范围。索引结构（DAFSA+Levenshtein自动机）的解码成本比暴力扫描低多个数量级。码本的最小汉明距离为1，但连续得分差异能区分硬决策无法区分的路线对。",
+        "conclusion": "本文提出的基于结构化码本和令牌序列解码的路线级地图匹配方法，通过将匹配单元从链路提升至路线，并利用城市高速公路网的命名符号结构，有效避免了逐链路解码的误差传播。网格量化器消除了实时距离计算，索引结构实现了高效的模糊解码。合成网络实验验证了方法的噪声鲁棒性和计算效率。",
+        "key_details": "关键细节包括：1) 数据与输入：使用东京首都高速公路的变形拓扑网络（760链路、695节点、15线路、24交叉口、102匝道），合成探测轨迹由真实路线加高斯噪声生成。2) 建模：令牌序列表示采用去重规范化，网格量化器预计算网格，令牌混淆概率P(o|t)基于线路邻接图拓扑距离定义（等价的softmax核，σ_conf为锐度参数）。3) 损失与超参：动态规划得分使用log P(o|t)，观测跳过和路线跳过惩罚与令牌信息成本成正比；σ_conf和网格分辨率是关键超参。4) 复杂度：码本通过DAFSA和Levenshtein自动机索引，解码成本从O(|R|·L_R·L_obs)降至O(|trie|·L_obs)或更优。5) 局限性：Φ可能非单射（不同路线可能映射为相同令牌序列），此时解码返回路线等价类；混淆模型未经实际噪声校准；真实探测数据评估和与HMM的比较留待后续版本。"
+      },
+      "affiliations": [
+        "Institute of Science Tokyo"
+      ],
+      "affiliations_text": "Institute of Science Tokyo",
+      "score": 4.313723890281421,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.22576v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722576v1-rational-minimax-approximations-for-matrix-valued-functions-existence-optimality-and-algorithms",
+      "source": "arxiv",
+      "title": "Rational Minimax Approximations for Matrix-Valued Functions: Existence, Optimality and Algorithms",
+      "authors": [
+        "Lei-Hong Zhang",
+        "Chenkun Zhang"
+      ],
+      "authors_text": "Lei-Hong Zhang, Chenkun Zhang",
+      "abstract": "In this paper, we study rational minimax approximation for continuous complex matrix-valued functions in the Frobenius norm, where all approximant entries share a common denominator. This generalizes classical scalar rational approximation, with applications in system modeling, microwave design, and nonlinear eigenvalue problems. We first prove the existence of such matrix-valued approximants on point sets dense in themselves, extending Walsh's foundational scalar result. Next, we establish characterizations of the local and global minimax approximants by deriving primal/dual matrix-valued Kolmogorov criteria and a Ruttan-type sufficient condition for global optimality. For analytic functions on a continuum, we link continuum minimax approximation to approximation on its boundary, and finite boundary samples via the maximum norm principle. We show that Ruttan's sufficient optimality condition provides a certificate under which a minimax approximant obtained from the boundary or from a discrete set of boundary nodes also solves the original continuum problem. Finally, for discrete approximation, we connect these conditions to a dual problem and the related dual-based numerical method m-d-Lawson: when the original minimax problem admits a solution, strong duality is equivalent to Ruttan's sufficient optimality condition, and, the optimality equations underlying the m-d-Lawson iteration coincide with Kolmogorov's dual criteria. These results provide a theoretical basis for certifying and computing matrix-valued rational minimax approximants.",
+      "url": "http://arxiv.org/abs/2607.22576v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22576v1",
+      "tldr": "This paper generalizes scalar rational minimax approximation to matrix-valued functions with a common denominator, proving existence, establishing Kolmogorov and Ruttan optimality criteria, and linking them to a dual-based algorithm (m-d-Lawson) for certifying and computing minimax approximants.",
+      "detailed_reading": {
+        "motivation": "矩阵值有理极小极大逼近在系统建模、微波设计和非线性特征值问题等场景中具有重要应用，但现有理论（如Walsh存在性定理、Kolmogorov最优性条件）主要针对标量函数，缺乏针对矩阵值函数且所有逼近项共享共同分母情形的系统研究。本文旨在建立该类逼近问题的存在性、最优性条件与数值算法的理论基础。",
+        "method": "论文针对定义在紧致自密集上的连续复矩阵值函数，采用所有条目共享共同分母的有理函数形式，在Frobenius范数下极小化最大逼近误差。首先，通过扩展Walsh的标量存在性证明，引入归一化分母处理，证明了矩阵值有理极小极大逼近的存在性。其次，推导了矩阵值Kolmogorov原始-对偶准则和Ruttan型充分全局最优性条件。对于解析函数，利用最大Frobenius范数原理将连续域上的逼近问题等价转换为边界或边界离散点上的问题，并证明了Ruttan条件是保证离散解同样适用于连续问题的证书。最后，对于离散逼近，建立了与对偶问题的联系，并分析了m-d-Lawson迭代方法，证明其强对偶性等价于Ruttan条件，且迭代的最优性方程对应于Kolmogorov对偶准则。",
+        "result": "论文证明了矩阵值有理极小极大逼近在自密集上的存在性，这是Walsh标量结果的自然推广。建立了局部和全局最优性的Kolmogorov型准则与Ruttan型充分条件。在解析函数情形下，揭示了连续、边界与离散逼近之间的等价性：当Ruttan条件满足时，边界或边界样本上的极小极大逼近也是原连续问题的最优解。对于离散问题，给出了强对偶性与Ruttan条件等价的理论结果，并将m-d-Lawson迭代解释为对Kolmogorov对偶准则的数值实现。这些结果为矩阵值有理极小极大逼近的认证与计算提供了完整的理论基础。",
+        "conclusion": "本文系统建立了矩阵值有理极小极大逼近的理论框架，包括存在性、最优性条件、连续-离散关系及数值算法基础。成果可直接用于指导实际应用中的逼近器构造与最优性验证，并为开发高效数值方法提供了理论支撑。",
+        "key_details": "关键细节包括：逼近误差采用Frobenius范数的平方度量；要求定义集是自密集（无孤立点）以保证存在性；对于解析函数，利用最大范数原理将问题域缩小至边界；离散逼近假设样本数m至少为max_{i,j}(n_{ij}+d+2)，以确保解的唯一性或收敛性；理论依赖共享分母结构，各条目次数可不同；Ruttan条件作为充分性证书避免了对全局搜索的依赖；m-d-Lawson方法基于对偶加权迭代，其合理性由强对偶性保证；未讨论分母极点的位置约束或数值稳定性等局限性。"
+      },
+      "affiliations": [
+        "Soochow University"
+      ],
+      "affiliations_text": "Soochow University",
+      "score": 4.284492501026984,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.22567v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722567v1-a-formal-kinetic-theory-for-zeroth-order-newton-dynamicsstein-corrected-hessian-estimation-and-curvature-variance-trade-offs",
+      "source": "arxiv",
+      "title": "A Formal Kinetic Theory for Zeroth-Order Newton Dynamics:Stein-Corrected Hessian Estimation and Curvature--Variance Trade-offs",
+      "authors": [
+        "Shihao Ji",
+        "Mingyu Li",
+        "Zihui Song"
+      ],
+      "authors_text": "Shihao Ji, Mingyu Li, Zihui Song",
+      "abstract": "Zeroth-order Newton-type methods are useful when gradients and Hessians are unavailable, but they behave quite differently from first-order gradient-free methods. We develop a kinetic framework for algorithms that estimate both gradient and Hessian from black-box function values. The naive random-direction Hessian estimator turns out to be biased even on quadratics; a Gaussian--Stein correction is needed to estimate the Hessian of the Gaussian-smoothed objective. Linearizing the inverse Hessian exposes two noise channels: gradient noise preconditioned by the inverse Hessian, and Hessian noise transmitted through an inverse-Hessian sandwich. Under a noisy oracle the second channel carries the second-difference factor $μ_H^{-4}$. A small-mass kinetic lift links the finite-step Newton update to an underdamped phase-space model; the overdamped spatial limit yields a Lyapunov bound that exposes the curvature--variance trade-off between step size, batch sizes, smoothing radii, and regularization. Numerical experiments confirm estimator identities, the gradient and Hessian variance laws, dimension scaling, inverse-perturbation accuracy, and optimization behavior under query-budget and regularization ablations.",
+      "url": "http://arxiv.org/abs/2607.22567v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22567v1",
+      "tldr": "This paper develops a formal kinetic theory for zeroth-order Newton methods, introducing a Gaussian–Stein corrected Hessian estimator to remove bias and revealing a curvature–variance trade-off that links step size, batch sizes, smoothing radii, and regularization.",
+      "detailed_reading": {
+        "motivation": "零阶牛顿方法在梯度和海森矩阵不可获取时具有重要应用价值，但其行为与一阶无梯度方法显著不同。朴素随机方向海森估计器即使在二次目标上也是有偏的，需要高斯-斯坦因校正来估计高斯平滑目标的真实海森矩阵。现有理论对零阶牛顿动力学中噪声的非线性传播机制缺乏深刻理解，尤其缺少解释小正则化、小平滑半径和小批大小如何导致不稳定的清晰尺度定律。",
+        "method": "本文建立了一个动理学理论框架，分析从黑箱函数值同时估计梯度和海森的零阶牛顿算法。核心方法包括：使用高斯-斯坦因校正的随机方向海森估计器，其关键因子为(bb^T-I)/2来消除偏差；分别用独立平滑半径μ_g和μ_H对梯度与海森进行估计，并采用批大小为B_g和B_H的平均降方差。更新步骤为x_{k+1}=x_k - η(ŝH_k + λI)^{-1}ĝ_k。通过将逆海森线性化，识别出两个噪声通道：由逆海森预条件的梯度噪声，以及通过逆海森夹层传输的海森张量噪声。进一步利用小质量动力学提升，将有限步牛顿更新关联到欠阻尼相空间模型，并在过阻尼空间极限下推导出李雅普诺夫界，显式给出步长、批大小、平滑半径和正则化λ之间的曲率-方差权衡。",
+        "result": "数值实验验证了关键理论预测：梯度估计协方差符合各向异性特征且与理论斜率一致；朴素海森估计器在二次函数上偏差高达6.0，而斯坦因校正后估计误差降至0.083；海森估计方差的批大小缩放斜率为-1.036（接近理论1/B_H），平滑半径缩放斜率为-4.020（验证μ_H^{-4}律）；在条件数扫描实验中，零阶牛顿方法最终优化误差为1.003，远优于梯度下降的3.428e-3（表现更差）；正则化λ的消融实验显示最优λ=0.05，批大小B_H=256，μ=0.03时达到最佳性能。",
+        "conclusion": "本文为零阶牛顿动力学建立了形式化的动理学理论，核心贡献包括：提出高斯-斯坦因校正海森估计器并证明其无偏性；推导出线性化零阶牛顿步中张量噪声通道的精确分解；通过动理学提升显式揭示曲率-方差权衡，即小正则化λ和小平滑半径μ_H会通过μ_H^{-4}和λ^{-3}因子急剧放大海森估计噪声；理论预测被系统数值实验证实。该工作为理解黑箱二阶优化方法的稳定性和超参数选择提供了理论基础。",
+        "key_details": "关键方法论细节：朴素随机方向海森估计器E[(f(x+μb)+f(x-μb)-2f(x))/μ^2 bb^T] = 2H + tr(H)I，必须使用校正因子(bb^T-I)/2才能得到无偏估计。噪声方差关键缩放：观测噪声导致的张量估计方差为E||K_obs||_F^2 = (3σ_f^2)/(2μ^4) d(d+1)，产生μ_H^{-4}因子。线性化噪声协方差包含两项：第一项(1/B_g) P_λ Σ_g P_λ，第二项(1/B_H) Cov(P_λ Z_H P_λ g)。局部曲率-方差权衡上界形如 (d+1)G_R^2+σ_f^2 d/μ_g^2 除以 B_g λ，加上 G_R^2 d/(B_H λ^3)乘以(ν_H^2 + σ_f^2 d^2/μ_H^4)，显式展示了λ^{-3}的放大效应。实现限制：若复用同一中心查询Y(x)则导致中心噪声跨方向相关，破坏1/B_H方差缩减；算法对平滑半径、批大小和正则化超参数敏感，需仔细调节。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.281159193328638,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.22618v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722618v1-transform-method-for-stochastic-processing-and-matching-networks",
+      "source": "arxiv",
+      "title": "Transform Method for Stochastic Processing and Matching Networks",
+      "authors": [
+        "Sushil Mahavir Varma",
+        "Prakirt Jhunjhunwala",
+        "Daniela Hurtado-Lange",
+        "Siva Theja Maguluri"
+      ],
+      "authors_text": "Sushil Mahavir Varma, Prakirt Jhunjhunwala, Daniela Hurtado-Lange, Siva Theja Maguluri",
+      "abstract": "Modern service systems -- ranging from cloud data centers to ride-hailing platforms -- operate at massive scales where congestion is a critical challenge. Utilizing an operations research approach, these systems are analyzed by modeling them as complex stochastic processes, which are typically understood through process-level convergence to fluid and diffusion limits. However, these methods often prove technically dense and provide limited guidance for finite, practical system scales. The transform method, presented in this tutorial, was recently developed as a unified and tractable framework for the steady-state analysis of Stochastic Processing and Matching Networks (SPNs/SMNs). The transform method overcomes the technical hurdles of process-level convergence by working directly with the pre-limit system. By exploiting the zero-drift property of exponential test functions, the method derives explicit functional equations (acting as a proxy for global balance equations) for the transforms (such as moment-generating functions) of queue-length distributions. This approach provides sharp, non-asymptotic performance guarantees, bridging the gap between theoretical asymptotics and real-world system behavior.\n  Since its introduction in 2020 for load-balancing in data center networks, the transform method has been extended to handle realistic complexities, including customer abandonment, state-dependent arrivals, Markov-modulated arrivals, large-system scale, and multi-dimensional networks with multiple bottlenecks. We survey these theoretical advances and demonstrate their practical relevance across diverse domains, such as matching markets and networked service systems. The transform method provides interpretable bounds tied directly to system parameters, offering a powerful analytical alternative to simulation-heavy or purely asymptotic approaches for system design and control.",
+      "url": "http://arxiv.org/abs/2607.22618v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22618v1",
+      "tldr": "This tutorial presents the transform method, a unified and tractable framework for the steady-state analysis of stochastic processing and matching networks that provides sharp, non-asymptotic performance guarantees by directly deriving functional equations for queue-length distributions.",
+      "detailed_reading": {
+        "motivation": "现代服务系统（如云数据中心、叫车平台和医疗设施）运行在大规模下，拥塞是关键挑战。传统基于流体和扩散极限的过程级收敛方法技术密集，且对有限实际规模提供的指导有限。变换方法作为统一且易处理的框架，直接分析预极限系统，克服了这些技术障碍，提供非渐近性能保证。",
+        "method": "变换方法采用指数测试函数（如e^{θϵq}）应用于队列动力学，利用稳态下的零漂移条件推导队列长度变换（如矩生成函数）的显式泛函方程。该方法遵循三步：导出变换方程、近似至二阶、求解泛函方程。它适用于随机处理网络和匹配网络，并已扩展处理顾客放弃、状态相关到达、马尔可夫调制到达、大规模系统和多维网络。具体而言，对离散时间单服务器G/G/1队列，基于Lindley递归和互补条件，通过零漂移得到泛函方程，在重流量极限下求解得到尺度化队列长度的指数分布。",
+        "result": "变换方法提供尖锐的非渐近性能保证，桥接理论渐近与实际系统行为。在单服务器队列中，恢复Kingman界限并证尺度化队列长度收敛到指数分布。在负载均衡、放弃、马尔可夫调制和多维网络等扩展中，获得显式的尾部界限、错误界限和联合分布刻画，例如在输入排队交换机中首次刻画重流量下的联合队列长度分布。",
+        "conclusion": "变换方法是分析、设计和控制真实世界随机系统（如数据中心、叫车平台和匹配市场）的可处理、适应性强且广泛适用的框架。它为系统参数提供可解释的界限，是纯渐近或模拟方法的有力补充，能直接为控制策略提供性能认证。",
+        "key_details": "关键实现细节包括：使用指数测试函数将加性更新转化为乘法因子，利用互补条件（q(k+1)·u(k)=0）简化漂移计算中的交叉项。稳态下零漂移导出变换的泛函方程，通过泰勒展开至二阶后求解，得到重流量下指数分布。方法假设到达和服务有界，扩展中引入微分方程、泊松方程和逆傅里叶变换处理放弃、马尔可夫调制和状态相关到达。局限性包括对特定网络结构的依赖，以及需要变换可解性条件。"
+      },
+      "affiliations": [
+        "Northwestern University",
+        "Amazon",
+        "Georgia Institute of Technology",
+        "University of Michigan Ann Arbor"
+      ],
+      "affiliations_text": "Northwestern University, Amazon, Georgia Institute of Technology, University of Michigan Ann Arbor",
+      "score": 4.2784608861146465,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.22580v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/28/260722580v1-optimality-of-a-threshold-policy-for-a-queueing-system-with-one-fast-server-and-two-identical-slow-servers",
+      "source": "arxiv",
+      "title": "Optimality of a Threshold Policy for a Queueing System with One Fast Server and Two Identical Slow Servers",
+      "authors": [
+        "Weina Wang",
+        "Taha Ameen",
+        "Yudong Chen",
+        "Yige Hong",
+        "Josh Nichols",
+        "Matthew Zurek"
+      ],
+      "authors_text": "Weina Wang, Taha Ameen, Yudong Chen, Yige Hong, Josh Nichols, Matthew Zurek",
+      "abstract": "This paper studies the optimal control problem of a queueing system with three servers: one fast server and two identical slow servers. The two-server version of this problem, with one fast server and one slow server, was introduced by Lin and Kumar (1984), and the optimal policy has been shown to be of threshold type. However, generalizing this result beyond the two-server setting has been considered an open problem. In this paper, we resolve the first nontrivial case by proving that a threshold policy is optimal for the three-server system considered.\n  The core technical ideas in this paper are generated by GPT-5.5 Pro. We have included a short report describing the authors' interactions with GPT-5.5 Pro. The authors verified the proofs and rewrote the paper for better rigor, clarity, and exposition. In addition, three key lemmas have also been verified in Lean 4.",
+      "url": "http://arxiv.org/abs/2607.22580v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22580v1",
+      "tldr": "This paper proves that a threshold policy is optimal for a queueing system with one fast server and two identical slow servers, resolving a longstanding open problem.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "University of Illinois",
+        "Carnegie Mellon University",
+        "University of Wisconsin-Madison"
+      ],
+      "affiliations_text": "University of Illinois, Carnegie Mellon University, University of Wisconsin-Madison",
+      "score": 4.1749161700515,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.22538v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722538v1-low-rank-kkt-updates-and-a-parallel-flipping-mechanism-for-model-based-derivative-free-optimization",
+      "source": "arxiv",
+      "title": "Low-Rank KKT Updates and a Parallel Flipping Mechanism for Model-Based Derivative-Free Optimization",
+      "authors": [
+        "Donghan Wu",
+        "Pengcheng Xie"
+      ],
+      "authors_text": "Donghan Wu, Pengcheng Xie",
+      "abstract": "Model-based derivative-free optimization relies on quadratic interpolation, but maintaining these models typically requires $\\mathcal{O}(m^3)$ linear system solves. We show that for the least Frobenius norm updating model, the associated KKT matrix possesses a fixed inner-product structure. Both single-point replacements and a proposed coordinate-axis flipping operation induce exact Rank-2 perturbations to this matrix. Using this structure, we derive an $\\mathcal{O}(n^2)$ update formula for the KKT inverse, eliminating costly refactorizations at each iteration. We integrate the update into a parallel trust-region algorithm where workers independently flip interpolation axes, refresh local models, and synchronize the best configuration. Tests on 530 benchmark problems show the method reduces model-maintenance overhead and achieves higher success rates under tight function-evaluation budgets compared to standard solvers.",
+      "url": "http://arxiv.org/abs/2607.22538v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22538v1",
+      "tldr": "This paper introduces a low-rank updating mechanism for the KKT matrix in least Frobenius norm quadratic models, enabling \\(\\mathcal{O}(n^2)\\) updates and a parallel coordinate-flipping strategy that reduces model maintenance overhead and improves performance on benchmark tests.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lawrence Berkeley National Laboratory",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "Lawrence Berkeley National Laboratory, University of California, Berkeley",
+      "score": 4.160495561177144,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.22542v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722542v1-a-hybrid-matheuristic-framework-for-the-chinese-postman-problem-with-load-dependent-costs",
+      "source": "arxiv",
+      "title": "A Hybrid Matheuristic Framework for the Chinese Postman Problem with Load-Dependent Costs",
+      "authors": [
+        "Thieu Khang Nguyen",
+        "Thu Huong Dang",
+        "Truong-Son Hy"
+      ],
+      "authors_text": "Thieu Khang Nguyen, Thu Huong Dang, Truong-Son Hy",
+      "abstract": "The Chinese Postman Problem with load-dependent costs (CPP-LC) arises in real-world logistics and transportation systems where travel costs depend on vehicle load and energy consumption. In this work, we propose a hybrid optimization framework that integrates metaheuristic search with mathematical programming to efficiently solve CPP-LC. The proposed method combines local search procedures with reduced mixed-integer linear programming (MILP) models to balance exploration and intensification. In addition, we develop an Ant Colony Optimization (ACO) algorithm to enhance scalability on large instances. Extensive experiments on benchmark datasets demonstrate that the proposed framework consistently achieves high-quality solutions and outperforms existing approaches in solution quality, while maintaining competitive computational efficiency. These results highlight the effectiveness of hybrid optimization strategies for complex, load-dependent routing problems in practical applications. Our implementation is publicly available at https://github.com/HySonLab/MatCPP",
+      "url": "http://arxiv.org/abs/2607.22542v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22542v1",
+      "tldr": "This paper proposes a hybrid matheuristic framework that integrates metaheuristic search with mixed-integer linear programming and Ant Colony Optimization to efficiently solve the Chinese Postman Problem with load-dependent costs, achieving high-quality solutions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lancaster University",
+        "University of Alabama at Birmingham"
+      ],
+      "affiliations_text": "Lancaster University, University of Alabama at Birmingham",
+      "score": 4.125706492304745,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.22537v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722537v1-a-uniqueness-result-for-finite-state-mean-field-games-with-non-separable-hamiltonian",
+      "source": "arxiv",
+      "title": "A uniqueness result for finite-state mean field games with non-separable Hamiltonian",
+      "authors": [
+        "Alekos Cecchin",
+        "Luca Di Persio",
+        "Nicola Fraccarolo"
+      ],
+      "authors_text": "Alekos Cecchin, Luca Di Persio, Nicola Fraccarolo",
+      "abstract": "We study a class of continuous-time mean field games on a finite state space with transition rates depending on the population distribution, leading to a non-separable Hamiltonian. In this setting, classical Lasry--Lions monotonicity arguments do not apply directly. We establish a new uniqueness result on arbitrary time horizons under a combination of strong monotonicity assumptions on the costs and quantitative bounds on the interaction term in the dynamics.",
+      "url": "http://arxiv.org/abs/2607.22537v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22537v1",
+      "tldr": "This paper proves a uniqueness result for finite-state mean field games with non-separable Hamiltonian over arbitrary time horizons by combining strong monotonicity assumptions on costs with quantitative bounds on the distribution-dependent transition rates.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Verona",
+        "University of Padova"
+      ],
+      "affiliations_text": "University of Verona, University of Padova",
+      "score": 4.080879180021245,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.22560v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722560v1-efficient-multidisciplinary-design-via-bayesian-optimization",
+      "source": "arxiv",
+      "title": "Efficient multidisciplinary design via Bayesian optimization",
+      "authors": [
+        "Nathalie Bartoli",
+        "Thierry Lefebvre",
+        "Rémi Lafage",
+        "Paul Saves",
+        "Youssef Diouane",
+        "Joseph Morlier"
+      ],
+      "authors_text": "Nathalie Bartoli, Thierry Lefebvre, Rémi Lafage, Paul Saves, Youssef Diouane, Joseph Morlier",
+      "abstract": "This study introduces SEGOMOE, a Bayesian optimization tool for optimizing complex, computationally expensive systems, especially in aeronautics. It efficiently handles mixed design variables (continuous, discrete, categorical, hierarchical) using adaptive Gaussian process models. SEGOMOE combines expert models to address nonlinearities in objectives and constraints, leveraging the open-source Surrogate Modeling Toolbox (SMT). The tool supports multi-fidelity data and solves both single- and multi-objective problems, including hidden constraints and high-dimensional decomposition. Validated through benchmarks and real-world aeronautical applications, SEGOMOE proves to be robust and versatile for tackling multidisciplinary challenges.",
+      "url": "http://arxiv.org/abs/2607.22560v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22560v1",
+      "tldr": "SEGOMOE, a Bayesian optimization tool, efficiently solves complex multidisciplinary design problems by handling mixed variables, constraints, multi-fidelity, and hidden constraints, validated through aeronautical applications.",
+      "detailed_reading": null,
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9001786050634735,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.22581v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722581v1-randomized-constructive-heuristics-for-the-vrptw-a-focus-on-regret-k",
+      "source": "arxiv",
+      "title": "Randomized Constructive Heuristics for the VRPTW: A Focus on Regret-k",
+      "authors": [
+        "Florian Rascoussier",
+        "Romain Billot",
+        "Lina Fahed",
+        "Christine Solnon"
+      ],
+      "authors_text": "Florian Rascoussier, Romain Billot, Lina Fahed, Christine Solnon",
+      "abstract": "The Vehicle Routing Problem with Time Windows (VRPTW) requires a fleet of capacitated vehicles to serve customers within strict time windows while minimizing total travel time. Constructive heuristics are fundamental for generating solutions and commonly serve as starting points for metaheuristics such as Iterated Local Search (ILS), Genetic Algorithms, and Ant Colony Optimization (ACO). This work studies three classical constructive heuristics - Nearest Neighbor, Best Insertion, and Regret-k - within a randomized, multi-start framework, a setting that remains largely under-explored despite their well-established deterministic use. We address how to effectively randomize these heuristics and, in particular, propose a novel randomization of Regret-k by separating the ''who'' (which customer to insert next) and ''where'' (insertion position) decisions, applying a probabilistic selection proportional to the regret value to preserve the heuristic's foresight while injecting the diversity needed for a multi-start approach. We further study the impact of combining these greedy randomized constructions with Local Search and ACO. Experiments follow the DIMACS 2021 conventions (integer, truncated Euclidean distances) on the Solomon and Gehring \\& Homberger benchmarks (100--1000 customers), comparing against the Best-Known Solutions and the state-of-the-art Hybrid Genetic Search solver, with all critical components implemented in modern C++ and bound to Python via pybind11. To the best of our knowledge, the randomization of Regret-k has never been examined; our analysis highlights the trade-off between solution quality and computational cost, providing a preliminary step toward hybrid methods (ACO, ILS, Branch-and-Price) for the Time-Dependent VRPTW within the MAMUT project.",
+      "url": "http://arxiv.org/abs/2607.22581v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22581v1",
+      "tldr": "This paper introduces a novel randomization of the Regret-k heuristic for the VRPTW by separating customer selection and insertion decisions, and evaluates it within multi-start, local search, and ACO frameworks on standard benchmarks to explore the trade-off between solution quality and computational cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IMT Atlantique",
+        "INSA Lyon"
+      ],
+      "affiliations_text": "IMT Atlantique, INSA Lyon",
+      "score": 3.8789424949003983,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.22594v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722594v1-dalemberts-functional-equation-and-a-globally-convex-free-action-principle-on-positive-paths",
+      "source": "arxiv",
+      "title": "d'Alembert's Functional Equation and a Globally Convex Free-Action Principle on Positive Paths",
+      "authors": [
+        "Sebastian Pardo-Guerra",
+        "Jonathan Washburn"
+      ],
+      "authors_text": "Sebastian Pardo-Guerra, Jonathan Washburn",
+      "abstract": "We study the kinetic action that d'Alembert's functional equation induces on positive paths in $\\Rplus$, and prove it strongly convex. Calibrated d'Alembert forces the cosh cost $\\Jcost(x)=\\tfrac12(x+x^{-1})-1$, i.e.\\ $\\Jlog(ξ)=\\coshξ-1$ in the log coordinate $ξ=\\log x$. Evaluating this log-cost at the log-\\emph{velocity} $\\dotξ$ rather than the log-position -- a single postulate (Postulate~\\ref{post:step}) -- yields $\\actionA[γ]=\\int_a^b(\\cosh\\dotξ-1)\\,dt$, strongly convex under geometric (log-space) interpolation. This convexity has three consequences, none requiring an Euler--Lagrange equation, a Fréchet derivative, or a second variation. First, a one-sided chord condition characterizes global minimality. Second, the unique fixed-endpoint minimizer is the uniform-log-velocity path. Third, the action gap obeys an exact Bregman / Pythagorean identity $\\actionA[γ]-\\actionA[γ_*]=\\int D_\\Kkin(\\dotξ\\,\\|\\,\\dotξ_*)\\,dt$, sharpened by a quantitative Friedrichs--Poincaré bound on $\\log(γ/γ_*)$. It has a dually-flat / Hessian-manifold reading in the additive coordinate $ξ$. \\\\ This theorem is purely mathematical, and we delimit it. The bridge to Newtonian and rapidity mechanics is \\emph{conditional}, requiring structure beyond Postulate~\\ref{post:step}: a kinematic embedding, a mass coupling, a time calibration, and a Hamiltonian-primary Legendre structure. Granted these, the cosh action recovers the Newtonian small-step limit and the rapidity profile $\\Kkin_m(φ)=m(γ_L-1)$; yet the cosh-dual Hamiltonian is \\emph{not} the special-relativistic free-particle Hamiltonian (Proposition~\\ref{prop:not-SR}), the agreement being one of profile, not an identity of Hamiltonians. Global minimality is a free-sector phenomenon: once a non-affine strictly convex potential is added, joint convexity is lost and the classical stationary-action picture returns.",
+      "url": "http://arxiv.org/abs/2607.22594v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22594v1",
+      "tldr": "The paper shows that d'Alembert's functional equation, combined with a postulate evaluating the resulting cosh cost at log-velocity, yields a globally convex free-action principle on positive paths with a unique closed-form minimizer and an exact Bregman divergence gap, while the connection to Newtonian and relativistic mechanics remains conditional.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Recognition Physics Institute"
+      ],
+      "affiliations_text": "Recognition Physics Institute",
+      "score": 3.8675822039214975,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.22550v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722550v1-learning-to-optimize-at-scale-a-benders-decomposition-transformers-framework-for-stochastic-combinatorial-optimization",
+      "source": "arxiv",
+      "title": "Learning to Optimize at Scale: A Benders Decomposition-TransfORmers Framework for Stochastic Combinatorial Optimization",
+      "authors": [
+        "Seung Jin Choi",
+        "Kimiya Jozani",
+        "Josh Cooper",
+        "Esra Buyuktahtakin Toy"
+      ],
+      "authors_text": "Seung Jin Choi, Kimiya Jozani, Josh Cooper, Esra Buyuktahtakin Toy",
+      "abstract": "We propose a learning-augmented Benders decomposition framework to solve large-scale two-stage stochastic mixed-integer programs. We focus on the two-stage stochastic capacitated lot-sizing problem (TSSCLSP) under demand uncertainty. Our method accelerates the convergence of the decomposition by using a pre-trained TransfORmer model to rapidly generate high-quality approximate solutions for the scenario subproblems. This hybrid strategy uses the TransfORmer predictions to generate strong optimality and feasibility cuts, effectively guiding the Benders master problem. Our framework includes a novel expandable generation mechanism, allowing a model trained on a fixed horizon to solve instances of arbitrary length. For the test set considered, our method solves instances up to T = 270, a scale previously intractable for this approach, while maintaining zero infeasibility in the generated subproblem solutions. This demonstrates the potential of TransfORmers as powerful surrogate solvers embedded within classical decomposition algorithms.",
+      "url": "http://arxiv.org/abs/2607.22550v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22550v1",
+      "tldr": "This paper introduces a Transformer-accelerated Benders decomposition framework that efficiently solves large-scale two-stage stochastic capacitated lot-sizing problems by generating high-quality approximate subproblem solutions and enabling zero-infeasibility scalability to previously intractable horizons.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Virginia Tech"
+      ],
+      "affiliations_text": "Virginia Tech",
+      "score": 3.848014498774834,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.22579v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722579v1-a-unified-approach-to-non-unique-fixed-points-via-modified-c-class-ciric-type-contractions",
+      "source": "arxiv",
+      "title": "A unified approach to non-unique fixed points via modified C-class Ciric-type contractions",
+      "authors": [
+        "Olaoluwa Omidire",
+        "Memudu Olatinwo",
+        "Kamiludeen Tijani",
+        "Babatunde Ishola"
+      ],
+      "authors_text": "Olaoluwa Omidire, Memudu Olatinwo, Kamiludeen Tijani, Babatunde Ishola",
+      "abstract": "Fixed point theory is central to nonlinear analysis, yet classical results often assume strict contractivity and guarantee uniqueness, limiting applicability to mappings with inherently non-unique fixed points. This paper addresses this gap by introducing a modified C-class function and establishing new non-unique fixed point theorems for Ciric-type mappings in complete metric spaces. We construct a generalized contractive inequality using a three-variable modifed C-class function combined with an altering distance function. Under orbital continuity and orbital completeness, we prove that Picard iteration converges to a fixed point without requiring global Lipschitz conditions or strict contractivity. Carefully designed examples illustrate the sharpness and generality of the framework, strictly extending classical Ciric and Chatterjea contractions as well as hybrid $(Φ,ψ)$-contractions. Our main contributions are: (i) a unified framework encompassing classical and generalized C-class contractions, (ii) existence results for non-unique fixed points, (iii) a simple criterion for uniqueness when desired, and (iv) practical validation through nontrivial examples. These results provide a robust foundation for further research in nonlinear operator theory, iterative methods, and applications in optimization and variational problems.",
+      "url": "http://arxiv.org/abs/2607.22579v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22579v1",
+      "tldr": "This paper introduces a modified C-class function to establish new non-unique fixed point theorems for Ćirić-type contractions in complete metric spaces, unifying and extending classical contraction principles through a generalized contractive inequality that does not require strict contractivity or global Lipschitz conditions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Osun State University",
+        "Obafemi Awolowo University"
+      ],
+      "affiliations_text": "Osun State University, Obafemi Awolowo University",
+      "score": 3.8276796521319545,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.22536v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722536v1-optimal-investment-with-switching-preferences",
+      "source": "arxiv",
+      "title": "Optimal Investment with Switching Preferences",
+      "authors": [
+        "Yu-Jui Huang",
+        "Liviu Ignat",
+        "Traian A. Pirvu",
+        "Reihaneh Vafadar"
+      ],
+      "authors_text": "Yu-Jui Huang, Liviu Ignat, Traian A. Pirvu, Reihaneh Vafadar",
+      "abstract": "Major life events can significantly increase individuals' risk aversion over a sustained period of time, as empirical studies reveal. How such an event-triggered shift of risk preferences impacts optimal investment is the focus of this paper. On a finite time horizon where a major life event may occur independently of the financial market, an investor aims to maximize her expected utility from terminal wealth while foreseeing a potential change in her risk aversion. We find that the associated Hamilton--Jacobi--Bellman (HJB) equation involves the post-event optimal value function (under elevated but fixed risk aversion after the event's occurrence), and the Fenchel--Legendre transform fails to linearize this HJB equation: it yields a parabolic equation with a fully nonlinear term, induced precisely by the post-event optimal value function. Through a combination of fixed-point, compactness, and verification arguments, we establish the existence of a positive convex classical solution with suitable growth to the fully-nonlinear parabolic equation. The convex conjugate of this solution is shown to satisfy the HJB equation and coincides with the pre-event optimal value function. The optimal trading strategy is obtained by concatenating the optimal pre-event and post-event strategies -- the former is expressed in terms of the solution to the HJB equation and the latter is traditional Merton's ratio.",
+      "url": "http://arxiv.org/abs/2607.22536v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22536v1",
+      "tldr": "This paper solves the optimal investment problem for an investor facing a potential shift to higher risk aversion from a major life event, deriving a fully nonlinear HJB equation and obtaining the optimal strategy as a concatenation of pre- and post-event Merton-type strategies.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7300534919473542,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.22589v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722589v1-diamond-transports-in-quadratic-form-and-distorted-optimal-transport",
+      "source": "arxiv",
+      "title": "Diamond transports in quadratic-form and distorted optimal transport",
+      "authors": [
+        "Ruodu Wang",
+        "Zhenyuan Zhang"
+      ],
+      "authors_text": "Ruodu Wang, Zhenyuan Zhang",
+      "abstract": "The diamond transport is generated by the uniform law on a diamond-shaped copula support. Since a classical optimal transport (OT) objective is affine in the coupling, this transport cannot be the unique minimizer in the classical setting. We study a broader family of transports, called diamond-type transports, in non-classical settings such as quadratic-form optimal transport (QOT) and distorted optimal transport (DOT), which are generally nonconvex. Our main results are within the QOT framework: for symmetric one-dimensional marginals, the diamond transport is an optimizer for a large class of QOT problems whose costs depend on within-coordinate distances. Examples include product costs under positive-definiteness and convexity conditions and, in particular, mixed rectangular costs. For rectangular costs, we show that the diamond transport is the unique minimizer except for boundary cases. In the DOT framework, diamond-type transports are minimizers for a natural class of cost, and the diamond transport is the unique minimizer in specialized examples. We also identify the intersection between DOT and QOT, which corresponds precisely to quadratic distortion functions.",
+      "url": "http://arxiv.org/abs/2607.22589v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22589v1",
+      "tldr": "This paper establishes that, while the diamond transport is not uniquely optimal in classical optimal transport, it becomes a minimizer (often the unique one) for a broad class of quadratic-form and distorted optimal transport problems with symmetric one-dimensional marginals and costs depending on within-coordinate distances, including mixed rectangular costs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Waterloo",
+        "Stanford University"
+      ],
+      "affiliations_text": "University of Waterloo, Stanford University",
+      "score": 3.6969822749278283,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.22557v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722557v1-threshold-indexability-of-restless-bandits-with-real-interval-state-spaces-a-performance-metric-verification-framework-and-long-run-average-analysis",
+      "source": "arxiv",
+      "title": "Threshold-indexability of restless bandits with real interval state spaces: a performance-metric verification framework and long-run average analysis",
+      "authors": [
+        "José Niño-Mora"
+      ],
+      "authors_text": "José Niño-Mora",
+      "abstract": "Restless multiarmed bandits are Markov decision process models for allocating a scarce resource among projects whose states evolve under active or passive actions. Whittle's index policy is widely used for such problems, but its application to a given model requires both a proof of indexability and a means of computing the index, two analytically challenging tasks. This paper develops a performance-metric framework for proving threshold-indexability and computing Whittle indices for binary-action projects with real interval state spaces. The framework extends discounted partial conservation law \\textup{(PCL)} methods to a criterion-agnostic setting and works directly with reward and resource metrics of threshold policies, rather than first proving threshold optimality and then monotonicity of optimal thresholds in the resource price. The main theorem is a verification and characterization result: under marginal-resource positivity and a marginal integration-by-parts identity, threshold-indexability is equivalent to monotonicity and continuity of the marginal productivity (MP) index, which then equals the Whittle index. The framework is specialized to the discrete-time long-run average criterion by a vanishing-discount transfer of discounted threshold metrics and includes exceptional states where the MP marginal-resource denominator vanishes, handled by continuous extension or vanishing-discount limits. Applications to web crawling and noisy-channel transmission recover known long-run average Whittle indices. For scalar Kalman-filter bandits, it proves a regular-part average-cost result and reduces the remaining indexability question to explicit exceptional-state metric-limit conjectures.",
+      "url": "http://arxiv.org/abs/2607.22557v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22557v1",
+      "tldr": "The paper develops a performance-metric verification framework for proving threshold-indexability and computing Whittle indices in restless bandits with real interval state spaces, extending discounted partial conservation law methods to a criterion-agnostic setting and specializing to long-run average analysis.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidad Carlos III de Madrid"
+      ],
+      "affiliations_text": "Universidad Carlos III de Madrid",
+      "score": 3.673532964434814,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.22590v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722590v1-drp-flr-data-driven-assessment-of-demand-response-potential-for-flexible-load-regulation-in-smart-grids",
+      "source": "arxiv",
+      "title": "DRP-FLR: Data-Driven Assessment of Demand Response Potential for Flexible Load Regulation in Smart Grids",
+      "authors": [
+        "Yunhao Yao",
+        "Siyu Jing",
+        "Yang Yang",
+        "Qiang Xu",
+        "Changqi Weng",
+        "Xiang-Yang Li"
+      ],
+      "authors_text": "Yunhao Yao, Siyu Jing, Yang Yang, Qiang Xu, Changqi Weng, Xiang-Yang Li",
+      "abstract": "The rapid growth of AI workloads and renewable energy resources exacerbates supply-demand imbalance in power systems, making traditional load regulation designed for efficient allocation inadequate and motivating demand response (DR) mechanisms to enable load controllability in smart grids. However, existing DR-oriented approaches either focus on optimizing electricity cost or occupant comfort with limited benefit to system-level balance. Others overlook the diverse and dynamic consumption patterns of heterogeneous energy entities, leading to significant over- or under-regulation. Therefore, we propose DRP-FLR. First, DRP-FLR achieves accurate short-term load forecasting by embedding exogenous knowledge (e.g., entity information, prediction time) into historical load representations. Next, it constructs entity-specific load-pattern profiles by clustering historical load curves, and estimates DR potential by matching forecasted loads with pattern profiles. Finally, DRP-FLR formulates flexible load regulation as a mixed-integer optimization problem and solves it with an MILP solver to jointly optimize DR utilization, participant economic benefit, and renewable accommodation, while enforcing supply-demand balance and economic feasibility. Experiments on a regional grid and a campus microgrid show that DRP-FLR reduces regulation deviation by 36.63%-91.87% and improves participant benefit by 44.66% on average.",
+      "url": "http://arxiv.org/abs/2607.22590v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22590v1",
+      "tldr": "DRP-FLR is a data-driven framework that accurately forecasts loads by embedding exogenous knowledge, estimates demand response potential through consumption pattern clustering, and optimizes flexible load regulation via mixed-integer linear programming to significantly reduce regulation deviation and improve participant economic benefits.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Science and Technology of China",
+        "Anhui Zhongxin Jiyuan Information Technology Co., Ltd."
+      ],
+      "affiliations_text": "University of Science and Technology of China, Anhui Zhongxin Jiyuan Information Technology Co., Ltd.",
+      "score": 3.612254221228558,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.22540v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722540v1-multi-path-routing-in-decentralized-exchange-networks-convex-allocation-and-an-improving-path-certificate",
+      "source": "arxiv",
+      "title": "Multi-Path Routing in Decentralized Exchange Networks: Convex Allocation and an Improving-Path Certificate",
+      "authors": [
+        "Ilia Zhavoronkov"
+      ],
+      "authors_text": "Ilia Zhavoronkov",
+      "abstract": "We present a graph-theoretic and convex optimization framework for multi-path routing in decentralized exchange networks, together with its implementation and empirical evaluation on Ethereum mainnet. The framework models the market as a directed token multigraph whose arcs carry AMM exchange functions. Routing is decomposed into two implemented layers: candidate path generation via gas-aware marginal k-shortest-path enumeration, where edge scores embed expected execution cost directly into graph traversal with an explicit pool-simple constraint tracked during path construction, and continuous flow allocation over the selected candidates solved as a concave maximization over a simplex with a per-pool price-impact cap. Under standard concavity and monotonicity assumptions, the KKT conditions imply marginal-output equalization across active paths. The central technical contribution is an improving-path certificate: after solving the allocation on k=20 candidate paths, the KKT multiplier is used as a threshold to determine via a single shortest-path query whether any omitted pool-simple path could improve the current solution; in our implementation the certificate confirms sufficiency in the majority of epochs. Execution is protected by an on-chain slippage tolerance enforced at the smart-contract level. We evaluate the implemented engine against four production DEX aggregators on repeated WETH-USDT quote observations across six trade sizes on Ethereum mainnet: median shortfall is below 5 bps across all sizes and top-3 quote rank exceeds 57% of epochs.",
+      "url": "http://arxiv.org/abs/2607.22540v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22540v1",
+      "tldr": "This paper presents a graph-theoretic and convex optimization framework for multi-path routing in decentralized exchange networks, introducing an improving-path certificate that verifies solution quality via a single shortest-path query, and empirically demonstrates competitive performance against production DEX aggregators on Ethereum mainnet.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Planet 9 Group Corporation"
+      ],
+      "affiliations_text": "Planet 9 Group Corporation",
+      "score": 3.349156560966899,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.22545v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722545v1-semalith-v14-a-calibrated-184m-safety-classifier-achieving-state-of-the-art-prompt-injection-detection-at-44x-fewer-parameters-than-llama-guard-3-8b",
+      "source": "arxiv",
+      "title": "Semalith v1.4: A Calibrated 184M Safety Classifier Achieving State-of-the-Art Prompt-Injection Detection at 44x Fewer Parameters than Llama-Guard-3-8B",
+      "authors": [
+        "Tejasvi C. Addagada"
+      ],
+      "authors_text": "Tejasvi C. Addagada",
+      "abstract": "Deploying large language models in financial-services and agentic settings requires safety classifiers that simultaneously handle prompt injection, regulatory compliance, and general harm, a combination no existing open guardrail addresses in a single inference pass.\n  Semalith v1.4 is a 184M-parameter DeBERTa-v3-base classifier performing simultaneous three-axis safety classification including prompt injection, general harm, and financial-services regulatory compliance, in a single forward pass. Its 22-class head (BENIGN, nine prompt-injection sub-types, general-harm, eleven BFSI labels) is trained with a 4-class auxiliary super-category head under jointly weighted loss, on a 76,204-row corpus mined from 49 public sources with SHA-1 deduplication against every held-out evaluation set, with 21 of 22 benchmarks at zero contamination (max 0.22%).\n  Against Llama-Guard-3-8B on 22 held-out benchmarks, Semalith v1.4 wins every prompt-injection evaluation (7/7) and 11 of 18 benchmarks overall at 44x fewer parameters, with FPR = 0.000 on 208 benign agentic prompts vs 0.063 for Llama-Guard-3-8B. On general-harm benchmarks (WildGuardMix, HEx-PHI, HarmBench), Llama-Guard-3 leads; this complementary split is documented in Section 4. Six measured weak spots are disclosed in Section 6.\n  Deployment guidance: v1.3 is recommended for conversational moderation deployments (ToxicChat F1 0.624); v1.4 is recommended when BFSI label coverage or zero-FPR on benign agentic prompts is the priority.",
+      "url": "http://arxiv.org/abs/2607.22545v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22545v1",
+      "tldr": "Semalith v1.4 is a 184M-parameter safety classifier that achieves state-of-the-art prompt-injection detection and regulatory compliance across three axes in a single pass, outperforming Llama-Guard-3-8B on all prompt-injection benchmarks with 44× fewer parameters.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.0641594092396214,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.22539v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/28/260722539v1-comparing-optimization-models-for-radiotherapy-scheduling",
+      "source": "arxiv",
+      "title": "Comparing Optimization Models for Radiotherapy Scheduling",
+      "authors": [
+        "C. C. Rambaldi Migliore",
+        "D. Stanicel",
+        "N. Musliu",
+        "G. Iacca",
+        "M. Roveri"
+      ],
+      "authors_text": "C. C. Rambaldi Migliore, D. Stanicel, N. Musliu, G. Iacca, M. Roveri",
+      "abstract": "The Radiotherapy Scheduling Problem (RTSP) involves determining an optimal schedule for patients undergoing radiation treatments, a task that has a massive impact on clinical outcomes given the central role of radiotherapy in cancer care. The daily batch approach--which consists of scheduling all the newly arrived patients together at the end of each day--modelled with Integer Linear Programming, is currently one of the most effective methods for the RTSP. However, this kind of formulation requires substantial computational resources in terms of time and memory. Here, we address these limitations by developing two novel greedy heuristics (named RTSP First Fit and RTSP Best Fit) and use them as constructive heuristics for a Simulated Annealing (SA) approach to optimize the scheduling. The proposed methods--the heuristics alone and their combination with SA--are evaluated on a publicly available dataset against an integer linear program formulation solved with two different state-of-the-art exact solvers. Evaluation metrics include six scheduling objectives capturing patient waiting times, preference satisfaction, and changes in linear accelerator assignment (aggregated in four different weight configurations), solving time, and memory consumption. The results show that the novel heuristics achieve solutions close to those of exact methods, while dramatically reducing runtime and memory usage; furthermore, when combined with SA, they further improve the solution quality while maintaining low runtime and memory usage.",
+      "url": "http://arxiv.org/abs/2607.22539v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.22539v1",
+      "tldr": "This paper introduces two novel greedy heuristics for radiotherapy scheduling and integrates them with simulated annealing to achieve near-optimal solutions with dramatically lower runtime and memory usage compared to exact integer linear programming solvers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technische Universität Wien",
+        "University of Trento",
+        "University of Pisa"
+      ],
+      "affiliations_text": "Technische Universität Wien, University of Trento, University of Pisa",
+      "score": 3.0335374930496197,
+      "score_text": "3.0"
+    }
+  ],
+  "errors": []
+}
