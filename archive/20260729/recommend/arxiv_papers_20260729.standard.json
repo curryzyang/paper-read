@@ -1,0 +1,760 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-29T05:54:50.128558",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.24885v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724885v1-eliminating-propagation-delay-attention-based-spatial-temporal-fusion-graph-convolution-network-for-traffic-flow-prediction",
+      "source": "arxiv",
+      "title": "Eliminating Propagation Delay: Attention-Based Spatial-Temporal Fusion Graph Convolution Network for Traffic Flow Prediction",
+      "authors": [
+        "Jinpeng Chen",
+        "Ziyu Yu",
+        "Tao Wang",
+        "Jun Ma",
+        "Hongbo Gao",
+        "Senzhang Wang",
+        "Zufeng Zhang",
+        "Kaimin Wei"
+      ],
+      "authors_text": "Jinpeng Chen, Ziyu Yu, Tao Wang, Jun Ma, Hongbo Gao, Senzhang Wang, Zufeng Zhang, Kaimin Wei",
+      "abstract": "Predicting traffic flow is crucial to optimizing transportation systems and improving urban mobility. Many graph convolution-based models have been proposed to extract spatial-temporal features and predict traffic flow. However, most focus on spatial-temporal and semantic correlation in topological relationships. There are two primary problems to address. Firstly, the convolutional structure in the model focuses on utilizing static spatial dependencies and spatial-temporal relationships in topological structures, while neglecting the different information propagation delays between adjacent nodes in the convolution. Secondly, these methods often stack a large number of complex structures, resulting in a substantial increase in computational time during the model training phase, thereby disregarding the model's requirements for timeliness. In this paper, we propose a novel network called the Attention-Based Spatial-Temporal Fusion Graph Convolution Network (A-STFGCN). We design a spatial-temporal fusion block to extract the spatial-temporal feature correlations with propagation delay errors removed and to capture both long-term and short-term temporal characteristics of the data within a multi-head self-attention mechanism based on a mask matrix. Extensive experiments on five real-world datasets demonstrate that our method achieves the best overall performance while having good computation and data utilization efficiency compared with the eight baseline methods.",
+      "url": "http://arxiv.org/abs/2607.24885v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24885v1",
+      "tldr": "The paper proposes an Attention-Based Spatial-Temporal Fusion Graph Convolution Network (A-STFGCN) that eliminates propagation delay errors and efficiently captures both long-term and short-term temporal features for accurate traffic flow prediction.",
+      "detailed_reading": {
+        "motivation": "现有图卷积交通流预测模型主要利用拓扑结构中的静态空间依赖和时空关系，忽略了相邻节点间不同的信息传播延迟，同时堆叠大量复杂结构导致训练阶段计算时间显著增加，无法满足模型对时效性的要求。",
+        "method": "提出一种基于注意力的时空融合图卷积网络（A-STFGCN）。首先通过谱聚类构建宏观图，结合传输块将宏观区域特征传递到节点分支；然后设计时空融合块（STF-Block），利用基于动态时间规整（DTW）的掩码矩阵构造延迟时间图，并通过多头自注意力机制同时捕获短期和长期时间特征；最后使用空间-时间融合图卷积（GSTF-GCN）消除传播延迟误差，同步提取时空相关性。输入为历史N个传感器节点的T1步交通观测，输出预测未来T2步流量。",
+        "result": "在五个真实交通数据集上的实验表明，A-STFGCN在预测精度上全面优于DCRNN、STGCN、Graph WaveNet、STSGCN、PDFormer等八种基线方法，同时保持较好的计算效率和数据利用效率，取得最优综合性能。",
+        "conclusion": "A-STFGCN有效解决了图卷积模型中传播延迟被忽略以及计算开销大的问题，通过延迟感知的时空融合图和多头自注意力机制实现了准确且高效的交通流预测。",
+        "key_details": "关键细节包括：1）利用DTW算法估计节点间信息传播延迟步数，构建延迟时间图；2）多头自注意力模块使用基于DTW相似性的掩码矩阵，关注具有特定时间偏移的时间步；3）通过谱聚类构建宏观图以降低大规模网络的计算复杂度；4）损失函数采用MSE；5）在五个真实交通数据集（含PEMS系列）上验证，与八种基线对比；6）模型在保持高精度的同时具有较好的计算效率和数据利用效率。"
+      },
+      "affiliations": [
+        "Jinan University",
+        "Central South University",
+        "University of Science and Technology of China",
+        "Beijing University of Posts and Telecommunications",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Jinan University, Central South University, University of Science and Technology of China, Beijing University of Posts and Telecommunications, Tsinghua University",
+      "score": 5.02550089960727,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2607.25000v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/29/260725000v1-functional-hinfinity-filtering-for-descriptor-systems-with-incrementally-quadratic-nonlinearities-under-disturbances",
+      "source": "arxiv",
+      "title": "Functional H_infinity Filtering for Descriptor Systems with Incrementally Quadratic Nonlinearities under Disturbances",
+      "authors": [
+        "Rishabh Sharma",
+        "Nutan Kumar Tomar"
+      ],
+      "authors_text": "Rishabh Sharma, Nutan Kumar Tomar",
+      "abstract": "This paper develops a functional H_infinity filter for nonlinear descriptor systems subject to external disturbances. Conventional H_infinity filtering approaches for descriptor systems impose restrictive regularity assumptions and employ implicit descriptor-form filters, leading to practical implementation difficulties. Moreover, existing approaches mainly target full-or reduced-order state estimation, which is computationally inefficient when only a specific functional of the state is required. To address these limitations, the filter is formulated directly in an explicit state-space framework and can be initialized with arbitrary initial values. The filter order is chosen to be less than or equal to the dimension of the functional vector to be estimated, thereby reducing computational complexity. The considered nonlinearities are characterized using incremental quadratic constraints parameterized by appropriate multiplier matrices, which encompass Lipschitz, one-sided Lipschitz, monotone, and many other nonlinearities. Sufficient criteria for the existence of the proposed filter are established through a rank condition imposed on the system matrices together with a set of linear matrix inequalities (LMIs). Under these conditions, asymptotic stability of the estimation error dynamics is guaranteed, while the influence of external disturbances on the error is bounded within a prescribed L2-performance framework. Finally, numerical simulations demonstrate and validate the effectiveness of our theoretical results.",
+      "url": "http://arxiv.org/abs/2607.25000v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25000v1",
+      "tldr": "This paper presents a functional H∞ filter for nonlinear descriptor systems under disturbances, using an explicit state-space formulation and incremental quadratic constraints to achieve reduced-order estimation with guaranteed asymptotic stability and L2-performance via rank conditions and linear matrix inequalities.",
+      "detailed_reading": {
+        "motivation": "现有描述系统的H_infinity滤波方法存在局限性：它们通常依赖严格的正则性假设，并采用隐式的描述器形式滤波器，导致实际实现困难；同时，这些方法主要针对全状态或降阶状态估计，当只需估计状态的特定线性函数时计算冗余。因此，有必要开发一种更通用的功能H_infinity滤波器，能够处理更广泛的非线性特性，并降低计算复杂度。",
+        "method": "本文考虑一类受外部扰动影响的非线性描述系统，其非线性特性由增量二次约束（δQC）统一刻画，涵盖Lipschitz、单边Lipschitz、单调等多种非线性。所设计的滤波器采用显式状态空间结构，阶数不大于待估计功能向量维数p，可任意初始化。滤波器存在性的充分条件由系统矩阵的秩条件结合一组线性矩阵不等式（LMI）给出。设计流程包括：选定滤波器阶数l1（≤p），求解满足秩条件的矩阵参数，并利用LMI工具包求解可行解，从而确定滤波器增益矩阵N、H1、L1、F1、R、M1、M2。",
+        "result": "在满足所提出的秩条件和LMI可行解的条件下，所设计的功能H_infinity滤波器能保证估计误差动态的渐近稳定性，并将外部扰动对误差的影响限制在指定的L2性能水平内。数值仿真验证了理论结果的有效性，表明滤波器能够准确估计所需的状态线性函数。",
+        "conclusion": "本文成功开发了一种适用于受扰动且具有增量二次非线性描述系统的功能H_infinity滤波器，克服了传统方法的正则性假设和隐式结构缺陷。该滤波器采用显式状态空间形式，阶数灵活，可处理更广泛的非线性类，为实际工程应用提供了更实用的解决方案。",
+        "key_details": "非线性特性通过增量二次约束和乘子矩阵统一描述，涵盖广泛非线性类；滤波器阶数可小于等于p，降低计算复杂度；存在性条件依赖于系统矩阵的秩条件和LMI，可利用标准LMI工具箱求解；滤波器可任意设置初值，无需一致初始条件；方法适用于矩形描述系统，扩展了现存结果的应用范围；局限性在于条件为充分条件，可能具有保守性。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Patna"
+      ],
+      "affiliations_text": "Indian Institute of Technology Patna",
+      "score": 4.873425462961849,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2607.24860v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724860v1-egocentric-station-holding-of-robotic-fish-in-unknown-turbulent-background-flow",
+      "source": "arxiv",
+      "title": "Egocentric Station Holding of Robotic Fish in Unknown Turbulent Background Flow",
+      "authors": [
+        "Xiaozhu Lin",
+        "Xu Huang",
+        "Hongru Dai",
+        "Xiaopei Liu",
+        "Junzhi Yu",
+        "Yang Wang"
+      ],
+      "authors_text": "Xiaozhu Lin, Xu Huang, Hongru Dai, Xiaopei Liu, Junzhi Yu, Yang Wang",
+      "abstract": "Approaching a target position and holding station in flowing water is a fundamental and critical capability for robotic fish operating in natural aquatic environments. Despite decades of advances in enhancing swimming efficiency and maneuverability, this capability remains underdeveloped, largely owing to the insufficiently characterized, highly nonlinear fluid-structure interactions inherent to freely swimming robotic fish in flows. To bridge this gap, we propose the SWiFT framework, a Swimming With Flow Toolbox that enables the efficient exploration of an egocentric station-holding policy for a body and/or caudal fin (BCF) robotic fish in unknown and turbulent background flows via reinforcement learning (RL). Our SWiFT integrates a free-swimming flow-tank experimental setup with a highly efficient, physically consistent computational fluid dynamics (CFD)-based simulator and a systematic sim-to-real transfer pipeline. The resulting policy achieves substantial improvements over state-of-the-art methods across all metrics, most notably root-mean-square error (RMSE) of distance. Furthermore, we validated that egocentric feedback alone, without any explicit flow sensing, enables station-holding in unknown turbulent flows, closely mirroring the biological phenomenon of rheotaxis. Accordingly, the success of this egocentric station-holding policy not only advances robotic fish control toward real-world deployment, but also highlights SWiFT's promise as a foundation for tackling complex swimming tasks for underwater robots.",
+      "url": "http://arxiv.org/abs/2607.24860v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24860v1",
+      "tldr": "This paper introduces the SWiFT framework, which leverages reinforcement learning integrated with a CFD-based simulator and sim-to-real transfer to enable a robotic fish to achieve robust egocentric station-holding in unknown turbulent flows using only egocentric feedback, significantly outperforming existing methods.",
+      "detailed_reading": {
+        "motivation": "现有仿生鱼研究多集中于静水或受限流动环境，缺乏在未知湍流背景流中自由游动并保持位置的能力，这严重限制了实际部署。受生物鱼仅凭自我感知实现流性反应（rheotaxis）的启发，本文旨在探索是否仅依靠自我中心反馈就能实现未知湍流中的稳定station-holding。",
+        "method": "提出SWiFT框架，整合三大模块：自由游动水槽实验装置、基于GPU加速的格子玻尔兹曼方法（LBM）的高效CFD模拟器、以及系统化的sim-to-real迁移管道。采用软演员-评论家（SAC）强化学习算法，策略直接映射自我中心感知输入（如姿态、角速度等）到关节角度命令，无需底层周期控制器。通过域随机化和精心设计的奖励函数（结合位置误差与能量效率）增强鲁棒性，模拟器使用少量实验数据校准，实现从仿真到真实的零样本迁移。",
+        "result": "在真实水槽实验中，SWiFT策略在所有关键指标上显著优于当前最先进的模型预测控制（MPC）和数据驱动的Koopman算子等方法，特别是距离均方根误差（RMSE）降低幅度最大。验证了仅依赖自我中心反馈（无显式流感知）即可在未知湍流中实现稳定station-holding，与生物流性反应现象完全一致。",
+        "conclusion": "本研究首次系统性地解决了仿生鱼在未知湍流背景流中自我中心station-holding的问题，证明了通过强化学习与CFD模拟器的结合可以生成鲁棒的控制策略，推动了仿生鱼在自然水域中的实际部署。同时揭示了自我中心反馈足以实现类似流性反应的行为，为水下机器人复杂游泳任务提供了基础。",
+        "key_details": "关键细节包括：使用自由游动水槽避免了外部固定约束，模拟器采用低数值耗散的LBM并利用GPU并行性加速；RL算法为SAC，策略学习直接生成非周期性身体运动；域随机化涵盖了流速、初始姿态等变化；sim-to-real校准仅需少量实验数据；策略不依赖人工侧线系统，简化了硬件需求。局限性在于水槽尺寸有限，未来需在更复杂自然环境中验证。"
+      },
+      "affiliations": [
+        "Chinese Academy of Sciences",
+        "Peking University",
+        "ShanghaiTech University"
+      ],
+      "affiliations_text": "Chinese Academy of Sciences, Peking University, ShanghaiTech University",
+      "score": 4.808722904816674,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2607.25053v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/29/260725053v1-motion-generation-with-environmental-constraints",
+      "source": "arxiv",
+      "title": "Motion Generation With Environmental Constraints",
+      "authors": [
+        "Előd Páll",
+        "Oliver Brock"
+      ],
+      "authors_text": "Előd Páll, Oliver Brock",
+      "abstract": "Robot motion planning faces challenges in high-dimensional spaces and uncertain environments, often constrained by the need for collision-free motions. We advocate an alternative approach, Environmental Constraint Exploitation (ECE), where deliberate contact with the environment simplifies planning by reducing dimensionality and computational complexity. By integrating ECE into motion planning algorithms, we bias exploration to task-relevant regions and leverage contact for uncertainty reduction to improve robustness during execution. We evaluate ECE benefits with RRT-based planners and demonstrate their practical benefits in a real-world application. This work consolidates and extends prior research, showcasing how ECE simplifies motion planning while enhancing adaptability and performance in complex environments.",
+      "url": "http://arxiv.org/abs/2607.25053v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25053v1",
+      "tldr": "This paper advocates for Environmental Constraint Exploitation (ECE), where deliberate robot-environment contact simplifies motion planning by reducing dimensionality and computational complexity, while also enhancing robustness under uncertainty.",
+      "detailed_reading": {
+        "motivation": "机器人运动规划面临高维空间和不确定环境的挑战，传统方法需要避免碰撞。本文提出环境约束利用（ECE），通过与环境有意接触来降低维度并减少计算复杂度，从而简化运动规划。",
+        "method": "方法核心是将环境约束利用集成到RRT类规划器中。具体包括：构建ECE图表示接触区域和转移关系；采用交织自由空间和接触空间采样的规划策略；针对低运动不确定性使用CERRT规划器，通过随机采样自由和接触空间生成部分覆盖；针对高运动不确定性使用Contingency CERRT规划器，利用接触感知减少状态不确定性并处理概率性转移；引入CEET规划器利用工作空间信息引导探索。在规划过程中，通过故意接触形成操纵漏斗，降低状态不确定性，并将探索偏置到任务相关区域。",
+        "result": "实验评估表明，ECE方法显著提高了高维配置空间下的规划效率，并能处理高运动不确定性。在RRT类规划器上显示性能提升，实际应用如从相同物体堆中抓取展示了新环境约束类型的有效性。相比传统无接触规划方法，ECE方法在复杂环境中增强了适应性和鲁棒性。表格总结了不同配置空间复杂度和运动不确定性下各种ECE实现的适用场景。",
+        "conclusion": "环境约束利用能够简化运动规划，通过接触降低状态维度并减少不确定性，从而提升规划效率和执行鲁棒性。该方法适用于各种环境约束类型，可整合到经典规划器中，为复杂环境中机器人运动生成提供了新思路。",
+        "key_details": "关键细节包括：环境约束分为几何型（如表面、边缘）、动态型（如惯性）、顺应型和非接触型（如视觉伺服）等；使用ECE图作为低维表示；规划中在自由空间和接触空间交错采样；CERRT算法偏置探索到较大未探索区域；Contingency CERRT处理概率性接触转移并重用已计算的部分解；CEET利用工作空间信息保持高维空间的计算可行性；运动不确定性处理通过接触感知和操纵漏斗实现；局限性包括未考虑最优性，但可结合优化方法进行轨迹优化。实际应用中，从堆叠物体中抓取利用了新的几何环境约束类型。论文未详细给出具体超参数和计算复杂度分析。"
+      },
+      "affiliations": [
+        "Technische Universität Berlin",
+        "Science of Intelligence"
+      ],
+      "affiliations_text": "Technische Universität Berlin, Science of Intelligence",
+      "score": 4.796389891352334,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2607.24983v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724983v1-generative-distributionally-robust-optimization",
+      "source": "arxiv",
+      "title": "Generative Distributionally Robust Optimization",
+      "authors": [
+        "Ziwei Zhang",
+        "Jonathan Yu-Meng Li",
+        "Zhihao Jin"
+      ],
+      "authors_text": "Ziwei Zhang, Jonathan Yu-Meng Li, Zhihao Jin",
+      "abstract": "Generative models are increasingly adopted in distributionally robust optimization (DRO), but existing approaches trade off model compatibility and adversarial structure: methods that accept arbitrary samplers do not restrict worst-case laws to a generator family, while generator-parameterized adversaries rely on model-specific access such as likelihoods, scores, or training data. We propose Generative Distributionally Robust Optimization (GDRO), a principled framework that accepts any sampleable conditional generator as the nominal model and restricts worst-case laws to a chosen conditional generator family. The key is the sampler-Sinkhorn pairing: samplers represent the conditional laws exactly, while Sinkhorn divergence compares their induced distributions without likelihood access and can be estimated from samples alone. The resulting population problem admits a direct finite-sample approximation and differentiable primal-dual implementation at the active decision context. For Lipschitz losses, the population Sinkhorn radius bounds downstream degradation. Across explicit and implicit generators, our method reduces rare-context inventory regret by 60% and SocialGAN navigation collisions by 50% relative to nominal decisions.",
+      "url": "http://arxiv.org/abs/2607.24983v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24983v1",
+      "tldr": "Generative Distributionally Robust Optimization (GDRO) introduces a principled framework that accepts any sampleable conditional generator as the nominal model and restricts worst-case laws to a chosen generator family using a likelihood-free sampler–Sinkhorn pairing, enabling robust decision-making under model misspecification without requiring model-specific access.",
+      "detailed_reading": {
+        "motivation": "现有分布鲁棒优化方法在模型兼容性和对抗结构之间存在权衡：接受任意采样器的方法不限制最坏情况分布至生成器家族，而生成器参数化的对手则依赖似然、分数或训练数据等模型特定信息。为此，本文提出生成式分布鲁棒优化（GDRO），该框架接受任意可采样的条件生成器作为名义模型，并将最坏情况分布限制在选定的条件生成器家族内。",
+        "method": "GDRO的核心是采样器-辛克霍恩配对：采样器精确表示条件分布，辛克霍恩散度通过样本即可比较诱导分布，无需似然访问。给定预训练名义条件生成器P_φ̂(·|x)和对抗生成器家族{Q_ψ(·|x)}，优化问题为inf_w sup_{ψ:S_ε(Q_ψ^x,P_0^x)≤ρ} E_{Y∼Q_ψ^x}[f(w,Y)]。通过条件采样器的推前形式构造经验分布，利用熵正则化最优传输的辛克霍恩散度定义约束，最终导出可微的原对偶有限样本近似。",
+        "result": "对于Lipschitz损失，人口辛克霍恩半径有界目标下降；在显式与隐式生成器实验中，GDRO将稀有情境库存遗憾降低60%，SocialGAN导航碰撞减少50%，均优于名义决策。该结果在多个任务上验证了生成器忠实对抗的有效性。",
+        "conclusion": "本文提出生成式分布鲁棒优化，是首个将最坏情况分布限制在选定条件生成器家族内并通过样本辛克霍恩散度认证的上下文局部DRO框架。理论与实验表明，该框架兼容任意采样器，并提供可证明的下游性能保障，为生成模型鲁棒优化提供了新范式。",
+        "key_details": "关键点包括：辛克霍恩散度采用平方欧氏成本且可仅从样本估计；人口问题的有限样本近似通过固定对抗潜在变量实现可微优化；理论保证依赖于输出有界支撑假设与Lipschitz损失；超参数包括辛克霍恩正则化系数ε和模糊半径ρ，需交叉验证；计算复杂度主要来自辛克霍恩矩阵缩放，样本量增加时空成本上升；局限性在于框架依赖Sinkhorn散度与Wasserstein的近似质量，且对抗生成器家族需包含名义模型附近分布。"
+      },
+      "affiliations": [
+        "University of Ottawa",
+        "Western University"
+      ],
+      "affiliations_text": "University of Ottawa, Western University",
+      "score": 4.726399517412946,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2607.24959v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724959v1-amortising-trajectory-optimisation-for-residual-mpc-via-implicit-contact-differentiation",
+      "source": "arxiv",
+      "title": "Amortising Trajectory Optimisation for Residual MPC via Implicit Contact Differentiation",
+      "authors": [
+        "Daniel Layeghi",
+        "Thomas Corbères",
+        "Calum Arnott",
+        "Aditya Kamireddypalli",
+        "Hashim Al-Obaidi",
+        "Steve Tonneau",
+        "Michael Mistry"
+      ],
+      "authors_text": "Daniel Layeghi, Thomas Corbères, Calum Arnott, Aditya Kamireddypalli, Hashim Al-Obaidi, Steve Tonneau, Michael Mistry",
+      "abstract": "Differentiable simulation can accelerate contact-rich trajectory optimisation by exposing local sensitivities of task outcomes to controls. Existing approaches either use finite differences, which are expensive and step-size sensitive; differentiate iterative contact solvers by unrolling automatic differentiation (AD), which stores a growing computation trace; or require intricate, solver-specific KKT sensitivity derivations. We introduce an AD-assisted implicit derivative for regularised smooth contacts and apply it to Mujoco MJX, based on the Implicit Function Theorem (IFT). The method differentiates the stationarity residual at the tolerance-converged solution, avoiding both solver unrolling and hand-assembled KKT systems. IFT keeps compiled temporary memory nearly constant with solver effort, changing by less than 4$\\%$ from one to ten iterations versus 10.6$\\times$ growth for unrolled AD. IFT memory grows slower with active contacts and model dimension, using 20$\\times$ less memory at 256 contacts and 6$\\times$ less at 16 contacts and 96 DoF. We further introduce optimiser distillation for residual MPC, amortising batched full-horizon iLQR into a policy that guides short-horizon residual iLQR. Across Finger, Franka, and Unitree, this raises six-step success by 28-98 percentage points over standard iLQR.",
+      "url": "http://arxiv.org/abs/2607.24959v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24959v1",
+      "tldr": "This paper introduces a memory-efficient implicit differentiation method for smooth contact-rich simulation using the Implicit Function Theorem, which avoids solver unrolling and hand-assembled KKT systems, and combines it with optimiser distillation for residual MPC to significantly improve success rates on Finger, Franka, and Unitree robots.",
+      "detailed_reading": {
+        "motivation": "现有可微仿真方法在接触丰富轨迹优化中存在计算和内存瓶颈：有限差分昂贵且对步长敏感，展开自动微分存储增长的计算轨迹，而KKT灵敏度推导复杂且依赖求解器。这限制了并行轨迹数量和长时间跨度的优化。",
+        "method": "基于隐函数定理，对正则化光滑接触问题的驻留残差进行自动微分辅助的隐式微分，应用于MuJoCo MJX。方法不修改前向求解器，避免展开求解器轨迹和手工组装KKT系统。同时提出优化器蒸馏：利用批量全水平iLQR生成教师轨迹，将优化动作蒸馏为策略网络，部署时策略提供长期名义动作，短水平残差iLQR提供局部模型校正。",
+        "result": "隐式微分保持编译临时内存几乎恒定，随求解器迭代变化小于4%，而展开自动微分增长10.6倍；在256个主动接触时内存减少20倍，在16个接触和96自由度时减少6倍。在Finger、Franka和Unitree机器人上，残差MPC的六步成功率比标准iLQR提高28-98个百分点。",
+        "conclusion": "提出的隐式微分方法有效解决了接触求解器内存扩展问题，使大规模并行轨迹优化成为可能。结合优化器蒸馏，显著提升了短水平模型预测控制的成功率和规划性能，验证了可微仿真与学习结合的潜力。",
+        "key_details": "方法基于Mujoco MJX的正则化光滑接触模型，利用隐函数定理微分收敛解；梯度仅在固定接触集和光滑摩擦区域内有效，接触创建/分离或摩擦模式变化时可能不准确。内存优势随求解器迭代、主动接触数和广义速度维度增大而更加显著。局限性包括对光滑正则化的依赖，且未处理接触非光滑事件；蒸馏需要离线生成教师轨迹，可能引入分布偏移。"
+      },
+      "affiliations": [
+        "University of Edinburgh"
+      ],
+      "affiliations_text": "University of Edinburgh",
+      "score": 4.666610266470848,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2607.24900v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724900v1-inverse-rl-helps-align-ai-by-imitating-humans",
+      "source": "arxiv",
+      "title": "Inverse RL Helps Align AI by Imitating Humans",
+      "authors": [
+        "Michał Wiliński",
+        "Liu Leqi",
+        "Chirag Nagpal"
+      ],
+      "authors_text": "Michał Wiliński, Liu Leqi, Chirag Nagpal",
+      "abstract": "Language model alignment aims to make model behavior reliably reflect desirable properties such as helpfulness, safety, and instruction following. Current approaches typically use supervised fine-tuning on demonstrations or reinforcement learning with rewards derived from verifiers or human feedback. These paradigms leave an important question underexplored: can demonstrations alone yield an implicit reward that can be inspected, reused, and optimized on-policy to align AI? Motivated by inverse reinforcement learning, we introduce Projected Alignment Reward Estimated from Demonstrations (PARED). PARED recovers the implicit reward underlying expert demonstrations as an explicit function over a small set of response-level features, learned by a lightweight discriminator that separates demonstrations from the policy's own samples in this feature space. Unlike a standard reward model, PARED requires no task-specific preference annotations: demonstrations provide the task-specific supervision, which can be augmented with AI feedback as additional dimensions of supervision. Through experiments involving inference-time reranking and adversarial on-policy RL, we show that the recovered reward improves a base policy without a supervised loss and yields further gains when optimized after standard supervised fine-tuning. Additionally, we demonstrate that PARED can be used for contextual alignment, in which a single policy can be tailored to the preferences of different audiences.",
+      "url": "http://arxiv.org/abs/2607.24900v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24900v1",
+      "tldr": "PARED introduces an inverse reinforcement learning approach that recovers an explicit, inspectable reward solely from expert demonstrations—without requiring preference annotations—to align AI via inference-time reranking and on-policy reinforcement learning.",
+      "detailed_reading": {
+        "motivation": "当前语言模型对齐方法主要通过监督微调或基于偏好的强化学习，但专家示范仅被用于模仿输出，未能恢复可检查、可复用、可策略优化的隐式奖励。逆强化学习可以推断奖励，但传统方法恢复的奖励往往不透明。PARED 旨在利用逆强化学习从示范中恢复紧凑、可解释的奖励，支持推理时选择和策略优化。",
+        "method": "PARED 使用专家示范和当前策略样本，将每个响应级轨迹 (x, y) 映射到由帮助性、无害性以及 LDA 主题分布构成的 7 维特征空间。一个轻量级逻辑回归判别器在二度多项式展开特征上区分专家与策略样本，其专家似然得分定义为奖励。判别器初始拟合后可在策略优化期间在线重拟合。奖励用于 best-of-N 重排（推理时选择）或作为 KL 正则化的 GRPO 奖励进行 on-policy RL。上下文对齐中为不同受众独立学习判别器，共享策略面向各受众优化对应奖励。",
+        "result": "在 best-of-N 重排和 on-policy RL 实验中，PARED 奖励改善了基策略（零样本指令微调模型），并在标准监督微调后进一步取得增益。在上下文对齐设置中，单一策略可针对成人和儿童两个受众分别调整，两个受众均获得提升，未发现受众间存在权衡。",
+        "conclusion": "PARED 通过逆强化学习从专家示范中恢复显式、可解释的奖励，无需任务特定的偏好标注。该奖励可审计、可复用，在推理选择和策略训练中提升对齐，并支持面向不同受众的上下文对齐，为利用示范进行对齐提供了一种新的范式。",
+        "key_details": "特征空间为 7 维（排除长度以避免策略优化中的捷径），使用 L2 正则化逻辑回归作为判别器，在度 2 多项式展开特征上实现特征匹配。在线更新时固定 TF-IDF 和 LDA 变换，仅重拟合判别器权重。RL 使用 GRPO 优化，KL 正则化系数 β 控制偏离参考策略的程度。局限性包括：奖励质量依赖于所选特征空间，且需为每个受众独立训练判别器；示范质量直接影响奖励效用。"
+      },
+      "affiliations": [
+        "The University of Texas at Austin",
+        "Independent Researcher",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "The University of Texas at Austin, Independent Researcher, Carnegie Mellon University",
+      "score": 4.559680630583404,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.24863v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724863v1-steeringless-drifting-differential-torque-control-of-a-four-wheel-independently-driven-vehicle",
+      "source": "arxiv",
+      "title": "Steeringless Drifting: Differential-Torque Control of a Four-Wheel Independently Driven Vehicle",
+      "authors": [
+        "Sheng Zhao",
+        "Zexin Wu",
+        "Dongyang Zhou",
+        "Bolin Zhao",
+        "Xiaodong Wu"
+      ],
+      "authors_text": "Sheng Zhao, Zexin Wu, Dongyang Zhou, Bolin Zhao, Xiaodong Wu",
+      "abstract": "Control methods for emerging vehicle chassis architectures are important for autonomous driving near handling limits. Unlike conventional drift control, which relies on mechanical steering and rear-tire saturation, a steering-free four-wheel independently driven (4WID) vehicle can generate direct yaw moment through differential wheel torques. This paper proposes a differential-torque drift control method for such a vehicle. A double-track vehicle model incorporating four-wheel differential actuation is established, based on which a drift-equilibrium calculation method and a closed-loop drift controller are developed. The proposed approach is validated through simulations and experiments on a 1:10-scale vehicle. The results show that the vehicle can achieve steady circular drifting with a sideslip angle of approximately 20$^\\circ$ and perform figure-eight drift tracking. This study demonstrates the feasibility of drift control using only differential wheel torques and provides a new perspective on near-limit control for steering-free vehicle architectures.",
+      "url": "http://arxiv.org/abs/2607.24863v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24863v1",
+      "tldr": "This paper proposes and validates a differential-torque drift control method for a steering-free four-wheel independently driven vehicle, demonstrating that steady circular and figure-eight drifting with large sideslip angles can be achieved using only wheel torques without mechanical steering.",
+      "detailed_reading": {
+        "motivation": "传统漂移控制依赖机械转向和后轮轮胎饱和，而对于无转向的四轮独立驱动(4WID)车辆，能否仅通过差动扭矩产生直接横摆力矩并实现漂移，是一个尚未解决的问题。本文旨在提出首个针对无转向4WID车辆的漂移控制框架，验证仅通过轮端扭矩实现稳定漂移的可行性。",
+        "method": "建立无转向四轮独立驱动车辆的双轨动力学模型，包含三自由度刚体动力学(纵向、横向、横摆)、轮胎摩擦圆约束(考虑纵向与横向力耦合)以及电机一阶动态模型(带幅值与速率限制)。离线阶段，基于目标纵向速度、侧偏角和横摆率参数化期望平衡状态，通过多起点序列二次规划求解约束优化问题(平衡残差为零，目标为最小化扭矩二范数和轮胎利用率六次方加权和)得到平衡扭矩向量。在线阶段，设计脉冲-保持控制器：利用纵向速度和横摆率反馈生成标量扭矩修正，叠加至平衡扭矩后经约束处理分配至四个车轮；脉冲信号用于漂移起始或状态切换，侧偏角不参与在线反馈。在1:10比例RC车辆平台进行仿真与实验验证。",
+        "result": "仿真与实验结果表明，车辆能够在无转向输入下实现侧偏角约20度的稳定圆形漂移，并能执行八字形轨迹漂移跟踪，且漂移过程中仅通过四个车轮的差动扭矩进行控制。该结果验证了所提方法的有效性，证明了纯差动扭矩漂移控制的可行性。",
+        "conclusion": "本研究证明了无转向四轮独立驱动车辆仅依靠差动扭矩即可实现稳定漂移控制，为无转向底盘架构的极限操控提供了新的控制思路。",
+        "key_details": "关键细节：(1)轮胎模型采用摩擦圆约束，利用atan2计算零转向角下的侧偏角，并使用饱和度函数限制纵向力与横向力，其耦合效应通过摩擦圆平方根关系体现。(2)平衡点优化中，目标函数包含扭矩归一化二范数(权重0.25)和轮胎利用率六次方(权重0.50，指数6)，通过多起点初始化避免局部最优，并确保左右对称车辆交换扭矩方向后仍需重新验证平衡残差。(3)控制器为脉冲-保持结构：脉冲信号仅用于漂移触发，在线反馈仅使用纵向速度和横摆率误差，侧偏角不纳入闭环。(4)电机模型考虑一阶滞后和幅值/速率约束(Tm固定，τ_max和τ_dot_max设置)。(5)仿真与实验在1:10比例车辆上进行，未考虑悬架运动、载荷转移和滚动阻力，且轮胎力模型为静态简化，可能影响高精度应用。"
+      },
+      "affiliations": [
+        "Nanyang Technological University",
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "Nanyang Technological University, Shanghai Jiao Tong University",
+      "score": 4.555301032269632,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.24996v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/29/260724996v1-calibrated-partial-resets-preventing-policy-collapse-in-continual-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Calibrated Partial Resets: Preventing Policy Collapse in Continual Reinforcement Learning",
+      "authors": [
+        "Luc McCutcheon",
+        "Evangelos Chatzaroulas",
+        "Saber Fallah"
+      ],
+      "authors_text": "Luc McCutcheon, Evangelos Chatzaroulas, Saber Fallah",
+      "abstract": "Neural networks are hindered by accumulating dormant neurons and loss of expressivity throughout training, particularly in non-stationary data settings, such as continual supervised and reinforcement learning. Recently, neuron resets have been used to maintain gradient flow and restore plasticity. However, full unit reinitialization often sacrifices peak performance and can destabilize training, leading to policy collapse.\n  To preserve plasticity without destabilizing training, we propose Calibrated Partial Resets (CPR), an optimizer that periodically pulls low-utility neurons toward their initialization, with pull strength scaled by each neuron's utility. Unlike binary reset methods, partial resets avoid brittleness; unlike uniform decay, calibrated utility-scaling concentrates adjustment on the units that need it most.\n  Among compared methods, only CPR avoids policy collapse over 400M training steps in SlipperyAnt, and it outperforms prior decay and reset-based methods on Continual MetaWorld and Continual MinAtar benchmarks. Ablations reveal a tunable trade-off between plasticity and peak performance, highlighting utility-scaled reinitialization as a promising direction for continual learning.",
+      "url": "http://arxiv.org/abs/2607.24996v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24996v1",
+      "tldr": "Calibrated Partial Resets (CPR) prevents policy collapse in continual reinforcement learning by periodically pulling low-utility neurons toward their initialization with a continuous strength scaled by each neuron's utility, avoiding the brittleness of binary resets and outperforming prior methods.",
+      "detailed_reading": {
+        "motivation": "神经网络在非平稳训练（如持续强化学习）中会积累休眠神经元并失去表达能力，现有神经重置方法通过完全重新初始化低效用单元来恢复塑性，但全有或全无的干预方式引入突变参数变化，导致训练不稳定甚至策略崩溃。为此，需要一种既能保持塑性又不会破坏稳定性的选择性且平滑的优化方法。",
+        "method": "提出校准部分重置（CPR）优化器，其核心是每f步将神经元的权重部分拉向初始化值。具体技术方案：(1) 效用估计：使用批数据中传入权重的梯度幅度的层归一化指数移动平均（EMA）作为每个神经元的效用得分；(2) 重置机制：计算每个神经元的重置系数 r_i^l = ρ * φ(u_i^l)，其中 φ 是通过 logistic sigmoid 函数定义的单调递减形状函数（固定 κ=16），ρ 是最大重置比例（<1），使低效用神经元接受强重置，高效用神经元仅受微弱扰动；(3) 权重更新：传入权重按 (1-r) 缩放并加上 r 乘以初始化分布采样，传出权重按 (1-r) 缩放；(4) 流程：在每次基础优化器更新后计算效用EMA，每隔f步执行一次CPR操作，并重置EMA至均值1。",
+        "result": "在400M步的长时域SlipperyAnt任务中，CPR是唯一在所有15个种子上均未出现策略崩溃的方法（零崩溃），而现有二进制重置方法（如CBP、ReDo）和衰减方法均发生崩溃；在SlipperyHumanoid、Continual MetaWorld和Continual MinAtar基准上，CPR的IQM平均回合回报显著优于先前方法。消融实验表明，CPR能通过调整重置强度ρ和形状函数κ控制塑性-稳定性权衡，且在κ∈[2,20]范围内表现鲁棒。",
+        "conclusion": "CPR通过部分、效用校准的重置机制，避免了二进制重置的突变不稳定性和均匀衰减的无差别调整，在长期持续强化学习中有效防止策略崩溃并提升最终性能。该工作揭示了效用缩放的重初始化作为持续学习中有前景的方向，并提供了通过调整重置强度实现塑性-稳定性权衡的可控框架。",
+        "key_details": "关键方法与实现细节：(1) 效用度量采用梯度幅度的EMA，相比激活或输出权重更稳定且可扩展；(2) 层归一化使效用均值恒为1，确保跨层可比；(3) 形状函数φ设计为以效用均值为中心的S形曲线，默认κ=16逼近阶梯但保留连续性；(4) 重置强度ρ∈(0,1]是主要超参数，需按任务手工设定；(5) 局限性：CPR依赖初始化分布（如Kaiming），且需周期性重置效用EMA，在极长训练中仍需调度重置频率f；对小批量梯度噪声敏感，但在RL高并发环境（2048环境）下表现稳定。"
+      },
+      "affiliations": [
+        "University of Surrey"
+      ],
+      "affiliations_text": "University of Surrey",
+      "score": 4.484746037384127,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2607.25060v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/29/260725060v1-lantern-conflict-aware-gradient-blending-for-physics-guided-diffusion-models-in-calorimeter-simulation",
+      "source": "arxiv",
+      "title": "Lantern: Conflict-Aware Gradient Blending for Physics-Guided Diffusion Models in Calorimeter Simulation",
+      "authors": [
+        "Farzana Yasmin Ahmad",
+        "Vanamala Venkataswamy",
+        "Geoffrey Fox"
+      ],
+      "authors_text": "Farzana Yasmin Ahmad, Vanamala Venkataswamy, Geoffrey Fox",
+      "abstract": "Monte Carlo simulation of calorimeter showers is a principal bottleneck for the High-Luminosity LHC, and diffusion models have emerged as fast, high-fidelity surrogates. Their denoising objective is purely statistical, however: a model can minimize it while placing the physics wrong. Existing physics-informed generative methods cannot close this gap, because they assume a closed-form law, a governing PDE residual or a hard per-sample constraint, that a shower does not supply: no per-sample PDE governs a stochastic cascade, and energy conservation fixes only one scalar per shower. Standard metrics ignore the correlation structure across calorimeter layers and voxels, comparing showers only in a physics feature space. We address both gaps. We introduce the Correlation Frobenius Distance (CFD), a single normalized score for correlation fidelity at layer-wise and voxel-wise scales. We then encode the soft per-sample structure available in a shower as two physics-aware auxiliary losses: a variance-stabilized voxel residual loss grounded in counting statistics, and a graph Laplacian loss over the detector geometry. We combine both with denoising through GradBlend, which anchors the step magnitude to the denoising gradient while letting the auxiliary steer its direction, yielding Lantern, a physics-guided diffusion surrogate. On CaloChallenge Dataset 2, injecting the physics losses through task-symmetric rules such as PCGrad, GradNorm, IMTL-G, and ConFIG inflates FPD by 2-100x relative to denoising alone, whereas GradBlend admits the same signal without regression and, with the Laplacian loss, Lantern improves both FPD and CFD. Our ablation on the auxiliary loss scheduler shows that the voxel residual loss, whose gradient conflicts with denoising, requires a terminal denoising-only phase to preserve shower fidelity, whereas the non-conflicting Laplacian loss is insensitive to the schedule.",
+      "url": "http://arxiv.org/abs/2607.25060v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25060v1",
+      "tldr": "Lantern introduces a conflict-aware gradient blending method (GradBlend) and two physics-aware auxiliary losses (variance-stabilized voxel residual and graph Laplacian) to guide diffusion models in calorimeter simulation, improving correlation fidelity (CFD) and physics distance (FPD) while preventing the generative objective from being degraded.",
+      "detailed_reading": {
+        "motivation": "蒙特卡洛模拟量热器簇射是高亮度大型强子对撞机的主要计算瓶颈，扩散模型作为快速高保真替代方案，但其去噪目标纯粹是统计的，模型可能在物理上出错。现有物理信息生成方法假设存在封闭形式定律、PDE残差或每样本硬约束，而随机簇射不提供这些。标准评估指标忽略跨层和体素的相关性结构。本文旨在填补这两个空白：引入相关性度量CFD，并设计物理引导扩散模型。",
+        "method": "基于条件扩散模型，将生成分解为能量网络（自回归Transformer预测层能量比）和形状网络（条件Vision Transformer预测噪声）。在形状网络中引入两个物理感知辅助损失：方差稳定化体素残差损失（基于计数统计，对每个体素残差按能量平方根加权并用Huber损失）和图拉普拉斯损失（基于探测器几何的图拉普拉斯惩罚相邻面共享体素差异）。采用GradBlend梯度混合规则：将更新方向与大小分离，步长锚定到去噪梯度，辅助梯度仅通过单位方向影响更新方向（通过余弦相似度门控）。训练时辅助损失通过开关调度（终期仅去噪阶段）。",
+        "result": "在CaloChallenge Dataset 2上，使用PCGrad、GradNorm、IMTL-G、ConFIG等对称规则注入物理损失使FPD恶化2-100倍，而GradBlend不退化且结合图拉普拉斯损失同时改善FPD和CFD。消融表明：体素残差损失与去噪梯度冲突，需要终期仅去噪阶段保持样本保真度；图拉普拉斯损失非冲突，对调度不敏感。",
+        "conclusion": "本文提出相关性Frobenius距离（CFD）、两个物理感知辅助损失和GradBlend组合规则，实现了对强生成代理安全的物理引导。证明锚定去噪是必要的，并揭示了体素残差损失与去噪的冲突性质及其调度要求。",
+        "key_details": "数据为CaloChallenge Dataset 2（6480体素量热器）。先验：计数统计（方差稳定化）和探测器几何（图拉普拉斯）。损失：Huber损失（δ=1）结合逆方差权重（ε=1e-6）。超参：体素残差损失只在训练早期激活。复杂度：由于无每样本PDE，物理信息仅通过软损失引入。局限性：能量网络未受物理引导，可能成为瓶颈；图拉普拉斯损失假设简单邻接，可能不足以捕捉长程相关性。"
+      },
+      "affiliations": [
+        "University of Virginia"
+      ],
+      "affiliations_text": "University of Virginia",
+      "score": 4.368877945485514,
+      "score_text": "4.4"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.25037v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/29/260725037v1-ultra-low-energy-open-circuit-fault-diagnosis-for-three-phase-inverters",
+      "source": "arxiv",
+      "title": "Ultra-Low-Energy Open-Circuit Fault Diagnosis for Three-Phase Inverters",
+      "authors": [
+        "Xiaoyi Lei",
+        "Fanfu Wu",
+        "Yunting Liu"
+      ],
+      "authors_text": "Xiaoyi Lei, Fanfu Wu, Yunting Liu",
+      "abstract": "Embedded fault diagnosis in three-phase inverters must satisfy the sub-watt power budget of converter control hardware, but conventional convolutional neural network (CNN)-based methods require dense multiply-accumulate operations and impose substantial inference energy. This work proposes an event-driven neuromorphic framework for energy-efficient open-circuit (OC) fault diagnosis. A CNN trained on current-vector trajectory matrices is converted into a spiking neural network (SNN) and evaluated using the NengoLoihi framework with Loihi-based neuromorphic energy estimation. By exploiting the sparse structure of trajectory matrices, the SNN activates computation only in informative regions instead of processing the full feature map densely. Experiments on a three-phase inverter platform show that the proposed method achieves 11 microjoules per diagnosis, corresponding to a 382 times inference-energy reduction compared with a GPU-based CNN, while maintaining 100% diagnostic accuracy. Robustness is further validated under unbalanced loading, current amplitude step changes, and injected measurement noise.",
+      "url": "http://arxiv.org/abs/2607.25037v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25037v1",
+      "tldr": "The paper proposes an event-driven neuromorphic framework using a spiking neural network converted from a CNN to achieve ultra-low-energy (11 μJ per diagnosis, a 382× reduction vs. GPU-based CNN) and 100% accurate open-circuit fault diagnosis for three-phase inverters by exploiting the sparsity of current-vector trajectory matrices.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Pennsylvania State University"
+      ],
+      "affiliations_text": "The Pennsylvania State University",
+      "score": 4.272670948452993,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.25056v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/29/260725056v1-hybrid-artificial-potential-fields-and-spatio-temporal-transformers-for-real-time-auv-path-planning",
+      "source": "arxiv",
+      "title": "Hybrid Artificial Potential Fields and Spatio-Temporal Transformers for Real-Time AUV Path Planning",
+      "authors": [
+        "Khadija Rais",
+        "Abdelmadjid Benmachiche",
+        "Imene Soualmia"
+      ],
+      "authors_text": "Khadija Rais, Abdelmadjid Benmachiche, Imene Soualmia",
+      "abstract": "Autonomous Underwater Vehicles (AUVs) operate in complex, unstructured environments where efficient and safe path planning is critical for mission success and energy conservation. This paper presents a comprehensive comparative evaluation of thirteen path planning algorithms, ranging from classical graph-search methods (A*, Dijkstra) and sampling-based approaches (RRT*) to metaheuristics (PSO, GA, ACO, BCO) and learning-based architectures. Special emphasis is placed on a proposed hybrid approach combining Artificial Potential Fields (APF) with a Spatio-Temporal (ST) Transformer. Evaluated across five navigation scenarios on high-resolution underwater terrain maps, all algorithms achieved 100\\% task completion; however, significant trade-offs emerged in path optimality, collision avoidance, and computational load. The Hybrid APF + ST-Transformer demonstrated superior balanced performance, achieving the shortest average path length (943.15 units), a low collision rate (0.031), and efficient computation time (0.96 s), outperforming standalone learning models, which required fallback mechanisms and classical methods that incurred higher latency. While classical algorithms guaranteed collision-free paths, their excessive path lengths and processing times render them less suitable for dynamic underwater operations. Conversely, metaheuristic approaches introduced trajectory complexity unsuitable for strict energy constraints. Based on these findings, the Hybrid APF + ST framework is recommended as a principal approach for real-time AUV navigation, offering a robust solution that harmonizes reactive obstacle avoidance with global path optimality in resource-constrained underwater systems.",
+      "url": "http://arxiv.org/abs/2607.25056v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25056v1",
+      "tldr": "The paper proposes and evaluates a hybrid Artificial Potential Field and Spatio-Temporal Transformer path planning framework for AUVs, which balances reactive obstacle avoidance and global path optimality to achieve superior performance in real-time underwater navigation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chadli Bendjedid University",
+        "Echahid Cheikh Larbi Tebessi University"
+      ],
+      "affiliations_text": "Chadli Bendjedid University, Echahid Cheikh Larbi Tebessi University",
+      "score": 4.180661814448054,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.24813v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724813v1-parallel-model-based-derivative-free-optimization-via-rank-two-kkt-updates",
+      "source": "arxiv",
+      "title": "Parallel Model-Based Derivative-Free Optimization via Rank-Two KKT Updates",
+      "authors": [
+        "Donghan Wu",
+        "Pengcheng Xie"
+      ],
+      "authors_text": "Donghan Wu, Pengcheng Xie",
+      "abstract": "Derivative-free optimization (DFO) addresses unconstrained problems $\\min_{\\x\\in\\RR^n} f(\\x)$ where $f$ is accessed only through a zeroth-order oracle. Model-based trust-region methods construct underdetermined quadratic interpolation models from $\\mathcal{O}(n)$ points and solve a KKT system to determine model parameters, costing $\\mathcal{O}(m^3)$ operations and limiting parallel scalability. It is shown that the KKT matrix for the minimum Frobenius norm updating model depends entirely on inner products of shifted coordinates. Reflecting the interpolation set across a single coordinate axis preserves these inner products and changes only one row and column of the KKT matrix, inducing a rank-at-most-two perturbation whose inverse update via the Sherman-Morrison-Woodbury formula costs $\\mathcal{O}(n^2)$ when $m=\\mathcal{O}(n)$. The reflection is an isometry in centered Euclidean trust regions and preserves the poisedness constant of the interpolation set; together with standard fully linear model-management assumptions this supports first-order global convergence. The mechanism is embedded in a master-worker parallel algorithm with a Truncated Conjugate Gradient subproblem solver. Numerical results on 530 benchmark problems compare performance against an established DFO solver.",
+      "url": "http://arxiv.org/abs/2607.24813v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24813v1",
+      "tldr": "This paper presents a parallel derivative-free optimization method that reduces the computational cost of updating quadratic interpolation models from \\(\\mathcal{O}(m^3)\\) to \\(\\mathcal{O}(n^2)\\) by exploiting rank-two KKT perturbations through coordinate reflections, while preserving interpolation set poisedness and ensuring first-order global convergence.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Berkeley",
+        "Lawrence Berkeley National Laboratory"
+      ],
+      "affiliations_text": "University of California, Berkeley, Lawrence Berkeley National Laboratory",
+      "score": 4.174255479166354,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.24953v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724953v1-stable-fp4-training-via-transposition-invariant-block-quantization",
+      "source": "arxiv",
+      "title": "Stable FP4 Training via Transposition-Invariant Block Quantization",
+      "authors": [
+        "Mehdi Rahimifar",
+        "Amin Darabi",
+        "Mehran Taghian Jazi",
+        "Xing Huang",
+        "Yao Wang",
+        "Zhijun Tu",
+        "Yufei Cui",
+        "Yunke Peng",
+        "Hongliang Li"
+      ],
+      "authors_text": "Mehdi Rahimifar, Amin Darabi, Mehran Taghian Jazi, Xing Huang, Yao Wang, Zhijun Tu, Yufei Cui, Yunke Peng, Hongliang Li",
+      "abstract": "Reducing training precision is a key lever for improving the e ciency of large language model (LLM) training, but pushing beyond FP8 to 4-bit oating point (FP4) remains challenging due to instability during optimization. We identify a fundamental source of this instability in existing microscaling approaches: scale inconsistency induced by tensor transposition. In conventional 1D block quantization, forward and backward passes assign di erent scaling factors to the same values after transposition, leading to biased and unstable gradient updates. To address this issue, we propose a low-precision training framework based on 2D block FP4 quantization, which enforces transposition-invariant scaling and preserves consistency between forward and backward computations. We further combine this with truncation-free scaling and stochastic rounding to control quantization error and maintain unbiased gradients. To handle the sensitivity of attention mechanisms, we adopt MXFP8 quantization for query and key projections, yielding a practical mixed-precision design. We evaluate our method on dense LLMs up to 7B parameters and a 30B Mixture-of-Experts model, trained on up to 100B tokens. Across all settings, our approach achieves stable end-to-end FP4 training and closely matches BF16 performance, with less than 1.3% degradation in perplexity and downstream accuracy. These results demonstrate that enforcing forwardbackward scaling consistency is su cient to enable practical FP4 training at scale, providing a simple and e ective pathway toward more e cient LLM training.",
+      "url": "http://arxiv.org/abs/2607.24953v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24953v1",
+      "tldr": "This paper identifies transposition-induced scale inconsistency in 1D microscaling as a key cause of FP4 training instability and proposes a 2D block quantization framework that enforces forward-backward consistency, enabling stable end-to-end FP4 training with less than 1.3% degradation compared to BF16 across models up to 30B parameters.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9350919312597474,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.24887v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724887v1-mechanisms-of-width-scaling-in-normalized-residual-networks-the-effective-alignment-dimension",
+      "source": "arxiv",
+      "title": "Mechanisms of Width Scaling in Normalized Residual Networks: The Effective Alignment Dimension",
+      "authors": [
+        "Jinhao Zhang",
+        "Zeyu Liu",
+        "Zicheng Yan",
+        "Yunquan Zhang",
+        "Guangming Tan",
+        "Fangming Liu",
+        "Daning Cheng"
+      ],
+      "authors_text": "Jinhao Zhang, Zeyu Liu, Zicheng Yan, Yunquan Zhang, Guangming Tan, Fangming Liu, Daning Cheng",
+      "abstract": "Existing theories of neural-network width characterize asymptotic limits, but provide limited guidance on whether an expansion direction identified from finite training data remains beneficial on unseen data. We study this problem for function-preserving residual expansion and introduce the effective alignment dimension, a measurable quantity describing the signal-noise geometry of activation gradients. By deriving the exact mean and variance of the inner product between independently estimated training and test gradients, we obtain a finite-sample upper bound on misalignment probability. The bound depends only on the effective alignment dimension and an effective sample size, requiring finite second moments and a nonzero population gradient, without covariance spectral assumptions or prescribed width-growth rates. We integrate this certificate into the train-test residual-expansion framework, yielding a high-probability condition for test-risk improvement. Experiments across width-controlled LLaMA-style Transformers, Pythia, and ResNet-20 show that wider models exhibit larger effective alignment dimensions and lower empirical misalignment. Direct residual interventions confirm that the alignment statistic predicts the sign and magnitude of held-out loss changes.",
+      "url": "http://arxiv.org/abs/2607.24887v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24887v1",
+      "tldr": "This paper introduces the effective alignment dimension, a measurable signal-noise quantity of activation gradients, to derive a finite-sample certificate for test-risk improvement in normalized residual networks, and empirically shows that wider models exhibit larger effective alignment dimensions and lower misalignment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huazhong University of Science and Technology",
+        "Institute of Computing Technology, Chinese Academy of Sciences",
+        "University of Science and Technology of China",
+        "Beijing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "Huazhong University of Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences, University of Science and Technology of China, Beijing University of Posts and Telecommunications",
+      "score": 3.9040300746532663,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2607.25046v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/29/260725046v1-derivative-free-optimization-approach-for-structured-symmetric-matrices-with-fixed-eigenvalues",
+      "source": "arxiv",
+      "title": "Derivative-free optimization approach for structured symmetric matrices with fixed eigenvalues",
+      "authors": [
+        "Carmo P. Brás",
+        "Evelin H. M. Krulikovski",
+        "Marcos Raydan"
+      ],
+      "authors_text": "Carmo P. Brás, Evelin H. M. Krulikovski, Marcos Raydan",
+      "abstract": "A Derivative-Free Optimization (DFO) model is developed and analyzed for solving inverse structured symmetric matrix problems for which the eigenvalues are specified. Some (zero and nonzero) entries are preassigned and cannot be changed, while others should be nonzero but their values are not given. The rest of the entries are completely free. The obtained matrix must meet these criteria and have the specified eigenvalues. This specialized inverse eigenvalue problem is relevant to various applications and is linked to determining the graph, with weights on the undirected edges, of the matrix associated with its sparse pattern. Our novel optimization model requires computing the eigenvalues of a symmetric matrix to evaluate the non-differentiable objective function. We apply deterministic DFO schemes, specifically the global variant GLODS of the well-known family of directional direct search (DDS) methods. We discuss its convergence properties which are based on the fact that the objective function of our model is Lipschitz continuous. Additionally, we explore the potential benefits of using several well-established heuristic strategies to solve the proposed optimization model. We present preliminary numerical results to illustrate and compare the performance of the considered deterministic and heuristic DFO options in various possible scenarios.",
+      "url": "http://arxiv.org/abs/2607.25046v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25046v1",
+      "tldr": "This paper develops a derivative-free optimization model, employing deterministic (GLODS) and heuristic strategies, to solve inverse structured symmetric matrix problems where the eigenvalues are fixed and certain entries are preassigned or must remain nonzero.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Federal University of Paraná",
+        "NOVA School of Science and Technology (NOVA FCT)"
+      ],
+      "affiliations_text": "Federal University of Paraná, NOVA School of Science and Technology (NOVA FCT)",
+      "score": 3.8067350082139773,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.24892v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724892v1-llm-as-forecasting-planner-training-free-text-conditioning-for-time-series-foundation-models",
+      "source": "arxiv",
+      "title": "LLM as Forecasting Planner: Training-Free Text Conditioning for Time-Series Foundation Models",
+      "authors": [
+        "Huu Hiep Nguyen",
+        "Dung Nguyen",
+        "Minh Hoang Nguyen",
+        "Dai Do",
+        "Hung Le"
+      ],
+      "authors_text": "Huu Hiep Nguyen, Dung Nguyen, Minh Hoang Nguyen, Dai Do, Hung Le",
+      "abstract": "Text-conditioned time-series forecasting predicts a series from both its numerical history and natural-language context, allowing forecasts to account for events and constraints that the past alone cannot reveal. This requires both reliable numerical forecasting and the ability to interpret contextual information. Time-series foundation models (TSFMs) provide strong numerical forecasts, while large language models (LLMs) can reason over text, but combining their strengths remains challenging because asking an LLM to generate or revise forecast values directly can distort the temporal structure captured by the TSFM. We instead formulate forecasting as a planning problem over TSFM-generated trajectories. The frozen TSFM acts as a simulator that proposes numerical continuations, while the LLM acts as a policy and value function that guides candidate selection and evaluates completed trajectories against the context. We instantiate this as \\rc{} (\\textbf{L}LM \\textbf{A}s \\textbf{F}orecasting \\textbf{P}lanner), a training-free framework that bridges the modality gap without retraining either model, using Monte Carlo tree search (MCTS) over the forecast horizon with a \\emph{Ranker} LLM as policy and a \\emph{Judge} LLM as value function. Experiments on Context-is-Key and Time-MMD across two TSFM backbones (Chronos and TimesFM) and four LLMs show that \\rc{} delivers consistent improvements across model choices, supporting sequential search as an effective training-free approach to text-conditioned forecasting.",
+      "url": "http://arxiv.org/abs/2607.24892v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24892v1",
+      "tldr": "This paper presents LAFP, a training-free framework that uses a frozen time-series foundation model as a simulator to generate numerical forecast candidates and a frozen LLM as a policy and value function to guide Monte Carlo tree search, enabling text-conditioned time-series forecasting without retraining either model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Deakin University"
+      ],
+      "affiliations_text": "Deakin University",
+      "score": 3.7644139240017243,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.24943v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724943v1-multiclass-classification-without-labels-via-posterior-simplex-geometry",
+      "source": "arxiv",
+      "title": "Multiclass Classification without Labels via Posterior Simplex Geometry",
+      "authors": [
+        "Raphaël Bonnet-Guerrini",
+        "Johann Ioannou-Nikolaides",
+        "Troels Petersen",
+        "Vincenzo Piuri"
+      ],
+      "authors_text": "Raphaël Bonnet-Guerrini, Johann Ioannou-Nikolaides, Troels Petersen, Vincenzo Piuri",
+      "abstract": "In many classification problems, reliable instance-level labels are unavailable. However, it is often possible to construct weakly enriched unlabeled samples: datasets selected by different cuts, sources, populations, or experimental conditions that change latent class proportions without revealing them. Classification without Labels (CWoLa) shows that, in the binary case ($K=2$), a classifier trained to distinguish two impure mixtures with different class proportions can recover an optimal class discriminator without knowing the mixture proportions. We extend this principle to multiclass learning from several unlabeled mixtures ($K>2$), where the learner observes only mixture identity and neither latent class labels nor class-prior matrices. We prove that, for a multiclass mixture model, the Bayes-optimal mixture classifier $g^\\star$ maps data points into a $(K-1)$-simplex embedded in mixture-posterior space. The $K$ vertices of this simplex are induced by the latent classes through the unknown mixing matrix. Leveraging this geometry, we propose prior-free procedures that train a standard classifier to distinguish mixture identities and then extract latent class structure using either post-hoc simplex fitting or a bottleneck architecture. Experiments on MNIST, CIFAR-10, and Galaxy10 DECaLS show that mixture identity alone can recover latent classes and their fractions in the mixture. By narrowing the gap between weakly supervised and fully supervised performance, we provide a mathematically grounded, scalable tool for multiclass discovery in label-scarce domains.",
+      "url": "http://arxiv.org/abs/2607.24943v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24943v1",
+      "tldr": "This paper extends Classification without Labels (CWoLa) to multiclass settings by proving that the Bayes-optimal mixture classifier's posterior lies in a (K-1)-simplex, enabling recovery of latent classes and mixture proportions from unlabeled mixtures without any instance-level labels or prior knowledge of class proportions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Istituto Nazionale di Fisica Nucleare",
+        "University of Copenhagen",
+        "Università degli Studi di Milano"
+      ],
+      "affiliations_text": "Istituto Nazionale di Fisica Nucleare, University of Copenhagen, Università degli Studi di Milano",
+      "score": 3.577500819076838,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.25018v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/29/260725018v1-conformal-cascade-distribution-free-accuracy-guarantees-for-multi-tier-llm-inference",
+      "source": "arxiv",
+      "title": "Conformal Cascade: Distribution-Free Accuracy Guarantees for Multi-Tier LLM Inference",
+      "authors": [
+        "Yifan Dou",
+        "Shikan Fang",
+        "Shibo Li"
+      ],
+      "authors_text": "Yifan Dou, Shikan Fang, Shibo Li",
+      "abstract": "Large language model (LLM) cascades reduce inference cost by routing easy queries to a small model and deferring hard queries to a larger one. Production cascades govern this deferral through a confidence threshold, but LLM confidence scores are miscalibrated, the threshold must be tuned per model pair and per domain, and no setting yields a formal bound on cascade accuracy. We introduce \\textbf{Conformal Cascade} (CC), a multi-tier inference framework that uses conformal prediction set size as the deferral rule: accept when the calibrated set collapses to a single answer, defer otherwise. The procedure delivers a distribution-free, finite-sample accuracy guarantee. By a per-tier union bound, the prediction set at the accepting tier covers the correct answer with probability at least $1 - Kα$ for any user-specified $α$; under a selection-preservation condition (consistent with, but not strictly implied by, our marginal coverage results), the bound tightens to $1 - α$. We further characterise expected cascade cost as an explicit function of $α$ and the calibration-set acceptance rate. Across 18 multiple-choice benchmarks spanning science, medicine, commonsense, and standardized exams, evaluated on two-tier cascades drawn from four open-weight model families, CC strictly improves over the strongest calibration-tuned heuristic cascade on the majority of family--benchmark pairs, with the largest gains on reasoning-heavy benchmarks where majority vote is unreliable; on easier benchmarks the cascade commits the vast majority of queries to the small model at no accuracy cost. Extension to open-ended generation requires an answer-clustering step that we leave for future work. The method requires no model training and only black-box API access.",
+      "url": "http://arxiv.org/abs/2607.25018v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25018v1",
+      "tldr": "Conformal Cascade replaces confidence-threshold deferral in LLM cascades with a conformal prediction set size rule, providing distribution-free, finite-sample accuracy guarantees and enabling explicit cost–accuracy trade-offs without model training or logprob access.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Florida State University"
+      ],
+      "affiliations_text": "Florida State University",
+      "score": 3.5529736104942744,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.24875v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724875v1-finabstain-uncertainty-calibrated-multimodal-rag-for-selective-financial-forecasting",
+      "source": "arxiv",
+      "title": "FinAbstain: Uncertainty-Calibrated Multimodal RAG for Selective Financial Forecasting",
+      "authors": [
+        "Dorothy Torres",
+        "Wei Cheng",
+        "Henan Huang"
+      ],
+      "authors_text": "Dorothy Torres, Wei Cheng, Henan Huang",
+      "abstract": "Large language models (LLMs) can synthesize financial narratives but may express high confidence when evidence is sparse, stale, or contradictory. This failure is especially consequential in forecasting, where filings, news, prices, volume, and technical signals can disagree. We present FinAbstain, a research framework for uncertainty-calibrated multimodal retrieval-augmented generation (RAG) with selective prediction. A point-in-time retriever admits only information public at the forecast timestamp and supplies modality-specific evidence to fundamental, news, technical, risk, and verification agents. Their probabilistic assessments are aggregated with retrieval relevance, evidence contradiction, repeated-sample consistency, and historical calibration statistics. Temperature scaling, isotonic regression, conformal prediction, and a proposed hybrid uncertainty score are evaluated under a common chronological protocol. A controller predicts bullish, bearish, or neutral outcomes only when uncertainty is below a validated threshold; otherwise it abstains, requests evidence, reduces exposure, or routes the case to human review. The evaluation covers one- and five-day abnormal-return direction, twenty-day volatility intervals, and abstention decisions, using accuracy, calibration, risk--coverage, citation, trading, latency, and cost metrics. To make the design auditable before a full data collection is complete, we report explicitly labeled simulated results rather than empirical claims. These results illustrate the intended hypothesis: calibrated abstention may trade coverage for lower selective error and drawdown. The contribution is a time-safe architecture, a composite uncertainty formulation, and a reproducible evaluation blueprint for evidence-grounded selective financial forecasting.",
+      "url": "http://arxiv.org/abs/2607.24875v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24875v1",
+      "tldr": "FinAbstain proposes a time-safe, multimodal RAG framework for selective financial forecasting that uses calibrated uncertainty estimates and a controller to abstain when evidence is contradictory or sparse, trading coverage for lower error and drawdown.",
+      "detailed_reading": null,
+      "affiliations": [
+        "New Jersey City University",
+        "The Pennsylvania State University"
+      ],
+      "affiliations_text": "New Jersey City University, The Pennsylvania State University",
+      "score": 3.5380772429296377,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.24828v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724828v1-extremal-problem-of-area-approximation",
+      "source": "arxiv",
+      "title": "Extremal problem of area approximation",
+      "authors": [
+        "O. O. Pokutnyi",
+        "R. R. Salimov",
+        "M. V. Stefanchuk"
+      ],
+      "authors_text": "O. O. Pokutnyi, R. R. Salimov, M. V. Stefanchuk",
+      "abstract": "This paper investigates the problem of optimal piecewise linear approximation of a smooth curve, in which the area of the region enclosed between the graph of the original function and the constructed interpolating polyline is minimized. This problem arises in technological processes such as laser and plasma cutting of metals, milling, additive manufacturing, and in the preparation of control programs for CNC equipment. For a quadratic parabola, the exact value of the minimum area is established, and it is shown that the optimal partition of the interval is uniform. For a cubic function, it is demonstrated that the optimal interpolation nodes are distributed non-uniformly; in the case of two internal partition points, their exact coordinates and the corresponding minimum area are obtained. The results can be applied in CAD systems for optimizing tool paths based on the criterion of minimum deviation area.",
+      "url": "http://arxiv.org/abs/2607.24828v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24828v1",
+      "tldr": "This paper studies the optimal piecewise linear approximation of a smooth curve by minimizing the area between the curve and its interpolating polyline, finding that for a quadratic parabola the optimal partition is uniform, while for a cubic function it is non-uniform.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.459623502413915,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.24881v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724881v1-behavior-driven-explainability",
+      "source": "arxiv",
+      "title": "Behavior-Driven Explainability",
+      "authors": [
+        "Caroline Dominik",
+        "Rolf Drechsler"
+      ],
+      "authors_text": "Caroline Dominik, Rolf Drechsler",
+      "abstract": "As system complexity has vastly increased, it has become significantly more challenging for a single person or a team to fully understand all aspects of an entire system. Particularly, this holds when considering all the different stages of a system's development life cycle, such as, e.g., design or maintenance. But especially for safety-critical systems it is essential that the final design can be trusted. Because of this, explainability is becoming an important requirement for modern systems. In this paper, we aim to achieve this goal by utilizing Behavior-Driven Development (BDD), where the expected system behavior is given in the form of structured scenarios. These scenarios give a sequence of actions for each functionality, and by this can be directly translated into explanations. We introduce this method of deriving explanations based on the specification as Behavior-Driven Explainability (BDX). While applicable at any development stage or abstraction level, a case study for the explanation of exceptions in a RISC-V processor shows the support this concept adds during system design.",
+      "url": "http://arxiv.org/abs/2607.24881v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24881v1",
+      "tldr": "This paper introduces Behavior-Driven Explainability (BDX), a method that leverages Behavior-Driven Development scenarios to derive explanations for system behavior, demonstrated through a case study on exceptions in a RISC-V processor.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bremen/DFKI"
+      ],
+      "affiliations_text": "University of Bremen/DFKI",
+      "score": 3.1805308241249657,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.25049v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/29/260725049v1-firmgrasp-a-friction-informed-risk-margin-for-robust-grasp-synthesis",
+      "source": "arxiv",
+      "title": "FIRMGrasp: A Friction-Informed Risk Margin for Robust Grasp Synthesis",
+      "authors": [
+        "Clinton Enwerem",
+        "John S. Baras",
+        "Calin Belta"
+      ],
+      "authors_text": "Clinton Enwerem, John S. Baras, Calin Belta",
+      "abstract": "Classical grasp quality metrics assume a single deterministic friction coefficient, so they cannot predict whether a grasp retains force closure across the range of friction values the contacting surfaces may exhibit. To predict these failures, we present FIRMGrasp, a family of friction-volatility-aware grasp quality metrics grounded in the Conditional Value-at-Risk (CVaR) risk measure. Unlike standard grasp quality assessors that assume a single friction realization, our metric evaluates the force-closure margin at the CVaR-discounted mean of the adverse friction tail, yielding a risk-adjusted margin $\\varepsilon^{(β)}$, the inscribed-ball radius of the risk-adjusted wrench space. We establish its monotonicity in the confidence level $β$, its differentiability in the grasp parameters, and a probabilistic closure certificate that guarantees force closure with probability at least $β$ whenever $\\varepsilon^{(β)}$ is positive. Under a calibrated friction distribution, analytic evaluation shows our $\\varepsilon^{(β)}$ metric identifies friction-sensitive grasps that the nominal Ferrari-Canny epsilon rates as high-quality, and we compare against the nominal epsilon and recent differentiable baselines. Across 1,599 LEAP Hand and Allegro Hand grasps, 53% of the grasps the nominal Ferrari-Canny margin certifies lose force closure in the adverse friction tail. On the same set, the nominal margin separates realized shake and pick success with probabilities of only 0.53 and 0.67, near chance on shake success, whereas $\\varepsilon^{(β)}$ orders the pair correctly with probabilities of 0.63 and 0.78, respectively. In simulated lift trials with gravity enabled at an adverse friction coefficient of 0.2, grasps $\\varepsilon^{(β)}$ certifies reach a 70% success rate under lateral pull, against 25% for grasps the nominal margin certifies but $\\varepsilon^{(β)}$ rejects.",
+      "url": "http://arxiv.org/abs/2607.25049v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25049v1",
+      "tldr": "FIRMGrasp introduces a family of friction-volatility-aware grasp quality metrics grounded in the Conditional Value-at-Risk (CVaR) risk measure, which guarantees force closure with probability at least β under uncertain friction conditions, generalizing classical deterministic metrics like the Ferrari-Canny epsilon.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Maryland"
+      ],
+      "affiliations_text": "University of Maryland",
+      "score": 3.0812717869248702,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2607.24889v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724889v1-gauge-grading-agent-built-financial-models-without-a-golden-answer",
+      "source": "arxiv",
+      "title": "GAUGE: Grading Agent-Built Financial Models Without a Golden Answer",
+      "authors": [
+        "Jiacheng Lu",
+        "Sinuo Wang",
+        "Wentao Zhao",
+        "Rui Sun",
+        "Cheng Hua",
+        "Tao Song",
+        "Hui Cai",
+        "Beidi Luan",
+        "Zhengze Wu",
+        "Lingjing Teng",
+        "Yijia He",
+        "Jing Li",
+        "Daxin Jiang",
+        "Zuo Bai",
+        "Haibing Guan"
+      ],
+      "authors_text": "Jiacheng Lu, Sinuo Wang, Wentao Zhao, Rui Sun, Cheng Hua, Tao Song, Hui Cai, Beidi Luan, Zhengze Wu, Lingjing Teng, Yijia He, Jing Li, Daxin Jiang, Zuo Bai, Haibing Guan",
+      "abstract": "Financial models combine public disclosures with analyst assumptions to produce forecasts and valuations. While some components can be checked mechanically, forecasts, discount rates, and target prices often admit multiple reasonable answers. Existing benchmarks nevertheless tend to grade such outputs against a single expert reference. Using independently built analyst models for the same companies, we find that across 108 directed pairs covering 65 companies, the median single-reference score is 0.33, 92.6% score below 0.70, and no same-vintage pair agrees on implied price within 10%. Point-tolerance grading can therefore penalize disagreement already present among professionals. We introduce GAUGE, a benchmark for evaluating agent-built valuation models against observed analyst practice rather than a single point answer. GAUGE uses 1,001 vendor-classified analyst workbooks and a 196-task evaluation set, with a three-layer observed-practice envelope, 56 auditable facets, eight validity gates, and deterministic structural checks. We validate the benchmark with a 55-participant known-groups study, company-grouped cross-fitting, and judge-stability audits. On the failure-aware score $φ_0$, senior analysts average 88.3, juniors 66.0, and finance students 43.2. Across 24 agents and 1,011 scored generations, the best agent scores 53.4, above the student mean but below every senior and most juniors. It passes 93% of mechanical facets and 78% of judgment facets, with a fleet-median gap of 26 points. Current agents are substantially stronger at model construction than valuation judgment. We release the methodology, a gated de-identified data tier, a controlled training split, a versioned 48-task evaluation core, and a withheld refresh pool.",
+      "url": "http://arxiv.org/abs/2607.24889v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24889v1",
+      "tldr": "GAUGE introduces a benchmark that evaluates agent-built financial models against observed analyst practice rather than a single correct answer, revealing that current agents are substantially stronger at model construction than valuation judgment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Adelaide",
+        "Foresight Fund",
+        "Peking University",
+        "Tsinghua University",
+        "StepFun",
+        "Finstep",
+        "Shanghai Jiao Tong University",
+        "National University of Singapore"
+      ],
+      "affiliations_text": "University of Adelaide, Foresight Fund, Peking University, Tsinghua University, StepFun, Finstep, Shanghai Jiao Tong University, National University of Singapore",
+      "score": 2.6661450850052058,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.24880v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/29/260724880v1-human-preference-aligned-tabular-similarity",
+      "source": "arxiv",
+      "title": "Human Preference aligned Tabular Similarity",
+      "authors": [
+        "Frederik Hoppe",
+        "Astrid Franz",
+        "Marianne Michaelis",
+        "Lars Kleinemeier",
+        "Udo Göbel"
+      ],
+      "authors_text": "Frederik Hoppe, Astrid Franz, Marianne Michaelis, Lars Kleinemeier, Udo Göbel",
+      "abstract": "Task-agnostic tabular embeddings are increasingly used for similarity search in real-world business systems such as Product Lifecycle Management (PLM). However, leading embedding approaches are optimized primarily for prediction tasks - not for producing human preference aligned similarity rankings. We argue that standard downstream metrics are insufficient to fully assess embedding trustworthiness for similarity search and that human preference aligned evaluation is a necessary and currently missing component. We present a concrete evaluation procedure and illustrate the problem through a PLM use case.",
+      "url": "http://arxiv.org/abs/2607.24880v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24880v1",
+      "tldr": "This paper argues that current tabular embeddings, optimized for prediction tasks, lack human preference alignment for similarity search and proposes a concrete human-centered evaluation procedure, as demonstrated through a Product Lifecycle Management use case.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CONTACT Software GmbH"
+      ],
+      "affiliations_text": "CONTACT Software GmbH",
+      "score": 2.3447244631439155,
+      "score_text": "2.3"
+    }
+  ]
+}
