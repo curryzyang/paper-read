@@ -1,0 +1,748 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-30T05:44:36.992217",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.26277v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726277v1-data-driven-stability-and-performance-analysis-of-lurye-systems",
+      "source": "arxiv",
+      "title": "Data-Driven Stability and Performance Analysis of Lurye Systems",
+      "authors": [
+        "Sahel Vahedi Noori",
+        "Peter Seiler"
+      ],
+      "authors_text": "Sahel Vahedi Noori, Peter Seiler",
+      "abstract": "This paper develops data-driven conditions for certifying internal stability and induced-$\\ell_2$ performance of discrete-time Lurye systems. The Lurye system is an interconnection of a nominal LTI system in feedback with a static, memoryless nonlinearity. The nonlinearity satisfies a known set of quadratic constraints on the inputs and outputs. Existing conditions for Lurye systems require a state-space realization of the nominal LTI dynamics. Our first data-driven result instead formulates the stability and performance conditions using finite input, output, and state trajectories of the nominal LTI block. Our second condition removes the need for measured state trajectories by reconstructing the state sequence, up to a similarity transformation, from input/output data. This state reconstruction is performed using deterministic subspace-identification techniques. Both data-driven conditions are expressed as convex semidefinite programs. These conditions, given sufficiently exciting inputs, recover the corresponding model-based Lurye condition in the noiseless setting. The proposed methods are illustrated via a simple example with a sector-bounded nonlinearity. Both proposed methods obtain the same induced-$\\ell_2$ gain bound as the model-based approach while using only trajectory data from the nominal system.",
+      "url": "http://arxiv.org/abs/2607.26277v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26277v1",
+      "tldr": "This paper develops data-driven convex conditions using only measured trajectory data (either with or without state measurements) to certify internal stability and induced-ℓ₂ performance of Lurye systems with known quadratic constraints on the nonlinearity.",
+      "detailed_reading": {
+        "motivation": "传统Lurye系统稳定性与性能分析需要标称LTI系统的状态空间模型，但在复杂实际系统中建模困难。本文旨在开发仅利用标称系统轨迹数据（无需完整模型）的数据驱动条件，认证Lurye系统的内部稳定性和诱导ℓ2性能。",
+        "method": "本文针对离散时间Lurye系统提出两个数据驱动条件，均表示为凸半定规划。第一个条件利用标称LTI系统的有限输入、输出和状态轨迹数据，结合满足已知二次约束的非线性，构建Lyapunov/耗散不等式。第二个条件仅使用输入/输出数据，通过确定性子空间辨识技术（如N4SID）从输入输出数据重建状态序列（可达相似变换），然后应用类似第一个条件的半定规划。两个条件在充分激励输入及无噪声设定下恢复对应的基于模型条件，并联合优化存储矩阵、QC矩阵和性能界γ。",
+        "result": "以一个扇区有界非线性为例，两个数据驱动方法得到的诱导ℓ2增益界与基于模型的方法完全相同，验证了方法在无噪声情况下可复现基于模型的分析结果，且仅使用轨迹数据。",
+        "conclusion": "本文发展了Lurye系统数据驱动稳定性与性能分析的两个凸条件，分别需要或不需要状态测量。通过子空间辨识克服状态不可测问题，示例验证了方法的有效性并与基于模型方法一致。未来可扩展至有噪声情况、控制器综合等问题。",
+        "key_details": "关键细节：1) 非线性需满足已知二次约束（QC矩阵M）；2) 子空间辨识要求输入充分激励且数据长度足够以保证可观测性；3) 无噪声假设保证数据驱动条件精确恢复基于模型结果；4) 优化为凸半定规划，可联合优化QC矩阵与存储矩阵，以获取最优（最小）诱导ℓ2增益界；5) 局限性包括直接扩展到控制器综合时变非凸、未考虑测量噪声、假设系统可观测且状态可重建（相似变换）。"
+      },
+      "affiliations": [
+        "University of Michigan"
+      ],
+      "affiliations_text": "University of Michigan",
+      "score": 5.295467331758543,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2607.26094v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726094v1-meta-learned-reward-shaping-for-reinforcement-learning-from-human-feedback",
+      "source": "arxiv",
+      "title": "Meta-Learned Reward Shaping for Reinforcement Learning from Human Feedback",
+      "authors": [
+        "Yunpeng Chu"
+      ],
+      "authors_text": "Yunpeng Chu",
+      "abstract": "Reinforcement Learning from Human Feedback (RLHF) is the standard approach for aligning large language models with human preferences, but its quality is limited by static, task-agnostic reward models. This mismatch leads to sparse learning signals and suboptimal alignment. We introduce MeRLa (Meta-Learned Reward Shaping), a principled framework that meta-learns a task-aware shaping function $Φ(x,y;φ)$ across auxiliary tasks before RLHF training. The learned shaping produces a composite reward that preserves policy optimality while providing task-specific learning signals. Our meta-objective combines task discrimination, entropy regularization, and potential-based conservation for stable convergence. We provide theoretical guarantees for policy invariance, analyze representation drift sensitivity, and formally address incentive misalignment from entropy maximization. Experiments on LLaMA-3-8B across four benchmarks show consistent improvements over PPO, DPO, GRPO, and DAPO, achieving a 90.8% length-controlled win rate on AlpacaEval 2.0 and a score of 9.14 on MT-Bench, with 41% less training instability. MeRLa retains its benefits when combined with process-based and rubric-based enhanced rewards.",
+      "url": "http://arxiv.org/abs/2607.26094v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26094v1",
+      "tldr": "MeRLa introduces a meta-learned reward shaping framework for RLHF that learns a task-aware shaping function across auxiliary tasks to improve reward signals, policy optimality, and training stability, achieving consistent gains over PPO, DPO, GRPO, and DAPO on LLaMA-3-8B.",
+      "detailed_reading": {
+        "motivation": "标准RLHF使用静态且任务无关的奖励模型，导致学习信号稀疏和对齐效果次优。静态奖励无法适应多样化提示下的细微质量差异，引发奖励稀疏、过度优化和对齐税等问题。",
+        "method": "方法包括两阶段：元学习阶段和部署阶段。元学习阶段利用辅助任务分布，学习一个轻量级MLP塑形函数Φ(x,y;φ)，输入为冻结参考模型提取的提示嵌入和响应嵌入及其差值的拼接。元学习目标结合任务区分损失（对比偏好/非偏好响应）、熵正则化（鼓励奖励值分散）和守恒损失（迫使Φ接近潜在基础形式以保证策略不变性）。部署阶段冻结Φ，与基础奖励组成复合奖励（带强度参数α），用于GRPO、PPO等在线RLHF算法，算法流程见Algorithm 1。",
+        "result": "在LLaMA-3-8B上四个基准测试中，MeRLa一致超越PPO、DPO、GRPO和DAPO：AlpacaEval 2.0长度控制胜率达90.8%，MT-Bench得分9.14，训练不稳定性降低41%。当与过程奖励或基于规则的增强奖励结合时，MeRLa仍保持优势。",
+        "conclusion": "MeRLa通过元学习任务感知的奖励塑形函数，在不改变最优策略的前提下提供了密集型任务特定学习信号，显著改善了RLHF的对齐质量和训练稳定性。其理论保证了策略不变性并分析了表示漂移与激励对齐问题，且与多种基奖励兼容。",
+        "key_details": "关键细节：数据来自辅助任务分布中的偏好对；先验采用潜在基础塑形以保证策略不变性；损失包含任务区分、熵正则和守恒损失；超参α控制塑形强度，λ1,λ2平衡各项；模型为低于1M参数的2层MLP；使用冻结编码器避免表示漂移，并通过谱归一化控制Lipschitz常数；局限性包括依赖辅助任务分布质量和残余守恒误差引入的微小偏差。"
+      },
+      "affiliations": [
+        "Stony Brook University"
+      ],
+      "affiliations_text": "Stony Brook University",
+      "score": 5.087101439289253,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2607.26279v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726279v1-multi-objective-compliance-integrated-coevolution-for-simulated-and-real-world-deployment-of-multi-robot-marine-autonomy",
+      "source": "arxiv",
+      "title": "Multi-Objective Compliance-Integrated Coevolution For Simulated And Real-World Deployment Of Multi-Robot Marine Autonomy",
+      "authors": [
+        "Everardo Gonzalez",
+        "Tyler M. Paine",
+        "Manuel Agraz Vallejo",
+        "Gaurav Dixit",
+        "Michael R. Benjamin",
+        "Kagan Tumer"
+      ],
+      "authors_text": "Everardo Gonzalez, Tyler M. Paine, Manuel Agraz Vallejo, Gaurav Dixit, Michael R. Benjamin, Kagan Tumer",
+      "abstract": "Collaborative robots are well-suited to maritime missions that benefit from coordination, such as the exploration of unknown reef structures, inspection of subsea infrastructure, or search-and-rescue operations. These missions typically provide sparse feedback signals for measuring progress and require adherence to safety and regulatory norms, turning a mission into a multi-objective optimization problem. Coevolutionary algorithms can process these sparse feedback signals to generate coordinated behaviors, and in some cases extend behaviors to multiple objectives. However, incorporating high-level team objectives with low-level compliance considerations on the fly to balance norm adherence with team performance remains elusive. This paper introduces a multi-objective framework that blends coevolved behaviors with compliance behaviors to achieve a balance between maximizing team progress and minimizing norm violations. The key insight is to decouple learning from compliance since operational norms are prescribed rather than discovered. We demonstrate that our framework achieves high team performance while avoiding collisions on a collaborative swimmer rescue mission with up to 8 vehicles in a hardware deployment, and 12 vehicles in simulation. The key contribution of this paper is Marine Multi-Objective Compliance-Integrated Coevolution (MMOCIC), a framework that blends team-wide optimization with established norms for real-world deployments of learning-based coordination.",
+      "url": "http://arxiv.org/abs/2607.26279v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26279v1",
+      "tldr": "The paper introduces Marine Multi-Objective Compliance-Integrated Coevolution (MMOCIC), a framework that decouples learning from compliance to blend coevolved team behaviors with prescribed norm adherence, achieving high performance and collision avoidance in multi-robot marine missions across simulated and real-world deployments.",
+      "detailed_reading": {
+        "motivation": "海事任务中协同机器人面临稀疏反馈信号和严格的合规要求，需要同时最大化团队进度和最小化规范违反。现有协同进化算法虽能处理稀疏目标，但难以动态整合高层团队目标与低层合规考虑，实现实时平衡。",
+        "method": "提出Marine Multi-Objective Compliance-Integrated Coevolution (MMOCIC)框架，采用集中训练分散执行范式。在仿真中通过合作协同进化算法（CCEA）为每台车辆进化神经网络作为协同行为目标；结合预设的COLREGs合规行为和Stay-In-Bounds边界行为，通过加权标量化（权重连续）混合三种行为。硬件部署时引入基于控制屏障函数（CBF）的安全过滤器，在极端接近时覆盖控制输入防止碰撞。训练时可选择激活或停用合规行为，实现零样本权重调整。",
+        "result": "在协作游泳救援任务中，硬件部署8辆车、仿真12辆车均实现高救援成功率同时避免碰撞。通过零样本调整权重可动态平衡救援数量与合规水平，无需重新训练，展示了灵活的可调性能-合规权衡。",
+        "conclusion": "MMOCIC有效解耦学习与合规，使协同进化专注于发现协调行为，预设合规行为确保规范遵守，在真实世界多机器人部署中实现了团队优化与既定规范的融合。",
+        "key_details": "关键细节：解耦学习与合规的核心洞察——合规是预设而非发现；差值适应度（Difference Fitness）用于稀疏团队目标下的个体贡献估计；CBF安全过滤器提供硬件部署的关键安全层；权重标量化允许零样本调节性能与合规；预设合规行为（COLREGs、Stay-In-Bounds）可覆盖协同进化生成的极端动作。不足之处包括：CBF依赖准确动力学模型，预设行为可能限制协同进化探索空间。"
+      },
+      "affiliations": [
+        "Oregon State University",
+        "MIT"
+      ],
+      "affiliations_text": "Oregon State University, MIT",
+      "score": 4.817306260998992,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2607.26336v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726336v1-learning-implicit-causal-world-models-from-multi-agent-demonstrations",
+      "source": "arxiv",
+      "title": "Learning Implicit Causal World Models from Multi-Agent Demonstrations",
+      "authors": [
+        "Jasorsi Ghosh"
+      ],
+      "authors_text": "Jasorsi Ghosh",
+      "abstract": "In model-based reinforcement learning, world models exist as internal simulators, but their training often conflates statistical correlations with causal mechanisms. This problem is exacerbated in multi-agent systems where physical transitions are intertwined with strategic agent intents, causing world models to fail under distribution shift. We introduce Implicit Causal World Models to recover environmental dynamics from offline demonstrations without requiring pre-defined causal graphs. By incorporating policy variance, we render world models discoverable via the sequential backdoor condition. Evaluations across coordination tasks (Two-Door, Navigation, and Giveway) demonstrate that these models provide interpretable causal representations under both full and partial observability, with model accuracy scaling directly with interventional strength.",
+      "url": "http://arxiv.org/abs/2607.26336v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26336v1",
+      "tldr": "Implicit Causal World Models learn causal environmental dynamics from multi-agent demonstrations without pre-defined graphs by leveraging policy variance and the sequential backdoor condition to achieve interpretable representations.",
+      "detailed_reading": {
+        "motivation": "在多智能体系统中，基于模型强化学习的世界模型常混淆统计相关与因果机制，导致分布偏移下失效。",
+        "method": "提出隐式因果世界模型，利用离线演示数据，通过整合策略方差并应用顺序后门条件来发现隐式因果图，无需预定义因果结构，从而恢复环境动态。",
+        "result": "在Two-Door、Navigation和Giveway等协调任务中，该模型在完全和部分观测条件下均可提供可解释的因果表示，且模型准确性随干预强度的增加而线性提升。",
+        "conclusion": "隐式因果世界模型能够从多智能体演示中有效学习因果机制，提升世界模型在分布外场景的泛化能力和可解释性。",
+        "key_details": "关键细节包括：利用策略方差作为后门调整变量实现因果发现；采用顺序后门条件处理时序依赖；模型基于变分推断框架学习隐式因果图；无需先验因果图，适用于部分观测；准确性受干预强度影响，强干预下因果识别更准确。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.692467332171657,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2607.26253v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726253v1-early-verdicts-better-budgets-sequential-adaptive-rollout-allocation-for-compute-efficient-rlvr",
+      "source": "arxiv",
+      "title": "Early Verdicts, Better Budgets: Sequential Adaptive Rollout Allocation for Compute-Efficient RLVR",
+      "authors": [
+        "Pixel Nomand",
+        "Elena Voss",
+        "Marcus Hale",
+        "Sofia Reyes"
+      ],
+      "authors_text": "Pixel Nomand, Elena Voss, Marcus Hale, Sofia Reyes",
+      "abstract": "Reinforcement learning with verifiable rewards (RLVR) is bottlenecked by rollout generation, yet many sampled prompts produce saturated groups (all responses correct or all incorrect) whose zero reward variance yields no policy-gradient signal. Existing remedies either oversample a larger candidate pool and discard saturated prompts (dynamic sampling), paying heavy extra rollouts, or predict prompt difficulty before sampling, which is fragile under a shifting policy. We observe that a group's effectiveness is usually decided early, within the first few of its rollouts, so spending a full group on an already-decided prompt is wasteful. We cast per-step rollout collection as a budget-constrained sequential allocation (optimal stopping) problem and introduce SARA (Sequential Adaptive Rollout Allocation). SARA maintains a Beta posterior over each prompt's success rate, evaluates a closed-form predictor of group effectiveness, and applies a two-threshold, SPRT-style rule that commits effective groups, abandons saturated ones after a short probe, and reallocates the freed budget to fresh prompts, without any extra prediction rollouts. We prove abandonment reliability, expected rollout savings, fixed-budget yield dominance, and a link between effective-group yield and the GRPO gradient norm. On mathematical reasoning and planning with 1.5B/3B models on a single GPU, SARA matches DPS (both below the DS oracle) while using 22% fewer rollouts than DS; composing SARA with DPS yields the best accuracy, slightly above DS, at 67% fewer rollouts (near-uniform cost).",
+      "url": "http://arxiv.org/abs/2607.26253v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26253v1",
+      "tldr": "SARA (Sequential Adaptive Rollout Allocation) is a budget-constrained optimal stopping method for RLVR that uses Beta posteriors and SPRT-style thresholds to early detect and abandon saturated prompts, reallocating their rollout budget to fresh prompts, achieving comparable or better accuracy with 22–67% fewer rollouts.",
+      "detailed_reading": {
+        "motivation": "现有RLVR中rollout生成是计算瓶颈，许多prompt产生饱和组（所有响应正确或全部错误），这些组零奖励方差，无策略梯度信号，浪费计算。现有方法如动态采样需额外rollouts，预测难度法在策略动态变化下脆弱，亟需更高效的预算分配方案。",
+        "method": "SARA将每个prompt的rollout收集建模为预算约束的序列分配问题。对每个prompt维护一个Beta后验估计成功率，训练中按顺序生成rollout，每步根据闭式预测器（基于后验概率计算组有效性的期望）判断当前组是否有效。应用双阈值SPRT风格规则：当后验低于低阈值时判定饱和并提前终止该组，当后验高于高阈值时判定有效并继续收集至满；释放的预算用于采样新prompt。整个过程无需额外预测rollouts，仅依赖在线生成的rollout结果。",
+        "result": "在数学推理和规划任务上，使用1.5B和3B模型在单GPU上，SARA匹配了DPS的性能（两者略低于DS oracle），但SARA使用的rollouts比DPS少22%。当SARA与DPS组合时，达到最佳准确率，略高于DS，且rollouts减少67%（接近均匀成本）。理论证明了SARA的放弃可靠性、期望rollout节省、固定预算收益优势以及与GRPO梯度范数的线性关系。",
+        "conclusion": "SARA通过早期判断组的有效性，自适应分配rollout预算，在不牺牲性能的前提下显著降低计算成本。与DPS组合可进一步提升效率，理论分析支持其可靠性。该方法为RLVR提供了一种高效、可扩展的预算分配策略。",
+        "key_details": "关键细节：使用Beta后验（初始α0=β0=1均匀先验）建模成功率；闭式预测器基于Beta分布计算组有效性的后验概率；双阈值（低阈值和高阈值）采用SPRT风格，探针长度设为前K个rollouts（实验中K=4）；理论证明包括错误放弃概率的上界、期望rollout节省的下界以及固定预算下收益优势的保证。局限性：假设prompt独立同分布，并假设rollout间条件独立；超参数（阈值、探针长度）需根据任务调整；目前未考虑非独立rollout或策略动态变化带来的先验漂移。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.6832730410241945,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2607.26148v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726148v1-embodied-agents-take-control-minimal-interface-zero-shot-agents-rival-industrial-scale-policies-in-vision-and-language-navigation",
+      "source": "arxiv",
+      "title": "Embodied Agents Take Control: Minimal-Interface Zero-Shot Agents Rival Industrial-Scale Policies in Vision-and-Language Navigation",
+      "authors": [
+        "Jian Zhou",
+        "Xunyi Zhao",
+        "Gengze Zhou",
+        "Zerui Li",
+        "Sihao Lin",
+        "Jiajun Liu",
+        "Qi Wu"
+      ],
+      "authors_text": "Jian Zhou, Xunyi Zhao, Gengze Zhou, Zerui Li, Sihao Lin, Jiajun Liu, Qi Wu",
+      "abstract": "Autonomous embodied agents must sustain a long decision-making loop that involves perceiving, acting, verifying, and self-correcting over many steps. Current systems sustain this loop through task-specific workflows or embodied policies. We study a third form, agentic embodied control, in which a general-purpose agent holds the loop itself. Using zero-shot navigation as a controlled testbed, we evaluate three software-engineering agent harnesses given only a monocular RGB camera and discrete actions. Under this strictly minimal condition, replicated default-effort configurations reach 70.7$\\pm$3.5% success (opus-5, mean over three runs), and fable-5 reaches 78% at maximum effort. When a trained waypoint tool is exposed alongside primitives as an optional capability, the hybrid fable-5 agent reaches 76.7$\\pm$0.6% at default effort, using half the environment steps and less than one quarter of the wall time of the maximum-effort primitive run. Controlled interventions show that capability is primarily model-centered: model choice strongly changes success, harness effects are descriptive, and a forced waypoint interface helps weaker models but can hinder stronger ones. Performance nevertheless falls sharply on longer-horizon tasks, while latency and context growth limit sustained operation. These results show that agentic control is already competitive in zero-shot navigation and that models, harnesses, and interfaces offer complementary paths toward autonomous embodied agents.",
+      "url": "http://arxiv.org/abs/2607.26148v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26148v1",
+      "tldr": "A minimal-interface, zero-shot agentic control approach achieves competitive navigation performance compared to industrial-scale policies, with model choice being the primary factor and hybrid interfaces improving efficiency.",
+      "detailed_reading": {
+        "motivation": "自主具身智能体需要维持一个涉及感知、行动、验证和自纠错的长时间决策循环。当前系统通过任务特定的工作流或具身策略维持这一循环，本文研究第三种形式——代理式具身控制，即通用型代理自行维持整个循环，并以零样本导航作为受控测试床，评估其可行性。",
+        "method": "采用三个软件工程代理框架（harnesses），仅使用单目RGB相机和离散动作作为输入，在零样本设置下进行导航任务。核心建模包括默认配置（default-effort）和最大努力配置（max-effort），以及可选暴露训练好的航点工具（waypoint tool）作为混合能力。关键操作流程：代理接收当前图像和指令，通过框架内部推理决定离散动作（前进、转向等），步进执行，直至到达目标或超时。训练流程为零样本，即不针对导航环境进行任何微调。推理流程中，默认配置直接使用原始API调用，混合配置则先调用航点工具生成中间目标再执行原始动作。",
+        "result": "默认配置下，opus-5模型达到70.7±3.5%成功率（三次运行均值），fable-5模型在最大努力下达到78%成功率。当混合航点工具后，fable-5在默认努力下达到76.7±0.6%成功率，且环境步数减半，耗时仅为最大努力原始API运行的四分之一。控制实验表明，模型选择对成功率影响显著，框架影响是描述性的，强制航点接口有助于弱模型但可能阻碍强模型。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.644261949097172,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.26059v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726059v1-emergent-sparsity-in-frozen-random-cnn-feature-extractors-for-deep-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Emergent Sparsity in Frozen Random CNN Feature Extractors for Deep Reinforcement Learning",
+      "authors": [
+        "Scott M. Norton"
+      ],
+      "authors_text": "Scott M. Norton",
+      "abstract": "We report a striking phenomenon: deep reinforcement learning agents trained with frozen, randomly initialized CNN feature extractors spontaneously develop extremely sparse fully-connected representations, without any sparsity-inducing objective. In the first fully-connected layer (FC1, $3{,}136 \\to 64$), agents compress task-relevant information through as few as 1-3 neurons out of 64 for deterministic Pong (5-11 for stochastic Pong), while trainable CNNs activate 55-64 neurons under matched conditions. We establish four principal findings. First, FC1 sparsity scales with task complexity: 1-11 for Pong, 19-26 for Breakout, and $\\sim$42 for Space Invaders. Width-scaling confirms this reflects task structure rather than a fixed capacity fraction. Second, within-game scaling emerges: three identical Pong seeds produce 5, 7, and 11 active neurons. The 5-neuron seed plateaus at $+14$ reward, while the others reach expert performance ($+18.4$, $+18.7$), suggesting the random projection's usable dimensionality bounds achievable performance. Third, ablation confirms necessity: removing these active neurons crashes performance across two PPO implementations and four games. Fourth, the information bottleneck commits early: a sweep shows the active set locks by 15-30M steps, while reward turns positive 35-105M steps later. A complementary finding in Breakout shows frozen and trainable CNNs reach competitive rewards via structurally different bottlenecks: frozen agents use 17-25 active neurons (participation ratio $\\sim$10-14), while trainable agents use 51 (participation ratio $\\sim$3.6). Finally, wherever input dimensionality dwarfs intrinsic task dimensionality, gradient descent on a frozen random projection may reveal the effective rank of the underlying problem without explicit sparsity machinery.",
+      "url": "http://arxiv.org/abs/2607.26059v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26059v1",
+      "tldr": "Deep reinforcement learning agents with frozen, randomly initialized CNN feature extractors spontaneously develop extremely sparse fully-connected representations whose active neuron count scales with task complexity, without any sparsity-inducing objective.",
+      "detailed_reading": {
+        "motivation": "深度强化学习中，标准端到端训练使用密集的分布式神经网络处理高维像素输入，虽然有效但掩盖了任务的内在结构。现有稀疏性方法需要显式诱导（如剪枝、正则化），而本文发现在冻结随机CNN特征提取器的条件下，稀疏性可以从学习动态中自然涌现，无需任何稀疏性目标。这一现象揭示了任务复杂性与表示维度的内在关系。",
+        "method": "采用Nature-DQN CNN架构：三个卷积层（32个8x8步长4、64个4x4步长2、64个3x3步长1）输出3136维特征，接两个全连接层FC1（3136→64）和FC2（64→64）使用ReLU激活。冻结CNN条件下，CNN权重用Kaiming均匀初始化并固定，仅训练FC层和策略/价值头（72.5k参数）。使用PPO算法在两个独立实现（Stable-Baselines3同步PPO和Sample Factory异步PPO）中训练，超参数包括学习率2.5e-4线性衰减、剪裁范围0.1、熵系数0.01。环境为四个Atari游戏（Pong、Breakout、Space Invaders、Freeway），使用84×84灰度4帧堆叠预处理。激活分析定义神经元在1000个样本中平均后ReLU激活>0.01为活跃，并通过保留/移除活跃神经元的消融测试验证瓶颈必要性。",
+        "result": "核心发现：冻结随机CNN的FC1层激活神经元数量远少于可训练CNN，且与任务复杂性成比例。Pong（确定性）仅1-3个活跃，Pong（随机粘滞）5-11个，Breakout 19-26个，Space Invaders约42个，而可训练CNN激活55-64个。消融实验证实移除活跃神经元导致性能崩溃至随机水平（两个PPO实现、四个游戏）。信息瓶颈在训练早期锁定（15-30M步），而奖励正向变化滞后35-105M步。在Breakout中，冻结CNN使用17-25个活跃（参与率10-14），可训练CNN使用51个（参与率3.6），两者达到竞争性奖励但瓶颈结构不同。",
+        "conclusion": "研究表明，当输入维度远大于任务内在维度时，对冻结随机投影进行梯度下降可以自然揭示问题的有效秩，无需显式稀疏机制。稀疏性从学习动态中涌现，活跃神经元数量追踪任务复杂性，为理解表示学习、泛化和模型简化提供了新视角。这一发现挑战了稀疏性必须被工程化诱导的普遍观点，并可能推广到其他高维输入场景。",
+        "key_details": "关键细节包括：CNN权重初始化使用Kaiming均匀分布并固定；活跃神经元阈值设为平均后ReLU激活>0.01；消融协议评估五种掩码条件；跨两个PPO实现（SB3和SF）和不同硬件（Mac和Ubuntu/RTX5090）结果一致；宽度缩放实验（32/64/128）确认活跃绝对数量稳定而非容量比例；训练随机性通过粘滞动作（p=0.25）和渐进课程控制；信息瓶颈锁定时间约15-30M步；局限性包括Freeway部分种子产生残存非功能性瓶颈，以及n=3的样本量使得缩放模式为提示性而非正式定律。"
+      },
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 4.367394729850748,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2607.26235v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726235v1-inertial-primal-dual-dynamics-with-hessian-driven-damping-for-smooth-and-bilinearly-coupled-saddle-point-problems",
+      "source": "arxiv",
+      "title": "Inertial Primal Dual Dynamics with Hessian-driven Damping for Smooth and Bilinearly Coupled Saddle Point Problems",
+      "authors": [
+        "Zepeng Wang",
+        "Juan Peypouquet"
+      ],
+      "authors_text": "Zepeng Wang, Juan Peypouquet",
+      "abstract": "Featuring Hessian-driven damping, two inertial primal dual dynamical systems are proposed for solving smooth saddle point problems with bilinear coupling. For convex-concave functions, we establish a convergence rate $\\mathcal{O}\\left( \\frac{1}{t^2} \\right)$ for the primal dual gap; for strongly convex-strongly concave functions, we obtain an asymptotic rate $\\mathcal{O}\\left( \\frac{1}{t^{α-1}} \\right)$ ($α\\ge 3$ is the damping parameter) without knowledge of the strong convexity parameters, and an accelerated linear convergence rate when the strong convexity parameters are known. As an application of the proposed inertial systems, we also consider the affinely constrained convex optimization problem, and develop an inertial system with Hessian-driven damping, which complements existing results.",
+      "url": "http://arxiv.org/abs/2607.26235v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26235v1",
+      "tldr": "This paper introduces two inertial primal-dual dynamical systems with Hessian-driven damping that achieve fast convergence rates for smooth bilinearly coupled saddle point problems and affinely constrained convex optimization.",
+      "detailed_reading": {
+        "motivation": "现有的惯性原始对偶系统缺乏Hessian-driven damping，导致轨迹振荡和离散化困难，且在强凸情形下收敛率不理想。本文旨在引入Hessian-driven damping，以平滑轨迹、直观离散化并提升收敛速度，同时填补强凸问题中无参数先验时次线性收敛率的研究空白。",
+        "method": "针对光滑双线性耦合鞍点问题，提出两类惯性原始对偶动力学系统。对于凸-凹情形，构建PD-AVD-H系统：\n\\ddot{x} + (α/t)\\dot{x} + β_f ∇_{xx}L(x,y)\\dot{x} + (γ+r/t)∇_xL(x,y+θt\\dot{y})=0,\n\\ddot{y} + (α/t)\\dot{y} - β_g ∇_{yy}L(x,y)\\dot{y} - (γ+r/t)∇_yL(x+θt\\dot{x},y)=0,\n其中α≥3, β_f,β_g,γ,r,θ>0。通过构造能量函数（含Hessian阻尼和耦合项）进行Lyapunov分析。对于强凸-强凹情形，提出PD-HBF-H系统（具有与重球法类似的结构），在已知强凸参数μ_f,μ_g时设置β与α。仿射约束问题则通过增广拉格朗日L_ρ将系统扩展。",
+        "result": "凸-凹情形下，原始对偶间隙以O(1/t^2)收敛；强凸-强凹且参数未知时，达到O(1/t^{α-1})（α≥3）渐近收敛率；若已知强凸参数，则加速为线性收敛率O(e^{-√(γ_0μ)t})（μ=min(μ_f,μ_g)）。对于仿射约束凸优化，增广拉格朗日间隙、函数值和可行性偏差均以O(1/t^2)收敛。",
+        "conclusion": "本文提出的带Hessian-driven阻尼的惯性原始对偶动力学系统，在双线性耦合鞍点问题上实现了更优的收敛率：凸-凹情形保持最优的O(1/t^2)率，强凸-强凹情形首次在无参数先验下获得O(1/t^{α-1})次线性率，并在已知参数时达到线性收敛。Hessian阻尼有效减少了轨迹振荡，为算法离散化提供了直观基础，且扩展至仿射约束问题。",
+        "key_details": "关键点包括：(1) 能量函数W(t)包含二阶矩、惯性项和Hessian阻尼；(2) Hessian-driven damping项β_f∇_{xx}L, β_g∇_{yy}L降低振荡并加速梯度消失；(3) 需要f,g二次连续可微且凸（强凸情形需已知或未知参数两种设定）；(4) 参数α控制惯性强度，β_f,β_g对收敛率无本质影响但改善路径；(5) 分析中利用凸性一阶条件⟨∇F, s-s^*⟩ ≥ F；(6) 复杂度：系统为二阶ODE，需数值离散化；(7) 局限性：仅适用于光滑问题，非光滑可通过降阶处理但未深入。"
+      },
+      "affiliations": [
+        "University of Groningen"
+      ],
+      "affiliations_text": "University of Groningen",
+      "score": 4.325883717944178,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.26121v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726121v1-towards-trustworthy-embodied-intelligence-a-systems-framework-and-graded-trustworthiness-levels",
+      "source": "arxiv",
+      "title": "Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels",
+      "authors": [
+        "Xinyu Yang",
+        "Tianxing Chen",
+        "Honghao Su",
+        "Minxuan Wang",
+        "Chenze Yu",
+        "Zhangzheng Tu",
+        "Yue Chen",
+        "Yuxiao Huo",
+        "Lingfeng Zhang",
+        "Yan Huang",
+        "Yan Qin",
+        "Shaolong Zhu",
+        "Qiwei Liang",
+        "Hekun Tian",
+        "Shujia Liu",
+        "Guangyu Chen",
+        "Junhao Gong",
+        "Zixuan Li",
+        "Wenwei Lin",
+        "Zijian Lin",
+        "Wenxuan Zhu",
+        "Eric J Chen",
+        "Yue Yuan",
+        "Qize Yu",
+        "Jiaqi Liang",
+        "Haowen Yan",
+        "Hengfei Zhao",
+        "Weijie Wan",
+        "Zikun Xiao",
+        "Junyuan Tang",
+        "Baijun Chen",
+        "Kai-Chong Lei",
+        "Kaixuan Wang",
+        "Kailun Su",
+        "Zanxin Chen",
+        "Yao Mu",
+        "Renjing Xu",
+        "Chuqiao Lyu",
+        "Qi Xiong",
+        "Ping Luo",
+        "Wenbo Ding"
+      ],
+      "authors_text": "Xinyu Yang, Tianxing Chen, Honghao Su, Minxuan Wang, Chenze Yu, Zhangzheng Tu, Yue Chen, Yuxiao Huo, Lingfeng Zhang, Yan Huang, Yan Qin, Shaolong Zhu, Qiwei Liang, Hekun Tian, Shujia Liu, Guangyu Chen, Junhao Gong, Zixuan Li, Wenwei Lin, Zijian Lin, Wenxuan Zhu, Eric J Chen, Yue Yuan, Qize Yu, Jiaqi Liang, Haowen Yan, Hengfei Zhao, Weijie Wan, Zikun Xiao, Junyuan Tang, Baijun Chen, Kai-Chong Lei, Kaixuan Wang, Kailun Su, Zanxin Chen, Yao Mu, Renjing Xu, Chuqiao Lyu, Qi Xiong, Ping Luo, Wenbo Ding",
+      "abstract": "Embodied intelligence integrates learned perception and decision making with real-time computation, control, and physical interaction. Because failures can cause immediate physical or operational harm, task completion alone does not establish trustworthiness. We define trustworthy embodied intelligence as the sustained capacity to execute specified tasks reliably under environmental and system variation while maintaining risk within acceptable bounds. We term this objective sustained safe success. Its supporting mechanisms are organized into four interdependent layers. The model layer generates task-competent action proposals with calibrated uncertainty and explicit safety preferences. The system layer realizes authorized actions dependably through integrated sensing, computation, control, hardware safeguards, fault containment, and fallback. The evidence layer substantiates bounded claims through evaluation, verification, validation, traceability, and structured assurance arguments. The deployment layer maintains claim validity through runtime monitoring, authority management, intervention, incident response, and controlled updates. Because assumptions and failures propagate across these layers, neither model capability, isolated safeguards, nor benchmark performance alone can establish end-to-end trustworthiness. Drawing on embodied AI, robotics, control, dependable computing, distributed systems, and autonomous driving, we further propose a non-normative hierarchy of trustworthiness levels. This hierarchy grades the strength of bounded deployment claims across task capability, safety, system assurance, operational governance, and supporting evidence, providing a basis for bounded deployment, comparative evaluation, research prioritization, and future standardization.",
+      "url": "http://arxiv.org/abs/2607.26121v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26121v1",
+      "tldr": "This paper defines trustworthy embodied intelligence as sustained safe success—reliable task completion under acceptable risk—and proposes a four-layer systems framework (model, system, evidence, deployment) along with a graded T0–T5 hierarchy for bounding and evaluating trustworthiness claims across capability, safety, system assurance, evidence, and governance.",
+      "detailed_reading": {
+        "motivation": "具身智能系统因失败可导致即时物理伤害，任务完成本身不足以建立信任。现有评估通常依赖受限实验室条件，忽略分布偏移、感知退化、通信延迟等部署中常见问题，导致性能与安全脱节。因此，需要定义可信具身智能为‘持续安全成功’，即可靠完成任务同时将物理、语义、程序和操作风险维持在可接受范围内。",
+        "method": "提出四层相互依赖的框架：模型层生成带有不确定性校准和显式安全偏好的行动提案；系统层通过集成感知、计算、控制、硬件保护、故障隔离和回退可靠执行授权行动；证据层通过评估、验证、确认、可追溯性和结构化保证论证来证实有界主张；部署层通过运行时监控、权限管理、干预、事件响应和受控更新维持主张有效性。进一步提出非规范性T0-T5信任等级层次，按任务能力、安全、系统保证、运营治理和支持证据的强度分级，适用于特定系统、任务、具身、环境、权限结构和证据基础。",
+        "result": "核心发现是信任是端到端系统属性而非单个模型或组件属性；四层框架明确了各层责任及跨层协调机制；识别出三个反复出现的跨层问题：语义-物理鸿沟、动作-后果鸿沟和跨层非组合性；T0-T5等级为有界部署、比较评估和未来标准化提供了基础，但未设定通用性能阈值或可接受风险水平。",
+        "conclusion": "可信具身智能不能仅依赖模型能力、孤立安全措施或基准性能；所提出的四层框架和等级体系为系统化设计、评估和部署提供了理论基础，支持有界部署声明、比较评估、研究优先级排序和未来标准化。框架强调跨层依赖和假设传播，任何单层不足都可能导致整体信任破坏。",
+        "key_details": "框架四层为功能责任而非软件模块；每条信任声明是有界的，依赖系统配置、任务分布、具身、环境、权限结构和证据体；跨层非组合性意味着即使各层分别可靠，组合后仍可能失败；T0-T5等级是非规范性的，不用于认证；局限性包括框架尚未在实际系统中验证，且不同应用领域可接受风险水平不同；证据层依赖形式化、统计、实证和运行证据的结合，但对罕见失效的覆盖仍具挑战。"
+      },
+      "affiliations": [
+        "University of Hong Kong",
+        "Tsinghua University",
+        "Peking University",
+        "Xspark AI",
+        "Hong Kong University of Science and Technology"
+      ],
+      "affiliations_text": "University of Hong Kong, Tsinghua University, Peking University, Xspark AI, Hong Kong University of Science and Technology",
+      "score": 4.223304391996885,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2607.26246v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/07/30/260726246v1-weak-to-strong-on-policy-distillation",
+      "source": "arxiv",
+      "title": "Weak-to-Strong On-Policy Distillation",
+      "authors": [
+        "Fangxu Yu",
+        "Zinan Lin",
+        "Xiaodong Liu",
+        "Weijia Xu",
+        "Michael Xu",
+        "Tianyi Zhou",
+        "Jianfeng Gao"
+      ],
+      "authors_text": "Fangxu Yu, Zinan Lin, Xiaodong Liu, Weijia Xu, Michael Xu, Tianyi Zhou, Jianfeng Gao",
+      "abstract": "On-policy distillation (OPD), which aligns a student with the teacher's token-level distribution on the student's own rollouts, is an effective paradigm for transferring capabilities across LLMs. Prevailing approaches assume a teacher at least as capable as the student: they either distill a larger model into a smaller one, which fails at the frontier where no larger teacher exists, or consolidate multiple domain experts trained from a shared base, which requires costly training at the student's scale. We introduce Weak-to-Strong On-Policy Distillation (W2S-OPD), a simple yet effective OPD framework that improves the strong student by distilling from multiple weak models. W2S-OPD constructs a proxy teacher in logit space from a contrast pair of a positive and a negative model, both smaller than the student and cheap to obtain. Their logit difference isolates the capability direction, which is added to the student's own base model, yielding a proxy teacher that couples this direction while staying distributionally adjacent to the student. The student then distills it by minimizing the per-token reverse KL on its own rollouts. We instantiate the contrast pair as i) a post-RL expert against its pre-RL initialization, isolating the skill RL instills, ii) a larger against a smaller base model, isolating the capability from scale, and iii) a small base model with correct versus wrong hints, isolating the instance-level direction toward the solution. Across four math and three code benchmarks, W2S-OPD outperforms OPD, enables the student to surpass the domain teacher, and keeps improving the student even when every supervision source is weaker. Analysis shows different contrasts yield distinct signals: the post-RL and hint contrasts emphasize reasoning frameworks, while the scale contrast emphasizes the solving procedure. Our code will be available at https://github.com/Yu-Fangxu/W2S-OPD.",
+      "url": "http://arxiv.org/abs/2607.26246v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26246v1",
+      "tldr": "W2S-OPD introduces a simple and effective framework that improves a strong student model by distilling from multiple weaker models via a contrast-based proxy teacher, enabling the student to outperform even the weak teachers on math and code benchmarks.",
+      "detailed_reading": {
+        "motivation": "现有基于策略的蒸馏（OPD）方法假设教师至少与学生能力相当，因此在缺乏更大教师的前沿场景下失效；同时，从共享基础模型训练多个领域专家并蒸馏的方法成本高昂。为解决此问题，我们提出弱到强策略蒸馏（W2S-OPD），旨在利用多个弱模型（即比学生更小的模型）通过对比蒸馏来增强强学生，从而突破教师必须更强的限制并降低资源开销。",
+        "method": "W2S-OPD在logit空间中构建一个代理教师，该教师由一对正负模型（均小于学生）的logit差值构成，此差值隔离了特定能力方向，并与学生自身基座模型的logit相加，得到分布上接近学生且耦合了该方向的代理教师。学生通过最小化自身rollout上的逐token逆向KL散度来蒸馏该代理教师。具体实例化三种对比对：（1）后强化学习（RL）专家与其RL前初始化，隔离RL注入的技能；（2）大基座模型与小基座模型，隔离规模带来的能力；（3）小基座模型分别使用正确提示和错误提示，隔离解法的实例级方向。训练过程中，学生模型在自生成数据上以代理教师为目标进行离线蒸馏。",
+        "result": "在四个数学基准和三个代码基准上，W2S-OPD一致优于传统OPD方法，且使学生模型超越其领域教师（如更小的专家模型）。即使在所有监督源（正负模型）均弱于学生的情况下，W2S-OPD仍能持续提升学生性能。不同对比对产生不同的信号：后RL和提示对比强调推理框架，规模对比强调解题过程。",
+        "conclusion": "W2S-OPD通过从多个弱模型构造代理教师，实现了对强学生的有效蒸馏，克服了传统策略蒸馏对教师-学生能力梯度的依赖。该框架不仅降低了蒸馏成本，还证明了弱监督信号也能通过对比机制增强强模型，为模型能力持续提升提供了新路径。",
+        "key_details": "关键细节包括：代理教师构建在logit空间而非输出分布上，通过正负模型logit差捕捉定向能力；蒸馏损失采用逐token逆向KL散度以保持分布匹配；对比对的选择需要确保正负模型差异集中于目标能力（如RL效果、规模、实例解法），且负模型不引入有害偏差；复杂度方面，正负模型远小于学生，计算开销低；局限性在于对比对的工程构造需要领域知识，且代理教师的质量依赖于对比对的有效性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.209380294864071,
+      "score_text": "4.2"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.26315v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726315v1-momo-dial-motion-mode-in-robot-manipulation-with-spatiotemporal-action-tokenization",
+      "source": "arxiv",
+      "title": "MoMo: Dial Motion Mode in Robot Manipulation with Spatiotemporal Action Tokenization",
+      "authors": [
+        "Yuhan Hu",
+        "Hugues Thomas",
+        "Peide Huang",
+        "Mouli Sivapurapu",
+        "Benoit Landry",
+        "Arto Kivila"
+      ],
+      "authors_text": "Yuhan Hu, Hugues Thomas, Peide Huang, Mouli Sivapurapu, Benoit Landry, Arto Kivila",
+      "abstract": "To operate effectively across diverse contexts, robots must not only perform manipulation tasks accurately but also adapt how their actions unfold to the task, object, and interaction setting. We ask whether this execution-level variation can be learned as a reusable behavioral factor shared across tasks. We present \\textbf{MoMo}, a two-stage imitation-learning framework consisting of a spatiotemporal action tokenizer and a behavior-cloning transformer that takes task and a continuous motion-mode condition as inputs. Across six real-robot manipulation tasks, varying this condition produces steady, dynamic, and intermediate behaviors that human raters can distinguish and that differ in joint speed, acceleration, and end-effector approach pitch. On tasks demonstrated in only one mode, MoMo transfers the unseen requested mode while largely preserving task success. Together, these results provide evidence of compositional generalization to unseen task--mode combinations and show that motion mode can be reused across tasks to control how a manipulation skill is performed.",
+      "url": "http://arxiv.org/abs/2607.26315v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26315v1",
+      "tldr": "MoMo introduces a two-stage imitation-learning framework with spatiotemporal action tokenization that enables compositional generalization of motion modes—steady, dynamic, or intermediate—across unseen robot manipulation tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Apple"
+      ],
+      "affiliations_text": "Apple",
+      "score": 4.093269574055928,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.26173v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726173v1-shared-sft-lessons-across-alignment-model-organisms-and-toy-models",
+      "source": "arxiv",
+      "title": "Shared SFT Lessons Across Alignment, Model Organisms, and Toy Models",
+      "authors": [
+        "Anton de la Fuente",
+        "Arthur Conmy"
+      ],
+      "authors_text": "Anton de la Fuente, Arthur Conmy",
+      "abstract": "Alignment training, model organisms, and toy models are usually treated as separate research areas. But projects in all three frequently use supervised fine-tuning (SFT) to pursue the same underlying goals. When projects share a goal, we should test whether lessons learned from one area transfer to the other areas. We study three such transfers, each taking a lesson developed in one SFT setting and testing it in another. First, we port a lesson about behavior generalization from alignment training into toy models. Training on the reason for a behavior, as in Teaching Claude Why, can make the behavior generalize better than training on examples of the behavior alone. Second, we port a lesson about capability preservation from model organisms into the Model-Spec Midtraining alignment setting. SFT on outputs written by a model other than the student (off-model outputs) can damage capabilities when trained on. Mixing in benign on-model (and on-policy) data into our training can prevent most of this damage while still embedding the target behavior. Third, we port a lesson about robustness from model organisms into the same alignment setting. We find that follow-up benign SFT can erase the alignment behavior while preserving capabilities, showing that capability preservation alone does not ensure robustness to subsequent training. Our work illustrates how porting SFT lessons between different research fields can uplift them all, suggesting more researchers should borrow techniques from outside their own areas.",
+      "url": "http://arxiv.org/abs/2607.26173v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26173v1",
+      "tldr": "This paper demonstrates that lessons about supervised fine-tuning (SFT) from one research area (alignment, model organisms, or toy models) can be successfully transferred to another, showing that training on the reason for a behavior improves generalization, mixing in benign on-model data preserves capabilities, and later benign SFT can erase trained behaviors.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.008977909242437,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.26192v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726192v1-dynamic-parameterization-is-not-dynamic-inference",
+      "source": "arxiv",
+      "title": "Dynamic Parameterization Is Not Dynamic Inference",
+      "authors": [
+        "Zongfei Li",
+        "Yuan-yih Shang",
+        "Guozhong Luo"
+      ],
+      "authors_text": "Zongfei Li, Yuan-yih Shang, Guozhong Luo",
+      "abstract": "Input-dependent controller coefficients are often treated as evidence of dynamic inference or computational savings. This interpretation conflates three properties: coefficient variation, dependence of a frozen model on how coefficients are assigned to inputs, and conditional execution. We focus on the second property and formulate a general principle of frozen-controller auditing. We provide one concrete implementation, Frozen-Controller Auditing (FCA), which caches the complete coefficient tensor along an unperturbed trajectory, disables the controller, and replays the frozen model with cross-input reassignment, token shuffling, and static profiles estimated from an independent calibration set. Because the coefficients are cached before any intervention, performance changes under replay measure assignment dependence without feedback from recomputing the controller on perturbed hidden states. Across seven independently trained 76M FeatureGate Transformers and three 504M models, static layerwise profiles retain 98.70% and 99.43% of the Correct-to-GlobalMean performance gap, respectively. Layer identity explains 87% to 96% of the coefficient variance. FeatureGate nevertheless executes every Transformer block, and its measured inference is 30.8% slower than Dense. On the public MUDDPythia-1.4B checkpoint, cross-input reassignment and token shuffling increase NLL by 1.9067 and 2.9637, respectively. These penalties show that the model depends strongly on content-conditioned cross-layer assignment. MUDDPythia also executes every Transformer block. The results show that dynamic parameterization alone does not establish dynamic inference and that functional dynamics do not establish computational savings. Claims about dynamic models should separately report coefficient variation, functional dependence of the frozen model, and actual execution.",
+      "url": "http://arxiv.org/abs/2607.26192v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26192v1",
+      "tldr": "Dynamic parameterization alone does not establish dynamic inference or computational savings, as Frozen-Controller Auditing reveals that static layerwise profiles retain high performance and both FeatureGate and MUDDPythia still execute every Transformer block.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.998974526861023,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.26273v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726273v1-top-k-pareto-bandits-hypervolume-regret-for-multi-objective-slate-selection",
+      "source": "arxiv",
+      "title": "Top-$k$ Pareto Bandits: Hypervolume Regret for Multi-Objective Slate Selection",
+      "authors": [
+        "Nicolas Gutowski",
+        "Fabien Chhel",
+        "Alexandre Letard",
+        "Sylvain Lamprier"
+      ],
+      "authors_text": "Nicolas Gutowski, Fabien Chhel, Alexandre Letard, Sylvain Lamprier",
+      "abstract": "We consider a stochastic multi-objective bandit problem where, at each round, the agent selects a slate of $k$ arms and observes their $d$-dimensional reward vectors under semi-bandit feedback. We do not aim at identifying a single optimal arm; instead, we consider the problem of maintaining a small set of actions that jointly approximate the Pareto frontier. We formalize this objective through the dominated hypervolume induced by the selected subset of arms, and define an $α$-approximate hypervolume regret with respect to the best size-$k$ subset achievable in hindsight, where $α= 1 - 1/e$ reflects the approximation guarantee of greedy maximization for monotone submodular functions. To address this problem, we introduce \\textit{THV-UCB}, an optimistic algorithm that selects arms greedily based on optimistic estimates of their marginal hypervolume contributions. We establish a gap-free regret bound $\\tilde{O}(d\\sqrt{nkT})$ that holds on every instance, together with a gap-dependent bound $\\tilde{O}(nk^{2.5}/Δ_{\\min})$ that becomes polylogarithmic in $T$ once the arms are sufficiently well separated. Our results provide theoretical support for using small subsets to approximate Pareto fronts in various multi-objective applications.",
+      "url": "http://arxiv.org/abs/2607.26273v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26273v1",
+      "tldr": "This paper introduces the Top-$k$ Pareto bandit problem with an $\\alpha$-approximate hypervolume regret for multi-objective slate selection, and proposes THV-UCB, an optimistic algorithm that achieves gap-free $\\tilde{O}(d\\sqrt{nkT})$ and gap-dependent $\\tilde{O}(nk^{2.5}/\\Delta_{\\min})$ regret bounds.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ESAIP",
+        "Université d'Angers",
+        "ESEO",
+        "AlphaEdge"
+      ],
+      "affiliations_text": "ESAIP, Université d'Angers, ESEO, AlphaEdge",
+      "score": 3.968225307778674,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.26264v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726264v1-symmetrized-sinkhorn-gibbs-inference-for-oscillatory-inverse-problems",
+      "source": "arxiv",
+      "title": "Symmetrized Sinkhorn-Gibbs Inference for Oscillatory Inverse Problems",
+      "authors": [
+        "Gabriel Huerta",
+        "Mohammad Motamed"
+      ],
+      "authors_text": "Gabriel Huerta, Mohammad Motamed",
+      "abstract": "Oscillatory inverse problems often exhibit highly nonconvex discrepancy landscapes due to signal misalignment and cycle-skipping phenomena, posing significant challenges for uncertainty quantification. While Gibbs posteriors provide a flexible framework for incorporating problem-specific discrepancy measures, their performance depends strongly on the empirical risk landscape induced by the chosen discrepancy measure. Optimal transport accounts for the spatial and temporal structure of the underlying feature domain when comparing oscillatory signals. However, the direct application of classical optimal transport is precluded because observed and predicted signals are typically signed and therefore do not satisfy the positivity requirements of classical transport formulations. We introduce a symmetrized Sinkhorn-Gibbs inference framework for oscillatory inverse problems. The proposed approach combines a normalization procedure for signed signals with a symmetrized Sinkhorn loss that exploits complementary transport information from the normalized signals and their normalized negations. The resulting loss is incorporated into the Gibbs posterior framework, yielding a Gibbs inference methodology tailored to oscillatory data. We establish smoothness properties of the proposed loss, prove well-definedness of the resulting Gibbs posterior, derive robustness guarantees, and develop an adaptive sampling strategy for posterior computation. Numerical experiments demonstrate less oscillatory empirical risk landscapes with fewer spurious local minima, more accurate posterior inference, greater robustness to observational noise, and improved population-level recovery than Gibbs posteriors based on Euclidean and trace-wise Wasserstein losses.",
+      "url": "http://arxiv.org/abs/2607.26264v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26264v1",
+      "tldr": "The paper introduces a symmetrized Sinkhorn-Gibbs inference framework that combines normalization of signed oscillatory signals with a symmetrized Sinkhorn loss to improve posterior inference and robustness in oscillatory inverse problems by reducing nonconvexity and cycle-skipping effects.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of New Mexico",
+        "Sandia National Laboratories"
+      ],
+      "affiliations_text": "University of New Mexico, Sandia National Laboratories",
+      "score": 3.9510985906919927,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.26247v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726247v1-between-gradient-and-natural-gradient-a-continuum-of-lora-initializations",
+      "source": "arxiv",
+      "title": "Between Gradient and Natural Gradient: A Continuum of LoRA Initializations",
+      "authors": [
+        "Dianze Liu",
+        "Farshid Ghezelbash"
+      ],
+      "authors_text": "Dianze Liu, Farshid Ghezelbash",
+      "abstract": "Low-rank adaptation (LoRA) fine-tunes large pretrained models at a fraction of the cost of full fine-tuning, but its performance depends strongly on how the adapters are initialized. Recent schemes initialize the adapters from the downstream loss gradient: some project the raw gradient onto its top directions, while others first whiten it with an estimate of the loss curvature. We show that these seemingly distinct methods are points on a single continuum: a two-parameter family of preconditioned gradient initializations, which we call Unified LoRA (ULoRA), governed by a spectral whitening exponent and an Adam-like diagonal exponent. Sweeping this family under a full learning-rate search, we find that no single fixed preconditioning strength dominates: the best operating point is task-dependent and frequently lies strictly inside the family, away from the published endpoints. Treated as an upper bound of this family, a tuned ULoRA configuration matches or exceeds full fine-tuning on all five GLUE tasks with RoBERTa-base and is competitive with the strongest baselines on GSM8K with LLaMA-2-7B. Our deployable, search-free variant, ULoRA-Auto, selects per-layer exponents from measured spectral statistics, approaches this upper bound at no additional search cost, and ranks at or near the top among deployable LoRA methods. Our results show that a principled design space for LoRA initialization and curvature preconditioning should be treated as a tunable dimension rather than a fixed design decision.",
+      "url": "http://arxiv.org/abs/2607.26247v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26247v1",
+      "tldr": "This paper introduces Unified LoRA (ULoRA), a two-parameter family of gradient-based LoRA initializations that unifies existing methods and shows that the optimal level of curvature preconditioning is task-dependent, often lying strictly between previously published endpoints.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Georgia Institute of Technology",
+      "score": 3.842893759797905,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.26337v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726337v1-reeling-it-in-flexible-needle-pick-up-via-thread-manipulation-for-autonomous-suturing",
+      "source": "arxiv",
+      "title": "Reeling It In: Flexible Needle Pick Up via Thread Manipulation for Autonomous Suturing",
+      "authors": [
+        "Emma Huang",
+        "Zih-Yun Chiu",
+        "Neelay Joglekar",
+        "Shanglei Liu",
+        "Michael C. Yip"
+      ],
+      "authors_text": "Emma Huang, Zih-Yun Chiu, Neelay Joglekar, Shanglei Liu, Michael C. Yip",
+      "abstract": "Suture-needle pickup is necessary for autonomous suturing, as a needle can be unexpectedly dropped or strategically released to adjust the grasping configuration. Current methods for autonomous needle pickup typically guide a robot to move straight toward the needle and grasp it, limited to conditions where the needle is observable and directly approachable. In addition, grasping the needle lying on tissue can lead to the robot pinching nearby tissue or the needle jumping around due to its slippery surface, posing potential safety issues. This work proposes an autonomous framework that uses a suture thread as an assistive tool for indirect needle pickup, avoiding unnecessary tool-tissue contact and enabling pickup even when the needle is occluded or inaccessible. The framework spans the entire workflow, including thread and tissue reconstruction, safe grasp-point selection, stable thread lifting, and bimanual thread-following until securing needle grasping. The robot policies account for visual uncertainty to maximize robustness in real-world environments. We evaluate the proposed framework on a da Vinci Research Kit under various real-world conditions. The results demonstrate robust performance even with a challenging thread configuration or a non-approachable needle, closing the gap in applying autonomous robot policies to unstructured suturing environments.",
+      "url": "http://arxiv.org/abs/2607.26337v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26337v1",
+      "tldr": "This paper proposes an autonomous suturing framework that uses the suture thread as an assistive tool to indirectly pick up the needle, enabling safe and reliable grasping even when the needle is occluded or inaccessible, while avoiding unnecessary tissue contact.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California San Diego",
+        "Carnegie Mellon University",
+        "Johns Hopkins University"
+      ],
+      "affiliations_text": "University of California San Diego, Carnegie Mellon University, Johns Hopkins University",
+      "score": 3.509733770443969,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.26344v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726344v1-automorphism-induced-non-canonicity-in-top-k-explanations-of-graph-neural-networks",
+      "source": "arxiv",
+      "title": "Automorphism-Induced Non-Canonicity in Top-k Explanations of Graph Neural Networks",
+      "authors": [
+        "Xin Xu",
+        "Siru Tao",
+        "Kaizhen Tan"
+      ],
+      "authors_text": "Xin Xu, Siru Tao, Kaizhen Tan",
+      "abstract": "A gradient-based GNN explainer given a molecule with two chemically equivalent nitro groups assigns them attribution scores that are equal to the last bit. It cannot do otherwise: message passing is exactly permutation equivariant, so any automorphism of the input leaves every attribution invariant. Yet the standard report, the top-k edges, names one of the two, and which one is settled by the order of an array. We show this is a structural obstruction rather than an implementation slip. When no minimal valid explanation is fixed by the input's automorphism group, no rule can be single-valued, minimal and symmetry-respecting at once. For the exact-k reports used in practice we give a parameter-free criterion, mechanised in Lean 4 with no axiom dependencies, that decides from the graph alone whether every score-optimal report of that size must split an orbit. Across 21298 instance-budget decisions the criterion agrees with a mechanical model-equivalence check without exception, and no severing case we found admitted a neutral alternative. The obstruction is common. Nontrivial automorphisms occur in 93.4% of Mutagenicity, the dataset the seminal explainability papers use, so the measure-zero dismissal of symmetric inputs, sound on the continuous domains it was made for, collapses here. At the sparsity budget those papers report, 24.0% of molecules with two interchangeable nitro groups (6 of 25) surface exactly one of them, every one arbitrary under mechanical verification. A model's blindness also manufactures symmetry: every MUTAG molecule contains atoms chemistry separates and the network provably cannot, and a matched control shows the resolution is set by what the model reads rather than how it is parameterised. Reporting orbits removes the arbitrariness at 0.11 ms and 0.43 extra edges per graph.",
+      "url": "http://arxiv.org/abs/2607.26344v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26344v1",
+      "tldr": "Top-\\(k\\) explanations of graph neural networks are structurally non-canonical for symmetric inputs because permutation equivariance forces tied attribution scores, causing arbitrary tie-breaking that can be resolved by reporting orbits instead.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4917140836599456,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.26278v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726278v1-flodr-an-invertible-dimensionality-reduction-method-based-on-a-normalising-flow",
+      "source": "arxiv",
+      "title": "FloDR: An invertible dimensionality reduction method based on a normalising flow",
+      "authors": [
+        "Abdallah Baraka",
+        "Daniel Probst"
+      ],
+      "authors_text": "Abdallah Baraka, Daniel Probst",
+      "abstract": "It is common for two-dimensional embeddings of high-dimensional data to be read far beyond what they can support. Distances in and between clusters, the meaning behind empty spaces, and the amount of structure hidden at each point are generally invisible in the output of methods such as t-SNE and UMAP. This is because the information that could support the meaning of these properties is discarded during the optimisation process. Here, we present FloDR, a dimensionality reduction method that embeds data through an invertible normalising flow. While FloDR only uses the first two output coordinates to create a two-dimensional embedding, it retains the remaining coordinates rather than discarding them. In addition to the embedding, an exact inverse and an exact density are properties of a trained mapping, which enable diagnostic visualisations that are computed from the exact inverse of the model that drew the layout rather than from an approximate one. Specifically, we draw two fields, the conditional spread, which measures how much of the original data remains undetermined at each embedding position in input units, and the hidden contrast, which measures how much information about a labelled contrast the two plotted coordinates discard. Both fields are rendered with a prespecified test against a held out portion of the input data and a bootstrap confidence. A field that fails the test is reported as refused.",
+      "url": "http://arxiv.org/abs/2607.26278v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26278v1",
+      "tldr": "FloDR is an invertible dimensionality reduction method using a normalizing flow that retains all coordinates to provide exact inverse and density, enabling diagnostic visualizations with statistical certification tests for assessing embedding reliability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wageningen University & Research"
+      ],
+      "affiliations_text": "Wageningen University & Research",
+      "score": 3.491546359371467,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.26164v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726164v1-data-fusion-and-contrastive-alignment-for-unconstrained-ir-molecular-structure-elucidation",
+      "source": "arxiv",
+      "title": "Data Fusion and Contrastive Alignment for Unconstrained IR Molecular Structure Elucidation",
+      "authors": [
+        "Ethan J. Mick",
+        "Campbell A. Sweet",
+        "Matthias J. Young",
+        "Derek T. Anderson"
+      ],
+      "authors_text": "Ethan J. Mick, Campbell A. Sweet, Matthias J. Young, Derek T. Anderson",
+      "abstract": "Automated molecular structure elucidation from infrared (IR) spectroscopy data has seen significant advancements in recent years, but its broad applicability is limited by a reliance on pre-determined chemical formulas provided as auxiliary model inputs. This limits model predictions to isomer identification rather than full molecular structure prediction. Although transformer models have been shown to identify molecular isomers with high accuracy, their reliability for unconstrained structure elucidation is comparatively low and poorly understood. In this work, we propose and evaluate key modifications to the traditional encoder-decoder transformer. To better address the vast chemical space of the unconstrained problem, we implement a novel Mixture-of-Experts (MoE) decoder module that utilizes non-additive aggregation via linear-order statistics and the Choquet integral. We further modify the transformer to utilize these non-additive operators when aggregating spectral representations as well. Together with an auxiliary contrastive alignment loss term, these enhancements improve Top-K prediction accuracy by over 10 percentage points compared to baseline IR-only models. Through sub-structure fragment analysis of molecular predictions, we further confirm that infrared spectra encode the vast majority of relevant chemical information, implying that the higher performance of isomer-ranking models is largely due to underrepresented or overlapping absorption bands for molecules in the explored chemical space. Ultimately, by demonstrating the efficacy of automated molecular structure elucidation from measured IR spectra, this work serves to significantly broaden the utility of AI in analytical chemistry.",
+      "url": "http://arxiv.org/abs/2607.26164v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26164v1",
+      "tldr": "This paper proposes key modifications to encoder-decoder transformers—including a Mixture-of-Experts decoder using non-additive aggregation (LOSN and Choquet integral) and contrastive alignment—that improve unconstrained IR molecular structure elucidation accuracy by over 10 percentage points without requiring a pre-determined chemical formula.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Missouri"
+      ],
+      "affiliations_text": "University of Missouri",
+      "score": 3.390015765768756,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2607.26339v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726339v1-raguard-a-layered-defense-framework-for-retrieval-augmented-generation-systems-against-data-poisoning",
+      "source": "arxiv",
+      "title": "RAGuard: A Layered Defense Framework for Retrieval-Augmented Generation Systems Against Data Poisoning",
+      "authors": [
+        "Pushkal Kumar",
+        "Tucker Nielson",
+        "Tanish Kolhe",
+        "Shubham Zala",
+        "Vincent Li"
+      ],
+      "authors_text": "Pushkal Kumar, Tucker Nielson, Tanish Kolhe, Shubham Zala, Vincent Li",
+      "abstract": "Retrieval-Augmented Generation (RAG) systems ground large language models (LLMs) in external corpora, but this reliance exposes them to corpus poisoning: maliciously injected passages that manipulate retrieved evidence. We introduce RAGuard, a layered defense against \\emph{factual} corpus-poisoning attacks on RAG pipelines. The first layer adversarially fine-tunes a dense retriever on synthetic poisoned documents (fabricated facts, contradictions, and reasoning traps), teaching it to downrank malicious passages before generation. The second layer, the Zero-Knowledge Inference Patch ZKIP, is a label-free, black-box filter: for each retrieved document, it performs a leave-one-out decode and scores the document by the semantic shift and output-entropy change that its removal induces. ZKIP requires no poison labels, no ground-truth answers, and no access to model internals; it compares the model's own answers under counterfactual contexts. On poisoned Natural Questions at 5--30\\% poison ratios, adversarial retriever training alone reduces but does not eliminate attack success, while ZKIP drives the measured attack success rate to 0.000 in every defended configuration, keeping Recall@5 within 0.03 of the clean-corpus baseline. Supervised analyses on both Natural Questions and BEIR (NFCorpus) confirm that the counterfactual signals ZKIP relies on carry learnable poison structure. The defense costs $k{+}1$ generator passes per query ($6\\times$ for $k{=}5$); we analyze batching and early-stopping approximations that reduce this overhead. We also show that keyword-preserving poisons leave lexical retrievers such as BM25 essentially unaffected, an observation that delineates the boundary of the threat model. Code, datasets, and evaluation harnesses are released for reproducibility.",
+      "url": "http://arxiv.org/abs/2607.26339v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26339v1",
+      "tldr": "RAGuard is a two-layer defense for Retrieval-Augmented Generation systems that combines adversarial retriever fine-tuning with a novel zero-knowledge, black-box inference-time filter (ZKIP) to completely eliminate factual corpus-poisoning attacks by measuring the causal influence of each retrieved document on the model's own outputs.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.209918511974326,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2607.26061v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726061v1-sim2win-a-team-agnostic-event-based-pre-match-outcome-prediction-and-tactical-profiling-system-for-football",
+      "source": "arxiv",
+      "title": "Sim2Win: A Team-Agnostic, Event-Based Pre-Match Outcome Prediction and Tactical Profiling System for Football",
+      "authors": [
+        "Mouad Zemzoumi",
+        "Amine Abouaomar"
+      ],
+      "authors_text": "Mouad Zemzoumi, Amine Abouaomar",
+      "abstract": "Pre-match tactical decision-making in professional football relies heavily on subjective expert analysis and identity-based scouting systems that cannot generalize to unseen teams. This paper presents Sim2Win, a team-agnostic, event-based pre-match tactical recommendation framework that reframes match outcome prediction as a tactical decision-support problem. Using StatsBomb open event data from eleven competitions spanning 178 teams and 1,411 team-match records, Sim2Win constructs five-match rolling tactical profiles, engineers four interpretable tactical feature ratios, clusters team behaviors into eight playstyles via K-Means, and trains thirteen classifiers to estimate win, draw, and loss probabilities from tactical matchup representations.\n  The system operates without team names or identity features, enabling generalization to teams never seen during training. A rigorous Leave-One-Competition-Out (LOCO) evaluation demonstrates that Sim2Win achieves a mean ROC-AUC of 0.704 and mean accuracy of 55.4% on completely unseen teams, outperforming ELO, Pi-Rating, and GAP baselines on all 21 ROC-AUC comparisons and 19 of 21 accuracy comparisons. Among all evaluated models, CatBoost achieved the strongest in-distribution performance with 60.90% accuracy.\n  These findings suggest that behavioral tactical representations provide transferable predictive signal under distribution shift and offer a viable alternative to identity-dependent football prediction systems.",
+      "url": "http://arxiv.org/abs/2607.26061v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26061v1",
+      "tldr": "Sim2Win introduces a team-agnostic, event-based framework that uses rolling tactical profiles and playstyle clustering to predict football match outcomes, achieving strong generalization to unseen teams and outperforming identity-based baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Al Akhawayn University in Ifrane"
+      ],
+      "affiliations_text": "Al Akhawayn University in Ifrane",
+      "score": 3.028074645182306,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.26324v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726324v1-planning-waste-to-energy-coupled-ai-data-centers-through-grade-matched-cooling-and-corridor-screening",
+      "source": "arxiv",
+      "title": "Planning Waste-to-Energy-Coupled AI Data Centers Through Grade-Matched Cooling and Corridor Screening",
+      "authors": [
+        "Qi He",
+        "Chunyu Qu",
+        "Wenjie Zuo"
+      ],
+      "authors_text": "Qi He, Chunyu Qu, Wenjie Zuo",
+      "abstract": "AI data-center growth is increasingly constrained by limited deliverable electricity, interconnection capacity, and cooling demand. This study develops a boundary-consistent screening framework for waste-to-energy (WtE)-coupled AI data-center cooling. It treats cooling as an energy service that can be supplied through grade matching rather than only through electricity-driven mechanical chilling. The framework translates plant-side exportable heat into corridor-level planning metrics by accounting for thermal attenuation, absorption conversion, and parasitic electricity for delivery and auxiliaries. In a reference case, a regulated WtE plant processing 1500 t/day of municipal solid waste at 10 MJ/kg provides about 78.1 MWth of exportable heat. At a 20 km corridor, this yields about 53.0 MW of delivered cooling and 8.0 MWe of net avoided cooling electricity after parasitic loads. The coupled system is governed by operating regimes rather than a single efficiency score. Under baseline assumptions, full thermal coverage extends to about 20.9 km, the quality-adjusted criterion remains positive to about 22.9 km, and net electricity relief remains positive to about 44.7 km. For a 1 GW IT campus at 70 percent utilization and a 5 km corridor, net grid relief ranges from about 116.9 to 264.4 MW across scenarios. The required WtE footprint ranges from about 3 to 148 representative plants, or 0.6 to 40 full-load-equivalent plants at a 25 percent displacement target. The framework identifies when WtE-coupled cooling is corridor-feasible, when hybrid operation is required, and when infrastructure scale becomes the binding constraint. It is intended for screening and comparison, not project-specific hydraulic or plant-cycle design.",
+      "url": "http://arxiv.org/abs/2607.26324v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26324v1",
+      "tldr": "This paper develops a boundary-consistent screening framework for waste-to-energy-coupled AI data center cooling that treats cooling as a grade-matched energy service rather than solely electricity-driven mechanical chilling, translating plant-side exportable heat into corridor-level planning metrics to identify feasibility regimes and deployment-scale constraints.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.6883487715230188,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.26298v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726298v1-entity-resolution-in-practice-lessons-from-a-self-serve-pipeline",
+      "source": "arxiv",
+      "title": "Entity Resolution in Practice: Lessons from a Self-Serve Pipeline",
+      "authors": [
+        "Kaushik Pavani",
+        "Ganga Aluri",
+        "Pravin Jadhav",
+        "Neeraj Prasad",
+        "Kiran Sanka"
+      ],
+      "authors_text": "Kaushik Pavani, Ganga Aluri, Pravin Jadhav, Neeraj Prasad, Kiran Sanka",
+      "abstract": "We built and evaluated a self-serve entity resolution (ER) system on six benchmarks spanning 864 to 5M records, and three lessons emerged that are absent from existing ER literature. (1) No single matching algorithm wins everywhere - a self-serve pipeline cannot predict its next dataset, so we recommend training several algorithm families per dataset and letting an automatic bake-off pick the winner. (2) Precision and recall need separate fixes, not a shared threshold - precision needs hard rule-based vetoes, recall needs more diverse candidate retrieval. (3) One false-positive link can silently merge unrelated entities - assuming \"A matches B\" and \"B matches C\" implies \"A matches C\" lets a single bad link chain hundreds of records together, so every cross-group merge must be actively re-verified. We hope these lessons save practitioners the months of dead-end experiments that led us to them.",
+      "url": "http://arxiv.org/abs/2607.26298v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26298v1",
+      "tldr": "A self-serve entity resolution system reveals three practical lessons: no single matcher dominates, so a tournament of algorithm families is needed; precision and recall require separate mechanisms (rule-based vetoes for precision, diverse blocking for recall); and a single false-positive link can trigger erroneous transitive closure, so every cross-group merge must be actively re-verified.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Walmart"
+      ],
+      "affiliations_text": "Walmart",
+      "score": 2.6585991707995205,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2607.26270v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/07/30/260726270v1-optimal-sizing-of-a-hydrogen-based-direct-reduced-iron-electric-arc-furnace-system-integrated-with-methanol-synthesis-toward-zero-carbon-steel-production",
+      "source": "arxiv",
+      "title": "Optimal sizing of a hydrogen-based direct reduced iron-electric arc furnace system integrated with methanol synthesis toward zero-carbon steel production",
+      "authors": [
+        "Qiang Ji",
+        "Fashun Shi",
+        "Lin Cheng",
+        "Yeye Xie",
+        "Yufei Xi",
+        "Zhen Dai",
+        "Xun Wang"
+      ],
+      "authors_text": "Qiang Ji, Fashun Shi, Lin Cheng, Yeye Xie, Yufei Xi, Zhen Dai, Xun Wang",
+      "abstract": "A hydrogen-based direct reduced iron-electric arc furnace system integrated with methanol synthesis (H2-DRI-EAF-MeOH) provides a feasible pathway toward zero-carbon steel production. However, the volatility and intermittency of renewable energy sources (RES) may lead to capacity oversizing, while conventional annualized-cost and levelized-cost metrics are insufficient to evaluate investment return. To address these issues, this paper develops a fractional programming-based optimal sizing model for the H2-DRI-EAF-MeOH system. Hourly production rate limits are decoupled from annual production capacities and formulated as independent decision variables. Theoretical analysis demonstrates that increasing hourly production rate limits expands the multi-period operating feasible region, increases the theoretical upper bound on RES matching, and provides an investment-efficiency condition for increasing production rate limits. The annualized net return on investment (ANROI) is then adopted to represent investment return, and the resulting mixed-integer linear fractional programming model is solved using the Dinkelbach method. Case studies show that compared with the annualized net return (ANR) benchmark, the ANROI-based sizing yields higher internal rates of return (IRR), reaching 20.67% and 17.08% under the on-grid and off-grid scenarios, respectively. As the equivalent annual operating hours decrease from 8000 to 4000 h, the IRR increases from 19.68% to 20.67% under the on-grid scenario and from 12.64% to 17.08% under the off-grid scenario, while the corresponding battery storage capacities decrease by 113.56 and 796.31 MWh. The off-grid zero-carbon constraint enables CO2-to-MeOH conversion but reduces the system IRR to 14.99%, indicating that the resulting revenues are insufficient to offset the additional costs.",
+      "url": "http://arxiv.org/abs/2607.26270v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.26270v1",
+      "tldr": "This paper develops a fractional programming-based optimal sizing model for an integrated hydrogen-based direct reduced iron-electric arc furnace-methanol synthesis system, using annualized net return on investment to improve investment efficiency and achieving internal rates of return up to 20.67% under on-grid and off-grid scenarios.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ningxia Institute of Applied Technology",
+        "State Grid Jibei Electric Power Company Limited",
+        "State Key Laboratory of Power System Operation and Control",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Ningxia Institute of Applied Technology, State Grid Jibei Electric Power Company Limited, State Key Laboratory of Power System Operation and Control, Tsinghua University",
+      "score": 2.6070019467720296,
+      "score_text": "2.6"
+    }
+  ]
+}
