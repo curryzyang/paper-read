@@ -1,0 +1,15 @@
+# Flat Score, Amplified Failures: How the Error Budget Masks Damage in Quantized LLM Agents
+
+- 区域：速读区
+- 排名：5
+- 匹配度：3.6/10
+- 来源：arxiv
+- 作者：Jiwon Jang, Kisu Yang, Heuiseok Lim, Hyunwoo Park
+- 机构：Korea University, VAIV Company, Seoul National University
+- 链接：[arXiv / Source](http://arxiv.org/abs/2607.27275v1) · [PDF](https://arxiv.org/pdf/2607.27275v1)
+
+## TLDR
+Although 4-bit quantization appears lossless on standard agent task scores because the benchmark’s ten-error budget absorbs extra failures, it actually amplifies models’ pre-existing tool-calling errors by up to 2.5×, and tightening the error budget to two reveals a 17-point score gap.
+
+## Abstract
+Post-training quantization to 4-bit weights is widely reported to be nearly lossless. We test this claim for multi-turn, tool-calling agents, where it now matters most. On $τ^2$-bench, across two open-weight model families in dense and MoE variants and two domains (eight cells, 456 episodes each, at 16-, 8-, and 4-bit weights), quantization indeed looks free on the standard metric. No cell shows a score change that survives multiple-comparison correction, and in the cell that carries the largest process damage, equivalence testing bounds the change within $\pm$7.5 points. The process tells a different story. Quantization amplifies the failure the model already exhibits at full precision (tool-name hallucination in telecom, with the same directional trend in retail entity errors) by up to 2.5$\times$ in volume (+17.6 points per task), while creating essentially no new failures. The failure set is the same at every precision (rank correlation $\geq$ 0.94, 0.18% novel events). The score stays flat because the benchmark's ten-error budget absorbs the extra failures. Shrinking the budget to two errors re-exposes a score gap of 17 points, and it does so only in the one cell where quantization added error volume, exactly as the masking account predicts. A targeted error-repair prompt, run for five telecom models at every precision, removes the damage exactly and only where it lives. Both diagnostics, the per-channel error rate and success under a shrinking budget, come from logs benchmarks already collect; we suggest reporting them alongside task reward.
