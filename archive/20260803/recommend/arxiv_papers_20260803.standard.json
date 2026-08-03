@@ -1,0 +1,727 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T06:29:07.846733",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2607.28762v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728762v1-feature-interaction-modeling-for-physics-informed-neural-networks-and-neural-operators",
+      "source": "arxiv",
+      "title": "Feature Interaction Modeling for Physics-Informed Neural Networks and Neural Operators",
+      "authors": [
+        "Quan Gu",
+        "Hongxia Liu"
+      ],
+      "authors_text": "Quan Gu, Hongxia Liu",
+      "abstract": "This work embeds feature interaction modules derived from factorization machines (FMs) into physics-informed neural networks (PINNs) and neural operator learning, to enhance model expressiveness for solution manifolds of parameterized partial differential equations (PDEs). Motivated by the second-order Taylor expansion of multivariate functions to characterize variable couplings, we first propose FM-PINN. It explicitly captures spatio-temporal variable interactions and improves the approximation accuracy for smooth high-order PDEs. We further group spatial coordinates, time, physical parameters, and initial and boundary conditions into independent feature sets and model their cross-group interactions. Based on this strategy, we develop FM-Operator and FM-DeepONet, which are particularly effective for nonlinear conservation laws and problems with sharp gradients or discontinuities, while offering no consistent advantage on smooth operator learning benchmarks. Numerical tests demonstrate that the proposed mechanism delivers substantial accuracy gains on challenging shock-dominated equations, indicating a promising direction for physics-consistent modeling of parameterized PDEs with strong cross-field dependencies.",
+      "url": "http://arxiv.org/abs/2607.28762v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28762v1",
+      "tldr": "The paper introduces factorization-machine-inspired feature interaction modules into PINNs and neural operators to explicitly model pairwise couplings among coordinates, time, and parameters, yielding significant accuracy gains for shock-dominated PDEs while remaining competitive on smooth benchmarks.",
+      "detailed_reading": {
+        "motivation": "现有PINN和神经算子研究多聚焦于域分解、谱分解、多模态融合和输入编码，却较少关注输入特征之间的交互；而参数化PDE解流形常依赖坐标、时间、物理参数与初边条件之间的强耦合。受多元函数二阶泰勒展开中交叉项的启发，论文将因子分解机的高效双线性交互机制引入PINN与神经算子，以增强对强跨场依赖问题的表达能力。",
+        "method": "构建连续场特征交互块：将输入划分为M个语义场F_i，每个场经仿射投影W_iF_i+β_i得到r维嵌入e_i，再用NFM的双交互池化z_BI=Σ_{i<j} e_i⊙e_j=1/2[(Σe_i)^{⊙2}-Σe_i^{⊙2}]聚合两两交互。基于该模块提出三种架构：FM-PINN将每个坐标作为独立场，经嵌入与交互后由MLP解码输出，损失仍为PDE残差、初边条件的加权MSE；FM-Operator直接以F=(s,y,q(s),η)为输入，q(s)=[mean(s),std(s),max|s|]，预测为MLP(z_BI)+Linear([F_1;...;F_M])以保留一阶线性项；FM-DeepONet将基干与trunk特征及辅助统计量组成场集，用MLP解码交互向量并生成修正量Δb和Δφ，最终以归一化内积形式输出。训练采用AdamW，PINN任务30k步、学习率1e-3、权重衰减1e-6，拉丁超立方采样内点10000个、边界/初始点400个，每步用1024个内点与全部边界/初始点。",
+        "result": "FM-PINN在多个高维光滑问题上的精度优于vanilla PINN；FM-Operator在更少参数条件下对sharp-gradient问题取得更优精度；FM-DeepONet显著改善含间断或强梯度问题的解精度。数值测试表明，在冲击主导的守恒律方程上，所提机制带来大幅精度提升；但在光滑算子学习基准上无一致优势。",
+        "conclusion": "特征交互建模为具有强跨场依赖的参数化PDE提供了一种物理一致的建模方向，尤其适用于非线性守恒律和激波/间断问题。该机制不是普适的万能近似增强，而是一种紧凑归纳偏置：显式建模交叉特征可提升表达效率，但共享秩约束也可能导致负迁移，因此在实际任务中需根据问题是否具有显著交叉项来选用。",
+        "key_details": "关键实现细节：特征交互块要求M≥2，单场输入需额外的一阶路径或不同场划分；FM-PINN中每个坐标映射为64维嵌入后做交互；FM-Operator需要同时提供传感器向量s、查询坐标y、统计量q(s)和物理参数η（若已包含在s中则省略）；理论动机来自分块二阶泰勒展开，交互项对应交叉Hessian项δF_i^T H_{ij} δF_j；双交互池化通过共享r维隐向量将交叉双线性形式限制为秩至多r，因此是紧凑归纳偏置，可能无法联合表示任意秩r交叉矩阵并造成负迁移；训练设置包括AdamW优化器、学习率1e-3、权重衰减1e-6、30k步、内点1024个/批、边界初始点400个全部使用。"
+      },
+      "affiliations": [
+        "Taiyuan University of Technology",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Taiyuan University of Technology, Independent Researcher",
+      "score": 6.259546252093857,
+      "score_text": "6.3"
+    },
+    {
+      "id": "2607.28830v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728830v1-closed-loop-model-based-control-barrier-functions-with-application-to-robust-flight-envelope-protection",
+      "source": "arxiv",
+      "title": "Closed-Loop Model-Based Control Barrier Functions with Application to Robust Flight Envelope Protection",
+      "authors": [
+        "Johannes Autenrieb",
+        "Mark Spiller",
+        "Peter A. Fisher",
+        "Junhyeok Yoon",
+        "Spilios Theodoulis",
+        "Anuradha Annaswamy"
+      ],
+      "authors_text": "Johannes Autenrieb, Mark Spiller, Peter A. Fisher, Junhyeok Yoon, Spilios Theodoulis, Anuradha Annaswamy",
+      "abstract": "Ensuring operation of aerospace systems within prescribed flight envelope limits is a fundamental requirement for modern flight control architectures. Flight envelope protection aims to prevent violations of aerodynamic and structural constraints, thereby mitigating risks such as stall and excessive load factors. Control barrier functions (CBFs) have emerged as a principled tool for enforcing safety by ensuring that the system state remains within a prescribed safe set. In most existing approaches, safety constraints are imposed at the control input-level based on an open-loop model of the system. While this open-loop model-based CBF formulation enables modular design, it may alter the closed-loop system dynamics, potentially compromising robustness guarantees and complicating integration into existing flight control architectures. This paper proposes a closed-loop model-based control barrier function (CLM-CBF) framework for flight envelope protection. The key idea is to enforce safety at the reference-level using an explicit model of the closed-loop system, thereby preserving the stability and robustness properties of the underlying controller. This formulation enables safety filtering without modifying the control law, facilitating modular integration and retrofitting into existing systems.",
+      "url": "http://arxiv.org/abs/2607.28830v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28830v1",
+      "tldr": "This paper introduces a closed-loop model-based control barrier function (CLM-CBF) framework that enforces flight envelope safety at the reference level using an explicit closed-loop model, thereby preserving the underlying controller's stability and robustness while enabling modular integration.",
+      "detailed_reading": {
+        "motivation": "现有飞行包线保护方法大多基于开环模型在控制输入层施加安全约束，这类开环模型控制障碍函数（OLM-CBF）虽然模块化，但会改变闭环系统动态，可能削弱鲁棒性保证，且难以集成到已认证的飞行控制架构中，甚至引发积分器饱和等问题。为此，本文提出闭环模型控制障碍函数（CLM-CBF）框架，在参考信号层利用闭环系统显式模型实施安全过滤，以保持底层控制器的稳定性与鲁棒性。",
+        "method": "该方法针对纵向导弹短周期模型，将非线性动力学在配平点线性化为状态x=[α,q]的LTI系统，控制输入为舵偏角δ。首先建立从参考指令r到状态x的闭环模型，即包含底层控制器动态的显式映射；然后基于闭环模型设计控制障碍函数条件，将安全约束（攻角界限）转化为关于参考信号的约束；最后构造二次规划（QP）安全过滤器，在满足闭环安全条件的前提下，求解对参考信号的最小侵入式修正，该修正不改变原有控制律，仅调整参考输入。",
+        "result": "在具有非线性气动特性和执行器约束的纵向导弹模型上进行仿真，结果显示CLM-CBF方法在激进机动过程中能够可靠地防止攻角等状态违反包线约束，同时保持期望的闭环行为，并保留了底层控制器的鲁棒性保证。与开环模型CBF方法相比，该方法避免了因修改控制输入而导致的闭环动态改变和稳定性裕度损失。",
+        "conclusion": "本文提出的CLM-CBF框架通过将安全过滤移至参考层并利用闭环模型，实现了安全保护与原有控制器性能的兼容，为飞行包线保护提供了一种可模块化集成、可改造现有系统的方案，尤其适用于追求严格鲁棒性的高性能飞行器。",
+        "key_details": "关键点包括：飞行包线安全约束被保守地转化为攻角α的上下界；闭环模型是设计核心，需准确反映从参考指令到状态的映射；安全过滤器采用QP形式，以参考信号修正量最小为目标；约束为CBF条件L_f h + L_g h u + α(h) ≥ 0基于闭环导数；执行器幅值与速率限制（±30°和±90°/s）在模型与控制器设计中需纳入；方法假设存在准确或可辨识的闭环模型，模型失配会影响安全保证，文中未给出完整复杂度分析和保守性量化。"
+      },
+      "affiliations": [
+        "Massachusetts Institute of Technology",
+        "German Aerospace Center (DLR)",
+        "Delft University of Technology"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology, German Aerospace Center (DLR), Delft University of Technology",
+      "score": 6.018935277348608,
+      "score_text": "6.0"
+    },
+    {
+      "id": "2607.28794v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728794v1-resilient-control-of-switched-vehicle-platoons-under-false-data-injection-attacks",
+      "source": "arxiv",
+      "title": "Resilient Control of Switched Vehicle Platoons under False Data Injection Attacks",
+      "authors": [
+        "Ali Eslami",
+        "Jiangbo Yu"
+      ],
+      "authors_text": "Ali Eslami, Jiangbo Yu",
+      "abstract": "This paper investigates resilient control design for leader--follower vehicle platoons with mode-dependent powertrain dynamics subject to False Data Injection (FDI) attacks on vehicle-to-vehicle (V2V) communication channels. The longitudinal motion of each vehicle is described by a switched third-order model that captures changes in the powertrain dynamics across different operating modes. To estimate the attack signals that are injected into the communication channels, each vehicle is equipped with an auxiliary system, and a dedicated observer is implemented for each communication link. The resulting attack estimates are then used to mitigate the effects of the attacks through our proposed resilient controller. For attacks with bounded rates but potentially unbounded amplitudes, the closed-loop platoon is shown to be uniformly ultimately bounded. For a predecessor-following topology, string stability is established for the nominal switched platoon, while the effect of nonzero attack-estimation errors on acceleration propagation is shown to be bounded. Numerical case studies demonstrate the effectiveness of the proposed approach.",
+      "url": "http://arxiv.org/abs/2607.28794v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28794v1",
+      "tldr": "This paper proposes a resilient control framework for switched vehicle platoons under bounded-rate false data injection attacks on V2V channels, using per-link observers to estimate and compensate for attack signals and thereby ensuring uniform ultimate boundedness and string stability.",
+      "detailed_reading": {
+        "motivation": "现有车队控制大多假定车辆纵向动力学固定不变，且网络攻击常被建模为随机或有界能量信号；对于切换动力总成动力学与V2V通信链路上幅值可能无界、仅速率有界的虚假数据注入攻击联合作用下的弹性控制问题尚无充分研究。本文同时处理物理模式切换与通信攻击，力求在不需要攻击幅值上界的前提下保证车队稳定与弦稳定。",
+        "method": "构建领航者-跟随者车队模型，每车纵向运动由依赖动力总成模式的切换三阶系统描述；通信拓扑固定且含以领航者为根的生成树。每个发送者运行防御者设计的切换辅助系统，接收者针对每条通信链路设计增广观测器：将被传输物理状态和辅助输出上的加性FDI攻击增广为状态，利用辅助系统模式切换构成的统一可观测性在线估计攻击信号。观测器误差仅取决于攻击变化率而非攻击幅值。随后用攻击估计值构造弹性控制器，对接收信息进行补偿；物理切换信号满足平均驻留时间条件。通过Lyapunov与平均驻留时间分析证明闭环一致最终有界，并对前车-跟随拓扑分析标称切换车队的弦稳定性及估计误差非零时加速度传播的有界性；最后用数值仿真验证。",
+        "result": "在攻击幅值可能无界、速率有界的FDI攻击下，所提弹性控制器使闭环车队一致最终有界；对前车-跟随拓扑，标称切换车队保持弦稳定，攻击估计误差非零时加速度沿车队传播的偏差也有界。数值案例验证了攻击估计与弹性控制方案的有效性，且方法不需要攻击幅值上界或攻击链路数量约束。",
+        "conclusion": "本文提出一套面向切换动力总成车队在V2V FDI攻击下的弹性控制与攻击估计方案，通过辅助系统和逐链路观测器估计并补偿攻击，在攻击幅值无界而速率有界的条件下同时实现闭环有界性和弦稳定性，为实际车队在物理模式切换与网络攻击并存场景下的安全控制提供了可行框架。",
+        "key_details": "关键点包括：每条V2V链路发送原始物理状态和辅助系统输出，接收端用已知公共运动参考构造moving-frame输入；辅助系统采用防御者预设的模式循环和各模式驻留时间集合，通过预共享种子与同步时钟复现切换信号，无需安全在线信道；增广状态含辅助状态及两类攻击信号，系统矩阵满足统一切换可观测性条件，观测器衰减率由可观测性格拉姆矩阵下界刻画；攻击估计误差的界由攻击速率上界决定而非攻击幅值，因此允许攻击幅值无界；控制器利用攻击估计值补偿，物理切换仅需平均驻留时间，不要求所有冻结模式共享公共Lyapunov函数；弦稳定性分析针对前车-跟随拓扑与恒定车头时距间距策略，并给出估计误差对加速度传播影响的有界性；局限是当前假设车队同步物理切换且控制器增益与模式即时同步，异步切换下的扩展留作未来工作。"
+      },
+      "affiliations": [
+        "McGill University"
+      ],
+      "affiliations_text": "McGill University",
+      "score": 5.375770617715856,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2607.28665v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728665v1-sensitivity-analysis-of-gru-lstm-and-transformer-encoder-in-classification-of-automated-driving-systems",
+      "source": "arxiv",
+      "title": "Sensitivity Analysis of GRU, LSTM and Transformer Encoder in Classification of Automated Driving Systems",
+      "authors": [
+        "Bidhya Shrestha",
+        "Christos Papadopoulos"
+      ],
+      "authors_text": "Bidhya Shrestha, Christos Papadopoulos",
+      "abstract": "Automated driving systems (ADSs) are becoming ubiquitous. Future Software Defined Vehicles (SDVs) may be able to run multiple ADSs, both native and aftermarket such as Comma.ai's Openpilot. Monitoring systems to independently verify which automated driving system is active are important for safety monitoring, regulatory compliance, insurance assessment, and anomaly detection. In this paper, we first evaluate the effectiveness of three sequence-based classification models: Gated Recurrent Units (GRU), Long Short-Term Memory (LSTM) networks, and a Transformer encoder model for identifying Level 2 automated driving systems using vehicle telematics data alone: Comma Openpilot, Tesla Autopilot, and Cadillac Super Cruise, along with manual driving. All three models achieve strong clean-data performance with macro F1-scores of 0.92 (GRU), 0.90 (LSTM), and 0.93 (Transformer encoder model) when trained on clean data; threat-matched training yields 0.904-0.916 macro F1 with only a modest clean-data penalty. Second, we introduce a modular robustness evaluation framework that simulates realistic telematics degradation through five corruption families at five severity levels (L1-L5). Continuous channels are perturbed using additive white Gaussian noise with cumulative drift, correlated cross-channel noise, and temporal jitter. Binary event signals are subjected to burst loss, delayed transitions, spurious toggles and cross-feature inconsistencies inspired by communication errors. Robustness is measured using macro-F1, which gives equal weight to each class and is suitable for imbalanced multiclass evaluation. Our evaluation reveals a sharp failure-mode split: event-level corruptions reduce macro-F1 only slightly (greater than equal to 0.87 at L5), while temporal jitter collapses macro-F1 to 0.44-0.50 across GRU, LSTM, and Transformer encoder model.",
+      "url": "http://arxiv.org/abs/2607.28665v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28665v1",
+      "tldr": "GRU, LSTM, and Transformer encoder models accurately classify automated driving systems from vehicle telematics (macro F1 ~0.90–0.93), but a proposed robustness benchmark reveals that temporal jitter is the dominant failure mode, collapsing macro-F1 to 0.44–0.50 across all models.",
+      "detailed_reading": {
+        "motivation": "自动驾驶系统（ADS）日益普及，软件定义汽车可能同时运行多种原生或后装ADS，而依靠系统自报状态并不可靠，存在误报、故障或被恶意篡改的风险。需要通过车辆遥测数据独立验证当前激活的驾驶系统，以支持安全监控、合规审查、保险评估和异常检测。",
+        "method": "使用车辆遥测数据进行四分类（Comma Openpilot、Manual Driving、Tesla Autopilot、Cadillac Super Cruise），输入为11维特征（6个连续通道：vEgo, aEgo, gas, yawRate, steeringAngleDeg, steeringRateDeg；5个二进制事件通道：standstill, brakeLightsDEPRECATED, leftBlinker, rightBlinker, brakePressed），时间窗口T=32。评估三种序列模型：6层堆叠GRU（隐藏单元64）、6层堆叠LSTM（隐藏单元64）、Transformer编码器（输入投影256维、可学习位置编码、6个编码器块、8个注意力头），最后用最后一个时间步表示接线性分类器。训练使用Adam优化器、batch size 256、学习率0.0001、最多100轮、早停patience=7、基于类别比例的交叉熵损失。鲁棒性评估框架包含五种噪声族（随机漂移、时间抖动、相关通道扰动、事件通道突发/切换/毛刺、跨特征不一致），各5个严重级别L1-L5，并使用威胁匹配训练（每个batch以0.85概率施加一种L1-L3的噪声）进行增强。",
+        "result": "干净数据下三个模型均表现良好：GRU macro-F1=0.92，LSTM=0.90，Transformer编码器=0.93；威胁匹配训练后macro-F1为0.904-0.916，干净数据惩罚较小。鲁棒性测试显示事件级扰动影响较小（L5下macro-F1仍≥0.87），但时间抖动严重破坏性能，GRU从L1的0.497降至L5的0.437，LSTM从0.502降至0.431，Transformer也降至约0.44-0.50。随机漂移下Transformer略优（L5=0.820），相关扰动下各模型下降幅度有限。",
+        "conclusion": "三种序列模型都能有效基于遥测数据识别L2级自动驾驶系统，Transformer编码器在干净数据上略优且对连续信号退化更鲁棒；但所有模型对时间抖动高度敏感，这是当前序列模型用于ADS识别的关键局限性。事件级二进制扰动相对容易处理，而时间对齐误差是实际部署中需要优先解决的脆弱点。",
+        "key_details": "数据集来自Comma、Cadillac和Tesla数据集，共超过340万条标记样本，按70/15/15分层划分。超参数未广泛调优，选择序列长度32和学习率0.0001基于验证集。鲁棒性度量使用macro-F1以平衡类别不平衡。时间抖动通过前后平移连续通道模拟ECU时钟偏移或总线调度延迟，是最大失效模式。威胁匹配训练采用eval-matched增强，但仅使用L1-L3严重级别训练，测试覆盖L1-L5。局限性包括：未进行大规模超参数搜索，模型可能非全局最优；Manual类召回率较低（0.76-0.80），表明人类驾驶与自动驾驶行为存在重叠。"
+      },
+      "affiliations": [
+        "University of Memphis"
+      ],
+      "affiliations_text": "University of Memphis",
+      "score": 5.211275682082296,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2607.28849v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728849v1-hypergradient-based-bilevel-reinforcement-learning-with-improved-sample-complexity",
+      "source": "arxiv",
+      "title": "Hypergradient-based Bilevel Reinforcement Learning with Improved Sample Complexity",
+      "authors": [
+        "Naman Saxena",
+        "Mudit Gaur",
+        "Vaneet Aggarwal"
+      ],
+      "authors_text": "Naman Saxena, Mudit Gaur, Vaneet Aggarwal",
+      "abstract": "Bilevel reinforcement learning (RL) is an important framework within the literature of RL that can be used to formalize various categories of problems, such as meta-learning, hierarchical task decomposition, and reinforcement learning from human feedback (RL-HF). Most of the bilevel RL algorithms are either not scalable because of using hypergradient with Hessian, or they suffer from high sample complexity because of using penalty-based approximation methods. In this work, we propose a hypergradient-based bilevel RL algorithm using the optimality of the Boltzmann policy for the entropy regularized discounted RL objective function. Our proposed algorithm is Hessian-free and obtains an iteration complexity of $O(ε^{-1})$ and state-of-the-art sample complexity of $\\tilde{O}(ε^{-2})$ under mild regularity conditions. Further, in our convergence analysis, we are able to remove the assumption of the Polyak-Lojasiewicz (PL) condition on the outer-level objective function present in the prior state-of-the-art sample complexity work.",
+      "url": "http://arxiv.org/abs/2607.28849v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28849v1",
+      "tldr": "This paper proposes a Hessian-free hypergradient-based bilevel reinforcement learning algorithm that achieves state-of-the-art sample complexity \\(\\tilde{O}(\\epsilon^{-2})\\) while removing the Polyak-Łojasiewicz condition on the outer-level objective.",
+      "detailed_reading": {
+        "motivation": "现有双层强化学习算法要么因使用含Hessian的hypergradient而难以扩展到大规模参数化策略，要么基于罚方法近似外层梯度导致样本复杂度较高；同时先前最优样本复杂度工作还依赖外层目标的Polyak-Łojasiewicz条件。本文希望提出一种无需Hessian、可扩展且样本复杂度更优的双层RL算法，并去掉PL条件和内层唯一最小化假设。",
+        "method": "该方法以熵正则折扣回报目标作为内层RL目标，外层目标定义为策略分布下轨迹损失的期望（如RLHF中的Bradley-Terry偏好损失）。核心是利用Boltzmann策略在熵正则RL目标下的最优性，对非可实现参数化策略类引入梯度移位值函数U和W，将其作为Q函数与值函数梯度的替代，从而构造无Hessian逆项的近似hypergradient。算法AHO交替优化：内层求熵正则RL的最优策略参数，外层用该近似超梯度更新奖励参数x；整个流程不计算Hessian，也不需要PL条件或内层唯一最小化假设。",
+        "result": "理论分析给出所提AHO算法的迭代复杂度为O(ε^{-1})，样本复杂度为O˜(ε^{-2})，将先前罚方法类双层RL算法的最优样本复杂度从O˜(ε^{-3})改进到O˜(ε^{-2})。同时，算法在连续状态动作空间上成立，是Hessian-free的，并去除了外层PL条件和内层唯一最小化假设。",
+        "conclusion": "本文提出的AHO是一种可扩展的Hessian-free双层强化学习算法，在样本复杂度和假设条件上均优于已有工作，适合元学习、层次任务分解和RLHF等双层RL场景。该结果说明利用Boltzmann策略最优性可以有效构造低复杂度超梯度，为双层RL提供更实用的理论方案。",
+        "key_details": "关键细节包括：内层使用熵正则折扣RL目标，温度系数τ控制策略探索性；外层轨迹损失可覆盖Bradley-Terry等偏好模型；U和W分别表示以Boltzmann策略从状态或状态-动作出发的折扣奖励梯度累计。Boltzmann最优策略的闭式形式使hypergradient中不再出现Hessian逆，且所构造的近似超梯度消除了罚方法中梯度近似误差O(σ^2)与采样误差O(1/(σ^2B))之间的权衡。收敛性证明只需温和正则性条件，但不可实现参数化策略类需要额外条件以保证Boltzmann最优性的可用性。当前文稿以理论分析为主，未展示数值实验，实际应用中的函数逼近误差和常数依赖仍需进一步验证。"
+      },
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 5.0320410746404605,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2607.28672v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728672v1-lawful-law-aligned-witness-for-faithful-use-of-latents",
+      "source": "arxiv",
+      "title": "LAWFUL: Law-Aligned Witness for Faithful Use of Latents",
+      "authors": [
+        "Kevin Chen",
+        "Kenneth W. Parker",
+        "Anish Arora"
+      ],
+      "authors_text": "Kevin Chen, Kenneth W. Parker, Anish Arora",
+      "abstract": "When a neural network predicts a physical system accurately, has it learned the governing law as formal, structured knowledge, and if so, does the network's internal computation actually use that representation throughout the law's domain of validity? We identify four interpretability gaps that limit answering these questions for {\\em physics laws over continuous variables}: the absence of a coverage-aware causal-consistency measure over continuous counterfactuals; of a domain-of-validity test for the identified circuit; of a verification of the law's invariants and forbidden behaviors; and of a quantification of how a derived physical quantity flows through the circuit. We develop a foundational framework, LAWFUL, that closes the first two and lays groundwork for the remaining two, and illustrate it on the Mocap2Radar transformer, validating whether it learns and internally uses the Doppler frequency law $f(t) = \\frac{2 v(t)}λ$ from motion-capture and radar data in which neither $f(t)$ nor $v(t)$ appears.",
+      "url": "http://arxiv.org/abs/2607.28672v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28672v1",
+      "tldr": "LAWFUL introduces a physics-grounded interpretability framework that closes key gaps in verifying whether neural networks faithfully learn and internally use continuous physical laws, demonstrated by confirming a Mocap2Radar transformer's adherence to the Doppler frequency law across its domain of validity.",
+      "detailed_reading": {
+        "motivation": "神经网络在预测物理系统时，其内部是否真正学到了形式化、结构化的物理定律，并且在定律的有效域内因果地使用该表示，这是一个关键的可解释性问题。现有方法存在四个空白：缺乏覆盖连续反事实族的因果一致性度量、缺乏对已识别电路的定律有效域测试、缺乏对定律不变量和禁止行为的验证、缺乏对导出物理量在电路中流动的量化。LAWFUL旨在弥合这些空白，为物理定律的机制可解释性提供基础框架。",
+        "method": "LAWFUL框架将学习模型f与物理模型g对齐。首先定义输入桥B将原始输入映射到物理空间Ω，输出桥D_f和D_g将两个模型输出投影到共享可观测空间Z。然后构建物理有意义的连续反事实扰动族P={p_α}，对每个评估输入x^(i)生成扰动输入x'^(i,α)使得B(x'^(i,α))=p_α(B(x^(i)))。定义物理一致性得分M_P(f,g)=Φ(z_f,z_g)，其中z_f和z_g分别包含基线和扰动下的桥接输出，Φ为设计选择（如误差或相似度）。为识别物理一致电路，将f视为计算图，使用激活修补：充分性配置patch^{x'}_{C}(x)将扰动仅路由到子图C，必要性配置patch^{x'}_{V\\C}(x)将扰动路由到除C外的所有组件，计算修补后的得分相对未修补基线M0的偏差Δ_suf(C)和Δ_nec(C)。子图C若满足Δ_suf(C)≤(1-τ)M0且Δ_nec(C)≥τM0则称为τ-物理一致电路，并取最小子图。实例化于MoCap2Radar transformer：学习模型是空间transformer（对53个标记）和时间transformer（对帧）组成的序列到序列模型，输入为MoCap窗口x∈R^{M×L×3}，输出dB尺度微多普勒谱；物理模型对每个标记独立应用多普勒频率定律g(v_rad)=2v_rad/λ。训练数据中不出现f(t)和v(t)，模型仍能泛化到分布外目标。",
+        "result": "在MoCap2Radar任务上，LAWFUL成功验证了transformer内部确实学习并使用了多普勒频率定律f(t)=2v(t)/λ，尽管f和v均未出现在训练数据中。框架识别出一个物理一致电路，该电路恢复了约91%的物理一致性得分（原文为“recovers 91\\...”），并且表现出对切向速度的不变性，即符合多普勒定律中径向速度决定频率、切向速度不影响频率的约束。模型在训练分布之外（如随机游走）仍然保持一致性，表明其推广到定律有效域而非仅经验分布。",
+        "conclusion": "LAWFUL提供了一个统一的正式框架，通过覆盖连续反事实的物理一致性得分和电路域有效域测试，弥合了物理定律机制可解释性的关键空白。该框架不仅能验证网络是否学习并内部使用物理定律，还能识别负责该行为的电路，并为验证定律不变量和量化物理量流动奠定基础。结论是：模型在预测物理系统时，其内部确实可以形式化地表征物理定律并在整个有效域内因果使用，LAWFUL为这种忠实性提供了可测量的证据。",
+        "key_details": "关键细节包括：数据采用53个反射标记的MoCap轨迹与Bumblebee雷达测量配对，训练输入为重叠STFT窗口（长度L），输出为K个多普勒频率bin的dB谱。输入桥B从MoCap轨迹提取每个标记的径向速度（物理空间Ω），输出桥D将预测谱和物理模型输出投影到共享可观测空间（如多普勒频率）。扰动族P选择径向速度扰动和切向速度扰动，分别测试速度-频率关系和切向不变性。一致性得分Φ采用点误差或相似度度量，取较大值表示更一致，上界为f完全匹配g的理想响应。电路识别使用激活修补，阈值τ∈(0,1)控制充分性和必要性偏差，需M0>0。框架的局限性：扰动族A为无限集时需通过采样、插值或信号重建近似；输入桥B的选择决定所测物理变量；输出桥Z的选择决定测试的物理方面；电路识别依赖扰动族，不同P可能识别不同子图。此外，不变量验证和信号流量化仅部分实现，是未来工作。"
+      },
+      "affiliations": [
+        "The Ohio State University",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "The Ohio State University, Independent Researcher",
+      "score": 4.980776574508207,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2607.28826v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728826v1-distilling-knowledge-from-large-language-models-into-lightweight-reinforcement-learning-agents-for-autonomous-cyber-operations",
+      "source": "arxiv",
+      "title": "Distilling Knowledge from Large Language Models into Lightweight Reinforcement Learning Agents for Autonomous Cyber Operations",
+      "authors": [
+        "Konur Tholl",
+        "François Rivest",
+        "Mariam El Mezouar",
+        "Adrian Taylor",
+        "Ranwa Al Mallah"
+      ],
+      "authors_text": "Konur Tholl, François Rivest, Mariam El Mezouar, Adrian Taylor, Ranwa Al Mallah",
+      "abstract": "Autonomous Cyber Operations (ACO) are increasingly important for defending enterprise networks as cyber threats continue to evolve in sophistication. ACO applications commonly employ Reinforcement Learning (RL) agents to learn defensive behaviors through interaction with environments. However, RL agents typically require extensive exploration during training, often resulting in unstable behavior and poor initial decision-making before converging toward effective defense strategies.\n  In this work, we investigate the use of a Large Language Model (LLM) to improve autonomous defensive decision-making within an ACO environment. Through prompt engineering rather than fine-tuning, we demonstrate that an 8-billion parameter LLM pretrained on cybersecurity data can outperform a baseline RL agent in a modified CybORG CAGE Challenge 2 environment. We then propose an online policy distillation framework that transfers the LLM's defensive policy into a lightweight RL agent containing only 64,910 parameters, reducing model size by several orders of magnitude while maintaining effective defensive capabilities. This provides a pathway toward operationalizing frontier cybersecurity models within lightweight, deployable agents.\n  To evaluate transferability, we construct CybORG scenarios ranging from 4 to 12 hosts and assess the approach across varying network configurations. We also evaluate teacher-guided RL stabilization strategies and observe that none consistently surpass the optimized teacher policy, suggesting policy-alignment limitations between reward-driven RL optimization and teacher-guided defense strategies.\n  Our results demonstrate the potential of cybersecurity-focused LLMs as sources of expertise for autonomous cyber defense, while policy distillation provides a practical path toward operationalizing frontier cybersecurity models within efficient, scalable agents.",
+      "url": "http://arxiv.org/abs/2607.28826v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28826v1",
+      "tldr": "A large cybersecurity-focused LLM can be distilled via online policy distillation into a lightweight RL agent (64,910 parameters) that maintains effective defensive performance in CybORG, offering a scalable path for autonomous cyber operations.",
+      "detailed_reading": {
+        "motivation": "自主网络作战（ACO）中，强化学习（RL）智能体通常需要大量探索，导致训练初期决策不稳定且效果差；在网络安全环境中，错误决策可能造成严重后果。同时，大语言模型（LLM）虽具备强大防御决策能力，但参数量大、推理成本高，难以直接部署。因此，本文旨在将8B参数的网络安全LLM的防御策略蒸馏为仅6.5万参数的轻量级RL智能体，在保持防御性能的同时显著降低模型规模，为前沿模型在资源受限环境中的实际部署提供可行路径。",
+        "method": "本文提出在线策略蒸馏框架，分为三个阶段。首先，通过提示工程优化一个在网络安全数据上预训练的8B参数LLM（Cyber Risk Llama），使用角色设定、零样本学习、规则语义和约束链式思维（chain-of-thought scaffolding）构造提示词，仅基于现实可获取的CybORG状态信息生成防御动作，并通过正则匹配与语义相似度提取可执行动作。其次，在蒸馏阶段，LLM作为教师，其推荐动作通过动作掩码（action masking）强制学生RL智能体（仅包含64,910个参数）执行，同时使用教师交叉熵损失L=-log(π_θ(a^teacher|s))更新学生策略，使学生的动作概率分布逐渐对齐教师策略；该过程持续240个回合，之后完全移除教师指导，仅由学生自主决策。最后，为评估可迁移性，构造了4到12台主机共9种不同规模的CybORG场景，保持相同LLM与提示结构，仅调整蒸馏回合数，并与基线PPO智能体、教师引导RL策略进行对比。",
+        "result": "优化后的提示相比标准提示在CybORG环境中平均奖励约为70，性能提升约35%；蒸馏得到的轻量级智能体（6480回合内，参数仅64,910）在2,000回合内的平均奖励优于基线PPO智能体和教师引导RL智能体。教师引导智能体在初期性能与蒸馏智能体相近，但随训练进行性能明显下降并最终收敛到基线水平，表明奖励驱动的RL优化与教师防御策略之间存在策略对齐问题。在50,000回合（160万时间步）的长训练中，基线PPO的均值性能始终未稳定超越蒸馏智能体，且训练波动大；蒸馏智能体则保持持续稳定。在4到12主机的多种网络拓扑下，蒸馏方法均表现出有效转移性。",
+        "conclusion": "本文验证了网络安全聚焦的LLM可以作为自主网络防御的专家知识源，并通过在线策略蒸馏有效转移到轻量级RL智能体中，模型规模缩小数个数量级，同时保持与教师相当甚至更优的防御性能。研究还表明，教师引导RL的多种稳定化策略均无法一致超越优化后的教师策略，说明传统奖励驱动的RL优化与教师防御策略之间存在固有的策略对齐局限。该工作为将计算开销大的前沿网络安全模型部署到轻量级、可扩展的智能体中提供了可行途径，并公开了代码与配置以支持复现。",
+        "key_details": "关键细节包括：教师LLM为8B参数的Cyber Risk Llama，学生RL智能体仅含64,910个参数；蒸馏使用动作掩码确保学生始终执行教师推荐的动作，同时用教师交叉熵损失进行参数更新，训练240个回合后停止教师影响；提示工程采用约束链式思维模板，仅包含人类防御者可获得的现实信息，不纳入特权模拟器状态或攻击方TTP；动作提取通过正则匹配和语义相似度回退实现；评估环境为修改的CybORG CAGE Challenge 2，并扩展到4-12主机的9种网络拓扑；蒸馏回合数随网络规模减小而减少；基线采用PPO算法（10次独立运行，50,000回合）；结果显示教师引导RL（逐步衰减教师损失）最终性能退化至基线，验证了策略对齐问题；计算复杂度方面，LLM推理成本远高于学生智能体，但蒸馏后仅需轻量部署。"
+      },
+      "affiliations": [
+        "Royal Military College of Canada",
+        "Polytechnique Montreal",
+        "Defence Research and Development Canada"
+      ],
+      "affiliations_text": "Royal Military College of Canada, Polytechnique Montreal, Defence Research and Development Canada",
+      "score": 4.621529456053844,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2607.28737v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728737v1-mirror-learning",
+      "source": "arxiv",
+      "title": "Mirror Learning",
+      "authors": [
+        "Yunpeng Liu",
+        "Matthew Niedoba",
+        "Oluwanifemi A. Adekanye",
+        "Jason Yoo",
+        "Yingchen He",
+        "Berend Zwartsenberg",
+        "Frank Wood"
+      ],
+      "authors_text": "Yunpeng Liu, Matthew Niedoba, Oluwanifemi A. Adekanye, Jason Yoo, Yingchen He, Berend Zwartsenberg, Frank Wood",
+      "abstract": "We investigate imitation learning through the lens of third-person observation and propose a framework for mirror learning: acquiring actionable policies from passive observation. While behavior cloning (BC) excels under dense, well-aligned first-person data, it fundamentally fails to leverage the rich observational signals arising from third-person demonstrations that humans and animals routinely exploit. We introduce a method that composes (i) a learned perspective transformation that places learners in demonstrators' shoes using a fine-tuned video diffusion model and (ii) an inverse dynamics model that infers action trajectories in the learners' control space. This enables the synthesis of mirror data, pseudo first-person expert data generated from third-person observations of demonstrator behavior. Empirically, we show that mirror data alone can train effective policies, and that augmenting first-person BC training with mirror data further improves downstream policy performance. Our results suggest that modern generative world models implicitly encode sufficient structure to enable a scalable and safe alternative to teleoperation-heavy data collection.",
+      "url": "http://arxiv.org/abs/2607.28737v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28737v1",
+      "tldr": "Mirror Learning uses a fine-tuned video diffusion model for viewpoint transformation and an inverse dynamics model to convert third-person observations into pseudo first-person expert demonstrations (\"mirror data\"), enabling effective behavior cloning and improving policy performance when combined with first-person data.",
+      "detailed_reading": {
+        "motivation": "模仿学习通常依赖第一人称密集、对齐的演示数据，但人类和动物能有效利用第三人称观察来学习技能。行为克隆虽然在第一人称数据上表现出色，却无法利用第三人称演示中丰富的观测信号，且遥操作或人工数据采集成本高、在物理系统中存在安全风险。为此，本文提出镜像学习框架，旨在将第三人称观察转化为可行动的策略监督，实现安全、可扩展的策略获取。",
+        "method": "镜像学习由两个核心模块组合而成。首先，镜像视频模型（MVM）以学习者第一人称视频和演示者的二进制注意力掩码（由SAM3进行实例分割并手动选择演示者获得）为条件，微调预训练视频扩散模型Cosmos-Predict2.5，通过Wan2.1 VAE编码三个视频流（掩码序列、学习者视频、带噪的演示者视频目标），沿时间维度拼接，采用flow-matching训练目标，并对时间对齐的token复制3D RoPE位置编码，冻结文本编码器和VAE、微调全部去噪层，从而生成演示者第一人称视角的伪视频。其次，逆动力学模型（IDM）由学习者自身经验数据训练，能够从第一人称视频序列推断出相应的动作序列。推理时，先由MVM生成演示者视角的视频，再由IDM估计动作，合成镜像数据（伪第一人称轨迹），用于后续行为克隆策略训练。",
+        "result": "在CARLA和Minecraft两个模拟环境中验证了MVM的生成能力，并由CARLA训练的MVM零样本迁移到真实May robotaxi数据，展示了跨域泛化。在自动驾驶下游行为克隆任务中，仅使用镜像数据即可训练有效策略；将镜像数据作为增强数据加入1k条第一人称GT数据训练后，minADE5从0.69降至0.68，表明镜像数据能进一步提升策略性能，且其效果与风格迁移增强相当或更好。",
+        "conclusion": "现代生成式世界模型隐式编码了足够的场景与物理结构，使得通过条件视频生成实现第三人称到第一人称的视角转换成为可行。镜像学习能够将第三人称演示转化为可用的行为克隆数据，单独训练策略或增强第一人称BC均有效，为替代遥操作密集型数据采集提供了一条安全、可扩展的新路径。",
+        "key_details": "关键实现细节包括：使用SAM3文本提示实现跨帧实例分割并手动选择演示者；MVM采用Cosmos-Predict2.5微调，冻结文本编码器和VAE，训练全部去噪层；为了保持时间对齐，三个编码视频流共享3D RoPE，并使用条件掩码区分观测与生成token。MVM只在CARLA合成数据上训练（不含行人），但能零样本迁移到真实世界数据。IDM由学习者本地数据训练，无需额外标注。方法的主要局限性是视频扩散模型微调计算成本高，且生成的镜像视频在细节上存在不完美，例如未见区域的外推可能产生不准确的渲染。"
+      },
+      "affiliations": [
+        "University of British Columbia",
+        "Inverted AI",
+        "Amii"
+      ],
+      "affiliations_text": "University of British Columbia, Inverted AI, Amii",
+      "score": 4.538173904463606,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2607.28851v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728851v1-model-predictive-path-integral-control-as-a-quantum-query-problem",
+      "source": "arxiv",
+      "title": "Model Predictive Path Integral Control as a Quantum Query Problem",
+      "authors": [
+        "Goutam Das",
+        "Takashi Tanaka"
+      ],
+      "authors_text": "Goutam Das, Takashi Tanaka",
+      "abstract": "Model predictive path integral control computes its update from cost-weighted trajectory samples and may require many classical rollouts in rare-event or high-accuracy regimes. We reformulate each component of the finite-ensemble MPPI update as a ratio of bounded path expectations and construct reversible rollout oracles encoding them as success probabilities, making the update directly estimable by quantum amplitude estimation. This gives a quadratic improvement in the query dependence on accuracy and rare-event desirability over classical Monte Carlo sampling, matching known lower bounds for the underlying scalar problem below the exhaustive-evaluation threshold, while our coordinatewise construction incurs a linear dependence on the number of control inputs. For a fixed ensemble, the low-temperature weights concentrate on the minimum-cost trajectories, connecting the limiting control to quantum minimum finding when the minimizer is unique. A fully enumerable guidance example validates the predicted estimator scalings, and an illustrative operation-count model with a crossover condition separates query advantage from modeled implementation advantage.",
+      "url": "http://arxiv.org/abs/2607.28851v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28851v1",
+      "tldr": "This paper reformulates model predictive path integral (MPPI) control as a quantum query problem, showing that quantum amplitude estimation can quadratically improve the query complexity of the control update over classical Monte Carlo sampling.",
+      "detailed_reading": {
+        "motivation": "模型预测路径积分控制（MPPI）通过成本加权轨迹样本来计算更新，在罕见事件或高精度场景下可能需要大量经典轨迹模拟，其计算瓶颈本质上是期望估计问题。本文旨在将MPPI更新重新表述为量子查询问题，利用量子振幅估计实现查询复杂度的二次加速，并探讨其与已知下界的匹配关系。",
+        "method": "将有限集MPPI更新表示为两个有界路径期望的比率（a和b_i），并构造可逆的rollout代价预言机，通过受控旋转将路径成本编码为成功概率，从而直接用量子振幅估计估计a和b_i，得到控制更新。具体地，用Rademacher变量将噪声序列编码为比特串，形成D=2^{Nm}个码字的有限集成；由Hadamard门制备均匀叠加，代价预言机通过可逆算术计算轨迹成本S(z)，再经受控旋转编码g(z)=e^{-S(z)/λ}。对每个控制输入坐标分别估计b_i，得到坐标式构造，查询复杂度线性依赖于控制输入数m。另外，在低温极限下权重集中于最小成本轨迹，可采用量子最小搜寻恢复极限控制。",
+        "result": "证明了量子方法在查询复杂度上对精度ε和罕见事件需求获得二次改进（相比经典蒙特卡洛），并匹配已知标量估计问题的下界；但坐标式构造带来对控制输入数的线性依赖。在固定集成下，当温度趋于零且最小值唯一时，权重集中于最小成本轨迹，量子最小搜寻以二次减少的预言机评估次数恢复极限控制。一个可完全枚举的引导示例验证了预测的估计量缩放，操作计数模型给出了查询优势与实现优势的分离及交叉条件。",
+        "conclusion": "该工作将MPPI控制更新转化为量子查询问题，证明了量子振幅估计可显著降低期望估计的查询复杂度，为随机最优控制中的量子加速提供了理论基础，并指出了可逆实现成本与查询优势之间的权衡。",
+        "key_details": "关键细节包括：使用Rademacher分布代替高斯噪声，编码为Nm比特串，形成有限码本；成本函数S(z)=φ(x_N)+Σq(x_k)Δt，权重g(z)=e^{-S(z)/λ}；状态制备无需QRAM，均匀叠加由Hadamard门实现；量子振幅估计要求固定点可逆算术和多项式近似旋转角；假设弱逼近误差为O(Δt)（Assumption 3），以及算术精度ηa（Assumption 4）。方法的主要局限是坐标式构造导致查询次数线性依赖控制输入数m，且可逆电路的实际门开销可能抵消查询优势，需通过交叉条件判断；此外，低温极限分析限于固定集成，未断言有限码本更新对连续最优反馈的收敛性。"
+      },
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 4.312951726423348,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2607.28669v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/03/260728669v1-lara-lightweight-adapters-in-the-residual-stream-for-composable-adaptation-and-alignment",
+      "source": "arxiv",
+      "title": "LARA: Lightweight Adapters in the Residual Stream for Composable Adaptation and Alignment",
+      "authors": [
+        "Pascal Ekin",
+        "Hyosun Choi",
+        "Wei Jie"
+      ],
+      "authors_text": "Pascal Ekin, Hyosun Choi, Wei Jie",
+      "abstract": "We present LARA (Lightweight Additive Residual Adaptation), a method for efficient adaptation that operates in the residual stream of a frozen model rather than in its weights. Where LoRA adds an update of low rank to weight matrices, LARA reads the hidden state at a small set of layers and adds a correction of low rank back to the residual stream, leaving all base weights untouched. On a code fine-tuning task and on preference optimization (DPO), LARA matches LoRA at equal parameter counts. Because adaptation is a frozen base plus a residual, LARA exposes a scale γ, applied at inference, that interpolates smoothly between base and adapted behavior, a form of graded control that adaptation in weight space does not offer. Finally, because each behavior is a small residual module over a shared frozen base, many behaviors can be held resident at once and routed automatically per token. We place seven behaviors, six fine-tuned and one optimized for preference, on one frozen 1.5B model for roughly 33 MB of overhead, against one full model for each behavior. Because the base is untouched, behaviors are trained separately and selected per token rather than loaded on demand, which suits hosting many behaviors, and adding new ones, on a single model on a device.",
+      "url": "http://arxiv.org/abs/2607.28669v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28669v1",
+      "tldr": "LARA adapts frozen LLMs by adding low-rank residual-stream corrections instead of modifying weights, matching LoRA at equal parameter budgets while enabling inference-time strength scaling and per-token routing of multiple behaviors on a single model.",
+      "detailed_reading": {
+        "motivation": "在冻结的大模型上进行高效适配时，主流方法LoRA是在权重空间添加低秩更新，但权重空间并非适配的唯一位置。Transformer的残差流承载层间激活，若在不改动任何基座权重的情况下，将轻量可学习校正直接加回残差流，即可实现与权重空间适配相当的效果，并额外获得推理时缩放控制与多行为组合部署的便利。现有残差适配器机制虽然已有先例，但缺少与LoRA在等参数条件下的系统对比，也未被用于多行为按token路由的负载场景。",
+        "method": "LARA在冻结Transformer的选定层子集L上插入轻量模块，每个模块读取该层隐藏状态h_l，经LayerNorm后依次通过下投影Wdown（r×d）和上投影Wup（d×r），乘以固定缩放α/r后加回残差流：h_l ← h_l + (α/r) Wup Wdown LN(h_l)，其中无中间非线性，Wup初始化为零以保证训练开始时等价于基座。基座权重完全不变，可训练参数仅包含模块的2dr个投影参数和LayerNorm仿射参数；实验配置d=1536、r=128、L={4,8,12,16,20,24}，共约2.39M参数。训练时γ=1，推理时引入缩放系数γ≥0对已训练校正进行线性缩放，γ=0精确恢复冻结基座，γ=1恢复训练模型。对于多行为场景，每个行为训练一套独立的LARA模块，共享同一冻结基座，另用一个约11k参数的线性路由器读取某层隐藏状态，为每个token分配N个行为上的分布，按加权混合应用各模块输出，实现按token自动路由；也可对单个行为做硬路由。",
+        "result": "在代码微调任务上，LARA与LoRA在等参数（2.39M vs 2.18M）下均显著降低训练分布困惑度：冻结基座5.34，LARA降至1.70，LoRA降至1.75；在指令分布（Dolly）上LARA为7.50，LoRA为6.74，二者互有胜负、总体相当。在DPO偏好优化（UltraFeedback，长度归一化）中，冻结基座奖励准确率0.55，LARA达到0.625（边际+0.600，DPO loss 0.7627），LoRA为0.613（边际+0.429，DPO loss 0.6664），LARA在奖励准确率和边际上更高。推理时缩放实验中，γ从0到1使得困惑度从5.34单调降至1.71（六桥配置），中间值平滑插值；γ>1时六层配置在γ=3骤升至219.37，而单层桥在γ=3仅为5.51，显示深层堆叠缩放更不稳定。多行为场景中，7个行为（6个微调+1个DPO）可同时驻留于一个冻结1.5B模型上，总开销约33MB，替换掉每个行为一个完整模型的部署方式。",
+        "conclusion": "LARA证明了在残差流中进行加性低秩适配能够以等参数预算匹配权重空间LoRA的微调与偏好优化质量，同时提供权重空间适配不具备的两个优势：推理时通过单个系数γ对基座与适配行为进行平滑插值控制，以及将多个行为以小模块形式同时驻留在共享冻结基座上并按token自动路由。该设计非常适合在单设备上托管多种行为并持续新增行为。",
+        "key_details": "关键细节包括：LARA模块线性映射、无非线性，Wup零初始化保证训练初始精确为基座；训练时γ固定为1，推理时γ才作为控制；放置层数L是影响质量的主要设计选择，SFT需要跨深度多个层，DPO则单层中间层即可达到多层的水平；计算开销为每token 2dr|L|次操作（约2.39M），与可训练参数数相同，且不进入注意力二次项，在7行为混合路由时约为基础模型1%计算量；LARA不能像LoRA那样合并进权重，因此每次推理都需支付该开销，但未合并的LoRA在等参数下每token工作量相同；γ>1时的行为不稳定与堆叠模块数相关，单桥更鲁棒；局限在于未给出γ>1不稳定的完整解释，且中间γ值并不代表独立有用的行为；实验基于Qwen2.5 1.5B Instruct的8bit版本，数据为代码语料（95%代码+5%指令）和UltraFeedback偏好对。"
+      },
+      "affiliations": [
+        "Royal Holloway, University of London",
+        "University of West London"
+      ],
+      "affiliations_text": "Royal Holloway, University of London, University of West London",
+      "score": 4.171334541464175,
+      "score_text": "4.2"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.28670v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728670v1-hierarchical-copula-gumbel-top-texorpdfstringkk-routing-two-sided-dependence-control-for-frozen-mixture-of-experts-at-fixed-per-token-routing-laws",
+      "source": "arxiv",
+      "title": "Hierarchical Copula-Gumbel-Top-\\texorpdfstring{$K$}{K} Routing: Two-Sided Dependence Control for Frozen Mixture-of-Experts at Fixed Per-Token Routing Laws",
+      "authors": [
+        "Richard Yi Da Xu"
+      ],
+      "authors_text": "Richard Yi Da Xu",
+      "abstract": "A stochastic Gumbel-Top-$K$ router defines, for every token of a mixture-of-experts (MoE) model, a \\emph{routing law}: a distribution over ordered expert lists and mixture weights. We ask which \\emph{joint} distributions over the routing choices of different tokens are reachable while every individual token's complete routing law is held exactly fixed. We give a two-sided construction, \\emph{Hierarchical Copula-Gumbel-Top-$K$} (\\CGA{}). Within a group of related tokens, an exchangeable Gaussian copula positively correlates the Gumbel perturbations at each expert coordinate, which can increase within-group expert-set coherence. Across disjoint pairs of groups, a tunable antithetic construction introduces a selectable amount of negative dependence. We prove that both operations leave each token's ordered Top-$K$ sample, mixture weights, and inclusion probabilities identical in distribution to independent routing \\emph{at a routing layer conditioned on its pre-routing logits}; conditional expected expert traffic is preserved as a consequence. We characterize the resulting trade-off: positive within-group coupling can only inflate the variance of realized expert loads relative to independent routing, while nonnegative cross-group opposition can only reduce it relative to flat coupling at the same within-group strength. Coherence and load dispersion are thus controlled by two complementary dependence dials on the invariance constraint surface. Because the base model is untouched, the dials can be driven by a small controller over frozen features, trainable with a score-function estimator: the frozen network is evaluated only in the forward direction, and gradients are confined to the controller. An initial small-scale pilot validates the mechanism and the training route, but does not establish task-level fine-tuning gains.",
+      "url": "http://arxiv.org/abs/2607.28670v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28670v1",
+      "tldr": "Hierarchical Copula-Gumbel-Top-K routing introduces two complementary dependence dials—positive within-group coupling for expert coherence and tunable negative cross-group coupling for load-variance control—over frozen mixture-of-experts routers, while provably preserving every token's complete per-token routing law.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TadReamk Limited",
+        "Hong Kong Baptist University"
+      ],
+      "affiliations_text": "TadReamk Limited, Hong Kong Baptist University",
+      "score": 4.108279997538949,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.28698v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728698v1-flow-matching-with-missing-data",
+      "source": "arxiv",
+      "title": "Flow Matching with Missing Data",
+      "authors": [
+        "Fairoz Nower Khan",
+        "Nabuat Zaman Nahim",
+        "Peizhong Ju"
+      ],
+      "authors_text": "Fairoz Nower Khan, Nabuat Zaman Nahim, Peizhong Ju",
+      "abstract": "Flow matching assumes fully observed training data, which many real-world applications rarely provide. We propose Missing-Data Flow Matching, which treats the missing coordinates of training samples as latent variables and averages the flow matching loss over the values they could take. We first prove the correction is exact rather than approximate. Under missing completely at random with true completions, the incomplete-data objective equals the complete-data objective, so missingness changes nothing about what flow matching learns and the entire difficulty relocates to the completion model. Our finite-sample analysis then answers design questions that the algorithm leaves open, and the answers are not the ones intuition suggests. Missingness transfers estimator variance rather than adding it, one completion per example already matches complete-data variance exactly, and under a fixed evaluation budget one completion is optimal. A learned completion model contributes a single irreducible bias, which we bound by its expected conditional Wasserstein distance to the true completion law. Experiments numerically validate the theoretical predictions, show that deterministic rather than frozen imputation is what collapses the generated distribution, and place our method alongside strong classical and deep imputation baselines on real tabular data.",
+      "url": "http://arxiv.org/abs/2607.28698v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28698v1",
+      "tldr": "Missing-Data Flow Matching trains flow matching on incomplete data by treating missing coordinates as latent variables resampled from their conditional distribution, proving exact equivalence to complete-data training under MCAR and showing that a single oracle completion is optimal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Kentucky"
+      ],
+      "affiliations_text": "University of Kentucky",
+      "score": 4.09751104240511,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2607.28755v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728755v1-tagtorch-a-pytorch-library-for-geometry-topology-and-symmetry-aware-machine-learning",
+      "source": "arxiv",
+      "title": "TAGTorch: A PyTorch Library for Geometry, Topology, and Symmetry-Aware Machine Learning",
+      "authors": [
+        "Brendan Kennedy",
+        "Tegan Emerson",
+        "Gregory Roek",
+        "Emilie Purvine",
+        "Henry Kvinge"
+      ],
+      "authors_text": "Brendan Kennedy, Tegan Emerson, Gregory Roek, Emilie Purvine, Henry Kvinge",
+      "abstract": "Over the last decade, neural networks have been applied to an increasingly diverse range of applications, including data with rich geometric, topological, or symmetry-related structure. As a result, researchers have increasingly drawn inspiration from topology, algebra, and geometry. Despite this rich algorithmic development, the supporting software ecosystem remains fragmented. Many important methods exist only as research prototypes in unmaintained repositories. We address this by introducing Topology, Algebra, and Geometry Torch (TAGTorch), an open-source, PyTorch-based library that unifies tools inspired by topology, algebra, and geometry, including data-preprocessing methods, architectures, training techniques, and model analysis tools. We describe the design philosophy of TAGTorch and then discuss its current architecture and capabilities, highlighting areas where it can fill gaps in the current software ecosystem. We conclude with a discussion of our future development priorities for the library.",
+      "url": "http://arxiv.org/abs/2607.28755v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28755v1",
+      "tldr": "TAGTorch is an open-source PyTorch library that unifies geometry, topology, and symmetry-aware machine learning tools—including data preprocessing, architectures, training techniques, and model analysis—to address the fragmented software ecosystem in mathematically-inspired AI.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pacific Northwest National Laboratory",
+        "University of Washington",
+        "University of Texas at El Paso"
+      ],
+      "affiliations_text": "Pacific Northwest National Laboratory, University of Washington, University of Texas at El Paso",
+      "score": 4.022992451951765,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.28667v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728667v1-guarantees-on-dynamical-system-distinguishability-for-llm-token-generation",
+      "source": "arxiv",
+      "title": "Guarantees on Dynamical System Distinguishability for LLM Token Generation",
+      "authors": [
+        "Mohamed Akrout",
+        "Dan Wilson"
+      ],
+      "authors_text": "Mohamed Akrout, Dan Wilson",
+      "abstract": "Recent work has shown that classifying large language models (LLMs)' responses can be distinguished by modeling token embeddings as trajectories of a black-box dynamical system (DS) and comparing prediction residuals of two DSs. Despite the empirical success of this dynamical approach, a theoretical understanding of why it works, how well it scales as a function of the token sequence, and when it transfers across embedding models remains lacking. We address these questions by formalizing the classification task as a binary hypothesis test between two stochastic linear DSs. We show that the total variation distance between the stationary marginal distributions of the two DSs can be arbitrarily small even when the dynamics differ substantially, which provides a fundamental accuracy floor for any classifier that ignores token dynamics. We then show that the misclassification probability of DS-based classification decays exponentially in the sequence length $L$, with the decay governed by a dynamical discriminability quantity $δ^2$ that captures the spectral distance between the two DSs. We also characterize cross-embedding generalization by introducing an approximate intertwining condition between embedding models and establishing a lower bound on the transferable discriminability in terms of the intertwining map's smallest singular value. Together, these results explain the empirical performance of DS-based classification and motivate further investigation into using DS theory to analyze AI systems, in contrast to the more common approach of using AI to model dynamical systems.",
+      "url": "http://arxiv.org/abs/2607.28667v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28667v1",
+      "tldr": "This paper provides theoretical guarantees for classifying large language models by modeling their token embeddings as stochastic linear dynamical systems, showing that misclassification probability decays exponentially with sequence length and characterizing when such classification transfers across embedding models.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.970800659462142,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2607.28764v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728764v1-sensitivity-based-system-strength-assessment-mapping-power-flow-and-network-topology-perturbations-to-system-eigenvalues",
+      "source": "arxiv",
+      "title": "Sensitivity-Based System Strength Assessment: Mapping Power Flow and Network Topology Perturbations to System Eigenvalues",
+      "authors": [
+        "Trager Joswig-Jones",
+        "Shuan Dong",
+        "Jin Tan",
+        "Baosen Zhang"
+      ],
+      "authors_text": "Trager Joswig-Jones, Shuan Dong, Jin Tan, Baosen Zhang",
+      "abstract": "As inverter-based resources (IBRs) contribute larger shares of generation in electrical power grids, quantifying system strength becomes increasingly important for identifying stability issues introduced by these devices. While admittance model based system strength metrics have been proposed to identify control interactions in systems with high levels of IBRs, these methods depend on repeated evaluations across many operating points to understand how the state of the system impacts system strength. To address this challenge, we consider the sensitivity of system stability to perturbations in the steady-state operating point, and propose system strength metrics based on sensitivities to power injections, voltages, and line admittances. Using these sensitivities we can identify changes in the system's state (e.g. a line tripping off or a generator increasing its power output) that trigger instability mechanisms. We show that these metrics provide critical insights into system stability and can be computed much faster than repeated eigenvalue calculations. We demonstrate our approach on 14-bus and 118-bus test systems to show how the metrics can be used to find remedial actions for small-signal stability issues.",
+      "url": "http://arxiv.org/abs/2607.28764v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28764v1",
+      "tldr": "This paper proposes system strength metrics based on the sensitivity of system eigenvalues to power flow and line admittance perturbations, enabling fast identification of instability triggers and remedial actions in inverter-based resource-rich power grids.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Washington",
+        "National Laboratory of the Rockies"
+      ],
+      "affiliations_text": "University of Washington, National Laboratory of the Rockies",
+      "score": 3.7952904558992557,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2607.28693v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728693v1-sedr-seq2p-a-lightweight-dilated-residual-sequence-to-point-network-for-multi-task-industrial-nilm",
+      "source": "arxiv",
+      "title": "SEDR-Seq2P: A Lightweight Dilated Residual Sequence-to-Point Network for Multi-Task Industrial NILM",
+      "authors": [
+        "Hatem Haddad",
+        "Feres Jerbi",
+        "Issam Smaali"
+      ],
+      "authors_text": "Hatem Haddad, Feres Jerbi, Issam Smaali",
+      "abstract": "Industrial NILM remains challenging because measurement noise and widespread concurrent machine operation reduce the generalization of models tuned on residential data. This work adopts a one-to-many, multi-task disaggregation setting, in which a single network estimates multiple industrial machine loads from aggregate power. Under a unified evaluation protocol on IMDELD, we benchmark Seq2Seq, Seq2SubSeq, Seq2Point, GRU, and WaveNet using energy-estimation metrics and the accuracy-delay criterion. While Seq2Point offers a stronger accuracy-delay balance than Seq2Seq/Seq2SubSeq, GRU and WaveNet achieve higher accuracy at markedly higher computational cost. To close this gap, we propose SEDR-Seq2P, a lightweight Seq2Point extension with dilated residual blocks and squeeze-and-excitation attention. Relative to the Seq2Point baseline, SEDR-Seq2P reduces MAE by approximately 7%, improves the coefficient of determination by approximately 1%, and increases the match rate by approximately 0.8%. In addition, compared to WaveNet, SEDR-Seq2P reduces inference latency by approximately 58%, yielding a favorable accuracy-delay trade-off for scalable industrial deployment.",
+      "url": "http://arxiv.org/abs/2607.28693v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28693v1",
+      "tldr": "SEDR-Seq2P, a lightweight dilated residual Seq2Point network with squeeze-and-excitation attention, improves multi-task industrial NILM accuracy while cutting inference latency by ~58% versus WaveNet, offering a favorable accuracy-delay trade-off for scalable deployment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wattnow"
+      ],
+      "affiliations_text": "Wattnow",
+      "score": 3.7277239786131258,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.28776v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728776v1-representations-from-pretrained-machine-learning-interatomic-potentials-as-coarse-coordinates-for-material-generation-and-evaluation",
+      "source": "arxiv",
+      "title": "Representations from Pretrained Machine-Learning Interatomic Potentials as Coarse Coordinates for Material Generation and Evaluation",
+      "authors": [
+        "Paul Hagemann",
+        "Katharina Ueltzen",
+        "Simon Müller",
+        "Janine George",
+        "Philipp Benner"
+      ],
+      "authors_text": "Paul Hagemann, Katharina Ueltzen, Simon Müller, Janine George, Philipp Benner",
+      "abstract": "Generative machine learning is increasingly used for inorganic crystal structure generation. Most models and the corresponding evaluation approaches rely on simple forms of crystal structure representation. In this paper, we showcase the power of atom-averaged features from pretrained Machine-Learning Interatomic Potentials (MLIPs), such as MACE, for such tasks. We first introduce a distance measure that assesses the output of material generative models by capturing both quality and novelty in a single distribution-based evaluation framework. In particular, we introduce the Coarse-Fine Transport Distance (CFTD) using two different featurizers, where the quality component is based on coarse MACE features. We showcase CFTD's versatility in capturing crystal-structure quality while also detecting memorization, and compare it with the recently introduced continuous SUN metrics. We further show that coarse MACE features can be used as guidance for a material generative model.",
+      "url": "http://arxiv.org/abs/2607.28776v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28776v1",
+      "tldr": "The paper proposes the Coarse-Fine Transport Distance (CFTD), a dual-featurizer metric using pretrained MACE interatomic potential features for quality and contrastive GNN features for novelty, to improve evaluation of generative crystal models, and demonstrates that coarse MACE features can also guide material generation.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.653814738051484,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2607.28681v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728681v1-mpp-gnn-subject-adaptive-community-detection-for-fmri-based-alzheimers-disease-classification",
+      "source": "arxiv",
+      "title": "MPP-GNN: Subject-Adaptive Community Detection for fMRI-Based Alzheimer's Disease Classification",
+      "authors": [
+        "Yang Zhang",
+        "Xiao Zhou",
+        "Jonathan Warrell",
+        "Avram Holmes",
+        "Xuan Zhang",
+        "Mark Gerstein"
+      ],
+      "authors_text": "Yang Zhang, Xiao Zhou, Jonathan Warrell, Avram Holmes, Xuan Zhang, Mark Gerstein",
+      "abstract": "Functional magnetic resonance imaging (fMRI) is a widely used technique for studying the brain. Recent methods that utilize graph neural networks (GNNs) for analysis of brain functional connectivity have shown great potential for the classification of brain disorders, such as Alzheimer's disease (AD). However, these methods often assume a preset number of functional modules across all subjects, which overlooks inter-subject variability. In addition, the discovered modules are rarely used to directly guide the learned connectivity patterns. Here, to address these issues, we propose a Meta Probabilistic Pooling GNN (MPP-GNN). We frame the model's task as a coupled, bilevel optimization that performs adaptive graph partitioning hierarchically to discover subject-specific modules and then uses the discovered brain modules as an explicit prior to guide edge refinement and representation learning. We validate MPP-GNN on two public datasets for AD classification, achieving the highest AUC in comparison to established baselines for both datasets. Furthermore, our analysis demonstrates that MPP-GNN shows significant alignment with the canonical functional-network organization defined by the Yeo brain atlas and reveals a network-level dedifferentiation pattern for AD.",
+      "url": "http://arxiv.org/abs/2607.28681v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28681v1",
+      "tldr": "MPP-GNN introduces a bilevel-optimized, subject-adaptive graph neural network that hierarchically discovers individualized brain communities via affinity propagation and uses them as priors to refine connectivity, achieving state-of-the-art Alzheimer’s disease classification from fMRI while recovering canonical functional networks and revealing AD-related dedifferentiation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pratt Institute",
+        "Rutgers University",
+        "Yale University"
+      ],
+      "affiliations_text": "Pratt Institute, Rutgers University, Yale University",
+      "score": 3.6206183367256886,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.28833v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728833v1-hidden-economic-consequences-of-adapting-to-fast-ramping-datacenter-loads",
+      "source": "arxiv",
+      "title": "Hidden Economic Consequences of Adapting to Fast Ramping Datacenter Loads",
+      "authors": [
+        "Willa Gutowski",
+        "Charles Foltz",
+        "Nicholson Koukpaizan",
+        "Slaven Peles",
+        "Eve Tsybina"
+      ],
+      "authors_text": "Willa Gutowski, Charles Foltz, Nicholson Koukpaizan, Slaven Peles, Eve Tsybina",
+      "abstract": "Artificial intelligence workloads are driving the rapid expansion of datacenter infrastructure, which imposes substantial stress on the US energy system. While high peak electricity prices are an anticipated outcome, measurable under peak hour simulations, the high off peak prices are a significantly underestimated threat. We simulate different ramping conditions on a congestible 5000-bus system, based on a modified IEEE 118-bus grid, to show that, in the presence of fast ramping loads and slow ramping generation, datacenters can aggravate latent load pockets. This results in unexpectedly high system costs during periods outside of datacenter peak. We test the datacenter effects using two distinct load conditions. We find that in the system coincident peak, coupled simulations result in up to 100% loading of slow expensive units, with an average marginal cost increase of 8%. These findings are of extreme importance as they reveal the hidden costs of preventively ramping slow generation in anticipation of datacenter load changes.",
+      "url": "http://arxiv.org/abs/2607.28833v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28833v1",
+      "tldr": "TLDR: Fast-ramping datacenter loads combined with slow-ramping generation force expensive “must-run” units to be preventively dispatched, creating hidden off-peak economic costs that only appear when using fully temporally coupled grid simulations rather than simpler decoupled analyses.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Oak Ridge National Laboratory"
+      ],
+      "affiliations_text": "Oak Ridge National Laboratory",
+      "score": 3.5818168855829717,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2607.28822v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728822v1-agentic-artificial-intelligence-for-power-systems-strategies-to-identify-and-close-capability-gaps",
+      "source": "arxiv",
+      "title": "Agentic Artificial Intelligence for Power Systems: Strategies to Identify and Close Capability Gaps",
+      "authors": [
+        "Eve Tsybina",
+        "Samim Konjicija",
+        "Slaven Peles"
+      ],
+      "authors_text": "Eve Tsybina, Samim Konjicija, Slaven Peles",
+      "abstract": "The rapid expansion of AI-driven information infrastructure, particularly data centers, is placing unprecedented pressure on power systems and accelerating the pace at which new assets must interconnect with the grid. As bulk transmission expansion rolls out slowly, new loads and generation are increasingly deployed within existing network constraints. Agentic AI is urgently needed to automate the numerous and repetitive connection processes, but its maturity has not been systematically validated on complex tasks and large-scale systems. We replicate the current state of the art in agentic AI for power systems planning and evaluate it against a structured suite of nodal planning problems spanning six levels of task complexity and four grid scales. We find that only the two lowest complexity levels are solvable on some of the test grid sizes, and identify the specific capability upgrades required to close this gap. Adopting stricter testing protocols and reproducible evaluation benchmarks is essential for assessing both genuine progress and the operational readiness of agentic AI.",
+      "url": "http://arxiv.org/abs/2607.28822v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28822v1",
+      "tldr": "Agentic AI for power systems currently solves only the simplest planning tasks on small grids, so the paper identifies specific capability upgrades and calls for stricter testing and reproducible benchmarks to close the gap.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Sarajevo",
+        "Oak Ridge National Laboratory"
+      ],
+      "affiliations_text": "University of Sarajevo, Oak Ridge National Laboratory",
+      "score": 3.537159396784937,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.28633v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728633v1-topology-aware-data-movement-for-disaggregated-gpu-inference",
+      "source": "arxiv",
+      "title": "Topology-Aware Data Movement for Disaggregated GPU Inference",
+      "authors": [
+        "Sanjeev Rao Ganjihal"
+      ],
+      "authors_text": "Sanjeev Rao Ganjihal",
+      "abstract": "Disaggregated LLM inference creates a datacenter networking problem that no existing system solves correctly. When prefill and decode run on separate GPU pools, the KV cache must be transferred between them. For a 70B model this is 2.6 GB per request, exceeding 100 GB/s aggregate at production scale. Yet DistServe, Splitwise, and Mooncake all use uniform RDMA, ignoring that bandwidth between two GPUs varies by 72x depending on their physical relationship: 900 GB/s via NVLink within a domain, 50 GB/s via InfiniBand across nodes, 12.5 GB/s via TCP across data centers. We design a topology-aware transfer orchestrator that discovers interconnect hierarchy at startup and selects optimal transport per transfer. Three mechanisms work together: (1) pipelined layer-by-layer transfer that overlaps transmission with ongoing prefill, hiding 60 to 85 percent of latency behind computation; (2) NVLink domain-aware placement for Mixture-of-Experts models that co-optimizes expert dispatch with KV cache locality; and (3) CXL 3.0 memory expanders as a shared overflow tier providing 6x capacity at 86x lower latency than NVMe. Full evaluation requires multi-node clusters with heterogeneous interconnects and CXL 3.0 hardware that is beyond academic resources and not yet available in GPU clouds. We present analytical bandwidth models, component implementations, and projected analysis across three architectures showing 3 to 18x transfer latency reduction over uniform RDMA.",
+      "url": "http://arxiv.org/abs/2607.28633v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28633v1",
+      "tldr": "TopKV is a topology-aware transfer orchestrator for disaggregated LLM inference that exploits GPU interconnect hierarchy, pipelined layer-by-layer KV cache transfer, NVLink-domain-aware MoE placement, and CXL 3.0 overflow tiers to reduce KV cache transfer latency by 3–18x over uniform RDMA.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.4904362330413323,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2607.28695v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728695v1-predicting-steel-fatigue-life-from-micrographs-using-physics-informed-deep-learning",
+      "source": "arxiv",
+      "title": "Predicting Steel Fatigue Life from Micrographs Using Physics-Informed Deep Learning",
+      "authors": [
+        "Aryuemaan Kumar Chowdhury"
+      ],
+      "authors_text": "Aryuemaan Kumar Chowdhury",
+      "abstract": "Here is the plain text version optimized for arXiv's submission form. Custom macros (like \\CV and \\SI) have been converted to standard text/math so they render correctly on the webpage: Evaluating the fatigue life of structural steels conventionally requires mechanical testing lasting tens to hundreds of hours, making it impractical for rapid quality control. We present CV, a computer vision framework that estimates the fatigue life ($\\log N_f$) of lightweight alloy steels directly from optical micrographs without physical testing.The pipeline features a seven-stage OpenCV preprocessing routine to remove artifacts, a 28-dimensional physics-informed feature extractor (quantifying crack morphology, grain structure, porosity, and texture), and a CNN regression model trained with a Gaussian negative log-likelihood (GNLL) loss to jointly predict $\\log N_f$ and sample-specific uncertainty $\\hatσ$.Evaluating three architectures (SE-CNN, ResNet-50, VGG-16) on a synthetic micrograph benchmark, ResNet-50 achieves $R^2 = 0.93$, RMSE = 0.18 log-cycles, and macro-F1 = 0.91. The GNLL objective reduces Expected Calibration Error by 76% compared to a mean-squared-error baseline (ECE: $0.089 \\rightarrow 0.021$). Grad-CAM maps confirm the network attends to metallurgically meaningful microstructural features.Running in under 65 ms per image, the pipeline and synthetic dataset generator are open-sourced. Because validation relies entirely on synthetic micrographs, these results demonstrate methodological soundness under simulated conditions; a domain-transfer study on real field samples is the immediate next step.",
+      "url": "http://arxiv.org/abs/2607.28695v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28695v1",
+      "tldr": "TLDR: This paper presents a physics-informed deep learning computer vision framework that predicts the fatigue life of steels directly from optical micrographs by combining a seven-stage preprocessing pipeline, a 28-dimensional physics-based feature extractor, and a CNN with uncertainty quantification, achieving high accuracy on a synthetic benchmark and demonstrating methodological soundness with calibrated predictions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Hyderabad",
+        "Oscowl AI"
+      ],
+      "affiliations_text": "Indian Institute of Technology Hyderabad, Oscowl AI",
+      "score": 3.303842597076472,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.28708v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728708v1-mmfgu-multimodal-federated-graph-unlearning",
+      "source": "arxiv",
+      "title": "MMFGU: Multimodal Federated Graph Unlearning",
+      "authors": [
+        "Haodong Lu",
+        "Zekai Chen",
+        "Weiwei Ji",
+        "Shihao Li",
+        "Xunkai Li",
+        "Xun Wu",
+        "Yinlin Zhu",
+        "Rong-Hua Li"
+      ],
+      "authors_text": "Haodong Lu, Zekai Chen, Weiwei Ji, Shihao Li, Xunkai Li, Xun Wu, Yinlin Zhu, Rong-Hua Li",
+      "abstract": "Multimodal federated graph learning enables clients to collaboratively train graph models over structural, textual, and visual signals without sharing private local data. However, the presence of heterogeneous multimodal content also makes unlearning requests more frequent and fine-grained: users may delete accounts or interactions, remove a particular image or text while retaining the associated entity, or revoke the learned correspondence between retained modalities or graph attributes. Existing federated graph unlearning mainly handles entity/relation or client removal and cannot directly satisfy these multimodal requests. They introduce three challenges: removing only the requested information without damaging retained content, preventing the target from being recovered through remaining modalities or graph neighborhoods, and stopping related traces on other clients from re-entering the global model after aggregation. To address them, we propose \\textsc{\\textbf{MMFGU}}, a multimodal federated graph unlearning framework built around target-specific representation decoupling. \\textsc{MMFGU} maps heterogeneous requests into unified target carriers, decouples requested representations while anchoring retained semantics, exposes and repairs propagated residuals with lightweight probes, and selectively purges affected clients through compact prototype and response signals. Experiments show that \\textsc{MMFGU} effectively removes requested information, preserves retained graph utility, and achieves a $\\boldsymbol{41.5\\times}$ speedup over full retraining.",
+      "url": "http://arxiv.org/abs/2607.28708v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28708v1",
+      "tldr": "MMFGU introduces a unified multimodal federated graph unlearning framework that maps fine-grained removal requests (entity/relation, modality, and pairing) into target-specific carrier decoupling, enabling selective forgetting with retained utility preservation and a 41.5× speedup over retraining.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beijing Institute of Technology"
+      ],
+      "affiliations_text": "Beijing Institute of Technology",
+      "score": 3.2626941403492893,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2607.28696v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728696v1-mitigating-class-tail-undercoverage-in-medical-vision-language-models-under-clinical-shift",
+      "source": "arxiv",
+      "title": "Mitigating Class-Tail Undercoverage in Medical Vision-Language Models under Clinical Shift",
+      "authors": [
+        "Mushir Akhtar",
+        "M. Tanveer"
+      ],
+      "authors_text": "Mushir Akhtar, M. Tanveer",
+      "abstract": "Medical vision-language models (VLMs) can retain high observed marginal coverage after clinical shift while substantially under-covering an individual disease class. The affected class varies with acquisition protocol and backbone geometry, so source prevalence does not reliably reveal the failure. Existing localized and tail-aware conformal methods respectively adapt to test neighborhoods and source-frequency tails, leaving held-out class-wise coverage failure unmodeled. We introduce Class-Tail Adaptive Localized Conformal Deferral (CALCoDe), a post-hoc reliability layer for frozen medical VLMs. Cross-fitted validation predictions identify classes at risk of undercoverage, and a disjoint calibration split estimates their class-conditional tail thresholds. CALCoDe combines each protected threshold with a localized conformal threshold using a one-sided maximum. The resulting set contains every label admitted by the localized rule, with additional protection confined to validation-identified classes. An independently calibrated support audit defers cases with insufficient inlier support. Under exchangeability among accepted examples within each protected class, CALCoDe provides finite-sample coverage at the prespecified guard level and contains the corresponding localized conformal sets; coverage on shifted external cohorts is evaluated empirically. Among standard conformal baselines and recent VLM-specific conformal methods evaluated across two dermatology shifts (HAM10000 to ISIC 2019 and HAM10000 to PAD-UFES-20) and four frozen VLM backbones (BiomedCLIP, OpenAI CLIP ViT-B/32, PubMedCLIP ViT-B/32, and MedSigLIP-448), CALCoDe is the only approach whose observed marginal and worst-class accepted coverage both reach 0.95 in all eight settings. On HAM10000 to ISIC 2019, its average worst-class accepted coverage is 0.970, compared with 0.926 for sTACP and 0.864 for LCP-VLM.",
+      "url": "http://arxiv.org/abs/2607.28696v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28696v1",
+      "tldr": "CALCoDe, a post-hoc reliability layer for frozen medical vision-language models, adaptively identifies and protects disease classes at risk of undercoverage under clinical shift and achieves both marginal and worst-class accepted coverage of 0.95 across all tested dermatology-shift and backbone settings.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Indore"
+      ],
+      "affiliations_text": "Indian Institute of Technology Indore",
+      "score": 2.964238178888285,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2607.28687v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/03/260728687v1-technological-advances-in-detecting-and-managing-cognitive-impairment-in-older-adults-trends-challenges-and-future-directions",
+      "source": "arxiv",
+      "title": "Technological Advances in Detecting and Managing Cognitive Impairment in Older Adults: Trends, Challenges, and Future Directions",
+      "authors": [
+        "Mohammad Asif",
+        "Azizuddin Khan",
+        "Mohd Azam",
+        "Anurag Rajkumar Bombarde"
+      ],
+      "authors_text": "Mohammad Asif, Azizuddin Khan, Mohd Azam, Anurag Rajkumar Bombarde",
+      "abstract": "As populations age, cognitive decline from mild cognitive impairment (MCI) to dementia is a defining health challenge of the coming decades, yet routine assessment often misses its earliest signs. This article critically synthesizes recent technological advances for detecting and managing cognitive impairment in older adults, spanning neurophysiological signals (chiefly electroencephalography, EEG), structural and molecular neuroimaging (MRI and amyloid/tau PET), blood-based biomarkers, and digital markers, integrated through artificial intelligence (AI), machine learning (ML), and deep learning (DL). Beyond summarizing, it contributes a cross-disciplinary taxonomy, a methodological-rigor lens foregrounding subject- and site-independent validation, an integrative early-detection framework linking tiered screening to intervention, and comparison tables of detection methods, interventions, and risk and protective factors. EEG markers (alpha/theta changes, P300 latency) and deep models (CNNs, LSTM/BiLSTM, transformers, self-supervised EEG foundation models) report strong accuracy, yet many rest on small, single-site datasets unlikely to survive rigorous external validation. Elsewhere, gains are tangible: plasma p-tau217 has reached clinical utility, with the first blood test cleared to aid Alzheimer's diagnosis in 2025; anti-amyloid therapies (lecanemab, donanemab) are approved despite modest, contested benefits; and multidomain lifestyle prevention has matured. Wearable, remote, speech, and virtual-reality tools enable continuous, ecologically valid monitoring, and multimodal fusion improves sensitivity and specificity. Barriers remain: standardization, explainability, data privacy, and equitable, externally validated deployment. The field's near-term promise lies in trustworthy, multimodal, longitudinally validated systems linking early detection to actionable, personalized care.",
+      "url": "http://arxiv.org/abs/2607.28687v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.28687v1",
+      "tldr": "This review synthesizes recent technological advances—spanning EEG, neuroimaging, blood-based and digital biomarkers, and AI/deep learning—for detecting and managing cognitive impairment in older adults, highlighting the need for externally validated, multimodal, and longitudinally integrated systems that link early detection to personalized care.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Bombay",
+        "T-Systems ICT India Pvt. Ltd."
+      ],
+      "affiliations_text": "Indian Institute of Technology Bombay, T-Systems ICT India Pvt. Ltd.",
+      "score": 2.3350947530297868,
+      "score_text": "2.3"
+    }
+  ]
+}
