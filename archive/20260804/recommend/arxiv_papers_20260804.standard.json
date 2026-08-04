@@ -1,0 +1,729 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-04T06:02:06.930006",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.00113v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800113v1-track-guided-hierarchical-reinforcement-learning-for-autonomous-vehicle-drifting-with-minimum-lap-time-planning",
+      "source": "arxiv",
+      "title": "Track-Guided Hierarchical Reinforcement Learning for Autonomous Vehicle Drifting with Minimum-Lap-Time Planning",
+      "authors": [
+        "Sheng Zhao",
+        "Bolin Zhao",
+        "Xiaodong Wu",
+        "Chen Lv"
+      ],
+      "authors_text": "Sheng Zhao, Bolin Zhao, Xiaodong Wu, Chen Lv",
+      "abstract": "In Formula 1, drivers optimize racing lines within tire grip limits to minimize lap times; however, in rally racing, drivers intentionally break traction to drift on loose surfaces. This maneuver rapidly aligns the vehicle for corner exits, ultimately reducing lap time. Autonomously executing such maneuvers formulates a complex dual-objective control problem: stabilizing highly nonlinear drift dynamics while strictly minimizing lap time. Addressing this challenge motivates the development of advanced Minimum-Lap-Time (MLT) drift control architectures. This paper proposes a planning-control framework specifically designed for MLT drifting scenario. First, we formulate an optimal control problem to generate a MLT drift planning trajectory, which is used as prior data to train a deep reinforcement learning drift controller. Given that drifting involves extremely large sideslip angles and is therefore challenging to learn directly, a Track-guided Reinforcement Learning (TgRL) drift control method is proposed to enable progressive training in a step-by-step manner, from drift control policy, to drift corner policy, and finally to a comprehensive drift race policy. The reward function incorporates both an instant reward term and an end reward term derived from the Minimum-Lap-Time objective. Simulation results demonstrate that the proposed framework enables the agent to learn a drift racing policy that not only ensures vehicle motion control performance but also effectively reduces lap time.",
+      "url": "http://arxiv.org/abs/2608.00113v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00113v1",
+      "tldr": "The paper proposes a track-guided hierarchical reinforcement learning framework with minimum-lap-time optimal-control-based drift planning that progressively trains a drift controller to stabilize highly nonlinear drift dynamics and minimize lap time on low-friction tracks.",
+      "detailed_reading": {
+        "motivation": "在拉力赛中，车手通过漂移故意突破轮胎抓地力极限，以快速调整车身姿态并缩短过弯时间，但这一过程同时涉及高度非线性的漂移动力学稳定与最小单圈时间优化双重目标。现有基于强化学习的漂移控制方法大多依赖昂贵且车辆专用的专家示范数据，且缺乏对早期训练的结构化引导，导致策略收敛缓慢且泛化性差。为此，本文提出一种面向最小单圈时间（MLT）漂移场景的规划-控制分层框架。",
+        "method": "该方法首先基于3自由度自行车模型和Magic Formula联合滑移轮胎模型，在Frenet坐标系下构建以状态（车速v、质心侧偏角β、横摆角速度r、横向偏移l、横摆角误差Δψ）和控制量（前轮转角δ_f、后轮滑移率λ_r）为变量的最优控制问题，通过求解MLT漂移规划（MLTDP）生成包含位置、姿态和速度信息的动态可行参考轨迹，作为先验数据。然后提出轨道引导强化学习（TgRL）方法，采用课程学习思想分三阶段渐进训练：先从基础漂移控制策略学起，再过渡到漂移过弯策略，最后综合为完整漂移比赛策略。奖励函数由即时跟踪项和源自最小单圈时间目标的终端奖励项组成，控制器以规划轨迹为参考进行深度强化学习训练。",
+        "result": "仿真结果表明，所提框架能够使智能体学习到一种漂移比赛策略，既保证了车辆运动控制性能（如稳定跟踪大质心侧偏角状态），又有效减少了单圈时间。对比不采用分层课程引导或缺少MLT先验轨迹的基线方法，TgRL显著提升了训练稳定性与最终圈速表现，验证了从规划到控制的分层架构在极限漂移场景中的有效性。",
+        "conclusion": "本文通过将最优控制生成的MLT漂移规划轨迹与轨道引导的分层强化学习控制器相结合，解决了漂移稳定控制与最小化单圈时间的双重难题。三阶段渐进训练策略使得智能体能够从基础漂移控制逐步掌握完整比赛策略，同时无需高成本专家示范数据。该框架为极限工况下自动驾驶赛车提供了可行的规划-控制解决方案，并为未来向实车迁移奠定了基础。",
+        "key_details": "关键实现细节包括：采用低附着路面μ=0.6模拟光滑赛道，车辆参数为质量1300kg、轴距前后各1.4m、横摆惯量1750kg·m^2；MLTDP以单圈时间最小化为目标，在OCP中施加道路边界、状态和输入约束，生成用于RL训练的参考轨迹；TgRL的课程式训练分为基础漂移控制、漂移过弯和完整比赛策略三个阶段，奖励由即时轨迹跟踪误差项与MLT终端奖励组成。该方法的局限性在于目前仅在仿真环境验证，且对规划参考轨迹质量与车辆模型精度有一定依赖，未来需进一步研究sim-to-real迁移及更复杂多变路况下的泛化能力。"
+      },
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, Nanyang Technological University",
+      "score": 5.473685902736248,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2608.00133v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800133v1-deep-reinforcement-learning-from-first-principles-to-reasoning-models",
+      "source": "arxiv",
+      "title": "Deep Reinforcement Learning: From First Principles to Reasoning Models",
+      "authors": [
+        "Ghoshana Bista"
+      ],
+      "authors_text": "Ghoshana Bista",
+      "abstract": "Deep reinforcement learning has evolved from classical dynamic programming, temporal-difference learning, and tabular control into a broad framework for sequential decision-making under uncertainty. This book provides a structured introduction to that evolution, emphasizing not only how reinforcement learning algorithms work, but also why they were developed, which problems they address, where they fail, and how they connect to real-world systems. It combines textbook foundations, research-oriented discussion, and a systems perspective. Early chapters introduce reinforcement learning, Markov decision processes, dynamic programming, Monte Carlo methods, temporal-difference learning, and the transition from tabular to deep approaches. The middle chapters cover major algorithmic families, including DQN, advanced value-based methods, policy gradients, actor-critic methods, PPO, SAC, model-based reinforcement learning, MuZero, offline reinforcement learning, and sequence-modeling approaches. Later chapters extend the discussion to multi-agent and hierarchical learning, safe reinforcement learning, reinforcement learning from human feedback, reasoning-oriented AI systems, communication networks, UAV applications, implementation pipelines, experimental methodology, failure analysis, and future research directions. Throughout the book, examples from UAV-assisted networks, SD-WAN traffic engineering, safe control, and reasoning-based AI connect mathematical concepts to practical challenges such as partial observability, competing objectives, safety constraints, deployment drift, and uncertain evaluation. The book is intended for advanced students, researchers, and engineers with basic knowledge of probability, linear algebra, calculus, and programming.",
+      "url": "http://arxiv.org/abs/2608.00133v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00133v1",
+      "tldr": "This book offers a comprehensive, systems-oriented introduction to deep reinforcement learning, tracing its evolution from classical dynamic programming and tabular methods to modern algorithms, multi-agent and safe RL, RLHF, reasoning models, and real-world applications like UAV networks and SD-WAN.",
+      "detailed_reading": {
+        "motivation": "深度强化学习已从经典动态规划与时序差分发展成现代AI的核心框架，但现有资料常要么过于抽象、与直觉脱节，要么过于操作化、与概念分离。作者旨在写一本同时连接直觉、数学、实现与应用的系统性指南，帮助读者从孤立的算法名词走向对领域的一致理解，并强调算法为何存在、解决什么问题、在哪失败以及如何连接真实系统。",
+        "method": "该书采用混合结构：先建立经典基础（强化学习、MDP、动态规划、蒙特卡洛、时序差分以及从表格到深度方法的过渡），再覆盖主要深度RL算法家族（DQN、改进价值方法、策略梯度、actor-critic、PPO、SAC、基于模型的RL、MuZero、离线RL、序列建模），随后扩展至多智能体、分层、安全RL、RLHF、推理模型、通信网络与UAV系统等主题。全书通过UAV辅助网络、SD-WAN流量工程、安全控制和基于推理的AI等运行实例，将数学概念与部分可观测性、多目标、安全约束、部署漂移和不确定评估等工程现实相联系，并提供多种阅读路径、可教学代码块、练习与实践建议。",
+        "result": "该书提供了从第一性原理到推理模型的完整体系化叙述，共25章、七个部分：从经典RL到深度RL诞生、策略梯度与actor-critic、规划/模型/离线学习、多智能体/分层/安全DRL、现代AI系统中的应用，以及构建与评估DRL系统的实践。相比只介绍孤立算法，本书强调反复出现的核心思想（Bellman一致性、自举、策略改进、探索与利用、近似与不稳定、约束与评估），并给出面向不同读者（入门、现代方法、语言模型、网络系统、研究快车道）的阅读路径，从而建立理论与实践间的可操作桥梁。",
+        "conclusion": "作者认为强化学习最有效的学习方式就是像其运行方式一样通过交互、反馈和细化来掌握。本书以清晰为首要目标，旨在让读者从直觉、数学、实现到应用四个层次理解深度强化学习；尽管领域仍在快速演进，核心问题不变：智能系统应如何行动、如何从后果中学习、如何平衡短期与长期目标，以及如何在不确定性和约束下保持可靠。",
+        "key_details": "该书的实现代码块被定义为教育性、模块化的最小概念实现，而非可直接部署的软件包；全书符号尽量统一（s、a、r、π、V/Q、γ），后续章节针对离线RL、序列建模、MARL、安全RL、RLHF和推理系统扩展特定符号。目标读者需具备概率、线性代数、微积分和编程基础，不要求先修RL。章节采用概述、概念与数学基础、实践陷阱、代码、领域实例、练习和下一章桥梁的结构，并强调超越基准，关注部署现实主义、可复现性、奖励失败、安全约束与评估不确定性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.389909550498018,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2608.00220v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800220v1-verifier-induced-support-reshaping-in-on-policy-optimization",
+      "source": "arxiv",
+      "title": "Verifier-Induced Support Reshaping in On-Policy Optimization",
+      "authors": [
+        "Shaohang Wei",
+        "Zikun Su",
+        "Feifan Song",
+        "Wen Luo",
+        "Wei Li",
+        "Guangyue Peng",
+        "Houfeng Wang"
+      ],
+      "authors_text": "Shaohang Wei, Zikun Su, Feifan Song, Wen Luo, Wei Li, Guangyue Peng, Houfeng Wang",
+      "abstract": "We show that on-policy reinforcement learning with verifiable rewards (RLVR) can improve the current objective while making successful behaviors for later objectives too rare to sample and reinforce. We call this verifier-induced support reshaping and define effective rewardable support as successful trajectories reachable within a fixed rollout budget. Across two model families, we study this effect through repeated verifier-scored sampling and bidirectional training on mathematical reasoning and constrained instruction following, including sequential training with the opposite verifier. Math-RLVR raises average instruction-following success but reduces the number of prompts with any successful response under repeated sampling. On IFEval with Qwen3-8B-Base, pass@1 rises by 6.5 percentage points while best@32 falls by 9.8 percentage points, and the same divergence appears across both models and IF benchmarks. Conversely, IF-RLVR shifts math responses from step-by-step openings toward direct answers, lowers best@k across sampling budgets, and reduces reward variation for later Math-RLVR. Token-distribution analyses and controlled opening interventions show that these changes concentrate in the first few response tokens. RLVR mainly reranks openings already available in the base policy, and the selected opening causally affects math searchability. The tested reference-policy constraints, routing priors, and on-policy distillation preserve cross-task support only partially; MathIF and ReasonIF show that marginal gains translate only partly into responses that are both correct and constraint-following. Therefore, endpoint improvements do not guarantee future trainability or joint capability under on-policy optimization. Code is available at https://github.com/sylvain-wei/verifier-induced-support-reshaping",
+      "url": "http://arxiv.org/abs/2608.00220v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00220v1",
+      "tldr": "On-policy RL with verifiable rewards improves the current objective but reshapes the policy’s support, making successful behaviors for later objectives too rare to sample and reinforce, thereby limiting future trainability and joint capability.",
+      "detailed_reading": {
+        "motivation": "在线策略优化中，使用可验证奖励的强化学习（RLVR）虽然能改善当前目标，但可能使后续目标所依赖的成功行为在固定采样预算内变得过于稀有而无法被采样和强化。现有研究多关注事后的性能保持（灾难性遗忘），缺乏对未来可训练性的前瞻性度量。本文提出验证器诱导的支持重塑，研究当前验证器优化后，后续目标的有效奖励支持如何被改变。",
+        "method": "以Qwen3-8B-Base和Qwen2.5-Math-7B为基座，分别进行数学推理RLVR（Math-RLVR，在7.5k MATH子集上使用精确最终答案验证）和约束指令跟随RLVR（IF-RLVR，在IFTrain上使用确定性全约束检查器），并执行双向顺序训练（IF→Math和Math→IF）。评估时对每个提示做k=32次随机采样，用对应验证器评分，计算均值（pass@1）、best@k和通过次数，并按通过数将提示分为全部错误、混合、全部正确三组，以混合组作为可提供组内奖励变化的信号。此外，将响应按可见开头分类为DRI（逐步推导）、DAI（直接答案）和Other，结合受控开头干预和逐token分布分析，检验跨任务支持变化的机制。最后测试参考策略约束、路由先验和在线策略蒸馏（OPD）等保留策略的效果。",
+        "result": "在IFEval上，Math-RLVR使Qwen3-8B-Base的pass@1提升6.5个百分点，但best@32下降9.8个百分点；Qwen2.5-Math-7B上同样出现+7.9和-11.4的分歧，IFBench亦有一致趋势，表明平均成功率上升而可采样覆盖下降。IF-RLVR使AIME的best@k在k=4到32的所有预算下持续下降，且响应开头从DRI转向DAI，DAI比例与best@32呈负相关。顺序训练中，IF→Math虽然使全错比例从65.6%下降，但混合组从33.6%持续下降至step 20时几乎消失，导致后续Math-RLVR缺少组内奖励变异；MathIF和ReasonIF的联合得分也仅小幅提升，未成比例转化为既正确又满足约束的响应。",
+        "conclusion": "端点指标上的改进并不保证后续目标的可训练性或联合能力：验证器诱导的支持重塑会改变未来成功轨迹的可采样性，当前目标的提升可能以牺牲另一目标的奖励支持为代价。因此，持续RLVR评估应不仅看当前验证器得分，还应监测有效奖励支持的变化；参考策略约束、路由先验和在线策略蒸馏只能部分保留跨任务支持，并可能与目标收益形成权衡。",
+        "key_details": "关键细节包括：训练数据采用7.5k MATH、IFTrain，评估集为AIME24/AIME25/MATH-500-128、IFEval/IFBench及MathIF/ReasonIF；数学验证器为最终答案精确匹配，IF验证器要求全部显式约束通过；核心支持分析使用k=32的采样预算，并定义了all-wrong/mixed/all-correct三组；组相对更新使奖励信号仅来自混合组，因此混合组比例下降意味着训练信号匮乏；开头分类规则只依据可见前几token，不反映内部推理状态；受控干预证明开头选择因果影响数学可搜索性，且RLVR主要重排基础策略已有的开头，而非生成新能力；保留策略（参考策略约束、路由先验、OPD）只能部分保留支持或牺牲目标性能；训练配置为固定种子单次运行，重复rollout反映策略内采样变异；局限性包括行为证据不能排除部分能力变化、结果局限于两个模型族和特定基准、以及缓解方法未完全解决支持重塑问题。"
+      },
+      "affiliations": [
+        "Peking University",
+        "BUPT"
+      ],
+      "affiliations_text": "Peking University, BUPT",
+      "score": 5.035028002291266,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2608.00175v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800175v1-inference-time-policy-alignment-for-fair-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Inference-Time Policy Alignment for Fair Reinforcement Learning",
+      "authors": [
+        "Umer Siddique",
+        "Peilang Li",
+        "Conor Wallace",
+        "Yongcan Cao"
+      ],
+      "authors_text": "Umer Siddique, Peilang Li, Conor Wallace, Yongcan Cao",
+      "abstract": "Deep reinforcement learning (RL) agents achieve strong performance by optimizing scalar reward functions. However, once deployed, the policies of these RL agents are often rigid and costly to adapt to new performance criteria. For instance, an agent trained to maximize expected cumulative reward may not accommodate previously unknown stakeholder preferences. Existing approaches to achieve fairness, a type of preference, in RL typically assume that such preferences are known a priori and require complete retraining of the policy under a fairness-oriented metric. Inspired by inference-time alignment in large language models, we investigate the problem of steering a pretrained RL policy toward welfare-based fairness objectives at inference time without updating the base policy's parameters. We formalize inference-time fairness alignment as a policy shaping problem and propose a multiplicative policy shaping framework that adjusts action probabilities using action-dependent welfare scores, thus requiring no modification to the base policy. Our framework is general and compatible with any deep RL agent. Through extensive experiments across multiple domains, we demonstrate that inference-time policy shaping substantially improves welfare-based fairness objectives while preserving core task performance.",
+      "url": "http://arxiv.org/abs/2608.00175v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00175v1",
+      "tldr": "The paper introduces an inference-time fairness alignment framework for reinforcement learning that steers a frozen, pretrained policy toward welfare-based fairness objectives via multiplicative policy shaping with a learned critic (QFair), improving fairness without retraining or sacrificing core task performance.",
+      "detailed_reading": {
+        "motivation": "深度强化学习智能体通过优化标量奖励函数获得强性能，但部署后策略僵化，难以适应新的性能标准（如公平性）。现有公平RL方法通常假设公平偏好已知，并需要完全重训练策略，成本高昂且不适应部署后偏好变化。受大语言模型推理时对齐启发，本文研究在不更新基策略参数的情况下，在推理阶段将预训练RL策略引导至基于福利的公平目标，以降低重新训练成本并提升部署适应性。",
+        "method": "提出乘法策略塑形框架，形式化推理时公平对齐为策略塑形问题。首先构造福利增强MDP，通过引入追踪累积奖励向量的增强状态来恢复非线性福利函数的马尔可夫性；然后离线从基策略rollouts（含轻探索）学习一个轻量级公平评论员QFair网络，该网络以当前状态和累积奖励向量为输入，输出动作相关的福利分数；推理时保持基策略参数冻结，将基策略的动作概率与QFair产生的福利分数相乘并归一化，得到塑形后的策略。该塑形过程还通过KL正则化约束，闭式解为基策略的指数重加权形式，保证福利改善下界。",
+        "result": "在多个领域的广泛实验中，推理时策略塑形大幅提升了基于福利的公平目标（如广义基尼福利函数），同时保持了核心任务回报，相比直接部署冻结基策略和需要重训练的公平RL方法，实现了无需更新基策略参数的公平对齐。",
+        "conclusion": "本文首次将推理时对齐范式扩展到具有轨迹级公平目标的顺序决策RL中，证明通过轻量级离线训练的公平评论员进行乘法策略塑形，可在部署时有效引导预训练策略满足福利公平约束，同时保持基性能，为低成本适应新公平偏好提供了新途径。",
+        "key_details": "关键点包括：1) 问题设定为有限视野多目标MDP，标量训练奖励取向量奖励各部分之和；2) 非线性福利函数依赖整个轨迹的累积奖励向量，导致策略非平稳，通过状态增强（附加累积奖励向量）恢复马尔可夫性；3) 训练离线进行，仅需基策略生成的数据和少量探索，无需福利驱动的环境交互，避免昂贵或不安全的训练；4) 塑形策略由闭式指数重加权得到，含KL正则化参数；5) 框架与任意深度RL智能体兼容，动作空间需有限；局限性包括：依赖奖励可分解为多个目标、未考虑状态空间连续性/大动作空间挑战，且公平目标需能表达为福利函数。"
+      },
+      "affiliations": [
+        "University of Texas at San Antonio"
+      ],
+      "affiliations_text": "University of Texas at San Antonio",
+      "score": 4.948079613735674,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.00206v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800206v1-motion-planning-for-mobile-manipulators-navigating-doorways-via-model-predictive-control",
+      "source": "arxiv",
+      "title": "Motion Planning for Mobile Manipulators Navigating Doorways via Model Predictive Control",
+      "authors": [
+        "Kasra Sinaei",
+        "Kasun Weerakoon",
+        "Christopher Bradley",
+        "Seyed Abolfazl Fakoorian",
+        "Donald Ebeigbe"
+      ],
+      "authors_text": "Kasra Sinaei, Kasun Weerakoon, Christopher Bradley, Seyed Abolfazl Fakoorian, Donald Ebeigbe",
+      "abstract": "Navigating doorways is a fundamental capability for mobile manipulators operating in human environments, requiring coordinated motion between the mobile base and manipulator arm. This paper presents a motion planning framework that generates dynamically feasible and collision-free trajectories for autonomously opening and traversing both push and pull doors. The proposed method formulates the robot and door as a coupled dynamical system within a nonlinear Model Predictive Control (MPC) optimization framework. Manipulation feasibility is enforced through a penalty-based constraint, avoiding explicit arm kinematic modeling in the planner. Simulations and a hardware experiment demonstrate that the approach successfully plans feasible trajectories for door traversal.",
+      "url": "http://arxiv.org/abs/2608.00206v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00206v1",
+      "tldr": "A motion planning framework using nonlinear model predictive control with coupled robot-door dynamics and a penalty-based reachability constraint enables mobile manipulators to autonomously open and traverse push and pull doors.",
+      "detailed_reading": {
+        "motivation": "移动操作机器人在人类环境中自主开门并穿越门洞需要移动基座与机械臂的协调运动，现有搜索式和行为树方法将任务离散化，难以联合优化；而全身规划又维度过高。本文提出一种基于非线性模型预测控制的连续运动规划框架，在低维状态空间中联合优化基座运动与门开启过程。",
+        "method": "将机器人和门建模为耦合动态系统，状态为[x,y,theta_base,theta_door]，输入为[v,omega_base,omega_door]，门采用单积分器模型。用操作可行性惩罚项替代整数切换变量，通过基座与门把手距离判断是否在臂可达范围内，并将惩罚与门角速度相乘。同时用几何约束确保基座与门板最近点距离大于基座半径加安全余量。MPC目标包含控制努力、操作惩罚和终端状态代价，求解N步离散优化问题；执行时用差分逆运动学求解器（PINK）生成关节速度并支持控制障碍函数。",
+        "result": "在NVIDIA Isaac Sim高保真仿真和硬件实验中，所提方法成功规划出穿越推门和拉门的可行无碰撞轨迹，验证了框架的实用性。与搜索式方法相比，该方法在同一连续非线性规划中联合优化基座运动和开门过程。",
+        "conclusion": "该框架通过软约束避免显式臂运动学建模，保持规划状态维数低，能统一处理推门和拉门，同时施加几何离隙约束，展示了在真实机器人上应用的潜力。",
+        "key_details": "关键细节包括：门被建模为绕固定铰链旋转的刚体，环境为已知尺寸走廊；基座采用unicycle动力学且建模为圆形，门板为线段；操作惩罚使用r_min和r_max定义可达范围，惩罚系数高增益；碰撞约束包含安全距离d_s；MPC有控制输入和状态边界。执行层采用PINK求解器，利用控制障碍函数约束关节速度，但规划器本身不考虑完整臂运动学，且需要依赖外部定位与门检测。"
+      },
+      "affiliations": [
+        "AlphaZ Inc.",
+        "The Pennsylvania State University"
+      ],
+      "affiliations_text": "AlphaZ Inc., The Pennsylvania State University",
+      "score": 4.788574362226659,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.00272v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800272v1-localization-in-spatiotemporal-fields-via-environmental-pdes",
+      "source": "arxiv",
+      "title": "Localization in Spatiotemporal Fields via Environmental PDEs",
+      "authors": [
+        "Jose Fuentes",
+        "Abdullah Al Redwan Newaz",
+        "Ana Cavalcanti",
+        "Leonardo Bobadilla"
+      ],
+      "authors_text": "Jose Fuentes, Abdullah Al Redwan Newaz, Ana Cavalcanti, Leonardo Bobadilla",
+      "abstract": "This paper proposes a localization framework that uses spatiotemporal fields governed by partial differential equations (PDEs) as localization signatures. Two PDE classes are considered: the shallow water equations, which describe free-surface flows in coastal and riverine environments, and the advection-diffusion equation, which models the transport and mixing of scalar quantities such as temperature, salinity, and dissolved oxygen. A numerical PDE solver provides predicted fields over the domain, and multiple field channels are fused as multimodal measurements to improve localization accuracy. We formulate the problem within a Rao-Blackwellized particle filter (RBPF) that partitions the vehicle state into a nonlinear component sampled by particles and a linear sensor bias component tracked analytically via per-particle Kalman filters. This factorization reduces the required number of particles compared to a standard particle filter while accounting for realistic sensor drift. Simulation studies on both PDE scenarios show that the RBPF consistently outperforms a standard particle filter in terms of final position error and Root Mean Square Error (RMSE) across varying particle counts. Field experiments with an autonomous surface vehicle measuring salinity, temperature, and dissolved oxygen validate that PDE-governed environmental fields provide sufficient spatial variability for practical localization. Related experimental videos are available at https://localization-environmental-pdes.github.io/.",
+      "url": "http://arxiv.org/abs/2608.00272v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00272v1",
+      "tldr": "A localization framework uses PDE-governed spatiotemporal environmental fields (shallow water and advection-diffusion) as signatures, with a Rao-Blackwellized particle filter fusing multimodal measurements to outperform standard filtering in GPS-denied vehicle localization, as validated in simulations and field experiments.",
+      "detailed_reading": {
+        "motivation": "GPS拒止环境下的自主车辆定位是水下、室内及电磁对抗场景中的基础挑战。现有替代定位方法多依赖静态空间场或稳态流场，难以处理海洋调查、污染追踪等实际场景中物理场随时间的显著动态变化。浅水方程与对流扩散方程等环境PDE能够刻画水体的复杂时空演化，但尚未被系统用于车辆自身的定位反问题。为此，本文提出利用PDE控制的时空场作为定位签名，并构建能融合多通道环境测量、同时处理传感器漂移的滤波框架，以提升GPS拒止条件下的定位精度与鲁棒性。",
+        "method": "本文提出一种基于环境PDE时空场的定位框架。建模方面，考虑两类PDE：浅水方程（SWE）描述近岸与河流自由表面流，提供水位η和流速(u,v)三个通道；对流扩散方程描述温度、盐度、溶解氧、叶绿素等标量输运混合，通过耦合流速场生成多通道标量场。数值PDE求解器在域上提供预测场，车辆配备M个传感器同步测量对应通道，观测模型为φ(位置,t)+零均值高斯噪声。状态估计采用Rao-Blackwellized粒子滤波（RBPF）：将车辆状态划分为非线性部分（位置/航向）由粒子采样，线性传感器偏置部分用每个粒子附带的卡尔曼滤波器解析更新，从而在考虑传感器漂移的同时大幅减少所需粒子数。输入为控制序列和PDE预测的多通道场值，每个粒子依据运动模型传播，用多模态测量似然加权重采样，卡尔曼滤波器在线更新偏置项。仿真中设定测量噪声协方差diag(0.2^2,0.2^2,0.1^2)，运动噪声diag(0.5^2,0.087^2)，线性过程噪声diag(10^-8,...)，粒子数在实验中变化以对比。",
+        "result": "在两类PDE仿真场景中，RBPF在最终位置误差和RMSE上均一致优于标准粒子滤波（PF）。SWE场景下，500粒子时RBPF的RMSE为0.80±0.03 m，PF为1.07±0.04 m，精度提升约25%；对流扩散场景中，500粒子时RBPF的RMSE为1.23±0.35 m，相比PF的约2.3-2.4 m降低近47%，标准PF在所有粒子数下误差稳定在约2.3-2.4 m，显示出精度上限。特征消融实验显示，SWE模型融合全部三个特征时RMSE为0.82±0.06 m，仅用单一特征时升至1.59±0.55 m；对流扩散模型从全特征1.51±0.79 m退化至单特征2.63±1.63 m，方差显著增大，证实多通道融合显著提升精度。实船实验采用自主水面艇测量盐度、温度、溶解氧，验证了PDE场具有足够空间变异性用于实际定位。",
+        "conclusion": "基于环境PDE的时空场可作为GPS拒止环境下有效的定位签名，且RBPF通过将线性传感器偏置解析化能显著优于标准粒子滤波，在较少粒子数下获得更高精度。浅水方程与对流扩散方程分别适用于水动力场景和水质监测场景，多通道测量融合是提升定位鲁棒性的关键。实验结果支持该框架在水下及近岸自主定位中的实用潜力。",
+        "key_details": "关键细节包括：1）SWE源项包含由GEBCO数据估计的 bathymetry 和实测风速（约12 m/s）构建的风应力项；2）对流扩散方程的扩散系数设置在0.01-1 m²/s之间，流速平均约1.0 m/s，初始场由实测数据拟合；3）RBPF的线性偏置状态采用卡尔曼滤波器，线性过程噪声设为diag(10^-8,10^-8,10^-8)以保证数值稳定；4）性能度量使用最终误差（末时刻位置误差）与RMSE（全程平均跟踪误差）互补，避免单点或均值偏差；5）特征消融中，随机选择测量通道并相应降低卡尔曼维度，重复5次独立运行以覆盖随机性；6）仿真步长1 s，总时长500 s，粒子数从数百到500变化；7）局限性包括：PDE场需先验数值求解，对复杂环境网格计算成本较高；对流扩散场梯度较弱时定位精度存在基础上限，且RBPF在高粒子数（如400）时方差较大，稳定性受场特征影响。"
+      },
+      "affiliations": [
+        "Florida International University",
+        "University of New Orleans"
+      ],
+      "affiliations_text": "Florida International University, University of New Orleans",
+      "score": 4.6890955915617125,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.00217v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800217v1-truncated-differentiation-for-inverse-potential-mfgs",
+      "source": "arxiv",
+      "title": "Truncated Differentiation for Inverse Potential MFGs",
+      "authors": [
+        "Siting Liu",
+        "Yat Tin Chow",
+        "Samy Wu Fung"
+      ],
+      "authors_text": "Siting Liu, Yat Tin Chow, Samy Wu Fung",
+      "abstract": "We study inverse potential mean-field games (MFGs), in which an unknown spatial inverse-cost (mobility) map is inferred from observed population densities. We solve the forward MFG with a preconditioned primal-dual hybrid gradient (PDHG) method and develop Jacobian-free backpropagation (JFB-$r$), which records only the final $r$ iterations from a detached warm start while retaining the full forward solve. To analyze this truncated differentiation method, we show that the exact-proximal dual-extrapolated PDHG map is a metric resolvent of the maximal monotone KKT operator. This resolvent view shows that JFB-$r$ exactly differentiates a finite-trajectory surrogate and, under a locally fixed active set at an exact equilibrium detach point, converges to the implicit gradient as the tracked depth increases. Across several inverse-MFG settings, numerical experiments show that JFB-r at moderate tracked depths can achieve recovery accuracy comparable to full unrolling while reducing memory and runtime.",
+      "url": "http://arxiv.org/abs/2608.00217v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00217v1",
+      "tldr": "This paper introduces JFB-r, a truncated, Jacobian-free backpropagation method that differentiates only the final r iterations of a preconditioned PDHG solver for inverse potential mean-field games, and shows—via a metric-resolvent analysis of the PDHG map—that it recovers full-unrolling accuracy at a fraction of the memory and runtime.",
+      "detailed_reading": {
+        "motivation": "反演势能平均场博弈中的未知空间逆成本（迁移率）图通常需要对均衡解映射求导。现有方法如伴随灵敏度需要额外大规模线性求解，嵌入KKT会扩大优化系统，完全展开前向求解器反向传播则需存储完整轨迹，内存和计算开销大。因此需要一种既能保留完整前向求解精度又能降低反向存储与运行时的可微求解方案。",
+        "method": "将前向势能MFG离散为凸规划：以密度ρ和通量m为原始变量，加上连续性约束、非负约束及KL终端项，构造拉格朗日鞍点问题。使用带精确Schur预条件子的G-prox预条件原始对偶混合梯度（PDHG）迭代求解，预条件子W=KK^T通过对空间DCT和小时间块特征分解求逆，每格邻近算子用12步阻尼牛顿迭代。在反问题中，用可微参数θ参数化c_θ(s)，以观测密度与模拟密度的平方误差为损失。为求梯度，采用JFB-r：前向仍运行N_itr步PDHG，但在第N_itr-r步分离计算图，只记录并反向传播最后r步迭代，从而得到近似的隐式梯度；理论上该操作等价于对有限轨迹替代目标精确求导。",
+        "result": "在多个反演势能MFG数值实验中，JFB-r在适中跟踪深度下能达到与完全展开相当的恢复精度，同时显著降低内存和运行时间。具体地，在含噪声且仅部分时间观测密度的情形下，JFB-25相比完全展开将峰值内存降低约3.9倍，运行时间减少约一半，而恢复误差在三种随机种子变化范围内与完全展开持平。",
+        "conclusion": "截断微分方法JFB-r为反演势能MFG提供了一种高效且可证明的求导方式：它不需要收缩性假设，而是通过将精确邻近PDHG映射视为极大单调KKT算子的度量预解式，说明在局部固定活动集和精确均衡分离点条件下，随跟踪深度增加会趋于隐式梯度。数值上以更小内存和更快速度恢复与完全展开相当的成本图，适合大规模反演问题。",
+        "key_details": "关键点包括：精确邻近双外推PDHG映射T_θ是单位参数度量预解式，因此无需压缩映射条件；JFB-r精确微分有限轨迹替代目标，并在局部固定活动集与精确均衡分离点下与隐式梯度一致；反向存储和计算成本随r而非N_itr增长，但需保留完整前向求解；实现中邻近算子采用12步阻尼牛顿近似；理论结果依赖固定网格上的局部正则性、密度内点假设和活动集局部固定，未声称网格一致或离散到连续极限；参数化为非线性时外目标非凸，灵敏度是局部分支意义上的。"
+      },
+      "affiliations": [
+        "Colorado School of Mines",
+        "University of California, Riverside"
+      ],
+      "affiliations_text": "Colorado School of Mines, University of California, Riverside",
+      "score": 4.622042805954232,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.00019v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800019v1-uncertainty-aware-simulation-based-inference-for-operations-research-with-large-language-models",
+      "source": "arxiv",
+      "title": "Uncertainty-Aware Simulation-Based Inference for Operations Research with Large Language Models",
+      "authors": [
+        "Liang Guo",
+        "Lin Shaochong",
+        "Shen Zuo-Jun Max",
+        "Zhang Kun"
+      ],
+      "authors_text": "Liang Guo, Lin Shaochong, Shen Zuo-Jun Max, Zhang Kun",
+      "abstract": "Deploying large language models (LLMs) for operations research (OR) tasks remains challenging because correctness depends on a coherent modeling process, not merely a correct final answer. Standard autoregressive generation operates on a myopic policy, which sometimes fails to anticipate whether a partial formulation can be validly extended into a globally consistent optimization model. Consequently, locally plausible steps may propagate into catastrophic downstream formulation or solver code errors. To address this, we propose an uncertainty-aware, training-free inference framework for OR mathematical modeling. Without updating model parameters, our method evaluates intermediate candidate steps using short lookahead simulations to quantify downstream predictive uncertainty or probability concentration. Candidates that demonstrate a higher likelihood of yielding coherent mathematical formulations are then dynamically selected via importance resampling. Empirical evaluations across multiple OR benchmarks (including NL4OPT, MAMO, and IndustryOR) demonstrate that our framework consistently outperforms both standard and low-temperature baselines, establishing an efficient, training-free paradigm for reliable OR formulation generation.",
+      "url": "http://arxiv.org/abs/2608.00019v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00019v1",
+      "tldr": "The paper proposes a training-free, uncertainty-aware inference framework that uses short lookahead simulations and importance resampling to evaluate and select intermediate steps in LLM-generated operations research formulations, consistently outperforming standard and low-temperature baselines across OR benchmarks like NL4OPT, MAMO, and IndustryOR.",
+      "detailed_reading": {
+        "motivation": "运筹学（OR）任务中，LLM生成数学规划的正确性取决于整体建模过程的连贯性，而非仅最终答案正确。标准自回归生成采用短视策略，局部看似合理的步骤可能无法扩展为全局一致的优化模型，导致下游公式或求解器代码出现严重错误。低温度采样虽能降低局部随机性，却无法解决结构层面的不确定性，甚至会强化早期错误。",
+        "method": "提出一种无需训练的、不确定性感知的推理框架：在生成过程中，对每个中间候选步骤执行短前瞻模拟（short lookahead simulations），利用冻结的基础LLM进行多次短轨迹展开，量化下游预测不确定性或概率集中度，据此设计两种奖励函数（power reward和entropy reward）。通过重要性重采样（importance resampling）动态调整候选步骤的选择概率，使高结构可靠性的路径获得更高选中概率，从而在不更新模型参数、不依赖外部奖励模型或梯度更新的情况下，引导生成走向全局一致的OR数学公式。",
+        "result": "在NL4OPT、MAMO和IndustryOR等多个OR基准上的实验表明，该框架在多种问题复杂度下持续优于标准采样和低温度采样基线，尤其在高度约束的工业级建模任务中增益最显著，验证了不确定性感知轨迹评估对结构一致性关键场景的有效性。",
+        "conclusion": "所提出的不确定性感知、基于模拟的推理框架为可靠的OR公式生成提供了一种高效且无需训练的范式，证明通过前瞻模拟与重要性重采样可以在推理阶段显式提升全局建模一致性，而不依赖昂贵的强化学习或外部验证器。",
+        "key_details": "关键点包括：1）基础模型为经过OR任务SFT的开源模型，其逐token条件分布可直接获取；2）奖励函数基于短前瞻模拟的下游概率集中度（power reward）和预测不确定性（entropy reward），无需人工标注或训练奖励模型；3）重要性重采样在生成过程中动态重分配概率质量，推理开销可扩展；4）论文分析指出OR推理具有强路径依赖性，正确最终答案几乎只源于无早期错误的中介链，早期错误难以恢复；5）当前框架依赖基础模型已有的推理能力，且奖励模拟的rollout长度和采样数量需权衡计算成本与效果。"
+      },
+      "affiliations": [
+        "The University of Hong Kong",
+        "Renmin University of China"
+      ],
+      "affiliations_text": "The University of Hong Kong, Renmin University of China",
+      "score": 4.613409158958761,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.00213v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800213v1-physically-consistent-sindy-sparse-identification-of-nonlinear-dynamics-for-microgrid-identification-and-real-time-frequency-control",
+      "source": "arxiv",
+      "title": "Physically Consistent SINDy (Sparse Identification of Nonlinear Dynamics) for Microgrid Identification and Real-Time Frequency Control",
+      "authors": [
+        "Mohan Du",
+        "Jiayi Lai",
+        "Rong-Peng Liu",
+        "Xiaozhe Wang"
+      ],
+      "authors_text": "Mohan Du, Jiayi Lai, Rong-Peng Liu, Xiaozhe Wang",
+      "abstract": "This paper proposes PC-SINDYc, a novel framework for the identification and frequency control of microgrids (MGs) with distributed energy resources. By leveraging physics-guided library construction, total least squares regression, and random sample consensus, the regression algorithm of PC-SINDYc robustly identifies the true frequency dynamics of MGs from phasor measurement unit (PMU) data, considering noise, delays, and constraint activations. Based on the identified model, the PC-SINDYc framework further incorporates a model predictive controller (MPC) for real-time frequency control. We prove that, under mild conditions, PC-SINDYc ensures asymptotic stability of the MG. Simulations on 4-bus and 13-bus MGs demonstrate that PC-SINDYc effectively controls MG's frequency across various disturbances unseen during the offline identification, outperforming PI controllers, conventional SINDYc, and state-of-the-art reinforcement learning methods.",
+      "url": "http://arxiv.org/abs/2608.00213v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00213v1",
+      "tldr": "PC-SINDYc is a physically consistent SINDy-based framework that robustly identifies microgrid frequency dynamics from noisy PMU data under delays and constraint activations, integrates a model predictive controller for real-time frequency control with asymptotic stability guarantees, and outperforms PI, conventional SINDYc, and reinforcement learning methods in simulations.",
+      "detailed_reading": {
+        "motivation": "微电网中分布式能源的随机性和缺乏惯量给频率稳定带来挑战，而现有模型驱动方法依赖难以获取的精确参数，黑箱数据驱动方法（如神经网络、强化学习）缺乏物理可解释性和稳定性保证，传统SINDy方法也不能识别真实物理模型且对噪声和约束激活敏感。因此需要一种能识别真实频率动态、鲁棒抗噪、可解释且保证控制性能的数据驱动方法。",
+        "method": "PC-SINDYc框架：首先基于物理指导构建候选函数库，显式考虑采用下垂控制和虚拟同步发电机控制的GFM变换器以及GFL变换器的不同控制模式，确保候选库包含与真实动态等价的项；然后利用PMU数据，结合总体最小二乘回归抑制测量噪声，并采用RANSAC自动剔除因变换器约束激活而产生的异常数据，从而离线辨识微网的频率动态模型；最后基于辨识出的模型设计模型预测控制器，在实时控制中根据当前测量状态滚动优化控制输入，实现频率恢复。辨识过程中仅需对系统施加±0.001至±0.01 p.u.的小信号激励，并采集约10秒的PMU数据。",
+        "result": "在4母线和13母线微电网仿真中，针对离线辨识阶段未见的多种扰动，PC-SINDYc均能有效控制频率，性能优于PI控制器、传统SINDYc和最先进的强化学习方法。理论分析还证明在温和条件下PC-SINDYc可保证微电网的渐近稳定性。",
+        "conclusion": "PC-SINDYc为含分布式能源的微电网提供了一种纯数据驱动、最小侵入且物理一致的识别与控制框架，能在噪声、延迟和约束激活下辨识真实频率动态，并基于该模型实现有稳定性保证的实时频率控制，克服了现有方法依赖精确参数、缺乏可解释性与泛化性的局限。",
+        "key_details": "关键细节包括：物理指导的库构造确保识别模型与真实方程等价；总体最小二乘用于消除回归稀释；RANSAC自动拒绝约束激活导致的异常样本；小信号激励幅度为±0.001至±0.01 p.u.，数据窗口约10秒；基于MPC的控制设计具有渐近稳定性证明；不依赖网络和变换器参数。局限性可能在于需要PMU测量数据的质量与时间同步，以及离线辨识后在线控制对计算实时性的要求。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.339222589701449,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.00249v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/04/260800249v1-dynamical-principles-of-habituation-across-substrates-and-scales",
+      "source": "arxiv",
+      "title": "Dynamical principles of habituation across substrates and scales",
+      "authors": [
+        "Matthew Smart",
+        "Stanislav Y. Shvartsman",
+        "Martin Mönnigmann"
+      ],
+      "authors_text": "Matthew Smart, Stanislav Y. Shvartsman, Martin Mönnigmann",
+      "abstract": "Habituation is a basic form of learning in which a system's response to repeated stimulation progressively diminishes but eventually recovers when the stimulus is withheld. Long studied in animals, it has increasingly been observed in unicellular organisms and non-living devices such as electronic circuits and neuromorphic materials, suggesting underlying dynamical principles that recur across domains. This review asks what those principles are: given qualitative constraints imposed by habituation on a system's response, what is the minimal dynamical structure that satisfies them? We formalize the classical hallmarks of habituation as behavioral constraints on input--output behavior, show that linear time-invariant systems are structurally incompatible with these constraints, and construct nonlinear motifs---linear fading-memory dynamics composed with static nonlinearities---that exhibit the hallmarks across diverse settings. We relate these motifs to models of specific biological systems and to physical and algorithmic realizations, from analog circuits to transient computation in machine learning.",
+      "url": "http://arxiv.org/abs/2608.00249v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00249v1",
+      "tldr": "TLDR: This review formalizes habituation's classical behavioral hallmarks as qualitative input–output constraints, shows that linear time-invariant systems cannot satisfy them, and identifies minimal nonlinear fading-memory motifs as the domain-general dynamical principles underlying habituation across biological and nonliving systems.",
+      "detailed_reading": {
+        "motivation": "习惯化是最基本的学习形式，表现为对重复刺激的响应逐渐减弱、停止刺激后恢复。该现象不仅见于动物，也在单细胞生物、电子电路和神经形态材料中出现，提示存在跨域复现的动力学原理。本文从系统与控制视角追问：在习惯化对输入-输出行为施加的定性约束下，满足这些约束的最小动力学结构是什么？",
+        "method": "将经典习惯化特征（H1-H10）形式化为对系统输入-输出算子的行为约束：以非负周期脉冲串（周期T、幅度A、占空比d）为输入，用每个周期内输出峰值y[k]刻画响应序列，从而把“递减、恢复、频率/强度依赖”转化为对峰值序列的不等式与序关系。假设系统为单输入单输出时不变状态空间模型x_dot=f(x,u), y=g(x,u)且具有唯一静息态；借Willems行为框架定义约束可行域。首先证明线性时不变（LTI）系统因叠加性与时间不变性无法满足单调衰减等习惯化约束，因而非线性是必要结构；随后构造最小motif——线性衰减记忆动力学与静态非线性（如阈值/饱和）复合，使其在参数和输入族变化下稳健满足H1、H2、H4、H5，并讨论H3、H6-H8的扩展；最后将motif与具体生物模型、模拟电路、神经形态材料和机器学习中的瞬态计算实现相关联。",
+        "result": "核心结果为结构性的：LTI系统无法实现习惯化，非线性并非建模选择而是必要前提；由线性衰减记忆加静态非线性构成的非线性motif可以同时满足习惯化的若干核心标志，并在多类系统中复现相同的衰减-恢复暂态行为。该结果将“衰减记忆”识别为习惯化的统一机制，为跨生物与非生物体系的对比提供了可复现的最小模型类。",
+        "conclusion": "习惯化的特征不是需拟合的数据，而是需要满足的行为规格；跨物种与非生命系统共现的现象背后存在与具体实现无关的动力学原理。最小结构可表述为线性衰减记忆动力学与静态非线性复合的非线性系统。这一视角为控制系统理论处理定性暂态约束提供了新问题，也为合成生物学、神经形态电路和机器学习中的瞬态计算设计给出了指导原则。",
+        "key_details": "关键细节包括：输入采用周期T、幅度A、占空比d的非负脉冲串，响应定义为每周期峰值y[k]；H0要求输出非负且有界，这是排除LTI的关键物理约束；只有H1（递减）和H2（自发恢复）是必要条件，其余标志刻画可选结构；研究重点为H1、H2、H4（频率敏感）和H5（强度敏感），H3、H6-H8可通过motif的微小修改实现，H9/H10未深入讨论；约束是跨输入族的定性关系而非单条轨迹拟合，与系统辨识、SINDy/符号回归的“逐点”拟合有本质区别；LTI不可能性依赖叠加性与时间平移不变性；衰减记忆与Volterra级数相关但Volterra构造仍属于逐点拟合；文中还讨论了与Willems行为框架、分岔理论中规范形的类比，并指出SISO、静息态假设、多稳态和奇异极限等局限。"
+      },
+      "affiliations": [
+        "Princeton University",
+        "Ruhr-Universität Bochum",
+        "Flatiron Institute"
+      ],
+      "affiliations_text": "Princeton University, Ruhr-Universität Bochum, Flatiron Institute",
+      "score": 4.258356805951246,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.00129v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800129v1-progressive2-a-teacher-student-progressive-co-evolving-knowledge-distillation-method-for-substantial-model-compression",
+      "source": "arxiv",
+      "title": "Progressive$^2$: A Teacher-Student Progressive Co-Evolving Knowledge Distillation Method for Substantial Model Compression",
+      "authors": [
+        "Tiancong Cheng",
+        "Ying Zhang",
+        "Zhiwen Yu",
+        "Yifang Yin",
+        "Bin Guo"
+      ],
+      "authors_text": "Tiancong Cheng, Ying Zhang, Zhiwen Yu, Yifang Yin, Bin Guo",
+      "abstract": "Knowledge distillation (KD) is a widely utilized technique for transferring knowledge from a large model (the teacher) to a smaller model (the student). Owing to its flexibility and broad applicability, KD has been extensively applied in the compression of server-side models to meet the Quality of Service (QoS) requirements of client users. Despite significant advancements, the performance of distillation is substantially compromised when a large disparity exists between the capabilities of the server and the requirements of the client. To alleviate this problem, we propose a novel distillation approach, named Progressive$^2$, which operates through the combination of a progressively stronger teacher and a progressively smaller student. On the side of the teacher, rather than involving all layers simultaneously, we progressively select additional layers for distillation following a raw-to-rich semantic progression, establishing a systematic learning curriculum. Furthermore, we design a teacher-side multi-feature fusion adapter for the teacher to improve training stability, which is theoretically supported by the framework of Lipschitz continuity. On the side of the student, rather than directly training a tiny model, we gradually reduce the size of the network to facilitate an iterative co-evolution with the teacher. Progressive$^2$ serves as a flexible framework; the progressive strategy of the teacher can be deployed independently to achieve an optimal balance between accuracy and training efficiency, while the joint integration of the teacher and the student yields further improvements in overall performance.",
+      "url": "http://arxiv.org/abs/2608.00129v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00129v1",
+      "tldr": "Progressive² is a knowledge distillation method that bridges large teacher-student capacity gaps for substantial model compression by progressively strengthening the teacher's layer-wise knowledge and gradually shrinking the student network in a co-evolving curriculum.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northwestern Polytechnical University"
+      ],
+      "affiliations_text": "Northwestern Polytechnical University",
+      "score": 4.111165552688965,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.00263v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800263v1-compliant-sphere-lattice-contact-distributed-contact-modeling-for-sphere-based-robot-representations",
+      "source": "arxiv",
+      "title": "Compliant Sphere Lattice Contact: Distributed Contact Modeling for Sphere-Based Robot Representations",
+      "authors": [
+        "Nataliya Nechyporenko",
+        "Ava Abderezaei",
+        "Alessandro Roncone"
+      ],
+      "authors_text": "Nataliya Nechyporenko, Ava Abderezaei, Alessandro Roncone",
+      "abstract": "Contact planning in robotics requires models that are both computationally efficient and physically accurate. Sphere-based robot representations satisfy the first requirement by enabling fast collision checking and differentiable geometry, but sacrifice physical accuracy by relying on point contact which cannot capture contact patch area, pressure distributions, rotational stiffness, or frictional moments. We introduce Compliant Sphere Lattice Contact (CSLC), a distributed contact model that operates natively on sphere representations by modeling the robot interface as a compliant lattice of surface spheres connected through anchor and lateral springs. When pressed against an object, the lattice deforms to produce a spatially distributed contact patch that improves the physical accuracy of sphere-based contact. We validate CSLC across two independent solvers and show preliminary results demonstrating contact patch formation and improved grasp stability.",
+      "url": "http://arxiv.org/abs/2608.00263v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00263v1",
+      "tldr": "CSLC is a distributed contact model that uses a compliant lattice of surface spheres to generate spatially distributed contact patches, improving physical accuracy and grasp stability for sphere-based robot representations.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.106143605313638,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.00212v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800212v1-a-physics-chemistry-informed-neural-network-pcinn-for-real-time-spatial-ald-coverage-prediction-and-reliable-kinetics-inversion",
+      "source": "arxiv",
+      "title": "A Physics-Chemistry-Informed Neural Network (PCINN) for Real-Time Spatial-ALD Coverage Prediction and Reliable Kinetics Inversion",
+      "authors": [
+        "Ning Hu",
+        "Chang Liu",
+        "Yunlei Jiang",
+        "Yuan Dong"
+      ],
+      "authors_text": "Ning Hu, Chang Liu, Yunlei Jiang, Yuan Dong",
+      "abstract": "Spatial atomic layer deposition (SALD) is a leading atmospheric-pressure, high-throughput route to industrial ALD, but design and control are limited by the cost of predicting surface coverage: high-fidelity CFD is far too slow for operating-window scans, while analytic models miss transport modulation such as the gas curtain. We present a physics-chemistry-informed neural network (PCINN), a hybrid surrogate with CFD-level accuracy at real-time speed: a query returns coverage in about 7 ms, roughly 5x10^4 times faster than a CFD solve, reaching a test R^2_log = 0.998 (leave-one-out R^2_raw = 0.974) from only 30 training cases spanning four orders of magnitude in coverage.\n  The architecture is not a black box: a small network learns only the operating-condition to near-wall concentration closure, while the known surface kinetics is a hard-coded, trainable chemistry layer integrated along the substrate trajectory. This single-scalar bottleneck keeps it accurate under sparse data, interpretable and invertible.\n  We add a full identifiability analysis (Fisher information, profile likelihood). The adsorption energy E_ads and desorption rate k_des are robustly identifiable; k_ads is not separately identifiable at a single temperature (only k_ads*c_wall is). Across four temperatures the prefactor nu and E_ads bind along a weakly identifiable degeneracy valley of slope 0.065 eV/decade, derived analytically as k_B T_eff ln(10) and turned into a reliability diagnostic: a seven-chemistry mismatch matrix shows it is invariant under any single-Arrhenius mismatch and shifts only when a second thermally activated process appears, so a slope departure flags unmodelled site heterogeneity.\n  Data come from simulation with known ground truth inverted by the same kinetic form, so the study verifies pipeline self-consistency and the identifiability boundary, not real parameters.",
+      "url": "http://arxiv.org/abs/2608.00212v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00212v1",
+      "tldr": "A physics-chemistry-informed neural network (PCINN) hybrid surrogate combines a small neural network for transport closure with a hard-coded, trainable surface-kinetics layer to achieve real-time (~7 ms), CFD-level spatial-ALD coverage prediction and reliable kinetics inversion, including an analytic identifiability diagnostic for parameter degeneracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hangzhou Dianzi University"
+      ],
+      "affiliations_text": "Hangzhou Dianzi University",
+      "score": 3.978779796402014,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.00106v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800106v1-learning-compositional-meta-routing-for-agentic-workflows-an-executable-benchmark",
+      "source": "arxiv",
+      "title": "Learning Compositional Meta-Routing for Agentic Workflows: An Executable Benchmark",
+      "authors": [
+        "Natan Vidra",
+        "Alina Kapanova",
+        "Arun Kanhai",
+        "Spurthi Setty"
+      ],
+      "authors_text": "Natan Vidra, Alina Kapanova, Arun Kanhai, Spurthi Setty",
+      "abstract": "Agentic systems must decide not only what answer to produce, but which reasoning and execution operations should precede it. A controller may answer directly, decompose a request, retrieve evidence, execute code, delegate to a specialist, or verify an intermediate result. Existing routing work largely selects model endpoints, retrieval depth, or tools in isolation. We introduce an executable benchmark and a budget-aware meta-router that composes heterogeneous operations from raw task text. The benchmark contains 216 training, 72 development, 108 held-out test, and 108 locked lexical-shift challenge tasks across data analysis, frozen-corpus research, and document processing. Outcomes are machine checked after operations execute. Independent regularized logistic heads predict operation probabilities from word and character features, are temperature-scaled on development data, and are greedily composed under route-cost and action-count budgets. On the held-out test, the learned policy achieves 100% success versus 93.5% for strong static and fixed workflows, with 43% lower cost than the static policy; a matched learned one-shot router reaches 56.5%. On the untouched challenge split, learned success falls to 75.9% and trails static routing at 93.5%, while remaining 49% cheaper and exceeding one-shot routing by 34.3 points. The gap identifies lexical generalization, rather than route execution, as the principal limitation. These results establish a reproducible testbed and a bounded proof of concept, not evidence of live-LLM performance.",
+      "url": "http://arxiv.org/abs/2608.00106v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00106v1",
+      "tldr": "This paper introduces an executable benchmark and a budget-aware meta-router that composes heterogeneous operations from raw task text, achieving 100% success on held-out test tasks at lower cost while revealing lexical generalization as the key limitation on a locked challenge split.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Cornell University",
+        "CUNY",
+        "Stevens Institute of Technology",
+        "Anote AI"
+      ],
+      "affiliations_text": "Cornell University, CUNY, Stevens Institute of Technology, Anote AI",
+      "score": 3.97254373985862,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.00208v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800208v1-developing-combined-manipulation-and-locomotion-skills-with-interaction-representation-and-skill-composition",
+      "source": "arxiv",
+      "title": "Developing Combined Manipulation and Locomotion Skills with Interaction Representation and Skill Composition",
+      "authors": [
+        "Fanxing Meng",
+        "Jing Xiao"
+      ],
+      "authors_text": "Fanxing Meng, Jing Xiao",
+      "abstract": "This paper addresses how to enable a humanoid robot to learn motion policies based on developmental principles and combine policies to create more sophisticated and useful behaviors. Specifically, we present an approach to (1) learning a whole-body reaching and grasping policy and (2) combining it and a standing-up and walking policy to compose a more complex policy of manipulation and locomotion: grasping, standing up, and walking.\n  In (1), our method draws inspiration from harmonic analysis and adopts cubic harmonics as weights to represent the hand-object spatial relationship via spatial convolution. Utilizing an intra-episode finger joint decoupling curriculum based on developmental principles, a robot can autonomously learn a generalizable grasping policy without relying on external datasets or pretrained models.\n  In (2), our method combines the grasping policy with a separately learned getting-up policy by providing both policies with their respective observation vectors and using hand-object interaction scores to determine when each policy should control which robot joints. Our results show a 93% zero-shot success rate for grasping unseen objects and a 96-100% success rate for standing up while holding the object. Our work also demonstrates that combining different policies is only effective if each policy learning happens on the same whole humanoid body even if a policy (such as for locomotion) does not seem to need all the body parts (such as fingers).",
+      "url": "http://arxiv.org/abs/2608.00208v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00208v1",
+      "tldr": "A humanoid robot learns a generalizable whole-body grasping policy using cubic-harmonics-based spatial interaction representations and a developmental curriculum, then composes it with a standing/walking policy via interaction-based joint control—achieving 93% zero-shot grasping of unseen objects and 96–100% success standing while holding them, while showing that full-body training is essential for seamless policy composition.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Worcester Polytechnic Institute"
+      ],
+      "affiliations_text": "Worcester Polytechnic Institute",
+      "score": 3.9557134115173795,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.00245v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800245v1-residual-centering-and-error-bounds-for-convex-approximation-of-mixed-integer-recourse",
+      "source": "arxiv",
+      "title": "Residual Centering and Error Bounds for Convex Approximation of Mixed-Integer Recourse",
+      "authors": [
+        "Alban Kryeziu"
+      ],
+      "authors_text": "Alban Kryeziu",
+      "abstract": "We study convex approximations of mixed-integer recourse functions in two-stage stochastic programming. For first-stage decisions, the relevant approximation error is the signed expected residual between the convex approximation and the integer-recourse value function. On bounded uncertainty boxes, we identify residual conditions that yield deterministic bounds for this expectation error. The central condition is coordinate slice-centering, under which integration by parts gives an anisotropic total-variation bound and a mixed-derivative bound whose all-coordinate case is expressed through Vitali variation of the density. Exact centering, however, may be incompatible with convexity, even for totally unimodular ceiling recourse. We therefore use commuting coordinate projectors to decompose an arbitrary residual into a centered component and an explicit slice-mean defect. The resulting defect-adjusted bounds provide selectable error certificates and uniform first-stage decision-quality guarantees. We further establish sharp constants, extend the mixed-derivative estimate to nonsmooth densities, and develop tensor-product and geometric extensions of the framework, alongside a max-affine convex fitting and audit methodology.",
+      "url": "http://arxiv.org/abs/2608.00245v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00245v1",
+      "tldr": "This paper introduces a residual-first framework for convex approximations of mixed-integer recourse, showing that coordinate slice-centering of the signed residual yields sharp, defect-adjusted expectation error bounds via total-variation and Vitali-type density variation, while explicitly accounting for centering defects and convexity limitations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Groningen"
+      ],
+      "affiliations_text": "University of Groningen",
+      "score": 3.9235326250594786,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.00135v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800135v1-rethinking-pretraining-for-specialized-design-data-evidence-from-the-jones-19-cultural-design-dataset",
+      "source": "arxiv",
+      "title": "Rethinking Pretraining for Specialized Design Data: Evidence from the JONES-19 Cultural Design Dataset",
+      "authors": [
+        "Alexandros Haridis",
+        "Charles Zhou"
+      ],
+      "authors_text": "Alexandros Haridis, Charles Zhou",
+      "abstract": "Design and architectural archives encode expert human knowledge in graphical formats, providing a critical testbed for design-inspired Machine Learning (ML) challenges absent with typical computer vision benchmarks. Building on JONES-19, a small-size image dataset based on The Grammar of Ornament (London, 1857), we evaluate the discriminative performance of Convolutional Neural Networks (CNNs) in two model training strategies: (a) ImageNet pretraining for domain-general \"visual common sense,\" and (b) learning from scratch on the design data in JONES-19. We find that while domain-general priors improve discriminative performance, learning from scratch augmented with repeated local sampling (multi-crop) effectively recovers these gains. For highly structured design data, local design-driven representations provide sufficient foundation for learning, challenging a reliance on massive general-purpose pretraining. These findings suggest that in specialized design domains, careful curation of smaller high-quality datasets that capture empirical and formal design principles may prove more effective and informative on the nature of a particular design domain than prioritizing large-scale data collection.",
+      "url": "http://arxiv.org/abs/2608.00135v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00135v1",
+      "tldr": "On a small, specialized cultural design dataset (JONES-19), ImageNet pretraining boosts CNN classification accuracy, but training from scratch with multi-crop augmentation largely recovers those gains, suggesting that curated, high-quality domain-specific data can rival massive general-purpose pretraining.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvard University"
+      ],
+      "affiliations_text": "Harvard University",
+      "score": 3.703946580525085,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.00198v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800198v1-autocause-a-python-framework-that-automates-expert-decisions-in-environmental-time-series-causal-discovery",
+      "source": "arxiv",
+      "title": "AutoCause: A Python framework that automates expert decisions in environmental time-series causal discovery",
+      "authors": [
+        "Marco Ruiz",
+        "Miguel Arana-Catania",
+        "David R. Ardila",
+        "Rodrigo Ventura"
+      ],
+      "authors_text": "Marco Ruiz, Miguel Arana-Catania, David R. Ardila, Rodrigo Ventura",
+      "abstract": "Environmental time-series causal discovery requires expert decisions about method choice, conditional-independence tests, lag horizons, sample-size adequacy, multiple-testing control, and evidence interpretation. Applied inconsistently across datasets, these choices yield graphs that cannot be compared, reproduced, or audited. We present AutoCause, an open-source Python workflow that records each decision, derives defaults from an extended causal-audit module, and admits domain-informed overrides. The workflow wraps four established causal-discovery methods from three families, adds non-causal reference models, and grades links by method-count support. On 145 datasets from DGP-Atlas, TimeGraph, and a topology-derived CausalRivers reference, the methods recover complementary parts of the reference graphs. Majority-supported links are more precise than single-method links on the synthetic benchmarks but not against river topology. AutoCause converts inconsistent expert practice into an auditable, repeatable analysis; causal interpretation remains with the analyst. Available at https://github.com/marcoruizrueda/autocause.",
+      "url": "http://arxiv.org/abs/2608.00198v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00198v1",
+      "tldr": "AutoCause is an open-source Python framework that automates and records expert decisions in environmental time-series causal discovery by wrapping multiple established methods, deriving defaults from extended causal-audit diagnostics, and grading consensus-support links, thereby making the analysis auditable and reproducible while leaving causal interpretation to the analyst.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Oxford",
+        "Instituto Superior Técnico",
+        "Caltech"
+      ],
+      "affiliations_text": "University of Oxford, Instituto Superior Técnico, Caltech",
+      "score": 3.647324710558826,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.00284v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800284v1-hybrid-attention-estimation-pipeline-for-adaptive-hri-using-an-expressive-robotic-head",
+      "source": "arxiv",
+      "title": "Hybrid Attention Estimation Pipeline for Adaptive HRI Using an Expressive Robotic Head",
+      "authors": [
+        "Pablo Moraes",
+        "Monica Rodriguez",
+        "Christopher Peters",
+        "Hiago Sodre",
+        "Tobias Doernbach",
+        "Bruna Guterres",
+        "Ricardo Grando"
+      ],
+      "authors_text": "Pablo Moraes, Monica Rodriguez, Christopher Peters, Hiago Sodre, Tobias Doernbach, Bruna Guterres, Ricardo Grando",
+      "abstract": "This paper presents an applied case study on hybrid visual attention estimation for human-robot interaction using an expressive robotic head based on the InMoov ecosystem. The proposed pipeline combines a fast geometric perception layer with an independent semantic perception layer based on a vision-language model. The geometric layer provides high-frequency face and head-pose information for temporal regulation, while the semantic layer receives only raw egocentric camera frames and produces contextual attention labels related to attention toward the robot, phone use, or attention elsewhere. These signals are integrated through a finite state machine that regulates adaptive interaction behavior, including activation, waiting, interaction resumption, and return to rest. The system was evaluated with 10 participants across 40 trials covering baseline and adaptive interaction conditions. Results show reliable interaction start across all trials, consistent pause behavior in the adaptive distraction condition, and non-redundant semantic information between the geometric and semantic outputs.",
+      "url": "http://arxiv.org/abs/2608.00284v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00284v1",
+      "tldr": "The paper presents a hybrid visual attention estimation pipeline for an expressive robotic head that combines a fast geometric perception layer with a vision-language semantic observer to enable state-based adaptive human-robot interaction, demonstrating reliable attention-aware pause and resume behaviors across 40 trials.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technological University of Uruguay",
+        "Ostfalia University of Applied Sciences"
+      ],
+      "affiliations_text": "Technological University of Uruguay, Ostfalia University of Applied Sciences",
+      "score": 3.6365052166156104,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.00246v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800246v1-similarity-aware-machine-unlearning",
+      "source": "arxiv",
+      "title": "Similarity-Aware Machine Unlearning",
+      "authors": [
+        "Madhavan Citalamangalam Kumaran",
+        "Midhun Parakkal Unni",
+        "Vicky Kouni",
+        "Haripriya Harikumar"
+      ],
+      "authors_text": "Madhavan Citalamangalam Kumaran, Midhun Parakkal Unni, Vicky Kouni, Haripriya Harikumar",
+      "abstract": "Machine unlearning removes the influence of user-specified training examples from a trained model, avoiding the need to retrain it from scratch. Localization-based methods improve unlearning efficiency by identifying a subset of influential model parameters. However, existing approaches select parameters based solely on forget-set importance, neglecting their role in retained dataset and often causing collateral damage to semantically similar retained examples. We address this limitation with a retain-aware localization method that considers parameter importance to both forgotten and retained data. We also introduce a retain-similar evaluation set, constructed using cosine similarity in the model embedding space, to directly measure collateral damage. Across eleven experimental settings on CIFAR-10 dataset and ResNet18 model, our method consistently reduces collateral damage while improving standard unlearning metrics, demonstrating the effectiveness of retain-aware localization for similarity-aware machine unlearning.",
+      "url": "http://arxiv.org/abs/2608.00246v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00246v1",
+      "tldr": "This paper proposes a retain-aware localization method for machine unlearning that selects parameters based on importance to both forgotten and retained data, reducing collateral damage to semantically similar retained examples.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Sheffield",
+        "University of Manchester",
+        "Paris Dauphine - PSL University"
+      ],
+      "affiliations_text": "University of Sheffield, University of Manchester, Paris Dauphine - PSL University",
+      "score": 3.6160148275334643,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.00296v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800296v1-stabilized-best-of-k-training-for-neural-combinatorial-optimization",
+      "source": "arxiv",
+      "title": "Stabilized Best-of-$K$ Training for Neural Combinatorial Optimization",
+      "authors": [
+        "Melveena Jolly",
+        "Midhun Xavier"
+      ],
+      "authors_text": "Melveena Jolly, Midhun Xavier",
+      "abstract": "Leader Reward modifies POMO training to emphasize the best trajectory produced by repeated inference. We test a narrow extension: replace its binary leader/non-leader distinction with a stabilized rank signal indexed by a sampling budget $K$. With the POMO architecture, 3,050-epoch schedule, and TSP-100 test set held fixed, the Leader Reward reimplementation obtains $7.7662$ under 100-start, 8-augmentation greedy decoding, matching the reported $7.766$ at its displayed precision. Under independent sampling, the stabilized $K=8$ recipe lowers realized Best-of-8 cost in all three paired training seeds: $7.7944$ versus $7.8136$. This observation is estimation-only and decoder-specific: three seeds are below the six-seed testing floor, Leader Reward is better at sampled $K=1$, and it remains slightly better under its original augmented-greedy protocol. We make no unbiased-estimator, universal superiority, or state-of-the-art claim.",
+      "url": "http://arxiv.org/abs/2608.00296v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00296v1",
+      "tldr": "The paper proposes a \"Stabilized Best-of-K\" variant of Leader Reward that replaces its binary leader/non-leader weighting with a rank-based, budget-indexed signal, and shows in a controlled TSP-100 POMO study that it consistently lowers realized Best-of-8 sampling cost across three training seeds—though the gain is decoder-specific, shrinks with larger K, and comes with no claims of universal superiority.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.600163693055134,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.00107v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800107v1-metaroute-bench-evaluating-meta-decision-policies-for-agentic-workflow-routing",
+      "source": "arxiv",
+      "title": "MetaRoute-Bench: Evaluating Meta-Decision Policies for Agentic Workflow Routing",
+      "authors": [
+        "Natan Vidra",
+        "Alina Kapanova",
+        "Arun Kanhai",
+        "Spurthi Setty"
+      ],
+      "authors_text": "Natan Vidra, Alina Kapanova, Arun Kanhai, Spurthi Setty",
+      "abstract": "Agentic systems must repeatedly decide whether to answer directly, decompose a task, invoke a tool, execute code, delegate to a specialist, verify an intermediate result, or recover from failure. These meta-decisions affect not only task success but also operating cost and latency, yet they are often embedded inside an orchestration framework and evaluated only through aggregate task accuracy. We present MetaRoute-Bench, an open, inspectable framework for comparing meta-decision policies under a shared execution model. The initial benchmark contains 180 synthetic task profiles spanning data analysis, research, and document processing, eight routing policies, and 30 paired random seeds. Across 43,200 traces, a task-aware compositional policy achieves 79.4% success compared with 76.7% for a strong workload-specific static policy, 67.4% for one-shot task routing, and 52.9% for direct answering. Relative to the static policy, this is a 2.7 percentage-point improvement with paired 95% CI of plus or minus 2.0 points, at 4.7% higher mean cost and 6.4% higher latency. Ablations show the largest losses when route composition is restricted to one operation and when verification is removed. These results are generated by a seeded offline execution model rather than a live deployment; accordingly, the primary contribution is a reproducible evaluation method and an analysis of routing-policy tradeoffs, not evidence of production effectiveness. We release task generation, policies, traces, tests, and analysis artifacts to support live-system validation.",
+      "url": "http://arxiv.org/abs/2608.00107v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00107v1",
+      "tldr": "MetaRoute-Bench is an open, inspectable benchmark framework with 180 synthetic task profiles and 43,200 paired traces that evaluates meta-decision routing policies for agentic workflows, showing a task-aware compositional policy achieves 79.4% success over static, one-shot, and direct-answering baselines by isolating tradeoffs among success, cost, and latency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Cornell University",
+        "CUNY",
+        "Stevens Institute of Technology",
+        "Anote AI"
+      ],
+      "affiliations_text": "Cornell University, CUNY, Stevens Institute of Technology, Anote AI",
+      "score": 3.5770107353728324,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.00152v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800152v1-response-magnitude-as-a-dominant-signal-for-held-out-crispri-perturbation-effect-prediction",
+      "source": "arxiv",
+      "title": "Response Magnitude as a Dominant Signal for Held-Out CRISPRi Perturbation Effect Prediction",
+      "authors": [
+        "Mehrdad Shoeibi",
+        "Niloofar Yousefi"
+      ],
+      "authors_text": "Mehrdad Shoeibi, Niloofar Yousefi",
+      "abstract": "Predicting the magnitude of a CRISPRi perturbation's transcriptomic effect on held-out target genes is an important open problem in single-cell biology. Recent work has documented that simple baselines often match or exceed deep perturbation predictors on related protocols. We study this phenomenon on the Virtual Cell Challenge (VCC) benchmark under a strict held-out target-gene split, identify the specific low-dimensional signal that drives the gap, and characterize how it transfers across cell types. The target is the log Anderson-Darling distance from non-targeting controls, which is strongly predictable from four deterministic scalar functions of the 2,000-dimensional input. A deep MLP encoder with direct access to the full input collapses toward the marginal training mean, and standard remedies do not close the gap. A linear regression on the four magnitude scalars alone exceeds the strongest x-only classical model, while a Random Forest on the input plus the four scalars substantially outperforms our deep proof-of-concept encoder. Two pre-specified controls attribute the magnitude gain to per-row alignment rather than added dimensionality. Under zero-shot transfer to two external CRISPRi screens evaluated against a target-gene endpoint rebuilt from single-cell data, magnitude-only predictors transfer positively whereas expression-only predictors are negative or unresolved. Exposing magnitude to the deep encoder improves transfer over its expression-only counterpart, yet the encoder does not outperform a four-scalar linear regression on the same features. We also find that the Anderson-Darling column distributed with these screens measures transcriptome-wide response breadth rather than target-gene effect strength, so evaluating transfer against it scores a different outcome.",
+      "url": "http://arxiv.org/abs/2608.00152v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00152v1",
+      "tldr": "TLDR: Across held-out CRISPRi perturbation prediction, response magnitude (captured by four simple scalar statistics) is the dominant recoverable signal—deep MLPs collapse to the training mean while magnitude-based linear/random-forest baselines win both in-distribution and under cross-screen transfer.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Central Florida"
+      ],
+      "affiliations_text": "University of Central Florida",
+      "score": 3.2684219231078275,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.00144v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800144v1-leak-it-a-probabilistic-approach-to-training-data-extraction-from-black-box-language-models",
+      "source": "arxiv",
+      "title": "Leak It: A Probabilistic Approach to Training-Data Extraction from Black-Box Language Models",
+      "authors": [
+        "Victor Maricato"
+      ],
+      "authors_text": "Victor Maricato",
+      "abstract": "Membership inference (MIA) on language models is usually summarised by an aggregate ROC-AUC, but such evaluations are confounded: model-free blind baselines separate members from non-members from surface text alone. We study black-box, sampling-based training-data leakage through a probabilistic lens, treating N samples from p(.|x) as an estimate of the output distribution and casting leakage signals as functionals of it. We extend the blind-baseline critique into the sampling regime: on WikiMIA a blind bag-of-words classifier reaches AUC 0.97 (TPR 0.90 at 5% FPR) and sampling adds nothing, while on an IID Pile split (MIMIR) neither self-concentration nor gold-continuation recovery significantly beats a blind baseline (incremental AUC 95% CI includes zero). Aggregate metrics hide the real harm. The same sampling verbatim-extracts training data for a tail of documents no blind attack can reach. On Pythia-6.9B, 83 of 500 Pile documents bearing a real identifier (16.6%; 21.3% of those bearing an email address) have that exact identifier reproduced AND not reproduced under a mismatched-prefix control, so each leak is attributable to that document, not to a globally common string. This per-document disclosure is invisible to aggregate AUC and grows with capacity (5.6% to 16.6% from 410M to 6.9B). The risk is uneven: identifier leakage is ~3x stronger in code than prose, though prose stays clearly positive and also grows with capacity (4.0% to 12.1%), while recovery of arbitrary held-out continuations is confined to code (+0.44 member gap on GitHub vs at most +0.014 on prose). Temperature and nucleus sampling matter little, a 16-token prefix suffices, and we detect no reduction from corpus deduplication. Privacy audits should report per-document extraction, decomposed by domain, not a single AUC. We release leakit, a black-box extraction-audit tool.",
+      "url": "http://arxiv.org/abs/2608.00144v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00144v1",
+      "tldr": "TLDR: This paper shows that while aggregate sampling-based membership inference on black-box language models is no better than model-free blind baselines, the same sampling approach can verbatim-extract training data and personally identifying information for a tail of documents—so privacy audits should report per-document extraction by domain rather than a single AUC.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Karolinska Institutet"
+      ],
+      "affiliations_text": "Karolinska Institutet",
+      "score": 2.9214721557922596,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.00223v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/04/260800223v1-the-anatomy-of-rf-chains-metrics-measures-and-operating-efficiency",
+      "source": "arxiv",
+      "title": "The Anatomy of RF Chains: Metrics, Measures, and Operating Efficiency",
+      "authors": [
+        "Leonid Belostotski",
+        "Arjuna Madanayake",
+        "John Nielsen",
+        "Mostafa Abdelhadi",
+        "Xingchen Liu",
+        "Xinquan Wang",
+        "Guanyue Qian",
+        "Sabit Ekin",
+        "Theodore S. Rappaport"
+      ],
+      "authors_text": "Leonid Belostotski, Arjuna Madanayake, John Nielsen, Mostafa Abdelhadi, Xingchen Liu, Xinquan Wang, Guanyue Qian, Sabit Ekin, Theodore S. Rappaport",
+      "abstract": "In 1958, Haus and Adler [1] introduced the concept of noise measure. Noise measure is a single quantitative metric that provides a comprehensive basis for comparing devices (individual circuits or outcomes of optimization iterations) in terms of their contribution to overall system noise by incorporating both noise factor and available power gain. Unlike noise factor alone, which reflects how much a device degrades the signal-to-noise ratio, noise measure captures the trade-off between noise and gain, making it a system-aware metric. This distinction is especially important when comparing devices in multistage systems, where both parameters jointly influence the overall system noise. Building on Haus and Adler's work, this article aims to advance RF system design by extending traditional device metrics, such as noise factor and noise measure, with new system-aware metrics: linearity, dynamic range, power efficiency, and waste measures. These new measures are interpretable, computable, and cascadable, making them well-suited for comparing the impact of individual devices or tracking the convergence of circuit design iterations on overall system-level performance. Additionally, a new metric--operating efficiency--is introduced, which unifies power efficiency, dynamic range, and data rate by incorporating signal statistics and variability in communication circuits and systems. Operating efficiency enables robust evaluation of devices under realistic and transient operating conditions, including interference, modulated signals, and adaptive modulation schemes.",
+      "url": "http://arxiv.org/abs/2608.00223v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.00223v1",
+      "tldr": "This paper extends Haus and Adler's noise measure into a system-aware framework of cascadable RF metrics—linearity, dynamic range, power efficiency, and waste measures—and introduces \"operating efficiency,\" a unified metric that links power efficiency, dynamic range, and data rate through signal statistics for realistic communication scenarios.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.921155435236396,
+      "score_text": "2.9"
+    }
+  ]
+}
