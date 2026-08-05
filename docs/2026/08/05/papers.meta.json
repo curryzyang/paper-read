@@ -1,0 +1,740 @@
+{
+  "label": "2026-08-05",
+  "date": "2026-08-05",
+  "generated_at": "2026-08-05T06:00:56",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.02662v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802662v1-verifier-guided-model-discovery-for-physical-dynamical-systems-with-pretrained-symbolic-transformers",
+      "source": "arxiv",
+      "title": "Verifier-Guided Model Discovery for Physical Dynamical Systems with Pretrained Symbolic Transformers",
+      "authors": [
+        "Farbod Faraji",
+        "Francesco Belardinelli"
+      ],
+      "authors_text": "Farbod Faraji, Francesco Belardinelli",
+      "abstract": "Reliable forecasting of nonlinear physical systems underpins scientific discovery and engineering decision-making. Yet high-fidelity simulations are prohibitively costly, and machine-learning surrogates can be opaque and encode assumptions about system dynamics, limiting generalizability. Pretrained transformers mapping synthetic ODE trajectories to equations offer interpretable alternatives, promising transfer without system-specific equation knowledge. Transferring them reliably to high-dimensional physical data, however, remains an open challenge. We develop a verifier-guided (VG) workflow around ODEFormer as a symbolic backbone, using dynamical and physical-admissibility criteria to select from a multi-trajectory candidate equation pool, enabling transfer. On canonical Van der Pol oscillators, VG outperforms the original ODEFormer workflow across held-out initial conditions. We then address vortex shedding, a phenomenon occurring in atmospheric and plasma systems of societal relevance, through coordinate reduction and symbolic discovery at fixed and varying Reynolds numbers. VG discovers fixed-parameter reduced-order equations that recover the fundamental shedding oscillator and higher harmonics without a wake-specific candidate library or prescribed Navier-Stokes structure, while the cross-parameter model generalizes to withheld regimes. Reconstruction fidelity alone did not determine symbolic discoverability, highlighting the importance of compatibility between latent dynamics and the backbone's pretraining distribution. This work establishes a verifier-guided neural-to-symbolic methodology for interpretable and physically auditable forecasting in the natural sciences.",
+      "url": "http://arxiv.org/abs/2608.02662v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02662v1",
+      "tldr": "A verifier-guided workflow around a pretrained symbolic transformer selects physically admissible, dynamically stable equations from pooled trajectory candidates, enabling interpretable symbolic discovery and forecasting for nonlinear systems—from Van der Pol oscillators to high-dimensional vortex shedding.",
+      "detailed_reading": {
+        "motivation": "高保真物理系统仿真成本高昂，而机器学习替代模型往往不透明且隐含对系统动力学的假设，限制其泛化能力。预训练符号Transformer虽能将合成ODE轨迹映射为可解释方程，并有望在不依赖特定系统方程知识的情况下迁移，但可靠迁移到高维物理数据仍是未解决的挑战。",
+        "method": "本研究提出验证器引导（VG）工作流，以预训练符号Transformer ODEFormer为符号骨架，保持其生成器不变。输入为可直接观测的ODE状态或经POD/自编码器降维的高维物理场（如圆柱绕流涡脱落场），跨参数发现时将参数p增广到状态并约束其导数为零。对每条轨迹/窗口独立解码生成候选方程池，经符号规范化去重后，用多轨迹滚动损失进行排序，选出前K个候选；随后应用可执行验证器套件，包括局部向量场一致性、有限有界演化、振荡幅值/频率/周期一致性、跨初值一致性，以及交叉参数情形下的参数方程为零、参数漂移可忽略和显式参数依赖等物理可容性测试。仅通过全部验证器的候选构成可容许集合，从中选择滚动损失最小者，并用Nelder-Mead对系数进行联合精炼，若精炼后不可容许则退回原方程。",
+        "result": "在Van der Pol振荡器上，VG在全部八个留出初始条件下均优于原始单轨迹ODEFormer流程：μ=0.5时中位后优化误差从1.21降至6.99e-4，μ=1.5时从4.5e-2降至3.27e-3。在圆柱绕流涡脱落问题中，VG在固定和变化雷诺数下均恢复了基本脱落振荡器及其高次谐波，无需尾流特定候选库或预设Navier-Stokes结构，跨参数模型可泛化到留出雷诺数区间。",
+        "conclusion": "以可执行的动力学与物理可容性验证作为模型选择约束，而非事后诊断，能够将预训练符号Transformer可靠迁移到高维物理数据，生成可解释且物理可审计的符号降阶模型。重建保真度本身不能决定符号可发现性，潜在动力学与骨干网络预训练分布的兼容性更为关键。",
+        "key_details": "关键细节包括：候选生成使用束搜索大小20、温度0.1；滚动损失按每坐标归一化MSE并在发现轨迹上平均；验证器包含局部导数匹配、有限性、振荡特征一致性等，并有具体阈值与容差设置（见附录）；交叉参数增广保持自主形式；系数精炼采用Nelder-Mead；局限性包括验证器建立的是规定域与时间范围内的经验可容性，且降维坐标可能省略高阶闭合所需动力学，此时发现的g是有效自主近似；VG不修改或重训生成器，而是通过多轨迹池化与验证收缩可识别候选集。"
+      },
+      "affiliations": [
+        "Imperial College London"
+      ],
+      "affiliations_text": "Imperial College London",
+      "score": 5.51158853585595,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2608.02778v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802778v1-neural-networks-with-local-converging-inputs-for-efficient-options-pricing-models",
+      "source": "arxiv",
+      "title": "Neural Networks with Local Converging Inputs for Efficient Options Pricing Models",
+      "authors": [
+        "Harris Cobb",
+        "Wenbo Hao",
+        "Yingjie Liu"
+      ],
+      "authors_text": "Harris Cobb, Wenbo Hao, Yingjie Liu",
+      "abstract": "We present a novel application of Neural Networks with Local Converging Inputs (NNLCI) to improve the efficiency of existing numerical methods for pricing multi-asset options. The most concise input format for NNLCI has been introduced, offering substantial convenience and efficiency. NNLCI uses a neural network to locally correct solutions from a coarse mesh and a refined mesh (relative to the coarse one), requiring only a minimal amount of high-fidelity training data. We demonstrate this approach on cash-or-nothing options under the Black-Scholes equation in one, two, and three spatial dimensions, and on single-asset down-and-out barrier call options under the Heston stochastic-volatility model (whose pricing PDE is two-dimensional in the spot price $S$ and the instantaneous variance $v$). In each case, NNLCI reduces the root-mean-square error (RMSE) of the refined-mesh numerical solution by a factor of approximately 4-12 on test sets, even when the neural network is trained on only a small subset of parameter combinations. These results demonstrate that NNLCI significantly reduces computational requirements for high-dimensional problems in real-time options trading and risk management, offering low training costs and strong generalization ability.",
+      "url": "http://arxiv.org/abs/2608.02778v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02778v1",
+      "tldr": "NNLCI uses small neural networks to locally correct coarse- and refined-mesh numerical solutions, reducing pricing error by 4–12× for multi-asset Black–Scholes and Heston barrier options with minimal high-fidelity training data.",
+      "detailed_reading": {
+        "motivation": "多资产期权定价面临高维PDE求解的维数灾难，传统隐式差分或有限元方法在实时交易与风险管理中计算代价极高；同时现有神经PDE求解器（如PINN、算子学习）常需大量高保真数据或直接编码参数，泛化能力受限。本文首次将局部收敛输入神经网络（NNLCI）引入期权定价，利用粗网格与加密网格的局部解修正，以极少量高保真训练数据提升现有数值方法效率，并实现对不同PDE参数、几何与边界的强泛化。",
+        "method": "构建嵌套的粗网格（如每方向21节点）、加密网格（每方向41节点，为粗网格加倍且粗节点重合）与参考网格（此处采用闭式解或最高分辨率解）。在每个时空配准点，取该点在粗网格与加密网格上的重合节点解值作为网络输入（2个输入）；对非均匀网格（Heston模型）再加入局部网格尺寸度量h_local作为第三输入。网络为两层ReLU前馈网络（1D用15神经元、2D用20神经元），以参考网格解为监督目标，用Adam学习率1e-3训练1500-2000轮。训练集按参数网格等间隔子采样（训练间隔g）生成，测试集为其余参数组合；推理时仅需粗网格与加密网格解，无需坐标、PDE参数或边界信息。",
+        "result": "在Black–Scholes下的现金或无期权（1D/2D/3D）与Heston随机波动率下的向下敲出障碍看涨期权（2D）四类案例中，NNLCI将加密网格数值解的均方根误差（RMSE）在测试集上降低约4至12倍。即使仅用少量参数组合子集训练，网络仍能在未见的参数上保持显著精度提升，且训练成本低，推理速度快。",
+        "conclusion": "NNLCI通过局部收敛输入对粗网格与加密网格解进行神经校正，能以极低训练数据和高泛化能力显著提升多资产及障碍期权定价的精度与效率，为实时交易和高维风险管理提供了一种轻量级替代方案；未来可探索更大局部patch及更多金融PDE场景。",
+        "key_details": "关键细节包括：输入仅为局部配准点处的粗/细网格解值，不显式编码时空坐标、PDE参数（σ、r、κ等）或边界条件，信息由局部收敛输入隐式携带；该方法依赖非混沌抛物型PDE的局部解唯一性近似，对混沌系统无效；粗网格与加密网格必须嵌套以保证节点重合，加密网格分辨率是粗网格两倍；训练数据按参数网格等间隔子采样（gap）构造，训练集远小于全网格；1D/2D参数网格分别含289和6561组，训练集在gap=2时仅为81和625组；网络架构极简，参数量小；局限在于局部patch信息可能无法唯一决定参考解，且在Heston非均匀网格上需额外输入局部网格尺寸度量以补偿网格非均匀性。"
+      },
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Georgia Institute of Technology",
+      "score": 4.868156593817561,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.02834v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802834v1-biconvex-optimization-for-smooth-minimum-time-trajectories-around-convex-obstacles",
+      "source": "arxiv",
+      "title": "Biconvex Optimization for Smooth Minimum-Time Trajectories around Convex Obstacles",
+      "authors": [
+        "Peter Werner",
+        "Tobia Marcucci",
+        "Daniela Rus"
+      ],
+      "authors_text": "Peter Werner, Tobia Marcucci, Daniela Rus",
+      "abstract": "We present a biconvex approach for minimum-time motion planning around convex obstacles that is guaranteed to converge, is anytime, and supports derivative constraints to arbitrary order. We jointly convexify the minimum-time objective and all derivative constraints through a change of variables, and handle collision avoidance via time-varying separating planes, reducing the problem to a biconvex program. This program is solved by alternating between computing maximum-margin separating planes and optimizing the trajectory. By only adding planes for obstacles that the current iterate collides with, the trajectory can jump around obstacles and escape local minima. The method is guaranteed to converge starting from a simple collision-free polygonal curve. In our experiments on drone navigation and dual-arm bin unloading, we find that the proposed method reliably produces high-quality trajectories with computation times comparable to state-of-the-art decomposition-based motion planners, while handling a larger class of problems and being substantially more robust to bad initialization. Project page:https://wernerpe.github.io/bmtp-website/",
+      "url": "http://arxiv.org/abs/2608.02834v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02834v1",
+      "tldr": "A biconvex optimization approach for minimum-time motion planning around convex obstacles that guarantees convergence, supports arbitrary-order derivative constraints, and robustly produces high-quality trajectories via alternating between separating-plane computation and trajectory optimization.",
+      "detailed_reading": {
+        "motivation": "现有运动规划方法中，采样规划器产生锯齿状路径且难以原生编码平滑度与导数约束，而局部轨迹优化方法受非凸碰撞约束影响容易陷入局部极小、运行时间不稳定且依赖精心初始化。基于分解的运动规划器虽然可靠，但需预先计算自由空间的凸分解，且难以在凸框架下同时支持任意阶导数约束和连续性约束。本文旨在提出一种无需预先凸分解、保证收敛、支持任意阶导数约束且对初始化鲁棒的最小时间轨迹规划方法。",
+        "method": "提出一种双凸最小时间规划器（BMTP）。输入为起点、终点、凸障碍集合及导数约束集。轨迹用贝塞尔曲线表示，通过变量替换将最小时间目标与所有导数约束共同凸化，支持任意阶导数约束和任意有限阶连续性约束。碰撞避免通过时变分离半空间实现，将问题转化为双凸规划。求解时交替执行两个步骤：固定当前轨迹，为当前发生碰撞的障碍计算最大间隔分离平面；固定分离平面，优化轨迹。仅对当前迭代碰撞的障碍添加平面，使轨迹能够绕过障碍并逃离局部极小。算法从简单的无碰撞多边形曲线初始化，可随时输出当前最优解并保证收敛。",
+        "result": "在无人机导航与双臂卸货箱实验中，所提方法稳定生成高质量轨迹，计算时间与最先进的基于分解的运动规划器相当，同时处理更大的问题类别，并对不良初始化显著更鲁棒。方法从简单无碰撞折线即可保证收敛，具备任意时间特性。",
+        "conclusion": "提出了一种保证收敛、任意时间、支持任意阶导数约束的双凸最小时间轨迹规划方法，无需昂贵的自由空间凸分解。该规划器在保持可靠性和可预测运行时的同时提高了轨迹质量，适用于无人机导航和双臂操作等场景，可作为现有启发式或策略后处理的替代方案。",
+        "key_details": "关键细节包括：使用贝塞尔曲线离散化轨迹以实现有限维数值求解；通过变量替换联合凸化最小时间目标与全部导数约束；碰撞避免采用时变分离平面，每个平面在每时刻将对应轨迹点与障碍分离；仅添加当前碰撞障碍的分离平面以帮助跳出局部极小；初始化只需简单多边形曲线，可由手工设计或采样规划器生成；方法保证从无碰撞初始曲线收敛。局限性包括障碍物需为凸集或可分解为凸集，以及未预先给出完整凸分解，依赖迭代生成分离平面。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.821661416503334,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.02811v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802811v1-staying-on-spec-real-time-monitoring-under-uncertainty-with-a-maritime-case-study",
+      "source": "arxiv",
+      "title": "Staying on Spec: Real-Time Monitoring under Uncertainty with a Maritime Case Study",
+      "authors": [
+        "Elizabeth Dietrich",
+        "Hanna Krasowski",
+        "Emir Cem Gezer",
+        "Roger Skjetne",
+        "Asgeir Johan Sørensen",
+        "Murat Arcak"
+      ],
+      "authors_text": "Elizabeth Dietrich, Hanna Krasowski, Emir Cem Gezer, Roger Skjetne, Asgeir Johan Sørensen, Murat Arcak",
+      "abstract": "Robotic systems must operate under uncertainty while satisfying complex task and safety specifications. Monitoring such specifications under uncertainty remains challenging, as existing formulations typically require extensive data or explicit uncertainty distributions. In this paper, we propose a real-time monitoring framework that reduces data requirements by leveraging data-driven reachable sets for specification evaluation. We instantiate the framework for maritime navigation, where complex specifications arise from traffic rules. We develop a data-efficient pipeline for constructing reachable sets and derive a monitoring formulation suitable for real-time deployment. Simulation and hardware experiments demonstrate robust monitoring under realistic disturbances, achieving improved risk detection compared to state-of-the-art metrics.",
+      "url": "http://arxiv.org/abs/2608.02811v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02811v1",
+      "tldr": "The paper proposes a real-time, data-efficient monitoring framework that uses data-driven reachable sets within probabilistic signal temporal logic (pacSTL) to evaluate complex specifications under uncertainty, demonstrating improved risk detection in maritime navigation under realistic disturbances.",
+      "detailed_reading": {
+        "motivation": "机器人在实际运行中需要同时满足复杂任务与安全规范，但不确定性使得规范监控十分困难。现有方法通常需要大量数据或显式的不确定分布，难以在真实海事场景中实时应用；同时，纯仿真数据生成的预测存在sim-to-real差距，直接使用真实数据又成本高昂。因此需要一种既能减少数据需求、又能适应真实扰动且可实时部署的规范监控框架。",
+        "method": "提出一个基于pacSTL（概率信号时序逻辑）与数据驱动可达集相结合的实时监控框架。离线阶段先用少量真实实验数据刻画扰动分布，将其注入高保真仿真模型以生成能够代表真实世界行为的大量轨迹，并利用数据驱动可达性分析构造具有PAC保证的可达集；在线阶段针对海事规则定义高效可计算的原子命题，并通过在可达集上求解鲁棒性的最小/最大优化得到每个时刻的鲁棒性区间，再以区间语义递归评估整个STL规范，从而在不依赖显式系统符号模型的情况下实时输出规范满足度区间。",
+        "result": "仿真与硬件实验表明，该框架在真实波浪扰动下能够实现鲁棒监控，相比传统STL监控和常用风险度量具有更强的表达能力和更优的风险检测性能。所提方法在有限真实数据条件下仍能有效捕获规范违反风险，与现有最先进基线相比改进了监控结果。",
+        "conclusion": "该工作证明通过数据驱动的可达集结合pacSTL可以在不确定环境下完成实时、数据高效的规范监控，并有效弥合仿真与真实部署之间的差距。框架尤其适合海事导航中由交通规则产生的复杂规范，为实际自主船舶的规范合规监控提供了可行方案。",
+        "key_details": "关键细节包括：基于pacSTL的PAC界限保证，鲁棒性上下界通过对可达集上的鲁棒函数做最小化和最大化获得；离线阶段使用少量真实实验数据估计扰动分布，再利用仿真数据构造可达集，从而降低对真实i.i.d.样本量的需求；利用系统不变性增强部署适用性；监控规范针对海事避碰规则设计原子命题以保证实时可计算性。局限性在于可达集的质量依赖高保真仿真模型和有限真实数据对扰动的刻画精度，且框架验证目前主要针对波浪扰动场景，其他复杂环境扰动仍需进一步研究。"
+      },
+      "affiliations": [
+        "Norwegian University of Science and Technology",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "Norwegian University of Science and Technology, University of California, Berkeley",
+      "score": 4.741575406091387,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.02633v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802633v1-geoid-pinn-identifiability-aware-regional-epidemic-inference-with-geographic-coupling",
+      "source": "arxiv",
+      "title": "GeoID-PINN: Identifiability-Aware Regional Epidemic Inference with Geographic Coupling",
+      "authors": [
+        "Weixiong Hua",
+        "Fan Bu"
+      ],
+      "authors_text": "Weixiong Hua, Fan Bu",
+      "abstract": "Regional surveillance data reflect local transmission, reporting, seeding, and external infection pressure, which are difficult to identify separately. We introduce GeoID-PINN, a physics-informed neural network (PINN) for susceptible-infectious-recovered-deceased (SIRD) dynamics. The model represents spatial dependence with a row-stochastic source-composition matrix whose rows assign nonnegative source weights that sum to one. We regularize this matrix toward a spatial prior constructed from distance, adjacency, commuting, or lead-lag information. In a four-region simulation with known truth, a compatible distance prior gives source-composition error 0.099. The error rises to 0.159 without regularization and 0.577 under a strongly misspecified prior, while trajectory fit and transmission-scale estimates remain similar. Accurate trajectories therefore do not guarantee recovery of the regional dependence structure. We also evaluate GeoID-PINN retrospectively using COVID-19 data from 64 Louisiana counties. Relative to an autoregressive negative-binomial baseline, Forecast-Trained Geo-PINN reduces mean squared error (MSE) from 32,957 to 11,468 and mean absolute error (MAE) from 70.60 to 57.73. The baseline has lower negative log likelihood (NLL), 5.158 versus 5.346, indicating better distributional fit but worse point accuracy. In a controlled 15-county comparison, county adjacency reduces MSE by 6.85 percent and MAE by 3.1 percent. Similar performance across plausible priors supports structured regularization but not unique edge recovery. These results require prior-sensitivity and observation-model checks before interpretation.",
+      "url": "http://arxiv.org/abs/2608.02633v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02633v1",
+      "tldr": "GeoID-PINN introduces a physics-informed neural network for regional SIRD epidemic inference that couples regions through a row-stochastic source-composition matrix regularized by spatial priors, achieving improved point forecasts for COVID-19 in Louisiana while demonstrating that accurate trajectory fits do not guarantee identifiability of the underlying regional coupling structure.",
+      "detailed_reading": {
+        "motivation": "区域监测数据反映本地传播、报告、初始种子和外部感染压力，这些成分难以分别识别。现有流行病PINN在估计区域相互依赖结构时存在敏感性和可识别性问题，因此需要一种能感知可识别性并进行区域耦合推断的方法。",
+        "method": "提出GeoID-PINN，一种用于易感-感染-恢复-死亡（SIRD）动力学的物理信息神经网络。状态网络输出未约束logit，经softmax映射为四个仓室状态，保证非负且每个区域人口总数守恒。空间依赖通过行随机源组成矩阵C建模，其元素非负且行和为1，采用带结构掩码的行softmax参数化；将该矩阵正则化到由距离、邻接、通勤或领先滞后信息构建的空间先验C0。损失函数包括状态通道NMSE、发病率NMSE（权重20）、SIRD残差物理损失、初始条件损失和先验损失；训练采用两阶段优化：先冻结C的logit参数B进行warmup，再联合优化所有参数。",
+        "result": "四区域仿真中，相容距离先验给出源组成误差0.099，无正则化误差升至0.159，强错误先验下误差达0.577，而轨迹拟合和传播尺度估计保持相似。路易斯安那64县COVID-19回顾评估中，预测训练的GeoID-PINN相对自回归负二项基线将MSE从32957降至11468，MAE从70.60降至57.73；基线NLL更低（5.158对5.346），分布拟合更好但点预测精度更差。15县对照中，县邻接先验使MSE降低6.85%，MAE降低3.1%。",
+        "conclusion": "准确拟合轨迹并不能保证恢复区域依赖结构；结构化正则化有助于稳定推断，但无法唯一恢复边权重。结果支持使用先验正则化，但在解读前必须进行先验敏感性和观测模型检验。",
+        "key_details": "数据输入为区域S、I、R、D状态观测和发病率，观测掩码和尺度预先固定；恢复率γ和死亡率μ可固定或通过sigmoid约束学习，报告因子固定以防额外不可识别性。C通过掩码行softmax构造，先验损失使用固定尺度s_C=0.10，正则化强度λ_C按场景变化。损失权重为：每个状态通道1、发病率20、物理损失1、初始条件10。优化使用Adam，合成实验800 epoch且前200冻结B，学习率3e-3。局限性：在可用观测下模型存在实际不可识别性，C应解释为条件源组成而非真实移动或因果传播网络。"
+      },
+      "affiliations": [
+        "University of Michigan"
+      ],
+      "affiliations_text": "University of Michigan",
+      "score": 4.65034117739317,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.02809v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802809v1-toward-certified-functional-safety-for-industrial-humanoid-robots-the-fail-passive-gap-and-a-feasibility-study",
+      "source": "arxiv",
+      "title": "Toward Certified Functional Safety for Industrial Humanoid Robots: The Fail-Passive Gap and a Feasibility Study",
+      "authors": [
+        "Caiwu Ding",
+        "Tao Cui",
+        "Lingyun Wang",
+        "Chengtao Wen"
+      ],
+      "authors_text": "Caiwu Ding, Tao Cui, Lingyun Wang, Chengtao Wen",
+      "abstract": "Industrial humanoid robots are constrained less by locomotion or manipulation capability than by the immaturity of functional safety certification for legged platforms. The root difficulty is that the safe state of a legged robot is an actively-controlled state, which violates the fail-passive assumption underlying ISO~13849-1 / EN~60204-1: removing power from a walking biped causes an uncontrolled fall, so classical de-energization is itself a hazard. We term this the fail-passive gap and use a certified external safety chain (light curtain, emergency stop, fail-safe input, fail-safe PLC, and wireless PROFIsafe) as an instrument to locate it precisely: because the external chain is closed and quantifiable with established methods (PFHD, DC, CCF, PL/SILCL), the residual uncertifiable element is pinpointed to the robot-side reaction chain. Using a Siemens fail-safe S7-1500 emergency-stop reference, we show its certifiable Reaction subsystem is contactor-based power removal (Stop Category~0)---exactly the element a balancing humanoid cannot have. We deliberately do not claim end-to-end certified PL~e / SIL~3. We validate the approach on a Unitree G1 EDU pick-and-place cell in a 3m x 1.5m semi-enclosed workspace, and contribute a humanoid-specific analysis of the active safe state (fall-as-hazard, single-support stop bounds, balancing-policy residual risk, ISO~13855 separation) and a provenance-labeled timing budget. Hosting an industrial software-defined automation (SDA) controller on the robot, co-located with the balancing policy, moves robot-side PROFINET/PROFIsafe reception onto a standardized IEC~61131-3 interface; because the G1's onboard compute is not safety-rated hardware, this endpoint is not a certified safety runtime, which reinforces rather than resolves the fail-passive gap and localizes it to the SDA-to-balancing-policy interface.",
+      "url": "http://arxiv.org/abs/2608.02809v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02809v1",
+      "tldr": "The paper identifies the \"fail-passive gap\"—that a balancing humanoid's safe state must be actively controlled rather than de-energized, violating classical machinery safety standards—and uses a certified external safety chain as a measuring instrument to precisely localize this uncertifiable robot-side reaction chain, providing a feasibility study rather than claiming end-to-end certification.",
+      "detailed_reading": {
+        "motivation": "工业人形机器人的部署瓶颈不在于运动或操作能力，而在于腿足平台的功能安全认证不成熟。根本难点在于腿足机器人的安全状态是主动受控状态，违背了ISO 13849-1 / EN 60204-1所依赖的失效被动假设：对行走中的双足机器人断电会导致失控摔倒，因此传统的断电去能本身即构成危险。本文将这一认证缺口定义为'失效被动鸿沟'，并利用一条已认证的外部安全链作为仪器精确定位该鸿沟。",
+        "method": "本文构建了一条由光幕、急停、fail-safe输入模块、fail-safe PLC和无线PROFIsafe组成的PL e/SIL 3级外部安全监督链，围绕Unitree G1 EDU人形机器人在约3m×1.5m半封闭传送带工位上的拾放任务展开。外部链按Detection–Evaluation–Reaction（检测–评估–反应）结构组织，安全停止命令经无线PROFIsafe从PLC传输至机器人侧。为让腿足反应链可被工业功能安全方法触及，本文将工业软件定义自动化（SDA）控制器（软PLC）直接托管在机器人板载计算上，与平衡策略共置，使PROFINET/PROFIsafe接收落到标准化的IEC 61131-3接口上，从而将问题边界收敛到SDA到平衡策略的接口。评估采用PFHD、DC、CCF、PL/SILCL等既有方法，并对照西门子fail-safe S7-1500急停参考设计，同时贡献了主动安全状态分析（摔倒即危险、单支撑停止边界、平衡策略残余风险、ISO 13855分离距离）以及带来源标注的时序预算。",
+        "result": "外部安全链是闭合且可用既有标准量化的，因此残余的不可认证元素被精确定位到机器人侧反应链。西门子S7-1500急停参考设计的可认证Reaction子系统是基于接触器断电的Stop Category 0，而这恰恰是平衡人形机器人无法具备的元素。论文明确不声称端到端认证PL e/SIL 3；由于G1板载计算并非安全级硬件，该端点也不是认证的安全运行环境，这反而强化了失效被动鸿沟的存在，并将其定位到SDA到平衡策略的接口。",
+        "conclusion": "面向工业人形机器人的功能安全认证不能直接套用传统机械的失效被动范式；主动受控的平衡停止状态目前无法通过现有标准获得认证。将认证外部链作为测量仪器可精确界定鸿沟位置，而将SDA控制器放在机器人上与平衡策略共置，是使腿足反应链可被工业功能安全方法分析的关键架构尝试，但该方案只能标准化接口，不能提供认证运行环境。真正的认证仍需要在机器人侧反应链上建立可实现主动安全停止并具备量化PFHD/PL的安全运行机制。",
+        "key_details": "关键细节包括：外部安全链采用SICK deTec2 Core光幕、SIPLUS ET 200SP Open Controller（CPU 1515SP PC2 F）及F-DI输入模块；与常规做法不同，设计不使用外部安全继电器或接触器，停止要求通过fail-safe PLC以安全报文经无线PROFIsafe传送，而非硬接线断电。实验在3m×1.5m半封闭工位，操作员可通过南侧开口接触，由光幕对监控。时序/延迟预算区分specified、configured、measured三类来源，给出最坏情况反应时间和距离。人形特定分析涵盖fall-as-hazard权衡、中步（单支撑）停止需求、平衡策略失效的残余风险，以及依据ISO 13855的分离距离计算。论文明确局限：外部链可认证，但机器人侧反应链无PFHD、无PL，G1板载计算非安全级硬件，因此SDA端点不构成认证PROFIsafe F-host，也无SIL/PL声明；最终鸿沟被定位到SDA到平衡策略接口，未来需在机器人侧建立可量化且可认证的主动安全停止方案。"
+      },
+      "affiliations": [
+        "Siemens Corporation"
+      ],
+      "affiliations_text": "Siemens Corporation",
+      "score": 4.64491599772013,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.02653v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802653v1-light-loco-parkour-versatile-perceptive-whole-body-locomotion-via-multi-skill-distillation",
+      "source": "arxiv",
+      "title": "Light-Loco-Parkour: Versatile Perceptive Whole-Body Locomotion via Multi-Skill Distillation",
+      "authors": [
+        "Hongming Chen",
+        "Zhuoran Li",
+        "Hongxi Wang",
+        "Jiangpeng Hu",
+        "Ziliang Li",
+        "Peize Liu",
+        "QingRui Zhao",
+        "Xuhao Liu",
+        "Liang Pan",
+        "Ximin Lyu",
+        "Yuntao Ma",
+        "Tingxiang Fan"
+      ],
+      "authors_text": "Hongming Chen, Zhuoran Li, Hongxi Wang, Jiangpeng Hu, Ziliang Li, Peize Liu, QingRui Zhao, Xuhao Liu, Liang Pan, Ximin Lyu, Yuntao Ma, Tingxiang Fan",
+      "abstract": "Existing humanoid whole-body control systems still fall short of the way humans move through cluttered terrain: they either track expressive whole-body references without terrain generalization, or react to terrain online while leaving the arms, torso, and knees largely unused. We present \\texttt{Light-Loco-Parkour} (LLP), an end-to-end perceptive whole-body locomotion system that closes this gap with a single deployable policy. Conditioned only on onboard depth and a velocity command, the policy decides when to walk, balance, climb, step down, or vault, with no reference input, skill label, hand-coded gate, or runtime motion graph. Compared with prior humanoid systems, LLP makes three contributions. First, it introduces a whole-body perceptive-control pipeline that extends an RL-trained, velocity-tracking locomotion policy with parkour skills learned from object-interacting motions, so the same policy tracks velocity in open terrain, executes whole-body traversal at obstacles, and resumes locomotion afterward. Second, it acquires terrain-conditioned skills from sparse seeds by expanding a single motion into dynamically feasible, terrain-paired references across obstacle geometry, rather than relying on a large motion corpus. Third, it learns autonomous skill transitions from reward, letting the policy decide when and which whole-body skill to invoke from depth and command alone, with no one-hot skill label, hand-coded state machine, or runtime motion generator. Simulation and real-world experiments show high success across both benchmarked terrains and unseen obstacle variations, and the same policy transfers zero-shot to indoor and outdoor hardware experiments. These results demonstrate autonomous perceptive whole-body locomotion on a humanoid in outdoor settings, using only onboard sensing and a single deployable policy.",
+      "url": "http://arxiv.org/abs/2608.02653v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02653v1",
+      "tldr": "Light-Loco-Parkour presents a single deployable, perception-driven humanoid policy that learns versatile whole-body locomotion and parkour skills from sparse seed motions, autonomously transitions between them from onboard depth and velocity commands, and transfers zero-shot to real-world indoor and outdoor terrains.",
+      "detailed_reading": {
+        "motivation": "现有仿人全身控制系统要么跟踪表达性全身参考运动但无法泛化到复杂地形，要么在线反应地形却主要依赖腿部而忽视手臂、躯干和膝盖；缺乏一个单一策略能够感知环境并协调全身穿越杂乱地形。",
+        "method": "提出Light-Loco-Parkour，一个端到端感知全身运动系统。首先用强化学习训练一个速度跟踪的感知运动教师策略，输入包含速度命令、本体感觉和局部高度扫描（特权信息）；其次，针对每种技能，从单个种子运动通过数据增强生成动态可行且地形配对的参考运动，训练各技能的教师策略；然后采用多专家DAgger将运动教师和技能教师蒸馏到一个统一的高度扫描学生策略，并设计仅由奖励驱动的转换阶段，使策略自主决定何时调用哪个技能；最后通过深度蒸馏将高度扫描策略转换为循环深度策略，仅使用机载深度、本体感觉和速度命令部署，以50Hz运行。",
+        "result": "在仿真和真实实验中，该方法在基准地形和未见障碍变体上均获得高成功率，并零样本迁移到室内外硬件实验，实现了户外环境下仅依靠机载感知和单一可部署策略的仿人自主感知全身运动。",
+        "conclusion": "证明了单一策略无需参考输入、技能标签、手写门控或运行时运动图，仅凭机载深度和速度命令即可在杂乱地形中自主选择并执行走、平衡、攀爬、下阶、跨跃等全身技能，完成长时程任务。",
+        "key_details": "采用教师-学生架构，教师使用特权信息（高度扫描）训练，学生通过多专家DAgger蒸馏；数据增强将单个种子运动扩展到连续障碍几何（如爬升高度从45cm到75cm），保证动态可行；转换阶段完全由RL奖励驱动，无专家、参考或技能标签，AMP先验用于在触发位置从运动切换到技能；深度蒸馏采用教师动作监督和辅助高度扫描重建；策略在机载以50Hz运行，所有训练在IsaacLab中进行。"
+      },
+      "affiliations": [
+        "Light Origins"
+      ],
+      "affiliations_text": "Light Origins",
+      "score": 4.456582082873218,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.02690v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802690v1-globe-trajectory-aligned-gradient-matching-with-structured-sparseoptimization-for-coreset-selection",
+      "source": "arxiv",
+      "title": "GLOBE: Trajectory-Aligned Gradient Matching with Structured SparseOptimization for Coreset Selection",
+      "authors": [
+        "Hetian Liu",
+        "Jin Cui",
+        "Mengcheng Shi",
+        "Yanbin Hu",
+        "Xinyue Long",
+        "Boran Zhao",
+        "Pengju Pen"
+      ],
+      "authors_text": "Hetian Liu, Jin Cui, Mengcheng Shi, Yanbin Hu, Xinyue Long, Boran Zhao, Pengju Pen",
+      "abstract": "On-device training of deep neural networks is fundamentally constrained by the computational and memory costs of large-scale datasets. Coreset selection offers a practical solution by retaining only a compact subset of real training samples. However, existing gradient-based methods commonly rely on gradients computed at a single model snapshot and employ greedy or pursuit-based selection procedures, limiting their ability to capture evolving optimization dynamics and handle strongly correlated samples. We propose GLOBE (Gradient Local-Balanced Extraction), a trajectory-aligned coreset selection framework that formulates sample selection as a globally optimized sparse weighting problem. GLOBE represents each sample by a gradient trajectory constructed across multiple training checkpoints, thereby capturing its influence throughout different stages of optimization. To preserve the training behavior of the full dataset, we introduce a multi-order matching objective that jointly aligns the first-order mean and projected uncentered second-order moments of gradient trajectories. GLOBE further combines Group LASSO, Elastic Net regularization, and nonnegative budget constraints to induce group- and sample-level sparsity while stabilizing the weights of correlated trajectories. Finally, class-balanced Top-K selection maintains adequate category coverage under limited sampling budgets. Experiments across six benchmarks and five evaluation architectures demonstrate that GLOBE consistently outperforms existing coreset selection methods in downstream test accuracy, particularly at low retention ratios. These results highlight the effectiveness of combining dynamic gradient information, multi-order distribution matching, and structured sparsity for data-efficient learning.",
+      "url": "http://arxiv.org/abs/2608.02690v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02690v1",
+      "tldr": "GLOBE proposes a coreset selection framework that aligns multi-checkpoint gradient trajectories via first- and second-order matching and structured sparse optimization (Group LASSO + Elastic Net), consistently improving downstream accuracy across benchmarks, especially at low retention ratios.",
+      "detailed_reading": {
+        "motivation": "现有基于梯度的核心集选择方法通常依赖单一模型快照下的梯度，并采用贪婪或追踪式选择策略，难以捕捉训练过程中的动态演化，也难以处理样本间强相关的情况。在设备端训练受计算和内存严格约束的背景下，需要一种能利用动态梯度信息并实现全局优化选择的核心集方法。",
+        "method": "GLOBE将核心集选择建模为全局稀疏权重优化问题。首先，通过知识蒸馏将轻量代理模型与教师模型输出对齐，训练代理并记录T个检查点，对每个样本在每个跟踪层拼接各检查点的逐样本梯度，构成梯度轨迹。然后，构造多阶匹配目标：一阶项匹配全量数据轨迹均值（Aω-b的二范数平方），二阶项通过随机投影降维后匹配投影非中心二阶矩（外积矩阵的Frobenius范数）。最后，结合Group LASSO（基于类内k均值特征聚类的样本组）和Elastic Net正则化，并施加非负预算约束，诱导组级和样本级稀疏性，稳定相关轨迹权重；最终通过类平衡Top-K选择得到核心集。",
+        "result": "在六个基准数据集和五种评估架构上的实验表明，GLOBE在下游测试准确率上持续优于现有核心集选择方法，尤其在低保留率（retention ratio）下优势更为明显。",
+        "conclusion": "将动态梯度信息、多阶分布匹配和结构化稀疏优化相结合，可以有效提升数据高效学习场景下的核心集质量，为资源受限的边缘设备训练提供实用方案。",
+        "key_details": "关键细节包括：代理模型通过知识蒸馏初始化，温度τ和平衡系数η控制软标签与硬标签的权衡；梯度轨迹按层独立构建，并用维度反比权重α平衡各层贡献；二阶矩匹配采用独立随机投影矩阵R_j降至m维，避免显式构造高维协方差；样本分组使用代理网络倒数第二层特征做类内k均值聚类；正则化中Group LASSO系数λ_g和Elastic Net系数共同控制稀疏性与稳定性；最终选择使用类平衡Top-K以保证类别覆盖。"
+      },
+      "affiliations": [
+        "Xi'an Jiaotong University"
+      ],
+      "affiliations_text": "Xi'an Jiaotong University",
+      "score": 4.406462692531962,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.02668v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802668v1-sphere-retraction-normalizations",
+      "source": "arxiv",
+      "title": "Sphere Retraction Normalizations",
+      "authors": [
+        "Jie Zhang",
+        "Cheng-Fang Su",
+        "Yi-Jui Huang",
+        "Min-Te Sun"
+      ],
+      "authors_text": "Jie Zhang, Cheng-Fang Su, Yi-Jui Huang, Min-Te Sun",
+      "abstract": "Residual connections are the de facto mechanism for training deep neural networks stably. Geodesic Normalization (GeoNorm) recasts them on a Riemannian manifold, orthogonalizing each layer output against the current hidden state and applying the resulting update through the Riemannian exponential map. Every hidden state thus keeps a constant $\\ell_{2}$-norm, confining the residual stream to a hypersphere. The exponential map, however, is only one member of a broad family of retraction maps. We show that on the hypersphere this entire family collapses to a single scalar design choice. What distinguishes one retraction from another is only how the magnitude of an update is converted into a rotation angle within the plane spanned by the hidden state and the update. This view places Euclidean residual connections and GeoNorm in one framework. Instantiating it with the metric projection retraction and the Cayley retraction yields Proj-SpheretNorm and Cay-SpheretNorm, which are exactly norm-preserving yet require only algebraic operations. Both prove to be members of a one-parameter family of angular retractions, $p$-SpheretNorm, whose rotation angle saturates rather than growing without bound. The two methods above are recovered exactly at $p = 1$ and $p = 2$, while the identity map and GeoNorm arise only as limits at either end. On nanoGPT, all three methods outperform existing lightweight deep connection schemes, and the best validation loss is attained at finite $p$, indicating that the exponential map is not the preferred retraction for spherical residual streams but merely one end of a spectrum.",
+      "url": "http://arxiv.org/abs/2608.02668v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02668v1",
+      "tldr": "The paper unifies residual connections and GeoNorm via retraction maps on a hypersphere, introducing a one-parameter family of norm-preserving sphere retraction normalizations (Proj-, Cay-, and p-SpheretNorm) that show the exponential map is just one end of a spectrum, and demonstrate on nanoGPT that finite-parameter variants outperform existing deep connection schemes.",
+      "detailed_reading": {
+        "motivation": "残差连接是稳定训练深度网络的标准机制，但传统欧氏残差流在深层Transformer中会引发深度诅咒、激活无界增长与注意力沉降等问题。GeoNorm将残差连接放到黎曼流形上，通过指数映射保持隐状态L2范数恒定，然而指数映射只是流形上retraction映射族中的一个特例。本文旨在回答超球面上深度连接应使用哪种retraction，并构造更优的球面归一化方法。",
+        "method": "将残差连接与GeoNorm统一为超球面上的retraction更新框架：对第l层，先用Gram-Schmidt过程将层输出F_l(h_l)正交投影到h_l的切空间得到z_l，再在h_l与z_l张成的平面内用retraction映射将更新幅值转换为旋转角。据此实例化两种仅需代数运算且严格保范的retraction：Proj-SpheretNorm（metric projection）与Cay-SpheretNorm（Cayley映射）。进一步提出单参数族p-SpheretNorm，其旋转角随更新幅值饱和而非无界增长；p=1、p=2分别精确恢复前两者，p→0+退化为恒等映射，p→∞且alpha_l∈(0,1]时恢复GeoNorm。训练时alpha_l作为可学习步长，p可作为超参调节，隐状态保持恒定L2范数。",
+        "result": "在nanoGPT（最高36层、6.55B tokens）的预训练与下游任务上，三种SpheretNorm均优于Pre-LN、Pre-DyT、Peri-LN、Keel和GeoNorm等轻量深度连接方案；其中Proj-SpheretNorm在medium和large模型上取得最低预训练/验证损失，并在OpenWebText与FineWeb-Edu上取得最高平均零样本准确率。最优验证损失出现在有限p处，表明指数映射并非球面残差流的最优选择，而只是谱系的一端。",
+        "conclusion": "超球面上的所有retraction本质上仅体现为将更新幅值转换为旋转角的标量设计选择；p-SpheretNorm将欧氏残差连接与GeoNorm纳入同一框架，并证明指数映射只是其中的极限情形而非最优选择。有限p、特别是p=1对应的Proj-SpheretNorm，以纯代数操作实现严格保范，既提升训练稳定性又改善深层模型性能，是更优的球面深度连接方案。",
+        "key_details": "关键实现细节包括：Gram-Schmidt正交化移除平行于当前隐状态的成分；所有retraction均在h_l与z_l张成的二维平面内旋转，旋转角是更新范数与隐状态范数之比的可学习缩放；Proj-SpheretNorm和Cay-SpheretNorm无需指数或三角函数以外的超越运算，具有精确保范性和低计算开销；p-SpheretNorm以p=1/2连接两种实例，p→∞时角度饱和于GeoNorm的有界旋转，避免残差流无界增长并缓解注意力沉降。实验设置覆盖24/36层nanoGPT，并与多种欧氏方案对比；局限在于主要验证于GPT式架构，对更广泛架构与理论收敛保证尚未充分展开。"
+      },
+      "affiliations": [
+        "National Central University",
+        "National Yang Ming Chiao Tung University"
+      ],
+      "affiliations_text": "National Central University, National Yang Ming Chiao Tung University",
+      "score": 4.308865392781333,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.02816v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/05/260802816v1-topological-simplification-in-predictive-coding-networks",
+      "source": "arxiv",
+      "title": "Topological Simplification in Predictive Coding Networks",
+      "authors": [
+        "Adam Shaw",
+        "Jiayu Li",
+        "Michael Sperling",
+        "Michael Kim",
+        "Alvin Jin"
+      ],
+      "authors_text": "Adam Shaw, Jiayu Li, Michael Sperling, Michael Kim, Alvin Jin",
+      "abstract": "We study the topology of learned representations in predictive coding networks (PCNs), a neuro-inspired bidirectional architecture, using a quantitative layer-wise persistent homology analysis. We train well-performing PCNs on a synthetic classification dataset ($\\geq 99.9\\%$ test accuracy) and on MNIST ($\\geq 95\\%$ test accuracy), and measure how topological features change across layers for different architectures and activation functions. We find that smaller PCNs collapse connected components across layers earlier than larger models (Spearman $\\unicode{x1D70C} \\in [0.72, 0.79]$ across activations), with model size measured as the sum of hidden-layer widths. We also observe a strong negative correlation ($\\unicode{x1D70C} = -0.58$) between the depth at which simplification occurs and reconstruction error; i.e., architectures that simplify later reconstruct better. Finally, a seed-level bootstrap comparison across architectures and activations shows that PCNs consistently collapse connected components later than matched MLPs, with an average difference of $3.6$ layers. These results suggest that persistent homology offers a useful quantitative lens on the compression--reconstruction tradeoff in PCNs, and that both model capacity and the recurrent, bidirectional dynamics of predictive coding inference shape when this tradeoff is resolved across layers.",
+      "url": "http://arxiv.org/abs/2608.02816v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02816v1",
+      "tldr": "Using persistent homology, the paper shows that predictive coding networks progressively simplify representation topology across layers, with smaller models collapsing components earlier, earlier simplification correlating with poorer reconstruction, and PCNs simplifying later than matched MLPs.",
+      "detailed_reading": {
+        "motivation": "现有拓扑简化研究多针对前馈网络，而预测编码网络作为同时支持推断与重构的双向神经形态架构，其表征拓扑的跨层演化尚不清楚。本研究用持久同调定量分析PCN表示拓扑，以理解拓扑简化与重构能力之间的权衡。",
+        "method": "训练8隐藏层PCN，在合成数据集（九圆盘嵌入九洞流形）和MNIST上达到高准确率，系统变化隐藏层宽度（均匀、递增、递减、瓶颈）与激活函数（ReLU、Leaky ReLU、tanh），每配置30个随机种子。对每层固定数据点构造度量空间（合成用归一化k-NN图加无权重测地距离，MNIST用归一化欧氏距离），计算持久同调并在固定过滤尺度eta下提取beta0和beta1；定义加权Betti和及running minimum得到分层简化量，由此计算COM（简化质心）作为简化时机指标。重构质量用MRD衡量：将one-hot输出经PCN反演过程得到重构，计算其到训练集最近同类邻居的平均欧氏距离。最后与匹配MLP做种子级bootstrap比较COM差异。",
+        "result": "合成数据上，模型大小（隐藏宽度之和）与COM正相关：ReLU rho=0.76、Leaky ReLU rho=0.79、tanh rho=0.72；线性拟合中ReLU斜率约为Leaky ReLU和tanh的两倍，R^2分别为0.59、0.63、0.41。COM与MRD强负相关（rho=-0.58，p<0.001），即简化越晚重构越好。MNIST上观察到与合成实验一致的渐进拓扑简化趋势。PCN比匹配MLP平均晚3.6层发生连通分量坍塌，bootstrap检验p<0.0001。",
+        "conclusion": "PCN表征拓扑沿层逐步简化，且简化时机由模型容量、激活函数和重构压力共同决定。较早拓扑简化会损害重构质量，而PCN相比MLP更晚简化，说明预测编码的循环双向动力学在压缩与可逆性之间取得平衡。持久同调为定量研究生成型架构中的压缩-重构权衡提供了有效视角。",
+        "key_details": "所有模型固定8隐藏层以保证逐层拓扑可比；拓扑计算仅针对单类（合成数据取Ma，MNIST取数字0）以避免类别混合。PCN通过最小化能量泛函进行训练和推断，使用局部误差而非反向传播；MNIST的过滤尺度eta取0.2和0.3以平衡碎片化与平凡连通。MRD使用最近同类欧氏邻居而非固定目标，允许合理的全新重构；MNIST重构不稳定故不报告，且因计算代价仅用代表架构、相关分析统计功效不足。局限包括持久同调参数（k、eta）选择依赖数据，合成数据具有人工拓扑先验。"
+      },
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 4.300553977914977,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.02628v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802628v1-deep-divide-and-reduce-in-symbolic-regression",
+      "source": "arxiv",
+      "title": "Deep Divide-and-Reduce in Symbolic Regression",
+      "authors": [
+        "Yusong Deng",
+        "Yanjie Li",
+        "Weijun Li"
+      ],
+      "authors_text": "Yusong Deng, Yanjie Li, Weijun Li",
+      "abstract": "Symbolic regression (SR) is the task of discovering underlying patterns from data and representing them using mathematical expressions. Current machine learning approaches to SR often lack a profound understanding of the intrinsic mathematical and physical principles governing these expressions. While the pioneering AI Feynman method leverages the mathematical properties underlying the data, its expression simplification mechanism suffers from a narrow scope of applicability and is prone to failure on complex equations. Furthermore, its underlying mechanisms rely heavily on brute-force searches for sub-expressions, severely limiting its practical utility. Through rigorous mathematical deduction and proofs, we propose our method, Deep Divide and Reduce in Symbolic Regression (DDRSR). DDRSR fundamentally broadens the applicability of expression decomposition and reduction, circumvents the need for brute-force sub-structure searches, and ensures both wider versatility and strict theoretical correctness. Empirical evaluations demonstrate that these theoretical principles yield significant advantages in both expression decomposition and numerical regression tasks. Finally, we discuss the applicable scenarios and inherent limitations of this paradigm, alongside promising directions for future research.",
+      "url": "http://arxiv.org/abs/2608.02628v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02628v1",
+      "tldr": "DDRSR extends translational symmetry, variable separability, and nested composition with rigorous mathematical proofs to enable efficient, theory-grounded divide-and-reduce symbolic regression that avoids brute-force sub-expression search and improves decomposition and regression performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "University of Chinese Academy of Sciences",
+      "score": 4.226819128129435,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.02700v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802700v1-nanq-noise-floor-aware-mixed-precision-non-uniform-quantization-for-analog-compute-in-memory",
+      "source": "arxiv",
+      "title": "NANQ: Noise-Floor-Aware Mixed-Precision Non-Uniform Quantization for Analog Compute-in-Memory",
+      "authors": [
+        "Yizhe Chen",
+        "Wenshuai Yao",
+        "Saiya Wang",
+        "Yuannuo Feng",
+        "Wenbo Qi",
+        "Kechao Tang",
+        "Ngai Wong",
+        "Wenyong Zhou",
+        "Wang Kang"
+      ],
+      "authors_text": "Yizhe Chen, Wenshuai Yao, Saiya Wang, Yuannuo Feng, Wenbo Qi, Kechao Tang, Ngai Wong, Wenyong Zhou, Wang Kang",
+      "abstract": "Analog compute-in-memory (CIM) enables energy-efficient neural network inference, but device variation and read noise can severely degrade low-bit quantized models. Existing CIM-oriented quantization methods mainly minimize ideal quantization error, ignoring the hardware noise floor and thus causing inefficient precision allocation. We propose NANQ, a noise-aware mixed-precision non-uniform quantization framework for analog CIM. NANQ models magnitude-dependent weight noise from measured responses of an eFlash CIM array and converts the noise profile into an adaptive quantization density, assigning finer resolution to low-noise regions while avoiding ineffective precision in noise-dominated regions. It further assigns layer-wise bit-widths by identifying each layer's precision saturation point under hardware noise using a unified threshold. On-chip experiments on an eFlash CIM SoC show that, under 2-bit weight-magnitude quantization, NANQ improves vision-model accuracy by 8.05 percentage points and reduces language-model PPL by 54.7% on average over PowerQuant. Mixed-precision NANQ captures most of the gains obtainable from additional quantization resources with only 3.2-3.8 equivalent bits.",
+      "url": "http://arxiv.org/abs/2608.02700v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02700v1",
+      "tldr": "NANQ is a noise-floor-aware, training-free mixed-precision non-uniform quantization framework for analog compute-in-memory that adapts quantization density and layer-wise bit-widths to magnitude-dependent hardware noise, improving accuracy and perplexity over prior CIM quantization methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Peking University",
+        "Beihang University",
+        "The University of Hong Kong"
+      ],
+      "affiliations_text": "Peking University, Beihang University, The University of Hong Kong",
+      "score": 3.969859877348014,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.02829v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802829v1-wiring-beats-blending-what-transfers-between-transformer-sizes-and-what-doesnt",
+      "source": "arxiv",
+      "title": "Wiring Beats Blending: What Transfers Between Transformer Sizes -- and What Doesn't",
+      "authors": [
+        "Ravi Satya Durga Prasad Yenugula"
+      ],
+      "authors_text": "Ravi Satya Durga Prasad Yenugula",
+      "abstract": "Model families train every size from scratch. Can a pretrained large model be converted into a smaller sibling? We characterize the 1.4B->410M conversion in the Pythia family end-to-end: (i) representations align strongly across sizes (ridge R^2=0.84) while parameters align weakly; (ii) dense weight projection is functionally destructive -- provably not an assembly artifact -- because basis mixing breaks rotary, per-head, GELU, and LayerNorm structure; (iii) after the best-fit linear operator, weight residuals are statistically indistinguishable from noise under shuffle controls; (iv) conversion value therefore lives in initialization. In matched-budget continued pre-training we decompose conversion into two independent levers -- least-squares compensation (function: best zero-shot) and variance-preserving rescale (dynamics: best endpoints). Compensation is a token-efficient, low-budget win rather than a universal one: at 30M tokens it beats the strongest subcloning variant on both a width-reduced pair (84.0 +/- 1.8 vs. 89.7 +/- 3.7, 3/3 seeds) and a held-out depth-reduced pair (109.3 vs. 117.9, 3/3 seeds), reaching a given quality with fewer tokens; at a 33x larger budget the two converge to parity (40.0 vs. 40.0), both far ahead of from-scratch, which transfer initialization always beats -- by up to 18x at low budget, the margin narrowing at convergence and at the largest scale. We further map the method's boundary: at ~5x the donor scale (6.9B->1.4B) stacking both levers over-corrects, which we trace to ill-conditioning of the compensation solve at large width, pointing to dimension-aware regularization as the fix. Code, checkpoints, and the frozen evaluation corpus are released.",
+      "url": "http://arxiv.org/abs/2608.02829v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02829v1",
+      "tldr": "Converting a large pretrained transformer into a smaller sibling works best through structured initialization (least-squares compensation plus variance-preserving rescale) rather than dense weight blending, since representations align strongly across sizes but parameters do not, giving token-efficient gains at low budgets that converge to parity with subcloning at larger scales.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.9421234739319266,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.02629v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802629v1-multimodal-auto-regressive-transformer-surrogate-for-modeling-variable-operations-and-quantifying-uncertainty-in-geological-carbon-storage",
+      "source": "arxiv",
+      "title": "Multimodal Auto-regressive Transformer Surrogate for Modeling Variable Operations and Quantifying Uncertainty in Geological Carbon Storage",
+      "authors": [
+        "Yifu Han",
+        "Louis J. Durlofsky"
+      ],
+      "authors_text": "Yifu Han, Louis J. Durlofsky",
+      "abstract": "The use of variable well perforation and injection strategies can improve the efficiency of geological carbon storage operations. We develop a new multimodal auto-regressive transformer surrogate to model these operations under geological uncertainty. A modified SEAM CO2 geomodel, which involves a faulted system with three stacked aquifers, is considered. The two injection wells are perforated in stages, from bottom to top, with the stage durations and individual well injection rates treated as control variables. The surrogate model processes three input modalities - the 3D geomodel, scalar parameters characterizing relative permeability functions, and control variables - through separate encoders. These are fused via self-attention in a transformer encoder, and a temporal decoder generates predictions auto-regressively through encoder-decoder cross-attention. The surrogate is trained, using 4000 GEOS flow simulations, to predict saturation and pressure at monitoring locations, total injected and mobile CO2 mass, and saturation footprints. For a new test set, involving randomly sampled geomodels and control variables, the surrogate achieves a median saturation MAE of 0.028 and median relative errors of 0.2-5% for the other quantities of interest. Importantly, it captures the switch from rate to bottom-hole-pressure control. The surrogate model is used within a hierarchical Markov chain Monte Carlo data assimilation procedure for a synthetic true model under three operational strategies. Substantial uncertainty reduction is achieved for key metaparameters, particularly the fault permeabilities. Posterior predictions for saturation footprints and total injected and mobile CO2 mass are also shown to be generally consistent with true model results.",
+      "url": "http://arxiv.org/abs/2608.02629v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02629v1",
+      "tldr": "A multimodal auto-regressive transformer surrogate that fuses 3D geomodels, relative-permeability parameters, and time-varying well controls accurately predicts CO₂ storage responses and, when embedded in hierarchical MCMC, substantially reduces geological uncertainty for variable perforation and injection operations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University"
+      ],
+      "affiliations_text": "Stanford University",
+      "score": 3.7192714407647958,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.02691v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802691v1-output-aware-rotation-for-int2-kv-cache-quantization",
+      "source": "arxiv",
+      "title": "Output-Aware Rotation for INT2 KV-Cache Quantization",
+      "authors": [
+        "Vincent-Daniel Yun",
+        "Woosang Lim",
+        "Minsoo Cheong",
+        "Sunwoo Lee",
+        "Murali Annavaram",
+        "Sai Praneeth Karimireddy",
+        "Sungjoo Yoo"
+      ],
+      "authors_text": "Vincent-Daniel Yun, Woosang Lim, Minsoo Cheong, Sunwoo Lee, Murali Annavaram, Sai Praneeth Karimireddy, Sungjoo Yoo",
+      "abstract": "The key-value (KV) cache has become a major memory and bandwidth bottleneck in long-context large language model inference, making ultra-low-bit quantization increasingly important. However, existing rotation-based INT2 methods optimize cache statistics or proxy errors before the complete attention readout, even though the model is ultimately affected by the error propagated through attention and the output projection $W_O$. To address this mismatch, we propose \\textit{OptR}, an output-aware rotation method that minimizes post-$W_O$ attention-output error. OptR decomposes the post-$W_O$ attention-output error into key- and value-induced terms and learns per-head orthogonal corrections through the full INT2 quantization and attention path. OptR further applies an attention-equivalent key reparameterization to reduce large channel-wise offsets without changing the softmax distribution. Across three models and five reasoning and coding benchmarks, OptR consistently improves both QuaRot and OSCAR and strengthens long-context retrieval, while preserving the paged KV-cache format with negligible inference overhead.",
+      "url": "http://arxiv.org/abs/2608.02691v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02691v1",
+      "tldr": "OptR is an output-aware rotation method for INT2 KV-cache quantization that learns per-head orthogonal corrections to minimize post-attention-output projection error, consistently improving existing rotation-based pipelines like QuaRot and OSCAR across reasoning and coding benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Seoul National University",
+        "University of Southern California",
+        "Inha University"
+      ],
+      "affiliations_text": "Seoul National University, University of Southern California, Inha University",
+      "score": 3.664258019499452,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.02780v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802780v1-semantic-haptic-feedback-enhances-dexterous-robotic-teleoperation",
+      "source": "arxiv",
+      "title": "Semantic Haptic Feedback Enhances Dexterous Robotic Teleoperation",
+      "authors": [
+        "Bingjian Huang",
+        "Sahar Aseeri",
+        "Jonas Schmidtler",
+        "Joseph Zhang",
+        "Sonny Chan",
+        "Andrew Doxon",
+        "Jom Preechayasomboon",
+        "Evan Pezent",
+        "Alberto Rigo",
+        "Amir Memar",
+        "Nicholas Colonnese",
+        "Chase Tymms"
+      ],
+      "authors_text": "Bingjian Huang, Sahar Aseeri, Jonas Schmidtler, Joseph Zhang, Sonny Chan, Andrew Doxon, Jom Preechayasomboon, Evan Pezent, Alberto Rigo, Amir Memar, Nicholas Colonnese, Chase Tymms",
+      "abstract": "In robot teleoperation, haptic feedback can be used to help human operators accomplish dexterous manipulation tasks. However, existing haptic feedback methods try to replicate high-fidelity sensory haptics that are felt in real world interactions, which are constrained by the sensing and feedback hardware capability and may lead to higher workload.\n  To addresses these limitations, this work introduces semantic haptics for teleoperation, which uses abstract haptic patterns to convey critical information about robot states. We categorize robot states into \"Confirmations\" and \"Exceptions\", implement a modular haptic rendering pipeline in robot simulation, and deliver semantic haptic feedback to operators through pneumatic and vibrotactile wristbands. This simplifies hardware requirements and enables one-to-many mappings between haptic patterns and robot states.\n  Through three evaluation studies, we identify the most effective semantic haptic design for a common pick and place teleoperation task and compare semantic haptics to other teleoperation feedback approaches including sensory haptics and visual feedback. Results suggest that while semantic haptics performs similarly as other feedback in unimanual tasks, it achieves superior performance in bimanual tasks, with reduced task workload, increased situational awareness, and overall preference.",
+      "url": "http://arxiv.org/abs/2608.02780v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02780v1",
+      "tldr": "Semantic haptic feedback—using abstract pneumatic and vibrotactile patterns to convey robot-state events instead of replicating raw contact forces—significantly improves bimanual dexterous teleoperation performance, reduces workload, and increases operator situational awareness compared to sensory haptic and visual feedback.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.623461834226038,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.02705v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802705v1-can-training-logs-make-model-comparisons-more-precise",
+      "source": "arxiv",
+      "title": "Can Training Logs Make Model Comparisons More Precise?",
+      "authors": [
+        "Wei-Jung Huang"
+      ],
+      "authors_text": "Wei-Jung Huang",
+      "abstract": "Comparing stochastically trained models requires estimating both a performance difference and its uncertainty from repeated runs. We study whether training logs from those same runs can make such comparisons more precise. Because training-log covariates are produced during training rather than measured before it, we use arm-specific covariate adjustment: each model is adjusted only with statistics from its own runs, and the raw mean difference remains the reported effect. In a vision study spanning three architectures and three datasets, simple adjustments based on early training logs often reduce uncertainty in model comparisons. The main limitation is covariate selection. Broadly searching the log pool for the most correlated statistic often adds more noise than it removes, even when useful statistics exist in hindsight. Training logs therefore appear useful for more precise model comparisons, but only when the adjustment avoids large selection noise.",
+      "url": "http://arxiv.org/abs/2608.02705v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02705v1",
+      "tldr": "Training logs can make model comparisons more precise through arm-specific covariate adjustment, but only when the adjustment statistic is chosen carefully to avoid the noise introduced by broad covariate selection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.584512014370736,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.02709v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802709v1-designing-a-good-virtual-node-addressable-and-cardinality-preserving-global-memory-for-message-passing-architectures",
+      "source": "arxiv",
+      "title": "Designing a Good Virtual Node: Addressable and Cardinality-Preserving Global Memory for Message Passing Architectures",
+      "authors": [
+        "Félix Marcoccia"
+      ],
+      "authors_text": "Félix Marcoccia",
+      "abstract": "Virtual nodes give message-passing neural networks a simple global communication route, but the standard node--VN--node pipeline compresses the graph into one homogeneous state and broadcasts it identically to every node. Building on the Two-Radius analysis of Mishayev et al., we ask how auxiliary virtual memory can relieve this finite-capacity bottleneck without self-attention. We identify two requirements. First, the global memory should be factorized into independently writable and readable states: this can be achieved using addressable cross-attention slots. Second, addressability alone does not preserve multiplicity, because softmax attention is invariant to uniform replication. Inserting each slot query as a private key/value anchor recovers the discarded normalization mass and yields, on bounded color domains, an injective multiset representation able to implement a 1-WL refinement. Experiments on multiplicity-aware Two-Radius, motif counting, and constrained link-set prediction support this addressable and cardinality-preserving virtual memory at (O(nMd)) arithmetic cost.",
+      "url": "http://arxiv.org/abs/2608.02709v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02709v1",
+      "tldr": "This paper proposes a virtual-node design with addressable, factorized cross-attention slots and an anchoring mechanism that preserves cardinality, overcoming the homogeneous-broadcast bottleneck of standard virtual nodes and achieving 1-WL-level expressivity at O(nMd) cost.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5828715389999557,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.02632v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802632v1-llms-can-annotate-attribution-graphs",
+      "source": "arxiv",
+      "title": "LLMs Can Annotate Attribution Graphs",
+      "authors": [
+        "Ameen Patel",
+        "Max Zhang",
+        "Nathan Hu"
+      ],
+      "authors_text": "Ameen Patel, Max Zhang, Nathan Hu",
+      "abstract": "Circuit tracing is an exciting technique for revealing the internal computation of language models, but it requires a time-intensive manual step of grouping individual features or MLP neurons into supernodes. We present a simple pipeline for automating this step: directly presenting feature descriptions to a language model that groups them into supernodes. Using automated interpretability metrics, we confirm that supernodes generated by our pipeline are as interpretable as those generated by human annotators. On a two-hop Capitals task, our pipeline recovers a supernode corresponding to the intermediate hop in 97 of 100 prompts. Finally, we present a simple proof of concept using our pipeline for open-ended exploration, where we automatically annotate 1000 attribution graphs from Wikipedia prompt completions and then use an LLM judge to flag interesting graphs worth human review. We hope this work demonstrates that even simple automation can produce meaningful attribution graph annotations, motivating further work on automated circuit tracing.",
+      "url": "http://arxiv.org/abs/2608.02632v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02632v1",
+      "tldr": "The paper presents a simple LLM-based pipeline that automatically groups feature descriptions into supernodes for annotating attribution graphs, achieving human-level interpretability, recovering intermediate hops in 97/100 two-hop queries, and enabling scalable open-ended circuit exploration.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University"
+      ],
+      "affiliations_text": "Stanford University",
+      "score": 3.511760626772627,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.02786v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802786v1-evaluation-blindness-how-silent-measurement-failures-corrupt-ai-systems-from-training-to-deployment",
+      "source": "arxiv",
+      "title": "Evaluation Blindness: How Silent Measurement Failures Corrupt AI Systems from Training to Deployment",
+      "authors": [
+        "Priyanka Bajaj"
+      ],
+      "authors_text": "Priyanka Bajaj",
+      "abstract": "AI systems can fail silently. The failure propagates through training loops, evaluation pipelines, and production monitoring stacks until downstream harm makes it visible. This paper introduces evaluation blindness: a measurement function M exhibits evaluation blindness with respect to failure class F when it produces readings indistinguishable from a healthy state while the system is actually failing, with no auxiliary signal flagging the gap.\n  The problem surfaces at two lifecycle stages the literature has treated separately. At training time, reward models are gamed, importance-sampling corrections are silently miscalculated, and benchmark contamination inflates fine-tuning evaluations, all while loss curves look healthy and gradient updates proceed normally. At deployment time, monitoring fails to catch six classes of production failure, including an Operational category that is 100% silent by structural definition.\n  We provide a formal detectability predicate unifying both stages. Four training-time case studies trace concrete breakdowns, including a real implementation bug in TRL PR #6594 where gradients are corrupted as loss decreases normally. A six-class taxonomy validated against 50 real-world incidents from court documents and regulatory filings finds that 53% of verifiable public failures were silent. A failure budget framework ties acceptable failure rates to use-case risk class.\n  The implication is direct: measurement infrastructure is a correctness concern across the full AI lifecycle, not just at evaluation time. Data, code, and taxonomy schema are at https://github.com/priyanka25aug/llm-failure-taxonomy.",
+      "url": "http://arxiv.org/abs/2608.02786v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02786v1",
+      "tldr": "Evaluation blindness — when AI system measurements remain indistinguishable from healthy states during failures — is formalized as a unified structural property across training and deployment, demonstrated through case studies, a six-class taxonomy of silent production failures, and a failure-budget framework.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.3607667140287556,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.02813v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802813v1-coordinated-primary-frequency-regulation-and-grid-forming-control-for-wind-turbine-generators",
+      "source": "arxiv",
+      "title": "Coordinated Primary Frequency Regulation and Grid-Forming Control for Wind Turbine Generators",
+      "authors": [
+        "Meng Chen",
+        "Yufei Xi",
+        "Lin Cheng",
+        "Florian Döfler",
+        "Ioannis Lestas"
+      ],
+      "authors_text": "Meng Chen, Yufei Xi, Lin Cheng, Florian Döfler, Ioannis Lestas",
+      "abstract": "Conventional grid-forming (GFM) control strategies often treat the DC source as an unconstrained link, creating mismatches when applied to the wind turbine generators (WTGs). Focusing on primary frequency regulation, this paper systematically investigates the mismatch between the GFM-WTGs behavior and the droop-based primary frequency regulation. To address this issue, a novel coordination strategy between WTG primary frequency regulation and GFM control is proposed. By establishing well-designed relationships among the power-tracking coefficient, power set-point, and frequency deviation, the proposed strategy enables GFM-WTGs to participate consistently in primary frequency regulation within predefined frequency limits while maintaining appropriate power points and effectively utilizing the allowable power reserve. Furthermore, the proposed method preserves the control structure and dynamic performance of conventional GFM control and inherently adapts to varying wind-speed conditions. Comparative case studies under different operating scenarios demonstrate the effectiveness and superiority of the proposed strategy.",
+      "url": "http://arxiv.org/abs/2608.02813v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02813v1",
+      "tldr": "TLDR: This paper proposes a coordinated control strategy that aligns grid-forming control with droop-based primary frequency regulation for wind turbine generators, ensuring consistent frequency support within predefined operating limits and adaptability to varying wind speeds.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ETH Zürich",
+        "University of Cambridge",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "ETH Zürich, University of Cambridge, Tsinghua University",
+      "score": 3.255459866677314,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.02697v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802697v1-measuring-explainer-stability-via-attribution-separability",
+      "source": "arxiv",
+      "title": "Measuring Explainer Stability via Attribution Separability",
+      "authors": [
+        "Eddie Conti",
+        "Álvaro Parafita",
+        "Axel Brando"
+      ],
+      "authors_text": "Eddie Conti, Álvaro Parafita, Axel Brando",
+      "abstract": "Attribution methods (AMs) assign an importance score to each feature and are widely adopted to explain black-box models. However, most methods can produce variable attribution scores due to stochastic components in their definition. In this paper, we propose a distribution-based framework to capture the stability of attribution scores. In particular, our approach allows to understand the degree of separability in the ranked attribution vector and obtain the largest index for which a feature ranking remains reliable. We further extend this framework to compare AMs based on the robustness of their rankings across a dataset. Through experiments, we demonstrate how to apply our method to evaluate explainer stability. Overall, our approach provides a complementary criterion for evaluating the stability of AMs.",
+      "url": "http://arxiv.org/abs/2608.02697v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02697v1",
+      "tldr": "The paper proposes a distribution-based framework that measures the stability of feature attribution rankings by quantifying the separability between importance score distributions, enabling evaluation and comparison of explainers via a new k-stability metric.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Barcelona Supercomputing Center"
+      ],
+      "affiliations_text": "Barcelona Supercomputing Center",
+      "score": 3.0757922061748975,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2608.02688v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802688v1-learning-molecular-representations-from-cellular-phenotypes-with-structure-preservation",
+      "source": "arxiv",
+      "title": "Learning Molecular Representations from Cellular Phenotypes with Structure Preservation",
+      "authors": [
+        "Xuan Lin",
+        "Jingyu Sheng",
+        "Tengfei Ma",
+        "Li Sun",
+        "Dapeng Xiong"
+      ],
+      "authors_text": "Xuan Lin, Jingyu Sheng, Tengfei Ma, Li Sun, Dapeng Xiong",
+      "abstract": "Phenotypic drug discovery enables the discovery of functional relationships between molecular structures and cellular responses. However, existing multimodal representation learning methods often optimize cross-modal alignment without considering the intrinsic organization of chemical space, resulting in distorted molecular representations and loss of structural information. We propose \\textbf{PhenMol}, a structure-preserving framework for phenotype-aware molecular representation learning. PhenMol disentangles molecular and cellular representations into shared and private components, enabling phenotype-guided alignment while preserving chemical structures through a dedicated molecular branch. This design integrates cellular phenotype information without disrupting molecular neighborhood organization. Experiments on approximately $3.04 \\times 10^{4}$ molecule--cell morphology pairs demonstrate that PhenMol improves molecular property prediction across 270 bioactivity tasks, molecule--phenotype retrieval, and clinical trial outcome prediction. Moreover, ECFP4-based structural analysis shows that PhenMol better preserves molecular neighborhoods and reduces embedding distortion compared with existing multimodal alignment methods. These results highlight the importance of structure-aware constraints in multimodal molecular representation learning and provide an effective approach for integrating cellular phenotypes with chemical knowledge for drug discovery.",
+      "url": "http://arxiv.org/abs/2608.02688v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02688v1",
+      "tldr": "PhenMol is a structure-preserving multimodal framework that learns phenotype-aware molecular representations by disentangling shared cellular signals from private chemical structure, preventing molecular embedding collapse and improving bioactivity prediction, retrieval, and clinical outcome prediction.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hunan University",
+        "Xiangtan University",
+        "Southeast University",
+        "Beijing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "Hunan University, Xiangtan University, Southeast University, Beijing University of Posts and Telecommunications",
+      "score": 2.9963715346812148,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.02663v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802663v1-ct-heg-a-bidirectional-timestamp-attributed-event-graph-for-icu-in-hospital-mortality-prediction-an-architectural-ablation-study",
+      "source": "arxiv",
+      "title": "CT-HEG: A Bidirectional, Timestamp-Attributed Event Graph for ICU In-Hospital Mortality Prediction - An Architectural Ablation Study",
+      "authors": [
+        "Mohammad Nasir Uddin",
+        "Rahnuma Tabassum Orpita",
+        "Asaduzzaman Anik",
+        "Eklachur Rahman Bhuiyan",
+        "Marjahan Risalat",
+        "SM Wali Ullah",
+        "Asif Ahamed"
+      ],
+      "authors_text": "Mohammad Nasir Uddin, Rahnuma Tabassum Orpita, Asaduzzaman Anik, Eklachur Rahman Bhuiyan, Marjahan Risalat, SM Wali Ullah, Asif Ahamed",
+      "abstract": "Accurate ICU mortality prediction requires modeling irregular clinical observations across heterogeneous entity types. Existing sequence models handle irregular sampling but ignore typed relational structure; existing graph models assume fixed-interval inputs. We introduce the Continuous-Time Heterogeneous EHR Graph (CT-HEG) schema and evaluate which architectural choices drive predictive performance. CT-HEG encodes each ICU stay as a typed, timestamped graph with three node types (visit, vital, lab_event) and 2D edge attributes (t_hours/48, value_norm) encoding timing and value without imputation. We instantiate CT-HEG as CHIRP-Net, a four-layer heterogeneous GATv2Conv network, evaluated on MIMIC-IV v3.1 (31,142 ICU stays, LOS>=48h, 13.4% mortality) with five seeds and bootstrapped confidence intervals, against logistic regression, mTAND, a Transformer, and GRU-D, plus an ablation study. CHIRP-Net achieved 5-seed mean AUROC 0.8449+/-0.0071 (AUPRC 0.4958+/-0.0209); the ensemble achieved AUROC 0.8618 (95% CI: 0.8485-0.8745). Removing reverse edges disconnected observation nodes from the visit readout, cutting AUROC by 0.1968+/-0.0073. Time-attentive edge features contributed 0.0247+/-0.0093 AUROC. Collapsing heterogeneous edge types into one relation (7x fewer parameters) outperformed the full model on all seeds. Post-calibration ECE was 0.0307. Temporal and demographic subgroup analyses were explored but not reported here, pending follow-up work. Bidirectional connectivity was necessary for the model to use its inputs at all, and CT-HEG was reasonably well calibrated after validation-fitted temperature scaling. These results support CT-HEG for irregular EHR data, while external validation, a pre-specified temporal evaluation, and a demographic fairness audit remain necessary before any claim of robustness. Code: https://github.com/nasiruddinstudents-ctrl/chirp-net-mimic-iv.",
+      "url": "http://arxiv.org/abs/2608.02663v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02663v1",
+      "tldr": "TLDR: This paper introduces CT-HEG, a continuous-time heterogeneous event graph for ICU mortality prediction, and shows via ablations on MIMIC-IV that bidirectional edges are structurally essential and timestamp-attributed edge features improve AUROC, while collapsing heterogeneous edge types can actually match or beat the full model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Westcliff University",
+        "Washington University of Science and Technology",
+        "Northern University Bangladesh",
+        "Stanton University"
+      ],
+      "affiliations_text": "Westcliff University, Washington University of Science and Technology, Northern University Bangladesh, Stanton University",
+      "score": 2.8709919820508967,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.02692v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/05/260802692v1-pattree-a-novel-approach-for-automated-creation-of-multimodal-graph-based-patient-representations-for-medical-classification-tasks",
+      "source": "arxiv",
+      "title": "PatTree: a novel approach for automated creation of multimodal, graph-based patient representations for medical classification tasks",
+      "authors": [
+        "Julia Gehrmann",
+        "Lars Quakulinski",
+        "Hamza Naseem",
+        "Oya Beyan"
+      ],
+      "authors_text": "Julia Gehrmann, Lars Quakulinski, Hamza Naseem, Oya Beyan",
+      "abstract": "Access to holistic, multimodal data improves the performance of Artificial Intelligence (AI) in medical classification tasks compared to utilizing single modalities or data sources. However, the inherent heterogeneity and complexity of clinical real-world data pose significant challenges to structured data analysis and AI application. This heterogeneity includes missing values, multiple time points, diverse modalities, and inconsistent formats and semantics. Data harmonization prior to data integration tackles this challenge but remains resource-intensive and error-prone, limiting the scalability and reproducibility of holistic, AI-driven decision support on clinical real-world data. We therefore propose PatTree, a graph-based, holistic representation of patients that can be derived from real-world clinical data through the automated structuring of multimodal clinical data. PatTree enables early-stage data integration without relying on pre-standardized inputs. While representing heterogeneous clinical data within a unified knowledge graph, PatTree preserves the semantic relationships between data elements across modalities and data sources, facilitating interoperability and machine-interpretable data access. Using a subset of the ADNI-1 cohort (n = 763), we demonstrate that classification of patients is directly feasible on PatTree reaching state-of-the-art classification performance. In the three-class classification task distinguishing Alzheimer's disease, mild cognitive impairment, and cognitively normal individuals, we achieve a balanced accuracy of 98.5% and an F$_1$ score of 0.987 on the held-out test set. Our results show that assumption-free, automated structuring of multimodal medical data can serve as a scalable foundation for clinical AI pipelines bypassing tedious data preparation and standardization.",
+      "url": "http://arxiv.org/abs/2608.02692v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02692v1",
+      "tldr": "PatTree automatically builds multimodal, graph-based patient representations from heterogeneous clinical data without pre-standardization, enabling direct classification with state-of-the-art accuracy (98.5% balanced accuracy) on Alzheimer's disease diagnosis tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cologne",
+        "Fraunhofer Institute for Applied Information Technology"
+      ],
+      "affiliations_text": "University of Cologne, Fraunhofer Institute for Applied Information Technology",
+      "score": 2.5945491605596853,
+      "score_text": "2.6"
+    }
+  ],
+  "errors": []
+}
