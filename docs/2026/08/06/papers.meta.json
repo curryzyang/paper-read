@@ -1,0 +1,721 @@
+{
+  "label": "2026-08-06",
+  "date": "2026-08-06",
+  "generated_at": "2026-08-06T06:06:34",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.04075v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804075v1-spatiotemporal-graph-transformer-for-traffic-intelligence-in-edge-computing",
+      "source": "arxiv",
+      "title": "Spatiotemporal Graph Transformer for Traffic Intelligence in Edge Computing",
+      "authors": [
+        "Laha Ale",
+        "Letian Lin",
+        "Na Cao",
+        "Zheng Ma",
+        "Peng Yu"
+      ],
+      "authors_text": "Laha Ale, Letian Lin, Na Cao, Zheng Ma, Peng Yu",
+      "abstract": "Accurate traffic forecasting is essential for proactive resource management in edge computing, where service demand evolves dynamically across both space and time. In practical cellular edge systems, traffic exhibits strong spatial correlations among neighboring service regions and long-range temporal dependencies driven by user mobility and application behavior. Existing recurrent forecasting approaches can capture short-term dynamics but often struggle to model long-horizon traffic evolution under non-stationary conditions. To address this challenge, we propose a spatiotemporal graph Transformer framework that jointly models spatial interactions and temporal dependencies for traffic forecasting in edge computing. The framework employs graph neural networks to capture spatial correlations among service regions and leverages Transformer-based self-attention to learn long-range temporal patterns from historical traffic observations. By decoupling spatial representation learning from temporal reasoning, the proposed approach provides an effective mechanism for large-scale spatiotemporal traffic modeling. Extensive experiments on a real-world cellular network dataset demonstrate that the proposed graph Transformer consistently outperforms recurrent graph-based baselines, including GCN-RNN, GCN-LSTM, and GCN-GRU models, across multiple forecasting horizons. The resulting forecasts enable more effective proactive resource provisioning and reduce overload risk compared with reactive management strategies. These results highlight the potential of graph-enhanced attention mechanisms for building intelligent and adaptive edge computing systems.",
+      "url": "http://arxiv.org/abs/2608.04075v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04075v1",
+      "tldr": "The paper proposes a spatiotemporal graph Transformer framework for edge computing traffic forecasting that combines graph neural networks for spatial correlations with Transformer self-attention for long-range temporal dependencies, consistently outperforming recurrent graph-based baselines and enabling more effective proactive resource provisioning.",
+      "detailed_reading": {
+        "motivation": "边缘计算中的服务需求在空间和时间上动态变化，现有基于循环网络的流量预测方法虽能捕捉短期动态，但在非平稳条件下难以建模长时间跨度的流量演化，制约了主动资源供给的准确性。为此，需要一种能够同时建模区域间空间相关性与长程时间依赖的流量智能框架。",
+        "method": "提出一种时空图Transformer框架，将空间感知与时间推理解耦。输入为边缘服务区域的历史流量观测序列X(t-L+1:t)和由区域质心经纬度构造的空间图；使用GNN（图卷积网络）按加权邻接矩阵聚合邻近区域流量特征，得到空间表征序列；再将每个区域的时空特征序列输入Transformer编码器，通过缩放点积自注意力建模长程时间依赖；最后通过输出映射层生成多步预测X(t+1:t+H)。训练采用MAE损失，优化所有训练样本、区域和预测时域的平均误差。",
+        "result": "在真实蜂窝网络数据集上的实验表明，所提GCN-Transformer在多个预测时域上一致优于GCN-RNN、GCN-LSTM和GCN-GRU等循环图基线，尤其在较长预测时域和流量快速变化阶段具有更高的准确性和稳定性；基于预测的主动资源供给相比反应式管理能更有效降低过载风险。",
+        "conclusion": "通过图神经网络捕获空间相关性并使用Transformer自注意力学习长程时间模式，可以实现大规模时空流量建模，提升边缘计算中多时域流量预测的精度与稳定性，为主动资源供给提供可靠支撑，表明图增强注意力机制在构建智能自适应边缘系统方面具有潜力。",
+        "key_details": "空间图用区域质心经纬度欧氏距离构造全连接加权图，权重为高斯核exp(-d^2/sigma^2)，sigma控制空间衰减率，邻接矩阵进行行归一化；输入可加入小时、星期等上下文特征；Transformer使用缩放点积注意力，解耦空间表示学习与时间推理；损失函数为多时域MAE；实验与GCN-RNN、GCN-LSTM、GCN-GRU在相同设置下比较；资源供给策略g(.)的设计不在本文范围，主要聚焦于预测精度与稳定性。"
+      },
+      "affiliations": [
+        "Southwest Jiaotong University",
+        "Beijing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "Southwest Jiaotong University, Beijing University of Posts and Telecommunications",
+      "score": 4.658842925993952,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.04060v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804060v1-sjepa-learning-elegant-latent-dynamics-with-hybrid-symbolic-neural-predictors",
+      "source": "arxiv",
+      "title": "SJEPA: Learning Elegant Latent Dynamics with Hybrid Symbolic-Neural Predictors",
+      "authors": [
+        "Yongchao Huang"
+      ],
+      "authors_text": "Yongchao Huang",
+      "abstract": "Joint-embedding predictive architectures learn abstract states by predicting target embeddings from context embeddings, but their transition models are typically opaque neural maps. We introduce SJEPA, a reconstruction-free JEPA framework that learns predictive representations whose induced dynamics admit compact symbolic descriptions. Its hybrid transition combines a symbolic law with a regularised neural correction for dynamics outside the selected grammar. The central principle is to learn the simplest adequate dynamics: representation constraints preserve informative, non-collapsed predictive coordinates, while operator compression favours low-complexity symbolic-neural transitions that remain predictively adequate. We formalise this principle through induced-dynamics complexity, analyse predictive-coordinate non-identifiability, and show that unconstrained operator compression creates a direct shortcut to representation collapse. The framework supports both alternating representation-equation learning and symbolic dynamics fitted to fixed representations. In controlled pendulum experiments, joint learning discovers substantially simpler symbolic dynamics with lower long-horizon rollout error and divergence than post-hoc fitting, while an unconstrained one-step diagnostic realises the predicted collapse shortcut. Under grammar misspecification, correction regularisation preserves the representable symbolic mechanism and directs the neural component towards residual dynamics. The results expose a controllable trade-off among predictive fidelity, representation quality, symbolic parsimony, and symbolic-neural allocation.",
+      "url": "http://arxiv.org/abs/2608.04060v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04060v1",
+      "tldr": "SJEPA is a reconstruction-free JEPA framework that learns predictive latent representations whose dynamics are compressed into compact symbolic laws with a regularized neural correction, favoring the simplest adequate dynamics while preventing representation collapse.",
+      "detailed_reading": {
+        "motivation": "联合嵌入预测架构（JEPA）通过学习从上下文嵌入预测目标嵌入来获得抽象状态，但其转移模型通常是黑盒神经网络，难以揭示变量间的交互、动作如何影响未来以及所学坐标是否支持简洁的动力学描述。本文提出SJEPA，目标不是学习最短方程，而是学习对信息丰富且非坍缩的预测坐标而言最简单且充分的控制律，即同时实现表示压缩与算子压缩，避免为简化动力学而牺牲表示质量。",
+        "method": "SJEPA采用无重建的JEPA框架，将潜在转移分解为符号定律与正则化神经修正：预测目标由Z_T_hat = F_{E,alpha}(Z_C, eps) + c_phi(Z_C, eps)给出，其中F为符合语法树的符号表达式（结构复杂度由节点加权和定义），c_phi为神经修正项，eps为条件信息（如时间偏移或动作）。训练目标为约束算子压缩：最小化符号复杂度Omega(E)与修正正则项lambda_c R_corr(phi)，同时满足预测损失L_pred <= delta_pred且表示约束(theta, theta_bar) in Theta_repr（如VICReg式正则，避免表示坍缩）。支持交替学习表示与符号方程，或对冻结编码器拟合符号动力学；实验中使用稀疏库表示符号支撑，并以可微系数代理优化，最终报告阈值化支撑。",
+        "result": "在受控摆实验中，联合表示-方程学习比事后拟合发现更简单的符号动力学，并显著降低长时程展开误差和发散程度；无约束的一步诊断实现了理论预测的坍缩捷径（表示固定点坍缩）。在语法误设下，修正正则化保留了可表示的符号机制，并将神经分量引导至残差动力学。实验揭示预测保真度、表示质量、符号简洁性与符号-神经分配之间存在可调节的权衡。",
+        "conclusion": "SJEPA展示了在JEPA家族中学习优雅潜在动力学的可行方向：通过将潜在转移显式分解为紧凑符号定律与受控神经修正，能够在保持预测充分性的同时获得可解释的动力学描述。该框架支持贝叶斯扩展、行动条件化、敏感性分析与规划，适用于需要紧凑潜在动力学、显式结构约束或受控残差建模的场景。",
+        "key_details": "关键细节包括：使用EMA目标编码器提供缓慢移动的预测目标；在连续时间系统中，符号-神经分解可作用于向量场而非直接转移映射，实验采用前向欧拉积分H(z)=z+Delta t[F(z)+c_phi(z)]；表示约束使用VICReg风格正则器避免坍缩；符号复杂度可替换为MDL准则；理论分析表明预测坐标非可辨识，且无约束的算子压缩会直接导致表示坍缩，因此必须联合施加预测约束与表示约束；修正项通过正则系数lambda_c控制，防止神经分量不必要地吸收可表示的动力学。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.608822949437543,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.04121v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804121v1-interpretable-fuzzy-inference-for-uav-target-tracking-using-bounding-box-geometry",
+      "source": "arxiv",
+      "title": "Interpretable Fuzzy Inference for UAV Target Tracking Using Bounding-Box Geometry",
+      "authors": [
+        "Reza Ahmari",
+        "Ahmad Mohammadi",
+        "Vahid Hemmati",
+        "Nicholas Edmond",
+        "Hossein Z. Saghazadeh",
+        "Olusola Odeyomi",
+        "Parham Kebria",
+        "Abdollah Homaifar"
+      ],
+      "authors_text": "Reza Ahmari, Ahmad Mohammadi, Vahid Hemmati, Nicholas Edmond, Hossein Z. Saghazadeh, Olusola Odeyomi, Parham Kebria, Abdollah Homaifar",
+      "abstract": "Vision-based guidance of unmanned aerial vehicles (UAVs) toward unmanned ground vehicles (UGVs) supports cooperative aerial--ground robotics, but reliable continuous yaw estimation from onboard vision remains challenging because of sensing uncertainty, limited computation, and the need for interpretable control. Existing deep-learning and geometric-reconstruction approaches often require large datasets, external localization, or complex modeling assumptions, reducing transparency and deployment suitability on resource-constrained platforms. We present an interpretable fuzzy-inference framework that generates continuous yaw commands from low-dimensional features extracted from YOLO boxes: target centroid location, area, and aspect ratio. No explicit geometric modeling is required. A Mamdani fuzzy system serves as an interpretable baseline using a shoulder--triangle--shoulder input partition. It is followed by a first-order Takagi--Sugeno model with three antecedent membership terms per input, whose parameters are derived from training-set quantiles, yielding a compact 27-rule structure. Evaluation uses 6{,}169 labeled samples from a VICON motion-capture environment. Across five randomized train--test splits, the Takagi--Sugeno model achieves a test-set mean absolute error of $0.140^\\circ \\pm 0.003^\\circ$, a root mean squared error of $0.200^\\circ \\pm 0.008^\\circ$, and a maximum absolute error of $1.254^\\circ \\pm 0.121^\\circ$. Within-threshold accuracies are $99.676% \\pm 0.270%$ for $\\pm1^\\circ$ and $100.000% \\pm 0.000%$ for both $\\pm3^\\circ$ and $\\pm5^\\circ$. Directional consistency between image-plane horizontal displacement and predicted yaw sign reaches $90.254% \\pm 0.612%$. These results show that the framework is transparent, data-efficient, computationally lightweight, and suitable for real-time vision-based UAV guidance toward mobile ground targets.",
+      "url": "http://arxiv.org/abs/2608.04121v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04121v1",
+      "tldr": "The paper presents an interpretable fuzzy-inference framework that maps low-dimensional YOLO bounding-box features (centroid, area, aspect ratio) to continuous yaw commands for vision-based UAV tracking of ground vehicles, achieving high accuracy (e.g., ~0.14° mean absolute error) with a compact, data-efficient, and transparent 27-rule Takagi–Sugeno system.",
+      "detailed_reading": {
+        "motivation": "视觉引导无人机追踪地面无人车是协同空地机器人的关键能力，但仅依靠机载视觉进行连续偏航角估计面临感知不确定性、计算资源有限和可解释性需求等挑战。现有深度学习和几何重建方法通常需要大规模数据集、外部定位或复杂建模假设，透明度低，难以在资源受限平台上实时部署。因此需要一种可解释、数据高效、计算轻量且适合实时视觉引导的连续偏航估计框架。",
+        "method": "提出一个可解释的模糊推理框架，输入为YOLO检测框提取的低维几何特征：目标质心水平位置、归一化面积和宽高比，输出连续偏航角。首先构建Mamdani模糊系统作为可解释基线，采用肩-三角-肩输入隶属函数划分；随后构建一阶Takagi-Sugeno模型，每个输入使用三个由训练集分位数导出的隶属函数，形成紧凑的27条规则结构。训练时，所有特征归一化和隶属函数参数仅从训练集获取，测试时保持不变；TS模型的后件线性参数通过最小二乘回归在训练集上辨识。评估使用VICON运动捕捉系统采集的6169个标注样本，并按五次随机训练测试划分进行验证。",
+        "result": "在五次随机划分的测试集上，Takagi-Sugeno模型取得平均绝对误差0.140°±0.003°，均方根误差0.200°±0.008°，最大绝对误差1.254°±0.121°。±1°阈值内准确率为99.676%±0.270%，±3°和±5°阈值内准确率均为100.000%±0.000%。图像平面水平位移与预测偏航角符号的方向一致性达到90.254%±0.612%。结果表明该框架透明、数据高效、计算轻量，适合实时视觉引导。",
+        "conclusion": "该模糊推理框架通过可解释的Mamdani基线和精确的一阶Takagi-Sugeno模型，在透明性与连续偏航回归精度之间取得了有效平衡，且无需显式几何建模。基于真实数据的多指标验证表明，该框架能够以极低计算成本可靠预测无人机对地面移动目标的偏航修正指令，适合部署在资源受限的机载平台上。",
+        "key_details": "关键细节包括：1) 防泄漏设计，所有归一化参数和隶属函数参数仅从训练集分位数计算，测试集不参与；2) 覆盖安全的肩-三角-肩输入划分减少边界激活模糊，保持27条规则的紧凑结构；3) Mamdani基线使用鲁棒百分位归一化并映射到[0,1]，TS模型直接使用原始特征尺度的训练分位数；4) TS模型后件为输入的一阶线性函数，通过训练集最小二乘辨识；5) 数据来自VICON运动捕捉系统，共6169个标注样本，五次随机70/30划分；6) 评估指标包括MAE、RMSE、最大绝对误差、阈值内准确率和方向一致性；7) 当前为离线评估，部署时预测偏航角可输入低层偏航率或姿态控制器，但未在真实控制回路中验证，且方法针对特定目标跟踪场景。"
+      },
+      "affiliations": [
+        "North Carolina A&T State University"
+      ],
+      "affiliations_text": "North Carolina A&T State University",
+      "score": 4.533364690202214,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.04114v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804114v1-intrinsic-stochastic-successive-convexification-on-se3-for-chance-constrained-6-dof-rendezvous",
+      "source": "arxiv",
+      "title": "Intrinsic Stochastic Successive Convexification on SE(3) for Chance Constrained 6-DOF Rendezvous",
+      "authors": [
+        "Fabio D'Onofrio",
+        "Renato Zanetti"
+      ],
+      "authors_text": "Fabio D'Onofrio, Renato Zanetti",
+      "abstract": "This work presents an intrinsic stochastic successive convexification method formulated on the Special Euclidean group SE(3) for six degrees of freedom spacecraft rendezvous trajectory optimization. The proposed approach extends stochastic successive convexification, originally developed for Euclidean state spaces, to the nonlinear manifold of SE(3), thereby enabling a consistent covariance steering and chance constrained optimization of rigid body pose trajectories. While conventional trajectory optimization methods often treat position and attitude separately, or account for stochastic dispersion only after a deterministic reference trajectory has been generated, the proposed SE(3)-based formulation captures the intrinsic coupling between translational and rotational motion uncertainty. This coupling is especially important for rendezvous problems with safety constraints that depend on the full relative pose, including collision avoidance, docking corridor, camera field of view, and probabilistic force and torque bounds. Numerical simulations show that jointly optimizing the nominal trajectory, covariance, and feedback law shapes the closed loop dispersion and improves probabilistic constraint satisfaction relative to tracking a deterministic reference with a feedback linearization controller.",
+      "url": "http://arxiv.org/abs/2608.04114v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04114v1",
+      "tldr": "The paper introduces an intrinsic stochastic successive convexification method on SE(3) that jointly optimizes the nominal trajectory, covariance, and feedback law for chance-constrained 6-DOF spacecraft rendezvous, capturing coupled translational–rotational uncertainty to improve probabilistic constraint satisfaction.",
+      "detailed_reading": {
+        "motivation": "传统六自由度交会轨迹优化方法常将位置与姿态分离处理，或仅在确定性参考轨迹生成后才加入随机散布，因而无法捕获平动与转动运动不确定性之间的内在耦合。这种耦合对依赖完整相对位姿的安全约束（如碰撞规避、对接走廊、相机视场、概率力/力矩界）至关重要，因此需要在SE(3)流形上建立一致的协方差控制和机会约束优化框架。",
+        "method": "本文提出一种在SE(3)上的内蕴随机逐次凸化方法。完整状态定义为乘积群SE(3)×ℝ^{n_c}，其中SE(3)表示位姿，ℝ^{n_c}表示欧氏速度分量。使用左不变逆回缩（boxminus）将位姿扰动映射到李代数切空间，用左回缩（boxplus）将切空间修正映射回流形，以此保持标称轨迹在流形上。在每次迭代中，将非线性动力学在切空间线性化，并结合集中高斯分布假设在切空间传播协方差，形成关于标称轨迹、协方差序列和仿射反馈增益的凸子问题。机会约束通过切空间协方差投影转写为确定性凸约束，并采用虚拟控制和信任域机制避免人工不可行性与无界性。算法迭代求解凸子问题直至收敛，实现同时优化标称轨迹、协方差与反馈律。实现采用齐次矩阵，但亦可推广到对偶四元数表示。",
+        "result": "数值仿真表明，联合优化标称轨迹、协方差与反馈律能够主动塑造闭环散布，相比先求确定性参考再用反馈线性化控制器跟踪的方法，显著提高了概率约束满足度。该方法在碰撞规避、对接走廊、相机视场和概率力/力矩界等依赖完整相对位姿的约束下均表现出更好的一致性。",
+        "conclusion": "本文在SE(3)上建立了几何一致的随机顺序凸优化框架，使位姿更新、不确定性模型、反馈策略和概率约束全部表达在SE(3)的李代数中，从而在六自由度交会问题中实现了平动与转动不确定性的内在耦合优化。该方法拓展了随机逐次凸化到非线性流形的适用范围，为位姿级随机轨迹优化提供了可行且高效的工具。",
+        "key_details": "关键点包括：采用左集中高斯分布假设，概率质量集中于对数映射良定义的邻域，因此可在李代数中使用欧氏协方差代数；使用左群理论均值而非Fréchet均值；位姿扰动采用左不变逆回缩，更新采用左回缩，保证均值在流形上；完整状态为SE(3)×ℝ^{n_c}，速度部分使用常规向量加法；机会约束利用切空间协方差投影转为高斯分位数约束；迭代凸化过程需要虚拟控制变量和信任域以保证可行性和收敛性；实现使用齐次矩阵，但推导同样适用于对偶四元数。局限性在于集中分布假设要求不确定性足够小，且未提供具体超参设置与复杂度分析。"
+      },
+      "affiliations": [
+        "The University of Texas at Austin"
+      ],
+      "affiliations_text": "The University of Texas at Austin",
+      "score": 4.524893398237343,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.04028v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804028v1-lindblad-inspired-multi-timescale-reservoir-computing-with-separable-rotation-and-dissipation",
+      "source": "arxiv",
+      "title": "Lindblad-Inspired Multi-Timescale Reservoir Computing with Separable Rotation and Dissipation",
+      "authors": [
+        "Jyotiranjan Beuria",
+        "Amit Shukla"
+      ],
+      "authors_text": "Jyotiranjan Beuria, Amit Shukla",
+      "abstract": "Echo-state networks enable efficient temporal learning by fixing the recurrent dynamics and training only a linear readout. However, conventional reservoirs typically accommodate signal mixing, memory retention, and stability within a single random recurrent matrix. Existing structured designs improve topology, norm preservation, leakage, or depth, but generally do not provide separate modal control of reversible mixing and irreversible forgetting together with a direct global stability guarantee. We introduce a classical Lindblad-inspired multi-timescale reservoir that bridges open-system dynamical principles with structured state-space modeling. The recurrent operator is assembled from exactly discretized damped rotational modes, so rotation and decay become independent design variables governing phase mixing and memory loss. Orthogonal mode mixing preserves normality, while the decay spectrum directly determines the echo-state stability margin without post-hoc spectral-radius rescaling. We evaluate the method over ten aligned seeds against standard, leaky, deep, orthogonal, cycle, and next-generation reservoirs, together with a compact trained gated recurrent unit, across linear memory, nonlinear recurrence, chaotic forecasting, delayed logic, and real sensor calibration. Across the benchmark suite, the proposed reservoir achieves the best fixed-reservoir performance on bounded NARMA-20 and the lowest mean error on Lorenz-63, matches the strongest linear-memory result, and remains broadly competitive across broad range of benchmarks. Ablation studies show that rotation increases state diversity, whereas dissipation provides controlled forgetting and improves predictive conditioning. The resulting framework offers an interpretable recurrent architecture in which mixing, memory, and stability are explicit and independently tunable design variables.",
+      "url": "http://arxiv.org/abs/2608.04028v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04028v1",
+      "tldr": "The paper introduces a Lindblad-inspired classical reservoir architecture that explicitly separates rotational mixing from dissipative memory loss via exactly discretized damped modes, providing independent tunable control over phase mixing, forgetting, and echo-state stability, and achieving competitive or superior performance across diverse temporal benchmarks.",
+      "detailed_reading": {
+        "motivation": "传统回声音态网络（ESN）通过固定循环动力学并仅训练线性读出实现高效时序学习，但常规储备池通常将信号混合、记忆保持和稳定性压缩在单一随机循环矩阵中，缺乏对可逆混合与不可逆遗忘的独立模态控制，且稳定性依赖谱半径后缩放，缺乏直接的全局稳定性保证。",
+        "method": "提出一种经典Lindblad启发的多时间尺度储备池架构。从开放系统GKSL生成元分解出发，将每个循环组件构造为25个精确离散化的阻尼旋转模式对：每个模式由生成元A_{mj}=-γ_{mj}I+ω_{mj}J得到精确流B_{mj}=e^{-γ_{mj}}R(ω_{mj})，旋转角ω和衰减率γ作为独立设计变量；通过正交相似变换W_m=Q_m blkdiag(B_{mj})Q_m^T混合模态，保持矩阵正态性且不进行谱半径后缩放。架构由6个50维成员并行组成，每个成员按固定输入投影、固定偏置、循环状态求和后经tanh非线性更新，拼接得到300维状态，经拟合样本统计标准化，对回归任务直接使用线性特征，对延迟XOR任务附加平方特征，最后用岭回归训练读出。",
+        "result": "在十个对齐种子下与标准ESN、leaky ESN、两层Deep ESN、正交储备池、带跳循环储备池（CRJ）、下一代储备池（NG-RC）及紧凑端到端训练GRU对比，覆盖线性记忆、非线性递归、混沌预测、延迟逻辑和真实传感器校准。所提方法在bounded NARMA-20上取得最佳固定储备池性能，在Lorenz-63上取得最低平均误差，线性记忆任务匹配最强结果，并在NARMA-10、Mackey-Glass预测、延迟XOR和空气质量校准上保持广泛竞争力。消融表明旋转增加状态多样性，耗散提供受控遗忘并改善预测条件。",
+        "conclusion": "该框架提供了一种可解释的循环架构，其中混合（旋转）、记忆（衰减）和稳定性由显式且独立可调的设计变量控制，无需谱半径后处理即可获得直接全局稳定性保证。旋转和耗散的分离是有效的设计原则，但某些任务上leaky、多项式延迟或端到端训练的GRU仍可能更优。",
+        "key_details": "关键细节包括：每个模式对的特征值模长为|λ_{mj}|=e^{-γ_{mj}}，参数为25个模式对，每成员维度50，共6个成员，总状态维度300；稳定性由诱导二范数∥W_m∥_2=e^{-min_j γ_{mj}}<1直接保证，无需谱半径再缩放；使用tanh激活，输入投影、循环矩阵和偏置均冻结，仅读出经过训练；特征映射对回归用线性特征，对XOR用平方特征；标准化使用训练样本的均值和标准差；读出采用岭回归。消融和训练时间测量显示旋转提升状态多样性，耗散改善条件数。局限性在于部分基准上leaky/NG-RC/GRU性能更好，且该方法为经典储备池而非量子模拟。"
+      },
+      "affiliations": [
+        "ISS",
+        "Indian Institute of Technology Mandi"
+      ],
+      "affiliations_text": "ISS, Indian Institute of Technology Mandi",
+      "score": 4.328904305734363,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.04173v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804173v1-understanding-fault-tolerance-of-adversarially-robust-pruned-models",
+      "source": "arxiv",
+      "title": "Understanding Fault Tolerance of Adversarially Robust Pruned Models",
+      "authors": [
+        "Manali Dangarikar",
+        "Cory Merkel"
+      ],
+      "authors_text": "Manali Dangarikar, Cory Merkel",
+      "abstract": "Deep neural networks (DNNs) deployed on resource-constrained neuromorphic hardware face three concurrent challenges: the need for model compression through pruning, vulnerability to adversarial input perturbations, and susceptibility to hardware-induced weight faults such as stuck-at-zero errors. While each of these factors has been studied in isolation, their combined effects on model reliability have received little attention. This paper presents an empirical investigation of how pruning, adversarial training, and hardware fault injection interact to affect the robustness of convolutional neural networks. Using a compact three-layer CNN trained on MNIST, we conduct three experiments: (1) comparing the fault tolerance of naturally and adversarially trained models under simultaneous hardware faults and adversarial attacks, (2) evaluating how pruning affects adversarial robustness, and (3) characterizing the joint accuracy surface across fault rates, adversarial perturbation magnitudes, and pruning levels. Our results show that adversarial training improves robustness against input perturbations but increases sensitivity to stuck-at-zero weight faults. Contrary to intuition, pruning did not significantly increase fault sensitivity, and varying the pruning level had little effect across fault rates and attack strengths. These results highlight the need to jointly consider adversarial robustness and hardware reliability.",
+      "url": "http://arxiv.org/abs/2608.04173v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04173v1",
+      "tldr": "Adversarially trained CNNs are more robust to input perturbations but more sensitive to stuck-at-zero weight faults, while pruning has minimal impact on fault tolerance or adversarial robustness.",
+      "detailed_reading": {
+        "motivation": "深度神经网络部署在资源受限的神经形态硬件上时，同时面临模型压缩（剪枝）、对抗输入扰动和硬件权重故障（如卡零错误）三重挑战。现有工作大多只孤立研究其中单个因素，对三者联合作用下的模型可靠性缺乏关注，因此本文首次实验探究剪枝、对抗训练和硬件故障注入如何共同影响卷积神经网络的鲁棒性。",
+        "method": "使用在MNIST上训练的三层卷积神经网络（三个卷积层分别有32、64、64个滤波器，后接10神经元全连接层），在PyTorch中开展实验。自然训练使用交叉熵损失和RMSProp优化器（学习率0.001，权重衰减5e-4，10轮）；对抗训练额外进行5轮，每轮同时使用自然图像和PGD生成的对抗图像，总损失为干净损失与对抗损失的均值。PGD采用L-inf约束，步长0.01，迭代40次，epsilon=0.3。剪枝采用基于幅度的非结构化剪枝，通过二值掩码与权重逐元素相乘来移除不重要连接。硬件故障通过软件故障注入模拟卡零错误，按比例将权重置零。评估时在epsilon从0到0.5（步长0.1）的FGSM和PGD攻击下，联合改变故障率（0到100%）和剪枝水平（0到80%），每个配置重复5次随机初始化并取平均。",
+        "result": "对抗训练显著提升了对FGSM和PGD攻击的输入鲁棒性，在epsilon=0.3且无故障时准确率保持在89%以上，但对抗训练模型对卡零权重故障更敏感，其干净准确率在故障率超过20%后明显低于自然训练模型。与直觉相反，剪枝并未显著增加故障敏感性，不同剪枝水平（0%到80%）在故障率和攻击强度变化下对准确率影响很小。联合表征显示，剪枝水平对鲁棒性-故障权衡几乎没有系统性影响，但中间故障率（20-40%）下模型行为方差较高，结果应视为方向性趋势而非精确效应。",
+        "conclusion": "本文通过受控实验揭示了剪枝、对抗训练和硬件权重故障之间的非平凡交互：对抗训练在增强输入鲁棒性的同时削弱了对卡零权重故障的容错能力，这种权衡可用决策边界几何解释——对抗训练将边界推离数据点，但权重故障破坏边界使其移回数据点附近，从而降低对抗鲁棒性。剪枝由于保留了大权重，并未额外加剧故障敏感度。该工作强调需要联合考虑对抗鲁棒性和硬件可靠性，为压缩、鲁棒模型在神经形态硬件上的可靠部署提供了初步依据。",
+        "key_details": "实验仅使用MNIST和简单三层CNN，未在更大数据集和真实神经形态硬件上验证。故障模型仅考虑卡零（stuck-at-zero），未包括卡一故障。剪枝采用非结构化幅度剪枝，训练时使用PGD对抗训练，攻击评估包括FGSM和PGD。中间故障率（20-40%）下运行间方差较大，结论需谨慎解读。论文提出决策边界几何解释作为假设，但未给出直接验证。未来方向包括不同数据集、架构、卡一故障以及真实硬件验证。"
+      },
+      "affiliations": [
+        "Rochester Institute of Technology"
+      ],
+      "affiliations_text": "Rochester Institute of Technology",
+      "score": 4.3038426197314035,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.04026v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804026v1-a-trust-region-framework-for-moment-estimation",
+      "source": "arxiv",
+      "title": "A Trust-region Framework for Moment Estimation",
+      "authors": [
+        "Oluwasegun A. Somefun"
+      ],
+      "authors_text": "Oluwasegun A. Somefun",
+      "abstract": "In this paper, we develop a trust-region framework for understanding the behavior of adaptive moment estimation mechanisms, such as \\textsc{Adam}, in stochastic gradient optimization. Specifically, in this framework, the magnitude of the update step for each individual weight is constrained within a trust-region governed by a moment constraint of order $p\\in[2,4]$. The resulting derivation then leads to a family of learning-rate mechanisms based on second-moment estimation and a normalized $p$-th moment estimation. When $p=4$, this involves kurtosis-like estimation. The general mechanism, referred to as \\textsc{Gmake}, provides a unified interpretation of normalization by moment estimation, learning-rate scheduling, spectral lowpass filtering as momentum, and operator-level spectral normalization within a common trust-region framework. Experiments on GPT2-124M trained on FineWeb-Edu and TinyStories suggest that the fourth-moment realization provides its greatest benefit when trust-region constraints are weak. As progressively stronger trust-region controls are introduced, the second-moment realization becomes increasingly competitive, often achieving slightly lower validation loss than its corresponding fourth-moment realization.",
+      "url": "http://arxiv.org/abs/2608.04026v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04026v1",
+      "tldr": "The paper proposes a trust-region framework for moment estimation that unifies adaptive optimizers like Adam into a family (Gmake) using normalized p-th moments, showing that fourth-moment (kurtosis-based) updates help most under weak constraints while second-moment methods become competitive under stronger trust-region control.",
+      "detailed_reading": {
+        "motivation": "现有自适应矩估计优化器（如Adam）在随机梯度优化中表现优异，但其行为缺乏统一的理论解释。本文旨在通过信赖域框架理解不同矩估计机制的作用，并建立归一化、学习率调度、动量与谱归一化之间的统一视角。",
+        "method": "本文提出一个信赖域框架，将每个权重的更新步长幅值约束在由p阶矩约束（p∈[2,4]）控制的信赖域内。由此推导出一族基于二阶矩估计和归一化p阶矩估计的学习率机制，称为Gmake。当p=4时，涉及类峰度（kurtosis-like）估计。该框架统一了基于矩估计的归一化、学习率调度、作为动量的谱低通滤波以及算子级谱归一化。实验采用GPT2-124M模型，在FineWeb-Edu和TinyStories数据集上进行训练验证。",
+        "result": "实验表明，在信赖域约束较弱时，四阶矩（p=4）实现的Gmake带来的收益最大；随着信赖域约束逐渐增强，二阶矩（p=2）实现变得更具竞争力，其验证损失通常略低于对应的四阶矩实现。",
+        "conclusion": "信赖域框架为理解自适应矩估计优化器提供了统一视角，且矩阶数的选择与信赖域强度存在交互作用：弱约束下高阶矩更优，强约束下低阶矩反而更好。该工作有助于指导优化器设计中的矩阶数与约束强度选择。",
+        "key_details": "关键点包括：信赖域约束的矩阶数p在2到4之间变化；p=4时采用类峰度估计；Gmake将多种技术纳入统一框架；实验基于GPT2-124M，训练数据为FineWeb-Edu和TinyStories；核心发现为四阶矩在弱约束下优势明显，而二阶矩在强约束下更优。由于仅有摘要信息，完整的超参数设置、损失函数细节及局限性需参考全文。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.243537922739765,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.04027v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804027v1-learning-to-resolve-neutron-resonances-with-fully-convolutional-neural-networks",
+      "source": "arxiv",
+      "title": "Learning to Resolve Neutron Resonances with Fully Convolutional Neural Networks",
+      "authors": [
+        "Nataly R. Panczyk",
+        "Athanasios Stamatopoulos",
+        "Josef Svoboda",
+        "Majdi I. Radaideh"
+      ],
+      "authors_text": "Nataly R. Panczyk, Athanasios Stamatopoulos, Josef Svoboda, Majdi I. Radaideh",
+      "abstract": "This work investigates the feasibility of augmenting traditional R-Matrix codes with a robust machine learning framework for automatically detecting neutron resonances in transmission spectra. Neutron transmission data are often complex and noisy, making them difficult to analyze using traditional peak-identification methods. The state-of-the-art R-Matrix codes currently used by physicists to fit these data often depend on prior evaluations and require substantial manual effort. This preliminary study demonstrates a method for accelerating the post-experimental processing of neutron transmission data and reducing bias associated with dependence on prior evaluations. We employ a fully convolutional neural network to classify individual points as belonging to resonance or non-resonance regions in seven transmission spectra---two evaluated and five experimental. Although the model achieves classification accuracies in the range of 93\\%, further analysis shows that this metric overstates its ability to generalize. Building on our prior analysis in PHYSOR 2026, we find that, despite the inclusion of additional training data, the method does not generalize reliably to previously unseen isotopes. To address these limitations, future work should evaluate whether a larger and more diverse training dataset can produce a generalizable model and should incorporate known physical characteristics of neutron resonances to improve model performance.",
+      "url": "http://arxiv.org/abs/2608.04027v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04027v1",
+      "tldr": "This paper investigates a fully convolutional neural network to automatically detect neutron resonances in transmission spectra, achieving ~93% accuracy but revealing limited generalization to unseen isotopes and underscoring the need for more diverse training data and physics-informed features.",
+      "detailed_reading": {
+        "motivation": "传统R-Matrix代码（如SAMMY/REFIT）拟合中子透射谱中的共振时，依赖先验评价且需要大量人工干预，且容易得到非物理解。本文旨在探索用全卷积神经网络自动检测中子透射谱中的共振区，以加速实验后处理并减少对先验评价的依赖，同时不替代现有白盒物理代码，而是作为辅助峰查找工具。",
+        "method": "使用一维全卷积神经网络（1D FCN）对透射谱逐点分类为共振/非共振。数据包括7个透射谱：Cs-133和Sm-149评价谱，以及Sm-149、Sm-147、Cu-63、Ir-191、Ir-193实验谱（来自DICER/LANSCE）。预处理：先用B样条拟合原始噪声谱（残差约1e-16），再在均匀能量网格上重采样为256000个点；通过交互式工具用SAMMY参数文件辅助标注峰区域，非峰标0、峰标1，污染物和模糊区标2/3但在训练中视为0；省略能量特征以增强材料无关性；将数据随机打乱并分割为长度1000的序列，不做重叠。模型架构：无全连接层，包含两组1D卷积+批归一化交替，后接Dropout，再接两个1D卷积层；逐像素输出概率，阈值0.5分类。训练：Adam优化器，二元交叉熵损失（logits），正类权重1.33以缓解类别不平衡，余弦退火学习率，训练50轮。针对三个泛化案例分别训练，每个案例用4个谱训练、2个谱测试；另训练了3个单谱对照模型。",
+        "result": "模型在分类准确率上达到约93%，但该指标高估了泛化能力。进一步分析表明，在三个跨同位素测试案例中，模型无法可靠泛化到未见过的同位素；即使增加了训练数据（相比PHYSOR 2026前作），泛化问题依旧存在。在部分测试谱上，模型对峰区域的识别精度与召回率不理想，尤其在峰密度较低的高能区表现较差；单谱模型在同谱测试上表现较好，但缺乏实际应用价值。",
+        "conclusion": "初步研究表明，1D FCN能学习透射谱中共振区域的模式，并在训练数据上达到较高分类准确率，但目前无法可靠泛化到未见过同位素。未来需要更大且更多样化的训练数据集，并将中子共振的已知物理特性（如Breit-Wigner形状、能量相关峰宽等）纳入模型，以提升泛化能力和物理一致性。该方法应与SAMMY等R-Matrix代码结合使用，而非替代。",
+        "key_details": "数据与标注：7个谱，2个评价谱（Cs-133, Sm-149 ENDF/B-VIII.0）和5个实验谱（Sm-149, Sm-147, Cu-63, Ir-191, Ir-193）；标注工具基于SAMMY参数文件定位峰，低能区峰更明显且标注更频繁，导致峰密度随能量变化；序列长度1000，无重叠，数据打乱打散能量连续性以增强训练多样性。训练配置：正权重1.33固定（基于最不偏斜的Sm-149实验谱），binary cross entropy with logits loss，cosine annealing，Adam，50轮。输入仅透射值（0-1），未缩放，刻意排除能量使模型不依赖特定同位素能量刻度。复杂度/约束：256000点均匀采样但不同谱能量范围不同导致点间距不一致，可能影响性能；逐像素预测要求比实际峰定位更精细，引入额外误差；模型仅为初步峰检测，不提供共振参数。局限性：训练数据量小、类别不平衡、标注主观性、跨同位素泛化失败；评价谱与实验谱存在域差异；评估指标需结合峰级度量而非仅像素级准确率。"
+      },
+      "affiliations": [
+        "Los Alamos National Laboratory",
+        "University of Michigan"
+      ],
+      "affiliations_text": "Los Alamos National Laboratory, University of Michigan",
+      "score": 4.16781450910911,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.04045v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804045v1-robust-and-personalized-federated-learning-for-aircraft-engine-prognostics-under-benign-and-adversarial-client-heterogeneity",
+      "source": "arxiv",
+      "title": "Robust and Personalized Federated Learning for Aircraft-Engine Prognostics under Benign and Adversarial Client Heterogeneity",
+      "authors": [
+        "Chinmoy Mitra",
+        "Md. Mehedi Hasan Nipu",
+        "Mohammad Sakib Mahmood",
+        "Md. Rakibul Islam",
+        "M. F. Mridha"
+      ],
+      "authors_text": "Chinmoy Mitra, Md. Mehedi Hasan Nipu, Mohammad Sakib Mahmood, Md. Rakibul Islam, M. F. Mridha",
+      "abstract": "Federated learning (FL) enables aircraft fleet operators to jointly train remaining-useful-life (RUL) models from engine sensor telemetry without sharing raw data. This study examines two complementary challenges: benign heterogeneity, where honest operators observe different operating conditions and fault modes, and adversarial heterogeneity, where compromised operators submit poisoned updates. We conduct a controlled, safety-oriented evaluation using a multi-task one-dimensional convolutional neural network and a structurally non-IID partition of the Commercial Modular Aero-Propulsion System Simulation (C-MAPSS) benchmark. We compare four remedies for benign heterogeneity and evaluate five attacks against four aggregation methods, including a physically motivated sensor-value backdoor designed to mask engine degradation.\n  Shared-representation personalization closes approximately 70% of the local-to-centralized root-mean-square-error gap, compared with 21% for proximal regularization and 10% for server-side reweighting. The backdoor achieves a 94.9% attack success rate against standard averaging while leaving clean accuracy statistically unchanged, demonstrating that accuracy alone cannot certify model safety and that attack success must be evaluated explicitly. Krum reduces attack success by an order of magnitude and is the only evaluated aggregator that withstands coordinated attackers, whereas personalization alone provides no protection. Combining personalization with robust aggregation restores robustness (2.8% attack success) with only a small accuracy cost, revealing a trade-off between robust update selection and collaborative representation learning. Results remain consistent across client counts and on a harder six-condition dataset. Code and data partitions are released for reproducibility.",
+      "url": "http://arxiv.org/abs/2608.04045v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04045v1",
+      "tldr": "A single-sentence TLDR: This paper shows that in federated learning for aircraft-engine remaining-useful-life prediction, shared-representation personalization best addresses benign client heterogeneity, while robust aggregation like Krum is essential against adversarial poisoning, and combining both restores resilience to failure-masking backdoors.",
+      "detailed_reading": {
+        "motivation": "航空发动机剩余寿命预测中，联邦学习允许机队运营商在不共享原始传感器数据的前提下联合训练RUL模型，但真实多运营商场景面临两类正交的客户端异质性：良性异质性（诚实运营商面临不同运行条件和故障模式）与对抗性异质性（被攻破运营商提交投毒更新）。现有FL-for-prognostics研究几乎只关注良性同构场景，而攻击研究则集中于图像分类基准，缺乏针对涡轮风扇发动机健康监测的物理启发后门攻击与鲁棒聚合的系统评估。本研究旨在同一C-MAPSS联邦基准下同时考察两类异质性，并验证个性化与鲁棒聚合能否组合成统一防御。",
+        "method": "基于C-MAPSS涡轮风扇退化基准，构建结构非IID的4客户端联邦划分（客户端1-2持有FD001单故障模式、客户端3-4持有FD003双故障模式，每个客户端50台发动机），采用多任务一维卷积神经网络（1D CNN）作为共享RUL预测模型。针对良性异质性比较四种方法：服务器端重加权、近端正则化（FedProx）、共享表征个性化（FedRep）和聚类联邦（FedCCFA）；针对对抗异质性构建五攻击×四聚合的全矩阵：标签翻转、梯度缩放（×−10和×−2）、物理动机的传感器值后门（通过篡改传感器读数掩盖发动机退化）以及协调的2-of-4拜占庭攻击，聚合器包括FedAvg、Trimmed Mean、Coordinate Median和Krum。训练流程：各客户端本地训练多轮后上传权重，服务器执行对应聚合，FedRep将模型拆分为共享表征层与本地个性化头，Krum在每轮选择最可信的单个客户端更新。后门攻击在恶意客户端对特定传感器值注入触发器并训练退化掩蔽行为，测试时检测攻击成功率。全部实验重复5个随机种子，并额外在客户端数量和六工况FD002/FD004数据集上验证一致性。",
+        "result": "共享表征个性化（FedRep）关闭了约70%的局部到集中式RMSE差距，远优于近端正则化（约21%）和服务器端重加权（约10%）；FedCCFA约为67%。物理动机传感器值后门在标准FedAvg下攻击成功率达94.9%，而干净精度在统计上无显著变化，证明仅看精度无法认证模型安全。鲁棒聚合中Krum将后门攻击成功率降低一个数量级至约6%，是唯一能抵御协调攻击者的评估聚合器；Trimmed Mean和Coordinate Median在2-of-4协同攻击下与无防御一样失败（攻击成功率约50%）。将FedRep与Krum组合后攻击成功率降至2.8%（±2.4），同时保留约70%的个性化收益，而单独使用个性化完全无防护（攻击成功率约63%）。结果在客户端数量和六工况数据集上保持一致。",
+        "conclusion": "良性异质性与对抗异质性需要不同且可组合的防御：个性化学习解决客户端数据分布差异，鲁棒聚合抵御中毒更新。将FedRep和Krum堆叠可在保持个性化精度收益的同时恢复稳健性，但存在鲁棒更新选择与协作表征学习之间的权衡。安全性评估必须显式测量攻击成功率，不能仅依赖干净精度。",
+        "key_details": "关键方法论细节包括：C-MAPSS结构非IID划分方式（不同故障模式子集分属不同客户端）以及受控实验设计（5攻击×4聚合全矩阵，5随机种子）；物理动机后门利用传感器值的物理语义植入触发器，通过掩盖发动机退化实现故障掩蔽，攻击成功率达94.9%且干净精度不变；Krum在f=1时攻击成功率约6%，组合FedRep+Krum后降至2.8%±2.4，但个性化单独无法提供安全保护；数据与代码分区已公开，便于复现。局限性包括：仅使用单一CNN架构、客户端规模较小（4客户端为主）、攻击模型假设攻击者控制本地训练管线，未考虑更复杂的多后门或自适应攻击；个性化与鲁棒聚合的组合存在精度-鲁棒性权衡，Krum的极端筛选可能丢弃信息。所有指标均对比局部训练与集中式训练基准，误差以RMSE衡量。"
+      },
+      "affiliations": [
+        "American International University-Bangladesh",
+        "Missouri State University",
+        "Rajshahi University of Engineering & Technology",
+        "Malardalen University",
+        "North South University"
+      ],
+      "affiliations_text": "American International University-Bangladesh, Missouri State University, Rajshahi University of Engineering & Technology, Malardalen University, North South University",
+      "score": 4.1009428780613675,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.04048v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/06/260804048v1-recurrent-residual-quantization-a-progressive-multi-precision-representation-for-llms",
+      "source": "arxiv",
+      "title": "Recurrent Residual Quantization: A Progressive Multi-Precision Representation for LLMs",
+      "authors": [
+        "Yu Luo",
+        "Bo Dong",
+        "Wenhua Cheng",
+        "Haihao Shen"
+      ],
+      "authors_text": "Yu Luo, Bo Dong, Wenhua Cheng, Haihao Shen",
+      "abstract": "Serving large language models (LLMs) under diverse deployment constraints requires flexible trade-offs between accuracy, memory footprint, and throughput. However, conventional quantization methods typically require a separate checkpoint for each target bit-width. We introduce Recurrent Residual Quantization (RRQ), a post-training quantization (PTQ) framework that represents weights as a low-bit quantized base together with a sequence of quantized residual corrections, enabling multiple effective precisions from a single checkpoint. Starting from a 2-bit model obtained via post-training quantization (PTQ) or round-to-nearest (RTN), RRQ progressively adds lightweight 2-bit residuals generated via RTN to construct 4-, 6-, and 8-bit representations. The method is calibration-free and avoids joint multi-bit optimization. In our Qwen3-8B setup, the full all-RTN 2-/4-/6-/8-bit package is constructed in 1,293 seconds, 3.3 times faster than the measured MatGPTQ construction. Experiments on six recent LLMs show competitive accuracy at 6 and 8 bits, with model-dependent behavior at 4 bits. The code will be made publicly available upon publication.",
+      "url": "http://arxiv.org/abs/2608.04048v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04048v1",
+      "tldr": "RRQ is a calibration-free post-training quantization framework that represents LLM weights as a low-bit base plus progressive quantized residual stages, enabling 2-, 4-, 6-, and 8-bit models from a single checkpoint with faster construction and competitive accuracy at higher precisions.",
+      "detailed_reading": {
+        "motivation": "现有LLM量化通常为每个目标位宽生成独立检查点，难以在内存、吞吐和精度之间灵活切换；多精度方法如MatGPTQ采用嵌套整数位切片，所有精度耦合在同一比特层级里，且难以复用已有低比特检查点。RRQ提出将权重表示为低比特量化基座加一系列量化残差修正，用单一检查点支持2/4/6/8比特，同时保留PTQ的灵活性和对已有量化检查点的可重用性。",
+        "method": "RRQ以全精度权重为输入，也可直接加载已有低比特检查点作为基座；若没有基座，则先用RTN对每个分组执行仿射量化（尺度/零点）得到2比特基座Q0，并令残差R0为原始权重减去基座反量化结果。随后递归地对R_{k-1}用RTN做2比特量化Q_k，存储该残差阶段的码、尺度和零点，反量化得到修正项，再更新残差R_k=R_{k-1}-hat R_k；重复三个残差阶段后，2/4/6/8比特分别对应基座前缀加上0/1/2/3个残差修正项。整个构建免校准、无需Hessian或联合多比特优化；推理时按前缀逐级累加基座和残差GEMM输出即可得到对应有效精度的结果。",
+        "result": "在Qwen3-8B案例中，全RTN的2/4/6/8比特RRQ包构建耗时1293秒，比实测MatGPTQ构建快约3.3倍。在六个近期LLM上，RRQ在6比特和8比特达到接近BF16的精度，并与现有单检查点多精度方法相当；4比特精度则呈现模型依赖行为，部分模型上表现不稳定。",
+        "conclusion": "RRQ通过递归残差量化提供了一种单检查点、可渐进扩展的多精度LLM权重表示，能够复用已有低比特模型并以极低构建开销生成更高精度版本。其适用性由权重的局部离群程度决定：离群值主导分组动态范围时残差修正显著有效，分布较平坦时直接固定比特量化可能更优，因此4比特效果依模型而异。",
+        "key_details": "关键实现细节包括：采用分组仿射零点量化，基座与三个残差阶段均用2比特RTN，因此前缀2/4/6/8比特天然可部署；基座和残差阶段格式可以异构，但实验只评估整数低比特阶段。分析采用Peak-to-Mean Ratio（PMR）刻画组内局部动态范围，示例Qwen3-14B在group size 128下平均张量最大PMR为27.826。理想化离群阈值近似为K>r(2^{n1+1}-1)，说明残差量化仅在离群幅度足够大时更优。局限是4比特表现模型相关，且完整构建需要全精度权重计算残差；若以已有低比特检查点为基座则只需执行残差阶段，可进一步节省开销。"
+      },
+      "affiliations": [
+        "Intel"
+      ],
+      "affiliations_text": "Intel",
+      "score": 4.056434353004054,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.04123v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804123v1-a-primal-perspective-on-distributionally-robust-optimization-an-investigation-on-modeling-and-solution-strategies",
+      "source": "arxiv",
+      "title": "A Primal Perspective on Distributionally Robust Optimization: An Investigation on Modeling and Solution Strategies",
+      "authors": [
+        "Yiqi Tian",
+        "Bo Zeng"
+      ],
+      "authors_text": "Yiqi Tian, Bo Zeng",
+      "abstract": "As a popular optimization scheme, distributionally robust optimization (DRO) protects decisions against ambiguity in probability distributions. For (single-stage) DRO, prevailing dual reformulations can become difficult when model or ambiguity-set structures are complex. We study DRO from a primal perspective, working directly with distributions in ambiguity sets on closed, potentially unbounded sample spaces. This perspective leads to an algorithmic framework, referred to as BiCS, that constructs and leverages distribution cuts to achieve strong performance. We show that BiCS is applicable to standard DRO, almost-sure DRO, DRO with various chance constraints, and DRO with ambiguity sets strengthened by local information. Numerical experiments with moment and Wasserstein ambiguity sets show that this framework demonstrates superior performance, including solving cases where the examined compact reformulations are unavailable or computationally difficult. The local-information study also makes changes in worst-case distributions directly visible.",
+      "url": "http://arxiv.org/abs/2608.04123v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04123v1",
+      "tldr": "The paper proposes a primal, distribution-cut-based algorithmic framework (BiCS) for distributionally robust optimization that avoids difficult dual reformulations and efficiently handles standard, almost-sure, chance-constrained, and locally informed DRO variants.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pittsburgh"
+      ],
+      "affiliations_text": "University of Pittsburgh",
+      "score": 3.9852075419339488,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.04084v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804084v1-specdrop-parameter-free-category-conditioned-routing-for-modular-specialization",
+      "source": "arxiv",
+      "title": "SpecDrop: Parameter-Free Category-Conditioned Routing for Modular Specialization",
+      "authors": [
+        "Boyao Wang",
+        "Zhihan Lei"
+      ],
+      "authors_text": "Boyao Wang, Zhihan Lei",
+      "abstract": "Mixture-of-experts (MoE) networks pursue specialization through learned routers, gates, and load-balancing losses, yet at matched total-parameter budgets learned routers can underperform equal-weight No-Routing baselines. Is the bottleneck the routing algorithm, or the alignment between training-signal granularity and the target categories? We probe the question with SpecDrop, a fixed parameter-free routing scheme: each of $K$ branches receives weight $p_a$ for its assigned category and a small leakage $p_i > 0$ otherwise, merged through a category-independent fixed denominator, with no learned routing parameters and no auxiliary losses; the category label is required at inference. On vision tasks where each image has one superclass label (CIFAR-100 on ResNet-110; ImageNet-1K on ViT-S/16), SpecDrop reaches 79.23% on CIFAR-100 and 79.89% on ImageNet-1K, exceeding parameter-matched baselines that do not use the label (+4.75 over dense on CIFAR-100; +6.53 over the No-Routing+SE control on ImageNet-1K). These gains quantify what category supervision buys when deployed through routing -- not an advantage over label-aware deployments of the baselines: given the same label, masking a dense model's outputs is stronger for accuracy alone (85.2 / 83.7). SpecDrop's contribution is converting the label into trained-in modular structure: 58%/100% branch-category alignment, and masking gains of 0.00 (CIFAR) / +1.06 (ImageNet) -- the output-space restriction is largely internalized during training. On fuzzy partitions, where training units span multiple categories (SlimPajama-6B language modeling with a 30M Transformer; SuperNI instruction tuning over Llama-3.2-1B with LoRA), the routing mechanism reduces to the matched No-Routing controls within seed noise, the null our thesis predicts. Granularity alignment, not algorithm choice, localizes when routing helps. Code: https://github.com/Beryex/SpecDrop",
+      "url": "http://arxiv.org/abs/2608.04084v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04084v1",
+      "tldr": "SpecDrop shows that a fixed, parameter-free category-conditioned routing scheme can match or beat learned routers on aligned vision tasks, revealing that alignment between training-signal granularity and target categories—not the routing algorithm—determines when modular specialization helps.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Carnegie Mellon University",
+      "score": 3.773591471119977,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.04057v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804057v1-laprune-controllable-differentiable-sparsity-at-million-scale",
+      "source": "arxiv",
+      "title": "LaPrune: Controllable Differentiable Sparsity at Million Scale",
+      "authors": [
+        "Jakub Antczak",
+        "Joanna Wojciechowicz",
+        "Łukasz Struski",
+        "Jacek Tabor"
+      ],
+      "authors_text": "Jakub Antczak, Joanna Wojciechowicz, Łukasz Struski, Jacek Tabor",
+      "abstract": "Top-$k$ selection determines which components of a sparse model remain active. Hard selection blocks gradients, while continuous relaxations often couple mask hardness to the selected mass. We introduce LaPrune, a mathematically exact-budget differentiable layer that controls the normalized second moment while preserving the selected mass. A LapSum barrier preserves the selection mass, and a normalized second-moment constraint moves the mask from a dense equal-mass allocation toward hard top-$k$ at each budget. We derive a population prediction of the saturated fraction, a near-binary limiting law, and a tight worst-case guarantee on the near-zero fraction. The normalized hardness parameter is invariant to score scale, while a fixed LapSum temperature is not.",
+      "url": "http://arxiv.org/abs/2608.04057v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04057v1",
+      "tldr": "LaPrune introduces a mathematically exact-budget differentiable sparsity layer that controls mask hardness via a normalized second-moment constraint while preserving the selected mass, enabling scale-invariant, million-scale top-k selection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wrocław University of Science and Technology",
+        "Jagiellonian University"
+      ],
+      "affiliations_text": "Wrocław University of Science and Technology, Jagiellonian University",
+      "score": 3.772457294906901,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.04113v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804113v1-out-of-the-loop-multi-fidelity-bayesian-optimization",
+      "source": "arxiv",
+      "title": "Out-Of-The-Loop Multi-Fidelity Bayesian Optimization",
+      "authors": [
+        "Gustavo Sutter",
+        "Hao Wang",
+        "Luis Ricardez-Sandoval",
+        "Pascal Poupart",
+        "Agustinus Kristiadi"
+      ],
+      "authors_text": "Gustavo Sutter, Hao Wang, Luis Ricardez-Sandoval, Pascal Poupart, Agustinus Kristiadi",
+      "abstract": "Black-box optimization is a ubiquitous problem in science and engineering, often dealing with expensive objective functions with cheaper lower-fidelity proxies available. Multi-fidelity Bayesian optimization (MF-BO) is a principled approach to this problem, leveraging correlations across different fidelities when querying the objective. However, for many important MF-BO tasks, the true highest-fidelity function is prohibitively expensive to be part of the optimization loop. Nevertheless, practitioners often have gold standard data (observations of the highest-fidelity function) obtained from previous experiments that might provide information for the current task. For instance, in molecular optimization, chemists often pick the top-$k$ candidate molecules using various computer simulations, and later reveal their true objective function values. In this work, we demonstrate the suboptimality of standard MF-BO algorithms in the real-world scenarios above, even under ideal assumptions. Next, we mitigate this problem by incorporating historical high-fidelity data accompanied by task descriptors---which can be explicitly given or extracted from unstructured metadata. We demonstrate the effectiveness of our methods on synthetic functions, as well as real-world problems in chemistry and hyperparameter optimization.",
+      "url": "http://arxiv.org/abs/2608.04113v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04113v1",
+      "tldr": "Standard multi-fidelity Bayesian optimization fails when the true highest-fidelity function is too expensive to query online, so the paper improves it by incorporating historical high-fidelity \"gold standard\" data with task descriptors, showing gains on synthetic, chemistry, and hyperparameter optimization tasks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.742051478592275,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.04051v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804051v1-camp-a-cycle-aware-multi-scale-patch-mixer-for-time-series-forecasting",
+      "source": "arxiv",
+      "title": "CAMP: A Cycle-Aware Multi-Scale Patch Mixer for Time Series Forecasting",
+      "authors": [
+        "Jung Min Choi",
+        "Vijaya Krishna yalavarthi",
+        "Lars Schmidt-Thieme"
+      ],
+      "authors_text": "Jung Min Choi, Vijaya Krishna yalavarthi, Lars Schmidt-Thieme",
+      "abstract": "Real-world time series are often governed by recurring patterns, but their dominant periods may vary across datasets, forecasting settings, and individual input windows. Existing cycle-aware forecasters commonly rely on a single period selected at the dataset level, which can be restrictive when periodic behavior changes over time or when multiple cycles coexist. Moreover, patch-based models typically process all patch positions uni- formly, although patches farther from the forecast boundary may require broader contextual refinement, while recent patches contain information that should be preserved more directly. Af- ter cyclic behavior is removed, the remaining dynamics may also span multiple temporal resolutions and cannot be adequately de- scribed at a single scale. We introduce CAMP, a Cycle-Aware Multi-Scale Patch Mixer designed to address these challenges. The Adaptive Cycle Learning module identifies dominant fre- quencies separately for each input window and generates both historical and future cyclic components without requiring a pre- defined cycle length. The Horizon-Guided Patch Mixer intro- duces position-dependent refinement, allowing earlier patches to incorporate broader temporal context while preserving infor- mation close to the forecast boundary. CAMP further models the de-cycled residual through temporally aligned multi-resolution representations, enabling complementary dynamics at different scales to be captured within one forecasting framework. Across seven long-term forecasting benchmarks, CAMP achieves the best average MSE on six datasets and the best or tied-best MAE on six. It also obtains the highest MSE win count across sixteen settings on four PEMS traffic benchmarks.",
+      "url": "http://arxiv.org/abs/2608.04051v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04051v1",
+      "tldr": "CAMP is a cycle-aware multi-scale patch mixer that adaptively learns per-window dominant frequencies and models de-cycled residuals with horizon-guided, multi-resolution patch mixing, achieving state-of-the-art forecasting performance across long-term and traffic benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Hildesheim"
+      ],
+      "affiliations_text": "University of Hildesheim",
+      "score": 3.7183738269554762,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.04147v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804147v1-linc-lightweight-noise-correction-via-per-sample-trust-and-gaussian-mixture-modeling",
+      "source": "arxiv",
+      "title": "LiNC: Lightweight Noise Correction via Per-Sample Trust and Gaussian Mixture Modeling",
+      "authors": [
+        "Abhishek Moturu",
+        "Babak Taati",
+        "Anna Goldenberg"
+      ],
+      "authors_text": "Abhishek Moturu, Babak Taati, Anna Goldenberg",
+      "abstract": "Label noise is common in medical imaging datasets due to factors such as inter-rater variability, annotation errors, and ambiguous cases. This can severely undermine the reliability and clinical effectiveness of machine learning models trained using those datasets. To address this challenge, we introduce Lightweight Noise Correction (LiNC), which adds a single trainable trust parameter per training sample and learns when to use the observed label and when to defer to the model during a standard training loop. The key idea is to train using a convex combination of the observed label and the model's own predictive distribution, controlled by a per-sample trust parameter. We show that the gradient of this objective drives trust values in opposite directions for clean versus noisy samples in the early training phase, yielding separable trust distributions. We use a 3-component Gaussian Mixture Model over the trust values to separate them into clean, ambiguous, and noisy cases and then execute a short soft-correction phase on the noisy cases and a final hard correction phase. Experiments on ten 2D datasets from MedMNISTv2 under label noise of up to 50% show consistent gains in accuracy and strong mislabel detection. LiNC adds negligible asymptotic overhead: the training-time complexity remains dominated by the base network, with additional memory growing linearly with the size of the training set.",
+      "url": "http://arxiv.org/abs/2608.04147v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04147v1",
+      "tldr": "LiNC introduces a per-sample trainable trust parameter that blends observed labels with model predictions, then uses a 3-component Gaussian Mixture Model to identify and correct noisy labels, achieving consistent accuracy gains on MedMNISTv2 under up to 50% label noise with negligible added overhead.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hospital for Sick Children",
+        "T-CAIREM",
+        "University of Toronto",
+        "Vector Institute",
+        "UHN KITE Research Institute"
+      ],
+      "affiliations_text": "The Hospital for Sick Children, T-CAIREM, University of Toronto, Vector Institute, UHN KITE Research Institute",
+      "score": 3.617135277257377,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.04157v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804157v1-mint-tensor-decomposition-on-stacked-recurrence-matrices-for-time-series-data-mining",
+      "source": "arxiv",
+      "title": "MINT: Tensor Decomposition on Stacked Recurrence Matrices for Time Series Data Mining",
+      "authors": [
+        "Kaamil Kaka",
+        "Audrey Der",
+        "Evangelos E. Papalexakis",
+        "Zachary Zimmerman",
+        "Vikram Jayaram"
+      ],
+      "authors_text": "Kaamil Kaka, Audrey Der, Evangelos E. Papalexakis, Zachary Zimmerman, Vikram Jayaram",
+      "abstract": "Recurrence plots are a time series data mining primitive applied to a variety of domains (e.g. star light curves, sound waveforms, CCT telemetry). This work proposes tensorized self-similarity matrices as a primitive for univariate time series datasets ($N\\times n$) of $N$ time series of length $n$ with a subsequence window of length $m$, and whose tensor-based nature is naturally extensible to multivariate datasets. The proposed method to compute this primitive computes dot plots of size $N \\times (n-m+1) \\times (n-m+ 1)$ from these datasets, where the subsequent tensor is mined using tensor decomposition methods to mine for co-clustered patterns. We demonstrate our results in mass rapid transit, electricity demand, wind turbine, and car traffic data, finding the MINT pipeline effectively co-clusters cross-sensor patterns in highly regular datasets containing motifs at regular intervals.",
+      "url": "http://arxiv.org/abs/2608.04157v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04157v1",
+      "tldr": "MINT proposes stacking self-similarity (Mplot/recurrence) matrices of multiple time series into a tensor and applying tensor decomposition to mine interpretable co-clustered cross-series subsequence patterns.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Riverside",
+        "Neuralix AI",
+        "University of Texas at Dallas"
+      ],
+      "affiliations_text": "University of California, Riverside, Neuralix AI, University of Texas at Dallas",
+      "score": 3.5367176439527186,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.04074v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804074v1-spend-bits-where-queries-look-kv-cache-vector-quantization-with-attention-preserving-transforms",
+      "source": "arxiv",
+      "title": "Spend Bits Where Queries Look: KV Cache Vector Quantization with Attention-Preserving Transforms",
+      "authors": [
+        "Samuel Fernández-Menduiña",
+        "Amir Ziashahabi",
+        "Eduardo Pavez",
+        "Antonio Ortega",
+        "Salman Avestimehr"
+      ],
+      "authors_text": "Samuel Fernández-Menduiña, Amir Ziashahabi, Eduardo Pavez, Antonio Ortega, Salman Avestimehr",
+      "abstract": "Long-context LLM decoding reads the key-value (KV) cache at every step. Loading it takes longer than computing attention over it, so throughput is bandwidth-bound. Hence, reducing the cache size can raise both decoding speed and serving capacity. The challenge is to reduce cache size while preserving the attention products, keeping reconstruction cheap, and using a fixed per-token bit count. At two bits per element, the most competitive methods rely on orthogonal transforms. However, existing techniques are either data-oblivious or use the query statistics without deriving the transform from a distortion criterion. Moreover, they rely on transforms built on top of random or Hadamard rotations, which equalize variances across entries rather than compacting energy, and fixed-width scalar quantizers, which are suboptimal at low rates. In this paper, we formulate KV cache quantization as a transform coding problem in which distortion is the error in the attention products. We derive closed-form optimal transforms for keys and values from calibration statistics, under a high-resolution model. We show that the optimal key transform is not orthogonal and satisfies a generalized Parseval relation: the attention-aware distortion becomes mean-squared error (MSE) in the transform domain. Thus, we can use MSE-optimal vector quantizers applied directly to the transformed key coefficients. To meet the fixed-width layout requirement, we show that grouping coefficients into equal-volume partitions makes equal-size codebooks attain the variable-rate optimum under the same high-resolution model. At two bits per element, our method, termed NOVA-KV, recovers most of the long-context retrieval accuracy lost by scalar quantization methods at comparable throughput.",
+      "url": "http://arxiv.org/abs/2608.04074v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04074v1",
+      "tldr": "NOVA-KV proposes an attention-preserving transform coding approach for KV cache quantization that derives closed-form optimal transforms and MSE-optimal vector quantizers, recovering most long-context retrieval accuracy lost by scalar quantization at 2 bits per element with comparable throughput.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 3.521289377613393,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.04042v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804042v1-kitchen-robotic-manipulation-utilizing-foundation-models",
+      "source": "arxiv",
+      "title": "Kitchen Robotic Manipulation utilizing Foundation Models",
+      "authors": [
+        "Myung-Hwan Jeon",
+        "Sankalp Yamsani",
+        "Joohyung Kim"
+      ],
+      "authors_text": "Myung-Hwan Jeon, Sankalp Yamsani, Joohyung Kim",
+      "abstract": "Deploying robots in everyday human environments requires perception systems that are both robust and adaptable to diverse, dynamic conditions. In this work, we present a modular perception pipeline for household manipulation tasks, with a focus on dishware handling in kitchen environments. The pipeline integrates open-vocabulary object detection, multi-view segmentation, instance-aware 3D reconstruction, and a 2D-3D feature fusion strategy for 6D pose estimation and grasp planning. Its modular design enables systematic substitution of multiple visual and geometric foundation models, allowing us to identify the best-performing configuration through extensive evaluation on a custom kitchen dataset. The best-performing configuration (LLMDet + SAMv2 + DINOv2 + GeoTransformer) achieves an ADI of 89.12\\% on the 20-scene kitchen benchmark with cluttered and occluded conditions. Furthermore, real-world demonstrations confirm that the best configuration can be deployed on physical robots without environment-specific retraining, successfully executing tasks such as sink-to-dishwasher transfer and cup stacking. It validates the adaptability and scalability of the pipeline and highlights its potential as a practical framework for household robotic systems. Our code and supplementary materials are available at https://raivlab.github.io/FM_kitchen .",
+      "url": "http://arxiv.org/abs/2608.04042v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04042v1",
+      "tldr": "A modular perception pipeline integrating multiple foundation models (best: LLMDet + SAMv2 + DINOv2 + GeoTransformer) enables robust 6D pose estimation and grasp planning for kitchen dishware manipulation, achieving 89.12% ADI on a cluttered kitchen benchmark and successfully transferring to real robots without environment-specific retraining.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Kumoh National Institute of Technology",
+        "University of Illinois Urbana-Champaign"
+      ],
+      "affiliations_text": "Kumoh National Institute of Technology, University of Illinois Urbana-Champaign",
+      "score": 3.499753986985527,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.04041v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804041v1-an-explainable-llm-agent-layer-for-open-world-anomaly-detection-in-oil-wells",
+      "source": "arxiv",
+      "title": "An Explainable LLM Agent Layer for Open-World Anomaly Detection in Oil Wells",
+      "authors": [
+        "Lucas Gouveia Omena Lopes",
+        "Thales Miranda de Almeida Vieira",
+        "Eduardo Toledo de Lima Junior",
+        "William Wagner Matos Lira"
+      ],
+      "authors_text": "Lucas Gouveia Omena Lopes, Thales Miranda de Almeida Vieira, Eduardo Toledo de Lima Junior, William Wagner Matos Lira",
+      "abstract": "Open-World Learning (OWL) pipelines for oil well anomaly detection have recently been shown to combine autoencoder-based detection, multiclass classification, and Mahalanobis-based novelty detection on the public 3W dataset. These pipelines answer \\textit{what happened}, but they do not explain \\textit{why the model believes it} or \\textit{what the operator should do next}, and they do not put a human-readable name on the novelty clusters they discover. This paper evaluates a Large Language Model (LLM) agent layer placed downstream of the OWL pipeline, designed as a \\textbf{companion} to the published upstream methods rather than a replacement. Using the Qwen3.5-397B-A17B Mixture-of-Experts model served via NVIDIA NIM, the agent receives structured sensor metrics and upstream classification or novelty assertions, and returns natural-language justifications, confidence-ranked critiques, and consolidated names for detected novelties. Across three studies spanning 989 real well-file segments from the 3W dataset, the agent achieved $35.1\\%$ top-1 / $63.9\\%$ top-3 (95\\% CI [56.9, 70.4]) classification on all nine classes, $71.7\\%$ top-2 validation [64.8, 77.6] with precision $0.91$ [0.84, 0.95] across 7 probed classes, and $89.7\\%$ novelty detection [87.0, 91.9] with stable cluster naming on 5 of 7 hidden classes. The agent is not a standalone classifier. Its role is to: (1) confirm upstream decisions when sensor evidence supports them, (2) justify decisions in sensor-grounded language operators can audit, (3) flag disagreement when upstream labels are implausible, and (4) name novelties so that clustered unlabeled events arrive at the engineer with a consolidated human-readable label. The goal is to close the explainability gap that currently blocks deployment of OWL pipelines in operational settings.",
+      "url": "http://arxiv.org/abs/2608.04041v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04041v1",
+      "tldr": "This paper introduces an explainable LLM agent layer downstream of an open-world anomaly detection pipeline that provides sensor-grounded justifications, validates or critiques upstream classifications, and names novel anomaly clusters, closing the explainability gap for operational oil well monitoring.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Federal University of Alagoas"
+      ],
+      "affiliations_text": "Federal University of Alagoas",
+      "score": 3.478620299386806,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.04043v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804043v1-tactus-open-vocabulary-object-recognition-from-low-cost-pressure-arrays",
+      "source": "arxiv",
+      "title": "Tactus: Open-Vocabulary Object Recognition from Low-Cost Pressure Arrays",
+      "authors": [
+        "Abdul Basit Tonmoy"
+      ],
+      "authors_text": "Abdul Basit Tonmoy",
+      "abstract": "Resistive pressure arrays are the cheapest and most widely shipped tactile sensors, yet tactile representation learning has concentrated on optical sensors that image a deforming gel. We present Tactus, an open model that answers text queries from pressure data alone: on the STAG benchmark (27 objects, held-out recordings), it reaches 0.771 +/- 0.062 top-1 over four runs (top-3 0.935), matching, and at best exceeding, the dataset's supervised closed-set CNN at 0.76, with no trained classifier head. The recipe is small-data: 187 training recordings, masked-autoencoder pretraining on 144k unlabeled same-sensor frames, and the sensor's own calibration affine, which recovered more accuracy than every architecture change combined. The released model's errors concentrate in a few contact-ambiguous classes, are uncorrelated with text-target geometry (Spearman rho <= 0.05 over 702 class pairs), and survive paraphrased and even bare-name queries within one point; two diverse frames recover 89% of eight-frame accuracy. Failures are reported with equal precision: cross-sensor pretraining pooling gave no gain, vision co-training degraded touch, and a mis-normalized input pipeline silently discarded 97% of the sensor's dynamic range while producing plausible intermediate results. Weights, code, and the memory layer the model plugs into are released openly.",
+      "url": "http://arxiv.org/abs/2608.04043v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04043v1",
+      "tldr": "Tactus is an open, open-vocabulary model that matches or exceeds a supervised closed-set CNN on object recognition from low-cost pressure arrays alone, using a small-data recipe of sensor-calibrated normalization, same-sensor masked-autoencoder pretraining, and text-embedding cosine ranking.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wabash College",
+        "Eximius Labs"
+      ],
+      "affiliations_text": "Wabash College, Eximius Labs",
+      "score": 3.3292666969500573,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.04174v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804174v1-ts2tabpfn-time-series-classification-and-extrinsic-regression-through-feature-extraction-and-a-tabular-foundation-model",
+      "source": "arxiv",
+      "title": "TS2TabPFN: Time Series Classification and Extrinsic Regression through Feature Extraction and a Tabular Foundation Model",
+      "authors": [
+        "Gabriel da Costa Merlin",
+        "Diego Furtado Silva"
+      ],
+      "authors_text": "Gabriel da Costa Merlin, Diego Furtado Silva",
+      "abstract": "Time series data are ubiquitous in practical applications, where classification (TSC) and extrinsic regression (TSER) have emerged as essential tasks for obtaining value from temporal sequences. While the literature has seen significant progress through feature-based and deep learning models, existing methods often focus either on the quality of feature extraction or on the intrinsic predictive power of complex architectures applied to raw data. This division creates a gap between the control offered by feature engineering and the automated performance of end-to-end models. This paper proposes TS2TabPFN, a framework that bridges this gap by integrating explicit feature extraction with TabPFN 2.5, a cutting-edge foundation model for tabular data, to leverage its predictive capabilities. Our extensive experimental evaluation demonstrates that TS2TabPFN significantly outperforms state-of-the-art models in TSER tasks with statistical significance, providing a robust and efficient alternative for TSC and surpassing most of the currently best-performing algorithms. These results suggest that combining foundation models with structured features overcomes single-paradigm limitations, establishing a new time series state-of-the-art.",
+      "url": "http://arxiv.org/abs/2608.04174v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04174v1",
+      "tldr": "TS2TabPFN bridges feature engineering and foundation models by extracting time series features (tsfresh, catch22, ROCKET) and feeding them into the tabular foundation model TabPFN, achieving state-of-the-art time series extrinsic regression and competitive classification performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of São Paulo (USP)"
+      ],
+      "affiliations_text": "University of São Paulo (USP)",
+      "score": 3.3001045101552533,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.04014v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804014v1-on-hamming-lipschitz-type-stability-of-the-subdominant-minmax-ultrametric-theory-and-simple-proofs",
+      "source": "arxiv",
+      "title": "On Hamming-Lipschitz Type Stability of the Subdominant (Minmax) Ultrametric: Theory and Simple Proofs",
+      "authors": [
+        "Alokendu Mazumder",
+        "Arnab Roy",
+        "Punit Rathore"
+      ],
+      "authors_text": "Alokendu Mazumder, Arnab Roy, Punit Rathore",
+      "abstract": "The subdominant (minmax) ultrametric is a canonical tree-structured summary of a dissimilarity matrix, arising equivalently as the ultrametric induced by single-linkage clustering. While its classical stability theory is usually formulated in $\\ell_\\infty$ or Gromov--Hausdorff terms, such bounds are poorly suited to sparse perturbations that alter only a few pairwise distances. We develop an $\\ell_0$-type stability theory for this operator. Our analysis shows that sparse edits propagate only through the minimum spanning tree (MST): a pairwise ultrametric value can change only if its tree path crosses an edited edge or a cut newly exposed by an edited off-tree edge. This yields a sharp per-edit exposed-cut score and a tree-only global envelope, leading to Hamming--Lipschitz bounds on the number of ultrametric entries that can change. We also prove sharpness results showing that this dependence on tree geometry is unavoidable: under strict cut separation the tree-edge bound is attained exactly, and for off-tree edits there are explicit families in which one edited distance changes $Θ(n^2)$ ultrametric entries. In addition, we prove a conditional near-additivity principle for multiple edits under certified large per-edit changed regions and negligible aggregate overlap. Experiments on deep-embedding graphs show that the resulting structural scores provide useful vulnerability diagnostics for hierarchical representations.",
+      "url": "http://arxiv.org/abs/2608.04014v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04014v1",
+      "tldr": "The paper develops an ℓ₀/Hamming-type stability theory for the subdominant (minmax) ultrametric, proving that sparse pairwise-distance edits propagate only through the minimum spanning tree, yielding sharp Hamming–Lipschitz bounds on the number of changed ultrametric entries.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IISc Bengaluru"
+      ],
+      "affiliations_text": "IISc Bengaluru",
+      "score": 3.056760550639272,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2608.04013v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804013v1-c2moe-consistency-and-complementarity-guided-mixture-of-experts-for-incomplete-multimodal-emotion-learning",
+      "source": "arxiv",
+      "title": "C$^2$MOE: Consistency and Complementarity-guided Mixture of Experts for Incomplete Multimodal Emotion Learning",
+      "authors": [
+        "Yuntao Shou",
+        "Tao Meng",
+        "Wei Ai",
+        "Keqin Li"
+      ],
+      "authors_text": "Yuntao Shou, Tao Meng, Wei Ai, Keqin Li",
+      "abstract": "Recent advances in Multimodal Emotion Recognition in Conversations (MERC) highlight its reliance on complete multimodal inputs. However, real-world data often suffer from missing modalities due to transmission errors or user behavior, severely degrading model performance. Existing methods enhance robustness via cross-modal consistency learning but largely ignore modality complementarity, leading to biased reconstructions. To address this limitation, we propose C$2$MOE, a novel Consistency and Complementarity-guided Mixture of Experts framework for incomplete multimodal emotion learning. Our approach unifies representation learning and missing modality imputation within a principled information-theoretic framework. Specifically, multimodal knowledge is factorized into consistency and complementarity components via interaction-aware experts. Consistency is captured by maximizing cross-modal predictability, while complementarity is preserved by maximizing conditional entropy between modalities. Building upon this decomposition, C$2$MOE introduces a dual-branch prediction mechanism for robust imputation under missing modalities. The consistency branch aligns imputed features with the joint distribution by minimizing uncertainty, and the complementarity branch exploits modality-unique cues via entropy maximization. Finally, C$2$MOE employs a learnable reweighting module that dynamically assigns importance scores to each expert's output, yielding a robust and adaptive fusion for imputation. Extensive experiments on multiple MERC benchmarks demonstrate that C$2$MOE consistently surpasses state-of-the-art methods across various missing-modality settings, validating its robustness and generalization.",
+      "url": "http://arxiv.org/abs/2608.04013v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04013v1",
+      "tldr": "C²MOE is a consistency and complementarity-guided mixture-of-experts framework that tackles incomplete multimodal emotion recognition by decoupling shared and modality-unique information via information-theoretic objectives and adaptive expert fusion, consistently outperforming state-of-the-art methods under missing-modality conditions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Central South University of Forestry and Technology",
+        "State University of New York, New Paltz"
+      ],
+      "affiliations_text": "Central South University of Forestry and Technology, State University of New York, New Paltz",
+      "score": 3.0234401050240187,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.04180v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/06/260804180v1-a-comparative-study-of-feature-selection-methods-for-ehr-diagnosis-codes-in-opioid-use-disorder-prediction",
+      "source": "arxiv",
+      "title": "A Comparative Study of Feature Selection Methods for EHR Diagnosis Codes in Opioid Use Disorder Prediction",
+      "authors": [
+        "Zihan Ding",
+        "Yinan Liu",
+        "Tengfei Ma",
+        "Rachel Wong",
+        "George Leibowitz",
+        "Benjamin Littenberg",
+        "Xia Zheng",
+        "Richard N. Rosenthal",
+        "Fusheng Wang"
+      ],
+      "authors_text": "Zihan Ding, Yinan Liu, Tengfei Ma, Rachel Wong, George Leibowitz, Benjamin Littenberg, Xia Zheng, Richard N. Rosenthal, Fusheng Wang",
+      "abstract": "Feature selection is a critical step in electronic health record (EHR)-based predictive modeling, where input variables are often high-dimensional, sparse, noisy, and redundant. Large feature sets not only increase computational burden and overfitting risk, but also make model interpretation difficult, leading to limited usefulness in clinical settings. In this study, we focus on diagnosis-related features and compare five feature selection paradigms for opioid use disorder (OUD) prediction: recurrence enrichment, NTK-motivated early gradient sensitivity, LightGBM-SHAP, Elastic Net, and large language model (LLM)-guided semantic selection. We use a unified preprocessing and evaluation framework and assess each method by downstream predictive performance, resampling stability, and representation of infrequent diagnosis codes. Our results demonstrate that performance improves with larger feature budgets with diminishing returns beyond a moderate size. NTK sensitivity provides the best overall balance of accuracy and stability, and LLM-guided selection contributes complementary clinically meaningful signals despite lower standalone performance.",
+      "url": "http://arxiv.org/abs/2608.04180v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.04180v1",
+      "tldr": "A comparative study of five feature-selection methods for EHR diagnosis codes in opioid use disorder prediction finds that NTK-motivated early gradient sensitivity offers the best accuracy–stability balance, while LLM-guided semantic selection adds complementary clinical value despite lower standalone performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Rutgers University",
+        "Stony Brook University",
+        "University of Vermont"
+      ],
+      "affiliations_text": "Rutgers University, Stony Brook University, University of Vermont",
+      "score": 2.9406285842495956,
+      "score_text": "2.9"
+    }
+  ],
+  "errors": []
+}
