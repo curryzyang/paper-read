@@ -1,0 +1,749 @@
+{
+  "label": "2026-08-07",
+  "date": "2026-08-07",
+  "generated_at": "2026-08-07T04:38:07",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.05365v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805365v1-unified-planning-learning-framework-for-robust-uuv-navigation-under-partial-observability",
+      "source": "arxiv",
+      "title": "Unified Planning-Learning Framework for Robust UUV Navigation Under Partial Observability",
+      "authors": [
+        "Md Ether Deowan",
+        "Eleni Kelasidi"
+      ],
+      "authors_text": "Md Ether Deowan, Eleni Kelasidi",
+      "abstract": "This paper presents an observation-only autonomy framework for Unmanned Underwater Vehicles (UUVs) navigation in dynamic underwater environments that integrates persistent occupancy mapping, global clearance-aware planning, and risk-aware local control. The proposed pipeline constructs occupancy maps solely from onboard sonar and depth image observations, adapts a clearance-constrained global planner (GP) to provide long-horizon structure, and integrates a reinforcement learning (RL) policy to handle short-range tracking and reactive avoidance. To further support decision-making under partial observability, the system learns a compact latent state representation from onboard sensor data, encoding environmental structure, obstacle dynamics, and uncertainty. Behavior tree (BT) distillation with staged supervision is introduced to improve safety and training stability, while an uncertainty-calibrated distillation mechanism reweights teacher guidance using online latent-model uncertainty, emphasizing uncertain regimes during learning, with time-to-collision (TTC) and clearance cues remaining explicit in planning and local policy features. To demonstrate the efficacy of the framework, a reproducible multi-seed evaluation protocol is established in high-fidelity GPU-accelerated simulation using NVIDIA Isaac Sim, and performance is benchmarked against BT-only and standard RL baselines. The results obtained demonstrate improved robustness and safety under dynamic conditions, thus providing a general pipeline with a unified hybrid planning learning architecture and a reproducible methodology for robust UUV autonomy under partial observability.",
+      "url": "http://arxiv.org/abs/2608.05365v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05365v1",
+      "tldr": "A unified observation-only hybrid planning-learning framework for UUV navigation integrates sonar-based occupancy mapping, clearance-aware global planning, and risk-aware RL local control with behavior-tree distillation and latent uncertainty modeling to achieve robust, safe autonomy under partial observability in dynamic underwater environments.",
+      "detailed_reading": {
+        "motivation": "水下无人潜航器（UUV）在部分可观测、动态且存在感知不确定性的环境中导航时，传统基于图搜索或采样的全局规划方法依赖已知环境和精确地图，反应式控制器缺乏长远预见，而纯深度强化学习方法样本效率低、训练早期探索不安全且常使用特权状态，现有工作多将建图、规划、控制割裂评估，缺乏端到端的观测-only自主栈，因此需要一种统一混合规划-学习框架来提升动态环境下的鲁棒性与安全性。",
+        "method": "提出一种观测-only的混合分层自主导航框架，输入仅包括前视声呐、深度图像、IMU、速度和路径点等机载观测，不依赖任何仿真器特权信息。首先，基于声呐命中/自由空间证据和深度一致性更新静态与动态双层占用栅格图，并计算在线清障场与风险图。其次，全局规划器在可通行且最小清障约束的单元格上使用Voronoi路径合成（失败时回退RRT），并采用事件触发重规划（包括卡死检测、TTC安全事件、路径冲突预测）。然后，局部策略采用强化学习（PPO）控制，策略输入包含路径跟踪误差、体坐标系速度、扇区化距离/TTC特征以及潜在世界模型特征；奖励函数综合进度、清障、TTC、姿态、能量和终端成败项，并在线强制执行最小距离和TTC硬安全约束。同时，训练阶段引入行为树（BT）蒸馏，通过带有阶段监督的教师策略引导RL训练，并使用基于潜在模型不确定性的校准机制动态调整蒸馏权重，突出高不确定/高风险区域。全部实验在NVIDIA Isaac Sim高保真GPU加速仿真中进行多随机种子评估，并对比BT-only和标准RL基线。",
+        "result": "在动态水下环境和部分可观测条件下，所提统一规划-学习框架相比BT-only和标准RL基线展现出更高的鲁棒性和安全性；实验表明，通过BT蒸馏和不确定性校准可显著提升样本效率和训练稳定性，降低碰撞率并提高任务完成成功率；多随机种子评估协议保证了结论的可复现性。论文未给出具体数值指标，但强调框架在动态障碍、感知噪声和地图不确定性下获得了改进的导航表现。",
+        "conclusion": "该工作验证了将基于清障的全局规划、潜在世界模型与RL局部控制以及BT蒸馏结合的混合架构，能够有效应对UUV在部分可观测动态环境下的自主导航挑战，提供了统一的观测-only端到端自主栈和可复现的评估方法，为鲁棒水下自主导航提供了一条通用技术路线。",
+        "key_details": "关键实现细节包括：①占用更新采用静态/动态双层记忆，动态层仅从声呐时序不一致和Doppler相对运动推断，仿真器stamp项在实验中禁用以保证纯观测约束；②全局规划使用Voronoi最大化清障而非A*，避免网格路径贴障放大声呐误差，RRT作为连接失败回退；③重规划触发条件含2.5秒常速预测的路径冲突；④局部策略特征包括潜在世界模型的一步预测残差和不确定性代理；⑤奖励系数手动挑选后固定，不做自动搜索，硬安全约束（最小距离d_coll和TTC阈值τ_coll）违反即终止；⑥BT蒸馏采用阶段式监督和不确定性校准权重λ_t^risk，教师信号按在线潜在模型不确定性重加权；⑦评估使用多随机种子、NVIDIA Isaac Sim高保真仿真，但需注意仅限于仿真环境，未涉及真实湖/海试验，且未报告具体数值指标和计算复杂度。"
+      },
+      "affiliations": [
+        "NTNU"
+      ],
+      "affiliations_text": "NTNU",
+      "score": 4.859610139798435,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.05363v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805363v1-contour-integral-methods-and-model-order-reduction-for-parametric-linear-control-systems",
+      "source": "arxiv",
+      "title": "Contour integral methods and model order reduction for parametric linear control systems",
+      "authors": [
+        "Serkan Gugercin",
+        "Mattia Manucci"
+      ],
+      "authors_text": "Serkan Gugercin, Mattia Manucci",
+      "abstract": "This paper introduces a contour integral method (CIM) for efficiently computing outputs of parametric linear systems in control form over specified time intervals and to a user-prescribed accuracy. The CIM approximates the inverse Laplace transform via a quadrature rule applied along a modified integration contour. For parametric systems, we show how CIM integrates effectively with projection-based model order reduction (MOR) where a greedy algorithm builds the projection spaces following an error estimate we derive for this setting. We additionally demonstrate that the developed projection framework naturally enforces Hermite interpolation conditions. This combination substantially lowers the cost of evaluating the input-output relations across the parameter domain, for a wide range of input functions, and for initial conditions well captured by a low-dimensional subspace.. We demonstrate the accuracy and efficiency of the approach on benchmark non-parametric and parametric control systems, comparing against state-of-the-art projection-based MOR methods.",
+      "url": "http://arxiv.org/abs/2608.05363v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05363v1",
+      "tldr": "The paper introduces a contour integral method combined with projection-based model order reduction—using a greedy algorithm with an error estimate and naturally enforcing Hermite interpolation—to efficiently and accurately compute outputs of parametric linear control systems across the parameter domain.",
+      "detailed_reading": {
+        "motivation": "针对参数化线性控制系统在全阶模型下进行参数域内多查询模拟时计算代价过高的问题，本文旨在发展一种可高效计算指定时间区间内系统输出、并能达到用户给定精度的数值方法，同时与投影型模型降阶相结合，降低参数扫描和输入输出关系评估的成本。",
+        "method": "以控制形式的参数化线性系统为对象，输入包括系统矩阵、输入/输出矩阵、输入函数、初始条件、时间区间和用户精度tol。方法核心是轮廓积分法：通过沿一条修正积分轮廓应用数值求积规则，近似逆拉普拉斯变换，将时域输出计算转化为复平面上的求积问题；对参数化系统，进一步将CIM与基于投影的模型降阶结合，推导适用于该设置的误差估计，并利用贪婪算法根据误差估计自动选择参数样本并构建投影空间，得到参数化降阶模型；该投影框架还自然满足Hermite插值条件。推理流程为先在选定的参数样本和求积节点上求解全阶系统，构造投影基，再对全阶系统做Galerkin投影得到ROM，最后在参数域内快速计算任意参数下的输入-输出响应。",
+        "result": "在基准的非参数和参数化控制系统中，本文方法能够在保持用户指定精度的前提下，显著降低参数域上评估输入-输出关系的计算成本；与最新的基于投影的模型降阶方法相比，验证了所提误差估计、贪婪子空间构造以及Hermite插值性质的有效性和效率优势。",
+        "conclusion": "轮廓积分法与投影型模型降阶可以有效结合，为参数化线性控制系统的时域输出计算提供一种高精度、低成本的方案；该方法适用于多种输入函数，并且当初始条件能被低维子空间较好刻画时，能够大幅加速跨参数域的模拟与评估。",
+        "key_details": "关键细节包括：采用逆拉普拉斯变换的轮廓积分与求积规则，通过修正积分轮廓和用户指定精度tol控制误差；贪婪算法基于本文推导的误差估计选择参数点和投影空间，避免穷举参数采样；投影框架自动满足Hermite插值条件，增强了ROM对原系统的匹配能力；方法适用于控制形式的线性系统，输入函数类型较广，但假设初始条件可由低维子空间有效表示；计算代价主要取决于求积节点数、约化维度和所选参数样本数，避免了在每个参数点执行全阶时域积分；潜在局限性包括误差估计可能保守、积分轮廓与求积参数需要根据时间区间和精度要求调整，以及强非线性参数依赖或高维参数情形下贪婪采样可能面临更大挑战。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.609130543713417,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.05410v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805410v1-sliding-sensors-configurable-confidence-in-state-estimation-for-continuum-robots",
+      "source": "arxiv",
+      "title": "Sliding Sensors: Configurable Confidence in State Estimation for Continuum Robots",
+      "authors": [
+        "Ella Walsh",
+        "Spencer Teetaert",
+        "Eric Diller",
+        "Timothy D. Barfoot",
+        "Jessica Burgner-Kahrs"
+      ],
+      "authors_text": "Ella Walsh, Spencer Teetaert, Eric Diller, Timothy D. Barfoot, Jessica Burgner-Kahrs",
+      "abstract": "Continuum robots often operate in uncertain environments, where accurate state estimation is essential for safe interactions. Estimate uncertainty is inherently spatially non-uniform: confidence varies depending on where measurements are available. Global estimation accuracy is not always the top priority, but rather achieving sufficient confidence at task-relevant locations along the robot. This extended abstract introduces mechanically reconfigurable sensing enabling uncertainty-shaping in state estimation for continuum robots. We present a concept hardware design demonstrating the feasibility of longitudinal translation of a sensor within a continuum robot. We demonstrate that state estimation confidence can be reconfigured by varying the sensor location, and show a reduction of full-body shape estimation errors when sliding the sensor back and forth over time, compared to a single fixed tip sensor.",
+      "url": "http://arxiv.org/abs/2608.05410v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05410v1",
+      "tldr": "Mechanically reconfigurable sliding sensors along a continuum robot enable spatial shaping of state-estimation confidence, improving full-body shape estimation accuracy compared to a fixed tip sensor.",
+      "detailed_reading": {
+        "motivation": "连续体机器人常在不确定环境下作业，状态估计不确定性在空间上非均匀，固定传感器布置会在远离测量点的区域造成低置信度，而实际任务往往需要在变化的任务相关位置维持足够置信度。因此本文提出机械可重构传感，使传感器能沿机器人骨干纵向移动，以主动整形状态估计的置信度分布。",
+        "method": "系统硬件上，将直径0.5mm、长8mm的5-DOF电磁线圈位置传感器（Aurora v3）安装于内管中，由丝杆-伺服电机（Dynamixel XL430-W250）线性驱动，使其在外管内沿连续体机器人（70cm长、nitinol内外管）纵向滑动，行程60mm、速度24mm/s。实验中在静态机器人位姿下让传感器往复振荡三个周期，Vicon光学跟踪器提供真值。状态估计采用因子图优化，使用连续弧长-时间表示（参考Teetaert等），估计状态包括位姿、应变与速度；5-DOF测量误差由SE(3)距离度量定义，并投影掉偏航分量，以高斯噪声模型构建测量因子。推理时根据传感器当前弧长位置添加时变测量因子，求解因子图获得全身形状估计。",
+        "result": "实验表明，改变传感器位置可将高置信度区域重新配置到相应的弧长位置；在真实C形和S形机器人上，滑动传感器相比固定尖端传感器降低了全身形状估计误差，位置RMSE最高改进8.4%，方向RMSE也有下降，证明滑动感知可提升整体形状估计精度。",
+        "conclusion": "本文首次展示了将传感器纵向滑动作为主动自由度用于连续体机器人状态估计，验证了不确定性整形的可行性。该方法为动态环境下主动感知和信念感知规划奠定了基础，未来工作将扩展至动态机器人及传感器动力学。",
+        "key_details": "关键实现细节包括：传感器尺寸须足够小以装入中心骨干；使用5-DOF电磁测量并去除偏航分量，利用小角度近似；估计框架采用连续弧长-时间表示；真实实验的滑动行程为60mm，传感器在尖端与内部6cm之间滑动，而全长滑动仅在仿真中展示；实验限于静态/准静态结构，未考虑传感器滑动频率等动力学效应。局限性包括对传感器尺寸的严格限制以及当前仅在静态/准静态条件下验证。"
+      },
+      "affiliations": [
+        "University of Toronto"
+      ],
+      "affiliations_text": "University of Toronto",
+      "score": 4.576004547433544,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.05221v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805221v1-a-system-for-train-condition-monitoring-and-structural-health-assessment-of-rail-vehicles",
+      "source": "arxiv",
+      "title": "A System for Train Condition Monitoring and Structural Health Assessment of Rail Vehicles",
+      "authors": [
+        "Maximilian Posner",
+        "Martin Dazer",
+        "Daniela Lauer",
+        "Robert Winkler-Höhn",
+        "Mathilde Laporte",
+        "Tobias Herrmann",
+        "Martin Köppel"
+      ],
+      "authors_text": "Maximilian Posner, Martin Dazer, Daniela Lauer, Robert Winkler-Höhn, Mathilde Laporte, Tobias Herrmann, Martin Köppel",
+      "abstract": "The ongoing digitalization of rail systems and the increasing use of artificial intelligence (AI) are fundamentally transforming the design, operation, and maintenance of rail vehicles. While fully automated operation at Grade of Automation 4 (GoA4) is well established in metro systems, its deployment in mainline rail remains limited. This is primarily due to stringent safety requirements and the complexity of open operational environments. Current perception systems based on cameras, radar, and lidar are effective in detecting objects but provide limited capability for reliably identifying impacts, collisions, and driving-over events. This paper presents a novel approach for real-time vehicle condition monitoring and impact detection that integrates structural sensor technologies with AI-based data analysis. The proposed framework addresses three key applications: (1) automated detection of impacts, structural damage, and driving-over events, (2) condition-based maintenance enabled by continuous monitoring, and (3) long-term data analytics to support vehicle design optimization. The results demonstrate the feasibility of the proposed approach and highlight its potential to enhance operational safety, enable predictive maintenance strategies, and support the transition toward fully automated operation in mainline rail systems",
+      "url": "http://arxiv.org/abs/2608.05221v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05221v1",
+      "tldr": "This paper presents a real-time rail vehicle monitoring system that combines structural sensors with AI to detect impacts, collisions, and driving-over events, thereby enabling condition-based maintenance, design optimization, and safer progression toward fully automated mainline rail operation.",
+      "detailed_reading": {
+        "motivation": "当前主线路铁路的完全自动化运营（GoA4）仍受限于严格的安全要求和开放运行环境的复杂性，现有基于摄像头、雷达和激光雷达的感知系统虽能检测物体，但难以可靠识别撞击、碰撞和碾压事件。因此需要一种融合结构传感器与AI数据分析的实时车辆状态监测与冲击检测方法，以提升运营安全、支持预测性维护并推动主线路铁路自动化转型。",
+        "method": "在KI-MeZIS项目中，于先进测试列车aTL上安装了多种传感器：单轴/三轴压电加速度传感器（量程±250g或±1000g）、单轴/三轴应变片（DMS）、气压传感器、旋转编码器、GNSS、温度传感器和RGB相机，传感器位置通过有限元仿真确定。数据来自三部分：常规线路22天实车运行（含高速、隧道、次级线路、不同天气）、8天共197次碾压事件（用Res货车和aTL在测试轨道上进行，对象包括骨头、鸡肉仿体、桦木、瓦片、接触网线、扁钢、钢楔、钢管、混凝土块、购物车、自行车、制动闸瓦等），以及实验室实验（摆锤冲击、准静态变形、前端襟翼三点弯曲/落锤/弹道冲击）。所有信号由DEWE3-M4数据记录仪同步采集。AI算法利用这些数据训练，用于冲击检测、损伤分类和预测性维护。",
+        "result": "实验表明：钢摆冲击产生超过500g的高幅值加速度，而明胶冲击信号通常低于1.5g，表明冲击体刚度直接影响信号特征。准静态变形试验中，第二次加载峰值力889.1 kN导致显著塑性变形，第四次重复加载在875.9 kN下结构失效，失效模式为塑性屈曲、焊缝开裂和局部撕裂。前端襟翼冲击试验显示，基于加速度信号无法识别弹射物类型，但可在任意传感器位置检测到冲击，通过加速度峰值、列车速度和物体类型可推算物体质量与损伤程度。仿真与试验高度一致，冲击模拟的最大加速度预测偏差仅1.8%，三点弯曲力-位移曲线偏差在-1.8%以内。",
+        "conclusion": "该研究验证了融合结构传感器与AI分析的实时列车状态监测与冲击检测框架的可行性，能够自动检测冲击、结构损伤和碾压事件，支持基于状态维护和长期数据分析辅助车辆设计优化，有望提升主线路铁路的运营安全性并促进全自动运营的实现。",
+        "key_details": "关键细节包括：传感器选型与布局基于有限元仿真，应变片置于高应力区，加速度计安装在结构代表性且可接近的位置；碾压测试涵盖14种真实世界高概率物体，并使用相同传感器配置的两种车辆进行对比以滤除车辆特定效应；实验室摆锤实验采用30.5 kg钢冲击体和28.5 kg明胶块模拟不同刚度碰撞，速度最高约4.2 m/s；前端襟翼冲击测试使用砾石、冰球和人工鸟（70 g、454 g、1800 g）以30、60、100 m/s速度发射；仿真数据生成存在局限，即焊缝可能失效区域应变片信号不能准确反映物理响应；加速度信号采样率限制可能造成高频率成分丢失；前端襟翼冲击信号噪声较大，影响精确幅值比较；数据记录和分析需满足欧盟第四铁路一揽子审批要求。"
+      },
+      "affiliations": [
+        "University of Stuttgart",
+        "Institut für Bahntechnik GmbH",
+        "German Aerospace Center",
+        "DB InfraGO AG"
+      ],
+      "affiliations_text": "University of Stuttgart, Institut für Bahntechnik GmbH, German Aerospace Center, DB InfraGO AG",
+      "score": 4.387016585934988,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.05313v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805313v1-failing-gracefully-mitigating-impact-of-inevitable-robot-failures",
+      "source": "arxiv",
+      "title": "Failing Gracefully: Mitigating Impact of Inevitable Robot Failures",
+      "authors": [
+        "Duc M. Nguyen",
+        "Saad A. Ghani",
+        "Andrew Marshall",
+        "Allison Andreyev",
+        "Gregory J. Stein",
+        "Xuesu Xiao"
+      ],
+      "authors_text": "Duc M. Nguyen, Saad A. Ghani, Andrew Marshall, Allison Andreyev, Gregory J. Stein, Xuesu Xiao",
+      "abstract": "Service robots operate in household environments shared with humans, pets, and everyday objects, where they are highly susceptible to failures such as software crashes, hardware degradation, or unpredictable interactions. While roboticists strive to minimize failures, some remain inevitable, making it critical to mitigate their potential consequences for safe and reliable deployment. This paper introduces a novel safety formulation that evaluates both the probability of impactful interactions between robots and surrounding entities during failures, and the severity of their outcomes. By quantifying the impact of failures on different entities, our approach enables robots to make informed planning decisions that balance safety with task efficiency. To support systematic evaluation, we also present FailBench, a MuJoCo-based simulation framework for studying robot-environment interactions under diverse failure modes, including sensing issues and actuator malfunctions. Together, our safety formulation and FailBench provide a foundation for developing safer and more robust motion plans and learned policies in real-world household environments.",
+      "url": "http://arxiv.org/abs/2608.05313v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05313v1",
+      "tldr": "The paper proposes a safety formulation that quantifies failure impact by considering both interaction probability and outcome severity, along with FailBench, a MuJoCo-based benchmark, to enable robots to plan and learn policies that mitigate the consequences of inevitable failures in household environments.",
+      "detailed_reading": {
+        "motivation": "服务机器人在家庭环境中与人类、宠物和日常物体共享空间，极易遭遇软件崩溃、硬件退化或不可预测交互等故障。现有研究大多聚焦于故障预防和恢复，缺乏对不可避免故障后果的系统性评估，导致机器人规划无法在安全与任务效率之间做出权衡。",
+        "method": "本文提出一种新颖的安全评估公式，同时量化故障期间机器人部件与周围实体发生有影响交互的概率及后果严重性，并聚合为总体影响度量。为支持系统评估，作者构建了基于MuJoCo的仿真框架FailBench，包含常见家庭场景与物体库、多种导航与操作规划器（如A*、PRM、RRT、RRT*、CHOMP、STOMP等），以及可注入执行器、传感器、末端执行器和电源系统等多样化故障模式的故障注入器。故障注入通过实时修改MuJoCo仿真参数（如关节阻尼、运动范围、传感器噪声等）实现高保真物理模拟，并利用接触事件（接触点位置和接触力）作为故障影响的量化依据。",
+        "result": "论文验证了所提安全公式能够有效反映FailBench中模拟的故障后果。FailBench提供了一套标准化基准，使研究者能够在多种故障模式下比较不同规划策略与学习策略的安全性，并展示了该方法在平衡安全与任务效率方面的潜力。",
+        "conclusion": "该工作将机器人安全研究的重点从故障预防转向故障后果评估，通过量化故障影响为机器人规划提供决策依据，为家庭服务机器人在不可避免故障下的安全部署奠定了基础。FailBench作为开源仿真框架，可支持未来更安全、更鲁棒的机器人运动规划与学习策略开发。",
+        "key_details": "关键点包括：故障注入器支持瞬时与渐进两种故障onset，并区分完整断连、关节松动、限位、传感器噪声、偏差漂移、控制延迟、夹爪失效、电量下降等多种故障模式；每个故障可配置损伤程度（轻微、中度、严重、致命）和持续时间。方法假设已知完整环境知识（物体身份、材料属性、脆弱性），实际部署时可借助视觉语言模型自动估计交互严重性。当前交互概率模型基于几何分析，未来可结合神经网络学习故障后接触分布。局限性包括环境知识要求高、动态环境建模不足，以及与现有运动规划器集成时面临的复杂代价地形优化挑战。"
+      },
+      "affiliations": [
+        "George Mason University"
+      ],
+      "affiliations_text": "George Mason University",
+      "score": 4.3836658760168765,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.05253v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805253v1-beyond-rotations-aurooft-for-expressive-quantized-orthogonal-fine-tuning",
+      "source": "arxiv",
+      "title": "Beyond Rotations: AuroOFT for Expressive Quantized Orthogonal Fine-Tuning",
+      "authors": [
+        "Yue Han",
+        "Dianlin Wang"
+      ],
+      "authors_text": "Yue Han, Dianlin Wang",
+      "abstract": "Quantized orthogonal fine-tuning (qoft) enables parameter-efficient adaptation of low-bit language models by learning structured activation rotations before frozen quantized weights. However, its task-specific updates remain constrained to linear orthogonal transformations, limiting input-dependent nonlinear corrections. We introduce AuroOFT, which keeps qoft as a stable quantization-compatible branch while attaching a zero-start gated low-rank nonlinear residual to each adapted linear layer. AuroOFT maps activations into an RMS-normalized compact latent space and uses adaptive nonlinear bases with bounded or token-dependent gating. The zero-initialized up projection makes AuroOFT functionally identical to qoft at initialization, while orthogonality remains a branch-level stability property rather than a property of the combined nonlinear layer. Under matched data, optimization, decoding, and parser protocols, AuroOFT improves Macro-6 over matched qoft by 1.30-2.70% on the 1.5B/3B Qwen2.5 settings, exceeds QLoRA by 6.52-10.62%, and saves 32.3-44.7% trainable parameters relative to QLoRA in representative scales. The small exam-style multiple-choice math set is treated only as a protocol-sensitivity diagnostic. Our code is available at the anonymous repository: https://anonymous.4open.science/r/AuroOFT-F3FD.",
+      "url": "http://arxiv.org/abs/2608.05253v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05253v1",
+      "tldr": "AuroOFT enhances quantized orthogonal fine-tuning (QOFT) by adding a zero-initialized, gated low-rank nonlinear residual branch alongside the stable QOFT rotation path, improving mathematical reasoning over matched QOFT by 1.30–2.70% and over QLoRA by 6.52–10.62% while using fewer trainable parameters.",
+      "detailed_reading": {
+        "motivation": "量化正交微调（QOFT）通过冻结量化权重前的结构化激活旋转实现低比特语言模型的高效适配，但任务更新被限制为线性正交变换，无法表达依赖输入的修正，形成正交表达性瓶颈。数学推理等任务需要局部、符号或数值比较相关的非线性修正，因此需要在不破坏QOFT稳定量化路径的前提下增强其表达能力。",
+        "method": "AuroOFT将每个被适配线性层包装为双分支结构：上分支保持QOFT，即输入激活x经Cayley-Neumann截断级数参数化的旋转（块大小32、5个Neumann项）后送入冻结NF4权重；下分支为残差，先做下投影A_lx，经恒等或FP32 RMSNorm，再经自适应非线性层（Lite ANL用双tanh加可学习逐维残差；SplineNorm用tanh+FP32 RMSNorm+B样条基；增强型Dual ANL用tanh基与SiLU门控基的softmax混合），随后Dropout、零初始化的上投影B_l和门控（标量/有界标量/逐token）乘以α/r缩放，最后与QOFT输出相加。B_l=0使初始化时与QOFT逐层完全等价；训练支持全层或选择性注入，QOFT与残差分支分设参数组、独立学习率和梯度裁剪。",
+        "result": "在数据、优化、解码和解析协议完全对齐的条件下，AuroOFT在Qwen2.5 1.5B/3B设置上相比匹配的QOFT将Macro-6提升1.30–2.70个百分点，比QLoRA高6.52–10.62个百分点，并在代表性规模上比QLoRA节省32.3–44.7%的可训练参数。小型考试式数学选择题集仅作为协议敏感性诊断，不作为结构主张的独立证据。",
+        "conclusion": "AuroOFT表明，正交性应作为量化适配的稳定主干，而非整个组合层的属性；非线性作为零起始门控低秩残差，能在不修改冻结量化权重、不把非线性插入Cayley旋转内部的前提下扩展每层可表达的函数族。该方法在初始化时精确恢复QOFT，在优化中提供受控的额外表达能力，兼顾量化稳定性和任务自适应修正能力。",
+        "key_details": "关键实现细节包括：QOFT采用块大小32和5项Neumann级数近似Cayley变换；残差分支的上投影零初始化保证与QOFT的初始化等价；门控有三种形式——无约束标量η_l、有界标量2σ(γ_l)、逐token门控2σ(W_g z)，增强版将η_l初始化为1、γ_l和W_g初始化为0以避免小门控抑制早期梯度；SplineNorm使用FP32 RMSNorm和tanh将激活限制在B样条网格[-1,1]内，网格大小M、阶数p；残差缩放为α/r；由于非线性分支的输入依赖特性，推理时不能与QOFT合并，会带来额外推理成本；正交性只在QOFT分支层面成立，组合层整体不再正交；小规模选择题集仅作诊断。"
+      },
+      "affiliations": [
+        "China Electronics Corporation",
+        "National University of Defense Technology"
+      ],
+      "affiliations_text": "China Electronics Corporation, National University of Defense Technology",
+      "score": 4.140128455687813,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.05250v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805250v1-beyond-full-model-rollback-aurosft-for-adapter-state-multi-task-fine-tuning",
+      "source": "arxiv",
+      "title": "Beyond Full-Model Rollback: AuroSFT for Adapter-State Multi-Task Fine-Tuning",
+      "authors": [
+        "Yue Han",
+        "Ziniu Liu"
+      ],
+      "authors_text": "Yue Han, Ziniu Liu",
+      "abstract": "Multi-task supervised fine-tuning (SFT) often casts a heterogeneous data mixture as a single optimization problem, even though different tasks may reach their best generalization at different times. msft exposes this mismatch through task-wise roll-out, exclusion, and rollback, but its original formulation materializes the scheduler state as full-model checkpoints, making stage transitions costly to store, restore, and deploy. This paper introduces AuroSFT, a parameter-efficient framework that recasts the carried state of overfitting-aware multi-task SFT as a compact, mergeable adapter state. AuroSFT freezes the pretrained backbone, trains only injected adapters, rolls back adapter checkpoints at task-wise peaks, and continues on the remaining active mixture. At the layer level, each adapter applies an AuroRA-inspired adaptive nonlinear layer to a low-rank weight factor rather than to the sample representation. The resulting update remains linear in the input, rank-bounded, and exactly mergeable into the frozen projection. Under the retained-backbone comparison protocol, AuroSFT achieves 61.36% average accuracy, compared with 59.85% for the corresponding msft reference row, and obtains higher accuracy on all five backbones. Our code is available at the anonymous repository: https://anonymous.4open.science/r/AuroSFT-80D1.",
+      "url": "http://arxiv.org/abs/2608.05250v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05250v1",
+      "tldr": "AuroSFT improves multi-task supervised fine-tuning by replacing full-model rollback with compact, mergeable adapter states (using weight-transformed nonlinear low-rank adapters) while preserving task-wise peak detection and rollback, achieving higher accuracy across five backbones.",
+      "detailed_reading": {
+        "motivation": "多任务监督微调（SFT）通常将异构数据混合视为单一优化问题，但不同任务达到最优泛化的时间不同，统一预算会导致部分任务过拟合或欠训练。mSFT通过任务级滚动、排除和回滚机制缓解了这一时间错配，但其原始实现将调度器状态物化为全模型检查点，使得阶段切换的存储、恢复和部署代价高昂。",
+        "method": "AuroSFT将过拟合感知多任务SFT的携带状态重构为紧凑、可合并的适配器状态。具体方案是：冻结预训练主干，仅训练注入q/k/v/o/gate/up/down投影的适配器参数{A,B,ANL}；在每一层，对低秩权重因子A施加类AuroRA的适应性非线性层得到\\bar A=σ(A^T)^T，再与B构成更新ΔW=(α/r)B\\bar A，使层输出保持对输入线性、秩有界且可精确合并到冻结投影。调度流程沿用mSFT的迭代过程：在活动混合上滚动训练，记录各任务验证准确率，找到最早达到峰值的任务，将其排除并回滚到该峰值的适配器检查点，然后在剩余活动混合上继续训练。",
+        "result": "在保留主干比较协议下，AuroSFT平均准确率达到61.36%，高于对应mSFT参考行的59.85%，并在全部五个轻量骨干（OLMo2-1B、Qwen2.5-0.5B/1.5B/3B/7B）上一致取得更高准确率。在细分类别上，AuroSFT在科学与知识、常识与语言、数学与定量等基准上也普遍优于mSFT。",
+        "conclusion": "AuroSFT通过将过拟合感知调度器的状态载体从全模型检查点转变为可合并的非线性低秩适配器，不仅显著降低了多阶段微调的存储与部署开销，还提升了异构多任务SFT的平均性能，表明适配器状态是比全模型回滚更优的状态空间设计方案。",
+        "key_details": "关键实现细节包括：ANL层σ(Z)=tanh(tanh(Z)H^T)+S(Z)W_s^T，其中H为可训练自投影，S为B样条基，W_s为样条权重，同时包含tanh路径与可学习样条路径；更新秩被r限制，并经α/r缩放；训练中仅优化{A,B,ANL}，回滚时只恢复适配器检查点，部署时可将ΔW精确合并到W_0。实验覆盖十个基准和五个轻量骨干，消融实验表明移除Weight ANL会显著降低准确率，验证了权重变换的作用；当前工作主要聚焦轻量模型，大规模模型上的扩展性和更复杂任务混合的适用性仍需进一步验证。"
+      },
+      "affiliations": [
+        "China Electronics Corporation",
+        "National University of Defense Technology"
+      ],
+      "affiliations_text": "China Electronics Corporation, National University of Defense Technology",
+      "score": 3.8996171947875773,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.05360v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805360v1-katz-centrality-based-security-allocation-in-positive-networks",
+      "source": "arxiv",
+      "title": "Katz Centrality-Based Security Allocation in Positive Networks",
+      "authors": [
+        "Anh Tung Nguyen",
+        "Sribalaji C. Anand",
+        "André M. H. Teixeira"
+      ],
+      "authors_text": "Anh Tung Nguyen, Sribalaji C. Anand, André M. H. Teixeira",
+      "abstract": "This paper deals with security allocation challenges for networked control systems represented by positive-weighted digraphs under stealthy false data injection attacks. These systems consist of interconnected subsystems, referred to as nodes in the underlying digraph, where an adversary aims to maximize network performance loss by stealthily attacking specific nodes. Meanwhile, a defender monitors several nodes to impose stealthiness constraints on the adversary's actions, thereby minimizing the network performance loss. We analyze the worst-case network performance loss of these stealthy attacks and make the following contributions: we (i) show that the worst-case network performance loss is upper-bounded by a tractable semi-definite programming (SDP) problem; (ii) establish the relationship between the SDP problem and the Katz centrality measure of the underlying digraph under a sufficient condition, resulting in a network-size-independent optimization problem; and (iii) provide a heuristic search based on the Katz centrality measure of the underlying digraph for selecting sub-optimal monitor nodes against all admissible attack scenarios without solving optimization problems. These results offer practical insights for safeguarding large-scale networked control systems against stealthy false data injection attacks. The obtained results are validated via extensive simulations on Erdos-Renyi random graphs with different network sizes.",
+      "url": "http://arxiv.org/abs/2608.05360v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05360v1",
+      "tldr": "This paper develops a Katz centrality-based security allocation framework for positive networked control systems under stealthy false data injection attacks, showing that worst-case performance loss is bounded by a tractable SDP problem and linked to Katz centrality to enable scalable, optimization-free selection of monitor nodes.",
+      "detailed_reading": {
+        "motivation": "针对正加权有向图表示的网络化控制系统在隐秘虚假数据注入攻击下的安全资源分配问题，现有安全度量在大规模网络中计算复杂且缺乏图论解释，难以扩展，需要更高效且具有图论洞察的安全评估与防御资源分配方法。",
+        "method": "将系统建模为正加权有向图，节点为子系统，攻击者选择若干节点注入隐秘攻击信号以最大化性能损失，防御者监控若干节点施加隐匿约束以最小化损失。首先利用耗散系统理论将最坏情况性能损失上界转化为可处理的半定规划（SDP）问题；然后在充分鲁棒性条件下证明该上界与SDP解相等，并利用正系统特性将SDP简化为与网络规模无关的优化问题；进一步引入两种适配Katz中心性度量，建立几何条件判定SDP有限解的存在性，并基于该条件设计启发式搜索算法，无需求解优化问题即可选择次优监控节点。",
+        "result": "通过不同规模的Erdős–Rényi随机图仿真验证：所提SDP上界在满足充分条件时精确等于最坏情况损失；Katz中心性为基础的几何条件能够有效判定安全性；启发式搜索可快速选择有效监控节点，且计算复杂度不随网络规模增长，适用于大规模网络。",
+        "conclusion": "论文建立了安全度量与Katz中心性之间的关联，提供了可扩展的安全评估框架和基于中心性的防御资源分配策略，为大规模正网络控制系统抵御隐秘虚假数据注入攻击提供了实用工具。",
+        "key_details": "关键点包括：系统状态非负性（正系统）与KYP引理在简化SDP中的作用；充分鲁棒性条件是保证SDP解与最坏损失相等的前提；两种Katz中心性变体考虑了网络邻接矩阵和自环增益；几何条件本质上是关于监控节点集合的中心性覆盖条件；启发式搜索基于中心性排序选择监控节点，避免求解优化问题；局限性在于结果依赖于充分条件和启发式搜索的次优性，且未考虑完全对抗性场景的证明保证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8938310711316895,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.05215v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805215v1-vlaff-vision-language-affordance-model-for-unified-actionable-affordances",
+      "source": "arxiv",
+      "title": "VLAff: Vision-Language-Affordance Model for Unified Actionable Affordances",
+      "authors": [
+        "Jihoon Oh",
+        "Kento Kawaharazuka",
+        "Kei Okada"
+      ],
+      "authors_text": "Jihoon Oh, Kento Kawaharazuka, Kei Okada",
+      "abstract": "Learning manipulation skills from human videos is promising for scalable robot learning. However, the embodiment mismatch between humans and robots makes this challenging. One promising solution is to learn object-centric actionable affordances that are embodiment-agnostic. In this work, we propose a framework that leverages egocentric human videos with state-of-the-art 3D Structure-from-Motion and hand mesh reconstruction to extract actionable affordances such as visual, grasp, and trajectory affordances that explicitly encode where to interact, how to grasp, and how to move. We construct EgoAffordance, a large-scale dataset comprising 204K episodes with 5.6M visual affordances and 11.6M grasp and trajectory affordances. Building on this, we introduce VLAff, a large vision-language model-based unified foundation model that learns cross-modal correlations across all actionable affordances. Given a visual observation and instruction, VLAff generates visual affordance heatmaps, grasp poses, and trajectories, which are then converted into directly executable actions by utilizing 3D scene information. Through extensive experiments, we demonstrate that VLAff not only achieves state-of-the-art performance on visual affordance prediction, but can also be effectively applied to real robot applications such as zero-shot manipulation and affordance-guided robot learning.",
+      "url": "http://arxiv.org/abs/2608.05215v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05215v1",
+      "tldr": "VLAff introduces a unified vision-language-affordance foundation model trained on the large-scale EgoAffordance dataset extracted from egocentric human videos, jointly predicting visual, grasp, and trajectory affordances to enable state-of-the-art visual affordance prediction and effective real-robot manipulation.",
+      "detailed_reading": {
+        "motivation": "从人类视频学习操作技能具有规模化潜力，但人与机器人之间存在具身差异，直接迁移困难。现有affordance工作多只建模单一模态（如仅视觉热图、仅手部姿态或仅轨迹），且常限于2D图像空间或静态实验室数据，缺乏统一的可操作affordance框架。本文旨在从第一人称人类视频中提取与具身无关的、以物体为中心的可操作affordance（视觉、抓取、轨迹），并构建统一基础模型以支持跨具身机器人操作。",
+        "method": "数据构建上，对大规模第一人称视频，先用预训练大VLM提取接触关键帧、动作标签、物体类别与交互手部信息；再用H2O检测器、SAM2分割、ViTPose关键点与CoTracker3跟踪获取接触区域；用WiLoR重建MANO手部参数，并用EgoHOS分割+ProPainter修补去除自我视角偏差；最后用MoGe2估计单目深度、COLMAP估计相机内参、DROID估计相机位姿并滤除动态区域，用TAPIR-3D跟踪3D手部轨迹，构建EgoAffordance数据集（204K片段、5.6M视觉affordance、11.6M抓取与轨迹affordance）。模型上，VLAff以预训练VLM为骨干，额外引入DINOv2视觉编码器以增强细粒度空间特征，并新增三类专用token：<SEG>经分割解码器生成像素级视觉热图，<GRASP>解码为96维MANO参数（全局手腕旋转+15个局部关节旋转，采用6D旋转表示），轨迹token通过对6D位姿空间进行空间分箱量化后自回归生成。训练采用Soft Dice损失监督视觉热图（s=1.0, p=1.5）、Smooth L1损失监督抓取参数、轨迹使用token级交叉熵。推理时输入图像与语言指令，输出热图、抓取姿态和轨迹，将热图峰值交互点经相机内参与深度反投影为3D锚点，对抓取和轨迹做物体中心化空间变换，最终结合3D场景信息转换为可直接执行的动作。",
+        "result": "在视觉affordance预测任务上，VLAff达到当前最优（SOTA）性能。在真实机器人上，该模型可有效应用于零样本操作和affordance引导的机器人学习。EgoAffordance数据集提供了目前最全面的可操作affordance标注（5.6M帧、1.7K实例/动作、16.4K物体类别），同时包含接触区域、手部姿态和相机轨迹，规模显著超过UMD、AGD20K、HOVA-500K等现有数据集。",
+        "conclusion": "统一建模视觉、抓取与轨迹三种可操作affordance能够捕捉它们之间的跨模态关联，是从人类视频向机器人操作进行跨具身迁移的有效中间表示。以物体中心的affordance表示配合大视觉语言模型架构，可在一模型中规模化学习多模态操作知识，并直接支持零样本操作与下游策略学习等真实机器人应用。",
+        "key_details": "关键细节包括：物体中心化空间变换（将热图峰值点经深度与内参投影为3D锚点，再变换抓取与轨迹到该锚点坐标系）是实现跨具身迁移的核心；Soft Dice损失中平滑因子s=1.0、幂参数p=1.5用于处理热图前景背景不平衡；轨迹采用RT系列的空间分箱量化，将6D位姿空间离散化为token序列，推理时自回归生成并按bin解码回连续位姿；额外DINOv2编码器弥补VLM细粒度空间定位不足；用分割+修补去除自我身体区域以减少第一人称视角偏差，并在SfM中过滤动态区域以提高相机位姿估计鲁棒性。局限方面，方法依赖单目深度和SfM的精度，深度估计误差会传导至3D锚点与轨迹；轨迹量化分辨率受分箱数量限制，可能损失细粒度运动信息。"
+      },
+      "affiliations": [
+        "University of Tokyo"
+      ],
+      "affiliations_text": "University of Tokyo",
+      "score": 3.8688970213965783,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.05234v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/07/260805234v1-ppdl-llm-based-flows-as-probabilistic-programs",
+      "source": "arxiv",
+      "title": "PPDL: LLM-Based Flows as Probabilistic Programs",
+      "authors": [
+        "Louis Mandel",
+        "Guillaume Baudart",
+        "Mandana Vaziri",
+        "Martin Hirzel"
+      ],
+      "authors_text": "Louis Mandel, Guillaume Baudart, Mandana Vaziri, Martin Hirzel",
+      "abstract": "Building reliable applications that leverage large language models (LLMs) remains a significant challenge. While LLMs offer impressive capabilities across diverse tasks, their outputs often lack accuracy and provide no clear measure of confidence. This uncertainty compounds in flows of multiple calls to LLMs and other tools, making it difficult for developers and end-users to trust the results. This paper introduces a probabilistic language for programming LLM-based flows. It enables developers to quantify and propagate uncertainty throughout the application's flow, and experiment with different inference scaling techniques without adding a single line of code beyond the flow's logic. We present an experimental study to demonstrate this capability, and a case study building a theorem proving agent for the Rocq theorem prover.",
+      "url": "http://arxiv.org/abs/2608.05234v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05234v1",
+      "tldr": "PPDL is a probabilistic programming language for LLM-based flows that lets developers quantify and propagate uncertainty through multi-step applications and experiment with inference scaling techniques without changing the flow logic.",
+      "detailed_reading": {
+        "motivation": "基于大语言模型(LLM)的流程应用面临输出不确定性问题，多次调用与工具交互会使不确定性随执行轨迹累积，而现有推理扩展实现与程序逻辑紧密耦合，缺乏对多条部分轨迹及其似然性的原则性追踪，难以量化并传播不确定性。因此需要一种将推理扩展与核心逻辑解耦的编程语言，使开发者能够以原则化方式探索输出分布并评估答案质量。",
+        "method": "PPDL 是一种基于 PDL(Prompt Declaration Language)的声明式概率编程语言。它扩展 PDL，引入 sample(以 LLM 调用为形式)与 factor(基于软/硬约束更新当前执行轨迹概率)两大核心构件，同时支持变量、控制结构(循环/条件/错误处理)、函数、文件导入与工具调用。程序以 YAML 风格编写，运行时通过概率推理引擎(多数投票、重要性采样、粒子滤波/顺序蒙特卡洛)对多条轨迹构成的分布进行探索；每条轨迹称为一个粒子，PPDL 返回输出分布而非单一输出。实现利用函数式数据结构在单条轨迹内部和跨多条部分轨迹之间进行并行化，并提供了形式化语义明确 prompt sample 与 factor 的交互。",
+        "result": "在不同 LLM 和多个广泛使用的基准上，PPDL 展示了作为推理扩展算法实验框架的通用性，能够在不修改流程逻辑代码的情况下切换不同概率推理引擎，并量化与传播不确定性。案例研究成功实现了一个面向 Rocq 定理证明器的智能体，验证了该语言在实践中构建可靠 LLM 流程的可行性。",
+        "conclusion": "PPDL 将概率编程与提示编程相结合，首次为 LLM 流程提供了概率编程语言支持。它将推理扩展与核心逻辑解耦，通过可插拔的推断引擎和分布化输出，使开发者能够评估不确定性并探索不同缩放策略，从而提升 LLM 应用的可靠性。",
+        "key_details": "PPDL 基于 PDL，使用 YAML 声明式语法；示例流程中，首先生成自然语言计划，再调用模型生成代码，并通过正则表达式捕获组和 JSON 类型规范约束输出格式。因子(factor)可基于模型软约束或规则工具硬约束更新轨迹概率；推理引擎包括多数投票、重要性采样和粒子滤波(SMC)。实现通过函数式数据结构支持轨迹内与跨轨迹并行化。项目已在 GitHub 开源(IBM/prompt-declaration-language 的 icml-26 分支)。需要注意的是，论文作者除一人外均为 IBM 员工，评估中包含 Granite 模型；论文全文可能包含更详细的数值实验，但当前预览未提供具体指标。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.84575671778501,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05238v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805238v1-decoupling-perception-from-description-computation-grounded-representation-alignment-between-multivariate-time-series-and-language",
+      "source": "arxiv",
+      "title": "Decoupling Perception from Description: Computation-Grounded Representation Alignment between Multivariate Time Series and Language",
+      "authors": [
+        "Xinran Feng",
+        "Yi Xie",
+        "Chao Zhang",
+        "Ruikun Li",
+        "Wanyun Ling",
+        "Ziyue Li",
+        "Chenxi Liu"
+      ],
+      "authors_text": "Xinran Feng, Yi Xie, Chao Zhang, Ruikun Li, Wanyun Ling, Ziyue Li, Chenxi Liu",
+      "abstract": "Training multimodal models to align time series with language runs into a self-supervision trap. The usual recipe asks an LLM to read a series and write a description, so label quality is capped by the perceptual skill the model is supposed to learn. The data can never teach more than the labeler already knows. A second gap makes this worse: most datasets use a single variable, but the patterns that matter (cross-channel correlation, lead-lag structure, co-occurring anomalies) appear only with several variables, right where the labeling LLM's limits are most exposed. These two problems create a trilemma: existing methods are reliable, realistic, or scalable, but none achieves all three. We resolve this by decoupling perception from description. Deterministic code computes a set of statistics from real, open-source multivariate series; the LLM verbalizes those precomputed facts. Perception, which LLMs do poorly, is handled by computation, while the LLM handles expression. This produces CGTime, our 4B-parameter computation-grounded time-series-language model. CGTime outperforms far larger general-purpose models on multivariate understanding tasks: it attains the best multivariate fact score on our held-out benchmark (0.283 vs. 0.173 for GPT-4o-mini and 0.203 for GPT-5.4-nano), a gap that survives Holm-corrected paired significance tests against every baseline. It also states verifiable numerical facts in generated captions more accurately and covers a broader range of statistical properties.",
+      "url": "http://arxiv.org/abs/2608.05238v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05238v1",
+      "tldr": "To overcome the self-supervision trap in time-series-language alignment, CGTime decouples perception from description by using deterministic computation to extract ground-truth statistics from real multivariate series and having the LLM only verbalize those precomputed facts, enabling a 4B-parameter model to outperform far larger baselines on multivariate understanding benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hong Kong University of Science and Technology (Guangzhou)",
+        "Technical University of Munich",
+        "Chinese Academy of Sciences",
+        "Munich Data Science Institute"
+      ],
+      "affiliations_text": "The Hong Kong University of Science and Technology (Guangzhou), Technical University of Munich, Chinese Academy of Sciences, Munich Data Science Institute",
+      "score": 3.8231575183292636,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05371v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805371v1-quantum-structured-world-models-qswms-for-predictive-latent-dynamics",
+      "source": "arxiv",
+      "title": "Quantum-Structured World Models (QSWMs) for Predictive Latent Dynamics",
+      "authors": [
+        "Hailong Jiang",
+        "Emran Hossain",
+        "Feng Yu",
+        "Jianfeng Zhu",
+        "Guilin Zhang",
+        "Wulan Guo"
+      ],
+      "authors_text": "Hailong Jiang, Emran Hossain, Feng Yu, Jianfeng Zhu, Guilin Zhang, Wulan Guo",
+      "abstract": "World models learn latent states that summarize interaction histories, evolve over time, and support prediction, simulation, or planning. Most existing world models represent these states using classical vectors, probability distributions, recurrent hidden states, or transformer activations. In this paper, we introduce Quantum-Structured World Models (QSWMs), a quantum-inspired framework for predictive world modeling with structured latent states, latent transition operators, and measurement-inspired decoding maps. We study whether mathematical structures inspired by quantum theory, such as complex-valued representations and density-matrix-like latents, provide useful inductive biases for world modeling. We establish three foundational properties: classical inclusion, predictive sufficiency, and structured compactness. We then instantiate complex-valued and density-matrix-like QSWM variants and evaluate them on elementary cellular automata against strong classical baselines. Results show promising local predictive potential for complex-valued QSWMs, while also revealing limitations in long-horizon rollout, density-matrix variants",
+      "url": "http://arxiv.org/abs/2608.05371v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05371v1",
+      "tldr": "TLDR: The paper introduces Quantum-Structured World Models (QSWMs), a quantum-inspired framework using complex-valued and density-matrix-like latent states for predictive world modeling, and shows that these structured representations offer useful local predictive inductive biases on elementary cellular automata while facing limitations in long-horizon rollouts and interpretability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Kent State University",
+        "George Washington University",
+        "Youngstown State University"
+      ],
+      "affiliations_text": "Kent State University, George Washington University, Youngstown State University",
+      "score": 3.8213864946753775,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05207v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805207v1-when-do-corrective-features-help-an-agent-for-corrective-feature-discovery-on-black-box-forecasters",
+      "source": "arxiv",
+      "title": "When Do Corrective Features Help? An Agent for Corrective Feature Discovery on Black-Box Forecasters",
+      "authors": [
+        "Fangxin Wang",
+        "Ziyi Zhang",
+        "Diyi Zhuang",
+        "Langzhou He",
+        "Shiyu Wang",
+        "Baichuan Mo",
+        "Philip S. Yu"
+      ],
+      "authors_text": "Fangxin Wang, Ziyi Zhang, Diyi Zhuang, Langzhou He, Shiyu Wang, Baichuan Mo, Philip S. Yu",
+      "abstract": "Frozen pretrained forecasters often fail in structured, recurring ways that are costly to repair through fine-tuning. We study corrective feature discovery: mining interpretable features of a frozen forecaster's residual to drive a lightweight post-hoc corrector. Prior automated feature engineering models the data-generating process; corrective features instead model the model-failure process. We present CRAFTER (Corrective Residual Agent with Feature-based Temporal Exploration and Reasoning), which keeps the backbone frozen and mines its residual with two complementary generators: a compositional search over the raw input channels, and a large language model (LLM) that proposes named feature combinations, binary flags, and short executable code. A single validation-grounded gate accepts or rejects every candidate regardless of its origin, and a validation-selected corrector applies the accepted features or leaves the forecast unchanged. This source-agnostic pipeline also allows prior feature-engineering systems to be evaluated under identical conditions, making CRAFTER an instrument for attributing forecast improvements to the feature source alone. Across six public datasets and six frozen backbones, CRAFTER surpasses every dedicated feature-engineering system at every feature budget, roughly doubling the improvement achieved by the corrector alone and reducing the error of the weakest backbones by up to 27%. These gains are robust across different LLM backends and persist even when applied on top of fine-tuned backbones.",
+      "url": "http://arxiv.org/abs/2608.05207v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05207v1",
+      "tldr": "CRAFTER is a source-blind agent that mines a frozen forecaster’s residual via compositional search and LLM-proposed named features, using a validation-grounded gate to discover corrective features that consistently outperform dedicated feature-engineering systems across datasets and backbones.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois Chicago",
+        "Texas A&M University",
+        "Massachusetts Institute of Technology",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "University of Illinois Chicago, Texas A&M University, Massachusetts Institute of Technology, Tsinghua University",
+      "score": 3.8179725659163832,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05348v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805348v1-tsdm-a-scheduling-policy-for-joint-throughput-aoi-optimization-in-multichannel-wireless-networks",
+      "source": "arxiv",
+      "title": "TSDM: A Scheduling Policy for Joint Throughput-AoI Optimization in Multichannel Wireless Networks",
+      "authors": [
+        "Lin Wang",
+        "I-Hong Hou"
+      ],
+      "authors_text": "Lin Wang, I-Hong Hou",
+      "abstract": "Optimizing for both low Age of Information (AoI) and high throughput is critical for remote sensing applications that rely on multichannel wireless networks. However, jointly optimizing these two metrics is an analytically challenging problem, particularly in systems with heterogeneous and unreliable channels. To address this challenge, we propose TSDM, a Two-Stage Deficit Matching scheduling framework. TSDM is based on a second-order approach that characterizes the performance of each data flow by its mean and temporal variance. In the first stage, TSDM translates the high-level utility maximization objective into a concrete set of target mean and temporal variance statistics for transmissions over each node-channel pair. In the second stage, a low-complexity Weighted Matching Deficit (WMD) rule performs real-time channel assignment. We theoretically prove that TSDM achieves the desired mean and temporal variance for each flow. Furthermore, we conduct extensive simulations on two open joint throughput-AoI optimization problems. In both cases, TSDM significantly outperforms existing scheduling policies.",
+      "url": "http://arxiv.org/abs/2608.05348v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05348v1",
+      "tldr": "TSDM is a two-stage deficit matching scheduling framework that jointly optimizes throughput and Age of Information in multichannel wireless networks by translating utility objectives into target mean and variance statistics per node–channel pair and using a low-complexity weighted matching rule to achieve them, with theoretical guarantees and superior simulation performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Texas A&M University",
+      "score": 3.80260699638916,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05358v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805358v1-dg-fedreuse-proxy-gradient-gated-cached-update-reuse-with-matched-sparse-uplink-accounting",
+      "source": "arxiv",
+      "title": "DG-FedReuse: Proxy-Gradient-Gated Cached-Update Reuse with Matched Sparse Uplink Accounting",
+      "authors": [
+        "Rahil Aftab",
+        "Vineet Kumar Rakesh",
+        "Soumya Mazumdar",
+        "Tapas Samanta"
+      ],
+      "authors_text": "Rahil Aftab, Vineet Kumar Rakesh, Soumya Mazumdar, Tapas Samanta",
+      "abstract": "Federated learning repeatedly incurs local optimization and model-update transmission. We study DG-FedReuse, a simulator-level mechanism that allows selected clients to contribute age-decayed cached updates when a stochastic head-gradient discrepancy proxy remains below a round-dependent threshold. A hard cache-age limit and minimum fresh-client quota constrain reuse, while fresh updates use an adaptive per-tensor Top-K numerical-field representation. Experiments cover six image-classification datasets, 50 virtual clients, Dirichlet label heterogeneity (α=0.5), and three seeds. At a common 90-round budget, DG-FedReuse yields 83.36-85.42% modeled update-data-field uplink saving, compared with 76.88% for matched Top-K FedAvg; the seed-aligned accuracy differences range from -5.29 to -0.14 percentage points. Best-observed test accuracies obtained under test-controlled checkpointing are retained only as exploratory archival evidence and range from -2.38 to +0.45 percentage points relative to matched FedAvg. A symmetric dense-model-downlink sensitivity reduces the headline saving to 41.68-F42.71% and the incremental gain over Top-K FedAvg to 3.24-4.27 percentage points, demonstrating the dependence of communication conclusions on the accounting boundary. The study characterizes the proposed reuse rule in the implemented simulator; it does not establish unbiased generalization, end-to-end bandwidth reduction, runtime or energy savings, faster convergence, or superiority over existing stale-update and lazy-aggregation methods.",
+      "url": "http://arxiv.org/abs/2608.05358v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05358v1",
+      "tldr": "DG-FedReuse is a federated learning mechanism that lets selected clients reuse age-decayed cached updates when a stochastic head-gradient proxy stays below a round-dependent threshold, using sparse Top-K fresh updates and safeguard quotas to achieve substantial modeled uplink savings with only small accuracy trade-offs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Jamia Hamdard",
+        "Variable Energy Cyclotron Centre",
+        "Gargi Memorial Institute of Technology",
+        "Homi Bhabha National Institute"
+      ],
+      "affiliations_text": "Jamia Hamdard, Variable Energy Cyclotron Centre, Gargi Memorial Institute of Technology, Homi Bhabha National Institute",
+      "score": 3.7901961862222864,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.05242v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805242v1-disentangling-3d-modeling-from-spatial-reasoning",
+      "source": "arxiv",
+      "title": "Disentangling 3D Modeling from Spatial Reasoning",
+      "authors": [
+        "Haoze Sun",
+        "Jiequan Cui",
+        "Qingshan Xu",
+        "Richang Hong"
+      ],
+      "authors_text": "Haoze Sun, Jiequan Cui, Qingshan Xu, Richang Hong",
+      "abstract": "In this work, we explore an alternative paradigm for spatial reasoning by explicitly disentangling 3D perception from reasoning, rather than jointly acquiring implicit 3D perception and reasoning through large-scale training. Our key observation is that modern perception models excel at estimating continuous 3D geometry, whereas large language models (LLMs) are particularly effective at compositional and symbolic reasoning. Motivated by these complementary strengths, we propose the Disentangled Spatial Reasoner (DiSR), a simple yet effective framework that reconstructs the physical world into structured 3D evidence using off-the-shelf expert perception models and fine-tunes an LLM with LoRA to perform reasoning solely over this explicit geometric evidence. Without large-scale 3D VQA training or complex tool-use policies, DiSR achieves competitive performance on popular spatial reasoning benchmarks. Beyond its strong performance, DiSR offers improved interpretability, modularity, and computational efficiency, demonstrating that explicit separation of perception and reasoning is a scalable and effective alternative paradigm to end-to-end modeling for spatial intelligence.",
+      "url": "http://arxiv.org/abs/2608.05242v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05242v1",
+      "tldr": "DiSR disentangles 3D perception from spatial reasoning by reconstructing images into structured 3D evidence with expert perception models and fine-tuning an LLM (via LoRA) to reason solely over that evidence, achieving state-of-the-art results on spatial reasoning benchmarks with improved efficiency, interpretability, and modularity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "HFUT",
+        "USTC"
+      ],
+      "affiliations_text": "HFUT, USTC",
+      "score": 3.7314746014666693,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.05369v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805369v1-world-to-wrist-task-conditioned-future-wrist-modeling-for-fine-grained-robot-manipulation",
+      "source": "arxiv",
+      "title": "World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation",
+      "authors": [
+        "Yuhao Pan",
+        "Haosong Peng",
+        "Zhengshen Zhang",
+        "Zhengyang Yan",
+        "Yalun Dai",
+        "Fushuo Huo",
+        "Chujie Wang",
+        "Tianyu Qi",
+        "Xiucheng Wang",
+        "Nan Cheng",
+        "Wenchao Xu"
+      ],
+      "authors_text": "Yuhao Pan, Haosong Peng, Zhengshen Zhang, Zhengyang Yan, Yalun Dai, Fushuo Huo, Chujie Wang, Tianyu Qi, Xiucheng Wang, Nan Cheng, Wenchao Xu",
+      "abstract": "Vision-language-action (VLA) models often treat main-view and wrist-view observations as parallel visual inputs, overlooking their distinct roles in robot manipulation. Fine-grained manipulation, however, benefits from anticipating how wrist-local interactions may evolve under the global task context. To address this limitation, we present World-to-Wrist VLA (W2-VLA), a VLA model for fine-grained robot manipulation with task-conditioned future wrist modeling. Given current multi-view observations and a task instruction, W2-VLA contextualizes a set of latent modeling tokens as a compact interface between the vision-language model and the wrist predictor. Conditioned on this interface and the observed wrist history, the predictor forecasts future wrist latents, which are transformed into future-aware context for action prediction. In addition, we introduce W2-CoT, a synthesis pipeline that produces structured annotations describing manipulation progress, physical transition cues, and wrist-local evidence. These annotations provide auxiliary supervision that shapes the task-conditioned latent interface. Experiments on LIBERO, RoboTwin 2.0, and real-world manipulation tasks demonstrate improved fine-grained and contact-sensitive manipulation across both single-arm and bimanual settings, while maintaining action-generation rates above 80 Hz.",
+      "url": "http://arxiv.org/abs/2608.05369v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05369v1",
+      "tldr": "W2-VLA is a vision-language-action model that improves fine-grained robot manipulation by predicting future wrist latents through a task-conditioned latent interface shaped by chain-of-thought annotations, enabling future-aware action generation at over 80 Hz.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sun Yat-sen University",
+        "National University of Singapore",
+        "The Hong Kong University of Science and Technology",
+        "Nanyang Technological University",
+        "Xidian University",
+        "Southeast University",
+        "Wuhan University"
+      ],
+      "affiliations_text": "Sun Yat-sen University, National University of Singapore, The Hong Kong University of Science and Technology, Nanyang Technological University, Xidian University, Southeast University, Wuhan University",
+      "score": 3.624469858107648,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.05265v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805265v1-evaluating-machine-learning-models-for-post-wildfire-debris-flow-prediction",
+      "source": "arxiv",
+      "title": "Evaluating Machine Learning Models for Post-Wildfire Debris-Flow Prediction",
+      "authors": [
+        "Quinn Ledingham",
+        "Zhengsen Xu",
+        "Yimin Zhu",
+        "Zack Dewis",
+        "Mabel Heffring",
+        "Saeid Taleghanidoozdoozan",
+        "Motasem Alkayid",
+        "Megan Greenwood",
+        "Lincoln Linlin Xu"
+      ],
+      "authors_text": "Quinn Ledingham, Zhengsen Xu, Yimin Zhu, Zack Dewis, Mabel Heffring, Saeid Taleghanidoozdoozan, Motasem Alkayid, Megan Greenwood, Lincoln Linlin Xu",
+      "abstract": "Prediction of post-wildfire debris flows is critical for mitigating hazards to communities, infrastructure, and resources during intense rainfall in recently burned areas. However, identifying reliable machine learning models is complicated by overlapping debris-flow and non-debris-flow events in feature space, the need for model interpretability, and limited training data. This paper addresses these challenges through a systematic evaluation of machine learning models in terms of predictive performance, feature importance, and synthetic data augmentation. Using basin-scale observations of post-wildfire debris-flow events across the western United States, we compare 15 models, including the Tabular Prior-Data Fitted Network (TabPFN). Repeated stratified cross-validation shows that TabPFN achieves the highest unaugmented performance with a threat score of 0.637, closely followed by the best tree-based models. SHapley Additive exPlanations (SHAP) are used to identify the features driving predictions, revealing that short-duration rainfall intensity and storm accumulation consistently rank highest, while burn severity and terrain features contribute less. We further evaluate synthetic data augmentation using TabPFN-generated samples to address the scarcity of debris-flow observations. Synthetic augmentation improves the performance of all models except CNN, with the largest mean threat score increase of +0.041 among the deep learning models. By combining rigorous model benchmarking, interpretable feature analysis, and synthetic data augmentation, this work provides a comprehensive framework for improving post-wildfire debris-flow prediction.",
+      "url": "http://arxiv.org/abs/2608.05265v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05265v1",
+      "tldr": "This paper systematically evaluates 15 machine learning models for post-wildfire debris-flow prediction, finding TabPFN achieves the highest performance, using SHAP to identify key rainfall features, and showing that synthetic data augmentation improves most models under data-scarce, class-imbalanced conditions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Calgary"
+      ],
+      "affiliations_text": "University of Calgary",
+      "score": 3.579412681931577,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.05315v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805315v1-rectifying-geometric-misalignment-online-source-free-adaptation-for-class-imbalanced-eeg",
+      "source": "arxiv",
+      "title": "Rectifying Geometric Misalignment: Online Source-Free Adaptation for Class-Imbalanced EEG",
+      "authors": [
+        "Shiwen Chu",
+        "Shanglin Li",
+        "Motoaki Kawanabe",
+        "Reinmar Kobler"
+      ],
+      "authors_text": "Shiwen Chu, Shanglin Li, Motoaki Kawanabe, Reinmar Kobler",
+      "abstract": "Electroencephalography (EEG) based Brain-Computer Interfaces (BCIs) often require unsupervised domain adaptation (UDA) to generalize across subjects and sessions. While Riemannian alignment methods like the Riemannian Centering Transformation (RCT) are effective for handling covariate shifts, they implicitly assume balanced class priors. However, in realistic online BCI scenarios, the label distributions vary dynamically (label shift), causing standard alignment techniques to geometrically misalign the target data distributions. In this work, we propose OSPDIM (Online SPD manifold information maximization), a source-free online UDA framework designed to address label shifts on the Riemannian manifold. OSPDIM introduces a manifold-constrained bias parameter into the tangent space mapping, which is optimized via information maximization to correct the geometric skew caused by imbalanced data streams. Unlike offline methods relying on global batch statistics, OSPDIM estimates and corrects geometric bias on-the-fly. Simulations on 2D SPD matrices visually demonstrate that OSPDIM successfully rectifies the misalignment where standard centering fails. Extensive experiments on multiple motor imagery datasets show that OSPDIM significantly outperforms standard Riemannian baselines, particularly in challenging online adaptation scenarios with severe class imbalance, offering a robust solution for practical, plug-and-play BCI systems.",
+      "url": "http://arxiv.org/abs/2608.05315v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05315v1",
+      "tldr": "OSPDIM is an online source-free unsupervised domain adaptation framework that introduces a manifold-constrained bias parameter optimized via information maximization to correct geometric misalignment caused by label shifts in class-imbalanced EEG-based BCIs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BIFOLD – Berlin Institute for the Foundations of Learning and Data",
+        "Nara Institute of Science and Technology",
+        "Advanced Telecommunications Research Institute International"
+      ],
+      "affiliations_text": "BIFOLD – Berlin Institute for the Foundations of Learning and Data, Nara Institute of Science and Technology, Advanced Telecommunications Research Institute International",
+      "score": 3.535581638763769,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.05249v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805249v1-prism-priority-aware-rubric-internalization-via-structured-multimodal-data-synthesis",
+      "source": "arxiv",
+      "title": "PRISM: Priority-aware Rubric Internalization via Structured Multimodal Data Synthesis",
+      "authors": [
+        "Xiaomin He",
+        "Dongling Xiao",
+        "Jiahao Xie",
+        "Ruiqi Lu",
+        "Qianle Wang",
+        "Zhongbin Guo",
+        "Wanxuan Sun"
+      ],
+      "authors_text": "Xiaomin He, Dongling Xiao, Jiahao Xie, Ruiqi Lu, Qianle Wang, Zhongbin Guo, Wanxuan Sun",
+      "abstract": "Real-world multimodal instructions often bundle multiple requirements with unequal importance, yet most multimodal training data still reduce instruction following to answering one self-contained question. We study this gap through \\textbf{rubric comprehension}, which casts the model not as a generator measured against rubrics but as an \\textbf{executor} that follows them: given an image and a typed, prioritized rubric, the model must verify each rule before producing an overall judgment. To support this setting, we propose \\textbf{PRISM}, a four-stage data synthesis framework that produces persona--task pairs, prefix-guided rule sets, quality-filtered rubrics, and structured verification traces. We further introduce \\textbf{PRISM-Eval}, whose Loose and Strict metrics use deterministic matching against fixed labels and therefore require no inference-time judge model. With only 10K synthesized samples, PRISM lifts Qwen3-VL-4B from 9.5\\% to 30.1\\% Strict accuracy on PRISM-Eval while preserving average performance on general benchmarks, and the gains transfer to four additional open-source MLLMs across dense and MoE architectures, suggesting that structured rubric supervision is a scalable path toward multi-rule, priority-aware multimodal instruction following.",
+      "url": "http://arxiv.org/abs/2608.05249v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05249v1",
+      "tldr": "PRISM introduces a four-stage structured multimodal data synthesis framework that trains MLLMs to follow typed, prioritized rubrics as executors, improving multi-rule instruction following (e.g., Qwen3-VL-4B from 9.5% to 30.1% Strict accuracy) while preserving general benchmark performance, as measured by a judge-free evaluation protocol.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ByteDance",
+        "Peking University"
+      ],
+      "affiliations_text": "ByteDance, Peking University",
+      "score": 3.5164283774660343,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.05255v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805255v1-an-emerging-retail-portfolio-management-application-personalized-tax-aware-reinforcement-learning-with-natural-language-goals",
+      "source": "arxiv",
+      "title": "An Emerging Retail Portfolio Management Application: Personalized, Tax-Aware Reinforcement Learning with Natural Language Goals",
+      "authors": [
+        "Ramin Pishehvar"
+      ],
+      "authors_text": "Ramin Pishehvar",
+      "abstract": "Retail investors lack access to the kind of personalized, tax-aware portfolio management that institutional clients take for granted -- existing robo-advisors use static, rule-based allocation, and institutional-grade systems require account minimums and technology stacks unavailable to individual investors. We present a fully built, integration-tested application that closes this gap: a FastAPI backend and web dashboard that let a user describe an investment goal in plain language (e.g. \"I want steady growth but need to sell some shares next month for a down payment\"), routes that goal to one of six investment mandates, and produces a live, broker-integrated portfolio recommendation from athree-phase reinforcement learning system -- a self-supervised cross-asset encoder, a Mixture-of-Experts (MoE) allocation policy with a learned intent router, and a lightweight LoRA adapter that personalizes recommendations from an individual's revealed brokerage behavior without retraining the shared model. The system is functionally complete and integration-tested end-to-end against a live brokerage API (Alpaca, paper-trading mode), including multi-user authentication, a trust first preview-before-apply confirmation flow, daily email digests, and an auditable action-integrity chain, but has not yet been opened to real end-users; we report this honestly as an emerging, pre-deployment application with a concrete path to full deployment, alongside 14-day walk-forward backtests (bootstrapped confidence intervals included) as preliminary, pre-deployment validation rather than production performance. We also report several practical engineering lessons -- silently-inactive integration paths, hanging third-party API calls, and the value of end-to-end empirical verification over trusting checkpoint metadata -- that we believe generalize to other applied RL systems built on external, live data sources.",
+      "url": "http://arxiv.org/abs/2608.05255v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05255v1",
+      "tldr": "TLDR: This paper presents a fully built, integration-tested retail portfolio management application that translates plain-language investment goals into personalized, tax-aware recommendations via a three-phase reinforcement learning pipeline—self-supervised cross-asset encoding, a Mixture-of-Experts allocation policy, and per-user LoRA personalization—validated through live brokerage API integration and backtests, though not yet deployed to real users.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.509520965677618,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.05243v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805243v1-marginal-matching-does-not-license-factorized-sampling-auditing-conditional-style-leakage-in-factorized-generative-models",
+      "source": "arxiv",
+      "title": "Marginal Matching Does Not License Factorized Sampling: Auditing Conditional Style Leakage in Factorized Generative Models",
+      "authors": [
+        "Duong Bach",
+        "Hai Nguyen Hong",
+        "Cuong Do"
+      ],
+      "authors_text": "Duong Bach, Hai Nguyen Hong, Cuong Do",
+      "abstract": "Factorized generative models commonly regularize a latent style variable z_s by matching its marginal distribution to a fixed Gaussian prior and interpret this as evidence that the style representation is independent of class information. We show that this interpretation is incorrect. Matching only the marginal distribution places no constraint on the class-conditional distributions, allowing the latent style to remain highly predictive of the label despite appearing perfectly Gaussian in aggregate. We derive an exact decomposition showing that this mismatch is one of four conditions required for factorized sampling, and demonstrate that eliminating it is necessary but not sufficient to obtain the intended factorization.\n  Empirically, our case-study model and four representative latent baselines achieve near-zero global MMD while still allowing a linear probe to recover class labels with 74%--100% accuracy (10% chance level). Our model reaches 99.15% clustering accuracy, whereas externally evaluated class-conditional generation succeeds only 16% of the time. This leakage remains under six independent perturbations involving model capacity, curriculum, prior geometry, and supervision across two datasets. Four mitigation strategies reduce probe accuracy to 21%--46%, although they leave within-class dependence largely unchanged. A post-hoc conditional prior improves externally evaluated class generation to 0.97 on MNIST without retraining but reaches only 0.41 on CIFAR-10, while an empirical style bank achieves 0.88 on CIFAR-10. These results demonstrate that no divergence computed solely on the marginal distribution of the style latent can certify independence from class labels, and that reporting marginal statistics alone does not verify the property commonly claimed in factorized generative models.",
+      "url": "http://arxiv.org/abs/2608.05243v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05243v1",
+      "tldr": "Matching only the marginal distribution of a style latent to a Gaussian prior does not certify class-invariance, allowing conditional style leakage that fools global MMD yet enables near-perfect label recovery, and eliminating this leakage is necessary but not sufficient for valid factorized sampling.",
+      "detailed_reading": null,
+      "affiliations": [
+        "VinUniversity"
+      ],
+      "affiliations_text": "VinUniversity",
+      "score": 3.500820865722786,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.05406v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805406v1-an-exact-solution-of-the-two-ball-multi-look-search-game-with-three-boxes-and-heterogeneous-costs",
+      "source": "arxiv",
+      "title": "An Exact Solution of the Two-Ball Multi-Look Search Game with Three Boxes and Heterogeneous Costs",
+      "authors": [
+        "Igor Kleiner"
+      ],
+      "authors_text": "Igor Kleiner",
+      "abstract": "A Hider distributes two identical balls among three boxes whose search costs satisfy $a\\ge b\\ge c>0$. A Searcher opens boxes adaptively until both balls are found; every opening incurs the corresponding box cost and recovers at most one ball. We give an exact solution of this heterogeneous multi-look search-cost game. The value is the maximum of three explicit rational functions. In the three parameter regimes, an optimal Hider strategy is the product-form distribution restricted respectively to three, five, or all six placements. Every non-wasteful deterministic Searcher policy is payoff-equivalent to one of $72$ elementary decision trees, which induce only $42$ distinct opening-count profiles. An analytic argument settles the first regime. Two exact Searcher mixtures settle the second, and four settle the third. Feasibility of the parameterized mixtures over the full cost region is established by exact rational Bernstein-basis certificates. Independent implementations reproduce the policy set, the zero-sum linear-program values, and all $154$ dyadic nodes examined by the Bernstein verifier.",
+      "url": "http://arxiv.org/abs/2608.05406v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05406v1",
+      "tldr": "The paper gives an exact solution to the three-box, two-ball multi-look search game with heterogeneous box costs, showing the value is the maximum of three explicit rational functions and providing optimal product-form Hider strategies with nested supports, along with exact finite Searcher-mixture certificates.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Holon Institute of Technology"
+      ],
+      "affiliations_text": "Holon Institute of Technology",
+      "score": 3.1495351536637433,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2608.05326v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805326v1-qevict-recoverable-quantized-kv-eviction-for-attention-drift-robust-long-context-decoding",
+      "source": "arxiv",
+      "title": "QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding",
+      "authors": [
+        "Ayushman Garg",
+        "Akshita Gupta",
+        "Shaswata Bhattacharya",
+        "Abhishek Gupta",
+        "Sandeep Kumar",
+        "Manoj Kumar"
+      ],
+      "authors_text": "Ayushman Garg, Akshita Gupta, Shaswata Bhattacharya, Abhishek Gupta, Sandeep Kumar, Manoj Kumar",
+      "abstract": "Autoregressive large language model inference is increasingly constrained by the memory footprint of the Key-Value (KV) cache. A dominant line of work reduces this footprint by evicting tokens that appear unimportant under attention-derived scores. However, such policies make an implicit irreversible decision: once a token is evicted, it cannot become useful again. We show that this assumption is brittle during decoding. Token and window importance drift as generated queries evolve, causing standard eviction policies to permanently discard states that later receive substantial attention under the full-cache model. To characterize this behaviour, we introduce Future Missed Mass and Global LIR, two diagnostics that measure future attention assigned to discarded states and the reactivation of historically inactive regions. We propose QEvict, a three-tier KV-cache management scheme that replaces binary retain-or-delete eviction with recoverable eviction. QEvict maintains high-confidence windows in full precision, stores intermediate windows in a quantized recoverable tier, and deletes only the lowest-confidence windows. During decoding, cumulative attention scores update window importance and when a quantized window becomes important again, it is dequantized and promoted to the full-precision. Under a fixed memory budget, this design preserves broader historical context while retaining exact full precision for the most important regions. Across long-context understanding, retrieval, and reasoning benchmarks, QEvict consistently improves over representative eviction and quantization baselines, reducing missed attention and improving information retention",
+      "url": "http://arxiv.org/abs/2608.05326v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05326v1",
+      "tldr": "QEvict introduces a three-tier recoverable KV-cache management scheme that, instead of permanently evicting low-attention tokens, stores them in a quantized recoverable tier from which they can be dequantized and promoted when attention drifts back, improving long-context decoding under fixed memory budgets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Delhi",
+        "Indian Institute of Technology Roorkee"
+      ],
+      "affiliations_text": "Indian Institute of Technology Delhi, Indian Institute of Technology Roorkee",
+      "score": 3.095432408490283,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2608.05196v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/07/260805196v1-ms-mlb-an-open-machine-learning-benchmark-for-blood-based-ms-classification",
+      "source": "arxiv",
+      "title": "MS-MLB: An Open Machine Learning Benchmark for Blood-Based MS Classification",
+      "authors": [
+        "Adam Simson",
+        "Ankush Dutta",
+        "Quang Bui"
+      ],
+      "authors_text": "Adam Simson, Ankush Dutta, Quang Bui",
+      "abstract": "Multiple sclerosis (MS) is diagnosed through clinical assessment, magnetic resonance imaging, laboratory evidence when appropriate, and exclusion of better explanations. Blood RNA expression data may contain disease associated immune signal, but a blood RNA classifier cannot be treated as a replacement for clinical diagnosis. This paper presents MS-MLB (Multiple Sclerosis Machine Learning Benchmark), a reproducible open benchmark for machine learning based MS research classification from whole blood RNA expression data. MS-MLB uses the public GSE17048 cohort, converts it into an MS versus healthy control task, and evaluates multiple algorithms under a shared, leakage controlled pipeline that a researcher can rerun without reconfiguring the evaluation. The evaluation includes nested cross-validation, an untouched stratified holdout set, bootstrap confidence intervals, ROC and precision recall analysis, calibration measurement, and an exploratory MS Research Score. In the final benchmark summary, Gradient Boosting ranked first by MS Research Score on the holdout set, with an MS Research Score of 93.83, AUC-ROC of 0.989, sensitivity of 0.950, specificity of 0.778, $F_{1}$ score of 0.927, and Brier score of 0.050. Prior studies have applied machine learning to MS blood transcriptomic data, including PBMC stage classification and whole blood diagnostic signature modeling. The contribution here is different and narrower. To our knowledge, MS-MLB is the first open benchmark focused on MS versus healthy control classification from GSE17048 whole blood RNA expression data with a documented external model submission pathway built into the framework. The score is intended for research comparison only and has not been clinically validated. The benchmark is accessible here: https://github.com/duckyquang/MS-MLB.",
+      "url": "http://arxiv.org/abs/2608.05196v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.05196v1",
+      "tldr": "MS-MLB is the first open, reproducible machine learning benchmark for classifying multiple sclerosis versus healthy controls from whole blood RNA expression data (GSE17048), featuring a leakage-controlled evaluation pipeline, an external model submission pathway, and Gradient Boosting as the top performer on the holdout set.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Synthica Research Group"
+      ],
+      "affiliations_text": "Synthica Research Group",
+      "score": 2.8009466208602274,
+      "score_text": "2.8"
+    }
+  ],
+  "errors": []
+}
