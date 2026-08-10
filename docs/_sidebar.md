@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-08-10
+  - [日报](/2026/08/10/README)
 - 2026-08-07
   - [日报](/2026/08/07/README)
   - [精读 · Unified Planning-Learning Framework for Robust UUV Navigation Under Partial Observability](/2026/08/07/260805365v1-unified-planning-learning-framework-for-robust-uuv-navigation-under-partial-observability)
