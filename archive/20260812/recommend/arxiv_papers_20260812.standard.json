@@ -1,0 +1,730 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-12T04:59:03.235952",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.10158v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810158v1-a-new-approach-for-feedback-stabilization-and-its-application-for-data-driven-control-of-polynomial-systems",
+      "source": "arxiv",
+      "title": "A New Approach for Feedback Stabilization and its Application for Data-Driven Control of Polynomial Systems",
+      "authors": [
+        "Diego de S. Madeira",
+        "Joao Gabriel N. Silva",
+        "Wilkley B. Correia",
+        "Antonis Papachristodoulou"
+      ],
+      "authors_text": "Diego de S. Madeira, Joao Gabriel N. Silva, Wilkley B. Correia, Antonis Papachristodoulou",
+      "abstract": "Inspired by recent developments in dissipativity-based control, this work proposes new sufficient conditions for asymptotic stabilization of nonlinear systems using state feedback. We prove that this new framework is well suited for data-driven control of polynomial systems using noisy measurements, a topic that has lately attracted considerable attention. Two iterative procedures for data-based state feedback design are provided using the proposed framework, that use sum-of-squares (SOS) optimization. Typical limitations of conventional SOS methods based on alternating (D-K) procedures for controller design, such as the need to provide an initialization for a control-Lyapunov function (CLF), are overcome in this paper. Numerical examples demonstrate the applicability and the advantages of the new strategies.",
+      "url": "http://arxiv.org/abs/2608.10158v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10158v1",
+      "tldr": "This paper proposes new dissipativity-inspired sufficient conditions for asymptotic state-feedback stabilization of polynomial systems, which enable two iterative sum-of-squares data-driven control design procedures using noisy measurements that avoid the need for control-Lyapunov function initialization or alternating D-K iterations.",
+      "detailed_reading": {
+        "motivation": "现有基于SOS的数据驱动多项式系统控制方法多依赖D-K交替迭代，需要为控制Lyapunov函数或控制律提供初值，且某些方法还需要预先指定虚构输出；同时经典耗散性框架通常求解满足耗散不等式的控制律集合，难以直接利用带噪数据刻画与候选CLF相容的闭环动力学。本文因此提出新的反馈镇定性充分条件，并面向带噪测量数据建立无需这些初值和先验指定的数据驱动设计框架。",
+        "method": "考虑输入仿射多项式系统dot x=f(x)+g(x)u，在Assumption 1下将未知f,g表示为dot x=A Z(x)+B W(x)u，其中Z,W为已知单项式基，A,B未知。在时间区间内采集输入状态样本以及带噪导数X1=hat X1+D0，并假设D0D0^T<=R_DR_D^T，从而将可行系统集合C表示为矩阵椭球形式。借鉴耗散性控制，提出了确定与候选CLF相容的闭环动力学集合的新充分条件，而非直接求满足耗散不等式的控制律集合。基于该框架给出两个迭代SOS算法：第一个算法每轮计算复杂度较低，论证风格接近鲁棒控制；第二个算法每轮计算更重但通常仅需很少迭代即可获得镇定控制器。两种算法都不采用D-K交替，也无需提供CLF或控制律初值。",
+        "result": "数值算例表明两种数据驱动SOS策略都能在带噪测量下获得多项式状态反馈镇定控制器并估计吸引域。相比已有基于D-K交替的SOS方法，本文消除了对CLF初始化的依赖；与需要预设虚构输出的迭代耗散方法相比，也无需该先验设定。第一个算法以较低单轮复杂度进行迭代，第二个算法在更少迭代内收敛，二者为实际使用提供了性能与计算复杂度的折中。",
+        "conclusion": "本文建立了新的反馈镇定性充分条件，并证明其与带噪数据下可行系统的矩阵椭球表示相容，从而为多项式系统的数据驱动镇定提供了系统化框架。所提出的两种迭代SOS策略避免了传统D-K方法的初值难题，拓展了耗散性与鲁棒Lyapunov思想在数据驱动控制中的应用，并为后续研究如降低复杂度、扩大吸引域、输出反馈等奠定了基础。",
+        "key_details": "关键点：1) 数据与假设：只需状态/输入样本及带噪导数，未知扰动D0满足椭球界D0D0^T<=R_DR_D^T；f,g的度数上界已知且Z(0)=0。2) 模型：连续时间输入仿射多项式系统，[A B]未知但可行集可等价表示为矩阵椭球C={(A,B): (Z_AB-xi)^T A (Z_AB-xi)<=Q}。3) 方法：采用SOS优化处理多项式正定/半正定约束；两个迭代算法分别侧重单轮低复杂度与快速收敛；不需要CLF/控制律初始化，也不需要预先指定虚构输出。4) 优势与局限：避免了D-K交替迭代，但条件是充分而非必要；吸引域估计受候选CLF和SOS松弛影响；第二算法单轮计算量较高，第一算法可能需要更多迭代。5) 本文没有对闭环动力学进行参数化。"
+      },
+      "affiliations": [
+        "Federal University of Ceará",
+        "University of Oxford"
+      ],
+      "affiliations_text": "Federal University of Ceará, University of Oxford",
+      "score": 5.78967896135336,
+      "score_text": "5.8"
+    },
+    {
+      "id": "2608.10056v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810056v1-navigating-the-proximity-safety-balance-constraint-decomposition-for-human-following-in-pedestrian-crowds",
+      "source": "arxiv",
+      "title": "Navigating the Proximity-Safety Balance: Constraint Decomposition for Human Following in Pedestrian Crowds",
+      "authors": [
+        "Shiting Gong",
+        "Jianpeng Yao",
+        "Jinfeng Wang",
+        "Marco Pavone",
+        "Jiachen Li"
+      ],
+      "authors_text": "Shiting Gong, Jianpeng Yao, Jinfeng Wang, Marco Pavone, Jiachen Li",
+      "abstract": "Following a target human in crowded environments involves an inherent conflict between staying close to the target and navigating safely among surrounding pedestrians and obstacles. This conflict becomes more severe in dense scenarios, where aggressive following risks collisions and conservative margins lead to target loss, especially when pedestrian behaviors are unfamiliar or unpredictable. Existing reinforcement learning (RL) methods typically encode these competing objectives into a single dense reward, but the resulting proximity-safety balance is implicit and difficult to adjust across conditions. To address this, we decompose the human-following task into a sparse task reward and independent cost constraints within a multi-constraint RL formulation, where each constraint is managed through cost thresholds with direct behavioral meaning rather than implicit reward weight ratios, allowing explicit and tunable control over the trade-off. We further quantify the prediction uncertainty of human motions and integrate these estimates into the RL costs to enhance safety under unpredictable conditions. Extensive experiments across both in-distribution and out-of-distribution settings demonstrate that our method achieves an effective proximity-safety balance compared to baselines. Real-robot deployment further validates the feasibility of our method in real-world scenarios. More details are available on our project page: https://nav-ps-balance.github.io/.",
+      "url": "http://arxiv.org/abs/2608.10056v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10056v1",
+      "tldr": "The paper proposes a multi-constraint reinforcement learning framework that decomposes human-following into a sparse reward and independent, behaviorally interpretable safety cost constraints with uncertainty-aware costs, enabling an explicit and tunable proximity-safety trade-off in dense pedestrian crowds.",
+      "detailed_reading": {
+        "motivation": "在拥挤环境中跟随目标行人需要同时满足‘靠近目标’与‘安全避障’两个内在冲突的目标，密集场景下激进跟随易导致碰撞，保守间距又易丢失目标。现有强化学习方法通常将竞争目标编码为单一稠密奖励，其折中关系隐含在权重比中，难以跨场景调节，且面对不可预测行人行为时泛化不足。因此需要一种能显式、可调地控制接近-安全平衡的决策框架。",
+        "method": "将人类跟随任务建模为带约束的马尔可夫决策过程（CMDP），采用稀疏任务奖励和三个独立成本约束：跟随成本（等式约束）、行人碰撞成本（不等式约束）、静态障碍碰撞成本（不等式约束），并通过PPO-Lagrangian联合优化。输入状态包括机器人自身状态、附近行人的当前位置与预测轨迹、由自适应共形推断（ACI）估计的各预测时域不确定性，以及最近5帧的局部占据栅格图。策略网络采用早融合Transformer架构：3D CNN提取占据栅格特征，机器人、目标、障碍物与行人各自生成token，经正弦位置编码与未检测行人掩码后输入Transformer编码器，取机器人token经MLP得到特征，输出二维速度动作(vx, vy)。训练中四个critic分别估计奖励与三个成本的GAE优势，通过动态拉格朗日乘子满足约束；推理时仅需一次前向传播即可生成动作。",
+        "result": "在分布内与分布外（OOD）场景下，包括不同人群密度、行人行为和环境布局，该方法相比优化式基线和消融变体取得了更高的任务成功率与更低的碰撞率。真实机器人ROS 2部署进一步验证了算法在真实世界中的可行性与有效性，表明约束分解和不确定性感知能实现有效的接近-安全折中。",
+        "conclusion": "将目标跟随分解为稀疏任务奖励与具有行为语义阈值的独立成本约束，能够替代隐式奖励权重比，显式且可调地控制接近-安全平衡；将行人运动预测不确定性量化并融入成本设计，可增强不可预测条件下的安全性。仿真与真实机器人实验均证明了该框架的有效性和可部署性。",
+        "key_details": "关键细节包括：ACI使用M个并行估计器在线维护每个行人每个预测时域的误差界，更新公式为δ(t+1)=δ(t)+γ*(1[δ(t)>δ(t)]-α)，最终通过自适应加权采样选择输出；人类安全成本在行人的当前位置周围使用半径r_ego+r_h+r_buf的固定安全区，在前K'个预测位置周围使用半径r_ego+r_h+δ_hat(t)的不确定感知安全区，成本与最大侵入深度成正比；跟随成本仅在距离超过个人空间阈值d_personal时惩罚，障碍成本则基于最小表面距离与安全阈值d_safe_o的偏差；奖励只在成功、碰撞、目标丢失三种终端事件时给出稀疏信号。训练采用PPO-Lagrangian，每类成本有独立critic和GAE，拉格朗日乘子动态调整，其中跟随约束为等式约束以维持期望距离而非最小化距离，安全约束为不等式。人体token按距机器人距离排序，掩码处理未检测行人；局限性包括依赖上游预测器质量，且对极端OOD行人行为仍可能不够鲁棒。"
+      },
+      "affiliations": [
+        "University of Pennsylvania",
+        "Stanford University",
+        "University of California, Riverside",
+        "NVIDIA Research",
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "University of Pennsylvania, Stanford University, University of California, Riverside, NVIDIA Research, Georgia Institute of Technology",
+      "score": 5.082264686572188,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2608.10047v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810047v1-physics-informed-machine-learning-in-prognostics-and-health-management-a-systematic-literature-review",
+      "source": "arxiv",
+      "title": "Physics-Informed Machine Learning in Prognostics and Health Management: A Systematic Literature Review",
+      "authors": [
+        "Christopher Braun",
+        "Julian Raible",
+        "Marco F. Huber"
+      ],
+      "authors_text": "Christopher Braun, Julian Raible, Marco F. Huber",
+      "abstract": "In modern industry, keeping complex systems reliable, safe, and efficient hinges on Prognostics and Health Management (PHM). Machine Learning (ML) has largely driven advancements in diagnostics and prognostics, yet purely data-driven models face inherent limitations, such as poor generalization, an inability to infer causal relationships, and a lack of interpretability. Physics-Informed Machine Learning (PIML) helps mitigate these limitations by incorporating prior physical knowledge directly into the ML pipeline, thereby fostering growing interest in its application to PHM. This work investigates how PIML is being leveraged in the context of PHM through a systematic literature review of 212 studies. The review introduces a four-class classification scheme, consisting of observational bias, inductive bias, learning bias, and hybrid approaches, and further categorizes studies by PHM task. Across all four classes, the reviewed studies consistently demonstrate improved predictive performance over conventional baselines across a broad range of assets, although the literature is heavily skewed toward lithium-ion batteries and bearings, and dominated by problem-specific solutions. Overall, the review indicates that physics-informed approaches already provide tangible benefits, whereas claims of improvements concerning some of the aforementioned limitations lack sufficient supporting evidence. Future research should prioritize transferable design patterns, benchmarks comparing integration strategies, and uncertainty-aware models that are lightweight and robust enough for online deployment in real-world settings.",
+      "url": "http://arxiv.org/abs/2608.10047v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10047v1",
+      "tldr": "This systematic literature review of 212 studies examines how Physics-Informed Machine Learning is applied in Prognostics and Health Management, proposing a four-class taxonomy (observational, inductive, learning bias, and hybrid approaches) and finding that while these methods consistently improve predictive performance over conventional baselines, the field remains skewed toward batteries and bearings with insufficient evidence for broader claims of improved generalization and interpretability.",
+      "detailed_reading": {
+        "motivation": "现代工业对复杂系统的可靠性、安全性和效率要求日益提高，故障预测与健康管理（PHM）成为关键支撑。纯数据驱动的机器学习模型在泛化能力、因果推断和可解释性方面存在固有局限，难以应对工业场景中的噪声、稀疏故障数据和工况变化。物理信息机器学习（PIML）通过将先验物理知识嵌入机器学习流程，有望缓解这些局限，但该领域研究分散，缺乏统一分类和系统性证据基础，因此有必要开展系统文献综述，回答PIML如何在PHM中被利用以及关键挑战与机遇。",
+        "method": "本研究采用系统文献综述方法，对212项PIML在PHM中的应用研究进行全面分析。综述提出四类分类方案：观测偏差（observational bias）、归纳偏差（inductive bias）、学习偏差（learning bias）和混合方法（hybrid approaches），并按PHM任务（故障检测、诊断、健康评估、预后）进一步归类。研究流程包括明确的检索策略、筛选程序和质量评估，以系统归纳先验物理知识的类型与表示形式、知识融入机器学习的方式及实际效益，并基于对方法学趋势的分析讨论工业应用中的挑战和未来方向。",
+        "result": "综述发现，在四类方法中，PIML相比传统基线在多种资产上均一致表现出预测性能提升，尤其是在锂离子电池和轴承领域证据最集中。但文献高度偏向这两个资产类别，且以问题特定解决方案为主。关于PIML能改善泛化、因果推断和可解释性等纯数据驱动方法局限性的主张，目前缺乏充分的实证支持。",
+        "conclusion": "PIML在PHM中已展现出切实益处，能够提升预测性能，但其对数据驱动方法固有局限的改进仍需更多证据。当前研究碎片化、领域分布不均且缺乏通用设计模式，未来应优先发展可迁移的设计范式、比较不同融合策略的基准测试，以及轻量级、稳健且支持不确定性量化、适合在线部署的模型。",
+        "key_details": "综述涵盖212项研究，分类框架区分了四种物理知识融合方式：观测偏差（数据层面增强）、归纳偏差（模型结构约束）、学习偏差（损失函数正则化）和混合方法。分析同时考虑了PHM任务类型、资产类型和知识表示形式。当前文献以锂离子电池和轴承为主，方法多为针对特定问题的定制方案，缺乏跨场景的通用性。未来研究需要关注模型的不确定性量化、计算复杂度约束，以及在实际在线部署中的鲁棒性和轻量化要求。"
+      },
+      "affiliations": [
+        "Fraunhofer Institute for Manufacturing Engineering and Automation IPA",
+        "University of Stuttgart"
+      ],
+      "affiliations_text": "Fraunhofer Institute for Manufacturing Engineering and Automation IPA, University of Stuttgart",
+      "score": 4.749810156546788,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.10172v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810172v1-intrinsic-structure-spectral-identifiability-for-mechanistic-interpretability",
+      "source": "arxiv",
+      "title": "Intrinsic Structure: Spectral Identifiability for Mechanistic Interpretability",
+      "authors": [
+        "Ashim Dhor",
+        "Pin-Yu Chen"
+      ],
+      "authors_text": "Ashim Dhor, Pin-Yu Chen",
+      "abstract": "Mechanistic interpretability explains models by identifying circuits inside them, but has no way to tell whether a circuit is a property of the model or an artifact of the method that found it. Sparse autoencoders illustrate the problem: different seeds and widths recover materially different features from the same activations, and no theory says whether that variability is incidental or structural. We put dictionary learning for interpretability on an identifiability footing. Treating the forward pass as a controlled dynamical system with depth as time and lifting it with the Koopman operator yields a finite linear realisation whose \\emph{spectrum} is a coordinate-free property of the model. We prove the spectrum is recoverable from $M$ calibration samples at rate $M^{-1/2}$ up to permutation - to our knowledge the first identifiability theorem for a mechanistic-interpretability primitive, with a matching minimax lower bound, a median-of-means variant for heavy-tailed activations, and a dissociation theorem: whenever the realisation is non-normal, the directions carrying activation variance and the directions carrying information across depth cannot coincide. The identifiable object and the legible object are not the same object. On GPT-2 small, Gemma-2-2B and Qwen3-8B-Base the spectrum converges everywhere and attains the predicted exponent on Qwen3-8B-Base ($0.506 \\pm 0.031$); shortfalls collapse onto one curve against each cell's sample threshold. Koopman modes beat random directions but lose to principal components on indirect-object identification, with the gap decaying $4.1\\times$ in depth-distance, as the theorem predicts. The Koopman spectrum is an identifiable, model-intrinsic fingerprint with a stated error bar, not a legible decomposition.",
+      "url": "http://arxiv.org/abs/2608.10172v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10172v1",
+      "tldr": "This paper proves that the Koopman spectrum of a transformer's forward pass is a coordinate-free, model-intrinsic fingerprint recoverable from finite samples at a minimax-optimal rate, demonstrating that identifiable structures in mechanistic interpretability are distinct from legible decompositions like sparse autoencoder features.",
+      "detailed_reading": {
+        "motivation": "机械可解释性依赖在模型内部识别电路来解释模型行为，但现有方法无法判断所得电路是模型的固有属性还是方法带来的伪影。稀疏自编码器即为例证：不同随机种子和宽度从相同激活中恢复出实质性不同的特征，而缺乏理论说明这种变异性是偶然的还是结构性的。因此需要为可解释性中的字典学习建立可辨识性基础，区分模型的内在结构与方法伪影。",
+        "method": "将模型前向传播视为以深度为时间索引的受控动力系统，并利用Koopman算子将其提升为有限维线性实现，从而得到坐标无关的谱对象。该谱从M个校准样本中以M^{-1/2}的速率、在置换意义下被恢复，同时构造了重尾激活下的中位数均值（median-of-means）变体以增强鲁棒性。关键步骤包括：定义受控动力系统与可观测函数，构造Koopman算子并获取有限线性实现，利用谱分解得到模型指纹；进一步推导分离定理，指出当实现非正规时，承载激活方差的方向与跨深度信息的方向不能重合。",
+        "result": "在GPT-2 small、Gemma-2-2B和Qwen3-8B-Base上，谱处处收敛；在Qwen3-8B-Base上观测到的收敛指数为0.506±0.031，与理论预测的M^{-1/2}速率一致。所有短残差在按每个单元的样本阈值归一化后塌缩为单一曲线。在间接宾语识别（IOI）任务中，Koopman模式优于随机方向但弱于主成分，且与PCA的差距随深度距离按4.1倍因子衰减，符合定理预测。Koopman谱在稳定性上优于SAE与随机投影，作为模型指纹具有可复现性和明确误差界。",
+        "conclusion": "Koopman谱是一种可辨识的、模型内在的指纹，带有明确的误差条，而不是一个可直接阅读的分解。该工作首次为机械可解释性原语提供了可辨识性定理，证明可辨识对象与可读对象不是同一对象，对理解模型内部结构的本源性和方法伪影的区分具有根本性意义。",
+        "key_details": "谱的恢复速率M^{-1/2}对应minimax最优，具有置换不变性；理论包含匹配的极小极大下界与重尾激活的中位数均值估计变体。分离定理依赖于线性实现的非正规性条件，这解释了激活方差方向与跨深度信息方向的分歧。实验覆盖三个规模迥异的模型，Koopman谱在非正规性方面远优于随机方向（如GPT-2的κV=78.7 vs 28.8），并显著降低对梯度的敏感性；但谱不是可读分解，其可辨识性与可解释性之间存在张力，是当前方法的局限性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.653640980792643,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.10111v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810111v1-complexity-of-local-observation-consistency-in-discrete-event-systems",
+      "source": "arxiv",
+      "title": "Complexity of Local Observation Consistency in Discrete-Event Systems",
+      "authors": [
+        "Tomáš Masopust"
+      ],
+      "authors_text": "Tomáš Masopust",
+      "abstract": "Hierarchical and multi-agent supervisory control under partial observation relies on local consistency conditions between a plant and its abstraction: local observation consistency (LOC) for the projection abstractions of hierarchical control, and local relabeling observation consistency (LROC) for the relabeling abstractions of multi-agent systems. Both are companions to a global condition and both have been used without their verification complexity being settled. We show that both are PSpace-complete for nondeterministic plants and decidable in polynomial time for deterministic plants.",
+      "url": "http://arxiv.org/abs/2608.10111v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10111v1",
+      "tldr": "LOC and LROC verification in discrete-event systems are PSpace-complete for nondeterministic plants but decidable in polynomial time for deterministic plants.",
+      "detailed_reading": {
+        "motivation": "在部分观测下的分层与多智能体监督控制依赖于plant与其抽象之间的局部一致性条件：分层控制投影抽象中的LOC，以及多智能体系统重标签抽象中的LROC。这些条件虽已被使用，但其验证复杂度始终未被确定，本文旨在彻底解决LOC与LROC验证问题的计算复杂度。",
+        "method": "输入为一个NFA或DFA plant G、事件字母表及相应抽象映射（投影Q或重标签R）与观测P。对LOC，定义Fill(X,e)为从状态集合X经不可观测填充串到达事件e的观测语言，并构造其正则NFA；再构造同步乘积自动机G⊗ΞG（Ξ取Σ_hi或Σ_o）以追踪在子字母表Ξ上投影一致的字符串对(X,Y)=(δ(I,s),δ(I,s'))。将LOC等价拆分为C1与C2两个条件，分别用Π_Σ_hi和Π_Σ_o中的可达对验证。验证算法在多项式空间内非确定性地猜测违反条件的e与可达对，并调用Fill集合对应NFA的交集空性判定；上界经Savitch定理得到PSpace。对确定性plant，则利用状态子集可确定性给出多项式时间算法。LROC类似地通过重标签同步与不可观测事件条件构造并判定。",
+        "result": "结果表明，对于非确定性plant，LOC验证与LROC验证均为PSpace-complete；对于确定性plant，两者均可判定且在多项式时间内可解。特别地，确定性plant的LOC验证可在多项式时间内完成，修正了文献中未证明的断言；LROC对非确定性plant的复杂度也被闭合为PSpace-complete。",
+        "conclusion": "本文完整确定了局部观察一致性LOC与局部重标签观察一致性LROC验证的复杂度，为非确定性系统下的层次化与多智能体监督控制提供了理论复杂度界限，同时表明确定性系统具有实际可计算的验证算法。该结果填补了这些条件长期未被解决的复杂度空白。",
+        "key_details": "关键细节包括：Fill集合作为正则语言可由规模为|Q_G|的NFA识别；乘积自动机顶点为状态子集对，路径长度计数器不超过2^{2|Q_G|}以保证线性空间上界；Fill交集空性判定可在非确定性对数空间内完成；PSpace上界通过Savitch定理由NPSpace转化。下界通过归约证明，且当Σ_c=Σ_o=Σ_hi时LOC仍为PSpace-hard。LROC的验证与可观测性变体类似，但非确定性plant情形需要专门的PSpace-hard归约。局限性在于非确定性plant的PSpace-completeness意味着在P≠PSpace假设下不存在多项式时间算法；确定性plant的多项式时间算法依赖于确定性结构，不适用于一般NFA。"
+      },
+      "affiliations": [
+        "Palacký University Olomouc"
+      ],
+      "affiliations_text": "Palacký University Olomouc",
+      "score": 4.631958666102646,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.10126v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810126v1-procedural-fairness-failures-in-rlhf-from-preference-averaging",
+      "source": "arxiv",
+      "title": "Procedural Fairness Failures in RLHF from Preference Averaging",
+      "authors": [
+        "M P V S Gopinadh",
+        "Karthik Kamuju",
+        "Kummari Avinash",
+        "John Joshua",
+        "Srinivasa Raju Rudraraju"
+      ],
+      "authors_text": "M P V S Gopinadh, Karthik Kamuju, Kummari Avinash, John Joshua, Srinivasa Raju Rudraraju",
+      "abstract": "Reinforcement Learning from Human Feedback (RLHF) aggregates heterogeneous preferences into a single reward model, assuming preference homogeneity. When preferences are heterogeneous, this aggregation induces a procedural fairness failure where majority preference groups dominate reward learning while minority preferences are systematically under-represented. This work defines procedural fairness in alignment as preserving distinct preference signals during reward modeling and shows that standard RLHF violates this via preference averaging. Preference-Aware RLHF (PA-RLHF) is introduced, separating optimization across preference modes at the reward learning stage. In a controlled setting, PA-RLHF improves overall alignment accuracy from 46.9% to 67.9% and reduces the fairness gap between best and worst aligned groups from 15.9 to 9.6 percentage points. These results show that procedural fairness failures in alignment can arise from structural design choices in reward learning, even in controlled, noise-free settings, with direct implications for large language models and agentic systems, where biased reward models can compound inequities across sequential decisions.",
+      "url": "http://arxiv.org/abs/2608.10126v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10126v1",
+      "tldr": "Standard RLHF's preference averaging causes procedural fairness failures that systematically under-represent minority preference groups, and the proposed Preference-Aware RLHF (PA-RLHF), which separates reward learning across preference modes, substantially improves both alignment accuracy and fairness.",
+      "detailed_reading": {
+        "motivation": "标准RLHF将异构的人类偏好聚合为单一奖励模型，隐含假设偏好同质；当偏好异构时，这种平均化会导致程序公平性失败，多数偏好群体主导奖励学习，少数偏好被系统性忽略。本文旨在揭示并解决这一结构性问题。",
+        "method": "提出偏好感知RLHF（PA-RLHF）：在奖励学习阶段不进行偏好平均，而是先将异构偏好数据按潜在偏好模式分组，为每个模式分别训练独立的奖励模型；然后在策略优化阶段，结合各模式奖励模型进行优化，例如采用多目标或加权融合方式，使不同偏好信号在奖励建模中都被保留。整体流程包括：收集多偏好对比数据、估计偏好模式归属、训练分模式奖励模型、基于分离的奖励信号优化策略。",
+        "result": "在受控无噪声设置下，PA-RLHF将整体对齐准确率从46.9%提升到67.9%，同时将最好与最差对齐群体间的公平性差距从15.9个百分点降至9.6个百分点，表明分离偏好建模能显著改善程序公平性。",
+        "conclusion": "对齐中的程序公平性失败可能源于奖励学习的结构性设计选择，而非仅由噪声或数据偏差造成；PA-RLHF通过保留偏好异质性，在提升整体对齐表现的同时减少群体间差距，对大规模语言模型和智能体系统的公平性具有直接启示。",
+        "key_details": "关键细节包括：偏好模式的数量需要预先设定或通过聚类决定；每个模式的奖励模型独立训练，避免了平均化；评测使用受控合成偏好数据，无标注噪声；公平性定义为最好与最差群体对齐准确率之差；PA-RLHF需要额外的模式分配和多个奖励模型存储，计算开销高于标准RLHF；方法在偏好模式重叠或模式数量不确定时的鲁棒性尚待验证，且对真实LLM场景的扩展仍需进一步研究。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.330001113176803,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.10016v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810016v1-sheaf-based-federated-representation-learning",
+      "source": "arxiv",
+      "title": "Sheaf-Based Federated Representation Learning",
+      "authors": [
+        "Gabriele D'Acunto",
+        "Enrico Grimaldi",
+        "Valeria Avino",
+        "Mario Edoardo Pandolfo",
+        "Leonardo Di Nino",
+        "Sergio Barbarossa",
+        "Paolo Di Lorenzo"
+      ],
+      "authors_text": "Gabriele D'Acunto, Enrico Grimaldi, Valeria Avino, Mario Edoardo Pandolfo, Leonardo Di Nino, Sergio Barbarossa, Paolo Di Lorenzo",
+      "abstract": "Heterogeneous federated systems require agents to learn and exchange informative representations despite differences in data distributions, sensing modalities, model architectures, latent dimensionalities, and local learning objectives. To address this challenge, we propose Sheaf-based Federated Representation Learning (SFRL), a general framework that jointly optimizes local objectives with a manifold-constrained geometric alignment regularizer based on learnable sheaf restriction maps. Unlike most existing approaches, SFRL does not assume a shared global latent space. Instead, global consistency emerges from the alignment of neighboring latent representations through orthogonal transformations and isometric embeddings. This alignment is enforced by a quadratic gluing regularizer induced by the sheaf Laplacian, whose learnable restriction maps adapt the geometry to the observed data. The penalty is evaluated on a small set of shared pilot samples, ensuring scalability and communication efficiency. We develop a decentralized algorithm for solving SFRL, termed Sheaf-FRL, which alternates between gradient updates of the local models and closed-form Procrustes updates of the edge-wise restriction maps. We further establish convergence of Sheaf-FRL to first-order stationary points in both deterministic and stochastic settings. As an application, we consider a cooperative classification task in the context of semantic communication, under model and data heterogeneity. Our results show that Sheaf-FRL outperforms baseline approaches in terms of local and post-communication classification accuracy across different levels of local distribution shift and exhibits greater robustness to latent-space dimensionality compression.",
+      "url": "http://arxiv.org/abs/2608.10016v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10016v1",
+      "tldr": "Sheaf-based Federated Representation Learning (SFRL) introduces a decentralized framework that aligns heterogeneous local latent representations via learnable sheaf Laplacian constraints and Procrustes updates, without assuming a shared global latent space, improving robustness and accuracy in heterogeneous federated learning.",
+      "detailed_reading": {
+        "motivation": "异构联邦系统中，各智能体的数据分布、感知模态、模型架构、潜在空间维度和学习目标均可能存在差异，而现有联邦学习方法通常隐含假设共享全局潜在空间或直接可比较的特征，这一假设在异构场景下过于严格且会损害局部表示质量与知识迁移。因此，需要一种不依赖共享潜空间、而是通过几何变换对齐相邻潜在表示的语义对齐机制。",
+        "method": "提出一种基于层化（Sheaf）的联邦表示学习框架SFRL，将每个智能体维护的局部潜在空间作为网络层化中的节点向量空间，并在每条边上定义可学习的限制映射（restriction maps），用于编码相邻表示之间的几何传输关系。该方法联合优化各局部任务目标与一个由可学习层化拉普拉斯算子诱导的二次粘合正则项，该正则项仅在一小组共享的pilot样本上计算，以限制通信开销。限制映射被约束为正交变换或Stiefel流形上的等距嵌入，从而适应不同潜在维度。求解采用全去中心化的交替算法Sheaf-FRL：交替执行局部模型的梯度更新与边限制映射的闭式Procrustes更新。",
+        "result": "在语义通信场景下的协作分类任务中，面对模型与数据异构性，Sheaf-FRL在不同局部分布偏移水平下的本地分类准确率和通信后分类准确率均优于基线方法，并且对潜在空间维度压缩表现出更强的鲁棒性。此外，算法在确定性和随机性设置下均能收敛到一阶驻点。",
+        "conclusion": "SFRL为异构联邦表示学习提供了一种无需共享潜在空间的通用框架，通过可学习的层化结构实现相邻表示的几何对齐，全局一致性由局部兼容关系涌现，有效提升了异构条件下的表示质量、知识迁移能力和通信效率。",
+        "key_details": "关键实现细节包括：使用pilot样本（一组共享参考表示）来评估粘合正则项，从而保证可扩展性和通信效率；限制映射限定为正交矩阵（O(d)）或Stiefel流形（St(d,d')）以处理旋转、反射和等距嵌入；更新采用闭式Procrustes解；对Sheaf-FRL在确定性与随机梯度设置下均证明了收敛到一阶驻点；实验考虑了不同局部分布偏移和潜在空间维度压缩，并公开了代码。局限性可能包括依赖共享pilot样本的可用性以及需要预设通信图中边结构。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.255651894494129,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.10007v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810007v1-uncertainty-aware-ensemble-deep-randomized-neural-networks-for-classification",
+      "source": "arxiv",
+      "title": "Uncertainty-Aware Ensemble Deep Randomized Neural Networks for Classification",
+      "authors": [
+        "M. Sajid",
+        "A. Quadir",
+        "A. Rahaman",
+        "P. N. Suganthan",
+        "M. Tanveer"
+      ],
+      "authors_text": "M. Sajid, A. Quadir, A. Rahaman, P. N. Suganthan, M. Tanveer",
+      "abstract": "The current state-of-the-art (SOTA) deep randomized neural networks, such as deep Random Vector Functional Link (dRVFL) and ensemble deep RVFL (edRVFL), treat all training samples uniformly, which limits their robustness and effectiveness when applied to real-world datasets containing noise and outliers. Furthermore, the propagation of contaminated features across hidden layers negatively influences the decision-making capability of these models. To overcome these limitations, we propose intuitionistic fuzzy dRVFL (IF-dRVFL) and intuitionistic fuzzy edRVFL (IF-edRVFL) frameworks that enhance model robustness. The proposed models unify intuitionistic fuzzy theory to exploit sample neighborhood information in the kernel space by jointly considering membership and non-membership degrees for each sample. Membership degrees are computed based on the distance of samples from their respective class centroids, while non-membership degrees quantify sample heterogeneity within local neighborhoods. These measures are employed to assign adaptive weights to training samples, enabling effective discrimination among clean, noisy, and outlier data points. Extensive experiments conducted on UCI and KEEL benchmark datasets, with and without the presence of Gaussian noise, demonstrate the superiority of the proposed IF-dRVFL and IF-edRVFL models over existing SOTA fuzzy and non-fuzzy approaches. The source code is available at https://github.com/mtanveer1/IF-edRVFL.",
+      "url": "http://arxiv.org/abs/2608.10007v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10007v1",
+      "tldr": "TLDR: The paper proposes uncertainty-aware intuitionistic fuzzy deep and ensemble deep Random Vector Functional Link networks (IF-dRVFL and IF-edRVFL) that assign adaptive sample weights via membership and non-membership degrees to improve classification robustness against noise and outliers.",
+      "detailed_reading": {
+        "motivation": "现有深度随机神经网络（如dRVFL和edRVFL）对所有训练样本一视同仁，难以应对真实数据中的噪声和异常值；同时，受污染的特征在隐藏层间传播会损害模型的决策能力。为此，本文引入直觉模糊理论，为每个样本同时计算隶属度与非隶属度，从而区分干净样本、噪声和异常点，提升深度RVFL模型的鲁棒性。",
+        "method": "本文提出IF-dRVFL和IF-edRVFL两种框架。输入为原始特征矩阵X和标签Y，深层隐藏层通过随机权重和激活函数逐层生成特征：第一层E(1)=ψ(Xω(1))，更深层E(g)=ψ(E(g-1)ω(g))（IF-dRVFL）或ψ([E(g-1),X]ω(g))（IF-edRVFL）。在核空间中，隶属度μ基于样本到其类中心的距离计算，非隶属度ν基于局部邻域内异类样本比例计算，两者结合得到IF得分s_u，构成对角权重矩阵S。优化目标为带权重的最小二乘问题：min (C/2)||Sη||² + (1/2)||ξ||²，约束E*ξ-Y=η，通过拉格朗日法求解输出权重ξ，根据特征维度与样本数关系选择闭式解。IF-edRVFL将每一隐藏层视为一个基模型，各基模型独立用IF权重训练，最终通过多数投票或平均融合输出。",
+        "result": "在UCI和KEEL基准数据集上，无论是否添加高斯噪声，IF-dRVFL和IF-edRVFL均优于现有SOTA模糊及非模糊方法，验证了所提模型在分类准确性和鲁棒性上的优越性。具体指标和对比结论在论文实验部分给出，代码已开源。",
+        "conclusion": "通过直觉模糊加权机制，IF-dRVFL和IF-edRVFL有效缓解了噪声和异常值对深度随机神经网络的影响，避免了不纯特征在层间传播的负面效应，同时IF-edRVFL以单网络隐式实现集成学习，兼顾了鲁棒性和计算效率。",
+        "key_details": "关键点：1）IF得分由隶属度μ（基于样本到类质心距离，含半径r和参数γ）和非隶属度ν（基于邻域内异类比例，参数β控制邻域半径）合成，并通过评分函数s_u=μ（ν=0时）、s_u=0（μ≤ν时）、s_u=(1-ν)/(2-μ-ν)（其他情况）计算；2）正则化参数C和隐藏节点数h需调优，权重随机初始化于[-1,1]；3）闭式解有两种形式：当特征维度(m+kh)≤N时用E*^T S² E* + I/C求逆，否则用S² E* E*^T + I/C求逆，后者复杂度更低；4）IF-edRVFL通过多数投票集成各层输出，无需训练多个独立网络；5）局限性：方法依赖核空间距离计算，高维大数据下距离矩阵计算成本较高；论文中未详细讨论超参数β和γ的选择策略。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Indore",
+        "Qatar University"
+      ],
+      "affiliations_text": "Indian Institute of Technology Indore, Qatar University",
+      "score": 4.255314580390335,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.10023v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810023v1-protection-levels-for-vision-based-pose-estimation",
+      "source": "arxiv",
+      "title": "Protection Levels for Vision-Based Pose Estimation",
+      "authors": [
+        "Olivia Beyer Bruvik",
+        "Romeo Valentin",
+        "Marc R. Schlichting",
+        "Don Walker",
+        "Mykel J. Kochenderfer"
+      ],
+      "authors_text": "Olivia Beyer Bruvik, Romeo Valentin, Marc R. Schlichting, Don Walker, Mykel J. Kochenderfer",
+      "abstract": "Vision-based navigation complements Global Navigation Satellite Systems, but certification demands integrity guarantees that account for faulty measurements. Previous work presented a probabilistic computer vision pipeline for runway-based pose estimation with fault detection inspired by Receiver Autonomous Integrity Monitoring. This work extends that framework by deriving protection levels, which provide probabilistic bounds on pose error that remain valid under undetected faults. We present an algorithm for computing protection levels for the nonlinear Perspective-$n$-Point problem applied to an aviation setting. The algorithm covers all six degrees of freedom of the aircraft pose (position and orientation) directly. We analyze the effect of measurement redundancy, pixel-level prediction uncertainty, and runway distance on the resulting protection levels. To make the results tangible, we demonstrate tradeoffs in the protection levels on an illustrative runway example.",
+      "url": "http://arxiv.org/abs/2608.10023v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10023v1",
+      "tldr": "This paper extends a vision-based pose estimation integrity framework by deriving protection levels—probabilistic bounds on full 6-DOF aircraft pose error that remain valid under undetected keypoint faults—and analyzes their behavior with respect to measurement redundancy, pixel uncertainty, and runway distance in an aviation setting.",
+      "detailed_reading": {
+        "motivation": "基于视觉的位姿估计（VBPE）是GNSS的重要补充，但航电认证要求对故障测量提供完整性保证；已有工作虽将RAIM式故障检测引入跑道关键点视觉位姿估计，却缺少在未检测故障下仍然有效的概率误差上界，即保护级别（PL）。本文旨在弥补这一缺口，把RAIM的保护级别构造推广到非线性PnP视觉位姿估计，对飞机位置和姿态六个自由度直接给出可投入运行时完好性判定的风险界。",
+        "method": "方法以单目图像、相机内参和已知3D跑道关键点为输入；神经网络为每个关键点输出2D像素均值及其预测协方差，将均值作为PnP求解的测量值。先通过加权重投影残差最小二乘求解位姿，再在位姿估计点线性化投影函数得到观测矩阵H，并用Σ_β=(H^T Σ_meas^{-1} H)^{-1}传播位姿协方差。借鉴残差型RAIM：定义残差投影矩阵S=I-H(H^T H)^{-1}H^T，由残差构造卡方检验统计量并与由误警率/完整性风险预算决定的检测门限T比较；同时用G=(H^T H)^{-1}H^T把测量域误差映射到状态域，对每个自由度（位置三轴和姿态三轴）计算标称噪声项和最坏未检测故障项之和，即PL_d=k_ff σ_{β,d}+max_i s_{d,i} T，其中s_{d,i}为第i个关键点坐标对自由度d的“斜率”。算法枚举单关键点故障模式，取最大项作为该自由度的PL，最终输出六维PL并与告警限比较判定系统可用性。",
+        "result": "在代表性跑道算例中，保护级别随跑道距离增加而增大，随关键点测量冗余增加而收紧，并随像素级预测不确定性增加而增大；与仅使用标称高斯协方差给出的误差界相比，计入未检测故障后PL显著变大，说明完整性保护不能由普通置信区间替代。算法可直接给出位置和姿态六个自由度的PL，为视觉导航可用性评估提供可量化、可对比的输入。",
+        "conclusion": "本文将RAIM式保护级别成功引入基于关键点的非线性PnP视觉位姿估计，为六自由度飞机位姿提供了在未检测故障下仍然有效的概率误差上界，填补了视觉导航完整性论证中故障情形误差界的空白。通过将PL与告警限比较，系统可在PL超限时标记不可用并切换备用导航源，从而支撑基于视觉的着陆/进近导航适航认证；未来可扩展至多故障模式、多传感器融合和非高斯误差模型。",
+        "key_details": "数据与输入：采用跑道四角或更多已知3D参考点，图像来自机载相机；神经网络只需输出关键点像素均值与预测协方差，不依赖具体网络结构。先验与假设：标称测量噪声为高斯分布，预测协方差需已校准；故障建模为测量域稀疏故障向量，方法基于单故障假设；完整性风险、误警概率和检测门限T按RAIM方式分配。损失/目标：最小化马氏距离加权的重投影残差，PnP为非线性最小二乘。实现关键点：位姿协方差通过对投影函数线性化传播得到；残差位于H的左零空间；PL的故障项由残差检测门限与状态-残差斜率决定；姿态部分需在SO(3)局部坐标或旋转向量参数化下处理。复杂度：需要按关键点逐一计算斜率，枚举n_kp个故障模式，总计算量约为O(n_kp·m^2)量级，并受PnP非线性优化影响。局限性：依赖高斯与局部线性化假设，单故障模型可能漏掉多故障；保守性会造成可用性损失；对预测不确定性校准质量敏感；若故障方向落入观测矩阵零空间，相应自由度PL会很大，需要额外传感器或先验约束。"
+      },
+      "affiliations": [
+        "A$^3$ by Airbus LLC",
+        "Stanford University"
+      ],
+      "affiliations_text": "A$^3$ by Airbus LLC, Stanford University",
+      "score": 4.061984765401135,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.10182v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/12/260810182v1-from-prediction-to-incrementality-causal-optimization-for-large-scale-targeting-and-recommendation",
+      "source": "arxiv",
+      "title": "From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation",
+      "authors": [
+        "Changshuai Wei",
+        "John Bencina",
+        "Phuc Nguyen",
+        "Andre Assuncao Silva T Ribeiro",
+        "Benjamin Zelditch"
+      ],
+      "authors_text": "Changshuai Wei, John Bencina, Phuc Nguyen, Andre Assuncao Silva T Ribeiro, Benjamin Zelditch",
+      "abstract": "Large-scale targeting and recommendation systems are typically built around predictive scores fed into heuristic or local allocation. When the business goal is incremental impact, as in marketing campaigns, incentives, and notifications, this paradigm systematically misallocates resources toward users who would have acted anyway. We present a decision-centric framework that instead optimizes causal effects under global constraints, aligning three components under a single objective: a causal neural network with a Transformer backbone for individual treatment-effect estimation, a Bayesian neural-bandit layer for uncertainty-aware exploration, and a dual-based large-scale linear-programming layer for constrained allocation. The framework also supports sequential context and multi-outcome, attribute-conditioned scoring through a Transformer encoder and outcome embeddings. We evaluate it with offline simulations on a public bandit dataset, targeted architectural ablations, and an online A/B test on LinkedIn Feed marketing traffic. We also distill production lessons on causal training-data construction and cost and delivery control, which were critical to successful deployment. The end-to-end treatment policy delivered a statistically significant $+7.20\\%$ lift in the primary long-term-value metric, demonstrating the feasibility of production-scale causal optimization under business constraints.",
+      "url": "http://arxiv.org/abs/2608.10182v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10182v1",
+      "tldr": "TLDR: This paper proposes a decision-centric causal optimization framework that jointly models individual treatment effects with a Transformer-augmented DragonNet, uncertainty-aware neural bandit exploration, and dual-based large-scale constrained allocation, demonstrating production feasibility and a statistically significant +7.20% lift in long-term value in a LinkedIn Feed marketing A/B test.",
+      "detailed_reading": {
+        "motivation": "大规模定向与推荐系统通常基于预测分数进行启发式或局部资源分配，当业务目标是增量影响（如营销活动、激励、通知）时，这种范式会将资源系统性错配给那些即使不干预也会行动的用户，导致投资回报率下降。现有因果建模或优化方法往往只关注局部决策或使用非因果信号，缺乏将因果效应、探索和全局约束联合优化的决策中心框架。",
+        "method": "提出一个决策中心的因果优化框架，包含三个协同组件：1) 因果神经网络：基于DragonNet架构，使用Transformer编码用户触达序列（含时间位置嵌入与多头注意力）和多结果产品嵌入，联合估计潜在结果μ1(X)、μ0(X)和倾向性得分e(X)，并采用EIF正则化；2) 贝叶斯神经Bandit层：通过线性化拉普拉斯近似（LLA）对预训练DragonNet参数后验进行高斯近似，对增量logit采样实现神经Thompson采样，保证探索正性和因果识别；3) 大规模线性规划层：将分配问题建模为带全局约束（预算、频控等）的0-1整数规划，松弛为概率变量后用smoothed dual-decomposition方法求解，通过Nesterov加速对偶上升，每个用户子问题用O(|I|log|I|)投影求解。训练流程为先用观测日志预训练因果模型，部署时每轮从后验采样增量分数输入LP求解器，观测反馈后更新Bandit。",
+        "result": "在公开bandit数据集上的离线仿真、针对性架构消融和LinkedIn Feed营销流量的在线A/B测试中，端到端处理策略在主要长期价值指标上取得了统计显著的+7.20%提升，验证了生产级规模下因果优化在业务约束下的可行性。",
+        "conclusion": "从预测转向增量因果优化，并将因果效应估计、不确定性探索和全局约束分配统一到单一目标下，能够显著改善大规模定向与推荐系统的业务效果，尤其适用于营销激励等增量目标场景。该框架在生产和在线实验中均表现有效，且可推广到其他有限干预能力分配问题。",
+        "key_details": "关键细节包括：使用营销触达序列（渠道-动作交互，含AD/IMPRESSION、EMAIL/OPEN等）及[CLS]标记池化，融合天数、星期和正弦位置编码；多结果损失采用逆频率权重c_k的BCE，按T=1和T=0分支分别计算并仅用观测对应头；EIF正则项为Neyman正交的一步修正；LLA采用last-layer变体以降低训练/服务开销，也可用Bayes by Backprop离线评估；LP求解器对双变量K维对偶使用Nesterov加速，每轮线性复杂度O(|U||I|)，γ选取保证ridge扰动<0.1%；实施约束包括每轮预算、频控x_{u,i,t}≤C_fcap，以及guardrail指标约束；探索保证对可行动作的正性概率；局限性包括需要未混淆性和重叠假设，且依赖观测日志构建训练数据，生产部署需注意成本与投放控制。"
+      },
+      "affiliations": [
+        "LinkedIn"
+      ],
+      "affiliations_text": "LinkedIn",
+      "score": 4.047731846174866,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.10149v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810149v1-reats-llm-reasoning-based-ensemble-learning-for-adaptive-time-series-forecasting",
+      "source": "arxiv",
+      "title": "REATS: LLM Reasoning-based Ensemble Learning for Adaptive Time Series Forecasting",
+      "authors": [
+        "Xu Zhang",
+        "Chang Xu",
+        "Hui Sun",
+        "Nan Ma",
+        "Zijian Zhang",
+        "Peng Wang",
+        "Wei Wang",
+        "Li Zhao"
+      ],
+      "authors_text": "Xu Zhang, Chang Xu, Hui Sun, Nan Ma, Zijian Zhang, Peng Wang, Wei Wang, Li Zhao",
+      "abstract": "Due to the diversity of real-world time series, no single forecasting model consistently dominates across all samples. Ensemble learning addresses this by combining complementary model strengths, yet existing methods rely on fixed rules or black-box models based solely on numerical inputs, failing to leverage LLM reasoning for interpretable weighting decisions. We propose REATS, which leverages LLM reasoning capabilities as an intelligent ensemble router that jointly processes textual temporal pattern descriptions and numerical features to produce interpretable, sample-adaptive ensemble weights through chain-of-thought reasoning. To enable effective LLM-based ensembling, we study its key design choices and propose: (i) a structured input pipeline that transforms raw time series into hybrid textual--numerical representations with fixed token cost, enabling rule-based chain-of-thought construction without API dependency, augmented with retrieved similar-sample priors; (ii) a diverse multi-row weight supervision scheme coupled with a token-efficient percentage-table format that reduces numerical complexity and mitigates LLM hallucinations; and (iii) a two-stage fine-tuning framework combining SFT with GRPO, where a reciprocal reward mapping transforms the continuous unbounded MSE gap into bounded signals with amplified near-oracle sensitivity, addressing the uniform sensitivity and outlier-dominated advantage compression inherent in naive reward designs for regression-based GRPO. Experiments on eight benchmarks demonstrate that REATS outperforms competitive ensemble baselines while providing natural language explanations and demonstrating strong transfer learning and out-of-domain generalization to unseen candidate models.",
+      "url": "http://arxiv.org/abs/2608.10149v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10149v1",
+      "tldr": "REATS leverages LLM chain-of-thought reasoning to act as an interpretable ensemble router that produces sample-adaptive weights for time series forecasting, using hybrid textual-numerical inputs, diverse weight supervision, and a two-stage SFT + GRPO fine-tuning framework with a reciprocal reward mapping to outperform competitive ensemble baselines and generalize to unseen models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "Microsoft Research",
+        "Nankai University",
+        "Jilin University"
+      ],
+      "affiliations_text": "Fudan University, Microsoft Research, Nankai University, Jilin University",
+      "score": 4.031348172130777,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.10145v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810145v1-the-evaluation-protocol-determines-the-result-an-independent-reproduction-of-leworldmodel-on-tworoom",
+      "source": "arxiv",
+      "title": "The Evaluation Protocol Determines the Result: An Independent Reproduction of LeWorldModel on TwoRoom",
+      "authors": [
+        "Joyjeet Singh"
+      ],
+      "authors_text": "Joyjeet Singh",
+      "abstract": "LeWorldModel trains a latent world model with a prediction loss and a single anti-collapse regulariser, and reports approximately 87% of goals reached on TwoRoom, its simplest diagnostic environment. We reproduce that result by independent reimplementation on roughly $25 of rented compute, with all evaluation on one laptop CPU.\n  We reach 94.0% at the repository's evaluation goal offset, against 84.0% for the authors' own released checkpoint measured under our protocol on identical episodes, and we reproduce the reported representation result directly (position probe Pearson r = 0.9988 against a reported 0.996). Reaching that point required four conventions that determine the outcome and appear in no released configuration file: dense action gathering across a frameskip block, a programmatically-set action-encoder width, ImageNet pixel normalisation, and action z-scoring. A reproducer following the released configurations alone obtains a model whose predictor cannot converge.\n  The evaluation protocol is itself contested by the released material. The paper's appendix and the repository's configuration specify different goal offsets and step budgets; on the authors' own weights these yield 14.0% and 84.0%, and only the configuration's values reproduce the reported figure. On fifty identical episodes, changing nothing but how the goal is constructed moves that checkpoint from 84.0% to 8.0%.\n  Two findings generalise. One-step prediction accuracy does not predict long-horizon planning success: across three checkpoints spanning a sevenfold range in prediction error, including the authors' own, it orders short-horizon success monotonically and fails to order long-horizon success at all. And a batch normalisation layer inflated our reported validation loss by up to a factor of 300, concealing a training loss that was flat throughout.",
+      "url": "http://arxiv.org/abs/2608.10145v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10145v1",
+      "tldr": "An independent reproduction of LeWorldModel on TwoRoom shows that the reported results hinge on undocumented pipeline conventions and a contested evaluation protocol, and that once correctly reproduced, the method's planning success depends on the chosen goal offset and step budget rather than on prediction accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent researcher"
+      ],
+      "affiliations_text": "Independent researcher",
+      "score": 3.9687961916615633,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.10025v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810025v1-the-impact-of-operational-data-fidelity-when-assessing-safety-critical-autonomous-vehicle-software",
+      "source": "arxiv",
+      "title": "The Impact of Operational-Data Fidelity when Assessing Safety-Critical Autonomous-Vehicle Software",
+      "authors": [
+        "Kizito Salako",
+        "Rabiu Tsoho Muhammad"
+      ],
+      "authors_text": "Kizito Salako, Rabiu Tsoho Muhammad",
+      "abstract": "For safety-critical software, data from the software's operational past (e.g. a sequence of success and failure events experienced by the software) can provide strong statistical support for reliability claims about the software. However, such data might not describe past software failure events in sufficient detail, and this might leave a reliability assessment (based on this data) unable to account for important features of past software failures. In this paper, by extending conservative Bayesian inference (CBI) techniques used in reliability assessment, we illustrate a principled statistical approach for checking the robustness of reliability claims derived from insufficiently detailed operational data. We demonstrate the extent to which insufficient detail in operational data can undermine software reliability claims in autonomous vehicle (AV) safety assessment scenarios. Reliability claims derived from insufficiently fine-grained data might be dangerously optimistic, despite a concerted effort by an assessor to use such data conservatively during the assessment. While these findings are consistent with previous work on the impact of statistical model fidelity in Bayesian software reliability assessments, our work clarifies why attempts to use low-fidelity data conservatively can be naive, and we give the first conservative estimates of the impact of data fidelity on assessments.",
+      "url": "http://arxiv.org/abs/2608.10025v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10025v1",
+      "tldr": "Insufficiently detailed operational data can make reliability claims for safety-critical autonomous-vehicle software dangerously optimistic, and this paper extends conservative Bayesian inference to quantify, for the first time, how much this low data fidelity undermines such assessments.",
+      "detailed_reading": null,
+      "affiliations": [
+        "City St. George's, University of London"
+      ],
+      "affiliations_text": "City St. George's, University of London",
+      "score": 3.9390239148758206,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.10039v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810039v1-flowscout-from-execution-feedback-to-reliable-tool-using-agent-workflows",
+      "source": "arxiv",
+      "title": "FlowScout: From Execution Feedback to Reliable Tool-Using Agent Workflows",
+      "authors": [
+        "Shuo Hao",
+        "You Lu",
+        "Bihuan Chen",
+        "Xin Peng"
+      ],
+      "authors_text": "Shuo Hao, You Lu, Bihuan Chen, Xin Peng",
+      "abstract": "Agentic workflows have become an important abstraction for building reliable LLM-based automation systems by organizing large language models (LLMs), tools, and control logic into explicit execution structures. However, constructing high-quality agentic workflows remains largely manual and requires substantial domain expertise. Recent studies have explored automatic agentic workflow generation from historical task-solving records, but they mainly produce LLM-centric workflows, where real tool executions are abstracted and simulated by LLM nodes, limiting the usability and stability of generated workflows. To address these limitations, we propose FlowScout, an execution-guided framework for generating tool-integrated agentic workflows from historical task-solving records. Specifically, FlowScout represents an agentic workflow as a directed graph composed of LLM nodes, tool-calling nodes, and dependency edges. It first mines a common tool coordination skeleton from historical records to construct an initial workflow, and then refines the workflow topology through Monte Carlo tree search guided by execution feedback. We evaluate FlowScout on four representative task domains and compare it with three baselines, i.e., PM4Py, ReAct and AFlow. Experimental results show that agentic workflows generated by FlowScout improve tool invocation correctness by at least 92.69% and execution quality by at least 17.66% over the baselines, while achieving lower performance variation across repeated runs.",
+      "url": "http://arxiv.org/abs/2608.10039v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10039v1",
+      "tldr": "FlowScout automatically generates reliable, tool-integrated agentic workflows from historical task-solving records by mining a common tool coordination skeleton and refining it with Monte Carlo tree search guided by execution feedback, significantly improving tool invocation correctness and execution quality over existing baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University"
+      ],
+      "affiliations_text": "Fudan University",
+      "score": 3.872296341463712,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.09997v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/12/260809997v1-transformer-geometry-observatory-tgo-iv-developmental-topology-observatory",
+      "source": "arxiv",
+      "title": "Transformer Geometry Observatory TGO-IV: Developmental Topology Observatory",
+      "authors": [
+        "Kaustubh Kapil",
+        "Kishor P. Upla"
+      ],
+      "authors_text": "Kaustubh Kapil, Kishor P. Upla",
+      "abstract": "Transformers have had a profound impact on the world of language processing and computer vision. As efforts to answer the million-dollar question of ``How does a Transformer learn?\" have been increasing, existing interpretability studies primarily analyze representations at isolated layers or the network as a whole, while the developmental evolution of individual representations and its manifolds across transformer layers remains underexplored. With this work, we aim at providing a comprehensive analysis of the evolution of representations as the representation point cloud transforms across the layers; thereby attempting to isolate layers or establish a trend which comes closer to justifying how and when raw input representations evolve into task-relevant feature representations. Thus, Transformer Geometry Observatory-TGO-IV introduces a topological framework for analysing the evolution of Transformer representations through the lens of Persistent Homology. Rather than studying local geometric properties alone, TGO-IV constructs Vietoris--Rips simplicial complexes from token-level representation point clouds and investigates the evolution of their persistent topological signatures across Transformer layers. The proposed framework comprises complementary topological observatories including Persistence Diagrams, Barcode Diagrams, Betti Curves, Persistence Landscapes, Bottleneck Distance, and Wasserstein Distance, enabling a comprehensive analysis of how the global topology of representation point clouds develops throughout the forward pass.",
+      "url": "http://arxiv.org/abs/2608.09997v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.09997v1",
+      "tldr": "TGO-IV introduces a topological observatory framework using persistent homology on Vietoris–Rips complexes to track how the global topology of token-level representation point clouds evolves across Vision Transformer layers, revealing developmental transitions beyond conventional geometric and spectral analyses.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sardar Vallabhai National Institute of Technology (SVNIT)"
+      ],
+      "affiliations_text": "Sardar Vallabhai National Institute of Technology (SVNIT)",
+      "score": 3.85991695748426,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.10079v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810079v1-thread-scaling-of-hexaly-on-the-tdvrptw-across-two-model-encodings-an-experimental-report-external-function-serialization-slice-count-choice-and-the-time-sliced-thread-ladder",
+      "source": "arxiv",
+      "title": "Thread Scaling of Hexaly on the TDVRPTW across Two Model Encodings. An Experimental Report: External-Function Serialization, Slice-Count Choice, and the Time-Sliced Thread Ladder",
+      "authors": [
+        "Florian Rascoussier"
+      ],
+      "authors_text": "Florian Rascoussier",
+      "abstract": "Thread scaling in Hexaly depends first on how the Time-Dependent Vehicle Routing Problem with Time Windows is modeled. We compare two Python encodings: one evaluates continuous travel-time functions through external callbacks, while the other approximates them with time slices evaluated natively by the solver. Independent CPU measurements show that the supported external-function interface uses a single evaluator worker regardless of the requested thread count. The native encoding, by contrast, makes effective use of the allocated cores. Across our selected benchmark panel, wider native searches produce better solutions both at the end of the run and throughout the search, while substantially reducing variation between seeds. Nearly every paired run improves from one to sixteen threads. The choice of encoding has an even larger impact than the thread count: native evaluation provides the strongest gains, at the cost of a travel-time approximation that must be sufficiently fine and independently checked. These descriptive results support multi-threading as a practical way to improve solution quality and stability when the model can exploit it, and show that the modeling approach is central to thread-scaling conclusions in time-dependent routing.",
+      "url": "http://arxiv.org/abs/2608.10079v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10079v1",
+      "tldr": "A one-sentence TLDR: Thread scaling in Hexaly on the TDVRPTW is dominated by the model encoding, since external-function callbacks serialize evaluation regardless of thread count, while a sufficiently fine time-sliced native encoding uses extra threads to improve solution quality and reduce seed variation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "INSA Lyon",
+        "IMT Atlantique"
+      ],
+      "affiliations_text": "INSA Lyon, IMT Atlantique",
+      "score": 3.811314297257989,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.10120v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810120v1-chronossm-training-for-temporally-aware-representations-in-autoregressive-state-space-models",
+      "source": "arxiv",
+      "title": "ChronoSSM: Training for Temporally Aware Representations in Autoregressive State Space Models",
+      "authors": [
+        "Adrien Schoen",
+        "Nachiketa Ratnakar Patil",
+        "Arjun Bhagoji",
+        "Francesco Bronzino"
+      ],
+      "authors_text": "Adrien Schoen, Nachiketa Ratnakar Patil, Arjun Bhagoji, Francesco Bronzino",
+      "abstract": "Modern sequence models, from Transformers to State Space Models, have enabled powerful generative modeling across diverse domains, yet they are typically trained to predict what happens while treating when it happens as a secondary concern. In data-mining settings where events are associated with explicit timing information, this separation can limit temporal reasoning, anomaly detection, and faithful reconstruction of event chronology. A common strategy is to treat timing as an auxiliary signal, training a separate timing model using representations learned solely for event prediction. However, this two-stage approach implicitly assumes that representations optimized for event prediction already contain sufficient temporal structure.\n  We introduce ChronoSSM, an autoregressive State Space Model (SSM) that jointly models events and timestamps with a shared backbone trained using combined token and temporal generation objectives. We compare the joint regime, where temporal supervision updates the backbone, with the two-stage regime, where timing is learned only using the frozen event representations. Across four domains spanning dense and partial timestamp supervision, joint training consistently makes inter-arrival information more recoverable from frozen representations without any systematic degradation in content-generation quality overall. Our results show that temporal supervision can produce more temporally informative representations without materially degrading autoregressive event modeling.",
+      "url": "http://arxiv.org/abs/2608.10120v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10120v1",
+      "tldr": "ChronoSSM introduces an autoregressive state space model that jointly trains event and timestamp generation with a shared backbone, showing that adding temporal supervision produces more temporally informative representations without degrading content-generation quality.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.794082577845722,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.10055v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810055v1-polyhedral-outer-approximations-for-misocp-geometry-and-cutting-planes",
+      "source": "arxiv",
+      "title": "Polyhedral Outer-Approximations for MISOCP: Geometry and Cutting Planes",
+      "authors": [
+        "Yongzheng Dai"
+      ],
+      "authors_text": "Yongzheng Dai",
+      "abstract": "Mixed-integer second-order cone programs are commonly solved by polyhedral outer approximation (OA), which iteratively strengthens a linear relaxation of the conic feasible region through cutting planes. We study how such approximations can be constructed more efficiently. First, we analyze the marginal contribution of a newly generated cut relative to cuts already present in the relaxation. Using violation- and volume-based measures, we show that this contribution decreases at least as fast as linearly as the new supporting direction approaches an existing one. Motivated by this geometric analysis, we develop a cut-generation strategy that balances separation depth with angular novelty and admits closed-form constructions. Second, we introduce a progressive-integrality OA framework that proceeds from an LP relaxation through partially integral relaxations before reaching the full MILP, thereby using inexpensive early iterations to strengthen the approximation before later mixed-integer solves. Computational experiments on CBLIB instances and large-scale AC unit-commitment models demonstrate complementary benefits from the proposed cut strategy and progressive integrality, substantially reducing the computational effort of outer approximation.",
+      "url": "http://arxiv.org/abs/2608.10055v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10055v1",
+      "tldr": "This paper proposes more efficient polyhedral outer approximations for mixed-integer second-order cone programs by analyzing the diminishing marginal contribution of new supporting cuts, introducing a cut-generation strategy that balances separation depth with angular novelty, and developing a progressive-integrality framework that significantly reduces computational effort.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Georgia Institute of Technology",
+      "score": 3.740202421798546,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.10010v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810010v1-curvefp-rational-radix-logarithmic-datatypes-with-closed-products-for-language-models",
+      "source": "arxiv",
+      "title": "CurveFP: Rational-Radix Logarithmic Datatypes with Closed Products for Language Models",
+      "authors": [
+        "Ye Qiao"
+      ],
+      "authors_text": "Ye Qiao",
+      "abstract": "Low-precision datatypes reduce language-model cost, but most formats optimize scalar fidelity while leaving the arithmetic induced by their products unchanged. We introduce CurveFP, a closed-product codebook family that distributes quantized magnitudes across interleaved logarithmic curves under compact block scales. A rational radix tunes dynamic range against local resolution, while uniform curve indices make every nonzero product algebraically closed. Product formation becomes an exact sign XOR and integer-index update, and a derived finite phase count determines the accumulation schedule. We instantiate this algebra as CurveFP eight E4C3/E5C2 for training and CurveFP seven E3C3 for compact deployment. In evaluation, CurveFP seven beats tensor-wise FP8 perplexity on four 7B--9B models with one fewer element bit and stays within 1.32\\% of native quality. CurveFP eight lowers operand NMSE in all 36 paired forward and backward GEMM comparisons. Across three matched 128.3M-parameter triplets, every mode completes 3B-token pretraining per seed; CurveFP eight reaches mean BF16-inference perplexity 22.5366 versus 22.5407 for FP8 and incurs a lower format-induced penalty in all three seeds. A 36-cell downstream matrix finds lower WikiText-103 perplexity for the CurveFP eight-trained checkpoints in all 12 seed-format comparisons, with mixed PG-19 and task deltas. Together, these results establish CurveFP as an arithmetic co-design that combines FP8-class numerical behavior, seven-bit inference, and a substantially simpler product path.",
+      "url": "http://arxiv.org/abs/2608.10010v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10010v1",
+      "tldr": "CurveFP introduces a closed-product, rational-radix logarithmic datatype family that reduces language-model multiplication to exact sign XOR and integer-index updates, delivering FP8-class numerical behavior with a seven-bit format that beats FP8 perplexity and simplifies the arithmetic path.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6705925249531033,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.10144v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810144v1-sefora-sketch-aggregated-federated-low-rank-adaptation-with-heterogeneous-client-ranks",
+      "source": "arxiv",
+      "title": "SeFoRA: Sketch-Aggregated Federated Low-Rank Adaptation with Heterogeneous Client Ranks",
+      "authors": [
+        "Yue Xia",
+        "Tayyebeh Jahani-Nezhad",
+        "Mayank Bakshi",
+        "Rawad Bitar"
+      ],
+      "authors_text": "Yue Xia, Tayyebeh Jahani-Nezhad, Mayank Bakshi, Rawad Bitar",
+      "abstract": "We consider federated parameter efficient fine-tuning of large neural networks with low-rank adaptation (LoRA,~Hu et al.\\ 2022). Combining LoRA with federated PEFT introduces challenges absent from either setting alone: clients may use different LoRA ranks, making their factor matrices dimension-incompatible, and factor-wise averaging suffers from a bilinear mismatch. We propose SeFoRA, a sketch-aggregated federated LoRA algorithm in which each client transmits a linear sketch of its local updates, enabling direct aggregation at the federator. As a result, SeFoRA alleviates the bilinear mismatch, and allows for aggregation in a small subspace of the full model. We introduce a rank-homogeneous version called SeFoRA-Ho which allows for direct adapter aggregation in this setting. We prove convergence to a neighborhood of the first-order stationary point at rate $\\cO(1/T)$ for the rank-homogeneous setting. Numerical experiments on fine-tuning RoBERTa-Large on GLUE datasets show how our algorithms outperform the state-of-the-art.",
+      "url": "http://arxiv.org/abs/2608.10144v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10144v1",
+      "tldr": "SeFoRA introduces a sketch-aggregated federated LoRA method that transmits linear sketches of local updates to enable direct aggregation, overcoming heterogeneous client ranks and bilinear mismatch while achieving provable convergence and outperforming state-of-the-art on GLUE benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northern Arizona University",
+        "Technical University of Munich",
+        "Technische Universität Berlin"
+      ],
+      "affiliations_text": "Northern Arizona University, Technical University of Munich, Technische Universität Berlin",
+      "score": 3.5797906009919087,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.10050v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810050v1-observational-policy-ranking-for-smb-financial-guidance-from-multi-action-accounting-logs",
+      "source": "arxiv",
+      "title": "Observational Policy Ranking for SMB Financial Guidance from Multi-Action Accounting Logs",
+      "authors": [
+        "Shrutendra Harsola",
+        "Vignesh Subrahmaniam",
+        "Vikas Raturi",
+        "Kamalika Das",
+        "Xiang Gao",
+        "Kratika Gupta",
+        "Ruocheng Guo",
+        "Padmaja Jonnalagedda",
+        "Ananya Pramod",
+        "Sricharan Kumar"
+      ],
+      "authors_text": "Shrutendra Harsola, Vignesh Subrahmaniam, Vikas Raturi, Kamalika Das, Xiang Gao, Kratika Gupta, Ruocheng Guo, Padmaja Jonnalagedda, Ananya Pramod, Sricharan Kumar",
+      "abstract": "Small and medium-sized businesses need timely financial guidance, yet historical accounting logs record self-selected and often co-occurring business changes rather than randomized recommendations. We formulate this setting as observational policy ranking: from pre-decision financial information, a policy selects one of 34 ledger-derived business-change categories for a target financial KPI. Using 85,078 company-month observations from 7,505 firms, we introduce Covariate-Adjusted Residual Policy Learning (CAR-PL), an action-wise R-learner that operates directly on multi-hot logs and regularizes selection by observational support. We compare CAR-PL with an uplift T-Learner, a conservative contextual value model, a zero-shot LLM, and non-personalized references on company-disjoint held-out firms under a shared model-assisted scoring rule. CAR-PL has the highest Gross Profit point estimate (0.084), the T-Learner has the highest Revenue point estimate (0.085), and the contextual value model has the highest Quick Ratio point estimate (0.062). CAR-PL and the T-Learner are not statistically separated on either growth KPI in matched company-clustered comparisons, while CAR-PL selects 33-34 categories and produces less concentrated selections across the catalog. Outcome-model-only scoring retains the same KPI-level point-estimate leader or top pair, and category rankings remain similar when the all-zero treatment reference is replaced by the most common training co-action pattern. These findings support objective-specific ranking of SMB financial guidance from multi-action accounting logs.",
+      "url": "http://arxiv.org/abs/2608.10050v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10050v1",
+      "tldr": "This paper introduces Covariate-Adjusted Residual Policy Learning (CAR-PL) to rank 34 ledger-derived business-change categories from observational multi-action accounting logs for SMB financial guidance, showing KPI-specific policy leaders—CAR-PL for Gross Profit, T-Learner for Revenue, and a contextual value model for Quick Ratio—across 85,078 company-month records from 7,505 firms.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Intuit"
+      ],
+      "affiliations_text": "Intuit",
+      "score": 3.516840144026061,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.10045v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810045v1-finding-the-signal-in-the-spam-jointly-learning-rewards-and-worker-reliability-from-pairwise-comparisons",
+      "source": "arxiv",
+      "title": "Finding the Signal in the Spam: Jointly Learning Rewards and Worker Reliability from Pairwise Comparisons",
+      "authors": [
+        "Kaustubh Shivshankar Shejole",
+        "Tanish Agarwal",
+        "Arpit Agarwal",
+        "Avishek Ghosh"
+      ],
+      "authors_text": "Kaustubh Shivshankar Shejole, Tanish Agarwal, Arpit Agarwal, Avishek Ghosh",
+      "abstract": "The problem of learning from pairwise comparisons has been widely studied across many domains such as recommendation systems, social choice, and more recently, fine-tuning large language models. In this problem, the goal is to learn item rewards based on pairwise comparisons between them. In many scenarios, these comparisons are elicited from crowdworkers using platforms such as Amazon Mechanical Turk, Scale AI, etc. However, crowdworkers are often unreliable due to limited domain knowledge or revenue-maximizing (spamming) behavior. In this work, our goal is to understand whether worker reliability (competency) can be learned jointly with item rewards. To this end, we adopt the Boltzmann-rational model for pairwise comparisons, which extends the Bradley-Terry-Luce model by incorporating worker competencies. We derive an EM-based algorithm for learning under this model by introducing Polya-Gamma latent variables to transform the logistic likelihood into a conditionally Gaussian form, enabling tractable optimization and leading to a simplified $Q$ function in the E-step of the algorithm. This technique allows us to reduce our formulation to a matrix sensing problem, using which we establish theoretical convergence guarantees for our algorithm. We conduct extensive experiments on real-world and synthetic datasets. These experiments demonstrate the advantages of using our algorithm over several baselines and confirm its strong robustness to both spammers and adversarial workers, highlighting its practical effectiveness in realistic crowdsourcing and reward learning settings. The code and data is publicly available at https://github.com/KaustubhShejole/BoRa_EM.",
+      "url": "http://arxiv.org/abs/2608.10045v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10045v1",
+      "tldr": "The paper proposes an EM-based algorithm that jointly learns item rewards and worker competencies from pairwise comparisons under a Boltzmann-rational model, using Polya-Gamma augmentation for tractable optimization and providing theoretical convergence guarantees via matrix sensing, while demonstrating robust performance against spammers and adversarial workers.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.345886405679241,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.10037v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810037v1-docschisel-adaptive-tool-documentation-optimization-framework-for-llm-agents",
+      "source": "arxiv",
+      "title": "DOCSCHISEL: Adaptive Tool Documentation Optimization Framework for LLM Agents",
+      "authors": [
+        "You Lu",
+        "Kun Zhang",
+        "Bihuan Chen",
+        "Xin Peng"
+      ],
+      "authors_text": "You Lu, Kun Zhang, Bihuan Chen, Xin Peng",
+      "abstract": "Large language models (LLMs) increasingly rely on external tools to accomplish complex real-world tasks, making tool documentation a critical grounding resource for LLM agents. Existing studies mainly focus on improving the tool-use capabilities of LLM agents, while largely treating tool documentation as a fixed input. Although several recent works attempt to optimize tool documentation through rewriting or compression, little is known about how the information contained in tool documentation affects agent performance across different settings.\n  To bridge this gap, we conduct a large-scale empirical study on tool documentation for LLM agents. Our study reveals substantial heterogeneity in the information fields provided by existing tool documentation. Moreover, the effectiveness of different information fields is highly dependent on the task domain, LLM backbone, and agent paradigm, indicating that no fixed tool documentation can consistently generalize across diverse agent settings.\n  Motivated by these findings, we propose DocsChisel, an adaptive tool documentation optimization framework for LLM agents. DocsChisel analyzes failed execution traces of a target LLM agent to identify documentation-related issues, and iteratively optimizes tool documentation by adding, removing, and refining information fields for each tool. We evaluate DocsChisel against two state-of-the-art baselines, i.e., EasyTool and DRAFT. Experimental results show that DocsChisel improves the task success rate of LLM agents by 95.89% over the original tool documentation and by 75.15%, on average, over existing baselines, while incurring limited optimization time and token overhead",
+      "url": "http://arxiv.org/abs/2608.10037v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10037v1",
+      "tldr": "DocsChisel is an adaptive framework that optimizes tool documentation for LLM agents by analyzing failed execution traces and iteratively adding, removing, or refining information fields, improving task success rates by up to 95.89% over original documentation and 75.15% over existing baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University"
+      ],
+      "affiliations_text": "Fudan University",
+      "score": 3.2145311373409653,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.10042v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810042v1-usertoolbench-a-user-profile-hidden-benchmark-for-personalized-decision-making-in-tool-use-llms",
+      "source": "arxiv",
+      "title": "UserToolBench: A User-Profile-Hidden Benchmark for Personalized Decision Making in Tool-Use LLMs",
+      "authors": [
+        "Xuexiong Yin",
+        "Zechuan Chen",
+        "Yongsen Zheng",
+        "Yuxiang Zhang",
+        "Jingyuan Yang",
+        "Bin Wang",
+        "Yubin Wang",
+        "Keze Wang"
+      ],
+      "authors_text": "Xuexiong Yin, Zechuan Chen, Yongsen Zheng, Yuxiang Zhang, Jingyuan Yang, Bin Wang, Yubin Wang, Keze Wang",
+      "abstract": "Tool-use LLMs are increasingly asked to act on users' behalf, but existing benchmarks usually focus on profile recall, style imitation, generic tool use, or response-level personalization. We introduce UserToolBench , a benchmark for personalized decision making in tool-use LLMs. UserToolBench tests whether a model can infer latent user preferences from interaction history, recognize when clarification is needed, and produce user-aligned tool-call trajectories under incomplete information. The benchmark is built from privacy-sanitized real interaction traces and combines structured persona profiles, public API-style tool ecosystems, and long-horizon multi-turn trajectories. It includes 10 user profiles, 36 tool sets, 1,065 turns, 170 unique tools, and evaluation-focused task types covering lack-of-information, single-tool, and multi-tool settings. Experiments with strong tool-use LLMs show that current models still have difficulty with personalized delegation. Multi-tool coordination, missing-constraint inference, and long-horizon behavioral consistency remain major bottlenecks. These results suggest that personalization evaluation should move beyond asking whether outputs sound user-specific and instead ask whether LLMs make correct decisions for the users they represent.",
+      "url": "http://arxiv.org/abs/2608.10042v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10042v1",
+      "tldr": "UserToolBench introduces a profile-hidden benchmark for evaluating whether tool-use LLMs can infer latent user preferences from interaction history and produce user-aligned executable tool-call trajectories, showing that current models still struggle with personalized delegation, especially in multi-tool coordination, missing-constraint inference, and long-horizon behavioral consistency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huawei Noah's Ark Lab",
+        "Nanyang Technological University",
+        "Sun Yat-Sen University"
+      ],
+      "affiliations_text": "Huawei Noah's Ark Lab, Nanyang Technological University, Sun Yat-Sen University",
+      "score": 2.8740031064585825,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.10046v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/12/260810046v1-detecting-soft-skills-in-ml-engineering-roles-cvs",
+      "source": "arxiv",
+      "title": "Detecting Soft Skills in ML Engineering Roles CVs",
+      "authors": [
+        "Aidin Azamnouri",
+        "Nouran Ayad",
+        "Justus Bogner",
+        "Stefan Wagner"
+      ],
+      "authors_text": "Aidin Azamnouri, Nouran Ayad, Justus Bogner, Stefan Wagner",
+      "abstract": "Soft skills shape collaboration among ML engineers, data scientists, and software engineers building ML-enabled systems, yet what we know about them comes almost entirely from the demand side. Job advertisements, surveys, and hiring manager interviews capture what employers ask for. How candidates themselves articulate these competencies has not been studied, and existing CV-mining work is both keyword-based, so it cannot see skills conveyed through narrative, and descriptive, reporting frequency rankings without testing whether group differences exceed sampling variation. We close both gaps. Using a balanced corpus of 300 curated CVs spanning the three roles, we extract explicitly listed and implicitly narrated soft skills with an LLM-based pipeline validated against a human-annotated ground truth, a distinction that existing extractors were not designed to make. We then convert the demand-side literature's claims into 13 falsifiable hypotheses about role signatures, seniority progression, and disclosure style, and test them with effect sizes under family-wise error control, so that candidate-side data can corroborate or contradict the demand-side account rather than merely illustrate it. Eleven hypotheses are supported, one partially, and one refuted. Candidates disclose soft skills through narrative rather than keyword lists by roughly three to one, and most so for the competencies employers value most: leadership, coordination, and mentoring (88-96% narrative). Seniority nearly triples the odds of articulating leadership. That competency, assumed universal in prior work, is articulated by software engineers at half the rate of their peers. Technical candidates do articulate soft skills, but a keyword-based screening systematically misses them.",
+      "url": "http://arxiv.org/abs/2608.10046v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10046v1",
+      "tldr": "Using a balanced corpus of 300 CVs and an LLM-based extraction pipeline that distinguishes explicit from implicit mentions, this paper tests 13 demand-side hypotheses and finds that ML engineering candidates articulate soft skills primarily through narrative rather than keyword lists, with significant role- and seniority-related differences.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Munich",
+        "Vrije Universiteit Amsterdam"
+      ],
+      "affiliations_text": "Technical University of Munich, Vrije Universiteit Amsterdam",
+      "score": 2.2027475150531846,
+      "score_text": "2.2"
+    }
+  ]
+}
