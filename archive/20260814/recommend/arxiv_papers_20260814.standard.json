@@ -1,0 +1,765 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-14T04:41:59.936867",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.12624v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812624v1-structure-preserving-uncertainty-quantification-for-generic-dynamics",
+      "source": "arxiv",
+      "title": "Structure-preserving uncertainty quantification for GENERIC dynamics",
+      "authors": [
+        "Zequn He",
+        "Celia Reina"
+      ],
+      "authors_text": "Zequn He, Celia Reina",
+      "abstract": "Structure-preserving machine learning embeds physical structure directly into model architectures, yet uncertainty quantification (UQ) for such hard-constrained models remains limited because standard UQ methods may violate the encoded admissibility conditions, require architectural modifications, or impose substantial computational costs. In this work, we propose Structure-Preserving Epistemic Neural Networks (S-PENNs), a general framework for UQ in scientific machine learning models with hard architectural constraints, and instantiate it for GENERIC (General Equation for Non-Equilibrium Reversible-Irreversible Coupling) dynamics. S-PENNs preserve the structural constraints of a pretrained model by attaching lightweight epinets to its constrained components, ensuring that every sampled realization remains physically admissible by construction. When applied to GENERIC dynamics, such a proposed framework yields thermodynamically consistent rollouts that preserve the first and second laws. Furthermore, we combine S-PENNs with split conformal prediction as a post-hoc calibration method to produce prediction intervals with finite-sample marginal coverage guarantees. We validate S-PENNs on three numerical examples: a harmonic oscillator coupled to a heat bath and an idealized chemical motor, both governed by ODEs, and a one-dimensional viscoplastic model governed by PDEs. Across all three examples, S-PENNs produce thermodynamically consistent stochastic realizations and well-calibrated prediction intervals while reducing the computational cost by about one to three orders of magnitude compared to deep ensembles. Although the present study focuses on GENERIC dynamics, S-PENNs can be extended more broadly to scientific machine learning models in computational mechanics with either hard or soft constraints.",
+      "url": "http://arxiv.org/abs/2608.12624v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12624v1",
+      "tldr": "S-PENNs extend epistemic neural networks to hard-constrained GENERIC dynamics, attaching lightweight epinets to each building block to ensure thermodynamically consistent, physically admissible uncertainty realizations and calibrated prediction intervals at 1–3 orders of magnitude lower cost than deep ensembles.",
+      "detailed_reading": {
+        "motivation": "结构保持机器学习通过架构硬编码物理结构，但此类硬约束模型的不确定性量化仍受限：标准UQ方法可能破坏可容许性条件、需要修改架构或带来高昂计算成本。现有UQ方法多针对软约束或物理正则化代理，难以在每次采样实现中同时满足多个耦合的约束条件，因此需要一种能在结构保持模型内部注入不确定性且不违反物理约束的通用框架。",
+        "method": "提出结构保持认知神经网络（S-PENNs），以预训练的GENERIC动力学模型（N-GENNs）为基础网络，对其每个受约束的构建块（能量E、熵S、泊松算子L、耗散势Ξ）分别附加轻量epinet。每个epinet继承对应构建块的架构属性，以该块的stop-gradient特征和相同输入为条件，并通过共享的epistemic index耦合各块扰动；扰动后的构建块经N-GENNs相同的结构保持重参数化组装，从而保证每个采样实现都满足退化条件、反对称性和凸性等热力学约束。训练时结合split conformal prediction作为后处理校准，以获得具有有限样本边际覆盖保证的预测区间。",
+        "result": "在三个数值算例（耦合热浴的谐波振荡器、理想化学马达的ODE系统，以及一维粘塑性PDE模型）中，S-PENNs均产生热力学一致的随机实现和良好校准的预测区间，同时与深度集成相比将训练计算成本降低约1至3个数量级。",
+        "conclusion": "S-PENNs为具有硬约束的科学机器学习模型提供了一种通用的不确定性量化框架，在GENERIC动力学上展示了保持热力学第一、第二定律的随机展开和可靠预测区间。该方法可推广到计算力学中具有硬约束或软约束的更广泛科学机器学习模型，为结构保持模型的不确定性量化提供了实用且高效的解决方案。",
+        "key_details": "关键细节包括：针对全局（与输入无关）参数专门设计了epinet构造，通过架构强制输入独立性，无需软惩罚方差项；split conformal prediction提供分布无关的有限样本边际覆盖保证；N-GENNs基础通过反对称矩阵Q_S实现可逆退化条件，通过投影矩阵P_E和凸耗散势PICNN实现不可逆退化条件；共享epistemic index确保跨模块扰动一致传播；局限性是当前工作聚焦GENERIC动力学，但框架可扩展至其他硬/软约束模型。"
+      },
+      "affiliations": [
+        "University of Pennsylvania"
+      ],
+      "affiliations_text": "University of Pennsylvania",
+      "score": 5.490241252559968,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2608.12597v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812597v1-predicting-when-random-low-dimensional-reparameterizations-train-neural-networks",
+      "source": "arxiv",
+      "title": "Predicting When Random Low-Dimensional Reparameterizations Train Neural Networks",
+      "authors": [
+        "Andrew Cheng",
+        "Ali Eslamian",
+        "Jie Cheng",
+        "Mehdi Zargham",
+        "Qiang Cheng"
+      ],
+      "authors_text": "Andrew Cheng, Ali Eslamian, Jie Cheng, Mehdi Zargham, Qiang Cheng",
+      "abstract": "Neural networks can often be trained or fine-tuned through random low-dimensional reparameterization, where a small latent vector is mapped into a full parameter update by a frozen random map. This raises a practical question: how large must the latent search space be to reach a low-loss region? We first express the known accessibility transition in an equivalent conic form, centered for compact convex targets at the statistical dimension of the polar cone. Our main theoretical contribution is an orientation-resolved quadratic master formula that predicts the random-slice residual from both the curvature spectrum and the reference-to-solution displacement profile. It yields a self-consistent isotropic-orientation predictor and, in a conservative radius-only specialization, recovers the earlier Gaussian-width quadratic bound. Building on this analysis, we introduce Random Mapping Networks (RaMaN), which instantiate the predicted latent dimension using structured Hadamard or seed-regenerated Gaussian maps. These constructions avoid the O(dP) storage of dense random maps and reduce optimizer-state memory from O(P) to O(d). We also develop matrix-free curvature approximations and sweep-free dimension selection. Across controlled quadratic and neural-curvature experiments, the orientation-resolved predictor closely tracks measured transition locations and outperforms orientation-agnostic approximations when displacement direction matters. End-to-end experiments further show sharp, protocol-dependent training transitions across image and language models.",
+      "url": "http://arxiv.org/abs/2608.12597v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12597v1",
+      "tldr": "The paper derives an orientation-resolved quadratic predictor for the latent dimension at which random low-dimensional reparameterizations can train neural networks, and introduces RaMaN, a memory-efficient framework that instantiates this predicted dimension using structured Hadamard or seed-regenerated Gaussian maps.",
+      "detailed_reading": {
+        "motivation": "神经网络常可通过随机低维重参数化来训练或微调，即用一个小的隐向量经冻结随机映射生成完整参数更新。核心实际问题是：隐搜索空间需要多大才能到达低损失区域？已有的几何刻画依赖难以预先获取的高斯宽度，且半径近似未显式考虑位移相对于曲率特征方向的方向性，存在操作层面的空白。本文旨在发展一个可计算的、能根据局部曲率谱和参考点到解的位移轮廓预测所需隐维度的框架，从而避免逐维穷举。",
+        "method": "本文提出两类贡献。理论上，先将已知的可达性相变等价表述为锥形式：对紧凸目标，相变中心由极锥的统计维度刻画；随后推导方向分辨的二次主公式，输入为局部曲率谱（Hessian特征值）和参考点到解的完整位移轮廓，输出为随机切片残余的预测值，从而得到自洽的各向同性方向预测器，并在忽略方向的半径特例中恢复Larsen等人的高斯宽度二次界。方法上，提出Random Mapping Networks (RaMaN)：用结构化Hadamard映射（SHM，基于crop(H D I_Omega)的嵌套Hadamard基方向选择）或种子再生成高斯映射实例化预测的隐维度d，避免存储O(dP)稠密随机映射，并将优化器状态内存从O(P)降至O(d)。还开发了无矩阵曲率近似（基于主曲率方向和随机谱质量估计）与免扫描维度选择流程；支持方向解析选择（有位移估计时）、半径选择（仅有位移尺度时）和嵌套自适应扩展。训练时仅优化低维z，通过冻结映射生成完整参数θ，执行标准前向/反向传播。",
+        "result": "在受控二次型和神经曲率实验中，方向分辨预测器能紧密跟踪实测相变位置，并在位移方向重要时显著优于忽略方向的近似；端到端实验在图像和语言模型上展示了清晰且依赖训练协议的相变。方法上，RaMaN的Hadamard和种子高斯映射相比稠密随机映射大幅降低存储和优化器状态开销。整体结果表明，随机低维重参数化的可达性相变位置可以基于可测的局部曲率和位移信息预先预测，而非仅靠经验扫描。",
+        "conclusion": "随机低维重参数化能否成功取决于低损失区域的有效余维数，本文给出的方向分辨主公式将相变位置与曲率谱和位移方向联系起来，提供了可操作的隐维度选择准则。RaMaN框架在保持理论固定切片解释的同时，通过结构化或种子映射避免了稠密映射存储，使大规模应用成为可能。作者不声称所有大网络都能用极低维隐变量训练，而是明确了何时几何上可行、如何预测所需维度，以及映射结构、优化器和训练协议如何影响相变。",
+        "key_details": "数据/输入：目标网络参数θ∈R^P，隐变量z∈R^d，d<<P；使用冻结随机映射θ=g_ω(z)。建模：二次局部曲率模型，Hessian正半定，包含曲率谱与位移轮廓；主公式同时依赖位移方向与曲率特征方向，两个具有相同谱和相同位移范数的问题可能因方向不同而需要不同隐维度。实现关键：SHM用Hadamard基的嵌套裁剪选择，种子高斯映射的活动列形成固定虚拟高斯矩阵的前缀；均避免O(dP)存储。训练/推理流程：仅优化z，θ由映射生成；支持无矩阵曲率近似（用主方向加随机谱估计），免扫描维度选择，以及保持先前随机子空间的嵌套扩展。损失与协议：相变对训练协议（如优化器、学习率、重采样策略）敏感，基准需记录可训练参数、冻结映射存储、优化器状态、检查点大小和运行时间。局限性：精确谱信息在大规模无法获得，需近似；理论对紧凸目标严格，神经损失非凸，预测为启发式；层间高斯构造基于独立层假设，实际网络未必满足。"
+      },
+      "affiliations": [
+        "University of Kentucky",
+        "University of Manchester",
+        "Miami University",
+        "University of Dayton",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "University of Kentucky, University of Manchester, Miami University, University of Dayton, Tsinghua University",
+      "score": 4.827618609280153,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.12436v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812436v1-multi-auv-ad-hoc-network-based-target-tracking-a-value-gradient-guidance-multi-agent-diffusion-reinforcement-learning-approach",
+      "source": "arxiv",
+      "title": "Multi-AUV Ad-hoc network-based Target Tracking: A Value Gradient Guidance Multi-Agent Diffusion Reinforcement Learning Approach",
+      "authors": [
+        "Jiaao Ma",
+        "Chuan Lin",
+        "Guangjie Han",
+        "Shengchao Zhu",
+        "Qian Zhu",
+        "Ying Liu",
+        "Zhenyu Wang"
+      ],
+      "authors_text": "Jiaao Ma, Chuan Lin, Guangjie Han, Shengchao Zhu, Qian Zhu, Ying Liu, Zhenyu Wang",
+      "abstract": "Multi-AUV ad-hoc network-based target tracking requires networked autonomous underwater vehicles (AUVs) to cooperatively track maneuvering targets under constrained acoustic communication, dynamic topology, and uncertain ocean disturbances. Although multi-agent reinforcement learning (MARL) enables decentralized coordination through centralized training, existing methods suffer from high-dimensional joint state-action modeling, noise-sensitive policy generation, leading to unstable training and degraded tracking. To address these issues, we propose VGG-MADiffRL, a value-gradient-guided multi-agent diffusion RL algorithm, and MDCA, a diffusion?based hierarchical control architecture. Leveraging underwater mission characteristics, we model sonar detection mechanisms and ocean current disturbances, formulating cooperative tracking for multi-AUV ad-hoc networks as an MDP. The proposed MDCA constitutes a three-tier closed-loop control framework: a global intelligent control layer, a local online training layer, and a physical action execution layer. This structure enables synergistic optimization across task allocation, local decision processes, and execution feedback. Within MDCA, the local online training layer is the policy learning framework; VGG-MADiffRL builds on diffusion policies and incorporates value gradients to guide action generation in the reverse denoising process, steering the generated actions towards higher expected returns. It employs twin value networks with joint optimization and soft target updates to mitigate overestimation and training oscillations, promoting more stable convergence. Experimental results show that VGG-MADiffRL consistently achieves faster convergence, higher tracking accuracy, and smoother training dynamics in cooperative tracking scenarios, validating its effectiveness and practical engineering value in dynamic underwater settings.",
+      "url": "http://arxiv.org/abs/2608.12436v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12436v1",
+      "tldr": "VGG-MADiffRL, a value-gradient-guided multi-agent diffusion reinforcement learning algorithm with a hierarchical MDCA control architecture, improves multi-AUV ad-hoc network cooperative target tracking by using diffusion policies and value-guided denoising to achieve faster convergence, higher accuracy, and more stable training under dynamic underwater conditions.",
+      "detailed_reading": {
+        "motivation": "多AUV自组网协同跟踪要求网络化AUV在受限声学通信、动态拓扑和不确定海流扰动下协同跟踪机动目标，现有MARL方法虽能通过集中训练实现去中心化执行，但面临高维联合状态-动作建模困难、策略生成对噪声敏感等问题，导致训练不稳定且跟踪性能下降。",
+        "method": "提出VGG-MADiffRL算法和MDCA分层控制架构。首先依据主动声呐方程和海流Navier-Stokes方程建模声呐探测机制与海洋扰动，将协同跟踪问题形式化为马尔可夫决策过程。MDCA为三层闭环控制框架：全局智能控制层负责任务分配，本地在线训练层作为策略学习核心，物理动作执行层将输出转换为控制指令。VGG-MADiffRL基于扩散策略，在反向去噪过程中引入价值梯度引导动作生成，使采样动作朝向更高期望回报；采用孪生价值网络联合优化与软目标更新，以价值估计损失和策略梯度构成双目标优化，缓解过估计与训练振荡。",
+        "result": "实验结果显示，VGG-MADiffRL在协同跟踪场景中持续取得更快的收敛速度、更高的跟踪精度和更平滑的训练动态，相比现有方法具有明显优势，验证了其在动态水下环境中的有效性和实际工程价值。",
+        "conclusion": "VGG-MADiffRL通过价值梯度引导的扩散策略与分层控制架构，有效解决了多AUV自组网协同跟踪中的训练不稳定、策略表示受限和次优动作采样问题，为受限通信和动态拓扑下的水下协同决策提供了稳健可行的解决方案，具有较大的工程应用潜力。",
+        "key_details": "关键细节包括：声呐探测采用主动声呐方程计算余量，海流扰动通过Navier-Stokes方程建模；使用卡尔曼滤波融合预测与观测以抑制水下噪声；状态空间包含自身位姿、环境感知以及相对目标、邻居和地标的观测向量，动作空间为三维连续控制量且输出需经范围裁剪与缩放；采用孪生价值网络联合优化和软目标更新缓解过估计；扩散策略的反向去噪过程通过价值梯度引导生成高期望回报动作。由于全文预览不完整，具体超参数与数值指标未在摘要中提供，但实验中训练稳定性和跟踪精度的提升已得到验证。"
+      },
+      "affiliations": [
+        "Hohai University",
+        "Northeastern University"
+      ],
+      "affiliations_text": "Hohai University, Northeastern University",
+      "score": 4.787368528308102,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.12564v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812564v1-scaling-automatic-research-agents-via-world-models",
+      "source": "arxiv",
+      "title": "Scaling Automatic Research Agents via World Models",
+      "authors": [
+        "Xiyuan Yang",
+        "Sheikh Sarwar",
+        "Jingru Cheng",
+        "Zhan Shi",
+        "Duanshun Li",
+        "Huiyuan Chen",
+        "Haiyang Zhang",
+        "Chenlei Guo",
+        "Jingrui He",
+        "Zhenyu Liao"
+      ],
+      "authors_text": "Xiyuan Yang, Sheikh Sarwar, Jingru Cheng, Zhan Shi, Duanshun Li, Huiyuan Chen, Haiyang Zhang, Chenlei Guo, Jingrui He, Zhenyu Liao",
+      "abstract": "Automating empirical research is a long-standing direction of AI. Recent automatic research (AutoResearch) agents bring this goal within reach, as modern LLMs show the capability to independently implement solutions and learn from the execution outcomes. Behind these gains, post-training (especially RL) plays a central role. In this paper, we identify a fundamental tension when scaling RL for these agents: the two components of every AutoResearch trajectory (agent generation and environment execution) scale in very different manners, since all generation shares compute through batching, while each execution occupies its exclusive sandbox and real machine time. As a result, the environment execution dominates the training cost and becomes the bottleneck as trajectories grow. To resolve this tension, we propose World Model RL (WMRL), which replaces environment execution with a world model to remove this bottleneck. Additionally, the world model can be imperfect, as its rewards are corrupted by bias and noise. Therefore, we further equip WMRL with two mitigations, Online Debiasing and Inverse-Variance Denoising, which offset the bias and suppress the noise respectively. Theoretically, we prove that both mitigations of WMRL strictly improve the convergence guarantee. Empirically, WMRL accelerates training by 3-4x on various tasks at different agent scales, while exceeding the performance of standard RL baselines. Moreover, our post-trained 4B and 9B agents outperform much larger open-weight agents of 48B and 120B on held-out benchmarks. Beyond AutoResearch, WMRL also transfers to post-training embodied VLA policies, which demonstrates the generalizability of our method.",
+      "url": "http://arxiv.org/abs/2608.12564v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12564v1",
+      "tldr": "This paper introduces World Model RL (WMRL), which replaces expensive real-environment execution with a learned world model during RL training of automatic research agents, removing the scaling bottleneck and, with bias/noise corrections, achieving 3–4× faster training and stronger performance than standard RL baselines.",
+      "detailed_reading": {
+        "motivation": "自动化实证研究是AI长期目标，AutoResearch代理结合LLM后训练（尤其是RL）已能独立实现解决方案并从执行结果中学习。但扩展RL时存在根本张力：轨迹的生成部分通过批处理共享计算，而每次环境执行需独占沙箱和真实机器时间，导致执行成本随轨迹增长线性上升并成为训练瓶颈。因此需要一种像生成一样可扩展的快速环境信号来替代昂贵执行，同时处理这种替代带来的预测误差。",
+        "method": "提出世界模型强化学习（WMRL）：用与代理同骨干的通用语言模型作为世界模型，输入任务上下文和代理的解决方案，预测执行结果并从中读取估计奖励，替代真实环境执行。训练流程基于GRPO，每批任务中采样多个组，所有组先用世界模型评分；同时选一部分锚组用真实环境执行获取真实分数。通过Online Debiasing在锚组上拟合单调映射来校正世界模型分数的系统偏差，再用Inverse-Variance Denoising将真实分数与校正后预测分数按方差反比加权融合，抑制随机噪声，得到修正奖励后计算组内优势并更新策略。由于世界模型前向传播可像生成一样批处理，执行瓶颈被消除。",
+        "result": "在多种AutoResearch任务和不同agent规模上，WMRL将训练加速3到4倍，同时超过标准RL基线；训练后的4B和9B agents在保留基准上优于48B和120B的开放权重模型；该方法还迁移到具身VLA策略后训练，证明了泛化性。",
+        "conclusion": "WMRL通过世界模型替代环境执行，解决了AutoResearch代理RL扩展中的执行瓶颈，并设计在线去偏与逆方差去噪来补偿世界模型的偏差和噪声，理论上严格改善收敛保证，实验上加速训练并提升性能，且可泛化到VLA等其他后训练场景。",
+        "key_details": "关键细节：世界模型是与代理相同骨干的通用语言模型，输入任务上下文与解决方案，输出执行结果预测；RL目标采用GRPO，每n个轨迹为一组，更新步长为γ；世界模型误差被分解为偏差b与零均值噪声ξ，其上界B和σ分别引入收敛界中的O(B²)和O(σ²)项；训练循环内保留少量真实执行流作为锚组，在线拟合单调映射去偏，并逆方差加权融合以去噪；限制是仍需少量锚组真实执行，世界模型不完美需要在线校正，无法完全免费；具体超参数如锚组比例、融合权重等依赖实现与任务。"
+      },
+      "affiliations": [
+        "Amazon",
+        "University of Illinois Urbana-Champaign"
+      ],
+      "affiliations_text": "Amazon, University of Illinois Urbana-Champaign",
+      "score": 4.770973447747751,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.12528v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812528v1-excitation-supervised-closed-loop-self-calibration-and-target-seeking-for-an-unknown-pose-range-bearing-relay",
+      "source": "arxiv",
+      "title": "Excitation-Supervised Closed-Loop Self-Calibration and Target Seeking for an Unknown-Pose Range-Bearing Relay",
+      "authors": [
+        "Yash Bagla"
+      ],
+      "authors_text": "Yash Bagla",
+      "abstract": "A vehicle seeking a hidden target through a range-bearing relay of unknown position and yaw must decide, online, whether its own motion has already made the relay calibration trustworthy, and what to do when it has not. Two distinct vehicle-relative observations are known to remove the calibration gauge and make the target's relay-local packet globally actionable (arXiv:2608.09464), but that statement is static: it classifies a stored window only after the fact. This paper supplies the closed-loop layer: we show that the trajectory-spread margin $S_v$ that governs identifiability is simultaneously a finite-noise seed-accuracy bound, a local-vector variance decomposition, and a circle-geometry excitation budget, and we use it to supervise an excitation-reset controller. An excitation-supervised algorithm retriggers exploratory motion whenever the spread certificate is insufficient, projecting the target-seeking input away from the excitation's push, and otherwise proceeds to unrestricted target seeking. Under explicit sampling assumptions the supervision rule provably acquires any required excitation in finite time; in the noiseless local regime with positive excitation decay, estimator convergence yields target-seeking convergence after certification; and the threshold is selected from a desired calibration-accuracy level rather than chosen heuristically. Closed-loop simulation, paired Monte Carlo comparisons, a spread-threshold ablation, and a ROS 2/Gazebo software-in-the-loop experiment with sensing delay validate the approach. A decay-rate sweep shows that supervision matters when a fixed schedule's decay outruns the unknown time-to-adequate-excitation: over 100 paired trials the fixed baseline's yaw RMSE rises from 0.010 to 0.065 rad and success falls to 56%, while target-tracking error remains insensitive; supervision keeps yaw RMSE between 0.0095 and 0.0191 rad with 100% success.",
+      "url": "http://arxiv.org/abs/2608.12528v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12528v1",
+      "tldr": "TLDR: The paper introduces an excitation-supervised closed-loop controller that uses a single trajectory-spread margin to certify when an unknown-pose range-bearing relay is sufficiently self-calibrated, retriggering exploratory motion when excitation is insufficient and enabling provably finite-time calibration acquisition, accuracy-driven threshold selection, and reliable target seeking validated in simulation, Monte Carlo sweeps, and ROS 2/Gazebo experiments.",
+      "detailed_reading": {
+        "motivation": "车辆通过未知位姿的测距-测向中继（range-bearing relay）寻找隐藏目标时，中继的位置和偏航未知且目标仅以中继局部坐标系报告。已有工作证明两类车辆相对观测可消除标定自由度，但该结论是静态的：只能在事后判断已存储轨迹窗口是否充分激励。本文要解决在线闭环问题：车辆在每一步必须决定自身运动是否已使中继标定可信，若不足则应继续探索，否则才进行目标追踪。作者希望将轨迹扩展裕度S_v从静态可辨识条件转化为可在线监督的标定激励判据，从而避免固定探索时间表在未知标定时间下失效。",
+        "method": "本文提出一种激励监督的闭环自标定与目标搜寻算法。系统模型为：隐藏目标p和中继x,yaw未知，车辆在每个位姿q_k收到中继返回的局部坐标系下的含噪距离-方位包，状态z=(p,x,ψ)，通过最小化加权批量残差J(z)进行估计。核心方法是利用轨迹扩展裕度S_v=Σ||ℓ_k^v-ℓ̄^v||²（噪声情形下等于Σ||q_k-q̄||²）作为监督信号。算法流程为：控制器在每一步检查S_v是否超过阈值S̄；若不足，则重新触发探索运动（如圆形旋转包络），同时将目标追踪输入投影到探索推动方向的垂直方向以避免干扰标定；若超过阈值，则停止探索并切换到无限制目标追踪。阈值S̄由期望标定精度推导：由var(ψ̂)=σ²/S_v，给定所需偏航标准差ε_ψ，选取S̄≥σ²/ε_ψ²，对应最少圆上位姿数K≥σ²/(ρ²ε_ψ²)。理论上证明：在显式采样假设下，监督规则能有限时间内累积所需激励；在无噪声局部区域且正激励衰减下，估计器收敛可带来标定后目标追踪收敛。验证通过闭环仿真、配对蒙特卡洛、阈值消融以及含传感延迟的ROS 2/Gazebo软件在环实验完成。",
+        "result": "核心发现：S_v同时作为有限噪声种子精度界、局部向量方差分解和圆形几何激励预算。理论结果包括：构造性种子误差界中，偏航误差|ψ̂-ψ|≤2πε/d_v，位置误差随1/√S_v或1/S_v缩放；线性化模型下var(ψ̂)=σ²/S_v，目标估计协方差分解为(σ²/K)I（平均项）和B F_ζ^{-1}B^T（标定传播项）；圆上等距K个位姿时S_v=Kρ²，达到阈值S̄最多需⌈S̄/ρ²⌉个位姿。实验方面，100次配对试验的衰减率扫描显示：当固定激励时间表的指数衰减快于未知的达到充分激励所需时间时，固定基线的偏航RMSE从0.010升至0.065 rad，成功率降至56%，而监督方法保持偏航RMSE在0.0095–0.0191 rad之间且成功率100%；目标追踪误差对两种方法不敏感。阈值消融验证了精度驱动阈值可作为总体RMSE目标，并量化了其激励代价。",
+        "conclusion": "本文证明轨迹扩展裕度S_v不仅是可辨识性条件，更是可在闭环中在线监督的标定质量证书。通过将静态可辨识性转换为由S_v触发的探索-重置控制律，算法能自适应地决定何时停止探索并切换到目标追踪，消除了固定时间表在未知标定时间下的脆弱性。理论保证与仿真、蒙特卡洛和软件在环实验共同表明，监督机制在有限时间内获取所需激励，且在标定后目标追踪收敛。结论是：当普通闭环运动难以自然提供足够激励时，激励监督对保证标定精度和成功率至关重要，而阈值可根据目标标定精度而非启发式选取。",
+        "key_details": "关键细节：(1) 测量噪声模型为各向同性高斯噪声，精度矩阵W=diag(σ_r^{-2},σ_θ^{-2},σ_r^{-2},σ_θ^{-2})；(2) 种子构建利用两帧车辆相对观测，要求d_v≥4ε以保证角度误差有界；(3) 方差分解中目标包对(x,ψ)的Fisher信息为零（当p可自由吸收变化），因此标定信息完全来自车辆包，yaw信息量F_ψ=S_v/σ²；(4) 圆形激励预算S_v=Kρ²(1-||ū||²)，等分圆周时ū=0；(5) 阈值设计规则S̄=σ²/ε_ψ²，允许从期望偏航精度反推最少位姿数；(6) 算法实现中欠激励阶段将目标追踪输入投影到探索推动方向的垂直方向以避免冲突；(7) 监督规则在显式采样假设下有限时间获取所需激励，无需预先知晓达到充分激励所需时间；(8) 局限性：局部收敛结论在无噪声模型下证明，噪声下的全局收敛依赖高斯-牛顿收敛域；监督对目标追踪误差影响不显著，说明其价值主要在于维护标定质量而非目标估计本身。代码与数据开源。"
+      },
+      "affiliations": [
+        "Michigan State University"
+      ],
+      "affiliations_text": "Michigan State University",
+      "score": 4.7472247852356455,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.12438v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812438v1-unifying-generative-models-with-path-integrals",
+      "source": "arxiv",
+      "title": "Unifying Generative Models with Path Integrals",
+      "authors": [
+        "Ramon Winterhalder"
+      ],
+      "authors_text": "Ramon Winterhalder",
+      "abstract": "We formulate generative modeling as a path integral in which flow-based, diffusion-based, variational, and adversarial models arise as different evaluation principles for a single master action. Its Martin-Siggia-Rose-Janssen-de~Dominicis (MSRJD) form separates free from interacting probability flows and opens them to diagrammatic perturbation theory. The expansion yields a one-loop correction to deterministic samplers at no stochastic-sampling cost, which we validate on solvable and nonlinear drifts, where it reduces a 53 % tree-level error to 1.6 %. Imperfect learned scores enter as insertions and yield a response-weighted score-matching objective, and symmetry-equivariant drift design becomes an operator expansion with EFT power counting.",
+      "url": "http://arxiv.org/abs/2608.12438v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12438v1",
+      "tldr": "Generative modeling is reformulated as a single path-integral master action that unifies flow, diffusion, variational, and adversarial models, and whose MSRJD perturbative expansion yields a one-loop deterministic correction reducing sampling error from 53% to 1.6%.",
+      "detailed_reading": {
+        "motivation": "现有生成模型（流、扩散、变分、对抗）各自依赖独立数学框架，缺乏统一视角来揭示内在联系并系统化改进。本文旨在通过路径积分构建统一框架，使这些模型成为同一主作用的不同评估原则，从而将量子场论中的微扰工具引入生成建模。",
+        "method": "本文提出用路径积分表述生成建模。构建一个主作用（master action），将基于流、扩散、变分和对抗的生成模型统一为对该作用的不同评估原则；采用Martin-Siggia-Rose-Janssen-de Dominicis（MSRJD）形式分离自由概率流与相互作用概率流，进而应用图表微扰理论。由此导出一环修正项，改进确定性采样器且不引入随机采样成本。对于不完美学习的分数函数，将其作为微扰插入，得到响应加权的分数匹配目标；对称等变漂移设计则通过算子展开和有效场论功率计数实现。",
+        "result": "在可解漂移和非线性漂移上验证了所提一环修正，将树级相对误差从53%降低到1.6%，显著提升了确定性采样器的精度。",
+        "conclusion": "该工作为生成模型提供了统一的理论框架，通过MSRJD路径积分将不同模型家族联系起来，开辟了利用量子场论方法系统性改进生成模型的新途径。实验显示其修正有效，未来有望推广到更复杂和高维的生成任务。",
+        "key_details": "关键细节包括：MSRJD形式将自由与相互作用概率流分离，使得费曼图微扰展开成为可能；一环修正无需额外随机采样，计算开销低；不完美学习分数作为插入项，导出了响应加权分数匹配目标而非传统分数匹配；对称等变漂移设计被重构为算符展开，具有EFT功率计数。局限性在于当前验证限于可解和非线性漂移，真实高维数据上的表现及超参选择仍需进一步研究。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.663261741591668,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.12535v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812535v1-genada-efficient-generative-time-series-adversarial-attack-framework",
+      "source": "arxiv",
+      "title": "GENADA: efficient generative time series adversarial attack framework",
+      "authors": [
+        "Michael Baronov",
+        "Denis Vorobev",
+        "Margarita Rusanova",
+        "Petr Sokerin",
+        "Alexey Zaytsev"
+      ],
+      "authors_text": "Michael Baronov, Denis Vorobev, Margarita Rusanova, Petr Sokerin, Alexey Zaytsev",
+      "abstract": "Deep learning models are widely used for time series analysis in domains such as healthcare, finance, energy systems, and environmental monitoring. However, these models remain vulnerable to adversarial attacks, where small input perturbations cause severe degradation in predictive performance. Commonly used gradient-based attacks, iterative first-order methods, are computationally burdensome, as they repeatedly backpropagate through the victim model to compute input gradients during a number of iterative refinement steps. We propose a GENerative ADversarial Attack (GENADA) that learns a generative model to produce deceptive perturbations directly in a single forward pass and a procedure to train it. Variants include single-step and iterative generative attack schemes. The validation considers attacks on several neural models and datasets in the time-series domain, a controlled, low-dimensional setting. Empirically, GENADA achieves comparable attack quality to strong baselines while requiring less time to generate perturbations during inference.",
+      "url": "http://arxiv.org/abs/2608.12535v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12535v1",
+      "tldr": "GENADA trains a generative model to produce adversarial perturbations for time series in a single forward pass, achieving attack quality comparable to strong gradient-based baselines like iFGSM while significantly reducing inference-time computational cost.",
+      "detailed_reading": {
+        "motivation": "现有时间序列分类深度模型易受对抗攻击，但常见基于梯度的迭代攻击（如FGSM/iFGSM）需要在推理时反复对受害模型反向传播计算输入梯度，计算开销大。本文提出生成式对抗攻击框架GENADA，学习一个生成器直接输出扰动，在保持攻击效果的同时显著降低推理时间。",
+        "method": "GENADA使用冻结的目标分类器f和可训练生成器G，G以原始时间序列X为输入，输出同维扰动。训练时扰动构造为δ=ε·tanh(G(X))，最小化带反转标签的对抗样本分类损失L_cls(f(X+ε·tanh(G(X))), ¬y)来更新G参数；推理时用sign(·)替换tanh(·)，使扰动ℓ∞范数精确等于ε。框架包含单步生成攻击和迭代生成攻击：迭代版本将扰动分摊为T步逐步施加，训练时仅对最后k步反传、前T-k步冻结，并随训练轮次逐步增大k至T，以节省内存并加速收敛。",
+        "result": "在PowerCons、GunPoint、Strawberry等时间序列数据集上，针对卷积、循环和Transformer等神经分类器，GENADA与强基线FGSM/iFGSM的攻击质量相当，但生成扰动所需推理时间显著更短；迭代式GENADA可进一步提升攻击效果，同时保持较低的计算开销。",
+        "conclusion": "GENADA证明生成式对抗攻击可用于时间序列分类任务：训练后只需单次前向即可生成满足ℓ∞约束的扰动，避免了推理时对受害模型的迭代反向传播。它在攻击效果与计算效率之间取得有利权衡，为时间序列对抗攻击提供了高效可扩展方案。",
+        "key_details": "关键细节包括：采用ℓ∞扰动约束，训练时用tanh保证扰动有界且可微，推理时用sign将扰动幅度精确缩放至ε；将分类标签取反并最小化冻结目标模型在对抗样本上的损失；迭代式GENADA将扰动分解为T步，训练只对最后k步反传并逐步增加可训练步数，降低显存占用和训练时间；相比iFGSM需T次反向传播，GENADA推理只需一次前向传播，复杂度显著降低。局限性在于验证场景限于低维单变量时间序列和少数数据集，生成器训练阶段仍需要访问目标模型梯度，且攻击质量与最强基线持平而非全面超越，多变量和大规模场景的泛化性尚未验证。"
+      },
+      "affiliations": [
+        "HSE University",
+        "Moscow Independent Research Institute of Artificial Intelligence"
+      ],
+      "affiliations_text": "HSE University, Moscow Independent Research Institute of Artificial Intelligence",
+      "score": 4.2423493720713825,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.12520v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812520v1-weight-certificates-for-convex-multi-objective-mpc-geometric-characterization-ell1-construction-and-ell2-foreclosure",
+      "source": "arxiv",
+      "title": "Weight Certificates for Convex Multi-Objective MPC: Geometric Characterization, $\\ell^1$ Construction, and $\\ell^2$ Foreclosure",
+      "authors": [
+        "Hadi Hajieghrary",
+        "Benedikt Walter",
+        "Chaitanya Shinde",
+        "Miguel Hurtadoand Jerry Lopez"
+      ],
+      "authors_text": "Hadi Hajieghrary, Benedikt Walter, Chaitanya Shinde, Miguel Hurtadoand Jerry Lopez",
+      "abstract": "Automated-driving rulebooks rank rule violations lexicographically, and model predictive control enforces that ranking either exactly, through $L{+}1$ sequential programs per tick, or approximately, through a weighted sum tuned by the separation heuristic $w_1\\gg w_2\\gg\\cdots\\gg w_L$. We show the heuristic answers the wrong question. For a convex priority-ordered program, a weighted sum reproduces the lexicographic optimum precisely when its weight, augmented by a unit performance coefficient, supports the upper image of the achievement map at the lexicographic point; the admissible weights form the unit-performance slice of an outward normal cone. Under hinge penalties this slice is a polyhedron obtained by projecting a scaled-KKT system, and a linear program returns an interior weight with a certified margin; under squared-hinge penalties no finite weight is exact whenever the limiting multiplier is nonzero, with violation along the local minimizer branch decaying as $O(1/w)$. Calibrated on held-out logs, the resulting weights have near-equal tier components in nine of eleven calibration-eligible scenario classes and roughly double legal-tier event precision against a matched heuristic weight in closed-loop nuPlan experiments on a 25-rule rulebook. The certificate is, however, pointwise: no single weight is valid across the sampled ticks of an episode, the median lifetime is one sampling interval (zero subsequent ticks at the native rate), and persistence tracks active-set stability. These findings motivate monitored weighted solves with selective cascade fallback, although the compliance-pattern monitor detects only a subset of measured lapses.",
+      "url": "http://arxiv.org/abs/2608.12520v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12520v1",
+      "tldr": "Weighted-sum scalarization reproduces lexicographic multi-objective MPC optima exactly only when the weight vector supports the achievement map's upper image—constructible via a linear program for hinge penalties but impossible for squared-hinge penalties—and although calibrated weights improve rulebook compliance in nuPlan simulations, the certificate is pointwise and too short-lived to replace exact lexicographic solves without monitored fallback.",
+      "detailed_reading": {
+        "motivation": "自动驾驶规则手册以字典序对规则违规进行排序，模型预测控制通常通过分离启发式 w1≫w2≫⋯≫wL 的加权和来近似实现该排序。本文指出该启发式回答了错误的问题：对于凸优先级排序程序，加权和精确复现字典序最优需要满足特定的几何支撑条件，而非简单的大权重分离。",
+        "method": "针对凸优先级排序的多目标MPC，本文建立加权和与字典序最优等价的几何条件：权重（辅以单位性能系数）必须在字典序点的achievement map的上镜像处提供支撑，可行权重构成外法锥的单位性能切片。在hinge惩罚下，该切片是缩放KKT系统的投影多面体，可通过线性规划求解得到带认证裕度的内点权重；在squared-hinge惩罚下，当极限乘子非零时不存在有限精确权重，违规沿局部极小值分支以 O(1/w) 衰减。实验采用25条规则手册，在nuPlan闭环仿真中基于留出日志校准权重。",
+        "result": "在11个可校准场景类中，9个场景类校准得到的权重各层分量接近相等；与匹配的启发式权重相比，闭环nuPlan实验中法律层事件精度大约翻倍。然而证书是逐点成立的：没有任何单一权重在整个episode的所有采样时刻均有效，权重中位寿命仅为一个采样间隔（原生频率下后续时刻为零），其持续性受active-set稳定性影响。",
+        "conclusion": "这些发现支持采用带监控的加权求解并辅以选择性级联回退策略，而非依赖单一固定加权和；同时需注意所提出的合规模式监控器只能检测到实际违规的子集，仍有局限性。",
+        "key_details": "关键细节包括：证书的点态性质导致权重需逐时刻验证；中位寿命为一个采样间隔意味着权重的有效性极短；持续性依赖于active-set稳定性；squared-hinge下违规以O(1/w)衰减但无法精确；校准权重在多数场景类中接近相等，表明分离启发式可能导致过大的权重差异；实验范围为仿真环境nuPlan-mini，不涉及真实道路部署。"
+      },
+      "affiliations": [
+        "TORC Robotics LLC"
+      ],
+      "affiliations_text": "TORC Robotics LLC",
+      "score": 4.207760361263913,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.12416v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812416v1-robosynchallenge-mastering-real-world-dexterity-via-generalizing-synthesized-manipulation-skills",
+      "source": "arxiv",
+      "title": "RoboSynChallenge: Mastering Real-World Dexterity via Generalizing Synthesized Manipulation Skills",
+      "authors": [
+        "Runyi Zhao",
+        "Ruixin Wu",
+        "Chengkun Li",
+        "Hongrui Zhang",
+        "Ang Li",
+        "Ruixing Jin",
+        "Yueci Deng",
+        "Yingying Guo",
+        "Lihe Ding",
+        "Shaocong Dong",
+        "Tianfan Xue",
+        "Yanjun Gao",
+        "Yudong Luo",
+        "Pascal Poupart",
+        "Simo Wu",
+        "Kui Jia",
+        "Wei-shi Zheng",
+        "Guiliang Liu"
+      ],
+      "authors_text": "Runyi Zhao, Ruixin Wu, Chengkun Li, Hongrui Zhang, Ang Li, Ruixing Jin, Yueci Deng, Yingying Guo, Lihe Ding, Shaocong Dong, Tianfan Xue, Yanjun Gao, Yudong Luo, Pascal Poupart, Simo Wu, Kui Jia, Wei-shi Zheng, Guiliang Liu",
+      "abstract": "Achieving generalizable robotic manipulation remains a central challenge in embodied intelligence. Despite rapid advances in model architectures and learning algorithms, progress is often limited by the scarcity and narrow diversity of real-world data. The RoboSynChallenge competition introduces a unified benchmark to evaluate and advance the generalizability of manipulation policies across a spectrum of tasks, environments, and difficulty levels. To alleviate the shortage of realistic data, the challenge integrates large-scale synthetic data generation with standardized real-world robotic evaluation. Participants are encouraged to leverage synthesized state-action trials to improve general-purpose policy learning, while final assessments are conducted exclusively on unseen real-world manipulation environments. Baseline implementations, including Transformer-, Diffusion-, Vision-Language-Action, and World-Action-Model-based policies, are provided to ensure reproducibility and comparability. By coupling scalable simulation-based training with rigorous real-world validation, RoboSynChallenge aims to foster the development of broadly capable, data-efficient, and adaptable manipulation systems, thereby paving the way toward truly general robotic intelligence.",
+      "url": "http://arxiv.org/abs/2608.12416v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12416v1",
+      "tldr": "RoboSynChallenge introduces a unified benchmark that combines large-scale synthetic data generation with standardized real-world evaluation to assess and improve the generalizability of robotic manipulation policies across diverse tasks and environments.",
+      "detailed_reading": {
+        "motivation": "真实世界操作数据稀缺且多样性有限，严重制约了机器人操作策略的泛化能力；现有基准要么局限于仿真环境，要么依赖昂贵且难以扩展的真实数据，且大多使用固定数据集，无法公平评估策略在未见真实环境中的泛化性能。为此，RoboSynChallenge提出一个统一基准，将大规模合成数据生成与标准化真实世界评估相结合，量化模拟数据在真实数据稀缺情况下对操作策略泛化能力的提升效果。",
+        "method": "RoboSynChallenge构建了完整的生成式数据与评估流水线：使用EmbodiChain生成式仿真框架，对光照、物体属性、桌面纹理、背景颜色、机器人配置以及相机内外参进行系统随机化，为每个任务生成1000条成功的仿真操作轨迹，并辅以少量遥操作采集的真实数据（每任务5种实验条件×4位置×3朝向共60条样本），支持仿真-真实协同训练。任务涵盖入门、中级、高级三档，涉及刚体、铰接物体、软体与工具操作，基于双AgileX Piper六自由度机械臂平台，仅依赖视觉观测与本体感觉。评估时在真实环境中系统变化背景（3种桌面纹理）、光照（3种位置/颜色）、物体（已见/未见实例）、干扰物（2/4/8个）和空间位置，逐因子扰动并报告成功率；同时提供Transformer、Diffusion、Vision-Language-Action和World-Action-Model等基线实现，确保可复现性与公平对比。",
+        "result": "RoboSynChallenge作为首个在统一框架下评估Sim2Real迁移能力的标准化基准，通过大规模合成数据训练与严格真实世界留出测试相结合，系统测量策略在背景、光照、物体、干扰物和位置变化下的成功率、推理时间与动作步数。该基准在刚体、铰接物体、装配和工具使用等任务类别上均覆盖，并支持双臂操作，区别于以往仅限单臂、仿真或离线数据集的竞赛；其生成式数据流（非固定人工数据集）与真实世界排名机制，能够直接反映模拟数据对真实泛化性能的贡献。",
+        "conclusion": "RoboSynChallenge通过耦合可扩展的仿真训练与严格的真实世界验证，旨在推动开发广泛适用、数据高效且适应性强的操作策略，为迈向真正通用的具身智能奠定基础。该基准强调模拟数据生成与真实评估的统一，有望填补Sim2Real标准评估的空白，促进机器人操作泛化研究的可复现与可比发展。",
+        "key_details": "数据集以EmbodiChain生成的成功轨迹为主，仅包含成功样本用于训练，真实测试数据不依赖地面真值标签，通过物理环境直接判定结果以避免泄露；合成数据协议采用多级随机化（光照、材质、几何、感知），每任务1000条轨迹，真实数据每任务60条样本，训练/评估环境均开放获取，数据采用CC BY-NC-SA 4.0许可；评估使用真实世界留出协议，训练观测与测试环境分布不同确保OOD；硬件为双臂Piper平台，配备三套相同备用工位以保证测试效率；基线模型在A800 GPU上统一部署，推理时间和动作步数作为效率指标；局限性在于真实评估依赖固定机器人平台和物理设置，扩展至其他硬件仍需额外适配。"
+      },
+      "affiliations": [
+        "Shenzhen Loop Area Institute (SLAI)",
+        "Fudan University",
+        "University of Waterloo",
+        "Sun Yat-sen University",
+        "The Chinese University of Hong Kong",
+        "The Hong Kong University of Science and Technology",
+        "University of Colorado Anschutz",
+        "The Chinese University of Hong Kong, Shenzhen",
+        "DexForce",
+        "Mila - Quebec AI Institute",
+        "Vector Institute"
+      ],
+      "affiliations_text": "Shenzhen Loop Area Institute (SLAI), Fudan University, University of Waterloo, Sun Yat-sen University, The Chinese University of Hong Kong, The Hong Kong University of Science and Technology, University of Colorado Anschutz, The Chinese University of Hong Kong, Shenzhen, DexForce, Mila - Quebec AI Institute, Vector Institute",
+      "score": 4.118970437130056,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.12609v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/14/260812609v1-security-constrained-operation-of-ibr-dominated-power-systems-static-and-dynamic-security-across-preventive-and-corrective-decisions",
+      "source": "arxiv",
+      "title": "Security-Constrained Operation of IBR-Dominated Power Systems: Static and Dynamic Security Across Preventive and Corrective Decisions",
+      "authors": [
+        "Buxin She"
+      ],
+      "authors_text": "Buxin She",
+      "abstract": "Inverter-based resources (IBRs) couple power system operation to fast dynamics and controller-dependent responses. Their configurable capabilities are reshaping the formulation and coordination of security-constrained operation. This paper presents a two-axis view: static versus dynamic security and preventive versus corrective decision timing. Preventive scheduling is extending from static post-contingency feasibility toward dynamic security, while corrective operation spans equilibrium-based corrective actions and trajectory-based control. A generic formulation represents this change and makes the preventive--corrective tradeoff explicit. Existing formulations, methods, and capability representations are reviewed and synthesized within this framework. The surveyed work yields two findings. First, IBR capability can expand the feasible set or relieve security constraints, reducing operating cost or improving security performance. Second, shared capability and constraints across formulations determine whether that capability remains operationally deliverable. These findings motivate future research in IBR capability characterization and quantification, joint scheduling, and scalable solution frameworks.",
+      "url": "http://arxiv.org/abs/2608.12609v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12609v1",
+      "tldr": "This paper presents a two-axis taxonomy and generic formulation for security-constrained operation in IBR-dominated power systems, spanning static versus dynamic security and preventive versus corrective decisions, and reviews how inverter-based resource capabilities can either expand feasibility and reduce costs or remain constrained by shared capability limits across coupled scheduling and control formulations.",
+      "detailed_reading": {
+        "motivation": "大规模逆变器资源（IBR）的部署使电力系统运行与快速动态和控制器响应强耦合，传统安全约束运行主要关注静态事故后可行性，未统一比较安全表示与决策时序，也未解释IBR可配置能力如何影响预防与纠正决策的耦合。现有综述分别覆盖SCUC、SCOPF或稳定性分析，缺乏统一框架，因此需要建立静态/动态安全与预防/纠正决策的双轴分类，并给出通用数学表述。",
+        "method": "本文提出双轴分类框架：按安全表示分为静态安全（平衡态可行）与动态安全（轨迹/稳定裕度），按决策时序分为预防决策（事故前固定）与纠正决策（利用事故后信息）。在此框架下给出通用预防-纠正优化模型：目标为预防成本与事故后纠正成本的加权和，约束包括预防可行集、事故安全集和纠正可行集；静态安全模块采用代数方程和不等式描述事故后平衡，动态安全模块采用微分代数方程描述系统轨迹并施加动态约束。基于该模型，系统梳理并归类现有SCUC/SCED/SCOPF、动态安全约束调度、基于轨迹的纠正控制等文献，分析各方法的安全判据、决策变量和求解框架。",
+        "result": "综述识别两大趋势：预防调度从静态事故后可行性向动态安全约束扩展，纠正运行从平衡点纠正向轨迹控制扩展。基于文献综合得到两点核心发现：一是IBR能力（如P-Q运行点、控制模式、控制参数）可扩大可行集或缓解安全约束，从而降低运行成本或提升安全性能；二是同一IBR能力在不同公式中的共享能力和约束决定其是否仍能在运行中实际交付。分类比较显示DC模型可扩展但忽略动态，AC模型精度高但非凸且计算复杂。",
+        "conclusion": "双轴框架为IBR主导电力系统的安全约束运行提供了统一视角，明确预防与纠正决策的权衡以及IBR能力在其中的耦合作用。未来研究应聚焦于IBR能力的表征与量化、预防-纠正联合调度、以及可扩展的求解框架，以支撑实际系统中的应用。",
+        "key_details": "关键细节包括：分类中静态安全指平衡态约束，动态安全指经轨迹或稳定裕度验证的动态属性；预防决策包括事故前固定的调度、控制模式和RAS整定，纠正动作是事故后选择并受预防调度约束；通用公式中预防变量对所有事故公共，动态初始条件由Gamma_c确定，预配置自动响应作为自动控制律mu_c，纠正策略pi_c在Ac中；IBR能力包括有功/无功运行点、储备、GFL/GFM模式及控制参数，其功率和能量限制约束事故后可用响应；现有局限包括动态安全约束直接嵌入调度的计算代价高，以及共享能力跨公式的可交付性需要量化。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.048245454160503,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.12591v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812591v1-the-symmetric-srg-with-applications-to-stability-of-cactus-dynamic-networks",
+      "source": "arxiv",
+      "title": "The $θ$-Symmetric SRG with Applications to Stability of Cactus Dynamic Networks",
+      "authors": [
+        "Xiaokan Yang",
+        "Wei Chen",
+        "Li Qiu"
+      ],
+      "authors_text": "Xiaokan Yang, Wei Chen, Li Qiu",
+      "abstract": "In this paper, we systematically study a variant of the scaled relative graph (SRG), referred to as the $θ$-symmetric SRG, and apply it to the stability analysis of cactus networks. Compared with the previous SRG definition, the $θ$-symmetric SRG enables the characterization of phase lead and lag behaviors, and serves as a more natural multivariable extension of the classical Nyquist plot. We first analyze the gain and phase aspects of $θ$-symmetric SRG separately and build a connection between $θ$-segmental phase and a norm minimization problem. This connection makes it possible to compute $θ$-segmental phase via semidefinite programming. We further derive the submultiplicative and subadditive properties of $θ$-symmetric SRG. These algebraic properties are crucial to determine the nonsingularity of product-type and sum-type return difference matrices, which topologically correspond to the cyclic and parallel-feedback extreme cases of cactus networks. By taking the cyclic interconnection as the fundamental starting point, we establish necessary and sufficient conditions for its robust stability. Integrating this with the parallel case, we synthesize a unified stability framework for general multi-loop cactus networks. The $θ$-symmetric SRG framework is less conservative and provides a more intuitive geometric interpretation of system behaviors compared with some existing approaches. Several examples are included to demonstrate the effectiveness of the proposed methods.",
+      "url": "http://arxiv.org/abs/2608.12591v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12591v1",
+      "tldr": "The paper introduces the θ-symmetric scaled relative graph (SRG) as an improved gain-phase tool for multivariable systems and develops a unified stability framework for cactus dynamic networks via its algebraic properties and semidefinite-programming-computable phase.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Chinese University of Hong Kong, Shenzhen",
+        "Peking University"
+      ],
+      "affiliations_text": "The Chinese University of Hong Kong, Shenzhen, Peking University",
+      "score": 3.9966146449770927,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.12573v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812573v1-prof-k-probabilistic-one-pass-filtering-for-efficient-top-k-selection",
+      "source": "arxiv",
+      "title": "Prof-K: Probabilistic One-Pass Filtering for Efficient Top-k Selection",
+      "authors": [
+        "Tadeusz Dziarmaga",
+        "Witold Sikora",
+        "Łukasz Struski",
+        "Jacek Tabor",
+        "Marcin Mazur"
+      ],
+      "authors_text": "Tadeusz Dziarmaga, Witold Sikora, Łukasz Struski, Jacek Tabor, Marcin Mazur",
+      "abstract": "Top-k selection is a fundamental computational primitive with applications spanning databases, information retrieval, signal processing, and modern machine learning workloads, including sparse activations and attention pruning. As data sizes grow, existing approaches become inefficient: exact methods incur high memory and compute overhead, while approximate methods often rely on brittle heuristics that degrade under adversarial or heavy-tailed inputs. In this paper, we introduce Prof-K, a fast, scalable, and distribution-agnostic top-k algorithm with probabilistic correctness guarantees. Prof-K performs a single-pass filtering procedure: a small random sample estimates an adaptive threshold, the N input elements are streamed once into a compact buffer, and an exact top-k routine on this buffer recovers the true top-k elements with probability at least 1 - $ε$, where $ε$ > 0 is user specified. We derive high-probability guarantees for correctness and buffer size, together with an approximately optimal sample size that minimizes overhead as a function of N and k. Empirically, Prof-K achieves 1.5x-10x speedups over the highly optimized PyTorch topk and recent RadiK implementations, with the largest gains in the large-scale, small-to-moderate-k regime where prior methods struggle most. Unlike previous approaches, these guarantees hold independently of the input distribution, ensuring robustness to adversarial settings. By relaxing the recall target (e.g., recovering 95% of the true top-k values), Prof-K additionally provides a principled accuracy-speed trade-off. We further demonstrate its impact on training BatchTopK Sparse Autoencoders (SAEs), where top-k selection constitutes a significant portion of the training cost.",
+      "url": "http://arxiv.org/abs/2608.12573v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12573v1",
+      "tldr": "Prof-K is a fast, distribution-agnostic top-k selection algorithm that uses a small random sample to estimate an adaptive threshold, filters the input in a single pass into a compact buffer, and then runs exact top-k refinement, providing probabilistic correctness guarantees and 1.5–10x speedups over existing methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Jagiellonian University"
+      ],
+      "affiliations_text": "Jagiellonian University",
+      "score": 3.9966003906650824,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.12514v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812514v1-exploring-oversmoothing-with-householder-matrices",
+      "source": "arxiv",
+      "title": "Exploring Oversmoothing with Householder Matrices",
+      "authors": [
+        "Bhaskar Karol"
+      ],
+      "authors_text": "Bhaskar Karol",
+      "abstract": "Deep graph neural networks(GNNs) suffer from oversmoothing- a progressive collapse of node representation towards a low information subspace as network depth increases because the normalized graph propagation operator is repeatedly applied directly to the hidden representations. In this work we study Householder Graph Neural Network (HouseGNN). Rather than updating the hidden state like standard GCN, HouseGNN uses the aggregated neighbourhood message solely to estimate a reflection direction; the node embedding is then updated by a Householder reflector followed by GroupSort, yielding a piecewise orthogonal layer that preserves Euclidean norm at every node and at every depth. We prove three core properties: (i) every internal layer preserves the node-wise Euclidean norm; (ii) the Householder reflector is scale scale and sign-invariant in the message; and (iii) pairwise distance between nodes can change through mismatch between node-wise orthogonal operators.",
+      "url": "http://arxiv.org/abs/2608.12514v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12514v1",
+      "tldr": "HouseGNN replaces standard GCN updates with per-node Householder reflections followed by GroupSort, yielding a piecewise-orthogonal, norm-preserving GNN layer that provably avoids the progressive node-representation collapse responsible for oversmoothing in deep graph networks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9290570111378607,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.12489v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812489v1-when-can-you-trust-offline-evaluation-of-equal-cost-top-k-allocation-a-controlled-reproducible-benchmark-and-practitioners-guide",
+      "source": "arxiv",
+      "title": "When Can You Trust Offline Evaluation of Equal-Cost Top-k Allocation? A Controlled, Reproducible Benchmark and Practitioner's Guide",
+      "authors": [
+        "Binshuang Li"
+      ],
+      "authors_text": "Binshuang Li",
+      "abstract": "Organizations decide whom to treat under a budget and want to know what a targeting rule would have earned before deploying it. Off-policy evaluation promises this from logged data, but the deployable rule is a deterministic top-k policy: it removes all averaging over actions, so weak overlap hits the estimate directly. We benchmark six estimators across five datasets and two known-effect sweeps, and validate the mechanisms against a non-simulated paired reference. First, weak overlap is governed by logger-target action alignment, not by logging sharpness alone: what governs support is the logger's probability of the target's actions. Sharpening a logger built from the target's own score barely moves overlap over the tested range; action-level disagreement collapses it. Effective sample size ranks this risk across logging environments, but is weak at ranking candidates within the single log a practitioner holds, and its cut point does not transfer. Second, the optimizer's curse is not fixed by cross-fitting the outcome nuisance. When the rule is fit on the data used to evaluate it, cross-fitting the nuisance alone leaves the reuse bias in place and makes it worse. Honest policy-level splitting avoids the reuse by targeting the learning procedure's value -- a change of estimand, not a de-biasing of the full-sample policy. Third, propensity-estimation error is the largest degradation we measure: an out-of-fold estimate hurts IPS more than any other stress we apply, leaves doubly-robust estimation almost unchanged, and can invert the overlap diagnostic itself. Logging is synthesized and propensities floored at 0.02, so every failure occurs with bounded weights; the floor also reduces the two tuned hybrids to their untuned parents, leaving four practically distinct estimators, and all exact-value surfaces are synthetic or semi-synthetic. We release the benchmark; public data only.",
+      "url": "http://arxiv.org/abs/2608.12489v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12489v1",
+      "tldr": "Offline evaluation of deterministic top-k allocation is trustworthy only when logger-target action alignment—not logging sharpness—drives overlap, when policy-level (not nuisance-only) splitting addresses the optimizer's curse, and when propensity models are credible, as shown by a controlled benchmark of six estimators across five datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.906813939692536,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.12592v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812592v1-represent-then-generate-multimodal-conditioned-time-series-generation-under-irregular-missingness",
+      "source": "arxiv",
+      "title": "Represent, Then Generate: Multimodal-Conditioned Time-Series Generation under Irregular Missingness",
+      "authors": [
+        "Haochen Zhang",
+        "Jiaheng Guo",
+        "Yu-Chao Huang",
+        "Nicholas Knoz",
+        "Tianlong Chen"
+      ],
+      "authors_text": "Haochen Zhang, Jiaheng Guo, Yu-Chao Huang, Nicholas Knoz, Tianlong Chen",
+      "abstract": "Continuous physiological time series underpin modern clinical monitoring, yet many of the most informative signals are invasive, expensive, or simply unavailable for a given patient. Conditional generation offers a remedy: an absent signal can be synthesized from co-recorded signals and routine clinical variables. Existing generators, however, are built around a single conditioning modality and degrade when forced to handle the heterogeneous, irregularly missing mix of time-variant signals and static covariates seen in practice. We propose ReCoGen (Represent Conditions, then Generate), a two-stage framework that decouples multimodal condition representation from target generation. Stage I trains one masked autoencoder per modality, distilling each time-variant condition into a compact and missingness-tolerant token sequence. Stage II trains a flow-matching generator that fuses these tokens with static conditions to synthesize the target signal. Across three physiological benchmarks, including continuous glucose monitoring on AI-READI and arterial blood pressure generation on MIMIC-III and MIMIC-IV, ReCoGen attains the best downstream utility on all sixteen (dataset, task, metric) settings, surpassing six representative conditional generators; on thirteen of them its utility also reaches or exceeds the utility measured on the real signal, a reference we read as an approximate anchor rather than a ceiling. Ablations trace the gains to the conditioning path: learnable cross-attention over the frozen per-modality encoders, and a dual token-plus-AdaLN route for the static conditions. ReCoGen thus turns routinely collected signals into informative surrogates for invasive or unavailable ones, a step toward less invasive, lower-cost continuous clinical monitoring.",
+      "url": "http://arxiv.org/abs/2608.12592v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12592v1",
+      "tldr": "ReCoGen is a two-stage framework that decouples multimodal condition representation from generation—using per-modality masked autoencoders to produce missingness-tolerant tokens and a flow-matching generator to synthesize target signals—and outperforms six existing conditional generators across all sixteen benchmark settings for clinical time-series generation under irregular missingness.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8715443827941005,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.12419v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812419v1-lokiformer-locality-aware-attention-with-decoupled-knowledge-memory-for-efficient-large-language-model-pretraining",
+      "source": "arxiv",
+      "title": "LoKiFormer: Locality-aware Attention with Decoupled Knowledge Memory for Efficient Large Language Model Pretraining",
+      "authors": [
+        "Qiuwu Chen",
+        "Zimo Liu",
+        "Yuchen Li",
+        "Ying Sun",
+        "Yifan Zhang",
+        "Zhijie Qiu",
+        "Zeng You",
+        "Ryan Dong",
+        "Simeng Ma",
+        "Yaofo Chen",
+        "Mingkui Tan"
+      ],
+      "authors_text": "Qiuwu Chen, Zimo Liu, Yuchen Li, Ying Sun, Yifan Zhang, Zhijie Qiu, Zeng You, Ryan Dong, Simeng Ma, Yaofo Chen, Mingkui Tan",
+      "abstract": "Large language models (LLMs) have achieved remarkable breakthroughs across various applications. However, their architectures remain inefficient in pretraining due to two main limitations: (i) self-attention lacks an explicit inductive bias for locality, leading to redundant modeling of sequence-internal local information; (ii) mixture-of-experts (MoE) implicitly couples knowledge storage with computational pathways, hindering flexible access to sequence-external global knowledge. To overcome these limitations, we propose LoKiFormer, a novel LLM architecture that augments the standard decoder with two dedicated modules: 1) Local Fusion Attention (LFA), which incorporates a convolutional fusion to attention, explicitly capturing local patterns and allowing the attention to operate on more informative representations; 2) Knowledge Memory Module (KMM), which introduces a parametric key-value memory that explicitly stores global knowledge in addressable slots, decoupling storage from computation and enabling direct knowledge retrieval. Together, these modules enable LoKiFormer to achieve more efficient and effective integration of information at both levels. Experimental results show that LoKiFormer converges 1.33x faster in pre-training than baseline models, underscoring its superiority over existing LLM architectures.",
+      "url": "http://arxiv.org/abs/2608.12419v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12419v1",
+      "tldr": "LoKiFormer improves LLM pretraining efficiency by adding a Local Fusion Attention module for explicit local pattern capture and a decoupled Knowledge Memory Module for direct global knowledge retrieval, achieving 1.33× faster convergence than baseline models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AIGCode",
+        "Pazhou Laboratory",
+        "South China University of Technology"
+      ],
+      "affiliations_text": "AIGCode, Pazhou Laboratory, South China University of Technology",
+      "score": 3.7386019565442297,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.12447v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812447v1-geometric-and-behavioral-stratification-in-transformer-residual-streams",
+      "source": "arxiv",
+      "title": "Geometric and Behavioral Stratification in Transformer Residual Streams",
+      "authors": [
+        "Nelson Guda"
+      ],
+      "authors_text": "Nelson Guda",
+      "abstract": "Trained transformer models develop privileged bases: coordinate axes whose statistics differ from the rest of the residual stream. But what kind of direction does such a basis select? We investigate the prediction direction, the unembedding direction of the token a model currently predicts, and find that it functions as a content-defined privileged anchor. Measured with respect to this anchor, residual-stream variation is geometrically and behaviorally stratified by proximity to the prediction.\n  The stratification holds in all eighteen models tested (dense and mixture-of-experts, 7B-120B, base and instruction-tuned). A narrow, scale-invariant prediction interface concentrates readout-relevant structure, while the vast prediction-distal complement expands with model scale. Because the prediction direction sits nearly orthogonal to the principal variance axes, variance-based analyses recover this organization only partly, and the shortfall grows with prompt heterogeneity.\n  Anchoring reveals a steep geometric gradient: prediction-proximal regions are highly structured and cluster related prompts, while the complement is flatter and anti-discriminates among prompt groups. The interface is a narrow slice but functionally decisive. Disrupting the variance directions closest to the prediction causes immediate divergence and frequent task-frame shifts; disrupting the next level down delays divergence and preserves framing. The complement is weakly readout-aligned per direction yet causally and temporally load-bearing, and behavior is driven by direction rather than magnitude.\n  These results establish the prediction direction as a privileged anchor distinct from previously described coordinate axes, and give a geometric account of how high-dimensional computation coexists with linear readout.",
+      "url": "http://arxiv.org/abs/2608.12447v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12447v1",
+      "tldr": "Transformer residual streams are geometrically and behaviorally stratified by proximity to the model’s current prediction direction, forming a narrow, scale-invariant readout interface surrounded by a large, causally essential complement—a pattern that holds across all 18 models tested and explains how high-dimensional computation coexists with linear readout.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6966299207323825,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.12435v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812435v1-march-scaling-recurrent-memory-with-content-routed-state-anchors",
+      "source": "arxiv",
+      "title": "MARCH: Scaling Recurrent Memory with Content-Routed State Anchors",
+      "authors": [
+        "Ming Zhang",
+        "Kaisen Yang",
+        "Shu Yu",
+        "Ermo Hua",
+        "Ning Ding",
+        "Xia Hu",
+        "Bowen Zhou",
+        "Chaochao Lu",
+        "Youbang Sun"
+      ],
+      "authors_text": "Ming Zhang, Kaisen Yang, Shu Yu, Ermo Hua, Ning Ding, Xia Hu, Bowen Zhou, Chaochao Lu, Youbang Sun",
+      "abstract": "Transformers owe much of their strong long-context retrieval capability to a token-level memory that grows with context length. This flexibility, however, incurs a quadratic computation complexity during training and a key--value cache that grows linearly during autoregressive inference. Recurrent alternatives offer efficient decoding by compressing the entire history into a fixed-size state, but often underperform on recall-intensive tasks since earlier associations usually get overwritten by subsequent updates, and only the most recent contextual information is retained. In this paper, we introduce Memory-Anchor Routing across Context History (MARCH), a network architecture that effectively scales state-space models beyond a fixed-size dimension, while maintaining computational efficiency over long-sequences. MARCH periodically caches cumulative recurrent-state checkpoints as state anchors and associates each anchor with a compact, content-conditioned anchor key. This lets MARCH maintain a memory bank, which can grow as context length increases, providing a controllable trade-off between historical resolution and memory cost. At each token, MARCH produces an anchor query to attend all causally available state anchors, and the output is calculated as an attention-style aggregation over all historical anchors along the current state. We show that after standard pretraining, MARCH consistently outperforms multiple linear attention variants across commonsense reasoning, LongBench, and in-context retrieval. These results demonstrate that content-routed state caching substantially strengthens recurrent long-range memory while preserving its native computation path.",
+      "url": "http://arxiv.org/abs/2608.12435v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12435v1",
+      "tldr": "MARCH improves recurrent sequence models by periodically caching content-addressable \"state anchors\" from the recurrent history, enabling a growing memory bank that allows selective retrieval of earlier states and substantially boosts long-context recall while retaining efficient recurrent computation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai AI Laboratory",
+        "Fudan University",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Shanghai AI Laboratory, Fudan University, Tsinghua University",
+      "score": 3.6708072663578335,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.12448v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812448v1-exemplar-based-objective-classification-of-gust-induced-loads-across-multiple-flight-conditions",
+      "source": "arxiv",
+      "title": "Exemplar-based objective classification of gust-induced loads across multiple flight conditions",
+      "authors": [
+        "Paolo Olivucci",
+        "Kowshik Srivatsan",
+        "David E. Rival"
+      ],
+      "authors_text": "Paolo Olivucci, Kowshik Srivatsan, David E. Rival",
+      "abstract": "Is it possible to find an objective classification criterion that organizes the complexity of gust-induced loads across many flight conditions? And one that remains as interpretable as a labelling based on coarse parameters, such as the flight attitude? Our approach encodes a large number of experimental observations through a machine-learned representation and applies a summarization procedure to select a minimal subset of highly significant exemplars. The exemplars provide a similarity-based objective classification criterion of all the observations, they can be more conveniently inspected by experts and can become subject of more refined experiments. We demonstrate the approach on a database of 3480 pressure-load measurements induced by random gusts on a flying-wing model across six flight attitudes. We find nine fundamental response types that recur across multiple attitudes; analysis of a type's transient response enables physical intuition into the underlying fluid mechanics.",
+      "url": "http://arxiv.org/abs/2608.12448v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12448v1",
+      "tldr": "The paper proposes an exemplar-based, data-driven classification method that uses a machine-learned representation and summarization to objectively classify gust-induced loads across multiple flight attitudes, identifying nine recurring fundamental response types from 3,479 experimental measurements on a flying-wing model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TU Braunschweig"
+      ],
+      "affiliations_text": "TU Braunschweig",
+      "score": 3.6656128634435565,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.12617v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812617v1-the-boolean-power-of-relu",
+      "source": "arxiv",
+      "title": "The Boolean Power of ReLU",
+      "authors": [
+        "Pablo Barceló",
+        "Floris Geerts",
+        "Matthias Lanzinger",
+        "Klara Pakhomenko",
+        "Jan Van den Bussche"
+      ],
+      "authors_text": "Pablo Barceló, Floris Geerts, Matthias Lanzinger, Klara Pakhomenko, Jan Van den Bussche",
+      "abstract": "We prove that, on finite simple undirected graphs equipped with a single Boolean node feature, the Boolean queries expressible in $Σ$-MPLang, for any collection $Σ$ of eventually constant activation functions and with arbitrary real coefficients, form a strict subclass of the Boolean queries expressible in ReLU-MPLang. We thereby settle a recently posed open problem: whether ReLU-MPLang is more powerful than trReLU-MPLang when it comes to Boolean queries. In particular, this implies that ReLU-GNNs are strictly more expressive than {TrReLU,id}-GNNs with respect to Boolean queries on Boolean-featured graphs.",
+      "url": "http://arxiv.org/abs/2608.12617v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12617v1",
+      "tldr": "ReLU-based message-passing GNNs are strictly more expressive than GNNs using any eventually constant activation functions (such as truncated ReLU) for Boolean queries on Boolean-featured graphs, resolving an open problem in GNN expressivity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Antwerp",
+        "Universiteit Hasselt",
+        "TU Wien",
+        "Pontifical Catholic University",
+        "IMFD & CENIA"
+      ],
+      "affiliations_text": "University of Antwerp, Universiteit Hasselt, TU Wien, Pontifical Catholic University, IMFD & CENIA",
+      "score": 3.5765255321365363,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.12441v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812441v1-dual-spatial-temporal-attribution-architecture-aligned-post-hoc-explainability-for-recurrent-graph-anomaly-detection",
+      "source": "arxiv",
+      "title": "Dual Spatial-Temporal Attribution: Architecture-Aligned Post-Hoc Explainability for Recurrent Graph Anomaly Detection",
+      "authors": [
+        "Iyad Assaad Nekka",
+        "Hamida Seba",
+        "Khaled Walid Hidouci",
+        "Karima Amrouche"
+      ],
+      "authors_text": "Iyad Assaad Nekka, Hamida Seba, Khaled Walid Hidouci, Karima Amrouche",
+      "abstract": "Deep learning detectors for anomalies in dynamic graphs have reached strong accuracy, yet they remain opaque: when an edge is flagged, the analyst receives a score but no reason. This opacity is untenable in the cooperative, regulated information systems where such detectors are deployed, where automated decisions must be auditable and trustworthy. We address this gap for AddGraph, the foundational GCN+GRU framework for edge-level anomaly detection in dynamic graphs, which to our knowledge has never been equipped with any form of explainability. We present a strictly post-hoc explainability framework, X-AddGraph, built on a Dual Spatial-Temporal Attribution (DSTA) mechanism whose three components are each aligned with one of AddGraph's architectural modules: a gradient-based relevance attribution over the current adjacency structure (spatial), a direct reading of the contextual attention weights already computed during inference (short-term temporal, at zero additional cost), and a gradient rollback through the recurrent hidden states (long-term temporal). Because the detector is frozen, detection performance is preserved exactly (Delta AUC = 0, verified empirically to ten decimal places). On the UCI Message benchmark, our trained AddGraph baseline reaches an average per-snapshot AUC of 0.8705, exceeding the originally published result; X-AddGraph reproduces every score identically while adding explanations where none existed. Evaluated across four edge populations - confident true positives, low-confidence true positives, false positives, and random samples - the long-term attribution identifies historical snapshots carrying significantly more counterfactual signal than random selection (0.127 vs. 0.074), a capability that no spatially-blind explainer can provide. We release our implementation for full reproducibility.",
+      "url": "http://arxiv.org/abs/2608.12441v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12441v1",
+      "tldr": "X-AddGraph introduces a strictly post-hoc, architecture-aligned Dual Spatial-Temporal Attribution framework that equips the AddGraph dynamic graph anomaly detector with spatial, short-term, and long-term temporal explanations without altering detection performance (ΔAUC = 0).",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Higher School of Computer Science (ESI)",
+        "Université Claude Bernard Lyon 1"
+      ],
+      "affiliations_text": "National Higher School of Computer Science (ESI), Université Claude Bernard Lyon 1",
+      "score": 3.4789180404323434,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.12525v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812525v1-optimal-heat-storage-sizing-for-district-heating-networks-to-maximize-electricity-revenue-from-combined-heat-and-power-units",
+      "source": "arxiv",
+      "title": "Optimal Heat Storage Sizing for District Heating Networks to Maximize Electricity Revenue from Combined Heat and Power Units",
+      "authors": [
+        "Martin Sollich",
+        "Maarten Blommaert"
+      ],
+      "authors_text": "Martin Sollich, Maarten Blommaert",
+      "abstract": "Integrating heat storages in district heating networks (DHNs) supports managing dynamic characteristics such as heat-demand variations and changing energy prices, and the intermittency of renewable sources. A common application are DHNs with combined heat and power (CHP) units, where a storage allows shifting heat extraction to periods with favorable electricity prices. Although the benefits of heat storage in DHNs are well established, determining the optimal storage size remains challenging due to the diversity of DHNs in terms of heat sources, production and consumption patterns, network heat losses, and fuel costs. This paper presents a scalable, automated methodology for optimizing short-term heat storage in DHNs using mathematical optimization. The nonlinear, physics-based approach models the DHN, heat producers, and storages simultaneously to minimize total economic cost through optimal storage sizing, explicitly considering time-varying heat-production costs, heat demands, and heat losses. The methodology is demonstrated on a 3rd-generation CHP-DHN in Belgium with 30 consumers, exceeding the scale of previous physics-based storage-sizing studies. For this system, optimal storage integration reduces the 20-year cost by 730 k EUR (16.5%), from 4.41 M EUR to 3.68 M EUR. The reduction results from a 1.07 M EUR decrease in heat-production cost achieved by shifting heat extraction to periods of low electricity prices, while the storage investment amounts to 323 k EUR. A comparison to a commonly used simplified storage sizing method, which fails to identify the optimal storage size, demonstrates the advantage of the proposed holistic, physics-based optimization approach in ensuring feasible designs, accurate cost assessments, and optimal storage sizing.",
+      "url": "http://arxiv.org/abs/2608.12525v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12525v1",
+      "tldr": "This paper presents a scalable, physics-based optimization methodology for sizing short-term heat storage in district heating networks with combined heat and power units, demonstrating on a real Belgian network a 16.5% reduction in 20-year costs by shifting heat production to periods of low electricity prices.",
+      "detailed_reading": null,
+      "affiliations": [
+        "EnergyVille",
+        "KU Leuven"
+      ],
+      "affiliations_text": "EnergyVille, KU Leuven",
+      "score": 3.2656055453015522,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.12477v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812477v1-learning-under-treatment-induced-label-indeterminacy-with-expert-annotations-of-counterfactual-outcomes-a-case-study-in-neurological-prognostication",
+      "source": "arxiv",
+      "title": "Learning Under Treatment-Induced Label Indeterminacy with Expert Annotations of Counterfactual Outcomes: A Case Study in Neurological Prognostication",
+      "authors": [
+        "Xiaobin Shen",
+        "Chloe Y. H. Huang",
+        "Jonathan Elmer",
+        "George H. Chen"
+      ],
+      "authors_text": "Xiaobin Shen, Chloe Y. H. Huang, Jonathan Elmer, George H. Chen",
+      "abstract": "Clinical prediction models are often developed as if the outcome of interest were cleanly observed for every patient. This assumption fails when treatment decisions make the clinically relevant outcome permanently unobservable. As a case study of this problem, we consider post-cardiac-arrest neurological prognostication using a cohort of 2,497 patients, including 1,429 patients whose outcomes were rendered indeterminate by treatment decisions. These patients with indeterminate outcomes were reviewed by independent clinical experts, who provided their guesses of counterfactual outcomes about what would have happened to the patients. We refer to these patients as uncertain cases. We also have patients for whom we observe their clinically relevant outcomes; we refer to these patients as certain cases. We propose a framework for evaluating prediction models that explicitly splits the evaluation between certain and uncertain cases. Here, we cannot easily evaluate both types of cases in a uniform manner as the available target labels differ. We then propose a simple prediction model that uses target labels from both certain and uncertain cases in a manner that allows us to trade off between them. Across the proposed neural model and a collection of tabular baselines, models with similar certain-case AUROC can nevertheless differ substantially in both certain-case Brier score and their probability estimates for uncertain cases. Improving alignment with target labels of uncertain cases for our proposed model generally comes at the cost of worse accuracy on certain cases, highlighting an explicit tradeoff that standard evaluation conceals. These results show that when treatment decisions determine whether clinically meaningful outcomes remain observable, conventional evaluation metrics can miss important failure modes in the very patients for whom prognostic support matters most.",
+      "url": "http://arxiv.org/abs/2608.12477v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12477v1",
+      "tldr": "A TLDR: This paper formalizes treatment-induced label indeterminacy in post-cardiac-arrest prognostication, proposes a split evaluation framework that separately assesses models on certain observed outcomes and expert-annotated counterfactual outcomes for uncertain cases, and shows that optimizing uncertain-case alignment can trade off against certain-case accuracy in ways standard metrics conceal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University",
+        "University of Pittsburgh"
+      ],
+      "affiliations_text": "Carnegie Mellon University, University of Pittsburgh",
+      "score": 3.0062352998554593,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.12422v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812422v1-which-site-and-when-a-free-satellite-data-test-of-himalayan-glacial-lake-bursts-landslides-and-ice-floods",
+      "source": "arxiv",
+      "title": "Which Site, and When: A Free-Satellite-Data Test of Himalayan Glacial Lake Bursts, Landslides, and Ice Floods",
+      "authors": [
+        "Matthew Kahn",
+        "Milan Arjel",
+        "Nirmala Adhikari",
+        "Mingmar Sherpa",
+        "James Pope"
+      ],
+      "authors_text": "Matthew Kahn, Milan Arjel, Nirmala Adhikari, Mingmar Sherpa, James Pope",
+      "abstract": "Two free satellite signals carry real information about glacial-lake outburst risk in the Nepal Himalaya: radar interferometry sees a moraine dam slowly sagging, and satellite weather marks the weeks when a primed lake is under stress. A companion feasibility study found that deformation indicates which lake is destabilizing and weather indicates when it is at risk, but proposed no predictive model. To address this gap, we propose and evaluate models that predict which site is susceptible and when a trigger arrives. We test three related hazards on free data alone: large moraine- and ice-dammed bursts, rainfall-triggered landslides, and smaller floods from ponds on and around a glacier. Each hazard gets two questions, never blended. Using 589 dated outbursts from HMAGLOFDB and several thousand catalogued landslides, we match each event against similar but unfailed sites, and hold every model to a strong simple baseline under spatial cross-validation that withholds whole map tiles, so no model succeeds by recognising a trained-on neighbourhood. Antecedent weather times the trigger at ROC 0.73 for big bursts, 0.83 for landslides, and 0.82 for small floods. Terrain ranks susceptibility only in part: scored naively it appears near 0.9, largely because catalogued failures cluster in wetter ranges; matched against comparable nearby sites the honest figures are 0.76, 0.71, and 0.54 (no better than chance). The burst signal holds within single regions, reaching 0.89 in Nepal alone. Five deep-learning models do not decisively beat a simple gradient-boosted baseline. Three score marginally higher on landslides, a hint too small to confirm. For the lake hazards the baseline wins outright, reproduced by a three-rule decision tree on ruggedness and monsoon rainfall. We close with a ranked Nepal watchlist, a prioritisation aid, not a prediction, and note where free data reaches its limits.",
+      "url": "http://arxiv.org/abs/2608.12422v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12422v1",
+      "tldr": "The study shows that free satellite data—radar deformation and weather signals—can predict *which* Himalayan glacial lakes are susceptible and *when* triggers occur (with honest ROC scores of 0.76–0.83 for bursts and landslides), while highlighting that simple baselines beat deep learning and that terrain-based susceptibility is often overestimated unless matched against comparable unfailed sites.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Cornell University",
+        "Tribhuvan University",
+        "University of Bristol",
+        "University of Alabama at Birmingham"
+      ],
+      "affiliations_text": "Cornell University, Tribhuvan University, University of Bristol, University of Alabama at Birmingham",
+      "score": 2.9695243129663944,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.12446v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/14/260812446v1-personalized-scorer-modeling-a-learning-based-framework-for-deriving-robust-sleep-stage-labels-from-multiple-experts",
+      "source": "arxiv",
+      "title": "Personalized Scorer Modeling: A Learning-Based Framework for Deriving Robust Sleep Stage Labels from Multiple Experts",
+      "authors": [
+        "Seyyed Ali Hoseini",
+        "Javad Baseri",
+        "Hamid Saadatfar",
+        "Edris Hoseini Gol",
+        "AmirHossein Eshghi"
+      ],
+      "authors_text": "Seyyed Ali Hoseini, Javad Baseri, Hamid Saadatfar, Edris Hoseini Gol, AmirHossein Eshghi",
+      "abstract": "Sleep stage classification is important for the diagnosis and management of sleep disorders, yet most automatic staging studies evaluate models against a single reference hypnogram despite known inter-scorer variability. This study investigates whether multi-scored datasets can be used to construct more reliable reference labels from the collective behavior of multiple experts. We use the publicly available DOD-H and DOD-O datasets. EEG (C3-M2) and chin EMG signals were segmented into 30-s epochs, and 30 features were extracted from each modality, yielding 60 features for EEG+EMG. We propose a learning-based hypnogram (LBH) that models the stage-specific behavior of each scorer using confusion matrices derived from machine-learning models. After column normalization, these matrices estimate the probability of each true sleep stage given each scorer's label; probabilities are aggregated across scorers to assign the final label for each epoch. LBH was evaluated with random forest, support vector machine, and multilayer perceptron classifiers under EEG-only and EEG+EMG settings, and compared with the dataset hypnogram (DH) and best-scorer hypnogram (BSH). LBH consistently improved overall performance. The best results were obtained with random forest and EEG+EMG, reaching 86.07% accuracy, 85.46% precision, and 85.29% F1-score on DOD-H, and 86.04% accuracy, 85.21% precision, and 84.70% F1-score on DOD-O. These findings suggest that personalized scorer modeling can improve reference hypnogram construction without discarding information from individual experts.",
+      "url": "http://arxiv.org/abs/2608.12446v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12446v1",
+      "tldr": "The paper proposes a learning-based hypnogram framework that models each expert scorer's stage-specific behavior via confusion matrices and aggregates their probabilities to derive more robust sleep stage labels from multi-scored datasets, consistently improving classification performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Birjand"
+      ],
+      "affiliations_text": "University of Birjand",
+      "score": 2.6859582014087184,
+      "score_text": "2.7"
+    }
+  ]
+}
