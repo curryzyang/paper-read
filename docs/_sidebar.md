@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-08-17
+  - [日报](/2026/08/17/README)
 - 2026-08-14
   - [日报](/2026/08/14/README)
   - [精读 · Structure-preserving uncertainty quantification for GENERIC dynamics](/2026/08/14/260812624v1-structure-preserving-uncertainty-quantification-for-generic-dynamics)
