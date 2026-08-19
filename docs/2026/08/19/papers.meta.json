@@ -1,0 +1,731 @@
+{
+  "label": "2026-08-19",
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T03:12:09",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.14619v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814619v1-pikfno-an-interpretable-neural-operator-based-on-physics-informed-kernel-function",
+      "source": "arxiv",
+      "title": "PIKFNO: An Interpretable Neural Operator Based on Physics Informed Kernel Function",
+      "authors": [
+        "Yuan Guo",
+        "Hanshu Chen",
+        "Zhuojia Fu"
+      ],
+      "authors_text": "Yuan Guo, Hanshu Chen, Zhuojia Fu",
+      "abstract": "This work proposes a new interpretable neural operator framework, termed the Physics Informed Kernel Function Neural Operator (PIKFNO), which explicitly incorporates physics informed kernel functions derived from governing equations into the neural operator architecture. Unlike traditional neural operators such as DeepONet, which rely on deep networks to implicitly learn basis functions, PIKFNO constrains the trunk network through physics informed kernel functions, thereby aligning its operator structure with the kernel expansions used in meshless collocation methods. Two construction strategies are introduced: one learns kernel functions directly from data, where the learned kernel can be regarded as a nonsingular fundamental solution, while the other builds them through transformations of analytical fundamental solutions. Numerical experiments demonstrate that PIKFNO achieves high predictive accuracy with substantially improved interpretability and superior generalization under limited training data. The proposed framework offers a new pathway for developing efficient, physically consistent, and interpretable neural operators.",
+      "url": "http://arxiv.org/abs/2608.14619v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14619v1",
+      "tldr": "PIKFNO introduces an interpretable neural operator that explicitly embeds physics-informed kernel functions derived from governing equations into its architecture, achieving high accuracy, physical consistency, and improved generalization under limited training data.",
+      "detailed_reading": {
+        "motivation": "传统神经算子如DeepONet虽在PDE求解中表现优异，但内部结构缺乏显式物理意义，可解释性差，且通常需要大量训练数据，外推能力和物理一致性不足。现有物理信息方法多通过损失项施加软约束，无法在算子层面保证物理一致性。受无网格配点法中核函数由控制方程决定这一思想启发，本文提出将物理信息核函数显式嵌入神经算子架构，以构建兼具可解释性、物理一致性与数据驱动表达力的算子学习框架。",
+        "method": "提出PIKFNO框架，在DeepONet基础上修改trunk网络：将trunk网络约束为径向基函数形式，核函数中心与边界配点对齐，使算子结构等同于无网格配点法中的核展开。两种核函数构造策略：PIKFNO_v1在难以获得解析基本解时，用一维神经网络直接学习核函数ψ(r)，训练后可视为非奇异数值基本解；PIKFNO_v2在已知基本解φ(r)时，将其线性变换为ψ(r)=k*φ(β*r)+b，其中k、β、b为可学习参数且β>0以避免r=0处的奇异性。框架输入为边界离散采样值（每边40点共160特征），trunk输入空间坐标(x,y)，输出为PDE解。训练采用与DeepONet相同的监督学习流程，损失为预测解与数值参考解之间的误差。",
+        "result": "在二维Laplace方程从边界条件到解的算子学习实验中，DeepONet测试误差为8.32e-4，PIKFNO_v1为8.90e-4，PIKFNO_v2为1.65e-3。PIKFNO_v1精度接近DeepONet但参数更少，PIKFNO_v2收敛最快。训练数据量减少时，PIKFNO_v2优势显著：训练集仅50个样本时误差1.58e-2，优于DeepONet的8.18e-2；500个样本时误差4.87e-3，优于DeepONet的3.57e-3。PIKFNO_v1学习到的核函数可直接作为基本解用于MFS，在解析解u=x^3-3xy^2的测试中相对误差极小，验证了数据驱动发现基本解的能力。",
+        "conclusion": "PIKFNO通过将物理信息核函数嵌入神经算子结构，实现了物理先验与数据驱动学习的有机融合。相比传统神经算子，PIKFNO具有更强的可解释性、在有限训练数据下保持高精度，且收敛更快；PIKFNO_v1还能为无网格方法提供数值基本解，为发展高效、物理一致且可解释的神经算子提供了新途径。",
+        "key_details": "关键细节包括：PIKFNO_v1的核函数由1D神经网络参数化，输入为径向距离r，输出为非奇异数值基本解，训练后可与PIKFNO框架解耦独立使用；PIKFNO_v2的核函数仅含3个可学习参数（k,β,b），β>0消除奇异性，线性变换保持物理一致性同时改善系数数值范围；branch网络采用[160,160,160,160]结构，trunk网络DeepONet为[2,160,160,160]，PIKFNO_v1为[1,160,160,1]（输入r），PIKFNO_v2无隐藏层；训练数据由传统数值求解器在40×40网格上生成，训练/测试各5000样本；PIKFNO_v1的核函数在r=0处无奇异性但值与PIKFNO_v2几乎一致，符合奇异边界法中源点位置决定ψ(0)的规律；局限性包括PIKFNO_v2因表达空间受限导致精度低于DeepONet，且依赖基本解先验。"
+      },
+      "affiliations": [
+        "Hohai University"
+      ],
+      "affiliations_text": "Hohai University",
+      "score": 6.476648318672506,
+      "score_text": "6.5"
+    },
+    {
+      "id": "2608.14570v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814570v1-coarse-to-fine-multi-resolution-diffusion-models-for-trajectory-generation-in-urban-systems",
+      "source": "arxiv",
+      "title": "Coarse-to-Fine Multi-Resolution Diffusion Models for Trajectory Generation in Urban Systems",
+      "authors": [
+        "Wen Ye",
+        "Muyan Weng",
+        "Chuizheng Meng",
+        "Hao Niu",
+        "Yizhou Zhang",
+        "Yan Liu"
+      ],
+      "authors_text": "Wen Ye, Muyan Weng, Chuizheng Meng, Hao Niu, Yizhou Zhang, Yan Liu",
+      "abstract": "Understanding human mobility is critical for a wide range of urban applications, including traffic management, epidemic control, and urban planning. However, due to privacy concerns, the availability of large-scale public trajectory data remains limited, posing challenges for downstream mobility analysis. Existing methods for synthetic trajectory generation primarily focus on matching global distribution similarity, while often overlooking mobility patterns across different spatial and temporal resolutions that are essential for practical utility.\n  To address these challenges, we propose a novel multi-resolution diffusion framework, MR-Traj, for large-scale trajectory generation. MR-Traj explicitly models trajectories as compositions of coarse-grained milestones and fine-grained segments, enabling the capture of complex spatial-temporal dependencies at multiple resolutions. Experimental results demonstrate that MR-Traj achieves comparable performance to state-of-the-art methods in terms of global distribution similarity, while consistently outperforming them in modeling fine-resolution mobility patterns and supporting downstream urban mobility tasks. In addition, by introducing stochasticity at multiple resolution levels, MR-Traj generates more diverse trajectories, which empirically reduces trajectory linkage risk under a seed-guided data release setting. Our code is available at https://github.com/Ray0202/MR-Traj.",
+      "url": "http://arxiv.org/abs/2608.14570v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14570v1",
+      "tldr": "MR-Traj is a coarse-to-fine multi-resolution diffusion framework that generates synthetic urban trajectories by modeling global milestones and fine-grained segments, improving fidelity across spatial-temporal resolutions, supporting downstream mobility tasks, and reducing trajectory linkage risk.",
+      "detailed_reading": {
+        "motivation": "大规模真实轨迹数据因隐私约束难以公开获取，现有合成轨迹生成方法主要追求全局分布相似性，却忽略了对下游城市应用至关重要的跨空间和时间分辨率的细粒度移动模式，导致生成轨迹在局部保真度与下游任务效用上不足。",
+        "method": "提出MR-Traj多分辨率扩散框架，将轨迹显式建模为粗粒度里程碑与细粒度片段两部分。首先用均匀采样从原始轨迹提取里程碑序列，训练一个里程碑级扩散模型（U-Net骨干，条件嵌入模块拼接出行时间、距离、起终点等全局属性）学习整体轨迹结构；随后将原轨迹切分为以里程碑为端点的等长片段，训练片段级扩散模型（同样采用U-Net，以对应里程碑和片段级条件为引导）逐段生成细粒度局部移动，最后按顺序拼接里程碑与片段得到完整合成轨迹。训练采用改进余弦噪声调度的去噪扩散目标，推理时先在里程碑层级采样，再在片段层级逐段生成。",
+        "result": "在大型真实城市移动数据集上的实验表明，MR-Traj在全局分布相似性上与最先进方法相当，但在细分辨率移动模式建模上持续优于基线，并在出租车目的地预测、异常移动模式识别等下游城市任务中表现更优；同时多分辨率级别引入随机性使生成轨迹更多样，在种子引导的数据发布设置下经验上降低了轨迹链接风险。",
+        "conclusion": "MR-Traj通过显式建模多分辨率层次结构，有效兼顾了全局移动结构与局部细粒度细节，提升了合成轨迹的局部保真度、多样性和下游分析效用，为城市系统大规模轨迹生成与负责任数据发布提供了可行方案。",
+        "key_details": "关键点包括：里程碑提取比较了均匀采样与开放角度关键点提取，实验表明均匀采样在该场景更有效且保证等长片段从而简化建模；采用U-Net作为两个扩散模型骨干，并引入余弦噪声调度以提高训练效率；理论分析通过Lipschitz条件和Total Variation距离界证明仅优化全局分布不足以最大化下游效用，必须在联合与边际分布上同时建模；多分辨率噪声注入增强了生成多样性，可降低轨迹链接隐私风险；局限是模型假设GPS轨迹密集且无语义标注，对语义轨迹可能需调整里程碑提取策略。"
+      },
+      "affiliations": [
+        "University of Southern California",
+        "KDDI Research, Inc."
+      ],
+      "affiliations_text": "University of Southern California, KDDI Research, Inc.",
+      "score": 4.935340361076416,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.14636v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814636v1-fractional-optimizers-meet-fractal-activation-functions-an-empirical-study-of-multi-scale-optimization-in-neural-network",
+      "source": "arxiv",
+      "title": "Fractional Optimizers Meet Fractal Activation Functions: An Empirical Study of Multi-Scale Optimization in Neural Network",
+      "authors": [
+        "Sebastian Raubitzek",
+        "Georg Goldenits",
+        "Sebastian Schrittwieser",
+        "Philip König",
+        "Kevin Mallinger"
+      ],
+      "authors_text": "Sebastian Raubitzek, Georg Goldenits, Sebastian Schrittwieser, Philip König, Kevin Mallinger",
+      "abstract": "Fractional optimization methods and fractal activation functions are two independent directions for improving neural network training. Fractional optimizers extend first-order optimization through fractional derivatives and memory effects, whereas fractal activations introduce multi-scale nonlinear representations based on self-similar Weierstrass- and Blancmange-type functions. Here, we investigate their interaction within a unified experimental framework. We evaluate fractional optimizer families on Ackley and Himmelblau benchmark surfaces, in standard form and with additive Weierstrass-type perturbations, and then in feed-forward neural networks with conventional and fractal activations on ten classification datasets. The comparison includes standard methods, regularization-style optimizers, explicit and adaptive memory-based fractional optimizers, and other representative literature methods. Overall, fractional optimization and fractal activations show useful but selective pairings. Regularization-style fractional scaling performs well with selected fractal activations in network training, while Grünwald--Letnikov memory is most relevant on perturbed surfaces. Adaptive memory improves plain memory substitution in several cases, supporting controlled fractional memory as a promising direction rather than a universal replacement.",
+      "url": "http://arxiv.org/abs/2608.14636v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14636v1",
+      "tldr": "This empirical study systematically evaluates fractional optimizers combined with fractal activation functions in neural networks, finding that the two approaches have useful but selective pairings—regularization-style fractional scaling works well with certain fractal activations, while adaptive memory-based fractional optimizers show promise as a controlled improvement over plain memory methods.",
+      "detailed_reading": {
+        "motivation": "神经网络训练中，分数阶优化器与分形激活函数分别从优化和表示两个方向引入多尺度机制，但二者尚未在统一框架下系统考察。本文试图验证：当分形激活函数通过自相似的Weierstrass/Blancmange类级数向表示和梯度注入多尺度粗糙结构时，以分数阶导数或记忆效应为核心的优化器能否成为其天然配套，从而提升训练效果。",
+        "method": "方法采用两阶段统一实验：第一阶段在Ackley和Himmelblau基准曲面（标准型及叠加截断Weierstrass型扰动）上评估优化器对已知极小值的可达性与鲁棒性；第二阶段在十个公共分类数据集上用前馈神经网络比较四种分形激活（Weierstrass/Blancmange型）与常规激活（ReLU/tanh等）。输入为二维基准函数或多分类表格特征，模型为多层前馈网络，关键模块是分数阶更新规则：显式Grünwald–Letnikov记忆、Herrera式Caputo缩放、以及新提出的自适应记忆混合系数。共比较5组21种优化器，包括经典基线、正则化式分数阶缩放、记忆型分数阶、自适应记忆分数阶（AdaptiveMemoryFSGD/FRMSprop/FAdam/FAdadelta）和文献代表方法。训练流程为前向传播→反向传播得到梯度→按优化器更新参数；自适应记忆族固定分数阶，通过稳定性和损失控制的自适应系数在范数匹配的分数阶记忆梯度与普通梯度间加权，并在信任系数边界处精确退化为经典优化器。",
+        "result": "实验显示分数阶优化与分形激活存在有用但选择性的配对：正则化式分数阶缩放与选定的分形激活在网络训练中表现良好，而Grünwald–Letnikov记忆在受分形扰动的曲面上最有效；自适应记忆在多种情况下优于朴素记忆替换，但并未全面超越其他方法，没有一种组合在所有任务上普遍最优。",
+        "conclusion": "分数阶优化器和分形激活函数是同一多尺度数学机制的两端，二者结合有潜力，但不应被当作通用替代方案。受控的分数阶记忆方向值得继续探索，尤其应将自适应记忆视为对固定分数阶方法的补充而非替换。",
+        "key_details": "关键细节包括：基准曲面为Ackley和Himmelblau，扰动采用截断Weierstrass型加性项以产生受控分形粗糙度；分类实验沿用前序工作的十个OpenML数据集、前馈网络及最强的四类分形激活函数；优化器比较覆盖5组21种，显式记忆型基于Grünwald–Letnikov核，与Weierstrass型函数分数阶微分的离散形式一致；自适应记忆族固定分数阶并自适应有界信任系数，边界处精确还原经典优化器。先验上利用了分数阶可导性与分形粗糙度指数的一致性（Zähle–Ziezold结果）。主要局限是组合收益具有选择性，部分情况下无提升，且分数阶优化器的噪声敏感性和额外超参成本仍是实际应用的主要约束。"
+      },
+      "affiliations": [
+        "University of Vienna",
+        "SBA Research gGmbH"
+      ],
+      "affiliations_text": "University of Vienna, SBA Research gGmbH",
+      "score": 4.8506724897799955,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.14642v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814642v1-training-and-evaluating-ethical-reinforcement-learning-agents-on-per-episode-distributions",
+      "source": "arxiv",
+      "title": "Training and Evaluating Ethical Reinforcement Learning Agents on Per-Episode Distributions",
+      "authors": [
+        "Prabhjyot Singh",
+        "Majid Ghasemi",
+        "Mark Crowley"
+      ],
+      "authors_text": "Prabhjyot Singh, Majid Ghasemi, Mark Crowley",
+      "abstract": "Reinforcement Learning (RL) agents trained on a single reward signal exploit the gap between the designed reward and the intended behavior. This is particularly a problem when we are trying to imbue ethical behavior into RL agents. An agent can look ethical on average while concentrating its violations in a few bad episodes, and a creature in the environment harmed in one episode is not restored by good conduct in another. We compare four ways of training ethical behavior in Craftax, an open-ended survival benchmark. The four are: scalar penalties with termination, a linear multi-objective weight sweep, an adaptive Lagrangian constraint, and a non-compensatory utility optimized per episode under the Expected Scalarized Returns (ESR) criterion. All are evaluated under a single detector-based protocol that counts every violation in every episode without censoring. On the frontier of mean return against mean violation rate, the four methods are indistinguishable; per episode they separate sharply. At matched mean return, the ESR agent holds its stated budget of one violation in effectively every episode (worst-decile 1.04 +/- 0.07 violations), the Lagrangian leaks past the same budget (1.14 +/- 0.03), and the weight sweep's worst episodes double it (2.20 +/- 0.20). An observation-augmentation control attributes the separation to the training objective rather than to what the agent observes, and the per-episode guarantee costs nothing on the mean frontier. When ethical violations do not average away across episodes, we argue both training and evaluation must target the per-episode distribution rather than the mean.",
+      "url": "http://arxiv.org/abs/2608.14642v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14642v1",
+      "tldr": "TLDR: Training ethical RL agents with a per-episode, non-compensatory ESR objective instead of mean-based or linear-scalarized objectives prevents ethical violations from being averaged away across episodes, and in Craftax it holds the stated per-episode violation budget at no cost to mean return—so both training and evaluation should target per-episode distributions rather than means.",
+      "detailed_reading": {
+        "motivation": "强化学习智能体在单一奖励信号下会利用设计奖励与真实意图之间的差距，这在赋予智能体伦理行为时尤为严重。一个智能体可能在平均意义上看起来合伦理，却将违规集中在少数恶劣回合中；环境中的一个生物在一个回合中被伤害，并不会因另一个回合中的良好行为而得到弥补。因此当伦理违规不能跨回合平均抵消时，训练和评估都必须针对每个回合的分布而非均值。",
+        "method": "在Craftax开放世界生存基准上比较四种伦理训练方法：带终止的标量惩罚、线性多目标权重扫描、自适应拉格朗日约束、以及基于每回合期望标量化回报（ESR）的非补偿效用。环境奖励为双分量向量[r_ext, r_eth]，其中r_eth在发生违规时为-10；定义三种困境（禁止杀戮、可持续性、比例武力）。ESR-PPO通过回合内累计回报的效用增量作为telescoping伪奖励，使用平滑阈值字典序效用u_TLO = sigma(s*(tau_tol - v))*R_ext - rho_u*v，并可选通过Bradley-Terry偏好学习蒸馏该效用；拉格朗日基线采用对偶上升更新约束乘子。所有方法在共享检测器环境中评估，不删减任何步骤，统计每个回合的违规分布。",
+        "result": "在平均回报对平均违规率的前沿上四种方法无法区分，但按每回合分布则清晰分离。在匹配的平均回报下，ESR智能体几乎在每个回合都保持其声明的预算（最差十分位1.04±0.07违规），拉格朗日略超预算（1.14±0.03），权重扫描的最差回合翻倍（2.20±0.20）。观察增强对照表明分离来自训练目标而非观察内容，且每回合保证在平均前沿上不产生代价。",
+        "conclusion": "当伦理违规不能跨回合平均抵消时，训练和评估必须针对每回合分布而不是均值。非补偿效用目标能在不牺牲平均回报的前提下将每回合违规数控制在预算内，优于平均约束方法，且该结论在方法论上归因于目标设计而非观测信息。",
+        "key_details": "关键实现细节包括：道德惩罚为事件触发且每回合固定-10，不提供正塑形；效用u_TLO使用逻辑门控sigma(s*(tau_tol-v))，sharpness s=12，容差tau_tol=0.5（严格）或k+0.5（容忍k次违规），每违规额外成本rho_u=10或1；ESR与SER的区别在于期望与效用顺序，线性效用下二者等价；评估采用共享检测器环境，无删减的逐步计数，报告标准差、任意违规概率和CVaR（最差十分位均值）等分布指标；随机策略和环境意味着不能保证完全干净回合；线性于状态-动作占用测度的统计量（如均值前沿）无法区分每回合目标与期望目标，分离必须出现在高阶矩。蒸馏变体从已训练智能体的回合返回池中生成偏好对，用Bradley-Terry损失拟合MLP，输出重标定到游戏回报单位。拉格朗日预算d在{0.5,1,2,4}中扫描，权重扫描w_eth在{0.1,0.3,1,3,10}中。"
+      },
+      "affiliations": [
+        "University of Waterloo"
+      ],
+      "affiliations_text": "University of Waterloo",
+      "score": 4.7310552245444395,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.14620v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814620v1-explaining-reinforcement-learning-decisions-in-self-adaptive-systems",
+      "source": "arxiv",
+      "title": "Explaining Reinforcement Learning Decisions in Self-adaptive Systems",
+      "authors": [
+        "Jasmina Gajcin",
+        "Juan C. Rosero",
+        "Ivana Dusparic"
+      ],
+      "authors_text": "Jasmina Gajcin, Juan C. Rosero, Ivana Dusparic",
+      "abstract": "Reinforcement Learning (RL) has been extensively used in autonomous and self-* systems, but RL policies, especially deep RL ones relying on neural networks, lack transparency and are difficult to understand. This can lead to diminished user trust, and makes for a more challenging verification of systems. To address this challenge, this paper introduces Explanations using Alternative Realities for Reinforcement Learning (EARL), a Python library to produce counterfactual explanations in RL settings. This library allows the user to produce explanations by exploring What-if scenarios to clarify agent behavior by comparing possible outcomes. Counterfactual explanations have been shown to be intuitive and user-friendly in psychology research, but have only recently been explored in RL, with existing implementations usually limited to toy examples and benchmarks. EARL supports counterfactual explanation generation in realistic RL-based self-adaptive systems. To demonstrate its applicability, we demonstrate its use in a simulation of CitiBikes, a self-adaptive bike-sharing system, and we provide evaluations showing how it performs in real applications.",
+      "url": "http://arxiv.org/abs/2608.14620v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14620v1",
+      "tldr": "EARL is a Python library that generates counterfactual \"what-if\" explanations for reinforcement learning decisions in self-adaptive systems, demonstrated on a CitiBikes bike-sharing simulation to improve transparency and user trust.",
+      "detailed_reading": {
+        "motivation": "深度强化学习策略在自适应系统中缺乏透明度，导致用户信任降低并增加系统验证难度；现有XRL方法多面向开发者，依赖低层可视化或全局近似，不便于非专家理解。反事实解释在心理学和监督学习中已被证明直观有效，但在RL中研究较少，且现有实现多局限于玩具环境，缺少支持真实RL自适应系统的统一开源工具。因此本文提出EARL库，用于在RL场景中生成反事实解释。",
+        "method": "EARL是一个模块化Python库，包含解释方法、模型包装器、评估接口以及DQN/PPO默认实现。解释方法模块集成了四种反事实生成算法：GANterfactual-RL（基于StarGAN的域转移，提供非图像版本）、RACCER-HTS（启发式树搜索）、RACCER-Advance（NSGA-II从当前状态搜索未来动作序列）和RACCER-Rewind（NSGA-II修改过去动作序列）。模型包装器为不同RL模型提供统一接口，使解释方法无需修改即可调用智能体动作和决策指标；评估接口计算覆盖率、生成时间、相似性、可行性和多样性。在CitiBikes案例中，环境包含5个站点、38维状态特征，动作为多离散的源站/目标站/转移车辆数；先训练PPO黑盒策略，再通过自定义generate_obs、set_nonstoch_state等环境修改实现任意中间状态重置，最后对100个高信息量状态生成反事实解释。",
+        "result": "在CitiBikes仿真环境中，EARL成功为RL智能体的重定位决策生成反事实解释，展示了策略会从车辆返还较多的站点S2/S5向高需求站点S3/S4调度车辆，其中S4接收车辆最多且主要来自S2。四种反事实生成方法均可在该真实规模任务上运行；通过覆盖率、生成时间、特征相似性、可行性和多样性等指标，能够对不同方法进行统一比较和评估，证明EARL适用于非玩具级别的RL自适应系统。",
+        "conclusion": "EARL填补了RL反事实解释缺少统一可扩展开源库的空白，通过统一接口、模型包装器和评估框架，将原本局限于简化环境的反事实方法扩展到真实自适应系统。CitiBikes案例表明该库能够生成直观、用户友好的反事实解释，有助于提升用户信任、支持系统验证，并为进一步研究提供了可复现的实验基础。",
+        "key_details": "关键细节包括：CitiBikes环境状态特征共38维，覆盖站点车辆数、容量、天气、日类型、履约率、短缺、失败归还和行程需求等；动作空间为MultiDiscrete([num_stations, num_stations, max_bike_transfer])。奖励函数为R=-100*bike_shortage-0.01*n，即强烈惩罚短缺且轻微惩罚车辆转移。GANterfactual-RL的生成器结构为[128,128,128]，判别器为[256,256]，生成器与判别器学习率均为1e-4，训练数据规模5e5，训练timesteps为1000；RACCER-HTS迭代300次；RACCER-Advance和RACCER-Rewind设置24代、种群大小100。RACCER系列优化三个目标：最小化原状态到反事实状态之间的动作步数、保证路径在解释策略下具有高概率、降低随机环境中的不确定性。可行性约束包括站点存储车辆不超过容量、站点不能借出超过容量的车、站点短缺量不超过容量。局限性方面，GANterfactual-RL仅基于转移数据集，不考虑环境时序和随机性；RACCER需要访问执行环境；目前评估基于有限状态集，且未做用户主观研究，后续可扩展更多方法和真实部署场景。"
+      },
+      "affiliations": [
+        "Trinity College Dublin"
+      ],
+      "affiliations_text": "Trinity College Dublin",
+      "score": 4.58162374569905,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.14638v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814638v1-randomly-initialized-autoencoders-fixed-points-and-edge-of-chaos",
+      "source": "arxiv",
+      "title": "Randomly initialized autoencoders: fixed points and edge-of-chaos",
+      "authors": [
+        "Leonid Berlyand",
+        "Roman Sarapin",
+        "Yitzchak Shmalo",
+        "Victor Slavin",
+        "Sasha Sodin"
+      ],
+      "authors_text": "Leonid Berlyand, Roman Sarapin, Yitzchak Shmalo, Victor Slavin, Sasha Sodin",
+      "abstract": "In this paper we study autoencoders, a special class of deep neural nets (DNNs) whose performance can be characterized via their fixed points. This perspective naturally raises questions of existence, stability, and basins of attraction of these fixed points. These questions are addressed via the contractive properties of autoencoders, and are closely related to the notion of edge-of-chaos.\n  Edge-of-chaos (EoC) is an important notion in the theory of DNNs. It describes the critical regime separating ordered and chaotic signal propagation through a randomly initialized network. Initialization at or near this critical regime offers several theoretical and practical advantages, including stability of the network w.r.t. perturbations of the input. EoC was previously introduced for broad classes of neural networks using mean-field averaging methods. In this paper we modify the notion of EoC for the study of autoencoders. Specifically, we introduce local and global EoC for autoencoders that control local (small) and global (arbitrary) perturbations of the input respectively.\n  The study of stability of autoencoders falls within the scope of nonlinear problems in Random Matrix Theory (RMT). Our analysis of local EoC is based on spectral techniques of RMT, whereas global EoC is studied by employing Sudakov-Fernique inequality for Gaussian processes.",
+      "url": "http://arxiv.org/abs/2608.14638v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14638v1",
+      "tldr": "Randomly initialized autoencoders are analyzed via fixed-point existence, stability, and basins of attraction, introducing local and global edge-of-chaos regimes characterized using random matrix theory and Sudakov–Fernique inequality.",
+      "detailed_reading": {
+        "motivation": "自编码器作为深度学习网络，其性能可通过固定点刻画，但随机初始化下固定点的存在性、稳定性与吸引域尚不清楚。本文旨在通过自编码器的收缩性质，引入适用于自编码器的边沿混沌（EoC）概念，从而确定随机初始化方差的临界值，以指导初始化设计。",
+        "method": "本文建立理论分析框架：考虑L层全连接自编码器，输入输出维度为N，隐藏层宽度n_k满足cN≤n_k≤CN，权重矩阵元素独立同分布服从N(0,σ²/n_k)，偏置服从N(0,σ̃²)，激活函数为ReLU（α=0）或LeakyReLU（0≤α<1）。定义输入-输出雅可比矩阵J，通过随机矩阵理论（RMT）谱技术分析其算子范数的对数增长率，研究局部EoC；对全局EoC，采用Sudakov-Fernique不等式处理高斯过程，得到自编码器在整个R^N上为收缩映射的概率下界。关键步骤包括推导雅可比矩阵奇异值极限、建立临界方差条件、构造一致概率界。",
+        "result": "定理1证明：在ReLU、层宽比例存在极限的条件下，对任意输入s，几乎必然有(1/L)log||J|| → 1/2 log(σ²/2)，由此得到局部EoC临界值σ²_{L,crit,loc}趋于2，与标准DNN的σ²_crit=2一致，且σ²_{L,crit,loc}≤σ²_crit。定理2给出无偏置情况下，对于任意α∈[0,1)，存在显式常数β_α^(L)，使得当σ²适当小时，自编码器在整个输入空间上以至少1-exp(-cNL)的概率成为收缩映射，从而保证固定点的全局存在性与吸引域。",
+        "conclusion": "本文为自编码器定义了局部与全局边沿混沌，将随机初始化方差与固定点稳定性联系起来。结果表明，ReLU自编码器的局部EoC临界方差为2，与经典网络吻合；而全局EoC通过Sudakov-Fernique不等式提供了高概率收缩条件。这些理论发现为自编码器的随机初始化设计提供了依据，有助于确保非线性降维中固定点的存在性和稳定性。",
+        "key_details": "关键细节包括：权重初始化N(0,σ²/n_k)且无偏置是全局结果的前提；局部定理要求α=0（ReLU）且隐藏层宽度极限存在；全局定理允许任意LeakyReLU但要求σ̃²=0。定理2中的β_α^(L)显式依赖于层宽比例c_k和α，用于界定收缩概率。局部EoC与标准EoC之间存在不等式σ²_{L,crit,loc}≤σ²_crit，并在大L时相等。局限性在于该研究仅针对随机初始化，未涉及训练过程；全局收缩条件要求无偏置，且结果以概率形式给出，未刻画数据流形上的行为。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.548839747821479,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.14563v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814563v1-forward-pass-domain-adaptation-without-cross-layer-backpropagation",
+      "source": "arxiv",
+      "title": "Forward Pass Domain Adaptation (Without Cross-Layer Backpropagation)",
+      "authors": [
+        "Rivaan Patil",
+        "Simon Dennis",
+        "Hao Guo",
+        "Kevin Shabahang"
+      ],
+      "authors_text": "Rivaan Patil, Simon Dennis, Hao Guo, Kevin Shabahang",
+      "abstract": "Forward-Pass-Only MLP training (FPO) adapts large language models without a backward pass through the model body, achieving 2.7--3.2x the throughput of standard fine-tuning at ~40% less peak training memory, while leaving off-domain benchmarks within seed-noise of baseline, a property that full-network fine-tuning does not reliably reproduce. FPO rests on a single empirical observation: at late layers of a transformer, the output-layer prediction error approximates the true gradient with cosine similarity 0.47--0.59 across six public models we survey. We introduce a two-minute diagnostic that quantifies this approximation per layer for any model, identifying where late-layer adaptation is viable. Informed by the diagnostic, FPO computes a single error signal at the output and applies it to each target layer. No signal is propagated between layers, and no autograd graph is constructed at any point. We evaluate FPO on three model families (OLMo-2-7B, Qwen3-8B, Falcon3-7B). Across all three, FPO produces in-domain perplexity improvement and leaves MMLU, ARC-Challenge, HellaSwag, and Winogrande within seed-noise of baseline. Localizing SFT to FPO's target layers to enter this regime is also feasible, but at 2.2x the wall-clock cost of FPO.",
+      "url": "http://arxiv.org/abs/2608.14563v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14563v1",
+      "tldr": "Forward-Pass-Only MLP training (FPO) adapts large language models to domain data using only a forward pass and output-layer error signals—no cross-layer backpropagation—delivering 2.7–3.2× higher throughput and ~40% lower peak memory than standard fine-tuning while keeping off-domain benchmarks within seed noise.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "University of Melbourne",
+        "i14",
+        "University of California, Santa Cruz"
+      ],
+      "affiliations_text": "University of Melbourne, i14, University of California, Santa Cruz",
+      "score": 4.502039509020633,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.14556v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814556v1-learning-discrete-riemannian-metrics-for-physical-fields-with-cochain-frame-equivarianc",
+      "source": "arxiv",
+      "title": "Learning Discrete Riemannian Metrics for Physical Fields with Cochain-Frame Equivarianc",
+      "authors": [
+        "Dongzhe Zheng",
+        "Christine Allen-Blanchette"
+      ],
+      "authors_text": "Dongzhe Zheng, Christine Allen-Blanchette",
+      "abstract": "Physical fields on meshes require a separation between topology and geometry: conservation laws are topological and should be exact, while geometry, material response, and anisotropic coupling must be learned from data. Existing neural surrogates often mix these roles inside unconstrained message passing. We introduce Riemannian Hodge Message Passing (RHMP), which turns this separation into an architectural principle. RHMP fixes the cellular coboundaries ($d_k$) determined by oriented incidence and learns symmetric positive-definite cochain metrics ($H_k$) for geometry-dependent propagation. Treating $H_k$ as the learned metric motivates cochain-frame equivariance: physical propagation should be invariant to orthogonal changes of the hidden cochain feature basis. RHMP implements this principle with metric-weighted Hodge blocks ($d_k^\\top H_{k+1}d_k$), yielding exact cochain-complex identities ($d_{k+1}d_k=0$), nonnegative Hodge energies, positive-semidefinite operators, and exact Abelian curvature invariance. Across seven physical benchmarks spanning fluids, electromagnetism, gauge fields, and variable-mesh CFD, RHMP achieves the best overall performance, with the largest gains when topology, learned geometry, and field structure interact.",
+      "url": "http://arxiv.org/abs/2608.14556v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14556v1",
+      "tldr": "RHMP introduces Riemannian Hodge Message Passing, an architecture that fixes topological coboundaries and learns discrete Riemannian cochain metrics to enforce exact conservation laws and cochain-frame equivariance, achieving state-of-the-art performance across seven physical benchmarks.",
+      "detailed_reading": {
+        "motivation": "网格上的物理场往往被不加区分地编码为节点特征，现有神经代理在消息传递中混同了拓扑守恒律与几何/材料响应。该工作提出应将拓扑与几何分离：守恒律由组合结构决定且必须精确，而几何、材料和各向异性耦合应从数据中学习。",
+        "method": "提出黎曼Hodge消息传递(RHMP)。输入为网格上的物理场，按物理类型分配到0/1/2-上链特征；固定由定向关联决定的胞腔上边界算子d_k，不学习d_k。从关于通道帧O(C)不变的统计量（如特征范数和内积）预测SPD上链度量H_k，并用度量加权Hodge块d_k^T H_{k+1} d_k和d_{k-1}H_{k-1}^{↓}d_{k-1}^T构造Hodge消息算子；配合范数门控非线性保持上链帧等变，最后用不变/等变读出得到标量或向量场预测。训练采用监督回归/分类损失端到端优化H_k参数。",
+        "result": "在覆盖流体、电磁学、阿贝尔/非阿贝尔规范场以及逐样本可变网格CFD的七个物理基准上，RHMP取得总体最佳性能；相对于图网络、胞腔复形网络、流形规范网络和神经算子基线，拓扑、学习几何与场结构相互作用越强的任务提升越大。",
+        "conclusion": "将物理场学习形式化为固定拓扑上边界算子、仅学习离散黎曼度量的RHMP，是一种有效的架构原则。该设计同时保证精确的d_{k+1}d_k=0、非负Hodge能量、半正定Hodge算子与精确阿贝尔曲率不变性，使网络既保持物理守恒结构又能从数据中适应几何与材料响应。",
+        "key_details": "关键点包括：特征按物理量类型放置到不同上链阶数，而不是全部作为节点特征；d_k固定为定向关联矩阵，不参与学习；H_k通过O(C)不变统计量预测并限制为SPD矩阵，作为离散黎曼度量/质量矩阵；上下Hodge项分别使用d_k^T H_{k+1} d_k与d_{k-1}H_{k-1}^{↓}d_{k-1}^T，保证算子半正定；范数门控非线性避免破坏上链帧等变；Abel规范场通过d(dλ)=0获得精确规范不变性；非阿贝尔场使用上链微分加代数耦合。局限在于SPD度量的表达能力和消息传递的计算开销仍受网格规模影响。"
+      },
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 4.397318319034949,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.14634v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814634v1-metaplasticity-as-adaptive-gradient-preconditioning-for-incremental-learning",
+      "source": "arxiv",
+      "title": "Metaplasticity as adaptive gradient preconditioning for incremental learning",
+      "authors": [
+        "Isabelle Aguilar",
+        "Zayn Andre Zainal",
+        "Omid Kavehei"
+      ],
+      "authors_text": "Isabelle Aguilar, Zayn Andre Zainal, Omid Kavehei",
+      "abstract": "Biological intelligence naturally prevents catastrophic forgetting through Complementary Learning Systems (CLS) theory, a macroscopic consolidation process driven at the local level by synaptic metaplasticity: the continuous, history-dependent neuromodulation of individual synapses. While artificial neural networks struggle with the stability-plasticity dilemma in non-stationary environments, existing solutions often require task labels or incur massive memory overhead, diverging from biological reality. Re-framing this localized neuromodulation as an optimization-driven process, we introduce $\\textbf{SynGAP}$: $\\textbf{Syn}$aptic $\\textbf{G}$eometric $\\textbf{A}$daptive $\\textbf{P}$reconditioning. SynGAP is a task-free continual learning framework based on adaptive gradient preconditioning. Rather than relying on explicit episodic triggers, SynGAP simulates real-time metaplasticity by maintaining an exponential moving average of the Fisher Information Matrix over a continuous data stream. During the optimization step, these dynamic metaplastic states are translated into a bounded multiplicative mask that preconditions raw gradients, selectively attenuating updates to critical historical parameters. Empirical evaluations demonstrate SynGAP's superior ability to mitigate catastrophic forgetting compared to established baselines. On the Split CIFAR-100 benchmark, SynGAP delivers a $4\\times$ increase in accuracy compared to EWC++ and outperforms Experience Replay (ER) by almost $10\\%$, while reducing the forgetting measure by over $10\\%$ against both methods. Furthermore, on the CORe50 benchmark, SynGAP achieves about $68\\%$, a $10\\%$ improvement over optimizer baselines. By mathematically formalizing continuous biological metaplasticity as stable gradient-based regularization, SynGAP offers a highly robust and memory-efficient solution for adaptive intelligence at the edge.",
+      "url": "http://arxiv.org/abs/2608.14634v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14634v1",
+      "tldr": "SynGAP reframes biological synaptic metaplasticity as adaptive gradient preconditioning, using an online exponential moving average of the Fisher Information Matrix to selectively attenuate gradient updates and mitigate catastrophic forgetting in task-free continual learning.",
+      "detailed_reading": {
+        "motivation": "生物智能通过突触可塑性（metaplasticity）与互补学习系统（CLS）自然避免灾难性遗忘，而人工神经网络在非平稳环境下存在稳定性-可塑性困境。现有增量学习方法要么依赖任务标签，要么产生大量记忆开销，偏离生物现实。本文旨在将生物突触元可塑性重新形式化为一种基于几何的自适应梯度预条件化过程，从而在不依赖显式任务边界和昂贵存储的前提下缓解灾难性遗忘。",
+        "method": "提出SynGAP（Synaptic Geometric Adaptive Preconditioning）框架。输入为连续数据流，模型在线维护Fisher信息矩阵对角线的指数移动平均（EMA）作为历史参数重要性状态F_t = α F_{t-1} + (1-α) diag(F_t(θ))。通过全局归一化与双曲正切构造有界可塑性函数g(F) = 1 - tanh(c(F + λ)) + ε，其中c = arctanh(τ)/(μ+λ)，μ为F的全局均值，λ为Tikhonov阻尼项，ε为环境塑性常数。输出有界乘性掩码Ω = g(F)，在每次优化时对原始梯度逐元素相乘：θ_{t+1} = θ_t - η(Ω ⊙ ∇θ L(θ))。该方法无需附加损失惩罚，也不依赖任务标签或大规模回放缓冲。",
+        "result": "在Split CIFAR-100基准上，SynGAP相比EWC++平均准确率提升4倍，相比Experience Replay（ER）准确率提高近10%，遗忘度量比两者均降低超过10%。在CORe50基准上，SynGAP取得约68%的平均准确率，比优化器基线提升10%。相比SGD、SGDM、Adam、Ballistic等基线，SynGAP在缓解灾难性遗忘方面优势显著，同时保持较低的遗忘和不可塑性指标。",
+        "conclusion": "SynGAP将连续的生物元可塑性形式化为稳定的基于梯度的正则化机制，通过自适应梯度预条件化平衡稳定性与可塑性，提供了一种高度鲁棒、内存高效的边缘自适应智能解决方案。该方法无需任务标签，仅依赖少量临时缓冲，且有效避免了加性损失惩罚导致的优化景观失真和参数僵化问题。",
+        "key_details": "关键点包括：使用在线EMA而非任务边界快照来追踪Fisher信息；利用tanh将无界FIM映射到有界区间[ε,1+ε]，数学上保证参数可塑性下限，防止网络完全冻结；c中的λ和τ（目标巩固超参数）控制掩码强度；ε为环境塑性常数；掩码直接作用于梯度而非损失函数，避免全局损失缩放问题；方法仅需一阶梯度信息，无SVD等昂贵运算；局限性包括仅使用对角Fisher近似，可能忽略参数间相关性，且超参数（α、τ、λ、ε）需根据任务调节。"
+      },
+      "affiliations": [
+        "The University of Sydney"
+      ],
+      "affiliations_text": "The University of Sydney",
+      "score": 4.161322900844268,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.14652v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/19/260814652v1-pushing-the-limits-of-high-resolution-weather-forecasting-through-data-scaling",
+      "source": "arxiv",
+      "title": "Pushing the Limits of High-Resolution Weather Forecasting through Data Scaling",
+      "authors": [
+        "Yang Zhao",
+        "Peisong Niu",
+        "Tian Zhou",
+        "Ziqing Ma",
+        "Guanlong Ma",
+        "Rong Jin",
+        "Huiling Yuan",
+        "Liang Sun"
+      ],
+      "authors_text": "Yang Zhao, Peisong Niu, Tian Zhou, Ziqing Ma, Guanlong Ma, Rong Jin, Huiling Yuan, Liang Sun",
+      "abstract": "The development of 0.1$^{\\circ}$ global weather forecasting models based on machine learning (ML) is constrained by the limited availability of high-resolution data, as decades of reanalysis are only available at 0.25$^{\\circ}$ resolution. While existing approaches fine-tune 0.25$^{\\circ}$ forecast models on limited 0.1$^{\\circ}$ samples, we show that this transfer is hindered by the irreversible information loss inherent in coarse-resolution forecasting. Therefore, we propose BaguanHR, a framework that shifts the focus from transferring models to transferring data. We first show that super-resolution (SR) has lower conditional entropy and input amplification than forecasting, making it a more robust vehicle for resolution transfer. By leveraging this advantage through variable-wise SR, we synthesize extensive 0.1$^{\\circ}$ data from ERA5. BaguanHR's performance on the synthetic-plus-real dataset exceeds both ML-based methods and IFS-HRES, achieving superior performance across over 85% of the lead times within 72 hours. Furthermore, our findings highlight a power-law scaling effect, as a twofold increase in data reduces RMSE by 4.6% for 72-hour forecasting and 4.9% for 120-hour forecasting. Our results demonstrate that scaling high resolution ML-based forecasting is primarily a data bottleneck, and that variable-wise super-resolution provides a simple yet general solution to unlock long coarse-resolution reanalyses for high-resolution training.",
+      "url": "http://arxiv.org/abs/2608.14652v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14652v1",
+      "tldr": "BaguanHR overcomes the data bottleneck in 0.1° ML weather forecasting by transferring data, not models, using variable-wise super-resolution to synthesize extensive high-resolution training data from coarse ERA5 reanalysis, outperforming existing methods and demonstrating power-law scaling where more data yields consistent error reductions.",
+      "detailed_reading": {
+        "motivation": "高分辨率0.1°全球天气预测模型受限于高分辨率数据稀缺，因为ERA5等再分析数据仅提供0.25°分辨率，而0.1°分析数据只有约10年。现有方法通过微调粗分辨率模型来适应高分辨率，但粗分辨率预测存在不可逆信息损失，导致迁移效果受限。",
+        "method": "提出BaguanHR框架，核心是'转移数据而非模型'。先通过理论分析证明超分辨率(SR)比预测(FC)具有更低的条件熵和输入放大因子，因此更稳健。利用逐变量Swin2SR模型在0.25°-0.1°配对样本上训练，对ERA5数据进行逐变量超分辨率合成，生成大量0.1°伪标签。预测模型采用Swin Transformer架构，包含变量专属tokenization、分层嵌入(将变量分12组聚合)和自适应性rollout策略(先导时间感知损失加权+随机缓冲区替换)。训练分三阶段：先在8年EC分析数据上预训练250k步，再加入10年合成数据微调70k步，最后进行2天rollout训练；并采用数据分片I/O优化。",
+        "result": "在合成+真实数据上训练的BaguanHR在72小时内超过85%预报时效上优于IFS-HRES和多种ML方法；与coarse-to-fine迁移相比，部分变量RMSE降低最高20%；数据缩放遵循幂律，训练数据从7年增至18年时，72小时和120小时RMSE分别降低4.6%和4.9%。",
+        "conclusion": "高分辨率ML天气预报的性能提升主要受数据瓶颈制约，逐变量超分辨率提供了一种简单通用的数据扩展方案，能够利用长期粗分辨率再分析生成高分辨率训练数据，比模型迁移或架构设计更有效。",
+        "key_details": "关键细节：SR逐变量训练并使用MAE损失；预测模型输入80个变量(tp仅输出)，经patch化、分层嵌入(Swin Transformer)后输出，变量分12组以减少内存；训练使用32块A800，三阶段(250k步预训练+70k步合成微调+2天rollout)并采用I/O数据分片加速；理论分析显示SR的放大因子(0.6-0.8)低于预测(1.0-1.2)，且SR重建误差远小于一步预测；局限是合成数据依赖SR精度，且实验基于ECMWF分析数据。"
+      },
+      "affiliations": [
+        "Alibaba Group",
+        "Ant Group",
+        "Nanjing University"
+      ],
+      "affiliations_text": "Alibaba Group, Ant Group, Nanjing University",
+      "score": 4.086224655482685,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.14594v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814594v1-geometry-is-not-robustness-a-trajectory-level-study-of-pgd-evaluation",
+      "source": "arxiv",
+      "title": "Geometry Is Not Robustness: A Trajectory-Level Study of PGD Evaluation",
+      "authors": [
+        "Dhairysheel Durgule"
+      ],
+      "authors_text": "Dhairysheel Durgule",
+      "abstract": "Projected Gradient Descent (PGD) is widely used to evaluate adversarial robustness, typically via final adversarial accuracy, which does not capture model behaviour throughout the attack. Recent work proposes trajectory-level diagnostics, such as loss evolution, gradient alignment, and steps-to-failure, for deeper insight into adversarial optimisation dynamics. However, whether these diagnostics reliably indicate robustness strength remains unclear. We conduct a trajectory-level investigation of PGD attacks on convolutional neural networks trained on Fashion-MNIST. We compare clean-trained and adversarially-trained models across multiple robustness regimes, using rigorous 20-step PGD evaluations with random initialisation and multiple restarts for robustness measurement, and single-initialisation trajectory recording for diagnostics. We record full PGD trajectories across 3000 clean-correct samples per model and analyse loss evolution, gradient alignment, and failure timing across attack iterations. Our results reveal a clear robustness hierarchy across models; however, trajectory metrics do not contribute equally to its identification. Mean loss trajectories and gradient alignment patterns appear quantitatively similar across adversarially-trained models with substantially different robust accuracies. In contrast, steps-to-failure distributions provide a clearer separation of robustness regimes, directly reflecting functional resistance to adversarial perturbation. These findings indicate that trajectory-level diagnostics describe optimisation geometry but do not independently measure adversarial robustness. Their interpretability depends on robustness regime, attack strength, and multi-metric evaluation. Trajectory-level analysis should be a complementary diagnostic tool, interpreted in context, rather than a replacement for standard robustness measurements.",
+      "url": "http://arxiv.org/abs/2608.14594v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14594v1",
+      "tldr": "Trajectory-level PGD diagnostics (loss evolution, gradient alignment, steps-to-failure) describe optimization geometry but do not independently measure adversarial robustness, with steps-to-failure best separating robustness regimes—thus they should serve only as complementary, context-dependent tools alongside standard robustness metrics.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 4.018545427756196,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.14647v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814647v1-smopd-selective-token-entropy-masking-for-dirty-history-multi-turn-on-policy-self-distillation",
+      "source": "arxiv",
+      "title": "SMOPD: Selective Token-Entropy Masking for Dirty-History Multi-Turn On-Policy Self-Distillation",
+      "authors": [
+        "Chenyang Jiang",
+        "Changhan Huang"
+      ],
+      "authors_text": "Chenyang Jiang, Changhan Huang",
+      "abstract": "Dirty-history rollouts make multi-turn on-policy self-distillation (OPSD) brittle: once a student emits an erroneous intermediate reply, later turns are conditioned on that reply, and uniform distillation can spend loss on tokens that carry little corrective signal. We introduce SMOPD (Selective Masking for On-Policy Distillation), a loss-only stabilization method for multi-turn OPSD. For each generated middle-turn reply, SMOPD ranks token positions by student entropy and removes the lowest-entropy 20% from the clipped generalized Jensen-Shannon distillation loss; final-answer and FULL-preservation losses are unchanged. This design targets token-level uncertainty rather than coarse trajectory outcomes, adds no parameters, and has zero inference-time overhead. We compare SMOPD with a correctness-scaling variant that multiplies a common detached reliability proxy using final-answer correctness. On LiC with Qwen3 models, SMOPD improves SHARDED-view accuracy by 1.0-2.5 percentage points in single-seed 1.7B, 4B, and 8B comparisons, and a small 4B multi-seed check shows a +1.7pp mean SHARDED gain over baseline (two-tailed p = 0.022). Adding the outcome scalar is harmful without masking at 1.7B (-4.0pp) and remains scale-dependent when combined with masking (+1.3pp at 4B, neutral at 1.7B, and -0.5pp at 8B). These archived aggregate results suggest that token-level uncertainty is a more reliable stabilization signal than scalar final-answer correctness in this evaluated dirty-history OPSD setting, while leaving causal mechanism tests and broader benchmark validation to future work.",
+      "url": "http://arxiv.org/abs/2608.14647v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14647v1",
+      "tldr": "SMOPD proposes a loss-only stabilization method that masks the lowest-entropy (overconfident) tokens from the middle-turn generalized Jensen–Shannon distillation loss in dirty-history multi-turn on-policy self-distillation, consistently improving multi-turn accuracy by 1.0–2.5 percentage points across Qwen3 1.7B–8B models while adding no parameters or inference overhead, and showing that token-level entropy uncertainty is a more reliable stabilization signal than scalar final-answer correctness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "South China Normal University"
+      ],
+      "affiliations_text": "South China Normal University",
+      "score": 3.896940417637604,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.14653v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814653v1-do-uncertainty-signals-help-a-systematic-study-of-uncertainty-aware-decoding-with-rollback-mechanisms",
+      "source": "arxiv",
+      "title": "Do Uncertainty Signals Help? A Systematic Study of Uncertainty-Aware Decoding with Rollback Mechanisms",
+      "authors": [
+        "Xianzong Wu",
+        "Xiaohong Li",
+        "Yuejun Guo",
+        "Xinyang Liu",
+        "Tianlin Li",
+        "Junjie Wang",
+        "Qiang Hu"
+      ],
+      "authors_text": "Xianzong Wu, Xiaohong Li, Yuejun Guo, Xinyang Liu, Tianlin Li, Junjie Wang, Qiang Hu",
+      "abstract": "Prediction uncertainty is a widely adopted metric for quantifying model confidence, with downstream applications spanning model explanation, data selection, and prediction rollback. Despite its demonstrated utility, the potential of uncertainty quantification to enhance code generation in large language models (LLMs) remains largely underexplored, raising a critical question: to what extent can uncertainty serve as an effective signal for improving LLM-based code generation?\n  To answer this question, we study uncertainty-aware rollback decoding, an inference-time strategy that uses uncertainty signals to identify unreliable generation regions and roll back to earlier valid prefixes without retraining the model. We evaluate this framework on seven code LLMs, five code generation benchmarks, and eight token-level uncertainty signals under a unified decoding setup.\n  Our results show that the complete rollback framework improves over equal-budget restart across the evaluated benchmarks and model settings, with gains of up to 0.26 in pass@1 and 0.35 in AvgTestPassRate on functional code generation benchmarks, and an absolute improvement of up to 6.4\\% in Patch-Aligned Safe Rate on Dsec-Python. Among the evaluated signals, information-theoretic measures such as token entropy and negative log-likelihood show the most favorable overall trend, frequently achieving the best or near-best results on standard benchmarks. A component-controlled ablation further shows that feedback-guided rollback provides the main improvement, while uncertainty localization provides an additional gain when checking, budget, rollback, and branch decay are held fixed.",
+      "url": "http://arxiv.org/abs/2608.14653v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14653v1",
+      "tldr": "Uncertainty-aware rollback decoding—using token-level uncertainty signals to identify and roll back unreliable generation prefixes—consistently improves LLM code generation across models and benchmarks, with information-theoretic signals like token entropy and negative log-likelihood being the most effective.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Luxembourg Institute of Science and Technology",
+        "Beihang University",
+        "Tianjin University"
+      ],
+      "affiliations_text": "Luxembourg Institute of Science and Technology, Beihang University, Tianjin University",
+      "score": 3.8572738109100104,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.14654v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814654v1-fedimp-enhancing-federated-learning-convergence-with-impurity-based-weighting",
+      "source": "arxiv",
+      "title": "FedImp: Enhancing Federated Learning Convergence with Impurity-Based Weighting",
+      "authors": [
+        "Hai Anh Tran",
+        "Cuong Ta",
+        "Truong X. Tran"
+      ],
+      "authors_text": "Hai Anh Tran, Cuong Ta, Truong X. Tran",
+      "abstract": "Federated Learning (FL) is a collaborative paradigm that enables multiple devices to train a global model while preserving local data privacy. A major challenge in FL is the non-Independent and Identically Distributed (non-IID) nature of data across devices, which hinders training efficiency and slows convergence. To tackle this, we propose Federated Impurity Weighting (FedImp), a novel algorithm that quantifies each device contribution based on the informational content of its local data. These contributions are normalized to compute distinct aggregation weights for the global model update. Extensive experiments on EMNIST and CIFAR-10 datasets show that FedImp significantly improves convergence speed, reducing communication rounds by up to 64.4%, 27.8%, and 66.7% on EMNIST, and 44.2%, 44%, and 25.6% on CIFAR-10 compared to FedAvg, FedProx, and FedAdp, respectively. Under highly imbalanced data distributions, FedImp outperforms all baselines and achieves the highest accuracy. Overall, FedImp offers an effective solution to enhance FL efficiency in non-IID settings.",
+      "url": "http://arxiv.org/abs/2608.14654v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14654v1",
+      "tldr": "FedImp improves federated learning convergence under non-IID data by assigning aggregation weights based on the entropy-based impurity (informational content) of each client's local dataset, reducing communication rounds by up to 66.7% and achieving higher accuracy than FedAvg, FedProx, and FedAdp.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Pennsylvania State University",
+        "Hanoi University of Science and Technology"
+      ],
+      "affiliations_text": "The Pennsylvania State University, Hanoi University of Science and Technology",
+      "score": 3.8522346804360437,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.14646v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814646v1-ifuzz-meta-an-interpretable-fuzzy-learning-framework-bridging-top-down-and-bottom-up-knowledge-integration",
+      "source": "arxiv",
+      "title": "iFuzz-Meta: An Interpretable Fuzzy Learning Framework Bridging Top-Down and Bottom-Up Knowledge Integration",
+      "authors": [
+        "Xiaowei Jiang",
+        "Daniel Leong",
+        "Beining Cao",
+        "Nan Zhou",
+        "Yingtao Ren",
+        "Yu-Cheng Chang",
+        "Thomas Do",
+        "Chin-Teng Lin"
+      ],
+      "authors_text": "Xiaowei Jiang, Daniel Leong, Beining Cao, Nan Zhou, Yingtao Ren, Yu-Cheng Chang, Thomas Do, Chin-Teng Lin",
+      "abstract": "Interpretable representation learning remains a key challenge in modern neural computation, particularly when models are expected not only to perform but also to explain their reasoning. This paper introduces iFuzz-Meta, an interpretable fuzzy rule-based learning framework that preserves human-understandable reasoning structures within modern neural architectures. Each fuzzy rule corresponds to a semantic and spatial prototype defined in the original feature space, enabling transparent inference and direct interpretability. Meta-learning is employed as an analytical paradigm to examine how these interpretable rules reorganize across tasks and domains, providing a principled means to link algorithmic adaptation with cognitive representation. A knowledge-guided regularization mechanism further enables a top-down-bottom-up integration, in which theoretical priors act as soft inductive biases while data-driven learning refines and extends them. This dual process ensures that adaptation proceeds along semantically and physiologically meaningful trajectories, rather than arbitrary parameter shifts. Evaluations demonstrate that iFuzz-Meta achieves interpretable reasoning and stable cross-domain generalization, establishing a potential general pathway toward explainable and knowledge-aware fuzzy systems.",
+      "url": "http://arxiv.org/abs/2608.14646v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14646v1",
+      "tldr": "iFuzz-Meta is an interpretable fuzzy rule-based learning framework that integrates top-down neuro-scientific priors with bottom-up data-driven adaptation via meta-learning, achieving transparent reasoning and stable cross-domain generalization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Technology Sydney"
+      ],
+      "affiliations_text": "University of Technology Sydney",
+      "score": 3.845431958749466,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.14644v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814644v1-duet-dual-teacher-on-policy-distillation-via-same-weight-disagreement-for-prohibition-compliance",
+      "source": "arxiv",
+      "title": "DUET: Dual-Teacher On-Policy Distillation via Same-Weight Disagreement for Prohibition Compliance",
+      "authors": [
+        "Zihan Li",
+        "Feifei Li",
+        "Wenhui Que"
+      ],
+      "authors_text": "Zihan Li, Feifei Li, Wenhui Que",
+      "abstract": "Real-world LLM deployments increasingly rely on runtime-injected prohibitions--enterprise policies, PII redlines, tool boundaries--that vary per request and per tenant. Conventional post-training is structurally ill-suited: SFT hides the violation signal in compliant labels, and DPO's sequence-level preferences mismatch token-localized violations. We propose DUET, a token-selective on-policy distillation method for prohibition compliance. DUET pairs a teacher that sees the prohibition (positive) with an identical-weight teacher that does not (negative). Because the two teachers differ only in prohibition visibility, their per-token disagreement isolates the prohibition's causal effect--yielding a clean supervision signal uncontaminated by model capacity or mismatch. This disagreement drives two complementary mechanisms: signal cleaning, which discards agreement tokens as redundant or prefix-corrupted, and preference-directed learning, which pushes the student away from the negative teacher and toward the positive one at token granularity, embedding DPO-style optimization directly into OPD without offline preference data. We construct an industrial Prohibition-Compliance benchmark spanning five task families covering explicit-refusal, paraphrase robustness, and over-refusal. Across 1.5B-8B Qwen variants, DUET achieves 72.3-85.2% violation compliance while preserving 88-93% normal utility, dramatically outperforming teacher model and other distillation baselines. External evaluation on SysBench confirms improved safety alignment with minimal degradation on GSM8K and MATH-500.",
+      "url": "http://arxiv.org/abs/2608.14644v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14644v1",
+      "tldr": "DUET improves LLM prohibition compliance by using two same-weight teachers that differ only in whether they see the prohibition, and distills from their per-token disagreement to select violation-relevant tokens and apply token-level preference-directed learning—outperforming existing distillation baselines while preserving general utility.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tencent Inc."
+      ],
+      "affiliations_text": "Tencent Inc.",
+      "score": 3.841118603176325,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.14650v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814650v1-paired-exact-reset-evaluation-of-a-prediction-derived-medium-to-full-world-model-cascade",
+      "source": "arxiv",
+      "title": "Paired Exact-Reset Evaluation of a Prediction-Derived Medium-to-Full World-Model Cascade",
+      "authors": [
+        "Malo de Pastor"
+      ],
+      "authors_text": "Malo de Pastor",
+      "abstract": "Existing adaptive-inference and world-action-model systems use cheap-stage outputs or predicted futures to allocate additional computation. We study a narrower question: under paired exact-reset physical outcomes, can a Medium-derived interface predict when switching to a separately frozen Full predictor improves task-specific decision loss enough to justify sequential overhead? Our contribution is a paired evaluation and audit protocol, not a new generic routing rule: all candidate actions are executed from the same reset state, Medium and Full act on the same candidate set and task, and their paired physical-loss difference defines the routing target. On a fresh PushT bank (V106; 1,600 states, 39 tasks, three checkpoint pairs), a frozen prediction-interface router lowers overhead-inclusive decision cost relative to standalone Medium, standalone Full, and a latency-advantaged task-only router. We then prospectively seal a second 1,600-state PushT confirmation (V107) against a stronger current-state control using the task, a dimension-matched projection of current DINO features, and all five candidate actions, with no DINO encoder latency charged. The prediction interface lowers priced physical decision cost by 0.002549 (state-clustered 95% interval [-0.002867, -0.002238]; one-sided 95% upper bound -0.002286), with negative effects for all three checkpoint pairs. A controlled-PyBullet audit independently supports a composite task-prediction-regime router. The sequential router remains slower than fixed policies, and its advantage is restricted to low compute prices. The evidence supports incremental routing information in the tested prediction interface beyond one deliberately favoured current-DINO control, but not causal sufficiency, compute saving, closed-loop value, or cross-family generality.",
+      "url": "http://arxiv.org/abs/2608.14650v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14650v1",
+      "tldr": "A paired exact-reset audit protocol shows that a frozen prediction-interface router can reduce overhead-inclusive physical decision cost when escalating from a Medium to a Full world model, beating standalone and latency-favored current-state baselines, though only at low compute prices and without proving causal sufficiency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Institut Polytechnique de Paris"
+      ],
+      "affiliations_text": "Institut Polytechnique de Paris",
+      "score": 3.8120281983601916,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.14640v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814640v1-bdip-net-dual-interaction-graph-learning-for-property-prediction-of-bilayer-materials",
+      "source": "arxiv",
+      "title": "BDIP-Net: Dual-Interaction Graph Learning for Property Prediction of Bilayer Materials",
+      "authors": [
+        "An Vuong",
+        "Chen Zhao",
+        "Jin Hu",
+        "Shui-Qing Yu",
+        "Xintao Wu"
+      ],
+      "authors_text": "An Vuong, Chen Zhao, Jin Hu, Shui-Qing Yu, Xintao Wu",
+      "abstract": "Stacked bilayer materials exhibit rich stacking-dependent properties driven by the interplay between strong intra-layer bonding and weak inter-layer van der Waals interactions. The computational discovery of such materials is challenging because accurate structure generation typically relies on expensive DFT-based optimization, while existing machine-learning models often fail to explicitly distinguish different interaction types during property prediction. To address these challenges, we propose a machine-learning framework for efficient construction and property prediction of stacked bilayer materials. The framework employs a MatterSim-D3-based structural optimization workflow to generate DFT-quality bilayer structures from monolayer building blocks and stacking configurations at substantially reduced computational cost. For property prediction, we introduce BDIP-Net (Bilayer Dual-Interaction Potential Network), a graph neural network that explicitly models intra-layer and inter-layer interactions through interaction-specific potential representations and adaptive message fusion. We evaluate the proposed framework on BiDB, HetDB, and SAMBA, encompassing homobilayers, heterobilayers, and twisted bilayer systems. Results show that the MatterSim-D3-based workflow closely reproduces DFT-PBE-D3 optimized structures, while BDIP-Net consistently outperforms existing graph neural network and potential-based approaches for bilayer property prediction.",
+      "url": "http://arxiv.org/abs/2608.14640v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14640v1",
+      "tldr": "BDIP-Net is a machine-learning framework that combines MatterSim-D3-based fast structural optimization with an interaction-aware graph neural network—explicitly separating intra-layer and inter-layer interactions via potential-based message passing—to efficiently and accurately predict stacking-dependent properties of bilayer materials.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Baylor University",
+        "University of Arkansas"
+      ],
+      "affiliations_text": "Baylor University, University of Arkansas",
+      "score": 3.7699449800871094,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.14645v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814645v1-efficient-neural-network-based-high-resolution-radiative-transfer-for-co-retrieval-and-application-to-interferometric-sensing",
+      "source": "arxiv",
+      "title": "Efficient Neural-Network-Based High-Resolution Radiative Transfer for CO___ Retrieval, and Application to Interferometric Sensing",
+      "authors": [
+        "Jordan Lontsi Tedongmo",
+        "Yann Ferrec",
+        "Laurence Croizé",
+        "Pablo Musé",
+        "Gabriele Facciolo",
+        "Andrés Almansa"
+      ],
+      "authors_text": "Jordan Lontsi Tedongmo, Yann Ferrec, Laurence Croizé, Pablo Musé, Gabriele Facciolo, Andrés Almansa",
+      "abstract": "Studying climate change requires reducing uncertainties in CO2 and CH4 emission estimates to better distinguish anthropogenic from natural sources, which motivates spaceborne measurements with improved revisit frequency and spatial coverage. In this context, the Horizon Europe SCARBOn project assesses a low-cost satellite constellation featuring the NanoCarb imaging interferometer as its core sensor for monitoring CO2 and CH4 emissions in the atmosphere. However, estimating CO2 and CH4 concentrations with high revisit and spatial coverage poses significant challenges: full-physics retrieval algorithms commonly used rely on repeated high-resolution radiative transfer (RT) simulations, which are computationally expensive when using line-by-line RT models. As an alternative, we propose in this study a feedforward multilayer perceptron (MLP) surrogate designed to accurately and efficiently predict top-of-atmosphere radiances in the CO2 weak band, using a combined mean absolute error (MAE) loss on radiances and RT Jacobians to preserve both spectral accuracy and sensitivity to geophysical parameters. Coupling the MLP-based RT surrogate with the NanoCarb instrumental response yields an efficient and precise forward model for NanoCarb measurements, which shows promising results for CO2 concentration retrieval.",
+      "url": "http://arxiv.org/abs/2608.14645v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14645v1",
+      "tldr": "The paper proposes a neural-network (multilayer perceptron) surrogate for fast, accurate high-resolution radiative transfer in the CO₂ weak band, which when coupled with the NanoCarb interferometer forward model enables efficient and precise CO₂ concentration retrieval.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Université Paris-Saclay",
+        "Institut Universitaire de France",
+        "ONERA",
+        "Université Paris Cité",
+        "Universidad de la República (UdelaR)"
+      ],
+      "affiliations_text": "Université Paris-Saclay, Institut Universitaire de France, ONERA, Université Paris Cité, Universidad de la República (UdelaR)",
+      "score": 3.629197329816616,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.14655v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814655v1-diagnosing-and-mitigating-perception-decision-misalignment-in-omni-llms-via-modality-subspace-activation",
+      "source": "arxiv",
+      "title": "Diagnosing and Mitigating Perception-Decision Misalignment in Omni-LLMs via Modality Subspace Activation",
+      "authors": [
+        "Hongbo Jiang",
+        "Jie Li",
+        "Yunhang Shen",
+        "Tianyu Xie",
+        "Pingyang Dai"
+      ],
+      "authors_text": "Hongbo Jiang, Jie Li, Yunhang Shen, Tianyu Xie, Pingyang Dai",
+      "abstract": "Omni-Large Language Models (Omni-LLMs) power complex multi-modal reasoning in applications like World Action Models and autonomous agents. However, their strong performance often masks a profound Perceptual-Decision Misalignment (PDM), where decisions remain unfaithful to multi-modal perceptions. To diagnose this, we formalize Causal Modality Sensitivity (CMS), operationalized via a dual-lens framework: Answer Retention Rate (ARR) at the macro behavioral level, and Logit Angular Discrepancy (LAD) to track microscopic distribution shifts. We also curate CausalMSBench, a diagnostic dataset isolating language priors. Benchmarking reveals that popular Omni-LLMs exhibit critically low CMS, showing negligible distribution shifts even when key modalities are removed. To rectify this, we propose Modality Subspace Activation (MSA), a training-free inference-time framework that uses Singular Value Decomposition (SVD) to estimate modal activation strengths. MSA dynamically balances modal projections in the last hidden state, effectively restoring CMS across benchmarks.",
+      "url": "http://arxiv.org/abs/2608.14655v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14655v1",
+      "tldr": "Omni-LLMs suffer from perception-decision misalignment where decisions ignore key modalities, so the authors propose CMS metrics and a training-free Modality Subspace Activation method to diagnose and restore modality sensitivity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai Artificial Intelligence Laboratory",
+        "Tencent YouTu Laboratory",
+        "Xiamen University"
+      ],
+      "affiliations_text": "Shanghai Artificial Intelligence Laboratory, Tencent YouTu Laboratory, Xiamen University",
+      "score": 3.605225844851461,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.14617v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814617v1-calibrated-trust-not-sharper-prediction-an-empirical-test-of-uncertainty-fusion",
+      "source": "arxiv",
+      "title": "Calibrated Trust, Not Sharper Prediction: An Empirical Test of Uncertainty Fusion",
+      "authors": [
+        "Surya Saka"
+      ],
+      "authors_text": "Surya Saka",
+      "abstract": "A recurring proposal in legal AI is to improve case-outcome prediction by fusing uncertainty tools (evidence graphs with belief propagation, sequential Bayesian odds updating, Dempster-Shafer combination, and conformal prediction) into one pipeline. We test this on 1,000 real European Court of Human Rights cases from LexGLUE and FairLex, predicting whether the Court found a Convention violation from the case's fact paragraphs. We compare three families across two frontier LLMs (Claude Opus 4.8 and GPT-5.5) as per-fact evidence estimators: (A) the raw LLM, (B) the LLM routed through the fusion pipeline, and (C) a term-frequency baseline through the same pipeline. Across roughly 4,750 tests we find: (1) on discrimination (AUROC around 0.83) the pipeline yields no improvement over either the raw LLM or the baseline; a frontier LLM used directly is the strongest single discriminator. (2) Naively composing an LLM with Bayesian-odds and Dempster-Shafer fusion more than doubles calibration error (ECE from about 0.16 to 0.46) via a prior-mismatch mechanism that replicates across both models. (3) Dempster-Shafer fusion is actively unsafe on long chains, committing confidently to wrong labels at below-chance accuracy; we recommend removing it. (4) The pipeline's genuine value is operational: routed through a conformal selective-prediction layer, the system decides which cases to automate and which to escalate. After removing Dempster-Shafer, recalibrating, and applying class-conditional risk control on the full 1,000-case set, the tuned engine auto-clears at 96.8 percent accuracy with 0.5 percent errors escaping and 96.3 percent caught for review, versus 85.9 / 3.8 / 72.1 for an untuned baseline. The contribution of such pipelines in law is calibrated trust, not sharper prediction.",
+      "url": "http://arxiv.org/abs/2608.14617v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14617v1",
+      "tldr": "Testing uncertainty-fusion pipelines on 1,000 ECtHR cases shows they do not improve prediction accuracy and can worsen calibration, so their real value is enabling calibrated, risk-controlled selective automation (\"calibrated trust\") rather than sharper prediction.",
+      "detailed_reading": null,
+      "affiliations": [
+        "JudicialMind"
+      ],
+      "affiliations_text": "JudicialMind",
+      "score": 3.347468162185439,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.14637v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814637v1-early-cycle-charge-trajectory-generative-prediction-and-full-life-cycle-health-management-of-iron-chromium-flow-batteries-based-on-flowbd-e1",
+      "source": "arxiv",
+      "title": "Early Cycle Charge Trajectory Generative Prediction and Full Life Cycle Health Management of Iron-Chromium Flow Batteries Based on FlowBD-E1",
+      "authors": [
+        "Suyang Zhuang",
+        "Zekun Jiang",
+        "Tianhang Zhou"
+      ],
+      "authors_text": "Suyang Zhuang, Zekun Jiang, Tianhang Zhou",
+      "abstract": "Long-duration stationary energy storage requires batteries whose degradation can be detected before substantial capacity loss has accumulated. Iron-chromium redox flow batteries are attractive for this role because they use abundant and low-cost active species, yet their operation is shaped by slow chromium kinetics, hydrogen evolution, membrane crossover and electrolyte imbalance. These coupled processes gradually reshape the full charge voltage/current (V/I) trajectory, but most battery prognostic studies either focus on lithium-ion cells or compress ageing into scalar capacity and state-of-health (SOH) labels. Here we study an industrial 33 kW Fe-Cr redox flow battery and introduce FlowBD-E1, an early-cycle generative forecasting framework that predicts complete future charge V/I trajectories from only the first few cycles. The model combines a multi-scale convolutional encoder, a lifecycle Transformer and an age-aware FiLM decoder, and we compare three deployment strategies: single-step latent extrapolation (SLE), recursive latent forecasting (RLF) and teacher-forced updating (TFU). Using the first 9 of 289 cycles, RLF achieved a joint V/I mean absolute percentage error (MAPE) of 0.731% over the remaining lifecycle and produced SOH estimates below 1% MAPE. Ablation and independent-sequence tests showed that the age-aware generative architecture outperformed LSTM and TCN baselines and retained sub-percent errors under industrial validation. These results suggest that early-cycle trajectory generation can turn a short commissioning record into a long-horizon diagnostic signal for flow-battery management.",
+      "url": "http://arxiv.org/abs/2608.14637v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14637v1",
+      "tldr": "FlowBD-E1, an early-cycle generative forecasting framework combining a multi-scale convolutional encoder, lifecycle Transformer, and age-aware FiLM decoder, predicts full future charge V/I trajectories and state-of-health for industrial Fe-Cr flow batteries from just the first few cycles, achieving sub-percent error and enabling long-horizon battery health management.",
+      "detailed_reading": null,
+      "affiliations": [
+        "China University of Petroleum (Beijing)",
+        "Zhonghai Energy Storage Technology (Beijing) Co., Ltd."
+      ],
+      "affiliations_text": "China University of Petroleum (Beijing), Zhonghai Energy Storage Technology (Beijing) Co., Ltd.",
+      "score": 3.271348349078677,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.14649v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814649v1-discrete-diffusion-language-models-are-training-free-multi-label-classifiers",
+      "source": "arxiv",
+      "title": "Discrete Diffusion Language Models Are Training-Free Multi-Label Classifiers",
+      "authors": [
+        "Pawan Kumar"
+      ],
+      "authors_text": "Pawan Kumar",
+      "abstract": "We present dLLM-SetScore, a training-free method that uses discrete masked-diffusion language models for multi-label text classification. For each candidate label, it asks a short yes/no question and compares the probabilities of the two answer tokens at one masked position. The method uses no task-specific fine-tuning or training on textual-entailment datasets; a 200-example labelled validation slice selects thresholds, temperature, and prompt wording.\n  We first show that placing all labels in one prompt creates a strong slot-position asymmetry: the first answer slot is predicted positive on $99.4\\%$ of GoEmotions examples and $100\\%$ of Reuters examples. Per-label scoring places every label in the same syntactic position, making predictions invariant to label order and avoiding this artifact. We evaluate LLaDA-8B and Dream-7B on six datasets against NLI models, an autoregressive LLM, SetFit, and supervised classifiers. On the five datasets shared by both diffusion families, Instruct checkpoints improve macro-F1 in 9 of 10 comparisons and micro-F1 in 8 of 10, although these comparisons do not identify the cause. Within our protocol, LLaDA-Instruct records the highest training-free values for both Reuters and ECtHR metrics. We prove permutation invariance, characterize thresholded decisions under weighted Hamming loss, and derive shortlist ceilings for recall and F1. An exploratory local Joint Set Refinement step lowers F1 from biased and unbiased initializations and is retained as a negative result.",
+      "url": "http://arxiv.org/abs/2608.14649v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14649v1",
+      "tldr": "dLLM-SetScore is a training-free multi-label text classification method that turns discrete masked-diffusion language models into per-label yes/no scorers by comparing the probabilities of two answer tokens at a single masked position, avoiding slot-position asymmetry and achieving competitive results without any task-specific fine-tuning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "International Institute of Information Technology, Hyderabad, India"
+      ],
+      "affiliations_text": "International Institute of Information Technology, Hyderabad, India",
+      "score": 3.2076234921669577,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.14614v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814614v1-dumpstercluster-from-dumpster-diving-to-serving-llama-70b-on-60-gpus",
+      "source": "arxiv",
+      "title": "DumpsterCluster: From Dumpster Diving to Serving LLaMA-70B on $60 GPUs",
+      "authors": [
+        "Zeyu Cao",
+        "Xuan Guo",
+        "Cheng Zhang",
+        "Cheuk Hang Lau",
+        "Ilia Shumailov",
+        "Yiren Zhao"
+      ],
+      "authors_text": "Zeyu Cao, Xuan Guo, Cheng Zhang, Cheuk Hang Lau, Ilia Shumailov, Yiren Zhao",
+      "abstract": "As AI datacenters retire functional GPUs, vast quantities of still capable accelerators enter secondary markets. This paper investigates whether these retired GPUs can find a productive afterlife to form a DumpsterCluster that can serve modern LLM inference, and under what conditions such repurposing is economically viable and environmentally sustainable. We physically built a 128-GPU DumpsterCluster from scratch using only second-hand components and ran it for one year. At current market prices (\\$22K for the DumpsterCluster vs. \\$600K for an 8-GPU B200 system), the economic advantages are substantial. Through pipeline-parallel optimizations, our V100 based DumpsterCluster achieves competitive LLaMA-70B throughput, validating production viability. However, our deployment reveals critical context dependencies. Older GPUs consume significantly more energy per token, making total cost of ownership favorable only in regions with inexpensive electricity. Under grid-average carbon intensity, second-hand systems can produce approximately 4x higher total carbon emissions per token for 8B models, and over 40x for 70B models, compared to current-generation hardware. These findings show that GPU afterlife is not universally sustainable - hardware repurposing must be strategically coupled with low carbon energy sources. When deployed in regions with favourable energy economics and clean electricity, second-hand GPUs offer a viable pathway for expanding AI capacity while advancing affordability, energy security, and environmental responsibility.",
+      "url": "http://arxiv.org/abs/2608.14614v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14614v1",
+      "tldr": "A 128-GPU cluster built entirely from second-hand V100s can serve LLaMA-70B at a fraction of the cost of new hardware, but its economic and environmental viability depends heavily on access to cheap, low-carbon electricity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Quettaflop AI",
+        "University of Oxford",
+        "University of Cambridge"
+      ],
+      "affiliations_text": "Quettaflop AI, University of Oxford, University of Cambridge",
+      "score": 2.444804173089431,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2608.14639v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/19/260814639v1-valid-per-field-selective-risk-control-for-document-extraction-three-failure-modes-a-validity-ladder-and-when-conditioning-pays",
+      "source": "arxiv",
+      "title": "Valid Per-Field Selective Risk Control for Document Extraction: Three Failure Modes, a Validity Ladder, and When Conditioning Pays",
+      "authors": [
+        "Bhaskar Gurram"
+      ],
+      "authors_text": "Bhaskar Gurram",
+      "abstract": "Per-field accept/review with selective risk at most alpha -- accept a field only if the error rate among accepted fields is controlled -- is the trust contract document-extraction systems need, and the natural procedure silently violates it on real documents. On 13,859 genuine claude-sonnet-5 fields from 800 CORD receipts (49.0% correct) we diagnose three failure modes: document clustering (design effect 1.84-2.45), score-refit leakage (coverage 0.416 at risk 0.127, violating alpha=0.10 in 95% of splits), and a tie-mass pathology (a degenerate score collapses the threshold grid, 0.030 to 0.001). We organize the fixes as a validity ladder, guarantee form stated per tier. A fit/val split protocol restores expected-selective-risk control for a learned fusion: coverage 0.318 at risk 0.096 at nominal alpha=0.10, no tolerance band (production variant 0.326) -- an on-average point whose realized risk exceeds alpha in 47.5% of resplits, not a certificate. Mondrian Learn-then-Test with exact binomial tails yields per-group PAC certificates: field-iid 0.171 at risk 0.068, cluster-corrected 0.140, doc-iid 0.060 -- the only tier matching documents, honestly near-vacuous today. Support-bin, the pre-specified provenance taxonomy, wins every rigor tier on the sonnet CORD capture (p<1e-4, Bonferroni-corrected) -- a win that does not replicate on the same documents under haiku or qwen -- while on higher-accuracy corpora pooled thresholds win: conditioning helps exactly where pooled cannot certify, subsumed by a learned score elsewhere. A frozen-configuration confirmation on selection-untouched claude-haiku-4-5 held at both risk levels, and a blind three-annotator human-gold audit verifies the practical tier's accepted-set risk at 1.3% against its 10% budget (Fleiss' kappa=0.83; labels err one-sidedly pessimistic). Released Apache-2.0 with seed-pinned, regression-gated procedures.",
+      "url": "http://arxiv.org/abs/2608.14639v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.14639v1",
+      "tldr": "This paper diagnoses three failure modes (document clustering, score-refit leakage, and tie-mass pathology) that make naive per-field selective risk control invalid on real document extraction outputs, then proposes a \"validity ladder\" of guarantee tiers—from expected-risk split protocols to per-group PAC certificates—showing that taxonomical conditioning on provenance pays exactly when pooled thresholds cannot certify, and is subsumed by learned scores elsewhere.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zasti AI"
+      ],
+      "affiliations_text": "Zasti AI",
+      "score": 2.369152912148361,
+      "score_text": "2.4"
+    }
+  ],
+  "errors": []
+}
