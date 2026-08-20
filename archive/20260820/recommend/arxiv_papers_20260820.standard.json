@@ -1,0 +1,761 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-20T03:06:16.765039",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.16978v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/20/260816978v1-vlcp-vision-language-control-policy-closed-loop-code-replanning-for-robot-manipulation",
+      "source": "arxiv",
+      "title": "VLCP: Vision Language Control Policy Closed-Loop Code Replanning for Robot Manipulation",
+      "authors": [
+        "Dhia Naouali",
+        "Minghan Wu",
+        "Claudia Wong",
+        "Abhinav Puthran",
+        "Omar G. Younis"
+      ],
+      "authors_text": "Dhia Naouali, Minghan Wu, Claudia Wong, Abhinav Puthran, Omar G. Younis",
+      "abstract": "Turning a frontier vision-language model into a robot policy usually means fine-tuning it to emit an action representation it never saw in pretraining, which throws away much of the reasoning that made the model worth reaching for. We go the other way and keep the VLM frozen. It writes the policy as a short Python control function, with no demonstrations and no fine-tuning. Writing that code once is open-loop, though. Existing closed-loop methods react at the wrong level: they retry a fixed policy or pick a different subtask, but never rewrite the code that failed. VLCP closes the loop where the failure actually lives, on the control code, within a single episode. Every $K$ steps the VLM re-observes the scene from multi-view RGB, proprioceptive state, and a state delta, then rewrites the control function from what it just saw, so a failure is caught before it compounds.\n  We evaluate on a 57-task MuJoCo/RoboVerse sweep. This training-free policy reaches $35.1\\%$ pooled success, against $3.5\\%$ for the identical system queried once per episode. That tenfold gap holds with non-overlapping confidence intervals in every scene family. The gain traces to a $27.3\\%$ within-episode recovery rate on failed grasps: a miss an open-loop controller would carry to the end of the episode gets re-observed and fixed at the next replan. And the loop stays cheap. A median $84\\%$ of input tokens hit cache, an episode needs only about $10$ compact queries, and control blocks written during any replan persist to a cross-episode skill library reused in later prompts.",
+      "url": "http://arxiv.org/abs/2608.16978v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16978v1",
+      "tldr": "VLCP keeps a vision-language model frozen and, instead of fine-tuning it to output actions, has it write and periodically rewrite a short Python control function from live multi-view observations within each episode, closing the loop at the level of the control code and boosting zero-training robot manipulation success from 3.5% to 35.1% on a 57-task benchmark.",
+      "detailed_reading": {
+        "motivation": "现有方法将前沿视觉语言模型微调为机器人策略时，会迫使其输出预训练中未见过的动作表示，从而丢失大量推理能力；而开放式代码策略无法在单次回合内修正失败，监控和重规划方法只在任务或语言层面重试固定策略或更换子任务，从不重写失败的控制代码。VLCP 旨在冻结 VLM，在回合内于控制代码层面闭环重规划，让失败在累积前被捕获并修正。",
+        "method": "VLCP 将策略表示为短 Python control(obs, J) 函数，由冻结的 VLM 编写，无需演示或微调。回合被划分为每 K=50 步的块，每块开始时 VLM 基于多视角 RGB、本体感受状态和状态差值重新观察场景，并重写下一块的控制函数；块内编译后的函数每步接收新 obs 和 Jacobian 执行，形成双重闭环。系统提示由三部分组成：静态文档/API/示例、跨回合技能库源码、目标固定提示，用户回合包含上一块图像、生成代码及动作轨迹、当前同步图像和 JSON 数值观察摘要。历史记录保留最近 H=20 对回合，缓存断点设置在最后助手回合以最大化 KV 缓存复用。每个重规划回合可附带生成带标签的辅助模块，原子写入磁盘技能库并立即导入，失败则回滚并在下次提示中报告。",
+        "result": "在 57 任务 MuJoCo/RoboVerse 基准上，训练无关策略达到 35.1% 合并成功率，而相同系统每回合仅查询一次的开放环路基线为 3.5%，十倍差距在所有场景族中具有不重叠置信区间。增益源于 27.3% 的回合内失败抓取恢复率，即开放环路控制器会带至回合结束的错过抓取，在下次重规划时被重新观察并修正。成本方面，84% 的输入 token 命中缓存，每个回合约 10 次紧凑查询，且重规划中编写的控制块可持久化到跨回合技能库被后续提示复用。",
+        "conclusion": "VLCP 证明在控制代码层面进行回合内闭环重规划是让冻结 VLM 实现高效机器人操作的关键设计：相比一次性生成代码或仅监控失败，重写失败的控制函数能在同一回合内恢复操作错误，且无需微调或演示。该方法保持模型预训练能力，同时通过技能库累积和缓存复用实现实际可行的查询成本，为训练无关的代码策略提供了可复现的闭环范式。",
+        "key_details": "模型使用冻结 VLM，不进行任何微调；输入包含来自两个固定相机的多视角 RGB、末端执行器位姿和关节位置的本体感受向量、从模拟器读取的任务相关物体位姿、解析计算的 3x7 末端执行器 Jacobian，以及显式状态差值。每个控制块运行 K=50 步，约 10 次重规划覆盖 500 步回合。损失/训练目标不适用；训练流程为零样本提示，仅通过文本指令生成代码。错误恢复机制基于视觉诊断（如夹爪短距闭合、接触角偏离、滑动、物体移位），特权物体位姿仅用于初始定位以隔离感知误差。技能库按最近顺序排序，上限 12 条，跨回合共享并支持并发导入。限制包括代码块间 K 值未系统扫描、依赖特权位姿和仿真器信息，未来可用学习检测器替代以部署到真实场景。"
+      },
+      "affiliations": [
+        "Silverstream AI",
+        "St. Mildred's-Lightbourn School",
+        "University of Monastir",
+        "Cornell University",
+        "Mila -- Quebec AI Institute",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Silverstream AI, St. Mildred's-Lightbourn School, University of Monastir, Cornell University, Mila -- Quebec AI Institute, Carnegie Mellon University",
+      "score": 4.877332776247655,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.17027v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/20/260817027v1-fetchman-learning-visual-humanoid-loco-manipulation-policies-from-simulated-experiences",
+      "source": "arxiv",
+      "title": "FetchMan: Learning Visual Humanoid Loco-Manipulation Policies from Simulated Experiences",
+      "authors": [
+        "Omar Rayyan",
+        "Zhi Li",
+        "Max Argus",
+        "Yuxin Jiang",
+        "Chang Yu",
+        "Chenfanfu Jiang",
+        "Yuchen Cui"
+      ],
+      "authors_text": "Omar Rayyan, Zhi Li, Max Argus, Yuxin Jiang, Chang Yu, Chenfanfu Jiang, Yuchen Cui",
+      "abstract": "Visual loco-manipulation policies that can generalize to novel scenes and objects have long been a goal of robotics research. However, today's data-hungry algorithms make collecting sufficient demonstrations a struggle for tabletop manipulation, and even more so for humanoids that must also walk and balance. Learning from simulated data and transferring that behavior to the real world, as is commonly done in locomotion, sidesteps this struggle, so we replicate that recipe for loco-manipulation. In doing so, we find that cloning synthetic demonstrations results in a low performance ceiling no matter the amount of training data. Reinforcement learning breaks through it, and refining the cloned policy with Flow-GRPO on a single sparse reward yields performance that synthetic behavior cloning cannot match. Together, these stages form our end-to-end sim-to-real pipeline spanning more than 150,000 scenes, which we use to train FetchMan. We evaluate it on FetchMan-Bench, a simulation benchmark we release, and deploy it zero-shot on a real Unitree G1, where our single-object reach-and-pick policy walks to and grasps a target across unseen scenes at 73.3% success. Finally, we extend this recipe to multi-object training, a first step toward loco-manipulation generalist policies at this data scale.",
+      "url": "http://arxiv.org/abs/2608.17027v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17027v1",
+      "tldr": "FetchMan trains visual humanoid loco-manipulation policies entirely in simulation by combining synthetic behavior cloning with Flow-GRPO reinforcement learning, enabling zero-shot deployment on a real Unitree G1 that walks to and grasps objects in unseen scenes at 73.3% success.",
+      "detailed_reading": {
+        "motivation": "视觉人形机器人移动操作策略要泛化到新场景和新物体，长期是机器人研究的目标。然而，数据饥渴的算法在桌面操作上收集示范已很困难，对人形机器人还需行走和平衡，示范收集更难。从仿真数据学习并迁移到真实世界，如 locomotion 领域常见做法，可绕过这一困境，因此本文将该范式复制到移动操作任务。作者发现直接克隆合成示范存在性能上限，需要强化学习突破，从而提出端到端仿真到真实世界的训练流程。",
+        "method": "该方法分为三阶段：首先使用带特权信息的脚本化全身控制器在程序化生成的室内场景中滚动生成合成示范数据，场景来自 MolmoSpaces（含 ProcTHOR-10k、Holodeck 等），每个 episode 采样场景、目标物体和机器人起始位姿，通过 A* 路径规划和离散操作阶段（reach/descend/close/lift）控制 Unitree G1 完成到达-抓取任务，并施加域随机化（纹理、光照、相机内外参、表面高度、物体位姿、动作噪声）。其次，用行为克隆（BC）从这些合成示范中训练视觉策略，输入为头部鱼眼图像、腕部 RGB 图像和本体感知向量（基座高度、横滚俯仰、上半身关节位置、夹爪开度），输出15维全身指令（基座线速度/偏航、基座高度、腰部关节、右臂关节、夹爪目标），基座指令由预训练的 SONIC 下半身控制器跟踪。最后，用 Flow-GRPO 在单一稀疏奖励下对克隆策略进行强化学习微调，利用仿真中相同状态的分组 rollout 打破示范性能上限，得到最终策略 FetchMan，并零样本部署到真实 Unitree G1。",
+        "result": "在包含超过150,000个场景的仿真训练后，FetchMan 在真实 Unitree G1 上对未见场景的单物体到达-抓取任务达到 73.3% 成功率，且无需真实数据或逐场景调参。实验表明克隆合成示范无论如何增加数据量都有性能天花板，而 Flow-GRPO 微调后的策略显著超越合成行为克隆。作者还发布了 FetchMan-Bench 仿真基准，并将该流程扩展到多物体训练，向移动操作通用策略迈出第一步。",
+        "conclusion": "本文证明仿真数据生成结合行为克隆与 Flow-GRPO 强化学习微调的端到端流程，可训练出能零样本部署到真实人形机器人的视觉移动操作策略。该方法克服了脚本化示范的模仿间隙，在场景多样性和真实泛化上优于纯行为克隆，为人形机器人移动操作提供可扩展的仿真到真实范式。",
+        "key_details": "关键细节包括：采用分层控制，将29维关节力矩压缩为15维全身指令，SONIC 控制器以50Hz跟踪基座指令，上半身和夹爪用PD控制，减少命令空间并保持 sim-to-real 一致性。示范数据中80%为完整到达-抓取，20%为纯抓取（起始于抓取站位）以平衡操纵阶段并随机化初始上肢配置。起点位姿在完整3D物理验证下可贴近支撑面，扩大接近几何分布。域随机化每 episode 独立重采样纹理、光照、相机、表面和物体位姿以及动作噪声。Flow-GRPO 在确定性 ODE 采样器中加入高斯噪声获得逐步似然，实现无需真实交互的强化学习微调。局限性包括：策略在单物体任务上评估，多物体为初步扩展；真实部署成功率仍有提升空间；依赖 MolmoSpaces 场景生成和预训练 SONIC 控制器，对仿真资产质量和控制器性能有一定依赖。"
+      },
+      "affiliations": [
+        "University of California, Los Angeles",
+        "University of Washington",
+        "Allen Institute for AI"
+      ],
+      "affiliations_text": "University of California, Los Angeles, University of Washington, Allen Institute for AI",
+      "score": 4.873521053245696,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.16913v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/20/260816913v1-proactive-road-safety-intervention-in-australia-predicting-risky-driving-hotspots-from-connected-vehicle-data",
+      "source": "arxiv",
+      "title": "Proactive Road Safety Intervention in Australia: Predicting Risky Driving Hotspots from Connected Vehicle Data",
+      "authors": [
+        "Adriana-Simona Mihăiţă",
+        "Clarence Cheung",
+        "Artur Grigorev",
+        "Tuo Mao",
+        "David Lillo-Trynes"
+      ],
+      "authors_text": "Adriana-Simona Mihăiţă, Clarence Cheung, Artur Grigorev, Tuo Mao, David Lillo-Trynes",
+      "abstract": "Road safety monitoring has historically been reactive, relying on crash-record analysis after fatalities and injuries have already occurred. Proactive identification of high-risk locations and dangerous driving behaviour before incidents occur is a critical but underexplored challenge. This paper addresses this gap using connected vehicle telemetry data from Greater Sydney, Australia, to detect and forecast near-miss risky driving events at the Local Government Area (LGA) level. Risky driving is quantified through g-force thresholds (hard braking >0.6g, harsh cornering >0.47g, harsh acceleration >0.5g), and spatio-temporal heatmaps are constructed to identify high-risk zones. Eight predictive models are benchmarked across three families: ensemble learning (Random Forests, XGBoost, LightGBM), deep learning (LSTM, N-BEATS), and classical time-series methods (ARIMA, Exponential Smoothing, Prophet). ARIMA achieves the lowest mean absolute error (MAE: 162.21), performing comparably to LSTM (MAE: 163.92) and outperforming all ensemble methods, with N-BEATS reaching an MAE of 180.75. These results demonstrate that parsimonious time-series models are competitive with deep learning approaches when training data volume is limited. The study highlights the potential of IoT-based connected vehicle data to support proactive road safety interventions, with Sydney's inner and western LGAs (CBD, Parramatta, Bankstown) identified as persistent high-risk zones warranting targeted policy action.",
+      "url": "http://arxiv.org/abs/2608.16913v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16913v1",
+      "tldr": "Using connected vehicle telemetry from Greater Sydney, this study predicts risky driving hotspots and near-miss events at the LGA level, finding that simple ARIMA models compete with deep learning and highlighting persistent high-risk zones for proactive road safety intervention.",
+      "detailed_reading": {
+        "motivation": "道路安全监测历来是被动的，依赖伤亡发生后的事故记录分析；在事故前主动识别高风险位置和危险驾驶行为是关键但尚未充分探索的挑战。本研究利用联网车辆遥测数据，旨在主动检测并预测接近事故的危险驾驶事件，以支持前瞻性道路安全干预。",
+        "method": "研究采用澳大利亚大悉尼地区的联网车辆遥测数据，以g力阈值量化危险驾驶（急刹车>0.6g、急转弯>0.47g、急加速>0.5g），构建时空热力图识别高风险区域，并按地方政府区域（LGA）聚合事件计数。随后对八种预测模型进行基准测试，涵盖集成学习（随机森林、XGBoost、LightGBM）、深度学习（LSTM、N-BEATS）和经典时间序列方法（ARIMA、指数平滑、Prophet），以预测各LGA的危险驾驶事件数量。",
+        "result": "ARIMA取得最低平均绝对误差（MAE: 162.21），与LSTM（MAE: 163.92）相当，优于所有集成方法，N-BEATS的MAE为180.75。结果显示，在训练数据量有限的情况下，简约的时间序列模型能与深度学习方法竞争；悉尼内城区和西部LGA（CBD、Parramatta、Bankstown）被识别为持续高风险区域。",
+        "conclusion": "研究表明，基于物联网的联网车辆数据能够有效支持主动式道路安全干预，且经典时间序列模型在有限数据条件下具有实际部署价值。识别出的高风险LGA应成为针对性政策行动的重点，推动从被动事故分析转向主动风险预测。",
+        "key_details": "数据来自Compass IoT，覆盖新南威尔士州超过70万辆汽车、64个制造商，时间跨度为2020年4月至2021年12月；使用事件数据包括安全点数据和刹车点数据；g力阈值依据Ehsani等基准研究并经过与官方事故黑点的空间关联验证。道路分析显示主干道占30.3%、单车道道路占51.2%，大部分危险驾驶发生在低速（低于20km/h）和中等速度（25-40km/h），每周高峰时段（工作日7-9点和15-18点）事件最多。预测任务基于LGA级事件计数，模型使用历史序列进行训练和评估，主要指标为MAE。局限性包括数据有限和区域聚合粒度可能掩盖局部细节。"
+      },
+      "affiliations": [
+        "COMPASS IOT PTY LTD",
+        "University of Technology Sydney (UTS)"
+      ],
+      "affiliations_text": "COMPASS IOT PTY LTD, University of Technology Sydney (UTS)",
+      "score": 4.801576474447074,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.17030v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/20/260817030v1-lambda-hold-control-human-like-movement-emerges-from-a-minimal-task-reward-in-predictive-musculoskeletal-simulation",
+      "source": "arxiv",
+      "title": "Lambda-Hold Control: Human-Like Movement Emerges from a Minimal Task Reward in Predictive Musculoskeletal Simulation",
+      "authors": [
+        "Jun Hyuk Lee",
+        "Chihyeong Lee",
+        "Jooeun Ahn"
+      ],
+      "authors_text": "Jun Hyuk Lee, Chihyeong Lee, Jooeun Ahn",
+      "abstract": "The massive overactuation in the human musculoskeletal system makes it challenging to train musculoskeletal models to generate human-like motion via reinforcement learning, primarily because exploration in the resulting high-dimensional and redundant action space is extremely inefficient. To address this problem, we propose the $λ$-hold controller, inspired by the equilibrium-point (EP) hypothesis, which has been widely supported by extensive evidence from human motor control studies. The policy's control variable is the per-muscle EP threshold length $λ$, from which a stretch-reflex recruitment law computes the muscle excitations automatically. Holding each $λ$ over an interval of the gait phase also sharply reduces the frequency at which the policy must be queried. Consequently, the controller, to our knowledge for the first time, enables a muscle-actuated skeletal model to learn human-like sprinting using only a minimal reward within an hour of training. The efficient exploration through the proposed $λ$-hold controller is not merely an engineering trick but an approach grounded in physiology, bringing together the EP hypothesis, intermittent control, and optimal feedback control. Beyond encapsulating human-like behavior in predictive simulation, this achievement contributes to developing a learnable model of the human motor controller.",
+      "url": "http://arxiv.org/abs/2608.17030v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17030v1",
+      "tldr": "The λ-hold controller, which uses physiologically grounded equilibrium-point threshold lengths and intermittent, phase-locked control to enable efficient exploration, allows a muscle-actuated skeletal model to learn human-like sprinting from only a minimal forward-velocity reward within about an hour of training.",
+      "detailed_reading": {
+        "motivation": "人体骨骼肌肉系统存在严重的过驱动与肌肉冗余，直接以肌肉 excitation 作为强化学习动作空间时，高维且多对一映射导致探索效率极低，难以生成类人运动。受平衡点假说启发，需要一种能将协调性内建于控制变量、降低决策频率的控制器，从而仅用最小任务奖励即可学习类人奔跑。",
+        "method": "采用 H2190 三维肌肉骨骼模型（21自由度、90块肌肉-肌腱单元），在 SCONE/Hyfydy 中以0.01 s步长仿真；策略直接输出每块肌肉的平衡点阈值长度 λ_i（范围[0.6,1.2]），并由牵张反射募集律 e_i = clamp(G_tonic(ℓ_i-λ_i)+G_phasic[v_i]+,0,1) 自动计算肌肉 excitation，其中增益固定为 G_tonic=50、G_phasic=0.1。控制采用 λ-hold：仅在足底反作用力事件（着地/离地）及事件间的子决策点重新查询策略，并在0.05-0.15 s保持区间内由反射律持续产生 excitation；为了不绑定固定节律，子决策点由最近同类事件间隔的一半估计。策略用 SAC+gSDE 训练，观测为432维生理信号（肌长、速度、肌腱力、足底接触/GRF、关节角/角速度、前庭信号及当前 λ 的 efference copy），奖励仅为 r=exp(v_x)·exp(-(v_z/0.1)^2)，不使用参考运动、代谢代价、课程或对称辅助。",
+        "result": "在预测性肌肉骨骼仿真中首次仅用前向速度这一最小奖励，在一个小时内学会协调、类人化的冲刺运动；相比 excitation-level 控制，按仿真步而非决策步比较时，λ-hold 更早更广地覆盖联合空间状态分布，所需策略决策数大幅减少。学习速度提升显著，可在单台工作站约1小时完成训练。",
+        "conclusion": "结果表明，将控制变量从肌肉 excitation 改为具有生理基础的平衡点阈值长度 λ，并让牵张反射填补保持区间内的控制，是一种可行且高效的神经运动控制建模思路。它并非单纯工程技巧，而是融合平衡点假说、间歇控制与最优反馈控制，为可学习的、可解释的人类运动控制器模型提供了新路径。",
+        "key_details": "关键实现细节：模型为 H2190，90块肌肉；仿真步长0.01 s；λ 界限[0.6,1.2]，反射增益对所有肌肉共享且固定；决策点绑足底GRF事件并插入子点，保持区间0.05-0.15 s，以避免固定时钟限制步频；hold 不是 action repeat，因为区间内 excitation 仍随 ℓ、v 经反射律变化。训练使用 SAC+gSDE，超参与 SAC 基线相同，DEP-RL 基线使用 DEP+MPO；观测排除 excitation/activation，因为它们由 λ、ℓ、v 完全决定。奖励无上限地鼓励前向速度，并用窄高斯惩罚侧向速度。局限性：决策点依赖于步态的周期性事件，对于无周期结构的任务如何设置仍需研究；反射增益或需按任务调整。"
+      },
+      "affiliations": [
+        "Seoul National University"
+      ],
+      "affiliations_text": "Seoul National University",
+      "score": 4.628775032799742,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.16925v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/20/260816925v1-detecting-and-discriminating-operator-misspecification-in-hybrid-pde-parameter-learning-a-reference-free-instrument-with-discrimination-bounded-in-sample",
+      "source": "arxiv",
+      "title": "Detecting and Discriminating Operator Misspecification in Hybrid PDE-Parameter Learning: a Reference-Free Instrument, with Discrimination Bounded In Sample",
+      "authors": [
+        "Eric Fock"
+      ],
+      "authors_text": "Eric Fock",
+      "abstract": "We build an instrument that reads, from a single fit and with no oracle, whether the operator a hybrid PDE-parameter estimator postulates is wrong-and separates that from a merely unidentifiable parameter. On one self-adjoint parabolic inverse problem, an information-matrix statistic with plug-in scale and per-seed parameter has median 0.19 under correct specification, rejection rate $0.033$ against a pre-registered ceiling of $0.10$, and rises to $224$ and $85$ under two misspecifications, firing in every replicate. On a correctly specified but non-identifiable design it stays mute-$0.050$ at $n=200$, Clopper-Pearson $[0.024, 0.090]$-while a rank statistic collapses to zero at a pre-registered boundary $c_5^*=2.15\\times10^{-3}.$ Two readings of one fit therefore separate the two failures across the three designs a deployable test reaches. That separation is the contribution; detection alone is a crowded flank. In sample it is a bound, out of sample a direction. It is needed because the usual accuracy check is blind: the misspecified estimator's in-domain RMSE is $2.7\\times 10^{-2}$, below the observation noise for $σ\\geq 0.05,$ while the coefficient is wrong by $29.7\\%$ at zero noise, $31.2\\%$ at the loudest. Nor is the failure architectural: a one-parameter curve fit, a bare parameter and multilayer perceptrons of $49$ and $241$ parameters converge to the same pseudo-true, matched in closed form to $0.07\\%,$ whereas a physics-informed network, with its composite objective, converges to a disjoint one. We report where the instrument is blind, a pre-registered negative where a neural estimator loses to Tikhonov-regularized inversion at recovery, and the hypothesis under which its guarantee holds but a trained network violates it.",
+      "url": "http://arxiv.org/abs/2608.16925v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16925v1",
+      "tldr": "TLDR: This paper introduces a reference-free, single-fit information-matrix instrument that both detects operator misspecification in hybrid PDE-parameter learning and discriminates it from mere parameter unidentifiability, demonstrating that standard in-domain accuracy checks are blind to such misspecification while the proposed statistic fires reliably across diverse architectures and pre-registered limits.",
+      "detailed_reading": {
+        "motivation": "混合PDE-参数学习（hybrid PDE-parameter learning）中，研究者常用一个假定的算子反演未知系数，但标准的预测精度检查是盲的：当算子被错误指定时，模型在拟合窗口内的RMSE可低至观测噪声之下，同时系数却偏差约30%。现有工作只关注优化或表示能力失败，无法从单次拟合中判断'算子是否错误'，更不能把'算子错误'与'参数不可辨识'区分开来。本文旨在构建一个无参考（reference-free）、只需单次拟合的仪器，同时检测并区分这两类失败。",
+        "method": "在一个自伴抛物型反问题上，采用χ架构的混合PDE-参数估计器：保留预设算子形式，仅用网络或标量学习未知扩散系数，并把解析灵敏度χ=∂F/∂θ注入反向传播。数据为带噪观测，噪声水平σ∈[0,0.2]，在t∈[0,1]内拟合，在t∈[1,2]上评估外推。对每次拟合计算带plug-in尺度和per-seed参数的信息矩阵统计量I_N，并用参数自助法校准；同时计算Fisher秩统计量刻画参数可辨识性。两个读数来自同一次拟合，分别回答'算子是否错误'和'参数是否不可辨识'。研究还比较了一参数曲线拟合、裸标量参数、参数量为49和241的MLP以及物理信息网络（PINN）四类估计器，并用White伪真参数的闭式解作为理论基准。",
+        "result": "在正确指定时，信息矩阵统计量中位数为0.19，拒绝率0.033（低于预注册上限0.10）；在两种误指定下统计量升至224和85，每个重复均触发。在正确指定但不可辨识的设计中，该统计量保持沉默：n=200时拒绝率0.050，Clopper-Pearson区间[0.024,0.090]；而秩统计量在预注册边界c5*=2.15×10^-3处塌缩到零。误指定估计器的域内RMSE为2.7×10^-2，在σ≥0.05时低于观测噪声，但系数在零噪声时错29.7%、噪声最大时错31.2%；其域外误差的log-log斜率为0.0049，而正确指定估计器为2.004。四类估计器收敛到同一伪真值（闭式匹配误差0.07%），而PINN由于复合目标函数收敛到不相交的伪真值；在结构化系数恢复任务上，神经估计器比Tikhonov正则化反演差1.8到4倍。",
+        "conclusion": "本文的贡献不是'检测'本身（该领域已很拥挤），而是从单次拟合中给出两个正交读数，将'算子误指定'与'参数不可辨识'明确分离。样本内该分离是一个边界，样本外是一个方向；这种分离是部署可用测试时所需的关键能力。由于误指定估计器的预测精度检查完全失效，必须用这类参考自由的规格化检验来验证混合PDE参数学习的结果，而不能靠域内RMSE或外推误差。",
+        "key_details": "关键细节包括：问题设定为自伴抛物反问题，缺失一个模态分量；观测噪声σ∈[0,0.2]，拟合窗t∈[0,1]，外推窗t∈[1,2]。估计器方面：一参数曲线拟合、裸标量、49/241参数MLP都收敛到相同伪真值α*=0.007033，自助区间重叠；PINN因复合损失定义为不同M估计问题，收敛到不相交的0.006939。统计量方面：I_N采用plug-in尺度和per-seed参数，经参数自助法校准，预注册拒绝率上限0.10；Fisher秩统计量的预注册边界c5*=2.15×10^-3。限制方面：报告了仪器的盲区设计、神经估计器在结构化系数恢复上输给Tikhonov的预注册阴性结果，以及H2假设下保证成立但训练网络可能违反的情形；本文不声称结论跨所有物理系统普适，只在一个可精确求解的算子上建立了证据。"
+      },
+      "affiliations": [
+        "Université de La Réunion"
+      ],
+      "affiliations_text": "Université de La Réunion",
+      "score": 4.550410143187796,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.17070v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/20/260817070v1-certified-but-private-scalable-zero-knowledge-proofs-for-neural-network-guarantees",
+      "source": "arxiv",
+      "title": "Certified but Private: Scalable Zero-Knowledge Proofs for Neural Network Guarantees",
+      "authors": [
+        "Youwei Zhong",
+        "Ben Merbaum",
+        "Timos Antonopoulos",
+        "Ning Luo",
+        "Charalampos Papamanthou",
+        "Katerina Sotiraki",
+        "Ruzica Piskac"
+      ],
+      "authors_text": "Youwei Zhong, Ben Merbaum, Timos Antonopoulos, Ning Luo, Charalampos Papamanthou, Katerina Sotiraki, Ruzica Piskac",
+      "abstract": "With the growing deployment of machine learning models, formal guarantees of the robustness and fairness of these models have become increasingly important in safety-critical and legal-compliance settings. However, model parameters are often commercial secrets that cannot be disclosed to auditors or end users. To this end, we present PANDA, a scalable system that uses zero-knowledge proofs (ZKPs) to prove the robustness and fairness properties of a model without revealing its private parameters. PANDA is built on top of CROWN, an efficient robustness certification framework that is used in many state-of-the-art formal verification tools for neural networks. The core contribution of PANDA is a novel algorithm for proving linear relaxation bounds for non-linear activation layers, yielding simple, lightweight proofs. Remarkably, our system can generate proofs of local robustness for neural networks with more than 2.9M parameters in 5 minutes, and can verify them in 10 seconds. Prior ZKP-based robustness system rely on exponential-time algorithms that cannot scale to nontrivial networks. In contrast, PANDA scales polynomially in the number of neurons in a network, allowing us to support neural networks 4 orders of magnitude larger than previous approaches with significantly reduced prover overhead.",
+      "url": "http://arxiv.org/abs/2608.17070v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17070v1",
+      "tldr": "PANDA is a scalable zero-knowledge proof system that proves local robustness and fairness properties of neural networks without revealing their private parameters, using CROWN-based linear relaxation bounds to scale polynomially to networks over 2.9 million parameters—four orders of magnitude larger than prior approaches.",
+      "detailed_reading": {
+        "motivation": "机器学习模型在安全关键和合规场景中的部署要求对鲁棒性和公平性提供形式化保证，但模型参数常为商业机密，不能向审计者或终端用户披露。现有形式化验证工具需要暴露模型内部信息，而基于零知识证明的先前鲁棒性认证系统只能支持约100个参数的小网络，无法扩展到真实应用。因此需要一种既能证明神经网络局部鲁棒性、又完全不泄露私有模型参数的规模化方案。",
+        "method": "提出PANDA系统，将CROWN线性边界传播认证算法嵌入零知识证明框架。证明者在ZKP外部运行CROWN，计算各层预激活张量的仿射下界和上界并生成鲁棒性证书，再在ZKP内部通过精简约束验证这些边界的正确性。核心是四点松弛验证模块：对ReLU、sigmoid、tanh等非线性激活函数，用四个逐点不等式检验连续区间上的线性松弛边界，避免在ZKP内进行昂贵的迭代搜索。所有实数计算经量化转换为Q比特整数和有限域算术，每层使用独立缩放因子，并设计定制后端，分别用多项式承诺、矩阵算术ZKP和查找参数ZKP来证明仿射变换、范围约束及非线性函数求值。最后验证者检查承诺、矩阵等式和查找表证明，确保证书有效且不泄露权重。",
+        "result": "PANDA能够为超过290万参数的神经网络在5分钟内生成局部鲁棒性证明，并在10秒内完成验证。与之前基于零知识证明的鲁棒性系统相比，支持的网络规模提升了4个数量级，证明者开销显著降低。证明者运行时随神经元数量呈多项式增长，而先前方法呈指数增长。PANDA还是首个支持sigmoid和tanh等超越激活函数的隐私保护局部鲁棒性认证系统。",
+        "conclusion": "PANDA首次实现了对大规模私有神经网络的局部鲁棒性进行可公开验证的零知识证明，解决了模型可验证性和知识产权保护之间的冲突。通过将CROWN认证计算放到ZKP外部并用轻量级约束验证，PANDA在保持隐私性的同时达到了实际可用的可扩展性，为安全关键场景中的模型审计和合规提供了可行路径。",
+        "key_details": "关键实现细节包括：采用CROWN的外层前向传播与内层反向传播来构造逐层线性边界，并在最终层直接构造关于分类差值的仿射界；证明者先在明文域运行CROWN得到松弛参数，再在ZKP内用四点松弛模块验证其满足激活函数的上下界；量化方案使用每层共享缩放因子，加法需重新缩放至相同因子，乘法则缩放因子相乘；底层密码学组件包括多项式承诺方案、矩阵算术证明和查找表证明，其中查找表同时用于范围证明和非线性函数值验证；系统满足完备性、可靠性和零知识性。局限性包括量化带来数值近似，以及当前评估集中于局部鲁棒性，公平性等其他性质的可扩展性仍需进一步研究。"
+      },
+      "affiliations": [
+        "University of Illinois Urbana-Champaign",
+        "Yale University"
+      ],
+      "affiliations_text": "University of Illinois Urbana-Champaign, Yale University",
+      "score": 4.488651248279167,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.17079v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/20/260817079v1-dynamic-regime-aware-conformal-calibration-for-reliable-economic-forecast-intervals-under-multiple-distribution-shifts",
+      "source": "arxiv",
+      "title": "Dynamic Regime-Aware Conformal Calibration for Reliable Economic Forecast Intervals under Multiple Distribution Shifts",
+      "authors": [
+        "Bogdan Oancea"
+      ],
+      "authors_text": "Bogdan Oancea",
+      "abstract": "Conformal prediction provides distribution-free prediction intervals but relies on exchangeability, an assumption often violated in economic forecasting because of covariate shift, concept drift, local heterogeneity and latent regimes. We propose Dynamic Regime-Aware Conformal Prediction (DRACP), which combines density-ratio, localized kernel and probabilistic regime-aware weighting with a self-tuning online significance controller in a unified weighted conformal calibration framework. We distinguish three theoretical results: finite-sample validity under oracle importance weights, a coverage-gap bound for estimated weights with rates in effective sample size, and deterministic or regret guarantees for the online controller. We evaluate DRACP against six baselines on 48 real forecasting series covering euro-area and EU-27 HICP inflation, US macroeconomic and energy indicators, and daily financial series. Recent online methods (FACI, strongly-adaptive online conformal prediction and conformal PID) were verified against the authors' implementations. DRACP is not the most efficient method: strongly-adaptive online conformal prediction achieves the best interval score and intervals about 20% narrower. Instead, DRACP provides the most reliable calibration, achieving coverage closest to the nominal 0.90 (0.890), never falling below 0.80 on any series, maintaining the best coverage at all forecast horizons, and performing best during the 2021-2023 inflation surge. The strongly-adaptive method undercovers on 20 of 48 series versus 10 for DRACP. DRACP therefore offers a principled trade-off between calibration and efficiency, favoring reliable coverage when prediction intervals must satisfy coverage standards. An ablation study shows that the online controller and conditional-scale normalization provide most of the performance gain, whereas the weighting components make a smaller contribution.",
+      "url": "http://arxiv.org/abs/2608.17079v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17079v1",
+      "tldr": "DRACP unifies density-ratio, kernel, regime-aware, and online self-tuning weighting into a single weighted-conformal framework to deliver reliable prediction-interval coverage under multiple distribution shifts, trading off wider intervals for calibration accuracy that stays closest to nominal across horizons and stress periods.",
+      "detailed_reading": {
+        "motivation": "经济预测中预测区间常因协变量漂移、概念漂移、局部异质性和潜在机制同时发生而违反可交换性，现有自适应共形方法通常只针对单一偏差，无法应对多重分布偏移同时作用的情况。因此需要一个统一的加权共形校准框架，能够同时处理多种非平稳性并保证可靠覆盖。",
+        "method": "DRACP将密度比权重、局部核权重、概率机制感知权重和自调优在线显著性控制器组合在一个加权共形校准步骤中。具体流程：先在训练块上拟合点预测器，得到过去各期的误差分数；然后对每个校准点计算四种权重——基于分类器估计的密度比（区分近期与较旧预测变量）、局部核（衡量预测变量相似性，带宽自适应且有有效样本量下限）、由混合模型分配的机制相似度、以及按时间几何衰减的最近性权重；四种权重相乘并归一化，在测试点加入原子权重后取加权分位数作为区间半径；在线控制器根据已实现覆盖率调整工作显著性水平，采用类似FACI的多专家指数加权聚合。所有量在时间t仅使用当时可得信息因果计算。",
+        "result": "在48个真实序列上对比六个基线，DRACP并非最有效：强自适应在线共形预测（SAOCP）取得最佳区间分数，区间约窄20%。但DRACP在覆盖率上最可靠：面板上平均覆盖率0.890最接近名义0.90，任何序列从未低于0.80，在所有预测期限上保持最佳覆盖率，且在2021-2023通胀激增期间表现最好。SAOCP在48个序列中20个欠覆盖，而DRACP只有10个。",
+        "conclusion": "DRACP提供了可靠覆盖与区间效率之间的原则性权衡，偏向于在预测区间必须满足覆盖标准时保证可靠覆盖。其价值在于面对多重同时发生的分布偏移时，能维持最接近名义水平的经验覆盖率，尽管区间较宽，因此适合作为需要严格覆盖保证的决策场景下的校准方法。",
+        "key_details": "理论结果区分三种：oracle重要性权重下的有限样本有效性、估计权重的覆盖差距界（以有效样本量而非名义样本量的速率表示）、以及在线控制器的确定性或遗憾保证。实现细节包括：密度比用分类器估计，局部核带宽自适应且带有效样本量下限，在线控制器采用多学习率专家聚合；数据涵盖欧元区和EU-27 HICP通胀、美国宏观经济和能源指标、每日金融序列；近期基线（FACI、SAOCP、conformal PID）均通过原作者实现验证。消融研究显示，在线控制器和条件尺度归一化贡献了大部分性能提升，而权重成分贡献较小；局限性是DRACP区间较宽，效率低于SAOCP。"
+      },
+      "affiliations": [
+        "National Institute of Research and Development for Biological Sciences",
+        "University of Bucharest"
+      ],
+      "affiliations_text": "National Institute of Research and Development for Biological Sciences, University of Bucharest",
+      "score": 4.208802450117977,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.17038v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/20/260817038v1-terrain-aware-local-path-planning-with-global-dem-data-integration-for-autonomous-ugv-navigation",
+      "source": "arxiv",
+      "title": "Terrain-Aware Local Path Planning with Global DEM Data Integration for Autonomous UGV Navigation",
+      "authors": [
+        "Devender Singh",
+        "Issah Nazif Suleiman",
+        "Paul Mitten",
+        "Glenn Cutler",
+        "Vinicius Prado da Fonseca",
+        "Matthew Hamilton"
+      ],
+      "authors_text": "Devender Singh, Issah Nazif Suleiman, Paul Mitten, Glenn Cutler, Vinicius Prado da Fonseca, Matthew Hamilton",
+      "abstract": "Autonomous navigation in complex outdoor terrains presents critical challenges for unmanned ground vehicles (UGVs) due to the inherent disconnect between global mapping and real-time sensor feedback. This work proposes a hybrid framework that integrates low-resolution Digital Elevation Model (DEM) data with real-time LiDAR-based obstacle detection and terrain analysis for efficient path planning. A global path is initially computed using a preprocessed DEM-based A* algorithm. Subsequently, local sensor data drives adaptive path correction, enabling the UGV to negotiate sudden environmental changes while maintaining safety and efficiency. Simulation results in Gazebo demonstrate significant improvements over a baseline approach, achieving a 95\\% obstacle avoidance rate and reducing the average encountered slope from $8^\\circ$ to $2.7^\\circ$ in custom terrain. This integration enhances path efficiency and terrain traversability and supports robust real-time adaptation, paving the way for more reliable autonomous navigation in dynamic outdoor environments.",
+      "url": "http://arxiv.org/abs/2608.17038v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17038v1",
+      "tldr": "The paper proposes a hybrid UGV navigation framework that integrates low-resolution global DEM data with real-time LiDAR-based local path correction, achieving 95% obstacle avoidance and reduced terrain slope traversal in simulations.",
+      "detailed_reading": {
+        "motivation": "户外复杂地形下无人地面车辆（UGV）的自主导航面临全局地图与实时传感器反馈脱节的挑战，现有系统难以实时适应突发环境变化，且安全与效率之间常存在权衡，缺乏将全局路径优化与局部地形分析统一起来的混合框架。",
+        "method": "提出混合导航框架：首先使用SRTM 1弧秒（30m分辨率）DEM数据，经裁剪、插值、归一化生成3D地表z(x,y)，计算坡度s(x,y)与代价函数C(x,y)=1.0*s+0.5*z，并对极端低海拔施加惩罚P=10，归一化后基于A*算法计算全局最优路径；随后在局部路径校正模块中，利用实时LiDAR点云，通过Ground Plane Fitting（GPF）结合迭代RANSAC进行地面分割（初始种子取最低250点，距离阈值0.1m，迭代3次），基于地面法向量与垂直轴计算当前坡度，并用滑动窗口（N=40）的坡度均值μ与标准差σ动态设定预警阈值τ_warn=μ+σ和临界阈值τ_crit=μ+3σ，实现分级响应（正常行驶、避障、紧急停车）；障碍物规避通过非地面点建模为高度分布，计算皮尔逊偏度系数S判断偏斜方向，或在对称分布时比较左右两侧中位高度h_L与h_R来决定左转或右转。",
+        "result": "在Gazebo自定义地形仿真中，相比基线方法，该框架实现了95%的障碍物规避率，并将平均遭遇坡度从8°降至2.7°，显著提升了路径效率和地形可通行性，同时支持实时动态路径调整，解决了UGV在动态环境中卡住的问题。",
+        "conclusion": "将低分辨率全球DEM数据与实时LiDAR感知融合的混合框架，能够有效弥补全局规划与局部执行之间的鸿沟，在保持全局路径最优性的同时实现实时地形自适应和障碍规避，为动态户外环境下的可靠自主导航提供了可行方案。",
+        "key_details": "关键细节：DEM采用SRTM 1弧秒约30m分辨率，区域为半径1000m的圆形，中心坐标（47.4870°N, -52.8629°W）；代价权重w_s=1.0, w_z=0.5，极端高程惩罚P=10；A*全局路径在归一化成本图上计算；局部处理使用LiDAR点云，地面分割阈值τ_seed=0.8m、τ_dist=0.1m、迭代3次；坡度滑动窗口N=40，动态阈值基于均值和标准差；障碍物偏度阈值τ=0.2；仿真环境为Gazebo，比较对象为未集成全局DEM的基线方法；局限性包括DEM分辨率低无法捕捉细粒度障碍（岩石、沟渠、坑洞），依赖经验阈值，且尚未在真实物理环境中验证。"
+      },
+      "affiliations": [
+        "Memorial University of Newfoundland",
+        "Compusult Ltd."
+      ],
+      "affiliations_text": "Memorial University of Newfoundland, Compusult Ltd.",
+      "score": 4.150818144194975,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.16932v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/20/260816932v1-dow-ke-anchor-free-multi-layer-knowledge-editing-via-direct-end-to-end-weight-optimization",
+      "source": "arxiv",
+      "title": "DOW-KE: Anchor-Free Multi-Layer Knowledge Editing via Direct End-to-End Weight Optimization",
+      "authors": [
+        "Ran Chen",
+        "Junbo Zhang",
+        "Qianli Zhou",
+        "Xinyang Deng",
+        "Wen Jiang"
+      ],
+      "authors_text": "Ran Chen, Junbo Zhang, Qianli Zhou, Xinyang Deng, Wen Jiang",
+      "abstract": "Multi-layer locate-then-edit methods for knowledge editing first optimize target residual-stream activations (anchors) at selected layers, then realize them layer by layer as weight updates. This pipeline optimizes an intermediate representation but deploys multi-layer weight updates whose joint effect through the true forward pass is never itself optimized: regardless of how anchors are set or propagated, each update comes from a local solve, so propagation-induced attenuation and distortion go uncorrected, leaving a closure gap between anchor targets and realized edits. We propose DOW-KE, an anchor-free method built on a single principle: what is optimized must be exactly what is deployed. DOW-KE backpropagates the final editing objective through the complete model, jointly optimizing the updates of all edited layers so cross-layer propagation and coupling enter every gradient step. The same principle dictates where preservation resides: embedding the preservation projection in the update parameterization, inside the computation graph, makes every gradient act on the deployed update; post-hoc constraints would reopen the gap, and the constrained search keeps edits clear of protected knowledge. In large-scale sequential editing on two datasets and three models, DOW-KE achieves the highest overall Score and neighborhood Specificity in five of six model-dataset settings among the evaluated baselines.",
+      "url": "http://arxiv.org/abs/2608.16932v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16932v1",
+      "tldr": "DOW-KE is an anchor-free multi-layer knowledge editing method that directly backpropagates the final editing objective through the entire model to jointly optimize deployed weight updates, eliminating the structural misalignment between optimized anchors and realized edits and achieving state-of-the-art performance in sequential editing benchmarks.",
+      "detailed_reading": {
+        "motivation": "现有多层 locate-then-edit 知识编辑方法采用两阶段管线：先在选定层优化残差流中的锚点激活，再将锚点逐层转化为权重更新。该管线优化的是中间表征，而真正部署的是多层权重更新的联合效果，后者从未在真实前向传播中被整体优化。由于逐层闭式解只拟合局部目标，残差传播的衰减、畸变和跨层耦合无法被校正，导致锚点目标与实际编辑效果之间存在闭合缺口，编辑强度也难以在完整性与局部性之间校准。",
+        "method": "DOW-KE 的原则是“被优化的必须是被部署的”。输入为一批编辑请求（主题-对象对）、随机前缀和需要保护的语料统计量；首先沿用 locate-then-edit 定位待编辑的 FFN 层窗口，并为每个编辑层计算编辑键 K1 和保存统计二阶矩 C；然后将每层权重更新 Δ 参数化为 Δ = R K1^T (λC + K1 K1^T)^-1，其中 R 是可学习的“写什么”值残差，保存投影被嵌入该参数化中，梯度因此始终作用在真实部署的更新上；接着以最终编辑目标（如目标对象负对数似然）加 KL 保持项为损失，在完整模型上反向传播，同时优化所有编辑层的 R，使残差衰减、畸变与跨层耦合进入每一步梯度；推理时直接使用更新后的权重，顺序编辑时逐批提交更新。",
+        "result": "在两个数据集和三个模型的大规模顺序编辑实验中，DOW-KE 在六个模型-数据集设置的五个中取得了最高的综合 Score 和邻域特异性。针对结构错位的量化实验显示，现有单锚点多层方法的终端未闭合残差约为 0.33，逐层实现率约为 0.5，且仅缩放更新幅度无法同时提升有效性和局部性（复合分数在缩放系数 0.9 时峰值为 86.89）；DOW-KE 通过端到端联合优化消除了这类闭合缺口。",
+        "conclusion": "DOW-KE 验证了知识编辑中“优化对象与部署对象必须一致”的核心思想：用最终目标直接监督权重更新，而非先优化锚点再局部求解，可以显式建模残差传播的衰减、畸变与跨层耦合，使多层编辑在功效、泛化和局部性上更优。该方法在多数模型-数据集设置上超过现有基线，为多层知识编辑提供了一种无需锚点的直接权重优化范式。",
+        "key_details": "关键细节：(1) 建模先验：沿用线性关联记忆视角，FFN 下投影矩阵 W^l 被视为键值记忆，键为 k_t^l=φ^l(γ(h_t^{l-1}+a_t^l))，值为 W^l k_t^l；(2) 更新参数化：Δ = R K1^T (λC + K1 K1^T)^-1，R 是逐层可学习的值残差，K1 由随机前缀下的编辑键得到，C 是保护知识键的二阶矩，保存约束在计算图内生效而非事后施加；(3) 损失：最终编辑目标（目标对象负对数似然）在 N 个随机前缀上平均以增强泛化，KL 项在 essence prompt 上抑制表示漂移；(4) 训练/推理：所有待编辑层的 R 通过完整模型反向传播联合优化，推理时无额外模块或外部记忆，顺序编辑时逐批提交权重更新；(5) 超参与复杂度：超参包括编辑层窗口、随机前缀数 N、保存系数 λ、KL 系数 λ_KL；更新空间为随编辑批次增长的低秩空间，更新与特定事实绑定，存储不随编辑数持续增加；局限是全模型端到端反向传播的计算开销高于闭式解，且结果依赖层定位与保存统计的质量。"
+      },
+      "affiliations": [
+        "Northwestern Polytechnical University"
+      ],
+      "affiliations_text": "Northwestern Polytechnical University",
+      "score": 4.010820232641826,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.16930v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/20/260816930v1-eman-optimization-driven-capacity-growth-through-path-emergence-in-multi-task-learning",
+      "source": "arxiv",
+      "title": "EMAN: Optimization-Driven Capacity Growth through Path Emergence in Multi-Task Learning",
+      "authors": [
+        "Chenlei Fang",
+        "Jingchen Li",
+        "Hongzong LI",
+        "Qingyao Li",
+        "Yixuan Zhang",
+        "Huarui Wu",
+        "Haobin Shi",
+        "Chunjiang Zhao"
+      ],
+      "authors_text": "Chenlei Fang, Jingchen Li, Hongzong LI, Qingyao Li, Yixuan Zhang, Huarui Wu, Haobin Shi, Chunjiang Zhao",
+      "abstract": "Existing multi-task learning methods rely on hard sharing, multiple paths or experts, adaptive sharing, and dynamic expansion. However, their capacity changes are usually constrained by predefined structures or triggered by task boundaries and conflict signals. This raises a fundamental question: can a network start from exact single-path computation and grow a new independent path only when persistent optimization evidence appears? We propose the Emergent Modular Atomic Network (EMAN), an optimization-driven framework for exposing an antisymmetric growth direction through latent relative phases without instantiating a second path, and for monitoring multiple decision signals during training to transform local optimization evidence into a structural decision. EMAN materializes two equal-capacity independent paths only after certification. EMAN adaptively allocates shared and task-specific representation capacity to accommodate varying task requirements. Extensive experiments on controlled rank settings, PASCAL-Context, and NYUv2 validate its effectiveness, achieving improved performance at a competitive computational cost.",
+      "url": "http://arxiv.org/abs/2608.16930v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16930v1",
+      "tldr": "EMAN is an optimization-driven multi-task learning framework that starts from exact single-path sharing, detects persistent optimization evidence via a latent relative-phase probe, and materializes a second independent path only when needed, improving performance at competitive computational cost.",
+      "detailed_reading": {
+        "motivation": "现有MTL方法依赖硬共享、多路径/专家、自适应共享或动态扩展，但容量变化常受预定义结构、任务边界或冲突信号限制。硬共享在后期可能出现容量瓶颈，而常开双路径全程存在冗余计算。EMAN旨在让网络从精确单路径计算出发，仅当训练中持续出现优化证据时才生长第二条独立路径，从而由优化过程内生决定容量增长。",
+        "method": "EMAN分为精确共享→相位探测→优化证据认证(OEC)→条件路径物化四阶段。初始只存储母参数ω̄并执行单路径前向h=f(x;ω̄)，逻辑上令p1=p2=h；引入相对相位φ=θ1-θ2，计算共享项u、余弦对交互βcosφ(p1⊙p2)与正弦反对称项κsinφ(p1-p2)，并用带stop-gradient的RMS归一化控制交互项幅度，得到z=u+ρq̂。探测时把逻辑路径梯度投影到零和反对称方向得g_d，候选方向为d_anti=-g_d/(‖g_d‖+ε)。OEC综合方向强度S_t、半批/分片一致性K、冻结与动态有限步下降D_t、动态安全指标U_t及连续探测窗口W_t内的时域持久性，全部通过固定阈值才置C_t=1。认证成功后，将母参数复制为两个等容量路径并沿d_anti施加零和扰动ω±ε_d d_anti，随后两路径独立优化；若证据不足则维持精确共享。",
+        "result": "受控秩实验中，单物理路径为秩3容量，任务联合需求分别为秩3/4/6；EMAN在秩3保持共享，在秩6材料化第二路径并恢复缺失的潜在因子和预测性能，秩4对应靠近单路径容量极限，释放后的路径子空间互补。PASCAL-Context静态设置下EMAN释放较早；任务到达场景中，初始两任务阶段保持单路径，在saliency和surface-normal任务加入后释放，三随机种子下最终性能与always-dual相当，活动双路径阶段缩短约一半并减少路径训练计算。NYUv2上EMAN获得最优平均语义分割与深度结果及最高综合分；PASCAL-Context任务级增益略不均匀。",
+        "conclusion": "EMAN验证了容量扩展可由优化证据内生触发的可行性：从精确单路径起步，通过相对相位暴露反对称增长方向，仅在持续且安全时物化第二条独立路径，从而兼顾共享效率与动态容量。该方法能按任务需求自适应分配共享和任务专有表征，在多个基准上以接近双路径的性能显著降低早期训练开销。",
+        "key_details": "关键实现细节包括：逻辑双路径不增加物理参数，参数量、内存和前向成本与共享模型相同；固定奇映射B(d)=d在退化点提供单位局部增益，使相位释放可在不实例化第二路径时暴露反对称方向；OEC阈值与探测窗口固定，且仅使用训练数据判定；材料化通过零和扰动保证两路径等容量且同构；NormCal使用stop-gradient避免幅度缩放影响梯度；相位释放后需经历固定适应窗口才开始OEC；超参数包括方向步长η、扰动幅度ε_d、相位耦合系数β/κ、NormCal缩放ρ及各类OEC阈值。局限方面，PASCAL-Context任务级提升不如NYUv2均匀，Recon在surface-normal和联合损失上仍保持最强；静态全部任务同时出现时释放较早，延迟计算节省空间有限。"
+      },
+      "affiliations": [
+        "Northwestern Polytechnical University",
+        "Beijing Research Institute of Agricultural Artificial Intelligence and Robotics",
+        "Ministry of Agriculture and Rural Affairs",
+        "Beijing Academy of Agriculture and Forestry Sciences",
+        "National Engineering Research Center for Information Technology in Agriculture"
+      ],
+      "affiliations_text": "Northwestern Polytechnical University, Beijing Research Institute of Agricultural Artificial Intelligence and Robotics, Ministry of Agriculture and Rural Affairs, Beijing Academy of Agriculture and Forestry Sciences, National Engineering Research Center for Information Technology in Agriculture",
+      "score": 3.9913658024850784,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.17034v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817034v1-agents-unlock-new-capabilities-through-switching-lora-adapters-as-a-tool-slaaat",
+      "source": "arxiv",
+      "title": "Agents unlock new capabilities through Switching LoRA Adapters as a Tool (SLAaaT)",
+      "authors": [
+        "Kenneth Ge"
+      ],
+      "authors_text": "Kenneth Ge",
+      "abstract": "Post-training can unlock new capabilities and improve performance on specialized tasks, but sometimes at the cost of catastrophic forgetting in other domains. This poses a problem in long agent trajectories that compose different capabilities. We reject this tradeoff by giving an agent a tool to switch between specialized LoRA adapters mid-trace. To test its effectiveness, we compose two synthetic coding tasks that are logically simple but require specialization. We find that this allows the model to solve problems it previously could not, that the model is able to switch autonomously (and find a new strategy that beats our human heuristic baseline on one task), and that this incurs an up to an 18x reduction in capability tax compared to an agent using only one specialized adapter. Our approach also substantially outperforms spawning subagents in both task capabilities and token usage.",
+      "url": "http://arxiv.org/abs/2608.17034v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17034v1",
+      "tldr": "By giving an agent a tool to switch between specialized LoRA adapters mid-trajectory, the model can compose post-trained skills, avoid catastrophic forgetting, and outperform single-adapter, fused, and subagent baselines on synthetic coding tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent"
+      ],
+      "affiliations_text": "Independent",
+      "score": 3.937206234163208,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.17087v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817087v1-backward-through-time-algebraically",
+      "source": "arxiv",
+      "title": "Backward through Time, Algebraically",
+      "authors": [
+        "Konstantinos Kogkalidis"
+      ],
+      "authors_text": "Konstantinos Kogkalidis",
+      "abstract": "Linear temporal logic is a modal extension of propositional logic that allows one to state how a system should behave over time. Its canonical domain is the booleans, but discretely-valued judgements are of little use in steering softly-valued systems (neural policies, adaptive controllers, sequence models, etc). In such cases, the goal formula's (dis)satisfaction becomes a training signal, and differentiability becomes a prime concern. Candidate differentiable semantics abound, but navigating them is tricky. Implementations, where available, are shallow embeddings, demanding an upfront commitment to a single semantic algebra and its (usually implicit) conduct. The paper casts the reader as a functional programmer asked to come to terms with this predicament, and refusing. Out of that refusal comes an evaluation engine that is algebra-generic and amenable to differentiation, together with an executable specification of the algebras it can accept. Various algebras are implemented and audited for their behavior, both forward and backward. Each algebra turns out to be a choice of which direction to disappoint, and how. Everything described (and more) is part of the PyTorch library telos, to be found at https://github.com/konstantinosKokos/telos.",
+      "url": "http://arxiv.org/abs/2608.17087v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17087v1",
+      "tldr": "This paper presents an algebra-generic, differentiable evaluation engine for linear temporal logic over soft (e.g., neural) traces, showing that different semantic algebras correspond to different choices of how and in which direction to “disappoint,” and implements it as the PyTorch library `telos`.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9256198432311553,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.16926v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816926v1-data-dpo-direct-preference-optimization-for-target-model-data-selection-in-llm-post-training",
+      "source": "arxiv",
+      "title": "Data-DPO: Direct Preference Optimization for Target Model Data Selection in LLM Post-Training",
+      "authors": [
+        "Peng Sun",
+        "Yi Yang",
+        "Antong Zhang",
+        "Chunxiao Li",
+        "Yanbo Wang",
+        "Dianbo Liu",
+        "xin chen",
+        "Kai Yu",
+        "Lu Chen",
+        "Tianfan Fu"
+      ],
+      "authors_text": "Peng Sun, Yi Yang, Antong Zhang, Chunxiao Li, Yanbo Wang, Dianbo Liu, xin chen, Kai Yu, Lu Chen, Tianfan Fu",
+      "abstract": "Data selection in supervised fine-tuning aims to select a small set of effective samples from large-scale candidate data, reducing training cost while preserving model performance. However, existing methods usually treat data value as a relatively static property, and pay limited attention to the compatibility between data and the capability distribution of the target model. To address this issue, we propose Data-DPO, a target model-oriented SFT data selection method. Data-DPO observes the local training feedback of the target model on different samples through one-step probing, transforms activation differences among samples into pairwise data preferences, and trains a lightweight reward model to learn target-model-aware data preferences. In the final selection stage, Data-DPO further combines target model preference, external quality scores, and marginal diversity to construct a more stable and effective training subset. Experimental results on Vision-Flan and LLaVA-CoT show that Data-DPO consistently outperforms existing data selection baselines under multiple data budgets and stably surpasses full data training performance.",
+      "url": "http://arxiv.org/abs/2608.16926v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16926v1",
+      "tldr": "Data-DPO introduces a target-model-aware data selection method for SFT that uses one-step probing to derive pairwise data preferences, trains a lightweight reward model on them, and combines preference, quality, and diversity to select training subsets that consistently outperform existing baselines and even full-data training on Vision-Flan and LLaVA-CoT.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "Nanjing University",
+        "Suzhou Laboratory",
+        "Shanghai Jiao Tong University",
+        "Brown University",
+        "North University of China",
+        "National University of Singapore"
+      ],
+      "affiliations_text": "Fudan University, Nanjing University, Suzhou Laboratory, Shanghai Jiao Tong University, Brown University, North University of China, National University of Singapore",
+      "score": 3.917742986037607,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.16927v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816927v1-hierarchical-data-selection-via-manifold-coverage-and-sparse-feature-coverage-in-llm-post-training",
+      "source": "arxiv",
+      "title": "Hierarchical Data Selection via Manifold Coverage and Sparse Feature Coverage in LLM Post-training",
+      "authors": [
+        "Peng Sun",
+        "Yi Yang",
+        "Antong Zhang",
+        "Chunxiao Li",
+        "Yanbo Wang",
+        "Dianbo Liu",
+        "xin chen",
+        "Kai Yu",
+        "Lu Chen",
+        "Tianfan Fu"
+      ],
+      "authors_text": "Peng Sun, Yi Yang, Antong Zhang, Chunxiao Li, Yanbo Wang, Dianbo Liu, xin chen, Kai Yu, Lu Chen, Tianfan Fu",
+      "abstract": "As supervised fine-tuning data continues to scale, selecting high-value subsets from large candidate pools is crucial for reducing training cost and improving model performance. Existing methods often measure diversity directly in the original embedding space, where geometric metrics entangle dominant semantic directions, fine-grained supervision differences, and local noise. We address this limitation by formulating data selection as a coarse-to-fine hierarchical coverage problem and propose MASS. MASS learns low-dimensional principal manifold coordinates with a dense autoencoder for coarse semantic grouping, and then performs quality-aware sparse feature coverage within each group using a TopK sparse autoencoder. Experiments on Vision Flan and LLaVA-CoT show that MASS consistently outperforms strong data selection baselines across multiple budgets, and in several settings matches or surpasses full data training with only a small subset of data.",
+      "url": "http://arxiv.org/abs/2608.16927v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16927v1",
+      "tldr": "MASS improves LLM post-training data selection by formulating it as a coarse-to-fine hierarchical coverage problem—using a dense autoencoder for principal manifold grouping and a TopK sparse autoencoder for quality-aware fine-grained feature coverage—consistently outperforming baselines and often matching full-data training with only a small subset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "Nanjing University",
+        "Suzhou Laboratory",
+        "Shanghai Jiao Tong University",
+        "Brown University",
+        "North University of China",
+        "National University of Singapore"
+      ],
+      "affiliations_text": "Fudan University, Nanjing University, Suzhou Laboratory, Shanghai Jiao Tong University, Brown University, North University of China, National University of Singapore",
+      "score": 3.810831907250005,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.17091v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817091v1-deep-learning-for-cross-border-electricity-price-forecasting-a-comparative-study",
+      "source": "arxiv",
+      "title": "Deep Learning for Cross-Border Electricity Price Forecasting: A Comparative Study",
+      "authors": [
+        "Hadeer Elashhab",
+        "Sai Srijan Papineni",
+        "Marvin Dorn",
+        "Veit Hagenmeyer",
+        "Benjamin Schäfer"
+      ],
+      "authors_text": "Hadeer Elashhab, Sai Srijan Papineni, Marvin Dorn, Veit Hagenmeyer, Benjamin Schäfer",
+      "abstract": "While publicly available electricity market data presents a valuable resource for forecasting research, the field lacks established benchmark datasets for standardized comparison. As a result, many studies have relied on different datasets and metrics to evaluate methods in isolated settings, making it difficult to assess progress and compare state-of-the-art approaches consistently. In this work, we use public data to evaluate deep learning models for electricity price forecasting (EPF) across multiple market settings. Our goal is to establish a reproducible framework that enables a consistent evaluation of forecasting models. Although deep learning has been explored for day-ahead EPF, many prior studies are limited to single-market settings, narrow feature sets, or fixed training regimes. This work presents a comparative evaluation of six deep learning models--covering state-space, MLP, RNN, and Transformer-based architectures--emphasizing generalization across markets. We simulate low-data target-market conditions using zero-shot, one-shot, and few-shot learning. Our test set focuses on the Germany-Luxembourg (DE-LU) bidding zone in 2024 using a standardized dataset with calendar, historical price, and market-derived features. Our findings suggest that N-HiTS and NBEATSx perform competitively in limited-data scenarios, while transformer-based models can reach comparable accuracy but tend to require more adaptation and tuning. Model performance also benefits from careful feature selection and hyperparameter tuning, and we note that the differences between the strongest models are often small.",
+      "url": "http://arxiv.org/abs/2608.17091v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17091v1",
+      "tldr": "TLDR: This paper establishes a reproducible framework for cross-border electricity price forecasting by comparing six deep learning models on the Germany-Luxembourg 2024 market under zero-, one-, and few-shot settings, finding that N-HiTS and NBEATSx perform best in limited-data scenarios while transformer models need more tuning.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7966543286260905,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.16965v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816965v1-robell-rvfl-a-robust-generalized-bell-random-vector-functional-link-network",
+      "source": "arxiv",
+      "title": "RoBell-RVFL: A Robust Generalized Bell Random Vector Functional Link Network",
+      "authors": [
+        "A. Rahaman",
+        "A. Quadir",
+        "M. Tanveer"
+      ],
+      "authors_text": "A. Rahaman, A. Quadir, M. Tanveer",
+      "abstract": "The dominance of majority classes in real-world datasets poses a fundamental challenge to randomized neural networks, often biasing decision boundaries and overlooking critical minority samples. Existing remedies, such as synthetic minority over-sampling (SMOTE) and class-weighted loss functions, primarily address class proportions while neglecting intra-class distribution, making them vulnerable to label noise and outliers. In this paper, we propose \\textbf{RoBell-RVFL}, a robust and lightweight \\emph{quality-aware} generalized bell random vector functional link network that redefines how randomized models handle class imbalance and noisy data. RoBell-RVFL employs a dual-strategy, sample-level weighting mechanism that strictly preserves minority class information using unit weights, while adaptively regulating the influence of majority class samples through a probability-weighted generalized bell (gbell) membership function in a kernel-induced feature space. This design effectively suppresses noisy, boundary, and outlier samples within the majority class, enabling the network to learn from informative samples rather than merely abundant ones. By explicitly incorporating local class probability and class distribution information into the learning process, RoBell-RVFL achieves adaptive control over sample contributions without sacrificing the closed-form learning efficiency of RVFL networks. Extensive evaluations on UCI and KEEL benchmark datasets, along with robustness tests under up to 40\\% label noise, demonstrate that RoBell-RVFL consistently and significantly outperforms recent state-of-the-art RVFL variants. The results indicate that adaptive, quality-aware sample weighting is essential for robust RVFL learning, rendering conventional global weighting schemes ineffective in noisy and imbalanced environments.",
+      "url": "http://arxiv.org/abs/2608.16965v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16965v1",
+      "tldr": "RoBell-RVFL introduces a robust RVFL variant that handles class imbalance and label noise via adaptive sample-level weighting with a probability-weighted generalized bell membership function, preserving minority samples while down-weighting noisy majority samples, and consistently outperforms state-of-the-art RVFL models on benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Indore"
+      ],
+      "affiliations_text": "Indian Institute of Technology Indore",
+      "score": 3.602522830746135,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.17063v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817063v1-j-miner-recovering-executable-decision-knowledge-from-language-model-classifiers",
+      "source": "arxiv",
+      "title": "J-Miner: Recovering Executable Decision Knowledge from Language-Model Classifiers",
+      "authors": [
+        "Yunfan Gao",
+        "Xinyi Huang",
+        "Tao Sheng",
+        "Haorui Song",
+        "Yun Xiong",
+        "Haofen Wang"
+      ],
+      "authors_text": "Yunfan Gao, Xinyi Huang, Tao Sheng, Haorui Song, Yun Xiong, Haofen Wang",
+      "abstract": "Large language models can be fine-tuned into specialized classifiers that perform well across diverse text tasks and make complex judgments, but they typically expose only final labels, leaving the decision knowledge acquired through fine-tuning implicit within the model. We study how to mine this internal decision knowledge from a fine-tuned classifier and encode it in an executable representation that can be inspected, validated, and reused beyond the source classifier. We introduce J-Miner, which mines text-level named concepts by aggregating vocabulary-aligned internal signals across layers and token positions, and uses the classifier's own predictions to learn executable decision rules over them. This process distills local internal readouts into an explicit classifier-level knowledge representation. Across multiple classification tasks, J-Miner rules reproduce up to 98.3\\% of source-classifier decisions and achieve 6.0--29.5 percentage points higher behavioral fidelity than equally compact rules learned from input words. Further analysis shows that the named concepts reflect internal semantic evidence associated with task decisions, while the learned rules consolidate these distributed signals into inspectable decision structures. The resulting decision knowledge also transfers to lightweight standalone students: using about 1/24 as many parameters as the source classifiers, they reconstruct and execute the representation from raw text while retaining 99.8\\% of the source classifiers' mean task accuracy. These findings show that task-specific decision knowledge can be faithfully represented in an explicit, executable form and reused beyond the classifier in which it was learned.",
+      "url": "http://arxiv.org/abs/2608.17063v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17063v1",
+      "tldr": "J-Miner extracts explicit, executable decision rules from fine-tuned language-model classifiers by mining vocabulary-aligned internal concepts, closely reproducing their decisions and enabling transfer to a much smaller standalone model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "Tongji University",
+        "Meituan"
+      ],
+      "affiliations_text": "Fudan University, Tongji University, Meituan",
+      "score": 3.5401146316327665,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.16931v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816931v1-sw-proxyce-zero-query-adversarial-transfer-from-public-eeg-encoders-to-private-downstream-models",
+      "source": "arxiv",
+      "title": "SW-ProxyCE: Zero-Query Adversarial Transfer from Public EEG Encoders to Private Downstream Models",
+      "authors": [
+        "Linhua Cong",
+        "Dingkun Liu",
+        "Dongrui Wu"
+      ],
+      "authors_text": "Linhua Cong, Dingkun Liu, Dongrui Wu",
+      "abstract": "Electroencephalography (EEG) foundation models have recently emerged as a promising paradigm for EEG decoding by learning reusable representations from large-scale heterogeneous neural recordings. However, the open release of EEG foundation encoders, while facilitating downstream developments, also introduces a previously unexplored security risk: publicly available representations may make private downstream models vulnerable. This paper investigates adversarial transfer attacks in EEG foundation model deployment in a public-encoder and private-downstream setting, where attackers have white-box access to a released encoder and a small task-matched labeled reference set, but no access or query to victim parameters, outputs, or gradients. We propose Shrinkage-Whitened Proxy Cross-Entropy (SW-ProxyCE), a query-free task-aware attack framework that recovers task-level decision geometry from a small labeled reference set through shrinkage-whitened class prototypes, enabling transferable adversarial generation without training an additional surrogate classifier. We evaluated SW-ProxyCE across three EEG tasks using three general-purpose foundation encoders and a paradigm-specific pre-trained encoder, covering both linear-probing and full-fine-tuning downstream models in cross-subject and within-subject scenarios. Results demonstrated that adversarial examples generated from the public encoder and limited labeled references can effectively transfer to inaccessible downstream models. SW-ProxyCE consistently outperformed task-agnostic representation-shift attacks, revealing that the strong transferability of EEG foundation models does not necessarily lead to adversarial robustness. Our code will be available on GitHub.",
+      "url": "http://arxiv.org/abs/2608.16931v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16931v1",
+      "tldr": "This paper proposes SW-ProxyCE, a zero-query adversarial transfer attack that exploits publicly released EEG foundation encoders to generate transferable adversarial examples against private downstream models using only a small labeled reference set, revealing that strong encoder transferability introduces a security risk.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huazhong University of Science and Technology"
+      ],
+      "affiliations_text": "Huazhong University of Science and Technology",
+      "score": 3.5233333789978936,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.16963v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816963v1-study-strategy-clusters-from-ednet-logs-track-engagement-not-mastery",
+      "source": "arxiv",
+      "title": "Study-Strategy Clusters from EdNet Logs Track Engagement, Not Mastery",
+      "authors": [
+        "Qingchuan Lyu",
+        "Yingxin Li",
+        "Albert Yang"
+      ],
+      "authors_text": "Qingchuan Lyu, Yingxin Li, Albert Yang",
+      "abstract": "Learning analytics often treats unsupervised clusters of intelligent tutoring system (ITS) logs as learner types that should predict learning. We test that assumption on EdNet-KT3. Clustering study-strategy features (resource use, revision, video, problem practice) for 5{,}000 active learners yields a silhouette-selected parent cut ($k=5$) with 4 contrast poles (reading-focused, video-heavy, revision-heavy, and problem-first) plus a large near-mean residual ($\\sim$64.9\\%). Reclustering that residual adds four finer styles, giving a bootstrap-stable hierarchy of 8 named strategies. We split each learner's timeline by respond count so clusters use only the early half and outcomes only the late half. Early clusters predict later engagement (continuing to practice and finishing late sessions, especially persistence, $η^{2}\\approx 0.106$; completion $η^{2}\\approx 0.021$) but not later unassisted accuracy (correctness on late first-attempts without help; $p_{\\mathrm{adj}}\\approx 0.093$). Volume rises with some styles, yet volume-only clustering barely matches strategy labels (ARI$=0.064$). A knowledge-tracing model (SAKT) on the seven TOEIC exam sections predicts next correctness only modestly better than a baseline that knows only how hard each section usually is (AUC lift $+0.051$; CI $[+0.045,+0.058]$), and that mastery signal is nearly independent of behavior styles (ARI$=0.007$). Behavioral clustering here describes study styles and engagement, not knowledge gains.",
+      "url": "http://arxiv.org/abs/2608.16963v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16963v1",
+      "tldr": "Clustering study strategies from EdNet logs yields stable learner profiles that predict engagement (persistence and completion) but not mastery (unassisted accuracy), indicating that behavioral clusters describe how students study rather than what they know.",
+      "detailed_reading": null,
+      "affiliations": [
+        "New York University",
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "New York University, Georgia Institute of Technology",
+      "score": 3.3616349472855145,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.17042v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817042v1-python-based-rtl-generator-demonstrated-on-a-low-if-2-fsk-wireless-communication-system",
+      "source": "arxiv",
+      "title": "Python-based RTL Generator Demonstrated on a Low-IF 2-FSK Wireless Communication System",
+      "authors": [
+        "Brandon P. Hippe",
+        "David C. Burnett"
+      ],
+      "authors_text": "Brandon P. Hippe, David C. Burnett",
+      "abstract": "Hardware optimization is critical in the design of efficient wireless communication systems. Wireless communication hardware often consumes a significant fraction of the total system's power budget, with much of this power used in circuits that reduce various types of noise, particularly in the analog front end. The Single-Chip Micro Mote, or SCuM, uses a crystal-free radio architecture and makes design trade-offs that favor power consumption over noise performance while maintaining standards compatibility with popular Internet-of-Things (IoT) protocols such as IEEE 802.15.4 and Bluetooth Low Energy. In the continued development of SCuM, we recognize that the digital baseband hardware developed can be more closely optimized with the architecture of the chip. In this paper, we present an extensible Python-based RTL generator that is closely linked to simulation and testing environments. This approach provides flexibility for use on different hardware platforms, such as tape-outs and FPGA implementations, and has promise in AI-assisted design workflows.",
+      "url": "http://arxiv.org/abs/2608.17042v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17042v1",
+      "tldr": "A Python-based RTL generator framework bridges high-level simulation and hardware design, enabling flexible, parameterized Verilog generation for low-IF 2-FSK wireless baseband hardware in crystal-free systems.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Villanova University"
+      ],
+      "affiliations_text": "Villanova University",
+      "score": 3.1608255846918865,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.16929v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816929v1-mrdec-daily-scale-longitudinal-multimodal-modeling-for-30-day-readmission-prediction",
+      "source": "arxiv",
+      "title": "Mr.Dec: Daily-Scale Longitudinal Multimodal Modeling for 30-Day Readmission Prediction",
+      "authors": [
+        "Minjun Kim",
+        "Jong Hak Moon"
+      ],
+      "authors_text": "Minjun Kim, Jong Hak Moon",
+      "abstract": "Predicting 30-day hospital readmission is essential for assessing patient stability and optimizing healthcare resources. As clinical risk evolves with the accumulation of evidence during hospitalization, capturing these dynamic trajectories is essential. However, many existing approaches compress the complex longitudinal history into fixed representations, often losing the granular, day-level clinical signals that reflect a patient's evolving physiological state. To address this, we propose Mr.Dec (Multimodal Readmission-risk prediction Decoder), which models each admission as a natural chronological sequence of daily multimodal events. By leveraging a Transformer Decoder, Mr.Dec integrates daily Electronic Health Record(EHR) updates and intermittent Chest X-ray(CXR) findings in a time-aligned stream, reflecting the actual clinical workflow. To ensure robustness, we utilize Disease-Specific Supervised Contrastive Learning as an auxiliary regularization to induce a diagnosis-aware structure in the latent space. Evaluations on the MIMIC-IV and MIMIC-CXR datasets show that Mr.Dec achieves state-of-the-art performance by preserving the integrity of the clinical sequence. Furthermore, our model identifies \"Critical Days\" within an admission, providing actionable and clinically grounded interpretations for real-time risk stratification. Code is available at: https://github.com/yejix-ai/MR.DEC",
+      "url": "http://arxiv.org/abs/2608.16929v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16929v1",
+      "tldr": "Mr.Dec proposes a daily-scale multimodal Transformer decoder that models hospital admissions as chronological sequences of daily EHR and intermittent chest X-ray events, achieving state-of-the-art 30-day readmission prediction with diagnosis-aware contrastive learning and clinically interpretable \"Critical Days\" identification.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yeji X"
+      ],
+      "affiliations_text": "Yeji X",
+      "score": 3.052783167823879,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2608.16974v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816974v1-position-fairness-failure-in-generative-models-is-an-evaluation-problem",
+      "source": "arxiv",
+      "title": "Position: Fairness Failure in Generative Models is an Evaluation Problem",
+      "authors": [
+        "Mariia Vladimirova",
+        "Jean-Yves Franceschi",
+        "Thibaut Issenhuth"
+      ],
+      "authors_text": "Mariia Vladimirova, Jean-Yves Franceschi, Thibaut Issenhuth",
+      "abstract": "Despite groundbreaking advancements in generative models during the last decade, concerns about their lack of fairness, reinforcing societal inequalities and harming marginalized groups, remain under-addressed and difficult to act upon. This position paper argues that fairness failures in generative models, albeit driven by multiple factors, are ultimately stemming from an evaluation problem: fairness findings are rarely comparable across papers or actionable for deployment decisions. This paper diagnoses recurring empirical and conceptual failure modes in current practice and motivates a shift from ad-hoc bias checks to standardized, generative-specific evaluation. We propose Fairness Cards as a minimal reporting artifact that makes evaluation choices explicit (prompt families, counterfactual protocols, metrics, and refusal handling) enabling reproducibility, comparability, and accountability. We conclude with additional recommendations towards a paradigm shift in evaluation standards. Our project page can be found at https://mariiavladimirova.github.io/fairness-cards .",
+      "url": "http://arxiv.org/abs/2608.16974v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16974v1",
+      "tldr": "Fairness failures in generative models are fundamentally an evaluation problem, and the paper proposes standardized \"Fairness Cards\" to make fairness assessments reproducible, comparable, and actionable.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Criteo AI Lab",
+        "FairPlay joint team"
+      ],
+      "affiliations_text": "Criteo AI Lab, FairPlay joint team",
+      "score": 3.013621511916745,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.16928v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816928v1-benchmarking-classical-and-transformer-based-models-for-document-sensitivity-classification",
+      "source": "arxiv",
+      "title": "Benchmarking Classical and Transformer-Based Models for Document Sensitivity Classification",
+      "authors": [
+        "Aleesha Zainab",
+        "Muhammad Ahmed Khalid",
+        "Faheem Ullah Khan",
+        "Asifullah Khan"
+      ],
+      "authors_text": "Aleesha Zainab, Muhammad Ahmed Khalid, Faheem Ullah Khan, Asifullah Khan",
+      "abstract": "Automatic sensitivity classification of organizational documents is a critical yet underserved problem, where the consequences of misclassification range from regulatory violations to security breaches. While AI-based approaches offer a scalable alternative to manual review, their reliability depends fundamentally on the integrity of training data. A pervasive but underreported problem in this domain is label leakage: residual classification markers embedded within document bodies that allow models to exploit surface shortcuts rather than learning genuine content-based sensitivity signals, producing performance estimates that are inflated and unreliable. This paper addresses this problem by introducing Strategic 16K, a carefully constructed, leakage-controlled corpus of 16,000 diplomatic cables sourced from the WikiLeaks Public Library of US Diplomacy (PlusD), and presents a systematic benchmark evaluating six model architectures spanning classical machine learning and transformer-based approaches. We document an extended leakage removal protocol that identifies and eliminates three categories of residual classification markers embedded within document bodies. On the clean benchmark, BERT achieves the strongest performance (Accuracy = 89.14%, F1 = 89.33%), followed by ELECTRA (Accuracy = 88.57%, F1 = 88.90%). Among classical models, TF-IDF with Logistic Regression achieves the strongest performance at significantly lower computational cost. These results constitute the first fully reproducible sensitivity classification benchmark constructed under explicit leakage-controlled conditions from WikiLeaks PlusD.",
+      "url": "http://arxiv.org/abs/2608.16928v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16928v1",
+      "tldr": "The paper introduces Strategic 16K, a leakage-controlled corpus of 16,000 WikiLeaks diplomatic cables for document sensitivity classification, and benchmarks six classical and transformer models, showing that eliminating label leakage prevents inflated performance and that BERT achieves the best accuracy (89.14%) while TF-IDF with logistic regression offers a strong, low-cost baseline.",
+      "detailed_reading": null,
+      "affiliations": [
+        "PIEAS"
+      ],
+      "affiliations_text": "PIEAS",
+      "score": 2.9237543554865835,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.17019v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/20/260817019v1-grid-integration-of-gigawatt-scale-hydrogen-hubs-a-multi-timescale-stability-analysis-and-connection-requirements-for-weak-grid-environments",
+      "source": "arxiv",
+      "title": "Grid Integration of Gigawatt-Scale Hydrogen Hubs: A Multi-Timescale Stability Analysis and Connection Requirements for Weak Grid Environments",
+      "authors": [
+        "Mohamed Shamseldein"
+      ],
+      "authors_text": "Mohamed Shamseldein",
+      "abstract": "The global transition toward green hydrogen is driving the deployment of gigawatt-scale electrolysis centers, introducing a novel, converter-dominated load class to the bulk power system. Unlike conventional industrial loads, these facilities utilize extensive power electronics interfaces with fast dynamics comparable to Inverter-Based Resources (IBRs). This paper presents a comprehensive grid impact assessment of large-scale hydrogen hubs, focusing on harmonic injection, voltage stability in low Short Circuit Ratio (SCR) environments, and frequency response capabilities. Adopting a \"full-spectrum\" open-source modeling approach, the study utilizes PandaPower for large-scale steady-state contingency assessment; ANDES for electromechanical dynamic simulations to evaluate Fast Frequency Response (FFR); and ParaEMT for high-fidelity electromagnetic transient analysis of harmonic distortion and Low Voltage Ride-Through (LVRT). A critical finding of this study is that standard load models, including the generic PERC1 (data center) model, are insufficient for hydrogen hubs. The paper recommends specific structural modifications to the PERC1 model - specifically regarding process safety latches and restart voltage thresholds - to accurately capture the risk of prolonged plant tripping. Based on these findings, the paper proposes a set of standardized connection requirements to ensure secure integration.",
+      "url": "http://arxiv.org/abs/2608.17019v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.17019v1",
+      "tldr": "This paper presents a multi-timescale stability analysis of gigawatt-scale hydrogen hubs in weak grids—using steady-state, electromechanical, and electromagnetic transient simulations—and proposes a modified PERC1 load model with safety-latch and restart-threshold adjustments, along with standardized connection requirements for secure grid integration.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ain Shams University"
+      ],
+      "affiliations_text": "Ain Shams University",
+      "score": 2.7386551528898844,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2608.16972v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/20/260816972v1-multisigbert-beyond-survival-analysis-through-multimodal-and-sequential-modeling-in-oncology",
+      "source": "arxiv",
+      "title": "MultiSigBERT: Beyond Survival Analysis through Multimodal and Sequential Modeling in Oncology",
+      "authors": [
+        "Paul Minchella",
+        "Stéphane Chrétien",
+        "Guillaume Metzler",
+        "Loïc Verlingue",
+        "Rémi Vaucher"
+      ],
+      "authors_text": "Paul Minchella, Stéphane Chrétien, Guillaume Metzler, Loïc Verlingue, Rémi Vaucher",
+      "abstract": "Machine learning has become an essential component of modern healthcare, where the integration of heterogeneous data sources offers unprecedented opportunities to improve clinical decision-making. Electronic Health Records (EHR) contain complementary information -- including narrative clinical reports, numerical measurements, and structured variables -- yet most survival models remain limited to a single modality or fail to exploit the temporal nature of patient trajectories. We propose MultiSigBERT, a unified framework for multimodal sequential survival modeling in oncology based on path signature representations. Here, narrative medical reports (free-text) are converted into sentence embeddings by extracting and averaging contextual word embeddings. These representations are then compressed via modality-specific PCA and concatenated with structured covariates to form joint temporal trajectories which are then encoded using the Signature transform, a tool from Rough Paths theory that efficiently captures higher-order temporal interactions across modalities without supervision needed. The computed Signature features are finally incorporated as high dimensional features into a LASSO-regularized Cox model to estimate individualized risk scores. The performance of our novel MultiSigBERT pipeline is illustrated on the analysis of a real-world oncology cohort from the Léon Bérard Center, comprising over 120,000 medical reports and structured records from more than 2,500 patients. The model achieves a concordance index of 0.743 (sd 0.029) on an independent test set, demonstrating the benefit of jointly modeling multimodal temporal dynamics together with patient-level geometric structure for survival prediction.",
+      "url": "http://arxiv.org/abs/2608.16972v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16972v1",
+      "tldr": "MultiSigBERT is a multimodal sequential survival analysis framework that integrates OncoBERT-derived text embeddings and structured clinical variables via path signature transforms and a LASSO-regularized Cox model, achieving a concordance index of 0.743 on a large real-world oncology cohort.",
+      "detailed_reading": null,
+      "affiliations": [
+        "EPITA",
+        "Université Lumière Lyon 2",
+        "Léon Bérard Center"
+      ],
+      "affiliations_text": "EPITA, Université Lumière Lyon 2, Léon Bérard Center",
+      "score": 2.6683441330073703,
+      "score_text": "2.7"
+    }
+  ]
+}
