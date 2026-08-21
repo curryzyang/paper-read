@@ -1,0 +1,736 @@
+{
+  "label": "2026-08-21",
+  "date": "2026-08-21",
+  "generated_at": "2026-08-21T03:32:51",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.18118v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818118v1-formal-safety-verification-for-nonlinear-systems-with-generative-barrier-certificate",
+      "source": "arxiv",
+      "title": "Formal Safety Verification for Nonlinear Systems with Generative Barrier Certificate",
+      "authors": [
+        "Mengxin Ren",
+        "Hanrui Zhao"
+      ],
+      "authors_text": "Mengxin Ren, Hanrui Zhao",
+      "abstract": "Safety verification is a fundamental problem in control theory. Barrier certificates (BCs) provide a powerful formal mechanism, yet deriving BCs is computationally intensive. This paper introduces a generative framework that leverages large language models (LLMs) to synthesize BCs through reasoning. Based on the classical Sum-of-Squares (SOS) approach, we train a domain-specific LLM capable of generating high-quality BC candidates for nonlinear systems. Then, the LLM-generated BCs transform the intractable Bilinear Matrix Inequality (BMI) solving problems into convex Linear Matrix Inequality (LMI) feasibility test, significantly improving efficiency while preserving correctness. Experimental results show that our generative method achieves several orders of magnitude speedup over traditional numerical BC approaches and, perhaps surprisingly, surpasses the state-of-the-art dedicated neural BC model. These findings mark a substantive step toward integrating generative AI with formal safety verification for dynamical systems.",
+      "url": "http://arxiv.org/abs/2608.18118v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18118v1",
+      "tldr": "This paper introduces a generative framework that fine-tunes a large language model to synthesize barrier certificates for nonlinear systems, converting intractable BMI problems into efficient convex LMI feasibility checks and achieving orders-of-magnitude speedups while surpassing state-of-the-art neural barrier certificate methods.",
+      "detailed_reading": {
+        "motivation": "安全验证是控制理论中的基础问题，屏障证书（BC）为非线性系统提供形式化安全保证，但传统数值方法合成BC需要求解NP-hard的BMI问题，计算代价高且可扩展性差；现有神经方法依赖固定网络结构和预定函数模板，难以发现更优或非预设形式。本文利用大语言模型（LLM）的数学推理能力，将BC合成重构为符号生成任务，旨在突破模板限制，提升验证效率与表达力。",
+        "method": "提出一个端到端的生成式BC合成框架：首先将动力系统（维度、定义域、初始集、不安全集、动力学多项式和候选BC）序列化为结构化文本规范，作为LLM的输入输出接口；然后采用逆向设计策略构建大规模监督训练语料——从随机合成的满足先验条件的候选BC出发，算法推导出与之兼容的动力系统，并通过微分同胚数据增强提升泛化性；接着对预训练通用LLM进行领域微调，使其能够生成显式符号形式的BC候选；最后用SOS松弛将LLM生成的候选BC条件转化为凸的LMI可行性检验，而非求解传统数值方法中的非凸BMI问题，从而高效验证正确性。",
+        "result": "实验表明，该生成式方法相比传统数值BC方法实现了几个数量级的加速，并且令人意外地超越了当前最先进的专用神经BC模型。在成功率与效率两方面均优于现有数值和神经方法，证明了生成式AI与形式化安全验证结合的有效性。",
+        "conclusion": "该工作展示了利用LLM进行符号推理来合成屏障证书的可行性，将传统上难以求解的BMI问题转化为凸LMI检验，显著提升了安全验证的效率和可扩展性，为动态系统形式化验证与生成式AI的深度融合迈出了实质性一步。",
+        "key_details": "关键点包括：BC条件采用引入辅助多项式λ(x)的松弛形式，保证凸性并扩展可行空间；数据生成采用逆向工程，从有效BC反推兼容系统，解决真实训练数据缺乏问题；微分同胚数据增强用于提升跨系统泛化能力；验证阶段利用SOS松弛和LMI可行性检验，避免NP-hard的BMI求解；框架支持任意符号形式的BC，不限于固定阶次多项式模板；局限性可能在于依赖LLM生成候选的质量与语料覆盖的多样性，以及实验系统规模有限。"
+      },
+      "affiliations": [
+        "National University of Defense Technology",
+        "East China Normal University"
+      ],
+      "affiliations_text": "National University of Defense Technology, East China Normal University",
+      "score": 5.6587463286700785,
+      "score_text": "5.7"
+    },
+    {
+      "id": "2608.18178v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818178v1-trust-as-a-field-a-macroscopic-representation-for-vehicular-networks",
+      "source": "arxiv",
+      "title": "Trust as a Field: A Macroscopic Representation for Vehicular Networks",
+      "authors": [
+        "Md Mahmudul Islam",
+        "Shaurya Agarwal"
+      ],
+      "authors_text": "Md Mahmudul Islam, Shaurya Agarwal",
+      "abstract": "Trust assessment is a fundamental component of cooperative and connected vehicle systems. However, existing approaches operate primarily at the level of individual vehicles, making it difficult to reason about trust evolution across road segments. In this paper, we propose a spatio-temporal trust-field framework that aggregates microscopic vehicle-level trust into a continuous representation over space and time. The trust field is formally defined on road segments. We conducted simulation-based experiments using synthetic trajectories generated under controlled conditions, enabling analysis of trust-field behavior in simple road scenarios. Beyond theoretical modeling, we study an implication of the trust-field concept: reconstructing the full trust field from sparse roadside-unit (RSU) measurements. We compare (i) a coordinate-based deep learning baseline that learns a generic trust field from sparse samples and (ii) a field-informed deep learning method that treats trust as a latent quantity carried by vehicles and enforces measurement consistency through the aggregation mechanism. The field-informed approach more accurately recovers trajectory-aligned low-trust patterns and yields improved reconstruction error.",
+      "url": "http://arxiv.org/abs/2608.18178v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18178v1",
+      "tldr": "The paper introduces a spatio-temporal trust-field framework that aggregates vehicle-level trust into a continuous macroscopic representation over road segments, and demonstrates that a field-informed deep learning method recovers sparse-measurement trust reconstructions more accurately than a generic baseline.",
+      "detailed_reading": {
+        "motivation": "现有车联网信任评估方法主要聚焦于单车或局部节点层面的信任计算，难以刻画信任在道路区段上的宏观演化模式。受宏观交通流理论中密度、流量等时空场表示的启发，本文提出将信任建模为一种时空连续场，从而支持网络级信任分析、从稀疏测量中重建信任以及减少重复的局部信任计算。",
+        "method": "本文提出一种时空信任场（trust field）框架。首先，将每条道路段表示为空间区间，并将车辆级信任值τ_i(t)定义为外部给定的标量；随后，通过高斯核聚合操作，将稀疏的车辆信任轨迹映射为连续时空标量场T(x,t)=Στ_i·K_σ(x-x_i)/ΣK_σ(x-x_i)，其中K_σ为高斯核，带宽σ控制信任的空间影响范围。在实验部分，使用MATLAB实现微观交通仿真，基于智能驾驶模型（IDM）生成单车道1000米路段上35辆车的合成轨迹，模拟自由流和拥堵（停走波）场景，并设置正常车辆、静态低信任恶意车辆和动态信任恶意车辆三种信任模式。在重建实验中，比较了基于坐标的深度学习基线（直接学习稀疏样本到全场的映射）和场信息深度学习法（将信任视为车辆携带的隐变量，并通过聚合机制强制测量一致性），以评估从稀疏路侧单元（RSU）测量重建完整信任场的能力。",
+        "result": "实验结果表明：在自由流场景下，全部车辆完全信任时场均匀为1；静态恶意车辆产生一条沿其轨迹的窄对角低信任带；动态信任恶意车辆产生彗星状低信任结构，其宽度和强度反映信任随时间的演化。在拥堵和冲击波场景下，慢速或停止的恶意车辆会在空间上形成由交通动态决定的局部信任退化区域。在稀疏RSU测量重建信任场任务中，场信息深度学习法相比坐标基深度学习基线，能更准确恢复与轨迹对齐的低信任模式，并取得更低的重建误差。",
+        "conclusion": "本文提出的时空信任场框架能够将微观车辆信任聚合为连续宏观表示，有效揭示信任在道路区段上的演化规律。基于场信息的重建方法优于通用坐标基方法，表明将信任场物理结构与测量一致性约束结合能提升从稀疏测量恢复信任场的能力。该工作为车联网信任的网络级建模、稀疏感知与重建提供了新思路，未来可扩展至真实轨迹数据与更复杂路网。",
+        "key_details": "关键实现细节包括：信任值τ_i(t)被假定为外部已知标量，计算机制不作规定；高斯核带宽σ控制空间聚合平滑程度，但聚合算子可替换为分箱、紧支撑核等；IDM参数采用常见值，期望速度约30-31.5 m/s，最大加速度1.5 m/s²，舒适减速度2.0 m/s²，期望时距1.2 s，最小间距2 m，车辆长度4.5 m；仿真路段长1000 m，时间70 s，35辆车；重建比较中，场信息方法通过将信任作为隐变量并强制聚合一致性来约束学习，而坐标基方法仅学习通用字段。局限性包括：目前仅基于合成轨迹和控制场景验证，未使用真实数据；信任来源未建模；重建实验未在完整多车道或复杂路网上评估。"
+      },
+      "affiliations": [
+        "University of Central Florida"
+      ],
+      "affiliations_text": "University of Central Florida",
+      "score": 5.4318218353048415,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2608.18234v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818234v1-gigabrain-wbc-05-a-behavior-world-model-for-robust-whole-body-control-with-environment-interaction",
+      "source": "arxiv",
+      "title": "GigaBrain-WBC-0.5: A Behavior World Model for Robust Whole-Body Control with Environment Interaction",
+      "authors": [
+        "Ziyang Cheng",
+        "Tianshu Tang",
+        "Jinxin Lan",
+        "Xinze Chen",
+        "Yuhan Gong",
+        "Zhichao Liu",
+        "Changzhong Wu",
+        "Yahao Mao",
+        "Zongyan Deng",
+        "Mingxuan Ma",
+        "Huasen Xi",
+        "Yilong Liu",
+        "Yutong Wu",
+        "Xiaofeng Wang",
+        "Yang Wang",
+        "Yun Ye",
+        "Guan Huang",
+        "Xiaojie Jin",
+        "Zheng Zhu",
+        "Jiwen Lu"
+      ],
+      "authors_text": "Ziyang Cheng, Tianshu Tang, Jinxin Lan, Xinze Chen, Yuhan Gong, Zhichao Liu, Changzhong Wu, Yahao Mao, Zongyan Deng, Mingxuan Ma, Huasen Xi, Yilong Liu, Yutong Wu, Xiaofeng Wang, Yang Wang, Yun Ye, Guan Huang, Xiaojie Jin, Zheng Zhu, Jiwen Lu",
+      "abstract": "Whole-body motion tracking policies turn a humanoid into a robust control interface: the teleoperator---or an upstream model---only supplies a coarse movement intent, while the low-level policy keeps the robot balanced and physically feasible. Existing trackers deliver this interface only on flat ground: trained in empty scenes, they never learn how contact with terrain and objects reshapes their dynamics, and they attempt to teach the policy to balance under any command by continually enlarging the reference-motion corpus, which stops working once feasible behaviors become environment-dependent. We present GigaBrain-WBC-0.5, the first Behavior World Model (BWM) for humanoid whole-body control. Rather than a purely reactive tracker, we train a causal Transformer to jointly predict its next action, next state, and the distribution over its next latent behavior command, so the network that acts also models how the environment shapes what it can do next. An automatic terrain-annotation pipeline recovers full 3D contact geometry from retargeted motion, enabling terrain annotation at the scale of existing motion datasets. The predicted distribution is reused at deployment to detect implausible commands online and retract them onto learned behaviors, so the robot attempts tasks in a \"best-effort\" manner. The result is a unified policy that takes real-time command, interacts with environment, and stays robust to implausible commands, falls, and disturbances. GigaBrain-WBC-0.5 achieves the highest success rate across all four regimes among three large-scale tracker baselines: 81.3% on terrain interaction (4.3x the strongest baseline), 83.1% under implausible commands, and 99.3% fall recovery (16.8x the strongest baseline). Hardware trials show robust interaction under missing supports and disturbances; the Unitree G1 checkpoint transfers to the Maker L01 robot with simple fine-tuning.",
+      "url": "http://arxiv.org/abs/2608.18234v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18234v1",
+      "tldr": "GigaBrain-WBC-0.5 is a humanoid whole-body control policy trained as a causal Behavior World Model that jointly predicts its next action, state, and latent command distribution, enabling robust terrain/object interaction, online rejection of implausible commands, and fall recovery within a single controller.",
+      "detailed_reading": {
+        "motivation": "现有全身运动跟踪策略只在平坦地面上有效，训练于空场景，无法学习地形与物体接触对动力学的重塑；同时通过不断扩大参考运动库来保证任意指令下平衡的做法，在可行行为依赖环境时失效。因此需要一种能同时建模环境如何塑造可能行为、并在线处理不合理指令与跌倒的鲁棒全身控制方案。",
+        "method": "提出GigaBrain-WBC-0.5，即首个用于人形全身控制的行为世界模型（BWM）。训练一个因果Transformer，在每个控制步联合输出下一动作、下一本体状态以及下一潜在行为命令的混合分布；该网络既执行动作又建模当前环境允许的行为。配合自动地形标注流程，从重定向运动轨迹恢复完整3D接触几何，实现与现有运动数据集规模相当的地形配对语料。部署时利用预测的命令分布在线检测不合理指令，并将其投影到最接近可执行行为上，形成无状态闭式滤波器，无需独立分类器或回退控制器。",
+        "result": "在四个测试场景中，GigaBrain-WBC-0.5均取得最高成功率：地形交互81.3%（为最强基线的4.3倍），不合理指令下83.1%，跌倒恢复99.3%（为最强基线的16.8倍）。硬件实验显示在缺失支撑和外部扰动下仍能鲁棒交互，且Unitree G1模型通过简单微调即可迁移至Maker L01机器人。",
+        "conclusion": "行为世界模型将环境交互、在线指令过滤与跌倒恢复统一在一个策略中，使机器人既能实时响应操作员粗略意图，又能以“尽力而为”方式处理不可行指令和跌倒，显著优于现有大规模跟踪器基线，证明了建模自身未来行为比单纯扩大参考数据更有效。",
+        "key_details": "关键设计包括：联合预测动作、下一状态与下一命令分布，使策略内化接触动力学；自动地形标注输出真3D几何而非2.5D高程图，支持桌椅箱体等空间结构；在线滤波器为无状态闭式解，仅含一个运行时安全半径超参，可权衡精度与鲁棒性；训练不使用逐链接触标签或特权状态，命令通道为操作员可在线提供的参考窗口；局限性可能包括对复杂动态物体或极高难度地形的泛化仍需验证，且训练数据规模与多样性依赖现有运动数据集。"
+      },
+      "affiliations": [
+        "Tsinghua University",
+        "University of Chinese Academy of Sciences",
+        "GigaAI",
+        "Chinese Academy of Sciences",
+        "University of Shanghai for Science and Technology",
+        "Beijing Jiaotong University"
+      ],
+      "affiliations_text": "Tsinghua University, University of Chinese Academy of Sciences, GigaAI, Chinese Academy of Sciences, University of Shanghai for Science and Technology, Beijing Jiaotong University",
+      "score": 4.563140767046004,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.18129v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818129v1-simulation-optimization-of-systems-of-optimizers-exploiting-the-inner-optimizations-geometry",
+      "source": "arxiv",
+      "title": "Simulation-Optimization of Systems of Optimizers: Exploiting the Inner Optimization's Geometry",
+      "authors": [
+        "Zhou He"
+      ],
+      "authors_text": "Zhou He",
+      "abstract": "We study simulation-optimization of systems of optimizers (SOSO): agent-based simulations in which every agent solves a structured optimization - a linear program (LP), mixed-integer program, or dynamic program - at every decision epoch. Such systems arise in supply chains, electricity markets, and logistics, yet standard simulation optimization treats the simulation as a black box, discarding the inner optimization's geometry. We formalize SOSO and develop a framework that converts this geometry into computational advantage. We prove that the inner LP's optimal basis and dual variables propagate through the dynamics to yield an exact, unbiased, single-replication infinitesimal perturbation analysis (IPA) gradient of the outer objective, with measure-zero basis changes as the only obstructions. We derive a common-random-numbers covariance bound governed by a computable basis-disagreement count from the forward simulation. We further prove that IPA variance grows exponentially with feedback depth, formalizing the bullwhip effect, and introduce surrogate-as-decision with an error budget unifying LP-horizon and reinforcement-learning surrogates under one bound. We compose these into PRIME, a stochastic-approximation solver integrating the IPA gradient, adaptive step sizing, and multi-start spatial diversification. On six testbeds spanning the SOSO taxonomy, PRIME achieves the best or tied-best optimality gap at equal budget with near-zero oscillation and narrow seed-to-seed variance; IPA yields a ~2000x per-replication variance reduction over independent finite differences, and common random numbers cut paired-difference variance by over 10,000x in a 1,000-SKU, six-distribution-center supply chain. These results establish exploiting embedded-optimization geometry as a practically significant direction for simulation optimization.",
+      "url": "http://arxiv.org/abs/2608.18129v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18129v1",
+      "tldr": "This paper formalizes simulation-optimization of systems of optimizers (SOSO) and shows that exploiting the inner optimization's geometry—through optimal bases and dual variables—yields exact unbiased single-run IPA gradients and massive variance reduction, enabling a practical stochastic-approximation solver (PRIME) that outperforms black-box methods across diverse testbeds.",
+      "detailed_reading": {
+        "motivation": "在供应链、电力市场、物流等系统中，每个智能体在每个决策时刻都求解结构化优化问题（LP/MILP/DP），形成所谓“优化器系统”（SOSO）。现有仿真优化把仿真视为黑箱，丢弃内层优化的几何结构，导致梯度估计成本高、方差大，尤其受反馈放大影响。因此需要一种能利用内层LP最优基和对偶变量等几何信息的外层仿真优化方法。",
+        "method": "提出SOSO形式化框架，并将内层LP的几何转化为计算优势。具体地，在每次仿真复制中，每个智能体在每个周期求解参数化LP，读取最优基B和最优对偶变量λ；证明这些量沿多周期、多智能体随机动力学传播后，可构成外层目标J(θ)的单次复制、无偏的IPA梯度估计量，障碍仅为可检测的零测基变化。进一步设计共同随机数（CRN）方差削减方案，其协方差上界由前向仿真中可计算的基不一致计数决定；提出surrogate-as-decision误差预算，统一LP-horizon与强化学习替代策略的误差界。将这些组件组合成PRIME随机逼近求解器，采用IPA梯度、自适应步长、多起点空间多样化进行外层优化。",
+        "result": "在覆盖SOSO分类法的六个测试系统上，PRIME在同等预算下达到最优或并列最优的optimality gap，近零振荡，种子间方差窄。IPA梯度在代表性策略点较独立有限差分实现约2000倍单次复制方差降低；在一个1000 SKU、六个配送中心的供应链测试中，共同随机数将配对差分方差降低超过10000倍（峰值接近容量饱和）。黑箱梯度方法在反馈放大下方差指数增长，而PRIME保持稳定。",
+        "conclusion": "利用内嵌优化的几何（LP基与对偶）进行仿真优化在计算上可行且显著优于黑箱方法，为SOSO问题提供了精确、低成本、可扩展的优化方向。该框架将内层优化结构作为一等公民，在路径依赖随机系统中实现了无偏梯度、有效方差削减和误差可控的替代决策。",
+        "key_details": "内层LP形式为 min_a c(s,θ)^T a s.t. Ga≤h(s,θ)，最优基B和对偶λ由求解器返回；IPA无偏性成立在全测度策略集，基变化是唯一障碍且可在线检测。方差随反馈深度指数增长，形式化牛鞭效应；CRN协方差上界由基不一致计数决定，是前向仿真的免费副产物。PRIME使用随机逼近与自适应步长，并配合多起点空间多样化；surrogate-as-decision误差预算统一LP-horizon与RL替代。MILP内层尚无精确IPA，仅能通过LP松弛代理扩展误差界；计算成本主要由N×T×M×K次内层求解主导。"
+      },
+      "affiliations": [
+        "University of Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "University of Chinese Academy of Sciences",
+      "score": 4.479154252582673,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.18227v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818227v1-revisiting-the-push-t-robot-manipulation-task-with-agentic-robotics",
+      "source": "arxiv",
+      "title": "Revisiting the \"Push-T\" Robot Manipulation Task with Agentic Robotics",
+      "authors": [
+        "Shuangyu Xie",
+        "Kaiyuan Chen",
+        "Ken Goldberg"
+      ],
+      "authors_text": "Shuangyu Xie, Kaiyuan Chen, Ken Goldberg",
+      "abstract": "Push-T is an iconic benchmark for learning manipulation policies from human demonstrations. The robot must use a single point of contact to push a T-shaped block into a target pose. In this short paper, we revisit the Push-T task in the context of emerging advances in Agentic Robotics where an LLM coding agent -- Claude Code with Fable 5 -- is prompted to create an algorithmic solution that does not require any demonstration data. We study how effective the agentic coding loop can solve the Push-T task, and compare the resulting code as policy with the visuomotor imitation learning policy. Results suggest that the agent found the 2D gym simulation online, and used sim experiments to learn push mechanics, iteratively optimizing to achieve 100% success rate using 46% fewer steps than the best diffusion policy trained with 200 human demonstrations. The coding agent also solve extensions from T to the full alphabet (Push-A to Push-Z) using a self generated curriculum and generated simulation code for the Franka and UR5 robot arms in 3D cross-embodiment simulations with visual feedback. Videos, policies and details will be posted online.",
+      "url": "http://arxiv.org/abs/2608.18227v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18227v1",
+      "tldr": "An LLM coding agent (Claude Code) autonomously generates a demonstration-free procedural controller for the Push-T task that achieves 100% success with 46% fewer steps than a diffusion policy trained on human demonstrations, and further scales to Push-A–Z and cross-embodiment 3D simulations.",
+      "detailed_reading": {
+        "motivation": "重新审视经典的Push-T机器人操作基准，探索新兴的Agentic Robotics范式能否在无需任何人类演示数据的情况下，由LLM编码代理自动生成程序化控制器，并与基于模仿学习的视觉运动策略进行对比，同时进一步扩展至更广泛的任务与具身形态。",
+        "method": "使用Claude Code with Fable 5作为LLM编码代理，仅基于自然语言任务描述启动自主循环：生成代码、在仿真中执行、观察成败、诊断并迭代修订方案。初始的Claude_state_controller采用几何混合反馈控制器，将环境状态表示为5维向量，通过离散接触库和准静态接触模型，在plan、approach、push、retreat四阶段状态机中贪心选择动作，并结合短视域执行与闭环重规划。随后通过提示添加视觉反馈，构建包含逐帧工作区感知（颜色分割、IoU拟合）、一次性标定、逐次推挤参数自适应（摩擦增益更新）的三阶段感知管线，形成Claude_vision_controller。在扩展到Push-Alphabet时，代理自生成26个字母形状的基准和自课程，通过多轮自我改进从47.1%提升至更高性能，并将视觉MPC控制器移植到Franka和UR5e仿真环境进行跨具身验证。",
+        "result": "在gym_pusht的200个固定种子评估中，Claude_state_controller达到100%成功率，平均步数120.1，平均推挤次数3.72，而LeRobot Diffusion Policy（200个人类演示训练）成功率仅62.5%，平均步数223.7，平均推挤次数6.38；Claude_vision_controller成功率97.2%。Push-Alphabet任务中，状态输入下的MPC控制器达到99.4%成功率，平均推挤次数5.15；视觉MPC在UR5e仿真上成功率为98.5%，在Franka仿真上为89.8%。整个开发过程生成约950万输出token，API成本约1500-2000美元，耗时约221小时。",
+        "conclusion": "实验表明，明确的几何接触推理结合闭环重规划能够成为基于人类演示的视觉运动策略学习的有效替代方案；Agentic编码循环可以生成无需演示数据的程序化策略，不仅解决Push-T，还能以自生成课程扩展到26个字母形状，并跨不同仿真机械臂实现具身迁移，展示了Agentic Robotics在机器人操作任务中的潜力。",
+        "key_details": "关键细节包括：任务提示明确禁止使用学习策略但允许现有机器人数据；状态空间包含推杆位置和T块位姿的5维向量；控制器依赖结构分解（面法向推挤平移、偏置推挤旋转）；视觉感知采用颜色分割、粗略到精细IoU拟合和摩擦参数自适应更新公式f←f·r^{-η}；评估阈值在Push-T为95%覆盖率，Push-Alphabet为90%；Push-Alphabet的自我学习经历了五个阶段，包括基线规划、旋转-平移权衡、薄笔画角覆盖、困难几何杠杆机制和恢复规则；经典Dubins pushing基线通过代理编写的适配器从83.8%提升至97.2%成功率；限制在于模拟器可能被代理利用API或数值规律，且对真实物理环境中的感知误差、校准漂移、摩擦变化等鲁棒性未验证。"
+      },
+      "affiliations": [
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "University of California, Berkeley",
+      "score": 4.381146907627154,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.18190v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818190v1-safe-domain-adaptation-for-physics-overcoming-nuisances-label-shifts-and-simulation-priors",
+      "source": "arxiv",
+      "title": "Safe Domain Adaptation for Physics: Overcoming Nuisances, Label Shifts, and Simulation Priors",
+      "authors": [
+        "Ivan Kharuk"
+      ],
+      "authors_text": "Ivan Kharuk",
+      "abstract": "Domain adaptation is widely used to make neural networks trained on simulations applicable to experimental data. Its premise is that the two domains differ only in nuisances, and that the quantity of interest is distributed identically in both. In physics neither assumption holds: simulations can be wrong about the physics, and the distribution of the target quantity - an energy spectrum, a redshift distribution - is often the measurement itself. We study the consequences of such mismatches on a toy air-shower benchmark in which a detector-response nuisance, a physical simulation shift, and an energy-spectrum shift can be switched on separately or together. Standard adversarial adaptation handles the conditional shifts, but once the two spectra differ it aligns them, replacing an uncontrolled bias by one anchored on the simulation prior. We present adaptive domain adaptation, which reweights the simulated events so as to focus domain adaptation on the genuine physical mismatch alone. Since the predicted spectrum depends on model training configuration, we provide a label-free model selection rule for selecting the near-the-best operation point.",
+      "url": "http://arxiv.org/abs/2608.18190v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18190v1",
+      "tldr": "The paper studies how standard adversarial domain adaptation fails in physics when simulations have genuine physical mismatches and the target label distribution (e.g., energy spectrum) is itself the measurement, and proposes adaptive domain adaptation with iterative reweighting plus a label-free model-selection rule to safely handle such shifts.",
+      "detailed_reading": {
+        "motivation": "标准域自适应（DA）的前提是源域与目标域仅存在 nuisance 差异且目标量分布相同，但物理应用中两个假设均不成立：模拟器可能对物理本身有误，且能谱等目标量分布往往正是待测量的对象。若直接使用对抗式 DA，当源和目标能谱不一致时，模型会把实验谱错误地对齐到模拟先验上，从而污染待测物理量。",
+        "method": "构建了一个 toy 气簇射探测器阵列基准，包含 9 个台站、波形时间序列与横向分布函数（LDF）等特征，可分别/同时开启探测器响应 nuisance、物理模拟偏移（LDF 斜率变化）与能谱（label）偏移。网络由一维 CNN 波形编码器和 transformer 事件编码器组成，回归头输出能量，并附加基于梯度反转层（GRL）的对抗域判别器；训练使用带标签的源域回归批和由 DA-source 与无标签目标域组成的对抗批。针对 label shift 提出自适应域自适应（ADA）：在对抗损失中动态为模拟事件加权，使网络自身估计的源与目标能谱重合，从而把能谱差异从域判别特征中移除，让对抗只作用于真实物理失配；进一步提出迭代域自适应，将上一轮预测的目标谱作为下一轮改进先验，并给出基于跨随机种子预测分歧的无标签模型选择规则。",
+        "result": "标准对抗 DA 在两域能谱相同时表现良好，但一旦能谱不同，DANN 会把重建谱拉向模拟先验，产生系统性偏差；ADA 通过重加权消除了这一偏差并显著改善目标谱重建。局部域分类器只能去除局部探测器层面 nuisance，对非局部或全局事件属性失配无效，需使用全局事件级对抗。基于跨种子分歧的模型选择规则在研究的每个案例中都能选出接近最优的配置。",
+        "conclusion": "物理中的安全域自适应必须显式区分探测器 nuisance、真实物理失配和标签分布偏移；ADA、迭代先验更新与无标签模型选择相结合，可以在能谱本身是测量目标时避免对抗对齐带来的污染，实现可靠的物理量重建。",
+        "key_details": "数据侧使用 Beta 分布采样能谱，训练集为平坦谱，目标集谱未知，DA-source 谱取近似目标先验；评估指标为能量预测 MAE 与预测谱和真实谱的 Wasserstein-1 距离。ADA 在回归任务中在线推断权重，无需目标标签；迭代 ADA 把预测谱反馈为下一轮先验。训练上 Adam 会放大回归与对抗梯度的冲突，导致目标恢复差三倍，故采用动量 0.9 的 SGD；网络约 23,500 参数，训练 60 轮，λ 按 DANN 调度从零上升。局限性包括基于 toy 基准验证，实际复杂探测器下先验误差与迭代收敛性仍需进一步研究。"
+      },
+      "affiliations": [
+        "Institute for Nuclear Research of the Russian Academy of Sciences",
+        "Moscow Institute of Physics and Technology"
+      ],
+      "affiliations_text": "Institute for Nuclear Research of the Russian Academy of Sciences, Moscow Institute of Physics and Technology",
+      "score": 4.299613285203739,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.18113v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818113v1-optimal-loss-allocation-in-a-mean-field-model-of-systemic-risk",
+      "source": "arxiv",
+      "title": "Optimal Loss Allocation in a Mean-Field Model of Systemic Risk",
+      "authors": [
+        "Yucheng Guo",
+        "Qinxin Yan"
+      ],
+      "authors_text": "Yucheng Guo, Qinxin Yan",
+      "abstract": "We study a systemic-risk control problem in which a central planner allocates losses generated by bank defaults across the surviving institutions. Banks are modeled through their distances to default, evolving as absorbed Brownian motions with downward jumps induced by redistributed default losses. Unlike bailout models, the planner cannot inject external capital or reduce the aggregate loss, and the only admissible intervention is to decide how each endogenous loss is assigned among solvent banks. The objective is to maximize terminal system health, including survival mass as a leading special case and, more generally, increasing concave welfare functionals of the terminal distribution.\n  Our main result identifies an optimal allocation rule with a simple economic interpretation: losses should be concentrated on the currently healthiest institutions. In discrete time, this rule takes the form of a cutoff or taxing-the-richest policy, which reduces banks above an endogenous threshold down to that threshold while leaving weaker banks untouched. We prove convergence of the time-discretized mean-field control problem as the allocation time step tends to zero and characterize the limiting problem as a singular mean-field control problem. The optimally controlled law is described by a reflected free-boundary formulation, in which the cutoff becomes the moving upper edge of the support, and the associated value function satisfies a Hamilton-Jacobi equation on Wasserstein space. Finally, we formulate the corresponding finite-particle control problem and show, under suitable assumptions, that the cutoff-controlled particle system converges to the continuous-time mean-field model. This provides a finite-system foundation for the optimal mean-field loss-allocation rule.",
+      "url": "http://arxiv.org/abs/2608.18113v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18113v1",
+      "tldr": "In a mean-field systemic-risk model where a central planner allocates default losses among surviving banks without external capital, the optimal policy is a \"taxing-the-richest\" cutoff rule that concentrates losses on the healthiest institutions, characterized via a singular mean-field control limit and a reflected free-boundary formulation.",
+      "detailed_reading": {
+        "motivation": "系统性风险中，银行违约产生的损失必须由幸存机构承担，但如何分配这些内生损失（不注入外部资本）以最大化终端系统健康仍缺乏理论最优解。现有模型通常预设损失分配规则（如按比例或均分），而本文引入中央规划者，通过控制损失在幸存银行间的分配来改善系统整体生存状况。",
+        "method": "采用均值场模型：每家银行的净值过程为带吸收的布朗运动，并在其他银行违约时遭受向下跳跃；中央规划者控制累计损失L_t的分配，约束为E[L_t]≥αP[τ≤t]、单次损失L_t-L_{t-}<X_{t-}且违约后停止。首先求解离散时间均值场控制问题，用随机占优证明最优分配为“对最富者征税”的截断规则：将高于内生阈值的银行削减到阈值，直至满足总损失，较弱银行不受影响。然后令时间步长趋于零，证明离散值函数收敛到连续时间奇异均值场控制问题，其值函数满足Wasserstein空间上的Hamilton-Jacobi方程（含粘性解比较原理），最优控制律由带反射的自由边界问题刻画，自由边界Λ_t成为支撑集的上边缘，最优控制L_t由Skorokhod反射映射给出。最后构造连续时间有限粒子控制问题，通过动态规划层次和Schur-凹性证明粒子系统的最优边界策略，并证明N→∞时该粒子系统收敛到连续时间均值场模型。",
+        "result": "主要结果表明最优损失分配规则是集中损失于当前最健康的机构。离散时间下该规则表现为截断/“对最富者征税”策略；连续时间下，最优控制律由反射自由边界问题描述：在0<x<Λ_t上满足∂_t u=½∂_xx u，边界条件u(t,0)=0、½∂_x u(t,Λ_t)=-Λ̇_t u(t,Λ_t)、u(t,Λ_t)=α∂_x u(t,0)，且Λ_t满足E[L_t]=αP[τ≤t]。值函数V(t,μ)是Wasserstein空间上Hamilton-Jacobi方程的粘性解，并同时作为离散时间步长趋于零和粒子数趋于无穷的极限。",
+        "conclusion": "本文从理论上证明了在系统风险损失分配中，为了使终端生存数量最大化，应该让最健康的银行承担更多损失，而非保护强者或平均分摊。这一“对最富者征税”规则在离散和连续时间下都具有明确的解析形式，并通过自由边界问题与奇异均值场控制建立了紧密联系，同时有限粒子系统的收敛性为均值场模型提供了微观基础。",
+        "key_details": "关键假设包括初始分布μ0({0})=0且∫x μ0(dx)>α，损失率α>0，目标函数f为递增凹函数（特殊情形为生存指示函数）。技术细节上，离散最优性依赖随机占优论证；连续时间极限得到奇异均值场控制，其值函数满足Wasserstein空间上的Hamilton-Jacobi方程，唯一性依赖于新的比较原理（详见后续工作）。自由边界问题结合了吸收和反射，与已有粒子选择系统不同，其适定性需单独论证。有限粒子控制问题利用Schur-凹性简化边界优化。局限性包括自由边界问题的弱解唯一性仍需额外假设，且模型假设同质银行、损失规模固定，未考虑网络异质性或外部资本注入。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.234267976278807,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.18222v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818222v1-think-shallow-solve-deep-controlling-recurrent-dynamics-for-reliable-test-time-depth",
+      "source": "arxiv",
+      "title": "Think Shallow, Solve Deep: Controlling Recurrent Dynamics for Reliable Test-Time Depth",
+      "authors": [
+        "Ivan Viakhirev",
+        "Kirill Borodin",
+        "Amirah Almutairi",
+        "Serguei Barannikov",
+        "Maxim Abramov",
+        "Grach Mkrtchian"
+      ],
+      "authors_text": "Ivan Viakhirev, Kirill Borodin, Amirah Almutairi, Serguei Barannikov, Maxim Abramov, Grach Mkrtchian",
+      "abstract": "Recurrent-depth reasoners aim to solve harder problems by iterating their update longer at test time, but additional iterations can improve, preserve, or degrade an answer. We show that a measurable property of the trained operator, its finite-time dynamical regime (estimated as settling, marginal, or drifting), indicates which of these occurs. We give a sufficient condition for depth-safety: once an operator's per-step displacement is small relative to the decoder margin, the decoded answer cannot change under further iterations. Empirically, on algorithmic tasks trained from $800$ unaugmented examples per difficulty tier, settling operators do not degrade with added depth, and on some tasks convert it into higher accuracy on harder unseen instances (Sudoku, $0.19$ to $0.34$ past the training horizon). A single terminal fixed-point objective moves the regime and the depth behavior together: removing it induces drift and removes the gains, and adding it to a generic recurrence yields depth-safe extrapolation on carry propagation. We give four operational criteria for useful test-time depth, use them to catalogue failure modes, and, as a consistency check, apply the same measurements to Huginn-3.5B, which falls in the non-settling family.",
+      "url": "http://arxiv.org/abs/2608.18222v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18222v1",
+      "tldr": "A recurrent reasoner's test-time depth behavior is governed by its finite-time dynamical regime—settling, marginal, or drifting—where settling operators are depth-safe and can convert added iterations into accuracy on harder instances, and a single terminal fixed-point training objective causally controls this regime.",
+      "detailed_reading": {
+        "motivation": "循环深度推理器通过在测试时迭代更多步来求解更难的问题，但额外迭代可能提升、保持或降低答案质量。现有方法通常依赖大规模数据增强或增大参数量来补偿，而忽略了对训练后算子有限时间动力学特性的测量与控制。本文旨在建立可测量的动力学机制（settling/marginal/drifting）与测试时深度行为之间的联系，并提供可控的训练目标使推理器在更深的测试时迭代中安全且有效地泛化到未见难度实例。",
+        "method": "本文提出受控循环配方（CoRe），在固定无增强数据（每难度800个样本）下训练权重共享的迭代映射 z_{t+1}=f(z_t,x)，共16步循环并采用深度监督（4次监督展开）。输入在每一步前重新注入（input recall），状态更新沿任务相关的约束图（如数独的行/列/块）做结构化消息传递；关键训练项为终端不动点目标：惩罚最终更新位移 ||z_T-z_{T-1}||=a_T||f(z_{T-1},x)-z_{T-1}||，即固定点残差乘学习到的更新门。训练使用AdamW、梯度裁剪0.5、batch 64、4–8k步、d=256；推理时扫描测试深度h_c∈{3,16,32,64,128}。对每个训练好的算子测量五类信号：谱（Jacobian σ_max、ρ、Henrici非正规性）、动力学（有限时间Lyapunov谱、Kaplan-Yorke维、固定点残差、settle ratio）、信息流（logit-lens秩）、拓扑（持续同调Betti条）和训练时间指标；按λ_max标记regime：settle(λ_max<-0.05)、marginal(|λ_max|≤0.05)、drift(λ_max>0.05)。在固定输入尺寸难度阶梯（数独9×9孔率0.2→0.7、16节点可达性BFS深度2→12、2×32位加法最长进位2→28）上，用训练时未见难度tier评估，并对比七种重实现架构（TRM、UT/URM、FPRM、EqR、DEQ、Neural GPU、SE-RRM）及Huginn-3.5B（仅测量）。",
+        "result": "settling算子不会随深度增加而退化，且在部分任务上将测试时深度转化为更高准确率：数独未见难度tier上准确率从0.19提升至0.34（训练深度→最佳测试深度）；可达性任务保持未训练平台0.92。去除终端不动点目标后，架构与数据不变且σ_max≈5.6不变，但regime从settle翻转为drift（λ_max从-0.06变为+0.10，Kaplan-Yorke维从0变为8），数独未见困难实例准确率从0.34跌至0.03。将该目标加入通用循环（carry propagation）后，原本深度增加会退化的模型变为深度安全外推。Huginn-3.5B经测量属于非settling家族；基于同样分类的无标签目标修复其数字复制深度安全性（0.00→1.00），但不安装转化能力。四类操作化准则（R1外推、R2难度自适应稳定并转化、R3增量计算、R4收敛答案）可对失败模式分类，所有失败均可归入四类可测量模式。",
+        "conclusion": "训练后算子的有限时间动力学机制（settling/marginal/drifting）是测试时深度是否有用且安全的可靠预测指标。一个终端不动点目标可以同时改变动力学机制和深度行为：移除它导致drift并消除收益，添加它使通用循环获得深度安全外推。因此，要让循环深度推理器可靠地利用测试时深度，必须直接控制其不动点动力学，而仅控制谱半径或增大模型规模是不够的。",
+        "key_details": "关键数据：固定无增强训练数据，每难度tier 800个唯一样本，评估每tier 256个固定测试样本，三颗种子；数独验证使用有效性oracle而非参考匹配（未见困难tier上valid/reference差距5.5倍：0.34 vs 0.062），因为多解问题；数独唯一可解分数随tier下降：1.00/0.91/0.50/0.06/0.00。关键先验/设计：输入重注入是必要条件（移除后σ_max=1.0000且EM=0.00，退化为输入不敏感identity）；结构化消息传递决定循环计算内容，但无结构时模型能收缩却不正确（settle必要不充分）；固定点残差项不能通过关闭门平凡满足（附录验证）。超参：AdamW、梯度裁剪0.5、batch 64、d=256、4–8k步、16个训练循环步、深度监督4个展开；测试深度集合{3,16,32,64,128}。复杂度/约束：固定输入尺寸阶梯才可用于外推声明，尺寸/长度类泛化被排除；adaptive stabilization为事后诊断而非在线停时规则；Huginn-3.5B仅测量不可训练干预。局限性：settling不一定保证学到算法（可能只是覆盖），需R1-R4合取排除；低学习率并非必要（高LR消融反而0.42优于0.34），报告LR为匹配规模；不同架构在哪类任务上settle取决于任务（carry上TRM式注意力循环优于CoRe）。"
+      },
+      "affiliations": [
+        "lab260",
+        "CNRS",
+        "BitmanagerAI",
+        "KAU",
+        "ITMO",
+        "MTUCI",
+        "FRC RAS"
+      ],
+      "affiliations_text": "lab260, CNRS, BitmanagerAI, KAU, ITMO, MTUCI, FRC RAS",
+      "score": 4.227552711012381,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.18123v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818123v1-learning-the-center-and-radius-of-wasserstein-ambiguity-sets-for-data-driven-decision-making",
+      "source": "arxiv",
+      "title": "Learning the Center and Radius of Wasserstein Ambiguity Sets for Data-Driven Decision Making",
+      "authors": [
+        "Junjie Guo"
+      ],
+      "authors_text": "Junjie Guo",
+      "abstract": "Wasserstein distributionally robust optimization (DRO) is commonly built around the empirical distribution, with the ambiguity radius selected from a concentration bound. Although this construction provides useful statistical guarantees, it can be conservative and does not fully exploit predictive information about the underlying distribution or the difficulty of a particular decision problem. We develop a more flexible framework in which a predictive model determines the nominal distribution and a separate model estimates a data-dependent radius. The key requirement is not that the ambiguity set be centered at the empirical distribution, but that it contain the unknown data-generating distribution with the desired probability. We establish finite-sample guarantees and asymptotic consistency for arbitrary learned centers, derive tractable reformulations for non-uniform discrete predictive distributions, separate predictive-model and scenario-discretization errors, and prove stability under simultaneous perturbations of the center and radius. We further characterize the oracle conditional-quantile radius as the smallest conditionally valid rule and introduce a split-conformal procedure for finite-sample marginal calibration. Experiments on newsvendor problems, synthetic portfolios, distribution shifts, and real financial data show that learned and calibrated ambiguity sets can improve reliability, but do not automatically yield smaller radii or better decisions. Overall, the proposed framework treats calibration as a practical mechanism for reliable decision making rather than a universal guarantee of improved optimization performance.",
+      "url": "http://arxiv.org/abs/2608.18123v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18123v1",
+      "tldr": "This paper develops a flexible Wasserstein distributionally robust optimization framework where both the ambiguity set's center (from a predictive model) and its radius (via a learned, data-dependent rule) are calibrated to contain the true distribution with finite-sample guarantees, showing that such learned and calibrated sets improve reliability but do not universally yield smaller radii or better decisions.",
+      "detailed_reading": {
+        "motivation": "传统Wasserstein分布式鲁棒优化通常以经验分布为模糊集中心，并依据集中不等式选取固定半径；这种做法虽有统计保证，但偏保守，且没有充分利用关于真实分布的预测信息或具体决策问题的难度。本文提出更灵活的框架：由预测模型决定名义分布，由另一个模型估计数据依赖的半径，核心要求不是让模糊集以经验分布为中心，而是让随机模糊集以期望概率包含未知数据生成分布。",
+        "method": "整体流程为：输入历史观测和可用的协变量，先由预测模型生成名义分布，并将其离散化为带非均匀权重的场景分布；再由半径模型基于样本量、维度、预测诊断、波动率或不确定性估计等特征预测数据依赖半径。理论上对一般非均匀离散名义分布推导了Wasserstein模糊集的最坏情形期望对偶形式和有限凸重构；将预测模型误差与场景离散化误差分离并证明二者在半径上相加，同时建立中心和半径同时扰动下鲁棒值的联合稳定性。校准采用分裂保形（split-conformal）程序获得有限样本边际覆盖。实验涵盖新闻vendor问题、合成组合、分布偏移和真实金融数据，采用无泄漏的嵌套拟合-校准-测试流程、配对推断、分布偏移压力测试和交易成本设置。",
+        "result": "理论结果建立了任意学习中心下的有限样本有效性和渐近一致性；证明oracle条件分位数半径是逐点最小的条件有效半径规则，并给出有限样本边际校准的分裂保形程序。实验表明，学习并校准的模糊集可以提高可靠性，但不会自动产生更小的半径或更好的决策；在受控设置下校准可靠，但没有一致的半径效率或决策价值优势。",
+        "conclusion": "本文强调覆盖原则本身是一种实用的可靠决策机制，而非提升优化性能的普遍保证。只要随机模糊集能以目标概率覆盖真实分布，经验分布并非逻辑必需；学习中心和半径可以在不依赖经验中心的情况下提供可靠性，但对实际决策收益需谨慎评估。",
+        "key_details": "关键细节包括：光尾假设A=E[exp(||ξ||^a)]<∞用于集中不等式；任意学习中心需要满足覆盖条件而非固定为经验分布；非均匀离散预测分布需重新推导对偶和凸重构；误差分解为预测模型误差与场景离散化误差之和；条件分位数半径是最小条件有效规则，近似半径预测器需加入安全余量；分裂保形校准依赖可交换性，滚动金融实验中不能朴素随机划分否则会泄漏；区分了通用分布覆盖与任务特定证书覆盖，并给出高概率和期望遗憾保证。局限性在于学习与校准不保证半径更小或决策更优，且高维场景下集中不等式半径可能偏保守。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.164268840982293,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.18235v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/21/260818235v1-classifying-directional-trajectories-near-criticality-in-the-three-state-majority-vote-model-with-deep-belief-networks-and-bidirectional-grus",
+      "source": "arxiv",
+      "title": "Classifying Directional Trajectories Near Criticality in the Three-State Majority-Vote Model with Deep Belief Networks and Bidirectional GRUs",
+      "authors": [
+        "Mauricio A. Valle",
+        "Gonzalo A. Ruz"
+      ],
+      "authors_text": "Mauricio A. Valle, Gonzalo A. Ruz",
+      "abstract": "In this work, we investigate whether the latent representations learned by a Deep Belief Network (DBN) and a Bidirectional Gated Recurrent Unit (Bi-GRU) can discriminate among four dynamically distinct trajectory types in the three-state majority vote model (MV3): approach from disorder, approach from order, departure to disorder, and departure to order. The DBN, pre-trained in an unsupervised manner on static equilibrium samples via a Gaussian-Bernoulli Restricted Boltzmann Machine input layer and architecture $784 \\to 4096 \\to 225 \\to 81$, encodes each lattice snapshot into an 81-dimensional latent vector. A t-SNE analysis of the DBN latent space reveals only partial separation of the four trajectory types, reflecting the fact that a model trained on static configurations cannot fully resolve directional temporal structure. A two-layer Bi-GRU classifier, trained on sequences of DBN-encoded snapshots of length $T = 50$, achieves near-perfect separation of all four trajectory types in its hidden state space, as confirmed by t-SNE visualization on both training and test sets. Furthermore, a sliding-window application of the trained Bi-GRU to continuous MV3 dynamics demonstrates its ability to sense the system's current dynamical regime in real-time. These results establish a principled hierarchical architecture for detecting and classifying critical transitions in agent-based opinion dynamics models.",
+      "url": "http://arxiv.org/abs/2608.18235v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18235v1",
+      "tldr": "A hierarchical deep learning pipeline combining a Deep Belief Network for latent snapshot encoding and a Bidirectional GRU for temporal sequence classification can almost perfectly distinguish four directional trajectory types (approach/departure from order/disorder) around criticality in the three-state majority-vote model, enabling real-time detection of dynamical regime shifts.",
+      "detailed_reading": {
+        "motivation": "三维多数投票模型（MV3）在临界点附近表现出丰富的非平衡动力学，但现有深度学习研究多基于静态构型或忽略轨迹方向，无法回答系统是接近还是离开临界点、来自有序相还是无序相。为支持对临界转变的早期预警，本文提出用深度信念网络（DBN）与双向GRU（Bi-GRU）的层次架构，对四种方向性轨迹进行分类。",
+        "method": "首先在28×28格点上模拟MV3系统，采用异步蒙特卡洛更新，状态映射为{0.0,0.5,1.0}，并以复数向量定义磁化。然后利用随机化速度生成T=50步的准静态轨迹，覆盖四种模式，其中从临界出发的模式先热化300 MCS，并对每个轨迹进行颜色置换增强。DBN由GB-RBM和两个BB-RBM组成，在静态平衡样本上预训练后固定权重，将每个快照编码为81维潜在向量。最后将编码序列输入两层Bi-GRU分类器进行监督多分类，得到四种轨迹类型的判别表示，并可用滑动窗口实时分类。",
+        "result": "t-SNE分析显示，DBN潜在空间仅对四种轨迹类型产生部分分离，说明基于静态构型训练的表征无法充分捕捉方向性时间结构；而两层Bi-GRU隐状态空间在训练集和测试集上均实现了近乎完美的分离。滑动窗口实验表明，训练后的Bi-GRU能沿连续MV3轨迹实时感知系统当前所处动力学状态，从而有效区分接近/离开临界点及来源/去向的有序或无序特征。",
+        "conclusion": "结合无监督表示学习（DBN）与双向时序建模（Bi-GRU）的层次架构，为检测和分类观点动力学模型中的临界转变提供了原则性方案，并可作为临界转变早期预警系统的具体步骤。该工作表明，方向性轨迹信息对理解非平衡临界动力学至关重要，静态快照分析不足以刻画时间演化特征。",
+        "key_details": "关键细节包括：数据规模约60,000个快照，观测临界点p_c≈0.894（理论值0.849），状态归一化为{0.0,0.5,1.0}。DBN架构784→4096→225→81，GB-RBM输入，隐藏单元标准差s=0.5，采用对比散度逐层预训练后权重固定。轨迹长度T=50，随机化相位速度u~U(0.65,0.95)，离开临界的模式需在p_c热化300 MCS；颜色置换增强使训练集扩增三倍。局限在于DBN本身基于静态构型，其潜在表达无法完全解析轨迹方向，必须依赖Bi-GRU的时序建模才能获得清晰分离。"
+      },
+      "affiliations": [
+        "Universidad Adolfo Ibáñez"
+      ],
+      "affiliations_text": "Universidad Adolfo Ibáñez",
+      "score": 4.1505623730341785,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.18147v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818147v1-entropy-constrained-adaptive-stochastic-quantization",
+      "source": "arxiv",
+      "title": "Entropy-Constrained Adaptive Stochastic Quantization",
+      "authors": [
+        "Ran Ben Basat",
+        "Yaniv Ben-Itzhak",
+        "Michael Mitzenmacher",
+        "Shay Vargaftik"
+      ],
+      "authors_text": "Ran Ben Basat, Yaniv Ben-Itzhak, Michael Mitzenmacher, Shay Vargaftik",
+      "abstract": "Adaptive stochastic quantization (ASQ) is a recently introduced quantization approach that optimizes the Mean Squared Error (MSE) for a given input while preserving unbiasedness. It is designed to alleviate the communication and memory bottlenecks of modern data and machine learning workloads, including model, gradient, and KV-cache compression and nearest-neighbor search. Further, practical systems can then compress quantized data with a lossless entropy encoder. However, existing unbiased methods, including ASQ, choose their quantization values without considering this later encoding stage, leaving accuracy on the table.\n  We formulate the Entropy Constrained Adaptive Stochastic Quantization (ECASQ) problem, which jointly selects adaptive quantization values to minimize MSE under an entropy budget and an unbiasedness constraint. We give an optimal dynamic program with $O(sd^2)$ time and $O(d^2)$ space for a length-d vector and at most s quantization values, and a GPU-friendly approximate dynamic program with $O(sd^2)$ time and $O(d)$ space. The approximation guarantees that the solution has an MSE no larger than the optimal solution that uses one fewer bit of entropy per entry. We also provide an iterative refinement procedure for the approximation solution that, in our experiments, yields near-optimal results while retaining a substantial speed advantage over our solver for the optimal solution.",
+      "url": "http://arxiv.org/abs/2608.18147v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18147v1",
+      "tldr": "This paper introduces the Entropy-Constrained Adaptive Stochastic Quantization (ECASQ) problem, which jointly optimizes adaptive stochastic quantization to minimize mean squared error under an entropy budget and unbiasedness constraint, and provides an optimal dynamic program alongside a faster GPU-friendly approximate algorithm with near-optimal performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "VMware Research by Broadcom",
+        "University College London",
+        "Harvard University"
+      ],
+      "affiliations_text": "VMware Research by Broadcom, University College London, Harvard University",
+      "score": 4.110738301556167,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.18124v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818124v1-tobyqa-a-trust-region-method-for-derivative-free-optimization-on-time-varying-functions",
+      "source": "arxiv",
+      "title": "TOBYQA: A Trust-Region Method for Derivative-Free Optimization on Time-Varying Functions",
+      "authors": [
+        "Haoyu Yao",
+        "Pengcheng Xie"
+      ],
+      "authors_text": "Haoyu Yao, Pengcheng Xie",
+      "abstract": "Derivative-free optimization (DFO) becomes particularly difficult when function evaluations are affected by temporal drift and observation noise. Conventional trust-region methods generally assume a static landscape, which may lead to stale-data bias and misleading trust-region updates. We propose TOBYQA (Time-augmented Optimization BY Quadratic Approximation), a regularized DFO framework that jointly models spatial geometry and temporal variations within a unified quadratic interpolation system. Specifically, TOBYQA augments the classical KKT interpolation system with a ridge term on the $(1,1)$-block, which accommodates observation noise and ensures well-posedness under a mild full-column-rank condition on the constraint block, thereby relaxing the stringent geometric poisedness requirements of classical methods. To handle non-stationarity, we embed an explicit linear-in-time drift term into the interpolation model, enabling a drift-compensated ratio test that subtracts the estimated temporal component from the observed reduction. Additionally, a diagonal affine-scaling adapts the search geometry to local variation in curvature. Benchmark evaluations on the Moré--Wild 88-function suite across various temporal drifts and dimensions ($n \\in \\{6,10,20\\}$) demonstrate that TOBYQA exhibits enhanced robustness under drift, while maintaining competitive performance in static environments.",
+      "url": "http://arxiv.org/abs/2608.18124v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18124v1",
+      "tldr": "TOBYQA introduces a drift-compensated, ridge-regularized trust-region DFO framework that jointly models spatial and temporal variations via a unified quadratic interpolation system, improving robustness on time-varying, noisy functions while matching static performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xi'an Jiaotong University",
+        "Lawrence Berkeley National Laboratory"
+      ],
+      "affiliations_text": "Xi'an Jiaotong University, Lawrence Berkeley National Laboratory",
+      "score": 3.99758050923322,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.18183v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818183v1-accelerating-visual-on-policy-distillation-with-batched-speculative-jacobi-rollouts",
+      "source": "arxiv",
+      "title": "Accelerating Visual On-Policy Distillation with Batched Speculative Jacobi Rollouts",
+      "authors": [
+        "Bingqi Shan",
+        "Zhehao Yu",
+        "Kenhong Lin",
+        "Baoquan Zhang"
+      ],
+      "authors_text": "Bingqi Shan, Zhehao Yu, Kenhong Lin, Baoquan Zhang",
+      "abstract": "Visual on-policy distillation (OPD) improves the training of compact visual autoregressive models by learning from trajectories generated by the current student. However, these online rollouts are still produced token by token with autoregressive decoding, which adds substantial cost to every on-policy training step. Speculative Jacobi Decoding (SJD) provides an alternative because it can process multiple tokens in parallel without an auxiliary draft model, but the original method is designed for single-sequence inference. We introduce HB-SJD, a batched SJD rollout backend for visual OPD. HB-SJD allows each image to advance independently according to its own decoding progress, while images at different sequence positions are still verified in batched model forwards. As images finish, HB-SJD switches between Full and Compact execution to reduce the cost of later rollout rounds. HB-SJD only replaces the student rollout backend and leaves the teacher, distillation objective, and optimization procedure unchanged. Experiments with LlamaGen show that HB-SJD substantially reduces rollout and end-to-end training time while preserving the generation quality of the distilled student.",
+      "url": "http://arxiv.org/abs/2608.18183v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18183v1",
+      "tldr": "HB-SJD, a batched speculative Jacobi decoding backend for visual on-policy distillation, reduces rollout and end-to-end training time of compact autoregressive image models while maintaining the distilled student’s generation quality.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.992914330394563,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.18177v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818177v1-towards-reversible-forgetting-managing-obsolete-knowledge-in-continual-enterprise-ai-agents",
+      "source": "arxiv",
+      "title": "Towards Reversible Forgetting: Managing Obsolete Knowledge in Continual Enterprise AI Agents",
+      "authors": [
+        "Nilutpaul Sarker Yash",
+        "Tirtho Roy",
+        "Ushashi Bhattacharjee"
+      ],
+      "authors_text": "Nilutpaul Sarker Yash, Tirtho Roy, Ushashi Bhattacharjee",
+      "abstract": "Continual learning has traditionally treated forgetting as a failure, emphasizing preservation of previously acquired knowledge as environments evolve. We argue that this objective is incomplete for enterprise AI agents operating in non-stationary environments, where customers, policies, tools, workflows, regulations, and market conditions change over time. Indiscriminate retention can allow obsolete knowledge to influence decisions, creating negative transfer and operational risk. We therefore propose reversible forgetting: a conceptual framework with three operational memory states: active, dormant, and retired, and a reactivation transition that can restore dormant knowledge when its relevance returns. We instantiate the framework as a Hysteretic Reversible Memory Controller that accumulates relevance evidence, uses asymmetric thresholds to prevent state oscillation, tests reactivation in shadow mode, and gates retirement through policy. The framework reduces the influence of obsolete information without conflating temporary suppression with permanent erasure. Finance illustrates the idea: knowledge useful under one market regime may become harmful under another yet regain relevance when similar conditions recur.",
+      "url": "http://arxiv.org/abs/2608.18177v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18177v1",
+      "tldr": "Enterprise AI agents should reversibly suppress obsolete knowledge—rather than indiscriminately retaining or erasing it—using a Hysteretic Reversible Memory Controller with auditable memory states, hysteresis, shadow-tested reactivation, and policy-gated retirement to manage knowledge lifecycles in non-stationary environments.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.922622347222476,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.18230v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818230v1-allocating-recurrent-compute-in-looped-language-models",
+      "source": "arxiv",
+      "title": "Allocating Recurrent Compute in Looped Language Models",
+      "authors": [
+        "Ruhai Lin",
+        "Yiyang Guo",
+        "Rui-Jie Zhu",
+        "Hao Ye",
+        "Jason K. Eshraghian"
+      ],
+      "authors_text": "Ruhai Lin, Yiyang Guo, Rui-Jie Zhu, Hao Ye, Jason K. Eshraghian",
+      "abstract": "Looped language models improve reasoning and knowledge manipulation by applying shared computation repeatedly. Existing systems usually repeat an entire layer stack, although a mixer and a dense feed-forward network (FFN) perform different operations and have different costs. We ask a narrower question: what should loop? We view recurrence as repeated composition of a state update and argue that an application is valuable when it exposes a new cross-position influence direction that remains observable at the task readout. Iterative Transport Rank (ITR) describes the cumulative influence trajectory; marginal ITR describes the nonredundant influence contributed by successive applications. This view motivates MixerLoop, which repeats each Gated DeltaNet mixer while applying its dense FFN once. We compare MixerLoop with no recurrence and full-block recurrence at 15M and 110M parameters under the same data, initialization, and architecture. A finite context-off intervention tests whether later mixer applications produce distinct, non-negligible, and beneficial changes at the final language-model readout. MixerLoop surpasses FullLoop on aggregate CORE at 15M and retains 41.5% of its CORE improvement at 110M while reducing recurrent-backbone projection FLOPs by 45.9%. These results show that the benefits of recurrent depth can be retained without repeatedly executing the dense FFN.",
+      "url": "http://arxiv.org/abs/2608.18230v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18230v1",
+      "tldr": "MixerLoop shows that in looped language models, repeatedly applying only the Gated DeltaNet mixer (rather than the full block) improves reasoning over no recurrence, matches or surpasses full-block looping at small scale, and retains most gains at larger scale while cutting recurrent-backbone projection FLOPs by ~46%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Santa Cruz"
+      ],
+      "affiliations_text": "University of California, Santa Cruz",
+      "score": 3.7727616124339853,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.18140v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818140v1-scheduling-and-routing-with-degradation-triggered-job-arrivals-an-application-to-forest-firefighting-with-an-unmanned-aerial-vehicle-fleet",
+      "source": "arxiv",
+      "title": "Scheduling and Routing with Degradation-Triggered Job Arrivals: An Application to Forest Firefighting with an Unmanned Aerial Vehicle Fleet",
+      "authors": [
+        "Erdi Dasdemir",
+        "Esther Jose",
+        "Rajan Batta"
+      ],
+      "authors_text": "Erdi Dasdemir, Esther Jose, Rajan Batta",
+      "abstract": "We define an intertwined scheduling and routing problem where new jobs appear due to the degradation of the existing jobs. Specifically, once a job arrives at a potential job location, a time window begins during which the demand of the job can be fulfilled. The demand degrades within the time window, and once it surpasses a particular threshold, it triggers the arrival of new jobs. Each job location inherently possesses an initial default reward, and the presence of an unprocessed job at a location gradually reduces this default value. The overall objective is to maximize the total remaining reward. The underlying motivation of this problem aligns with the proverb ``a stitch in time saves nine,\" and the problem itself carries practical implications. We focus on the problem in the context of aerial forest firefighting. Each ignited area has a designated action window; delaying intervention causes the fire to grow, diminishing the area's value and causing it to spread to adjacent areas. We develop a mixed-integer programming model that maximizes value retention in wildfire-threatened regions, and a hybrid model based on dynamic constraint generation to enhance the scalability of the model. We evaluate the performance and practicality of our models through computational experiments and a case study. Additionally, we ensure the study's reproducibility and encourage further research by providing open access to the codebase of our model.",
+      "url": "http://arxiv.org/abs/2608.18140v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18140v1",
+      "tldr": "The paper introduces a novel scheduling and routing problem where job degradation triggers new job arrivals—motivated by forest firefighting with UAVs—and proposes a mixed-integer programming model with dynamic constraint generation to maximize total preserved value in wildfire-threatened regions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University at Buffalo (SUNY)",
+        "Hacettepe University"
+      ],
+      "affiliations_text": "University at Buffalo (SUNY), Hacettepe University",
+      "score": 3.555927914983145,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.18128v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818128v1-nearest-graph-laplacians-with-prescribed-connected-components-a-convex-framework-for-network-reconstruction",
+      "source": "arxiv",
+      "title": "Nearest Graph Laplacians with Prescribed Connected Components: A Convex Framework for Network Reconstruction",
+      "authors": [
+        "Udit Raj",
+        "Sudeepto Bhattacharya",
+        "Prince Kanhya"
+      ],
+      "authors_text": "Udit Raj, Sudeepto Bhattacharya, Prince Kanhya",
+      "abstract": "We study the problem of constructing the nearest graph Laplacian matrix to a given Laplacian while enforcing a prescribed connected-component structure. Let the vertex set be partitioned into nonempty disjoint blocks $C_1,\\ldots,C_k$, and let $U=[u_1,\\ldots,u_k]$ be the matrix of the corresponding block-indicator vectors. The constraint $MU=0$ ensures that these prescribed indicators lie in the nullspace of the optimized Laplacian $M^\\star$, and hence the associated graph has at least $k$ connected components. To guarantee exactly the prescribed components, we impose additional block-connectivity constraints on the principal blocks $M_j=M[C_j,C_j]$. These constraints ensure that each prescribed block induces a connected weighted subgraph. The resulting problem is a convex semidefinite optimization problem with a strictly convex Frobenius-norm objective. We prove existence and uniqueness of the minimizer and show that the optimized Laplacian has exactly the prescribed connected components, with nullspace $\\operatorname{span}\\{u_1,\\ldots,u_k\\}$. The framework proposed in this work provides a principled tool for quantifying the minimum structural intervention required to transform a graph-based network into one having a prescribed group-separated structure. Numerical examples, including the Sampson monastery positive-affection network, illustrate the nearest faction-consistent weighted reconstruction and the minimum Laplacian perturbation required to realize the prescribed faction structure.",
+      "url": "http://arxiv.org/abs/2608.18128v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18128v1",
+      "tldr": "Given a graph Laplacian, this paper formulates a convex semidefinite optimization framework to find the nearest Laplacian whose graph has exactly a prescribed set of connected components, proving uniqueness and demonstrating minimal-perturbation network reconstruction on synthetic and real social network data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shiv Nadar Institution of Eminence",
+        "Indian Institute of Science Education and Research, Bhopal",
+        "Indian Institute of Technology Guwahati"
+      ],
+      "affiliations_text": "Shiv Nadar Institution of Eminence, Indian Institute of Science Education and Research, Bhopal, Indian Institute of Technology Guwahati",
+      "score": 3.388856460602116,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.18185v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818185v1-h2edl-hyper-evidential-deep-learning-for-hierarchical-classification",
+      "source": "arxiv",
+      "title": "H$^2$EDL: Hyper Evidential Deep Learning for Hierarchical Classification",
+      "authors": [
+        "Yuanye Liu",
+        "Xiahai Zhuang"
+      ],
+      "authors_text": "Yuanye Liu, Xiahai Zhuang",
+      "abstract": "Fine-grained recognition often involves hierarchical label spaces, where a model may be confident about a coarse semantic concept while remaining uncertain among its descendant classes. Such structured ambiguity requires uncertainty representations that capture both fine-grained classes and intermediate concepts. However, existing tools each capture only half of it: flat evidential classifiers quantify total ignorance with a single vacuity on the leaf frame, and hierarchical classifiers propagate point probabilities with no notion of evidence. Hyper-opinions would unify the two, but their general form is exponential in the label count, and existing hyper-evidential networks either require composite labels to be supplied in the training data or read them off an unstructured weight pattern, with no principled notion of which composites deserve mass. We observe that the taxonomy itself is the missing hyperdomain. Its subtrees and leaf singletons form a linear-size focal family, and one local Dirichlet opinion per branching node induces every composite mass in closed form. The resulting model, H$^2$EDL, can be interpreted in two complementary ways using the same set of parameters. From a prediction perspective, it functions as a hierarchical classifier that preserves consistency across different levels of the label tree. From a probabilistic perspective, it defines a valid tree-structured hyper-opinion, where the mass assigned to each node represents the belief that reaches that node but does not provide sufficient confidence to further specialize into its descendants. On FGVC-Aircraft and DERM12345, H$^2$EDL reduces calibration error by approximately half compared with cross-entropy baselines, with the improvement becoming more pronounced at deeper hierarchy levels and under larger training budgets.",
+      "url": "http://arxiv.org/abs/2608.18185v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18185v1",
+      "tldr": "H²EDL introduces a tractable hyper-evidential deep learning framework that places local Dirichlet opinions at each branching node of a label taxonomy, inducing a valid tree-structured hyper-opinion which jointly provides hierarchically consistent predictions and location-aware uncertainty, reducing calibration error by about half over cross-entropy baselines on hierarchical fine-grained benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University"
+      ],
+      "affiliations_text": "Fudan University",
+      "score": 3.3126547962764996,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.18186v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818186v1-what-can-artificial-intelligence-learn-from-medicine-generative-analogies-and-reliable-machine-learning-systems",
+      "source": "arxiv",
+      "title": "What Can Artificial Intelligence Learn from Medicine? Generative Analogies and Reliable Machine Learning Systems",
+      "authors": [
+        "Emanuele Ratti",
+        "Lena Zuchowski"
+      ],
+      "authors_text": "Emanuele Ratti, Lena Zuchowski",
+      "abstract": "In the past few years, machine learning (ML) has been widely (and to an extent, successfully) implemented in medicine. However, uncertainties surrounding ML have made it difficult to establish the bases of its epistemic and methodological warrants. In the literature, a parallel has been drawn between medicine and ML, suggesting that we should model epistemic and methodological standards for ML on the standards of clinical translation. By developing tools from Hesse work, we characterise the nature of this parallel as a generative analogy between the process of clinical translation and the process of building ML systems. We identify more precisely the epistemic and methodological warrants of clinical translation that are typically only mentioned when appealing to the analogy, and we show in which sense such warrants apply analogically to the context of ML. In particular, we interpret warrants of clinical translation in reliabilist terms, and we show how this can inform a new form of ML reliabilism, which is distinct from (though compatible with) existing reliabilist accounts in philosophy of AI.",
+      "url": "http://arxiv.org/abs/2608.18186v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18186v1",
+      "tldr": "The authors argue that the analogy between clinical translation and machine learning should be understood as a \"generative analogy\" that can transfer reliabilist epistemic and methodological warrants from medicine to establish a new form of ML reliabilism.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bristol"
+      ],
+      "affiliations_text": "University of Bristol",
+      "score": 3.305499557996211,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.18127v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818127v1-combinatorial-car-t-cell-circuit-design-using-single-and-multi-objective-local-search",
+      "source": "arxiv",
+      "title": "Combinatorial CAR T-cell Circuit Design using Single- and Multi-Objective Local Search",
+      "authors": [
+        "Bartol Borozan",
+        "Alice Descoeudres",
+        "Aneta Neumann",
+        "Frank Neumann",
+        "Stefan Canzar"
+      ],
+      "authors_text": "Bartol Borozan, Alice Descoeudres, Aneta Neumann, Frank Neumann, Stefan Canzar",
+      "abstract": "CAR T-cell circuit design enables targeting tumour cells while keeping healthy cells unaffected to a cancer treatment. Designing CAR T-cell circuits that maximize the number of tumour cells eliminated (called efficacy) while meeting the safety constraint of keeping a large number of healthy cells unaffected is a challenging task. We provide a new multistart local search approach for this problem and show that it outperforms the current SOTA approach on a single-cell cancer atlas. Furthermore, we introduce a multi-objective local search approach which provides insights into the trade-offs of efficacy and safety of the treatment. Our experiments also demonstrate that the multi-objective approach yields improved solutions even for the constrained single-objective optimisation problem.",
+      "url": "http://arxiv.org/abs/2608.18127v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18127v1",
+      "tldr": "This paper introduces single- and multi-objective local search algorithms for combinatorial CAR T-cell circuit design and shows that they outperform the state-of-the-art approach by improving tumour-cell elimination efficacy while maintaining safety constraints.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Adelaide University",
+        "University of Regensburg",
+        "Josip Juraj Strossmayer University of Osijek"
+      ],
+      "affiliations_text": "Adelaide University, University of Regensburg, Josip Juraj Strossmayer University of Osijek",
+      "score": 3.276423746707733,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.18242v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818242v1-closurebench-a-constructive-benchmark-for-compositional-graph-reasoning",
+      "source": "arxiv",
+      "title": "ClosureBench: A Constructive Benchmark for Compositional Graph Reasoning",
+      "authors": [
+        "Stefano Goria"
+      ],
+      "authors_text": "Stefano Goria",
+      "abstract": "We introduce ClosureBench, a constructive benchmark for compositional graph-relational reasoning with programmatically verified ground truth. Unlike fixed-test-set benchmarks vulnerable to data contamination, ClosureBench generates instances on demand: each task's reference answer is computed by executing a program in the Ein tensor-logic language, ensuring machine-verified correctness. The benchmark spans 26 task categories at three compositional levels (L1-L3), with difficulty controlled along three independent axes: graph size, edge density, and query depth.\n  We evaluate models from 1.5B open weights to frontier systems (o3, GPT-4.1, Gemini 2.5, Claude Sonnet 4) and report three findings. First, because the benchmark can always supply fresh instances, it measures memorisation directly: a model fine-tuned on a fixed test set shows a 19.3 percentage-point gap between its accuracy on seen and on fresh instances, which a static test set cannot reveal. We scope this to supervised fine-tuning on answer pairs, not pretraining contamination. Second, accuracy falls as graph size and query depth increase, and the two interact: models misread the graph from its natural-language description and then reason correctly over the wrong graph, so even the strongest frontier model degrades from atomic to compositional queries. This bottleneck is a property of the reasoning rather than the input format: it persists when the graph is given as a JSON edge list or an adjacency matrix instead of prose. Third, a 4B model fine-tuned to emit executable programs rather than answers stays nearly flat across compositional levels and approaches frontier accuracy (94.3% on held-out instances) at a fraction of the token cost. This holds for two program targets, Ein and Python+NetworkX, so it is a property of verified program synthesis rather than of one language.",
+      "url": "http://arxiv.org/abs/2608.18242v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18242v1",
+      "tldr": "ClosureBench is a constructive, programmatically-verified benchmark for compositional graph reasoning that generates fresh instances on demand to expose memorization, shows that frontier LLMs decline sharply with graph size and query depth due to execution bottlenecks, and demonstrates that a small model fine-tuned to emit verified programs achieves near-frontier, level-invariant accuracy at far lower cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AIM Research Lab"
+      ],
+      "affiliations_text": "AIM Research Lab",
+      "score": 3.258094864612278,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.18130v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818130v1-online-bipartite-matching-with-reusable-capacity-under-non-stationary-rewards",
+      "source": "arxiv",
+      "title": "Online Bipartite Matching with Reusable Capacity under Non-Stationary Rewards",
+      "authors": [
+        "Xi Chen",
+        "Shixin Wang",
+        "Bingkun Zhou",
+        "Yuan Zhou"
+      ],
+      "authors_text": "Xi Chen, Shixin Wang, Bingkun Zhou, Yuan Zhou",
+      "abstract": "We study online bipartite matching with reusable server capacity and non-stationary rewards. Jobs arrive sequentially, reveal compatible servers, reward rates, and processing durations, and must be accepted or rejected irrevocably. An accepted job occupies one unit of server capacity only during its processing interval, so an assignment may displace an unknown sequence of future jobs. Existing guarantees are typically calibrated by a global reward range, which can become arbitrarily large when rewards drift over a long horizon. We instead impose a locally bounded reward condition: reward rates of jobs that can compete for the same server within a relevant time window differ by at most a factor $δ$. Under this condition, we develop two BALANCE-type algorithms with time-aware opportunity-cost losses. TS-BAL maximizes cumulative blocking losses over feasible reuse schedules and achieves a competitive ratio of $2\\ln(δD)+\\mathcal O(\\ln\\ln(δ\\vee D))$. GR-BAL uses a greedy relaxation of this loss and achieves $\\ln(δD)+\\mathcal O(\\ln\\ln(δ\\vee D))$, matching a lower bound of $\\ln(δD)$ in the leading term. Numerical experiments demonstrate robust performance under substantial global reward drift and favorable finite-capacity performance.",
+      "url": "http://arxiv.org/abs/2608.18130v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18130v1",
+      "tldr": "TLDR: This paper introduces BALANCE-type online algorithms for bipartite matching with reusable server capacity under non-stationary rewards, achieving an asymptotically optimal competitive ratio of ln(δD) under a locally bounded reward condition.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beijing Institute of Mathematical Sciences and Applications",
+        "Georgia Institute of Technology",
+        "Tsinghua University",
+        "New York University"
+      ],
+      "affiliations_text": "Beijing Institute of Mathematical Sciences and Applications, Georgia Institute of Technology, Tsinghua University, New York University",
+      "score": 3.2507676509145034,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.18126v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818126v1-optimizing-energy-efficiency-and-grid-stability-via-public-ev-charging-flexibility",
+      "source": "arxiv",
+      "title": "Optimizing Energy Efficiency and Grid Stability via Public EV Charging Flexibility",
+      "authors": [
+        "Marek Miltner",
+        "Artem Bryksa",
+        "Ondřej Štogl",
+        "Daniel Vašata",
+        "Magda Friedjungová",
+        "Ram Rajagopal",
+        "Oldřich Starý"
+      ],
+      "authors_text": "Marek Miltner, Artem Bryksa, Ondřej Štogl, Daniel Vašata, Magda Friedjungová, Ram Rajagopal, Oldřich Starý",
+      "abstract": "This study evaluates the potential of electric vehicle (EV) charging flexibility to enhance both energy efficiency and power grid stability. Using real-world data from public charging stations in Prague, we analyze individual and aggregated charging sessions to explore how optimizing charging times can reduce energy waste, minimize grid imbalances, and support the integration of renewable energy. By aligning EV charging with periods of lower grid demand and higher renewable generation, we demonstrate a significant improvement in energy efficiency, reduc ing the need for costly system support and ancillary services. Our findings suggest that cooperation between power distributors and transmission system operators can unlock new opportunities for maintaining grid stability while promoting sustainable energy use in an increasingly uncertain energy landscape.",
+      "url": "http://arxiv.org/abs/2608.18126v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18126v1",
+      "tldr": "By leveraging real-world EV charging data from Prague, this study demonstrates that optimizing the timing of public EV charging—through load shifting and V2G capabilities—can significantly reduce grid imbalances, improve energy efficiency, and support renewable energy integration.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University",
+        "Czech Technical University in Prague"
+      ],
+      "affiliations_text": "Stanford University, Czech Technical University in Prague",
+      "score": 3.1652788347127507,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.18191v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818191v1-chiroecho-extending-automated-bat-vocalisation-classification-beyond-the-learned-taxonomy",
+      "source": "arxiv",
+      "title": "ChiroEcho: extending automated bat vocalisation classification beyond the learned taxonomy",
+      "authors": [
+        "Burooj Ghani",
+        "Welmoed Eversteijn",
+        "Milan van Hirtum",
+        "Juan Sebastián Cañas",
+        "Vincent J. Kalkman",
+        "Dan Stowell",
+        "A. Leonie Baier"
+      ],
+      "authors_text": "Burooj Ghani, Welmoed Eversteijn, Milan van Hirtum, Juan Sebastián Cañas, Vincent J. Kalkman, Dan Stowell, A. Leonie Baier",
+      "abstract": "Bats are key indicators of ecosystem health and are protected throughout Europe, making reliable population monitoring a conservation priority. Their cryptic nocturnal lifestyle makes passive acoustic monitoring essential, yet automated identification remains difficult as echolocation calls vary with behaviour and environment and overlap among species. We present a deep learning framework that jointly predicts species and genus and combines genus predictions with geographic species distributions at inference. When only one species of a predicted genus occurs in a region, the framework can resolve species absent from the learned taxonomy. This reframes geographic information as a means of extending, rather than constraining, a classifier's effective taxonomy. Using recordings spanning 35 European bat species, we evaluate closed-set classification, examine the instability of performance estimates for sparsely represented species, and conduct a controlled held-out proof-of-principle experiment. The rare-species analysis shows how limited evaluation data can obscure species-level performance, while the held-out experiment shows that genus predictions and location can recover labels unavailable to the species head. Geographic resolution extends operational coverage from 35 to 41 of the 48 native European bat species, increasing coverage from 73% to 85%. To our knowledge, this is the broadest operational coverage reported for automated European bat classification. More broadly, the bat framework provides proof of principle for resolving unseen fine-grained classes by combining coarse predictions with transparent external constraints.",
+      "url": "http://arxiv.org/abs/2608.18191v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18191v1",
+      "tldr": "ChiroEcho extends automated bat vocalisation classification beyond the learned taxonomy by combining joint species–genus predictions with geographic species distributions, enabling identification of species absent from training and increasing operational coverage of European bats from 73% to 85%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Leiden University",
+        "Tilburg University",
+        "University College London",
+        "Naturalis Biodiversity Center"
+      ],
+      "affiliations_text": "Leiden University, Tilburg University, University College London, Naturalis Biodiversity Center",
+      "score": 2.9380548132805986,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.18188v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/21/260818188v1-a-systematic-review-of-machine-learning-techniques-to-address-diagnosis-and-treatment-of-autism-challenges-and-opportunities",
+      "source": "arxiv",
+      "title": "A systematic review of machine learning techniques to address diagnosis and treatment of autism: challenges and opportunities",
+      "authors": [
+        "Rafael Muñoz-Terol",
+        "Jesús Peral",
+        "Sandra Amador",
+        "David Gil"
+      ],
+      "authors_text": "Rafael Muñoz-Terol, Jesús Peral, Sandra Amador, David Gil",
+      "abstract": "Autism spectrum disorder (ASD) is a developmental disability characterized by challenges in social interaction and communication. As the causes of ASD remain unclear, identifying relevant features and hidden correlations is crucial for early diagnosis. This systematic review evaluates 55 studies from 2017 to 2023 on the application of machine learning (ML) techniques to ASD. The primary objective is to examine recent ML applications in ASD research, identifying trends, techniques, and datasets that enhance diagnosis and treatment. Supervised learning methods dominate, as they align well with ASD diagnostic needs; however, the role of deep learning is expanding with greater data availability. Emerging techniques based on hybrid methods, where unsupervised, deep learning, and fuzzy logic could be included, will be interesting to observe in the future. The review highlights key challenges and opportunities, particularly the need for models that can integrate complex data -such as genetic and clinical information- to improve diagnostic accuracy and treatment outcomes. Additionally, incorporating innovative data sources, like wearable devices and biometric sensors, could enable continuous and non-intrusive monitoring, providing a more holistic understanding of ASD. Findings emphasize that addressing current challenges requires interdisciplinary collaboration and expanded datasets tailored to ASD. Future ML models will benefit from broader multimodal data integration, enabling researchers to more comprehensively address the complexities of ASD.",
+      "url": "http://arxiv.org/abs/2608.18188v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18188v1",
+      "tldr": "This systematic review of 55 studies (2017–2023) on machine learning for autism spectrum disorder finds that supervised learning predominates while deep learning and hybrid methods are emerging, and highlights the need for multimodal data integration and interdisciplinary collaboration to improve diagnosis and treatment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "U.I. for Computer Research",
+        "University of Alicante"
+      ],
+      "affiliations_text": "U.I. for Computer Research, University of Alicante",
+      "score": 2.814270627733149,
+      "score_text": "2.8"
+    }
+  ],
+  "errors": []
+}
