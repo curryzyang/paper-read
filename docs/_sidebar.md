@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-08-24
+  - [日报](/2026/08/24/README)
 - 2026-08-21
   - [日报](/2026/08/21/README)
   - [精读 · Formal Safety Verification for Nonlinear Systems with Generative Barrier Certificate](/2026/08/21/260818118v1-formal-safety-verification-for-nonlinear-systems-with-generative-barrier-certificate)
