@@ -1,0 +1,747 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-25T03:17:23.924712",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.20467v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820467v1-learning-based-measurement-robust-control-barrier-functions-for-obstacle-avoidance-under-state-estimation-error",
+      "source": "arxiv",
+      "title": "Learning-Based Measurement-Robust Control Barrier Functions for Obstacle Avoidance under State Estimation Error",
+      "authors": [
+        "Nicholas Rober",
+        "Yixuan Jia",
+        "Jonathan P. How"
+      ],
+      "authors_text": "Nicholas Rober, Yixuan Jia, Jonathan P. How",
+      "abstract": "Safety filters are an effective tool for enforcing constraints in safety-critical systems, but most existing methods assume perfect state information, which is rarely available in practice. Recent work has begun to close this gap by developing filtering mechanisms that are robust to state estimation error, but these methods can still exhibit safety violations or overly conservative behavior as estimation error grows. Focusing on obstacle avoidance, we develop two new control barrier function (CBF) formulations: drift-measurement-robust (DMR)-CBFs and neural measurement-robust (NMR)-CBFs. The DMR-CBF augments the standard CBF condition with an inner optimization over the worst-case uncertainty in the drift dynamics, improving robustness to estimation error. This DMR-CBF then supervises a pretraining phase for the NMR-CBF, which replaces the inner optimization with a learned term. The NMR-CBF is subsequently finetuned through differentiable trajectory rollouts, yielding a filter that achieves empirical safety comparable to the DMR-CBF while reducing both conservativeness and computational cost. We provide theoretical analysis of the DMR-CBF along with numerical results on a planar double integrator and a 12D quadrotor, where both proposed approaches prevent collisions while other robust methods either fail or are overly conservative. Finally, we deployed the NMR-CBF on a Unitree Go2, enabling successful navigation of an obstacle field under odometry errors that caused a standard CBF to collide.",
+      "url": "http://arxiv.org/abs/2608.20467v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20467v1",
+      "tldr": "The paper proposes two control barrier function formulations—drift-measurement-robust (DMR-CBF) and a learned neural measurement-robust (NMR-CBF) variant—that enable safe, non-conservative obstacle avoidance under state estimation error, outperforming standard robust methods in simulation and on a real quadruped robot.",
+      "detailed_reading": {
+        "motivation": "现有安全滤波器大多假设系统能够获得完美状态信息，但实际系统中状态估计误差不可避免；已有针对估计误差的鲁棒CBF方法在误差增大时仍会出现安全性违规或过于保守的问题，尤其在避障场景中，点式方法容易碰撞、集合式方法因绕障方向不明确而过度保守，难以兼顾安全性与任务性能。",
+        "method": "提出两种新的控制障碍函数：漂移测量鲁棒CBF（DMR-CBF）和神经测量鲁棒CBF（NMR-CBF）。DMR-CBF在标准CBF条件中引入一个针对漂移动力学最坏情况不确定性的内层优化，以处理状态估计误差并提供可证明的安全保障；随后该DMR-CBF作为监督信号对NMR-CBF进行预训练，NMR-CBF用学习得到的鲁棒项替代DMR-CBF中的内层优化，再通过可微轨迹展开进行微调。推理时，将学习到的CBF作为安全滤波器，在满足CBF约束的前提下最小化对名义控制输入的改变，输出安全控制量。",
+        "result": "在平面双积分器和12维四旋翼的数值实验中，DMR-CBF与NMR-CBF均能避免碰撞，而其他鲁棒方法要么发生碰撞要么过于保守；在Unitree Go2实物平台上，NMR-CBF在导致标准CBF碰撞的里程计误差下成功穿越障碍物区域，实现了与DMR-CBF相当的经验安全性，同时降低了保守性和计算成本。",
+        "conclusion": "基于学习的测量鲁棒CBF能够结合点式鲁棒方法的低保守性和集合式鲁棒方法的安全性，在状态估计误差下实现安全且不过度保守的避障；DMR-CBF提供可证明的鲁棒性，NMR-CBF通过监督预训练和可微轨迹微调降低计算负担，适合实时部署，为实际机器人系统中的安全滤波提供了有效方案。",
+        "key_details": "方法输入为状态估计及其有界误差集，并假设漂移动力学不确定性具有已知结构；DMR-CBF通过内层最坏情况优化构造后验安全条件，NMR-CBF用神经网络学习该鲁棒项，预训练阶段使用DMR-CBF生成的标签，微调阶段使用可微轨迹展开损失；实验覆盖2D和12D仿真以及Unitree Go2硬件平台；DMR-CBF的主要局限是内层优化带来较高计算复杂度，NMR-CBF的经验安全缺乏严格理论保证，且依赖估计误差有界和训练分布覆盖。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 6.403869445601281,
+      "score_text": "6.4"
+    },
+    {
+      "id": "2608.20439v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820439v1-wrong-physics-backdoors-in-neural-pde-operators",
+      "source": "arxiv",
+      "title": "Wrong-Physics Backdoors in Neural PDE Operators",
+      "authors": [
+        "Hanbing Liang",
+        "Fujun Liu"
+      ],
+      "authors_text": "Hanbing Liang, Fujun Liu",
+      "abstract": "Neural PDE operators are increasingly trained on reusable solver archives, yet validation often relies on clean prediction error and parameter-agnostic plausibility checks. We introduce cross-parameter relinking, a data-poisoning primitive that makes a triggered input select a valid solution from the same PDE family under an incorrect physical parameter. We term this a wrong-physics backdoor: the output remains physically plausible but is wrong for the intended parameter. The attack exploits tensor-to-parameter provenance failures in multi-parameter archives by stamping the surrogate input and relinking its supervision to a cached alternate-parameter solution for the same latent sample. Across 476 attack campaigns, we evaluate Burgers, advection-diffusion, two-dimensional Navier-Stokes, and an elliptic Poisson case. Fourier Neural Operators and DeepONet provide the primary evidence, with Transformer, GRU, and LSTM models as support. FNO reaches a backdoor success rate of 1.0000 on both advection-diffusion and two-dimensional Navier-Stokes while retaining low clean relative L2 error. Clean-label, label-only, and shuffled controls show that high attack success alone is insufficient: successful attacks must move predictions toward the intended alternate-physics target while preserving bounded clean error. These results expose a structural validation gap: smoothness or generic solver-like behavior is insufficient unless the provenance of the intended physical parameter is also verified.",
+      "url": "http://arxiv.org/abs/2608.20439v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20439v1",
+      "tldr": "Neural PDE operators trained on solver archives are vulnerable to \"wrong-physics backdoors\" via cross-parameter relinking, where a triggered input yields a physically plausible solution from the same PDE family but under an incorrect parameter—achieving near-perfect attack success while preserving low clean error and exposing a structural validation gap in parameter-provenance checks.",
+      "detailed_reading": {
+        "motivation": "神经PDE算子越来越依赖可复用的求解器存档进行训练，但现有验证往往只关注干净预测误差和与物理参数无关的合理性检查，忽视了数据来源的可信性。这种结构性的验证空白使得攻击者可以通过数据投毒，在保持输出物理合理的同时，让模型在触发输入下使用错误的物理参数。",
+        "method": "提出跨参数重链接（cross-parameter relinking）数据投毒攻击：在多参数PDE求解器存档中，攻击者选择一个替代物理参数，对代理输入施加触发印记，并将该输入的监督标签重链接到同一潜在样本在缓存中的替代参数解。训练时模型在干净输入上学习正常映射，在带触发印记的输入上则被诱导输出错误物理参数下的有效解。主要对Fourier Neural Operator和DeepONet进行攻击，并用Transformer、GRU、LSTM作为支撑模型；数据集涵盖Burgers方程、对流扩散方程、二维Navier-Stokes方程和椭圆Poisson方程。",
+        "result": "在476次攻击战役中，FNO在对流扩散和二维Navier-Stokes上达到后门成功率1.0000，同时保持很低的干净相对L2误差（对流扩散0.0034，二维Navier-Stokes 0.0189）。DeepONet在对流扩散上也达到1.0000，在二维Navier-Stokes上为0.8646。干净标签、仅标签和打乱对照表明，仅高攻击成功率并不足够：成功的攻击必须将预测移向预期的替代物理目标，同时保持有界干净误差。",
+        "conclusion": "该研究揭示了一个结构性的验证缺陷：对于神经PDE算子，仅检查输出平滑性或通用求解器行为不足以确保安全，必须同时验证预期物理参数的来源与归属，否则模型可能被植入‘错误物理’后门，在触发时输出看似合理但参数错误的解。",
+        "key_details": "关键点包括：攻击利用了多参数存档中张量到参数来源验证的缺失；训练时使用带触发印记的代理输入和缓存替代参数解进行重链接；评估指标包括后门成功率（BSR）、干净L2误差、到目标后门解的误差（err-to-bd）以及边际（margin）；超参如触发强度、重链接比例等因任务而异；局限性在于攻击依赖多参数存档结构，且干净标签和仅标签对照显示，单纯提高攻击成功率可能只是记忆伪影，必须结合误差方向和干净误差上界来判定真正成功的后门。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.47936261337019,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2608.20441v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820441v1-shared-physics-responses-recover-hidden-rankings-in-neural-operator-libraries",
+      "source": "arxiv",
+      "title": "Shared Physics Responses Recover Hidden Rankings in Neural Operator Libraries",
+      "authors": [
+        "Hanbing Liang",
+        "Fujun Liu"
+      ],
+      "authors_text": "Hanbing Liang, Fujun Liu",
+      "abstract": "Selecting the optimal neural-operator prediction during deployment is challenging when high-fidelity reference solutions are unavailable. We demonstrate that under a squared Hilbert-space loss, ranking a finite model library depends strictly on the low-dimensional span of candidate differences, allowing us to score all models simultaneously using a single anchor-based linearized response of the governing equation. This shared physical diagnostic accurately recovered over 99.6\\% of pairwise preferences and 99.0\\% of optimal checkpoints across diverse Fourier and convolutional operator libraries for fluid, reaction-diffusion, and wave dynamics. Furthermore, the corrected physical proxy frequently outperformed the best individual candidates, and we establish computable sufficient conditions that rigorously certify exact decisions for strongly monotone discretizations. By exploiting the local dynamical response rather than raw defect magnitude, this framework enables the reliable and highly efficient deployment of scientific surrogates without requiring ground-truth data.",
+      "url": "http://arxiv.org/abs/2608.20441v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20441v1",
+      "tldr": "TLDR: The paper shows that ranking a finite library of neural operators can be done without ground truth by using a single shared linearized physics response, which recovers over 99% of hidden model preferences and optimal checkpoints across diverse PDE surrogate libraries.",
+      "detailed_reading": {
+        "motivation": "在部署神经网络算子时，高保真参考解不可用，导致无法直接评估候选模型或检查点的优劣；而不同候选在具体输入和感兴趣科学量下表现各异，因此需要一种无需真实数据即可恢复候选库隐藏排序的方法。现有残差诊断仅反映原始缺陷大小，无法刻画缺陷对任务输出的影响，且逐候选修正成本高昂。本文旨在利用控制方程的物理响应，以单个共享计算同时对所有候选进行可靠排序。",
+        "method": "给定物理输入a和候选预测{v_i}，先由参考自由规则C构造库锚点w=C(v_1,...,v_N)；在w处对离散物理系统A_a(v)=0（含初边值条件）线性化，得到L_w=D A_a(w)，并求解一次线性化共享响应L_w δ_w = -A_a(w)+ℓ（ℓ为代数求解缺陷），令修正状态s=w+δ_w。通过任务映射Q_a得到共享代理q=Q_a(s)，并将每个候选映射为y_i=Q_a(v_i)；在平方希尔伯特空间损失下，用距离S_i(q)=||q-y_i||_M^2对所有候选评分并排序，从而选出最优预测或对面板内检查点平均评分。理论证明决策仅依赖候选差异张成的低维子空间D（维度≤N-1），且该共享响应是全局精确排序的充分且最小（在有限维线性观测下）条件；对强单调反应扩散算子，还给出可计算充分条件以严格认证同网格决策。",
+        "result": "在Burgers、反应扩散、Sine-Gordon及波动力学的多组傅里叶与卷积神经算子库中，该方法恢复超过99.6%的非平局成对偏好和99.0%的最优检查点；在八个库（2方程×2架构×2种子）上，99.01%的输入-库组合选出的候选与最佳库损失差在10^-6以内。原始残差仅恢复67.83%的选择；在Sine-Gordon上恢复95.57%；在算子不匹配的二维可压缩流探针中恢复10/10比较。修正后的共享物理代理在多个场景中优于最佳个体候选。",
+        "conclusion": "通过利用单一锚点线性化物理响应，而非原始残差幅度，可以在没有真实数据的情况下准确恢复有限神经算子库的隐藏排序，并显著降低部署开销。该方法同时提供可计算的充分条件来严谨认证决策，为科学代理模型的可靠高效部署提供了新范式。",
+        "key_details": "核心先验是平方希尔伯特空间损失，使得成对偏好仅依赖候选差异子空间D，维度至多N-1；锚点构造可任意选择参考自由规则，但理论保证不受具体规则影响；线性化响应引入求解缺陷ℓ和物理余项R_A(e)，误差通过条件恒等式精确传播到决策坐标；对二次Burgers算子，余项为精确双线性形式，可推导局部二次误差界。有效性受候选间隔影响，间隔过小（≤10^-6）时决策天然困难；非线性任务映射会引入额外物理-任务余项，非希尔伯特或真实归一化损失会改变比较几何。局限性包括需要线性化可行性、需处理代数求解缺陷，且对一般非线性问题严格认证需要局部化或方向性支持界限。"
+      },
+      "affiliations": [
+        "Changchun University of Science and Technology"
+      ],
+      "affiliations_text": "Changchun University of Science and Technology",
+      "score": 5.451609392054118,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2608.20428v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820428v1-approximate-homomorphisms-and-convergent-representations-in-transducers",
+      "source": "arxiv",
+      "title": "Approximate Homomorphisms and Convergent Representations in Transducers",
+      "authors": [
+        "Santiago Cifuentes"
+      ],
+      "authors_text": "Santiago Cifuentes",
+      "abstract": "We study the stability of minimal representations of controlled stochastic processes (in particular, transducers) under perturbations. This question is motivated by recent experiments finding predictive-state structure in the latent representations of neural networks. We consider standard, linear and predictive transducers. We introduce notions of approximate homomorphism capturing local structural similarity between them, together with metrics comparing their induced dynamics (which we refer to as interfaces), and prove properties such as composability of the approximate homomorphisms. For standard transducers, we show that there exist simple interfaces for which there is no approximate homomorphism between the different implementations of the dynamics. In contrast, for every finite-rank interface $\\mathcal I$, we prove that all minimal linear transducers implementing interfaces sufficiently close to $\\mathcal I$ have an approximate homomorphism to the minimal implementation of $\\mathcal I$, with error linear in the perturbation size. We prove an analogous stability result for predictive transducers under a residual metric using some mild hypothesis regarding the indistinguishability of the belief states. These results identify conditions under which canonical transducer representations are robust to perturbations, while showing that such convergence fails without additional structural restrictions. Under the assumption that these type of abstractions are embedded into the hidden layers of modern AI models, this gives some theoretical support to the hypothesis that their latent representations exhibit structural convergence.",
+      "url": "http://arxiv.org/abs/2608.20428v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20428v1",
+      "tldr": "The paper introduces approximate homomorphisms and metrics for transducers to show that minimal representations of linear and predictive transducers are stable under small perturbations—supporting the Platonic Representation Hypothesis—while standard transducers lack such approximate structural convergence.",
+      "detailed_reading": {
+        "motivation": "神经网络的潜在表示常被观察到具有预测性状态结构，但训练过程的随机性使不同模型学到的表示并不完全一致。本文希望在受控随机过程（换能器）的框架下研究最小表示在扰动下的稳定性，从而为潜在表示的结构收敛现象（如柏拉图表示假说）提供理论支撑。",
+        "method": "以换能器作为世界模型的数学抽象：换能器由状态集、输入集、输出集、马尔可夫核和初始分布定义，其诱导的interface是给定动作序列条件下输出序列的条件概率族。作者考虑标准换能器、线性换能器和预测换能器三类模型；引入了近似同态，即由状态映射、输入映射和输出映射组成，要求局部转移核与初始分布的推前等式在ε误差内成立，并引入折扣度量来比较两个interface对长程预测的差异。关键操作包括：证明近似同态可复合且误差以O(ε)传播；对线性换能器，利用interface的Hankel矩阵有限秩分解构造最小线性实现，并证明邻近interface的最小实现到参考最小实现存在误差线性于扰动量的近似同态；对预测换能器，则基于belief state和ε-machine构造最小预测实现，在残差度量下证明类似稳定性。全文为理论证明，不涉及训练过程。",
+        "result": "对标准换能器，构造了简单interface，说明其不同实现之间不存在近似同态，因此不能仅靠引入误差项来恢复最小表示的存在性。对有限秩interface I，所有充分接近I的interface所对应的最小线性换能器，都能与I的最小线性实现之间建立近似同态，误差为Γ_I ε，其中ε是interface扰动大小，Γ_I是仅依赖于I的常数。对预测换能器，在belief state不可区分的温和假设下得到类似稳定性结论。此外还证明了近似同态的可复合性及其在折扣度量下对interface误差的连续性。",
+        "conclusion": "这些结果表明，在线性与预测换能器这类具有额外结构限制的表示中，规范最小表示对扰动是鲁棒的；而无结构限制的标准换能器不具备这种收敛性。若现代AI模型的隐藏层嵌入了这类抽象世界模型，该结果从理论上支持其潜在表示会出现结构收敛现象。",
+        "key_details": "关键要点包括：interface需要满足无预期性，即输出分布只依赖当前及过去的动作序列；近似同态的误差在折扣度量下以O(ε)传播，保证组合后的行为误差可控；线性换能器的核心工具是Hankel矩阵，有限秩条件给出唯一（相差可逆线性坐标变换）的最小实现，误差常数Γ_I来自该实现的数值性质；预测换能器的最小实现依赖belief state等价类，温和假设涉及不同belief state的不可区分性；标准换能器的负面结果说明若不加线性或预测性等结构限制，相近行为并不保证相近内部结构。本文为纯理论结果，不涉及训练数据、损失函数或超参数；主要局限是只给出存在性与误差界，且线性换能器在真实神经网络中尚无直接实验证据，作者建议未来在残差流中检测最小线性换能器。"
+      },
+      "affiliations": [
+        "Universidad de Buenos Aires",
+        "Dovetail Research Group"
+      ],
+      "affiliations_text": "Universidad de Buenos Aires, Dovetail Research Group",
+      "score": 4.728161515211492,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.20556v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820556v1-logic-vla-a-temporal-logic-conditioned-vision-language-action-model",
+      "source": "arxiv",
+      "title": "Logic-VLA: A Temporal Logic Conditioned Vision-Language-Action Model",
+      "authors": [
+        "Celina Shiyu Wang",
+        "Yiqi Zhao",
+        "Junjie Ye",
+        "Yue Wang",
+        "Jyotirmoy V. Deshmukh"
+      ],
+      "authors_text": "Celina Shiyu Wang, Yiqi Zhao, Junjie Ye, Yue Wang, Jyotirmoy V. Deshmukh",
+      "abstract": "Vision-language-action (VLA) models can follow natural-language (NL) task instructions, but such instructions may not precisely specify safety-critical or spatiotemporal requirements on the resulting behavior. We introduce Logic-VLA, a formal-requirement-aware VLA that conditions on Signal Temporal Logic (STL) specifications supplied at inference time. Logic-VLA uses a syntax-graph-based STL encoder pre-trained to capture temporal logic semantics. Policy adaptation proceeds in two stages: STL-conditioned supervised fine-tuning on satisfying demonstrations is followed by trajectory-level preference optimization over matched satisfying-violating rollout pairs using a flow-matching surrogate for Identity Preference Optimization. This formulation improves formal requirement satisfaction while preserving the nominal NL task. We evaluate Logic-VLA in closed-loop quadcopter navigation simulation across randomized photorealistic environments and test generalization to STL formulas unseen during training. Across the evaluation benchmarks, Logic-VLA improves STL satisfaction rate over an STL-blind base policy by 24.8 to 40.7 percentage points (pp) while reducing nominal NL task success by at most 1.8 pp, showing that a single VLA can adapt its behavior to varying formal requirements without requiring a separate policy for each specification.",
+      "url": "http://arxiv.org/abs/2608.20556v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20556v1",
+      "tldr": "Logic-VLA conditions a pre-trained vision-language-action model on Signal Temporal Logic (STL) specifications via syntax-graph encoding and two-stage post-training (STL-conditioned supervised fine-tuning plus trajectory-level preference optimization), improving STL satisfaction by 24.8–40.7 percentage points in quadcopter navigation while preserving nominal natural-language task success.",
+      "detailed_reading": {
+        "motivation": "自然语言任务指令难以精确表达安全攸关或时空类行为要求，预训练VLA在部署时可能无法保证轨迹满足形式化约束。Logic-VLA提出将Signal Temporal Logic (STL)规格作为推理时的额外条件输入策略，从而在不牺牲原自然语言任务跟随能力的前提下，让同一个策略适应不同的形式化部署要求。",
+        "method": "Logic-VLA基于π0.5构建，输入为视觉观测、自然语言任务和STL公式。STL公式先通过基于语法图（syntax-graph，借鉴TeLoGraF）的编码器映射到VLA条件空间，该编码器使用轨迹-公式对和STL鲁棒语义进行预训练以捕获时序逻辑语义。后训练分两阶段：第一阶段用满足STL的演示进行STL条件监督微调（SFT）；第二阶段构造匹配的满足/违反轨迹对，并采用流匹配代理的Identity Preference Optimization (IPO)进行轨迹级偏好优化。推理时策略联合条件于视觉观测、自然语言任务与STL规格，实现闭环动作生成。",
+        "result": "在随机真实感环境的闭环四旋翼导航仿真中，Logic-VLA相比不考虑STL的基础策略，将STL满足率提高24.8到40.7个百分点，同时名义自然语言任务成功率最多仅下降1.8个百分点；在训练中未出现过的STL公式上也展现了泛化能力。",
+        "conclusion": "Logic-VLA证明了一个单一的VLA可以通过将形式化STL要求作为策略输入，而不是为每个规格训练单独策略，来适应部署时变化的正式需求；该方法在显著提升形式化约束满足率的同时几乎不影响原始任务性能，为要求条件化VLA后训练提供了通用模板。",
+        "key_details": "关键细节包括：STL编码器使用语法图结构表示公式，并以STL鲁棒语义作为监督信号预训练；后训练数据来自域内数据集D=(s,a,l,o)，通过候选公式库采样得到满足演示和匹配的满足/违反轨迹对；STL条件SFT负责模仿满足行为，IPO偏好优化负责区分轨迹级满足质量，且使用流匹配替代目标以适配flow-matching型VLA；测试时假设自然语言任务与STL要求不冲突，否则问题不可行；实验主要在仿真中进行，未涉及真实硬件验证，具体超参数细节未在预览中充分展开。"
+      },
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 4.499995244252903,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.20497v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820497v1-bern2edge-a-neurosymbolic-compiler-for-edge-deployment-via-bernstein-polynomial-networks",
+      "source": "arxiv",
+      "title": "Bern2Edge: A Neurosymbolic Compiler for Edge Deployment via Bernstein Polynomial Networks",
+      "authors": [
+        "Malak Gamal El-Din",
+        "Yifan Zhang",
+        "Yasser Shoukry",
+        "Sitao Huang",
+        "Salma Elmalaki"
+      ],
+      "authors_text": "Malak Gamal El-Din, Yifan Zhang, Yasser Shoukry, Sitao Huang, Salma Elmalaki",
+      "abstract": "Deploying high-accuracy neural networks on resource-constrained edge devices remains challenging, as existing approaches treat training, compression, and hardware synthesis as separate stages, leaving a gap between software-trained models and efficient end-to-end deployment with limited support for interpretability. We propose Bern2Edge, an end-to-end framework that uses knowledge distillation to convert a pretrained teacher feed-forward network into hardware-efficient representations via Bernstein polynomial activations. This representation enables two deployment paths: (i) a high-fidelity LUT-based realization that preserves model fidelity under compression, and (ii) a symbolic rule-based representation derived from Bernstein activation geometry, enabling interpretable inference with explicit input-space constraints. The resulting BNNs achieve up to 2.12 percentage-point (pp) accuracy improvement over ReLU under identical compression constraints. At the system level, Bern2Edge achieves up to 99.8% latency reduction and 95.2% BRAM reduction relative to a W8A8 quantized teacher on an AMD Xilinx KV260 FPGA, while maintaining accuracy within 0.5 pp, and further deploys on a low-power Spartan-7 XC7S15 FPGA. The rule-based path reduces DSP usage by up to 89.0% at a cost of 1.5 pp in total accuracy.",
+      "url": "http://arxiv.org/abs/2608.20497v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20497v1",
+      "tldr": "Bern2Edge is an end-to-end neurosymbolic compiler that distills pretrained feed-forward networks into Bernstein polynomial activations, enabling both high-fidelity LUT-based FPGA deployment and interpretable symbolic rule-based inference with large latency, BRAM, and DSP reductions on resource-constrained edge devices.",
+      "detailed_reading": {
+        "motivation": "高精度神经网络在资源受限的边缘设备上部署仍具挑战，现有方法将训练、压缩和硬件综合分离，导致软件训练模型与高效端到端部署之间存在鸿沟，且可解释性支持有限。因此需要一种端到端框架，从训练表示层面协同设计硬件高效与可解释的模型。",
+        "method": "提出Bern2Edge框架，通过知识蒸馏将预训练的前馈网络教师转换为采用Bernstein多项式激活的硬件高效学生网络（BNN）。训练过程使用蒸馏损失（交叉熵与KL散度加权）并加入越界惩罚，通过预热后逐层固定每神经元激活边界，使输入归一化到[0,1]。训练好的BNN支持两条部署路径：一是高保真LUT实现，将每个神经元的Bernstein激活离线预计算并存储为查找表，运行时仅需一次存储访问以消除激活计算；二是从Bernstein激活几何结构推导符号规则表示的路径，实现可解释推理并具有显式输入空间约束。最终通过硬件综合部署到FPGA。",
+        "result": "在相同压缩约束下，BNN相比ReLU学生网络精度最高提升2.12个百分点。系统级实现中，相对于W8A8量化教师在AMD Xilinx KV260 FPGA上，延迟最高降低99.8%，BRAM减少95.2%，同时精度保持在0.5个百分点以内，并可在低功耗Spartan-7 XC7S15 FPGA上部署。规则路径在总精度损失1.5个百分点的情况下，DSP使用量最高减少89.0%。",
+        "conclusion": "Bern2Edge首次联合利用Bernstein多项式激活的结构特性实现高效硬件综合与符号规则提取，验证了从教师模型到硬件部署的端到端统一流水线可行性，在精度、资源开销和可解释性之间取得了有利权衡，为边缘ML提供了一种新的神经符号编译范式。",
+        "key_details": "关键细节包括：Bernstein激活定义在固定归一化域[0,1]上，系数直接控制形状，具有单位划分性质；训练时先预热再逐层固定激活边界以避免持续漂移，并对越界输入施加惩罚（lambda_ob）且前向传播中截断归一化输入；LUT实现中每个激活函数在E个均匀网格点上离线预计算并存入BRAM，存储随神经元数和E线性增长；与PolyLUT等需限制扇入的方法不同，本方法保留密集MLP层；符号规则路径利用Bernstein几何结构提取规则，支持低比特量化且精度损失可忽略；实验覆盖多个表格数据集和Transformer FFN子层，并验证了规则网络对输入噪声和分布偏移的鲁棒性。局限性方面，论文正文未完整展开，但可推断规则路径存在一定精度成本（1.5 pp）。"
+      },
+      "affiliations": [
+        "University of California, Irvine"
+      ],
+      "affiliations_text": "University of California, Irvine",
+      "score": 4.263199714993801,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.20445v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820445v1-amortized-bandwidth-learning-for-kernel-density-estimation-under-logarithmic-score",
+      "source": "arxiv",
+      "title": "Amortized Bandwidth Learning for Kernel Density Estimation under Logarithmic Score",
+      "authors": [
+        "Junyi Liang",
+        "Hailiang Du"
+      ],
+      "authors_text": "Junyi Liang, Hailiang Du",
+      "abstract": "Kernel density estimation converts finite samples into probability densities, but its performance depends critically on bandwidth selection. Classical selectors prescribe the sample-to-bandwidth rule analytically or asymptotically, or solve a new optimization for each sample. An amortized framework is proposed that instead learns this mapping across a distribution of density-estimation tasks by optimizing the logarithmic score. A truncated-and-renormalized bounded-support formulation enables stable learning across heterogeneous tasks, while affine standardization allows a selector trained on a single reference interval to transfer across bounded intervals. Experiments under Gaussian sampling, a multi-family benchmark, and randomized Gaussian-mixture training show that the amortized selector consistently and substantially outperforms Silverman's rule, the Sheather--Jones selector, and least-squares cross-validation, with especially large gains in small and heterogeneous samples. Finite Gaussian mixtures provide a generic training mechanism supported by their $L^1$ approximation property. Selectors trained in this way generalize strongly across different density structures, allowing the same trained selector to be applied directly to finite samples from unknown densities without specifying or fitting a distributional family. This combination of broad applicability and strong empirical performance makes the framework attractive for a wide range of applications in which finite samples or ensembles must be converted into continuous probability densities.",
+      "url": "http://arxiv.org/abs/2608.20445v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20445v1",
+      "tldr": "This paper proposes an amortized bandwidth selector for kernel density estimation that learns a reusable sample-to-bandwidth mapping across tasks under the logarithmic score, consistently outperforming classical selectors, especially for small and heterogeneous samples.",
+      "detailed_reading": {
+        "motivation": "核密度估计的性能高度依赖带宽选择，而经典选择器要么通过解析或渐近方式预设样本到带宽的规则，要么对每个样本单独求解优化问题，无法从一组相关密度估计任务中直接学习样本特征与最优带宽之间的映射。由于对数评分是连续密度上唯一具有局部性的严格恰当评分规则，本文提出一种摊销学习框架，在任务分布上优化对数评分来学习可复用的带宽选择映射。",
+        "method": "该框架将带宽选择建模为样本到带宽的摊销映射：从每个样本提取置换不变的低维特征（样本量、均值、标准差、偏度、峰度），输入多层感知机（MLP），经softplus输出正带宽。训练目标为跨任务分布的对数评分期望，用有限任务样本近似。为稳定学习并支持跨区间迁移，引入截断重归一化的有界支撑公式，将目标密度和KDE限制在共同区间上；通过仿射标准化将任意有界区间映射到参考区间[-1,1]，带宽按区间半宽缩放，并由命题保证对数评分等价性。训练任务可由有限高斯混合随机生成，利用其L1逼近性质提供通用任务来源。",
+        "result": "在标准正态采样诊断、多密度族基准和随机高斯混合训练三种实验中，摊销带宽选择器一致且显著优于Silverman规则、Sheather-Jones选择器和最小二乘交叉验证，尤其在小样本和异质样本上增益最大。实验表明，该选择器能跨不同密度结构强泛化，训练后可直接用于未知密度的有限样本。",
+        "conclusion": "将带宽选择视为从样本特征到带宽的可学习映射，并在对数评分下跨任务摊销训练，能够替代经典解析或逐样本优化选择器。该方法兼具广泛适用性和强经验性能，适用于需要将有限样本或集合转换为连续概率密度的各类场景。",
+        "key_details": "关键细节包括：特征仅用五个低维统计量，MLP结构简单且用softplus保证正带宽；有界支撑公式避免远端低密度区稀有样本过度影响对数评分目标，截断区间可由物理边界或数据驱动方式指定；区间标准化通过仿射变换使单个参考区间训练的选择器可迁移至任意有界区间，带宽按a=h_[-1,1]*a缩放；训练任务分布采用随机高斯混合，利用其L1逼近性质生成多样化密度；对数评分以2为底，评分差以比特解释。局限在于当前为实现简单未优化网络架构，且有界支撑需预先确定工作区间；方法虽以高斯核展示，但核心思想可扩展至其他核族。"
+      },
+      "affiliations": [
+        "The London School of Economics and Political Science",
+        "East China University of Science and Technology",
+        "Durham University"
+      ],
+      "affiliations_text": "The London School of Economics and Political Science, East China University of Science and Technology, Durham University",
+      "score": 4.100887545122431,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.20442v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820442v1-stored-in-optimizer-state-valued-by-later-training-a-causal-account-of-subliminal-trait-transfer",
+      "source": "arxiv",
+      "title": "Stored in Optimizer State, Valued by Later Training: A Causal Account of Subliminal Trait Transfer",
+      "authors": [
+        "Qinyang Xu"
+      ],
+      "authors_text": "Qinyang Xu",
+      "abstract": "Subliminal trait transfer allows a student model to acquire behavioral dispositions from teacher-generated data in which the trait is not semantically expressed. Recent work explains how such signals enter gradients, but not how they survive source removal or acquire different signs under later training. We treat parameters and optimizer moments as a single trainer state and derive an exact transport-valuation identity separating observer-independent propagation of the source perturbation from the value assigned by a future continuation and behavioral readout. State surgery identifies the first moment as a causal carrier. Transplanting it alone leaves parameters, hidden states, and outputs unchanged at the cut, yet source-free updates generate growing parameter and hidden-state differences; transplanting parameters with the first moment recovers the terminal behavioral response. Sending the same source-induced difference through matched futures produces negative, near-zero, and positive Qwen effects (-0.658, +0.008, and +0.658 seed means). This ordering recurs in all 12 Llama-3.2-1B seeds after eight updates, while state-difference norms remain nearly equal across routes. Both contrasts grow in every paired seed when the continuation extends to sixteen updates. A full-horizon costate predicts all 42 Qwen route-mean signs and all 21 resolved Llama ordinary-route signs. Observer-independent transport also replicates across Qwen, SmolLM2, and Llama, while the complete-state recurrence predicts physical, hidden, and fixed-head responses in non-LoRA MNIST systems, including CNNs trained with AdamW and momentum SGD. Together, these results identify a two-stage mechanism for subliminal trait transfer: optimizer state transports the source perturbation, and later training determines its behavioral value.",
+      "url": "http://arxiv.org/abs/2608.20442v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20442v1",
+      "tldr": "Subliminal trait transfer is causally explained by a two-stage mechanism in which source perturbations are carried through the optimizer's first moment and only later assigned their behavioral value by subsequent training.",
+      "detailed_reading": {
+        "motivation": "已有工作只能解释亚阈值特质如何进入梯度，却无法解释在教师数据源被移除后该信号如何继续存留，以及后续训练中为何会获得不同符号。本文从因果角度研究亚阈值特质迁移，将优化器状态视为关键载体，并分离源扰动的传播过程与后续训练对行为价值的赋值过程。",
+        "method": "将模型参数与优化器动量（一阶矩等）共同视为一个训练器状态，推导出精确的传输-估值恒等式：源扰动以观察者无关的方式传播，未来继续训练与行为读出为其赋值。采用状态手术：在切割点仅移植一阶矩，保持参数、隐藏状态和输出不变，再进行无源更新；同时对比移植参数与一阶矩的完整状态。通过匹配的未来轨迹将同一源差异送入不同继续训练路径，并用全时域共态预测最终行为效应的符号。实验在Qwen、SmolLM2、Llama-3.2-1B以及非LoRA MNIST CNN（AdamW与动量SGD）上进行。",
+        "result": "同一源诱导差异经三种匹配未来路径分别产生负、近零和正的Qwen行为效应（种子均值 -0.658、+0.008、+0.658），该排序在全部12个Llama-3.2-1B种子中于8次更新后复现，且各路径状态差异范数几乎相等；当延续至16次更新时两个对比在每个配对种子中均增长。全时域共态预测了全部42个Qwen路径均值的符号以及全部21个已解析的Llama普通路径符号。传输机制在Qwen、SmolLM2和Llama间复现，完整状态递推也预测了MNIST CNN的物理、隐藏与固定头响应。",
+        "conclusion": "亚阈值特质迁移由两阶段机制构成：优化器状态（尤其一阶矩）负责携带并传播源扰动，而后续训练决定该扰动的行为价值与符号。该因果解释统一了参数与优化器状态，为理解和控制隐式行为特质迁移提供了新视角。",
+        "key_details": "关键点包括：状态手术中单独移植一阶矩在切割点不改变参数、隐藏状态与输出，但无源更新后产生持续增大的参数和隐藏状态差异；同时移植参数与一阶矩可恢复终端行为响应。不同未来路径的状态差异范数接近，说明符号反转并非来自扰动幅度差异，而是后续训练赋予的价值。方法涉及LoRA与非LoRA设置、AdamW和动量SGD优化器，并在多模型多种子下验证。摘要未提供完整超参与损失函数细节，也未报告计算复杂度或明确局限性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.018370915511723,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.20367v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820367v1-a-hybrid-edge-cloud-digital-twin-for-welfare-constrained-control-in-poultry-production",
+      "source": "arxiv",
+      "title": "A Hybrid Edge Cloud Digital Twin for Welfare-Constrained Control in Poultry Production",
+      "authors": [
+        "Suresh Neethirajan"
+      ],
+      "authors_text": "Suresh Neethirajan",
+      "abstract": "Poultry production operates under tightly coupled environmental and biological dynamics, yet commercial climate control remains largely heuristic, limiting welfare assurance and operational efficiency. We introduce an edge-cloud digital twin framework for real-time, welfare-constrained environmental control in poultry facilities. The framework integrates distributed sensing, on-device state estimation, a hybrid physics-data model, and model predictive control to enable anticipatory and adaptive management under practical farm constraints. A grey-box thermodynamic and mass-balance formulation is augmented with a learned residual that captures unmodeled biological variability, including activity-dependent metabolic heat. This hybrid model is embedded within a state-space representation for real-time estimation and control at the edge, while cloud coordination supports cross-farm learning and long-horizon optimization. Bandwidth-aware processing and asynchronous synchronization enable deployment in connectivity-limited environments. Evaluation in a high-fidelity broiler production testbed demonstrates substantial gains over rule-based control and physics-only modeling. Temperature prediction error is reduced from 1.8 degrees Celsius to 0.4 degrees Celsius, ammonia constraint violations decrease by 90 percent, and communication requirements are lowered approximately 30-fold through edge-first processing. A Domain Transfer Score of 0.92 further indicates strong robustness across facility conditions. These results show that physically grounded digital twins, coupled with real-time control, enable scalable and welfare-aware management of biological production systems.",
+      "url": "http://arxiv.org/abs/2608.20367v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20367v1",
+      "tldr": "This paper proposes a hybrid edge-cloud digital twin framework that integrates physics-based modeling, learned residuals, and model predictive control for real-time welfare-constrained environmental control in poultry barns, significantly improving prediction accuracy, reducing ammonia violations, and cutting communication overhead.",
+      "detailed_reading": {
+        "motivation": "商业禽舍环境控制仍以启发式规则为主，依赖人工与被动调节，难以应对畜禽生物过程与外界环境强耦合、高度时变带来的福利风险；同时农村地区网络连接受限，云中心式监控与闭环控制难以落地。现有物理仿真计算量大、数据驱动方法缺乏可解释性与跨场泛化能力，IoT平台又缺乏控制理论基础。因此需要一种将物理一致性、实时控制与分布式边缘-云架构结合的数字孪生框架，在保证动物福利硬约束的前提下实现规模化、可部署的环境管理。",
+        "method": "提出一种面向家禽生产的边缘-云数字孪生框架，包含物理感知层、边缘计算层、数字孪生核心层、监督控制层和云分析治理层。物理层通过分布式温湿度、CO2、氨气、视频、音频、称重及垫料水分传感器采集数据，以Modbus TCP、OPC UA、MQTT等协议接入；边缘层利用扩展卡尔曼滤波融合多模态传感流并估计不可观测状态，如代谢产热，同时进行视频活动指数、音频呼吸异常等特征提取。数字孪生核心采用灰盒热力学电阻-电容网络与质量平衡方程构建状态空间模型，并串联一个学习残差模块补偿未建模生物变异性（如活动依赖性代谢热、气流不均匀性、传感器漂移）；残差网络以物理模型预测与数据偏差的加权目标训练，同时惩罚违反能量/质量守恒的预测。控制层在边缘侧部署模型预测控制，以生理热中性区和空气质量限值作为硬约束，目标函数最小化输出偏离参考轨迹与控制能耗，预测时域为6-12步（30-60分钟），求解有限时域优化问题；云端负责跨农场学习、长期优化、模型再训练和法规日志。系统采用带宽感知的卸载决策与异步同步，高频数据仅在边缘处理，仅向云发送聚合统计或异常事件，保证弱连接环境下实时控制自主性。",
+        "result": "在高保真肉鸡生产数值试验台上，该框架相较规则控制和纯物理模型取得显著提升：温度预测误差从1.8°C降至0.4°C，氨气约束违规减少90%，通信需求因边缘优先处理降低约30倍，领域迁移分数达0.92，表明跨设施条件具有较强的鲁棒性。结果验证了混合物理-数据建模与MPC结合相比基线方法在预测精度、福利约束满足和部署可行性上的优势。",
+        "conclusion": "研究表明，将物理可解释的灰盒模型与数据驱动残差学习、模型预测控制及边缘-云协同调度集成于数字孪生框架，能够在生物生产系统中实现可扩展且福利感知的自主环境管理。该方法既保持了热力学和质量守恒的一致性，又通过边缘计算适应农村弱连接环境，为商业家禽养殖从启发式管理走向闭环优化提供了可行路径。",
+        "key_details": "关键实现细节包括：灰盒RC热模型与质量平衡方程构成连续时间状态空间表示，状态向量为[T_air, T_wall, c_CO2, c_NH3, c_humidity, m_bird, θ_bio]；系统矩阵可由递归最小二乘在调试阶段标定。氨气浓度硬约束设为<20 ppm，温度约束为18-25°C，相对湿度≤90%，执行器约束包括风机0-100%、加热器0-50 kW；MPC权重矩阵Q/R可调。混合模型采用串行结构f_total = f_phys + f_ML(φ_k)，训练损失兼顾数据失配与能量/质量守恒违反惩罚，从而保障学习残差的物理合理性。边缘采样率为1-5 Hz，视频帧等中频数据本地处理、事件触发上云；模型与ISO 23247及Asset Administration Shell语义兼容。局限性方面，当前基于高保真数值试验台验证，尚未在实际农场充分部署；残差学习依赖站点数据积累，跨场应用虽有0.92迁移分数但仍需校准；多节点RC扩展、遗留设备协议转换和4G/卫星链路的异步同步是实际部署中的关键约束。"
+      },
+      "affiliations": [
+        "Dalhousie University"
+      ],
+      "affiliations_text": "Dalhousie University",
+      "score": 3.7854124643828433,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.20427v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/25/260820427v1-bf1-a-causal-dyadic-sparse-attention-retrofit-for-efficient-long-context-transformers",
+      "source": "arxiv",
+      "title": "BF1: A Causal Dyadic Sparse-Attention Retrofit for Efficient Long-Context Transformers",
+      "authors": [
+        "Hina Dixit"
+      ],
+      "authors_text": "Hina Dixit",
+      "abstract": "Dense causal attention remains expensive at long context even when implemented with highly optimized exact kernels. We study BF1, a deterministic block-aligned dyadic sparse-attention route that combines a small exact local neighborhood, a global first block, and logarithmically spaced historical blocks. The route is related to prior log-sparse and dilated attention patterns; our contribution is a correctness-gated pretrained-model retrofit, a matched topology-control study, and a systems characterization that connects per-layer sparsity to whole-model latency. For fixed block width, every converted layer uses O(n log n) selected token interactions and has O(log n) graph communication depth. On an NVIDIA RTX PRO 6000 Blackwell GPU, an optimized BF16 implementation crosses dense attention between 2K and 4K tokens and reaches a 10.91x per-layer prefill speedup at 32K. Retrofitting eight of 28 Qwen3-0.6B attention layers lowers warm whole-model time to first token by 7.7%, 11.3%, and 15.3% at 8K, 16K, and 32K, respectively, while the remaining dense layers keep the complete model asymptotically quadratic. Under a matched 1,000-step, 16.384M-token adaptation protocol, BF1 ranks first across three training seeds: mean report perplexity is 1.68639 versus 1.69154 for a matched static-random nonlocal graph, 1.69258 for dense continued training, and 1.81505 for equal-budget local sliding. At seed 1234, the packed-report paired interval places Dense-CT 0.3169-0.4055% above BF1 and static-random graph 17 0.2441-0.3642% above BF1. These results establish BF1 as a reproducible sparse operator and selective retrofit primitive with real long-context systems value. This paper evaluates numerical correctness, selected-interaction scaling, kernel performance, partial-model inference, and matched next-token language modeling.",
+      "url": "http://arxiv.org/abs/2608.20427v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20427v1",
+      "tldr": "BF1 is a deterministic dyadic sparse-attention operator that, when retrofitted into pretrained transformers, achieves O(n log n) interactions, significant long-context speedups (up to 10.91× per-layer prefill and 15.3% TTFT reduction), and better matched language-modeling perplexity than dense or alternative sparse baselines.",
+      "detailed_reading": {
+        "motivation": "密集因果注意力即使在高度优化的精确内核下，在长上下文下仍然昂贵。本文研究BF1，一种确定性的块对齐二进稀疏注意力路线，旨在通过结合小的精确局部邻域、全局第一块和对数间隔历史块，实现高效长上下文Transformer，并通过正确性门控的预训练模型改造和系统特性研究，验证其实际系统价值。",
+        "method": "BF1将输入序列分割为宽度b=64的块；对每个查询块，选择自身块（因果三角）、两个局部前驱块、全局第一块以及从4块开始的二进偏移历史块，去除无效与重复索引，形成固定、因果、块对齐的稀疏图。每个转换层使用O(n log n)选中的token交互和O(log n)通信深度。实验以Qwen3-0.6B-Base为初始模型，冻结dense教师，选取8个中间注意力层进行改造；四个训练臂（BF1、静态随机图17、等预算局部滑动、Dense-CT）使用相同的50,333,696个可训练参数、相同token顺序、目标函数（next-token loss+教师logit蒸馏+隐藏状态匹配）、优化器调度和报告包。训练采用49,000行ORCA风格问答语料，按内容哈希分割，每个臂在1,000步内消耗16.384M训练token，检查点按最小验证NLL选择。推理时预填充通过FlexAttention实现自定义块掩码，BF16精度，批量1；解码采用paged-GQA后端处理选中的页。",
+        "result": "在NVIDIA RTX PRO 6000 Blackwell GPU上，优化后的BF16实现于2K-4K间超越dense，32K时达到每层prefill 10.91×加速和26.98×交互数减少。将Qwen3-0.6B的8/28层改造后，warm TTFT在8K、16K、32K分别降低7.7%、11.3%、15.3%（32K从589.1ms降至499.1ms）。在匹配的1,000步16.384M token适应协议中，BF1在三个训练种子下均排名第一：平均报告困惑度1.68639，优于静态随机图17（1.69154）、Dense-CT（1.69258）和等预算局部滑动（1.81505）。种子1234的配对95%区间显示Dense-CT比BF1高0.3169-0.4055%，静态随机高0.2441-0.3642%。通信深度方面，32K时BF1的最大最短路径为8跳，静态随机为14跳，滑动为59跳。",
+        "conclusion": "BF1被确立为一种可复现的稀疏算子和选择性改造原语，具有实际的长上下文系统价值：在per-layer和部分模型转换下提供显著的常数因子加速，并在匹配的语言建模适应中一致优于多个对照。然而，由于剩余20层保持全局dense，整体模型仍为O(n^2)复杂度；BF1不声称完全亚二次模型、压缩总KV存储或通用能力保持。",
+        "key_details": "关键设计细节包括：块宽b=64，局部前驱块数为2，二进偏移从4块开始，不使用尺度依赖的分数偏置。正确性门控要求通过未来token隔离、BF16与物化路由掩码参考一致性、部分末块覆盖、dense路径等价等检查；在长度128、257、512下最大绝对误差0.00390625，平均误差低于7.1e-5。性能协议为batch 1、5次预热、30次重复、取两个相反顺序的中位数。decode方面，paged-GQA后端执行精确页注意力，但计划成本（100-121微秒/令牌）主导低批次路径；batch 32时32K/64K有效加速为2.67×/3.05×，未声称低批次端到端解码优势。训练重复三个种子（1234, 2026, 3407），静态随机图17固定种子以隔离优化器变异。局限性：评估仅覆盖数值正确性、系统缩放和匹配的next-token困惑度，不报告检索、聚合、状态跟踪等能力。"
+      },
+      "affiliations": [
+        "Decompute Inc."
+      ],
+      "affiliations_text": "Decompute Inc.",
+      "score": 3.7303666057543423,
+      "score_text": "3.7"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.20423v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820423v1-from-thermal-preference-prediction-to-adaptive-thermal-intervention-a-reinforcement-learning-approach-using-physiological-and-environmental-sensing",
+      "source": "arxiv",
+      "title": "From Thermal Preference Prediction to Adaptive Thermal Intervention: A Reinforcement Learning Approach Using Physiological and Environmental Sensing",
+      "authors": [
+        "Isibor Kennedy Ihianle",
+        "Emmanuel Manu",
+        "Ehsan Asnaashari",
+        "Mojgan Jadidi",
+        "Pedro Machado",
+        "Amrit Sagoo",
+        "Ahmad Lotfi"
+      ],
+      "authors_text": "Isibor Kennedy Ihianle, Emmanuel Manu, Ehsan Asnaashari, Mojgan Jadidi, Pedro Machado, Amrit Sagoo, Ahmad Lotfi",
+      "abstract": "Personalised thermal comfort is essential for occupant wellbeing and for the development of more responsive building-control strategies, yet conventional Heating, Ventilation, and Air Conditioning (HVAC) systems rely on static setpoints and population-level comfort models that fail to capture individual physiological variability. This paper presents a two-stage personalised thermal comfort approach integrating multimodal physiological and environmental sensing with reinforcement learning-based decision-making.",
+      "url": "http://arxiv.org/abs/2608.20423v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20423v1",
+      "tldr": "The paper proposes a two-stage personalized thermal comfort system that combines physiological and environmental sensing with ensemble learning–based Comfort Oracles and reinforcement learning controllers to generate adaptive, occupant-specific thermal interventions that outperform conventional HVAC control.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nottingham Trent University",
+        "York University"
+      ],
+      "affiliations_text": "Nottingham Trent University, York University",
+      "score": 3.627716401182464,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.20545v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820545v1-aoi-oriented-globally-optimal-joint-source-and-update-scheduling-in-fluid-antenna-systems",
+      "source": "arxiv",
+      "title": "AoI-Oriented Globally Optimal Joint Source and Update Scheduling in Fluid Antenna Systems",
+      "authors": [
+        "Xiaopeng Yuan",
+        "Paul Zheng",
+        "Anke Schmeink"
+      ],
+      "authors_text": "Xiaopeng Yuan, Paul Zheng, Anke Schmeink",
+      "abstract": "As a promising technique, fluid antennas enable adaptive radio environment management and interference mitigation through reconfigurable fluid port selections. In this work, to explore the benefits of fluid antennas for data freshness enhancement, we consider a fluid-antenna assisted status update system supported by multiple source nodes monitoring the same environmental status. We assume a subset of the source nodes are activated to report status updates with different periods. Each user is assigned to one source node and equipped with an fluid antenna to adaptively enhance the channel gain to assigned source node while mitigating interference from other activated source nodes. With maximal signal-to-interference-noise ratio (SINR)-based fluid port selection at all users, we formulate an optimization problem to minimize the maximum average age of information (AoI), where source node activation and assignment, i.e., source scheduling, is jointly optimized with the update periods of all activated source nodes. To optimally solve the resulting mixed-integer nonlinear problem, we first consider given source scheduling decision and apply performance achievability analysis. Aided by fixpoint theory, we propose an efficient bisection algorithm for optimal update scheduling. Based on these characterizations, we further propose a filtering algorithm which efficiently eliminates all non-optimal source scheduling decisions. The globally optimal joint solution is then obtained by combining the resulting optimal source scheduling with its corresponding optimal update scheduling. Numerical results validate the optimality of proposed solution and demonstrate the effectiveness of fluid antennas in enhancing data freshness.",
+      "url": "http://arxiv.org/abs/2608.20545v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20545v1",
+      "tldr": "TLDR: This paper proposes a globally optimal joint source and update scheduling algorithm using fixpoint theory and filtering to minimize the maximum average age of information (AoI) in a fluid-antenna-assisted multi-source status update system.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TU Dresden",
+        "RWTH Aachen University"
+      ],
+      "affiliations_text": "TU Dresden, RWTH Aachen University",
+      "score": 3.6146853503345233,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.20478v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820478v1-endolift-language-disambiguated-latent-conditioned-rectified-flow-for-bidirectional-endoscopic-control",
+      "source": "arxiv",
+      "title": "EndoLIFT: Language-Disambiguated Latent-Conditioned Rectified Flow for Bidirectional Endoscopic Control",
+      "authors": [
+        "Chi Kit Ng",
+        "Yidong Zhang",
+        "Lui Siu Hing",
+        "Jinsong Lin",
+        "Tianchun Wu",
+        "Ho Yin Chim",
+        "Zhiqing Tang",
+        "Tao Yang",
+        "Huxin Gao",
+        "Trevor Yeung",
+        "Raymond Shing-Yan Tang",
+        "Hongliang Ren"
+      ],
+      "authors_text": "Chi Kit Ng, Yidong Zhang, Lui Siu Hing, Jinsong Lin, Tianchun Wu, Ho Yin Chim, Zhiqing Tang, Tao Yang, Huxin Gao, Trevor Yeung, Raymond Shing-Yan Tang, Hongliang Ren",
+      "abstract": "Routine gastrointestinal endoscopy is intrinsically bidirectional: the instrument is advanced to reach target anatomy and later withdrawn or retroflexed for inspection, while an external cue may require earlier reversal. When the requested phase changes before the visual scene does, nearly identical observations can require opposite axial actions. We identify and formalize this ambiguity in bidirectional endoscopic control as intent aliasing. We propose EndoLIFT (Endoscopic Language-Instruction Flow with Trajectory Latents), a vision-language-action policy that combines explicit language-based intent conditioning with a latent-conditioned rectified-flow action expert. The policy receives RGB, a language instruction, and the previous-action state; a 32-D variational trajectory latent stochastically conditions continuous action-chunk generation. Controlled same-observation instruction swaps establish that language selects the axial mode, independently of whether the trajectory latent is present. Relative to the matched model without latent conditioning, EndoLIFT improves navigation-direction accuracy by 11.1 percentage points and reduces wrong-direction advance by 83\\%. An architecture-controlled 1-bit mode-flag reference exhibits weaker canonical-anchor switching, while EndoLIFT retains 82.8\\% intent-following accuracy across 44 held-out linguistic variants. In closed-loop evaluation, EndoLIFT improves overall success by 30 percentage points over EndoLIFT w/o VTL on both the seen colon phantom and the unseen lung and stomach phantoms, and completes 10/10 ex-vivo porcine-trachea trials. These results separate language-based intent selection from the trajectory latent's contribution to directional correctness and robust retraction.",
+      "url": "http://arxiv.org/abs/2608.20478v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20478v1",
+      "tldr": "EndoLIFT introduces a language-disambiguated, latent-conditioned rectified-flow policy that resolves intent aliasing in bidirectional endoscopic control, enabling the same visual scene to trigger correct forward or retraction actions and improving navigation-direction accuracy and closed-loop success across seen and unseen anatomies.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sun Yat-sen University",
+        "The Chinese University of Hong Kong"
+      ],
+      "affiliations_text": "Sun Yat-sen University, The Chinese University of Hong Kong",
+      "score": 3.568447114308828,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.20480v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820480v1-when-clean-data-hurts-learning-with-monotone-corruptions-beyond-binary-classification",
+      "source": "arxiv",
+      "title": "When Clean Data Hurts: Learning with Monotone Corruptions Beyond Binary Classification",
+      "authors": [
+        "Julian Asilis",
+        "Shaddin Dughmi",
+        "Chirag Pabbaraju"
+      ],
+      "authors_text": "Julian Asilis, Shaddin Dughmi, Chirag Pabbaraju",
+      "abstract": "Optimal learners are tailored to exploit the i.i.d.\\ data assumption underlying the classic PAC model. What if an i.i.d.\\ training sample were corrupted with correctly labeled examples drawn from an otherwise unrelated, even adversarial source? This model of learning with monotone adversarial corruptions was recently introduced by Larsen et al. (2026), who demonstrated that all known optimal binary learners suffer increased error rates in this setting, from $O(d / n)$ in the PAC model to $Ω(d \\log(n / d) / n)$ under monotone corruption. Mehrotra (2026) proved this logarithmic factor to be necessary for binary classification, but left open the consequences of corruption for more general learning settings, such as multiclass classification and partial binary concept classes.\n  As our primary result, we demonstrate that monotone adversaries are frighteningly more powerful in each of these settings. We exhibit a learnable multiclass problem, of DS dimension only 2, that becomes altogether unlearnable under a monotone adversary, and show an analogous result for partial binary concept classes. These results are achieved by an adaptive adversary permitted to view the original i.i.d.\\ training set $S$ and to insert $b < \\infty$ corrupted datapoints into $S$. In the multiclass example, the adversary need only insert a linear number $b = |S| = n$ of datapoints.\n  We complement these impossibility results by proving that every class remains learnable when the number of adaptive additions is $o(n)$, which our previous multiclass lower bound proves to be tight. We further observe that the classic multiclass error rate of $O(d_{\\mathrm{DS}} / n)$ remains achievable against adaptive adversaries restricted to a known constant budget $b = O(1)$, against semi-adaptive adversaries viewing only a $p$-fraction of $S$ for $p \\in (0, 1)$, and against oblivious adversaries that cannot view $S$.",
+      "url": "http://arxiv.org/abs/2608.20480v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20480v1",
+      "tldr": "Under monotone adversarial corruptions, adaptive insertion of correctly-labeled but arbitrary data can completely destroy learnability in multiclass and partial binary classification—even for classes of low combinatorial dimension—while sublinear or oblivious adversaries leave learning essentially unaffected.",
+      "detailed_reading": null,
+      "affiliations": [
+        "USC",
+        "Stanford University"
+      ],
+      "affiliations_text": "USC, Stanford University",
+      "score": 3.4598660666067254,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.20433v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820433v1-humanoid-musical-robots-as-experimental-interfaces-for-music-evoked-emotion",
+      "source": "arxiv",
+      "title": "Humanoid Musical Robots as Experimental Interfaces for Music-Evoked Emotion",
+      "authors": [
+        "Vincent K. M. Cheung",
+        "Jia-Yeu Lin"
+      ],
+      "authors_text": "Vincent K. M. Cheung, Jia-Yeu Lin",
+      "abstract": "Advances in technology have led to increasingly sophisticated musical humanoid robots. However, their use has largely been limited to performance and related research in human-robot interaction. In this position paper, we propose a novel perspective: musical humanoid robots as experimental interfaces for investigating music-evoked emotions. We argue that current research is constrained by paradigms relying on pre-recorded auditory stimuli, which fail to capture the multimodal, embodied, and interactive nature of real-world musical experience. Building on existing theories of music cognition and emotion, we identify mechanisms that require controlled manipulation of both acoustic and non-acoustic variables. We show that humanoid robots are well-suited as they enable parametric control of performance variables, reproducibility across trials, and the decoupling and recombination of auditory, visual, and interactive components. We illustrate the technical feasibility of this perspective through a case study of the WAseda Saxophonist Robot 5 (WAS-5), demonstrating reproducible control of acoustic and interaction variables that are prerequisites for future music-emotion experiments. Our work positions musical humanoid robots as a methodological platform that enables future controlled investigations of music-evoked emotions.",
+      "url": "http://arxiv.org/abs/2608.20433v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20433v1",
+      "tldr": "This paper proposes that humanoid musical robots, demonstrated via the WAS-5 saxophonist robot, can serve as experimental interfaces to systematically investigate music-evoked emotions by enabling controlled, reproducible, and multimodal manipulation of acoustic and non-acoustic performance variables.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Waseda University",
+        "Sony Computer Science Laboratories"
+      ],
+      "affiliations_text": "Waseda University, Sony Computer Science Laboratories",
+      "score": 3.2639205211227025,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.20546v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820546v1-koala-gripper-co-designing-robotic-grippers-and-data-capture-devices-for-scaling-dexterous-manipulation-learning",
+      "source": "arxiv",
+      "title": "Koala Gripper: Co-designing Robotic Grippers and Data-Capture Devices for Scaling Dexterous Manipulation Learning",
+      "authors": [
+        "Amar Hajj-Ahmad",
+        "Zubin Kremer Guha",
+        "Tim Fofonoff",
+        "Zhi Ern Teoh",
+        "Ciarán T. O'Neill",
+        "Ben Thacher",
+        "Igor Fala",
+        "Vidullan Surendran",
+        "Murphy Wonsick",
+        "Peter Whitney",
+        "David Watkins"
+      ],
+      "authors_text": "Amar Hajj-Ahmad, Zubin Kremer Guha, Tim Fofonoff, Zhi Ern Teoh, Ciarán T. O'Neill, Ben Thacher, Igor Fala, Vidullan Surendran, Murphy Wonsick, Peter Whitney, David Watkins",
+      "abstract": "As the demand for larger manipulation datasets grows, handheld robotic gripper data collection and the associated gripper designs become more vital. Current data collection device designs trend towards matching the morphologies of existing robotic grippers, sacrificing ergonomics and manipulation performance. In this paper, we propose a co-design framework that guides the simultaneous development of both data collection and robotic execution devices by weaving both platform constraints into the design process. Through this workflow, we present the Koala Gripper system, a data capture device and robotic gripper platform that improves dexterity and grasp capability compared to parallel jaw grippers while preserving scalability and ease-of-use. The design introduces a novel force-optimized finger/trigger linkage mechanism with directional reflected mass characteristics, a unique monolithic dual-thumb, and user-centered ergonomic design. The design's actuated robotic fingers are backdrivable, with effective mass on the order of tens of grams. We show that these grippers are capable of secure grasps over a wide range of objects, forceful tool use, and precise singulation. We further validate the platform by deploying it with an end-to-end data collection and policy execution pipeline that highlights its capabilities through learning from demonstration. More information available at http://koalagripper.rai-inst.com",
+      "url": "http://arxiv.org/abs/2608.20546v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20546v1",
+      "tldr": "The Koala Gripper paper introduces a co-design framework for simultaneously developing handheld data-capture devices and robotic grippers, yielding a scalable, ergonomic, underactuated linkage-based gripper system with a dual-thumb that improves dexterous manipulation and is validated through imitation learning.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.254041518697744,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.20516v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820516v1-when-graph-jepa-learns-the-wrong-thing-diagnosing-and-repairing-category-conditional-collapse",
+      "source": "arxiv",
+      "title": "When Graph-JEPA Learns the Wrong Thing: Diagnosing and Repairing Category-Conditional Collapse",
+      "authors": [
+        "Gollam Rabby",
+        "Sören Auer"
+      ],
+      "authors_text": "Gollam Rabby, Sören Auer",
+      "abstract": "Joint-embedding predictive architectures are selected almost universally by linear probing and effective rank. We report a case where both read healthily while the representation carries zero usable instance information. We repair it, and a second failure appears: the repaired metric saturates on a target carrying no structural information. Our corpus is a scientific-reasoning graph over 57,903 articles, each a subgraph. A Graph-JEPA predicts one masked aspect from a subgraph's remaining aspects, attaining linear-probe accuracy 0.871 and effective rank 18-47, yet retrieval recovers 0.00 of 14.4 bits (MRR 1.9e-4 vs chance 1.99e-4, p=0.98). Three upper bounds on the same pool and code recover nearly everything (+14.28, +14.34, +14.22 bits), ruling out corpus, masking, pool, and metric as causes. We trace this to variance allocation - frozen inputs place 86.05% of variance on subgraph identity and 0.40% on aspect identity, while trained latents place 0.39% and 99.61%. This is a property of the objective's optimum: the degenerate solution is a global minimum of the coupled predictor/EMA-target objective, present already at init. A repaired configuration reaches 14.377 of 14.379 bits, above the 13.865-bit oracle; reverting the loss to regression drops it to 0.307 bits, confirming it. Yet the repair licenses nothing about reasoning: the target is reducible, since intra-subgraph edges are a deterministic function of node census. The oracle reaches 96.4% of the ceiling, and our largest effect is the learning-rate schedule, not architecture. Bits and a reasoning probe show no relation across ten cells. A data-derived target fails a quality gate - 25.96% of nodes are duplicate placeholders, and the rest is more generic than supporting evidence. Rank, probes, and metrics can all saturate on an unsupportive evaluation. We release a harness with a reducibility audit and target gate.",
+      "url": "http://arxiv.org/abs/2608.20516v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20516v1",
+      "tldr": "Graph-JEPA representations can pass standard linear-probe and effective-rank checks while carrying zero usable instance information—a category-conditional collapse that is a global minimum of the objective—and although repairable to recover the target's bits, standard metrics still saturate on reducible or low-quality targets, motivating a released harness with reducibility and target-gate audits.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.2126365529572203,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.20532v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820532v1-learning-exact-nvidia-sass-encoders-with-mathbbf2-linear-algebra",
+      "source": "arxiv",
+      "title": "Learning Exact NVIDIA SASS Encoders with $\\mathbb{F}_2$ Linear Algebra",
+      "authors": [
+        "Jiading Gai"
+      ],
+      "authors_text": "Jiading Gai",
+      "abstract": "NVIDIA provides a SASS disassembler but no public SASS assembler for recent data-center GPUs, limiting controlled machine-code rewriting. We present F2Asm, which learns exact 128-bit SASS encoders from paired disassembly and original CUBIN instruction words. To our knowledge, F2Asm is the first system to learn SASS instruction encoders as vector-valued affine maps over F2 and the first open-source NVIDIA SASS assembler to support Rubin SM107. F2Asm uses Gaussian elimination over F2 to incrementally build a compact basis, detect inconsistencies, and reject inputs outside the learned span. F2Asm separates target-specific control bits, relocation rules, and CUBIN metadata from its learning algorithm. We train encoders for Hopper SM90/SM90a, Blackwell SM100, and Rubin SM107 using 3,225 CUBINs from pinned NVIDIA and third-party production libraries, CUDA 13.3 packages, and CUDA 13.4 Developer Preview archives. In round-trip tests, F2Asm reassembles the disassembled SASS for each CUBIN, and all compared executable text sections match the originals exactly.",
+      "url": "http://arxiv.org/abs/2608.20532v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20532v1",
+      "tldr": "F2Asm learns exact 128-bit NVIDIA SASS instruction encoders as affine maps over 𝔽₂ using incremental Gaussian elimination, enabling byte-exact reassembly of CUBINs across Hopper, Blackwell, and Rubin GPUs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.2126062219035174,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.20406v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820406v1-machine-learning-and-arima-model-averaging-for-adaptive-public-health-forecasting-comparative-evaluation-and-an-ontario-covid-19-case-study",
+      "source": "arxiv",
+      "title": "Machine Learning and ARIMA Model Averaging for Adaptive Public Health Forecasting: Comparative Evaluation and an Ontario COVID-19 Case Study",
+      "authors": [
+        "Yushu Zou",
+        "Ye Li",
+        "Johra Moosa",
+        "Martin Grunnill",
+        "Samir N. Patel",
+        "Venkata R. Duvvuri"
+      ],
+      "authors_text": "Yushu Zou, Ye Li, Johra Moosa, Martin Grunnill, Samir N. Patel, Venkata R. Duvvuri",
+      "abstract": "Public health forecasts must respond to abrupt changes in surveillance data without over-extrapolating noise, reporting artifacts, or temporary trends. We evaluated autoregressive integrated moving average (ARIMA), random forest, and extreme gradient boosting (XGBoost) models using 190 weekly observations of publicly available Ontario COVID-19 case counts from January 2020 to October 2023. Rolling-origin time-series cross-validation preserved temporal order during model tuning and evaluation. Performance was assessed across three operating dimensions: responsiveness following selected turning points, forecast horizons of one to six weeks, and the amount of historical training data. We also developed Machine Learning and ARIMA Model Averaging (MLAMA), a non-negative performance-weighted ensemble with weights that vary by forecast horizon and responsiveness setting. Retrospective comparisons showed that ARIMA adapted rapidly after turning points but its normalized error increased at longer horizons. Random forest and XGBoost were less responsive initially but maintained more stable normalized error over longer horizons. For two-week forecasts at the end of the study period, training on the most recent data outperformed using longer historical periods, particularly for XGBoost. MLAMA achieved the lowest normalized mean absolute percentage error across most forecast horizons and ranked among the best-performing methods across responsiveness settings. These findings support selecting forecasting models according to operating conditions rather than relying on a single universally preferred approach. MLAMA provides a practical framework for combining complementary statistical and machine-learning forecasts. The accompanying Python package is currently maintained in a private repository while software validation and reproducibility testing are completed.",
+      "url": "http://arxiv.org/abs/2608.20406v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20406v1",
+      "tldr": "This study compares ARIMA, random forest, and XGBoost for adaptive public health forecasting across responsiveness, forecast horizon, and training data depth, and introduces MLAMA, a performance-weighted ensemble that achieves the lowest normalized error and supports condition-specific model selection for operational COVID-19 forecasting.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Toronto",
+        "Public Health Ontario",
+        "York University"
+      ],
+      "affiliations_text": "University of Toronto, Public Health Ontario, York University",
+      "score": 3.205794732613999,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.20383v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820383v1-infrared-hotspot-guided-early-warning-of-lithium-ion-battery-thermal-runaway-under-mechanical-abuse",
+      "source": "arxiv",
+      "title": "Infrared Hotspot-Guided Early Warning of Lithium-Ion Battery Thermal Runaway Under Mechanical Abuse",
+      "authors": [
+        "Syed Sajid Ullah",
+        "Salman Khan",
+        "Muhammad Zunair Zamir"
+      ],
+      "authors_text": "Syed Sajid Ullah, Salman Khan, Muhammad Zunair Zamir",
+      "abstract": "Mechanical abuse can trigger thermal runaway (TR) in lithium-ion batteries through localized heat generation before sensor signals become decisive. This paper proposes a two-stage early-warning approach that estimates localized thermal instability from infrared hotspot dynamics and then fuses this instability score with mechanical, electrical, thermal, and image-intensity features for a 20-frame warning horizon. Evaluation uses repeated experiment-wise three-fold validation, with out-of-fold Stage-I scores during Stage-II training to prevent stacked-model optimism. Hotspot dynamics alone achieve Stage-I ROC-AUC 0.945, and the two-stage classifier reaches Stage-II ROC-AUC 0.908, exceeding direct multimodal fusion while preserving an interpretable intermediate instability signal. Thermal gradient rise precedes voltage-based detection by 40 frames (4 seconds) on average, enabling earlier battery management system intervention. Lead-time analysis at a fixed 0.5 threshold yields a 14.8-frame mean lead time.",
+      "url": "http://arxiv.org/abs/2608.20383v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20383v1",
+      "tldr": "The paper proposes a two-stage, leakage-controlled early-warning framework that distills infrared hotspot dynamics into an interpretable thermal-instability score before fusing it with multimodal features to predict lithium-ion battery thermal runaway 20 frames ahead, outperforming direct multimodal fusion while achieving a 14.8-frame mean lead time.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chang'an University"
+      ],
+      "affiliations_text": "Chang'an University",
+      "score": 3.0425817482820774,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2608.20440v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820440v1-decision-tree-and-k-means-analysis-of-raman-spectra-for-edible-oils-a-physics-informed-ai-approach",
+      "source": "arxiv",
+      "title": "Decision Tree and K-Means Analysis of Raman Spectra for Edible Oils: A Physics-Informed AI Approach",
+      "authors": [
+        "Amrita Shaw",
+        "Chandrasekar S. N.",
+        "Sai Muthukumar V.",
+        "Jhinuk Gupta",
+        "Deepak L. N. Kallepalli"
+      ],
+      "authors_text": "Amrita Shaw, Chandrasekar S. N., Sai Muthukumar V., Jhinuk Gupta, Deepak L. N. Kallepalli",
+      "abstract": "Authentication of edible oils in processed foods is important for food quality, fraud prevention, and regulatory compliance. This study establishes an integrated Raman spectroscopy and machine-learning framework that links intrinsic spectral organization, interpretable classification, and Physics-Informed Artificial Intelligence (PI-AI). Five edible oils were investigated in pure form and within a fried-potato-chip matrix using t-SNE, K-means clustering, Decision Trees, and Non-Negative Least Squares (NNLS)-based spectral decomposition. Unsupervised analyses revealed substantially stronger class organization and separability in pure oils, whereas food-matrix effects introduced pronounced spectral overlap. Decision Trees achieved 100% classification accuracy for pure oils using only four Raman variables from the original 1866-feature spectral space. These four variables, consistently identified by both pre-pruned and post-pruned models, represented only approximately 0.21% of the available spectral information while retaining perfect test-set performance. For matrix-containing samples, NNLS-based PI-AI spectral decomposition substantially improved classification by separating oil-related signatures from paper and potato contributions. Optimized post-pruned models achieved accuracies of 86.4% and 85.4% for paper-subtracted and paper-plus-potato-subtracted datasets, respectively, while reducing the number of important Raman variables to only five and four. The compact four-feature representation further reduced the data footprint by 99.44% without loss of classification accuracy. Collectively, these findings demonstrate that accurate Raman-based oil identification can be achieved through physically meaningful, highly compact, and interpretable spectral representations, providing a promising foundation for Frugal AI, Edge AI, portable sensing, and embedded food-quality monitoring.",
+      "url": "http://arxiv.org/abs/2608.20440v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20440v1",
+      "tldr": "This paper introduces a physics-informed Raman spectroscopy and machine-learning framework that uses t-SNE, K-means, Decision Trees, and NNLS-based spectral decomposition to accurately authenticate edible oils in both pure and fried-food matrices using remarkably few interpretable spectral variables, supporting frugal and edge AI applications for food-quality monitoring.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CogniEvolve AI Inc.",
+        "Aix-Marseille University",
+        "Sri Sathya Sai Institute of Higher Learning"
+      ],
+      "affiliations_text": "CogniEvolve AI Inc., Aix-Marseille University, Sri Sathya Sai Institute of Higher Learning",
+      "score": 2.920603194653358,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.20343v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820343v1-bankruptcy-prediction-via-hybrid-resampling-and-stacking-ensemble-techniques-with-explainable-artificial-intelligence-xai-driven-analysis",
+      "source": "arxiv",
+      "title": "Bankruptcy Prediction via Hybrid Resampling and Stacking Ensemble Techniques with Explainable Artificial Intelligence (XAI)-Driven Analysis",
+      "authors": [
+        "Obu-Amoah Ampomah",
+        "Edmund Fosu Agyemang",
+        "Kofi Acheampong",
+        "Louis Agyekum",
+        "Enock Adu Bonsu",
+        "Eric Nyarko"
+      ],
+      "authors_text": "Obu-Amoah Ampomah, Edmund Fosu Agyemang, Kofi Acheampong, Louis Agyekum, Enock Adu Bonsu, Eric Nyarko",
+      "abstract": "This study develops and evaluates a bankruptcy prediction framework that integrates consensus-based feature selection, hybrid resampling, stacking ensembles, and explainable artificial intelligence to improve minority-class detection in severely imbalanced financial data. Using the Taiwanese Bankruptcy Prediction dataset from the UCI Machine Learning Repository, five feature-selection algorithms were first applied, and a consensus retention rule reduced the input space to 23 robust variables. The balanced training data were then generated using SVM-SMOTE, SMOTE-Tomek, and SMOTE-ENN. Five ensemble machine learning classifiers, namely gradient boosting, extreme gradient boosting, histogram-based gradient boosting, LightGBM, and AdaBoost, were compared with five deep learning models, including RNN, LSTM, GRU, DNN, and MLP. In addition, hybrid stacking ensembles combined the five machine learning classifiers as base learners with each deep learning model as a meta-learner. Model performance was assessed using accuracy, recall, specificity, G-mean, and ROC-AUC, while SHAP was used to explain feature contributions. The results show that resampling strategy materially shaped model behavior. SVM-SMOTE and SMOTE-Tomek favored accuracy and specificity, whereas SMOTE-ENN delivered stronger minority-class detection. Among standalone models, the GRU with SMOTE-ENN achieved the best overall predictive balance, with recall of 0.8627, G-mean of 0.8517, and ROC-AUC of 0.9431. Among stacking ensembles, SMOTE-ENN with (GB+XGB+HGB+LGBM+AB)+LSTM provided the strongest compromise between sensitivity and specificity. SHAP analysis identified leverage, profitability, solvency, and operational efficiency indicators as the most influential predictors of bankruptcy risk. These findings support more reliable and interpretable early warning systems for financially distressed firms.",
+      "url": "http://arxiv.org/abs/2608.20343v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20343v1",
+      "tldr": "This study develops a bankruptcy prediction framework that integrates consensus-based feature selection, hybrid resampling (SVM-SMOTE, SMOTE-Tomek, SMOTE-ENN), stacking ensembles of machine learning and deep learning models, and SHAP-based explainable AI, demonstrating that SMOTE-ENN with a GRU or an LSTM-stacked ensemble yields the best balance of minority-class recall and overall predictive performance on severely imbalanced Taiwanese financial data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Western Michigan University",
+        "Tulane University",
+        "University of Ottawa",
+        "University of Ghana",
+        "University of Arizona"
+      ],
+      "affiliations_text": "Western Michigan University, Tulane University, University of Ottawa, University of Ghana, University of Arizona",
+      "score": 2.8409354172908796,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2608.20488v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820488v1-metag-a-dataset-to-build-agentic-meta-reviewing-capabilities",
+      "source": "arxiv",
+      "title": "Metag: A dataset to build agentic meta-reviewing capabilities",
+      "authors": [
+        "Anirudh Sundar",
+        "Min Chen",
+        "Divya Tadimeti",
+        "Gemma Zhang",
+        "Alice Li",
+        "Nigel Boachie Kumankumah",
+        "Pavan Uttej Ravva",
+        "Sadid Hasan",
+        "Somya Chatterjee",
+        "Pruthvi Prakash Navada",
+        "Xiao Wang",
+        "Yue Kang",
+        "Sulaiman Vesal",
+        "Larry Heck"
+      ],
+      "authors_text": "Anirudh Sundar, Min Chen, Divya Tadimeti, Gemma Zhang, Alice Li, Nigel Boachie Kumankumah, Pavan Uttej Ravva, Sadid Hasan, Somya Chatterjee, Pruthvi Prakash Navada, Xiao Wang, Yue Kang, Sulaiman Vesal, Larry Heck",
+      "abstract": "AI tools increasingly support tasks across the scientific research cycle, from experiment design and manuscript preparation to peer review. At the same time, the continuing growth in conference submissions has increased the burden on meta-reviewers, who must synthesize reviewer feedback, author rebuttals, and manuscript revisions. To address this concern, this paper introduces Metag, a dataset to accelerate the development of meta-reviewing agents, specifically to identify changes made to scientific articles during the review-rebuttal process. Each instance contains a reviewer concern, the author's proposed resolution, and the manuscript diffs implementing the stated change. Metag is collected by obtaining manuscript versions from before the review deadline and after acceptance, computing differences between the two documents, and asking human annotators to align these differences with action items from OpenReview discussions. The resulting dataset consists of 349 high-quality action items tied to paper differences and will enable building methods to empower meta reviewers to quickly identify whether authors have addressed reviewer statements and where in the paper those changes have been made, resulting in additional transparency and traceability throughout peer review. The dataset is publicly available at https://github.com/microsoft/Metag-dataset.",
+      "url": "http://arxiv.org/abs/2608.20488v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20488v1",
+      "tldr": "Metag is a new dataset of 349 human-annotated action items that link reviewer concerns from OpenReview to specific manuscript diffs, enabling agentic meta-reviewing tools to trace whether and where authors addressed feedback during the review-rebuttal process.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft",
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Microsoft, Georgia Institute of Technology",
+      "score": 2.5412955345044312,
+      "score_text": "2.5"
+    },
+    {
+      "id": "2608.20550v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820550v1-wireless-power-transfer-in-titanium-implants",
+      "source": "arxiv",
+      "title": "Wireless Power Transfer in Titanium Implants",
+      "authors": [
+        "R. W. Porto",
+        "L. Murliky",
+        "F. R. de Sousa",
+        "A. S. de Almeida",
+        "H. M. de Albuquerque",
+        "V. J. Brusamarello"
+      ],
+      "authors_text": "R. W. Porto, L. Murliky, F. R. de Sousa, A. S. de Almeida, H. M. de Albuquerque, V. J. Brusamarello",
+      "abstract": "This work addresses the problem of applications that require wireless power transfer to devices embedded within conductive blocks. The emergence of eddy currents tends to generate a magnetic field opposing that of the transmitter, drastically reducing the coupling coefficient and, consequently, the efficiency of the process. A case study involving a titanium implant is presented and analyzed with a load designed to ensure a constant current of 1 mA. An experimental setup is assembled and evaluated to compare differences in the measured electrical parameters when the receiver is embedded in the implant, considering several solutions that mitigate or avoid the effects of eddy currents. The results show that such a system may be technically unfeasible if careful attention is not paid to the geometry of the cavity in which the receiver is positioned.",
+      "url": "http://arxiv.org/abs/2608.20550v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20550v1",
+      "tldr": "Wireless power transfer to devices embedded in conductive titanium implants is severely degraded by eddy currents, and may be technically unfeasible unless the receiver cavity geometry is carefully designed to mitigate these effects.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade Federal de Santa Catarina",
+        "Universidade Federal do Rio Grande do Sul",
+        "Instituto Federal do Rio Grande do Sul",
+        "MSC MED Engenharia e Tecnologia Médica Ltda"
+      ],
+      "affiliations_text": "Universidade Federal de Santa Catarina, Universidade Federal do Rio Grande do Sul, Instituto Federal do Rio Grande do Sul, MSC MED Engenharia e Tecnologia Médica Ltda",
+      "score": 2.43347791824814,
+      "score_text": "2.4"
+    },
+    {
+      "id": "2608.20447v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/25/260820447v1-mutual-information-and-sensitivity-analysis-for-feature-selection-in-customer-targeting-a-comparative-study",
+      "source": "arxiv",
+      "title": "Mutual information and sensitivity analysis for feature selection in customer targeting: a comparative study",
+      "authors": [
+        "Nestor Barraza",
+        "Sergio Moro",
+        "Marcelo Ferreyra",
+        "Adolfo de la Peña"
+      ],
+      "authors_text": "Nestor Barraza, Sergio Moro, Marcelo Ferreyra, Adolfo de la Peña",
+      "abstract": "Feature selection is a highly relevant task in a data-driven knowledge discovery project. Several techniques have been developed aiming at finding the features that influence most an outcome to predict, including mutual information and, in recent years, the data-based sensitivity analysis. The present research focus on analyzing the advantages and disadvantages of each of these two techniques, by applying both to a bank telemarketing case. Thereafter, a logistic regression model is built on the tuned set of features identified by each of the two techniques as the most influencing set of features on the success of a telemarketing contact, in a total of 13 features for mutual information and 9 features for the data-based sensitivity analysis. The latter performs better for lower values of false positives while the former is slightly better for a higher false positive ratio. Thus, mutual information becomes a better choice if bank managers intend to reduce slightly the cost of contacts without risking losing a high number of successes. Such results show that mutual information, although not recent, is still a valid method for feature selection. On the other side, the data-based sensitivity analysis selection achieved good prediction results with less features.",
+      "url": "http://arxiv.org/abs/2608.20447v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.20447v1",
+      "tldr": "The paper compares mutual information and data-based sensitivity analysis for feature selection in a bank telemarketing customer targeting case, finding that sensitivity analysis performs better at lower false-positive rates with fewer features, while mutual information is slightly better at higher false-positive rates and remains a valid, cost-effective choice for reducing contacts without losing many successes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Dataxplore",
+        "Universidad Nacional de Tres de Febrero",
+        "Instituto Universitário de Lisboa (ISCTE-IUL)",
+        "Boldt Gaming",
+        "University of Minho"
+      ],
+      "affiliations_text": "Dataxplore, Universidad Nacional de Tres de Febrero, Instituto Universitário de Lisboa (ISCTE-IUL), Boldt Gaming, University of Minho",
+      "score": 2.316211128690978,
+      "score_text": "2.3"
+    }
+  ]
+}
