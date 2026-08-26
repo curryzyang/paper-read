@@ -1,0 +1,763 @@
+{
+  "label": "2026-08-26",
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T03:35:44",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.21400v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821400v1-active-interaction-aware-model-predictive-path-integral-via-ego-conditioned-generative-predictions",
+      "source": "arxiv",
+      "title": "Active Interaction-Aware Model Predictive Path Integral via Ego-Conditioned Generative Predictions",
+      "authors": [
+        "Khaled A. Mustafa",
+        "Mohamed-Khalil Bouzidi",
+        "Christian Schlauch",
+        "Ahmad Gazar",
+        "Nadja Klein",
+        "Joerg Reichardt",
+        "Javier Alonso-Mora"
+      ],
+      "authors_text": "Khaled A. Mustafa, Mohamed-Khalil Bouzidi, Christian Schlauch, Ahmad Gazar, Nadja Klein, Joerg Reichardt, Javier Alonso-Mora",
+      "abstract": "Dense traffic is inherently interactive. The ego vehicle and surrounding agents continuously influence each other's reactions, making \"what-if\" reasoning essential for safe and efficient driving. To enable such an active interaction-aware behavior, we propose a planning framework that integrates an ego-conditioned generative autoregressive prediction model within Model Predictive Path Integral (MPPI) control. The generative prediction model outputs stochastic, multi-modal predictions of surrounding agents conditioned on each of the ego's considered future actions. A nested sampling scheme enables tractable evaluation of expected cost and collision risk under the induced distribution. This formulation allows the ego to actively probe how different candidate actions shape the interaction outcomes and to identify actions that reduce ambiguity in uncertain interactions. Closed-loop simulations demonstrate improved safety and efficiency compared to conventional predict-then-plan and passive interaction-aware approaches.",
+      "url": "http://arxiv.org/abs/2608.21400v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21400v1",
+      "tldr": "TLDR: This paper integrates an ego-conditioned generative autoregressive prediction model into Model Predictive Path Integral (MPPI) control to enable active interaction-aware planning, where the ego probes how its candidate actions influence surrounding agents' multi-modal reactions, improving safety and efficiency over predict-then-plan and passive interaction-aware baselines.",
+      "detailed_reading": {
+        "motivation": "密集交通中自车与周围智能体持续互相影响，传统预测-规划解耦方法忽略自车行为对他车的影响，容易导致过度保守甚至“冻结机器人”问题。现有博弈论和被动交互感知方法也难以兼顾表达力、计算复杂度与真实人类驾驶行为多样性。因此需要一种能主动进行“what-if”推理、并通过行动降低交互不确定性的规划框架。",
+        "method": "提出将自车条件化的生成式自回归预测模型（GARPM，采用SMART类Transformer架构）嵌入MPPI控制框架。输入包括过去H步自车与周围智能体状态、道路拓扑和动态导航信息，预测模型按自车候选未来轨迹进行条件化，输出周围智能体未来T步的随机多模态联合轨迹，其因子分解为p(Y_k|X_{0:k-1},Y_{0:k-1},H_t)。规划端采用MPPI：在每个重规划时刻采样M条高斯扰动控制序列，通过已知自车动力学生成候选轨迹；对每条候选轨迹，使用嵌套采样从生成模型中抽取多条周围智能体rollout，评估包含碰撞风险和效率的期望代价；最后通过指数重要性采样加权更新最优控制序列，并采用滚动时域策略仅执行第一步。",
+        "result": "闭环仿真结果表明，所提方法相比传统predict-then-plan方法和被动交互感知规划方法，能够减少过度保守与死锁行为，在安全性和行驶效率上均获得提升。该框架同时具备不确定性感知、交互感知、学习驱动预测和主动探测能力，而这些能力在现有单一范式方法中难以同时具备。",
+        "conclusion": "将生成式自回归预测模型与MPPI结合，能够有效解决预测与规划之间的循环依赖，实现主动交互感知规划。该公式允许自车通过候选行动主动探测他车反应，并在期望代价中隐式平衡任务目标与交互不确定性降低，从而比解耦式和被动交互感知方法更果断且更安全。",
+        "key_details": "关键细节包括：使用自回归Transformer生成模型SMART作为交互仿真器，其预测以自车轨迹和过去观测为条件，能够生成多样化多模态未来轨迹；MPPI采样使用高斯控制扰动，通过嵌套采样近似双重期望，并计算风险感知的碰撞概率；权重更新采用指数重要性采样，涉及逆温度参数β和最小代价偏移ρ以保持数值稳定；规划器使用已知确定性自车动力学，无需显式信念空间或额外探索项即可实现主动不确定性降低。局限在于嵌套采样使计算量随候选轨迹数和每轨迹rollout数增长，且依赖数据驱动的生成模型，可能缺少严格安全性保证与分布外泛化保障。"
+      },
+      "affiliations": [
+        "TU Delft",
+        "Karlsruhe Institute of Technology",
+        "Aumovio SE"
+      ],
+      "affiliations_text": "TU Delft, Karlsruhe Institute of Technology, Aumovio SE",
+      "score": 5.6237986878118384,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2608.21414v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821414v1-riskworld-object-centric-latent-world-modeling-for-autonomous-driving-risk-identification",
+      "source": "arxiv",
+      "title": "RiskWorld: Object-Centric Latent World Modeling for Autonomous Driving Risk Identification",
+      "authors": [
+        "Jingzheng Li",
+        "Yufei Ge",
+        "Qianren Mao",
+        "Zhijun Chen",
+        "Bing Li",
+        "Xingyu Peng",
+        "Baochang Zhang",
+        "Xianglong Liu"
+      ],
+      "authors_text": "Jingzheng Li, Yufei Ge, Qianren Mao, Zhijun Chen, Bing Li, Xingyu Peng, Baochang Zhang, Xianglong Liu",
+      "abstract": "Autonomous driving risk identification aims to determine which observed object is likely to become safety-critical to the ego vehicle. Existing approaches typically predict scene-level accidents, infer risk objects indirectly from ego behavior, or apply geometric checks after trajectory forecasting, without directly using predicted ego--object relations for risk-source localization. We propose RiskWorld, an object-centric latent world model that identifies risk from the imagined evolution of each candidate relative to the ego vehicle. RiskWorld combines pretrained predictive video representations with structured ego--object histories, contextualizes observed interactions, and rolls relation-aware object states into the future using RSSM-style latent dynamics. It decodes the rollout into object-level risk scores, supported by auxiliary future-relation and temporal-risk predictions. Inference uses only observations up to the current time, while logged futures provide training supervision. On RiskBench, RiskWorld achieves the best overall F1 of 63.0\\% and the lowest false-alarm rate of 2.1\\%. Further analyses show that the learned rollout captures the evolution of object-level risk before critical events, while RiskWorld's selections preserve planning-critical information under filtered observation.",
+      "url": "http://arxiv.org/abs/2608.21414v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21414v1",
+      "tldr": "RiskWorld is an object-centric latent world model that identifies safety-critical objects in autonomous driving by rolling forward imagined ego-object relations via RSSM-style latent dynamics, achieving state-of-the-art risk localization performance on RiskBench.",
+      "detailed_reading": {
+        "motivation": "现有驾驶风险识别方法通常预测场景级事故、从自车行为间接推断风险对象，或在轨迹预测后进行几何检查，未直接利用预测的自我-对象关系来定位风险源。本文提出将对象级风险识别视为未来自我-对象关系的演变预测，直接利用关系演化作为风险源定位的证据。",
+        "method": "RiskWorld采用对象中心潜在世界模型。输入为K帧前视RGB、对象轨迹与自车运动；冻结的V-JEPA2编码器提取全局场景特征与对象对齐特征，MLP和掩码GRU编码结构化对象状态与自车状态，融合后经掩码多头自注意力（RelAttn）建模对象间与自我-对象交互，得到关系感知对象token。随后使用RSSM式潜在动力学（确定GRU+随机状态）将每个对象token滚动H步，后验在观测边界初始化，未来仅用先验递归预测，并施加KL正则化。解码时逐步骤头输出未来相对位置、距离和时态风险概率，池化未来状态得到对象级风险分数；最小距离和碰撞时间从轨迹导出。训练联合优化对象级风险BCE、未来关系回归（位置/距离/最小距离）、时态风险曲线BCE和KL损失，未来标注仅提供训练监督。",
+        "result": "在RiskBench上，RiskWorld取得最佳总体F1为63.0%，比最强基线提升1.2个百分点，同时获得最低误报率（FA）2.1%。进一步分析表明，学习的潜在rollout能捕捉关键事件前对象级风险演化，且在过滤观测下RiskWorld的选取仍保留规划关键信息。",
+        "conclusion": "RiskWorld通过对象中心潜在世界模型直接预测未来自我-对象关系，有效提升对象级风险识别性能，说明将风险视为关系演变的构想在自动驾驶风险监测中具有优势。",
+        "key_details": "关键实现细节包括：使用冻结的V-JEPA2预训练视频特征提供上下文，结构化状态编码保留明确的自车坐标、运动、框和类别；RSSM潜在动力学采用后验-先验KL正则化（β权重）稳定初始化；损失包含类平衡BCE（λ_obj, λ_curve）、平滑L1回归（λ_xy, λ_dist, λ_min），时间风险曲线采用指数衰减（时间常数T）并对事件区间赋值；推理时用后验均值初始化后仅用先验均值滚动；时间风险通过预测曲线阈值γ_ttr得到。模型对每个对象独立滚动，动力学参数在各候选间共享，复杂度与候选数线性相关。局限性在于论文未明确讨论，但推理不依赖未来标注，训练需成对的当前历史与未来标注。"
+      },
+      "affiliations": [
+        "Hong Kong Polytechnic University",
+        "Nanyang Technological University",
+        "Zhongguancun Laboratory",
+        "Beihang University",
+        "Tianjin University"
+      ],
+      "affiliations_text": "Hong Kong Polytechnic University, Nanyang Technological University, Zhongguancun Laboratory, Beihang University, Tianjin University",
+      "score": 4.771167740593374,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.21440v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821440v1-geo-vla-geometry-aware-vision-language-action-planning-via-internalization-of-map-semantics",
+      "source": "arxiv",
+      "title": "Geo-VLA: Geometry-Aware Vision-Language-Action Planning via Internalization of Map Semantics",
+      "authors": [
+        "Ran Chen",
+        "Jiaxing Ren",
+        "Zhikun Zhang",
+        "Yunhao Hou",
+        "Junbao Zhuo",
+        "Bochao Zou"
+      ],
+      "authors_text": "Ran Chen, Jiaxing Ren, Zhikun Zhang, Yunhao Hou, Junbao Zhuo, Bochao Zou",
+      "abstract": "Vision-language-action (VLA) models have advanced end-to-end autonomous driving by leveraging foundation models for semantic reasoning and long-tail generalization. However, their planning performance remains limited in complex driving environments because image-only representations inadequately capture planning-relevant road geometry and topology. In this paper, we propose Geo-VLA, a plug-and-play framework that enhances VLA models by learning geometry-aware visual representations. During training, Geo-VLA internalizes geometric map semantics to strengthen road-structure representations, while requiring no HD maps or additional lane information during inference. To support this approach, we introduce Geo-QA, a geometry-focused question-answering dataset that injects road geometry into vision-language representations through contrastive learning and instruction tuning. Experiments on NAVSIM v1 demonstrate that Geo-VLA consistently improves VLA planners with distinct action-generation architectures, achieving 92.1 PDMS and establishing a new state-of-the-art among single-camera VLA planners.",
+      "url": "http://arxiv.org/abs/2608.21440v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21440v1",
+      "tldr": "Geo-VLA is a plug-and-play framework that improves vision-language-action planners for autonomous driving by internalizing geometric map semantics into visual representations during training via a new Geo-QA dataset, achieving state-of-the-art performance on NAVSIM without requiring HD maps at inference.",
+      "detailed_reading": {
+        "motivation": "现有视觉-语言-动作（VLA）模型在端到端自动驾驶中依赖纯图像表示，难以充分捕捉规划所需的道路几何与拓扑信息，导致在转弯、交叉口等复杂场景中轨迹预测偏离专家轨迹和真实道路结构。直接引入高精地图作为推理输入虽能提供结构信息，但带来数据维护、定位、地图编码等额外开销，且未改善视觉-语言骨干本身的结构表示能力。因此，本文提出将地图语义作为训练监督，使VLA模型在不改变推理输入（无需高精地图）的前提下内化道路几何与拓扑知识。",
+        "method": "Geo-VLA是一个即插即用的两阶段训练框架。首先进行几何感知预训练：利用Geo-QA数据集（3000个样本，覆盖车道结构、道路方向/曲率、交叉口结构、可行驶区域边界、道路拓扑五类）构造图像-文本对和问答对，其中问答由GPT-5.4结合前视图像与离线地图标注生成，答案同时作为对比学习中的文本描述。预训练采用对比学习（对齐图像与地图语义描述）和指令微调（问答生成）联合优化，使用LoRA适配器更新视觉编码器和LLM骨干中的参数子集，辅助投影头在预训练后丢弃。随后进行规划微调：固定预训练后的骨干，仅用专家轨迹监督优化各基线VLA模型的原始动作解码器。推理时仅需前视图像、自车历史、自车状态与导航命令，无需高精地图、地图文本或额外地图编码器。",
+        "result": "在NAVSIM v1 navtest基准上，Geo-VLA一致提升了两种不同动作生成架构的VLA基线：DynVLA + Geo-VLA取得92.1 PDMS，ReCogDrive + Geo-VLA取得91.2 PDMS，均超过各自基线（DynVLA 91.0，ReCogDrive 90.8），并创下单相机VLA规划器的新SOTA。消融实验表明，静态道路结构监督（如车道、边界、拓扑）比动态目标监督带来更大的规划收益；与显式HD map编码器相比，Geo-VLA在零推理开销下取得了接近的性能（ReCogDrive变体：Geo-VLA 91.2 vs HD map encoder 91.9）。",
+        "conclusion": "Geo-VLA通过训练时将地图语义内化为视觉-语言骨干的几何感知表示，在保持原始推理接口、无需高精地图的前提下显著提升了VLA规划性能，验证了“地图语义作为监督而非推理输入”的有效性，为端到端自动驾驶规划提供了一种轻量、可迁移的增强方案。",
+        "key_details": "关键细节包括：Geo-QA数据集通过GPT-5.4基于前视图像和离线地图标注自动生成问答，类别均衡（各400/600样本？原文未具体分配，但总共3000份）且仅用于训练；对比学习使用图像-文本对（答案作为描述），指令微调使用问答对，两者联合优化骨干中的LoRA适配器；预训练时辅助投影头（g_v, g_t）仅用于目标计算，之后丢弃；规划微调冻结骨干，只更新解码器，保留基线原始训练协议；实验采用标准单轨迹协议，排除Best-of-N和候选选择方法；与显式几何输入（HD map encoder、车道检测）对比，Geo-VLA无额外推理开销，但性能略低于HD map encoder（可能因后者直接提供结构化特征）；潜在局限性包括依赖离线地图标注生成监督数据、仅在单相机设置下验证，以及未测试更大规模数据或更多种VLA架构。"
+      },
+      "affiliations": [
+        "University of Science and Technology Beijing"
+      ],
+      "affiliations_text": "University of Science and Technology Beijing",
+      "score": 4.573823328574979,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.21395v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821395v1-odg-nomad-overhead-camera-direction-guided-nomad",
+      "source": "arxiv",
+      "title": "ODG-NoMaD: Overhead-Camera Direction-Guided NoMaD",
+      "authors": [
+        "Blossom Treesa Bastian",
+        "Keerthi S. Shetty",
+        "Manish Kolachalam",
+        "Rani Malhotra",
+        "Ashish Dutta"
+      ],
+      "authors_text": "Blossom Treesa Bastian, Keerthi S. Shetty, Manish Kolachalam, Rani Malhotra, Ashish Dutta",
+      "abstract": "NoMaD [31] is a learned vision-navigation policy that unifies goal-conditioned navigation and exploration in a single goal-masked diffusion policy. In an unseen environment, however - where neither a goal image nor a topological map is available - it can only explore undirectedly, wandering without global awareness. We present ODG-NoMaD, which gives NoMaD's exploration mode a global sense of where to proceed, without retraining the policy. An overhead depth camera is used once on deployment to build an occupancy map and plan a global path, which is segmented to yield a desired heading; a per-frame traversability map from the robot's onboard depth then refines this into a collision-free direction. The gradient of a cosine direction cost is injected into the final denoising steps, rotating sampled trajectories toward this direction while preserving the multimodality of exploration. In simulated office environments with and without random obstacles, ODG-NoMaD reduces the residual distance to the target by up to an order of magnitude over unguided exploration, outperforms the point-goal cost guidance of NaviDiffusor [37], and is the only configuration that remains collision-free on every trial.",
+      "url": "http://arxiv.org/abs/2608.21395v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21395v1",
+      "tldr": "ODG-NoMaD steers NoMaD's goal-masked diffusion exploration in unseen environments by injecting the gradient of a direction cost—derived from an overhead-camera-built occupancy map and global path, refined by onboard traversability—into the denoising process, dramatically improving goal-reaching and collision avoidance without retraining.",
+      "detailed_reading": {
+        "motivation": "NoMaD是一种将目标条件导航与探索统一于单一掩码扩散策略的视觉导航模型，但在未见环境中既无目标图像也无拓扑地图时，其探索模式只能盲目游走，缺乏全局感知，容易重复访问已覆盖区域并困于局部环境。为此，ODG-NoMaD在不重训策略的前提下，将经典规划的全局引导与NoMaD探索模式的反应性、泛化性结合，使探索具有明确的前进方向。",
+        "method": "ODG-NoMaD的流程是：部署时用顶部深度相机拍摄一次深度图像，经外参标定将有效像素（0.3–8 m）反投影为点云并旋转到世界系，按高度阈值（-0.05、0.08、2.5 m）分类为自由/占用/未知，以0.05 m分辨率栅格化并做形态学开闭运算得到占用地图；在该地图上用全局规划器规划从机器人当前位置到目标的路径。随后用Ramer–Douglas–Peucker算法将稠密路径简化为若干近似直线段，用atan2计算当前所在段的期望航向角。机器人每帧使用机载深度图构建BEV可通行图，通过两层选择器将全局航向与局部可通行方向融合为无碰撞的引导方向；在NoMaD的动作扩散模型去噪过程中，将余弦方向代价的梯度注入最终去噪步，使采样轨迹朝该方向旋转，同时保留探索的多模态性。整个过程不需要重新训练NoMaD策略。",
+        "result": "在模拟办公环境（含随机障碍物与不含随机障碍物）中，ODG-NoMaD相较无引导探索将到目标的平均残差距离降低约7倍，最高可降低一个数量级；其性能优于NaviDiffusor基于点目标代价的引导方式，并且是唯一在所有试验中都保持无碰撞的配置。当地图构建后引入新障碍物时，ODG-NoMaD仍能在沿全局路径走向目标的同时绕开新障碍物，保持无碰撞。",
+        "conclusion": "ODG-NoMaD表明，通过推理期方向引导将顶部相机提供的全局路径信息注入NoMaD的探索模式，可以显著提升未见环境中的定向探索效率，同时保持学习策略的碰撞感知与多模态探索能力；方向引导比点目标代价引导更适合用于扩散导航策略的全局路径注入，且结合可通行图可增强对新障碍的鲁棒性。",
+        "key_details": "关键实现细节包括：占用地图构建采用高度阈值分类（地板带-0.05至0.08 m，天花板截止2.5 m）和3×3椭圆结构元素的开闭运算去噪；全局路径用RDP算法按垂直距离容差ε简化为段，每段方向由atan2计算；方向代价采用余弦形式，梯度只注入最终去噪步骤以保留探索多模态性；NoMaD为预训练模型，掩码目标token后进入探索模式，动作表示为归一化位移序列；引导方向由全局路径航向与机载深度可通行图融合得到，以规避训练分布外的障碍物。该方法的局限性在于顶部地图只在部署时构建一次，若环境发生全局结构性变化，需重新建图或依赖局部可通行图进行补偿。"
+      },
+      "affiliations": [
+        "IIT Kanpur",
+        "Infosys Center for Emerging Technologies"
+      ],
+      "affiliations_text": "IIT Kanpur, Infosys Center for Emerging Technologies",
+      "score": 4.401539550612831,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.21407v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821407v1-mamba-based-selective-state-space-modeling-improves-the-accuracy-complexity-tradeoff-of-smolvla-vision-language-action-experts",
+      "source": "arxiv",
+      "title": "Mamba-based Selective State Space Modeling Improves the Accuracy-Complexity Tradeoff of SmolVLA Vision-Language-Action Experts",
+      "authors": [
+        "Farida Mohsen",
+        "Thowayba Elkaffash",
+        "Mohammad Reza Chalak Qazani",
+        "Mohamed Mabrok",
+        "Nader Meskin",
+        "Ali Safa"
+      ],
+      "authors_text": "Farida Mohsen, Thowayba Elkaffash, Mohammad Reza Chalak Qazani, Mohamed Mabrok, Nader Meskin, Ali Safa",
+      "abstract": "Vision-language-action (VLA) models face a crucial tradeoff between their task success rate and the policy-call frequency. Executing a single action per inference ($N=1$) enables accurate robot control but comes at the cost of huge compute time overheads, making real-time implementation infeasible. On the other hand, executing longer action horizons before replanning ($N\\gg1$) reduces compute complexity, but inevitably degrades the system's success rate. In order to improve the VLA accuracy-complexity tradeoff, this paper investigates Mamba's selective state-space modeling as an alternative to causal self-attention within the action expert of the popular SmolVLA model, widely used as a reference model for its highly accurate yet low complexity nature. We evaluate both the Mamba- and Transformer-based experts on the widely-adopted LIBERO benchmark suites across three execution horizons $N\\!\\in\\!\\{1,25,50\\}$, respectively corresponding to high, moderate and low compute complexities. Our results remarkably show that the advantage of the Mamba expert increases with the execution horizon, indicating significant success retention under long execution horizons $N = 50$ and $N = 25$. When $N = 50$ actions are executed before replanning (i.e., corresponding to feasible real-time deployment), the Mamba expert outperforms the Transformer baseline by $7.8\\%$. In addition, when $N = 25$ actions are executed before replanning, our Mamba expert outperforms the Transformer baseline by $3.7\\%$. Finally, under per-action replanning ($N=1$), our Mamba variant matches the Transformer-based mean success rate while significantly reducing the overall model parameter complexity by $24\\%$ thanks to Mamba's compute-efficient nature.",
+      "url": "http://arxiv.org/abs/2608.21407v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21407v1",
+      "tldr": "Replacing the causal self-attention in SmolVLA's action expert with Mamba-based selective state-space modeling improves the accuracy-complexity tradeoff, boosting success rates by up to 7.8% at long execution horizons while cutting model parameters by 24% at per-action replanning.",
+      "detailed_reading": {
+        "motivation": "视觉-语言-动作（VLA）模型面临任务成功率与策略调用频率之间的关键权衡：单步推理执行（N=1）虽准确但计算开销巨大，无法实时；而长执行域（N>>1）降低计算复杂度但导致成功率下降。本文旨在通过将Mamba选择性状态空间建模替代SmolVLA动作专家中的因果自注意力，以改进这一精度-复杂度权衡。",
+        "method": "本文基于SmolVLA框架，输入多视角RGB观测、机器人状态和语言指令，由冻结的SmolVLM2-500M-Video-Instruct骨干编码为层级特征。动作专家（AE）交替使用交叉注意力接地层和intra-chunk时间层，其中基线B0保留Transformer因果自注意力，所提M1将所有八个因果自注意力层替换为Mamba-1选择性状态空间扫描。二者均采用相同的条件流匹配目标训练，生成50个7维Delta动作，推理时用十步Euler积分采样，执行时按N∈{1,25,50}取前N个动作进行重规划。",
+        "result": "在LIBERO基准套件上，Mamba专家在长执行域下显著优于Transformer基线：N=50时成功率提高7.8%，N=25时提高3.7%；在N=1时两者平均成功率相近（约76%），但Mamba变体将动作专家参数从99.9M降至76.3M（减少约23.6%），从而在保持精度的同时大幅降低计算复杂度。",
+        "conclusion": "实验表明，Mamba基选择性状态空间建模能有效改善VLA模型的精度-复杂度权衡，尤其在长执行域下保留更高成功率，同时减少参数冗余，为实时机器人控制提供可行方案。该研究证明架构内的时间混合算子对执行水平敏感性有显著影响，为后续优化VLA策略提供新方向。",
+        "key_details": "关键细节包括：数据采用LIBERO基准，含多视图RGB（512×512）和机器人状态；使用冻结的SmolVLM2骨干，仅训练动作专家；流匹配损失采用与SmolVLA一致的采样分布；训练时使用AdamW优化器（β1=0.9，β2=0.95），30k步，全局批量64，学习率从1e-4余弦退火至2.5e-6（前1k步warmup）；推理固定为十步Euler。参数复杂度从99.9M降至76.3M，减少23.6%。局限性在于仅评估了LIBERO套件，且执行范围限于1、25和50。"
+      },
+      "affiliations": [
+        "Qatar University",
+        "Hamad Bin Khalifa University",
+        "James Cook University"
+      ],
+      "affiliations_text": "Qatar University, Hamad Bin Khalifa University, James Cook University",
+      "score": 4.328899811912193,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.21488v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821488v1-kan-robust-bench-a-benchmark-for-evaluating-the-robustness-of-kolmogorov-arnold-networks",
+      "source": "arxiv",
+      "title": "KAN-Robust-Bench: A Benchmark for Evaluating the Robustness of Kolmogorov-Arnold Networks",
+      "authors": [
+        "Mohammad Meymani",
+        "Roozbeh Razavi-Far"
+      ],
+      "authors_text": "Mohammad Meymani, Roozbeh Razavi-Far",
+      "abstract": "While machine learning models have demonstrated strong performance in many domains, these models have shown profound vulnerabilities when they are exposed to adversarial threats. While adversarial attacks fall into various categories, the most prominent category in research studies is evasion. In evasion attacks, the adversary generates perturbed versions of samples, which might not be observable by human eyes. These samples generally fool the machine learning models with high confidence. This phenomenon poses a significant security violation against machine learning models. In this paper, we investigate the certified and empirical robustness of various Kolmogorov-Arnold network architectures against strong evasion attacks. At first, we provide the mathematical foundations for randomized smoothing and interval bound propagation, and report the $\\ell_2$-certified robustness of the models under randomized smoothing. After that, we systematically evaluate the robustness of various defended and undefended KAN models under FGSM, PGD, and C&W attacks in order to find out the optimal defense strategies and architectures.",
+      "url": "http://arxiv.org/abs/2608.21488v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21488v1",
+      "tldr": "This paper introduces KAN-Robust-Bench, a benchmark that systematically evaluates the certified and empirical robustness of various Kolmogorov-Arnold network architectures against strong evasion attacks (FGSM, PGD, and C&W) using defenses such as randomized smoothing, adversarial training, and interval bound propagation on CIFAR-10 and SVHN.",
+      "detailed_reading": {
+        "motivation": "现有针对KAN的对抗鲁棒性研究大多集中于KAN与MLP/CNN等传统架构的对比，缺少在KAN家族内部、相同对抗条件下对不同KAN架构的系统性基准评估。本文旨在系统评估多种KAN视觉架构在强白盒逃逸攻击下的经验鲁棒性与认证鲁棒性，并比较不同防御策略，以确定最优的KAN架构与防御组合。",
+        "method": "以CIFAR-10和SVHN为基准数据集，选取KAN-Mixers、KANICE、PoolKANNeXt等具有代表性的KAN计算机视觉架构。攻击端采用白盒逃逸攻击FGSM、PGD和C&W生成对抗样本；防御端涵盖对抗训练、随机平滑（RS）和区间边界传播（IBP）。随机平滑通过向输入添加高斯噪声并利用蒙特卡洛采样进行多数投票构造平滑分类器，进而根据最可能类别与次可能类别的概率计算ℓ2认证半径；IBP训练则将最终损失定义为干净损失与IBP损失的加权组合，通过λ控制鲁棒性与准确率的权衡。实验流程首先在随机平滑下报告各模型的ℓ2认证鲁棒性，再对无防御和多种防御模型系统进行FGSM、PGD、C&W攻击测试，比较不同KAN架构和防御策略的鲁棒性表现。",
+        "result": "实验系统地给出了多种KAN架构在CIFAR-10和SVHN上的干净准确率、对抗攻击下的准确率以及随机平滑下的认证半径。结果表明鲁棒性高度依赖于KAN架构与防御策略的组合；随机平滑能够提供可证明的ℓ2鲁棒性保证，对抗训练可提升经验鲁棒性，而IBP通过可验证边界训练带来认证鲁棒性但伴随精度权衡。整体上，不同KAN架构在同一对抗条件下的表现存在明显差异，最优防御策略并非唯一。",
+        "conclusion": "KAN架构在对抗攻击下表现出与传统模型不同的鲁棒性特性，且KAN家族内部不同架构的鲁棒性差异显著。系统比较对抗训练、随机平滑与区间边界传播后，发现采用合适的防御策略可以显著提升KAN模型在CIFAR-10和SVHN上的鲁棒性，随机平滑在认证鲁棒性方面尤为有效。研究为KAN架构的鲁棒性基准测试和防御策略选择提供了参考。",
+        "key_details": "关键数据集为CIFAR-10和SVHN；攻击配置包含FGSM、PGD和C&W，均为白盒逃逸攻击。随机平滑使用高斯噪声和蒙特卡洛投票，认证半径依赖最可能类与次可能类的概率差及噪声方差σ。IBP训练使用最终损失为(1−λ)×ℓ_clean+λ×ℓ_IBP，λ控制鲁棒性与准确率权衡。评估包括无防御模型、对抗训练模型、随机平滑模型和IBP防御模型。局限性方面，研究主要聚焦白盒逃逸攻击，未覆盖投毒或黑盒攻击；认证鲁棒性仅针对ℓ2范数和随机平滑，其他范数与认证方法未系统比较；不同KAN架构的训练时间与计算复杂度差异也可能影响防御策略的实际适用性。"
+      },
+      "affiliations": [
+        "University of New Brunswick"
+      ],
+      "affiliations_text": "University of New Brunswick",
+      "score": 4.10421335456581,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.21411v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821411v1-social-graph-mamba-forecasting-pedestrian-movements-based-on-social-context",
+      "source": "arxiv",
+      "title": "Social Graph Mamba: Forecasting Pedestrian Movements Based on Social Context",
+      "authors": [
+        "Hong-Son Nguyen",
+        "Yen-Chen Liu"
+      ],
+      "authors_text": "Hong-Son Nguyen, Yen-Chen Liu",
+      "abstract": "Forecasting pedestrian motion has always been fundamental for autonomous navigation in crowded environments. While attention-based methods achieve strong performance, they suffer from quadratic computational complexity in modeling social interactions, limiting scalability. Additionally, the existing methods often achieve high accuracy on prediction benchmarks at the individual level, but fail to fully capture the natural movement behaviors of crowds in real-world scenarios, particularly group structures. In this study, we propose Social Graph Mamba (SGM), a novel architecture that replaces attention-based social reasoning with Selective State Space Models (SSMs) operating on dynamically constructed interaction graphs. SGM introduces a dynamic interaction graph with social triplet factorization to decompose crowd interactions sequentially, and a community-aware module to effectively discover group structures via differentiable MinCut optimization and conditions both the embedding space and multi-modal decoder on group membership. Our experiments on standard benchmarks (ETH/UCY, SDD) demonstrate competitive performance with linear sequence complexity compared to quadratic attention-based methods. We further validate SGM in physical robot experiments by integrating predicted trajectories into a Social Force Model (SFM) for real-world implementation.",
+      "url": "http://arxiv.org/abs/2608.21411v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21411v1",
+      "tldr": "Social Graph Mamba (SGM) replaces quadratic-complexity attention with linear-complexity Selective State Space Models on dynamic interaction graphs and unsupervised community-aware grouping, achieving competitive pedestrian trajectory prediction on benchmarks and enabling real-world robot deployment.",
+      "detailed_reading": {
+        "motivation": "现有基于注意力机制的轨迹预测方法在建模社交交互时具有二次方计算复杂度，限制了在大规模拥挤场景中的可扩展性；同时，这些方法往往在个体层面取得较高精度，却未能充分捕捉真实场景中人群的自然移动行为，尤其是群体结构。为此，需要一种兼顾效率与群体感知的新型预测架构。",
+        "method": "提出Social Graph Mamba (SGM)，以选择性状态空间模型（SSM/Mamba）替代注意力机制进行社交推理。整体流程包括：1）输入多智能体历史轨迹，构建动态交互图，边权重由物理启发式组件（距离、速度一致性、碰撞时间TTC）融合而成，并采用距离阈值和top-k邻居剪枝；2）通过社区感知模块，利用可微MinCut优化无监督发现群体结构，并将群体归属信息嵌入特征空间和条件多模态解码器；3）采用拓扑引导的节点优先排序，依据动态加权度中心性对智能体排序以适应SSM的序列处理；4）提出社交三元组分解，将交互建模为时间分支、自我中心分支和目标中心分支，每个分支使用Cycle Mamba进行双向上下文传播，其中自我和目标token按动态边权重加权，并引入方向感知的目标预测与可学习方向平衡；5）通过动态社交门融合三个分支，再进行全局交互扫描以聚合群体级上下文；6）最后由条件多模态解码器生成K个未来轨迹假设及其概率。",
+        "result": "在ETH/UCY和SDD标准基准上，SGM取得了与基于二次复杂度注意力的方法相当的性能，同时保持线性序列复杂度。在物理机器人实验中，将预测轨迹集成到社会力模型（SFM）中，验证了真实世界部署的可行性。",
+        "conclusion": "SGM通过将SSM应用于动态交互图，在保持预测精度的同时显著降低计算复杂度，并通过无监督社区发现提升了对群体结构的建模能力，为实时机器人导航中的行人轨迹预测提供了一种高效且可扩展的解决方案。",
+        "key_details": "动态交互图的边权重为 w_ij = w_dist + w_vel + w_ttc，其中距离项使用高斯核（α=1.0, σ_p=2.0），速度项为余弦相似度（β=0.5），TTC项为逆碰撞时间（γ=2.0，上限10），并设置d_max=10m、top-k=20。排序使用加权度中心性且按升序排列，使高影响力智能体获得更丰富上下文；社区感知模块通过可微MinCut优化软分配，无需真实群体标注。Cycle Mamba通过拼接反向与正向序列进行单次扫描，并用可学习标量θ（初始0）平衡前后向输出；目标预测使用自我智能体最后k=3步特征以编码方向和速度。复杂度为线性O(N)，相比注意力O(N^2)具有优势。局限包括：TTC计算假设速度恒定，且社区分配可能受噪声影响；物理实验仅集成到SFM，尚未在真实高密度人群上全面评估。"
+      },
+      "affiliations": [
+        "National Cheng Kung University"
+      ],
+      "affiliations_text": "National Cheng Kung University",
+      "score": 4.10119272811993,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.21386v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821386v1-model-of-models-when-does-emitting-a-specialist-beat-attending-adapting-or-tuning",
+      "source": "arxiv",
+      "title": "Model of Models: When Does Emitting a Specialist Beat Attending, Adapting, or Tuning?",
+      "authors": [
+        "John C. Howell"
+      ],
+      "authors_text": "John C. Howell",
+      "abstract": "Given a task described by a few examples, how should a model be specialized to it? Four mechanisms are available -- zero-shot, in-context attention, test-time gradient adaptation, and emitting specialist weights from a hypernetwork -- yet the operating regime of the last is rarely mapped. We run the identical four-way comparison across six tasks spanning regression, generation, language modeling, reinforcement learning, and clinical and genomic classification, holding the specialist, the context, and (where we can) the training budget fixed. The clearest wins for emission are about cost at matched quality: it ties the state-of-the-art amortized tabular model (TabPFN) on clinical few-shot classification while emitting a reusable specialist instead of re-attending the support set per query, and reaches noise-floor shape generation with a $132$-float per-instance program. On few-shot sinusoid regression it is $2$--$3$ orders of magnitude below MAML at zero test-time gradient steps -- a margin that narrows to $\\sim$$30\\times$ but persists once training budgets are equalized. Emission cannot match in-context attention on high-dimensional sequence modeling: under matched-budget pre-training a one-pass adapter recovers only a minority of the in-context gain ($14.0\\pm0.9\\%$ at $5$M, $11.2\\pm0.5\\%$ at $15$M), and a LoRA-rank sweep shows this shortfall is a partial capacity limit -- capture climbs from $5\\%$ to $21\\%$ as rank grows but plateaus far below full recovery. Mechanism ablations confirm the emitted specialist is genuinely task-conditioned, not a memorized prior; and, more speculatively, emitted specialists compose in weight space -- interpolating two of them tracks the corresponding blend of their functions. We close with a falsifiable thesis, operationalized through a per-task resolution measure, bounding when each conditioning mechanism should be preferred.",
+      "url": "http://arxiv.org/abs/2608.21386v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21386v1",
+      "tldr": "TLDR: This paper systematically compares four ways to specialize a model to a few-shot task—zero-shot, in-context attention, gradient adaptation, and hypernetwork-based weight emission—across six tasks, showing that emission wins mainly through cost at matched quality on low-dimensional amortizable tasks but cannot match in-context attention for high-dimensional sequence modeling, with a proposed per-task resolution measure to predict when each mechanism should be preferred.",
+      "detailed_reading": {
+        "motivation": "研究动机是系统比较零样本、上下文注意力、测试时梯度适应和超网络发射专家权重这四种模型特化机制，特别是绘制发射机制的适用边界，因为其操作范围很少被系统映射。作者通过六个任务五个领域的受控四路对比，旨在确定何时发射优于其他机制。",
+        "method": "方法上，构建共享专家和固定预算的统一框架。给定任务上下文集C_tau，四种机制分别为：零样本使用固定参数，上下文注意力将样本拼接进查询窗口，梯度适应通过SGD微调，MoM通过超网络直接发射专家参数。超网络使用深度集或集合变换器编码上下文，输出完整权重或FiLM调制，并采用RMS归一化目标进行端到端训练。推理时，MoM单次前向生成专家权重，随后专家可被复用，无需在查询窗口保留上下文。在六个任务上进行比较，并引入每任务分辨率-K度量来预测发射性能。",
+        "result": "核心结果包括：在少样本正弦回归中，MoM在零测试时梯度步长下达到MSE 0.0004，比MAML低2-3个数量级，预算匹配后差距缩小至约30倍但仍存在；在临床分类上持平TabPFN；形状生成达到噪声基底，每实例仅132浮点。但在高维序列建模（语言建模）中，发射只能恢复上下文增益的14.0±0.9%（5M预算）和11.2±0.5%（15M预算），且不随规模增长；LoRA秩增加从5%提升到21%，仍远未完全恢复。机制消融证实发射专家是任务条件的，而非记忆先验；发射专家在权重空间可组合。",
+        "conclusion": "结论是发射机制在低维可摊销任务族中占据优势，提供零测试时梯度步长和可重用专家，但在高维序列建模中无法匹配上下文注意力，且差距不随模型规模缩小。作者提出可证伪论点，通过分辨率度量界定各机制的最佳使用条件，强调发射的成本效益优势更多体现在匹配质量下的成本。",
+        "key_details": "关键细节包括：发射权重需RMS归一化目标，专家输入特征化必须匹配数据函数类；超网络采用深度集或集合变换器保证排列不变性。训练时需注意预算匹配（MAML与MoM的episode数不同），MoM的MSE相对标准差大，比值解释需谨慎。形状生成中并行解码贡献约20倍加速，发射额外约3倍；语言建模的容量限制通过LoRA秩扫描定位（5%到21%随秩增长但饱和）；分辨率-K可事先预测发射优势，局限性是高维序列建模中发射失败和函数类不匹配。"
+      },
+      "affiliations": [
+        "Nineonefour"
+      ],
+      "affiliations_text": "Nineonefour",
+      "score": 4.019931369060948,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.21398v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821398v1-runtime-action-interference-for-ai-control-of-alphastar-in-starcraft-ii",
+      "source": "arxiv",
+      "title": "Runtime Action Interference for AI Control of AlphaStar in StarCraft II",
+      "authors": [
+        "Jaymari Chua",
+        "Chen Wang",
+        "Liming Zhu",
+        "Lina Yao"
+      ],
+      "authors_text": "Jaymari Chua, Chen Wang, Liming Zhu, Lina Yao",
+      "abstract": "A trained reinforcement learning policy does not determine the complete behavior that users encounter: deployment code still schedules, admits, suppresses, or replaces its proposed actions. We contribute \\emph{runtime action interference} (RAI), an AI control mechanism that preserves policy parameters while regulating action pacing and filtering configured action patterns after inference. RAI releases a proposed action only when its cooldown condition is satisfied and its content detector does not flag the action; otherwise, it dispatches a no-op. The detector covers specified toxic behaviors, including worker-unit harassment, while the cooldown controls action rate. We implement RAI in a replication of AlphaStar actor.py and make the implementation and reproducibility materials available through an open source code repository. We deployed RAI in a \\textit{StarCraft~II} human participant study that compared two presentations of the same opponent with high capability and rate limited actions; we withheld its capability claim in one presentation and disclosed it in the other. On response scales from 1 to 5, we observed pooled fairness, trust, and toxicity means of 3.90, 3.50, and 2.00 under claim withholding, compared with 2.62, 4.31, and 2.85 under disclosure. Disclosure corresponded with lower perceived fairness and higher perceived toxicity across every expertise group, whereas trust increased among novices and experts but decreased among intermediate participants. Our human evaluation therefore shows that perceptions of an opponent controlled through RAI can vary substantially with the capability information presented to users, even when the configured control remains constant. We conclude that human-computer evaluations must separate control within the execution stack from capability disclosure and assess fairness, trust, and toxicity as distinct dimensions of human experience.",
+      "url": "http://arxiv.org/abs/2608.21398v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21398v1",
+      "tldr": "RAI is a post-inference AI control mechanism that regulates action pacing and filters toxic action patterns without modifying policy parameters, and a human study in StarCraft II shows that disclosing versus withholding the opponent's capability claim significantly changes perceived fairness, trust, and toxicity even when the controller is identical.",
+      "detailed_reading": {
+        "motivation": "训练后的强化学习策略并不完全决定用户遇到的行为，部署堆栈仍会在推理后调度、抑制或替换动作。因此需要一种不修改策略参数、在推理后对动作执行进行控制的机制，以调节动作节奏并过滤配置的有害行为。同时，人类评估中需要区分执行栈内的控制与能力披露对用户体验的影响。",
+        "method": "提出运行时动作干扰（RAI），在策略推理后、动作分发前添加确定性准入规则：维护冷却状态c_t，通过时间框架资格E_phi(c_t,t)和内容检测器T_psi(a_t^pi,h_t)两个正交谓词裁决；仅当两者均通过才释放动作，否则替换为no-op。策略参数固定，控制器参数phi和检测器配置psi决定行为。实现于AlphaStar actor.py，并记录审计事件。在星际争霸II中进行人类参与研究，比较同一高能力+RAI对手在能力声明隐藏（10人）与披露（13人）条件下的公平、信任、毒性评分，另有9人基线。",
+        "result": "在1-5评分下，能力隐藏时公平、信任、毒性池化均值分别为3.90、3.50、2.00；披露时分别为2.62、4.31、2.85。披露对应公平感降低、毒性感知提高，且在每个专家组中一致；信任在新手和专家中上升（新手+1.30，专家+1.35），但在中级参与者中下降（-0.75）。",
+        "conclusion": "人类评估必须分离执行栈中的控制与能力披露，并将公平、信任、毒性作为独立体验维度评估，因为即使控制器配置不变，能力信息也能显著改变用户感知。",
+        "key_details": "RAI在推理后作用于动作流，策略参数theta不变；冷却控制动作速率，内容检测器识别有毒模式（如工人单位骚扰）。审计记录包含时间戳、策略提议、冷却决策、检测器决策及原因、释放动作和控制器状态。人类研究焦点比较中，每个专家组别细胞样本量为2-5，分析为描述性，不作因果声明；提供开源实现、聚合数据和复现材料。另外，渲染器工具独立于RAI清理队列命令。"
+      },
+      "affiliations": [
+        "CSIRO",
+        "University of New South Wales"
+      ],
+      "affiliations_text": "CSIRO, University of New South Wales",
+      "score": 3.9875463380151226,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.21380v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/26/260821380v1-roboshape-information-theoretic-point-cloud-representations-for-privacy-aware-robot-perception",
+      "source": "arxiv",
+      "title": "RoboShape: Information-Theoretic Point Cloud Representations for Privacy-Aware Robot Perception",
+      "authors": [
+        "Oguzhan Baser",
+        "Mirac Sozen",
+        "Kaan Kale",
+        "Sandeep Chinchali",
+        "Sriram Vishwanath"
+      ],
+      "authors_text": "Oguzhan Baser, Mirac Sozen, Kaan Kale, Sandeep Chinchali, Sriram Vishwanath",
+      "abstract": "With the increased adoption of robotic agents operating in human environments by scanning and sharing 3D representations (e.g., for fleet learning, cloud-based planning, or collaborative mapping), collected point clouds reveal not just the objects in a scene but also sensitive spatial context, such as room function or information that occupants never consented to disclose. Traditional point cloud encoders offer no principled control over this: either all is preserved, or none. Hence, we introduce RoboShape, an information theory guided compression head following the frozen {\\tt Sonata} encoder. We project voxel-level embeddings using the Donsker-Varadhan formulation of mutual information (MI). Specifically, we maximize the MI between embeddings and object-level understanding while minimizing it for private attributes. RoboShape leads to 87.5\\% smaller embeddings that retain 98.7\\% of object classification utility while collapsing sensitive attribute predictions by 39.3\\% across the three real-world indoor LiDAR datasets. Its privacy-preserving embeddings are cheaper to transmit over the network or to train a model for any downstream tasks. We release the RoboShape codebase to give the robotics community a practical, encoder-agnostic tool for building perception pipelines that are compact, privacy-aware, and deployment-ready.",
+      "url": "http://arxiv.org/abs/2608.21380v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21380v1",
+      "tldr": "RoboShape introduces an information-theoretic, encoder-agnostic projection head that compresses voxel-level point cloud embeddings by maximizing mutual information with task-relevant object labels and minimizing it with sensitive room attributes, achieving 8× compression, 98.7% retained object classification utility, and 39.3% reduced privacy leakage across real-world LiDAR datasets.",
+      "detailed_reading": {
+        "motivation": "机器人部署中常需扫描并共享3D点云表示，但点云除物体信息外还隐含着房间功能等敏感空间上下文，而传统点云编码器无法在保留任务信息的同时有原则地抑制隐私信息，缺乏可量化的信息论控制手段。",
+        "method": "以冻结的预训练Sonata编码器将原始点云体素化并提取每个体素的512维嵌入x_k；RoboShape仅训练一个浅层投影层φ_Θ，将x_k映射为64维压缩嵌入z_k。训练时使用Donsker-Varadhan互信息估计器网络，分别估计z_k与原始嵌入的MI、与物体类别标签L(v_k)的任务MI、以及与敏感房间类型标签S(v_k)的隐私MI；联合样本来自同体素的配对，边缘样本通过对batch内标签洗牌构造。优化目标为γI(z;x)+λI(z;L)-μI(z;S)。训练采用两层交替：先更新MI估计器若干次以逼近互信息，再更新投影层参数使目标最大化；推理时仅保留冻结编码器和投影层，丢弃MI估计器。",
+        "result": "在ScanNet、Matterport3D、ARKitScenes三个真实室内LiDAR/RGB-D数据集上，RoboShape将体素嵌入压缩87.5%（8倍），物体分类AUROC从原始Sonata的0.990略降至0.978，保留98.7%的任务效用；敏感房间类型预测AUROC从0.9998大幅下降39.3%，隐私MI从0.247降至0.123 nats。t-SNE显示物体簇保持而房间类型簇弥散。",
+        "conclusion": "RoboShape是首个面向3D点云、基于互信息引导的隐私感知表示塑造方法，通过体素级分解使信息论优化在稀疏不规则点云上可解，以轻量即插即用模块实现了压缩、任务效用和隐私抑制的统一，可用于机器人感知管线的部署。",
+        "key_details": "关键细节包括：将每个体素嵌入视为独立MI样本，池化多场景体素组成固定维batch，从而解决变长点云MI估计难题；损失包含三项MI并引入γ、λ、μ超参平衡信息保持、任务效用与隐私抑制；投影层是唯一可训练参数，Sonata编码器保持冻结；MI估计器仅训练时使用，推理时丢弃以降低开销；压缩后的嵌入传输成本更低。局限在于依赖预训练编码器已有的体素级特征质量，且实验对象为室内场景，对室外开放场景的泛化有待验证。"
+      },
+      "affiliations": [
+        "Georgia Institute of Technology",
+        "Bogazici University",
+        "The University of Texas at Austin"
+      ],
+      "affiliations_text": "Georgia Institute of Technology, Bogazici University, The University of Texas at Austin",
+      "score": 3.966923022238337,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.21402v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821402v1-selective-cross-view-consistency-for-world-action-models-held-out-viewpoint-robustness-without-test-time-camera-information",
+      "source": "arxiv",
+      "title": "Selective Cross-View Consistency for World Action Models: Held-Out Viewpoint Robustness Without Test-Time Camera Information",
+      "authors": [
+        "Bingqi Huang",
+        "Bingchuan Wei",
+        "Yingkai Cai",
+        "Zhaokui Wang"
+      ],
+      "authors_text": "Bingqi Huang, Bingchuan Wei, Yingkai Cai, Zhaokui Wang",
+      "abstract": "World action models (WAMs) jointly denoise future video frames and robot actions, and the video prior is expected to generalize their control. Camera viewpoint change remains one of their hardest perturbation axes. We study a question specific to this model class: when training with same-state cross-view image pairs, on which output coordinates should a consistency loss be imposed? The WAM denoising target mixes view-covariant coordinates, namely the predicted future scene, with view-invariant coordinates, namely the action chunk, future proprioception, and value. We show that consistency applied to the covariant block is provably harmful, shrinking legitimate view-specific content to a fraction $1/(1+4λ)$ of its true value, and we verify this shrinkage law in controlled experiments. Selective cross-view consistency (SCVC) therefore constrains only the invariant block, requires no camera labels, extrinsics, depth, or view synthesis at training or test time, and leaves the deployment interface unchanged. We introduce a carve-and-hold-out evaluation protocol on the LIBERO-Plus camera track that separates a distribution-matched ceiling from genuine interpolation and extrapolation to held-out viewpoints, with a matched pair-trained control isolating the effect of the consistency term from pair exposure. On held-out orbital viewpoints beyond the training envelope, SCVC improves closed-loop success over the matched control by 12.2 points (95% CI [7.4, 17.0]; +15.5, CI [11.7, 19.4], under an independent second seed) -- an effect two further camera axes replicate -- while interpolation within the envelope shows no gain in either seed (-1.2 and -4.3 points) and in-distribution competence is preserved (-0.6, -0.2). We also report a cross-backbone audit showing that published camera-robustness numbers are confounded by wrist-camera pose stability.",
+      "url": "http://arxiv.org/abs/2608.21402v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21402v1",
+      "tldr": "Selective cross-view consistency (SCVC) improves world action models' robustness to held-out camera viewpoints by enforcing a consistency loss only on view-invariant outputs (actions, proprioception, value) and not on view-covariant future frames, avoiding a provable shrinkage bias and requiring no camera labels or test-time camera information.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Tsinghua University",
+      "score": 3.956805710601741,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.21388v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821388v1-gimbal-based-human-tracking-for-companion-robots-using-continual-learning",
+      "source": "arxiv",
+      "title": "Gimbal-Based Human Tracking for Companion Robots Using Continual Learning",
+      "authors": [
+        "Cong-Thanh Vu",
+        "Ching-Chieh Liu",
+        "Yen-Chen Liu"
+      ],
+      "authors_text": "Cong-Thanh Vu, Ching-Chieh Liu, Yen-Chen Liu",
+      "abstract": "Reliable and continuous human tracking is essential for natural human-robot interaction, particularly for companion robots. However, many existing approaches rely on wearable tags or fixed cameras with limited fields of view, which reduces system flexibility and often causes tracking failures when the target moves outside the sensing range. In this paper, we present a human tracking approach based on a gimbal-mounted camera integrated into a mobile robot. By actively controlling the gimbal mechanism, the camera can dynamically adjust its viewing direction to maintain the target within the field of view, even under substantial relative motion between the robot and the human. Furthermore, a continual learning strategy is applied to the person re-identification (ReID) task to adapt to changes in appearance and environmental conditions during long-term tracking. Experimental results demonstrate that the proposed system significantly improves the stability and continuity of human tracking, enables real-time re-identification, and provides responsive feedback for reliable tracking of human motion from walking to running. User studies further indicate that the proposed approach enhances user comfort by eliminating the need for wearable tags.",
+      "url": "http://arxiv.org/abs/2608.21388v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21388v1",
+      "tldr": "This paper presents a gimbal-mounted camera system for companion robots that, combined with continual learning for person re-identification, maintains continuous visual contact with a user across varied motions and positions, improving tracking stability and eliminating the need for wearable tags.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Cheng Kung University"
+      ],
+      "affiliations_text": "National Cheng Kung University",
+      "score": 3.88280482288181,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.21485v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821485v1-congruence-decomposition-with-neural-block-solvers-for-large-scale-pci-assignment",
+      "source": "arxiv",
+      "title": "Congruence Decomposition with Neural Block Solvers for Large-Scale PCI Assignment",
+      "authors": [
+        "Yeqing Qiu",
+        "Chengpiao Huang",
+        "Ye Xue",
+        "Akang Wang",
+        "Fan Xu",
+        "Zhipeng Jiang",
+        "Dong Zhang",
+        "Ruoyu Sun",
+        "Qingjiang Shi",
+        "Zhi-Quan Luo"
+      ],
+      "authors_text": "Yeqing Qiu, Chengpiao Huang, Ye Xue, Akang Wang, Fan Xu, Zhipeng Jiang, Dong Zhang, Ruoyu Sun, Qingjiang Shi, Zhi-Quan Luo",
+      "abstract": "Physical Cell Identity (PCI) assignment is essential for interference management in dense 5G networks. As cellular networks scale, PCI reuse becomes unavoidable, which may cause collisions, confusions, and multiple forms of modular interference. Jointly mitigating these effects gives rise to a large-scale, multi-objective combinatorial optimization problem that is difficult to solve efficiently at practical network scales. In this work, we propose a congruence decomposition framework with neural block solvers for large-scale PCI assignment. The proposed decomposition exploits the arithmetic structure of PCI values to decouple multiple modular interference objectives into a collection of blockwise Min-$k$-Partition subproblems, followed by a graph coloring procedure to resolve PCI conflicts. For the resulting NP-hard Min-$k$-Partition subproblems, we develop neural block solvers by parameterizing their relaxed quadratic formulations with graph neural networks, enabling efficient optimization at large scales. Discrete assignments are recovered through conditional expectation rounding with theoretical guarantees. Experiments on synthetic cellular graphs and real-world 5G networks show that the proposed method consistently outperforms existing modular-interference-aware baselines in modular interference reduction, conflict elimination, and computational efficiency.",
+      "url": "http://arxiv.org/abs/2608.21485v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21485v1",
+      "tldr": "The paper proposes a congruence decomposition framework with graph neural network-based block solvers that decouples large-scale 5G Physical Cell Identity (PCI) assignment into Min-\\(k\\)-Partition subproblems, achieving efficient multi-objective modular interference reduction, collision/confusion elimination, and a 2.04× speedup on real-world networks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shenzhen Research Institute of Big Data",
+        "Tongji University",
+        "University of Chinese Academy of Sciences",
+        "The Chinese University of Hong Kong, Shenzhen",
+        "Sun Yat-sen University",
+        "Huawei Technologies",
+        "Columbia University"
+      ],
+      "affiliations_text": "Shenzhen Research Institute of Big Data, Tongji University, University of Chinese Academy of Sciences, The Chinese University of Hong Kong, Shenzhen, Sun Yat-sen University, Huawei Technologies, Columbia University",
+      "score": 3.760656624314666,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.21390v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821390v1-on-the-optimized-use-of-non-orthonormality-constraints-for-the-quasi-static-ins-alignment-of-autonomous-underwater-and-surface-vehicles",
+      "source": "arxiv",
+      "title": "On the Optimized Use of Non-Orthonormality Constraints for the Quasi-Static INS Alignment of Autonomous Underwater and Surface Vehicles",
+      "authors": [
+        "Carlos Renato C. Durao",
+        "Felipe O. Silva",
+        "Itzik Klein",
+        "Vinıcius M. G. B. Cavalcanti",
+        "Adriano Frutuoso",
+        "Ettore A. de Barros",
+        "Jay A. Farrell"
+      ],
+      "authors_text": "Carlos Renato C. Durao, Felipe O. Silva, Itzik Klein, Vinıcius M. G. B. Cavalcanti, Adriano Frutuoso, Ettore A. de Barros, Jay A. Farrell",
+      "abstract": "Inertial navigation systems are specialized navigation apparatuses that equip almost all autonomous underwater and surface vehicles. They require precise initial alignment, i.e., determination of their initial attitude, which is typically achieved: (a) in quasi-static conditions (whenever possible); and (b) in two stages: Coarse Alignment (CA), using methods like TRI-axis Attitude Determination (TRIAD), and Fine Alignment (FA), via Zero Velocity Update (ZVU)-based Extended Kalman Filtering (EKF). However, conventional methods suffer from slow convergence and limited bias estimability. In response, this paper introduces: (a) an optimized version of a recently proposed CA method, namely, TRIAD with Coarse Bias Estimation (TRIAD-CBE); and (b) a novel FA EKF observation model that incorporates Non-Orthonormality (NON) error constraints derived from TRIAD, directly linking these errors to the inertial sensor biases. As validated through extensive Monte Carlo (MC) simulations, as well as real-world experiments using two Inertial Measurement Units (IMUs) of different grades, our approaches substantially accelerate the convergence of misalignment and bias estimates (from minutes to seconds), while maintaining accuracy/precision comparable to traditional techniques.",
+      "url": "http://arxiv.org/abs/2608.21390v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21390v1",
+      "tldr": "This paper introduces an optimized TRIAD-CBE method and a novel fine-alignment EKF observation model using TRIAD-derived non-orthonormality error constraints, accelerating INS misalignment and bias convergence from minutes to seconds for autonomous underwater and surface vehicles while maintaining accuracy comparable to traditional techniques.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Federal Institute of Education, Science and Technology of Amazonas",
+        "Federal University of Lavras",
+        "University of São Paulo",
+        "University of Haifa",
+        "Fluminense Federal Institute of Education, Science and Technology",
+        "Zoox, Inc."
+      ],
+      "affiliations_text": "Federal Institute of Education, Science and Technology of Amazonas, Federal University of Lavras, University of São Paulo, University of Haifa, Fluminense Federal Institute of Education, Science and Technology, Zoox, Inc.",
+      "score": 3.756987822713124,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.21410v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821410v1-position-robot-privacy-as-embodied-boundary-work-connecting-capabilities-contexts-and-design-responses-in-everyday-robotics",
+      "source": "arxiv",
+      "title": "Position: Robot Privacy as Embodied Boundary Work. Connecting Capabilities, Contexts, and Design Responses in Everyday Robotics",
+      "authors": [
+        "Liwen He",
+        "Shuning Zhang",
+        "Chengwen Zhang",
+        "Xin Yi",
+        "Chun Yu",
+        "Jihong Jeung",
+        "Xin Tong"
+      ],
+      "authors_text": "Liwen He, Shuning Zhang, Chengwen Zhang, Xin Yi, Chun Yu, Jihong Jeung, Xin Tong",
+      "abstract": "Robots are increasingly entering everyday environments where privacy is shaped not only by data practices, but also by spatial, bodily, social, and relational boundaries. Their embodied capabilities allow them to reshape these boundaries through situated action, challenging privacy framings centered on data flows, interface settings, or one-time consent. Prior work has examined robot privacy through sensing, data collection, telepresence, transparency, consent, bystander awareness, and multi-stakeholder governance. Building on this work, we propose embodied boundary privacy as a capability-by-context framing for examining how physically present robots may reshape privacy boundaries in situated interaction. Specifically, this framing organizes privacy risks across seven robot capabilities and five deployment contexts, asking how embodied capabilities enable boundary crossings and how situated contexts shape who is affected, how these crossings are interpreted, and when they become contested. We use this perspective to outline design and research implications for embodied privacy mechanisms, including boundary checkpoints, viewpoint-aware sensing control, remote-presence disclosure, object- and body-level access rules, constraints on socially persuasive privacy influence, and local interruption rights. We encourage HRI research, design, and governance to treat robot movement, orientation, proximity, object access, remote presence, and social expression as privacy-relevant actions whose meaning depends on context.",
+      "url": "http://arxiv.org/abs/2608.21410v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21410v1",
+      "tldr": "The paper proposes a \"capability-by-context\" framing of robot privacy as embodied boundary work, arguing that robots' physical capabilities—movement, viewpoint, proximity, object access, remote presence, and social expression—reshape privacy boundaries in everyday settings and outlining design and research implications for embodied privacy mechanisms.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tsinghua University",
+        "Beijing Academy of Artificial Intelligence",
+        "The Hong Kong University of Science and Technology (Guangzhou)",
+        "The Hong Kong University of Science and Technology"
+      ],
+      "affiliations_text": "Tsinghua University, Beijing Academy of Artificial Intelligence, The Hong Kong University of Science and Technology (Guangzhou), The Hong Kong University of Science and Technology",
+      "score": 3.746830644438889,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.21399v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821399v1-federated-ensemble-forecasting-under-supply-chain-market-volatility",
+      "source": "arxiv",
+      "title": "Federated Ensemble Forecasting Under Supply-Chain Market Volatility",
+      "authors": [
+        "Shunmukha Sagar Puppala"
+      ],
+      "authors_text": "Shunmukha Sagar Puppala",
+      "abstract": "Supply chain forecasting systems increasingly operate under market shocks, non-identically distributed regional demand, and limited willingness to centralize commercial data. This work proposes Federated Ensemble Forecasting with Negative-Correlation Learning (FEF NCL), a distributed method that trains specialized forecasting experts across client nodes while discouraging redundant model errors. The framework combines temporal feature encoders, client level drift scoring, reliability-weighted aggregation, and an explain ability layer that exposes the market and supplier variables most responsible for each forecast. A single synthetic dataset is used to evaluate the design. It contains 124,800 weekly SKU region observations from ten regional client nodes, 60 product families, 40 suppliers, five commodity groups, and a 2021-2024 volatility profile with explicit price-shock regimes. Because the dataset is synthetic, the reported results should be interpreted as controlled evidence of internal consistency rather than real-world validation. Across the synthetic test split, FEF NCL reduces weighted mean absolute percentage error from 13.9% for the best federated baseline to 12.4%, improves delay-risk macro-F1 from 0.755 to 0.801, and lowers the high volatility quintile error by 2.1 percentage points relative to SCAFFOLD. The analysis suggests that negative-correlation specialization is useful when clients face different supplier, freight, and commodity conditions, although deployment would require stronger privacy analysis, live drift monitoring, and operational calibration. Index Terms federated learning, ensemble learning, negative correlation learning, supply chain forecasting, market volatility, data drift, demand planning, risk governance",
+      "url": "http://arxiv.org/abs/2608.21399v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21399v1",
+      "tldr": "FEF-NCL is a federated ensemble forecasting method with negative-correlation learning and drift-aware aggregation that improves supply-chain demand forecasts under market volatility, reducing weighted MAPE from 13.9% to 12.4% on a synthetic multi-client dataset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "SAP"
+      ],
+      "affiliations_text": "SAP",
+      "score": 3.6424150200022405,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.21441v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821441v1-constructing-predictive-surgical-path-for-ai-based-capsulorhexis-skill-transfer",
+      "source": "arxiv",
+      "title": "Constructing Predictive Surgical Path for AI-based Capsulorhexis Skill Transfer",
+      "authors": [
+        "Mohammad Javad Ahmadi",
+        "Hamid D. Taghirad"
+      ],
+      "authors_text": "Mohammad Javad Ahmadi, Hamid D. Taghirad",
+      "abstract": "Automated training of surgeons is one of the most crucial factors that significantly minimize surgical training risks and expenses. With recent advances in artificial intelligence (AI) knowledge and available data from various surgeries, AI's involvement in surgical training is becoming very promising. It is recommended that at the early stages of AI development, it interferes in the surgery as a third agent alongside the trainer. As trust in AI increases, this process will lead to an AI agent acting as a trainer in the future. The first phase in which AI can intervene in the training process is to suggest an improved surgical path to the trainer. A platform must be constructed in the first step, to accomplish this task and to enhance the movement path of trainee surgeons. This paper introduces this platform along with an annotated capsulorhexis surgery dataset called the ARAS-Farabi dataset. In this research, a deep convolutional neural network is pre-trained with JIGSAWS and ARAS-Farabi surgical datasets that can extract surgical skill characteristics from surgery tool tip motion data. The proposed platform develops a reference model from the feature space of an expert surgeon's movement trajectory and proposes an improved path to enhance the skill of a novice surgeon. An optimization with two loss functions is utilized to create a path that raises the skill level of the novice surgeon's path while simultaneously predicting and preserving his/her intent. The results of this study reveal that, with the assistance of an AI agent, the trainee surgeon's movement path can be enhanced by at least 20 percent while maintaining his intentional objective. In addition to the recommended deep network, various tangible indicators have also been developed in this research to verify the level of trainee improvement.",
+      "url": "http://arxiv.org/abs/2608.21441v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21441v1",
+      "tldr": "This paper presents an AI-based platform that uses a deep CNN trained on JIGSAWS and a new capsulorhexis dataset (ARAS-Farabi) to construct an improved surgical path for novice surgeons by transferring expert skill characteristics while preserving the trainee's intent, achieving at least 20% path enhancement.",
+      "detailed_reading": null,
+      "affiliations": [
+        "K. N. Toosi University of Technology"
+      ],
+      "affiliations_text": "K. N. Toosi University of Technology",
+      "score": 3.6276057845949716,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.21496v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821496v1-the-geometry-of-ai-validation-exact-certification-limits-for-iid-best-of-n-search",
+      "source": "arxiv",
+      "title": "The geometry of AI validation: Exact certification limits for iid best-of-N search",
+      "authors": [
+        "Ricardo Fitas"
+      ],
+      "authors_text": "Ricardo Fitas",
+      "abstract": "AI systems increasingly generate alternatives, inspect evidence, and deploy a selected output. Validation is therefore target-relative: evidence certifies deployment only in directions resolved by the interventions that produced it. We represent validation and deployment rules as kernels over a reliability surface. Their span geometry separates replication, which reduces sampling noise, from new intervention directions, which reduce structural blindness. We make this principle exact for iid best-of-$N$ search. Under scalar ranking, randomized ties, maximum selection, bounded binary truth, and a stable rank-truth relation, knowing best-of-$n$ reliability through $n=m$ leaves exact ambiguity width $B_{m,N}=1+2\\sum_{r=1}^{m}(-1)^r\\cos^{2N}{rπ/[2(m+1)]}$. Explicit bounded worlds attain the entire interval, and the complete prefix is information-maximal among reliability-mean audits confined to $n\\le m$. The governing scale is $m^2/N$: when $m$ is proportional to $\\sqrt{N}$, ambiguity remains about 0.83, while width $\\varepsilon$ requires $m$ of order $\\sqrt{N\\log(1/\\varepsilon)}$. Monotonicity gives an exact uniform-approximation frontier; a Lipschitz bound gives an exact capped-tail dual and order-sharp $L/m^2$ ambiguity. These results yield a two-gate audit rule: establish structural coverage, then add independent tasks for precision. Retrospective studies of mathematical reasoning and code selection construct compatible deployment values with wide separation and show that a score-tail audit rule frozen on 82 discovery tasks substantially reduces held-out error. Beyond iid search, the geometry applies only to known or independently estimated kernels; the empirical analyses are illustrative rather than prospective interventions.",
+      "url": "http://arxiv.org/abs/2608.21496v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21496v1",
+      "tldr": "This paper formalizes AI validation as a target-relative inverse problem using kernel span geometry, derives exact certification limits for iid best-of-N search—where auditing best-of-m reliability leaves an ambiguity governed by m²/N—and proposes a two-gate audit rule combining structural coverage with independent task precision.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Darmstadt"
+      ],
+      "affiliations_text": "Technical University of Darmstadt",
+      "score": 3.5289038020554733,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.21387v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821387v1-multimodal-language-model-driven-interaction-and-companionship-for-service-robots-in-elderly-care-facilities",
+      "source": "arxiv",
+      "title": "Multimodal-Language-Model-Driven Interaction and Companionship for Service Robots in Elderly-Care Facilities",
+      "authors": [
+        "Ching-Chieh Liu",
+        "Cong-Thanh Vu",
+        "Yen-Chen Liu"
+      ],
+      "authors_text": "Ching-Chieh Liu, Cong-Thanh Vu, Yen-Chen Liu",
+      "abstract": "Service robots are increasingly deployed in elderly-care facilities to alleviate caregiver workload and enhance the quality of daily care. However, most existing studies focus on isolated service functions and lack integrated capabilities for continuous companionship, natural interaction, and safety monitoring. In this paper, we present an intelligent companion robot system that unifies active visual human-following, real-time LLM-driven speech interaction for intent understanding and task execution, and VLM-based safety monitoring for fall detection and abnormal posture assessment. The perception layer ensures robust human tracking and uses an active gimbal to maintain the user in view during occlusions or abrupt movements. At the interaction layer, a Large Language Model interprets spoken requests and maps them to robot actions, enabling escorting and semantic navigation. Simultaneously, a VLM-based safety agent continuously analyzes visual observations to detect fall-related or abnormal postures and triggers emergency responses when necessary. Experimental results demonstrate the system's ability to reliably follow and interact with humans, while effectively detecting potential falls to ensure user safety.",
+      "url": "http://arxiv.org/abs/2608.21387v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21387v1",
+      "tldr": "The paper presents an intelligent companion robot for elderly-care facilities that integrates active visual human-following, LLM-driven speech interaction for intent understanding and task execution, and VLM-based safety monitoring for fall detection, enabling continuous companionship, natural interaction, and timely emergency response.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Cheng Kung University"
+      ],
+      "affiliations_text": "National Cheng Kung University",
+      "score": 3.514507136313338,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.21416v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821416v1-operational-digital-twin-clinics-enable-task-based-evaluation-of-embodied-ai",
+      "source": "arxiv",
+      "title": "Operational digital twin clinics enable task-based evaluation of embodied AI",
+      "authors": [
+        "Xinyuan Wu",
+        "Jingrao Zhang",
+        "Mengdi Xu",
+        "Henry K. Chu",
+        "Mingguang He",
+        "Danli Shi"
+      ],
+      "authors_text": "Xinyuan Wu, Jingrao Zhang, Mengdi Xu, Henry K. Chu, Mingguang He, Danli Shi",
+      "abstract": "Embodied artificial intelligence (AI) must be tested in the clinical environments where it will operate, but building realistic, robot-testable settings is costly and difficult to scale. Here we show that routine clinic images can be transformed into operational digital twins for task-based evaluation of embodied AI. Using 39 ophthalmic clinic scenes, we converted single photographs into editable, simulator-ready environments and assessed reconstruction quality, room-scale geometry, mesh grounding, multi-robot feasibility, perturbation sensitivity and closed-loop policy performance. The reconstructed scenes preserved workspace structure, while local editing enabled controlled device reconfiguration. Device meshes, collision proxies and semantic anchors converted visual reconstructions into contact-aware simulation scenes. Across three robot embodiments, shared task targets showed different patterns of reachability and contact feasibility. Small device translations and rotations produced task-specific changes in contact margins that were not captured by visual similarity alone. Digital-twin trajectories also supported local policy learning and closed-loop evaluation. These findings establish operational validity as a key principle for clinical digital twins and provide an intermediate layer between offline development and physical deployment of embodied AI in healthcare.",
+      "url": "http://arxiv.org/abs/2608.21416v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21416v1",
+      "tldr": "Routine clinic photographs can be transformed into operational digital twins—editable, contact-aware simulation environments—that enable task-based evaluation of embodied AI in clinical settings, including multi-robot feasibility, perturbation sensitivity, and policy learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hong Kong Polytechnic University",
+        "Centre for Eye and Vision Research (CEVR)",
+        "Tsinghua University",
+        "University of Macau"
+      ],
+      "affiliations_text": "The Hong Kong Polytechnic University, Centre for Eye and Vision Research (CEVR), Tsinghua University, University of Macau",
+      "score": 3.434384956356407,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.21433v2",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821433v2-the-setting-of-imu-parameters-in-kalman-filtering-based-information-fusion",
+      "source": "arxiv",
+      "title": "The Setting of IMU Parameters in Kalman Filtering-based Information Fusion",
+      "authors": [
+        "Qiang Hu",
+        "Yanhua Zou",
+        "Shuaiyi Huo",
+        "Haibo Ge",
+        "Wei Ouyang"
+      ],
+      "authors_text": "Qiang Hu, Yanhua Zou, Shuaiyi Huo, Haibo Ge, Wei Ouyang",
+      "abstract": "The setting or tuning of specifications for the inertial measurement unit (IMU) is tricky in sensor fusion. The underneath conundrum is caused by the fact that the working condition of IMU is more complex than the stationary calibration scenario. Since the noises and biases instabilities calibrated under static condition cannot accommodate other cases, the effective tuning of IMU parameters largely hinges on the experience or profound understanding of the system. In the current work, the setting method of IMU parameters based on Allan variance calibration is delved into within the Kalman filtering framework. Specifically, the relationship between the power sepctral density and Allan variance is leveraged in formulating the process uncertainty in continuous-time filtering. Three typical IMU-based sensor fusion systems, including INS/GNSS integration, LiDAR-inertial odometry, and visual-inertial odometry are considered to show the feasibility and effectiveness of this parameter setting process.",
+      "url": "http://arxiv.org/abs/2608.21433v2",
+      "pdf_url": "https://arxiv.org/pdf/2608.21433v2",
+      "tldr": "The paper proposes a systematic method for setting IMU noise and bias-instability parameters in Kalman filtering-based sensor fusion by leveraging the relationship between power spectral density and Allan variance calibration, and demonstrates its feasibility across INS/GNSS integration, LiDAR-inertial odometry, and visual-inertial odometry.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tongji University"
+      ],
+      "affiliations_text": "Tongji University",
+      "score": 3.3979342130273342,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.21473v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821473v1-class-conditioned-gaussian-mixture-modeling-for-imbalanced-time-series-quantification",
+      "source": "arxiv",
+      "title": "Class-Conditioned Gaussian Mixture Modeling for Imbalanced Time Series Quantification",
+      "authors": [
+        "Md Shahriar Kabir",
+        "Mayesha Maliha R. Mithila",
+        "Anne H. H. Ngu",
+        "Mylène C. Q. Farias",
+        "Byron Gao"
+      ],
+      "authors_text": "Md Shahriar Kabir, Mayesha Maliha R. Mithila, Anne H. H. Ngu, Mylène C. Q. Farias, Byron Gao",
+      "abstract": "Quantification, estimating class prevalences in bags of unlabeled instances is vital in domains where aggregate statistics are more important than individual instance labels, such as biosignal monitoring, fall detection, and activity recognition. We investigate this issue in the challenging setting of imbalanced time series data and develop CC-GMNet-TS, a class-conditioned Gaussian mixture quantifier that combines a Transformer-based feature extractor with per-class latent mixtures. Unlike previous mixture-based quantifiers, which use a single Gaussian mixture shared by all classes, CC-GMNet-TS assigns each class its own compact mixture in a bounded latent space and scores segment embeddings against these class-specific components to create bag-level representations that emphasize rare but informative patterns. Bags are constructed from labeled pools using the Artificial Prevalence Protocol (APP) and prior shift bag sampling (PShift) to cover a wide range of class prevalence scenarios, and the model is trained end-to-end with a quantification-oriented loss. Experiments on three benchmarks: EMG Data for Gestures, SmartFallMM, and UCI-HAR show that CC-GMNet-TS achieves lower error across the three benchmarks compared to traditional aggregators and recent deep quantifiers, while ablations confirm the contributions of both the Transformer backbone and class-conditioned mixtures during PShift.",
+      "url": "http://arxiv.org/abs/2608.21473v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21473v1",
+      "tldr": "CC-GMNet-TS is a deep quantifier for imbalanced time series that uses a Transformer encoder and per-class Gaussian mixtures in a bounded latent space to estimate bag-level class prevalences, achieving lower error than classical and deep baselines on EMG, SmartFallMM, and UCI-HAR benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Texas State University"
+      ],
+      "affiliations_text": "Texas State University",
+      "score": 3.1831471055210656,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.21420v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821420v1-evaluating-human-and-llm-generated-thematic-analysis-in-hri-for-vulnerable-populations-a-comparative-and-ethical-analysis",
+      "source": "arxiv",
+      "title": "Evaluating Human and LLM-Generated Thematic Analysis in HRI for Vulnerable Populations: A Comparative and Ethical Analysis",
+      "authors": [
+        "Alva Markelius",
+        "Fethiye Irmak Dogan",
+        "Julie Bailey",
+        "Hatice Gunes"
+      ],
+      "authors_text": "Alva Markelius, Fethiye Irmak Dogan, Julie Bailey, Hatice Gunes",
+      "abstract": "Thematic analysis (TA) has long been regarded as an inherently human, reflexive, and interpretive process. However, the extent to which LLM-generated TA is appropriate for Human-Robot Interaction (HRI) research involving vulnerable populations remains largely unexamined and raises critical questions about validity and ethics, particularly in sensitive research contexts. This paper presents a comparative study of human- and LLM-generated TA in an HRI context with a focus on vulnerable populations. We evaluate both objective and semantic agreement between human- and LLMgenerated themes, and examine whether observed divergences reflect systematic interpretive patterns with ethical significance. Our analysis investigates whether LLM-generated TA risks marginalising or misrepresenting the experiences of vulnerable participants, with implications for researchers employing LLM-assisted TA in HRI.",
+      "url": "http://arxiv.org/abs/2608.21420v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21420v1",
+      "tldr": "This paper presents a comparative and ethical analysis of human- versus LLM-generated thematic analysis in Human-Robot Interaction research with vulnerable populations, evaluating objective and semantic agreement while examining whether divergences risk misrepresenting marginalized participants' experiences.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cambridge"
+      ],
+      "affiliations_text": "University of Cambridge",
+      "score": 2.7852384476005296,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2608.21499v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821499v1-selection-of-heart-sound-segments-for-synchronous-classification-of-multi-channel-heart-sounds",
+      "source": "arxiv",
+      "title": "Selection of Heart Sound Segments for Synchronous Classification of Multi-channel Heart Sounds",
+      "authors": [
+        "Marcelo Nogueira",
+        "Jorge H. Oliveira",
+        "Carlos F. Ferreira",
+        "Miguel T. Coimbra",
+        "Alípio M. Jorge"
+      ],
+      "authors_text": "Marcelo Nogueira, Jorge H. Oliveira, Carlos F. Ferreira, Miguel T. Coimbra, Alípio M. Jorge",
+      "abstract": "Cardiac auscultation remains the most cost-effective screening procedure for cardiovascular diseases, and requires listening at the four main auscultation spots. Despite this, automatic heart sound analysis algorithms mostly classify patients using a single heart sound (single-channel), or, when using more than one (multi-channel), analyze each channel individually. To our knowledge, no prior work classifies patients through the synchronous analysis of multi-channel heart sounds, following the procedure used by physicians. This motivates us to study whether synchronous multi-channel analysis outperforms single-channel approaches, and whether it holds an advantage over asynchronous multi-channel methods that analyze channels one by one, potentially by capturing inter-channel interference phenomena. To answer these questions, we introduce a selection algorithm that identifies optimal heart sound segments from each of the four auscultation spots, which are then fed into a multi-input CNN that classifies patients by analyzing the four selected sounds simultaneously. Our synchronous approach, combining the proposed selection algorithm with a multi-input CNN, achieves a superior overall accuracy of 96.5\\%, a 9.1\\% gain over the best-performing single-channel and asynchronous multi-channel methods. The benefit of the proposed segment selection strategy over random selection is confirmed by a paired statistical significance test ($p = 0.003$). These results were obtained on 735 patients from the CirCor DigiScope dataset with complete recordings from all four spots, and their scope and generalizability are discussed in light of this and other methodological considerations.",
+      "url": "http://arxiv.org/abs/2608.21499v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21499v1",
+      "tldr": "By introducing a segment selection algorithm and a multi-input CNN for the synchronous analysis of heart sounds from all four auscultation spots, this work achieves superior patient classification accuracy (96.5%), significantly outperforming both single-channel and asynchronous multi-channel methods on the CirCor DigiScope dataset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Instituto Superior de Engenharia do Porto",
+        "Universidade da Maia",
+        "INESC TEC",
+        "Universidade do Porto"
+      ],
+      "affiliations_text": "Instituto Superior de Engenharia do Porto, Universidade da Maia, INESC TEC, Universidade do Porto",
+      "score": 2.5994377453771156,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2608.21404v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/26/260821404v1-tolerance-dependent-inspection-disagreement-between-a-fixed-cmm-and-a-portable-articulated-arm-cmm",
+      "source": "arxiv",
+      "title": "Tolerance-Dependent Inspection Disagreement Between a Fixed CMM and a Portable Articulated-Arm CMM",
+      "authors": [
+        "Md Manjurul Ahsan",
+        "Hamidreza Samadi",
+        "Shivakumar Raman"
+      ],
+      "authors_text": "Md Manjurul Ahsan, Hamidreza Samadi, Shivakumar Raman",
+      "abstract": "Fixed coordinate measuring machines (CMMs) and portable articulated-arm CMMs are often assigned to the same inspection task, but their nominal accuracy specifications do not show whether a change of instrument will preserve the disposition of a part. The question is not simply how far the two results differ, but whether that difference crosses the tolerance boundary. We examined this issue with recorded measurements of cylindrical, cubic, and spherical features under nominal 20 °C and 30 °C conditions. Repeated records and two roughness profiles without sufficient acquisition information were removed, leaving six dimensional and four form profiles. For each dimensional feature, the distances of the two system means from nominal define the exact tolerance interval in which the systems receive opposite direct labels. The fixed-CMM stream was approximately 11.2 μm higher than the articulated-arm stream at both conditions. All four form profiles fell on opposite sides of the recorded 10 μm upper limit. The dimensional disagreement intervals also overlapped strongly; their mean widths were 6.573 μm at 20 °C and 4.995 μm at 30 °C. The results clarify why an average difference between instruments is not, by itself, a measure of substitution risk. The proposed tolerance map identifies the feature-tolerance combinations for which instrument choice can change the recorded inspection label and, therefore, where a controlled equivalence study and a task-specific uncertainty budget are needed before substitution.",
+      "url": "http://arxiv.org/abs/2608.21404v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21404v1",
+      "tldr": "A fixed CMM and a portable articulated-arm CMM can assign opposite inspection labels to the same feature depending on the tolerance, so a tolerance-dependent map—not just the average instrument difference—is needed to identify where substitution poses decision risk.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Oklahoma"
+      ],
+      "affiliations_text": "University of Oklahoma",
+      "score": 2.3979781355335055,
+      "score_text": "2.4"
+    }
+  ],
+  "errors": []
+}
