@@ -1,0 +1,752 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-27T13:09:31.175312",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2608.24970v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/27/260824970v1-physics-informed-error-field-learning-a-post-training-optimization-framework-for-physics-informed-neural-networks",
+      "source": "arxiv",
+      "title": "Physics-Informed Error Field Learning: A Post-Training Optimization Framework for Physics-Informed Neural Networks",
+      "authors": [
+        "Jiuyun Sun",
+        "Yong Zhang"
+      ],
+      "authors_text": "Jiuyun Sun, Yong Zhang",
+      "abstract": "Physics-Informed Neural Networks (PINNs) have emerged as an important class of numerical methods for solving partial differential equations (PDEs). However, during the late-stage optimization process, further parameter updates often yield diminishing accuracy improvements while increasing computational costs. To address this issue, this paper proposes a Physics-Informed Error Field Learning (PIEFL) framework for PINNs. Unlike conventional approaches that continuously approximate the solution field using a single network, PIEFL introduces an auxiliary error network after the primary network achieves satisfactory accuracy and shifts the learning objective from the solution field to the error field. By deriving error control equations under physical constraints, the error network learns the discrepancy between the current approximation and the exact solution, and the learned error correction is combined with the primary prediction to improve solution accuracy. The proposed framework avoids continuous optimization of the entire solution space and focuses computational resources on correcting existing prediction errors. Moreover, PIEFL requires no modification to the primary network architecture, making it compatible with existing PINN models and applicable as a general post-training optimization strategy. Numerical experiments on representative PDEs demonstrate that PIEFL achieves higher solution accuracy under the same computational budget, validating its effectiveness in improving the performance of PINNs.",
+      "url": "http://arxiv.org/abs/2608.24970v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24970v1",
+      "tldr": "PIEFL is a post-training optimization framework for PINNs that shifts the learning objective from the solution field to a physics-constrained error field learned by an auxiliary network, combining its correction with the primary prediction to achieve higher accuracy under the same computational budget without modifying the original network architecture.",
+      "detailed_reading": {
+        "motivation": "物理信息神经网络（PINN）在训练后期存在明显的收益递减现象：继续更新网络参数只能带来微小的精度提升，却显著增加计算成本。为此，本文提出一种后训练优化框架，将学习目标从解场转向误差场，以更高效地利用计算资源提升解精度。",
+        "method": "PIEFL采用级联两阶段架构。第一阶段训练标准PINN作为主网络，得到近似解u_p和物理残差f_p；第二阶段固定主网络参数，引入辅助误差网络学习误差场u_e，其物理控制方程通过将u=u_p+u_e代入原PDE推导为∂u_e/∂t+N_e[u_e]+f_p=0，其中N_e[u_e]=N[u_p+u_e]-N[u_p]。误差网络的损失由误差场初边值数据损失MSE_ue和物理残差损失MSE_fe组成，误差初边值由原始IC/BC减去主网络预测得到。训练完成后最终解为u_final=u_p+α·hat_u_e，其中α为输出缩放系数。该方法无需修改主网络架构，可作为通用后训练优化策略。",
+        "result": "在KdV方程实验中，主网络预测相对误差为3.846063e-3，误差网络单独预测误差为1.659345e-2，PIEFL最终预测误差降至1.469116e-4；而训练15000步的标准PINN相对误差为9.480554e-4。误差演化曲线表明，PIEFL在约7000步时就已达到标准PINN训练15000步的精度，且后期误差下降更快、波动更小。",
+        "conclusion": "PIEFL通过将学习目标从解场切换为误差场，避免了持续优化整个解空间，能够将计算资源集中用于修正已有预测误差。在相同计算预算下，PIEFL可获得比标准PINN更高的解精度，且与现有网络结构改进、自适应采样、损失加权等增强技术兼容，是一种高效通用的PINN后训练优化策略。",
+        "key_details": "数值实验中网络结构为[2,20,20,20,20,1]；KdV方程求解域为[-10,10]×[-1,1]，训练点200个，配点8000个；主网络和误差网络的Adam迭代次数分别设为5000和10000；误差网络输出缩放系数α设为0.001。误差场幅值通常较小，引入α可降低学习难度。实际使用中需要主网络先达到满意精度，误差网络才能有效学习残差；对于强非线性或高维问题，误差场的物理残差计算复杂度可能较高。"
+      },
+      "affiliations": [
+        "Shandong University of Science and Technology"
+      ],
+      "affiliations_text": "Shandong University of Science and Technology",
+      "score": 6.861734556616598,
+      "score_text": "6.9"
+    },
+    {
+      "id": "2608.25084v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/27/260825084v1-the-frame-kernel-method-for-multiscale-operator-learning",
+      "source": "arxiv",
+      "title": "The Frame Kernel Method for Multiscale Operator Learning",
+      "authors": [
+        "Branden Frieden",
+        "Ryan Whitehead",
+        "M. Keith Ballard",
+        "Robert M. Kirby",
+        "Varun Shankar"
+      ],
+      "authors_text": "Branden Frieden, Ryan Whitehead, M. Keith Ballard, Robert M. Kirby, Varun Shankar",
+      "abstract": "We present a natively multiscale operator learning method for the surrogate modeling of (numerical solvers for) multiscale partial differential equations (PDEs). The primary novelty of our method lies in a novel multiscale kernel frame function approximation technique. Leveraging this new kernel frame technique, we cast the operator learning problem as one of learning frame coefficients of output functions as a function of frame coefficients of input functions. The generalization step then automatically allows for a multiscale decomposition of the output functions. Our method is applicable to both tensor-product grids and point clouds. We present interpolation proofs, error estimates, and numerical convergence rates for our frame approximation. We the demonstrate the applicability of our method for the surrogate modeling of inherently multiscale PDEs. The new multiscale frame kernel method is significantly more accurate than popular neural operators on challenging problems from the literature, while simultaneously admitting an a posteriori multiscale decomposition upon generalization.",
+      "url": "http://arxiv.org/abs/2608.25084v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25084v1",
+      "tldr": "The paper introduces a natively multiscale operator learning method based on a novel multiscale kernel-frame approximation, which learns maps between frame coefficients and provides accurate surrogate models for multiscale PDEs with automatic a posteriori scale decomposition, outperforming popular neural operators.",
+      "detailed_reading": {
+        "motivation": "多尺度偏微分方程的代理建模需要算子学习方法能够显式表示和分离不同空间尺度，而现有神经算子和核方法在表示多尺度结构时存在局限，如依赖频率分离、网格结构或缺乏原生多尺度坐标。本文旨在开发一种原生多尺度的算子学习方法，无需架构调优即可在训练和预测中暴露各空间尺度。",
+        "method": "提出帧核方法（Frame Kernel Method, FKM）。首先构造多尺度核框架：在采样点集上建立嵌套中心层级，每层使用不同支撑半径的紧支撑Wendland径向基函数，形成冗余字典；通过求解最小范数插值系数（利用A^T=QR分解）将输入输出函数投影到frame系数。算子学习阶段，将输入函数的frame系数作为核特征，学习到输出函数frame系数的映射。训练时对每对样本分别计算输入输出系数，推理时预测输出系数并按层组织，实现多尺度分解。方法支持张量积网格和点云，网格用dyadic thinning，点云用farthest-point traversal选择中心，必要时添加边界辅助中心；离散评估矩阵稀疏，用k-d树范围查询组装。",
+        "result": "在多个具有挑战性的多尺度PDE代理建模问题上，FKM相比vanilla kernel method (VKM)和流行的神经算子（如FNO等）将预测误差降低了1到4个数量级，同时预测结果可进行后验多尺度分解，具有更高的准确性和可解释性。此外，作者提供了插值证明、Sobolev误差估计和数值收敛率，验证了frame近似的理论性质。",
+        "conclusion": "帧核方法是一种原生多尺度的算子学习方法，通过构造冗余多尺度核框架，将算子学习转化为frame系数间的映射，在复杂多尺度PDE问题上显著优于现有神经算子，并额外提供后验多尺度分解能力。该方法适用于规则网格和散乱点云，具有扎实的理论保证和计算可行性。",
+        "key_details": "使用Wendland紧支撑正定径向基函数，支撑半径按ρ_j=η2^j s0指数增长，s0为最细层局部间距（网格最小间距或点云中位最近邻距离）。中心层级通过dyadic thinning或farthest-first traversal构造，保证嵌套性。最小范数系数通过A^T=QR求得，单次分解可复用，无需额外正则化。误差分析基于scattered-zeros不等式，得到Sobolev估计，并推测双重原生空间阶数（与诱导核解释一致）。实际实现中需注意边界覆盖，可能添加边界辅助中心。计算复杂度受稀疏矩阵和k-d树查询影响，适合大规模问题。"
+      },
+      "affiliations": [
+        "U.S. Air Force Research Laboratory",
+        "University of Utah"
+      ],
+      "affiliations_text": "U.S. Air Force Research Laboratory, University of Utah",
+      "score": 6.081898171533934,
+      "score_text": "6.1"
+    },
+    {
+      "id": "2608.24940v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/27/260824940v1-when-does-frequency-decomposition-benefit-physics-informed-neural-networks-a-preliminary-ablation-study",
+      "source": "arxiv",
+      "title": "When Does Frequency Decomposition Benefit Physics-Informed Neural Networks? A Preliminary Ablation Study",
+      "authors": [
+        "Shubham Rai"
+      ],
+      "authors_text": "Shubham Rai",
+      "abstract": "Partial differential equations (PDEs) often have high-frequency and multi-scale features that neural networks struggle to approximate. Physics-Informed Neural Networks (PINNs) build the governing equations directly into training, but suffer from spectral bias: they learn low-frequency components faster than high-frequency ones. Techniques such as Fourier feature embeddings and sinusoidal activations address this, but most studies assume they help across the board without checking which spectral regimes actually benefit. We introduce a dual-branch, spectrally-gated architecture (DBSG-PINN) that splits low- and high-frequency components into separate subnetworks joined by an adaptive gate, and use it to run a partially controlled ablation of frequency decomposition and spectral routing. We test this on five one-dimensional benchmark PDEs, ranging from smooth, single-scale problems to oscillatory, multi-scale ones. Frequency decomposition helps most on the spectrally complex benchmarks, cutting relative $L_2$ error by up to $59.2\\%$ on a multimodal wave problem, but gives little benefit on smoother PDEs. On one benchmark (1D Wave), it performs substantially worse than a simpler fixed-combination variant. The gate's benefit scales with how spectrally rich the target solution is: the full model's advantage over the ablations is largest on multi-scale benchmarks and smallest (or negative) on single-scale ones, consistent with the gate exploiting frequency structure rather than acting as noise,though we do not directly visualize or quantify its spatial activations in this study. All results come from a single training seed across five 1D benchmarks, so we present this as an exploratory study meant to raise questions rather than answer them, and outline the additional seeds and benchmarks needed to test whether the pattern holds.",
+      "url": "http://arxiv.org/abs/2608.24940v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24940v1",
+      "tldr": "This paper introduces a dual-branch spectrally-gated PINN (DBSG-PINN) and an ablation study across five 1D PDE benchmarks, finding that explicit frequency decomposition and adaptive gating improve accuracy mainly on spectrally complex/multi-scale problems (up to 59.2% error reduction) while providing little or even negative benefit on smoother, single-scale PDEs.",
+      "detailed_reading": {
+        "motivation": "偏微分方程常包含高频与多尺度特征，而神经网络受谱偏差影响，对低频分量学习快、对高频分量学习慢。现有频率感知方法（如傅里叶特征、正弦激活）大多默认对所有问题都有效，但缺乏对不同谱复杂度问题的系统性对照验证。本文旨在探究显式频率分解何时真正有益于PINN，并通过受控消融实验分析谱路由的作用。",
+        "method": "提出DBSG-PINN双分支谱门控架构：低频分支用tanh激活捕获光滑分量，高频分支用sin(ωx)激活建模振荡行为，两分支输出由轻量门控网络产生的sigmoid系数g(x,t)做凸组合得到最终预测。输入坐标(x,t)并行送入三个子网络，联合端到端训练，损失为PDE残差、初始条件、边界条件的加权和，采用Adam加L-BFGS两阶段优化。在5个一维基准PDE上对比完整模型与三个消融变体：NoGate（门固定为0.5）、LowOnly（仅低频分支）、HighOnly（仅高频分支），各变体保持优化器、迭代预算、配点策略和损失权重一致，但分支容量非严格匹配。",
+        "result": "频率分解在谱复杂基准上收益最大：多模态波动问题相对L2误差最高降低59.2%，光滑单尺度PDE上收益很小。在1D Wave基准上，完整模型比简单固定组合（NoGate）显著更差。门控贡献随目标解的谱丰富度变化：全模型相对消融变体的优势在多尺度基准上最大，在单尺度基准上最小或为负，表明门控在利用频率结构而非仅充当噪声。所有结果基于5个一维基准、每个单一训练种子，属于探索性研究。",
+        "conclusion": "频率分解并非普遍有益，其价值取决于PDE解的谱复杂度：对多尺度振荡问题帮助显著，对平滑问题可能无效甚至有害。学习式门控在谱丰富时能带来增益，但该模式需更多种子和基准验证。当前研究仅提出初步问题，未建立通用规律，需进一步控制种子方差、扩展基准并直接可视化门控空间激活以确认结论。",
+        "key_details": "关键要点：1) 分支容量不完全匹配，高频分支在多数基准上更宽（如64 vs 32单元），深度差1-2层，故LowOnly与HighOnly对比非严格容量对照；2) 激活函数固定频率ω，'频率分解'指软归纳偏置而非严格频谱分离，门控决定各分支贡献；3) 损失权重固定且所有变体共享同一损失景观，未用自适应加权；4) 评估网格为均匀100×100，训练配点间距按基准不同；5) 局限：单一训练种子、无门控空间激活可视化、未量化门控与局部谱内容的关系，需额外种子和基准测试模式是否成立。"
+      },
+      "affiliations": [
+        "bibha.ai"
+      ],
+      "affiliations_text": "bibha.ai",
+      "score": 5.864259578051035,
+      "score_text": "5.9"
+    },
+    {
+      "id": "2608.24949v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/27/260824949v1-demystifying-reinforcement-learning-post-training-of-language-models",
+      "source": "arxiv",
+      "title": "Demystifying Reinforcement Learning Post-Training of Language Models",
+      "authors": [
+        "Donovan Clay",
+        "Saket Gollapudi",
+        "Sankar Harilal",
+        "Min Jang",
+        "Jacob Morrison",
+        "Sewoong Oh",
+        "Natasha Jaques"
+      ],
+      "authors_text": "Donovan Clay, Saket Gollapudi, Sankar Harilal, Min Jang, Jacob Morrison, Sewoong Oh, Natasha Jaques",
+      "abstract": "Reinforcement learning (RL) post-training has emerged as a powerful framework for enhancing the capabilities of large language models (LLMs), enabling impressive reasoning, math, and coding capabilities. Yet for many researchers and practitioners, the principles behind classical RL remain a \"black box\". In this work, we deconstruct the RL post-training algorithm, investigating each step to clarify what is actually happening beneath the surface. By isolating the mechanics of RL with Verifiable Rewards in a controlled and simplified environment, we examine how RL outcomes are shaped by the base model's prior distribution, the granularity of the reward signal, the diversity of the prompt distribution, and model scale. We use the entropy of the policy's output distribution as a lens to compare the distributions learned through pretraining, SFT, and RL post-training, revealing how each stage shapes model certainty. Our investigation sheds light on how these choices interact to affect post-training success. For example, we show that the effect of so-called 'spurious rewards' depends on the prompt distribution used for post-training. We also provide insight into why the success of RL post-training depends on whether the base model already places sufficient probability mass on the desired behavior, linking it to the classical concept of exploration in RL. Ultimately, we provide this primer as a resource to those in the NLP community wishing to incorporate RL as a tool in their toolbox.",
+      "url": "http://arxiv.org/abs/2608.24949v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24949v1",
+      "tldr": "This paper demystifies RL post-training for LLMs by deconstructing its components in controlled experiments, showing how base model priors, reward granularity, prompt diversity, and scale interact to determine success—demonstrating, for example, that spurious rewards' effects depend on prompt distribution and that dense rewards can overcome sparse-reward limitations on learning new behaviors.",
+      "detailed_reading": {
+        "motivation": "强化学习后训练虽已显著提升大语言模型的推理、数学和编程能力，但其背后的经典强化学习原理对许多研究者和实践者而言仍是“黑箱”，导致文献中出现了相互矛盾或误导性的结论。本文旨在通过受控实验解构RL后训练的每个步骤，澄清基础模型先验分布、奖励信号粒度、提示分布多样性和模型规模如何共同影响后训练的成功率，并为NLP社区提供一份可理解的RL入门资源。",
+        "method": "在受控的序列生成与数学推理环境中，作者系统性地操纵基础模型分布、奖励函数和提示分布三个组件。首先通过SFT+（在目标行为上微调以提高先验概率）和SFT-（在目标行为上最大化交叉熵以抑制概率）构造不同的基础模型初始化，包括目标字符串生成（如电影台词）和AIME 2025数学问题。奖励函数涵盖稀疏的二元验证器、基于Levenshtein距离的密集奖励，以及用于数学推理的过程奖励模型（PRM）。提示分布包括窄域的推理数据集和Tulu-3使用的广泛预训练分布。训练使用带KL约束的RL目标，并以策略输出分布的熵作为透镜，比较预训练、SFT和RL后训练各阶段对模型确定性的影响，同时测量目标行为的概率质量变化。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "RL后训练并非凭空创造新行为，而是对基础模型先验分布进行概率质量再分配；其成功与否取决于基础模型是否已在目标行为上放置足够概率质量，以及奖励信号能否有效引导探索。该研究调和了近期关于“虚假奖励”和“RL是否真能学习新行为”的矛盾结论，为理解RL后训练机制提供了系统性视角，并为构建更有效的后训练流程提供了实用指南。",
+        "key_details": "关键细节包括：使用Base、SFT+、SFT-三种初始化变体分别表示原始基础模型、人工抬高目标先验的模型和人为压制目标概率的模型；目标字符串任务可精确测量行为概率，数学任务使用AIME 2025问题并验证正确答案；稀疏奖励为二元正确性加上长度惩罚，密集奖励使用Levenshtein距离或由LLM-as-judge构建的PRM；训练目标包含KL散度约束以防止语言漂移；提示分布分为窄域（仅数学）和宽域（Tulu-3预训练分布）；采用策略熵作为衡量分布变化的指标；实验基于OLMo 3、Qwen2-7B、Qwen3-1.7B、Qwen2.5-7B-Instruct等不同规模模型。局限性在于实验环境为简化受控场景，可能无法完全反映真实大规模LLM后训练的复杂性。"
+      },
+      "affiliations": [
+        "Allen Institute for AI",
+        "University of Washington"
+      ],
+      "affiliations_text": "Allen Institute for AI, University of Washington",
+      "score": 4.73200357008719,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.25088v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/27/260825088v1-the-von-neumann-state-space-transformer-for-neural-decoding",
+      "source": "arxiv",
+      "title": "The Von-Neumann State-Space Transformer for neural decoding",
+      "authors": [
+        "Morteza Sarafyazd"
+      ],
+      "authors_text": "Morteza Sarafyazd",
+      "abstract": "Cortical computation is strikingly low-dimensional: a handful of latent variables, carried in a neural population's activity, steer the higher-dimensional responses of individual neurons. Our aim is sample efficiency-models that decode well from limited data and at small parameter budgets. In a standard Transformer layer, the feed-forward block applies the same operator to every token. We suggest a von-Neumann inspired hypothesis of efficient computation as an alternative for neural decoding: a controller decodes an instruction and then executes a token-specific operator; the usual realization-a soft mixture of experts-only blends their outputs, not operators. We introduce a von-Neumann State-Space Transformer (VN-SST), a memory-augmented Transformer whose feed-forward block is a low-rank instruction bank: a shared base operator plus a small set of learned low-rank instructions, from which a per-token code synthesizes the weight matrix actually used at that token. The code is read from a low- dimensional projection of a carried state-space memory, so a slow latent trajectory acts as an instruction pointer-mirroring how low-dimensional dynamics may route cortical computation. On three motor-cortex neural-decoding benchmarks, VN-SST is far more data-efficient than a modern Transformer, each jointly predicting spikes and decoding behavior. This model wins by a wide margin on the scarcest benchmark, leads on the other two, and turns longer context into rising rather than falling accuracy. We evaluated that the network compresses a large instruction bank to a few bits per token, so program capacity acts as a control channel, not an accuracy lever. The same model is also more parameter-efficient on two small text benchmarks used for language modeling (LLMs), suggesting a generic mechanism.",
+      "url": "http://arxiv.org/abs/2608.25088v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25088v1",
+      "tldr": "VN-SST is a memory-augmented Transformer whose feed-forward weights are synthesized per token from a low-rank instruction bank controlled by a slow state-space memory, achieving far more data-efficient neural decoding than a standard Transformer on motor-cortex benchmarks.",
+      "detailed_reading": {
+        "motivation": "皮层计算具有显著的低维特性：少数潜在变量即可组织高维神经元群体的活动。本文的目标是在有限数据和小参数预算下提升神经解码的样本效率。标准Transformer的前馈模块对每个token应用相同的算子，而作者提出一种受冯·诺依曼架构启发的假设：由控制器解码指令并执行token特异的算子，而不是像软混合专家那样仅混合多个固定专家的输出。",
+        "method": "提出VN-SST（Von-Neumann State-Space Transformer），在Transformer骨架中用三条并行记忆通路替代普通注意力：局部因果注意力、对角选择性状态空间模型（SSM）和基于delta规则的快速权重联想记忆；三个通路输出由控制器门控融合。前馈模块改为可编程SwiGLU：每个token的权重由共享基算子加上K个低秩指令的加权和合成，即W(t)=W0+sum_k c_{t,k} U_k V_k^T，其中每个token的代码c_t由当前token和SSM慢状态的低维投影共同经MLP生成，tanh限制在[-1,1]。实际计算不物化权重，而是通过投影到K×r指令库并缩放读取实现。训练时使用分段的截断时间反向传播，状态(s,M)跨段携带并在若干段后截断；联合优化下一时刻spike的MSE与行为解码MSE，总损失为MSE_next-spike + λ·MSE_decode（λ=10）。模型在四个Transformer层上缩放宽度，并与同等参数窗口的现代Transformer基线比较参数、数据和上下文长度三个维度的表现。",
+        "result": "在MC_RTT、MC_Maze和Area2_Bump三个运动皮层神经解码基准上，VN-SST在有限数据下显著优于现代Transformer：在最稀疏的数据预算下解码R²为0.35对0.21，并在所有数据预算的三大基准上均领先。VN-SST是唯一能将更长上下文窗口转化为解码精度上升而非下降的模型。此外，32条指令的指令库被压缩为每个token约3.4-6.5个有效算子（几比特），说明程序容量是控制通道而非精度杠杆；该模型在两个小型文本语言建模基准上也表现出更高的参数效率。",
+        "conclusion": "通过让低维慢状态轨迹充当指令指针、按token合成前馈算子，VN-SST实现了比固定算子Transformer更高的样本效率和参数效率，并能更好地利用长上下文。这种可编程算子机制在神经解码和语言建模上均有效，暗示其是一种通用计算机制，而非仅针对特定任务的技巧。",
+        "key_details": "关键细节包括：spike以50ms分箱，经3个bin的高斯核平滑并z-score标准化，神经延续使用128-bin前缀；模型为4层固定深度，参数量约64K-270K非嵌入参数，VN-SST因携带状态和指令库而使用更窄宽度以对齐参数窗口；SSM为对角输入相关选择机制，每通道n个潜在状态，步长由写门控制；快速权重记忆写入当前预测误差而非原始值，使回忆具备内容寻址能力；指令库默认K=8、秩r=8、流形读出维度m=8，U和U_d初始化为零从而从共享基SwiGLU开始；每个token的程序计算开销为O(Kr(d+d_ff))，新增指令成本约为完整MoE专家的r/d_ff；训练使用AdamW、余弦学习率、warmup、梯度裁剪和50个epoch，所有神经扫描报告3个种子的均值；上下文长度扫描中固定优化器步数以避免与训练预算混淆。局限性包括：单试次spike预测接近单位方差噪声底，因此主要用行为解码R²比较；参数扫描未精确匹配参数数量，而是通过重叠参数窗口揭示效率。"
+      },
+      "affiliations": [
+        "BrainCo"
+      ],
+      "affiliations_text": "BrainCo",
+      "score": 4.718337744118465,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.24963v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/27/260824963v1-why-and-when-neural-networks-improve-local-approximation-in-optimization",
+      "source": "arxiv",
+      "title": "Why and When Neural Networks Improve Local Approximation in Optimization",
+      "authors": [
+        "Chengkuo Bian",
+        "Pengcheng Xie"
+      ],
+      "authors_text": "Chengkuo Bian, Pengcheng Xie",
+      "abstract": "Published experience with neural surrogates in derivative-free optimisation is contradictory: the same family of models that cuts the evaluation count of one solver leaves another unchanged, or makes it worse. We show that the contradiction dissolves once three factors are stated, and that these, rather than the fit accuracy a training curve reports, are what delimit when a learned local model pays. Role: a surrogate that proposes candidates the true objective must still approve helps, while one that replaces a gradient the solver depends on hurts. Radius: a model fitted to an optimisation path is reliable only inside a bounded neighbourhood, and its error neither vanishes as that neighbourhood shrinks nor survives its growth. Room: a surrogate can only accelerate progress the base method is still able to make. We formalise radius-aware local generalisation, relate it to the classical fully linear condition, and test each factor with the surrogate class, training pipeline and base method held fixed. Over 117 benchmark instances safeguarded assistance raises the instances solved to high accuracy from 67 to 84 while gradient replacement lowers them to 65; removing the gradient term from the training loss cuts surrogate acceptance from 0.703 to 0.148; and 1000 paired comparisons over ten noise levels show no noise threshold, only a base method that stops early. The same factors bound the gain: a model-based trust-region solver, which leaves little room, drops from 88 to 86 when the identical surrogate is attached, and released interpolation software stays ahead at 103, and on a Monte-Carlo inventory model repairing the acceptance interface is worth 10.40 cost units against 0.00 for the surrogate.",
+      "url": "http://arxiv.org/abs/2608.24963v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24963v1",
+      "tldr": "Neural-network surrogates improve derivative-free optimization only when they act as safeguarded assistance rather than gradient replacement, operate within their reliable local generalization radius, and leave the base method room to improve—not merely when they fit accurately.",
+      "detailed_reading": {
+        "motivation": "已发表的神经代理模型在无导数优化中的经验相互矛盾：同一类模型在某些求解器中减少评估次数，在另一些中却无效果甚至更差。作者认为这种矛盾源于三个被忽视的因素——角色、半径和空间，而非训练曲线报告的拟合精度。本文旨在厘清神经网络局部代理模型何时能真正改进优化性能，并给出机制性解释。",
+        "method": "论文以无导数优化为背景，目标为min f(x)，每次评估来自昂贵仿真。将代理模型分为两种角色：替换（直接替代梯度或核心量）和协助（仅提议候选点，真实目标函数仍负责最终验收）。使用神经网络作为代理，训练损失采用Sobolev型目标：值误差平方和加梯度误差平方和加L2正则，数据来自优化轨迹中已评估点及有限差分梯度。提出半径感知的局部泛化概念，并与经典全线性条件关联。实验设计固定网络类、训练流程和基方法，仅改变代理嵌入方式。在117个基准实例上比较：安全协助、梯度替换、移除训练损失中梯度项、不同基方法（有限差分法、模型信任域法、Py-BOBYQA）以及蒙特卡洛库存模型。还形式化了ARAS方法，给出混合方向下降性和复杂度继承定理，但基准测试显示其收益不如成本。",
+        "result": "在117个基准实例上，安全协助将高精度求解实例数从67提升到84，而梯度替换降至65；从训练损失中移除梯度项使代理步骤验收率从0.703降至0.148；1000次配对比较跨越十种噪声水平，未发现噪声阈值，只有提前停止的基方法。相同因素限制收益：模型信任域求解器附加相同代理后从88降至86，发布的Py-BOBYQA以103保持领先；蒙特卡洛库存模型中修复验收接口价值10.40成本单位，而代理本身价值0.00。",
+        "conclusion": "神经网络代理能否改进DFO方法主要取决于算法角色（协助而非替换）、工作半径是否在代理可靠局部泛化范围内，以及基方法是否有剩余空间；逐点拟合精度本身不能预测优化收益。该结论解释了文献中的矛盾，并强调了机制性研究的重要性。",
+        "key_details": "关键点：角色上，替换使误差直接进入求解器依赖的量，协助则被真实目标函数的验收测试过滤；半径上，沿优化路径拟合的模型仅在有限邻域内可靠，误差不随邻域缩小而消失，也无法承受邻域增长；空间上，代理只能加速基方法还能取得的进展。训练损失中的梯度项将代理验收率从0.703降至0.148，说明梯度信息约束曲率的重要性。实验固定网络类、训练流程和基方法，确保差异可归因于所变机制。局限：该研究是机制性而非求解器论文，所有变体未调优；维度刻意较小（n≤16可穷举，n=128一次）；评估次数而非墙钟时间为主要货币。此外，作者报告了三个自我修正：n=64交叉是插值代码缺陷、两个几何诊断被提出并反驳、先前版本网络设置欠训练。还警告参考集选择会颠倒排名：仅比较代理变体时协助优于模型法，加入发布求解器后顺序反转。"
+      },
+      "affiliations": [
+        "Lawrence Berkeley National Laboratory",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "Lawrence Berkeley National Laboratory, University of California, Berkeley",
+      "score": 4.619768737478141,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.25095v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/27/260825095v1-scalable-self-supervised-learning-for-multiphase-ac-opf-in-distribution-systems-with-topology-reconfiguration",
+      "source": "arxiv",
+      "title": "Scalable Self-Supervised Learning for Multiphase AC-OPF in Distribution Systems with Topology Reconfiguration",
+      "authors": [
+        "Hoang T. Nguyen",
+        "Shaohui Liu",
+        "Reetam Sen Biswas",
+        "Varsha Pendyala",
+        "Nurali Virani",
+        "Deepjyoti Deka",
+        "Priya L. Donti"
+      ],
+      "authors_text": "Hoang T. Nguyen, Shaohui Liu, Reetam Sen Biswas, Varsha Pendyala, Nurali Virani, Deepjyoti Deka, Priya L. Donti",
+      "abstract": "The proliferation of distributed energy resources (DERs) in distribution grids enables the active coordination of these assets to reduce costs and enable cleaner operations. Realizing this potential requires solving multiphase AC optimal power flow (AC-OPF) quickly across varying loads, DER availabilities, and topology reconfigurations, at much greater speed and scale than conventional nonlinear solvers. Learning-based surrogates can offer millisecond inference, yet existing methods target largely balanced transmission systems and do not scale to the multiphase, unbalanced, and reconfigurable nature of distribution feeders at utility scale. We present the Penalty + Sequential Linearized Feasibility Seeking (SLFS) algorithm, a self-supervised learning framework for multiphase distribution AC-OPF under switch-induced topology changes. Penalty+SLFS requires no labeled optimal solutions and trains directly from the AC-OPF objective and constraints through a differentiable fixed-point power flow solver, avoiding expensive label generation and admitting robust training procedures. Topology changes are handled efficiently using Sherman-Morrison-Woodbury updates of the admittance-matrix inverse, while an M-step Jacobian approximation accelerates differentiation through the power flow solver. At inference, SLFS repairs any infeasible predictions, providing feasibility guarantees with low computational overhead. On IEEE feeders ranging from 13 to 8,500 nodes, Penalty+SLFS achieves negligible optimality gaps and near-zero constraint violations, delivers up to three orders of magnitude speedups over IPOPT, and remains robust under large distributional shifts, demonstrating a viable path toward real-time, topology-aware AC-OPF for large-scale distribution grids.",
+      "url": "http://arxiv.org/abs/2608.25095v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25095v1",
+      "tldr": "Penalty+SLFS is a self-supervised learning framework for multiphase distribution AC-OPF that trains directly from the optimization objective and constraints via a differentiable power-flow solver, efficiently handles switch-induced topology changes using Sherman-Morrison-Woodbury updates, and achieves near-optimal, feasible solutions with up to three orders of magnitude speedups over IPOPT on feeders up to 8,500 nodes.",
+      "detailed_reading": {
+        "motivation": "配电网中分布式能源的普及要求快速求解多相交流最优潮流（AC-OPF），以适应负荷、DER可用性和拓扑重构的变化。传统非线性求解器速度慢，而现有基于学习的替代方法主要针对平衡输电网，无法扩展至多相、不平衡且可重构的配电网馈线，且监督学习需要昂贵的标签生成。",
+        "method": "提出Penalty+SLFS自监督学习框架。该方法无需最优解标签，直接以AC-OPF目标函数和约束作为损失，通过可微不动点潮流求解器训练神经网络，输入为负荷、DER可用性和开关状态，输出DER有功/无功设定值。训练时采用惩罚损失处理约束，利用Sherman-Morrison-Woodbury公式高效更新拓扑变化下的导纳矩阵逆，并用M步雅可比近似加速对潮流求解器的微分。推理阶段使用序列线性化可行性搜索（SLFS）迭代修正不可行预测，通过逐次线性化和矩阵-向量操作实现GPU友好的可行性修复。",
+        "result": "在13至8500节点的IEEE馈线上，Penalty+SLFS实现了可忽略的最优性差距和接近零的约束违规，相对IPOPT提速高达两到三个数量级，并在较大分布偏移下保持鲁棒性。",
+        "conclusion": "Penalty+SLFS为大规模配电网提供了一条实时、拓扑感知的AC-OPF可行路径，能够同时处理多相不平衡、开关重构和数千节点规模，兼具高精度、强可行性保证和显著加速。",
+        "key_details": "关键点包括：训练数据无需可行解标签，可同时使用可行和不可行样本，增强泛化；利用SMW更新导纳矩阵逆，应对开关拓扑变化，对病态情况采用迭代细化；M步雅可比近似提高训练速度和内存效率，并给出误差界；SLFS在标准假设下保证约束违规单调递减；方法为GPU友好，仅用矩阵-向量操作；局限性可能在于需要可微潮流求解器及对大型系统的计算资源要求。"
+      },
+      "affiliations": [
+        "Massachusetts Institute of Technology",
+        "GE Vernova"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology, GE Vernova",
+      "score": 4.4784841582099135,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.24947v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/27/260824947v1-cat-gs-balanced-multimodal-learning-via-calibrated-gating-and-fusion-surgery",
+      "source": "arxiv",
+      "title": "CAT-GS: Balanced Multimodal Learning via Calibrated Gating and Fusion Surgery",
+      "authors": [
+        "Mahir Shahriar Tamim",
+        "Sharjil Khan",
+        "Md. Samiul Alim",
+        "Tanvir Ahmed Khan",
+        "Shafin Rahman",
+        "Nabeel Mohammed"
+      ],
+      "authors_text": "Mahir Shahriar Tamim, Sharjil Khan, Md. Samiul Alim, Tanvir Ahmed Khan, Shafin Rahman, Nabeel Mohammed",
+      "abstract": "End-to-end training of multimodal neural networks often exhibits unstable neural dynamics characterized by three coupled failure modes that degrade learning: (i) modality imbalance, where one branch dominates gradient-based optimization; (ii) unstable gating, where noisy confidence cues induce erratic modality selection; and (iii) fusion interference, where modality-specific gradients conflict at the shared fusion layer. We propose CAT-GS (Calibrated, Adaptive, Thresholded Gating with Fusion Surgery), a neural dynamics-based optimization controller for intelligent computing applications. CAT-GS operates during backpropagation without modifying model architectures, fusion modules, or task losses. Through calibration of teacher-derived reliability via temperature scaling and EMA smoothing, CAT-GS stabilizes neural dynamics using a margin-thresholded policy to switch between warm-up dropout, weak-modality prioritization, and weak-biased blending, stabilizes gradient magnitudes under aggressive gating via capped gradient-budget renormalization, and applies fusion-only PCGrad to reduce destructive cross-modal interference at the primary shared bottleneck. We evaluate CAT-GS on audio--visual multimodal pattern recognition benchmarks (CREMA-D, AV-MNIST, and VGGSound), a tri-modal setting (UR-FUNNY), controlled synthetic data (CG-MNIST), and additional cross-domain benchmarks (AVE and CMU-MOSI). CAT-GS improves or matches fused multimodal accuracy against strong imbalance-aware baselines (including OGM-GE, G$^2$D, and UMT) across settings, and yields smoother gating behavior with fewer conflicting fusion gradients.",
+      "url": "http://arxiv.org/abs/2608.24947v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24947v1",
+      "tldr": "CAT-GS is a backpropagation-stage optimization controller that stabilizes multimodal training by calibrating teacher-derived reliability for thresholded gating, renormalizing gradient budgets, and applying fusion-only PCGrad to jointly mitigate modality imbalance, gating instability, and fusion interference.",
+      "detailed_reading": {
+        "motivation": "端到端多模态网络训练常出现三类耦合的动力学失稳：模态不平衡导致单分支主导梯度优化、基于噪声置信度的门控产生模态选择的抖动、共享融合层中模态专属梯度相互冲突。现有方法通常只单独处理其中一类问题，缺乏对这三类失效模式的统一校正机制。",
+        "method": "CAT-GS是一个仅作用于反向传播阶段、不修改模型架构/融合模块/任务损失的优化控制器。它利用冻结的单模态教师网络对每个模态计算真实标签上的Softmax平均置信度作为可靠性信号，支持可选温度缩放和EMA平滑来稳定该信号；随后通过边际阈值策略在warm-up dropout、弱模态优先、弱偏置混合等门控模式间切换；再通过带EMA目标幅度和硬上限的梯度预算重归一化防止激进门控造成梯度饥饿；最后仅在共享融合瓶颈处应用PCGrad梯度手术，消除跨模态负向干扰。整体流程插入在loss.backward()与optimizer.step()之间，训练目标为交叉熵损失、教师logits蒸馏损失和特征MSE损失的加权组合。",
+        "result": "在CREMA-D、AV-MNIST、VGGSound、UR-FUNNY、CG-MNIST以及AVE和CMU-MOSI等跨域基准上，CAT-GS相比OGM-GE、G2D、UMT等强不平衡感知基线，在融合多模态精度上取得提升或持平，并表现出更平滑的门控行为和更少的融合梯度冲突。",
+        "conclusion": "CAT-GS通过在优化阶段统一处理模态不平衡、门控不稳定和融合干扰三类耦合问题，能够在不改动模型结构的前提下提升多模态训练的稳定性与融合精度，是一种即插即用且架构无关的多模态训练优化方案。",
+        "key_details": "关键细节包括：教师网络保持冻结且直接接收原始模态输入，不依赖学生特征；可靠性信号采用batch级均值而非逐样本信号，配合EMA平滑减少门控抖动；温度缩放默认设为1，在主要实验中不是必要性能驱动因素；梯度预算机制通过EMA目标幅度和硬上限防止被抑制模态长期得不到有效更新；PCGrad仅作用于融合层，既降低全局投影的计算成本，又保留单模态编码器的动态。局限性方面，方法依赖可用的单模态教师提供可靠性信号，且部分门控阈值、EMA系数和蒸馏权重需按数据集设置。"
+      },
+      "affiliations": [
+        "North South University"
+      ],
+      "affiliations_text": "North South University",
+      "score": 4.371147909713015,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.25017v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/27/260825017v1-rollout-decoded-reconstruction-for-long-horizon-prediction-in-latent-world-models",
+      "source": "arxiv",
+      "title": "Rollout-Decoded Reconstruction for Long-Horizon Prediction in Latent World Models",
+      "authors": [
+        "Rishi Shah",
+        "Rishav Shrestha"
+      ],
+      "authors_text": "Rishi Shah, Rishav Shrestha",
+      "abstract": "A latent world model trains its decoder on latents anchored to observations, then deploys it on the model's own free-running rollout, hundreds of steps past the last observation. Rollout-Decoded Reconstruction (RDR) closes this gap with a single loss term that free-runs the model during training exactly as evaluation will, decodes every rollout latent, and penalizes reconstruction error against ground truth. The term adds no parameters, costs training-time compute only, and reduces to the standard objective at weight zero, so every comparison in this paper is a one-flag A/B. On the chaotic Kuramoto-Sivashinsky equation, RDR raises valid prediction time (the time to first crossing of normalized error 0.5) from $3.87 \\pm 0.23$ to $6.97 \\pm 0.42$ time units at an identical 193,568 parameters, a $1.80\\times$ improvement confirmed on seeds never used in selection and holding in 10 of 10 preregistered configurations at ratios of 1.71-2.50$\\times$. The results come from a single system; a sweep in which the advantage grows with latent width is descriptive, and control experiments on two classic tasks are preliminary.",
+      "url": "http://arxiv.org/abs/2608.25017v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25017v1",
+      "tldr": "Rollout-Decoded Reconstruction (RDR) closes the train-deployment gap in latent world models by adding a single training-time loss that decodes the model's free-running rollout and penalizes reconstruction error against ground truth, improving valid prediction time on chaotic Kuramoto-Sivashinsky forecasting by 1.80× with no added parameters.",
+      "detailed_reading": {
+        "motivation": "潜在世界模型在训练时仅用锚定到观测的隐状态训练解码器，但部署时解码器要处理模型自回归 rollout 数百步后产生的漂移隐状态，导致训练与推理分布不一致，长期预测误差提前超过阈值。现有 latent world model 都未系统研究这一 decoder 训练分布失配问题，因此提出直接让训练过程与评估过程对齐的解码目标。",
+        "method": "RDR 在训练时让模型从编码初始状态开始完全自由 rollout，与评估时路径一致；对 rollout 中每一步隐状态都进行解码，并将重建结果与真实场计算 L2 重建误差作为额外损失项加入总目标。总损失为 L_TF + α_e L_R + L_OBS + L_recon + λ L_RDR，其中 λ=0.3，α_e 在 epoch 2 到 5 从 0 线性升到 1，rollout 分支在 2 个 warm-up epoch 后开启；模型为 64 维 KS 场快照经 MLP 编码器映射到 32 维隐状态，S5 四层状态空间模型推进隐状态，MLP 解码器映射回场空间；训练时窗口长度为 160 快照，rollout 长度 K=128，batch size 64，Adam 学习率 3e-4，训练 320 epoch，每臂 3 个随机种子。RDR 不增加参数，推理成本不变，仅在训练时多出 K 次解码器前向与反向计算。",
+        "result": "在混沌 Kuramoto-Sivashinsky 方程上，RDR 将有效预测时间（VPT@0.5）从后验-only 基线的 3.87±0.23 时间单位提升到 6.97±0.42 时间单位，参数同为 193,568，提升 1.80 倍；在 10 个预注册配置中 RDR 全部获胜，比值 1.71–2.50 倍。长期 1300 步评估下同样从 3.77 提升到 6.90。与观测空间 pushforward 预测器（7.00±0.26）对比，RDR 与之持平，说明在完全可观测 64 维系统上隐瓶颈未带来额外优势；RDR 优势随训练 epoch 增加而继续增长，160/240/320 epoch 下 VPT 为 5.27/6.37/6.90，未见饱和。",
+        "conclusion": "RDR 通过单个训练期损失项直接消除 latent world model 解码器的训练/部署分布失配，在混沌长期预测任务上带来一致且显著的 VPT 提升，且不增加参数、不改变架构、不增加推理开销。效果在预注册的 10 个配置中全部复现，说明该目标可作为现有 latent world model 的通用即插即用改进项；但实验仅基于单一 KS 系统，latent 宽度消融为描述性结果，两个经典任务控制实验仍属初步。",
+        "key_details": "关键细节：RDR 损失对 rollout 中每一步隐状态解码并与真实场做 L2 重建误差，梯度同时流向解码器、预测器和编码器；λ 在 0.1–1.0 范围内结果平坦，操作权重 0.3；两臂计算同一 rollout，边际成本仅为训练期额外 K 次解码器前向/反向。共享解码器形式（193,568 参数）强于分裂解码头形式（243,296 参数，VPT 6.47），排除容量解释。VPT 定义为归一化 RMSE 首次超过 0.5 的时间，KS L=22 下最大 Lyapunov 指数约 0.043，一个 Lyapunov 时间为 23.26 时间单位；评估使用 64 条留出轨迹，3 种子平均。局限性：未测试离散隐状态、KL balancing、latent overshooting、partially observable/像素观测等场景；TD-MPC2、MuDreamer 等无解码器模型不适用；在完全可观测系统上隐瓶颈无增益。预注册协议锁定了 primary arm 门槛 5.77 tu，primary arm 实测 6.47±0.40，通过门槛。训练时长是唯一持续带来提升的杠杆，更长训练留待未来工作。"
+      },
+      "affiliations": [
+        "E3A Healthcare"
+      ],
+      "affiliations_text": "E3A Healthcare",
+      "score": 4.3149681061437235,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.25034v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/27/260825034v1-on-the-representational-geometry-of-dynamic-programs",
+      "source": "arxiv",
+      "title": "On the Representational Geometry of Dynamic Programs",
+      "authors": [
+        "Richard F. M. Lim",
+        "Ruriko Yoshida"
+      ],
+      "authors_text": "Richard F. M. Lim, Ruriko Yoshida",
+      "abstract": "Standard neural architectures often fail to generalize to longer inputs for dynamic programming (DP) targets. We investigate what makes this hard geometrically. Every finite min-plus DP is a shortest path on a DAG, which is equivalently a tropical polynomial whose extended Newton polyhedron encodes the decision boundary of which path wins. We prove these three descriptions (graph, polynomial, polyhedron) form isomorphic semirings at two levels --- formal polynomials and their computed functions --- connected by operations that characterize all structural redundancies. We then address the length-generalization question geometrically: does the decision boundary at length $T$ decide the boundary at $T+1$? We present two structural negatives. The semiring's two native ways to reduce dimension (setting a variable to each identity) are neither injective nor always closed within the DP. Series and parallel composition fail to construct all DAG topologies from smaller sub-DAGs, and even all terminal-only operations do not capture all DP compositions.",
+      "url": "http://arxiv.org/abs/2608.25034v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25034v1",
+      "tldr": "Standard neural architectures fail to length-generalize on dynamic programs because, although DAGs, tropical polynomials, and Newton polyhedra form isomorphic semiring descriptions of DP, the native operations of substitution and composition are structurally insufficient to determine larger instances from smaller ones.",
+      "detailed_reading": {
+        "motivation": "标准神经架构在处理动态规划（DP）目标时往往无法泛化到更长输入。论文从几何角度探究这一困难的根源：每个有限min-plus DP可视为DAG上的最短路径，等价于热带多项式，其扩展牛顿多面体编码了路径获胜的决策边界。作者旨在回答：长度T的决策边界是否能决定长度T+1的边界？",
+        "method": "论文建立图、热带多项式、扩展牛顿多面体三种描述之间的半环同构定理，在形式多项式和计算函数两个层面上统一为同一代数结构。基于该框架，定义两种恒等替换（变量设为+∞的P_i和设为0的Q_i），分析它们在代数、多面体、超曲面和图上的变换规则，并研究这些替换的封闭性与单射性。进一步考察级联（串行）和并联（取最小）两种基本组合操作能否由小子图生成所有DAG拓扑，以及仅终端操作能否捕获所有DP组合。通过构造反例和正规形式（deshared正规形式和函数正规形式）完成证明。",
+        "result": "证明了三重半环同构定理：图/多项式/多面体在形式层和函数层各自构成同构半环，且两个层面间有满射同态。得到两个结构性否定：其一，两种恒等替换既非单射也并非总在DP内封闭；其二，级联和并联组合不能从更小子DAG构造所有DAG拓扑，仅终端操作也无法捕获所有DP组合。此外，deshared正规形式和函数正规形式的存在使得两种图等价关系可判定。",
+        "conclusion": "长度泛化在几何上存在根本性障碍：T时刻的决策边界不能决定T+1时刻的边界，且DP的组合结构不足以由小规模实例重构所有大规模实例。这解释了标准神经架构在DP长度外推上的系统性失败，表明需要额外的归纳偏置或不同表示。",
+        "key_details": "关键细节包括：使用min-plus（热带）半环，其恒等元为+∞（min）和0（+）；扩展牛顿多面体由凸包加向上锥构成；两种替换操作分别对应坐标面和坐标投影；定义四个局部操作实现图到正规形式的归约；证明依赖理论反例而非实验，未提供数值指标；局限性在于结果是否定性的，没有提出新架构，但为设计长度外推模型提供了几何约束。"
+      },
+      "affiliations": [
+        "Bowdoin College",
+        "Naval Postgraduate School",
+        "Aalborg University"
+      ],
+      "affiliations_text": "Bowdoin College, Naval Postgraduate School, Aalborg University",
+      "score": 4.247282068383675,
+      "score_text": "4.2"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.24987v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824987v1-d3-mopd-adaptive-dynamic-domain-scheduling-for-efficient-multi-teacher-distillation",
+      "source": "arxiv",
+      "title": "D$^3$-MOPD: Adaptive Dynamic Domain ScheDuling for Efficient Multi-Teacher Distillation",
+      "authors": [
+        "Zechen Sun",
+        "Zhiwei Zhang",
+        "Fei Zhao",
+        "Juntao Li",
+        "Mu Chuan",
+        "Huayu Deng",
+        "Guojian Zhan",
+        "Wenliang Chen",
+        "Yao Hu",
+        "Min Zhang"
+      ],
+      "authors_text": "Zechen Sun, Zhiwei Zhang, Fei Zhao, Juntao Li, Mu Chuan, Huayu Deng, Guojian Zhan, Wenliang Chen, Yao Hu, Min Zhang",
+      "abstract": "Multi-teacher on-policy distillation (MOPD) distills several domain-expert teachers into a single student by minimizing per-domain reverse-KL divergence on the student's own rollouts. Existing approaches typically fix the per-domain data mixture before training, overlooking the fact that different domains converge at substantially different rates: some plateau early while others continue to improve throughout the training budget. A fixed mixture therefore wastes compute on fast-converging domains and undertrains slower-converging ones. To address this, we propose D$^3$-MOPD (Dynamic Domain ScheDuling for MOPD), a zero-overhead scheduler that repurposes the per-domain reverse-KL signal already produced during training to adapt the domain mixture online. Running asynchronously outside the training process, an off-process watcher periodically tracks each domain's KL trajectory, estimates remaining headroom and current improvement rate, and accordingly adjusts the domain sampling ratios without altering the core training loop. Our D$^3$-MOPD scales naturally to arbitrary numbers of domains, and the expected benefit grows as more domains introduce more diverse convergence patterns for the scheduler to exploit. On a Qwen3.6-35B-A3B student distilled from four domain-expert teachers, D$^3$-MOPD closes 97% of the average student-to-teacher performance gap, compared with 63% for vanilla MOPD, reaches the same peak performance with an approximately 3$\\times$ reduction in rollout steps, and surpasses the specialist teachers on three of seven benchmarks.",
+      "url": "http://arxiv.org/abs/2608.24987v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24987v1",
+      "tldr": "D$^3$-MOPD is a zero-overhead, asynchronous scheduler that dynamically adjusts per-domain sampling ratios in multi-teacher on-policy distillation based on per-domain reverse-KL trajectories, closing 97% of the student-teacher performance gap (vs. 63% for vanilla MOPD) with ~3× fewer rollout steps.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.166220750559729,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2608.24959v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824959v1-gaussvla-geometry-aware-spatial-reasoning-for-vision-language-action-model",
+      "source": "arxiv",
+      "title": "GaussVLA: Geometry-Aware Spatial Reasoning for Vision-Language-Action Model",
+      "authors": [
+        "Md Selim Sarowar",
+        "Md Tanvir Islam",
+        "Sungho Kim",
+        "Sangtae Ahn"
+      ],
+      "authors_text": "Md Selim Sarowar, Md Tanvir Islam, Sungho Kim, Sangtae Ahn",
+      "abstract": "Vision-Language-Action (VLA) models encode visual observations as flat 2D patch tokens that carry no intrinsic geometric structure, and augmenting them with dense monocular depth injects per-pixel scalar values that encode neither surface orientation nor geometric confidence. This leaves the policy with limited structured spatial reasoning for action prediction. We propose GaussVLA, a Mamba-based VLA that incorporates two custom modules: Gaussian Spatial Tokenizer (GST) to lift frozen semantic and depth features into compact 3D Gaussian tokens, pools geometrically salient regions with learned queries, and \\emph{Depth-Aware Chain-of-Thought (DA-CoT)} that performs structured, non-autoregressive geometric reasoning under language and flow-time conditioning. Across both simulation and real-world evaluations, GaussVLA demonstrates strong spatial-manipulation performance while remaining parameter-efficient. On LIBERO, it achieves 93.5% average success and 100.0% success on the Spatial suite with only 200M parameters, improving over SpatialVLA by 19.7% relative average success while remaining significantly more parameter-efficient.",
+      "url": "http://arxiv.org/abs/2608.24959v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24959v1",
+      "tldr": "GaussVLA introduces a Mamba-based Vision-Language-Action model with a Gaussian Spatial Tokenizer and Depth-Aware Chain-of-Thought to inject structured 3D geometric reasoning into action prediction, achieving state-of-the-art spatial manipulation performance (93.5% average success on LIBERO) with only 200M parameters.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yeungnam University",
+        "Kyungpook National University"
+      ],
+      "affiliations_text": "Yeungnam University, Kyungpook National University",
+      "score": 4.036836808805408,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.25080v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/27/260825080v1-nvexplain-explaining-time-series-forecasting-with-latent-trajectory-analysis-and-structure-preserving-surrogates",
+      "source": "arxiv",
+      "title": "NVExplain: Explaining Time Series Forecasting with Latent Trajectory Analysis and Structure-Preserving Surrogates",
+      "authors": [
+        "Muyan Anna Li",
+        "Manikandan Ravikiran",
+        "Aditi Gautam"
+      ],
+      "authors_text": "Muyan Anna Li, Manikandan Ravikiran, Aditi Gautam",
+      "abstract": "Time series forecasting models are widely used in high-stakes settings, yet their predictions remain difficult to interpret because existing post-hoc methods often ignore temporal dependence and fail to provide horizon-specific explanations. We propose a model-agnostic explainability framework that explains forecasting predictions by attributing each forecast horizon to temporally relevant historical lags. The framework models forecasting as a latent trajectory and introduces semantic flow to quantify how information evolves across time in the model's internal representations. By aggregating semantic flow, it constructs a lag-horizon attribution matrix that captures horizon-resolved temporal influence. To improve explainability, we further generate structure-preserving perturbations and fit sparse local surrogate models, producing human-readable and temporally coherent explanations. We evaluate the method using faithfulness and stability diagnostics across multiple benchmark datasets. Results show that the semantic-flow variant achieves competitive or superior faithfulness compared to standard post-hoc baselines, while being substantially more computationally efficient. Stability analysis further demonstrates that the explanations are robust and identifies regimes where interpretation should be applied with caution.",
+      "url": "http://arxiv.org/abs/2608.25080v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25080v1",
+      "tldr": "NVExplain introduces a model-agnostic time series forecasting explainability framework that attributes each forecast horizon to relevant historical lags via latent trajectory semantic flow and structure-preserving surrogates, achieving competitive or superior faithfulness with high computational efficiency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NVIDIA"
+      ],
+      "affiliations_text": "NVIDIA",
+      "score": 4.0345544017908095,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.24945v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824945v1-fampwq-fisher-information-based-adaptive-mixed-precision-weight-quantization-for-effective-llm-inference",
+      "source": "arxiv",
+      "title": "FAMPWQ: Fisher Information-based Adaptive Mixed Precision Weight Quantization for Effective LLM Inference",
+      "authors": [
+        "Gongwei Lee",
+        "Ji Liu",
+        "Juncheng Jia",
+        "Ji Wu"
+      ],
+      "authors_text": "Gongwei Lee, Ji Liu, Juncheng Jia, Ji Wu",
+      "abstract": "Recent years have witnessed remarkable achievements of Large Language Models (LLMs) in multiple domains, while the excessive resource requirements of LLMs hinder the deployment on resource-constrained devices. Although model quantization stands out as an effective approach, conventional quantization approaches typically incur severe performance degradation due to uniform bit-width or simple heuristic sensitivity evaluation. In this paper, we propose a novel Fisher information-based Adaptive Mixed Precision Weight Quantization approach, i.e., FAMPWQ, which performs layer-adaptive weight quantization for effective LLM inference on commodity GPUs. First, we propose a system model with a novel Fisher information metric to measure the layer-wise sensitivity to quantization. Second, we propose a reinforcement learning-based bit-width allocator in FAMPWQ, which generates an adaptive bit-width allocation strategy based on the Fisher information sensitivity metric. Extensive experiments on 7 models and 5 benchmarks demonstrate that FAMPWQ significantly outperforms 7 baseline approaches in terms of PPL (up to 3.39 smaller), accuracy (up to 6.87% higher), and LLM-as-a-judge comparison (up to 76% win rate).",
+      "url": "http://arxiv.org/abs/2608.24945v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24945v1",
+      "tldr": "FAMPWQ proposes a Fisher information-based adaptive mixed-precision weight quantization method that uses quantization-perturbation sensitivity and reinforcement learning-based bit-width allocation to significantly improve LLM inference efficiency and performance under storage constraints.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Soochow University",
+        "Tsinghua University",
+        "Hithink Research"
+      ],
+      "affiliations_text": "Soochow University, Tsinghua University, Hithink Research",
+      "score": 4.018451066244364,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.24973v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824973v1-resource-efficient-pruning-for-transformer-via-low-rank-importance-estimation",
+      "source": "arxiv",
+      "title": "Resource-Efficient Pruning for Transformer via Low-Rank Importance Estimation",
+      "authors": [
+        "Peng Liu",
+        "Huibing Zeng",
+        "Yiqun Zhang",
+        "Yang Yi",
+        "Jigang Wu"
+      ],
+      "authors_text": "Peng Liu, Huibing Zeng, Yiqun Zhang, Yang Yi, Jigang Wu",
+      "abstract": "With the rapid development of large-scale pre-trained language models based on Transformer architectures, their high computational and memory costs have become a major obstacle to deployment, especially in resource-constrained environments. Traditional pruning methods typically depend on full gradient-based importance estimation, and they necessitate prior finetuning of the model to achieve satisfactory performance. This process often results in intolerable resource consumption. This paper proposes REP-LIE, a new approach to enable resource-efficient pruning during the process of finetuning. REP-LIE leverages the gradients of LoRA low-rank matrices to estimate the importance of weights without requiring full gradient computation. To address the inherent randomness in importance estimation, a stability score is introduced, serving as the basis for iterative pruning of unimportant model parameters. The pruned model is further finetuned through lightweight updates, eliminating the need for full-parameter optimization in the process of finetuning. Extensive experiments on both medium-scale encoder models and large-scale generative models (LLaMA-7B and Mistral-7B) demonstrate that REP-LIE still achieves competitive performance compared to existing approaches.",
+      "url": "http://arxiv.org/abs/2608.24973v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24973v1",
+      "tldr": "REP-LIE enables resource-efficient Transformer pruning by estimating weight importance from LoRA low-rank gradients and using a stability score for iterative pruning, followed by lightweight LoRA-based finetuning, achieving competitive performance at reduced computational cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yangzhou University",
+        "Guangdong University of Technology"
+      ],
+      "affiliations_text": "Yangzhou University, Guangdong University of Technology",
+      "score": 3.9208676826174926,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.24946v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824946v1-macroagent-regularity-aware-macro-legalization-with-llm-agent-designed-contour-algorithms",
+      "source": "arxiv",
+      "title": "MacroAgent: Regularity-Aware Macro Legalization with LLM-Agent-Designed Contour Algorithms",
+      "authors": [
+        "Jiaxi Jiang",
+        "Xufeng Yao",
+        "Yuxuan Zhao",
+        "Yuntao Lu",
+        "Peiyu Liao",
+        "Zuodong Zhang",
+        "Yibo Lin",
+        "Bei Yu"
+      ],
+      "authors_text": "Jiaxi Jiang, Xufeng Yao, Yuxuan Zhao, Yuntao Lu, Peiyu Liao, Zuodong Zhang, Yibo Lin, Bei Yu",
+      "abstract": "Macros constitute a large part of the core area in modern very large-scale integration (VLSI) designs. Moreover, macro positions have a significant impact on the final quality of result (QoR), and macro legalization is typically the final step in determining the macro positions. However, existing approaches related to macro legalization either lack robustness or incur substantial computational costs or neglect the regularity between macros. To address these limitations, we introduce MacroAgent. The novel framework is a four-stage approach: clustering, contour generation, template matching, and inter-cluster refinement. We propose leveraging Large Language Models (LLMs) to discover multiple, effective heuristic regularity-aware contour algorithms. This framework successfully generates robust and effective algorithmic solutions for macro legalization. Compared with state-of-the-art macro legalization works, experimental results on TILOS and Chipyard benchmarks demonstrate a 2 to 8 fold improvement in layout regularity, a 3% to 5% reduction in routed wirelength with comparable congestion after global routing, and significantly better robustness with an acceptable runtime. Furthermore, end-to-end evaluation through Cadence Innovus place-and-route confirms that the regularity improvements translate into tangible PPA gains, including 2.9% lower routed wirelength and 68.3% TNS improvement over the DREAMPlace macro legalization baseline; it also achieves 1.8% lower routed wirelength when integrated into the Innovus macro placement flow.",
+      "url": "http://arxiv.org/abs/2608.24946v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24946v1",
+      "tldr": "MacroAgent is a four-stage, LLM-agent-driven macro legalization framework that uses automatically designed regularity-aware contour algorithms to significantly improve layout regularity, reduce routed wirelength, and enhance PPA over state-of-the-art methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Peking University",
+        "The Chinese University of Hong Kong"
+      ],
+      "affiliations_text": "Peking University, The Chinese University of Hong Kong",
+      "score": 3.855973449914267,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.24954v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824954v1-afdbench-a-reasoning-first-ai-scientist-for-nationalweather-service-forecast-discussions",
+      "source": "arxiv",
+      "title": "AFDBench: A Reasoning-First AI Scientist for NationalWeather Service Forecast Discussions",
+      "authors": [
+        "Manmeet Singh",
+        "Somnath Luitel",
+        "Prabhjot Singh",
+        "Manraaj Banga",
+        "Naveen Sudharsan",
+        "Josh Durkee"
+      ],
+      "authors_text": "Manmeet Singh, Somnath Luitel, Prabhjot Singh, Manraaj Banga, Naveen Sudharsan, Josh Durkee",
+      "abstract": "Large language models (LLMs) hallucinate numerical values when generating high-stakes meteorological text, posing risks for weather communication. We present AFDBench, an AI meteorologist that generates professional Area Forecast Discussions (AFDs) by reasoning through structured AI weather forecast data from Google's WeatherNext 2. We introduce AFDBench, the first benchmark for evaluating generative meteorological reasoning, comprising 7,732 expert written discussions from 13 National Weather Service (NWS) offices paired with real AI weather forecast inputs, and three complementary metrics: Met-Align (numerical accuracy), Style-Align (professional dialect adherence), and Input-Grounding (fidelity to source weather data). Zero-shot evaluations reveal that open-source LLMs achieve low Style-Align (~0.33) and moderate Input-Grounding (~0.88), failing to write in the professional NWS register or faithfully use their input data. We apply Group Relative Policy Optimization (GRPO) with domain-specific rewards targeting temperature accuracy, synoptic correctness, and format compliance. On 1,033 held-out samples from two unseen NWS offices, GRPO nearly doubles Style-Align from 0.318 to 0.619 and improves Input-Grounding from 0.881 to 0.940, demonstrating that reinforcement learning teaches a 7B-parameter model to write like a professional meteorologist and faithfully interpret AI weather data.",
+      "url": "http://arxiv.org/abs/2608.24954v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24954v1",
+      "tldr": "AFDBench introduces a benchmark and domain-specific GRPO reinforcement learning approach that trains a 7B LLM to generate professional, numerically grounded National Weather Service forecast discussions, nearly doubling style adherence (0.318→0.619) and improving input fidelity (0.881→0.940) on unseen forecast offices.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Western Kentucky University",
+        "RediMinds Inc.",
+        "University of Texas at Austin"
+      ],
+      "affiliations_text": "Western Kentucky University, RediMinds Inc., University of Texas at Austin",
+      "score": 3.778130310386506,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.24938v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824938v1-exfold-unified-expert-folding-for-training-free-moe-prefill-decode-acceleration",
+      "source": "arxiv",
+      "title": "ExFold: Unified Expert Folding for Training-Free MoE Prefill-Decode Acceleration",
+      "authors": [
+        "Juntong Wu",
+        "Yifei Liu",
+        "Junyi Chen",
+        "Siqi Fan",
+        "Chaoran Feng",
+        "Minghao Li",
+        "Liujie Zhang",
+        "Weihang Chen",
+        "Li Yuan"
+      ],
+      "authors_text": "Juntong Wu, Yifei Liu, Junyi Chen, Siqi Fan, Chaoran Feng, Minghao Li, Liujie Zhang, Weihang Chen, Li Yuan",
+      "abstract": "Mixture-of-Experts (MoE) models scale capacity for strong quality while keeping per-token compute bounded through sparse expert activation. Yet low-latency MoE serving is increasingly challenging, because it spans two inference phases with fundamentally different bottlenecks: prefill is dominated by token-wise expert computation, whereas decode is constrained by memory traffic from the batch-wise activated expert set. However, existing training-free acceleration methods optimize only a single resource proxy, either the experts each token executes or the experts a batch activates, and either discard the excluded experts' contribution or leave it only implicitly approximated. In this paper, we propose ExFold, a unified training-free expert-folding framework for jointly accelerating MoE prefill and decode. ExFold casts both prefill and decode as one budgeted output-approximation problem: execute only a phase-specific constrained expert set while projecting the contribution of budget-excluded experts onto retained experts using calibrated scalar projectors. Motivated by the observation that many expert outputs are directionally aligned but differ in magnitude, ExFold calibrates a pairwise scalar-projector matrix on unlabeled data and uses it at inference time to fold excluded expert contributions into retained experts. Under this view, prefill acceleration becomes token-level Top-K folding, and decode acceleration becomes batch-level expert-pool folding. The two phases differ only in how retained experts are selected, while excluded contributions are recovered by one shared folding mechanism. We implement ExFold as a plug-and-play plugin in vLLM, with a lightweight expert-folding CUDA kernel, delivering up to 1.41x TTFT and 2.45x TPOT speedups while retaining about 99% of the original average quality.",
+      "url": "http://arxiv.org/abs/2608.24938v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24938v1",
+      "tldr": "ExFold is a training-free expert-folding framework that accelerates both MoE prefill and decode by projecting budget-excluded expert contributions onto retained experts via calibrated scalar projectors, achieving up to 1.41× TTFT and 2.45× TPOT speedups while preserving about 99% of model quality.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Electronic Science and Technology of China",
+        "Peking University",
+        "Xiaohongshu Inc.",
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "University of Electronic Science and Technology of China, Peking University, Xiaohongshu Inc., Shanghai Jiao Tong University",
+      "score": 3.7512584987100963,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.24974v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824974v1-clearing-the-underbrush-ai-enhanced-rf-interference-suppression",
+      "source": "arxiv",
+      "title": "Clearing the Underbrush: AI-Enhanced RF Interference Suppression",
+      "authors": [
+        "Rahul Jain",
+        "Pierre Trepagnier",
+        "Rick Gentile",
+        "Joey Botero",
+        "Alexia Schulz"
+      ],
+      "authors_text": "Rahul Jain, Pierre Trepagnier, Rick Gentile, Joey Botero, Alexia Schulz",
+      "abstract": "AI-based structured interference rejection has grown more popular because deep learning approaches can outperform traditional methods by jointly considering the signal of interest (SOI) and the signal mixture (SOI plus interference). This work builds on a previous AI-enabled approach utilizing autoregressive transformer-based models by adding a Finite Scalar Quantization (FSQ) tokenizer layer which aims to improve the interference rejection performance while keeping overall latency to a minimum. Additionally, we experiment with other inference optimization techniques with the goal of speeding up inference without much accuracy loss. We explore this space with an experiment where the SOI is a digitally modulated radio frequency (RF) signal and the structured interference is a digital television signal, an extremely common type of Orthogonal Frequency-Division Multiplexing (OFDM) transmission. Our results achieve low latency and increased interference rejection over traditional techniques and prior work with other AI-enabled methods. We demonstrate the benefits of the AI-enabled approaches via audio metrics such as Perceptual Evaluation of Speech Quality (PESQ). Additionally, we explore a variety of applications and detail how our interference rejection algorithm may be used in operationally-relevant scenarios.",
+      "url": "http://arxiv.org/abs/2608.24974v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24974v1",
+      "tldr": "This paper presents an AI-enhanced RF interference suppression approach that augments an autoregressive transformer with a Finite Scalar Quantization tokenizer, achieving lower latency and improved interference rejection compared to traditional and prior AI-based methods for recovering digitally modulated signals.",
+      "detailed_reading": null,
+      "affiliations": [
+        "MIT Lincoln Laboratory"
+      ],
+      "affiliations_text": "MIT Lincoln Laboratory",
+      "score": 3.593509980606892,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.24904v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824904v1-dynamic-influence-weighted-distillation-for-single-imu-activity-recognition",
+      "source": "arxiv",
+      "title": "Dynamic Influence-Weighted Distillation for Single-IMU Activity Recognition",
+      "authors": [
+        "Bingxuan Xie"
+      ],
+      "authors_text": "Bingxuan Xie",
+      "abstract": "Inertial sensors at multiple body locations can improve activity recognition, but requiring every sensor at inference increases the deployment burden. We study whether four synchronized IMUs available during training can improve a student that uses only the right-arm IMU during fitting and inference. A frozen four-IMU teacher provides logit and feature targets. Fixed-weight knowledge distillation applies each target with the same strength to every fitting sample, although the student may not benefit equally from them. We introduce dynamic influence weighting (DIW), which tests a one-step candidate update on separate fold-internal training participants. DIW then assigns separate sample-wise gates to the logit and feature losses. On WEAR, we evaluate 19 labels and 68,298 complete windows from 22 participants using subject-disjoint five-fold cross-validation. Pooled out-of-fold macro-F1 is 0.561820 for Supervised and 0.571623 for Fixed-weight KD. DIW reaches 0.638451, gains of 7.66 and 6.68 percentage points, respectively. It exceeds Supervised for 18 of 19 labels and 21 of 22 held-out participants. All three routes retain the same 80,915-parameter right-arm student at inference. Under this protocol, DIW converts training-only multi-position information into a stronger single-IMU model without changing deployed sensing or the student forward graph.",
+      "url": "http://arxiv.org/abs/2608.24904v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24904v1",
+      "tldr": "TLDR: This paper introduces dynamic influence weighting (DIW), a per-sample adaptive gating of logit and feature distillation losses that allows a single right-arm IMU student to outperform supervised and fixed-weight knowledge distillation by leveraging a four-IMU teacher during training only, achieving substantial macro-F1 gains on the WEAR dataset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "South China Normal University"
+      ],
+      "affiliations_text": "South China Normal University",
+      "score": 3.521516994275413,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.25096v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/27/260825096v1-understanding-the-energy-scaling-of-large-language-model-inference-across-context-lengths-and-attention-architectures",
+      "source": "arxiv",
+      "title": "Understanding the Energy Scaling of Large Language Model Inference Across Context Lengths and Attention Architectures",
+      "authors": [
+        "Molka Chkir",
+        "Syed Muhammad Danish",
+        "Jos Höll",
+        "Arghavan Asad"
+      ],
+      "authors_text": "Molka Chkir, Syed Muhammad Danish, Jos Höll, Arghavan Asad",
+      "abstract": "The growing adoption of large language models (LLMs) has raised increasing concerns about the energy consumption and environmental impact of inference. This paper presents a systematic empirical study of decode-phase energy consumption across representative open-source LLMs employing Multi-Head Attention (MHA), Grouped Query Attention (GQA), and Grouped Query Attention with Sliding Window Attention (SWA) to characterize how attention architecture influences decode-phase energy consumption under varying inference workloads. We evaluate four models across different context lengths, batch sizes, and generation workloads while measuring GPU energy using NVIDIA hardware counters. We examine the effects of context length, attention mechanism, Key-Value (KV) cache growth, and batching on decode-phase energy consumption. Results show that attention mechanism is the primary factor governing how decode energy scales with context length. MHA models exhibit substantially steeper energy growth than GQA models, whereas GQA with SWA maintains nearly constant energy consumption. We further show that model size primarily determines absolute energy consumption, while batching reduces both energy per generated token and request latency by up to 87%. These findings provide practical guidance for selecting energy-efficient LLM architectures and inference configurations.",
+      "url": "http://arxiv.org/abs/2608.25096v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25096v1",
+      "tldr": "TLDR: This paper empirically shows that the attention mechanism (MHA, GQA, or GQA with SWA) is the primary driver of how LLM decode-phase energy scales with context length, while model size determines absolute energy and batching cuts per-token energy and latency by up to 87%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Reutlingen University",
+        "Algoma University"
+      ],
+      "affiliations_text": "Reutlingen University, Algoma University",
+      "score": 3.4474886075817452,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.25073v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/27/260825073v1-demmo-longitudinal-and-cross-disease-modelling-of-digital-mobility-outcomes-via-multi-task-learning",
+      "source": "arxiv",
+      "title": "DeMMO: Longitudinal and Cross-Disease Modelling of Digital Mobility Outcomes via Multi-Task Learning",
+      "authors": [
+        "Menghui Zhou",
+        "Zhipeng Yuan",
+        "Vitaveska Lanfranchi",
+        "Po Yang"
+      ],
+      "authors_text": "Menghui Zhou, Zhipeng Yuan, Vitaveska Lanfranchi, Po Yang",
+      "abstract": "Digital mobility outcomes (DMOs) derived from wearable sensors characterise mobility in daily life and offer a promising means of monitoring disease progression. Yet most DMO studies examine one disease at one visit; they do not model how multivariate DMO relationships with multiple clinical outcomes evolve jointly across diseases. Technically, existing temporal multi-task frameworks can model progression within an individual disease, but they do not jointly model multiple prediction outcomes across diseases, particularly when disease cohorts do not share participants. To address these gaps, we propose DeMMO, an interpretable framework for longitudinal, multi-disease, and multi-outcome learning. DeMMO represents each disease-outcome objective by a longitudinal DMO coefficient matrix and combines temporal regularisation with stable and visit-specific feature selection. Its central technical contribution is an automatic cross-disease and cross-outcome relation-learning mechanism that learns signed relations directly from these longitudinal mappings, enabling selective information sharing without paired participants. We evaluate DeMMO on the recently released, large-scale, multicentre Mobilise-D dataset, which provides a new opportunity to study 24 harmonised real-world DMOs over five visits across multiple mobility-limiting conditions. Against nine strong linear, longitudinal, and deep-regression baselines, DeMMO achieves the best overall and outcome-specific prediction performance, with significant improvements over the strongest baselines. Stability selection further identifies reliable longitudinal DMO patterns for subsequent clinical validation and disease monitoring. The implementation code and experimental results are available at https://github.com/menghui-zhou/DeMMO.",
+      "url": "http://arxiv.org/abs/2608.25073v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.25073v1",
+      "tldr": "DeMMO is an interpretable multi-task learning framework that jointly models longitudinal digital mobility outcomes across multiple diseases and clinical outcomes via automatic cross-disease relation learning, achieving state-of-the-art prediction performance on the large-scale Mobilise-D dataset.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.314003983122139,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.24937v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824937v1-multi-modal-anomaly-detection-a-survey",
+      "source": "arxiv",
+      "title": "Multi-Modal Anomaly Detection: A Survey",
+      "authors": [
+        "Xudong Mou",
+        "Zexin Wu",
+        "Chuan Luo",
+        "Shiru Chen",
+        "Xudong Liu",
+        "Chunming Hu",
+        "Renyu Yang"
+      ],
+      "authors_text": "Xudong Mou, Zexin Wu, Chuan Luo, Shiru Chen, Xudong Liu, Chunming Hu, Renyu Yang",
+      "abstract": "Multi-Modal Anomaly Detection (MMAD) detects rare abnormal events from heterogeneous data sources and is increasingly used in safety- and reliability-critical applications such as industrial inspection and cybersecurity. Yet the literature is fragmented across domains and modality combinations, and existing surveys usually group methods by architecture rather than by how abnormality is defined and separated in multi-modal settings. We survey MMAD from an assumption-driven perspective. We formalize the problem, identify five intrinsic characteristics underlying its core challenges, and organize prior work into two complementary paradigms. The first, normality-assumption methods, models regularity via representation learning, cross-modal alignment, and knowledge enhancement. The second, anomaly-assumption methods, sharpens decision boundaries through coarse-grained, structural, and semantic anomaly injection. We also investigate how foundation models are reshaping MMAD through scalable pretraining, flexible cross-modal transfer, and emerging reasoning capabilities. Finally, we compile representative benchmarks and evaluation protocols across domains and highlight open problems and future directions for robust, adaptive, and interpretable MMAD systems.",
+      "url": "http://arxiv.org/abs/2608.24937v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24937v1",
+      "tldr": "TLDR: This survey provides a unified, assumption-driven overview of multi-modal anomaly detection by organizing methods into normality-assumption and anomaly-assumption paradigms, analyzing core challenges, and exploring how foundation models are reshaping the field.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beihang University",
+        "Shandong Inspur Intelligent Production Technology Co., Ltd"
+      ],
+      "affiliations_text": "Beihang University, Shandong Inspur Intelligent Production Technology Co., Ltd",
+      "score": 3.288724516978683,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.24936v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824936v1-greenleaf-law-embed-tiny-a-compact-embedding-model-for-legal-domain-retrieval",
+      "source": "arxiv",
+      "title": "GreenLeaf Law Embed Tiny: A Compact Embedding Model for Legal Domain Retrieval",
+      "authors": [
+        "Surya Saka"
+      ],
+      "authors_text": "Surya Saka",
+      "abstract": "We present GreenLeaf Law Embed Tiny, a 0.6B parameter embedding model for legal domain retrieval. GreenLeaf-Tiny achieves 75.11% on the Massive Legal Embedding Benchmark (MLEB) and 64.38% on MTEB(Law, v1),demonstrating competitive performance among models under 1B parameters. Our approach combines a two-stage training pipeline that first distills knowledge from a larger teacher model into a compact student architecture, then applies domain-specific fine-tuning with hard negative mining; a carefully curated dataset of 3.4 million query-passage pairs, including 150,000 human-curated samples across diverse legal jurisdictions; and an efficient inference architecture supporting multiple quantization levels (BF16, INT8, binary) enabling deployment in resource-constrained environments. We provide detailed analysis of our training methodology, architectural choices, and comprehensive evaluation across legal retrieval tasks. Our results demonstrate that domain-specific training with high-quality data can improve performance for specialized domain applications",
+      "url": "http://arxiv.org/abs/2608.24936v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24936v1",
+      "tldr": "GreenLeaf Law Embed Tiny is a compact 0.6B-parameter legal embedding model that uses two-stage training (knowledge distillation plus domain-specific fine-tuning with hard negative mining) on a curated 3.4M-pair corpus to achieve competitive legal retrieval performance (75.11% on MLEB, 64.38% on MTEB(Law)) while supporting efficient quantized deployment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "JudicialMind"
+      ],
+      "affiliations_text": "JudicialMind",
+      "score": 3.224819072163399,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.24978v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/27/260824978v1-msr-iva-masked-structural-residual-independent-vector-analysis-for-state-aware-fusion-of-structural-mri-and-dynamic-functional-network-connectivity",
+      "source": "arxiv",
+      "title": "MSR-IVA: Masked Structural Residual Independent Vector Analysis for State-Aware Fusion of Structural MRI and Dynamic Functional Network Connectivity",
+      "authors": [
+        "Victor Solomon",
+        "Zening Fu",
+        "Rafal Angryk",
+        "Vince D. Calhoun",
+        "Jingyu Liu"
+      ],
+      "authors_text": "Victor Solomon, Zening Fu, Rafal Angryk, Vince D. Calhoun, Jingyu Liu",
+      "abstract": "Multimodal fusion of structural MRI (sMRI) and dynamic functional network connectivity (dFNC) can reveal how brain structure relates to changing functional states. When the same structural latent representation is coupled with multiple states, applying independent vector analysis (IVA) separately to each state can produce unrelated structural decompositions, while forcing identical decompositions may suppress state-specific relationships. In addition, not every subject expresses every dynamic state. We propose masked structural residual IVA (MSR-IVA), a state-aware framework that combines a shared structural representation with state-specific residual adaptations and masks for incomplete state expression. On an Alzheimer's Disease Neuroimaging Initiative cohort, MSR-IVA improved matched source coupling by 6.5% and reduced unmatched dependence by 15.7% relative to the independent pairwise IVA baseline. Among subjects expressing both states, mean absolute cross-state structural source correlation was 0.9177 for MSR-IVA versus 0.2978 for no sharing, demonstrating controlled structural sharing that preserves source correspondence while allowing state-specific adaptation.",
+      "url": "http://arxiv.org/abs/2608.24978v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24978v1",
+      "tldr": "MSR-IVA introduces a state-aware multimodal fusion framework that couples structural MRI with multiple dynamic functional connectivity states via shared structural representations, residual adaptations, and masking for incomplete state expression, improving cross-state source correspondence while preserving state-specific flexibility.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Emory University",
+        "Georgia Institute of Technology",
+        "Georgia State University"
+      ],
+      "affiliations_text": "Emory University, Georgia Institute of Technology, Georgia State University",
+      "score": 2.7749653570656467,
+      "score_text": "2.8"
+    }
+  ]
+}
