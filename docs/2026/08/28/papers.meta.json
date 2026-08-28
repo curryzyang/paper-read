@@ -1,0 +1,718 @@
+{
+  "label": "2026-08-28",
+  "date": "2026-08-28",
+  "generated_at": "2026-08-28T14:34:41",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.26447v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826447v1-stability-analysis-and-data-driven-verification-via-recurrent-lyapunov-functions",
+      "source": "arxiv",
+      "title": "Stability Analysis and Data-driven Verification via Recurrent Lyapunov Functions",
+      "authors": [
+        "Roy Siegelmann",
+        "Fernando Paganini",
+        "Enrique Mallada"
+      ],
+      "authors_text": "Roy Siegelmann, Fernando Paganini, Enrique Mallada",
+      "abstract": "Lyapunov's direct method is a cornerstone of stability and control, but it hinges on finding a Lyapunov function, a task demanding ingenuity or computation. A key difficulty is that every sub-level set of the function must be forward invariant, coupling its geometry to the system's trajectories. We relax this by replacing invariance with recurrence: a set is recurrent if every trajectory starting in it returns within a finite time. This yields the notion of a Recurrent Lyapunov Function (RLF), whose sub-level sets need only be recurrent. We show that, under mild conditions, RLFs guarantee stability, and we introduce stronger notions yielding asymptotic and exponential stability. We also give norm-based converse theorems: under the corresponding stability conditions, any norm is an RLF for their practical versions. We then develop GPU-based algorithms that certify (practical) stability from trajectory data alone, without a Lyapunov function. Certifying stability up to an $\\varepsilon$-neighborhood needs only $O(\\log(1/\\varepsilon))$ trajectory evaluations, with constants growing as the certified decay rate nears the true one, exposing an intrinsic performance-cost trade-off.",
+      "url": "http://arxiv.org/abs/2608.26447v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26447v1",
+      "tldr": "This paper introduces Recurrent Lyapunov Functions that relax the invariance condition of sub-level sets to recurrence, proving stability guarantees and norm-based converse theorems, along with GPU-based, trajectory-only verification algorithms that certify practical stability with logarithmic sample complexity.",
+      "detailed_reading": {
+        "motivation": "传统Lyapunov直接法要求每个子水平集必须正向不变，这使函数几何与系统轨迹紧密耦合，导致Lyapunov函数构造困难。本文用回归性（recurrence）替代不变性，即每个从集合内出发的轨迹在有限时间内返回该集合，从而放松了这一关键约束，并支持仅从轨迹数据验证稳定性。",
+        "method": "引入Recurrent Lyapunov Function (RLF)，其子水平集只需满足回归性而非正向不变性。在局部Lipschitz向量场假设下，给出保证稳定、渐近稳定和指数稳定的RLF条件，并证明在相应稳定条件下任意范数都满足实用（ε-松弛）RLF条件。开发两个GPU并行化算法：一个在固定区域内搜索最佳衰减率，另一个在目标衰减率下增长吸引域，通过轨迹数据直接验证实用指数稳定性，全程无需显式构造Lyapunov函数；验证依赖单边Lipschitz常数、弱配对等工具。",
+        "result": "核心结果是样本复杂度：在B_R \\ B_ε上验证实用指数稳定性仅需O(log(1/ε))次轨迹评估，且常数随认证衰减率接近真实衰减率而增长，揭示性能-成本权衡。与Boffi等人的Ω(ε^{-2d})样本复杂度相比，ε依赖性从多项式降为对数，但代价是常数M编码了系统指数速率λ与认证速率α之间的差距(λ-α)。",
+        "conclusion": "RLF通过以回归性代替不变性，解耦了水平集几何与向量场的瞬时对齐，仍能保证稳定、渐近稳定和指数稳定；范数逆定理表明任意范数在实用意义下都是RLF，因此无需计算Lyapunov函数即可实现基于轨迹数据的稳定性认证，并提供了可并行、可扩展的GPU验证框架。",
+        "key_details": "关键细节包括：系统需满足局部Lipschitz假设；RLF条件可定义在包含平衡点的任意紧集而非仅子水平集；逆定理给出的是实用（ε-松弛）版本，因此只保证实用渐近/指数稳定；样本复杂度上界为O(M^d log(R/ε))，其中d是状态维数，M与(λ-α)有关，当认证速率接近真实速率时轨迹评估需求增加；两个GPU算法分别用于固定区域最佳衰减率和目标速率下最大吸引域估计，并已通过数值实验验证；与Karafyllis等人工作相比，本文聚焦回归性联系与可并行算法，而非鲁棒稳定性的Matrosov型条件。"
+      },
+      "affiliations": [
+        "Johns Hopkins University",
+        "Universidad ORT Uruguay",
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Johns Hopkins University, Universidad ORT Uruguay, Massachusetts Institute of Technology",
+      "score": 5.1613139799826495,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2608.26469v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826469v1-active-curriculum-refinement-for-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Active Curriculum Refinement for Reinforcement Learning",
+      "authors": [
+        "Zhenya Liu",
+        "Yuxin Chen"
+      ],
+      "authors_text": "Zhenya Liu, Yuxin Chen",
+      "abstract": "In many reinforcement learning (RL) domains, environments are connected by prerequisite relations, such as difficulty-increasing edits or parameter increments, which induce a directed acyclic curriculum graph (DAG). Although this structure is often exploited only implicitly, explicitly modeling it can improve training. We introduce PATH, a curriculum-learning framework that performs active learning over the curriculum graph. PATH first expands coverage by sampling diverse curriculum paths and then reallocates training toward regions that remain unmastered. Experiments across diverse environments show that PATH explicitly leverages the graph structure to achieve strong robustness and generalization.",
+      "url": "http://arxiv.org/abs/2608.26469v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26469v1",
+      "tldr": "PATH is a curriculum-learning framework that performs active learning over a directed acyclic curriculum graph by combining random path sampling for broad coverage with regret-driven allocation to unmastered regions, improving robustness and generalization in reinforcement learning.",
+      "detailed_reading": {
+        "motivation": "在众多强化学习场景中，环境实例间存在先决关系（如难度递进编辑或参数增量），可构成有向无环课程图DAG；现有方法往往仅隐式利用该结构。本文提出显式建模课程图并进行主动学习的框架，以解决如何用少量课程路径高效掌握整个可达环境空间的问题。",
+        "method": "PATH以课程DAG为输入，节点为环境实例、边为先决关系；维护N个路径指针构成的动态缓冲区B。第一阶段PATH:Random从源节点均匀采样完整路径，在每个当前环境上训练策略，当平均回合回报达到早停阈值eps_es则沿出边推进，达到采样耐心eps_p则终止并重新初始化路径。第二阶段PATH:Active用基于TD误差的positive value loss（PLR式S(theta)）作为后悔代理更新权重w(theta)，按权重采样训练，并在掌握节点后把多个后继指针插入缓冲区以扩张高学习潜力区域；同时以概率p注入随机源节点并驱逐低权重指针以保持缓冲区大小N。当终止路径数n达到T_switch后由随机阶段切换至主动阶段，从而完成从广泛覆盖到重点分配的课程训练。",
+        "result": "在MiniGrid离散控制与BipedalWalker连续控制等基准上，PATH相比已有课程学习与基于后悔的UED方法，显式利用课程DAG结构取得了显著更优的鲁棒性与泛化性能，能够更高效地覆盖并掌握可达环境空间。",
+        "conclusion": "显式将课程学习建模为课程DAG上的主动路径获取，能有效平衡探索与利用：先随机路径探索扩大覆盖面，再根据后悔信号重分配训练预算到未掌握区域。该框架验证了显式结构利用对提升RL泛化与鲁棒性的价值，并可用于带先决关系的结构化环境族。",
+        "key_details": "关键细节包括：早停阈值eps_es与采样耐心eps_p控制路径推进和终止，T_switch决定两阶段切换点；PATH:Active使用GAE的lambda/gamma计算TD误差序列，以正价值损失S(theta)作为后悔代理；缓冲区大小N、重放率p、低权重淘汰机制共同维持对高后悔区域的聚焦；算法无需显式枚举整张图，只要能从当前节点通过参数增量或局部编辑构造后继即可在线生成路径。当前局限是依赖显式或可构造的课程DAG，且超参数（尤其eps_es和eps_p）需要在不同任务上调整，论文通过附录敏感性分析说明其影响。"
+      },
+      "affiliations": [
+        "The University of Chicago"
+      ],
+      "affiliations_text": "The University of Chicago",
+      "score": 4.8419368673078695,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.26273v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826273v1-constraint-aware-physics-informed-neural-networks-for-static-shape-estimation-of-co-manipulative-continuum-robots",
+      "source": "arxiv",
+      "title": "Constraint-Aware Physics-Informed Neural Networks for Static Shape Estimation of Co-Manipulative Continuum Robots",
+      "authors": [
+        "Rana Danesh",
+        "Pari Qarehdaghi",
+        "Farrokh Janabi-Sharifi"
+      ],
+      "authors_text": "Rana Danesh, Pari Qarehdaghi, Farrokh Janabi-Sharifi",
+      "abstract": "Static shape estimation of co-manipulative continuum robots (CCRs) is challenging because the continuum arms and manipulated flexible object form a closed chain that must satisfy both static equilibrium and geometric loop-closure constraints. This paper presents a constraint-aware physics-informed neural network (PINN) for static shape estimation of a tendon-driven CCR modeled using the geometric variable strain formulation. The proposed method incorporates a projected static equilibrium residual and a configuration-level geometric residual to enforce the governing mechanics and closed-chain geometry. In simulation, the PINN is compared with a purely data-driven artificial neural network (ANN) under limited and noisy training data. With 140 samples and 50% label noise, the PINN reduces the relative configuration error, equilibrium residual, and closed-chain residual by 67.88%, 67.35%, and 88.06%, respectively. Using the full dataset, the PINN achieves 0.1597% relative configuration error with an inference time of 0.1773 ms, compared with 17.97 s for an iterative nonlinear solver. Experimental fine-tuning reduces the marker RMSE from 2.657 mm to 0.497 mm and increases R2 from -0.788 to 0.937. These results demonstrate accurate, physically consistent, and computationally efficient static shape estimation of closed-chain CCRs.",
+      "url": "http://arxiv.org/abs/2608.26273v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26273v1",
+      "tldr": "A constraint-aware physics-informed neural network that enforces static equilibrium and loop-closure constraints enables accurate, physically consistent, and computationally efficient static shape estimation for closed-chain co-manipulative continuum robots.",
+      "detailed_reading": {
+        "motivation": "协操作连续体机器人（CCR）中，连续体臂与受操作柔性对象构成闭合链，其静态形状估计需同时满足静力平衡和几何闭环约束，而传统迭代非线性求解器计算昂贵，纯数据驱动网络又无法保证物理一致性与约束满足，尤其在训练数据有限或带噪声时。为此，本文提出一种约束感知的物理信息神经网络（PINN），在统一建模中融合力学残差和几何闭环残差，以实现快速、准确且物理一致的静态形状估计。",
+        "method": "采用几何变量应变（GVS）公式对肌腱驱动的CCR进行建模，将连续应变场用基函数展开为广义坐标q，并通过Magnus指数映射从应变重构位形。系统包含两个连续体臂和一个柔性对象，通过闭环连接形成闭链。网络输入为肌腱驱动向量u，输出为广义坐标q（即预测的静态构型）。训练时，除了数据拟合损失外，还引入两个物理约束残差：一是投影静力平衡残差，将静态平衡方程Kq = B_q(u) + F_g投影到约束兼容子空间（利用约束雅可比A(q)的零空间投影），以保证在闭链约束下满足力平衡；二是配置级几何闭环残差，即闭环连接处的位形误差e(q)（由SE(3)相对变换的对数映射得到），用于强制闭合链的几何一致性。网络通过最小化数据损失、平衡残差和几何残差的加权组合进行训练。训练流程为先使用仿真数据预训练，再使用实验测量的肌腱位移和标记点位置进行微调。推理时仅需前向传播即可快速得到静态形状。",
+        "result": "在仿真中，与纯数据驱动ANN比较，在140个样本且50%标签噪声条件下，PINN将相对配置误差降低67.88%，平衡残差降低67.35%，闭环残差降低88.06%。使用完整数据集时，PINN达到0.1597%的相对配置误差，推理时间0.1773 ms，而迭代非线性求解器需17.97 s。实验微调后，标记点RMSE从2.657 mm降至0.497 mm，R2从-0.788提升至0.937。结果表明PINN在精度、物理一致性和计算效率上均显著优于基线。",
+        "conclusion": "约束感知PINN能够有效融合数据与力学模型，同时满足静力平衡和闭环几何约束，在有限、带噪数据下仍保持高精度和物理一致性，并比迭代求解器快数个数量级。实验微调进一步验证了从仿真到实验的可迁移性，为CCR实时静态形状估计提供了高效且可靠的方案。",
+        "key_details": "关键细节包括：使用GVS公式减少参数维度，并采用四阶Zanna配点方案和两点Gauss积分实现高精度位形重建；约束处理采用配置级闭环误差e(q)与约束雅可比A(q)，其中A(q)的零空间用于投影静力平衡残差，避免直接求解约束方程；损失函数为数据损失、投影平衡残差和闭环残差的加权和，超参数需平衡三者的贡献；训练数据仅使用140个样本就能获得鲁棒性，但依赖仿真数据的物理真实性，且闭链约束的m_i（约束方向数）和偏移变换需精确标定；模型局限性包括仅考虑静态情况，未含惯性/阻尼项，且假设线性弹性本构关系和已知材料参数，对模型误差敏感，但实验微调可部分补偿。推理时间0.1773 ms可实现实时应用，但训练本身仍需离线完成。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.786656955582902,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.26314v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826314v1-dispersive-forward-tree-search-for-optimal-control-coverage-complexity-and-computation",
+      "source": "arxiv",
+      "title": "Dispersive Forward Tree Search for Optimal Control: Coverage, Complexity, and Computation",
+      "authors": [
+        "Shashank A. Deshpande",
+        "Jonathan P. How"
+      ],
+      "authors_text": "Shashank A. Deshpande, Jonathan P. How",
+      "abstract": "Steering-based planners require solutions to state-to-state boundary value problems, which can be inaccessible for nonlinear platforms. Forward propagation evades the steering requirement, but the finite-sample behavior of the associated planners remains uncharacterized and their implementations underperform in practice. This paper develops a propagation-based kinodynamic planner with deterministic finite-sample near-optimality guarantees. We work within the large class of differentially flat nonlinear systems and show that a forward tree of locally dispersive control commands contains a near-optimal trajectory at a certified tree size. We provide a general mechanism to construct dispersive command sets for control-affine systems, which are necessary to implement the search algorithm prescribed by the theory. We show that covering the certified trajectory class irrespective of cost provably demands a tree exponentially sized in the problem horizon, and present a cost-conditioned dominance pruning procedure that retains near-optimality at a tree size polynomial in the horizon. We implement the resulting search algorithm, Dispersive Forward Tree search (DFT*), as breadth-first expansion of the forward tree, which maps naturally onto parallel hardware. We design efficient dispersive samplers for the unicycle, the trailer car, and the quadrotor and evaluate challenging planning tasks for these platforms. DFT* delivers consistently competitive and often substantially better solution quality than state-of-the-art kinodynamic planners at comparable solution times on embedded-tier processors, accelerating further as parallel compute is scaled. We also implement DFT* in a receding-horizon loop to demonstrate real-time planning in dynamic environments at embedded-tier compute budgets.",
+      "url": "http://arxiv.org/abs/2608.26314v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26314v1",
+      "tldr": "The paper develops Dispersive Forward Tree search (DFT*), a propagation-based kinodynamic planner with deterministic finite-sample near-optimality guarantees for differentially flat systems, using locally dispersive control samplers and cost-conditioned dominance pruning to achieve polynomial tree complexity and strong practical performance on parallel hardware.",
+      "detailed_reading": {
+        "motivation": "基于转向（steering）的规划器需要求解状态到状态的边值问题，这对非线性平台通常不可行；前向传播虽能避免转向要求，但其有限样本行为缺乏刻画且实际实现性能不佳。本文针对微分平坦非线性系统，提出一种基于前向传播的动力学规划器，并给出确定性有限样本近最优性保证，以弥补该方向理论空白。",
+        "method": "提出 Dispersive Forward Tree Search (DFT*)：在微分平坦系统框架下，通过对控制命令集进行局部分散（locally dispersive）采样，以广度优先方式扩展前向树，无需求解边值问题。具体地，利用微分平坦性构造关于平坦输出喷流（flat output jets）的轨迹类覆盖，给出控制仿射系统分散命令集的一般构造机制；搜索采用前向传播+广度优先扩展，天然适合并行硬件。为控制树规模，引入基于代价的条件支配剪枝（cost-conditioned dominance pruning），在保留近最优性的前提下将树大小从关于问题时域指数级降为多项式级。还实现了单轮车、拖挂车和四旋翼的高效分散采样器，并给出用于动态环境的滚动时域版本 WWDFT*。",
+        "result": "在 Dynobench 离线基准上，DFT* 在嵌入式级处理器上与最先进动力学规划器在相近求解时间内相比，解质量持续具有竞争力且经常显著更优；随并行计算规模扩展可进一步加速。滚动时域版本的 WWDFT* 在嵌入式计算预算下实现了动态环境中的实时规划。理论方面，证明了分散前向树在认证树规模下包含近最优轨迹，并对无约束代价类给出了指数下界和经剪枝后的多项式上界。",
+        "conclusion": "DFT* 表明，对于微分平坦非线性系统，基于前向传播的动力学规划可以在不依赖转向求解的前提下获得确定性有限样本近最优性保证；结合代价条件支配剪枝，算法在理论上和工程实现上均高效可行，可作为基于前向搜索的最优控制规划新范式。",
+        "key_details": "关键点包括：理论保证针对微分平坦非线性系统，参考轨迹类需满足侵蚀控制权限（ε-eroded control authority）和约束鲁棒性；有限样本近最优性用命令集分散度 δ_A(n) 刻画，代价泛函需足够正则且可随时间递归聚合，约束需可时间组合，否则覆盖认证轨迹类要求树指数级增长。实际实现采用广度优先并行扩展与支配剪枝，复杂度和计算量由时域指数级降为多项式级；方法依赖微分平坦性，控制仿射系统有通用分散命令集构造，并针对单轮车、拖挂车、四旋翼设计了采样器。局限在于目前目标是等价的鲁棒最优代价而非精确全局最优，且对非平坦系统需另行设计覆盖机制。"
+      },
+      "affiliations": [
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology",
+      "score": 4.772654925596068,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.26239v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826239v1-wall-ss-scaling-long-horizon-world-models-via-next-scale-autoregression",
+      "source": "arxiv",
+      "title": "WALL-SS: Scaling Long-horizon World Models via Next-Scale Autoregression",
+      "authors": [
+        "Maeve Zhang",
+        "Rain Sun",
+        "Xiang Wang",
+        "Cyril Zhang",
+        "Shalfun Li",
+        "Meng Cao",
+        "Howard Lu",
+        "Ethan Chen",
+        "Harry Jhou",
+        "KZ Zheng",
+        "Lights Shi",
+        "Regis Cheng",
+        "Lorenzin",
+        "Robert Wang",
+        "Victor Yao",
+        "Gody Li",
+        "Elise Mon",
+        "Yohann Tang",
+        "Ryan Yu",
+        "PS Zhang",
+        "Vincent Chen",
+        "Hang Su",
+        "Roy Gan",
+        "Hao Wang",
+        "Qian Wang"
+      ],
+      "authors_text": "Maeve Zhang, Rain Sun, Xiang Wang, Cyril Zhang, Shalfun Li, Meng Cao, Howard Lu, Ethan Chen, Harry Jhou, KZ Zheng, Lights Shi, Regis Cheng, Lorenzin, Robert Wang, Victor Yao, Gody Li, Elise Mon, Yohann Tang, Ryan Yu, PS Zhang, Vincent Chen, Hang Su, Roy Gan, Hao Wang, Qian Wang",
+      "abstract": "Generative world models provide robots with predictive models of how the world evolves under interaction, with growing potential for simulation, planning, policy evaluation, and robot learning. Beyond clip-level future prediction, a unified generative formulation should relate actions to consequences, support flexible horizons and continuous interaction, and enable reward-driven optimization. We introduce WALL-SS, a world model that generates visual futures through Scale-wise autoregressive Scaling, enabling action-controllable and long-horizon robotic simulation. WALL-SS represents embodied trajectories as causal sequences of temporally interleaved observations and actions, making action-dependent state transitions explicit while naturally supporting variable-length generation, streaming extension through reusable causal states, and direct optimization through sequence probabilities. To make this formulation effective over long horizons, we generate each future observation in a coarse-to-fine manner and develop three complementary components within the same hierarchy. Action-conditioned next-scale prediction injects scale-aligned action representations to improve action-future coupling and model both successful and failed behaviors. Scale-compressed long-horizon memory retains recent interactions at fine resolution while compressing distant observations and actions, with scale-wise dream forcing enhancing robustness to self-generated context. Finally, on-policy alignment optimizes autoregressive visual dynamics with action-following and long-term consistency rewards while preserving the pretrained visual distribution. Experiments show that WALL-SS improves action following and trajectory accuracy, supports coherent minute-long streaming rollout under bounded memory, and consistently benefits from on-policy alignment in reducing action drift and long-horizon inconsistency.",
+      "url": "http://arxiv.org/abs/2608.26239v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26239v1",
+      "tldr": "WALL-SS introduces a next-scale autoregressive world model that generates action-controllable, long-horizon robotic visual futures via coarse-to-fine prediction with scale-aligned action conditioning, scale-compressed memory, and on-policy alignment, enabling coherent streaming rollouts and calibrated closed-loop policy evaluation.",
+      "detailed_reading": {
+        "motivation": "现有视频世界模型大多以片段级未来预测为主，未将动作与后果在统一因果序列中显式关联，难以支持灵活时长、流式交互和奖励优化；自回归式世界建模又面临误差累积和长期记忆不一致的挑战。为此提出WALL-SS，利用next-scale自回归生成可控、长程的机器人视觉未来。",
+        "method": "WALL-SS将具身轨迹表示为时间上交叉的观测与动作的因果序列，以粗到细的next-scale自回归逐尺度生成每个未来观测。输入为初始多视角观测、任务指令和时序对齐的动作序列；使用确定性渲染器将动作投影到各相机时间线，经共享因果编码器提取逐尺度动作条件，并以尺度对齐的因果掩码将动作token作为Transformer前缀注入，只在同一视觉尺度的对应动作上条件化。采用尺度压缩长时记忆：近期交互保持细粒度，历史观测与动作按尺度层级压缩为粗粒度摘要，在有限记忆预算下传播；通过尺度级dream forcing在自生成/损坏历史上训练以增强鲁棒性。最后将next-scale视觉token生成视为随机策略，在固定动作条件下用动作跟随和长时一致性奖励优化新采样轨迹，同时用自回归回放和参考模型正则化保持预训练视觉分布。",
+        "result": "实验表明WALL-SS在动作跟随和轨迹准确性上优于基线；在有限记忆下支持连贯的分钟级流式展开；on-policy对齐持续降低动作漂移和长程不一致。将同一外部机器人策略在WALL-SS和物理世界中闭环部署，得到校准的任务结果和一致的策略检查点排名，说明学到的世界模型保留了下游策略评估所需的动作相关动态。",
+        "conclusion": "WALL-SS提出了基于next-scale自回归的动作可控、长时程、可奖励对齐的机器人世界模型，以统一的因果公式连接感知、动作、记忆与优化。其三项互补设计（动作条件next-scale预测、尺度压缩记忆、on-policy对齐）共同提升了长时程一致性和动作保真度，为生成式世界模型用于机器人仿真、策略评估与学习提供了有效方案。",
+        "key_details": "关键实现细节：模型基于InfinityStar初始化，使用多尺度残差量化编码视觉token；动作条件通过确定性渲染器投影到相机时间线，共享因果编码器输出特征，按动作尺度集合S_A投影，查询在尺度ℓ时选择满足κ(ℓ)≤ℓ的最细动作尺度，动作图采用块对角掩码，禁止其他视角、相邻片段和未来动作的注意力。长时记忆将近期观测保留为细尺度、历史观测/动作逐步压缩为粗尺度，在有限记忆预算下进行流式传播；scale-wise dream forcing对自生成或损坏的历史上下文训练以缓解曝光偏差。on-policy对齐将next-scale生成视为随机策略，使用动作跟随奖励和长时一致性奖励，并通过自回归回放和参考模型正则化维持预训练视觉分布。数据来自异构机器人和UMI演示，初始为多视角观测。局限：自回归误差累积仍是核心挑战，且多尺度层级和流式记忆带来实现复杂度。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.728499947020695,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.26444v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826444v1-integrated-multi-modal-transit-network-design-via-dynamic-line-generation",
+      "source": "arxiv",
+      "title": "Integrated Multi-Modal Transit Network Design via Dynamic Line Generation",
+      "authors": [
+        "Ning Duan",
+        "Oktay Günlük",
+        "Samitha Samaranayake"
+      ],
+      "authors_text": "Ning Duan, Oktay Günlük, Samitha Samaranayake",
+      "abstract": "The integration of fixed-route public transit and on-demand mobility services presents both a modeling challenge and a computational opportunity for large-scale network design. We propose a flow-based mixed-integer programming formulation that jointly optimizes transit line planning and service frequencies while explicitly capturing first- and last-mile connectivity via on-demand services, under a fixed operating budget. To achieve tractability at urban scale, we develop a novel column generation heuristic scheme with tailored pricing subproblems. Applied to networks and demand in Boston and Chicago, the framework yields operationally feasible designs that substantially increase demand served. Relative to transit-only and on-demand-only baselines, ridership increases by up to 20.99% and 93.58% in Boston, and by up to 10.63% and 149.84% in Chicago. Compared to a multi-modal benchmark, our approach improves ridership by 5.42% and 5.80% in Boston and Chicago, respectively. These results demonstrate that (i) joint co-design of transit routes, frequencies, and on-demand legs within a unified optimization framework yields substantially greater ridership than single-mode or decoupled approaches under equivalent budget constraints; and (ii) the proposed formulation and column generation pricing scheme admit tractable, operationally feasible, high-performing solutions relative to tested baselines.",
+      "url": "http://arxiv.org/abs/2608.26444v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26444v1",
+      "tldr": "This paper introduces a flow-based mixed-integer programming framework with a column generation heuristic for jointly designing fixed-route transit lines, service frequencies, and on-demand first/last-mile connections, showing significant ridership improvements over single-mode and decoupled baselines in Boston and Chicago.",
+      "detailed_reading": {
+        "motivation": "传统公共交通与按需出行服务的割裂设计导致系统效率低下，固定线路公交受限于高需求走廊而缺乏广泛可达性，按需服务则因高成本和空驶问题难以独立承担大规模出行。现有研究多假设公交网络给定或仅做解耦优化，缺乏在统一框架下联合设计公交线路、发车频率与按需接驳腿的端到端方案。本文旨在提出一种可扩展的大规模多模式公交网络设计方法，在固定运营预算下最大化服务乘客数。",
+        "method": "本文提出基于流的混合整数规划（MIP）模型，联合优化公交线路规划、服务频率及按需出行（出租车）的首末公里接驳。输入为道路网络、OD出行需求、公交容量、运营成本及预算。模型显式刻画乘客路径选择，限制换乘次数，并施加线路长度不超过端点最短路两倍、最大长度及最小发车频率（即最大等待时间）等服务质量约束。为求解城市规模问题，开发了列生成启发式方案：在主问题LP松弛对偶信息的引导下，通过定制的定价子问题近似候选线路的检验数，动态生成线路；在每次迭代中限制于对偶信息优先的子图，并采用预选启发式筛选有潜力的候选线路加入主问题。算法交替求解主问题与定价子问题直至收敛，最终得到运营可行的线路与服务频率方案。",
+        "result": "在波士顿和芝加哥的真实网络与需求数据上验证，所提框架相比纯公交基线，乘客量最高提升20.99%（波士顿）和10.63%（芝加哥）；相比纯按需出行基线，提升最高达93.58%（波士顿）和149.84%（芝加哥）；相比多模式基准方法，波士顿和芝加哥分别提升5.42%和5.80%。结果表明在同等预算下，联合协同设计公交线路、频率与按需腿能显著提升乘客量，且列生成定价方案具备可处理性与运营可行性。",
+        "conclusion": "联合优化公交线路、发车频率与按需接驳腿的多模式系统设计，相比单一模式或解耦方法能在同等预算下服务更多乘客，并生成运营可行的方案。所提出的流式MIP模型与定制的列生成定价方案能够在城市规模实例上高效求解，为多模式公交网络规划提供了一种新的可行框架。",
+        "key_details": "关键点包括：模型允许乘客通过公交、按需服务或两者组合（如按需到公交再按需）出行，但限制换乘次数以避免多商品流模型中无限换乘的不现实假设；为保证服务质量，每条线路要求最大等待时间对应的最小车辆数，且线路端到端距离不超过最短路两倍；定价子问题因缺乏线路特有约束的对偶变量，采用近似检验数的启发式方法；列生成中利用LP松弛的对偶信息优先搜索子图，并通过预选启发式降低主问题中连续、整数和半连续变量交互带来的计算负担。方法局限可能在于按需服务仅考虑单人出租车模式，且实验基于静态需求，未考虑动态波动。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.578821848068377,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.26288v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826288v1-muon-with-finite-newton-schulz-the-smoothing-benefit-in-nonsmooth-nonconvex-optimization",
+      "source": "arxiv",
+      "title": "Muon with Finite Newton-Schulz: The Smoothing Benefit in Nonsmooth Nonconvex Optimization",
+      "authors": [
+        "Mingyi Li",
+        "Taira Tsuchiya"
+      ],
+      "authors_text": "Mingyi Li, Taira Tsuchiya",
+      "abstract": "Muon has emerged as a strong optimizer for the matrix-valued parameters in large language model pretraining, approximately orthogonalizing its momentum with a few Newton-Schulz iterations. Existing theory either replaces this iteration with the exact polar factor it approximates, or treats its finite depth as an approximation error, and thus the iteration Muon actually runs can only hurt the guarantees. We show that finite Newton-Schulz can instead be beneficial for nonsmooth nonconvex optimization. To this end, we analyze Muon through the online-to-nonconvex conversion, which views the update rule as an online learner and converts its regret bound into a stationarity guarantee. The finite Newton-Schulz iteration smooths the discontinuous polar map into a Lipschitz map of the singular values, and Muon with finite Newton-Schulz can be regarded as an online learner with a smoothed spectral potential. This smoothing is exactly what the conversion needs: we prove that a Newton-Schulz depth growing only logarithmically in the target accuracy suffices for convergence to stationary points in nonsmooth nonconvex optimization, whereas Muon with the exact-polar update may fail to converge. The resulting sample complexity bounds match the best-known guarantees for nonsmooth nonconvex optimization and are optimal for smooth nonconvex optimization up to problem-dependent factors. The argument extends beyond Newton-Schulz to general spectral maps with the same smoothing property.",
+      "url": "http://arxiv.org/abs/2608.26288v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26288v1",
+      "tldr": "Finite Newton–Schulz iterations in Muon smooth the discontinuous polar map into a Lipschitz spectral map, making the optimizer converge to stationary points in nonsmooth nonconvex optimization with only logarithmically growing iteration depth, whereas exact-polar Muon can fail.",
+      "detailed_reading": {
+        "motivation": "Muon优化器在大语言模型预训练中表现优异，其核心是用有限次Newton-Schulz迭代近似极分解（polar factor）来正交化动量。然而现有理论要么用精确极分解替代该迭代，要么将有限深度视为近似误差，导致实际运行的有限Newton-Schulz只会损害理论保证。同时，非光滑非凸优化场景下，精确极分解的Muon可能无法收敛。本文旨在回答：有限Newton-Schulz迭代能否本身成为有益机制，使得带动量的Muon在非光滑非凸目标上找到稳定点。",
+        "method": "采用online-to-nonconvex conversion（O2NC）框架，将Muon的更新规则视为在线学习器，并将其遗憾界转化为驻点性保证。具体地，将有限Newton-Schulz迭代视为对不连续极分解映射的光滑化，诱导出关于奇异值的Lipschitz谱映射，从而将Muon解释为具有光滑谱势的在线梯度预测算法。该学习器等价于在折扣线性损失上的follow-the-regularized-leader（FTRL），其正则化器是光滑势的Fenchel共轭。分析中，用动量而非累积梯度来分解折扣遗憾为惩罚项和稳定性项，惩罚项随势接近核范数而减小，稳定性项随谱映射Lipschitz常数增大而增大。有限Newton-Schulz深度q控制两者权衡：惩罚项和稳定性项均以q的几何速率变化，平衡后得到q=O(log(1/ε))时的次线性折扣遗憾，再经O2NC转换为样本复杂度保证。",
+        "result": "证明了带动量且每轮执行q=O(log(1/ε))步Newton-Schulz的Muon，在期望内经过O(ρ^{-1}ε^{-3}+ε^{-2})次随机梯度评估即可找到(ρ,ε)-稳定点，该复杂度与非光滑非凸优化的最佳已知保证匹配，且在光滑非凸优化中达到问题相关因子意义下的最优。相比之下，使用精确极分解更新的Muon可能无法收敛。这是首个在非光滑非凸优化中有限Newton-Schulz作为平滑机制而非近似误差来保证收敛的理论结果。",
+        "conclusion": "有限Newton-Schulz迭代不是精确极分解的单纯近似误差，而是一种有益的平滑机制：它用Lipschitz谱映射替代不连续的极分解，使得O2NC框架能够提供非光滑非凸优化的驻点收敛保证。所需Newton-Schulz深度仅随目标精度对数增长，与实际中少量迭代即可工作的经验观察一致。该论证超越了Newton-Schulz，适用于具有相同平滑性质的一般谱映射，为设计其他正交化变体提供了理论依据。",
+        "key_details": "关键点包括：1）数据与输入：随机梯度不可靠（有偏噪声）的Lipschitz非光滑非凸目标，矩阵参数形状为R^{m×n}（m≤n），每次迭代维护动量的指数移动平均M。2）建模：有限Newton-Schulz将极分解映射平滑为奇异值的Lipschitz映射，光滑势的梯度恰好是Muon更新方向；q=0时正则化器为算子范数球上的平方Frobenius正则化，q→∞时正则化衰减为零并退化为follow-the-leader。3）关键操作：每轮计算动量M的SVD（理论分析用），应用q步Newton-Schulz多项式迭代得到近似正交化方向，再乘以学习率更新参数。4）复杂度与约束：q只需O(log(1/ε))，样本复杂度为O(ρ^{-1}ε^{-3}+ε^{-2})；精确极分解对应的稳定性项无界，导致线性遗憾和无法收敛。5）局限性：分析的Muon变体与实际部署版本仍有差异，论文在结论部分具体说明；对于其他谱映射（如softsign等平滑松弛）也适用但需满足一定条件。"
+      },
+      "affiliations": [
+        "The University of Tokyo",
+        "RIKEN"
+      ],
+      "affiliations_text": "The University of Tokyo, RIKEN",
+      "score": 4.578340957762891,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.26375v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826375v1-cg4ai-a-column-generation-framework-for-training-ai-models-under-constraints",
+      "source": "arxiv",
+      "title": "CG4AI: A Column Generation Framework for Training AI Models Under Constraints",
+      "authors": [
+        "Youcef Magnouche",
+        "Abderrahmane Driouch",
+        "Sébastien Martin",
+        "Pierre Bauguion"
+      ],
+      "authors_text": "Youcef Magnouche, Abderrahmane Driouch, Sébastien Martin, Pierre Bauguion",
+      "abstract": "Standard machine-learning training minimizes a loss function over a dataset, but does not guarantee that the resulting model will satisfy predefined rules or constraints on its outputs. In many real-world applications, ranging from autonomous systems to network routing, such guarantees are essential. We propose CG4AI, a framework that builds a convex combination of AI models while enforcing linear constraints on the combined output. A master linear program (LP) determines the optimal mixture weights, while a pricing subproblem generates new models guided by LP dual variables, focusing attention on the most violated constraints. A cutting-plane procedure extends feasibility guarantees beyond the training set. We apply CG4AI to two problems: (i) digit classification on MNIST, where we demonstrate four distinct uses of constraints, learning from constraints alone, improving adversarial robustness, correcting misclassified examples, and enforcing output relabeling; and (ii) the multi-commodity flow problem, where link capacity constraints are enforced on neural-network routing predictors. Experiments on MNIST and standard SNDLIB benchmark networks show that CG4AI reliably produces feasible predictors while achieving better accuracy than single-model baselines.",
+      "url": "http://arxiv.org/abs/2608.26375v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26375v1",
+      "tldr": "CG4AI is a column-generation framework that trains a convex ensemble of AI models whose weighted outputs are guaranteed by a master linear program to satisfy hard linear constraints, with pricing subproblems guided by dual variables and applications to constraint-aware MNIST classification and capacity-constrained network routing.",
+      "detailed_reading": {
+        "motivation": "标准机器学习训练仅最小化数据集上的损失函数，无法保证模型输出满足预定义的规则或约束。在自动驾驶、网络路由等真实应用中，硬约束（如安全规则、链路容量）至关重要，因此需要一种能在训练阶段强制约束且不牺牲精度的方法。",
+        "method": "CG4AI构建AI模型的凸组合作为最终预测器，其权重由主线性规划（LP）确定，同时将输出约束直接编码为LP中的线性不等式。每个新模型（列）通过求解定价子问题生成，该子问题结合监督训练损失与LP对偶变量，从而指导模型聚焦最违反约束的输入。对于大规模约束集，采用切割平面过程仅添加最违反的约束。在MNIST上实现四种约束应用，在多商品流问题中对神经网络路由预测器强制链路容量约束。训练完成后，推理时无需任何投影或额外优化。",
+        "result": "在MNIST上，CG4AI展示了四种约束用途：仅从约束学习、提高对抗鲁棒性、纠正错误分类示例和强制输出重标记。在SNDLIB基准网络的41个配置上，CG4AI可靠地产生可行预测器，同时精度优于单模型基线。",
+        "conclusion": "CG4AI通过列生成在训练阶段强制硬线性约束，相比基于惩罚或推理时投影的方法，具有训练时强制、零推理开销和可行性保证的优势。实验表明其在保证约束满足的同时能达到更好的精度，适用于需要安全或物理约束的预测任务。",
+        "key_details": "关键要点：输出约束集可与训练集完全不相交，从而分离'必须满足'与'优化'的输入；主LP目标是最小化凸组合的加权训练损失而非最大化边际，支持任意可微损失；约束线性化使主问题成为LP，可行性由LP可行性保证；定价子问题使用对偶变量作为重要性权重；切割平面扩展可行性保证到连续输入空间；局限性是约束必须为线性，且需要主LP可行。"
+      },
+      "affiliations": [
+        "Huawei Technologies Ltd."
+      ],
+      "affiliations_text": "Huawei Technologies Ltd.",
+      "score": 4.495592774322311,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.26328v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826328v1-directional-optimality-conditions-for-optimization-problems-in-asplund-spaces",
+      "source": "arxiv",
+      "title": "Directional Optimality Conditions for Optimization Problems in Asplund Spaces",
+      "authors": [
+        "Weihao Mao",
+        "Jane J. Ye"
+      ],
+      "authors_text": "Weihao Mao, Jane J. Ye",
+      "abstract": "This paper develops directional necessary optimality conditions for constrained optimization problems in Asplund spaces. Under directional metric subregularity, we first derive a directional optimality condition in terms of limiting subdifferentials. We then introduce sufficient conditions for directional metric subregularity and establish their relationships with directional pseudo-normality and quasi-normality. For systems with joint constraints, we further propose a joint criterion for directional metric subregularity and use it to obtain necessary optimality conditions. The results not only extend several finite-dimensional directional constructions to an Asplund-space setting, but also yield conclusions that are new even in finite dimensions.",
+      "url": "http://arxiv.org/abs/2608.26328v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26328v1",
+      "tldr": "This paper extends directional necessary optimality conditions and directional metric subregularity criteria from finite dimensions to Asplund spaces, deriving limiting-subdifferential optimality conditions and new results that even improve finite-dimensional theory.",
+      "detailed_reading": {
+        "motivation": "传统约束规范在处理非凸优化和几何约束问题时经常失效，且有限维方向变分分析难以推广到无限维Banach空间，因为弱*拓扑与范数拓扑的差异会导致乘子消失问题。本文旨在Asplund空间中建立方向性必要最优性条件，并给出更可计算、易验证的结果。",
+        "method": "考虑问题min f(x) s.t. P(x)∈Λ，其中X,Y为Asplund空间。通过方向度量次正则性和弱*严格Lipschitz性质，利用方向极限法锥、方向次微分和方向余导数，对约束系统进行标量化处理，推导出以极限次微分形式表达的必要最优性条件。同时引入方向伪正规性和方向拟正规性作为方向度量次正则性的充分条件，并在联合约束系统中提出联合顺序约束规范准则。",
+        "result": "在Asplund空间中建立了方向性必要最优性条件，扩展了有限维结果，且部分准则在有限维中也是新的。具体地，在方向度量次正则性下得到了基于极限次微分的方向最优性条件；方向伪正规性和方向拟正规性在方向PSNC条件下足以推出方向度量次正则性；对联合约束系统给出了联合方向度量次正则性准则并将其用于最优性条件。",
+        "conclusion": "本文结果不仅将有限维方向构造推广到Asplund空间，还提供了更具体、可操作的方向最优性条件，为无穷维约束优化问题提供了新的分析工具。",
+        "key_details": "关键点包括：使用方向法锥N(x̄;Ω;ū)和方向次微分等方向变分工具；需要Asplund空间和局部闭性假设；借助弱*严格Lipschitz性质处理无穷维弱*拓扑与范数拓扑差异；方向度量次正则性作为核心假设；联合约束系统采用顺序规范避免乘子消失。局限性在于方向度量次正则性等条件仍需验证，部分充分条件在应用中可能不易检验。"
+      },
+      "affiliations": [
+        "University of Victoria"
+      ],
+      "affiliations_text": "University of Victoria",
+      "score": 4.265476927507873,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.26222v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/08/28/260826222v1-neuronfuzz-safety-neuron-guided-fuzzing-for-llm-safety-evaluation",
+      "source": "arxiv",
+      "title": "NeuronFuzz: Safety Neuron Guided Fuzzing for LLM Safety Evaluation",
+      "authors": [
+        "Zhiyuan Xu",
+        "Muhammad Firhard Roslan",
+        "Joseph Gardiner",
+        "Sana Belguith",
+        "Lichao Wu"
+      ],
+      "authors_text": "Zhiyuan Xu, Muhammad Firhard Roslan, Joseph Gardiner, Sana Belguith, Lichao Wu",
+      "abstract": "Safety evaluation is critical for assessing whether aligned Large Language Models (LLMs) remain robust against jailbreak attacks. Existing automated testing methods, however, largely rely on response-level feedback: each candidate prompt typically requires generating a target-model response to evaluate its attack effectiveness. This process is expensive and, more importantly, provides only sparse guidance on strongly aligned models, where most candidates are rejected with the same failure outcome.\n  This paper presents NeuronFuzz, a white-box fuzzing framework that exploits internal safety neurons as continuous execution feedback for LLM safety evaluation. A SafetyOracle converts safety-neuron activations into a continuous safety alarm score that serves as feedback for fuzzing and can be obtained during prefill, eliminating response generation from the fuzzing loop. To construct the SafetyOracle, NeuronFuzz uses template-invariant harmful and benign inputs and stability-aware selection to identify a compact set of safety neurons whose activations capture harmful-intent recognition. Moreover, since the safety alarm score is differentiable, NeuronFuzz uses its gradients to identify safety-sensitive template positions and a masked language model to generate fluent, context-compatible mutations while preserving original harmful payload and avoiding additional optimization variables. We evaluate NeuronFuzz across 21 text and multimodal models. Across five white-box source models, it achieves a 76-100% jailbreak discovery rate, outperforming baselines by up to 48 percentage points. Its optimized templates further transfer zero-shot to open-weight and six proprietary target models, achieving average ASR and top-5 ensemble ASR (EASR) of 69.6%/92.6% and 44.1%/60.0%, respectively.",
+      "url": "http://arxiv.org/abs/2608.26222v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26222v1",
+      "tldr": "NeuronFuzz is a white-box fuzzing framework that replaces expensive response-level feedback with continuous, prefill-time safety-neuron activations (via a differentiable SafetyOracle) to guide gradient-based mutation and efficiently discover jailbreak templates across diverse LLMs, achieving high jailbreak rates and cross-model transfer.",
+      "detailed_reading": {
+        "motivation": "现有LLM安全测试的自动化方法大多依赖响应级反馈，每个候选提示都要生成目标模型响应才能评估，成本高且对强对齐模型反馈稀疏，导致难以区分同样被拒绝的候选。因此需要一种能在预填充阶段获得、且能提供连续信号的内部反馈来指导模糊测试。",
+        "method": "NeuronFuzz构建SafetyOracle作为反馈信号：首先构造模板不变的有害/良性输入对（同一模板配不同安全性载荷），在预填充阶段用前向钩子收集所有Transformer MLP块的gate和up投影激活，经最大池化后拼接成提示级表示；然后通过B次bootstrap稳定性选择，每轮拟合线性分类器并按系数绝对值保留每块sqrt(p)个神经元，筛选出选择率高、符号一致且正向主导的紧凑安全神经元集；训练轻量分类器将这些神经元激活映射为连续安全警报分数。模糊测试循环中，该分数在prefill阶段即可获得，无需生成响应；同时利用分数的梯度定位安全敏感的模板位置，用掩码语言模型生成流畅且上下文兼容的替换词，保持原有有害载荷不变，并据此迭代变异与选择候选。",
+        "result": "在21个文本和多模态模型上的评估中，NeuronFuzz在5个白盒源模型上实现76%-100%的越狱发现率，比基线最高提升48个百分点；优化后的模板零样本迁移到开源和6个专有目标模型，开源模型平均ASR/EASR为69.6%/92.6%，专有模型为44.1%/60.0%。",
+        "conclusion": "NeuronFuzz证明了将内部安全神经元作为模糊测试反馈的有效性，以预填充阶段可获得的连续信号替代昂贵稀疏的响应级反馈，显著提高了越狱模板的发现效率与迁移能力，为LLM安全评估提供了一种高效的新范式。",
+        "key_details": "关键细节包括：使用模板不变的有害/良性对消除模板风格干扰；神经元候选来自MLP的gate和up投影并做max-pooling；稳定性选择采用B次bootstrap，每轮保留q_l=ceil(sqrt(p_l))个最大绝对系数神经元，并要求选择率s_j与符号一致性c_j超过阈值且正系数占优；梯度引导突变仅修改模板位置，保留有害载荷；SafetyOracle在prefill阶段计算，避免了自回归解码开销。局限性在于构建SafetyOracle需要白盒访问一个源模型（或代理模型），并且超参数τ_s、τ_c需根据模型调整。"
+      },
+      "affiliations": [
+        "University of Bristol"
+      ],
+      "affiliations_text": "University of Bristol",
+      "score": 4.0281539820726335,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.26453v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826453v1-distributed-training-using-an-intelligent-network",
+      "source": "arxiv",
+      "title": "Distributed Training using an Intelligent Network",
+      "authors": [
+        "Nihar Shah",
+        "Ben Blier"
+      ],
+      "authors_text": "Nihar Shah, Ben Blier",
+      "abstract": "Distributed training across a wide area network (WAN) is challenging, as continuous parameter exchange by islands of compute is constrained by limited bandwidth, high latency, and uneven topology. We propose making the network an active participant in training. On the systems side, such networks should leverage (i) multicast technology to replicate outbound traffic and (ii) in-line FPGAs to aggregate inbound traffic, to ease egress and ingress bottlenecks. These technologies are used for training across workers within a data center, but this paper extends them to the WAN. On the algorithms side, we develop an optimization framework that produces rich synchronization schedules (namely, rotating cliques of islands) around the underlying network topology and these technologies, to maximize information exchange. Finally, we illustrate this on a nine-city topology modeled on the DoubleZero network, a live programmable WAN equipped with both technologies, and show how the optimal schedules shift with the network's capabilities. Together, these can narrow the gap to the gold standard of colocated training.",
+      "url": "http://arxiv.org/abs/2608.26453v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26453v1",
+      "tldr": "This paper proposes making the wide-area network an active participant in distributed training by using multicast and in-line FPGAs for efficient parameter exchange, alongside an optimization framework that generates rotating-clique synchronization schedules to maximize information flow and narrow the gap to colocated training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "DoubleZero Foundation"
+      ],
+      "affiliations_text": "DoubleZero Foundation",
+      "score": 4.004830499293044,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.26233v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826233v1-pruning-binarized-neural-networks-a-dedicated-framework-and-globally-weighted-algorithms",
+      "source": "arxiv",
+      "title": "Pruning Binarized Neural Networks: A Dedicated Framework and Globally Weighted Algorithms",
+      "authors": [
+        "Roan Rubiales",
+        "Jean Pierre David"
+      ],
+      "authors_text": "Roan Rubiales, Jean Pierre David",
+      "abstract": "Extreme compression of deep neural networks, up to full binarization, dramatically reduces memory footprint and arithmetic complexity, facilitating deployment on constrained edge hardware with field-programmable gate arrays (FPGAs) and microcontrollers. Although combining binarization with pruning promises additional efficiency gains, existing pruning strategies are ill-suited to binarized representations and rarely translate into meaningful hardware savings. We introduce a PyTorch-based, research-oriented framework that incorporates freezing and pruning mechanisms for designing and optimizing binarized neural networks. The framework enables rapid and reproducible evaluation of state-of-the-art approaches and the fast prototyping of new ones. Leveraging this framework, we propose a novel pruning method that accounts for the relative importance of learned parameters across abstraction levels. Such a global weighting mechanism consistently achieves a superior trade-off between model accuracy and pruning rate, achieving a 70% pruning rate on VGG11 with constant accuracy, while state-of-the-art results reach only 41% in the binarized setting.",
+      "url": "http://arxiv.org/abs/2608.26233v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26233v1",
+      "tldr": "The paper proposes a PyTorch framework and a novel globally weighted pruning method for binarized neural networks that significantly improves the accuracy-versus-pruning-rate trade-off, achieving 70% pruning on VGG11 without accuracy loss.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Polytechnique Montreal"
+      ],
+      "affiliations_text": "Polytechnique Montreal",
+      "score": 3.9623147470094073,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.26451v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826451v1-toward-equitable-low-carbon-mobility-fairness-aware-demand-prediction-for-expanding-bike-sharing-systems",
+      "source": "arxiv",
+      "title": "Toward Equitable Low-Carbon Mobility: Fairness-Aware Demand Prediction for Expanding Bike-Sharing Systems",
+      "authors": [
+        "Man Luo",
+        "Yixuan Zhao"
+      ],
+      "authors_text": "Man Luo, Yixuan Zhao",
+      "abstract": "Bike-sharing systems are an important component of low-carbon urban mobility, but continued expansion creates challenges in both cold-start prediction and equitable resource allocation. Newly deployed stations lack historical ridership records, causing a mismatch between training and inference for graph-based models on evolving networks. Historical demand may also encode structural inequalities, as lower ridership in low-income neighborhoods can reflect limited infrastructure access rather than weak latent demand. Models trained directly on such data may therefore reinforce existing mobility disparities. We propose FairGIN, a fairness-aware graph neural network for demand prediction in expanding bike-sharing systems. FairGIN integrates three components. Expansion-Simulated Increment Training stochastically simulates network expansion during training to reduce the cold-start distribution gap. Attention-Based Knowledge Transfer combines station-adaptive temperature scaling with orthogonal embedding alignment to transfer representations from data-rich existing stations to data-sparse new stations. Fairness-Aware Optimization introduces income-stratified regularization and an equity-calibrated deployment score to support more inclusive station placement. Experiments on NYC and Seattle demonstrate that FairGIN achieves state-of-the-art predictive accuracy across diverse expansion scenarios while substantially reducing income-based disparities without compromising overall system efficiency.",
+      "url": "http://arxiv.org/abs/2608.26451v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26451v1",
+      "tldr": "FairGIN is a fairness-aware graph neural network that improves demand prediction for newly deployed bike-sharing stations by simulating network expansion, transferring knowledge from existing stations, and incorporating income-stratified fairness regularization, achieving state-of-the-art accuracy while reducing income-based disparities in deployment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Exeter"
+      ],
+      "affiliations_text": "University of Exeter",
+      "score": 3.803895468630935,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.26309v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826309v1-algebraic-multigrid-acceleration-for-efficient-label-spreading",
+      "source": "arxiv",
+      "title": "Algebraic Multigrid Acceleration for Efficient Label Spreading",
+      "authors": [
+        "Antonia van Betteray",
+        "Jonathan Klees",
+        "Miriam Schäfers",
+        "Matthias Rottmann"
+      ],
+      "authors_text": "Antonia van Betteray, Jonathan Klees, Miriam Schäfers, Matthias Rottmann",
+      "abstract": "Modern machine learning models rely on large amounts of labeled data. However, manual annotation of large-scale datasets is expensive and time-consuming. Label spreading is a semi-supervised learning technique that addresses this challenge by propagating information from a few labeled examples to a larger pool of unlabeled data. Despite its effectiveness, its application to large-scale, high-dimensional datasets is limited by computational costs and memory constraints. To address these limitations, we propose Algebraic Multigrid Acceleration for Efficient Label Spreading (AMELS), an efficient label spreading framework that improves scalability by fast construction of neighborhood graphs and the incorporation of algebraic multigrid solvers. The latter is an iterative solver that replaces the ordinary random walk iteration typically performed in label spreading. Due to the multilevel nature of algebraic multigrid solvers, AMELS spreads given label information across a graph of any size in a single multigrid cycle. We demonstrate that AMELS achieves significant runtime reductions compared to existing implementations while also being more robust to hyperparameter choices in terms of both runtime and classification accuracy. Our framework therefore enables efficient label spreading on large-scale image datasets and produces accurate labels even when only a few labeled samples are available.",
+      "url": "http://arxiv.org/abs/2608.26309v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26309v1",
+      "tldr": "AMELS accelerates label spreading for large-scale, high-dimensional datasets by combining fast neighborhood graph construction with algebraic multigrid solvers, enabling scalable, efficient label propagation in a single multigrid cycle while improving runtime robustness and classification accuracy.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.787041920304566,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.26433v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826433v1-fedcmapss-a-benchmark-for-federated-learning-in-remaining-useful-life-estimation",
+      "source": "arxiv",
+      "title": "FedCMAPSS: A Benchmark for Federated Learning in Remaining Useful Life Estimation",
+      "authors": [
+        "Amelia Sorrenti",
+        "Matteo Pennisi",
+        "Concetto Spampinato",
+        "Simone Palazzo"
+      ],
+      "authors_text": "Amelia Sorrenti, Matteo Pennisi, Concetto Spampinato, Simone Palazzo",
+      "abstract": "Data-driven prognostics and health management has emerged as a key enabler for Industry 4.0, yet the development of robust remaining useful life (RUL) estimation models is often limited by the scarcity of run-to-failure data. While federated learning offers a promising paradigm to collaboratively train predictive models without sharing sensor data, research efforts have operated so far in the absence of a common evaluation framework. To address this gap, this paper introduces FedCMAPSS, a benchmark for federated RUL estimation based on the commonly-used NASA C-MAPSS dataset. We define a set of five standardized tasks designed to simulate real-world industrial challenges, ranging from ideal IID settings to extreme statistical heterogeneity, and conduct a systematic evaluation of state-of-the-art federated optimization algorithms across multiple neural architectures. By establishing reproducible baselines and making the source code and data splits publicly available, this work aims to provide a standard foundation for developing and comparing federated predictive maintenance solutions.",
+      "url": "http://arxiv.org/abs/2608.26433v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26433v1",
+      "tldr": "FedCMAPSS provides a standardized benchmark for federated remaining useful life estimation on the C-MAPSS dataset, defining five reproducible tasks that simulate real-world data heterogeneity and systematically evaluating state-of-the-art federated optimization algorithms across neural architectures.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Catania"
+      ],
+      "affiliations_text": "University of Catania",
+      "score": 3.7459958679316814,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.26332v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826332v1-beyond-capability-benchmarks-learning-operational-fingerprints-of-llm-cloud-services-from-production-incident-metadata",
+      "source": "arxiv",
+      "title": "Beyond Capability Benchmarks: Learning Operational Fingerprints of LLM Cloud Services from Production Incident Metadata",
+      "authors": [
+        "Meiwei Zhang",
+        "Eduardo Miranda",
+        "Bruce Baynes",
+        "Suvigya Jain",
+        "Wanlong Chen",
+        "Tao He",
+        "Sergey Borodavkin"
+      ],
+      "authors_text": "Meiwei Zhang, Eduardo Miranda, Bruce Baynes, Suvigya Jain, Wanlong Chen, Tao He, Sergey Borodavkin",
+      "abstract": "Managed LLM services are now part of real production systems, but model selection and service planning still rely heavily on capability benchmarks that reveal little about operational behavior after deployment. We present Operational Embedding (OpEmbed), a framework for learning compact operational fingerprints of LLM cloud services from structured, privacy-preserving support-case metadata, without using case text. OpEmbed aggregates model--time windows into an eight-channel operational signature and learns a low-dimensional representation via temporal contrastive learning, cross-view reconstruction, and generational-ordinality regularization. Evaluated on more than 33,000 production support cases spanning seven LLM families over 26 months at Google Cloud, OpEmbed recovers interpretable family- and version-level structure, improves leave-one-model-out operational forecasting over non-learned baselines, remains useful under limited early-window data, and supports cross-model fault-type transfer. We report the practical lessons learned from building and evaluating this tool for model onboarding, support readiness assessment, and operational monitoring.",
+      "url": "http://arxiv.org/abs/2608.26332v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26332v1",
+      "tldr": "OpEmbed learns compact operational fingerprints of LLM cloud services from structured support-case metadata alone, enabling cross-model forecasting, fault-pattern transfer, and reliability monitoring without relying on capability benchmarks or case text.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Google LLC"
+      ],
+      "affiliations_text": "Google LLC",
+      "score": 3.703934812464174,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.26462v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826462v1-diff-mining-logit-differences-reveal-finetuning-objectives",
+      "source": "arxiv",
+      "title": "Diff Mining: Logit Differences Reveal Finetuning Objectives",
+      "authors": [
+        "Greg Kocher",
+        "Robert West",
+        "Clément Dumas",
+        "Julian Minder"
+      ],
+      "authors_text": "Greg Kocher, Robert West, Clément Dumas, Julian Minder",
+      "abstract": "Finetuning has become the gold standard for refining existing behaviors and inducing new ones in language models, yet it often remains unclear exactly which behaviors emerge during this process. As models grow ever more capable, understanding finetuning better becomes increasingly important, particularly since unwanted behaviors may arise during finetuning. In this paper, we introduce Diff Mining, a simple yet effective framework for identifying what a finetuned model has learned by comparing its logits to those of its base model. Diff Mining effectively surfaces salient tokens that are amplified in the finetuned model, serving as a fingerprint of its training -- even on text unrelated to the finetuning domain. Unlike many existing model diffing methods which require model internals, Diff Mining only needs access to output logits and scales to large models. The framework consists of two modular stages: (i) extracting per-context logit differences between the finetuned and base models on a reference corpus, and (ii) aggregating the resulting signals to construct an interpretable token set representing the finetune. For aggregation, we explore both a simple Top-K frequency method and a Non-negative Matrix Factorization (NMF)-based approach for disentangling multiple finetuning objectives into distinct token clusters. Empirically, Diff Mining succeeds across diverse settings: on finetune domain detection, it significantly outperforms state-of-the-art model diffing methods both in identifying relevant tokens and in downstream performance when an interpretability agent is given access to the extracted token set; on models with injected biases, it identifies more than one third of the biases without targeted probing. Overall, our framework shows promise in developing auditing tools to detect finetuning objectives.",
+      "url": "http://arxiv.org/abs/2608.26462v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26462v1",
+      "tldr": "Diff Mining reveals what a finetuned model has learned by comparing its output logits to those of its base model—extracting salient, amplified tokens that fingerprint the finetuning objectives without needing model internals.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6508771845106995,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.26132v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826132v1-slm-conditioned-hierarchical-relation-routing-for-labeled-property-graph-learning",
+      "source": "arxiv",
+      "title": "SLM-Conditioned Hierarchical Relation Routing for Labeled Property Graph Learning",
+      "authors": [
+        "Michal Podstawski"
+      ],
+      "authors_text": "Michal Podstawski",
+      "abstract": "Labeled property graphs combine relational structure with heterogeneous textual and categorical properties attached to both nodes and relationships. Conventional graph neural networks typically represent these properties as static feature vectors, limiting their ability to determine which semantic evidence should influence message propagation for a particular prediction target. We propose SLM-Conditioned Hierarchical Relation Routing, an architecture that integrates a small language model directly into graph message selection. A topology GNN provides a stable structural representation and prediction anchor. For each target node, incident messages combine the neighbor's structural state, node-property encoding, relationship-property encoding, and relationship type. A parameter-efficient SLM processes structured graph soft tokens and produces a target-conditioned routing query. This query first selects relevant messages within each relationship type and subsequently routes information across relation-level summaries. The resulting representation provides a bounded residual update to the topology anchor, preserving structural evidence while allowing contextual semantic information to modify the prediction. The architecture supports interpretable analysis at both the neighbor and relationship-type levels and provides a general mechanism for integrating language-derived semantics into property-rich graph learning.",
+      "url": "http://arxiv.org/abs/2608.26132v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26132v1",
+      "tldr": "The paper introduces SLM-Conditioned Hierarchical Relation Routing, an architecture that uses a small language model to generate target-conditioned queries for hierarchically selecting graph messages within and across relationship types, producing bounded residual updates that refine a topology-GNN anchor for property-rich labeled graph learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NASK National Research Institute"
+      ],
+      "affiliations_text": "NASK National Research Institute",
+      "score": 3.6041886252540642,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.26383v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826383v1-cross-platform-benchmark-of-neural-3d-reconstruction-for-autonomous-laboratory-robots",
+      "source": "arxiv",
+      "title": "Cross-Platform Benchmark of Neural 3D Reconstruction for Autonomous Laboratory Robots",
+      "authors": [
+        "Yongho Kim",
+        "Mengjiao Han",
+        "Victor Mateevitsi",
+        "Silvio Rizzi",
+        "Michael E. Papka",
+        "Nicola Ferrier"
+      ],
+      "authors_text": "Yongho Kim, Mengjiao Han, Victor Mateevitsi, Silvio Rizzi, Michael E. Papka, Nicola Ferrier",
+      "abstract": "Autonomous robots performing laboratory tasks depend on 3D reconstruction pipelines that can turn raw camera streams into actionable object representations within the latency budget of a physical control loop. Neural 3D reconstruction methods have demonstrated high-quality view synthesis, but their real-time viability across the compute platforms on which laboratory robots actually run remains poorly characterized. In this work, we present a systematic compute-platform benchmark of neural 3D reconstruction methods, evaluating NeRF and 3D Gaussian Splatting training and rendering on GPU-enabled computing devices ranging from single-board computers to server-class nodes, and place Meta's SAM3D single-image reconstruction on the same axes to quantify its latency and fidelity gap relative to per-scene optimization. Our results show that Gaussian Splatting yields higher rendering quality than NeRF at greater GPU cost, and that onboard compute is insufficient for full per-scene optimization at interactive rates. Our preliminary assessment on SAM3D indicates that it delivers plausible object geometry within seconds, but with detail mismatches that can compromise downstream manipulation. Together, these findings motivate tiered pipelines in which lightweight feed-forward reconstruction sustains the real-time perception-and-tracking loop for laboratory robots, while heavier neural reconstruction is scheduled selectively on suitable compute.",
+      "url": "http://arxiv.org/abs/2608.26383v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26383v1",
+      "tldr": "This paper benchmarks neural 3D reconstruction methods (NeRF, 3D Gaussian Splatting, and SAM3D) across compute platforms from edge devices to HPC nodes, finding that Gaussian Splatting offers better rendering quality at higher GPU cost, onboard compute is insufficient for interactive per-scene optimization, and SAM3D is fast but less accurate—motivating a tiered reconstruction pipeline for autonomous laboratory robots.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois Chicago",
+        "Argonne National Laboratory",
+        "Northwestern University"
+      ],
+      "affiliations_text": "University of Illinois Chicago, Argonne National Laboratory, Northwestern University",
+      "score": 3.6030710677460966,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.26324v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826324v1-privacy-without-regret-differentially-private-inference-time-alignment",
+      "source": "arxiv",
+      "title": "Privacy Without Regret: Differentially Private Inference-Time Alignment",
+      "authors": [
+        "Ishi Jain",
+        "Nandini Bhattad",
+        "Sayak Ray Chowdhury"
+      ],
+      "authors_text": "Ishi Jain, Nandini Bhattad, Sayak Ray Chowdhury",
+      "abstract": "Best-of-N (BoN) sampling is the simplest and most widely deployed inference-time alignment strategy, but it suffers from two distinct problems: reward hacking, in which the selected response exploits errors in the proxy reward model, and the absence of any privacy protection for the sensitive human preference data used to train that reward model. We show that a single intervention-adding calibrated noise to reward scores before selection-resolves both. Our first result, Private Best-of-N (PrivBoN), establishes that Gumbel noise at an appropriate scale simultaneously provides $ε$-differential privacy and implements KL-regularized alignment. Whenever the privacy budget exceeds a critical threshold $ε^*$, the privacy-mandated noise is the regret-optimal regularization, and privacy imposes zero additional alignment cost-matching the information-theoretic skyline of Huang et al. (2025). Because $ε^*$ depends on an unknown coverage coefficient, we introduce Private Inference-Time Pessimism (PrivITP), which combines $χ^2$-regularized rejection sampling with a two-phase Gaussian mechanism. PrivITP achieves ex-post $(ε,δ)$-DP with a privacy cost independent of the number of responses $n$, cleanly decouples the regularization parameter from the privacy parameter, and attains the skyline up to a noise-inflation term. Experiments across several language models, datasets, and reward models confirm our results: PrivBoN and PrivITP are scaling-monotonic (unlike BoN, which degrades past a critical $n$), and PrivITP matches or outperforms PrivBoN at equivalent privacy levels, with the largest gains in the strong-privacy regime.",
+      "url": "http://arxiv.org/abs/2608.26324v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26324v1",
+      "tldr": "Adding calibrated noise to reward scores before Best-of-N selection yields differentially private inference-time alignment algorithms (PrivBoN and PrivITP) that simultaneously prevent reward hacking and protect sensitive preference data, matching the information-theoretic regret skyline with zero additional alignment cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Kanpur"
+      ],
+      "affiliations_text": "Indian Institute of Technology Kanpur",
+      "score": 3.5623201996898985,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.26437v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826437v1-subgraph-filtering-for-fair-graph-neural-networks",
+      "source": "arxiv",
+      "title": "Subgraph Filtering for Fair Graph Neural Networks",
+      "authors": [
+        "Haohui Lu",
+        "jiyuan Tian",
+        "Fangyu Zhou",
+        "Shahadat Uddin"
+      ],
+      "authors_text": "Haohui Lu, jiyuan Tian, Fangyu Zhou, Shahadat Uddin",
+      "abstract": "Graph neural networks (GNNs) can exhibit unfair behavior even when sensitive attributes are excluded from node features, because graph topology and message passing propagate group-correlated signals under sensitive homophily. Existing fairness-aware GNN methods mainly constrain representations or prediction distributions at a global level, without explicitly controlling the local structural pathways through which biased information propagates during aggregation. We propose Subgraph Filtering for Fair Graph Neural Networks (SF-GNN), a lightweight and architecture-agnostic framework that mitigates structural bias at its source. SF-GNN identifies bias-prone edges by combining sensitive homophily with structural propagation amplifiers, including hub participation and triadic closure. It then incorporates stochastic edge filtering into each message-passing step to selectively downweight or remove these edges while preserving the remaining graph structure. Training further incorporates a statistical-parity regularizer with a warm-up schedule to stabilize optimization. Experiments on five benchmark datasets show that SF-GNN achieves consistent fairness improvements while maintaining competitive predictive performance, leading to a better fairness--accuracy trade-off than recent fairness-aware GNN baselines.",
+      "url": "http://arxiv.org/abs/2608.26437v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26437v1",
+      "tldr": "SF-GNN is a lightweight, architecture-agnostic framework that mitigates structural bias in graph neural networks by identifying and stochastically filtering bias-prone edges during message passing, achieving improved fairness with competitive predictive performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Sydney",
+        "Charles Darwin University"
+      ],
+      "affiliations_text": "The University of Sydney, Charles Darwin University",
+      "score": 3.412752498504684,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2608.26423v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826423v1-the-latent-diagnostic-taxonomy-a-framework-for-constructing-classifiers-and-diagnosing-their-decisions-applied-to-prompt-injection-detection",
+      "source": "arxiv",
+      "title": "The Latent Diagnostic Taxonomy: A Framework for Constructing Classifiers and Diagnosing Their Decisions, Applied to Prompt Injection Detection",
+      "authors": [
+        "Jaturong Kongmanee",
+        "Smile Thanapattheerakul"
+      ],
+      "authors_text": "Jaturong Kongmanee, Smile Thanapattheerakul",
+      "abstract": "This paper proposes a framework for constructing a classifier as a safeguard layer, and for developing a complementary diagnostic that identifies which of the classifier's confident decisions can be trusted. This framework, the Latent Diagnostic Taxonomy, consists of (i) constructing a dimensionality-optimized classifier, in which the embedding dimensionality is empirically selected via cross-validated performance rather than fixed a priori, (ii) locating a relatively small set of latent support vectors (~ 29% of total training examples) representing influential prompts for identifying tokens that alter the classifier's predicted labels, and (iii) utilizing such tokens and their associated attack magnitudes for constructing a diagnostic taxonomy. This diagnostic taxonomy provides an end-to-end guideline for flagging prompts that require different treatments: rely Safely on the classifier's decision; flag Heuristic Bias and Heuristic Override cases; route Insufficient Context cases for further human/safety review. Applying the framework to a classifier trained on a public prompt injection dataset, we find that a substantial fraction of its confident decisions (~ 77%) are not robust to removing a single token, and that this brittleness separates into two distinct failure patterns: a confidence calibration failure and a genuinely exploitable shortcut. For each zone of the taxonomy, we also recommend strategies for remediating diagnosed prompts. We illustrate the framework as a series of steps, demonstrating how each step operates.",
+      "url": "http://arxiv.org/abs/2608.26423v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26423v1",
+      "tldr": "The Latent Diagnostic Taxonomy is a framework that builds a dimensionality-optimized classifier and diagnoses its confident decisions via token-occlusion analysis on support vectors—sorting them into Safe, Heuristic Bias, Heuristic Override, and Insufficient Context zones—to identify which predictions can be trusted, demonstrated on prompt injection detection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TrendAI Research"
+      ],
+      "affiliations_text": "TrendAI Research",
+      "score": 3.2571092323577218,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2608.26395v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826395v1-isoperimetric-problems-related-to-extremal-diameter-graphs-in-3d-theoretical-and-numerical-aspects",
+      "source": "arxiv",
+      "title": "Isoperimetric problems related to extremal diameter graphs in 3D: theoretical and numerical aspects",
+      "authors": [
+        "Beniamin Bogosel"
+      ],
+      "authors_text": "Beniamin Bogosel",
+      "abstract": "We study optimization problems for separable functionals of the Euclidean or spherical lengths of dual edge pairs in finite extremal unit-diameter configurations in three dimensions. For a fixed diameter graph, these problems lead to nonconvex constrained optimization of the vertex coordinates. We first prove that a convergent sequence of extremal configurations retains an extremal geometric core after coincident points are merged and vertices incident to at most one diameter are removed. A spherical Crofton argument then gives a sharp lower bound for additive concave functionals, attained by the regular tetrahedron. We also analyze the effect of inserting or deleting dangling vertices. For the sum of products of spherical dual-edge lengths, we obtain an exact supremal reformulation of the three-dimensional Blaschke--Lebesgue area problem. The numerical study uses all 10,644 available extremal configurations with at most 16 vertices. We combine direct evaluation with gradient-based local optimization on each fixed graph and reconstruct the intrinsic diameter graph and its dual pairs after vertex collisions. For every supplied graph, the selected verified endpoint contains a regular tetrahedron. These computations do not certify the global maximum for any fixed graph, but they motivate structural conjectures connecting tetrahedral containment with the Blaschke--Lebesgue problem.",
+      "url": "http://arxiv.org/abs/2608.26395v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26395v1",
+      "tldr": "The paper investigates isoperimetric optimization problems for separable functionals of dual edge lengths in 3D extremal unit-diameter configurations, deriving structural convergence results, a sharp lower bound via spherical Crofton arguments, an exact reformulation of the Blaschke–Lebesgue area problem, and numerical evidence linking tetrahedral containment to the problem.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Aurel Vlaicu University of Arad"
+      ],
+      "affiliations_text": "Aurel Vlaicu University of Arad",
+      "score": 3.1608560619033597,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2608.26304v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826304v1-multi-objective-planning-for-healthcare-facility-resilience-mitigate-now-or-respond-later",
+      "source": "arxiv",
+      "title": "Multi-Objective Planning for Healthcare Facility Resilience: Mitigate Now or Respond Later?",
+      "authors": [
+        "Gizem Toplu-Tutay",
+        "John J. Hasenbein",
+        "Matt Kammer-Kerwick",
+        "Erhan Kutanoglu"
+      ],
+      "authors_text": "Gizem Toplu-Tutay, John J. Hasenbein, Matt Kammer-Kerwick, Erhan Kutanoglu",
+      "abstract": "Flooding can damage healthcare facilities, interrupt local care capacity, and trigger costly patient evacuations. Addressing these risks requires long-term resilience investments under uncertainty. We develop a bi-objective two-stage stochastic optimization model that jointly determines permanent facility hardening and scenario-dependent evacuation decisions. The first objective minimizes expected evacuation, physical damage, and business-interruption costs. The second minimizes a service-disruption impact index that combines the duration and scale of service loss with a place-based social-vulnerability weight. We develop an exact Benders decomposition and a scalable Lagrangian-dual method with tailored primal recovery, embedding both within an adaptive procedure for constructing informative Pareto frontiers. A case study of 3,752 hospitals and nursing homes in Texas evaluates the framework under climate-informed tropical-cyclone flood scenarios. The results show that minimizing economic losses alone can systematically allocate less protection to facilities located in socially vulnerable areas, while moderate movement along the Pareto frontier can substantially reduce disruption impacts at limited additional expected cost. The exact decomposition solves all tested instances, including larger stress tests for which the extensive formulation becomes memory-limited, while the Lagrangian method provides substantially faster high-quality solutions.",
+      "url": "http://arxiv.org/abs/2608.26304v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26304v1",
+      "tldr": "This paper develops a bi-objective two-stage stochastic optimization model for healthcare facility flood resilience, jointly optimizing permanent hardening and scenario-dependent patient evacuations to trade off expected economic losses against socially vulnerability-weighted service disruption impacts, and demonstrates with exact and Lagrangian decomposition methods on Texas hospitals and nursing homes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Austin"
+      ],
+      "affiliations_text": "The University of Texas at Austin",
+      "score": 2.908108407215433,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2608.26436v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/08/28/260826436v1-neotrifuse-reliability-aware-multimodal-fusion-under-missingness-heterogeneity-for-neonatal-mortality-risk-prediction",
+      "source": "arxiv",
+      "title": "NeoTriFuse: Reliability-Aware Multimodal Fusion under Missingness Heterogeneity for Neonatal Mortality Risk Prediction",
+      "authors": [
+        "Jiyuan Tian",
+        "Qincheng Shen",
+        "Ye Lin",
+        "Yu Gao",
+        "Haohui Lu"
+      ],
+      "authors_text": "Jiyuan Tian, Qincheng Shen, Ye Lin, Yu Gao, Haohui Lu",
+      "abstract": "Neonatal mortality risk prediction from bedside monitoring data remains challenging due to extreme class imbalance, heterogeneous clinical risk factors, multi-scale temporal dynamics, and substantial missingness. We propose NeoTriFuse, a reliability-aware multimodal fusion framework for missingness-heterogeneous neonatal monitoring data. Unlike conventional multimodal approaches that treat missingness primarily as a preprocessing issue, NeoTriFuse models missingness as an explicit reliability signal that dynamically modulates modality contributions during fusion. The framework integrates static perinatal variables, local-global temporal encoders, and patient-level statistical summaries through reliability-guided gating mechanisms, while jointly optimizing mortality prediction and an auxiliary length-of-stay objective. NeoTriFuse achieves competitive performance, with an F1 score of 0.6736 +/- 0.0216 and an AUROC of 0.9454 +/- 0.0056. Ablation studies indicate that the local-global temporal architecture and patient-level summary branch contribute most substantially to predictive performance, while reliability-aware gating provides additional improvements on threshold-dependent metrics under heterogeneous observation completeness. Sensitivity analyses further suggest stable performance across nearby hyperparameter settings. Overall, the findings support reliability-aware multimodal fusion as a practical approach for neonatal mortality prediction under realistic clinical missingness conditions.",
+      "url": "http://arxiv.org/abs/2608.26436v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.26436v1",
+      "tldr": "NeoTriFuse is a reliability-aware multimodal fusion framework that treats missingness as an explicit signal to dynamically modulate static, temporal, and summary modality contributions, achieving competitive neonatal mortality risk prediction (F1 0.6736, AUROC 0.9454) under heterogeneous data completeness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Sydney",
+        "Charles Darwin University"
+      ],
+      "affiliations_text": "The University of Sydney, Charles Darwin University",
+      "score": 2.8301041075719735,
+      "score_text": "2.8"
+    }
+  ],
+  "errors": []
+}
