@@ -1,0 +1,740 @@
+{
+  "label": "2026-09-01",
+  "date": "2026-09-01",
+  "generated_at": "2026-09-01T08:04:49",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2608.28656v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828656v1-redlight-vla-models-for-traffic-rule-grounding-and-behavioral-emphasis-in-driving-policies",
+      "source": "arxiv",
+      "title": "RedLight-VLA: Models for traffic-rule grounding and behavioral emphasis in driving policies",
+      "authors": [
+        "Bala Murali Manoghar Sai Sudhakar",
+        "Sourab Bapu Sridhar",
+        "Sandipan Das",
+        "Rahul Ahuja",
+        "Meda Lazar",
+        "Ashish Garg",
+        "Pratik Likhar",
+        "Senthil Yogamani"
+      ],
+      "authors_text": "Bala Murali Manoghar Sai Sudhakar, Sourab Bapu Sridhar, Sandipan Das, Rahul Ahuja, Meda Lazar, Ashish Garg, Pratik Likhar, Senthil Yogamani",
+      "abstract": "Behavior-cloned Vision-Language-Action (VLA) driving policies struggle with rare rule-governed maneuvers at signalized intersections. Braking and launching examples contribute little to averaged trajectory loss, while fused representations lack explicit supervision for the governing traffic-light and stop-line state. We present RedLight-VLA, a training objective that uses expert futures and automatically generated perception targets without additional manual rule annotation. First, trajectory-derived behavioral reweighting (BR) emphasizes rare deceleration and acceleration using rotation-invariant longitudinal dynamics and a scale-preserving reduction that exactly recovers the baseline when disabled. Second, parallel auxiliary (AUX) heads ground traffic-light and stop-line state in continuous post-fusion rule tokens, without autoregressive language generation or changes to the trajectory decoder. We evaluate on a curated set of 20 s sequences with a 5 s prediction horizon. Controlled variants share the same backbone, training data, decoder, and evaluation population. Against an otherwise identical VLA baseline, RedLight-VLA reduces red-light stop-line overshoot from 7.3% to6.8%, reduces stop-line velocity error by 12.7%, and improves 3 s trafficlight-sliced ADE/FDE from 0.274/0.964 m to 0.247/0.897 m. Green-light false stops increase from 3.2% to 3.9%; however, combining BR with AUX supervision mitigates the larger increase observed for AUX alone (4.0%). The combined model also improves non-traffic-light ADE/FDE from 0.268/0.956 m to 0.241/0.876 m and outperforms either mechanism alone on all four sliced displacement measures.",
+      "url": "http://arxiv.org/abs/2608.28656v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28656v1",
+      "tldr": "RedLight-VLA improves behavior-cloned Vision-Language-Action driving policies at signalized intersections by combining trajectory-derived behavioral reweighting with parallel auxiliary heads for traffic-light and stop-line grounding, reducing red-light overshoot, stop-line velocity error, and displacement errors.",
+      "detailed_reading": {
+        "motivation": "行为克隆的视觉-语言-动作（VLA）驾驶策略在信号交叉口的罕见规则控制操作中表现不佳，因为制动和起步样本对平均轨迹损失的贡献很小，且融合表示缺乏对交通灯和停车线状态的显式监督。",
+        "method": "提出RedLight-VLA训练目标，包含两个关键模块：一是基于轨迹导出的行为重加权（BR），利用旋转不变的纵向动力学和尺度保持的缩减方式强调罕见的减速和加速样本，并在禁用时精确恢复基线；二是并行辅助头（AUX），在连续的后融合规则token上监督交通灯和停车线状态，无需自回归语言生成或修改轨迹解码器。模型在20秒序列、5秒预测horizon的精选数据集上评估，受控变体共享相同骨干、训练数据、解码器和评估集。",
+        "result": "与完全相同的VLA基线相比，RedLight-VLA将红灯停车线过冲从7.3%降至6.8%，停车线速度误差降低12.7%，3秒交通灯分片的ADE/FDE从0.274/0.964米改善到0.247/0.897米。绿灯误停从3.2%升至3.9%，但BR与AUX结合缓解了单独AUX带来的更大上升（4.0%）。组合模型还改善了非交通灯ADE/FDE从0.268/0.956米到0.241/0.876米，并在所有四项分片位移指标上优于任一单独机制。",
+        "conclusion": "RedLight-VLA通过行为重加权和并行辅助监督有效增强了驾驶策略对交通规则的grounding和行为侧重，在红灯场景显著减少过冲和速度误差，同时保持整体轨迹预测性能提升，是无需额外人工规则标注的可扩展方案。",
+        "key_details": "关键点包括：BR使用旋转不变纵向动力学进行重加权，且设计为可关闭以恢复基线；AUX头直接利用连续后融合规则token，避免离散语言生成；评估关注20秒序列和5秒预测horizon，使用交通灯分片指标；控制变量保证公平对比；局限性是绿灯误停略有增加，需BR与AUX联合抑制，且评测集为精选场景而非全量开放道路。"
+      },
+      "affiliations": [
+        "Qualcomm Technologies, Inc., USA",
+        "Arriver System Software S.r.l., Romania",
+        "Qualcomm Auto Ltd Sweden Filial, Sweden",
+        "Qualcomm India Private Limited, India"
+      ],
+      "affiliations_text": "Qualcomm Technologies, Inc., USA, Arriver System Software S.r.l., Romania, Qualcomm Auto Ltd Sweden Filial, Sweden, Qualcomm India Private Limited, India",
+      "score": 5.624311631479722,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2608.28677v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828677v1-cognitively-grounded-on-device-runtime-learning-for-ground-robots-in-unknown-physical-environments",
+      "source": "arxiv",
+      "title": "Cognitively-Grounded On-Device Runtime Learning for Ground Robots in Unknown Physical Environments",
+      "authors": [
+        "Yihao Cai",
+        "Yanbing Mao",
+        "Christian Lebiere"
+      ],
+      "authors_text": "Yihao Cai, Yanbing Mao, Christian Lebiere",
+      "abstract": "This paper presents \\ul{CogRun}, a framework that enables safety-critical ground robots to perform cognitively-grounded runtime learning entirely on edge-AI devices in unknown physical environments, without prior maps or perceptual knowledge. CogRun consists of three components: a Learning-Agent, a Rational-Agent, and a Coordinator. The Learning-Agent is novel in cognitive-neural learning architecture, which featurs dedicated replay buffers, cognition-driven experience sampling, and a safety-aware action blending of actor-critic reinforcement learning (RL) with instance-based learning (IBL). The Rational-Agent is a non-learning module that complements the Learning-Agent by exclusively handling safety-critical functions, while the Coordinator manages interactions between the two agents to promote safe and efficient runtime learning. CogRun's full autonomy stack (i.e., perception, learning, and control) on edge-AI devices eliminates dependence on wireless communications, enabling broader applications in challenging environments with limited or no connectivity. Experiments on a quadruped robot in real-world wild forests and on an off-road autonomous vehicle in a simulated wild forest demonstrate that CogRun enables safe and efficient runtime learning, allowing robots to safely and continuously interact with the physical world for enhancing task performance in complex, unknown environments.",
+      "url": "http://arxiv.org/abs/2608.28677v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28677v1",
+      "tldr": "CogRun is a cognitively-grounded framework that enables safety-critical ground robots to perform safe, efficient runtime learning entirely on edge-AI devices in unknown environments by combining reinforcement learning with instance-based learning, a rational safety agent, and a coordinator.",
+      "detailed_reading": {
+        "motivation": "地面机器人在未知、非结构化的物理环境中部署时面临三大挑战：非平稳环境导致离线训练策略失效、通信受限环境下云边架构不可用、经验重放效率低且忽视与当前状态的相关性。现有运行时学习方法依赖云边通信或缺乏认知启发的记忆机制，难以在安全关键任务中实现高效自适应。",
+        "method": "CogRun框架在边缘AI设备上实现完整的感知-学习-控制栈。其由Learning-Agent、Rational-Agent和Coordinator三部分组成：Learning-Agent采用actor-critic RL与实例学习(IBL)融合的认知神经架构，配置专用重放缓冲区（学习缓冲区B_L和理性缓冲区B_R），通过结合相似性、频率和近因的认知驱动采样机制选取最相关的经验进行训练，并采用安全感知的RL-IBL动作混合；Rational-Agent是非学习安全模块，基于可验证的安全方法在状态超出安全集时接管控制并共享安全经验；Coordinator根据安全条件实时切换两个智能体的动作。系统在ROS2和NVIDIA Jetson AGX Orin上运行，通过CPU-GPU解耦执行（Rational-Agent和Coordinator在CPU，Learning-Agent在GPU）实现低延迟控制。",
+        "result": "在真实野外森林的四足机器人和模拟野外森林的越野自动驾驶车辆上进行的实验表明，CogRun能够使机器人安全、持续地与物理世界交互并提升任务性能。与基线方法相比，CogRun显著增强了安全保证、经验效率和任务完成质量，验证了其在复杂未知环境中进行安全高效运行时学习的有效性。",
+        "conclusion": "CogRun通过认知启发的记忆机制和理性安全代理的协同，在边缘设备上实现了无需无线通信的自主运行时学习，有效解决了非平稳环境适应、通信限制和经验效率三大挑战，为安全关键地面机器人在未知场景中的自主部署提供了可行方案。",
+        "key_details": "关键实现细节包括：专用重放缓冲区将安全经验与试错经验分离，并在每个mini-batch中混合采样以降低危险探索；认知驱动的排序分数由相似性（欧氏距离）、频率和近因（基于记忆衰退的指数衰减函数）共同构成；Rational-Agent采用保守但可证明安全的控制方法（如物理模型或Interactive-Far），其干预频率由安全集条件决定；系统在500Hz状态估计和100Hz视觉特征输入下，Learning-Agent以20Hz运行，Rational-Agent以200Hz运行，协调器实时管理切换；架构的局限性在于安全集需要预定义且依赖感知模型精度，以及边缘AI设备的算力约束。"
+      },
+      "affiliations": [
+        "Wayne State University",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Wayne State University, Carnegie Mellon University",
+      "score": 5.015030385411899,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2608.28723v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828723v1-vehicle-drift-emergence-continuous-evolution-from-grip-driving-to-the-handling-limit-via-boundary-exploration-learning-model-predictive-control",
+      "source": "arxiv",
+      "title": "Vehicle Drift Emergence: Continuous Evolution from Grip Driving to the Handling Limit via Boundary Exploration Learning Model Predictive Control",
+      "authors": [
+        "Sheng Zhao",
+        "Binh-Minh Nguyen",
+        "Hangyu Lu",
+        "Xiaodong Wu"
+      ],
+      "authors_text": "Sheng Zhao, Binh-Minh Nguyen, Hangyu Lu, Xiaodong Wu",
+      "abstract": "Automated drift controllers commonly track a prescribed drift equilibrium, sideslip reference, or trajectory. These formulations establish how to execute drift, whereas the continuous transition from grip driving to drift near the handling limit remains unresolved. This paper defines drift emergence in a repetitive lap time minimization task, where neither the controller objective nor the reward contains an explicit drift reference. A boundary exploration learning model predictive controller (BE-LMPC) constructs an empirical safe set and a locally shifted terminal cost from completed laps. By iteratively improving spatial speed allocation under a fixed global speed bound, the controller progressively explores larger sideslip and yaw rate envelopes while preserving recoverability. As lap performance improves, sustained sideslip and pronounced yaw motion emerge while the rear axle approaches saturation. Analysis shows that, when external conditions vary smoothly, the transition from tire adhesion to sliding does not itself cause abrupt changes in tire force or vehicle state. The combined-slip Fiala model satisfies this continuity condition at the transition. At a tire road friction coefficient of 0.6, lap time decreases from 49.95 s on Lap~3 to 25.50 s on Lap~12, with drift first emerging on Lap~11. Lap~12 reaches 16.5$^\\circ$ sideslip and 0.894 rear axle utilization. In contrast, no drift is detected for friction coefficients from 0.8 to 1.2; at 1.2, a similar peak speed is achieved with only 0.483 rear axle utilization. These results characterize drift as a conditional continuation of limit handling that emerges when increasing performance demand approaches the available tire capacity, rather than as a separately prescribed motion mode.",
+      "url": "http://arxiv.org/abs/2608.28723v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28723v1",
+      "tldr": "The paper shows that drift can emerge autonomously from grip driving via a boundary-exploration learning model predictive controller in a lap-time minimization task, where high-sideslip motion arises as a continuous, performance-driven transition near the handling limit on low-friction surfaces rather than being explicitly prescribed.",
+      "detailed_reading": {
+        "motivation": "现有自动驾驶漂移控制大多采用“预设-跟踪”范式，即预先指定漂移平衡点、质心侧偏角参考或轨迹，这只能解决如何执行漂移，而无法解释从抓地行驶到接近操控极限时漂移如何连续涌现。本文在重复赛道最小圈时任务中定义漂移涌现，要求控制器目标与奖励均不含任何显式漂移参考，从而回答性能寻优闭环能否自主产生高侧偏角运动，以及何种需求-容量条件使其可达。",
+        "method": "采用平面三自由度单轨车辆模型，状态为[X,Y,ψ,v,r,β]，控制输入为加速度指令和前轮转角；轮胎使用组合滑移Fiala模型，前后轴按固定50:50纵向力分配，摩擦系数在每次仿真中恒定。提出边界探索学习模型预测控制（BE-LMPC）：利用已完成圈构建经验安全集和局部平移终端代价，在固定全局速度上界下迭代优化空间速度分配，以可恢复性为门控逐步扩大质心侧偏角和横摆角速度包络；控制器不含任何漂移参考，漂移检测仅依据β≥8°、r≥0.45 rad/s、后轴利用率ρ_r≥0.82且持续0.30 s。通过摩擦系数扫描和检测器敏感性分析以及抓地约束和固定包络方法对比，研究漂移涌现条件。",
+        "result": "在摩擦系数0.6的低附路面上，圈时从第3圈的49.95 s降至第12圈的25.50 s，漂移首次出现在第11圈；第12圈达到16.5°质心侧偏角和0.894的后轴利用率。摩擦系数0.8至1.2时未检测到漂移，其中1.2时达到相似峰值速度但后轴利用率仅为0.483。结果表明漂移是极限操控的条件性延续，当性能需求接近可用轮胎容量时涌现，而非单独预设的运动模式。",
+        "conclusion": "漂移不是一种独立的运动模式，而是当性能需求增大到接近轮胎附着力极限时，从抓地驾驶连续演化而来的条件性响应。在恒定控制结构和无漂移参考的优化目标下，BE-LMPC能够自主产生持续高侧偏角与明显横摆运动，且该现象仅在低摩擦且需求-容量比可达到边界的条件下出现。",
+        "key_details": "关键细节包括：Fiala组合滑移模型在|h|=1处侧向力关于滑移角C^1连续，增量侧偏刚度连续趋于零，保证从附着到滑移的过渡不引起状态突变；低摩擦（μ=0.6）时后轴接近饱和是漂移涌现的必要条件，而高摩擦（μ≥0.8）时轮胎容量充足，无需大幅侧偏即可达到相近速度；BE-LMPC的经验安全集与局部移位终端代价保证逐圈可行性和性能单调改进，控制器仅优化空间速度分配，不直接优化侧偏角或横摆角速度；漂移检测阈值（β≥8°, r≥0.45 rad/s, ρ_r≥0.82, 持续0.30 s）为研究特定设置，需做敏感性分析；模型忽略车身侧倾、俯仰、悬架、左右载荷转移、轮胎温度及执行器动态，且控制器与仿真使用同一模型，以避免模型差异造成人为过渡。"
+      },
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "The University of Tokyo",
+        "The University of Hong Kong"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, The University of Tokyo, The University of Hong Kong",
+      "score": 4.905680729902752,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2608.28878v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828878v1-hybrid-offline-online-multi-agent-decision-transformers-for-wireless-resource-management",
+      "source": "arxiv",
+      "title": "Hybrid Offline-Online Multi-Agent Decision Transformers for Wireless Resource Management",
+      "authors": [
+        "Yiming Zhang",
+        "Kun Yang",
+        "Cong Shen",
+        "Dongning Guo"
+      ],
+      "authors_text": "Yiming Zhang, Kun Yang, Cong Shen, Dongning Guo",
+      "abstract": "This paper develops a hybrid offline-online multi-agent reinforcement learning framework based on decision transformers. The policy is first pretrained offline via supervised sequence modeling of trajectories generated by existing policies, providing a safe and sample-efficient initialization. It is then fine-tuned online using a hybrid objective that incorporates critic-guided gradients, enabling performance improvements beyond the offline policy. To facilitate stable offline-to-online transfer and effective multi-agent coordination, the framework incorporates return-weighted sampling, a critic conditioned on neighbors' actions, and neighborhood-correlated exploration. The approach is fully distributed: both training and execution rely only on local observations and limited information exchange among neighboring agents. Evaluations with dynamic traffic arrivals in two settings: (i) joint scheduling and power allocation and (ii) coordinated beamforming, show that the proposed method achieves quality-of-service (QoS) performance comparable to centralized methods. Moreover, when pretrained on lower-quality datasets, online fine-tuning is also observed to surpass the initial offline policy. These results demonstrate a promising learning-based alternative for wireless resource management.",
+      "url": "http://arxiv.org/abs/2608.28878v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28878v1",
+      "tldr": "A hybrid offline-online multi-agent decision transformer framework for wireless resource management, which safely pretrains on existing trajectories and then fine-tunes online with critic-guided gradients, enables fully distributed policies that achieve centralized-comparable QoS performance and surpass their own offline data-generating policies.",
+      "detailed_reading": {
+        "motivation": "无线资源管理在密集网络中面临干扰管理与QoS保障的挑战，集中式优化方法（如WMMSE、FP）依赖全局CSI且计算开销高，而分布式启发式方法性能较差。在线多智能体强化学习虽能匹配分布式决策结构，但早期随机探索会导致QoS劣化且样本效率低；纯离线方法又受限于数据集质量，难以超越行为策略。因此需要一种既能安全高效初始化、又能在线持续改进的混合离线-在线学习框架。",
+        "method": "提出基于多智能体决策Transformer（MADT）的混合离线-在线MARL框架。离线阶段：利用已有策略（如集中式优化或启发式）在模拟环境中生成轨迹，记录各智能体的局部观测、动作、奖励并计算return-to-go，构建数据集；然后用带因果注意力掩码的决策Transformer对所有智能体的轨迹窗口进行监督序列建模，最小化交叉熵损失，预训练共享策略网络。在线微调阶段：策略网络同时优化交叉熵损失（正则化到已知行为）、critic引导的RL损失（利用优势函数加权提升优于平均的动作概率）和熵正则（鼓励探索），其中优势由共享的轻量无记忆双critic（TD3式离散动作版本）计算，critic以邻居动作条件化观测信息并以时间差分学习更新，使用目标网络和Polyak平均稳定训练。此外采用return-weighted采样、邻居相关探索，且训练和执行完全分布式，仅依赖局部观测和邻居间有限信息交换。",
+        "result": "在动态流量到达（Poisson到达）的两个无线场景中——(i) 联合调度与功率分配和 (ii) 协调波束成形——所提方法实现了与集中式方法相当的QoS性能（以分组时延为指标）。当在低质量数据集上预训练时，在线微调也观察到超越初始离线策略的性能提升。",
+        "conclusion": "混合离线-在线多智能体决策Transformer为无线资源管理提供了一种有前景的分布式学习替代方案，能够在保证安全高效初始化的同时通过在线交互超越离线数据质量限制，达到接近集中式优化方法的QoS水平。",
+        "key_details": "关键实现细节包括：决策Transformer以长度L的观测/动作/return-to-go序列作为输入，使用槽位索引嵌入作为位置编码，执行时目标return初始化为离线数据集最高四分之一回合回报的均值并随实际奖励递减；critic采用两个共享的轻量无记忆网络分别输出每个离散动作的Q值，第二个critic仅用于降低自举目标过估计，目标网络通过Polyak平均慢速更新；优势函数为Q值减去当前策略期望Q值，并用标准差归一化使梯度尺度不依赖奖励量级；在线损失为L_CE + λ_RL L_RL - λ_ent H，超参数λ_RL和λ_ent平衡三项；bootstrapping折扣γ_c与智能体目标中的折扣γ可能不同；框架对受控资源类型无关，新问题只需重定义每智能体观测、动作和奖励；局限包括仍需模拟环境生成离线数据，且验证限于两个无线场景。"
+      },
+      "affiliations": [
+        "Northwestern University",
+        "University of Virginia"
+      ],
+      "affiliations_text": "Northwestern University, University of Virginia",
+      "score": 4.790843129872995,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2608.28854v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828854v1-designing-deployment-and-field-testing-of-c2stack-for-networked-intelligent-software-defined-uavs",
+      "source": "arxiv",
+      "title": "Designing, Deployment and Field Testing of C2Stack for Networked Intelligent Software-Defined UAVs",
+      "authors": [
+        "Maxwell McManus",
+        "Zhaoxi Zhang",
+        "Sidharth Santhi Nivas",
+        "Yuqing Cui",
+        "Prem Sagar Pattanshetty Vasanth Kumar",
+        "Chenzhi Zhao",
+        "Nicholas Mastronarde",
+        "George Sklivanitis",
+        "Dimitris Pados",
+        "Elizabeth Serena Bentley",
+        "Zhangyu Guan"
+      ],
+      "authors_text": "Maxwell McManus, Zhaoxi Zhang, Sidharth Santhi Nivas, Yuqing Cui, Prem Sagar Pattanshetty Vasanth Kumar, Chenzhi Zhao, Nicholas Mastronarde, George Sklivanitis, Dimitris Pados, Elizabeth Serena Bentley, Zhangyu Guan",
+      "abstract": "Unmanned Aerial Vehicles (UAVs) are emerging as critical enablers of next-generation wireless networking and autonomous systems. Despite their potential, deploying and testing networked UAV systems in real-world environments remains challenging, largely due to the absence of well-developed, end-to-end, ready-to-use protocol stacks. To fill this gap, we present C2Stack, a configurable protocol stack and experimental framework designed for real-time control, evaluation, and optimization of UAV networks. C2Stack incorporates a modular control plane, referred to as the~C2Stack Network Operating System (CNOS), alongside a programmable data plane that exposes APIs for cross-layer algorithm development, digital twin integration, and autonomous swarm control.\n  In this article, we share our experience with the deployment and testing of C2Stack. We implemented C2Stack on a custom UAV swarm platform that integrates multiprocessor system-on-chip (MPSoC) radios with Intel NUC computing modules, enabling interoperability with various RF front ends. Field trials were conducted in both netted environments and large-scale outdoor test ranges, focusing on two representative use cases: (i) network utility maximization through online reinforcement learning, and (ii) collaborative interference source localization. The experiments demonstrate the feasibility of real-time, data-driven optimization in dynamic aerial environments, while also revealing practical challenges in field deployments of networked UAV systems, including power constraints, sensing limitations, and deployment logistics. We have made C2Stack source code available to the community under the MIT License, with the goal of establishing it as a foundational framework for experimental research on intelligent networked aerial systems.",
+      "url": "http://arxiv.org/abs/2608.28854v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28854v1",
+      "tldr": "C2Stack is a configurable, open-source protocol stack and experimental framework for networked software-defined UAVs, whose modular control plane and programmable data plane enable real-time data-driven network control, validated through field trials on a custom swarm platform for tasks like reinforcement learning-based utility maximization and collaborative interference localization.",
+      "detailed_reading": {
+        "motivation": "无人机网络的真实部署与测试仍缺乏端到端、开箱即用的协议栈。现有框架多依赖理想化网络条件或简化通信模型，难以在真实空域环境中验证AI/ML控制算法；同时公开测试平台（如AERPAW、ARA）在载荷能力、集群支持和协议灵活性上存在明显限制。为此，本文提出C2Stack，填补从理论到实验研究的鸿沟，支撑智能软件定义无人机网络的快速原型验证与现场评测。",
+        "method": "C2Stack采用控制平面与数据平面分离的架构。控制平面即C2Stack网络操作系统（CNOS），包含CNOS Core（进程通信服务器PCS、统一消息协议、GUI）、Autonomy Toolchain（提供X-Layer Algorithm API和Virtual Network API，支持在线强化学习等用户自定义算法）和C2-App Suite（如干扰检测与定位子模块IDLS）。数据平面为可编程协议栈（PPS），按五层架构（APP/TSPT/NET/MAC/PHY）独立对象化实现，PHY层通过软件定义协议接口（SDPI）连接FPGA基带与射频前端，支持跨层指标监控与参数动态配置。实验平台采用自研中大型无人机群，集成MPSoC无线电与Intel NUC计算模块，并支持多种RF前端。现场试验在有网环境与大型室外靶场进行，验证两个用例：基于在线强化学习的网络效用最大化，以及协同干扰源定位。",
+        "result": "现场实验证明了C2Stack在动态空中环境中支持实时数据驱动优化的可行性：在线强化学习能够根据实时网络状态调整协议参数，协同干扰源定位可有效估计干扰位置。同时，实验揭示了真实部署中的实际挑战，包括功率限制、感知局限和部署后勤问题。C2Stack已以MIT许可证开源。",
+        "conclusion": "C2Stack作为可配置、可扩展的协议栈与实验框架，能够支撑无人机网络的通信与控制实时优化，并为智能空基网络的实验研究奠定了开源基础。其模块化设计使跨层算法、数字孪生与自主集群控制可灵活集成，未来可基于现有测试平台推广协作开发。",
+        "key_details": "关键细节包括：PCS统一消息协议通过internal/node-level/network-level三类逻辑接口路由消息，并通过控制面与数据面子头降低复杂度；PPS各层独立对象化，用户算法可替换现有服务而无需大量修改代码；SDPI处理载荷聚合、类型转换、位掩码与符号映射，并监控符号错误率、EVM与信道分布；实验平台MPSoC+Intel NUC实现FPGA基带与上层协议间的实时双向数据流控制。局限性方面，无人机振动与风扰导致位置可靠性下降，功率与感知能力约束现场试验范围；部署后勤（如飞行许可、GPS遮挡）也影响可重复性。"
+      },
+      "affiliations": [
+        "University of Minnesota - Twin Cities",
+        "Virginia Tech",
+        "Florida Atlantic University",
+        "University at Buffalo",
+        "U.S. Air Force Research Laboratory"
+      ],
+      "affiliations_text": "University of Minnesota - Twin Cities, Virginia Tech, Florida Atlantic University, University at Buffalo, U.S. Air Force Research Laboratory",
+      "score": 4.734394465784745,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2608.28899v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828899v1-differentiating-minimal-norm-solutions-to-parametric-optimization-problems",
+      "source": "arxiv",
+      "title": "Differentiating Minimal-Norm Solutions to Parametric Optimization Problems",
+      "authors": [
+        "Baptiste Plaquevent-Jourdain",
+        "Jalal Fadili",
+        "Antonio Silveti-Falls"
+      ],
+      "authors_text": "Baptiste Plaquevent-Jourdain, Jalal Fadili, Antonio Silveti-Falls",
+      "abstract": "Differentiating through parametric optimization problems is central to bilevel programming and meta-learning, often accomplished using approximate implicit differentiation. The implicit function theorem requires inverting a partial Jacobian of the optimality condition, which fails when there are many solutions. Nonetheless, in such cases it is possible to relax invertibility to a strictly weaker uniform range condition, under which it is shown that the minimal-norm solution mapping admits generalized derivatives by using a limiting Tikhonov regularization argument and conservative set-valued field theory. With additional control on the eigenvalues of the generalized Hessians, a pseudoinverse formula is justified. This is established for a class of smooth convex objectives and extended to nonsmooth composite problems. These assumptions are verified for Least-Squares, Huber regression and LASSO. The resulting extension of nonsmooth implicit differentiation to ill-posed settings is examined experimentally on data poisoning and data hypercleaning problems.",
+      "url": "http://arxiv.org/abs/2608.28899v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28899v1",
+      "tldr": "The paper extends implicit differentiation of parametric optimization problems to ill-posed settings with multiple solutions by relaxing the implicit function theorem's invertibility condition to a uniform range condition, using limiting Tikhonov regularization and conservative set-valued field theory to justify pseudoinverse-based generalized derivatives for minimal-norm solution mappings, with applications to nonsmooth composite problems like Least-Squares, Huber regression, and LASSO.",
+      "detailed_reading": {
+        "motivation": "在双层优化与元学习中，常需对参数化优化问题求导，现有方法多依赖近似隐式微分。隐函数定理要求最优性条件的偏雅可比矩阵可逆，当问题存在多个解时这一条件失效，导致梯度无法定义。本文旨在解决多解（病态）情形下最小范数解映射的求导问题。",
+        "method": "以参数化优化问题的最小范数解映射为求导对象，其中外层参数为输入，内层目标为光滑凸函数（复合情形为光滑损失加非光滑正则）。建模上放弃偏雅可比矩阵的可逆性假设，改设更弱的均匀值域条件；通过引入极限Tikhonov正则化项使内层解唯一化，再利用保守集值场论对正则化解映射取正则参数趋于零的极限，从而得到最小范数解的广义导数；当广义Hessian特征值可控时，进一步推导出伪逆公式作为可计算的导数形式。整体流程为：验证均匀值域条件、构造正则化内层问题、求解唯一正则化解、取极限获得保守Jacobian、用伪逆公式回传梯度；该框架在最小二乘、Huber回归与LASSO上逐一验证适用条件，并在数据投毒与数据超清洗双层任务中实现端到端梯度计算。",
+        "result": "证明了在均匀值域条件下，即使偏雅可比矩阵不可逆，最小范数解映射仍存在良定义的广义导数（保守Jacobian），并在广义Hessian特征值有界时伪逆公式成立。该结论先对光滑凸目标建立，再推广到光滑加非光滑正则的复合问题；最小二乘、Huber回归与LASSO均被验证满足理论前提。在数据投毒与数据超清洗实验中，该方法在病态多解场景下相比标准隐式微分获得更稳定有效的梯度，给出可复现的对比结论。",
+        "conclusion": "本文将隐式微分从解唯一的良态情形推进到解不唯一的病态情形，以均匀值域条件替代雅可比可逆假设，为非光滑复合参数优化问题的梯度计算奠定了理论与算法基础。这为双层优化、元学习及数据清洗等应用提供了在病态设定下仍可用的求导工具，并明确了适用边界。",
+        "key_details": "核心假设是均匀值域条件，它弱于可逆性且便于在具体模型上验证；极限Tikhonov正则化是推导枢纽，要求正则参数单调趋于零并处理极限交换；保守集值场论提供非光滑广义导数的严格定义，绕开单值切导数可能不存在的问题；伪逆公式需要额外控制广义Hessian的特征值。方法限于凸目标，非光滑复合情形要求正则项（如LASSO的ℓ1范数）满足次微分规则性与近端可计算条件；实验采用数据投毒与数据超清洗两个典型病态双层任务，展示实用性，但也暴露了对目标凸性和条件验证的依赖等局限。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.615883563135038,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2608.28853v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828853v1-equivariant-sheaf-neural-networks-learning-geometric-transport-on-graphs",
+      "source": "arxiv",
+      "title": "Equivariant Sheaf Neural Networks: Learning Geometric Transport on Graphs",
+      "authors": [
+        "Alessio Borgi",
+        "Mario Severino",
+        "Fabrizio Silvestri",
+        "Pietro Liò"
+      ],
+      "authors_text": "Alessio Borgi, Mario Severino, Fabrizio Silvestri, Pietro Liò",
+      "abstract": "Equivariant graph neural networks provide a principled way to model geometric systems, but efficient first-order architectures remain limited in how vector information can be transformed as it moves across a graph. We introduce \\textsc{ESNN}, an Equivariant Sheaf Neural Network that enriches this interaction by learning directed, matrix-valued transport between neighboring vector features while preserving exact Euclidean equivariance. Rather than increasing the order of the representation, ESNN keeps scalar and vector features first-order and places the additional geometric flexibility in the edge transport itself. We characterize this transport theoretically, showing that when relative displacement is the only covariant geometric input, every linear $O(n)$-equivariant map decomposes into independent radial and tangential components, while learned covariant features enable richer feature-conditioned transformations. We also introduce controlled symmetry relaxation for systems with a preferred ambient direction, which may be prescribed or inferred from data while recovering full $E(n)$-equivariance when the directional pathway is inactive. Across particle dynamics, mesh-based simulation, point-cloud classification, and molecular property prediction, ESNN improves dynamics prediction, recovers the gravity axis when symmetry is broken, yields substantial gains on selected mesh tasks and long-horizon rollouts, and remains robust to unseen rotations. These results show that learning how geometric information is transported across edges offers a complementary route to expressive equivariant message passing without requiring higher-order representations.",
+      "url": "http://arxiv.org/abs/2608.28853v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28853v1",
+      "tldr": "The paper introduces Equivariant Sheaf Neural Networks (ESNN), a first-order equivariant graph architecture that learns matrix-valued, direction-dependent edge transport between vector features to model anisotropic geometric interactions while preserving exact Euclidean equivariance, improving performance across dynamics, mesh, point-cloud, and molecular tasks.",
+      "detailed_reading": {
+        "motivation": "现有等变图神经网络虽然能高效建模几何系统，但一阶架构在向量信息跨图传输时的变换方式受限，难以刻画方向依赖的各向异性交互；同时，通用sheaf网络虽支持矩阵值边交互，却未考虑欧氏向量特征的变换律。为此，本文提出在保持一阶标量/向量表示的前提下，通过学习边上的矩阵值传输来增强几何信息的传递，并保持精确的E(n)等变性。",
+        "method": "ESNN将节点特征表示为不变标量s_i和协变向量V_i（n×c_v），在消息传递中为每条有向边学习矩阵值传输，将传输分解为O(n)协变的空间作用S_ij与不变的特征通道混合M_ij。具体实现包括：相对位移r_ij作为唯一协变输入时，线性O(n)等变传输被参数化为独立的径向分量（沿r_ij）和切向分量（垂直r_ij），并允许特征依赖的旋转和各向异性缩放；通过可学习的优选方向向量和松弛系数β控制对称性破缺，β=0时恢复完全E(n)等变，β>0时仅保留保持该方向的子群等变性。训练/推理遵循标准消息传递流程：节点特征经传输、聚合、更新，可堆叠多层。",
+        "result": "在粒子动力学、网格模拟、点云分类和分子性质预测等任务中，ESNN相比基线改善了动力学预测精度；在对称性破缺的系统中能数据驱动地恢复重力轴方向；在选定的网格任务和长时程rollout上取得显著性能提升，并对未见的旋转保持鲁棒性。理论分析表明，当相对位移是唯一协变几何输入时，径向-切向分解捕获了所有线性O(n)等变传输的完整类。",
+        "conclusion": "学习几何信息在边上的传输方式，为增强等变消息传递的表达力提供了一条不需高阶表示的互补路径。ESNN通过矩阵值传输在保持一阶特征的同时实现各向异性交互，并通过受控对称性松弛适应有优选方向的物理系统，验证了其在不同几何领域的有效性。",
+        "key_details": "关键实现细节包括：特征表示为一阶标量加向量通道，向量通道数c_v可调；传输矩阵的协变性要求满足S'_{ij}=Q S_{ij} Q^T；在径向-切向分解中，沿相对位移方向与正交方向独立缩放，该形式在仅有相对位移协变输入时是完备的；对称性松弛中的优选方向可作为全局可学习参数，松弛系数β可学习，β=0时精确恢复E(n)等变；实验覆盖多领域，但未报告具体数值指标，且理论完备性仅在相对位移为唯一协变输入时成立，对更丰富协变输入的情况依赖学习到的特征条件变换。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.463605823497693,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2608.28896v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828896v1-conservative-hybrid-graph-networks-for-process-systems-with-learned-routing",
+      "source": "arxiv",
+      "title": "Conservative Hybrid Graph Networks for Process Systems with Learned Routing",
+      "authors": [
+        "Paolo Guida"
+      ],
+      "authors_text": "Paolo Guida",
+      "abstract": "Industrial process networks do not maintain a single effective topology while operating: streams are throttled or bypassed, and units move between idle, transition, and active regimes. Models of such systems are typically trained on measured state trajectories while the operating mechanisms that generated them remain latent, and an unconstrained graph network can fit such a trajectory without assigning stable physical meaning to the recovered routing. We address both problems with the Conservative Hybrid Graph Network (CHGN), which learns routing, regime assignment, and removal rates as data-driven surrogates and inserts them into a fixed transport equation, so that the mass balance holds by construction for any predicted routing. CHGN trained on networks of 10-20 nodes transfers zero-shot to unseen graphs of 25-40 nodes without retraining, reaching an RMSE of 2.1e-3 against 6e-2 to 9e-2 for GNN baselines under the same protocol, with a gate MAE of 7.9e-3 and regime accuracy of 94.3% (1.2e-2 and 96.4% respectively on the fixed training topology). On a fluid-mixing pilot plant, CHGN improves on a persistence baseline for held-out physical faults but does not predict manual interventions, for which the governing valve actions are unobserved. The model therefore transfers across process topologies without retraining and exposes the latent mechanisms governing plant behaviour to inspection.",
+      "url": "http://arxiv.org/abs/2608.28896v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28896v1",
+      "tldr": "The Conservative Hybrid Graph Network (CHGN) learns latent routing, regime, and removal mechanisms as data-driven surrogates embedded in a fixed transport equation to guarantee mass balance, enabling zero-shot transfer to larger unseen process graphs with far lower error than GNN baselines while exposing interpretable plant operating mechanisms.",
+      "detailed_reading": {
+        "motivation": "工业过程网络在运行时并不维持单一有效拓扑：流股会被节流或旁路，单元会在空闲、过渡和活跃状态间切换。现有图网络模型通常假设静态拓扑或已知的演化拓扑，且未受约束的图网络在拟合状态轨迹时，可能无法为学到的路由赋予稳定的物理意义，导致拓扑不可辨识和物料不守恒（泄漏）问题。因此需要一种能够同时学习潜在路由、运行状态并严格保证质量平衡的模型。",
+        "method": "提出保守混合图网络（CHGN），将数据驱动的路由预测、状态指派和移除速率估计嵌入固定输运方程。模型输入为状态历史矩阵、单元类型嵌入、外部输入以及静态图结构；共享空间GNN（Φ）将节点特征映射为潜在表示，门控头（Γ）基于节点表示、开关类型和物理参数预测每个开关的软路由权重，并令互补边的权重为g和1-g，从而保证分流不改变总流量；状态头（Z）基于局部历史预测单元处于空闲/过渡/活跃的概率；汇头（R）输出有界移除速率系数。随后按符号关联矩阵B重建内部输运B F_hat，加上外部输入E u和移除项s，得到完整导数，用显式欧拉步进并在非负性保护下自回归推理。训练时从真实初始历史展开T步，联合优化四个模块。",
+        "result": "在10-20节点网络上训练的CHGN，零样本迁移到未见过的25-40节点图，无需重训练即达到RMSE 2.1e-3，而GNN基线在同一协议下误差为6e-2至9e-2；门控MAE为7.9e-3，状态辨识准确率为94.3%（固定训练拓扑上分别为1.2e-2和96.4%）。在流体混合中试装置上，CHGN对持出物理故障的预测优于持久性基线，但无法预测未观测阀门动作导致的人工干预。",
+        "conclusion": "CHGN通过将可学习路由、状态和移除率嵌入保守的输运方程，同时解决了拓扑辨识性和质量守恒问题，能够在不重训练的情况下跨过程拓扑规模迁移，并揭示控制过程的潜在机制供检查。",
+        "key_details": "关键细节包括：利用符号关联矩阵的列和为零的性质，使内部输运天然满足质量平衡；门控头与消息函数解耦，避免门控与消息的重新缩放歧义；各头输入信息分离，防止机制互换；移除速率用sigmoid限制在(0,r_max)内，显式表示可表示条件（r*需在区间内）；训练采用显式欧拉步和逐元素非负性保护，实验中该保护从未激活；局限性在于对流体混合实验中的人工干预（阀门动作未观测）无法预测，且门控-消息直接重缩放路径虽被移除，但其他潜在辨识性条件仍需进一步检验。"
+      },
+      "affiliations": [
+        "King Abdullah University of Science and Technology (KAUST)"
+      ],
+      "affiliations_text": "King Abdullah University of Science and Technology (KAUST)",
+      "score": 4.3834560079997855,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2608.28778v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828778v1-adversarial-calibration-attack-on-autonomous-vehicles",
+      "source": "arxiv",
+      "title": "Adversarial Calibration Attack on Autonomous Vehicles",
+      "authors": [
+        "Liangkai Liu",
+        "Qingzhao Zhang",
+        "Kang G. Shin"
+      ],
+      "authors_text": "Liangkai Liu, Qingzhao Zhang, Kang G. Shin",
+      "abstract": "Autonomous vehicles (AVs) rely on accurate camera-LiDAR calibration for multimodal sensor fusion. In practice, calibration can drift due to vibration, temperature variation, or minor sensor displacement, motivating online calibration algorithms that detect and correct misalignment at runtime while allowing the vehicle to continue operating without a factory visit. Existing AV attacks largely assume correct calibration. We instead identify online sensor calibration as a new attack plane. A corrupted calibration update can persist across subsequent fusion operations, causing system-wide errors that propagate from perception to planning and control. We present Adversarial Calibration Attack (ACA), the first physical attack against camera-LiDAR online calibration. Using a single adversarial poster, ACA first spoofs the miscalibration detector to trigger the calibration process and then steers the calibration estimator toward an incorrect transformation. A unified optimization jointly designs the poster's geometry and texture for both objectives. We evaluate ACA across benchmark datasets, simulation, and physical experiments. On benchmark datasets such as KITTI and nuScenes, ACA induces up to 33.9 degrees mean rotational calibration error, thereby severely degrading object detection. In the CARLA simulator, the attack causes a collision when the corrupted calibration is accepted in vulnerable scenarios crafted by the attacker. On a real Husky robot, a printed adversarial poster successfully reproduces the calibration error. These results demonstrate that online calibration is a practical and safety-critical attack surface for AVs.",
+      "url": "http://arxiv.org/abs/2608.28778v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28778v1",
+      "tldr": "TLDR: This paper introduces the first physically realizable attack against online camera–LiDAR calibration in autonomous vehicles, using a single adversarial poster to both trigger unnecessary recalibration and corrupt the estimated extrinsic transform, causing severe calibration errors and downstream safety failures.",
+      "detailed_reading": {
+        "motivation": "现有自动驾驶攻击大多假设传感器标定正确，而在线标定作为可运行时更新的系统状态，一旦被篡改会持续影响后续多模态融合、感知、规划与控制，构成被忽视的高风险攻击面。本文首次针对相机-激光雷达在线标定流程提出物理可实现攻击，利用单一对抗海报同时欺骗失准检测器触发标定并引导标定估计器输出错误外参。",
+        "method": "提出ACA攻击，目标为在线标定流水线中的失准检测器D和标定网络f_theta。攻击者部署一张同时被相机和LiDAR观察到的平面海报，通过统一优化同时设计海报的几何与纹理。Stage-1使用铰链损失，当检测器超过触发阈值后优化转向破坏标定；Stage-2通过完整迭代轨迹对标定网络求导，采用EOT和跨多帧通用训练增强鲁棒性。物理约束渲染器模拟不透明印刷表面、面积平均成像和LiDAR按角度栅格采样，保证相机外观与LiDAR点云对应同一物理物体。",
+        "result": "在KITTI和nuScenes数据集上，ACA可诱发最高33.9度的平均旋转标定误差，严重降低3D检测性能；PointPainting的Car 3D AP@R40从51.72降至0.36，而不用外参的PointPillars几乎不变。在CARLA仿真中，接受被污染标定可在攻击者设计的脆弱场景中导致碰撞；在真实Clearpath Husky A300上，打印的对抗板成功复现标定误差。",
+        "conclusion": "在线标定是自动驾驶实际且安全关键的攻击面。单个物理对抗物体能够同时破坏标定触发与估计，产生持久且系统级的跨模态错位，且该攻击对不验证外参状态的输入一致性防御具有盲区。",
+        "key_details": "攻击假设匹配替代灰盒：攻击者知道检测器和标定网络架构族、传感器配置及数据分布，可训练替代标定网络，但无需精确参数。关键模块为门控流水线：检测器D判断何时标定，标定网络f_theta迭代外参T。攻击需同时满足两个目标，Stage-1用铰链损失确保检测器触发，Stage-2通过完整迭代轨迹优化外参偏差。物理约束包括海报为不透明平面、面积平均成像、LiDAR按角度栅格采样，并通过EOT和跨帧通用训练增强对视角和场景变化的鲁棒性。局限性为仅需部署在攻击者选定的地点，无需泛化到任意道路；攻击依赖标定流水线未独立验证外参状态的盲区。"
+      },
+      "affiliations": [
+        "Texas Tech University",
+        "University of Arizona",
+        "University of Michigan"
+      ],
+      "affiliations_text": "Texas Tech University, University of Arizona, University of Michigan",
+      "score": 4.32792426877048,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.28843v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/01/260828843v1-curvature-cryptanalysis-of-smooth-transformer-feed-forward-networks",
+      "source": "arxiv",
+      "title": "Curvature Cryptanalysis of Smooth Transformer Feed-Forward Networks",
+      "authors": [
+        "Munawar Hasan",
+        "Apostol Vassilev"
+      ],
+      "authors_text": "Munawar Hasan, Apostol Vassilev",
+      "abstract": "We show that smooth two-layer feed-forward networks (FFNs) expose an additional structural model extraction channel under a chosen-input raw-output oracle at the FFN branch; consider transformer FFN branches with GELU or SiLU activations under chosen-input raw-output access, without access to parameters, gradients, or internal activations; exploit a second-order leakage channel in which projected input Hessians form different mixtures of the same hidden symmetric rank-one factors induced by the FFN input weights. We formalize resulting Hessian collection as a partially symmetric decomposition to establish conditions for local identifiability and stability to exploit vector-output stencil reuse to reduce the structural query cost by a factor of 16. On independently trained CIFAR-10 vision transformers, only 16 projected Hessians, corresponding to 8193 black-box queries, recover the hidden FFN directions with average absolute cosine alignment above 0.94, with 95.1 % of GELU and 91.9 % of SiLU directions exceeding 0.90 alignment. Recovery remains high across independently trained models, repeated extraction runs, and all transformer blocks. The recovered structure supports functional extraction too. Keeping the recovered directions fixed and fitting only the remaining FFN parameters yields high-fidelity substitutes with more than 93 % top-1 agreement, while test accuracy remains within 0.90% and 0.62% of the GELU and SiLU targets. Output rounding and Gaussian noise substantially reduce recovery under a fixed attack configuration, but adapting the finite-difference step restores average alignment to 0.9603 and 0.9398. This is an end-to-end path from black-box second-order observations to hidden FFN-structure recovery and functional replacement. Under the stated oracle model, smooth FFN curvature exposes internal parameter geometry that behavioral fidelity alone cannot reveal.",
+      "url": "http://arxiv.org/abs/2608.28843v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28843v1",
+      "tldr": "Smooth transformer feed-forward networks with GELU/SiLU activations leak their hidden first-layer weight directions through second-order curvature (projected input Hessians), enabling black-box structural and functional model extraction from only 16 projected Hessians (~8193 queries) with high alignment and fidelity.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "Michigan Technological University",
+        "National Institute of Standards and Technology"
+      ],
+      "affiliations_text": "Michigan Technological University, National Institute of Standards and Technology",
+      "score": 4.309266549489051,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.28771v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828771v1-err-sequential-entropy-resolution-for-efficient-and-decisive-llm-reasoning",
+      "source": "arxiv",
+      "title": "ERR+: Sequential Entropy Resolution for Efficient and Decisive LLM Reasoning",
+      "authors": [
+        "Xin Jiang",
+        "Minhao Wang",
+        "Wen Wu",
+        "Zhentao Xie",
+        "Shangheng Du",
+        "Jinxin Shi",
+        "Jiabao Zhao"
+      ],
+      "authors_text": "Xin Jiang, Minhao Wang, Wen Wu, Zhentao Xie, Shangheng Du, Jinxin Shi, Jiabao Zhao",
+      "abstract": "Large reasoning models achieve strong performance on complex tasks by generating extended chain-of-thought (CoT) traces via reinforcement learning with verifiable rewards (RLVR). While current RLVR methods have achieved strong results with correctness-based reward signals, they provide limited guidance on the quality of the reasoning process itself, leaving the internal reasoning structure largely unoptimized. Through empirical analysis across multiple model families, we identify a consistent pattern: correct reasoning trac es exhibit more frequent and larger token-level entropy drops within the thinking phase than incorrect ones. We propose ERR+, a two-phase RLVR framework grounded in this observation. The first phase trains with the Entropy Relief Reward (ERR), a bonus proportional to cumulative token-level entropy drops in the thinking phase, log-normalized by response length. Unlike prior methods that suppress entropy, ERR rewards the resolution of uncertainty while leaving exploratory high-entropy states unconstrained. The second phase introduces the Robust Relative Efficiency Reward, which scores each response's length against co-generated peers via a $\\tanh$-transformed within-group $z$-score. We provide a formal analysis showing that joint optimization of the two objectives induces gradient conflict in early training, motivating the sequential design . Experiments on five datasets demonstrate consistent improvements in both accuracy and response conciseness across model backbones. Our code is available at https://github.com/XrkArul/err_response",
+      "url": "http://arxiv.org/abs/2608.28771v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28771v1",
+      "tldr": "ERR+ is a two-phase RLVR framework that improves LLM reasoning by first rewarding entropy drops in the thinking phase (uncertainty resolution without suppressing exploration) and then optimizing response length via a robust relative efficiency reward, jointly improving accuracy and conciseness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ByteDance",
+        "East China Normal University"
+      ],
+      "affiliations_text": "ByteDance, East China Normal University",
+      "score": 4.278772818037813,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2608.28910v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828910v1-learning-theoretic-foundation-for-general-coded-computing-the-straggler-setting",
+      "source": "arxiv",
+      "title": "Learning-Theoretic Foundation for General Coded Computing: The Straggler Setting",
+      "authors": [
+        "Parsa Moradi",
+        "Behrooz Tahmasebi",
+        "Mohammad Ali Maddah-Ali"
+      ],
+      "authors_text": "Parsa Moradi, Behrooz Tahmasebi, Mohammad Ali Maddah-Ali",
+      "abstract": "Coded computing has emerged as a powerful paradigm for mitigating the impact of straggling workers in distributed computing systems. However, existing coded-computing schemes are predominantly designed for the exact recovery of highly structured computations, such as polynomial evaluation and matrix multiplication, and typically rely on strict recovery thresholds. These assumptions significantly limit their applicability to modern machine-learning workloads, particularly deep neural networks (DNNs), whose computations generally lack rigid algebraic structure and, in many applications, require only accurate approximations rather than exact recovery.\n  To address this gap, we revisit coded computing from a learning-theoretic perspective and introduce General Coded Computing (GCC). Rather than adopting existing algebraic tools, GCC formulates coded computing through a natural end-to-end mean-squared error loss that directly measures the discrepancy between the desired computations and their recovered estimates. By deriving suitable upper bounds and restricting the encoder and decoder to a reproducing kernel Hilbert space (RKHS) with mild smoothness constraints, we show that both the encoder and decoder admit specific representations as linear combinations of RKHS kernel functions. This representation allows the corresponding coefficients to be computed efficiently. Moreover, this framework enables us to establish theoretical performance guarantees for GCC under two complementary straggler regimes. In the worst-case setting with $N$ worker nodes, and at most $S$ stragglers, we show that the end-to-end loss decays at least at rate $O(S^3N^{-3})$ for standard configurations. We then study a probabilistic setting in which each worker independently straggles with probability $p$. We prove that the expected loss can still converge at rate $O(\\log_{1/p}^3(N)N^{-3})$.",
+      "url": "http://arxiv.org/abs/2608.28910v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28910v1",
+      "tldr": "The paper introduces General Coded Computing (GCC), a learning-theoretic framework using RKHS-based encoders and decoders with an end-to-end mean-squared error objective, which provably achieves straggler-resilient approximate coded computing for general functions like deep neural networks, with worst-case and probabilistic error rates of \\(O(S^3N^{-3})\\) and \\(O(\\log_{1/p}^3(N)N^{-3})\\).",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.073707786233075,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2608.28693v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828693v1-robogesture-real-time-semantic-aligned-co-speech-gestures-generation-for-humanoid-interaction",
+      "source": "arxiv",
+      "title": "RoboGesture: Real-Time Semantic-aligned Co-Speech Gestures Generation for Humanoid Interaction",
+      "authors": [
+        "Zifan Wang",
+        "Ziang Ren",
+        "Pengyang Shi",
+        "Zirui Wang",
+        "Chenghuai Lin",
+        "Tianze Wang",
+        "Zekun Qi",
+        "Liangliang Zhao",
+        "He Wang",
+        "Li Yi"
+      ],
+      "authors_text": "Zifan Wang, Ziang Ren, Pengyang Shi, Zirui Wang, Chenghuai Lin, Tianze Wang, Zekun Qi, Liangliang Zhao, He Wang, Li Yi",
+      "abstract": "Enabling humanoid robots to respond to human speech with synchronized and semantically meaningful gestures is fundamental to natural human-robot interaction. However, this task faces three critical barriers: the scarcity of semantically rich datasets, the \"modality eclipse\" where models ignore audio cues in favor of kinematic inertia, and the sim-to-real gap regarding physical safety. We propose RoboGesture, a robot-centric framework that co-designs data, modeling, and control to power a complete interactive human-humanoid system in which the robot listens, responds, and gestures in real time. We first establish the RoboGesture dataset featuring over 300 gesture categories and develop an automated pipeline to synthesize large-scale collision-free, robot-specific audio-motion pairs. Our architecture features a Hierarchical Semantic-Acoustic Aligner that extracts multi-granular prosodic and semantic cues directly from raw audio tokens. These cues drive a Streaming Conditional Motion Generator based on a diffusion transformer with conditional flow matching. To ensure high responsiveness, we introduce Anti-Inertia CFG Masking, which prevents the model from collapsing into repetitive historical patterns by compelling it to proactively mine control signals from the audio modality. Finally, an MPC-based safety filter ensures real-time, collision-free execution on physical hardware. Experiments on a Unitree G1 humanoid demonstrate that RoboGesture generates safer, more rhythmic, and more semantically appropriate responses compared to state-of-the-art baselines.",
+      "url": "http://arxiv.org/abs/2608.28693v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28693v1",
+      "tldr": "RoboGesture presents a robot-centric framework that co-designs data, modeling, and control to enable real-time, semantically aligned, and safety-aware co-speech gesture generation on physical humanoids, overcoming data scarcity, audio-neglect, and sim-to-real gaps via a large-scale collision-free dataset, a hierarchical semantic-acoustic aligner, anti-inertia CFG masking, and an MPC-based safety filter.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harbin Institute of Technology",
+        "Beijing Institute of Technology",
+        "Shanghai Qi Zhi Institute",
+        "Peking University",
+        "Tsinghua University",
+        "Galbot Inc."
+      ],
+      "affiliations_text": "Harbin Institute of Technology, Beijing Institute of Technology, Shanghai Qi Zhi Institute, Peking University, Tsinghua University, Galbot Inc.",
+      "score": 4.044827810809953,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.28893v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828893v1-modeling-of-network-constraints-in-large-scale-capacity-expansion-optimization-of-power-grids",
+      "source": "arxiv",
+      "title": "Modeling of Network Constraints in Large-scale Capacity Expansion Optimization of Power Grids",
+      "authors": [
+        "Yu Weng",
+        "Lara Booth",
+        "Priya L. Donti",
+        "Ruaridh Macdonald"
+      ],
+      "authors_text": "Yu Weng, Lara Booth, Priya L. Donti, Ruaridh Macdonald",
+      "abstract": "Capacity expansion modeling plays a critical role in optimizing the deployment of new generation, storage, and transmission, typically at national and regional levels. To support long-term planning, these models consider a large set of energy technologies and policies, along with decades of weather and demand data. Realistic capacity expansion models thus become high-dimensional optimization problems, with hundreds of millions of variables and constraints, which are challenging to solve. A common strategy to address this complexity is to omit non-linear, non-convex AC optimal power flow (ACOPF) constraints and instead use linearized power balance equations or transport formulations. While these simplifications improve tractability, they limit our understanding of how power flow and the physical properties of power networks impact investment decisions across generation, storage, and transmission infrastructure. This paper addresses this gap by extending the GenX capacity expansion model to incorporate fixed point theorem-based network constraints. These embed ACOPF-based considerations while maintaining the tractability of the planning model, nearly preserving the dimensionality of the transport formulation and incurring only modest runtime increases. This approach is much cheaper than embedding ACOPF directly, making it appropriate for large-scale capacity planning problems. We compare our approach to the original transport-based GenX model as well as a non-linear, non-convex version that incorporates the full ACOPF constraints, for a case study of the ISO New England grid.",
+      "url": "http://arxiv.org/abs/2608.28893v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28893v1",
+      "tldr": "The paper extends the GenX capacity expansion model with fixed-point theorem-based network constraints that embed AC optimal power flow physics at nearly the tractability of simpler transport models, and demonstrates via an ISO New England case study that these constraints capture ACOPF-like impacts on generation investment decisions with modest runtime increases.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology",
+      "score": 3.9548909751369044,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2608.28697v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828697v1-multi-group-pipe-routing-under-permanent-geometric-occupancy-problem-benchmark-and-classical-baselines",
+      "source": "arxiv",
+      "title": "Multi-Group Pipe Routing under Permanent Geometric Occupancy: Problem, Benchmark, and Classical Baselines",
+      "authors": [
+        "Deng Quan"
+      ],
+      "authors_text": "Deng Quan",
+      "abstract": "Additive manufacturing (AM) enables compact hydraulic components whose internal fluid channels can follow free-form 3D paths rather than conventionally drilled holes. A representative case is multi-group channel layout in rotary direct-drive servo valves: once a channel is placed it permanently occupies volume, so later channels must clear earlier geometry--unlike classical multi-agent pathfinding (MAPF), where agents free space after moving. We study this setting as multi-group pipe routing under permanent geometric occupancy. Our contributions are a problem formalization with geometric dual-witness conflicts, a constructive 3D benchmark (two corridor generators x two obstacle painters, controlled difficulty, feasibility witnesses), and baseline results for CBS, PBS, and priority planning adapted to this coupling. We evaluate by success rate under a fixed time budget. PlaneSlice hard instances clearly rank CBS above PBS and PP, while easier cells validate the pipeline. The goal is a reproducible problem definition, suite, and classical baselines--not a new optimal MAPF algorithm.",
+      "url": "http://arxiv.org/abs/2608.28697v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28697v1",
+      "tldr": "TLDR: This paper formalizes multi-group pipe routing under permanent geometric occupancy (distinct from classical MAPF), introduces a constructive 3D benchmark with feasibility witnesses, and evaluates CBS, PBS, and priority-planning baselines—finding CBS clearly outperforms on hard PlaneSlice instances under fixed time budgets.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.945804627640067,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.28859v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828859v1-the-halt-vector-internalizing-a-causal-steering-intervention-for-efficient-reasoning",
+      "source": "arxiv",
+      "title": "The Halt Vector: Internalizing a Causal Steering Intervention for Efficient Reasoning",
+      "authors": [
+        "Dylan Jayabahu",
+        "Tinuade Adeleke"
+      ],
+      "authors_text": "Dylan Jayabahu, Tinuade Adeleke",
+      "abstract": "Reasoning models do not stop when they know the answer. On DeepSeek-R1-Distill-Qwen-7B the chain of thought runs about twice as long as the model's own answer probability takes to settle, and how much of that excess is removable varies from problem to problem, so a global length penalty cannot take it out. We take it out by internalizing a causal interpretability finding into the weights. The mechanism is a halt vector: a difference-of-means direction at layer 18 of this model whose steering strength controls how long it thinks, while a replicated value axis does nothing. Installing that intervention in the weights is harder than it looks. Maximizing the scalar projection onto the direction corrupts the off-axis dimensions a frozen downstream reader depends on, and generation gets longer instead of shorter; what works is reconstructing the whole steered activation with those dimensions pinned to their natural values. Fit from 24 problems and no reinforcement learning, the halt removes about a quarter of the thinking at held accuracy across five unseen benchmarks, and the cut tracks each problem's own removable slack at 0.70. It also closes a non-termination pathology that grows with difficulty and that a decoding-time confidence hook makes worse. We do not claim to beat a well-tuned length penalty or decoding-time early exit on the raw trade-off; the contribution is how the halt is obtained.",
+      "url": "http://arxiv.org/abs/2608.28859v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28859v1",
+      "tldr": "A causal “halt vector” extracted at layer 18 of DeepSeek-R1-Distill-Qwen-7B and internalized into the weights via full-activation reconstruction with off-axis dimensions pinned yields a per-problem, hook-free self-halt that removes about a quarter of unnecessary chain-of-thought tokens without reinforcement learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher",
+        "University of Waterloo"
+      ],
+      "affiliations_text": "Independent Researcher, University of Waterloo",
+      "score": 3.8604171073028675,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2608.28733v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828733v1-generation-of-high-level-concepts-in-3d-scene-graphs-via-autoregressive-diffusion",
+      "source": "arxiv",
+      "title": "Generation of High-Level Concepts in 3D Scene Graphs via Autoregressive Diffusion",
+      "authors": [
+        "Jose Andres Millan-Romera",
+        "Samuel Cognolato",
+        "Holger Voos",
+        "Jose Luis Sanchez-Lopez",
+        "Luciano Serafini"
+      ],
+      "authors_text": "Jose Andres Millan-Romera, Samuel Cognolato, Holger Voos, Jose Luis Sanchez-Lopez, Luciano Serafini",
+      "abstract": "Indoor 3D Scene Graphs (3DSGs) represent environments as multi-layer hierarchies that connect observed geometric primitives (e.g., planes) to higher-level metric-semantic concepts (e.g., rooms, floors, buildings), enabling incremental spatial reasoning for robotic perception and SLAM. However, classical high-level concept generation approaches rely on hand-crafted rules for specific concept classes, while learning-based methods require separate models for graph structure and spatial node features (e.g., centroids), which limits scalability to novel classes and more complex hierarchies. We propose a unified autoregressive diffusion-based graph generative model that jointly learns structure and features, constructing complete 3DSGs bottom-up from observed vertical planes across arbitrary hierarchy depths. Our method consistently surpasses all learning-based and random baselines across 3DSG datasets spanning synthetic scenes, real architectural floor plans, and robotic sensor data, with varying layout complexity and hierarchy depth, and surpasses a one-shot model with oracle access to the target graph size on the largest hierarchy and on real single-floor data. Finally, we propose an adaptation of the Fused Gromov--Wasserstein distance for principled graph-level evaluation of generated 3DSGs against ground truth.",
+      "url": "http://arxiv.org/abs/2608.28733v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28733v1",
+      "tldr": "The paper proposes a unified autoregressive diffusion-based graph generative model that jointly learns structure and features to construct complete multi-level 3D scene graphs bottom-up from observed planes, and introduces a Fused Gromov–Wasserstein distance for principled evaluation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fondazione Bruno Kessler",
+        "University of Padova",
+        "University of Luxembourg"
+      ],
+      "affiliations_text": "Fondazione Bruno Kessler, University of Padova, University of Luxembourg",
+      "score": 3.830088039903621,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2608.28664v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828664v1-the-potential-of-haptic-foundation-models",
+      "source": "arxiv",
+      "title": "The Potential of Haptic Foundation Models",
+      "authors": [
+        "Jianquan Wang",
+        "Haiwei Dong",
+        "Abdulmotaleb El Saddik"
+      ],
+      "authors_text": "Jianquan Wang, Haiwei Dong, Abdulmotaleb El Saddik",
+      "abstract": "Despite the success of foundation models in language and vision, their expansion into embodied AI is bottlenecked by a lack of generalized touch sensing. This limitation is especially relevant to consumer electronics, where smartphones, wearables, VR controllers, home robots, and health monitoring devices require safe and adaptive physical interaction. Constrained by hardware heterogeneity and the necessity of active physical data collection, current haptic models remain rigidly task-specific. To overcome these limitations, this article explores the transformative potential and developmental trajectory of Haptic Foundation Models (HFMs). We detail the paradigm shift required to transition from passive Large Language Models and Vision Language Models into active HFMs across four core dimensions: action coupling, physical dynamical representation space, continuous time-series data granularity, and action-conditioned future state prediction. Furthermore, we synthesize existing large-scale tactile datasets and benchmark UniTouch, AnyTouch, T3, and Sparsh on TacBench for force estimation, slip detection, and relative pose estimation.",
+      "url": "http://arxiv.org/abs/2608.28664v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28664v1",
+      "tldr": "This paper introduces Haptic Foundation Models (HFMs) as a paradigm shift from passive LLMs/VLMs to active, action-coupled tactile sensing, outlining four core design dimensions and benchmarking existing models to enable generalized touch perception for embodied AI and consumer electronics.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Ottawa",
+        "Dayan Technologies"
+      ],
+      "affiliations_text": "University of Ottawa, Dayan Technologies",
+      "score": 3.7108993246876567,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.28826v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828826v1-dual-park-ravani-interpolation-of-rigid-motions-acceleration-field-continuity-and-holonomic-hermite-repair",
+      "source": "arxiv",
+      "title": "Dual Park-Ravani Interpolation of Rigid Motions: Acceleration-Field Continuity and Holonomic Hermite Repair",
+      "authors": [
+        "Daniel Condurache"
+      ],
+      "authors_text": "Daniel Condurache",
+      "abstract": "The Park-Ravani construction generates a twice continuously differentiable, frame-invariant spline on SO(3) by exponentiating cubic canonical-coordinate polynomials. We show that the construction transfers, without changing form, to the group of orthogonal dual tensors, a representation of rigid displacements. The transferred recurrence is stated compactly through the dual extension of the right Jacobian of the exponential map and its first Fréchet derivative. This yields interpolation of prescribed rigid poses and continuity of the body dual twist and its first derivative. Using the higher-order rigid-body kinematics of dual spatial twists, we then prove that the resulting curve has a continuous physical acceleration field, not merely a continuous quantity obtained by formally differentiating the dual part of a twist. We also distinguish algebraic dual transfer from temporal differential prolongation: their simultaneous first-order use takes place in a hyper-dual algebra, and interpolation of arbitrary prolonged nodal data need not be holonomic. A noncommuting three-pose example verifies the recurrence, all knot continuity statements, and dimensional covariance under a change from meters to millimeters. We define and analyze the first-order holonomy defect of a generic hyper-dual interpolant, exhibit an exact counterexample, and remove the defect by cubic or quintic Hermite interpolation in dual logarithmic coordinates.",
+      "url": "http://arxiv.org/abs/2608.28826v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28826v1",
+      "tldr": "TLDR: This paper extends the Park–Ravani spline construction to rigid motions via orthogonal dual tensors, proving continuity of the full physical acceleration field and correcting nonholonomic hyper-dual interpolation defects using cubic/quintic dual-logarithmic Hermite repair.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Gheorghe Asachi Technical University of Iași"
+      ],
+      "affiliations_text": "Gheorghe Asachi Technical University of Iași",
+      "score": 3.701822406598747,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.28718v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828718v1-robophys-3d-a-comprehensive-embodied-world-model-evaluation-via-3d-reconstruction",
+      "source": "arxiv",
+      "title": "RoboPhys-3D: A Comprehensive Embodied World Model Evaluation via 3D Reconstruction",
+      "authors": [
+        "Tianyi Wang",
+        "Jiazhou Chen",
+        "Yiming Xu",
+        "Xiangyu Li",
+        "Tianyi Zeng",
+        "Chih-Hsien Chou",
+        "Ning Lu",
+        "Liang Peng",
+        "Junfeng Jiao",
+        "Christian Claudel"
+      ],
+      "authors_text": "Tianyi Wang, Jiazhou Chen, Yiming Xu, Xiangyu Li, Tianyi Zeng, Chih-Hsien Chou, Ning Lu, Liang Peng, Junfeng Jiao, Christian Claudel",
+      "abstract": "Video world models increasingly serve as data engines, action planners, and simulators for embodied AI, but conventional embodied world model (EWM) benchmarks lack a unified 3D-grounded protocol for establishing whether generated rollouts preserve the underlying 3D scene state or translate into executable actions. We introduce RoboPhys-3D, a 3D-grounded EWM benchmark built on RoboTwin 2.0, covering 50 manipulation tasks across four regimes, with 5,000 episodes and 25,000 multi-view ground-truth videos. A defining feature of RoboPhys-3D is that generated and ground-truth videos are processed through the same 3D reconstruction pipeline, enabling reconstruction-induced error to be distinguished from generation-induced error. The RoboPhys-3D benchmark organizes 50 complementary metrics into 18 sub-dimensions across four levels: pixel-level fidelity, 3D geometry consistency, state-level understanding, and task-level completeness. We further introduce Average Full Score, a hierarchical score averaging all 50 metrics for comprehensive evaluation, and RoboPhyscore, a compact task-aligned score averaging the metrics most strongly correlated with task success. Among the four representative video world models, Cosmos 3 achieves the highest RoboPhyscore (0.6330, 92.7% of ground truth), while state- and execution-grounded metrics reveal substantial failures that perceptual and vision-language model-based judgments fail to capture. RoboPhyscore further exhibits strong agreement with human evaluation (Pearson r = 0.9761 and Spearman \\r{ho} = 0.8962), demonstrating the importance of grounded, execution-aware evaluation for EWM capability.",
+      "url": "http://arxiv.org/abs/2608.28718v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28718v1",
+      "tldr": "RoboPhys-3D is a comprehensive 3D-grounded benchmark for embodied world models that evaluates generated rollouts against reconstruction-matched ground truth through a unified 3D reconstruction pipeline, organizing 50 metrics across four levels to disentangle generation-induced errors and introduce task-aligned scores that strongly correlate with human judgment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Austin",
+        "Futurewei Technologies, Inc.",
+        "Purdue University"
+      ],
+      "affiliations_text": "The University of Texas at Austin, Futurewei Technologies, Inc., Purdue University",
+      "score": 3.692377626876148,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.28905v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828905v1-off-policy-evaluation-for-semantic-id-recommenders-does-the-models-own-code-hierarchy-help",
+      "source": "arxiv",
+      "title": "Off-Policy Evaluation for Semantic ID Recommenders: Does the Model's Own Code Hierarchy Help?",
+      "authors": [
+        "Artem Betlei"
+      ],
+      "authors_text": "Artem Betlei",
+      "abstract": "Generative recommenders increasingly emit semantic IDs (SIDs): each item is a short sequence of hierarchical discrete codes from a residual quantizer, decoded autoregressively. Before spending scarce A/B-test, a team may decide offline which decoder or reranking variants are worth testing - a job for off-policy evaluation (OPE). We ask a simple question: can the model's own SID tree serve as the action abstraction for that OPE? Our answer has three parts. (i) Under the near-argmax logging real recommenders use, per-item OPE is hopeless - as item-level effective sample size is usually small on production logs - but marginalizing items to code-prefix clusters restores estimable support and cuts error. (ii) This gain is thanks to coarsening, not to the hierarchy specifically; but the SID tree is what makes coarsening feasible in a generative system - each cluster's mass is exactly and cheaply returned by the decoder, whereas flat clustering requires enumerating item/leaf masses that a code-only decoder does not directly expose. (iii) Resolution depth is the operative knob - coarser under scarce support - and a conditional bias bound links the coarsening bias to the quantizer's worst-case reconstruction residual and the target-logging divergence.",
+      "url": "http://arxiv.org/abs/2608.28905v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28905v1",
+      "tldr": "Using the semantic ID code hierarchy of a generative recommender as a coarse action abstraction for off-policy evaluation restores support and reduces error where per-item evaluation is infeasible, though the benefit stems from coarsening itself, with the hierarchy making such coarsening feasible and its depth serving as a tunable bias-variance knob.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6655772467641268,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2608.28890v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828890v1-adaptive-ris-aided-communications-through-ml-based-generation-of-phase-masks",
+      "source": "arxiv",
+      "title": "Adaptive RIS-aided Communications through ML-based Generation of Phase Masks",
+      "authors": [
+        "Corwin Carpenter",
+        "Thomas Daltzis",
+        "George C. Trichopoulos",
+        "Jacek Kibilda",
+        "Joao F. Santos"
+      ],
+      "authors_text": "Corwin Carpenter, Thomas Daltzis, George C. Trichopoulos, Jacek Kibilda, Joao F. Santos",
+      "abstract": "Reconfigurable Intelligent Surfaces (RISs) are an attractive technology for Millimeter Wave (mmWave) communications due to their ability to passively reflect incident signals. However, current implementations of RIS rely on performing computationally-intensive algorithms offline to generate phase masks, which are stored as a codebook on the embedded microcontroller on the RIS. The codebook size is restricted by the embedded microcontroller's storage capacity, which limits the ability of the RIS to adapt to evolving channel conditions and deployment scenarios. In this demo, we showcase an Machine Learning (ML)-based solution for dynamically generating new phase masks during runtime. Our approach leverages a ML model deployed on the microcontroller for approximating the output of a phase mask generation algorithm, responding to new inputs while remaining smaller than a codebook.",
+      "url": "http://arxiv.org/abs/2608.28890v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28890v1",
+      "tldr": "A machine learning model embedded on a RIS microcontroller dynamically generates phase masks at runtime, replacing fixed codebooks and enabling adaptive RIS-aided mmWave communications with performance nearly matching ground-truth masks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Arizona State University",
+        "Virginia Tech"
+      ],
+      "affiliations_text": "Arizona State University, Virginia Tech",
+      "score": 3.5838680197523622,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2608.28911v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828911v1-semkv-semantic-mixed-precision-kv-cache-quantization-guided-by-the-quality-cliff-for-long-context-llm-inference",
+      "source": "arxiv",
+      "title": "SemKV: Semantic Mixed-Precision KV Cache Quantization Guided by the Quality Cliff for Long-Context LLM Inference",
+      "authors": [
+        "Daeha Lee",
+        "Do-Hyung Kim",
+        "Jae-Hong Kim"
+      ],
+      "authors_text": "Daeha Lee, Do-Hyung Kim, Jae-Hong Kim",
+      "abstract": "The key-value (KV) cache is the dominant memory bottleneck of long-context large language model (LLM) inference, growing linearly with context length. We show that uniform KV quantization on a fractional-bit grid does not degrade gracefully: under a prespecified multi-seed statistical protocol, Llama-3.1-8B-Instruct with an affine quantizer is statistically indistinguishable from FP16 KV down to 2.322 code bits/value and collapses at 2.0 bits - a quality cliff in (2.0, 2.322] that reappears in generation-time quantization and multi-turn dialogue and transfers to Mistral-7B. The cliff reframes importance-aware mixed precision: above it, eight model-internal importance indicators are statistically interchangeable, so the benefit of mixing is grid interpolation, reaching average precisions uniform quantization cannot realize. SemKV preserves every token, ranks tokens by a model-internal score, and assigns two adjacent above-cliff precisions, achieving a measured 6.0x storage reduction with no statistically detectable quality difference from full KV (n=900, three seeds), and outperforming FP16 token pruning granted a 1.5x larger memory budget. Replacing the affine base with a distortion-optimized quantizer (TurboQuant-MSE) lowers the cliff in every protocol tested, raising the no-detectable-loss operating point to 7.9x. The recipe: measure the cliff for the target deployment setting, then interpolate above it.",
+      "url": "http://arxiv.org/abs/2608.28911v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28911v1",
+      "tldr": "SemKV introduces a quality-cliff-guided mixed-precision KV cache quantization method that preserves all tokens by assigning two adjacent above-cliff precisions based on model-internal importance, achieving up to a 7.9x storage reduction with no statistically detectable quality loss compared to full-precision KV cache.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Electronics and Telecommunications Research Institute (ETRI)"
+      ],
+      "affiliations_text": "Electronics and Telecommunications Research Institute (ETRI)",
+      "score": 3.5090576958309825,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.28840v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828840v1-unsupervised-latent-space-alignment-with-hyperspherical-geodesic-matching",
+      "source": "arxiv",
+      "title": "Unsupervised Latent Space Alignment with Hyperspherical Geodesic Matching",
+      "authors": [
+        "Cameron Ryan",
+        "Vivek Sivaraman Narayanaswamy",
+        "Kowshik Thopalli",
+        "Shusen Liu"
+      ],
+      "authors_text": "Cameron Ryan, Vivek Sivaraman Narayanaswamy, Kowshik Thopalli, Shusen Liu",
+      "abstract": "Independently trained neural networks tend to encode the same data with similar latent geometries. These latent geometries are not directly compatible, yet they can be nearly the same up to some class of transformations. While there exists many methods for alignment between different latent spaces, it is typically done using a set of shared sample correspondences, known as anchors. This leaves a fundamental question: are the geometric signatures of different latent spaces representing similar data sufficient to recover an alignment between them? To that end, we introduce HGA (Hyperspherical Gaussian Alignment), a method that directly optimizes a transformation between two latent spaces by maximizing a geometric measure of \"fit\" between them. Since it is driven by the geometry of the latent spaces rather than paired data, HGA can operate in both an unsupervised and weakly supervised regime. On tasks such as model stitching or multilingual word embedding correspondence recovery, HGA manages to match supervised results with minimal or no supervision.",
+      "url": "http://arxiv.org/abs/2608.28840v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28840v1",
+      "tldr": "This paper introduces HGA (Hyperspherical Geodesic Alignment), a method that aligns latent spaces by optimizing an orthogonal transformation to maximize a geodesic-based Gaussian affinity between normalized point clouds, achieving supervised-level performance on model stitching and multilingual embedding alignment with minimal or no supervision.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northeastern University",
+        "Lawrence Livermore National Laboratory"
+      ],
+      "affiliations_text": "Northeastern University, Lawrence Livermore National Laboratory",
+      "score": 3.4773390727177707,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2608.28922v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/01/260828922v1-rankshift-in-database-detection-and-explanation-of-categorical-shifts",
+      "source": "arxiv",
+      "title": "RankShift: In-Database Detection and Explanation of Categorical Shifts",
+      "authors": [
+        "Omair Shafi Ahmed"
+      ],
+      "authors_text": "Omair Shafi Ahmed",
+      "abstract": "A login service can receive its usual number of failed sign-ins while one source grows from 2% to 30% of them. The same pattern appears in system logs when a rare event template becomes common while the message rate stays stable. These events change which categories are active without changing how many events occur. RankShift detects such changes inside the analytical database that stores the data. It compares each window's category shares with a benign reference using a Pearson score whose terms identify the categories responsible for the change. The same query returns the score, calibrated alert, and largest increasing contributions. We evaluate RankShift on HDFS, BGL, and Thunderbird. It matches the count-vector autoencoder within 0.001 AUROC on HDFS (0.999 versus 1.000) and leads on Thunderbird (0.983 versus 0.949). In a controlled fixed-volume experiment, RankShift detects rare-category shifts that are invisible to event-count monitoring, reaching 0.787 AUROC compared with 0.771 for the autoencoder. Across all three corpora, observed false-alarm rates track the requested operating levels. RankShift requires no model training or inference service, and the autoencoders deployed state is 137x larger.",
+      "url": "http://arxiv.org/abs/2608.28922v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.28922v1",
+      "tldr": "RankShift is an in-database, training-free method that detects and explains categorical distribution shifts—even when total event counts stay stable—by comparing category shares with a benign reference via a Pearson score, achieving accuracy comparable to or better than count-vector autoencoders on HDFS, BGL, and Thunderbird logs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft"
+      ],
+      "affiliations_text": "Microsoft",
+      "score": 2.7076371595241677,
+      "score_text": "2.7"
+    }
+  ],
+  "errors": []
+}
