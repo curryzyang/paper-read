@@ -1,0 +1,771 @@
+{
+  "label": "2026-09-02",
+  "date": "2026-09-02",
+  "generated_at": "2026-09-02T07:40:41",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.00079v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900079v1-the-space-time-transform-memory-augmented-control-barrier-functions",
+      "source": "arxiv",
+      "title": "The Space-Time Transform: Memory-Augmented Control Barrier Functions",
+      "authors": [
+        "Avinash Malik"
+      ],
+      "authors_text": "Avinash Malik",
+      "abstract": "Control Barrier Functions (CBFs), their High-Order variants (HOCBFs) and Exponential CBFs (ECBFs) are standard geometric tools for enforcing nonlinear safety constraints. CBFs, and their variants, offer an elegant geometric framework for nonlinear safety, yet mathematically, they reduce to continuous-time convolutions restricted by zero-memory kernels. In the presence of high-frequency measurement noise, these memoryless operators act as improper filters, leading to significant control chattering and the potential loss of active control authority due to Quadratic Program (QP) infeasibility. To address this structural limitation, this paper introduces a space-time transform that embeds dynamic temporal filtering directly into the safety constraint synthesis. By designing a proper spatio-temporal kernel, this approach inherently attenuates high-frequency noise while preserving affine control authority. Crucially, we prove the robust forward invariance of the designed STT-CBF. Monte Carlo simulations of a third-order system demonstrate that the proposed framework achieves a 100% safety rate while reducing control total variation by over 99% compared to conventional parameterized barrier methods, mitigating hardware hazards and enabling reliable deployment on physical robotic platforms.",
+      "url": "http://arxiv.org/abs/2609.00079v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00079v1",
+      "tldr": "Standard CBFs and their high-order variants are shown to be memoryless high-pass filters that amplify noise and cause QP infeasibility, so this paper introduces a Space-Time Transform using proper spatio-temporal kernels to embed memory into safety constraints, robustly guaranteeing forward invariance while cutting control chatter by over 99% in simulations.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "University of Auckland"
+      ],
+      "affiliations_text": "University of Auckland",
+      "score": 6.75104909354885,
+      "score_text": "6.8"
+    },
+    {
+      "id": "2609.00297v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900297v1-geometry-aware-latent-autoregressive-generative-model-for-pdes-in-complex-domains",
+      "source": "arxiv",
+      "title": "Geometry-aware Latent Autoregressive Generative Model for PDEs in Complex Domains",
+      "authors": [
+        "Zi Wang",
+        "Minghui Xu",
+        "Tapan Mukerji"
+      ],
+      "authors_text": "Zi Wang, Minghui Xu, Tapan Mukerji",
+      "abstract": "Solving multiphysics partial differential equations (PDEs) remains a major challenge in scientific computing, especially for highly complex $μ$m-scale tortuous geometries critical to energy and chemical engineering. We address this challenge by proposing a Geometry-aware Latent Autoregressive generative Model for PDEs (GeoLAMP) for solving physics within highly irregular and tortuous structures. GeoLAMP introduces a dual-encoder architecture on graph representations to jointly capture global topology and fine-scale geometric features, enabling an effective transition from real-space fields to compact latent representations. In the latent space, we propose a causal self-attention transformer with flow matching to model temporal dynamics, allowing stable and scalable block-wise autoregressive prediction. A flexible decoder reconstructs high-resolution physical fields on arbitrary points. We establish three multiphysics benchmark datasets in complex geometries, covering reactive flow, heat convection, and elasticity. GeoLAMP consistently achieves the most stable autoregression performance on these datasets, maintaining low errors throughout the entire rollout horizon. Our results provide a systematic study of geometry-aware learning for PDEs in $μ$m-scale complex geometries and offer new insights into block-wise time marching of latent autoregressive PDE modeling via a flow matching framework.",
+      "url": "http://arxiv.org/abs/2609.00297v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00297v1",
+      "tldr": "GeoLAMP is a geometry-aware latent autoregressive generative model that uses dual graph encoders, a causal self-attention transformer with flow matching, and an arbitrary decoder to accurately and stably solve multiphysics PDEs in highly complex, tortuous μm-scale geometries.",
+      "detailed_reading": {
+        "motivation": "求解复杂微米级迂曲几何结构中的多物理场偏微分方程是科学计算中的重大挑战，尤其在能源与化学工程中至关重要。现有方法或受限于真实空间几何复杂度随规模剧增，或缺乏能同时保留全局拓扑与局部精细几何特征的几何感知潜空间建模能力，因此需要一种能在高复杂不规则结构上稳定高效地学习时空动力学的方法。",
+        "method": "GeoLAMP 采用双编码器图表示架构：全局编码器用最远点采样覆盖全域拓扑，局部编码器用基于曲率协方差特征分解的采样捕捉孔隙与高曲率局部细节，二者作为变分自编码器将真实空间场压缩到规则潜空间；潜空间中用带因果掩码自注意力的 Transformer 以流匹配目标建模时间动态，支持 M-to-M 分块自回归预测；灵活解码器通过带掩码的图神经算子将潜变量解码到任意空间位置。训练时对目标块构造线性插值 xt=(1-t)epsilon+t z，回归目标速度 u=z-epsilon，损失为速度场 L2 误差；推理时用 50 步欧拉积分求解概率流 ODE，并将预测块拼接回条件窗口实现滚动预测。",
+        "result": "在反应流、热对流和弹性力学三个复杂几何多物理基准数据集上，GeoLAMP 在完整自回归 rollout 和最终步预测中均获得最低的最终步相对 L2 误差，长时程误差保持低水平，自回归稳定性优于 Transolver、Geo-FNO、NUNO 和匹配的确定性潜空间回归基线等对比方法；在弹性数据集上 Transolver 平均 rollout 误差略低，但 GeoLAMP 的平均误差与最终步误差接近，说明长时间自回归更稳定。",
+        "conclusion": "GeoLAMP 通过几何感知的双编码器将真实空间物理场压缩为潜表征，再利用流匹配增强的因果自注意力 Transformer 进行分块自回归，能够在高度不规则微米级复杂几何中稳定预测多物理场动态；结果提示分块 rollout 不只是对后续状态的简单回归，而是学习到了深层时间依赖，为复杂几何下潜空间自回归 PDE 建模提供了系统研究和新思路。",
+        "key_details": "数据集由 COMSOL 有限元生成，覆盖三种微米级结构：圆堆积多孔结构中的反应流、随机场结构中的对流换热、泡沫结构中的弹性问题，均含线性和非线性边界条件。编码器使用 GNO 层，GNO 以 Green 函数近似在查询球内聚合信息；全局采样用 FPS 的最大最小欧氏距离准则，局部采样用邻域协方差最小特征值占比作为曲率分数并选最大者。潜空间模型以 SiT 为骨干，GeoLAMP-S 用交叉注意力做单步预测，GeoLAMP-B 用因果自注意力做 M=8 的无重叠分块预测；每块条件 token 在前，目标 token 在后，噪声 token 可关注所有前置条件键。训练时噪声只在目标块上构造，条件块作为 c 传入，损失对目标潜变量位置平均。推理时从高斯噪声出发欧拉积分 50 步。解码器支持任意分辨率重建，并引入掩码策略处理变长网格节点。局限性可能包括对训练几何分布的依赖、潜空间中几何信息的压缩损失，以及 rollout 误差累积仍需进一步控制。"
+      },
+      "affiliations": [
+        "Stanford University"
+      ],
+      "affiliations_text": "Stanford University",
+      "score": 5.672220247083246,
+      "score_text": "5.7"
+    },
+    {
+      "id": "2609.00092v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900092v1-safin-1-safety-from-within-through-memory-native-state-evolution",
+      "source": "arxiv",
+      "title": "Safin-1: Safety from Within through Memory-Native State Evolution",
+      "authors": [
+        "Ming Zhang",
+        "Kaisen Yang",
+        "Shu Yu",
+        "Ermo Hua",
+        "Zhekai Chen",
+        "Cheng Jin",
+        "Jingnan Zheng",
+        "Yi Zhang",
+        "Zhongtian Ma",
+        "Jiawei Zhou",
+        "Sirui Chen",
+        "Qiaosheng Zhang",
+        "Xiang Wang",
+        "Ning Ding",
+        "Xia Hu",
+        "Bowen Zhou",
+        "Youbang Sun",
+        "Chaochao Lu"
+      ],
+      "authors_text": "Ming Zhang, Kaisen Yang, Shu Yu, Ermo Hua, Zhekai Chen, Cheng Jin, Jingnan Zheng, Yi Zhang, Zhongtian Ma, Jiawei Zhou, Sirui Chen, Qiaosheng Zhang, Xiang Wang, Ning Ding, Xia Hu, Bowen Zhou, Youbang Sun, Chaochao Lu",
+      "abstract": "Long-horizon complex tasks require foundation models to accumulate information, maintain internal states, and adapt over extended interactions. Safety should be an intrinsic property of the model itself, rather than a behavioral constraint relying solely on external safeguards or post-hoc alignment such as supervised fine-tuning. This motivates Safety from Within, where safety-relevant capabilities are represented and invoked through the model's native computation. We present Safin-1, a family of foundation models realizing this principle through memory routing and state evolution. Safin-1 is built on Memory-Anchor Routing across Context History (MARCH), a network architecture that maintains structured memory states and selectively retrieves relevant historical information through content-conditioned routing. It supports test-time adaptation of persistent capability states without repeatedly modifying the backbone, enabling controlled specialization over a shared foundation. We investigate this interface on downstream safety tasks through a Safety State, demonstrating effective state-based adaptation with substantial safety improvements. More broadly, the routed-state interface unifies contextual memory and persistent capability adaptation within the model's native computation, reframing memory from a passive record of prior context into an active substrate for maintaining and evolving model behavior. Evaluations across general capabilities, long-context understanding, retrieval, and efficiency further validate Safin-1. These findings provide a path toward safety as a state-native and adaptively maintainable capability. This work is only an initial architectural exploration of Safety from Within, and substantial further work is needed to realize this broader vision.",
+      "url": "http://arxiv.org/abs/2609.00092v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00092v1",
+      "tldr": "Safin-1 introduces a family of foundation models that embeds safety and capability adaptation directly into the model's native memory via Memory-Anchor Routing across Context History (MARCH), using persistent, selectively routed \"state anchors\" and a detachable Safety State to enable test-time safety specialization without modifying the backbone.",
+      "detailed_reading": {
+        "motivation": "长程复杂任务要求基础模型在长时间交互中持续积累信息、维持内部状态并动态适应，而现有方法将安全视为外部护栏或事后对齐（如监督微调）所施加的行为约束，未能使安全成为模型自身的内在属性。作者提出“由内而外的安全”（Safety from Within）理念，认为安全相关能力应通过模型原生计算被表征和调用，而非依赖外部防护或事后修正。",
+        "method": "Safin-1基于MARCH（Memory-Anchor Routing across Context History）架构实现状态路由与状态演化。其核心方案为：采用Gated DeltaNet、Kimi Delta Attention或Gated DeltaNet-2等循环骨干，在文本边界后插入共享可学习锚点嵌入，周期性检查点保存累积循环状态形成可寻址的状态锚点；每个锚点通过与状态对齐的读取操作和输出投影生成内容相关的紧凑路由键，每个token通过路由机制在因果可见的锚点键与可学习的空选项之间进行选择，并将检索到的历史状态读出与当前循环路径残差融合。此外，该路由接口还支持持久能力状态，即在不修改冻结的共享语言模型骨干的前提下，将层级的持久安全状态（Safety State）与上下文派生锚点一起放入同一状态库，由现有路由器决定每个token的贡献，从而实现测试时安全状态适应。训练流程涉及匹配的持续预训练和监督微调，并开发了稠密与稀疏路由实现以支持长序列。",
+        "result": "在受控0.8B预训练研究中，MARCH一致提升了通用语言建模、LongBench、真实世界上下文检索和RULER NIAH的表现，并支持超出训练长度的外推。在规模扩展中，4B和35B-A3B变体在十个能力基准上的宏平均值分别从66.79提升至69.20、从76.25提升至78.35，在挑战性推理和竞赛级数学上提升最显著。在安全方面，状态原生安全专用化使平均越狱攻击成功率相对训练匹配的rank-8 LoRA控制降低42.3%，且具有更优的安全-过度拒绝权衡。",
+        "conclusion": "Safin-1通过将循环计算的时间轨迹转化为可寻址状态锚点库，并用同一路由接口承载上下文记忆与持久能力状态，证明了“由内而外安全”的可行路径：安全可以作为模型原生状态的一部分被选择性调用，并在测试时通过状态演化进行自适应维护，同时保持共享通用基础模型不动。该工作只是初步架构探索，但为安全作为状态原生且可自适应维持的能力提供了具体方向。",
+        "key_details": "关键细节包括：锚点策略按文本边界二分插入共享锚点嵌入，锚点不修改循环状态而只读取对应检查点以构建路由元数据；状态锚点维度为d_v×d_k，代表累积前缀状态而非局部片段；路由键通过独立投影矩阵W_k压缩到d_r维，实现内容条件寻址；检索到的历史状态读出与当前状态路径残差融合，保持底层循环更新不变；持久安全状态从有害与良性示例中学习，支持可插拔增减而无需重写骨干；安全评估同时报告越狱成功率与过度拒绝指标，以刻画权衡；稀疏状态路由在长序列（至128K）中选择压缩循环记忆而非token级键，提供注意力的状态级类比；该工作为初始探索，全面落地仍需大量后续工作。"
+      },
+      "affiliations": [
+        "Shanghai AI Laboratory"
+      ],
+      "affiliations_text": "Shanghai AI Laboratory",
+      "score": 4.8670675651278925,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2609.00189v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900189v1-elite-weighted-supervised-fine-tuning-for-goal-directed-molecular-optimization",
+      "source": "arxiv",
+      "title": "Elite-Weighted Supervised Fine-tuning for Goal-Directed Molecular Optimization",
+      "authors": [
+        "Shiyun Wa",
+        "Yifei Wang",
+        "Anna G. Green",
+        "Simone Sciabola",
+        "Ye Wang"
+      ],
+      "authors_text": "Shiyun Wa, Yifei Wang, Anna G. Green, Simone Sciabola, Ye Wang",
+      "abstract": "Goal-directed optimization is essential for steering molecular generators to propose candidates with desired properties. However, it is often implemented with policy-gradient reinforcement learning, which requires a generation-trajectory log-probability whose form depends on the model architecture and generation procedure. This makes an optimizer difficult to reuse across architectures and conditional generative designs. Supervised fine-tuning needs none of that machinery, but its update is driven by a fixed dataset, so the reward never enters the update. We introduce Elite-Weighted Supervised Fine-tuning (EW-SFT), which uses reward to guide elite selection of high-scoring molecules, and updates the model by its own pretraining loss on that set. Ablations show that reward information is passed primarily through elite selection, rather than through continuous weighting within the selected set. Because the update consumes only scored molecules and the model's native loss, the same rule applies across autoregressive, masked-diffusion, and discrete-flow generators, and across de novo, motif-extension, and linker-design tasks. Under a fixed budget of 3D shape alignment oracle calls on two kinase reference compounds, EW-SFT consistently outperforms the corresponding native optimizers. It further improves goal-directed optimization under a 2D similarity oracle on four held-out references and achieves comparable performance on a sample-efficiency benchmark without a trajectory-level RL formulation. These results demonstrate that EW-SFT is a unified and effective optimizer across molecular generators, design constraints, references, and oracles.",
+      "url": "http://arxiv.org/abs/2609.00189v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00189v1",
+      "tldr": "TLDR: The paper proposes Elite-Weighted Supervised Fine-tuning (EW-SFT), a unified, architecture-agnostic molecular optimizer that uses rewards only to select high-scoring molecules and then fine-tunes any generator with its native pretraining loss, consistently outperforming trajectory-level RL across diverse generators, design tasks, and oracles.",
+      "detailed_reading": {
+        "motivation": "目标导向的分子优化需要让生成模型产出具有期望性质的候选分子，但现有方法常依赖策略梯度强化学习，需要计算与模型架构和生成过程绑定的轨迹对数概率，导致优化器难以在不同架构与条件生成设计间复用；监督式微调虽然无需该机制，但其更新只由固定数据集驱动，奖励并未进入更新过程。为此提出一种统一且高效的优化方法。",
+        "method": "提出精英加权监督式微调（EW-SFT）：利用奖励筛选出高评分分子构成精英集合，模型仅在该集合上使用自身的预训练损失进行更新，不依赖轨迹级对数概率。消融表明奖励信息主要通过精英选择传递，而非集合内的连续加权。由于更新只消耗已评分分子与模型原生损失，同一规则可适用于自回归、掩码扩散和离散流生成器，并支持从头设计、基序扩展和连接子设计等任务。",
+        "result": "在固定3D形状对齐oracle调用预算下、针对两个激酶参考化合物，EW-SFT持续优于对应的原生优化器；在2D相似性oracle下对四个留出参考化合物进一步改进了目标导向优化，并在样本效率基准上达到与轨迹级RL相当的性能。",
+        "conclusion": "EW-SFT是一种跨分子生成器、设计约束、参考化合物和oracle均有效的统一分子优化方法，摆脱了强化学习轨迹公式化的限制，同时实现了优于或媲美原生优化器的表现。",
+        "key_details": "关键细节包括：精英集合由奖励排序筛选高评分分子形成；模型更新采用其预训练阶段的原生损失，不引入额外RL目标；奖励信息主要作用于顶层精英选择而非内部连续加权；方法天然兼容不同生成架构（自回归、掩码扩散、离散流）及多种分子设计任务；评估使用固定oracle调用预算，涵盖3D形状对齐和2D相似性两类oracle；局限性可能在于依赖采样分子的质量与oracle评分预算，原文未提供超参与复杂度分析的具体细节。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.42993042592429,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.00078v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900078v1-rw-lora-communication-efficient-decentralized-lora-fine-tuning-via-random-walks",
+      "source": "arxiv",
+      "title": "RW-LoRA: Communication-Efficient Decentralized LoRA Fine-Tuning via Random Walks",
+      "authors": [
+        "Xingran Chen",
+        "Rohit Bhagat",
+        "Ghadir Ayache",
+        "Rawad Bitar",
+        "Yanmin Gong",
+        "Salim El Rouayheb"
+      ],
+      "authors_text": "Xingran Chen, Rohit Bhagat, Ghadir Ayache, Rawad Bitar, Yanmin Gong, Salim El Rouayheb",
+      "abstract": "Parameter-efficient fine-tuning methods such as LoRA have become a standard approach for adapting large foundation models. Adopting fine-tuning to distributed settings faces several challenges. Most existing distributed LoRA methods rely on centralized aggregation, and gossip-based decentralized LoRA requires repeated synchronization among multiple model copies. Both methods incur significant communication overhead and introduce errors due to simultaneous aggregation of multiple model updates. In this paper, we take a different perspective and propose a random-walk-based LoRA fine-tuning scheme. Instead of maintaining multiple model replicas, a single model token traverses the network and is updated sequentially using local fine-tuning objectives. This design eliminates the need for global synchronization, substantially reduces communication and computation costs, and avoids aggregation errors. We provide rigorous convergence guarantees for non-convex objectives under standard assumptions. Through empirical results on multiple NLP tasks and graph topologies, we show that the proposed method achieves competitive task performance with substantially less communication and computation than gossip-based LoRA.",
+      "url": "http://arxiv.org/abs/2609.00078v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00078v1",
+      "tldr": "RW-LoRA introduces a decentralized LoRA fine-tuning method where a single model token traverses the network via random walks and is updated sequentially at local nodes, eliminating global synchronization and aggregation errors, reducing communication/computation overhead, and achieving competitive NLP task performance with rigorous convergence guarantees compared to gossip-based LoRA.",
+      "detailed_reading": {
+        "motivation": "现有的分布式LoRA微调方法主要依赖中心化服务器聚合或基于gossip的去中心化同步，两者都需要频繁交换模型参数或多次副本同步，造成显著通信开销，并在同时聚合多个模型更新时引入聚合误差（例如LoRA因子平均时的双线性失配）。RW-LoRA旨在提出一种低通信开销、无需全局同步且避免聚合误差的分布式LoRA微调范式。",
+        "method": "RW-LoRA采用基于随机游走的单token顺序更新机制。具体而言，网络中的单个token携带当前LoRA低秩因子(A,B)在图上随机游走；在每次迭代t，token位于节点v_t，该节点使用本地数据计算目标函数的随机梯度，并更新低秩因子A和B，更新后token根据图的转移概率P传到随机邻居节点v_{t+1}。算法初始化A遵循高斯分布、B为零矩阵，并冻结预训练权重W0；在节点处先重构W=W0+BA，再基于本地随机梯度执行因子更新，重复T次。全流程无需参数服务器、无需邻居间同步，也不进行多个模型副本的聚合。",
+        "result": "在多个NLP任务和不同图拓扑（包括完全图和环形图）上的实验表明，与基于gossip的去中心化LoRA基线相比，RW-LoRA在保持相当任务精度的同时，显著降低了通信开销和计算量。论文还给出了非凸目标下基于标准假设的严格收敛保证。",
+        "conclusion": "RW-LoRA提供了一种通信高效的分布式LoRA微调新思路，通过单一模型token沿随机游走顺序更新，消除了全局同步和多副本聚合开销，规避聚合误差，在通信和计算受限的去中心化场景中具有实用价值。",
+        "key_details": "关键细节包括：传输的是LoRA低秩因子(A,B)而非完整梯度，通信量与单token大小有关；随机游走的收敛速度依赖图的混合时间（mixing time）；理论分析假定数据在节点间i.i.d.分布，非i.i.d.扩展留作未来工作；更新规则为Markov采样下的随机梯度法，避免同时聚合多个独立更新；初始化采用B=0以保证训练初期的LoRA增量不影响原模型输出；实验中的LoRA秩r取常见小值（如2/4/8/16）。"
+      },
+      "affiliations": [
+        "LinkedIn",
+        "Rutgers University",
+        "Singapore University of Technology and Design",
+        "Technical University of Munich",
+        "Texas A&M University"
+      ],
+      "affiliations_text": "LinkedIn, Rutgers University, Singapore University of Technology and Design, Technical University of Munich, Texas A&M University",
+      "score": 4.173200918999698,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.00261v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900261v1-an-inexact-augmented-lagrangian-method-for-l0-l1-smooth-convex-optimization",
+      "source": "arxiv",
+      "title": "An Inexact Augmented Lagrangian Method for $(L_0, L_1)$-Smooth Convex Optimization",
+      "authors": [
+        "Aleksandr Vyguzov",
+        "Fedor Stonyakin"
+      ],
+      "authors_text": "Aleksandr Vyguzov, Fedor Stonyakin",
+      "abstract": "Augmented Lagrangian methods are among the most effective approaches for solving constrained convex optimization problems. However, classical complexity analyses of first-order methods applied within the augmented Lagrangian framework usually rely on the assumption that the objective function has a Lipschitz continuous gradient. This assumption excludes an important class of generalized smooth functions whose gradients may grow unboundedly.\n  In this paper, we study an inexact augmented Lagrangian method for solving linearly constrained convex optimization problems with $(L_0,L_1)$-smooth objective functions. We show that the augmented Lagrangian subproblems preserve the $(L_0,L_1)$-smooth structure, with parameters depending on the penalty coefficient. This property allows us to employ recent accelerated first-order schemes designed for generalized smooth optimization instead of classical smooth optimization methods. In particular, we combine the inexact augmented Lagrangian framework with a two-stage acceleration procedure based on clipped gradient descent and accelerated optimization.",
+      "url": "http://arxiv.org/abs/2609.00261v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00261v1",
+      "tldr": "TLDR: The paper develops an inexact augmented Lagrangian method for linearly constrained convex optimization with $(L_0,L_1)$-smooth objectives, showing that the subproblems preserve this generalized smooth structure and combining it with a two-stage clipped-gradient/accelerated scheme to achieve $\\mathcal{O}(K/\\varepsilon)+\\mathcal{O}(K)$ ergodic convergence.",
+      "detailed_reading": {
+        "motivation": "经典增广拉格朗日方法的一阶复杂度分析通常假设目标函数具有Lipschitz连续梯度，但该假设排除了梯度可能无界增长的广义光滑函数类。实际中许多重要损失（如指数损失、logistic损失、范数函数）仅满足(L0,L1)-光滑条件，因此需要将不精确增广拉格朗日方法推广到这类更一般的凸优化问题。",
+        "method": "本文针对线性约束凸优化问题 min f(x) s.t. Ax=b，在f为凸(L0,L1)-光滑函数的假设下，采用不精确增广拉格朗日方法（iALM）。外循环每次生成增广拉格朗日子问题 L_β_k(x,y^k)，允许以可控精度ε_k近似求解，随后按 y^{k+1}=y^k+β_k(Ax^{k+1}-b) 更新对偶变量；内循环使用两阶段加速过程求解子问题：先用裁剪梯度下降（步长可取三种形式之一）使函数次优性降至 L0/(5L1^2)，此时目标退化为有效2L0-光滑，再切换至AGMsDR加速算法以达到ε_k精度。参数选取为 β_k=ρ_k=Cβ/(Kε)，并要求累积精度满足 Σ ρ_k ε_k ≤ Cε/2。",
+        "result": "证明了增广拉格朗日子问题保持(L0,L1)-光滑结构，且其L0参数随惩罚系数β_k增加而增大。基于iALM的遍历收敛分析，得到目标误差和可行性误差的复杂度为 O(K/ε)+O(K)，其中K为外迭代次数；同时表明常数惩罚参数序列在迭代次数意义下最优，但为缓解病态性可选择递增序列如 β_{k+1}=β_g σ^k。",
+        "conclusion": "本文首次将不精确增广拉格朗日框架与针对(L0,L1)-光滑函数设计的加速一阶方法结合，解决了经典L-光滑假设无法覆盖的广义光滑线性约束凸优化问题，给出了可证明的遍历收敛率，拓展了增广拉格朗日方法的适用性和理论边界。",
+        "key_details": "关键点包括：(L0,L1)-光滑定义为 ||∇²f(x)|| ≤ L0+L1||∇f(x)||，当L1=0时退化为经典L-光滑；裁剪梯度下降步长备选 η_k^cl = min{1/(2L0), 1/(3L1||∇f||)} 等；两阶段切换条件为 f(x)-f* ≤ L0/(5L1^2)，之后函数表现为2L0-光滑；外层复杂度依赖 K 和精度 ε，总内迭代复杂度为 O(K/ε)+O(K)；假设KKT点存在且每步子问题可解；常数β策略虽迭代最优但可能导致子问题病态，递增β可在复杂度和数值稳定性间权衡。"
+      },
+      "affiliations": [
+        "Moscow Institute of Physics and Technology",
+        "Adyghe State University",
+        "Innopolis University",
+        "V. I. Vernadsky Crimean Federal University"
+      ],
+      "affiliations_text": "Moscow Institute of Physics and Technology, Adyghe State University, Innopolis University, V. I. Vernadsky Crimean Federal University",
+      "score": 4.167835336579146,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.00129v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900129v1-flawed-in-nature-perfect-through-evolution",
+      "source": "arxiv",
+      "title": "Flawed in Nature, Perfect through Evolution",
+      "authors": [
+        "J. M. Diederik Kruijssen"
+      ],
+      "authors_text": "J. M. Diederik Kruijssen",
+      "abstract": "The performance of artificial intelligence (AI) and machine learning (ML) models degrades when the problem they were trained on drifts. This is a near-universal feature of real-world problems, which often change unpredictably. Biological evolution has achieved intelligence by overcoming this obstacle through natural selection acting on heritable variation. AI/ML techniques have long incorporated forms of natural selection, but it has been challenging to maintain model diversity as optimization naturally drives convergence. Here we show that a swarm of AI/ML models subjected to deliberate mutations of their model coefficients away from optimality can reliably and sustainably improve performance in changing environments by acting as a statistical hedge against non-stationarity. We call this mechanism 'Flawed in Nature, Perfect through Evolution', reflecting that the collective performance gain goes at the expense of individual performance. We prove via four theorems that the resulting regret reduction is guaranteed under general conditions, establishing the Flawed-in-Nature mechanism as a generalizable design principle for AI/ML systems. We validate these results on synthetic linear regression tasks, demonstrating that the mutated swarm delivers the best model in $\\sim80\\%$ of environment changes and that inference synthesis successfully translates this individual advantage into a collective one. The mechanism proves to be most effective when the mutation drift rate matches the drift rate of the environment. We outline a simple, adaptive controller that enables practical applications by tuning the mutation drift rate to match the unknown drift rate of the environment. The close analogy of the Flawed-in-Nature mechanism to biological evolution suggests it may have been a critical missing ingredient for the organic discovery of AI forms that more closely mimic biological intelligence.",
+      "url": "http://arxiv.org/abs/2609.00129v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00129v1",
+      "tldr": "By deliberately mutating individual AI/ML models away from optimality, a swarm can collectively outperform any single model in changing environments—acting as a statistical hedge against drift—with theoretical guarantees and empirical validation.",
+      "detailed_reading": {
+        "motivation": "现有AI/ML模型面对真实世界普遍存在的概念漂移时性能不断下降，而单一模型在非平稳环境下存在不可约的线性遗憾；同时，自然选择式的机器学习虽已引入多样性，但优化过程产生的收敛压力使模型群难以维持可持续变异，因此需要一种能从群体多样性获益的机制。",
+        "method": "提出'Flawed in Nature, Perfect through Evolution'机制：维护一个模型群（swarm），对每个模型的系数施加持续的、远离最优的随机突变，形成统计对冲。训练与推理流程为：先从历史数据训练得到基准模型，再复制出多个模型并周期性注入参数突变，使群体持续产生可遗传变异；推理时通过推理合成层按近期预测精度对个体输出进行加权聚合，让最适应新环境的突变体主导最终预测。作者用四个定理证明该机制在一般条件下能降低后悔，并针对未知环境漂移率设计了自适应控制器，在线调节突变漂移率以匹配环境漂移。实验采用带概念漂移的合成线性回归数据。",
+        "result": "理论结果表明，单一模型在环境变化中只能实现线性后悔且无法被信息论地改进，而突变模型群可实现严格更小的后悔上界。合成线性回归实验中，突变群在约80%的环境变化后包含最优模型，且推理合成成功将个体优势转化为集体预测优势；当突变漂移率与环境漂移率一致时机制最有效。",
+        "conclusion": "Flawed-in-Nature机制表明，故意让单个模型不完美、维持群体多样性，是在非平稳环境中取得持续高绩效的通用原则；个体牺牲换来集体鲁棒性，这为构建更接近生物智能、能自主适应变化环境的AI系统提供了理论依据和实用控制器方案。",
+        "key_details": "关键点包括：理论框架依赖有限VC维或Glivenko-Cantelli类和有界损失假设，定义的是对风险最小化器的后悔而非经验误差；突变是对模型系数的持续性随机扰动，区别于超参扰动、随机初始化和推理噪声，且变异会在群体中累积。算法核心超参是突变漂移率，其与环境漂移率匹配时才达到最优，自适应控制器用于在线估计该速率。推理合成需以近期数据作为评估窗口，带来额外验证开销。实验目前限于合成线性回归，尚未在复杂高维或非线性真实任务中验证，也未讨论突变群中个体数量与性能-多样性之间的显式权衡。"
+      },
+      "affiliations": [
+        "Allora Foundation"
+      ],
+      "affiliations_text": "Allora Foundation",
+      "score": 4.141794076741319,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.00218v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900218v1-uncertainty-aware-parameter-estimation-for-condition-monitoring-of-power-converters",
+      "source": "arxiv",
+      "title": "Uncertainty-Aware Parameter Estimation for Condition Monitoring of Power Converters",
+      "authors": [
+        "Tomas Monopoli",
+        "Jiahong Liu",
+        "Shuai Zhao"
+      ],
+      "authors_text": "Tomas Monopoli, Jiahong Liu, Shuai Zhao",
+      "abstract": "Parameter estimation is widely used for condition monitoring of power converters, but most existing methods provide only point estimates and therefore cannot quantify whether an observed parameter change is statistically significant. This paper proposes an uncertainty-aware parameter estimation framework based on Bayesian maximum a posteriori optimization and a differentiable converter model. A Laplace approximation is used to obtain a local Gaussian posterior, enabling uncertainty quantification, consistency testing, estimator-resolution analysis, and precision-weighted pooling across data windows. The method is validated on synthetic and hardware Buck converter. It demonstrates accurate estimation of well-identified parameters and reveal the weak practical identifiability of parameters such as MOSFET on-resistance under the available sensing configuration.",
+      "url": "http://arxiv.org/abs/2609.00218v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00218v1",
+      "tldr": "The paper proposes an uncertainty-aware Bayesian parameter estimation framework for power converter condition monitoring that provides local Gaussian posteriors via Laplace approximation, enabling uncertainty quantification, consistency testing, and precision-weighted pooling, and demonstrates that while well-identified parameters are accurately estimated, parameters like MOSFET on-resistance have weak practical identifiability under typical sensing configurations.",
+      "detailed_reading": {
+        "motivation": "现有电力电子变换器参数估计方法大多只给出点估计，无法量化观测到的参数变化在统计上是否显著，也难以区分估计噪声与真实退化，因此难以支撑基于统计显著性的状态监测与变化检测。论文提出一种不确定性感知的参数估计框架，通过贝叶斯后验分布而非单一数值来表征参数估计质量。",
+        "method": "该方法基于贝叶斯最大后验（MAP）优化，结合可微分的Buck变换器物理前向模型。具体流程为：以硬件或仿真采集的输入输出数据为观测，建立负对数后验损失（数据似然项加先验项）；使用Adam与L-BFGS的序列组合优化该损失以求得MAP点估计；在最优解处对负对数后验进行二阶泰勒展开，用其Hessian矩阵构造Laplace近似的局部高斯后验。为获得校准的不确定性，引入基于有限冲激响应（FIR）的白化算子处理积分器残差的相关性及有色噪声和周期性扰动；再通过谱正则化对后验协方差进行条件化处理，使不同工作点下的后验可相互比较。基于所得后验，还可进行一致性检验、分辨率分析以及跨数据窗的精度加权融合。",
+        "result": "在仿真数据上，该方法与已知PINN基准相比实现了约20倍的速度提升，同时提供了校准后的不确定性；在硬件Buck变换器测试台上，该方法恢复了物理上正确的参数值，验证了不同工作点后验的可比性，并能以量化分辨率检测出电流相关电感偏移和模拟电容老化等元件级变化。此外，实验揭示了在现有传感配置下，某些参数（如MOSFET导通电阻）的实际可辨识性较弱，而对良好可辨识的参数则能实现准确估计。",
+        "conclusion": "该不确定性感知贝叶斯参数估计框架为电力电子变换器状态监测提供了一种统计上严谨的工具，不仅能够给出参数的点估计，还能量化其不确定性、支持估计分辨率分析、跨工作点比较和基于精度加权的多窗口融合，从而可靠地检测参数漂移或退化。研究同时指出，参数能否被准确估计取决于当前传感配置下的实际可辨识性，这为未来传感设计和监测策略提供了重要启示。",
+        "key_details": "数据与输入：使用合成仿真数据和硬件Buck变换器测量数据，无创采集正常运行数据，无需额外信号注入。先验：通过先验分布融合数据手册公差或历史测量等知识。损失：负对数后验包含数据项和先验项，噪声模型采用基于FIR白化算子的广义最小二乘结构以处理残差相关性与有色噪声。优化：Adam+L-BFGS序列优化，Hessian来自优化器曲率信息，Laplace后验近似额外成本可忽略。协方差正则：基于损失景观对工作点结构依赖的谱正则化，保证跨工作点后验可比性。复杂度/限制：方法在非线性模型下为局部后验近似，弱可辨识参数（如MOSFET导通电阻）在现有传感配置下估计不确定性大；Laplace近似与局部优化不保证全局最优，且模型失配时需靠白化与正则化缓解；与MCMC相比计算高效，但仍有模型-现实差异敏感性。"
+      },
+      "affiliations": [
+        "Aalborg University"
+      ],
+      "affiliations_text": "Aalborg University",
+      "score": 4.060552246043559,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.00049v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900049v1-real-q-e2e-llm-quantization-via-dynamic-gradient-descent",
+      "source": "arxiv",
+      "title": "REAL-Q: E2E LLM Quantization via Dynamic Gradient Descent",
+      "authors": [
+        "Qian Zhang",
+        "Yaoming Li",
+        "Zhewen Tan",
+        "Yanshu Wang",
+        "Heng Lu",
+        "Kun Su",
+        "Zongwei Lv",
+        "Wenhan Yu",
+        "Yongge Ma",
+        "Yinjun Han",
+        "Ruikuang Liu",
+        "Tong Yang"
+      ],
+      "authors_text": "Qian Zhang, Yaoming Li, Zhewen Tan, Yanshu Wang, Heng Lu, Kun Su, Zongwei Lv, Wenhan Yu, Yongge Ma, Yinjun Han, Ruikuang Liu, Tong Yang",
+      "abstract": "Post-training quantization (PTQ) is essential for deploying large language models (LLMs) under strict resource constraints. State-of-the-art PTQ methods quantize each layer with a single closed-form second-order solver: to remain analytically tractable, they heavily approximate the global loss (dropping cross-channel coupling, pooling output rows into groups), and they then freeze the resulting Hessian across the entire layer, with no way to refresh it as the loss landscape shifts column by column--a phenomenon we call information misalignment. We propose REAL-Q (Real-time E2E-loss Aligned LLM Quantization), a novel PTQ paradigm that breaks this compromise: instead of diluting the objective for the sake of analytic tractability, REAL-Q targets an end-to-end-aligned surrogate of the global loss and refines it via fine-grained, dynamic Block-wise Gradient Descent applied after every column block (128 columns). By coupling this fine-grained correction with a sliding window mechanism for smooth cross-layer transitions, REAL-Q effectively mitigates error propagation across the network. On LLaMA-3.1 (8B and 70B) and Qwen3 (0.6B-32B) at W4A16, REAL-Q reduces end-to-end KL divergence by up to ~49% relative to state-of-the-art globally-guided methods.",
+      "url": "http://arxiv.org/abs/2609.00049v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00049v1",
+      "tldr": "REAL-Q improves LLM post-training quantization by replacing static, layer-local second-order solvers with an end-to-end aligned surrogate (aggregated Fisher MSE) refined via fine-grained dynamic block-wise gradient descent, reducing KL divergence by up to ~49% over prior methods on LLaMA-3.1 and Qwen3 models.",
+      "detailed_reading": {
+        "motivation": "GPTQ类后训练量化方法为了保持闭式二阶求解可解析，不得不严重近似全局损失，丢弃跨通道耦合并将输出行分组；同时冻结的Hessian在整个层内不随逐列量化造成的损失地形变化而更新，形成论文所称的信息错位。REAL-Q旨在打破分析可解性与保真度之间的折中，用动态、细粒度、端到端对齐的梯度校正降低跨层误差传播。",
+        "method": "REAL-Q在逐层逐列量化管线中引入粗到细的优化层次。输入为校准集token及当前transformer block输出y_t；先从全精度模型输出分布中采样标签，计算NLL梯度g_t=∇_{y_t}L_NLL，并按块聚合完整的Fisher矩阵F=(1/T)Σg_tg_t^T，再以block输出扰动Δy_t的二次型L_Fisher=1/(2T)ΣΔy_t^T F Δy_t作为替代端到端KL的损失。量化时保留GPTQ风格的列扫描合解析补偿作为粗更新；在W4A16下按128列组成一个列块，每完成一个列块，就以当前block输出上的Fisher损失为目标，用Adam执行一步动态Block-GD，梯度针对真实的当前部分量化状态在线重算，从而修正静态Hessian漏掉的累积误差；Adam对角预条件隐式提供二阶信息。为避免相邻transformer block间目标突变，使用loss sliding window对相邻block的Fisher损失做连续插值，并将反向传播限制在至多两个相邻block内。",
+        "result": "在LLaMA-3.1（8B和70B）与Qwen3（0.6B–32B）的W4A16设置下，REAL-Q在所有评测模型上都取得最低的端到端KL散度；相比当前最强的全局引导类方法（如GuidedQuant），WikiText-2上的KL最多降低约49%。论文同时报告困惑度与zero-shot准确率作为次级指标，REAL-Q在输出分布保持方面的优势保持一致。",
+        "conclusion": "REAL-Q表明，无需将优化目标压缩到可解析二阶求解器也能实现高保真LLM量化。通过完整的聚合Fisher矩阵作为端到端对齐的损失代理，配合每128列后的动态Adam块级梯度校正与滑动窗口，静态近似和冻结Hessian导致的信息错位与误差传播可被有效缓解。该范式说明在PTQ中将解析式粗校正与动态一阶精修结合，是更优且可扩展的量化策略。",
+        "key_details": "REAL-Q在每个transformer block上离线聚合一整张d×d Fisher矩阵，不保留逐token Hessian，也不引入输出行分组这类启发式超参；Fisher-Hessian等式要求从全精度模型输出分布p中采样目标标签并计算NLL梯度的外积，均值场解耦的近似误差可写为元素级协方差之和。超参上列块大小取128列，每个列块后仅执行单步Adam，梯度在线重算；与GuidedQuant对比时其分组数N_g=4，而REAL-Q保留全跨通道耦合。实验统一采用W4A16 per-row量化并采纳QuaRot旋转预处理，KL在WikiText-2上报告；反向传播限制在至多两个相邻block内以避免全模型回传。局限是Fisher替代损失并非精确全局KL，均值场项丢弃逐token Hessian与输出扰动间的相关性，且Block-GD需要在线前向/反向传播，实际开销高于单次闭式求解；Adam对角预条件只能隐式逼近二阶信息，不能替代精确Hessian。"
+      },
+      "affiliations": [
+        "ZTE Corporation",
+        "Peking University",
+        "Northeastern University"
+      ],
+      "affiliations_text": "ZTE Corporation, Peking University, Northeastern University",
+      "score": 4.02695668714239,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.00196v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/02/260900196v1-whale-a-simple-recipe-for-joint-harness-weight-optimization",
+      "source": "arxiv",
+      "title": "WHALE: A Simple Recipe for Joint Harness-Weight Optimization",
+      "authors": [
+        "Haechan Kim",
+        "Yoonho Lee",
+        "Gisang Lee",
+        "Chelsea Finn",
+        "Kangwook Lee"
+      ],
+      "authors_text": "Haechan Kim, Yoonho Lee, Gisang Lee, Chelsea Finn, Kangwook Lee",
+      "abstract": "Agent performance depends jointly on the model parameters and the executable harness code that manages context and control flow. Optimizing either component in isolation can leave the system bottlenecked by its frozen counterpart: weight updates can change which harness is effective, while harness updates can change which model capabilities are exposed. Existing joint-adaptation methods optimize weights and textual prompts but leave the broader harness fixed. We propose Weight-Harness Alternating LEarning (WHALE), a simple recipe that alternates two phases: updating the model under the current harness, then searching for a better harness under the updated model. We instantiate these two phases with online rejection-sampling fine-tuning and Meta-Harness, respectively. When to switch is a key design choice: to separate real improvements from noise without over-optimizing against a changing counterpart, WHALE uses either fixed phase durations or an adaptive patience rule over training signals. Using Qwen3.5-2B/4B agents across three domains (search question answering, mathematical reasoning, and chess puzzles), WHALE outperforms weight-only, harness-only, and Fast-Slow Training by 4.15-24.38 percentage points in best mean@8 accuracy. Either component can be the bottleneck: harness search matches peak weight-only accuracy with far fewer rollouts in SearchQA, but improves math accuracy only after a weight update. Small interleaved updates also outperform stagewise weight-then-harness optimization in accuracy and rollout cost. The code is available at https://github.com/krafton-ai/WHALE.",
+      "url": "http://arxiv.org/abs/2609.00196v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00196v1",
+      "tldr": "WHALE alternates between model weight fine-tuning and executable harness code search to jointly optimize both components, outperforming weight-only, harness-only, and staged baselines across search QA, math reasoning, and chess puzzle agent benchmarks.",
+      "detailed_reading": {
+        "motivation": "智能体的表现同时取决于模型参数与可执行的任务编排代码（harness），而单独优化其中任意一个都可能因另一方固定而受到瓶颈制约。现有的联合优化方法只同时调整权重与文本提示，却将更广泛的harness视为固定不变，难以充分挖掘系统潜能。",
+        "method": "提出WHALE（Weight-Harness Alternating LEarning），一种简单有效的交替学习方案。它交替执行两个阶段：先在当前harness下对模型进行在线拒绝采样微调，再在更新后的模型上利用Meta-Harness搜索更优的harness。两个阶段之间的切换策略是关键设计选择，既要用以区分真实改进与噪声，又要避免对不断变化的另一组件过度优化，因此采用固定阶段时长或基于训练信号的自适应耐心规则来决定何时切换。",
+        "result": "在Qwen3.5-2B与Qwen3.5-4B智能体上，覆盖搜索问答、数学推理与国际象棋谜题三个领域，WHALE的最佳mean@8准确率比仅优化权重、仅优化harness以及Fast-Slow Training基线高出4.15至24.38个百分点。实验还显示两个组件都可能成为瓶颈：在SearchQA中harness搜索可以用远少于权重更新的rollout达到峰值权重优化准确率，而数学准确率只有在权重更新之后才能被harness搜索进一步提升。",
+        "conclusion": "结果表明，权重与harness的联合、交替优化能显著优于单独优化和传统分阶段优化，WHALE是一种有效且简单的联合优化方案。交错的小步更新在准确率和rollout成本上都优于先权重后harness的分阶段流程，说明两者需要协同考虑。",
+        "key_details": "关键细节包括：权重更新阶段采用在线拒绝采样微调，利用当前模型生成样本并筛选正确或高分样本进行训练；harness搜索阶段使用Meta-Harness，在更新后的模型上搜索可执行代码形式的上下文与控制流。切换策略可选择固定阶段长度或根据验证信号的自适应耐心规则。实验使用Qwen3.5-2B与Qwen3.5-4B模型，评估指标为mean@8准确率。不同任务上harness与权重更新的收益并不对称，提示需要根据训练信号判断切换时机。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.0228454133782385,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.00061v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900061v1-renft-repairing-mode-collapse-in-reward-post-training-via-internal-probability-mass-recalibration",
+      "source": "arxiv",
+      "title": "ReNFT: Repairing Mode Collapse in Reward Post-Training via Internal Probability-Mass Recalibration",
+      "authors": [
+        "Yuchen Bao",
+        "Chao Wen",
+        "Haowei Wang",
+        "Ruoxin Chen",
+        "Donghao Luo",
+        "Jiahui Zhan",
+        "Wenjian Huang",
+        "Shen Chen",
+        "Yiting Wang",
+        "Taiping Yao",
+        "Chengjie Wang",
+        "Shouhong Ding",
+        "Jianguo Zhang"
+      ],
+      "authors_text": "Yuchen Bao, Chao Wen, Haowei Wang, Ruoxin Chen, Donghao Luo, Jiahui Zhan, Wenjian Huang, Shen Chen, Yiting Wang, Taiping Yao, Chengjie Wang, Shouhong Ding, Jianguo Zhang",
+      "abstract": "Reward post-training of diffusion generators inevitably concentrates probability mass on a few reward-favored modes, a mode collapse that erases within-prompt diversity. Existing methods for mitigating collapse rely on external signals or interfaces, augmenting the reward with perceptual objectives, adjusting reference regularization, or modifying the text encoder, but none repairs an adapter that has already collapsed while preserving the acquired reward. We observe that online post-training primarily reallocates probability mass over capabilities inherited from pretraining rather than learning new visual content. Collapse is therefore suppression, not deletion, and can be reversed from within the generator. We propose ReNFT, which repairs a high-reward, low-diversity adapter through internal probability-mass recalibration. Unconditional probes first prioritize \"anti-hub\" prompts where the prompt-independent bias is easiest to expose. Two policy-dominated mixed routes then generate matched counterfactual proposals from the same prompt and initial noise, one probing the frozen base direction for suppressed alternatives and the other exposing the post-trained unconditional tendency. Reward ranking with an adaptive flipping guard assigns pull and push roles, and a joint-and-paired NFT update realizes the repair. On PickScore and GenEval, ReNFT retains 98.9% and 99.0% of NFT's reward while improving DreamSim-Div by 58.8% and 55.0%, respectively, offering a complementary alternative to external interventions.",
+      "url": "http://arxiv.org/abs/2609.00061v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00061v1",
+      "tldr": "ReNFT repairs mode collapse in reward post-trained diffusion generators by recalibrating internal probability mass—using anti-hub prompt prioritization and counterfactual mixed-route proposals to restore within-prompt diversity while retaining 98.9–99.0% of the original reward and improving DreamSim-Div by 55–58.8%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tencent Youtu Lab",
+        "Southern University of Science and Technology"
+      ],
+      "affiliations_text": "Tencent Youtu Lab, Southern University of Science and Technology",
+      "score": 3.994772210764083,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.00097v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900097v1-faster-than-flash-exploiting-attention-sparsity-for-efficient-long-context-decoding",
+      "source": "arxiv",
+      "title": "Faster Than Flash: Exploiting Attention Sparsity for Efficient Long-Context Decoding",
+      "authors": [
+        "Zhigeng Liu",
+        "Zhiyuan Ning",
+        "Ruixiao Li",
+        "Xiaoran Liu",
+        "Yuerong Song",
+        "Min Zhang",
+        "Ziwei He",
+        "Xipeng Qiu"
+      ],
+      "authors_text": "Zhigeng Liu, Zhiyuan Ning, Ruixiao Li, Xiaoran Liu, Yuerong Song, Min Zhang, Ziwei He, Xipeng Qiu",
+      "abstract": "The development of long-context Large Language Models (LLMs) is constrained by the memory bandwidth bottleneck and quadratic complexity of the attention mechanism during decoding. To overcome the inherent trade-offs between the memory overhead of metadata-based metrics and the computational inefficiency of adaptive selection strategies, we present Faster Flash Decoding (FFD), a novel hardware-algorithm co-design framework designed to break the memory wall in long-context decoding. FFD integrates the selector and computer into a fully fused kernel, replacing external metadata indices with content-aware scanning via low-bit quantization. Furthermore, we introduce the top-delta strategy, which dynamically filters blocks to achieve distribution-adaptive sparsity without global synchronization. Offering a training-free and plug-and-play solution, FFD also enables the reuse of scanning results for computation, achieving up to 11.6x kernel-level speedup and scaling to 256K context length, with 2.37x end-to-end throughput improvement. Empirical validation on RULER and LongBench confirms that FFD maintains model accuracy while delivering high-ratio sparsity, with code available at https://github.com/qluoluo/faster-flash-decoding",
+      "url": "http://arxiv.org/abs/2609.00097v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00097v1",
+      "tldr": "Faster Flash Decoding (FFD) is a plug-and-play, training-free hardware-algorithm co-design framework that breaks the memory wall in long-context LLM decoding by fusing selection and computation in a single kernel, using low-bit quantized content-aware scanning and a dynamic top-delta sparsity strategy to achieve up to 11.6x kernel-level and 2.37x end-to-end speedups at 256K context while preserving accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "Shanghai Innovation Institute",
+        "Harbin Institute of Technology"
+      ],
+      "affiliations_text": "Fudan University, Shanghai Innovation Institute, Harbin Institute of Technology",
+      "score": 3.8743043423725636,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.00103v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900103v1-good-memory-has-ecc-evaluating-the-memory-of-vision-language-models-beyond-accuracy",
+      "source": "arxiv",
+      "title": "Good Memory Has ECC: Evaluating the Memory of Vision-Language Models Beyond Accuracy",
+      "authors": [
+        "Shmuel Berman",
+        "Jia Deng"
+      ],
+      "authors_text": "Shmuel Berman, Jia Deng",
+      "abstract": "Memory is widely viewed as an important unsolved problem for LLMs and VLMs, and current benchmarks typically evaluate it by testing accuracy over long text or video. However, accuracy alone misses properties that matter for real long-horizon tasks. We introduce ECCBench, a benchmark and evaluation protocol that measures memory beyond a system's capacity--its raw accuracy at a specific budget--via three axes we call ECC: efficiency--the computation, in FLOPs, needed to answer from memory; compression--whether compressible inputs are remembered more accurately or efficiently; and calibration--whether the system abstains in response to its own uncertainty and the cost of an error. We find that pretrained VLMs compress their memory over text but not video and are poorly calibrated on both. Among a broader set of memory backbones, several non-Transformer architectures achieve better compression-calibration tradeoffs than RoPE Transformers, suggesting they may be useful components for agents operating over long horizons.",
+      "url": "http://arxiv.org/abs/2609.00103v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00103v1",
+      "tldr": "ECCBench introduces a benchmark evaluating VLM memory along ECC—efficiency, compression, and calibration—beyond raw accuracy, showing that VLMs compress text but not video and are poorly calibrated, while non-Transformer memory backbones achieve better compression-calibration tradeoffs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 3.761603692492187,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.00286v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900286v1-non-blocking-fault-current-limiting-control-of-half-bridge-mmcs-for-mtdc-transmission",
+      "source": "arxiv",
+      "title": "Non-Blocking Fault Current Limiting Control of Half-Bridge MMCs for MTDC Transmission",
+      "authors": [
+        "Pengxiang Huang",
+        "Shahil Shah"
+      ],
+      "authors_text": "Pengxiang Huang, Shahil Shah",
+      "abstract": "A key protection requirement in multiterminal HVDC (MTDC) transmission systems is to selectively isolate faulted areas using DC circuit breakers (DCCBs) during DC faults while keeping the rest of the systems in operation. However, in MTDC systems using half-bridge modular multilevel converters (HB-MMCs), the lack of inherent fault current suppression capability in HB-MMCs can cause converter blocking before fault clearance by DCCBs. This work presents an active fault current limiting (AFCL) control strategy for HB-MMCs to mitigate DC fault currents, thus avoiding converter blocking and reducing the breaking capability required of DCCBs. In addition, a systematic approach is proposed to design the AFCL control strategy under converter and network stability constraints. The effectiveness of the proposed strategy is demonstrated through PSCAD on two typical MTDC systems during DC faults.",
+      "url": "http://arxiv.org/abs/2609.00286v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00286v1",
+      "tldr": "This paper proposes a non-blocking active fault current limiting (AFCL) control strategy for half-bridge MMCs in MTDC transmission that reduces DC fault currents to prevent converter blocking and lower DCCB breaking requirements, with a systematic design under stability constraints and PSCAD validation on multi-terminal systems.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Laboratory of the Rockies"
+      ],
+      "affiliations_text": "National Laboratory of the Rockies",
+      "score": 3.6297233185410542,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.00224v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900224v1-qtea-ternary-llms-with-sparse-residual-salient-weight-and-by-column-optimization",
+      "source": "arxiv",
+      "title": "QTEA: Ternary LLMs with Sparse Residual Salient Weight and By-Column Optimization",
+      "authors": [
+        "Yipin Guo",
+        "Arun M George",
+        "Jie Fu",
+        "Tareq Mahmoud",
+        "Sixue Xing",
+        "Siddharth Joshi"
+      ],
+      "authors_text": "Yipin Guo, Arun M George, Jie Fu, Tareq Mahmoud, Sixue Xing, Siddharth Joshi",
+      "abstract": "Weight-only post-training quantization (PTQ) can alleviate the computational burden of serving large language models (LLMs) at scale. However, existing PTQ methods often fail to generalize across models and suffer severe accuracy loss below 2 bits. Many leverage unstructured sparsity to mitigate this loss, but at the cost of regularity and GPU-friendly execution. We present QTEA, a sub-2-bit PTQ framework that quantizes weights into ternary values and uses salient weights as residual error compensators. To maintain hardware efficiency, residuals are assigned to selected columns with semi-structured \\(1{:}4\\) sparsity within the salient columns. We further add column-wise rescale refinement to GPTQ-style column-by-column quantization, alternately updating per-column scales and ternary assignments to reduce reconstruction error. We also identify order-dependent error propagation in GPTQ and introduce error decay to attenuate late-stage error accumulation. On Qwen3-14B, QTEA compresses all weights to an effective 1.7 bits per weight while improving average accuracy over the strongest ternary PTQ baseline by 16.7\\%. It also achieves 1.40\\(\\times\\) and 2.61\\(\\times\\) lower perplexity on WikiText and C4 respectively. This trend holds on Llama3-8B, where QTEA obtains a 6.6\\% accuracy gain and 1.34\\(\\times\\)/1.95\\(\\times\\) lower perplexity on the same datasets. Finally, we develop a lookup-table based kernel that achieves 7.2\\(\\times\\) faster per-token generation over an FP16 baseline. Code is available at https://github.com/Intelligent-Microsystems-Lab/QTEA.",
+      "url": "http://arxiv.org/abs/2609.00224v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00224v1",
+      "tldr": "QTEA is a sub-2-bit post-training quantization framework that ternarizes LLM weights while using column-semi-sparse salient residual weights, column-wise rescale refinement, and error decay to achieve 1.7 bits per weight with large accuracy/perplexity improvements over ternary PTQ baselines and up to 7.2× faster generation than FP16.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Notre Dame"
+      ],
+      "affiliations_text": "University of Notre Dame",
+      "score": 3.6229896217427564,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.00059v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900059v1-distal-distillation-and-self-supervised-pretraining-for-structure-agnostic-materials-property-prediction",
+      "source": "arxiv",
+      "title": "DISTAL: Distillation and Self-Supervised Pretraining for Structure-Agnostic Materials Property Prediction",
+      "authors": [
+        "Weiran Wang",
+        "Xintong Huo",
+        "Yueying Wang",
+        "Yusi Fan",
+        "Wenyan Wang",
+        "Xin Feng",
+        "Ruihao Xin",
+        "Lan Huang",
+        "Kewei Li",
+        "Fengfeng Zhou"
+      ],
+      "authors_text": "Weiran Wang, Xintong Huo, Yueying Wang, Yusi Fan, Wenyan Wang, Xin Feng, Ruihao Xin, Lan Huang, Kewei Li, Fengfeng Zhou",
+      "abstract": "Materials property prediction remains difficult in low-data settings, where many target properties are supported by only a limited number of labeled samples. Models with the strongest predictive accuracy often depend on crystal structures, which restricts their use in early-stage screening when structural information is limited or unavailable. To address this challenge, we propose DISTAL, a dual-prior framework for structure-agnostic materials property prediction that combines self-supervised compositional pretraining with structure-aware knowledge distillation. DISTAL first learns transferable compositional representations from a large virtual composition space using 145 composition-derived descriptors. It then distills structural knowledge from a pretrained ALIGNN teacher into a composition-conditioned student. This setting allows structural priors to be used during training without requiring structural inputs at inference. By integrating explicit compositional descriptors, pretrained latent features, and distilled structural features within a unified prediction pipeline, DISTAL captures complementary signals that are difficult to recover from any single representation alone. Across 39 benchmark tasks, the best-performing multimodal configuration combines all three signals, and improves over the reference benchmark on 37 tasks. DISTAL achieves the strongest overall performance among all evaluated feature combinations. These results indicate that compositional pretraining and structural distillation provide complementary priors and offer a practical route to robust composition-only prediction in small-data materials informatics. The source code and the pre-trained models are anonymously available at: https://osf.io/eq96d/overview?view_only=451617f42f7849e08750bd1852b48980 and will be released at the official link after acceptance.",
+      "url": "http://arxiv.org/abs/2609.00059v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00059v1",
+      "tldr": "DISTAL improves low-data, structure-agnostic materials property prediction by combining self-supervised compositional pretraining on virtual compositions with knowledge distillation from a structure-aware ALIGNN teacher, achieving the best performance on 37 of 39 benchmark tasks using only composition inputs at inference.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Jilin University of Chemical Technology",
+        "Jilin University"
+      ],
+      "affiliations_text": "Jilin University of Chemical Technology, Jilin University",
+      "score": 3.6202186303893837,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.00089v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900089v1-foundation-models-for-electricity-price-forecasting-and-battery-arbitrage-can-they-replace-market-specific-forecasting-models",
+      "source": "arxiv",
+      "title": "Foundation models for electricity price forecasting and battery arbitrage: Can they replace market-specific forecasting models?",
+      "authors": [
+        "Arkadiusz Lipiecki",
+        "Rafał Weron"
+      ],
+      "authors_text": "Arkadiusz Lipiecki, Rafał Weron",
+      "abstract": "Foundation models promise accurate forecasts with little or no task-specific training, but whether they can replace models designed specifically for electricity price forecasting remains unclear. We compare nine variants from five foundation model families, evaluated in zero-shot mode, with two state-of-the-art electricity price forecasting benchmarks in Germany, Poland, and Spain over 2021-2025. Their performance is assessed in terms of point and probabilistic forecasting accuracy, as well as economic value in battery energy storage arbitrage. Only the TabPFN models consistently and significantly outperform the benchmarks across all three markets and all statistical measures. However, this statistical dominance does not translate directly into economic dominance: TabPFN performs best under unlimited bids and riskier quantile-based strategies, whereas the Distributional Deep Neural Network benchmark is more profitable when risk tolerance is lower. Thus, foundation models cannot universally replace market-specific models, and their value depends on both model architecture and the decision problem.",
+      "url": "http://arxiv.org/abs/2609.00089v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00089v1",
+      "tldr": "Foundation models cannot universally replace market-specific electricity price forecasting models: only TabPFN consistently achieves superior statistical accuracy across Germany, Poland, and Spain, yet its economic dominance in battery arbitrage depends on trading strategy and risk tolerance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wrocław University of Science and Technology",
+        "Aarhus University"
+      ],
+      "affiliations_text": "Wrocław University of Science and Technology, Aarhus University",
+      "score": 3.5978354080305364,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.00064v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900064v1-attention-sensitivity-is-not-enough-dissociating-attention-level-and-behavioural-in-context-learning-under-fine-tuning",
+      "source": "arxiv",
+      "title": "Attention Sensitivity Is Not Enough: Dissociating Attention-Level and Behavioural In-Context Learning under Fine-Tuning",
+      "authors": [
+        "Jinyuan Zhang",
+        "Peng He",
+        "He Hu",
+        "Yin Yuan",
+        "ShengShuo Jiao"
+      ],
+      "authors_text": "Jinyuan Zhang, Peng He, He Hu, Yin Yuan, ShengShuo Jiao",
+      "abstract": "In-context learning (ICL) lets large language models adapt to new tasks from demonstrations, and fine-tuning can erode this behaviour. Many preservation diagnostics inspect attention: if attention changes when demonstrations change, the model is treated as context-sensitive. This paper asks how far that proxy can be trusted once it is optimised. We formalise \\emph{In-Context Sensitivity} (ICS), the average row distance between last-token attention on matched and mismatched demonstration prefixes, and pair it with \\emph{ICL-GAP}, the behavioural accuracy gap between the same prefixes. In a controlled four-arm ablation on Llama-2-7B, an ICS-maximising regulariser ($\\armKL$) drives ICS to $1.413$, within $0.5\\%$ of its geometric ceiling. The behavioural readout tells a different story: ICL-GAP stays near zero and MMLU accuracy moves from $0.371$ to $0.279$, a Goodhart dissociation of the bounded attention proxy. Endpoint statistics locate the mechanism: attention grows sharp and near-disjoint across prefixes yet routes to formatting and demonstration-body tokens rather than labels. A random-label protocol confirms that the behavioural probe family retains dynamic range at the same checkpoints. In a constructive sweep, behaviour gating partially mitigates the effect, while objectives anchored to pretrained computation hold the high-MMLU, moderate-ICS region that divergence maximisers leave. The main lesson is diagnostic: attention-level ICL proxies earn their place as training targets only after validation against behavioural gaps.",
+      "url": "http://arxiv.org/abs/2609.00064v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00064v1",
+      "tldr": "Optimizing attention-based in-context learning proxies during fine-tuning can drive them to their theoretical ceiling while leaving behavioral ICL unchanged and overall accuracy degraded, showing that attention-level sensitivity must be validated against behavioral gaps before being used as a training objective.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hubei University"
+      ],
+      "affiliations_text": "Hubei University",
+      "score": 3.4559655981843984,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.00204v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900204v1-exploiting-the-benefits-of-v2b-application-on-peak-shaving-of-data-center-loads",
+      "source": "arxiv",
+      "title": "Exploiting the Benefits of V2B Application on Peak Shaving of Data Center Loads",
+      "authors": [
+        "Arya Joshi",
+        "Hamed Haggi",
+        "Chinmay Morankar"
+      ],
+      "authors_text": "Arya Joshi, Hamed Haggi, Chinmay Morankar",
+      "abstract": "The accelerated growth in data center projects has introduced a demand-driven bottleneck throughout power grids and contributed to a substantial increase in carbon emissions. These concerns are fueling discussions on methods to use existing energy assets to drive operational efficiency. To this end, this paper explores the benefits of Vehicle-to-Building (V2B) applications to support peak shaving of data center cooling loads. Initially, a literature review was conducted considering V2B constraints and optimization methods including SoC limitations, EV participation, tariffs, and building loads. This analysis was then used to develop a conceptual case study of a 10 MW data center in Loudoun County, VA by simulating a temperature-dependent load profile and adjusting the V2B participation of 40 commercial and passenger EVs. Simulation results indicate that, depending on seasonal variations in cooling load demands, strategic deployment of V2B assets between 12-5pm can offset gross cooling loads by 13-36%.",
+      "url": "http://arxiv.org/abs/2609.00204v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00204v1",
+      "tldr": "This paper proposes a Vehicle-to-Building (V2B) framework using commercial and passenger EVs to shave data center cooling loads, showing through simulations of a 10 MW Virginia data center that strategic afternoon V2B deployment can offset 13–36% of peak cooling demand depending on season.",
+      "detailed_reading": null,
+      "affiliations": [
+        "WSP USA"
+      ],
+      "affiliations_text": "WSP USA",
+      "score": 3.4407849148846865,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.00099v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900099v1-generative-artificial-intelligence-for-reliable-mechanistic-reasoning-for-corrosion",
+      "source": "arxiv",
+      "title": "Generative artificial intelligence for reliable mechanistic reasoning for corrosion",
+      "authors": [
+        "Bharath M N",
+        "R K Singh Raman",
+        "Alankar Alankar"
+      ],
+      "authors_text": "Bharath M N, R K Singh Raman, Alankar Alankar",
+      "abstract": "Corrosion accounts for approximately 4% of global GDP, and reliable prediction is essential for timely mitigation. Machine learning effectively predicts corrosion rates from composition, microstructure, and environmental variables, but cannot explain the underlying mechanisms. A reliable approach in safety-critical materials engineering requires not only accurate retrieval but also mechanistically defensible reasoning, a capability that existing factuality metrics cannot assess. This work presents a domain-adapted retrieval-augmented generation framework for corrosion knowledge synthesis, demonstrated on magnesium alloy corrosion. Three open-weight language models (Llama-3.1-8B, Qwen-2.5-7B, Mistral-7B) are fine-tuned on 3,309 expert-verified question-answer pairs from 840 peer-reviewed papers and integrated with a hybrid dense-lexical retrieval pipeline. Retrieval augmentation produces Token F1 gains of 143-194%, with system faithfulness of 0.964 and context recall of 0.988. Blind external validation on newly published literature and in-house electrochemical data confirms trend-level generalisation. Reason Map, a proposition-graph framework, is further introduced; it independently constructs directed evidence graphs from generated answers and retrieved literature, enabling systematic detection of causal direction inversions and unsupported inferential leaps that flat factuality metrics cannot expose. The modular architecture can be applied across domains, offering a generalizable blueprint for trustworthy AI-assisted knowledge synthesis to circumvent corrosion, which can also be applied to other engineering domains.",
+      "url": "http://arxiv.org/abs/2609.00099v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00099v1",
+      "tldr": "The paper introduces a retrieval-augmented generation framework with fine-tuned open-weight LLMs and a proposition-graph tool called Reason Map that, by comparing answer and evidence graphs, detects causal inversions and unsupported inferential leaps in corrosion knowledge synthesis—limitations that standard factuality metrics miss—demonstrating reliable, mechanistically defensible reasoning on magnesium alloy corrosion.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Bombay",
+        "Monash University",
+        "IITB-Monash Research Academy"
+      ],
+      "affiliations_text": "Indian Institute of Technology Bombay, Monash University, IITB-Monash Research Academy",
+      "score": 3.34489715404702,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.00093v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900093v1-local-reference-geometry-residual-augmentation-for-imbalanced-time-series-classification",
+      "source": "arxiv",
+      "title": "Local Reference Geometry Residual Augmentation for Imbalanced Time Series Classification",
+      "authors": [
+        "Chuanhang Qiu",
+        "Yanran Xu",
+        "Yue Wang",
+        "Anthony Bagnall"
+      ],
+      "authors_text": "Chuanhang Qiu, Yanran Xu, Yue Wang, Anthony Bagnall",
+      "abstract": "Imbalanced time series classification is often addressed by changing the training distribution, objective, logits, or final threshold. These interventions address important biases, yet leave a representation-level question unmeasured: after minority support is reduced, does a learned feature space remain locally reliable around minority regions? We identify a training-local geometry failure: under imbalance, minority cases can lie in sparse, rest-dominated, or mixed feature-space neighborhoods, even when the representation retains useful global class structure. To diagnose and repair this failure, we propose Local Reference Geometry (LRG), a lightweight post-hoc feature augmentation module applied between a fixed feature extractor and the classifier head. Using training features only, LRG measures local exposure and class-mixture risk, then augments each fixed feature with a standardized signed displacement from nearby training geometry and an LDA-projected residual summary. On controlled UCR/Bake Off Redux imbalance benchmarks, paired raw-versus-LRG comparisons show gains for learned, pretrained, and fixed representations, including when LRG is combined with training-level interventions and post-encoder classifier corrections. Ablations show that the gain comes from the signed local residual appended to the original feature, rather than from generic prototype distances, affinity features, scalar statistics, or VLAD-style codes. Further analyses support the proposed local-geometry failure hypothesis: minority neighborhoods become increasingly rest-exposed under imbalance, training-local risk identifies error-prone regions, and LRG gains concentrate in those high-risk regions.",
+      "url": "http://arxiv.org/abs/2609.00093v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00093v1",
+      "tldr": "LRG is a lightweight post-hoc feature augmentation method that repairs imbalanced time series classification by adding signed local geometry residuals and LDA-projected summaries to fixed representations, improving minority-class reliability in sparse or rest-dominated feature-space neighborhoods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Southampton"
+      ],
+      "affiliations_text": "University of Southampton",
+      "score": 3.33651971858383,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.00084v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900084v1-stochastic-complexity-of-vectors-containing-cluster-structure",
+      "source": "arxiv",
+      "title": "Stochastic complexity of vectors containing cluster structure",
+      "authors": [
+        "Daniel Nicorici",
+        "Olli Yli-Harja",
+        "Jaakko Astola"
+      ],
+      "authors_text": "Daniel Nicorici, Olli Yli-Harja, Jaakko Astola",
+      "abstract": "This paper studies the problem of computing the stochastic probability (shortest code length) of the encoded vectors containing cluster structure using Normalized Maximum Likelihood (NML) model. This is of great theoretical and practical importance in data clustering based on Minimum Description Length (MDL) principle, such as for estimating the best number of clusters and best cluster structure for the data. Straightforward computation of the shortest code length of the vector containing cluster structure based on the NML model requires polynomial time with respect to the size of the vector and number of clusters. We show that this is a tractable problem by introducing a recursion formula for the efficient computation of normalizing constant from the NML model. The time complexity of the new formula is linear opposed to previous polynomial time with respect to the size of the vector and number of clusters.",
+      "url": "http://arxiv.org/abs/2609.00084v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00084v1",
+      "tldr": "This paper presents a recursion formula that computes the Normalized Maximum Likelihood stochastic complexity (code length) of cluster-structured vectors in linear time, replacing previous polynomial-time methods and enabling efficient MDL-based clustering and estimation of cluster structure and number of clusters.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tampere University of Technology",
+        "Medicel Oy"
+      ],
+      "affiliations_text": "Tampere University of Technology, Medicel Oy",
+      "score": 3.3212234718600016,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.00047v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900047v1-task-specific-prompt-with-global-context-for-multi-task-graph-pre-training",
+      "source": "arxiv",
+      "title": "Task-Specific Prompt with Global Context for Multi-Task Graph Pre-Training",
+      "authors": [
+        "Zhiyang Qiu",
+        "Yangtao Wang",
+        "Xiaocui Li",
+        "Yanzhao Xie",
+        "Siyuan Chen",
+        "Wensheng Zhang"
+      ],
+      "authors_text": "Zhiyang Qiu, Yangtao Wang, Xiaocui Li, Yanzhao Xie, Siyuan Chen, Wensheng Zhang",
+      "abstract": "Graph prompt learning is an effective paradigm to adapt pre-trained graph models to downstream tasks in low-resource scenarios. However, existing multi-task graph pre-training frameworks generally use randomly initialized prompts, leading to poor alignment between the prompt space, pretext objectives and graph structural characteristics. This greatly weakens the task relevance, structural awareness and transferability of prompt representations. To address this challenge, we propose TPGC, a dual-prior prompt initialization solution that explicitly models the synergy between task prior and structural prior. Specifically, the Task-Prior Injection Module first conducts a short homologous multi-task pre-training on an auxiliary graph, enabling prompt initialization to inherit optimization preferences associated with multiple pretext tasks. Built on the task-aware representations, the Structure-Prior Injection Module further extracts transferable global structural context from the auxiliary graph, converting it into layer-wise prompt vectors by aggregating structurally informative node embeddings. Extensive experiments on 6 mainstream benchmarks covering node and graph classification show that TPGC achieves consistently better performance under few-shot settings than state-of-the-art baselines, with fewer downstream tunable parameters and lower runtime. The code is available at https://github.com/Virgilqiu/TPGC",
+      "url": "http://arxiv.org/abs/2609.00047v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00047v1",
+      "tldr": "TPGC proposes a dual-prior prompt initialization method that injects task-specific and global structural context from an auxiliary graph into prompts for multi-task graph pre-training, consistently improving few-shot node and graph classification performance over state-of-the-art baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hunan University of Technology and Business",
+        "Guangzhou University"
+      ],
+      "affiliations_text": "Hunan University of Technology and Business, Guangzhou University",
+      "score": 3.259510753961626,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.00090v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900090v1-assessing-alignment-and-stability-of-feature-importance-explanations-via-weight-of-evidence",
+      "source": "arxiv",
+      "title": "Assessing Alignment and Stability of Feature Importance Explanations via Weight of Evidence",
+      "authors": [
+        "Eddie Conti",
+        "Claudio Daka",
+        "Álvaro Parafita",
+        "Antonio L. Alfeo",
+        "Axel Brando",
+        "Mario G. C. A. Cimino"
+      ],
+      "authors_text": "Eddie Conti, Claudio Daka, Álvaro Parafita, Antonio L. Alfeo, Axel Brando, Mario G. C. A. Cimino",
+      "abstract": "Feature importance Methods (FIMs) are widely used in Explainable AI to interpret model predictions, yet attribution scores alone often provide limited insight into the underlying reasoning process. In this work, we introduce a novel perspective by embedding FIMs within a hypothesis-testing framework based on Weight of Evidence (WoE). We quantify how strongly the observed evidence supports any given hypothesis on feature importance. The reference hypothesis can stem from domain knowledge, ground truth, or be derived from the FIM itself. This formulation enables a principled evaluation of FIMs, capturing both their alignment with prior knowledge and their variability. We further provide theoretical results linking WoE to attribution variance. Empirical results shows the applicability and flexibility of our strategy analyzing LIME and SHAP explanations in settings with different reference hypotheses. Overall, our framework offers a complementary tool for assessing FIMs through a contrastive, evidence-based lens.",
+      "url": "http://arxiv.org/abs/2609.00090v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00090v1",
+      "tldr": "This paper introduces a Weight of Evidence-based hypothesis-testing framework to evaluate feature importance methods by quantifying how strongly stochastic attributions support reference hypotheses, enabling principled assessment of alignment, faithfulness, and stability with applications to LIME and SHAP.",
+      "detailed_reading": null,
+      "affiliations": [
+        "eCampus University",
+        "University of Florence",
+        "University of Pisa",
+        "Barcelona Supercomputing Center"
+      ],
+      "affiliations_text": "eCampus University, University of Florence, University of Pisa, Barcelona Supercomputing Center",
+      "score": 2.996478074220424,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2609.00054v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/02/260900054v1-convergence-issues-in-relational-concept-analysis-based-on-aoc-posets",
+      "source": "arxiv",
+      "title": "Convergence issues in Relational Concept Analysis based on AOC-posets",
+      "authors": [
+        "Xavier Dolques",
+        "Agnès Braud",
+        "Alain Gutierrez",
+        "Marianne Huchard",
+        "Florence Le Ber"
+      ],
+      "authors_text": "Xavier Dolques, Agnès Braud, Alain Gutierrez, Marianne Huchard, Florence Le Ber",
+      "abstract": "Formal Concept Analysis (FCA) is an approach for conceptual classification building and rule discovery from a binary table describing a set of objects by a set of attributes. Extensions have been proposed to deal with non-binary and more complex data, such as Relational Concept Analysis (RCA) for multi-relational data. RCA aims to highlight groups of objects characterized by their relationships with other groups of objects. The richer and more complex nature of the underlying data allows RCA to produce richer results than FCA, at the expense of higher computational and interpretive complexity. The most commonly used conceptual classification structure in FCA is the concept lattice. However, in many applications, concept lattice substructures, such as AOC-posets, are preferred over the full lattice, either to mitigate combinatorial blow-up or to focus on the most informative parts of the structure. Indeed, in an AOC-poset, only concepts introducing an object or an attribute are represented, which makes AOC-posets smaller and easier to compute and use than concept lattices. Although RCA was originally defined on concept lattices, it can also be instantiated on AOC-posets. RCA is iterative and its convergence is guaranteed in the lattice-based setting, but this guarantee is lost when using AOC-posets. In this paper, we investigate this loss of convergence in detail. We show why convergence is no longer guaranteed in the general case, identify conditions under which it can still be ensured, and discuss how a dataset can be transformed to recover convergence. We also propose a convergent variant of the process, which preserves the AOC-poset structure: relational attributes, once created, are never removed, which guarantees convergence at the price of attributes that may refer to concepts absent from the final structures.",
+      "url": "http://arxiv.org/abs/2609.00054v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00054v1",
+      "tldr": "The paper investigates why the iterative Relational Concept Analysis process loses its convergence guarantee when using AOC-posets instead of full concept lattices, identifies conditions and data transformations that can restore convergence, and proposes a convergent variant that keeps relational attributes permanently to ensure termination.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Montpellier",
+        "University of Strasbourg"
+      ],
+      "affiliations_text": "University of Montpellier, University of Strasbourg",
+      "score": 2.923963567877428,
+      "score_text": "2.9"
+    }
+  ],
+  "errors": []
+}
