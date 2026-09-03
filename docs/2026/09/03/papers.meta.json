@@ -1,0 +1,759 @@
+{
+  "label": "2026-09-03",
+  "date": "2026-09-03",
+  "generated_at": "2026-09-03T07:40:31",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.01609v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901609v1-didrive-a-risk-aware-hierarchical-diffusion-framework-for-safe-offline-reinforcement-learning-in-autonomous-driving",
+      "source": "arxiv",
+      "title": "DiDrive: A Risk-Aware Hierarchical Diffusion Framework for Safe Offline Reinforcement Learning in Autonomous Driving",
+      "authors": [
+        "Qisong Guo",
+        "Jingtang Chen",
+        "Zhilin Chen",
+        "Pei Xu",
+        "Mingjian Fu",
+        "Wenxi Liu",
+        "Yuanlong Yu"
+      ],
+      "authors_text": "Qisong Guo, Jingtang Chen, Zhilin Chen, Pei Xu, Mingjian Fu, Wenxi Liu, Yuanlong Yu",
+      "abstract": "While diffusion models effectively capture multimodal behavioral priors for autonomous driving, offline reinforcement learning (RL) policies remain susceptible to distribution shift, heavy-tailed risk signals, out-of-distribution (OOD) action generation, and high-dimensional state redundancy. To address these challenges, we propose DiDrive, a distribution-guided offline diffusion framework featuring two synergistic components: the Risk-Aware Hierarchical Diffusion (RHDif) architecture and the 3DICE policy optimization paradigm. In the state space, RHDif utilizes a low-level risk-gated encoder and a high-level contextual modulator to filter environmental redundancy and focus on safety-critical threats. In the action space, 3DICE mitigates OOD overestimation and gradient oscillation through in-sample calibrated guidance, spatiotemporal optimization, and ensemble-based candidate ranking. Evaluations on the CARLA benchmark demonstrate DiDrive's superiority over baselines like IQL, CQL, and Diffusion-QL, particularly in complex, high-density traffic scenarios with 60 vehicles, where it achieves an 85% success rate and a 4295.68 average reward, providing a robust pathway for safe autonomous driving decision-making.",
+      "url": "http://arxiv.org/abs/2609.01609v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01609v1",
+      "tldr": "DiDrive introduces a risk-aware hierarchical diffusion framework for safe offline reinforcement learning in autonomous driving, combining a Risk-Aware Hierarchical Diffusion architecture and 3DICE policy optimization to reduce distribution shift, OOD actions, and heavy-tailed risks, achieving superior success rates and rewards in complex CARLA traffic scenarios.",
+      "detailed_reading": {
+        "motivation": "自动驾驶中的离线强化学习面临分布偏移、重尾风险信号、OOD动作生成以及高维状态冗余等挑战。现有扩散模型虽能捕捉多模态行为先验，但在复杂交通场景中易受噪声干扰，生成危险或分布外动作；而传统策略约束和价值正则化方法受限于单峰高斯假设，难以刻画驾驶行为的多模态性。此外，高维状态输入中的冗余环境信息会掩盖局部风险，误导动作生成。因此需要一种能同时实现风险感知状态表征与支持集内稳定策略优化的离线扩散框架。",
+        "method": "提出DiDrive框架，包含两个协同组件：风险感知分层扩散（RHDif）架构和3DICE策略优化范式。在状态空间，RHDif采用低层风险门控时空编码器（RGSE）增强局部危险特征，并通过高层跨模态上下文调制器（CMCM）对齐全局语义、抑制背景冗余；融合后的特征作为联合条件注入反向去噪过程。在动作空间，3DICE构建表征-引导-优化-选择四阶段机制：先由RHDif构建风险过滤后的行为先验，再基于密度比w*(s,a)进行样本内校准引导，通过渐进参数整合（PPI）实现时空协同优化，最后采用集成候选排序筛选动作。训练时利用静态数据集，通过重尾奖励下的稳定性设计避免OOD过估计和梯度振荡。在CARLA基准上进行评估。",
+        "result": "在CARLA仿真基准上，DiDrive在不同交通密度下均优于IQL、CQL和Diffusion-QL等基线。特别在60辆背景车辆的高密度复杂场景中，DiDrive实现了85%的成功率和4295.68的平均奖励，同时在成功率、平均奖励和车道偏离指标上均表现更优，证明了其在复杂高密度交通场景下的鲁棒性和安全性。",
+        "conclusion": "DiDrive通过RHDif与3DICE的协同设计，有效解决了离线强化学习在自动驾驶中的分布偏移、OOD动作生成、重尾风险信号不稳定以及高维状态冗余等问题，为安全自动驾驶决策提供了可靠路径。其成功表明，风险感知的状态表征与支持集内约束的分布校正优化相结合，能够显著提升复杂交通环境下的决策安全性和任务性能。",
+        "key_details": "关键点包括：奖励函数综合速度保持、车道保持、平滑性、停止惩罚以及碰撞/偏离道路各-100的硬惩罚，从而自然形成重尾分布；3DICE使用密度比w*(s,a)=d*(s,a)/d^D(s,a)对行为策略进行样本内加权，目标策略表示为π*(a|s)∝w*(s,a)π^D(a|s)；RHDif采用RGSE进行自底向上的局部风险感知，CMCM进行自顶向下的上下文过滤，融合特征作为扩散模型的条件；利用样本内引导避免了显式查询OOD动作，PPI渐进参数整合增强训练稳定性，集成候选排序减少过估计。实验在CARLA模拟器中进行，高密度场景为60辆背景车辆。局限性可能包括依赖仿真环境，尚未在真实道路数据中验证，且扩散模型的采样计算开销需考虑。"
+      },
+      "affiliations": [
+        "Fuzhou University",
+        "Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Fuzhou University, Chinese Academy of Sciences",
+      "score": 5.432628761229599,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2609.01746v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901746v1-cat-flow-curvature-adaptive-steps-for-flow-matching",
+      "source": "arxiv",
+      "title": "CAT-Flow: Curvature-Adaptive sTeps for Flow Matching",
+      "authors": [
+        "Qinchan Li",
+        "Pedro Cisneros-Velarde",
+        "Keru Fu",
+        "Samuel Antunes Miranda",
+        "Sharan Vaswani",
+        "Hao Zhang"
+      ],
+      "authors_text": "Qinchan Li, Pedro Cisneros-Velarde, Keru Fu, Samuel Antunes Miranda, Sharan Vaswani, Hao Zhang",
+      "abstract": "Flow Matching has emerged as a leading framework for generative modeling, powering state-of-the-art systems such as FLUX and Stable Diffusion 3.5. However, the iterative nature of its ODE-based sampling process creates a fundamental efficiency bottleneck: the quality of generated samples is highly sensitive to the choice of step-sizes, and current models typically require 20 to 30 steps for good quality. In this work, we propose two lightweight, training-free algorithms, CAT-OV and CAT-OT that adapt step-sizes at inference time based on a novel connection between Flow Matching sampling and gradient flow. Our algorithms are computed efficiently by not requiring additional neural function evaluations. Specifically, CAT-OT estimates curvature over time via a finite-difference approximation of the time-derivative of the vector field, while CAT-OV approximates curvature over the state space via a gradient of the vector field. Under suitable conditions, both methods have truncation error bounds of constant order. Empirically, CAT-OV and CAT-OT outperform existing step-size heuristics in image quality metrics across four text- to-image Flow Matching models, reducing the number of generation steps required to reach comparable quality by up to 40%.",
+      "url": "http://arxiv.org/abs/2609.01746v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01746v1",
+      "tldr": "CAT-Flow proposes two lightweight, training-free adaptive step-size algorithms (CAT-OV and CAT-OT) that leverage a connection between Flow Matching sampling and gradient flow to adjust step-sizes based on trajectory curvature, reducing required generation steps by up to 40% while maintaining image quality.",
+      "detailed_reading": {
+        "motivation": "文本到图像的流匹配模型（如FLUX、Stable Diffusion 3.5）依赖ODE迭代采样，但采样质量对步长设置非常敏感，通常需要20到30步才能取得好效果；现有固定步长、启发式步长或需额外训练/额外神经函数评估的自适应方法均未直接考虑ODE轨迹的几何曲率。因此，本文基于流匹配与梯度流之间新的理论联系，提出推理时免训练、无额外NFE的曲率自适应步长算法，以提升采样效率。",
+        "method": "输入为训练好的流匹配向量场u(x,t;θ)与初始噪声x0。作者先证明在相同初始条件下，流匹配直线流与特定梯度流具有相同解，从而将采样过程视为沿势能面的梯度流，并借鉴RMSProp等自适应优化器的思想。CAT-OT通过前后两个时间步向量场的有限差分近似向量场对时间的导数，用该曲率估计的范数动态调整当前步长；CAT-OV则利用历史向量场或其加权值的运行平均（一阶与二阶矩）构建RMSProp式曲率估计，并在状态空间维度上对更新步长进行归一化。两种算法都在现有生成迭代中直接计算，不调用额外神经函数，无需训练，推理时按自适应步长执行欧拉更新至t=1。",
+        "result": "在DiffDB真实用户提示下，CAT-OV和CAT-OT在四个文生图流匹配模型上均优于现有步长启发式；达到可比图像质量所需的生成步数最多减少40%，且只增加可忽略的墙钟时间和FLOPs。相比同步数基线，两种方法在CLIP、AES和HPSv3等指标上表现更好，较小步数设置下优势更明显。",
+        "conclusion": "流匹配采样可以等价地解释为梯度流，基于这一连接设计的曲率自适应步长方法能有效减少生成所需步数、提升采样效率。该方法是轻量且免训练的，可直接用于现有流匹配模型，也验证了几何曲率信息对设计采样算法的实用价值。",
+        "key_details": "方法核心是不引入额外神经函数评估，只对每次已获得的向量场做O(d)量级的算术运算；CAT-OT依赖相邻两步向量场差的有限差分，故在第一步无法直接估计时间方向曲率，需额外处理；CAT-OV使用β∈[0,1]的指数移动平均估计向量场的一阶和二阶矩，采用entrywise的平方与开方，整体步长受超参λ控制；二者在满足一定光滑性条件时具有常数阶截断误差上界。实验数据来自DiffDB，评估指标包括CLIP、AES和HPSv3；局限性是一阶欧拉式更新的基础框架对极端弯曲区域仍需较小步长，且理论与实现的曲率定义存在差异。"
+      },
+      "affiliations": [
+        "Simon Fraser University",
+        "VMware Research"
+      ],
+      "affiliations_text": "Simon Fraser University, VMware Research",
+      "score": 5.057633003067734,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2609.01799v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901799v1-designing-versatile-samples-for-learned-trajectory-scoring",
+      "source": "arxiv",
+      "title": "Designing Versatile Samples for Learned Trajectory Scoring",
+      "authors": [
+        "Yaguang Li",
+        "Jiaru Zhang",
+        "Chuheng Wei",
+        "Can Cui",
+        "Ziran Wang"
+      ],
+      "authors_text": "Yaguang Li, Jiaru Zhang, Chuheng Wei, Can Cui, Ziran Wang",
+      "abstract": "Many current end-to-end driving policies emit a pool of candidate trajectories and select one, which makes selection a separable component: a scorer can be retrained while the planner, its backbone, and its trajectory generator all stay frozen. However, many strong planners concentrate their proposals around safe mode, providing limited supervision near decision boundaries. In this work, we design a training dataset that provides more informative supervision for the scorer. In particular, we construct two generators that perturb the logged human trajectory along the two axes a vehicle can be displaced: laterally toward the drivable boundary and longitudinally toward a leading vehicle. The designed dataset produces more informative positive and negative samples than the base planner's proposal pool. We attach a transformer-based scorer to two frozen generative planners, DiffusionDrive and MeanFuser, and train it on the NAVSIM navtrain dataset. The results of the experiments show that we achieve 90.1 EPDMS on DiffusionDrive and 90.4 EPDMS on MeanFuser when using ResNet-34, with 0.4 and 0.3 EPDMS respectively, from the designed training dataset.",
+      "url": "http://arxiv.org/abs/2609.01799v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01799v1",
+      "tldr": "By training a lightweight transformer-based trajectory scorer on synthetically perturbed samples along lateral and longitudinal decision boundaries instead of only the frozen planner's safe proposal pool, the paper improves EPDMS scores on NAVSIM for DiffusionDrive and MeanFuser (90.1 and 90.4, respectively).",
+      "detailed_reading": {
+        "motivation": "当前许多生成式规划器的候选轨迹高度集中在安全区域，导致决策边界附近缺少可用于学习的有效监督样本，而驾驶指标的级联二元结构又使微小轨迹偏差可能获得完全相反的分数，这让学习型评分器难以准确排序。本文由此出发，通过构造具有信息量的扰动轨迹数据集来弥补边界区域的监督，在保持规划器冻结的前提下提升打分与选择的质量。",
+        "method": "方法以录制的驾驶员轨迹为锚点构造训练数据：横向生成器将轨迹逐点推向可行驶边界，纵向生成器使自车沿本车弧线前行并逼近引导车；两类位移用10米弧长的光滑步进斜坡加权到八个航路点，并通过模拟器在环内求解各分级目标margin，得到跨越决策边界的近碰撞与违规样本。评分器是一个轻量Transformer模块，将候选轨迹展平并升维为查询，在冻结规划器输出的小型上下文特征token上进行三层解码器交叉注意力，再用九个相互独立的解码头分别预测EPDMS的四个规则项与五个质量项；损失中二元项采用聚焦交叉熵且gamma等于2，连续进度项采用均方误差，NAVSIM中未定义标签的分量不参与对应损失。推理时按EPDMS公式合成总分并选取argmax轨迹，同时只使用基础规划器自身的候选池，因此在线开销不变。",
+        "result": "在NAVSIM navtrain数据集上以ResNet-34进行实验，将所提评分器加至DiffusionDrive后EPDMS达到90.1，加至MeanFuser后达到90.4，相比仅用基础规划器自身提议池训练分别带来0.4和0.3的提升。两个规划器拥有不同传感器配置、骨干网络与候选池规模，因此增益具有跨规划器的可复现性；分量分解表明增益主要集中于乘法的规则安全项上。",
+        "conclusion": "本文说明评分器的训练数据可以作为一种主动设计变量：与其扩大固定或超密集的轨迹词汇，不如从人类轨迹出发，沿驾驶中最影响安全判断的两个自由度生成接近决策边界的正负样本。与冻结的生成式规划器联用时，该方法以很低训练成本显著改善最终选出的轨迹，且对不同形态的规划器具有普适性。",
+        "key_details": "关键点包括：EPDMS由四个乘积规则项与五个加权质量项构成，单个违规会清零整分，故评分器须按组件独立建模而非直接回归总分；九个组件网络不共享权重，并且所有损失权重lambda都设为1。在数据生成中，横向margin使用车辆四角到可行驶区域边界的有符号距离，纵向margin取前保险杠到引导车的最小间隙，扰动沿10米弧长的平滑斜坡逐渐增强，且生成轨迹长度被限制在冻结规划器最大提议长度以内，避免出现不可行的长轨迹。训练使用真实模拟器标签，时间在单GPU上少于1小时；推理不评估合成样本，因此原始评分延迟不变。"
+      },
+      "affiliations": [
+        "Purdue University",
+        "Bosch Artificial Intelligence Center"
+      ],
+      "affiliations_text": "Purdue University, Bosch Artificial Intelligence Center",
+      "score": 5.02876118174555,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.01676v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901676v1-sim2signal-sim-to-real-benchmarks-for-traffic-signal-control",
+      "source": "arxiv",
+      "title": "Sim2Signal: Sim-to-Real Benchmarks for Traffic Signal Control",
+      "authors": [
+        "Ferdous Al Rafi",
+        "Susrik Mukherjee",
+        "Latika Liladhar Dekate",
+        "Jennifer Yawa Lavoe",
+        "Huaiyuan Yao",
+        "Shlok Mohanty",
+        "Longchao Da",
+        "Xuesong Zhou",
+        "Hua Wei"
+      ],
+      "authors_text": "Ferdous Al Rafi, Susrik Mukherjee, Latika Liladhar Dekate, Jennifer Yawa Lavoe, Huaiyuan Yao, Shlok Mohanty, Longchao Da, Xuesong Zhou, Hua Wei",
+      "abstract": "Reinforcement learning achieves strong traffic signal control performance in simulation, yet policies trained in simulators often fail once deployed in the real world, a failure known as the Sim-to-Real gap. When RL is applied to traffic signal control, this gap arises from several sources: sensing, action execution, traffic dynamics, and the control objective. Their relative impact and the reliability of existing Sim-to-Real mitigation methods remain insufficiently understood, and the field lacks a standard benchmark for systematically measuring the gap and evaluating mitigation methods. We present Sim2Signal, a benchmark that decomposes the Sim-to-Real gap into observation, action, transition, and reward gaps, corresponding to mismatches in the four components of the underlying MDP, and induces each gap in isolation under a shared protocol. We evaluate 18 mitigation methods on 2 base controllers, across 33 gap settings and 10 calibrated networks built from 5 real-world locations. We find that direct transfer consistently degrades performance across all four gap sources, but the severity of the degradation does not predict the effectiveness of mitigation. Instead, mitigation effectiveness depends strongly on the network and gap setting: outside the action gap, a method that helps in one case may fail in another. The most effective methods generally estimate what the gap changes, rather than make the policy insensitive through domain randomization or invariant representations. Our code is available at https://github.com/Red-Pheonix/Sim2RealTSCBenchMark",
+      "url": "http://arxiv.org/abs/2609.01676v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01676v1",
+      "tldr": "Sim2Signal is a benchmark that systematically decomposes the sim-to-real gap in traffic signal control into observation, action, transition, and reward gaps, and its evaluation of 18 mitigation methods shows that no single method reliably closes these gaps—except for the action gap—and that the most effective approaches work by estimating what the gap changes rather than making policies insensitive to it.",
+      "detailed_reading": {
+        "motivation": "强化学习在交通信号控制模拟中表现优异，但策略部署到真实世界时常因Sim-to-Real gap而失效，且该gap源自观测、动作执行、交通动态和控制目标等多个环节。领域缺乏统一基准来分解并量化这些gap源，也缺少在共享协议下系统比较缓解方法的平台，导致各来源的相对影响和现有Sim-to-Real方法在不同设定下的可靠性仍不清楚。",
+        "method": "Sim2Signal基于sim2sim协议，将Sim-to-Real gap按MDP四要素分解为observation、action、transition和reward四种gap：在不改变路网与需求的前提下，以第二个受控环境扮演E_real，并在E_sim/E_real校准到ATT和吞吐量匹配后单独注入每种gap。基准使用DQN与PressLight两种基座控制器，覆盖5个真实地点的10个校准路网（含Tempe和Bullhead两个新NEMA数据），共33个gap settings，并统一遵循pretrain-train-deploy流程：所有缓解方法从同一预训练checkpoint出发，最多300 episode、其中至多100 episode在E_real中执行。主要指标是平均旅行时间ATT，用Δ=m_real-m_sim量化性能下降；reward gap下因真实奖励无法在E_sim计算，改为计算相对真实奖励oracle的regret。缓解方法按gap族组织：观测gap包括域随机化、潜在空间域自适应（LUSR/DARLA/ATC/VAE）和重建方法；动作延迟gap包括Delayed-Q、PRLight及其消融；动作相变gap在NEMA路网上测试规则约束恢复；transition和reward gap则使用对应估计量或oracle式方法，以Direct-Transfer作为无缓解基线。",
+        "result": "直接迁移（Direct-Transfer）在全部四类gap源下都稳定造成性能下降，但gap造成的退化幅度并不能预测缓解方法能恢复多少。动作gap上有相对跨网络和设置稳健的方法；其余三类gap中，方法有效性高度依赖路网与具体gap设置，同一方法在一种情况下有效、在另一种情况下可能失败，甚至所有缓解方法都不如不做缓解。最有效的缓解方法通常显式估计gap改变的量（如预测动作延迟后策略实际到达的状态、从噪声传感器估计真实车辆数），而不是通过域随机化或不变表征使策略对gap不敏感。",
+        "conclusion": "Sim2Signal说明Sim-to-Real缺口不能作为单一问题对待，需要按观测、动作、transition和reward四类来源分别测量与评估；缓解方法的选择应结合具体gap和路网进行，不能依赖“退化越严重则某种缓解越有效”的假设。该基准提供了可复现的共享协议、校准路网和18种方法的系统对比，为研究社区提供了一个比较Sim-to-Real缓解方法的标准平台，也为交通信号控制真实部署时选择可靠策略提供了依据。",
+        "key_details": "观测gap的具体设置包括高斯噪声σ∈{3,5,10,20}、每车道检测器故障概率∈{0.05,0.2,0.5,0.7}、检测区长度∈{10,20,50,100}米以及C1-C4组合；动作延迟gap设置20、30、40、60秒固定延迟，而缓解方法只假设20秒，从而同时检验延迟低估；动作相变gap只在带NEMA双环相位配置的Tempe和Bullhead路网上施加，包括Flexible、Barrier若干变体和Cyclic等规则。E_sim与E_real在注入gap前先校准到ATT和吞吐量残差范围内，因此后续Δ可归因于gap；所有方法共享预训练权重并受300 episode预算约束，reward oracle例外地直接在真实目标上训练且不受预算限制。该基准是sim2sim受控环境而非物理实地部署，且仅考虑车辆、未含行人；phase-transition类设置不适用于没有NEMA信号方案的路网。"
+      },
+      "affiliations": [
+        "Arizona State University"
+      ],
+      "affiliations_text": "Arizona State University",
+      "score": 4.991388837448374,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.01756v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901756v1-a-study-of-conditional-diffusion-models-for-open-loop-control-under-dry-friction-and-stiction",
+      "source": "arxiv",
+      "title": "A Study of Conditional Diffusion Models for Open-Loop Control under Dry Friction and Stiction",
+      "authors": [
+        "Eric Aislan Antonelo"
+      ],
+      "authors_text": "Eric Aislan Antonelo",
+      "abstract": "Diffusion models have recently emerged as expressive generative priors for planning and control. This paper studies Action Diffusion, an action-sequence diffusion formulation used as an open-loop proposal distribution for a point-mass system with dry friction and stiction. In this benchmark, motion starts only when the applied input exceeds a static-friction threshold, so effective controls occupy a small and temporally structured subset of the action-sequence space. A compact conditional 1D U-Net generates bounded control sequences conditioned on initial and target states. We compare it with uniform random shooting, random shooting from the same structured dataset prior, and the Cross-Entropy Method (CEM). Results show that Action Diffusion reduces terminal error and stuck steps, especially in low-sample regimes. These results indicate that conditional diffusion provides an effective mechanism for generating temporally coherent control sequences that overcome stiction by conditioning and recombining structured control primitives from the training prior for state-to-state open-loop control.",
+      "url": "http://arxiv.org/abs/2609.01756v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01756v1",
+      "tldr": "Conditional action-sequence diffusion models trained on state-to-state control data provide an effective, sample-efficient proposal distribution for open-loop control under dry friction and stiction, reducing terminal error and stuck steps compared to uniform/structured random shooting and CEM.",
+      "detailed_reading": {
+        "motivation": "干摩擦与静摩擦使质点系统只有在控制输入超过静摩擦阈值时才开始运动，因此有效的开环控制序列在整个动作序列空间中只占很小的、具有较强时序结构的子集；均匀随机采样或无目标条件的结构化先验难以稳定给出符号、幅值和时机都合适的控制。论文旨在研究一种动作序列扩散模型作为状态到状态开环控制的采样提议分布，利用初末状态条件化提升低样本量下的控制质量，并作为高维扩散控制研究之外的一个可解释低维基准。",
+        "method": "方法是在H=64的离散控制序列上构建条件扩散模型p_theta(u_0:H-1|x0,x*)，其中x0和x*为初始与目标状态，条件向量为c=[x0^T,x*^T]^T，通过MLP注入去噪网络。数据由合成方式得到：先从包含高幅kick、中幅和近零三类分段并经一阶滤波和裁剪的结构化控制先验中采样候选序列，再利用已知的干摩擦/静摩擦动力学前向rollout得到对应终端状态，形成训练集和验证集。去噪网络是紧凑的条件1D U-Net，由Conv1D、ResBlock1D、下采样/上采样和跳跃连接组成，使用GroupNorm、SiLU、时间正弦嵌入和条件嵌入。训练采用标准噪声预测MSE损失、余弦噪声调度，并以p_drop=0.2随机丢弃条件来实现classifier-free guidance。推理时用DDIM进行50步采样，combined conditional/unconditional预测并采用guidance scale=2.0。对每个目标状态生成K条候选控制序列，用已知动力学rollout后按终端误差||x_H-x*||_2选最优；多段参考目标则按状态序列分段进行开环组合规划。对比基线包括均匀随机shooting、同一数据集先验的无条件随机shooting以及CEM。",
+        "result": "在小位移目标如x*=(0.2,0)的任务上，Action Diffusion可以生成大量靠近目标轨迹的候选，并选出先超过静摩擦阈值启动运动、随后调节接近目标的控制序列。与均匀随机shooting和数据集先验随机shooting相比，Action Diffusion显著降低终端误差和卡滞步数，在低样本量K下优势尤为明显；数据集先验因未按目标条件化，常产生符号、时长或时机不合适的kick序列，而均匀随机shooting在多数样本预算下基本无效。在与CEM的误差-计算时间对比中，论文给出了K=32和K=512等代表性预算下Action Diffusion与CEM的终端精度和墙钟耗时关系，说明条件扩散在低样本预算下能提供更高效的候选控制分布。",
+        "conclusion": "条件扩散模型可以有效作为干摩擦/静摩擦系统中开环采样控制的学习式提议分布：通过以初始和目标状态条件化结构化控制先验，模型能够对已有控制基元进行选择、排序与时序重组，形成越过阈值、调节运动、停靠等可解释阶段，从而克服静摩擦造成的输入死区问题。该模型适合作为采样型开环规划的提议分布，但不是对摩擦建模、补偿算法或反馈控制的替代，其贡献在于为低维非光滑物理控制提供了一种可检查、可复现的生成式方法。",
+        "key_details": "动力学采用分段模型：当|v|<epsilon_v且|u|<=f_s时系统保持静止，即stiction；当|v|<epsilon_v但|u|>f_s时运动启动并受库仑摩擦项影响；当速度足够大时还需考虑库仑摩擦和粘性阻尼。关键超参包括H=64、dt=0.05、u_max=0.9、f_s=0.7、f_c=0.6、b=0.05、epsilon_v=1e-3、p0范围[-1,1]、v0范围[-0.5,0.5]；扩散训练使用50k训练样本和10k验证样本，Adam训练15000步、学习率2e-3、批大小256、EMA衰减0.995、扩散步数200、DDIM步数50、条件丢弃概率0.2、guidance scale=2。数据集的控制先验由八段常数构成，每段按三类幅度模式采样，并经alpha=0.3的一阶滤波和裁剪，因此模型学到的是条件化组合已有结构模式，而非从零发现模式。评测指标包括终端误差、控制能量、控制平滑度，以及满足|v_k|<epsilon_v、|u_k|<f_s且位置偏离目标delta>0.01时的卡滞步数。局限性包括系统为低维理想化质点、无测量噪声和过程噪声，且评测基于确定性已知动力学的开环选择，不涉及在线闭环反馈或复杂的摩擦辨识问题。"
+      },
+      "affiliations": [
+        "Federal University of Santa Catarina"
+      ],
+      "affiliations_text": "Federal University of Santa Catarina",
+      "score": 4.893915939851704,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2609.01768v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901768v1-emergence-of-fibrations-compression-and-symmetry-breaking-in-artificial-neural-networks",
+      "source": "arxiv",
+      "title": "Emergence of Fibrations, Compression, and Symmetry Breaking in Artificial Neural Networks",
+      "authors": [
+        "Osvaldo M Velarde",
+        "Lucas C Parra",
+        "Alireza Hashemi",
+        "Hernan A Makse"
+      ],
+      "authors_text": "Osvaldo M Velarde, Lucas C Parra, Alireza Hashemi, Hernan A Makse",
+      "abstract": "Artificial neural networks are often regarded as powerful yet opaque black boxes. Here, we demonstrate that learning in deep neural networks generates local symmetries known in graph theory as fibrations and coverings. We prove that covering symmetries are stable attractors of stochastic gradient descent. Consistent with this theory, we report the emergence of covering symmetries across major network architectures, including multilayer, convolutional, recurrent, and transformer networks. Exploiting these symmetries enables drastic model compression - reducing networks to 17% of their original size without sacrificing performance. Furthermore, controlled breaking of covering symmetry overcomes the loss of plasticity, achieving state-of-the-art performance in continual learning. The theoretical results provide a new foundation for AI systems based on symmetries that convert black boxes into interpretable colored graphs and enable more efficient inference and lifelong learning.",
+      "url": "http://arxiv.org/abs/2609.01768v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01768v1",
+      "tldr": "Deep neural networks trained via stochastic gradient descent spontaneously develop local graph symmetries called fibrations and coverings, which enable substantial lossless compression and, when deliberately broken, improve continual learning.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "City College of New York"
+      ],
+      "affiliations_text": "City College of New York",
+      "score": 4.6661302237967455,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2609.01705v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901705v1-generative-diffusion-surrogates-with-analytical-variance-schedule",
+      "source": "arxiv",
+      "title": "Generative Diffusion Surrogates with Analytical Variance Schedule",
+      "authors": [
+        "Patrick Reichherzer",
+        "Gianluca Gregori",
+        "David N. Hosking",
+        "Subir Sarkar"
+      ],
+      "authors_text": "Patrick Reichherzer, Gianluca Gregori, David N. Hosking, Subir Sarkar",
+      "abstract": "Stochastic transport describes physical systems in which an initially structured distribution spreads under unresolved forcing, scattering, or heterogeneous media. Useful surrogates for such systems should be probabilistic, time-resolved, and able to represent non-Gaussian distributional structure. Generative diffusion models, which corrupt data with Gaussian noise and learn a reverse flow back to structured states, have these properties. Their noise schedules, however, are usually chosen heuristically: image and audio generation---the canonical use cases---provide no physical clock. In transport, by contrast, the variance, or mean-square displacement, is often known from macroscopic theory or empirical scaling even when the full distribution is not. Here we prescribe the forward noising rate as the time derivative of this variance, turning generative time into a calibrated transport clock. The variance path is enforced by construction, while the learned score field represents how non-Gaussian structure inherited from entrance data is smoothed along that path, requiring no intermediate-time physical transport data. For ballistic-to-diffusive transport in turbulent plasmas, the surrogate matches test-particle distributions, reproduces the laboratory-measured variance scale, and tracks the simulated kurtosis evolution without schedule tuning, enabling calibrated emulation and likelihood-based inference.",
+      "url": "http://arxiv.org/abs/2609.01705v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01705v1",
+      "tldr": "This paper proposes physics-anchored diffusion surrogates for stochastic transport by setting the forward noise schedule from an analytically or empirically known variance law, so that generative time becomes a calibrated physical clock and the learned score models only non-Gaussian structure, enabling accurate, entrance-only emulation of transport distributions.",
+      "detailed_reading": {
+        "motivation": "随机输运系统（如湍流等离子体中的粒子输运）需要能够表示非高斯分布结构、随时间演化的概率代理模型。生成扩散模型具备这些性质，但其噪声调度通常按图像生成等场景的经验规则选择，缺乏物理时钟。在输运问题中，方差（均方位移）常可由宏观理论或经验标度已知，即使完整分布未知。因此，将前向噪声率设为该方差的时间导数，使生成时间成为校准的输运时钟，从而实现物理锚定的代理建模。",
+        "method": "采用方差爆炸（VE）随机微分方程框架，前向过程为 dx = g(τ)dW，其中噪声调度 g^2(τ) = dσ^2(τ)/dτ，σ^2(τ) 为解析给定的宏观方差律（如弹道-扩散过渡的方差公式 σ^2(τ) = C^{-1}[τ - τ_c(1 - e^{-τ/τ_c})]）。初始分布 x0 取入口分布 P0，训练时仅使用入口样本及其按该方差路径合成的高斯扰动，无需中间时刻物理输运数据。用神经网络学习score函数 sθ(x,τ) 逼近真实score，训练后通过概率流ODE或反向SDE采样，在指定读出时间 τ* 生成代理边际分布。方差路径由调度解析强制执行，网络只学习沿该路径非高斯结构（继承自P0）被平滑的形状。",
+        "result": "针对湍流等离子体中的弹道-扩散输运，所提物理锚定调度（VE-Telegraph）无需调度调优即可匹配测试粒子分布，复现实验室测量的方差尺度，并跟踪模拟的峰度演化。与线性、余弦、Karras/EDM等启发式调度相比，只有锚定调度的生成时间对应物理时钟，方差和峰度路径符合理论预测。反向SDE和概率流ODE采样均能实现预期的高斯卷积边缘路径，峰度松弛与解析式 K_M(τ)=K0(σ0^2/(σ0^2+σ^2(τ)))^2 一致。",
+        "conclusion": "将扩散模型的噪声调度锚定到宏观方差律，可把生成时间转化为校准的输运时钟，从而构建物理上可信的概率代理模型。该方法在仅需入口分布训练的条件下，能够准确再现从弹道到扩散过渡的方差尺度和高阶级非高斯结构演化，适用于科学仿真与似然推断。",
+        "key_details": "关键点：1) 方差锚定通过构造保证二阶矩路径，score网络只需学习残余形状，避免学习方差演化；2) 边际分布为入口分布与高斯核的卷积，峰度弛豫有闭式解；3) 与Kac/telegraph核对比说明相同方差律可对应不同输运机制，高斯代理核与有界支撑核会存在高阶矩差异；4) 训练数据仅需入口样本及其合成噪声，无需中间时刻物理数据；5) 限制包括高斯核假设无法表示有限传播速度、记忆效应或轨迹相关性，且马尔可夫近似忽略了相关尺度以上的记忆；6) 方法保持VE-SDE框架，仅修改标量调度，兼容现有扩散模型基础设施，计算开销低。"
+      },
+      "affiliations": [
+        "Max Planck Institute for Security and Privacy",
+        "University of Cambridge",
+        "University of Oxford",
+        "Gonville & Caius College",
+        "Princeton University"
+      ],
+      "affiliations_text": "Max Planck Institute for Security and Privacy, University of Cambridge, University of Oxford, Gonville & Caius College, Princeton University",
+      "score": 4.58801561725111,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2609.01731v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901731v1-trisar-task-coordination-and-collision-avoidance-for-aerial-robot-teams-in-disaster-response",
+      "source": "arxiv",
+      "title": "TriSAR: Task Coordination and Collision Avoidance for Aerial Robot Teams in Disaster Response",
+      "authors": [
+        "Aditya Anil Kapile",
+        "Pedro Machado",
+        "Isibor Kennedy Ihianle"
+      ],
+      "authors_text": "Aditya Anil Kapile, Pedro Machado, Isibor Kennedy Ihianle",
+      "abstract": "Multi-Unmanned Aerial Vehicle (UAV) disaster-response systems require coordinated task assignment and local trajectory control, yet the individual and combined contributions of these coordination layers to mission efficiency and operational safety remain insufficiently characterised under controlled experimental conditions. TriSAR is evaluated as a five-UAV coordination system operating in a physics-based Gazebo simulation of an earthquake-damaged urban environment. A 2 x 2 factorial design compares two task-allocation strategies (Genetic Algorithm and greedy fitness-based allocation) with reactive collision avoidance enabled or disabled. Each of the four configurations was evaluated over 30 stochastic episodes in a common scenario of five UAVs and eight targets. Under greedy allocation, enabling repulsion eliminated recorded collision-threshold violations, confirmed by a Mann-Whitney test (U = 885, p = 4.03 x 10^-12, rank-biserial r = 0.97). Under GA allocation, the same protective effect was confirmed (U = 675, p = 1.26 x 10^-5, rank-biserial r = 0.50). For mission-efficiency metrics, GA-based allocation showed no statistically detectable advantage over greedy allocation when repulsion was enabled, but a significant advantage in steps, path length, and energy when repulsion was disabled (Welch's t-tests, |g| between 0.92 and 1.76). These results show that reactive repulsion provides a substantial, allocation-dependent safety benefit, while the additional computational complexity of GA-based task allocation yields a detectable mission-efficiency benefit only when repulsion is disabled.",
+      "url": "http://arxiv.org/abs/2609.01731v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01731v1",
+      "tldr": "TriSAR uses a 2×2 factorial simulation of a five-UAV disaster-response system to show that reactive collision avoidance substantially improves safety under both task-allocation strategies, whereas a genetic-algorithm allocator improves mission efficiency over greedy allocation only when reactive repulsion is disabled.",
+      "detailed_reading": {
+        "motivation": "多无人机灾害响应系统需要协同任务分配与局部轨迹控制，但现有研究通常只评估完整混合架构的整体性能，缺乏在受控实验条件下对任务分配与防碰撞这两个协调层各自贡献及交互作用的量化分析。文献中的分配研究常报告质量提升却不测计算代价或不进行消融，防碰撞研究未放入任务分配流水线评估，混合GA-PSO系统则将两层融合过紧难以独立测量。TriSAR旨在通过可控的2x2因子消融实验填补这一空白，回答GA分配是否比贪心分配更高效、反应式排斥是否降低碰撞违规、以及排斥的安全效果是否依赖分配策略这三个问题。",
+        "method": "TriSAR采用五架UAV在基于物理的Gazebo模拟地震损坏城市环境（500m×500m×120m，3架搜索救援代理+2架固定中继代理，8个目标含4屋顶4地面）中运行。系统包含GA任务分配器和PSO轨迹控制器，二者可独立开关以实现消融。任务分配中，染色体为目标索引的排列，解码时按最低分配成本将任务依次分给代理，成本函数含距离、电池、目标紧迫度及屋顶类型惩罚（屋顶1.25倍）；GA使用40种群、100代、3-way锦标赛选择、PMX交叉概率0.85、基因交换突变概率0.15、精英保留2个、15代无改进早停；贪心基线直接用同一成本函数分配。轨迹控制采用每代理速度空间的局部PSO：每控制步（10 Hz）维护10个候选速度向量，围绕当前目标朝向方向重新初始化，经5次内迭代更新（w=c1=c2=0.5），选最终成本最低的候选速度；反应式排斥作为独立调节项，对安全距离2.5m内的邻居或障碍施加与侵入深度成比例的排斥力（k_rep=3.0 m/s）。能量模型采用三次阻力模型（悬停功率0.28、阻力系数7e-5、质量系数0.05）。实验采用2x2因子设计（GA/贪心分配 × 排斥启用/禁用），四种配置各运行30次随机种子独立的情节，配置间地面目标坐标有±2m抖动。碰撞违规定义为代理间距离低于2.5m的步数。统计使用Mann-Whitney U检验和Welch's t检验。",
+        "result": "在贪心分配下，启用排斥使碰撞阈值违规从有变为零，Mann-Whitney检验确认显著（U=885，p=4.03e-12，秩双列r=0.97）；在GA分配下同样显著（U=675，p=1.26e-5，r=0.50），但效应量更小。对于任务效率指标（步数、路径长度、能量），GA分配相对于贪心分配在排斥启用时没有统计可检测优势，但在排斥禁用时表现出显著优势（Welch's t检验，|g|介于0.92到1.76）。研究还记录了GA分配相比贪心分配需要额外计算时间（原文Section VI-C报告了该缺失的测量）。",
+        "conclusion": "反应式排斥提供了实质性且依赖分配策略的安全效益：在贪心分配下的安全效果远大于在GA分配下的效果。GA分配增加的搜索复杂度仅在排斥禁用时带来可检测的任务效率收益；在排斥启用时，GA相对贪心没有效率优势。因此对于小规模机队，简单贪心分配加上反应式排斥可能是成本效益更高的方案，而复杂优化分配器的价值取决于防碰撞层是否激活。研究同时暴露了基于位置的排斥的局部极小值脆弱性。",
+        "key_details": "关键要点包括：使用n=30每种配置的一致性批次，所有统计对比在同一批次内完成；碰撞违规定义为距离低于2.5m的离散步数，持续违规计为多次步数，未被折叠为单次事件；无代理-障碍违规记录，安全分析主要针对代理间距离；GA和贪心使用相同成本函数以隔离分配搜索策略的影响；PSO是每代理速度空间的局部轨迹优化器而非全局标准PSO；排斥机制为人工势场，继承了局部极小值脆弱性；能量模型参数是模拟尺度代理指标而非物理校准值；GA分配的计算成本（运行时间）在结果中作为缺失测量被报告，但摘要与重点结论未给具体数值；目标是5UAV/8目标场景，结论针对该规模，不推广到更广泛方法族。实验局限包括只测试一种分配器和一种反应式防碰撞机制。"
+      },
+      "affiliations": [
+        "Nottingham Trent University"
+      ],
+      "affiliations_text": "Nottingham Trent University",
+      "score": 4.548823538092961,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2609.01729v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901729v1-reckan-kolmogorov-arnold-networks-with-a-learnable-recursive-polynomial-basis",
+      "source": "arxiv",
+      "title": "RecKAN: Kolmogorov-Arnold Networks with a Learnable Recursive Polynomial Basis",
+      "authors": [
+        "Amirhosein Azarpour"
+      ],
+      "authors_text": "Amirhosein Azarpour",
+      "abstract": "Kolmogorov--Arnold Networks (KANs) replace the fixed scalar weights of a standard network with learnable univariate functions on each edge, but existing variants still fix the \\emph{basis} that those functions are built from: B-splines, Chebyshev polynomials, wavelets, or Jacobi polynomials, and learn only the combination weights over it. We introduce RecKAN, which instead defines the basis itself by a second order polynomial recurrence, $R_{n+1}(x) = (ax^2+bx+c)R_n(x) + (dx+e)R_{n-1}(x)$, whose five coefficients are learned jointly with the network. We show this recurrence recovers several classical polynomial families including both kinds of Chebyshev polynomials, Fibonacci, Pell, and Jacobsthal polynomials as special cases, and prove that its degree grows linearly in $n$ exactly on the sub-family containing all of them, giving a concrete sense in which the learned basis can move beyond any fixed classical choice. Across multiple benchmark datasets spanning image, text, biomedical time series classification, and time series forecasting, RecKAN outperforms three parameter-matched KAN baselines (Chebyshev, Jacobi, and spline based) on all classification tasks and achieves the lowest MSE on the ETTh1 forecasting benchmark. Additionally, when used as a classifier head with a convolutional backbone, RecKAN achieves higher accuracy than standard MLP heads on Fashion MNIST, CIFAR-10, and SVHN. On a synthetic function fitting benchmark it tracks a sharply oscillatory target that a parameter comparable MLP under fits. We further show that the learned recurrence coefficients are interpretable: on the task requiring the most local structure, training moves the basis away from the linear degree growth regime that contains every classical family we identify, consistent with our theoretical analysis of what that structural shift enables.",
+      "url": "http://arxiv.org/abs/2609.01729v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01729v1",
+      "tldr": "RecKAN introduces a Kolmogorov–Arnold Network variant whose basis functions are generated by a learnable recursive polynomial recurrence with shared coefficients, recovering classical polynomial families as special cases and consistently outperforming fixed-basis KAN baselines and MLPs across classification, forecasting, and function-approximation benchmarks.",
+      "detailed_reading": {
+        "motivation": "现有KAN变体虽然将标量权重替换为可学习的单变量函数，但构造这些函数所用的基函数族（如B样条、Chebyshev、小波、Jacobi等）仍在训练前被固定，仅学习基上的组合权重。这种固定基假设限制了网络表达力，且基的选择依赖人工先验或试错。RecKAN旨在打破这一限制，通过让基本身也由可学习参数生成，使网络能根据数据自适应调整基函数族。",
+        "method": "RecKAN的核心是引入二阶多项式递推R_{n+1}(x)=(ax^2+bx+c)R_n(x)+(dx+e)R_{n-1}(x)来生成递归多项式基，其中a,b,c,d,e五个系数与网络联合学习并在所有层共享。输入预激活先经tanh映射到有界区间，再按递推生成基张量；每条边的函数表示为该基的线性组合，组合权重为层特定参数。网络由多个RecKAN层组成，每层含组合权重张量，共享同一组递推系数。为稳定训练，递推系数通过tanh缩放到有界范围，每个新生成基值用批统计标量做前向归一化（梯度停止），并对递推参数采用独立学习率、可选预热冻结和全局梯度裁剪。",
+        "result": "在MNIST、CIFAR-10、AG News、ECG5000四个分类基准上，RecKAN均优于参数匹配的ChebyKAN、JacobiKAN和SplineKAN，平均分别超过0.38%、0.41%和1.11%；在ETTh1预测任务上取得最低MSE 0.011172，优于SplineKAN(0.011879)、JacobiKAN(0.033786)和ChebyKAN(0.036781)。在卷积骨干的 classifier head 替换实验中，RecKAN在Fashion-MNIST、CIFAR-10、SVHN上分别比MLP头高0.517、0.386和0.080个百分点。合成函数拟合中，RecKAN以149参数达到MSE 0.0391，优于385参数MLP的0.1583；二维任务中训练MSE 0.113对0.200。",
+        "conclusion": "RecKAN通过学习基的生成递推而非固定基族，在多种数据模态上实现了优于固定基KAN和MLP头的性能，且仅增加极少共享参数。学习的递推系数可解释：在需要局部高频结构的任务中，模型会激活二次项使基脱离经典族所在的线性度增长区域，表明自适应基能按任务需求调整表达结构。",
+        "key_details": "递推系数共5个，与网络联合学习，但独立于层深度且共享，网络深度不影响共享参数数量；可恢复第一类/第二类Chebyshev、Fibonacci、Pell、Jacobsthal等经典多项式族作为特例，前提是这些族的递推系数不依赖于阶数n。理论证明：在二次项激活时，第n个基函数的度数可线性增长为2n，而经典族对应的a=0子族仅增长为n。数值稳定性采用四重控制：系数经tanh有界化（原点位于可行域内部）、每步批归一化（梯度停止）、输入经tanh限幅、双时间尺度优化（递推参数单独学习率）与梯度裁剪。局限：分析描述性而非因果性，需消融实验验证；CIFAR-10上提升最大但准确率绝对值仍有限；在SVHN上提升微小且在标准差内。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.5345829612953,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2609.01922v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/03/260901922v1-new-strategies-for-some-pursuit-evasion-differential-games-with-gronwall-type-constraints",
+      "source": "arxiv",
+      "title": "New strategies for some pursuit-evasion differential games with Gronwall-type constraints",
+      "authors": [
+        "Jamilu Adamu",
+        "Mehdi Salimi",
+        "Farouq Abba Wabi",
+        "Jewaidu Rilwan"
+      ],
+      "authors_text": "Jamilu Adamu, Mehdi Salimi, Farouq Abba Wabi, Jewaidu Rilwan",
+      "abstract": "This paper studies a class of non-cooperative pursuit-evasion differential games in the sequence space $l_{2}.$ The motions of the pursuer and the evader are described by certain first-order differential equations while their control functions are subject to Gronwall-type constraints which impose history-dependent bounds on their control resources. Two fundamental problems are investigated. For the pursuit problem, new strategy for the pursuer is constructed and sufficient conditions guaranteeing the completion of pursuit are established. For evasion problem, an admissible strategy of the evader ensuring avoidance of capture is obtained, and corresponding sufficient conditions for successful evasion are derived. The proposed approached extends existing results on differential games with classical geometric and integral constraints to a broader class of systems governed by Gronwall-type restrictions.",
+      "url": "http://arxiv.org/abs/2609.01922v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01922v1",
+      "tldr": "The paper studies pursuit-evasion differential games in the sequence space \\(l_2\\) under Gronwall-type (history-dependent) control constraints, constructing new admissible strategies for both pursuer and evader and deriving sufficient conditions for capture and evasion, thus extending prior results from classical geometric and integral constraints to this broader class.",
+      "detailed_reading": {
+        "motivation": "现有追逃微分博弈研究多采用经典几何约束、积分约束或混合约束，这些约束只限制控制函数的当前取值或总能量消耗，难以刻画具有记忆、疲劳、资源消耗和累积能量反馈等历史依赖特征的现实系统。为此，本文在序列空间 l2 中研究一类双方控制函数均满足 Gronwall 型约束的追逃微分博弈，试图将相关结论从经典约束推广到更广的历史依赖约束框架。",
+        "method": "博弈建模采用一阶微分方程 dp_j/dξ=λ(ξ)a_j(ξ)、de/dξ=λ(ξ)b(ξ)，状态和控制均取值于 Hilbert 空间 l2；追捕者 p_j 的控制 a_j 满足 Gronwall 型不等式 ||a_j(ξ)||^2≤α_j^2+2c∫_0^ξ λ(s)||a_j(s)||^2 ds，逃逸者 e 的控制 b 满足 ||b(ξ)||^2≤β^2+2c∫_0^ξ λ(s)||b(s)||^2 ds。文中先定义可达域闭球，再针对单追捕者情形构造追捕策略：a(ξ)=(e0-p0)/π(θ)+∫_0^θ λ(s)b(s)/π(θ)ds，并要求在终端时刻逃逸者状态落入由不等式 2<e0-p0,z>≤R^2(θ)-r^2(θ)+||e0||^2-||p0||^2 定义的半空间 H 中，从而保证追捕完成。对于逃逸问题，则构造逃逸者的容许避捕策略，并推导保证对所有 ξ≥0 都能回避捕获的充分条件。",
+        "result": "在 Gronwall 型约束下，本文为追捕问题给出了使追捕者能在有限时间内完成捕获的充分条件，其核心条件与可达域半径 R(θ)、r(θ) 以及半空间 H 有关；为逃逸问题给出了逃逸者能成功避捕的充分条件。文中结果将已有关于几何约束、积分约束和混合约束的微分博弈结论推广到 Gronwall 型历史依赖约束，表明记忆型控制资源边界会显著影响博弈的胜负条件。",
+        "conclusion": "本文在 l2 序列空间中建立了 Gronwall 型约束下追逃微分博弈的可解性理论，分别给出追捕成功与逃逸成功的充分条件及相应策略构造，拓展了无限维微分博弈的研究范围，为分析具有记忆效应和累积资源约束的冲突控制系统提供了新的理论工具。",
+        "key_details": "关键细节包括：Gronwall 型约束通过积分不等式给出控制资源的历史依赖上界，并由 Gronwall 引理可推出 ||a(ξ)||≤α e^{c∫_0^ξ λ(s)ds} 和 ||b(ξ)||≤β e^{c∫_0^ξ λ(s)ds}，但文中特别指出该指数上界并不等价于原 Gronwall 约束；控制函数要求 Borel 可测且属于相应容许控制集 A_j(α)、B(β)；可达域定义为闭球，半径由控制参数、常数 c、λ 积分以及整个区间上的实际控制范数积分共同决定；追捕策略是开环地利用逃逸者在 [0,θ] 上的控制 b(·) 构造的，需要追捕者预先掌握逃逸者完整控制信息；求解过程强调策略的容许性和系统解的唯一性；本文属于纯理论分析，未提供数值仿真，局限在于充分条件未必必要，且实际应用中逃逸者完整控制函数的可获知性也可能受限。"
+      },
+      "affiliations": [
+        "Federal University of Health Sciences",
+        "Bayero University Kano",
+        "Federal University Gashua",
+        "Kwantlen Polytechnics University"
+      ],
+      "affiliations_text": "Federal University of Health Sciences, Bayero University Kano, Federal University Gashua, Kwantlen Polytechnics University",
+      "score": 4.50384491736063,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2609.01679v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901679v1-a-survey-on-self-improving-test-time-intelligence-feedback-driven-adapting-learning-and-scaling-at-inference",
+      "source": "arxiv",
+      "title": "A Survey on Self-Improving Test-Time Intelligence: Feedback-Driven Adapting, Learning, and Scaling at Inference",
+      "authors": [
+        "Shuaicheng Niu",
+        "Guohao Chen",
+        "Yaofo Chen",
+        "Zhiquan Wen",
+        "Jinwu Hu",
+        "Zeshuai Deng",
+        "Deyu Chen",
+        "Shuhai Zhang",
+        "Renjie Chen",
+        "Zihao Lian",
+        "Shoukai Xu",
+        "Gang Dai",
+        "Yunbei Zhang",
+        "Wei Luo",
+        "Yifan Zhang",
+        "Mingkui Tan",
+        "Cheng Deng"
+      ],
+      "authors_text": "Shuaicheng Niu, Guohao Chen, Yaofo Chen, Zhiquan Wen, Jinwu Hu, Zeshuai Deng, Deyu Chen, Shuhai Zhang, Renjie Chen, Zihao Lian, Shoukai Xu, Gang Dai, Yunbei Zhang, Wei Luo, Yifan Zhang, Mingkui Tan, Cheng Deng",
+      "abstract": "The ability of AI systems to improve their behavior during deployment is becoming increasingly important. As inference moves beyond the static execution of a fixed trained model, a growing body of work studies how models can refine their behavior on the fly by exploiting test-time information and additional computation. These developments have largely evolved along two directions: methods that modify the model's state using test-time signals, and methods that improve predictions through extra inference-time resources such as more sampling and tool use. However, these directions are often studied in separate communities with different terminology, making their connections harder to see. In this survey, we present feedback-driven Test-Time Intelligence (TTI) as a unified perspective for understanding such deployment-time improvement. We use this view to relate test-time adaptation, test-time learning, and test-time scaling, highlighting both their distinctions and their growing overlap in hybrid systems. This unified framework helps connect previously fragmented ideas and provides a clearer conceptual foundation for studying inference-time self-improvement. We review major methodological paradigms, representative applications, and open challenges across vision, language, multimodal learning, generative models, robotics, and healthcare. Our goal is to provide a coherent foundation and research roadmap for the study of self-improving AI systems at test time.",
+      "url": "http://arxiv.org/abs/2609.01679v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01679v1",
+      "tldr": "This survey unifies self-improving AI at deployment under a feedback-driven Test-Time Intelligence (TTI) framework, connecting test-time adaptation, learning, and scaling while reviewing methods, applications, and open challenges across domains.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.262706210260962,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.01689v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901689v1-median-of-means-as-an-extremal-convex-estimator-and-a-nonconvex-route-to-the-trimmed-oracle",
+      "source": "arxiv",
+      "title": "Median-of-Means as an Extremal Convex Estimator and a Nonconvex Route to the Trimmed Oracle",
+      "authors": [
+        "Angshul Majumdar"
+      ],
+      "authors_text": "Angshul Majumdar",
+      "abstract": "We revisit median-of-means estimation from a deterministic optimization viewpoint and develop a family of block-Lp estimators for robust learning with heavy-tailed and adversarially corrupted data. In a block contamination model with at least a fraction 1 minus epsilon of good blocks, we first show that every convex block M-estimator has worst-case robustness constant at least 1 divided by 1 minus 2 epsilon. This matches the classical median-of-means bound and proves that the trimmed-block oracle constant 1 divided by 1 minus epsilon cannot be attained within the convex class. We then introduce a nonconvex block-Lp family for p between 0 and 1 and derive finite-sample deterministic robustness bounds for all global minimizers. As p decreases from 1 toward 0, these bounds continuously approach the trimmed-block oracle constant. For sufficiently small p, the global minimizers coincide with those of the oracle under a mild separation condition. We also show that the block-Lp objectives have a benign landscape, with all local minima remaining close to the truth and no bad basins. Combining these results with block-level concentration yields sub-Gaussian deviation bounds under finite 2 plus delta moments and high-dimensional extensions to robust mean estimation and sparse regression.",
+      "url": "http://arxiv.org/abs/2609.01689v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01689v1",
+      "tldr": "This paper shows that all convex block M-estimators are limited to the median-of-means robustness constant, and introduces a nonconvex block-Lp estimator family whose global minimizers continuously approach the trimmed-block oracle performance as p→0 while maintaining a benign optimization landscape and sub-Gaussian guarantees under heavy-tailed contamination.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IIIT Delhi"
+      ],
+      "affiliations_text": "IIIT Delhi",
+      "score": 4.153673998273787,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.01802v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901802v1-d-frost-decentralized-federated-prompt-tuning-via-optimal-transport-for-non-iid-and-imbalanced-data",
+      "source": "arxiv",
+      "title": "D-FROST: Decentralized Federated pRompt-tuning via Optimal tranSporT for Non-IID and Imbalanced Data",
+      "authors": [
+        "Quan Minh Nguyen",
+        "Hoang M. Ngo",
+        "Trong Nghia Hoang",
+        "My T. Thai"
+      ],
+      "authors_text": "Quan Minh Nguyen, Hoang M. Ngo, Trong Nghia Hoang, My T. Thai",
+      "abstract": "Prompt tuning provides a parameter-efficient way to adapt foundation models (FMs) by freezing the pretrained backbone and updating only a small set of learnable prompts. This property makes prompt tuning especially suitable for decentralized federated learning (DFL), where exchanging full-model updates can be prohibitively expensive. However, prompt tuning in DFL introduces new challenges. Prompt sets learned from heterogeneous local data may not be index-wise aligned, making standard decentralized averaging unsuitable. In addition, the algorithm should be theoretically guaranteed to achieve consensus and make progress toward the shared objective. In this work, we provide the first study of prompt tuning in DFL. We formulate decentralized prompt tuning as a Wasserstein-based optimization problem over prompt measures, which captures the set-valued structure of prompts. We then propose D-FROST, an optimal-transport-based (OT-based) decentralized prompt-tuning algorithm that merges neighborhood prompts into compact representative prompt sets through transportation-based matching. We further analyze D-FROST by bounding the Wasserstein consensus error across clients, and establishing convergence of the network-level prompt barycenter to a neighborhood of stationarity. Experiments under heterogeneous client data demonstrate the effectiveness of D-FROST for decentralized prompt tuning.",
+      "url": "http://arxiv.org/abs/2609.01802v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01802v1",
+      "tldr": "D-FROST proposes a decentralized federated prompt-tuning algorithm that uses optimal transport to align and merge heterogeneous, set-valued prompt sets across clients, with theoretical convergence guarantees and strong empirical results on non-IID and imbalanced data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Florida",
+        "Washington State University"
+      ],
+      "affiliations_text": "University of Florida, Washington State University",
+      "score": 4.025802149923699,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.01608v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901608v1-wmllm-self-evolving-optimization-agents-via-predict-then-act-world-modeling",
+      "source": "arxiv",
+      "title": "WMLLM: Self-Evolving Optimization Agents via Predict-Then-Act World Modeling",
+      "authors": [
+        "Zhongzheng Li",
+        "Qingsong Ran",
+        "Shikun Feng",
+        "Nian Ran",
+        "Wenhao Li",
+        "Xiaoyuan Zhang",
+        "Yue Wang",
+        "Xiaoguang Zhao"
+      ],
+      "authors_text": "Zhongzheng Li, Qingsong Ran, Shikun Feng, Nian Ran, Wenhao Li, Xiaoyuan Zhang, Yue Wang, Xiaoguang Zhao",
+      "abstract": "Black-box optimization problems remain challenging because of large, weakly structured, and high-dimensional search spaces. Existing methods often suffer from poor sample efficiency because they rely on direct candidate generation or trial-and-error refinement. A natural way to improve search efficiency is to use world modeling, which can help identify promising optimization directions before costly evaluation. Large language models can predict the outcomes of these candidates with nontrivial accuracy because of their implicit knowledge. Motivated by this observation, we propose WMLLM, a self-evolving optimization-agent framework based on predict-then-act world modeling. The agent first predicts promising directions and then acts to generate candidates. Combined with agentic multi-turn refinement, population-based search, and reinforcement learning, WMLLM refines both its implicit world model and its optimization strategy during search. Experiments on black-box optimization tasks, especially multi-objective molecular optimization, show that WMLLM improves sample efficiency and final optimization performance. On the multi-objective molecular optimization benchmark, WMLLM achieves state-of-the-art results under a limited evaluation budget.",
+      "url": "http://arxiv.org/abs/2609.01608v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01608v1",
+      "tldr": "WMLLM is a self-evolving LLM-based optimization agent that uses predict-then-act world modeling, population search, and reinforcement learning to improve sample efficiency in black-box optimization, achieving state-of-the-art results on multi-objective molecular optimization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhongguancun Academy",
+        "Chinese Academy of Sciences",
+        "University of Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Zhongguancun Academy, Chinese Academy of Sciences, University of Chinese Academy of Sciences",
+      "score": 4.020180561950996,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.01839v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901839v1-import-what-you-need-learning-when-and-how-to-augment-ehr-graphs-with-external-knowledge",
+      "source": "arxiv",
+      "title": "Import What You Need: Learning When and How to Augment EHR Graphs with External Knowledge",
+      "authors": [
+        "Chen Chen",
+        "Mohsen Nayebi Kerdabadi",
+        "Dongjie Wang",
+        "Mei Liu",
+        "Zijun Yao"
+      ],
+      "authors_text": "Chen Chen, Mohsen Nayebi Kerdabadi, Dongjie Wang, Mei Liu, Zijun Yao",
+      "abstract": "Longitudinal prediction from electronic health records (EHRs) is limited by the sparsity and irregularity in patient trajectories, and knowledge augmentation with external knowledge graphs (KGs) offers a promising way to alleviate these issues. However, most existing methods perform fixed, context-agnostic topology augmentation by adding the same KG nodes and edges regardless of a patient's evolving state. We propose ReTA, a Reinforcement learning-based dynamic Topology Augmentation framework that casts KG import as a per-visit, budget-aware policy. ReTA first constructs an offline refined pool of KG-grounded templates, then learns a policy to select one augment action per visit from three options: Soft Import, which enriches node features without modifying graph topology, Hard Import, which grafts a compact KG subgraph onto the visit graph to create message-passing shortcuts, and Skip, which leaves the visit unaugmented when the base encoder is already confident. To stabilize learning, ReTA employs a decoupled encoder that processes semantic and structural signals in separate channels and fuses them via adaptive gating. Experiments on MIMIC-III and MIMIC-IV across diagnosis prediction, mortality, and readmission show that ReTA consistently outperforms strong baselines while remaining efficient, transfers across datasets and knowledge graphs, and yields interpretable augmentation patterns. The robust gains under sparse supervision highlight the advantage of ReTA's dynamic decision to import knowledge, boosting accuracy while curbing costs.",
+      "url": "http://arxiv.org/abs/2609.01839v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01839v1",
+      "tldr": "ReTA is a reinforcement learning-based framework that dynamically decides, per patient visit and under a budget, whether and how to import external knowledge-graph information into EHR visit graphs—via Soft Import, Hard Import, or Skip—improving prediction accuracy and efficiency across MIMIC-III/IV tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Florida",
+        "University of Kansas"
+      ],
+      "affiliations_text": "University of Florida, University of Kansas",
+      "score": 3.7858074903460603,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.01896v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901896v1-outagedit-a-generative-foundation-model-for-power-outage-forecasting-and-scenario-simulation",
+      "source": "arxiv",
+      "title": "OutageDiT: A Generative Foundation Model for Power Outage Forecasting and Scenario Simulation",
+      "authors": [
+        "Yunqin Zhu",
+        "Feng Qiu",
+        "Yao Xie"
+      ],
+      "authors_text": "Yunqin Zhu, Feng Qiu, Yao Xie",
+      "abstract": "Power-outage planning requires scenarios before an event occurs. These scenarios must represent uncertainty in magnitude, timing, and duration while preserving temporal dependence. However, severe events are rare, and data from any single region contain few examples of extreme outage and restoration patterns. To address this challenge, we introduce OutageDiT, a foundation model for generating seven-day outage trajectories at quarter-hour resolution, trained on outage and weather records across the United States. Specifically, a condition encoder processes the historical context and known future covariates once per forecast, and a shallow flow decoder reuses the resulting horizon-aligned states to generate complete trajectories. The resulting samples support point forecasting, uncertainty quantification, and conditional event simulation within one deep generative model. Across outage forecasting benchmarks, OutageDiT improves forecast accuracy and scenario quality over strong baselines and supports zero-shot transfer to held-out regions. Together, these results position conditional outage simulation as a bridge from outage forecasting to operational planning under uncertainty.",
+      "url": "http://arxiv.org/abs/2609.01896v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01896v1",
+      "tldr": "OutageDiT is a generative foundation model that uses a condition encoder and shallow flow decoder to produce realistic seven-day power outage trajectories, improving forecast accuracy, uncertainty quantification, and zero-shot regional transfer.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology",
+        "Argonne National Laboratory"
+      ],
+      "affiliations_text": "Georgia Institute of Technology, Argonne National Laboratory",
+      "score": 3.758015960729713,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.01680v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901680v1-reinforcement-learning-and-rule-based-peer-to-peer-pricing-in-residential-pv-bes-communities",
+      "source": "arxiv",
+      "title": "Reinforcement Learning and Rule-Based Peer-to-Peer Pricing in Residential PV-BES Communities",
+      "authors": [
+        "Pablo Benalcazar",
+        "Maciej Kalka",
+        "Wilian Guamán",
+        "Jacek Kamiński"
+      ],
+      "authors_text": "Pablo Benalcazar, Maciej Kalka, Wilian Guamán, Jacek Kamiński",
+      "abstract": "This paper compares rule-based and learning-based pricing mechanisms for peer-to-peer (P2P) electricity trading in residential photovoltaic communities. The rule-based benchmarks comprise bill-sharing as an ex post allocation mechanism, the mid-market rate, and supply-demand-ratio pricing. The reinforcement-learning (RL) formulation is implemented through a Deep Q-Network and evaluated under multiplier-based and learnable SDR-shaped pricing, with a fixed-parameter SDR variant as a non-learning control. Performance is assessed through community savings together with complementary financial and operational indicators. In the base PV-only configuration, the rule-based benchmarks outperform the best RL policy. With battery energy storage, evaluated for the RL policies only, community savings under the best RL policy increase from EUR 734.23 to EUR 978.52. Across the learning-based modes and in both configurations, SDR-shaped pricing outperforms the multiplier-based parameterization considered. The results indicate that rule-based pricing remains highly competitive wherever the two families are compared directly, and that storage substantially improves the learning-based outcomes under this accounting, while the distribution of benefits remains heterogeneous across households.",
+      "url": "http://arxiv.org/abs/2609.01680v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01680v1",
+      "tldr": "This paper compares rule-based peer-to-peer pricing benchmarks (bill-sharing, mid-market rate, supply–demand ratio) with Deep Q-Network reinforcement-learning pricing in residential PV communities with and without battery storage, finding that rule-based mechanisms remain highly competitive in PV-only settings while storage substantially improves learning-based community savings, with SDR-shaped pricing outperforming multiplier-based parameterization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Escuela Superior Politécnica de Chimborazo (ESPOCH)",
+        "Polish Academy of Sciences"
+      ],
+      "affiliations_text": "Escuela Superior Politécnica de Chimborazo (ESPOCH), Polish Academy of Sciences",
+      "score": 3.69074643387671,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.01807v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901807v1-hllm-single-pass-decoding-for-generative-reranking",
+      "source": "arxiv",
+      "title": "hLLM: Single Pass Decoding for Generative Reranking",
+      "authors": [
+        "Emil Laftchiev",
+        "Prachi Agrawal",
+        "Moe Kayali",
+        "Bixing Yan",
+        "Qi Xu",
+        "Zijie Lei",
+        "Chen Qiu",
+        "Zhi Hua",
+        "Ke Li",
+        "Luke Simon"
+      ],
+      "authors_text": "Emil Laftchiev, Prachi Agrawal, Moe Kayali, Bixing Yan, Qi Xu, Zijie Lei, Chen Qiu, Zhi Hua, Ke Li, Luke Simon",
+      "abstract": "Large language models (LLMs) achieve state-of-the-art generative ranking quality, but the ranking they produce must be decoded, and autoregressive decoding spends one sequential forward pass per emitted token. We observe that the only tokens a ranker must emit are the $N$ ordinal values naming the items in ranked order, and that this narrow, permutation-structured output format admits decoding strategies which are much more efficient than left-to-right generation. We introduce hLLM (Hungarian LLM), a format-specialized decoding strategy that decodes all $N$ ordinals in $O(1)$ forward passes. hLLM reads an $N \\times K$ item-position score matrix off the LLM's prefill hidden states with a lightweight self-attention head, then decodes the ordinals as the optimal bipartite assignment of that matrix via the Hungarian algorithm, yielding a valid permutation by construction rather than by repair. Through a systematic study of training signals and backbone adaptation, we show that LoRA-based fine-tuning combined with teacher ranking distillation reaches 28 ms end-to-end inference, a speed-up of $64\\times$ while maintaining ranking quality on par with the teacher. We provide a complete ablation decomposing the contributions of architecture, training signal, and backbone adaptation. Our framework connects generative ranking to combinatorial optimization, opening a path toward other $O(1)$-decode mechanisms for real-time ranking.",
+      "url": "http://arxiv.org/abs/2609.01807v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01807v1",
+      "tldr": "hLLM introduces a format-specialized decoding strategy that reads an item–position score matrix from the LLM's prefill hidden states and decodes all ranking ordinals in O(1) forward passes via the Hungarian algorithm, achieving a 64× speedup with ranking quality on par with an autoregressive teacher.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Meta Platforms, Inc."
+      ],
+      "affiliations_text": "Meta Platforms, Inc.",
+      "score": 3.5905952556211536,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.01699v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901699v1-tri-band-channel-measurement-enabled-multi-layer-digital-twin-for-terahertz-wireless-data-centers",
+      "source": "arxiv",
+      "title": "Tri-Band Channel Measurement-Enabled Multi-Layer Digital Twin for Terahertz Wireless Data Centers",
+      "authors": [
+        "Mingjie Zhu",
+        "Ziming Yu",
+        "Guangjian Wang",
+        "Chong Han"
+      ],
+      "authors_text": "Mingjie Zhu, Ziming Yu, Guangjian Wang, Chong Han",
+      "abstract": "The rapid growth of AI computing has driven increasing demands for flexible and high-capacity data-center interconnections. Owing to its ultra-wide bandwidth and high spatial reuse capability, terahertz (THz) communication has emerged as a promising solution for future wireless data centers, while digital twins (DTs) enable efficient wireless planning and real-time optimization. In this work, a measurement-driven multi-layer DT framework is proposed for THz wireless data centers, where the physical, channel, evaluation, and manipulation layers are progressively constructed from bottom to top. First, extensive channel measurements are conducted at 140, 220, and 300 GHz to characterize frequency-dependent propagation behaviors. Based on the tri-band measurements, a measurement-calibrated physical twin is established by jointly optimizing the geometry, material, antenna, and hybrid propagation models. On top of the physical twin, a line-of-sight (LoS)-aware implicit neural field is developed to construct an AI channel twin for efficient channel reconstruction. The proposed AI twin learns location-dependent channel statistics from the calibrated twin, enabling real-time prediction of received power and LoS probability. Building upon the reconstructed channel field, a system-level evaluation layer is derived to analyze coverage and interference for both AP-to-rack and rack-to-rack communications. Experimental results show that the proposed AI twin achieves lower power reconstruction error than existing neural-field baselines while maintaining real-time inference capability. Moreover, the ceiling-mounted AP deployment achieves over 90% coverage under a 10 dB signal-to-interference-plus-noise ratio (SINR) threshold, demonstrating the effectiveness of the proposed DT framework for THz wireless data-center planning and optimization.",
+      "url": "http://arxiv.org/abs/2609.01699v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01699v1",
+      "tldr": "This paper proposes a measurement-driven, four-layer digital twin framework for terahertz wireless data centers, using 140/220/300 GHz channel measurements to calibrate a physical twin and a LoS-aware AI neural channel twin that enables real-time reconstruction, system-level coverage/interference evaluation, and deployment planning, achieving over 90% coverage for ceiling-mounted APs at a 10 dB SINR threshold.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "Huawei Technologies Company Ltd."
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, Huawei Technologies Company Ltd.",
+      "score": 3.5597739578090897,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.01912v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901912v1-a-control-co-design-framework-to-optimize-sustainability-with-application-to-microgrid-driven-data-centers",
+      "source": "arxiv",
+      "title": "A Control Co-Design Framework to Optimize Sustainability with Application to Microgrid-Driven Data Centers",
+      "authors": [
+        "Tania Rifat Jahan",
+        "Donald J. Docimo"
+      ],
+      "authors_text": "Tania Rifat Jahan, Donald J. Docimo",
+      "abstract": "This work studies the optimization of physical plant characteristics and controller parameters for sustainability. Environmental sustainability is strongly correlated with the development and operation of energy systems, with data centers as the preeminent modern example. Data centers, and the grid technologies that provide their power, consume nonnegligible amounts of global energy and pose a risk to increase greenhouse gas (GHG) emissions and electronic waste. Addressing such issues requires improved plant design and control strategies, often approached through optimization-based methods. However, there are noticeable gaps regarding data center and microgrid design: (i) simultaneous optimization of plant and controller features is rarely explored, and (ii) sustainability criteria are not emphasized. This work addresses these gaps by establishing a generalized, sustainability-centric control co-design (CCD) framework for energy systems. Uniquely, the CCD framework defines and categorizes sustainability metrics into three lifecycle stages - manufacturing, operation, and disposal - supporting optimization and comparative analysis of the metrics for different design options. To exemplify its use, the CCD framework is applied to a microgrid-driven data center system, providing a family of sustainability metrics correlated to plant and controller parameters. The analysis enabled by the framework provides insights into the CCD of microgrids and data centers, such as that GHG-equivalent emissions from manufacturing of components can dwarf those generated during operation of the system. The system designs identified by the proposed framework show substantial improvements to environmental sustainability categories as compared to designs identified through baseline procedures.",
+      "url": "http://arxiv.org/abs/2609.01912v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01912v1",
+      "tldr": "This paper proposes a sustainability-centric control co-design (CCD) framework that simultaneously optimizes plant and controller design variables across manufacturing, operation, and disposal lifecycle stages, and demonstrates substantial environmental sustainability improvements for a microgrid-driven data center compared to baseline designs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Texas Tech University"
+      ],
+      "affiliations_text": "Texas Tech University",
+      "score": 3.5058243556473414,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.01615v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901615v1-prompt-space-meta-learning-does-not-transfer-across-users-a-frozen-llm-negative-result",
+      "source": "arxiv",
+      "title": "Prompt-Space Meta-Learning Does Not Transfer Across Users: A Frozen-LLM Negative Result",
+      "authors": [
+        "Liam Byrne",
+        "David Dylan",
+        "Orla Fitzgerald",
+        "Eoin Doyle",
+        "Ciara Nolan",
+        "Padraig Lynch",
+        "Sinead Gallagher"
+      ],
+      "authors_text": "Liam Byrne, David Dylan, Orla Fitzgerald, Eoin Doyle, Ciara Nolan, Padraig Lynch, Sinead Gallagher",
+      "abstract": "Personalizing a frozen large language model (LLM) to individual users is often framed as a meta-learning problem in prompt space: each user is a task, and one seeks a shared natural-language adaptation policy that, given a handful of the user's labeled interactions, configures the frozen model for that user. The framing is attractive because it is backbone-agnostic and reuses the machinery of prompt optimization, yet the field rarely tests whether the optimized meta-objective encodes transferable cross-user adaptation rather than generic instruction quality. We study this question with Muse (Meta-learned User-adaptation via Shared Evolution), which evolves a single shared adaptation prompt over a meta-train user population by reflective prompt evolution, freezes it, and applies it zero-shot to held-out users; matched controls isolate learning from confounds of phrasing and selection. On two standard personalization benchmarks (LaMP-2 categorization and LaMP-3 rating) over 200 held-out users each, Muse does not significantly improve on its own un-evolved seed prompt or on a structure-broken control that meta-trains on mismatched user-support pairs, and is dominated by plain few-shot retrieval on the rating task (Delta MAE +0.175, p < 0.001). We attribute these outcomes to a single mechanism, meta-objective collapse: the meta-validation objective is statistically invariant to whether the user-support correspondence is genuine (p=0.555 on LaMP-2, p=0.622 on LaMP-3), so it cannot be optimized into transferable adaptation and instead rewards instruction polish and validation overfitting. The seed-prompt, wrong-support, and invariance-oracle controls form a reusable protocol that separates learned adaptation from these confounds.",
+      "url": "http://arxiv.org/abs/2609.01615v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01615v1",
+      "tldr": "Prompt-space meta-learning for frozen-LLM user personalization does not transfer across users, because the meta-validation objective is blind to genuine user-support correspondence (\"meta-objective collapse\"), yielding no improvement over seed prompts or structure-broken controls.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University College Dublin",
+        "Trinity College Dublin",
+        "Dublin City University"
+      ],
+      "affiliations_text": "University College Dublin, Trinity College Dublin, Dublin City University",
+      "score": 3.342106986272211,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.01662v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901662v1-not-all-agreement-counts-as-corroboration-provenance-conserving-multi-view-fusion-for-typed-action-admission-in-human-robot-collaboration",
+      "source": "arxiv",
+      "title": "Not All Agreement Counts as Corroboration: Provenance-Conserving Multi-View Fusion for Typed Action Admission in Human-Robot Collaboration",
+      "authors": [
+        "Zekai Jin",
+        "Hanrong Zhang",
+        "Yihong Tang",
+        "Fei Hu",
+        "Zhen Dong",
+        "Yi Shao"
+      ],
+      "authors_text": "Zekai Jin, Hanrong Zhang, Yihong Tang, Fei Hu, Zhen Dong, Yi Shao",
+      "abstract": "For embodied systems, predictive agreement alone does not determine whether evidence warrants action; evidential origin matters. Repeated inference over one observation can multiply agreement without adding evidence, while source-local values do not reveal whether outputs have separately countable origins. PACT treats evidence countability as a relational variable for provenance-conserving fusion and typed action admission. A supplied provenance partition defines countable units. PACT retains coordinatewise support shared within each unit, accumulates only across units, and maps unmet release conditions to hold, confirm, or fallback. Under the stated assumptions, source-local values cannot identify countability; the coordinatewise meet is the greatest budget satisfying singleton fidelity and insertion non-amplification, with coarsening monotonicity and fixed-partition stability. Across 31,200 evaluations in 48 scene clusters, PACT attains a common-support normalized risk-coverage area (ncsAURC) of 0.0861. Excluding the constructed adversarial-consensus arm, provenance-partition aggregation reduces ncsAURC by 0.0557 relative to singleton aggregation, while the corroboration contrast vanishes. On complete-source records, native scores favor PACT, but a common posterior-peak score narrows its difference from nested Dirichlet and favors product fusion. Reassigning provenance over unchanged predictions moves evidence budgets as predicted. In offline human-robot collaboration, eightfold within-camera duplication leaves 720 typed responses per checkpoint unchanged; camera-grouped PACT admits 47 of 57 Qwen3-VL-32B reference-consistent candidates with no observed reference-inconsistent admission in 60 episodes. PACT separates computational from evidential multiplicity: agreement constitutes corroboration only when provenance permits separate accumulation.",
+      "url": "http://arxiv.org/abs/2609.01662v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01662v1",
+      "tldr": "PACT is a provenance-conserving multi-view fusion method for human-robot collaboration that treats evidence countability as a relational variable—counting agreement as corroboration only when outputs come from separately countable origins—and uses a coordinatewise meet within and accumulation across provenance-defined units to enable typed action admission (hold/confirm/fallback), preventing repeated inferences from inflating evidence while improving selective action admission and risk coverage in embodied settings.",
+      "detailed_reading": null,
+      "affiliations": [
+        "McGill University"
+      ],
+      "affiliations_text": "McGill University",
+      "score": 3.2531614307758785,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.01765v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901765v1-toward-explainable-and-policy-aware-ai-for-carbon-credit-price-prediction-a-research-framework-for-emerging-carbon-markets",
+      "source": "arxiv",
+      "title": "Toward Explainable and Policy-Aware AI for Carbon Credit Price Prediction: A Research Framework for Emerging Carbon Markets",
+      "authors": [
+        "Summaiya Unnisa Begum",
+        "Mohammed Nadeem Ullah",
+        "Mohammed Abdul Ghani Khan"
+      ],
+      "authors_text": "Summaiya Unnisa Begum, Mohammed Nadeem Ullah, Mohammed Abdul Ghani Khan",
+      "abstract": "Carbon markets put a price on emissions, yet that price remains hard to forecast. Work in this area clusters on the EU and Chinese schemes, compresses regulatory text into a sentiment score, and reports accuracy without calibration or explanation stability. We distil ten recurring gaps into an impact-feasibility matrix and propose EPA-CarbonNet, a six-layer architecture that fuses market series with policy text by cross-attention and calibrated intervals alongside policy-attributed explanations. We then build and test it on eleven years of daily S and P carbon index data. The findings are largely negative, and reported as measured: a random walk beats the model on five-day RMSE (0.0365 against 0.0475), SHAP rankings agree at rho = 0.54 across resampled backgrounds, and policy attention never coincides with documented regulatory events. Directional accuracy, at 58.6 percent, leads every baseline. Code, data documentation and all result artifacts are available at https://github.com/Kimalice/Toward-Explainable-and-Policy-Aware-AI-for-Carbon-Credit-Price-Prediction",
+      "url": "http://arxiv.org/abs/2609.01765v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01765v1",
+      "tldr": "EPA-CarbonNet, a six-layer policy-aware and explainable carbon-price forecasting architecture, was built and tested on 11 years of S&P carbon data, yielding largely negative results—a random walk beat it on five-day RMSE, SHAP explanations were unstable, and policy attention did not align with regulatory events—though it led baselines in directional accuracy.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.177532781504151,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.01673v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901673v1-cliffrank-a-dual-branch-framework-for-activity-cliff-ranking-prediction",
+      "source": "arxiv",
+      "title": "CliffRank: A Dual-Branch Framework for Activity-Cliff Ranking Prediction",
+      "authors": [
+        "Kewei Li",
+        "Rongying Zhang",
+        "Peiyu Yang",
+        "Zhongjian Wang",
+        "Qiuchen Zhao",
+        "Lan Huang",
+        "Fengfeng Zhou"
+      ],
+      "authors_text": "Kewei Li, Rongying Zhang, Peiyu Yang, Zhongjian Wang, Qiuchen Zhao, Lan Huang, Fengfeng Zhou",
+      "abstract": "Activity-cliff ranking remains difficult because local structural changes can cause large activity differences, while high-quality data that resolve the underlying mechanisms remain limited. To use available activity labels more effectively, we combine absolute-activity regression with ranking-consistency learning. CliffRank trains two parallel predictors with mean squared error, a thresholded listwise loss, and Pairwise Preference Consistency (PPC), which aligns relative ordering in the preference-probability space. On three antimicrobial peptide datasets, CliffRank with ESM2-t12 achieved the highest mean Spearman correlation of 0.5393 and mean Recall@50 of 21.4, although the leading method varied across individual datasets. On three small-molecule datasets, CliffRank with PNA, where PPC was activated after 120 epochs, achieved the highest mean Spearman correlation of 0.6890, while its mean Recall@50 of 30.4 matched that of ACANet-PNA. The PPC results also define its practical limits. Asymmetric initialization improved the MolCLR-GIN averages but did not improve every target. For PNA without pretrained weights, delayed PPC improved selected metrics, but no schedule was best for both mean Spearman correlation and mean Recall@50. Future work should evaluate more targets and antimicrobial peptide systems, develop adaptive PPC schedules, and incorporate protein or membrane context when available.",
+      "url": "http://arxiv.org/abs/2609.01673v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01673v1",
+      "tldr": "CliffRank is a dual-branch framework that combines pointwise regression, listwise ranking, and a novel Pairwise Preference Consistency loss to improve activity-cliff ranking prediction across antimicrobial peptides and small-molecule datasets, achieving the highest average Spearman correlations in both domains.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BCPM Data Limited",
+        "Greenwich High School",
+        "Jilin University",
+        "University of Cambridge"
+      ],
+      "affiliations_text": "BCPM Data Limited, Greenwich High School, Jilin University, University of Cambridge",
+      "score": 3.1500511976252166,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.01647v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/03/260901647v1-efficient-context-limited-telescope-bibliography-classification-for-the-wasp-2025-shared-task-using-scibert",
+      "source": "arxiv",
+      "title": "Efficient Context-Limited Telescope Bibliography Classification for the WASP-2025 Shared Task Using SciBERT",
+      "authors": [
+        "Madhusudhana Naidu"
+      ],
+      "authors_text": "Madhusudhana Naidu",
+      "abstract": "The creation of telescope bibliographies is a crucial part of assessing the scientific impact of observatories and ensuring reproducibility in astronomy. This task involves identifying, categorizing, and linking scientific publications that reference or use specific telescopes. However, this process remains largely manual and resource intensive. In this work, we present an efficient SciBERT-based approach for automatic classification of scientific papers into four categories - science, instrumentation, mention, and not telescope. Despite strict context-length constraints (maximum 512 tokens) and limited compute resources, our approach achieved a macro F1 score of 0.89, ranking at the top of the WASP-2025 leaderboard. We analyze the effect of truncation and show that even with half the samples exceeding the token limit, SciBERT's domain alignment enables robust classification. We discuss trade-offs between truncation, chunking, and long-context models, providing insights into the efficiency frontier for scientific text curation.",
+      "url": "http://arxiv.org/abs/2609.01647v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.01647v1",
+      "tldr": "TLDR: This paper presents a lightweight SciBERT-based model that, despite truncating text to 512 tokens, achieves top leaderboard performance (macro F1 0.89) in the WASP-2025 telescope bibliography classification task, demonstrating that domain-specific pretraining can outperform large general models under strict computational and context limits.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.26563869027801,
+      "score_text": "2.3"
+    }
+  ],
+  "errors": []
+}
