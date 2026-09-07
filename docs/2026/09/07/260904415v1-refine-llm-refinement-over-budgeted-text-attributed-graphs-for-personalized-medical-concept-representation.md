@@ -1,0 +1,15 @@
+# REFINE: LLM Refinement over Budgeted Text-Attributed Graphs for Personalized Medical Concept Representation
+
+- 区域：速读区
+- 排名：14
+- 匹配度：3.0/10
+- 来源：arxiv
+- 作者：Mohsen Nayebi Kerdabadi, Arya Hadizadeh Moghaddam, Dongjie Wang, Zijun Yao
+- 机构：University of Kansas
+- 链接：[arXiv / Source](http://arxiv.org/abs/2609.04415v1) · [PDF](https://arxiv.org/pdf/2609.04415v1)
+
+## TLDR
+REFINE learns patient-personalized medical concept representations from text-attributed knowledge graphs by using reinforcement learning to select a code- and patient-specific KG expansion budget and a frozen LLM with graph-aware soft prompts to semantically refine embeddings, improving EHR prediction across diverse backbones on MIMIC-III and MIMIC-IV.
+
+## Abstract
+Learning rich medical concept representations is essential for EHR prediction. Text-attributed knowledge graphs (TKGs) provide a natural foundation by organizing heterogeneous medical relations together with textual semantics. However, most existing encoders process concepts uniformly across patients, despite the fact that a code's meaning and predictive value depend on patient-specific clinical context and trajectory. Learning patient-personalized concept representations from TKGs introduces two key challenges: (1) deciding how much KG context to incorporate for each observed code, and (2) aligning semantic information with the patient-specific relational structure. We propose REFINE, a KG-aware budgeted LLM graph refinement framework for patient-personalized medical concept encoding. Starting from a global TKG, REFINE constructs patient-specific temporal graphs. A sequential reinforcement learning policy selects a personalized KG expansion budget for each observed code. The resulting patient graph is processed by a heterogeneous GNN to capture relation-aware structural dependencies, while a frozen LLM uses graph-aware soft prompts to semantically refine concept representations. Experiments on MIMIC-III and MIMIC-IV show that REFINE consistently improves diverse EHR backbones, outperforms strong baselines, and demonstrates robust gains across component ablation, KG selection, and data insufficiency.
