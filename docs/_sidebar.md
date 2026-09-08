@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-09-08
+  - [日报](/2026/09/08/README)
 - 2026-09-07
   - [日报](/2026/09/07/README)
   - [精读 · Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles](/2026/09/07/260904364v1-scalable-edge-assisted-fusion-and-path-prediction-for-connected-autonomous-vehicles)
