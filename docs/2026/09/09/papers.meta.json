@@ -1,0 +1,766 @@
+{
+  "label": "2026-09-09",
+  "date": "2026-09-09",
+  "generated_at": "2026-09-09T07:53:16",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.05521v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905521v1-situation-awareness-for-intelligent-data-distribution-in-connected-vehicles",
+      "source": "arxiv",
+      "title": "Situation Awareness for Intelligent Data Distribution in Connected Vehicles",
+      "authors": [
+        "Falk Dettinger",
+        "Akshay Narla",
+        "Michael Weyrich"
+      ],
+      "authors_text": "Falk Dettinger, Akshay Narla, Michael Weyrich",
+      "abstract": "The limitations of on-board sensors and blind spots caused by occlusion cause the reduction of perception quality in autonomous vehicles. In such cases, cooperative perception provides additional data via Vehicle-to-Everything communication to enhance local perception, causing a large volume of data transmission. The vehicle can focus on acquiring and utilizing relevant data according to the prevailing road context by identifying the current traffic situation. To achieve this, we propose a concept for the situation identification of the vehicle using Bird's-Eye-View images. Firstly, the situation around the vehicle is identified using object detection with semantic segmentation, followed by understanding the context of the traffic using a situation identification module consisting of an open-source projective transformation network Cam2BEV and a situation identification neural network. The concept was evaluated and validated by running the software on the CARLA simulator using the in-built RGB camera and the semantic segmentation camera. Additionally, the portability of the situation identification module for real-world applications was verified on Cityscapes and nuScenes urban driving datasets. Overall, the proposed situation identification approach enables efficient sensor data management by prioritizing relevant data to the current traffic situation. The source code is available in the following link: https://github.com/akshaynarla/DySi_Select",
+      "url": "http://arxiv.org/abs/2609.05521v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05521v1",
+      "tldr": "TLDR: The paper proposes a situation identification concept for connected vehicles that uses bird's-eye-view images from semantic segmentation and a Cam2BEV transformation with a neural network to classify traffic situations, enabling prioritized and efficient data distribution in V2X communication.",
+      "detailed_reading": {
+        "motivation": "由于车载传感器视野受限和遮挡会造成盲区，降低自动驾驶感知质量，协同感知通过V2X通信传输大量附加数据，导致网络带宽负载和冗余消息增加。因此需要根据当前道路交通情境，优先获取和利用相关数据，实现智能数据分发与冗余消减。",
+        "method": "提出一种基于鸟瞰图（BEV）的情境识别方法。输入来自前视RGB相机或CARLA语义分割相机图像，先使用DeepLabv3+进行语义分割得到语义分割图，再经开源投影变换网络Cam2BEV（基于uNetXST空间变换网络）将前视图转换为BEV图，并在语义类别中加入“occluded”表示遮挡区域。随后将BEV图输入情境识别网络SIN，SIN采用VGGNet-16作为骨干，利用ImageNet权重做迁移学习，将BEV图像分类为五类情境：自由路口、遮挡路口、自由行驶、含停放车辆的自由行驶、遮挡行驶。训练时各模块独立训练：Cam2BEV在Cam2BEV数据集上训练80轮，SIN在从Cam2BEV数据集派生的SIN数据集上训练25轮，均用Adam优化器且学习率0.0001；推理时图像依次经过三个级联模块，每10帧预测一次情境，以降低计算冗余。",
+        "result": "在CARLA仿真中，使用语义分割相机时整体准确率为76.7%（Town01 75.6%、Town02 80.2%、Town03 67.3%），使用RGB相机时整体准确率为63.4%。在真实数据集上，Cityscapes上的准确率约为69.5%-71.8%；nuScenes白天为60%，夜间仅有34.5%；总体含夜间场景准确率为61.2%，剔除夜间场景后为64.9%。结果表明该方法能有效识别交通情境，但夜间语义分割失效导致性能显著下降。",
+        "conclusion": "该工作提供了一种轻量的直接识别自车交通情境的方法，利用语义分割后的BEV图结合简单CNN即可实现分类，语义分割桥接了仿真到真实的差距，使概念具备真实世界可移植性。该方法可作为V2X环境下基于情境的智能数据选择与冗余管理的决策基础，并可用于识别自车周围盲区场景。",
+        "key_details": "关键点包括：新构建的SIN数据集源于开源的Cam2BEV数据集，含2500张训练图、250张验证图和100张测试图，分辨率1936×968，五类情境均衡分布；Cam2BEV数据集的BEV覆盖约50 m×25 m范围，输入语义类别被缩减为十类并新增“occluded”类；Cam2BEV训练使用Adam、学习率0.0001、batch size 16；SIN使用VGGNet-16，冻结非训练层并以ImageNet初始化，训练25轮以防过拟合，batch size 15；推理时每隔10帧预测一次，假设相机帧率为30 FPS。局限性包括：当前仅使用前视相机生成的BEV，情境类别限定为五类，夜间或光线不足时语义分割失效导致准确率大幅下降，且SIN需要与其训练分布一致的BEV输入才能保持性能。代码已开源。"
+      },
+      "affiliations": [
+        "University of Stuttgart"
+      ],
+      "affiliations_text": "University of Stuttgart",
+      "score": 5.3309920542502365,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2609.05515v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905515v1-multi-robot-learning-based-informative-path-planning-using-spatio-temporal-gaussian-process-kalman-filter",
+      "source": "arxiv",
+      "title": "Multi-robot Learning-based Informative Path Planning Using Spatio-Temporal Gaussian Process Kalman Filter",
+      "authors": [
+        "Muqing Cao",
+        "Yunwoo Lee",
+        "Junbin Yuan",
+        "Lorenzo Schenk",
+        "Sebastian Scherer"
+      ],
+      "authors_text": "Muqing Cao, Yunwoo Lee, Junbin Yuan, Lorenzo Schenk, Sebastian Scherer",
+      "abstract": "Multi-robot informative path planning (IPP) for persistent target monitoring requires robots to reason about spatial uncertainty, temporal evolution, and practical sensing and communication constraints. Recent learning-based multi-robot IPP methods use Gaussian Processes (GPs) for target uncertainty, but often rely on simplified sensing models and centralized belief updates. We propose a grid-based spatio-temporal GP-Kalman filtering framework for learning-based multi-robot IPP. Instead of maintaining one GP per target, we represent anonymous target presence as a single latent field over a discrete workspace grid. The proposed recursive update considers all visible cells inside a camera footprint and supports arbitrary fields of view and range-dependent noise. A GP-consistent temporal process update accounts for moving targets and stale information by inflating uncertainty over time. For decentralized deployment, each robot maintains its own mapper and exchanges compact belief summaries rather than raw measurements. Received beliefs are fused using diagonal covariance intersection to remain conservative under unknown inter-robot correlations. We integrate the mapper with a reinforcement-learning policy for graph-based neighbor selection. Simulation benchmarks show about 20% lower average target uncertainty and improved target visitation compared with learning-based and classical auction/coverage baselines. Real-world two-UAV experiments demonstrate transfer to outdoor multi-robot search over a large field of more than 7000 square meters.",
+      "url": "http://arxiv.org/abs/2609.05515v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05515v1",
+      "tldr": "TLDR: This paper presents a decentralized, learning-based multi-robot informative path planning framework that models target presence as a single grid-based spatio-temporal Gaussian process–Kalman field, incorporating realistic camera footprints, range-dependent noise, temporal uncertainty inflation, and conservative belief fusion to achieve about 20% lower target uncertainty in simulation and successful real-world two-UAV persistent monitoring over a 7,000 m² field.",
+      "detailed_reading": {
+        "motivation": "现有基于学习的多机器人信息路径规划（IPP）虽采用高斯过程表达目标不确定性，但多假设固定半径圆形感知、每目标每步最多一次二值观测、目标数量已知且需集中式原始测量同步，难以支持真实相机视场、距离相关噪声、移动目标及带宽受限下的分散部署。为此提出面向持续监测的网格化时空GP-卡尔曼滤波框架，将匿名目标存在性建模为单一潜在场，并兼容实际传感与通信约束。",
+        "method": "先将工作空间离散为G×G网格，对每个网格单元上的目标存在潜在场f维护单一高斯信念（均值向量m与协方差P），空间先验采用积分核GP以避免栅格伪影；当前时刻可见栅格由相机视场与视线决定，将每个可见单元的二值检测松弛为线性高斯观测，并用随距离/视角增大的对角噪声协方差建模传感退化。测量更新依据GP-积分核融合等价为卡尔曼更新，一次吸收视场内全部可见单元，并通过增益将信息传播到整个空间。时间更新采用Reece-Roberts GP-卡尔曼过程模型：用可分离时空核构造同时间协方差K与跨时间协方差C，令转移矩阵G=C K^{-1}、过程噪声Q=K-C K^{-1}C^T，以在目标移动时按时间相关性膨胀不确定性并遗忘过期信息。分散部署中每台机器人运行自身mapper，只交换压缩信念摘要（均值与对角方差）；收到队友信念后用对角协方差交叉融合，避免未知互相关下的过度自信。上层将信念映射与基于注意力/图结构的强化学习策略集成，策略在采样图节点处查询信念并选择下一邻居节点，从而端到端学习多机器人协同规划。",
+        "result": "仿真基准表明，该方法相较于COMPASS以及经典拍卖/覆盖基线，平均目标不确定性降低约20%，目标访问与覆盖表现更优；两架无人机在超过7000平方米真实户外场地的实验验证了从仿真到真实多机器人搜索的迁移能力。",
+        "conclusion": "提出并验证了一个可在真实传感与通信约束下工作的分散式多机器人持续监测框架：以网格化时空GP-卡尔曼滤波替代多GP中心化更新，结合紧凑信念交换与强化学习规划，可显著提升不确定性削减和目标访问性能，并成功部署于真实无人机系统。该结果表明将现实测量模型融入学习型IPP是提升实用性的关键。",
+        "key_details": "关键细节包括：1) 采用积分核GP计算单元面积上核积分，使栅格GP先验一致并减少离散化伪影；2) 对二值检测作Bernoulli到高斯松弛，Bernoulli方差不超过0.25，噪声模型在近完全确定时过估噪声，从而趋于保守而非过度自信；3) 测量更新只需对可见栅格数大小的创新协方差求逆，计算开销低；4) 时间过程模型假设空间与时间核可分离且时间平稳，用核值比联系跨时间协方差，动态膨胀陈旧信息；5) 为支持带宽受限通信，交换的是对角近似信念摘要而非原始测量或全协方差，融合采用对角协方差交叉，对未知互相关保持保守；6) 局限包括网格分辨率影响精度与复杂度、匿名场不保留目标身份、对角近似损失部分相关性、真实实验仅两架无人机等。"
+      },
+      "affiliations": [
+        "Daegu Gyeongbuk Institute of Science and Technology",
+        "Carnegie Mellon University",
+        "Singapore University of Technology and Design"
+      ],
+      "affiliations_text": "Daegu Gyeongbuk Institute of Science and Technology, Carnegie Mellon University, Singapore University of Technology and Design",
+      "score": 5.12746762763261,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2609.05650v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905650v1-endogenous-exploration-in-reinforcement-learning-with-intrinsic-curiosity",
+      "source": "arxiv",
+      "title": "Endogenous Exploration in Reinforcement Learning with Intrinsic Curiosity",
+      "authors": [
+        "Armando Vieira"
+      ],
+      "authors_text": "Armando Vieira",
+      "abstract": "We propose a reinforcement learning framework in which exploration is driven by intrinsic curiosity, designed for scenarios where environments are non-stationary and rewards are sparse, delayed, uninformative, or absent. In our model, action selection is guided by a combination of external rewards and an epistemic motivation mechanism that biases the agent toward structured exploratory directions. The central hypothesis is that effective exploration emerges at intermediate levels of incoherence, while performance degrades under both overly rigid and overly disordered dynamics. To test this idea, we implement the framework on top of a Liquid State Machine (LSM) substrate and evaluate it on two standard benchmarks: the discrete-action LunarLanderv2 and the continuous-control BipedalWalkerv3. The proposed method achieves competitive performance on both tasks relative to established deep RL algorithms, including Proximal Policy Optimization (PPO) and Intrinsic Curiosity Module (ICM). We further show that the curiosity window is not recovered in Active Inference agents under the same analysis, suggesting that the proposed dynamics capture a distinct exploration regime",
+      "url": "http://arxiv.org/abs/2609.05650v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05650v1",
+      "tldr": "This paper proposes a reinforcement learning framework where exploration emerges endogenously from intrinsic curiosity via coherence regulation between reach and yield fields on a Liquid State Machine substrate, showing competitive performance on LunarLander-v2 and BipedalWalker-v3 and identifying a \"curiosity window\" at intermediate incoherence levels that is absent in Active Inference agents.",
+      "detailed_reading": {
+        "motivation": "现有强化学习中的探索机制大多依赖外部设计的噪声、熵正则或预测误差等辅助目标，缺乏对探索何时应增加或减少的原理性解释，在奖励稀疏、非平稳或无奖励环境中容易过早收敛或陷入无序随机行为。本文提出探索应内生涌现于系统自身的相干性调节动力学，并预测有效探索发生在中间程度的不连贯区间，即好奇窗口。",
+        "method": "提出一个基于液体状态机（LSM）与相干性场调控的两层强化学习框架。LSM作为高维时间表征基底，状态x(t)按tanh(Wx+W_in o+ξ)更新，并加入慢速痕迹h构成增广状态z=[x,h]。相干性层在离散化场单元上定义三个概率场：可达π_t、约束y_t、记忆m_t，按耦合方程更新，其中π受y约束并加噪声，y由环境与π调节，m为π的慢速滑动平均。探索不依赖外部信号，而是内生调节噪声σ_π(t)=ψ(I(t))·G(t)，其中ψ(I)=A I e^{-I/I0}在中等I处取峰值；同时通过沉降学习π0更新，并引入空间耦合核维持整体集成。动作选择由外部奖励与内在好奇机制共同引导，在LunarLander-v2和BipedalWalker-v3上进行评测。",
+        "result": "该方法在LunarLander-v2与BipedalWalker-v3上取得了与PPO和ICM等深度RL算法相当的性能。核心发现是愉悦好奇功能C2=全局重叠G×相干盆地数B×盆地间转换率T在中等噪声水平出现单峰，峰值两侧下降超过1.5倍，验证了好奇窗口的存在；而Active Inference代理在相同分析下没有出现类似的峰值，表明该动力学捕获了独特的探索机制。",
+        "conclusion": "探索可以通过系统内部的相干性调节内生产生，而不需要外生噪声或辅助好奇心目标。在中间不连贯状态下，系统既能保持整体整合又能结构化访问多个相干盆地，从而出现最优探索。该框架提供了探索何时发生以及如何自适应调节的原理性描述，并区别于现有RL和Active Inference方法。",
+        "key_details": "C2函数定义为全局重叠（Bhattacharyya系数）乘以相干盆地数乘以盆地间转换速率，其乘积形式由表示定理唯一确定。场内通过软最大将增广状态映射到离散概率场，π更新依赖逐点乘指数负y再加噪声，噪声尺度由I的Unimodal函数调节；沉降学习以α为速率按历史不连贯的指数衰减更新基线π0。实验场为40单元空间中的五个高斯盆地；LSM稀疏循环权重谱半径ρ<1。局限包括理论证明在附录中依赖计算引入的函数形式，且仅验证了两个基准任务，尚未在更多非平稳领域测试。"
+      },
+      "affiliations": [
+        "University of Tartu"
+      ],
+      "affiliations_text": "University of Tartu",
+      "score": 5.046034419676583,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.05569v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905569v1-information-guided-safe-reinforcement-learning-for-autonomous-gas-source-localization-using-suas",
+      "source": "arxiv",
+      "title": "Information-Guided Safe Reinforcement Learning for Autonomous Gas Source Localization using sUAS",
+      "authors": [
+        "Sachin Giri",
+        "Thomas Zhao",
+        "Matthew Huynh",
+        "YangQuan Chen"
+      ],
+      "authors_text": "Sachin Giri, Thomas Zhao, Matthew Huynh, YangQuan Chen",
+      "abstract": "The autonomous localization of fugitive gas emissions using small Unmanned Aircraft Systems (sUAS) constitutes a fundamentally ill-posed inverse problem. In turbulent atmospheric boundary layers, highly intermittent scalar concentration fields violate the assumptions of classical gradient-based navigation, causing data-driven estimators to suffer from severe noise and spurious local minima. To address these challenges, we introduce an Information-Guided Safe Reinforcement Learning framework evaluated within a custom, GPU-accelerated 3D simulation environment coupling an Eulerian wind solver with a Lagrangian puff dispersion model. We identify a critical vulnerability in deterministic information-seeking planners - a Gramian bias where agents act greedily upon flawed early estimates, starving the estimator of spatial diversity. To systematically break this degeneracy, our architecture integrates a classical empirical observability Gramian (EMGR) planner with a learned Soft Actor-Critic (SAC) exploratory policy. A deterministic meta-supervisor actively monitors estimator reliability via Kullback-Leibler (KL) divergence, dynamically blending deterministic exploitation with learned exploration to steer the sUAS into high-information zones. Trained via a progressive curriculum and safeguarded by a strictly enforced Robust Control Barrier Function (RCBF), our RL framework achieves nearly 80% localization success on complex, mobile sources - drastically outperforming classical baselines (~30%) - while ensuring zero safety violations.",
+      "url": "http://arxiv.org/abs/2609.05569v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05569v1",
+      "tldr": "A paper introduces an Information-Guided Safe Reinforcement Learning framework that combines a classical empirical observability Gramian planner with learned Soft Actor-Critic exploration—managed by a KL-divergence meta-supervisor and safeguarded by a Robust Control Barrier Function—to break the Gramian bias in airborne gas source localization, achieving ~80% localization success in GPU-accelerated turbulent simulations versus ~30% for classical baselines with zero safety violations.",
+      "detailed_reading": {
+        "motivation": "自主定位 fugitive gas emissions 是一个病态逆问题，在湍流大气边界层中高度间歇的标量浓度场使传统梯度导航失效，数据驱动估计器易受严重噪声和虚假局部最小值干扰。确定性信息搜索规划器存在 Gramian 偏差，即代理对早期错误估计的贪婪利用会耗尽估计器的空间多样性，从而陷入停滞。需要一种安全且信息引导的强化学习框架来平衡确定性开发与探索，主动正则化该病态逆问题，并保证实际部署的安全性。",
+        "method": "提出 Information-Guided Safe RL 框架，在 GPU 加速 3D 仿真环境中训练，该环境耦合欧拉风场求解器（Stable Fluids、红黑 SOR、Ornstein-Uhlenbeck 过程）与拉格朗日高斯 puff 扩散模型以还原间歇性羽流结构。架构上，将经典经验可观测性 Gramian（EMGR）规划器与学习型 Soft Actor-Critic（SAC）探索策略相结合，由确定性元监督器通过在线 KL 散度监测估计器可靠性，动态混合确定性 EMGR 速度与 SAC 探索动作，引导无人机进入高信息区。估计器采用 MLE（投影相关加 Grünwald-Letnikov 分数阶滤波）和粒子滤波器保持假设多样性。训练采用渐进课程，并用鲁棒控制障碍函数（RCBF）求解 QP 将混合策略映射到严格安全动作空间，考虑最坏情形扰动；输入为浓度测量、位置和风场数据，输出为安全导航速度。",
+        "result": "在复杂移动源场景中，所提框架达到近 80% 的定位成功率，而经典 EMGR 基线仅约 30%，同时实现零安全违规。对比实验表明，纯确定性信息规划存在 Gramian 偏差，而加入 SAC 探索与 RCBF 安全约束的混合策略能显著提升成功率并保证安全，展示了学习型探索对打破估计退化的有效性。",
+        "conclusion": "信息引导的安全 RL 框架能够有效解决湍流环境下气体源定位的病态逆问题，通过元监督器动态平衡 EMGR 开发与 SAC 探索，并用 RCBF 严格保障安全，显著优于经典基线。GPU 加速仿真平台结合真实感流动模型缩小了 sim-to-real 差距，为实际 sUAS 甲烷泄漏定位提供了可行方案。",
+        "key_details": "关键实现细节：仿真环境使用 NVIDIA Warp，Eulerian 风场采用 Stable Fluids 算子分裂、Helmholtz-Hodge 投影和红黑 SOR 求解 Poisson 方程，地面边界为无穿透并施加局部阻力，障碍物内部速度清零；Lagrangian puff 模型使用 RK2 积分和 Langevin 噪声，pasquill-Gifford 稳定度类决定扩散系数，甲烷浮力加速度约 4.55 m/s²，地面采用镜像法满足无通量条件。观测量为传感器浓度，噪声为高斯；MLE 采用滑动窗口投影相关目标，并用阶次 α∈[-0.9,0] 的分数阶滤波处理风历史；粒子滤波在 ESS 过低时进行系统重采样。KL 散度监测使用缓冲长度 N_b，用于切换开发与探索。RCBF 安全层通过 QP 求解，假设最坏情况扰动，每个时间步执行。训练采用渐进课程提高任务难度。局限性：结果基于仿真，真实硬件验证尚未报告；方法依赖环境模型精度，且需更多真实风场验证约 30% 的经典基线对比条件。"
+      },
+      "affiliations": [
+        "University of California, Merced"
+      ],
+      "affiliations_text": "University of California, Merced",
+      "score": 4.882413252438648,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2609.05727v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905727v1-newton-matching-for-generative-modeling-a-unified-framework-for-fine-tuning-and-sampling",
+      "source": "arxiv",
+      "title": "Newton Matching for Generative Modeling: A Unified Framework for Fine-Tuning and Sampling",
+      "authors": [
+        "Zeyang Li",
+        "Yunan Wang",
+        "Paolo Giaretta",
+        "Navid Azizan"
+      ],
+      "authors_text": "Zeyang Li, Yunan Wang, Paolo Giaretta, Navid Azizan",
+      "abstract": "We develop Newton Matching, a unified framework for fine-tuning and sampling in generative modeling. The target is $π\\proptoμe^{τr}$, where $r$ is the reward, $τ>0$ the inverse temperature, and $μ$ denotes the pretrained model's terminal density for fine-tuning or the constant $1$ for sampling. We shift the paradigm from isolated losses to iterative optimization over canonical models: population minimizers of standard conditional matching for terminal densities. Under compatible smooth-realization assumptions, canonical velocities form a manifold diffeomorphic to the density manifold. Transporting the Fisher-Rao metric and mixture connection to this manifold, we show that the reverse-KL Hessian equals the metric, so the Newton direction coincides with the negative Fisher-Rao gradient. At terminal density $ρ$, each stage takes a tangential step generated by the regularized reward $r-\\frac1τ\\log(ρ/μ)$, followed by terminal-density-preserving canonicalization. This canonical retraction yields an exact finite-stepsize density characterization. For the ideal iteration, we prove strict reverse-KL descent away from the target for $0 < η\\le τ$, global convergence under mild conditions, and local quadratic convergence for full steps ($η=τ$). Covariance and gradient forms, each with forward or reverse regression-pair constructions, yield sample-wise tangential-update losses with the same population minimizer, without importance sampling or full-trajectory backpropagation. We develop approximate updates and define critical-point consistency as vanishing tangential displacement if and only if $ρ=π$. We recover representative methods as exact realizations, critical-point-consistent approximations, or objective-altering variants, enabling modular algorithm design. Our work advances the theory and algorithms of reinforcement learning for generative models.",
+      "url": "http://arxiv.org/abs/2609.05727v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05727v1",
+      "tldr": "The paper proposes Newton Matching, a unified framework for fine-tuning and sampling in generative models that frames distribution learning as iterative Newton-like optimization on a manifold of canonical models, recovering backward-KL descent, global convergence, and quadratic convergence while unifying existing reward-based regression methods.",
+      "detailed_reading": {
+        "motivation": "针对扩散模型与流模型在微调和采样任务中通常面临目标密度仅已知未归一化形式且缺乏直接样本的困难，已有方法或采用轨迹级强化学习而抛弃了条件匹配的可扩展结构，或采用重加权导致高方差，近来基于回归的方法又缺乏统一的总体级更新与收敛刻画。本文旨在提供一个统一框架，通过规范模型和几何优化来连接微调与采样，并厘清单步密度更新、目标改进与迭代收敛等核心问题。",
+        "method": "Newton Matching以目标π∝μe^(τr)为对象，其中μ为预训练模型末端密度(微调)或常数1(采样)。方法将学习视为迭代优化：在标准条件匹配的总体最小化器意义下定义每个末端密度对应的规范模型(canonical model)，并假设兼容光滑实现后，这些规范模型的速度表示形成与密度流形微分同胚的流形。在该流形上回拉Fisher-Rao度量与mixture connection，发现reverse-KL Hessian恰为该度量，故Newton方向等于负Fisher-Rao梯度，由正则化奖励 r - (1/τ)log(ρ/μ) 生成且可写成协方差或梯度表示。每一步先沿该方向做阻尼或全步长切向更新，再执行保持末端密度不变的canonicalization，构成canonical retraction并得到有限步长密度更新的精确刻画。训练时可通过前向或后向回归配对构造样本级匹配损失，无需重要性采样或沿完整轨迹反向传播，并允许对切向更新做近似从而扩展算法设计空间。",
+        "result": "论文证明了在0<η≤τ范围内除目标点外每一迭代均有严格的reverse-KL下降；在温和条件下理想迭代全局收敛；取全步长η=τ时具有局部二次收敛速率。该框架还将若干代表性强化学习方法重新解释为精确实现、与临界点一致的近似或改变目标函数的变体，从而揭示了不同方法的共同总体结构。",
+        "conclusion": "Newton Matching为生成模型的微调与无归一化采样提供了统一的理论与算法框架，阐明了条件匹配结构、几何优化和回归更新之间的联系，并提供了严格的收敛保证与方法分类，可指导模块化算法设计与进一步的理论分析。",
+        "key_details": "关键技术点包括：目标密度形式π∝μe^(τr)统一了微调与采样，τ为逆温度；规范模型是末端密度的条件匹配总体最小化器，其速度流形与密度流形在兼容光滑实现假设下微分同胚；在mixture connection下reverse-KL Hessian等于Fisher-Rao度量，因此Newton方向为负Fisher-Rao梯度；更新使用正则化奖励r-(1/τ)log(ρ/μ)，兼有协方差与梯度两种表示，可搭配前向或反向回归对构造损失，避免重要性采样及全轨迹反向传播；引入临界点一致性(vanishing tangential displacement等价于ρ=π)以区分不同近似；理想迭代的收敛性依赖0<η≤τ的步长区间，全步长时二次收敛。该框架的实际应用仍需满足相关光滑性假设，并且不同表示与回归对的选取会影响具体算法在样本近似下的行为。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.802720002832387,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.05593v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905593v1-adaptive-cost-sensitive-machine-learning-for-autonomous-robot-navigation-failure-prediction-when-not-all-errors-are-equal",
+      "source": "arxiv",
+      "title": "Adaptive Cost-Sensitive Machine Learning for Autonomous Robot Navigation Failure Prediction: When Not All Errors Are Equal",
+      "authors": [
+        "Rifa Ferzana"
+      ],
+      "authors_text": "Rifa Ferzana",
+      "abstract": "Autonomous robot navigation failures differ not only in categorical severity but also in the physical context in which they occur. A near-miss at low speed under reliable sensing is not equivalent to the same event during rapid motion, close obstacle approach or degraded perception. This paper reframes navigation failure prediction as consequence-sensitive forecasting. We first establish a fixed baseline in which training weights are modulated by categorical severity, then introduce an adaptive extension defining a state-dependent consequence function combining severity with normalised velocity, obstacle proximity and sensing uncertainty, together with a risk-sensitivity term that rises as conditions deteriorate. We evaluate on 2,000 simulated differential-drive episodes (~1,000,000 timesteps) using episode-level GroupKFold, with external validation on the UCI SCITOS G5 dataset. Fixed weighting raises Logistic Regression high-severity recall from 0.851 to 0.985 and reduces missed consequence cost from 1,940 to 313; the adaptive extension reaches 0.998 and 82. Under matched false-positive conditions, however, the discriminative advantage is modest (0.986 versus 0.984), so most of the gain reflects a more conservative operating point rather than better ranking. The effect is consistent across all five folds and stable across a threefold span of context coefficients. Because the primary simulation produced no collisions, we add a controlled extension in which 108 of 600 episodes terminate in contact: collision recall rises from 0.850 to 0.966 (fixed) and 0.984 (adaptive), with missed collision cost falling from 1,000 to 105, at false-positive rates of 0.413 and 0.799, respectively. Context-dependent consequence modelling thus provides a principled mechanism for allocating conservatism by physical risk.",
+      "url": "http://arxiv.org/abs/2609.05593v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05593v1",
+      "tldr": "This paper reframes autonomous robot navigation failure prediction as consequence-sensitive forecasting by introducing an adaptive cost-sensitive learning framework that weights training samples by categorical severity and physical context (velocity, obstacle proximity, sensing uncertainty), substantially improving high-severity and collision recall at the cost of a more conservative operating point rather than better ranking.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [
+        "University of Edinburgh"
+      ],
+      "affiliations_text": "University of Edinburgh",
+      "score": 4.750739888424711,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.05741v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905741v1-practical-zero-trust-for-mission-critical-robotic-fleets-via-hardware-attestation-and-packet-timing-watermarking",
+      "source": "arxiv",
+      "title": "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking",
+      "authors": [
+        "Ryne Gonzales",
+        "Ethan Liesdyanto",
+        "Rex Worley",
+        "Michael Frederick",
+        "Jaewon Kim",
+        "Eman Hammad"
+      ],
+      "authors_text": "Ryne Gonzales, Ethan Liesdyanto, Rex Worley, Michael Frederick, Jaewon Kim, Eman Hammad",
+      "abstract": "Autonomous unmanned vehicles are vital to tactical missions, mission-critical public-safety operations like search and rescue and disaster response. However, their reliance on open wireless links and standard Robot Operating System (ROS 2) middleware exposes a broad cyber-physical attack surface. A compromise of these systems can disrupt real-time control loops, leading to mission failure or asset loss in high-stakes environments. This paper presents and empirically evaluates a layered, context-aware cybersecurity framework enforcing Zero-Trust principles for a multi-node robotic fleet over Wi-Fi. The framework integrates an active hardware root of trust (TPM 2.0), centralized in-band and out-of-band SIEM telemetry monitoring (ELK Stack and Kismet), and a non-cryptographic Inter-Packet Delay (IPD) timing watermark. Evaluated on a live ROS 2 mobile testbed under multi-layer exploits (OSI Layers 2-5), results demonstrate that while volume-based filters isolate brute denial-of-service floods, tracking the statistical sample kurtosis (K) of the embedded IPD watermark exposes stealthy Man-in-the-Middle command injections with complete detection accuracy without payload overheads.",
+      "url": "http://arxiv.org/abs/2609.05741v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05741v1",
+      "tldr": "TLDR: The paper proposes and empirically validates a layered Zero-Trust framework for ROS 2 robotic fleets—combining TPM 2.0 hardware attestation, SIEM telemetry, and Inter-Packet Delay timing watermarking—demonstrating that statistical kurtosis tracking of the watermark achieves complete detection of stealthy man-in-the-middle command injections without payload overhead.",
+      "detailed_reading": {
+        "motivation": "自主无人车在战术任务和公共安全场景中高度依赖开放无线链路与ROS 2中间件，导致其面临跨OSI Layer 2至5的广泛网络物理攻击面。传统静态阈值检测无法区分环境波动与恶意干预，而现有研究多停留在理论或仿真，缺乏在真实硬件受限平台上针对多节点机器人车队的实证验证，因此需要一种实用的零信任防护框架来保障任务关键型机器人集群的实时控制闭环与运行韧性。",
+        "method": "提出并实测了一个分层上下文感知的零信任安全框架，面向Wi-Fi环境下的多节点ROS 2机器人车队。框架集成三项核心能力：其一，基于TPM 2.0硬件信任根，通过Endorsement Key签名和系统寄存器完整性哈希实现节点启动时的挑战-响应认证，阻止仿冒设备入网；其二，搭建集中式SIEM监控中枢，在嵌入式平台（Raspberry Pi 5）上运行ELK Stack，通过Packetbeat、Metricbeat和Heartbeat收集各机器人节点的网络流量、主机状态和连通性日志，同时由Kismet节点采样802.11频谱以检测de-authentication等无线攻击；其三，设计非加密的Inter-Packet Delay（IPD）时间水印机制：控制器发送速度指令时，在每个包间隔上叠加零均值高斯随机偏移（σ=0.02s），形成水印化的包时序；接收端在滚动窗口（N=250）内计算采样峰度K，通过判断K是否落在正常区间[2.8, 3.2]来识别中间人重放或命令注入，因为攻击者的排队和调度扰动会破坏时序水印统计特性。实验在包含TurtleBot3（树莓派4B）的实车测试床上进行，红队分别实施mdk4发起的802.11 de-authentication洪水、hping3 ICMP flood、TCP SYN flood以及ARP缓存投毒实现的MITM命令注入四类跨层攻击。",
+        "result": "实验结果表明，基于流量体积的过滤机制能够有效隔离粗暴的DoS洪水攻击；但对于隐蔽的MITM命令注入，原始网络抖动指标无法有效预警，而通过跟踪IPD水印的样本峰度K，当攻击者插入中继并篡改ROS 2速度指令时，K值会偏移至正常区间之外（K<2.0或K>4.5），实现了完全检测精度（100%检测率），且无需增加任何报文负载或计算开销。",
+        "conclusion": "该研究证实了将硬件信任根、集中式SIEM遥测与分组级时间水印相结合的实用零信任框架，能够在多节点ROS 2车队中有效应对跨OSI Layer 2至5的恶意攻击。相比单纯依赖流量阈值或应用层加密方案，所提方法不仅隔离了高带宽DoS，还以零负载开销的方式精确识别了低功率、隐遁的中间人命令注入，为资源受限的公共安全机器人系统提供了可部署的实证防御路径。",
+        "key_details": "关键方法论细节包括：IPD水印采用零均值高斯噪声（μ=0, σ=0.02s）调制包间延迟，窗口N=250的样本峰度K是检测指标，正常基线为2.8≤K≤3.2，异常判定为K<2.0或K>4.5；SIEM采用ELK Stack（Elasticsearch/Logstash/Kibana）部署在树莓派5上，数据采集器包括Packetbeat（解析L2/L3帧）、Metricbeat（监控socket、CPU、内存）和Heartbeat（探测连通性）；TPM 2.0在系统初始化阶段执行EK签名验证和完整性哈希度量，未注册设备被拒绝接入；攻击场景具体包括mdk4发起的802.11管理帧de-auth、hping3 ICMP echo flood、TCP SYN耗尽SSH端口连接表、以及通过ARP投毒实施ROS 2 geometry_msgs/Twist命令的主动篡改；实验平台为Wi-Fi（802.11n）连接的TurtleBot3车队，每节点搭载树莓派4B；该方案的局限性包括IPD水印依赖接收端精确的统计窗口同步，以及当前评估在单一无线测试床完成，尚未扩展到大规模异构车队或高动态移动环境。"
+      },
+      "affiliations": [
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Texas A&M University",
+      "score": 4.44711546905991,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.05739v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905739v1-resilient-control-loops-in-autonomous-vehicles-under-adversarial-jamming-via-spectral-perception-and-network-layer-failover",
+      "source": "arxiv",
+      "title": "Resilient Control Loops in Autonomous Vehicles Under Adversarial Jamming via Spectral Perception and Network-Layer Failover",
+      "authors": [
+        "Luis Barajas",
+        "Colin Jeardoe",
+        "Jaewon Kim",
+        "Eman Hammad"
+      ],
+      "authors_text": "Luis Barajas, Colin Jeardoe, Jaewon Kim, Eman Hammad",
+      "abstract": "The operational integrity of autonomous mobile robots relies on the continuous availability of wireless control loops, making them highly attractive targets for adversarial intentional electromagnetic interference. This paper introduces a resilient, cross-layer framework that combines physical-layer spectral perception with network-layer routing optimization to protect middleware stability, such as ROS2, during intentional electromagnetic interference. Utilizing a software-defined radio front-end, the system extracts dynamic spectral descriptors, including spectral entropy and channel occupancy, to inform a Random Forest classifier that establishes adaptive environmental baselines. To ensure uninterrupted data flow, the architecture maintains dual pre-authenticated physical interfaces in a hot-standby configuration, enabling instantaneous failover through automated network routing table updates. Empirical validation on a physical ROS2 mobile robot testbed demonstrates that this adaptive hardware-assisted architecture optimizes communication recovery to an average of 141ms. This sub-second restoration translates directly into a 78.9% reduction in pooled root-mean-square path tracking error compared to software re-association, successfully securing system-level mission integrity.",
+      "url": "http://arxiv.org/abs/2609.05739v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05739v1",
+      "tldr": "This paper presents a cross-layer resilient framework for ROS 2-based autonomous vehicles that uses SDR-driven spectral perception and Random Forest classification to detect adversarial jamming, then triggers rapid network-layer failover between dual hot-standby wireless interfaces, achieving 141 ms communication recovery and a 78.9% reduction in path-tracking error on a physical robot testbed.",
+      "detailed_reading": {
+        "motivation": "自主移动机器人的无线控制回路持续可用是其运行完整性的关键，因此极易成为蓄意电磁干扰（IEMI）的攻击目标。现有研究多聚焦于理论链路层指标，缺乏对物理层干扰如何经由ROS 2等中间件传播并破坏物理平台闭环控制稳定性的实证评估；同时固定阈值检测在环境噪声变化下易误报漏报，亟需跨层、上下文感知的弹性通信框架。",
+        "method": "提出一个结合物理层频谱感知与网络层路由优化的跨层弹性框架。系统使用HackRF One作为机器人端被动感知前端，以2.5 MS/s采样率采集IQ数据，经512点FFT得到20 MHz观测窗内PSD，提取五个频谱描述符（均值PSD、PSD标准差、最大PSD、频谱熵、信道占用率）。随机森林分类器离线训练，输入这些特征区分正常Wi-Fi流量与IEMI事件，推理时输出干扰概率并与频段特定阈值（75%）比较，需连续三次检测确认并经历冷却期。缓解阶段采用双预认证物理接口热备用配置：TP-Link AC600 USB适配器永久关联2.4 GHz BSSID，板载无线接口关联5 GHz BSSID，两条链路持续认证并各配静态IP；检测到干扰后通过修改Linux默认路由和网关，瞬间将遥测与控制流量导向未受扰接口，无需解关联/重关联。实验平台为TurtleBot3 Burger（Raspberry Pi 4, Ubuntu 24.04, ROS 2 Humble, Cyclone DDS），干扰源为USRP B210发射窄带CW音（2.447 GHz或5.2 GHz，发射增益85 dB，持续5 s），对比三种架构：静态阈值软件切换、自适应ML软件切换、自适应硬件辅助切换。",
+        "result": "在物理ROS 2移动机器人测试平台上，自适应硬件辅助切换将通信恢复时间优化至平均141 ms，相比软件重关联（完整wpa_supplicant重连周期）实现了亚秒级恢复；该恢复直接带来池化均方根路径跟踪误差降低78.9%。静态阈值基线因环境噪声易误报，而自适应ML检测器在区分正常流量与IEMI方面更鲁棒。硬件辅助路由切换避免了单接口软件重关联的多秒瓶颈，显著保障了系统级任务完整性。",
+        "conclusion": "将物理层SDR频谱感知与网络层多接口路由切换相结合的跨层弹性架构，能有效抑制蓄意干扰对ROS 2闭环控制的影响，将恢复延迟压缩到毫秒级并大幅降低轨迹跟踪误差。相比纯软件重关联，维持双预认证热备用物理接口并仅修改路由表的策略是一种实用且可扩展的防御范式。",
+        "key_details": "关键细节包括：检测器使用随机森林分类器，特征为五个PSD衍生描述符；决策采用频段特定阈值（2.4 GHz为-30 dB静态阈值，自适应概率阈值为75%）及N_sample=75样本连续窗口抑制瞬态；每次频段切换后HackRF重调谐并施加五样本冷却期。双接口均为预认证热备用，静态IP同子网，切换只动路由表。实验局限：使用窄带CW干扰，未覆盖响应式或持续跟踪干扰机；测试仅在双频Wi-Fi（2.4/5 GHz）上进行，协议无关性仅为概念验证；6 GHz网络因Raspberry Pi 4不支持被排除；机器人路径为1m×1m方形两圈，距离2-4 m变化，干扰持续5 s，遥测本地记录以防链路中断导致数据丢失。"
+      },
+      "affiliations": [
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Texas A&M University",
+      "score": 4.4464723999851925,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.05519v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905519v1-robots-influencing-humans-to-reveal-their-goals-during-collaboration-and-competition",
+      "source": "arxiv",
+      "title": "Robots Influencing Humans to Reveal their Goals during Collaboration and Competition",
+      "authors": [
+        "Debasmita Ghose",
+        "Oz Gitelson",
+        "Michal Lewkowicz",
+        "Jake Brawer",
+        "Marynel Vazquez",
+        "Brian Scassellati"
+      ],
+      "authors_text": "Debasmita Ghose, Oz Gitelson, Michal Lewkowicz, Jake Brawer, Marynel Vazquez, Brian Scassellati",
+      "abstract": "We propose a unified strategy for fast goal inference in human-robot interaction. The core idea is to drive the human toward Critical Decision Points (CDPs)-states where competing human strategies prescribe different next actions and thus maximally reveal the goal. We formalise CDPs using a goal-conditioned policy divergence measure and incorporate them into a Receding-Horizon Planner that explores future action sequences while optimizing a cost function balancing task progress and information gain. We evaluate this approach in both a collaborative, fully observable cooking task and a competitive, partially observable hide-and-seek game, each in simulation and on real robots. In both scenarios, our method infers human goals more accurately and earlier than baseline strategies.",
+      "url": "http://arxiv.org/abs/2609.05519v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05519v1",
+      "tldr": "TLDR: This paper proposes a unified robot planning framework that actively guides humans toward \"Critical Decision Points\"—states where competing human goals prescribe different actions—to achieve faster and more accurate goal inference in both collaborative and competitive human-robot tasks.",
+      "detailed_reading": {
+        "motivation": "在人与机器人共享环境的交互中，机器人需要快速推断人类的高层目标，但标准被动式贝叶斯推断在动作重叠、部分可观测或对抗性条件下收敛过慢，导致长时间的不确定性。关键洞察是某些状态比其他状态能更有效地揭示人类目标，因此提出主动引导人类到达这些“关键决策点”（CDPs）以加速目标推断。",
+        "method": "提出一种统一的目标推断策略，核心是用目标条件策略散度度量形式化关键决策点（CDP），即不同人类策略会规定不同下一动作的状态；将CDP纳入滚动时域规划器（Receding-Horizon Planner），通过扩展未来动作序列树，在平衡任务进度与信息获取的代价函数下选择机器人动作，主动影响人类走向CDP。在每个时间步，机器人基于观测到的人类动作用贝叶斯过滤更新对目标集合的信念，并依据策略库中的边际策略计算似然。该方法在协作、完全可观测的烹饪任务和竞争、部分可观测的捉迷藏游戏中分别以仿真和实物机器人验证；烹饪任务中人类与机器人协作制作多份餐食，捉迷藏中机器人作为搜寻者估计人类藏匿策略，CDP可在空间状态网格上预计算。",
+        "result": "在两个场景中，所提方法均比基线策略更早、更准确地推断出人类目标。烹饪任务中，主动引导人类至CDP使得机器人能更早澄清意图，从而调整自身行为以减少冗余或冲突努力；与信息增益最大化方法（如sadigh2016）和Bayesian Delegation（wu2021）相比，所提方法在目标动作序列重叠时更有效。捉迷藏游戏中，机器人引导藏匿者到CDP相比随机探索地图或仅当可见时最小化距离的基线，能更快抓住人类藏匿者。",
+        "conclusion": "研究表明，机器人可以利用共享环境中少量信息量极高的状态（CDP），通过主动影响人类行为来显著加速目标推断，该策略在协作与竞争、完全与部分可观测、动作时间依赖与独立等多种条件下均有效，是首个统一跨越合作与竞争交互的目标预测方法。",
+        "key_details": "关键细节包括：完整环境状态定义为s=(s_w,s_h,s_r)，机器人通过传感器接收噪声/部分观测；假设交互为回合制，机器人基于任务级状态表示规划；目标集合有限且候选策略库P_g包含多种真实人类策略，全策略库为各目标策略库的并集，人类真实目标策略在交互中恒定；信念采用均匀先验，似然通过对策略库中所有策略取平均的边际策略计算，并用贝叶斯过滤更新。CDP由目标条件策略散度形式化，RHP规划器在推断时权衡任务进度与信息增益。局限性方面，需要预先提供候选目标集合与策略库，且假设人类目标不中途切换；当前实验场景为烹饪和捉迷藏，尚需在更复杂或更大规模任务中验证可扩展性。"
+      },
+      "affiliations": [
+        "Yale University",
+        "University of Colorado, Boulder",
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Yale University, University of Colorado, Boulder, Massachusetts Institute of Technology",
+      "score": 4.380426342815239,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.05588v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/09/260905588v1-ge-act-20-pretraining-and-scaling-a-world-action-model-for-robotic-manipulation",
+      "source": "arxiv",
+      "title": "GE-Act 2.0: Pretraining and Scaling a World-Action Model for Robotic Manipulation",
+      "authors": [
+        "AgiBot Research Team",
+        "Renhang Liu",
+        "Wenzhi Zhao",
+        "Zhuo Yang",
+        "Liliang Chen",
+        "Pengfei Zhou",
+        "Shengcong Chen",
+        "Guanghui Ren",
+        "Youlun Peng",
+        "Rongjun Jin",
+        "Nan Wang",
+        "Sukai Wang",
+        "Xindong He",
+        "Jinyuan Feng",
+        "Ziyu Xiong",
+        "Linqing Zhong",
+        "Yifei Wei",
+        "Feng Han",
+        "Long Zhang",
+        "Da Huang",
+        "Nanshu Zhao",
+        "Chenghao Yin",
+        "Mo Wu",
+        "Zhaodong Yan",
+        "Kongtao Hu",
+        "Yuxiang Yan",
+        "Aogelijiang Niyazi",
+        "Yu Fang",
+        "Jia Zeng",
+        "Lizhu Meng",
+        "Daizhen Lv",
+        "Haoyu Cao",
+        "Zhiwen Hou",
+        "Lianjin Ye",
+        "Yuehan Niu",
+        "Zhikai Cai",
+        "Xuan Hu",
+        "Hui Min",
+        "Xiongfeng Cai",
+        "Yue Liao",
+        "Jing Wu",
+        "Soujanya Poria",
+        "Ye Li",
+        "Sanping Zhou",
+        "Maoqing Yao"
+      ],
+      "authors_text": "AgiBot Research Team, Renhang Liu, Wenzhi Zhao, Zhuo Yang, Liliang Chen, Pengfei Zhou, Shengcong Chen, Guanghui Ren, Youlun Peng, Rongjun Jin, Nan Wang, Sukai Wang, Xindong He, Jinyuan Feng, Ziyu Xiong, Linqing Zhong, Yifei Wei, Feng Han, Long Zhang, Da Huang, Nanshu Zhao, Chenghao Yin, Mo Wu, Zhaodong Yan, Kongtao Hu, Yuxiang Yan, Aogelijiang Niyazi, Yu Fang, Jia Zeng, Lizhu Meng, Daizhen Lv, Haoyu Cao, Zhiwen Hou, Lianjin Ye, Yuehan Niu, Zhikai Cai, Xuan Hu, Hui Min, Xiongfeng Cai, Yue Liao, Jing Wu, Soujanya Poria, Ye Li, Sanping Zhou, Maoqing Yao",
+      "abstract": "World-action models (WAM) predict future states to guide robot actions, enabling learning from both action-free video and action-labeled interaction. Most inherit pretrained video generators, leaving WAM pretraining and scaling underexplored. We introduce Genie Envisioner Act 2.0 (GE-Act 2.0), a world-action model whose trainable generative and action components are all initialized from scratch on manipulation data. It combines a control-oriented autoencoder (CoAE), a single-step visual planner (SVP), and an inverse dynamics model (IDM). CoAE retains action- and instruction-relevant information under aggressive compression, while SVP produces a complete future state in one differentiable pass, so visual planning and inverse dynamics can be pretrained separately on complementary data. The components are then jointly trained with knowledge-aligned selective optimization (KASO), which reduces mismatched supervision by selecting only predicted futures judged behaviorally compatible with the recorded action. We evaluate pretrained checkpoints directly, without per-task fine-tuning, on 100 tasks across 20 manipulation skill groups with held-out scenes, backgrounds, lighting, and object instances. Scaling co-training data from 300 to 30,000 hours raises success from 17.1% to 44.1% on G1-OP and from 13.4% to 31.1% on G2-90D; despite comprising less than 2% of the co-training data, G2-90D improves by 17.7 points, suggesting cross-embodiment transfer. Gains span 19/20 and 18/20 skill groups, and skill-specific coverage strongly correlates with zero-shot out-of-distribution (OOD) success (Pearson r=0.80; Spearman rho=0.85). Under the same protocol, the model grounds object, color, shape, and position references in at least 90% of trials and follows explicit instructions even when they conflict with an already-committed behavior or a conventional scene association.",
+      "url": "http://arxiv.org/abs/2609.05588v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05588v1",
+      "tldr": "GE-Act 2.0 introduces a world-action model pretrained entirely from scratch on manipulation data—combining a control-oriented autoencoder, single-step visual planner, and inverse dynamics model with knowledge-aligned selective optimization—showing that scaling co-training data from 300 to 30,000 hours boosts zero-shot out-of-distribution success across 100 real-robot tasks and two embodiments without task-specific fine-tuning.",
+      "detailed_reading": {
+        "motivation": "现有世界动作模型大多直接继承预训练视频生成器，其自身的预训练与扩展规律尚未得到充分探索。GE-Act 2.0旨在回答两个系统级问题：如何在操作数据上从零预训练视觉生成与逆动力学组件，以及当所有可训练生成与动作组件均随机初始化时，世界动作模型的能力如何随操作数据规模扩展。",
+        "method": "GE-Act 2.0采用解耦的两阶段架构，包含控制导向自编码器CoAE、单步视觉规划器SVP和逆动力学模型IDM。CoAE通过重建与多教师特征对齐学习被激进压缩的潜在空间，保留动作与指令相关信息；SVP以单次可微的flow生成器前向过程直接产生完整未来状态，因此SVP可在无动作视频上单独预训练，IDM可在无指令轨迹上单独预训练；随后将两者端到端联合训练，并使用知识对齐选择性优化KASO，采样多个预测未来后仅选择被当前IDM判定为与记录动作行为兼容的候选进行动作监督，以缓解预测模式与演示动作不一致造成的监督失配。",
+        "result": "将共训练数据从300小时扩展到30000小时，零样本OOD成功率在G1-OP上从17.1%提升至44.1%，在G2-90D上从13.4%提升至31.1%；G2-90D在全部共训练数据中占比不足2%却提升17.7个百分点，表明存在跨本体迁移。增益覆盖了20个技能组中的19个和18个；技能覆盖度与零样本OOD成功率强相关（Pearson r=0.80，Spearman rho=0.85）。在相同零样本OOD协议下，模型对物体、颜色、形状和位置参照的指令遵循在至少90%的试验中正确，并且能在指令与已承诺行为或常规场景关联冲突时遵循显式指令。",
+        "conclusion": "从零预训练并扩展世界动作模型是可行且有效的，无需任务级微调即可获得跨任务与跨本体的零样本OOD操作能力提升，且这种能力与训练数据中技能覆盖程度密切相关。GE-Act 2.0的组件解耦设计使视觉生成和逆动力学能够分别利用互补数据，而KASO进一步提升了联合训练中预测未来与真实动作的一致性。",
+        "key_details": "关键细节包括：CoAE在极低码率下通过重建和多教师特征对齐保留动作与指令信息，相比基线自编码器能更好支持动作探针预测；SVP采用MeanFlow/改进MeanFlow风格的训练思路，以单网络前向覆盖完整噪声区间，从而避免多步生成带来的预训练成本；IDM以当前视觉潜在和预测未来视觉潜在及本体感受为输入，同时预测稠密动作块和稀疏远视动作序列；KASO通过best-of-K选择缓解多模态任务中生成未来与记录动作的模式失配；所有组件均从随机初始化开始，在39,000/32,000小时规模的互补数据上预训练后联合训练；评估协议固定为100个真实机器人任务、20个操作技能组，且不进行任何任务或本体微调，在未见场景、背景、光照和目标实例上进行；结果也暗示稀采样本体的性能可受益于大规模主体语料的跨本体迁移。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.30128494624287,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.05508v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905508v1-when-do-options-help-policy-necrosis-and-redundant-coverage-in-option-critic",
+      "source": "arxiv",
+      "title": "When Do Options Help? Policy Necrosis and Redundant Coverage in Option-Critic",
+      "authors": [
+        "Bingyun Liu",
+        "Yuheng Jing"
+      ],
+      "authors_text": "Bingyun Liu, Yuheng Jing",
+      "abstract": "Option-critic learns options: sub-policies together with a learned rule for when each one hands control back. Its headline result is that performance improves as options are added. We explain that result, with theory and experiment. First, the termination rule option-critic learns by maximising return contributes nothing. When the termination test and the policy that picks options read the same values, the test fires at every step, so the learned rule is identical to always terminating. When that policy explores and the test does not, as in option-critic itself, the rule can block the exploration; there are instances where it suffers $Ω(T)$ regret while always terminating holds to $O(\\log T)$. Forcing termination at every step leaves the option-count curve intact. Second, the policy inside an option barely explores at all, so a state locks onto the first action that looked good and never updates again. We name this policy necrosis, give a state-level test for it, and find three fifths of states necrotic in a typical option. Restoring exploration repairs those states, and one option then solves the task. Third, extra options improve no option; what falls is the chance that all of them fail in the same state, from $59\\\\%$ to $4\\\\%$, and performance follows that joint quantity.",
+      "url": "http://arxiv.org/abs/2609.05508v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05508v1",
+      "tldr": "The paper shows that option-critic's performance gains from adding options come not from temporal abstraction but from redundant coverage that reduces the chance all options fail in the same state, while its learned termination rule is vacuous or harmful and the real failure is \"policy necrosis\" in intra-option policies, which restoring lower-level exploration can repair with a single option.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Chinese Academy of Sciences",
+      "score": 4.277413069144119,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.05710v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905710v1-can-acceleration-in-gradient-norm-minimization-be-anytime-sharp-last-iterate-limits-in-smooth-convex-optimization",
+      "source": "arxiv",
+      "title": "Can Acceleration in Gradient-Norm Minimization Be Anytime? Sharp Last-Iterate Limits in Smooth Convex Optimization",
+      "authors": [
+        "Pierre Vernimmen",
+        "François Glineur"
+      ],
+      "authors_text": "Pierre Vernimmen, François Glineur",
+      "abstract": "In smooth convex optimization, the gradient norm is a directly observable measure of stationarity. Accelerating a first-order method that minimizes the gradient norm is known to be more delicate than accelerating the minimization of function values. Optimal accelerated methods such as OGM-G (Kim & Fessler, 2021) are known to exist for any prescribed finite horizon, but their coefficients depend explicitly on the length of that horizon, i.e. the number of iterations.\n  We ask what kind of acceleration is feasible when the stopping horizon is unknown to the method, i.e. for horizon-independent methods. Diakonikolas & Wang (2022) conjectured that an $Ω(N^{-1})$ lower bound on the squared gradient norm holds at every horizon $N$ for any nonadaptive, horizon-independent linear-span first-order method. We disprove this pointwise conjecture by exhibiting a method that achieves near-$N^{-2}$ last-iterate guarantees on a density-one set of horizons. We show instead that an $Ω(N^{-1})$ lower bound must hold for infinitely many horizons. More precisely, if $\\mathcal G_N(\\mathcal A)$ denotes the bound on the squared gradient norm after $N$ iterations for a method $\\mathcal A$, we prove that $\\limsup_{N\\to\\infty}N \\mathcal G_N(\\mathcal A) \\ge 1/2$ for any method $\\mathcal A$. This bound is sharp: the constant $1/2$ is exactly attained by the horizon-independent gradient-descent schedule of Rotaru et al. (2026).\n  In addition, we show that the above two extreme behaviors cannot be achieved by the same method: any method $\\mathcal A$ with an $o(N^{-1})$ guarantee on a subsequence of iterates must satisfy $\\limsup_N N \\mathcal G_N(\\mathcal A)=\\infty$. In contrast, best-so-far output admits a uniform $O(N^{-2})$ guarantee.",
+      "url": "http://arxiv.org/abs/2609.05710v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05710v1",
+      "tldr": "This paper characterizes the limits of anytime acceleration for gradient-norm minimization in smooth convex optimization, showing that horizon-independent linear-span methods cannot beat a sharp \\( \\limsup_N N\\mathcal G_N \\ge 1/2 \\) barrier, although they can achieve near-\\(N^{-2}\\) last-iterate rates on a density-one set of horizons, a strict dichotomy with uniform \\(O(N^{-2})\\) best-so-far guarantees.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UCLouvain"
+      ],
+      "affiliations_text": "UCLouvain",
+      "score": 4.202309764263086,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.05498v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905498v1-observability-analysis-of-joint-steering-and-extrinsic-calibration",
+      "source": "arxiv",
+      "title": "Observability Analysis of Joint Steering and Extrinsic Calibration",
+      "authors": [
+        "Subodh Mishra"
+      ],
+      "authors_text": "Subodh Mishra",
+      "abstract": "This technical report studies the local weak observability of a planar bicycle-model vehicle when vehicle pose, planar LiDAR extrinsic calibration, and steering-angle bias are estimated jointly. A Lie-derivative-based nonlinear observability analysis is used to examine stationary, straight-line, constant-curvature, and combined straight-plus-arc motion. The resulting observability matrices and nullspaces describe how pose, LiDAR translation and yaw offsets, and steering bias become coupled under different motion primitives. Stationary motion and individual motion primitives retain unobservable directions, whereas the combination of straight and curved motion removes the identified degeneracies and yields full local weak observability of the seven-state system. The analysis provides a theoretical basis for selecting calibration trajectories that sufficiently excite both steering and sensor-extrinsic parameters.",
+      "url": "http://arxiv.org/abs/2609.05498v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05498v1",
+      "tldr": "TLDR: This paper analytically shows, via Lie-derivative-based nonlinear observability analysis of a planar bicycle model, that jointly estimating vehicle pose, planar LiDAR extrinsics, and steering-angle bias becomes fully locally weakly observable only when combining straight and curved motion, whereas stationary, straight-line, or constant-curvature motion alone leaves unobservable degeneracies.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.134123235503269,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.05688v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905688v1-connecting-score-matching-maximum-likelihood-and-expectation-maximization-in-mixed-linear-regression",
+      "source": "arxiv",
+      "title": "Connecting Score Matching, Maximum Likelihood, and Expectation-Maximization in Mixed Linear Regression",
+      "authors": [
+        "Zhankun Luo",
+        "Abolfazl Hashemi"
+      ],
+      "authors_text": "Zhankun Luo, Abolfazl Hashemi",
+      "abstract": "We study variance-preserving diffusion of the response in mixed linear regression (MLR) with unknown mixing weights. Our analysis separates the statistical guarantees of score matching from the loss geometry and optimization signal at a fixed diffusion noise level. The KL divergence links the denoising score matching objective integrated over the diffusion path with the likelihood and a terminal discrepancy. Under mild regularity conditions and terminal schedule, the resulting estimator converges up to the ground truth parameters of MLR, and its scaled error converges to the Gaussian limit of the maximum-likelihood estimator. At a fixed scale of the diffusion noise level, we derive a decomposition linking the score matching loss to cross-entropy and Expectation-Maximization (EM) operators. This decomposition yields an EM-related low-noise gradient expansion with additional correction terms of latent variance. In the high-noise limit, we further characterize gradient descent on this limiting loss under isotropic covariance. Along fixed high signal-to-noise ratio rays, the score matching imbalance gradient and the latent-variance term tend to zero pointwise. Numerical experiments illustrate our theoretical findings and statistical guarantees.",
+      "url": "http://arxiv.org/abs/2609.05688v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05688v1",
+      "tldr": "This paper studies parameter recovery in mixed linear regression via variance-preserving diffusion of the response, showing that the denoising score matching objective integrates to maximum likelihood with Gaussian-limit guarantees and decomposes into cross-entropy and Expectation-Maximization gradient structures across diffusion noise levels.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9334500374145964,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.05575v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905575v1-capsule-lens-locating-and-tracking-concept-geometry-in-model-representations",
+      "source": "arxiv",
+      "title": "Capsule Lens: Locating and Tracking Concept Geometry in Model Representations",
+      "authors": [
+        "Yiming Tang",
+        "Harshvardhan Saini",
+        "Samyak Jha",
+        "Huaming Chen",
+        "Xufeng Duan",
+        "Dianbo Liu"
+      ],
+      "authors_text": "Yiming Tang, Harshvardhan Saini, Samyak Jha, Huaming Chen, Xufeng Duan, Dianbo Liu",
+      "abstract": "Understanding how concepts are encoded in the internal representations of machine learning models is a central problem in mechanistic interpretability, essential both for the science of deep learning and for the trustworthy deployment of increasingly capable models. Existing approaches to interpret model representations mainly map representations onto more interpretable spaces and do not directly characterize how concepts occupy representation space; various hypotheses have been proposed, but often lack of rigorous validation and largely focus on static representations. In this work, we introduce Capsule Lens, a framework that matches the region a concept occupies with a simple, trackable geometric form, a capsule, defined by several interpretable parameters, fitted in closed form to each concept's geometry and validated on held-out samples. We apply Capsule Lens in two major settings: static and dynamic representations. On static representations, we demonstrate how to locate concept geometry across various models, and how the span and norm curves uncover important geometric characteristics. On dynamic representations, we present three case studies tracking representation drifts induced by distinct training settings, CLIP pretraining, RL post-training on visual question answering, and RL post-training on mathematical reasoning. These analyses reveal qualitatively different geometric dynamics, ranging from broad network-wide restructuring in CLIP pretraining to localized and concept-specific changes in RL post-training. Our results include findings aligned with existing literature as well as novel observations. We believe Capsule Lens stands as a promising tool for locating, analyzing, and tracking concept geometry in both static and dynamic representations.",
+      "url": "http://arxiv.org/abs/2609.05575v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05575v1",
+      "tldr": "Capsule Lens introduces a framework that models each concept's representation region as a simple, interpretable “capsule” geometry, fitted in closed form and validated on held-out samples, enabling localization of concept geometry in static representations and revealing distinct geometric drift patterns across dynamic settings like CLIP pretraining and RL post-training.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.853861325154,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.05695v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905695v1-sparse-plus-low-rank-matrix-embedding-with-applications-in-cancer-radiotherapy-optimization",
+      "source": "arxiv",
+      "title": "Sparse plus low-rank matrix embedding with applications in cancer radiotherapy optimization",
+      "authors": [
+        "Mojtaba Tefagh",
+        "Gourav Jhanwar",
+        "Masoud Zarepisheh"
+      ],
+      "authors_text": "Mojtaba Tefagh, Gourav Jhanwar, Masoud Zarepisheh",
+      "abstract": "Decomposing a matrix into sparse and low-rank components is central to robust principal component analysis and has broad applications in machine learning, signal processing, and computer vision. Classical formulations seek to recover the underlying sparse and low-rank structure. We instead introduce \\emph{sparse-plus-low-rank matrix embedding} (SLME), whose goal is to construct a computationally efficient surrogate for a large dense matrix, without requiring its components to be interpretable. Given $A\\in\\mathbb{R}^{m\\times n}$, SLME approximates $A \\approx S+HW$, where $S$ is sparse, $H\\in\\mathbb{R}^{m\\times r}$, $W\\in\\mathbb{R}^{r\\times n}$, and $r\\ll \\min\\{m,n\\}$. The resulting matrix-vector product can be evaluated as $Sx+H(Wx)$ in $\\mathrm{nnz}(S)+r(m+n)$ operations, rather than the $mn$ operations required by $Ax$. Our primary motivation arises from optimization problems in cancer radiotherapy treatment planning, where a large dense \\emph{dose-influence matrix} is a major computational bottleneck.\n  We formulate SLME as a bi-objective nonconvex optimization problem that balances approximation error against the computational cost of the downstream tasks. We then develop \\emph{R3-Trust}, an efficient trust-region algorithm that approximates the Pareto frontier in a single parameter-free run. Each point on the resulting frontier provides a sparse-plus-low-rank representation with a different balance between accuracy and downstream computational cost. Experiments on clinical radiotherapy matrices show that decompositions obtained from existing recovery-oriented formulations can be suboptimal for the embedding objective. Conversely, experiments on synthetic instances demonstrate that SLME and R3-Trust can also be applied to sparse-plus-low-rank recovery, where they compare favorably with state-of-the-art recovery methods in both reconstruction accuracy and computational time.",
+      "url": "http://arxiv.org/abs/2609.05695v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05695v1",
+      "tldr": "TLDR: This paper introduces sparse-plus-low-rank matrix embedding (SLME) and a trust-region algorithm (R3-Trust) to efficiently approximate large dense matrices—motivated by radiotherapy dose optimization—by trading off approximation error against computational cost, outperforming recovery-oriented decompositions on clinical and synthetic benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Memorial Sloan Kettering Cancer Center",
+        "University of Edinburgh"
+      ],
+      "affiliations_text": "Memorial Sloan Kettering Cancer Center, University of Edinburgh",
+      "score": 3.7292576260187476,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.05435v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905435v1-ahabench-do-agents-learn-from-prior-experience-a-benchmark-for-long-horizon-continual-learning",
+      "source": "arxiv",
+      "title": "AhaBench: Do Agents Learn from Prior Experience? A Benchmark for Long-Horizon Continual Learning",
+      "authors": [
+        "Zerui Cheng",
+        "Jiawei Xu",
+        "Huacan Chai",
+        "Jiayang Sun",
+        "Pramod Viswanath",
+        "Maxm Pan"
+      ],
+      "authors_text": "Zerui Cheng, Jiawei Xu, Huacan Chai, Jiayang Sun, Pramod Viswanath, Maxm Pan",
+      "abstract": "Modern language agents are expected to operate over long horizons: they ask follow-up questions, reuse worked examples, handle tool feedback, and adapt to delayed consequences. Most evaluations still reset the agent after a prompt or score only the final state of one trajectory. AhaBench asks a more operational question: when a fixed model receives useful experience, does its later behavior improve under a related evaluation condition where the obvious support has been removed, changed, or delayed? The suite contains three components. Aha-Puzzle tests no-hint exploration after solved hidden-state puzzles; Aha-Euler turns Project-Euler-style mathematical ideas into generated taught/held-out tasks with exact validators; and Aha-Vending, an open-source implementation inspired by Vending-Bench, tests whether a simulated vending agent remains profitable while handling delayed feedback and operational incidents. AhaBench reports a three-part scorecard: Initial Score measures starting competence, Post-Experience Score measures the later empirical outcome, and Learning Lift is their difference. This decomposition is the main empirical message: models that use visible support well, models that reach high post-experience scores, and models that improve most during a run are not always the same. On the common eight-model panel, Claude Opus 4.6 leads aggregate Post-Experience Score at 64.3 and aggregate Learning Lift at +25.8, with Gemini 3.1 Pro close behind at 63.4. The component results explain the split: puzzle traces raise supported scores but often fail to become no-hint exploration behavior; Aha-Euler full teaching reaches 78.6-100.0% while answer-only transfer ranges from 0.0 to 73.9%; and Aha-Vending separates profitable incident handling from bankruptcy and no-order failure. We release benchmark tasks, rubrics, validators, simulator code, and interfaces for evaluating new agents.",
+      "url": "http://arxiv.org/abs/2609.05435v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05435v1",
+      "tldr": "AhaBench is a benchmark suite that evaluates whether fixed language agents truly learn from prior experience over long horizons—via puzzle exploration, mathematical transfer, and simulated vending tasks—by measuring initial competence, post-experience performance, and the resulting \"learning lift.\"",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tsinghua University",
+        "Shanghai Jiaotong University",
+        "Princeton University",
+        "Tencent Hy",
+        "Hong Kong University"
+      ],
+      "affiliations_text": "Tsinghua University, Shanghai Jiaotong University, Princeton University, Tencent Hy, Hong Kong University",
+      "score": 3.6802356688950963,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.05665v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905665v1-decomposition-of-sparse-integer-programs-via-nonlinear-edge-encodings-and-column-and-row-generation",
+      "source": "arxiv",
+      "title": "Decomposition of Sparse Integer Programs via Nonlinear Edge Encodings and Column-and-Row Generation",
+      "authors": [
+        "Gustavo Angulo",
+        "Santanu S. Dey"
+      ],
+      "authors_text": "Gustavo Angulo, Santanu S. Dey",
+      "abstract": "A wide range of sparse integer programs admit a block structure in which subproblems interact through a small set of shared variables. Dualizing the linking equalities yields a decomposable Lagrangian relaxation, but generally introduces a duality gap. Recent work shows that this gap can be closed while preserving decomposability by dualizing exponentially large families of redundant nonlinear consistency constraints on the shared variables. We develop a computational framework for exploiting this idea without explicitly constructing the resulting exponentially large relaxation. Our framework combines nonlinear edge encodings of shared-variable consistency with a column-and-row generation (CRG) algorithm that generates local integer solutions by pricing and encoding constraints by separation. With complete encodings and exact separation, the framework recovers the exact relaxation while retaining independent optimization over the blocks. We introduce several encoding families and establish exponential separations among them: the Generalized family can require exponentially fewer constraints than the Vertex, Monomial, or Reflected families, yet can itself require exponentially many constraints on instances for which a single problem-specific encoding suffices. Computational experiments on decomposed stable-set and dominating-set instances show that CRG substantially outperforms a monolithic formulation across a range of tree topologies and coupling strengths. The results also show that richer encoding families need not perform better computationally, highlighting the choice of encoding as a central issue in effective decomposition.",
+      "url": "http://arxiv.org/abs/2609.05665v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05665v1",
+      "tldr": "The paper develops an exact, decomposable column-and-row generation framework that closes the Lagrangian duality gap for block-structured sparse integer programs by dynamically separating redundant nonlinear consistency constraints encoded via edge-based nonlinear functions, with theoretical and computational results showing that richer encoding families can exponentially reduce required constraints but may not perform best in practice.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pontificia Universidad Católica de Chile",
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Pontificia Universidad Católica de Chile, Georgia Institute of Technology",
+      "score": 3.6070225291855085,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.05574v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905574v1-multi-granularity-adaptive-hypergraph-representation-learning-via-granular-ball",
+      "source": "arxiv",
+      "title": "Multi-granularity Adaptive Hypergraph Representation Learning via Granular-ball",
+      "authors": [
+        "Sen Zhao",
+        "Yifan Guan",
+        "Jinyuan Ni",
+        "Gaojie Xu",
+        "Zhang Xu",
+        "Xiaoyu Lian",
+        "Yi Liu",
+        "Yi Wang",
+        "Wei Wang"
+      ],
+      "authors_text": "Sen Zhao, Yifan Guan, Jinyuan Ni, Gaojie Xu, Zhang Xu, Xiaoyu Lian, Yi Liu, Yi Wang, Wei Wang",
+      "abstract": "Hypergraph representation learning aims to capture high-order information in graphs by constructing hyperedges that simultaneously connect multiple nodes. These hyperedges adapt to the graph's topological features, facilitating the extraction of high-order relationships at multiple granularities. Most prior work relies on predefined definitions to generate hyperedges, overlooking the diversity in graph topological structures and the multi-granularity characteristics of hyperedges. As a result, this limits their ability to effectively and adaptively discover high-order relationships and efficiently process complex structural information. To address this limitation, we propose a novel framework called \\underline{M}ulti-\\underline{G}ranularity \\underline{H}ypergraph \\underline{R}epresentation \\underline{L}earning (MGHRL). MGHRL introduces an Adaptive Granular Hypergraph Generation strategy, which generates hyperedges at multiple levels of granularity through the adaptive splitting of granular-ball, effectively capturing high-order relationships based on the graph's topological structure. Additionally, we propose a Multi-Granularity Hypergraph Network with multiple sub-networks, capturing features from hyperedges at different granularities and integrating them via hierarchical reversible connections. Experimental results show that MGHRL significantly outperforms baseline models on benchmark datasets.",
+      "url": "http://arxiv.org/abs/2609.05574v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05574v1",
+      "tldr": "MGHRL proposes an adaptive granular-ball-based multi-granularity hypergraph representation learning framework that generates hyperedges via coarse-to-fine splitting and integrates cross-granularity features with a hierarchical reversible multi-column network, significantly outperforming baselines on benchmark datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chongqing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "Chongqing University of Posts and Telecommunications",
+      "score": 3.560817607154771,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.05585v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905585v1-benchmarking-dexterity-of-multifingered-robot-hands-a-review-and-perspective",
+      "source": "arxiv",
+      "title": "Benchmarking Dexterity of Multifingered Robot Hands: A Review and Perspective",
+      "authors": [
+        "Anthony Shilati",
+        "Anunth Ramaswami",
+        "Luke Batteas",
+        "Sylvia Tan",
+        "Anthony Barcio",
+        "Sairam Umakanth",
+        "Preksha Rao",
+        "David McDougall",
+        "Landry Graves",
+        "Ahmet A. Ozkan",
+        "Yunsoo Yoon",
+        "Arushi Pradhan",
+        "Michael G. Henry",
+        "Rohan Kota",
+        "Damian Gonzalez",
+        "Gray C. Thomas",
+        "Gary K. Fedder",
+        "J. Edward Colgate",
+        "Kevin M. Lynch"
+      ],
+      "authors_text": "Anthony Shilati, Anunth Ramaswami, Luke Batteas, Sylvia Tan, Anthony Barcio, Sairam Umakanth, Preksha Rao, David McDougall, Landry Graves, Ahmet A. Ozkan, Yunsoo Yoon, Arushi Pradhan, Michael G. Henry, Rohan Kota, Damian Gonzalez, Gray C. Thomas, Gary K. Fedder, J. Edward Colgate, Kevin M. Lynch",
+      "abstract": "Robot hands are a key interface between AI and the physical world, making advances in robotic dexterity essential to realizing the vision of physical AI. While impressive dexterity has been demonstrated with simple grippers, multifingered hands offer the potential for substantially greater versatility, precision, and adaptability in manipulation. In this review, we survey the state of the art in benchmarking the dexterity of multifingered robot hands. Recognizing dexterity as a complex and multifaceted concept, we present the perspective of the U.S. National Science Foundation HAND Engineering Research Center, with a particular focus on fine in-hand manipulation. We introduce a framework consisting of three benchmark levels that correspond to increasing system complexity, review representative benchmarks at each level, and propose new benchmarks and metrics to address limitations in the literature. More information can be found at https://hand-erc.github.io/benchmarking/.",
+      "url": "http://arxiv.org/abs/2609.05585v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05585v1",
+      "tldr": "This review presents a HAND ERC perspective on benchmarking multifingered robot hand dexterity, organizing benchmarks into component-, hand-, and system-level tiers to bridge design choices and full-system manipulation performance, with an emphasis on fine in-hand manipulation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University",
+        "Northwestern University",
+        "Florida A&M University",
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Carnegie Mellon University, Northwestern University, Florida A&M University, Texas A&M University",
+      "score": 3.5189991806608143,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.05658v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905658v1-robustness-of-llm-generated-systemverilog-assertions-to-semantics-preserving-rtl-transformations",
+      "source": "arxiv",
+      "title": "Robustness of LLM-Generated SystemVerilog Assertions to Semantics-Preserving RTL Transformations",
+      "authors": [
+        "FNU Aditi"
+      ],
+      "authors_text": "FNU Aditi",
+      "abstract": "Large language models (LLMs) are increasingly being explored for automating SystemVerilog Assertion (SVA) generation, yet most evaluations report correctness on a single syntactic representation of an input. Such point accuracy does not reveal whether a model's correct output is stable when the same RTL behavior is written differently. This paper presents a controlled metamorphic evaluation of LLM-based SVA generation under semantics-preserving RTL transformations. Starting from the VERT dataset, we construct a quality-filtered conditional-control pool and a stratified 40-program evaluation set containing 295 assignment behaviors. We evaluate two open code models, Qwen2.5-Coder-7B and DeepSeek-Coder-V2-Lite, with an identical evaluation prompt and greedy decoding. Three transformations are studied: operand reordering, deterministic identifier renaming, and redundant parenthesization. Beyond baseline and transformed accuracy, we measure conditional robustness, invariance failure, and any-flip rate, with 10,000-sample clustered bootstrap intervals at the RTL-program level. Across all six model-transformation conditions, 9.7%-27.0% of behaviors that were correct on the original RTL become incorrect after a semantics-preserving transformation. Aggregate accuracy can therefore hide substantial instability: under identifier renaming, DeepSeek-Coder-V2-Lite improves from 53.9% to 63.7% accuracy while 19.5% of its originally correct behaviors fail. Manual review of 30 sampled correct-to-wrong transitions identifies dropped path predicates, branch-polarity errors, Boolean-structure corruption, and output-contract violations. The results show that point accuracy alone is insufficient for characterizing LLM reliability in assertion generation and motivate robustness-aware evaluation for AI-assisted hardware verification.",
+      "url": "http://arxiv.org/abs/2609.05658v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05658v1",
+      "tldr": "LLM-generated SystemVerilog assertions are not robust to semantics-preserving RTL rewrites such as operand reordering, identifier renaming, or redundant parenthesization, with 9.7%–27.0% of originally correct behaviors becoming incorrect and aggregate accuracy masking substantial instability, showing that point accuracy alone is insufficient for evaluating LLM-based assertion generation.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5050884174806067,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.05676v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905676v1-pac-private-autoregressive-generation-calibrating-noise-to-ensemble-disagreement",
+      "source": "arxiv",
+      "title": "PAC-Private Autoregressive Generation: Calibrating Noise to Ensemble Disagreement",
+      "authors": [
+        "Mina Mirzadehsarcheshmeh",
+        "Amir Keyvan Khandani"
+      ],
+      "authors_text": "Mina Mirzadehsarcheshmeh, Amir Keyvan Khandani",
+      "abstract": "Language models adapted on private text are often served through APIs, so privacy leakage occurs through generated outputs rather than exposed weights. Private prediction protects these releases. Methods such as PMixED incur privacy cost at each release and increasingly rely on the public model over long horizons. PAC privacy instead calibrates noise to output variability across possible secrets, adding less noise when predictions are stable. To our knowledge, PAC-private prediction has not previously been extended from classification to autoregressive generation.\n  We construct $m=128$ overlapping worlds from the private corpus, with each record appearing in exactly $m/2$ worlds, and train one adapter per world over a frozen public model. The realized world is the secret. At each token, the public model defines a candidate set, the worlds vote, and their posterior-weighted disagreement determines the PAC noise; unanimity requires no calibration noise. We prove $I(S;Y_{1:T}) \\leq I(S;H_T) \\leq bT$. Our contributions are extending PAC privacy to autoregressive generation, handling adaptive self-generated contexts, and introducing coupled decoding that preserves privacy accounting while avoiding greedy degeneration.\n  On WikiText-103 with GPT-2-small, we retain 74% of the fine-tuning gain at a per-token budget of $2^{-32}$, while membership-inference success is bounded by 51.08% after $10^6$ tokens; posterior-entropy estimates of leakage are roughly 17% of the charged budget. Inference privacy is not content protection: even when membership advantage on a memorized canary is indistinguishable from zero, the canary is emitted at the same rate. Against PMixED under matched membership-inference bounds on the same data universe and test set, we retain 98% of non-private headroom from $10^2$ to $10^6$ tokens, versus at most 56%, with no crossover.",
+      "url": "http://arxiv.org/abs/2609.05676v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05676v1",
+      "tldr": "TLDR: This paper extends PAC privacy to autoregressive generation by training 128 overlapping private adapters that vote at each token, calibrating noise to their disagreement so unanimous predictions are free, and proves a mutual-information bound on the released token stream that preserves far more utility than PMixED under matched membership-inference constraints.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4565610863632834,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.05698v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905698v1-analysis-of-respiratory-sinus-arrhythmia-with-neural-networks",
+      "source": "arxiv",
+      "title": "Analysis of Respiratory Sinus Arrhythmia with Neural Networks",
+      "authors": [
+        "Julian Szymanski",
+        "Patryk Orkisz",
+        "Higinio Mora"
+      ],
+      "authors_text": "Julian Szymanski, Patryk Orkisz, Higinio Mora",
+      "abstract": "The paper introduces a neural network-based approach for analyzing ECG signals to estimate respiratory rate by leveraging the phe- nomenon of Respiratory Sinus Arrhythmia (RSA). Our method employs a deep learning model trained to predict respiratory waveforms directly from ECG input data. To achieve this, we developed and evaluated three different neural network architectures capable of automatically extract- ing relevant features from ECG signals without the need for manual preprocessing. The proposed approach offers a robust and scalable solu- tion for non-invasive respiratory monitoring, with potential applications in healthcare and wearable technology",
+      "url": "http://arxiv.org/abs/2609.05698v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05698v1",
+      "tldr": "This paper introduces a neural network-based approach that predicts respiratory waveforms directly from ECG signals using three deep learning architectures to estimate respiratory rate via Respiratory Sinus Arrhythmia, offering a robust, non-invasive solution for healthcare and wearable monitoring without manual preprocessing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Alicante",
+        "Gdansk University of Technology"
+      ],
+      "affiliations_text": "University of Alicante, Gdansk University of Technology",
+      "score": 3.415556830569606,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.05694v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905694v1-graphnose-a-graph-transformer-in-olfaction",
+      "source": "arxiv",
+      "title": "GraphNOSE: A Graph Transformer in Olfaction",
+      "authors": [
+        "Mrityunjay Sharma",
+        "Sarabeshwar Balaji",
+        "Valentina Parma",
+        "Ritesh Kumar"
+      ],
+      "authors_text": "Mrityunjay Sharma, Sarabeshwar Balaji, Valentina Parma, Ritesh Kumar",
+      "abstract": "Predicting olfactory qualities from molecular structure is an open problem in chemoinformatics. Although linear models can link molecular features to odor descriptors, they often fail when extrapolating to novel chemical scaffolds, extreme molecular weights, or complex odor mixtures. To address this, we introduce GraphNOSE, an open-source graph transformer framework that predicts multi-label odor descriptors from simplified molecular-input line-entry system (SMILES) strings for single molecules and binary mixtures. By integrating positional and structural encodings within a transformer-based graph architecture, GraphNOSE achieves strong performance with six times fewer parameters than standard graph neural network (GNN) baseline while consistently outperforming linear models, molecular language model embeddings, molecular fingerprints, and baseline GNNs by an average area under the ROC curve (AUROC) margin of 4.52% (p < 0.01). GraphNOSE achieves an AUROC of 84% on out-of-distribution compounds (OODs). This exceeds the current state-of-the-art GNN for OOD in olfaction (Open-POM: 81%, p < 0.001), and identifies conditions under which linear models empirically fail. Finally, we apply XAI (explainable AI) methods to identify which substructures and molecular features drive odor predictions, yielding insights consistent with chemical intuition and grounded in the model's learned representations. Together, these results establish GraphNOSE as a scalable and interpretable architecture for olfactory prediction that generalizes to structurally distinct compounds underrepresented in current perceptual databases.",
+      "url": "http://arxiv.org/abs/2609.05694v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05694v1",
+      "tldr": "GraphNOSE introduces an open-source graph transformer with positional and structural encodings that predicts odor descriptors for single molecules and binary mixtures, outperforming linear models, fingerprints, language model embeddings, and baseline GNNs—including on out-of-distribution compounds—while using fewer parameters and offering interpretable insights.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CSIR- Central Scientific Instruments Organisation",
+        "Indian Institute of Science Education and Research Bhopal(IISERB)",
+        "University of Pennsylvania",
+        "Monell Chemical Senses Center",
+        "Academy of Scientific and Innovative Research (AcSIR)",
+        "Department of Higher Education, Himachal Pradesh"
+      ],
+      "affiliations_text": "CSIR- Central Scientific Instruments Organisation, Indian Institute of Science Education and Research Bhopal(IISERB), University of Pennsylvania, Monell Chemical Senses Center, Academy of Scientific and Innovative Research (AcSIR), Department of Higher Education, Himachal Pradesh",
+      "score": 3.2968796003049636,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.05582v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/09/260905582v1-hb-pvi-a-hierarchical-bayesian-personalization-and-value-of-information-framework-for-complex-activity-recognition",
+      "source": "arxiv",
+      "title": "HB-PVI: A Hierarchical Bayesian Personalization and Value-of-Information Framework for Complex Activity Recognition",
+      "authors": [
+        "Hammed A. Olayinka"
+      ],
+      "authors_text": "Hammed A. Olayinka",
+      "abstract": "Personalization can improve activity-recognition performance, but participant-specific gains are heterogeneous, and every additional calibration label has an acquisition cost. This study presents HB-PVI, a hierarchical Bayesian personalization and value-of-information framework jointly modeling participant heterogeneity, the benefit and harm of four personalization mechanisms, and the economic value of an additional label, for the 47-participant MUSIC-CAR complex-activity cohort. A leakage-safe, leave-one-participant-out evaluation combines a sequential-Monte-Carlo participant-effect updater with a Student-$t$ hierarchical gain model and a one-step expected-value-of-sample-information (EVSI) stopping rule. Adapter personalization produced small positive mean F1 gains, growing from 0.00099 at one label to 0.00198 at ten, while adapter-plus-head and prototype-residual personalization were negative on average. Under the primary practical-benefit threshold ($Δ_{\\min}=0.01$) and cost setting, one-step EVSI was zero at every decision state, so the policy purchased no labels and retained population inference for all 47 participants, matching always-stop exactly (region-of-practical-equivalence probability $=1$). Relative to fixed ten-shot adapter personalization, this reduced labeling by 100\\% while keeping the posterior mean F1 loss at 0.00217 (95\\% credible interval, 0.00048 to 0.00389), with posterior probability 0.9992 of remaining below the 0.005 tolerance. HB-PVI was utility-optimal in 199 of 216 cost-threshold settings and in every setting at or above the primary label cost. These results argue for a population-first deployment policy whenever personalization gains are small relative to labeling, computation, and harm costs, and show that value-of-information reasoning, not raw predictive accuracy, should drive personalization decisions in health-sensing applications.",
+      "url": "http://arxiv.org/abs/2609.05582v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.05582v1",
+      "tldr": "HB-PVI, a hierarchical Bayesian value-of-information framework for complex activity recognition, shows that under realistic labeling costs, personalization gains are too small to justify purchasing any calibration labels, making a population-first policy optimal across nearly all cost-threshold settings.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Worcester Polytechnic Institute"
+      ],
+      "affiliations_text": "Worcester Polytechnic Institute",
+      "score": 3.1586687370438984,
+      "score_text": "3.2"
+    }
+  ],
+  "errors": []
+}
