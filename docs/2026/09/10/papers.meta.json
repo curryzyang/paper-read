@@ -1,0 +1,709 @@
+{
+  "label": "2026-09-10",
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T07:48:15",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.09162v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909162v1-physics-informed-neural-networks-by-gradient-guided-gaussian-adaptive-sampling-3gas-pinns",
+      "source": "arxiv",
+      "title": "Physics-informed neural networks by Gradient-Guided Gaussian Adaptive Sampling (3GAS-PINNs)",
+      "authors": [
+        "Yousen Wang",
+        "Wei Zhao"
+      ],
+      "authors_text": "Yousen Wang, Wei Zhao",
+      "abstract": "Physics-informed neural networks (PINNs) provide a mesh-free framework for solving partial differential equations, yet their performance in nonlinear problems is often limited by slow convergence, gradient imbalance, and insufficient resolution to capture localized intermittent structures such as shock waves[1]. These issues arise primarily from the use of fixed weights of loss and uniform collocation point distributions, which cannot adapt to the evolving complexity of the solution field during training. To address these challenges, Gradient-Guided Gaussian Adaptive Sampling Physics-Informed Neural Networks (3GAS-PINNs) is proposed in this paper, which combines uniform probability distribution and Gaussian-smoothed probability distribution derived from the spatial gradients of solution, to maintain global constraint satisfaction as well as concentrating collocation points in regions of high gradient. Thus, intermittency structures like shock wave and solitons can be accurately captured. The method is evaluated on three benchmark nonlinear problems, including one-dimensional forced Burgers equation, Korteweg-de Vries (KdV) equation and nonlinear Schrodinger equation, all of which exhibit steep gradients or strong nonlinearity. In comparison with baseline PINNs, 3GAS-PINNs can effectively promote the physical consistency in intermittent regions. The accuracy of the numerical simulation can be improved by a factor of up to 14.",
+      "url": "http://arxiv.org/abs/2609.09162v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09162v1",
+      "tldr": "The paper introduces Gradient-Guided Gaussian Adaptive Sampling Physics-Informed Neural Networks (3GAS-PINNs), which adaptively blend uniform and gradient-derived Gaussian collocation sampling to resolve high-gradient intermittent structures, improving nonlinear PDE simulation accuracy by up to 14× over baseline PINNs.",
+      "detailed_reading": {
+        "motivation": "标准 PINN 在非线性 PDE 中常因固定损失权重和均匀/随机配点导致收敛慢、梯度不平衡，并难以分辨激波、孤子等局部间歇结构；这些问题源于训练中解场复杂度演化而采样不能自适应。为此，作者希望在不破坏全局约束的前提下，将计算资源动态集中到高梯度区域。",
+        "method": "提出 3GAS-PINNs，以神经网络 u(x,t;θ) 为代理，用自动微分计算 PDE 残差及空间梯度，损失由 PDE 残差、初始条件和边界条件的 MSE 加权组成并用 Adam 优化。核心是在 warmup 后每隔 K 个 epoch 重采样：先由当前预测解计算梯度场 g_k(x)，再用高斯核卷积得到平滑强度场 G_k(x)，归一化为概率密度 ρ_k(x)，并按混合策略抽取 ⌊ηN⌋ 个自适应点和 N−⌊ηN⌋ 个均匀点组成下一轮配点集。高斯核宽度 σ 根据平均梯度和解的标准差自适应确定，以平衡高梯度集中采样与空间连续性。",
+        "result": "在 1D 强迫 Burgers 方程、KdV 方程和非线性 Schrödinger 方程三个具有陡梯度或强非线性的基准上，3GAS-PINNs 相比基线 PINNs 更能捕捉激波/孤子等间歇结构，并提升间歇区域物理一致性。以绝对解误差和绝对梯度误差衡量，数值模拟精度最高可提升 14 倍。",
+        "conclusion": "梯度引导高斯自适应采样通过混合均匀分布与梯度平滑概率分布，使配点动态集中到高梯度区域，同时保留全局约束，从而缓解标准 PINNs 在非线性问题中的收敛慢、梯度不平衡和局部结构抹平问题。三个非线性基准验证表明该方法可显著提高 PINNs 的求解精度和物理一致性，最高约 14 倍。",
+        "key_details": "关键实现包括网络输入为时空坐标 (x,t)、输出预测解，自动微分计算 PDE 所需导数，损失由 PDE 残差、IC 和 BC 的 MSE 构成，并用 Adam 迭代优化。采样算法需设置总配点数 N、自适应比例 η、重采样频率 K、warmup 阶段和经验缩放常数 A；概率密度满足非负且积分为 1，均匀子集用于维持全局 PDE 约束。高斯核宽 σ 过宽会使采样过均匀，过窄会造成配点过度聚集，因此其选择对稳定性和精度至关重要；参考点上的高斯卷积和周期性重采样会带来额外计算开销，且 A、η、K 等超参可能需要针对问题调节。评估使用绝对解误差 e_u 和绝对梯度误差，测试覆盖 Burgers、KdV 和 NLS。"
+      },
+      "affiliations": [
+        "Northwest University"
+      ],
+      "affiliations_text": "Northwest University",
+      "score": 6.071383413841151,
+      "score_text": "6.1"
+    },
+    {
+      "id": "2609.09384v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909384v1-networked-admissibility-preserving-control-for-directed-safe-coordination",
+      "source": "arxiv",
+      "title": "Networked Admissibility-Preserving Control for Directed Safe Coordination",
+      "authors": [
+        "Abhinav Sinha",
+        "Lohitvel Gopikannan",
+        "Shashi Ranjan Kumar"
+      ],
+      "authors_text": "Abhinav Sinha, Lohitvel Gopikannan, Shashi Ranjan Kumar",
+      "abstract": "This paper addresses safety-critical coordination for scalar agents whose distributed commands are implemented through constrained physical-input dynamics. Agents communicate over a fixed weighted digraph with a directed spanning tree, while their outputs must remain inside a common moving safety corridor and their realized inputs must satisfy heterogeneous asymmetric bounds. We propose a networked Admissibility-Preserving Control (APC) architecture in which an Admissibility-Preserving Input Realization (APIR) governs physical inputs and a logarithmic barrier coordinate represents the safety corridor. The synthesis yields an exact cascade in which exponentially decaying realization errors drive nonsymmetric consensus dynamics. For every compatible compact initial set, the closed-loop system admits a unique complete solution, renders the moving corridor and actuator intervals forward invariant with uniform margins, keeps commands bounded, and achieves exponential consensus. We derive direction-specific sufficient conditions under which positive and negative control demands remain within their corresponding actuator limits. The analysis yields a closed-form barrier-coordinate limit determined by the left Perron vector and initial APIR mismatch. Under strong connectivity and the stated gain and compatibility conditions, partial pinning propagates a constant barrier reference from a nonempty informed subset and assigns the induced safety corridor trajectory. A non-weight-balanced example illustrates the directional certificate and predicted collective motion.",
+      "url": "http://arxiv.org/abs/2609.09384v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09384v1",
+      "tldr": "The paper proposes a networked Admissibility-Preserving Control architecture that combines Admissibility-Preserving Input Realization with a logarithmic barrier coordinate to guarantee directed multi-agent coordination stays within a moving safety corridor and heterogeneous asymmetric actuator bounds while achieving exponential consensus over rooted digraphs.",
+      "detailed_reading": {
+        "motivation": "本文关注标量智能体在安全关键协调中的可容许性问题：分布式命令不能直接视为理想输入，而是通过受约束的物理输入动力学实现，同时输出需保持在共同移动安全走廊内，实际输入需满足异构非对称执行器界限。已有网络障碍函数或静态饱和设计通常把输入代数化或只做瞬时裁剪，未把执行器实现瞬态纳入安全证书；在仅有有向生成树且一般非权重平衡的图中，APIR 初始不匹配会进入集体模态并改变最终一致值，因此需要把执行器实现作为闭环动力学的一部分。",
+        "method": "为每个标量智能体建立 x_i 动力学为 x_i 导数等于 u_i，并用 APIR 动力学驱动物理输入 u_i，其中控制器产生专用命令 v_i，σ_i 采用偶次多项式分段以在零点保持一阶连续并在执行器边界内指。通过对数障碍坐标 z_i 表示移动走廊，将输出约束映射到实数域，得到 z_i 导数等于 b_i u_i 加 χ_i。定义有向一致性场 β_i 为负 k 乘以入邻居 z 差加权和，APIR 误差 e_i 为 z_i 导数减 β_i。设计分布式命令 v_i 解析抵消 b_i、χ_i 和 β_i 的导数项并加入负 c_i e_i 反馈；其中 b 和 χ 的导数按闭式展开，β 的导数用邻居已实现的 b_j u_j 加 χ_j 计算，避免数值微分。由此形成精确级联：e_i 按指数衰减，z_i 动力学为有向拉普拉斯耦合加衰减误差。兼容性证书离线利用图半群常数、左 Perron 向量、走廊宽度与速度加速度界、执行器区间和紧初始集验证。",
+        "result": "对每个兼容紧初始集，闭环系统具有唯一完整解，移动走廊和异构非对称执行器区间前向不变并具有一致裕度，命令有界且实现指数一致。给出方向相关充分条件，分别保证正负控制需求不超出对应执行器上下限；当方向需求不同时，单边兼容性测试可认证严格大于对称测试的执行器界集合。障碍坐标的一致极限可由左 Perron 向量和初始 APIR 不匹配闭式确定。在强连通及给定增益和兼容条件下，部分牵制可从任意非空知情子集传播恒定障碍参考并指定诱导的安全走廊轨迹；非权重平衡算例验证方向证书和预测的集体运动。",
+        "conclusion": "该工作把 APIR 执行器实现作为动态状态纳入有向网络安全协调，同时保证移动输出走廊和异构非对称输入区间不变，避免为满足饱和而放宽输出性能走廊。分析揭示了有向图不平衡和 APIR 瞬态如何通过左 Perron 向量偏移最终一致值，并为强连通下部分牵制提供安全集体轨迹指定能力。整体方法适用于有向生成树但非权重平衡的网络，具有区域性和依赖兼容初始集的特点。",
+        "key_details": "关键输入包括固定加权有向图且含生成树、共同移动走廊的 C2 边界及其宽度速度加速度界、每个智能体非对称执行器区间。建模核心是 APIR 动态输入、对数障碍坐标及其逆映射，逆映射导数上界为走廊最大宽度除以四。控制参数 k、c_i、p1_i、p2_i 为正，σ_i 使用偶次幂且两分支在原点和一阶导连续，边界处输入向量场指向区间内部。兼容性证书离线使用图半群衰减常数、谱隙和左 Perron 向量；在线仅需局部、入邻居和共同走廊信息，且所有导数闭式计算。主要约束是紧兼容初始集、已知走廊界、有限执行器权威和区域可认证性；部分牵制指定轨迹需要强连通及增益兼容条件。局限性包括依赖 C2 走廊和已知界、初始集需兼容，以及未覆盖完全一般时变或未知环境。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Bombay",
+        "University of Cincinnati"
+      ],
+      "affiliations_text": "Indian Institute of Technology Bombay, University of Cincinnati",
+      "score": 5.381616957375192,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2609.09403v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909403v1-a-decade-of-bayesian-optimization-for-controller-tuning-and-robot-learning-tutorial-review-and-future-prospects",
+      "source": "arxiv",
+      "title": "A Decade of Bayesian Optimization for Controller Tuning and Robot Learning: Tutorial, Review, and Future Prospects",
+      "authors": [
+        "David Stenger",
+        "Paul Brunzema",
+        "Johanna Menn",
+        "Alexander von Rohr",
+        "Angela P. Schoellig",
+        "Sebastian Trimpe"
+      ],
+      "authors_text": "David Stenger, Paul Brunzema, Johanna Menn, Alexander von Rohr, Angela P. Schoellig, Sebastian Trimpe",
+      "abstract": "In the past decade, Bayesian optimization (BO) has emerged as a powerful and adaptable framework for automatic controller tuning and robot learning. This article offers a comprehensive overview of the state-of-the-art in BO, designed to support both researchers and practitioners in understanding recent advancements, practical applications, and future research directions. We begin by adopting a practitioner's perspective, illustrating how to effectively set up BO through a representative controller tuning example. We position BO within the broader context of learning paradigms, ranging from deep reinforcement learning to data-driven control, and highlight scenarios where BO is most advantageous. Next, we discuss the diverse range of BO methods that have been developed to tackle complex problems and specific applications. This article provides a unified perspective on the current landscape of BO, emphasizing its relevance to control systems and robotics, and it highlights future prospects by identifying key research challenges and promising avenues for advancing BO in the field. This includes addressing a significant gap in the BO landscape: the lack of standardized benchmark problems specifically for control-related applications. To foster future research and ensure rigorous evaluation, we start an effort towards a lightweight benchmark suite for control engineering and robotics. We also present metrics and best practices to facilitate direct comparisons between new BO algorithms and established state-of-the-art methods.",
+      "url": "http://arxiv.org/abs/2609.09403v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09403v1",
+      "tldr": "This paper reviews a decade of Bayesian optimization for controller tuning and robot learning, providing a practical tutorial, a unified survey of methods and applications, and future research directions while proposing benchmark and evaluation practices for the field.",
+      "detailed_reading": {
+        "motivation": "过去十年，贝叶斯优化已成为控制器自动整定与机器人学习的强大且通用框架，但控制与机器人社区仍缺乏面向该领域的标准化基准、系统评价和从实践者角度的统一指南。本文因此面向研究者与工程师，系统梳理BO在控制器整定和机器人学习中的方法、应用与未来方向，并特别强调控制相关基准缺失这一关键空白。",
+        "method": "论文采用教程、综述与展望相结合的结构：首先以代表性控制器整定任务为例，从实践者视角展示如何把控制器调参建模为黑箱优化问题，并介绍BO与高斯过程回归、采集函数等核心组件；随后将BO置于深度强化学习、数据驱动控制等学习范式中进行定位，比较其数据效率与适用场景；继而系统回顾BO关键设计选择及安全探索、约束处理、多目标优化、崩溃约束、时变环境等高级变体，并对110篇在硬件上进行在线参数整定的控制与机器人论文进行文献综述；最后提出基准测试最佳实践、评价指标与统计分析方法，并发布轻量级基准套件TuneControl及示例代码，以支持新算法与现有最优方法的直接比较。",
+        "result": "综述显示，BO在控制与机器人硬件在线整定中的应用持续增长，尤其适合实验代价高、需数据高效且仅能获得可测性能输出的黑箱场景；文献统计覆盖110篇控制与机器人硬件研究，说明BO已被广泛用于从PID、LQR到MPC等控制器整定。论文同时指出现有研究在标准化基准和系统评价方面存在明显缺口，并给出TuneControl这一面向控制工程与机器人学的轻量级可扩展基准套件，以及可直接用于公平比较的指标、基线和统计检验建议。",
+        "conclusion": "作者认为BO已成为控制器自动整定和机器人学习中的重要实验设计方法，其优势在于数据效率高、对系统假设少并能利用已有控制器结构；但要让BO在控制与机器人领域更稳健地发展，需要社区共同建立标准化基准、统一评价协议并开展严格统计比较。未来研究应重点关注安全约束、多目标、时变条件、真实硬件实验规范以及可复现的基准建设。",
+        "key_details": "关键实现细节包括：以高斯过程作为代理模型并配合采集函数平衡探索与利用；将控制器参数视为黑箱优化变量，以任务性能指标为观测，在有限试验预算下序贯决策；高级BO需处理安全探索、约束、多目标、崩溃约束和时间变化；基准方面强调基线选择、评价指标、统计分析与可复现性，并给出TuneControl轻量级基准套件。局限性在于该文主要是综述、教程和基准倡议，而非提出单一新算法或大规模实证验证，且控制相关标准化基准仍处于起步阶段，现有应用综述以硬件在线整定为主，可能受发表偏差和任务异质性影响。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.955950092590308,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.09380v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909380v1-accelmpc-high-rate-low-power-fpga-accelerated-model-predictive-control-for-tiny-drones",
+      "source": "arxiv",
+      "title": "AccelMPC: High-Rate, Low-Power FPGA-Accelerated Model Predictive Control for Tiny Drones",
+      "authors": [
+        "Andrea Grillo",
+        "Brian Plancher"
+      ],
+      "authors_text": "Andrea Grillo, Brian Plancher",
+      "abstract": "Unlocking the potential of tiny aerial robots requires order of magnitude improvements in the performance of embedded edge control. In particular, although recent cached model predictive control (MPC) solvers can handle the fast system dynamics and complex constraints required for agile drone flight, their computational demands remain prohibitive for resource-constrained robots, forcing prior implementations to operate at reduced control rates. AccelMPC overcomes this challenge through an end-to-end co-design approach that jointly optimizes the solver algorithm, numerical representation, hardware mapping, and physical integration. AccelMPC pairs a co-designed FPGA-accelerated alternating direction method of multipliers (ADMM)-based MPC solver with a custom 6g PCB, providing high-bandwidth communication for deployment on a 35g Crazyflie. Hardware experiments demonstrate 1 kHz onboard constrained MPC with dynamic obstacles, up to 15.6x faster solve times and 195.4x improvement in energy-delay product over state-of-the-art embedded microcontroller-based solvers, all while scaling to optimization problems with over 20,000 optimization variables and a comparable number of constraints. We release our PCB design files, firmware, and FPGA solver code open source.",
+      "url": "http://arxiv.org/abs/2609.09380v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09380v1",
+      "tldr": "AccelMPC enables 1 kHz onboard constrained model predictive control for a 35g Crazyflie via an end-to-end co-designed FPGA-accelerated ADMM solver and custom 6g PCB, achieving up to 15.6× faster solve times and 195.4× better energy-delay product than state-of-the-art embedded MCU solvers while handling over 20,000 optimization variables.",
+      "detailed_reading": {
+        "motivation": "微型空中机器人受尺寸、重量与功耗（SWaP）限制，其快速不稳定动力学却要求接近千赫兹的反馈频率，因此片上控制性能亟需数量级提升。已有的缓存式MPC求解器（如TinyMPC）虽能在Crazyflie级MCU上实现实时MPC，但在千赫兹控制率下每步只能完成一到两次ADMM迭代，约束激活时收敛不足，只能降低控制频率。这造成MPC承诺的显式约束预测控制与资源受限机器人实际能力之间的根本性差距。",
+        "method": "AccelMPC采用算法—数值表示—硬件映射—物理集成的端到端协同设计：输入为线性MPC问题，按交错顺序堆叠状态与输入得到块带状稀疏QP，用ADMM求解，其中w-更新为结构化线性方程组、y-更新为盒投影、λ-更新为对偶上升。离线缓存P、M与惩罚参数ρ，并预计算系数矩阵P+ρM^T M的带状Cholesky因子L（带内元素仅h个），在线求解退化为前代与回代两遍流式替换；同时将TinyMPC的矩阵级Riccati递推替换为标量级流水线友好的替换过程。在线阶段每控制步执行固定次数的ADMM迭代（保证确定性时延），对偶变量与辅助变量跨控制周期热启动，仅初始状态、参考窗口与约束上下界l、u在运行时更新。数值上使用32位定点算术，ρ限制为2的幂使乘除退化为移位，并把Cholesky每行对角元倒数存入行末以消除在线除法。两套互补的FPGA映射分别面向能效与可扩展性，配合自研6g PCB与Crazyflie（35g）通过高带宽低时延链路通信，部署于真实飞行闭环。",
+        "result": "硬件实验在35g Crazyflie上实现了1 kHz全机载带约束MPC，并在飞行中完成对动态障碍物的在线避障轨迹调整。相比最先进的嵌入式MCU求解器，求解时间最高快15.6倍，能量—时延积（EDP）改善最高达195.4倍，同时可扩展到超过20,000个优化变量及数量相当的约束。定点实现与IEEE-754单精度实现对比，量化带来的额外误差可忽略：预测位置RMSE差异约1e-6 m及以下、最大约束违反约1e-7 m、控制RMSE约1e-7。",
+        "conclusion": "结果表明，通过求解器结构、数值精度、硬件映射与物理集成的联合协同设计，FPGA加速的在线MPC可在极度受限的微型机器人平台上实现高带宽、显式约束的预测控制，突破了此前必须降频运行的瓶颈。作者据此提出FPGA硬件—算法协同设计是资源受限机器人实现高率约束预测控制的关键使能途径，并开源了PCB设计文件、固件与FPGA求解器代码（github.com/A2R-Lab）。",
+        "key_details": "关键点包括：采用TinyMPC式缓存ADMM，P、M、ρ离线固定，仅初始状态、参考窗口与l/u在线更新，牺牲少量灵活性换取大幅性能提升；用带状Cholesky因子替代Riccati递推或全矩阵求逆，前向/后向替换的循环依赖降到固定深度h的标量级，单次迭代复杂度随变量数线性增长O(N_var)，h由局部阶段耦合决定且几乎与预测时域无关，因此可流式流水线化；对比GPU方案需存储完整矩阵逆会超出嵌入式FPGA片上内存；32位定点、ρ取2的幂、存储对角元倒数消除在线除法，使在线算术仅含加、乘、移位与比较；每控制步固定ADMM迭代次数以保证确定性1 ms级控制周期与时延；对偶/辅助变量跨控制周期热启动利用时间相干性；局限在于定点量化精度、ρ调参自由度受限、依赖约束上下界在线可更新而P、M不变的结构假设，以及需自研PCB与FPGA带来额外硬件集成成本。"
+      },
+      "affiliations": [
+        "Dartmouth College",
+        "École Polytechnique Fédérale de Lausanne"
+      ],
+      "affiliations_text": "Dartmouth College, École Polytechnique Fédérale de Lausanne",
+      "score": 4.781278591512683,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.09234v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909234v1-learning-to-fly-stable-vision-guided-uav-servoing-with-compact-target-centric-cues-and-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Learning to Fly: Stable Vision-Guided UAV Servoing with Compact Target-Centric Cues and Reinforcement Learning",
+      "authors": [
+        "Saurbh Singh Jamwal",
+        "Nived Chebrolu"
+      ],
+      "authors_text": "Saurbh Singh Jamwal, Nived Chebrolu",
+      "abstract": "Vision-guided reinforcement learning for Unmanned Aerial Vehicles (UAVs) remains challenging due to unstable policy optimisation, aggressive exploration, and the cost of high-dimensional visual perception. In this work, we investigate long-horizon UAV visual servoing using compact target-centric cues combined with low-dimensional sensor measurements. Rather than learning directly from RGB images, lightweight target segmentation provides image-space offsets and relative depth, which are combined with quadrotor velocity and projected-gravity measurements into a compact 12D policy observation. We compare Direct PPO with three matched-budget curriculum strategies: a Visual curriculum that progressively expands target placement difficulty, a Dynamics curriculum that gradually relaxes action constraints and smoothing, and a Joint curriculum that combines both progressions. All strategies reach comparable nominal performance, with complementary advantages across tracking metrics. Observation ablations show that proprioceptive measurements are critical for stable flight and image-space cues for target alignment, while explicit depth is not necessary for strong performance in the evaluated setting. Against tuned classical visual-servo controllers, learned policies show greater robustness to strong control and visual perturbations, while the Visual curriculum exhibits the smallest degradation under unseen target motion. Overall, the results demonstrate that compact target-centric representations can support robust long-horizon aerial visual servoing and that visual curriculum training can improve robustness to dynamic distribution shifts despite limited gains in nominal performance.",
+      "url": "http://arxiv.org/abs/2609.09234v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09234v1",
+      "tldr": "This paper demonstrates that using compact target-centric visual cues—image-space offsets and relative depth combined with proprioceptive measurements in a 12D observation—with PPO and curriculum learning enables stable, robust long-horizon vision-guided UAV visual servoing that outperforms classical visual-servo controllers under perturbations.",
+      "detailed_reading": {
+        "motivation": "视觉引导无人机强化学习面临策略优化不稳定、探索激进及高维视觉感知成本高等问题；论文旨在研究长时程无人机视觉伺服，避免直接学习RGB图像，转而使用紧凑目标中心线索与低维传感器测量，以提升稳定性、训练可行性和鲁棒性。",
+        "method": "框架先用轻量目标分割从RGB-D中提取归一化图像横向/纵向偏移和相对深度，并与四旋翼机体线速度、角速度、投影重力拼接成12维策略观测；PPO策略输出集体推力与机体滚转、俯仰、偏航力矩四维连续动作，在IsaacLab并行环境中闭环训练。奖励由目标居中、深度调节、可见性、角运动正则和高度稳定组成，且直接PPO与三种课程策略共享相同奖励、网络、PPO超参和优化预算，课程仅改变难度进度：视觉课程逐步扩大目标深度和横纵向位移，动力学课程逐步放宽动作限幅与力矩尺度并降低动作平滑，联合课程同时施加二者。",
+        "result": "等预算下，直接PPO与视觉、动力学、联合课程策略在名义性能上相当，但在跟踪指标上各有互补优势；观测消融显示本体感受测量对稳定飞行至关重要，图像空间线索用于目标对齐，而在所评估范围内显式深度并非强性能必需。与调参后的经典2D/3D视觉伺服控制器相比，学习策略在强控制扰动和视觉扰动下鲁棒性更强，视觉课程策略在未见目标运动下性能退化最小。",
+        "conclusion": "紧凑目标中心表示能够支撑稳健的长时程空中视觉伺服，视觉课程训练虽未显著提升名义性能，但可改善动态分布偏移下的鲁棒性；这表明将感知压缩为任务相关的几何接口并结合强化学习是无人机视觉伺服的有效路线。",
+        "key_details": "关键实现包括12维观测（机体线速度、角速度、投影重力、归一化图像偏移u/v与相对深度d）、归一化动作到推力/力矩的映射、IsaacLab仿真以及基于颜色的目标分割掩码质心偏移，深度作为标量可由RGB-D、立体、单目深度估计或学习深度模块替代。实验采用每配置200回合、5个随机种子，成功步要求目标可见且中心与深度误差低于阈值，鲁棒性测试在动作噪声、视觉噪声和视觉丢失率均为0.2下零样本评估且不重调控制器；局限在于分割器未作基准比较、深度来自仿真、主要在仿真中验证，课程调度和奖励权重向真实部署的迁移仍需检验。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Bombay"
+      ],
+      "affiliations_text": "Indian Institute of Technology Bombay",
+      "score": 4.722087513334452,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2609.09313v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909313v1-from-learning-to-control-data-driven-multi-agent-reinforcement-learning-for-multivariable-control-in-a-microalgae-bioprocess",
+      "source": "arxiv",
+      "title": "From Learning to Control: Data-Driven Multi-Agent Reinforcement Learning for Multivariable Control in a Microalgae Bioprocess",
+      "authors": [
+        "Juan D. Gil",
+        "Ehecatl Antonio Del Rio Chanona",
+        "José Luis Guzmán",
+        "Manuel Berenguel"
+      ],
+      "authors_text": "Juan D. Gil, Ehecatl Antonio Del Rio Chanona, José Luis Guzmán, Manuel Berenguel",
+      "abstract": "Effective control of bioprocesses is particularly challenging due to the intrinsic nonlinearity and dynamic variability of living-cell systems. In microalgae-based photobioreactors (PBRs), maintaining stable pH and dissolved oxygen (DO) levels is critical for optimal growth and productivity, yet their strong coupling and sensitivity to environmental fluctuations make multivariable control difficult. This study proposes a novel hybrid offline-online Multi-Agent Reinforcement Learning (MARL) framework for simultaneous pH and DO regulation, leveraging Deep Deterministic Policy Gradient (DDPG) agents to achieve a fully data-driven and model-free control solution. The agents are trained using historical data generated by an expert system, eliminating the need for direct experimentation with the environment. After deployment, the agents operate autonomously, continuously fine-tuning their policies daily to adapt to evolving process dynamics and reject fast transient disturbances. Experimental validation in an open, industrial-scale PBR at the University of Almeria demonstrated the framework's capability to maintain stable operation under realistic conditions. The results confirm that model-free MARL control provides a robust and adaptive alternative for complex bioprocess environments.",
+      "url": "http://arxiv.org/abs/2609.09313v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09313v1",
+      "tldr": "This paper presents a hybrid offline-online multi-agent reinforcement learning framework using DDPG agents, trained on expert PID-generated data, to achieve model-free simultaneous pH and dissolved oxygen control in an industrial-scale microalgae photobioreactor, validated experimentally under real conditions.",
+      "detailed_reading": {
+        "motivation": "微藻光生物反应器中pH与溶解氧（DO）稳定控制对生长和产率至关重要，但活细胞系统具有强非线性、时变性和环境扰动敏感性，且两个变量强耦合，使多变量控制困难。现有MPC、MRAC和PID等方法依赖精确模型或先验约束，在开放工业级PBR中难以持续适应生物与环境波动，因此需要无模型、数据驱动的多变量控制方案。",
+        "method": "将pH与DO控制建模为部分可观测马尔可夫决策过程，观测包括pH、DO、温度、光照、稀释流量等过程与环境变量，动作为CO2注入流量Q_CO2与空气流量Q_air；采用分散式MARL，为pH和DO各配置一个DDPG智能体，每个智能体包含actor、critic及对应目标网络和经验回放缓冲区。离线阶段利用PID专家系统产生的历史数据训练，采样mini-batch最小化critic的Bellman时序差分损失，并按策略梯度更新actor，目标网络软更新；在线阶段将回放缓冲区预载历史数据，白天由智能体自主控制并采集新经验，每晚用新数据微调策略，以适配时变动态并抑制瞬态扰动。",
+        "result": "在西班牙阿尔梅里亚大学/IFAPA的开放工业级raceway PBR（80平方米）上进行了连续四天验证，框架在真实环境扰动下维持了pH和DO的稳定运行，表明离线-在线MARL可同时调节两个耦合变量。摘要报告该无模型控制方案能在现实条件下稳定工作，但未给出具体控制误差、超调量或与PID定量对比指标。",
+        "conclusion": "该研究证明基于DDPG的多智能体强化学习可作为复杂微藻生物过程的多变量无模型控制方案，减少对显式过程模型的依赖，并具备在线自适应与抗扰能力。作者称这是MARL控制策略首次在工业规模生物过程中得到验证，为生物过程控制提供了鲁棒、自适应的替代路径。",
+        "key_details": "实验对象为80平方米双通道raceway PBR，水道长40米、宽1米、深0.3米，配有桨轮混合，pH和DO在注入池后及通道末端测量，控制关注离注入点最远的通道末端；数据采集频率为每秒一次，主要扰动包括太阳辐射I和不规则稀释流量Q_d，且Q_air对pH存在明显耦合影响。训练数据来自PID专家控制器，避免直接实验；稳定性机制包括固定历史数据离线预训练、慢速在线微调和目标网络软更新；关键超参有折扣因子γ、软更新系数τ和mini-batch大小M，但奖励函数、学习率等细节在预览中未完整给出。局限在于仅四天开放PBR验证、依赖专家数据质量，分布式MARL的非平稳性仅通过离线预训练、慢速微调和软更新缓解。"
+      },
+      "affiliations": [
+        "University of Almería",
+        "Imperial College London"
+      ],
+      "affiliations_text": "University of Almería, Imperial College London",
+      "score": 4.529077884223989,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2609.09370v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909370v1-constraint-aware-discrete-black-box-optimization-using-tensor-decomposition",
+      "source": "arxiv",
+      "title": "Constraint-Aware Discrete Black-Box Optimization Using Tensor Decomposition",
+      "authors": [
+        "Keisuke Onoue",
+        "Ryosuke Kojima"
+      ],
+      "authors_text": "Keisuke Onoue, Ryosuke Kojima",
+      "abstract": "Discrete black-box optimization is often addressed using approaches such as Sequential Model-Based Optimization (SMBO), which aims to improve sample efficiency by fitting surrogate models that approximate a costly objective function over a discrete search space. In many real-world problems, the set of feasible inputs is often given by logical constraints known in advance. However, existing surrogate modeling techniques generally fail to capture the symbolic rules governing feasibility in discrete input spaces. In this paper, we propose a surrogate modeling approach based on tensor decomposition that captures the structure of discrete search spaces while directly integrating feasibility information. To implement this approach, we formulate surrogate model training as a constrained polynomial optimization problem and solve a relaxed formulation using a differentiable penalty term derived from T-norms. Our experiments on both synthetic and real-world benchmarks, including a pressure vessel design task, demonstrate that the proposed method improves sample efficiency by effectively guiding the search away from infeasible regions.",
+      "url": "http://arxiv.org/abs/2609.09370v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09370v1",
+      "tldr": "This paper proposes a constraint-aware tensor-decomposition surrogate model for discrete black-box optimization that integrates feasibility constraints via a differentiable T-norm penalty to improve sample efficiency by steering search away from infeasible regions.",
+      "detailed_reading": {
+        "motivation": "离散黑箱优化常用SMBO并通过代理模型提升样本效率，但现实问题中可行输入往往由预先已知的逻辑约束决定。现有代理建模技术通常难以在离散输入空间中捕获支配可行性的符号规则，导致搜索容易浪费在不可行区域。",
+        "method": "本文提出一种基于张量分解的代理建模方法：将离散搜索空间表示为张量，用低秩张量分解学习目标函数在离散组合上的结构；同时把预先给定的逻辑可行性约束编码为多项式/符号约束，与代理训练共同构成约束多项式优化问题，并用由T-norms导出的可微惩罚项进行松弛求解，从而可用梯度方法优化分解因子；在SMBO循环中，用该代理预测目标并评估可行性，采集函数在惩罚后选择候选点，查询昂贵黑箱目标并更新数据。",
+        "result": "在合成基准和真实基准（包括压力容器设计任务）上，所提方法相比现有代理/SMBO方法提升了样本效率，并能有效引导搜索远离不可行区域。",
+        "conclusion": "将张量分解代理与逻辑可行性约束直接结合，可为带约束离散黑箱优化提供一种可微、可扩展的建模范式，使有限评估预算更聚焦于可行且高价值的区域。",
+        "key_details": "关键点包括：输入为离散变量组合与已知逻辑约束，先验/结构假设为目标在张量分解下具有低秩性；训练损失由目标拟合误差与T-norm可行性惩罚组成，需调节张量秩、惩罚权重、采集策略和初始设计；实现上需将约束写成可微多项式形式并做松弛；局限可能在高维离散空间、复杂逻辑约束、张量秩选择及惩罚权重敏感性，真实任务含压力容器设计验证了实用性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.396737815527673,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.09399v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909399v1-a-general-representation-form-of-system-data-with-fundamental-lemma-as-a-special-case",
+      "source": "arxiv",
+      "title": "A general representation form of system data with fundamental lemma as a special case",
+      "authors": [
+        "Steven X. Ding",
+        "Linlin Li"
+      ],
+      "authors_text": "Steven X. Ding, Linlin Li",
+      "abstract": "This note introduces a general data representation of dynamic systems.",
+      "url": "http://arxiv.org/abs/2609.09399v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09399v1",
+      "tldr": "The paper introduces a general data representation for dynamic systems that includes the fundamental lemma as a special case.",
+      "detailed_reading": {
+        "motivation": "数据驱动控制与系统辨识中，Willems 基本引理为利用输入输出数据直接刻画系统轨迹提供了基石，但它依赖线性时不变、无噪声和持续激励等条件，适用范围受限。作者希望给出更一般的系统数据表示形式，使基本引理成为其特例，从而统一理解不同系统与数据条件下的轨迹生成机制。",
+        "method": "论文引入一般的动态系统数据表示：给定若干条测量轨迹，将输入输出序列按时间堆叠为数据矩阵（如 Hankel 或广义 Hankel 矩阵），并考虑系统的行为集合；通过构造数据矩阵的列空间或核空间，将任意系统轨迹表示为已测数据的线性组合，同时用系数矩阵或约束方程保证输入输出与时间移位的一致性。对于线性时不变系统，当输入满足持续激励且数据矩阵满秩时，该一般表示退化为 Willems 基本引理中的轨迹参数化；对于更一般的系统，则通过数据矩阵的秩条件或映射关系给出可达轨迹的刻画。",
+        "result": "核心发现是：基本引理所给出的“所有轨迹均可由数据矩阵列线性组合生成”并非线性时不变数据独有，而是一般数据表示的一个特例；在适当秩条件与持续激励条件下，一般表示可精确覆盖系统行为，并保持与基本引理一致的参数化形式。论文未在摘要中给出数值指标，主要贡献为形式化定理与特例归约。",
+        "conclusion": "该文为系统数据表示提供了一个统一框架，将 Willems 基本引理纳入更一般的轨迹参数化中，有助于厘清数据驱动控制中数据矩阵、持续激励与系统行为等价性之间的关系，并为推广到更广泛系统或数据条件提供理论基础。",
+        "key_details": "关键细节包括：以输入输出轨迹构造数据矩阵，用 Hankel 结构编码时间移位；通过列空间或核空间和系数矩阵的约束刻画轨迹；基本引理对应线性时不变、无噪声、输入持续激励且数据矩阵列满秩的特殊情形。该方法属解析代数框架，无训练损失，超参涉及 Hankel 深度与持续激励阶数；计算复杂度随轨迹长度和 Hankel 深度增长。局限性在于一般表示仍依赖精确数据与秩条件，噪声、非线性、时变及有限数据长度下的鲁棒性未在摘要中展开，实际应用需注意持续激励阶数与数据量的匹配。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.395873158487503,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.09295v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909295v1-support-discovery-with-iteratively-reweighted-least-squares-for-fixed-charge-network-flow",
+      "source": "arxiv",
+      "title": "Support Discovery With Iteratively Reweighted Least Squares for Fixed-Charge Network Flow",
+      "authors": [
+        "Sindura Saraswathi",
+        "Christian Kümmerle"
+      ],
+      "authors_text": "Sindura Saraswathi, Christian Kümmerle",
+      "abstract": "The fixed-charge network flow problem (FCNFP) couples continuous flow allocation with discrete arc-activation decisions, making it a canonical but computationally challenging model for a variety of network design and resource allocation problems. Exact mixed-integer linear programming formulations capture the fixed-charge structure faithfully, but often become difficult to solve on large networks. We propose a scalable continuous-optimization algorithm for large-scale single-commodity FCNFP based on an iteratively reweighted least-squares (IRLS) framework. The method replaces the discontinuous fixed-charge and linear arc cost objective with a smooth nonconvex Lasry--Lions surrogate and solves a sequence of weighted quadratic flow subproblems. Each subproblem is solved by a warm-started dual semismooth Newton method whose Newton systems have weighted graph-Laplacian structure, enabling the use of modern Laplacian solvers. To further improve the discovered arc supports of the challenging underlying combinatorial problem, we also develop an algorithmic variant that incorporates objective-driven perturbation restarts and an anchor-union restricted search that jointly leverages supports discovered by IRLS and by complementary FCNFP heuristics. Computational experiments on 410 benchmark, synthetic, and large-scale instances show that our method obtains the best objective quality among the evaluated scalable FCNFP algorithms, with a mean gap of $1.316\\%$ to a time-limited MILP reference and a win-or-tie rate of $90.0\\%$ among the non-MILP methods. The results indicate that combining smooth continuous optimization with support-level search is an effective strategy for producing high-quality feasible solutions to large-scale FCNFP.",
+      "url": "http://arxiv.org/abs/2609.09295v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09295v1",
+      "tldr": "This paper proposes a scalable iteratively reweighted least-squares algorithm using a smooth Lasry–Lions surrogate and support-improvement search to find high-quality feasible solutions for large-scale fixed-charge network flow problems.",
+      "detailed_reading": {
+        "motivation": "固定费用网络流（FCNFP）同时耦合连续流量分配与离散弧激活决策，是网络设计与资源配置的经典模型，但因固定费用项非连续、问题NP难，精确MILP在大网络上往往难以求解甚至无法证明最优。作者希望在不显式求解混合整数搜索的前提下，利用连续优化和网络流结构为大规模单商品FCNFP生成高质量可行解。",
+        "method": "输入为有向网络 G=(V,E)、每条弧的容量 c_e、比例成本 r_e、固定成本 b_e 以及节点需求 d，用关联矩阵 C 建模为 min Σ(r_e f_e + b_e 1{|f_e|>0}) s.t. Cf=d, 0≤f_e≤c_e。方法用 Lasry-Lions 双包络光滑非凸代理替代不连续的固定加线性成本，代理分近零二次区、过渡区与活动区三段，由 λ>μ>0 控制，α=λ/(λ+sλ0) 且 s=10^-2，过渡点 x1、x2 保证连续可微。在 IRLS 框架中，每轮根据当前流量按代理曲率计算边权 W_k，把问题化为加权二次流子问题 min 1/2 f^T W_k f s.t. Cf=d, 0≤f≤c；小流量获得大权重以促其消失，大流量权重较小以集中支持。每个子问题用热启动对偶半光滑牛顿法求解，其牛顿系统具有加权图拉普拉斯结构，可借助现代拉普拉斯求解器；改进版还加入目标驱动扰动重启和 anchor-union 限制搜索，联合 IRLS 与外部 FCNFP 启发式发现的支持并在受限子图上重跑 IRLS。",
+        "result": "在410个基准、合成与大规模实例上，该方法在所评估的可扩展FCNFP算法中取得最佳目标质量，相对时间受限MILP参考的平均gap为1.316%，在非MILP方法中的胜或平率为90.0%。作为对比，时间受限的OR-Tools MILP基线能求解60节点/400弧实例，但在120节点/1500弧处开始无法证明最优，并在所有1000节点/20000弧实例上均无法证明最优。",
+        "conclusion": "结果表明，将光滑连续优化与支持级组合搜索结合，是生成大规模FCNFP高质量可行解的有效策略，尤其适用于精确MILP过慢或只能给出次优可行流的场景。该方法本质上是一种原始启发式算法，不尝试证明全局最优性。",
+        "key_details": "关键实现点包括：Lasry-Lions代理的三段权重 w_e 分别为 1/(λ-μ)、(T_e-|f_e|)/(μ|f_e|) 与 r_e/|f_e|+α b_e/|f_e|^2，其中 T_e=λ r_e+sqrt(2λ b_e)，x2 由 S_e=T_e-μ r_e 确定；λ随迭代减小以逐步增强非凸性并逼近原目标，μ受逐边上界约束以保证过渡点实且有序。理论上在受限参数域和精确解析权重下，IRLS更新构成对固定参数代理的majorization-minimization；数值实现会裁剪权重并非精确求解二次规划，因此直接验证代理下降。子问题规模与图拉普拉斯系统相关，借助近线性拉普拉斯求解器提升可扩展性；局限在于非凸性导致无全局最优保证，性能依赖平滑调度、扰动重启质量以及外部启发式提供锚支持的好坏。"
+      },
+      "affiliations": [
+        "University of Central Florida"
+      ],
+      "affiliations_text": "University of Central Florida",
+      "score": 4.38229282672979,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.09254v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/10/260909254v1-difflut-net-differentiable-training-of-fpga-lut-networks-with-learnable-connectivity",
+      "source": "arxiv",
+      "title": "DiffLUT-Net: Differentiable Training of FPGA LUT Networks with Learnable Connectivity",
+      "authors": [
+        "Jiaqi Ye",
+        "Xinrui Gong",
+        "Jingcun Wang",
+        "Olga Kondrateva",
+        "Bing Li",
+        "Grace Li Zhang"
+      ],
+      "authors_text": "Jiaqi Ye, Xinrui Gong, Jingcun Wang, Olga Kondrateva, Bing Li, Grace Li Zhang",
+      "abstract": "Field-programmable gate arrays (FPGAs) enable efficient neural-network inference, but most deployment flows either accelerate multiply-accumulate operations or convert pretrained quantized models into lookup tables (LUTs). We present DiffLUT-Net, an FPGA-native network connected by six-input LUTs that are trained from scratch. We jointly learn the 64 truth-table entries of a LUT and the source to each of its six input ports using a differentiable LUT function relaxation and hardware source selection. After training, the truth tables and connections are discretized, unused logic can be pruned, and the network is exported directly as synthesizable Verilog. Across five benchmarks, DiffLUT-Net achieves favorable accuracy-resource trade-offs. These results demonstrate the effectiveness of jointly learning LUT functions and sparse connectivity for compact FPGA-native inference. The code is available at https://github.com/TUDa-HWAI/DiffLUT-Network.",
+      "url": "http://arxiv.org/abs/2609.09254v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09254v1",
+      "tldr": "DiffLUT-Net is an FPGA-native neural network that jointly learns each six-input LUT’s truth table and input connectivity from scratch through differentiable relaxations, then discretizes and exports the trained network as synthesizable Verilog, achieving favorable accuracy–resource trade-offs across five benchmarks.",
+      "detailed_reading": {
+        "motivation": "FPGA推理部署常将训练与硬件实现分离，先训练MAC网络再量化或映射为LUT，导致学习到的模型与FPGA原语之间存在鸿沟；已有真值表转换方法受输入位宽指数增长限制，而直接训练逻辑或LUT网络的方法又未必同时优化LUT函数与物理连接并走通完整硬件流程。",
+        "method": "DiffLUT-Net以六输入LUT6为基本计算单元从零训练，流程包括温度计编码将实值特征转为二进制信号、一个或多个可训练LUT6层、GroupSum按类别分组累加最后层LUT输出并取最大和为预测。每个LUT的64个真值表项用参数lambda_j经sigmoid得到omega_j，并以K输入LUT的多线性松弛 y=sum_{u=0}^{2^K-1} omega_j prod_i x_i^{a_i}(1-x_i)^{1-a_i} 进行可微训练；层间连接用连接矩阵A学习，每个LUT输入端口在训练时考虑上一层所有输出，训练后每个端口保留一个源进行硬选择。训练完成后将真值表二值化、固定连接、剪除未用逻辑，并导出可综合Verilog，再做布局布线后FPGA评估。",
+        "result": "在五个基准上，DiffLUT-Net取得有利的精度-资源权衡；摘要给出的代表性结果包括紧凑JSC CERNBox模型达到72.5%精度，以及在MNIST上相当精度下紧凑配置的资源占用显著更优。与算术加速器、训练后真值表方法以及直接训练的逻辑或LUT网络相比，联合学习LUT函数与稀疏连接可实现更紧凑的FPGA原生推理。完整训练到硬件流程在Vivado布局布线后得到验证。",
+        "conclusion": "结果表明，将LUT真值表与输入端口连接作为可微参数联合优化，可在保持FPGA合法布线的同时获得紧凑且精度可接受的FPGA原生网络；DiffLUT-Net提供了从训练、离散化、剪枝到可综合Verilog导出的端到端路径，说明硬件原生LUT网络是低延迟FPGA推理的可行方向。",
+        "key_details": "关键实现点包括：输入采用分布感知的温度计二进制编码；每个LUT6有64个可训练参数，经sigmoid约束到[0,1]，推理时以0.5阈值二值化；连接矩阵A的a_{i,j}连接上一层输出y_j与当前层输入端口x_i，每六个连续行对应一个LUT6的六个输入端口，训练后每端口选一个源并暴露未用上游逻辑以供剪枝；最后层LUT输出由GroupSum分到类别组并取最大组和分类。局限是LUT真值表随输入位数指数增长，因此方法依赖LUT6固定扇入、低精度或稀疏连接和剪枝；预览未给出损失函数、优化器、超参、直通估计及离散化误差处理细节，完整复现需参考原文与开源代码。"
+      },
+      "affiliations": [
+        "TU Darmstadt",
+        "TU Ilmenau"
+      ],
+      "affiliations_text": "TU Darmstadt, TU Ilmenau",
+      "score": 4.364458681182643,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2609.09163v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909163v1-world-time-compute-with-verified-code-world-models",
+      "source": "arxiv",
+      "title": "World-Time Compute with Verified Code World Models",
+      "authors": [
+        "James Schwoebel",
+        "Ingrida Semenec",
+        "Jenia Rousseva",
+        "Marcos Ortiz",
+        "Collin Overbay",
+        "Christopher Klaus",
+        "Anderson Edmond",
+        "Manish Bhatt",
+        "Rome Thorstenson",
+        "Jessica Tsai",
+        "Martin G. Frasch"
+      ],
+      "authors_text": "James Schwoebel, Ingrida Semenec, Jenia Rousseva, Marcos Ortiz, Collin Overbay, Christopher Klaus, Anderson Edmond, Manish Bhatt, Rome Thorstenson, Jessica Tsai, Martin G. Frasch",
+      "abstract": "LLMs generalize across a domain only after seeing many real, labeled examples, which most domains lack. We study a way to manufacture it cheaply. When a domain's dynamics can be written as code, one template instantiates into many world models: executable, verifiable programs over symbolic state, each an inexhaustible source of exactly-labeled trajectories. Fine-tuning an LLM on trajectories through many such worlds, which we call world-time compute, a training-time analogue of test-time compute, lifts generalization to held-out worlds it never trained on (synthesized world families). Gains are largest where capability is scarcest: +29 points at 0.5B; the largest model's lift is within noise, consistent with saturation. Labels can be trusted because the worlds are verified code: synthesized-then-checked dynamics are exact over 20-step rollouts and answer 10x out-of-distribution probes exactly (100%), whereas per-step LLM and MLP predictors compound error and collapse. Unlike domain randomization, each world is independently authored and verified; a corrupted-label control shows label exactness, not task variety, drives the gains. On real benchmarks (ARC-AGI grids, List Functions, CLRS) the same lever holds as per-world test-time training. On List Functions the harder cross-world form holds: one adapter trained on 128 disjoint worlds reaches 40% on held-out worlds versus 6% for a corrupted-label control (+34 points, CI [29, 39]). The gain is a saturating regularity, not a law: largest for few-step reasoning and small/weak models, fading for long chains, perception-induced tasks, and saturated tasks; cross-task transfer is weak without shared skill. Worlds are authored and served by OpenWorld, a zero-dependency framework (companion paper). Scope: symbolic state; pixel-native domains remain territory of learned models. All code, recipes, and this manuscript regenerate from one repository.",
+      "url": "http://arxiv.org/abs/2609.09163v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09163v1",
+      "tldr": "Fine-tuning LLMs on trajectories from many independently verified code-based world models—dubbed world-time compute—drives generalization to held-out symbolic worlds mainly through exact labels rather than task variety, with large gains for small or weak models and saturation at scale.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.205264663066824,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.09213v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909213v1-geometry-conditioning-in-an-embodied-slm-training-controls-and-robustness-diagnostics-in-a-08b-hybrid-model",
+      "source": "arxiv",
+      "title": "Geometry Conditioning in an Embodied SLM: Training Controls and Robustness Diagnostics in a 0.8B Hybrid Model",
+      "authors": [
+        "Hao Li",
+        "Haofei Sun",
+        "Lin He"
+      ],
+      "authors_text": "Hao Li, Haofei Sun, Lin He",
+      "abstract": "We study how physical-state inputs affect a 0.8B hybrid language model adapted for manipulation with 6.2M trainable parameters. Six conditions are trained on three LIBERO-Spatial tasks and evaluated over three seeds and 540 held-out rollouts. Conditioning recurrent decay gates on geometric increments yields 28.9% success, compared with 36.7% when those increments are shuffled during training and 24.4% without explicit object/goal geometry. Both geometry policies receive correct inputs at evaluation. A token adapter using the same increments scores 27.8%; differences vary across seeds and remain inconclusive. Token-clock conditioning scores 11.1%, including one seed that fails to converge. In separate robustness tests, a state-only relative-coordinate policy retains 7/10 success under frame relabeling, whereas all four tested visual policies fall to at most 3/20 after a 5 cm object displacement. These results show no reliable advantage from training-time geometric alignment under this recipe and illustrate the gap between coordinate invariance and physical-layout generalization. Episode records, seed-level analyses, and figure-generation code accompany the paper.",
+      "url": "http://arxiv.org/abs/2609.09213v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09213v1",
+      "tldr": "This paper finds that training-time geometry conditioning in a 0.8B hybrid embodied language model yields no reliable manipulation advantage over shuffled or absent geometry, and that state-only relative-coordinate policies are robust to frame relabeling but visual policies fail under physical object displacement, exposing a gap between coordinate invariance and physical-layout generalization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Tennessee, Knoxville"
+      ],
+      "affiliations_text": "University of Tennessee, Knoxville",
+      "score": 4.187445825658091,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.09210v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909210v1-identifying-habit-physics-and-nuisance-in-robot-world-models",
+      "source": "arxiv",
+      "title": "Identifying Habit, Physics, and Nuisance in Robot World Models",
+      "authors": [
+        "Jinting Hang",
+        "Zhenhui Cai"
+      ],
+      "authors_text": "Jinting Hang, Zhenhui Cai",
+      "abstract": "Teleoperated demonstrations are often multimodal even when the underlying dynamics are nearly deterministic given the executed action. We argue that this multimodality typically mixes three factors--operator habit in action selection, shared physics, and observation nuisance--and that entangled next-observation predictors absorb all three. We formalize the split with a structural causal model a=g(h,z,u), z'=f(z,a), o=r(z,c), and test it with complementary interventions: replacing or shuffling actions at fixed state sharply increases next-state error, whereas appearance and camera changes should not; habit-aware reverse scoring improves ranking of feasible pasts without rewriting the dynamics. The associated adaptation rule is to freeze a shared physics readout and update only a thin interface. On StackCube, DROID, and RH20T this rule improves low-shot transfer relative to training from scratch, retains cleaner dynamics under corrupted adaptation data, and extends from proprioception to pixel observations with multi-view and multi-step checks. We do not equate latent actions with operator habit, and we do not target large-scale video generation benchmarks.",
+      "url": "http://arxiv.org/abs/2609.09210v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09210v1",
+      "tldr": "This paper proposes a structural causal model that disentangles operator habit, shared physics, and observation nuisance in robot world models, and shows that freezing the learned physics while adapting only a thin policy/interface improves low-shot transfer and preserves cleaner dynamics across StackCube, DROID, and RH20T.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvest Praxis"
+      ],
+      "affiliations_text": "Harvest Praxis",
+      "score": 4.167961905580212,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.09217v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909217v1-design-and-attitude-control-of-an-underwater-quadruped-robot",
+      "source": "arxiv",
+      "title": "Design and Attitude Control of an Underwater Quadruped Robot",
+      "authors": [
+        "Davide Molinaroli",
+        "Mohit Singh",
+        "Kostas Alexis"
+      ],
+      "authors_text": "Davide Molinaroli, Mohit Singh, Kostas Alexis",
+      "abstract": "Legged robots are versatile on land, but their use in underwater environments remains limited. Extending quadruped locomotion to water enables amphibious mobility with applications in inspection, environmental monitoring and disaster response. This paper presents the design, modeling, and experimental validation of a reproducible underwater quadruped robot. The robot is built around custom waterproof motor housings machined from polyoxymethylene plastic, which use off-the-shelf O-rings and dynamic shaft seals. A simplified model is derived to describe the dynamics of this underwater legged system, capturing how drag forces on spherical end effectors transmit torque to the floating base. Building on this model, a closed-loop attitude controller is developed using an error formulation defined on the special orthogonal group SO(3). The controller is evaluated both in simulation and experimentally in a water tank, where the robot tracks desired orientation setpoints in roll, pitch and yaw.",
+      "url": "http://arxiv.org/abs/2609.09217v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09217v1",
+      "tldr": "This paper presents the design, simplified drag-based modeling, and experimental validation of a reproducible underwater quadruped robot with custom waterproof motor housings and an SO(3) closed-loop attitude controller that tracks roll, pitch, and yaw setpoints in a water tank.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Norwegian University of Science and Technology"
+      ],
+      "affiliations_text": "Norwegian University of Science and Technology",
+      "score": 4.136239235830476,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.09250v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909250v1-no-free-checker-a-survey-of-verifiers-for-robot-policies",
+      "source": "arxiv",
+      "title": "No Free Checker: A Survey of Verifiers for Robot Policies",
+      "authors": [
+        "Yang Wan",
+        "Xihang Yue",
+        "Zhirui Liu",
+        "Ziyuan Chu",
+        "Shuxun Wang",
+        "Yuhan Chen",
+        "Xiaonan Jiang",
+        "Xukun Zhu",
+        "Yubo Dong",
+        "Linchao Zhu"
+      ],
+      "authors_text": "Yang Wan, Xihang Yue, Zhirui Liu, Ziyuan Chu, Shuxun Wang, Yuhan Chen, Xiaonan Jiang, Xukun Zhu, Yubo Dong, Linchao Zhu",
+      "abstract": "A verifier for robot policies reads a candidate behavior and returns a score for how well it did, used both to evaluate vision-language-action policies and to train them. Verifiers range from success detectors and reward models to runtime monitors, safety filters, and temporal-logic specifications. We survey roughly 150 verifiers and compare them along two properties. Availability is how much a verdict costs, how early in a rollout the verdict arrives, and how often a verdict can be asked for. Availability rises as verdicts get cheaper, earlier, and denser. Credibility is how much a high score tells us about the task. Credibility falls as the judgment becomes gameable and self-serving. We group the verifiers by who supplies the judgment: human verifiers, rule-based and formal verifiers, learned and pretrained verifiers, and model-intrinsic verifiers. Across the four families, we find that credibility falls as availability rises. Regardless of who supplies the judgment, there is no free checker. We then examine what validates a verifier itself, and how much a high score tells us. Three measures appear in the literature: agreement with human labels, the performance of the policy it trains, and behavior under reward hacking. We close with nine metrics that make a verifier claim checkable, and coordinates for the verifiers still to be built.",
+      "url": "http://arxiv.org/abs/2609.09250v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09250v1",
+      "tldr": "This survey of roughly 150 verifiers for robot policies categorizes them by judgment source—human, rule-based/formal, learned/pretrained, and model-intrinsic—and finds a fundamental trade-off in which credibility falls as availability rises, concluding that “there is no free checker” and proposing metrics to make verifier claims checkable.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University",
+        "City University of Hong Kong"
+      ],
+      "affiliations_text": "Zhejiang University, City University of Hong Kong",
+      "score": 4.092184639371664,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.09367v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909367v1-explaining-f-divergence-based-regularization-via-local-curvature-and-sharpness-aware-minimization",
+      "source": "arxiv",
+      "title": "Explaining f-Divergence-Based Regularization via Local Curvature and Sharpness-Aware Minimization",
+      "authors": [
+        "Nour Jamoussi",
+        "Marios Kountouris"
+      ],
+      "authors_text": "Nour Jamoussi, Marios Kountouris",
+      "abstract": "Divergence-based regularization and Sharpness-Aware Minimization (SAM) are two prominent approaches for improving generalization in deep learning, both motivated by robustness to perturbations. However, their relationship has remained largely unexplored. Building on classical second-order expansions of $f$-divergences, we show that the two methods are locally consistent under parameter-space perturbations: both induce curvature-sensitive penalties, with divergence regularization yielding a Fisher-weighted quadratic form and SAM penalizing sharpness through the dominant Hessian eigenvalue. For negative log-likelihood objectives with exponential-family output distributions, this correspondence becomes especially transparent, since the Fisher and Gauss-Newton matrices coincide. We further show that the same local geometric perspective extends to input-space perturbations, where divergence-based regularization is defined through transformations of the input. In this setting, the regularizer induces a pullback quadratic form on the input space, providing a more general perturbation framework than standard SAM while preserving the same local sensitivity interpretation. To validate the analysis empirically, we use the asymmetric $α$-skew Jensen-Shannon divergence (JSD) family as a controlled testbed. Its local curvature coefficient scales as $α(1-α)$ and is maximized at the symmetric point $α=\\tfrac12$, which recovers the standard JSD. Loss-landscape visualizations in the input-perturbation regime show that stronger induced curvature penalization is associated with flatter local minima. Experiments on four benchmark datasets further demonstrate that both accuracy and negative log-likelihood are consistently best near this regime of maximal curvature penalization.",
+      "url": "http://arxiv.org/abs/2609.09367v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09367v1",
+      "tldr": "This paper shows that f-divergence-based regularization and Sharpness-Aware Minimization are locally consistent curvature-sensitive penalties—divergence regularization inducing a Fisher-weighted quadratic form and SAM penalizing the dominant Hessian eigenvalue—and validates this geometric view with α-skew Jensen-Shannon divergence, where maximal curvature penalization at α=1/2 yields flatter minima and the best accuracy/NLL.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.050146421591879,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.09361v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909361v1-communication-efficient-admm-over-hierarchical-networks",
+      "source": "arxiv",
+      "title": "Communication-efficient ADMM over Hierarchical Networks",
+      "authors": [
+        "Binh Nguyen",
+        "Shuangqing Wei",
+        "Truong X. Nghiem"
+      ],
+      "authors_text": "Binh Nguyen, Shuangqing Wei, Truong X. Nghiem",
+      "abstract": "This paper develops a novel distributed optimization algorithm based on the Alternating Direction Method of Multipliers (ADMM) to solve hierarchical optimization problems over tree-structured networks, termed hierarchical ADMM (hADMM), with a particular focus on enhancing communication efficiency across the network. By rearranging the augmented Lagrangian to establish a query-response communication mechanism between nodes that explicitly exploits the hierarchical tree structure, the proposed algorithm significantly reduces communication costs compared to existing ADMM-based methods for hierarchical optimization. Furthermore, hADMM guarantees asymptotic convergence under convexity assumptions. We also present a convergence rate analysis based on linear matrix inequalities to characterize the maximum theoretically achievable convergence rates across different network topologies, showing that the proposed hADMM attains linear convergence under mild conditions. Three numerical experiments demonstrate that hADMM is compatible with arbitrary tree network structures and outperforms existing approaches in terms of communication efficiency.",
+      "url": "http://arxiv.org/abs/2609.09361v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09361v1",
+      "tldr": "The paper proposes hADMM, a communication-efficient distributed ADMM algorithm for tree-structured hierarchical optimization that exploits parent-child query-response exchanges to reduce communication costs while guaranteeing asymptotic convergence and, under mild conditions, linear convergence.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Louisiana State University",
+        "University of Central Florida"
+      ],
+      "affiliations_text": "Louisiana State University, University of Central Florida",
+      "score": 3.9490411843761812,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.09241v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909241v1-distribution-consistent-inference-for-dynamic-sparse-mixture-of-experts",
+      "source": "arxiv",
+      "title": "Distribution-Consistent Inference for Dynamic Sparse Mixture-of-Experts",
+      "authors": [
+        "Dohyeon Kim",
+        "Bedionita Soro",
+        "Sung Ju Hwang"
+      ],
+      "authors_text": "Dohyeon Kim, Bedionita Soro, Sung Ju Hwang",
+      "abstract": "Mixture-of-Experts (MoE) architectures have emerged as a powerful paradigm for scaling model capacity while preserving efficient inference in large foundation models. However, most MoE models use a fixed top-$k$ expert selection policy, assigning the same expert budget to every token even when fewer experts may be sufficient. Inference-time dynamic top-$k$ routing can reduce computation without retraining, but existing methods often overlook the distributional shift caused by deviating from the training-time routing configuration. We show that reducing the number of activated experts consistently increases the RMS scale and variance of SMoE outputs, inducing a representation mismatch that contributes to downstream performance degradation in addition to the loss of expert capacity. To address this correctable component, we propose Layer-wise Distribution Alignment (LDA), a lightweight inference-time correction that uses layer-wise calibration statistics to align reduced-routing representations with the default configuration. Across multiple SMoE LLMs, benchmarks, and routing strategies, LDA recovers much of the performance lost induced by the distributional shift under reduced routing while preserving sparse-inference efficiency with negligible overhead.",
+      "url": "http://arxiv.org/abs/2609.09241v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09241v1",
+      "tldr": "The paper shows that dynamic top-k routing in sparse Mixture-of-Experts LLMs causes a correctable distributional shift—increased RMS scale and variance in layer outputs—and proposes Layer-wise Distribution Alignment (LDA), a lightweight inference-time correction that aligns reduced-routing representations with the default top-k distribution to recover performance while preserving efficiency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "DeepAuto.ai",
+        "KAIST"
+      ],
+      "affiliations_text": "DeepAuto.ai, KAIST",
+      "score": 3.7647158148638264,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.09257v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909257v1-accountable-and-uncertainty-aware-evaluation-of-sensor-based-ai-under-distribution-shift-devices-subjects-and-nearly-three-years-underground",
+      "source": "arxiv",
+      "title": "Accountable and uncertainty-aware evaluation of sensor-based AI under distribution shift: devices, subjects, and nearly three years underground",
+      "authors": [
+        "Benny Platte",
+        "Rico Thomanek",
+        "Christian Roschke",
+        "Marc Ritter"
+      ],
+      "authors_text": "Benny Platte, Rico Thomanek, Christian Roschke, Marc Ritter",
+      "abstract": "Sensor-based AI systems are rarely operated under the conditions under which they were trained: devices, personnel and recording epochs change, and each change degrades performance in ways a random train-test split cannot reveal. We propose a staged, accountable evaluation protocol that treats the evaluation of a deployed model as a measurement with declared reference levels and a quantified uncertainty. Four cumulative generalisation stages hold out devices, subjects and time. Each stage is judged on quantiles of repeated trainings against chance references with the correct class count, an out-of-present-scope rate exposes silent misdirection towards classes that are no longer present in deployment relative to training, and an explicit decision rule ties roll-out decisions not to means but to 5% quantiles. We demonstrate the protocol on infrastructure-free geomagnetic localisation with smartphone-based recurrent classifiers in two real underground mines, including a replication of the scheme's training stages at the second site. Unchanged models are re-evaluated on data recorded 34 months after the training campaign, on a device generation unknown at training time and with a held-out surveyor. The 5% quantile of their present-conditioned precision there is 0.39 over 299 repeated trainings, 16.5 times the chance level; across the composition of the 42 reachable location classes the figure varies by +/-0.08, several times the spread between repeated runs. Repeated trainings of a single configuration show why means mislead: a bimodal configuration passes a mean-based test decisively while its 5% quantile lies more than an order of magnitude below chance.",
+      "url": "http://arxiv.org/abs/2609.09257v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09257v1",
+      "tldr": "This paper proposes a staged, uncertainty-aware, and accountable evaluation protocol for sensor-based AI under distribution shift that cumulatively holds out devices, subjects, and time and judges performance by quantiles against chance references, demonstrated on smartphone-based geomagnetic localisation in two underground mines where unchanged recurrent models re-evaluated after 34 months achieved a 5% quantile precision of 0.39 (16.5× chance), showing that mean-based reporting can mislead deployment risk.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Mittweida University of Applied Sciences"
+      ],
+      "affiliations_text": "Mittweida University of Applied Sciences",
+      "score": 3.718872662596038,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.09376v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909376v1-experimental-validation-of-combined-imaging-and-vibration-mitigation-for-high-altitude-platforms",
+      "source": "arxiv",
+      "title": "Experimental Validation of Combined Imaging and Vibration Mitigation for High-Altitude Platforms",
+      "authors": [
+        "Ákos Radványi",
+        "Anita Keszler",
+        "Dániel Balogh",
+        "Béla Takarics",
+        "András Majdik",
+        "Andrej Tokarjev",
+        "Gábor Kovács",
+        "Tamás Szirányi",
+        "Bálint Vanek"
+      ],
+      "authors_text": "Ákos Radványi, Anita Keszler, Dániel Balogh, Béla Takarics, András Majdik, Andrej Tokarjev, Gábor Kovács, Tamás Szirányi, Bálint Vanek",
+      "abstract": "The demand for continuous, high-resolution aerial monitoring is driving interest in High- Altitude Pseudo-Satellites (HAPS), which offer a cost-effective alternative to satellites with greater flexibility. While HAPS platforms provide valuable Earth observation potential, se- lecting an optical sensor requires balancing resolution and payload constraints, given their lightweight structures. We propose a multidisciplinary concept to enhance the Earth obser- vation capabilities of HAPS using a commercially available, weight-efficient distributed camera network, combined with advanced image processing and active vibration control. A super- resolution pipeline is introduced, where images from individual cameras are preprocessed and fed into a super-resolution algorithm. The low structural rigidity of HAPS platforms increases their sensitivity to low-frequency vibrations, which must be mitigated through active control to preserve imaging performance. A nominal H-infinity mixed-sensitivity controller is designed to suppress resonance peaks at camera locations. The methodology is experimentally validated on a simplified wing platform designed for real-time testing. Quantitative evaluation based on nine metrics demonstrates significant image quality improvements, highlighting the effectiveness of H-infinity control in mitigating low-frequency elastic modes and stabilizing the platform for super- resolution. These results show that lightweight commercial sensors, combined with advanced image processing and control, can deliver high-quality imaging for future HAPS remote sensing missions.",
+      "url": "http://arxiv.org/abs/2609.09376v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09376v1",
+      "tldr": "This paper experimentally validates a combined framework of distributed lightweight cameras, super-resolution processing, and H-infinity active vibration control on a scaled flexible-wing HAPS demonstrator, showing that suppressing low-frequency structural vibrations significantly improves multi-camera imaging quality for future high-altitude Earth observation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "HUN-REN SZTAKI"
+      ],
+      "affiliations_text": "HUN-REN SZTAKI",
+      "score": 3.672492861552813,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.09240v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909240v1-scaling-post-training-ternarisation-to-qwen3-8b-capability-retention-reproduction-lossless-packing-and-packed-execution",
+      "source": "arxiv",
+      "title": "Scaling Post-Training Ternarisation to Qwen3-8B Capability Retention, Reproduction, Lossless Packing, and Packed Execution",
+      "authors": [
+        "Anirudh Malik",
+        "M Sparsh Mehra",
+        "Poojith Devan"
+      ],
+      "authors_text": "Anirudh Malik, M Sparsh Mehra, Poojith Devan",
+      "abstract": "Ultra-low-bit language models promise reductions in storage and memory traffic, but a nominal \"1.58-bit\" label does not specify the deployed representation or its execution cost. We study a scale-up of an aggressive post-training conversion pipeline from Qwen3-4B to Qwen3-8B.\n  The conversion uses KOTMS rotation, E2M-ATQ adaptive ternarisation, and GPTQ-style error compensation in a weight-only A16 configuration. We do not claim these algorithms as new. Our contribution is the end-to-end scale-up characterisation: an external reproduction gate, matched 4B/8B capability analysis, cross-corpus perplexity, effective-bit accounting, lossless lattice-aware packing, and direct packed execution.\n  The 8B model reaches a three-corpus perplexity ratio of 1.361x, with WikiText-2, C4, and PTB ratios of 1.318x, 1.393x, and 1.371x. On eight zero-shot tasks at n = 500, mean accuracy is 64.6% versus 72.4% for FP16, corresponding to 78.5% chance-corrected retention and a 7.8-point absolute cost. The matched 4B run retains 69.6%, yielding an 8.9-point 8B advantage.\n  The packed checkpoint is 8.24 GiB and preserves the recorded perplexity to measurement precision. Direct packed execution reaches 15.52 tokens/s in 7.35 GiB, while a preliminary packed GEMV remains slower than FP16 cuBLAS. The result is a validated scale-up baseline: model size improves robustness to aggressive post-training discretisation, actual serialisation is solved for the measured artefact, and direct execution is feasible, while broader seeds, calibration distributions, and kernel optimisation remain open.",
+      "url": "http://arxiv.org/abs/2609.09240v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09240v1",
+      "tldr": "This paper scales an existing post-training ternary conversion pipeline from Qwen3-4B to Qwen3-8B, showing improved capability retention at larger scale, lossless lattice-aware packing to 8.24 GiB, and feasible direct packed execution at 15.52 tokens/s, while identifying kernel optimization as the remaining bottleneck.",
+      "detailed_reading": null,
+      "affiliations": [
+        "OneBit AI"
+      ],
+      "affiliations_text": "OneBit AI",
+      "score": 3.368042099722992,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.09388v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909388v1-xai-refine-an-automated-explanation-knowledge-loop-for-brain-age-prediction",
+      "source": "arxiv",
+      "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+      "authors": [
+        "Yang Qiao",
+        "Junjie Wu",
+        "Deqiang Qiu",
+        "James J. Lah",
+        "Liang Zhao"
+      ],
+      "authors_text": "Yang Qiao, Junjie Wu, Deqiang Qiu, James J. Lah, Liang Zhao",
+      "abstract": "Brain-age prediction models are commonly evaluated by predictive accuracy, yet accurate predictions alone do not establish that a model relies on reproducible or neurobiologically supported mechanisms. Post-hoc explanation methods can expose these mechanisms, but existing workflows typically stop at diagnosis or require correction targets to be specified before model analysis. We propose XAI-Refine, an automated explanation-knowledge loop for brain-age prediction from resting-state functional connectivity. At each iteration, XAI-Refine consolidates complementary post-hoc analyses across repeated training runs into reliable, structured model explanations. It converts each reliable explanation into a neutral neurobiological question, retrieves and verifies relevant literature, and compiles the verified evidence into an admissible set in the same typed explanation space. The target for refinement is defined as the minimal projection of the current model explanation onto the admissible set induced by applicable verified knowledge. This revised explanation is then translated into a differentiable constraint while preserving the originating model variable, measurement operator, and applicable scope. Candidate updates are promoted only when multi-seed validation confirms target-directed explanatory movement, predictive performance remains within a prespecified guardrail, and non-target explanatory drift remains bounded. Experiments on functional-connectivity-based brain-age prediction evaluate predictive performance, explanation reliability, literature alignment, and target-specific model revision, illustrating a structured route from post-hoc analysis to evidence-guided model refinement.",
+      "url": "http://arxiv.org/abs/2609.09388v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09388v1",
+      "tldr": "XAI-Refine is an automated explanation–knowledge loop that iteratively extracts reliable post-hoc explanations from resting-state functional-connectivity brain-age prediction models, verifies them against literature, and translates minimal evidence-supported revisions into differentiable constraints to refine the model while preserving predictive performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Emory University"
+      ],
+      "affiliations_text": "Emory University",
+      "score": 3.360275394273376,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.09299v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909299v1-literati-towards-anytime-optimal-shape-generalized-trees-via-ao",
+      "source": "arxiv",
+      "title": "Literati: Towards Anytime Optimal Shape Generalized Trees via AO*",
+      "authors": [
+        "Nakul Upadhya",
+        "Eldan Cohen"
+      ],
+      "authors_text": "Nakul Upadhya, Eldan Cohen",
+      "abstract": "Decision trees are prized for their interpretability and strong performance on tabular data, but popular greedy top-down induction algorithms can yield suboptimal and unnecessarily complex structures. Optimal decision tree methods address this through global optimization, yet remain restricted to axis-aligned threshold splits, which limit the expressivity of each node and often force deep, complex trees to capture non-linear feature effects. Shape Generalized Trees (SGTs) generalize threshold splits to learnable univariate shape functions, improving expressivity and enabling more compact trees. However, existing SGT induction algorithms are greedy and offer no optimality guarantees. In this work, we introduce Literati, the first algorithm for optimal SGT induction. We propose a novel AND/OR graph formulation of the problem that jointly optimizes tree structure and shape function complexity. To solve this AND/OR graph, we develop an AO*-based algorithm with two enhancements that improve anytime performance while preserving optimality: a secondary heuristic for OR-node selection and a round-robin policy for AND-node exploration. Across 24 real-world datasets, Literati achieves higher training and test accuracy than state-of-the-art tree approaches.",
+      "url": "http://arxiv.org/abs/2609.09299v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09299v1",
+      "tldr": "Literati introduces an AO*-based anytime optimal method for learning Shape Generalized Trees by jointly optimizing tree structure and shape-function complexity through a novel AND/OR graph formulation, achieving higher train and test accuracy than state-of-the-art tree approaches across 24 real-world datasets.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.248882153050576,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.09159v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909159v1-spectral-origin-of-the-topological-gap-exponent-d-mechanism-kernel-decomposition-and-scope",
+      "source": "arxiv",
+      "title": "Spectral origin of the topological gap exponent d + η: mechanism, kernel, decomposition, and scope",
+      "authors": [
+        "Matthew Loftus"
+      ],
+      "authors_text": "Matthew Loftus",
+      "abstract": "The topological gap $Δ$ -- the excess $H_1$ total persistence of a critical point cloud over a density-matched null -- scales as $Δ\\sim L^{d+η}$. We derive this analytically: the spectral integral $I(α) = \\sum_{k\\neq 0} S_{\\mathrm{conn}}(k)\\,|k|^α$ scales as $L^{2-α-η}$ when IR-dominated, giving $I(-2η) \\sim L^{d+η}$. The decomposition $I(-2η) = I_0 \\cdot I_{\\mathrm{shape}}$ separates volume ($I_0 \\propto N(1-m^2) \\sim L^d$) from anomalous dimension ($I_{\\mathrm{shape}} \\sim L^η$); the volume factor accounts for the magnetization-driven per-configuration variance of $Δ$. We prove the mechanism requires $d < 2 + η$ (IR dominance), confining it to $d = 2$ for physical systems; in $d = 3$ the spectral integral is UV-dominated, explaining why density normalization is needed. An $α$-sweep for Potts $q = 4$ at $L = 32$--$256$ finds $α_{\\mathrm{opt}}$ in $[-0.75, -0.5]$, consistent with $-2η_{\\mathrm{Ising}}$ and inconsistent with $-2η_{q=4} = -1$; we flag this as tentative pending $L \\geq 1024$ confirmation. The $\\langle m^2 \\cdot I(-2η)\\rangle$ hyperscaling product is dominated by the correlation $r(m^2, I) \\approx -0.98$ via the shared $I_0$ amplitude, so we report it as a covariance-correction analysis. Under a heuristic argument extending Divol--Polonik to inhomogeneous Poisson intensities, the bare PH kernel is flat; the effective kernel acquires $k$-dependence only at criticality. The per-configuration agreement between $Δ$ and $I(-0.5)$ is primarily a magnetization correlation: $R^2 = 0.91$ at $L = 256$ collapses to $R^2 \\approx 0$ once $|M|$ is partialed out. Per-configuration evidence corroborates the $I_0$ Parseval identity but not the $|k|^{-2η}$ shape factor; the latter is established by ensemble $L$-scaling.",
+      "url": "http://arxiv.org/abs/2609.09159v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09159v1",
+      "tldr": "TLDR: The paper analytically derives the topological gap scaling Δ ∼ L^{d+η} as the IR-dominated spectral integral I(−2η) of the critical connected structure factor, factorizing it into a volume term ∼L^d and an anomalous shape term ∼L^η and showing the mechanism requires d < 2+η, so it applies physically only in d = 2.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.1998585630821585,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.09429v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/10/260909429v1-applying-foundation-model-embeddings-towards-urban-livability-evaluation",
+      "source": "arxiv",
+      "title": "Applying foundation model embeddings towards urban livability evaluation",
+      "authors": [
+        "Ayush Khot",
+        "Wen Zhou",
+        "Shaowen Wang"
+      ],
+      "authors_text": "Ayush Khot, Wen Zhou, Shaowen Wang",
+      "abstract": "While accurate measurement of socioeconomic indicators remains challenging in data-scarce regions, which limits policy interventions and resource allocation, high-resolution geospatial data is widely available and can contain information on various livability statistics. We investigate which physical features are encoded within foundation model embeddings, such as AlphaEarth, AnySat, and TerraMind, and provide a systematic framework for identifying the most predictive geospatial indicators. By analyzing how different types of geospatial data influence urban livability predictions, our approach enables researchers to prioritize the most informative features for their specific applications. Additionally, we demonstrate how to leverage foundation model embeddings to enhance prediction performance for these outcomes. This work contributes a principled methodology for extracting actionable information from satellite imagery while accounting for complex spatial dependencies, with applications in predicting urban livability in regions with limited observation data.",
+      "url": "http://arxiv.org/abs/2609.09429v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.09429v1",
+      "tldr": "The paper investigates which physical features are encoded in geospatial foundation model embeddings (AlphaEarth, AnySat, and TerraMind) and develops a systematic framework for using them to identify predictive indicators and improve urban livability prediction in data-scarce regions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois at Urbana-Champaign"
+      ],
+      "affiliations_text": "University of Illinois at Urbana-Champaign",
+      "score": 3.1668822646917585,
+      "score_text": "3.2"
+    }
+  ],
+  "errors": []
+}
