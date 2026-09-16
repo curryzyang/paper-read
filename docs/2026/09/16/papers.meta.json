@@ -1,0 +1,720 @@
+{
+  "label": "2026-09-16",
+  "date": "2026-09-16",
+  "generated_at": "2026-09-16T00:35:20",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.13231v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913231v1-shieldvla-feasibility-aware-safety-alignment-for-vision-language-action-models",
+      "source": "arxiv",
+      "title": "ShieldVLA: Feasibility-Aware Safety Alignment for Vision-Language-Action Models",
+      "authors": [
+        "Manan Tayal",
+        "Akshay Nambi"
+      ],
+      "authors_text": "Manan Tayal, Akshay Nambi",
+      "abstract": "Vision-Language-Action (VLA) models demonstrate strong generalization in robotic manipulation and navigation, but existing fine-tuning methods provide limited safety guarantees. Current approaches primarily rely on Lagrangian optimization that enforces safety through soft penalties on expected cumulative cost, often resulting in residual constraint violations or overly conservative behavior. Moreover, learning safety in visual domains is challenging due to the absence of dense per-step safety annotations. We propose ShieldVLA, a safety-aligned fine-tuning framework for VLA models based on Hamilton-Jacobi (HJ) reachability. ShieldVLA learns a model-free approximation of the HJ reachability value function directly from visual observations to estimate the safe operating region. The learned safety critic gates policy optimization by separating reward maximization within feasible regions from recovery near unsafe states, avoiding persistent reward-cost trade-offs. To enable scalable supervision in visual environments, we introduce rubric-based VLM safety scores that convert semantic safety feedback into structured critic targets without requiring manual cost labels. Across five navigation and manipulation benchmarks spanning multiple VLA backbones, ShieldVLA reduces cumulative safety cost by 57% on average and improves task success rate by +0.13 over SafeVLA.",
+      "url": "http://arxiv.org/abs/2609.13231v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13231v1",
+      "tldr": "ShieldVLA is a safety-aligned fine-tuning framework for Vision-Language-Action models that learns a model-free Hamilton-Jacobi reachability safety critic from visual observations using rubric-based VLM safety scores and uses it to gate policy optimization between reward maximization in safe regions and recovery near unsafe states, reducing cumulative safety cost by 57% on average and improving task success over SafeVLA.",
+      "detailed_reading": {
+        "motivation": "现有VLA微调主要靠拉格朗日软惩罚对期望累计代价约束，常产生残余违规或过度保守，而且视觉域缺少密集逐步安全标注。本文要把安全从全局奖励-代价权衡转为状态相关可行性判断，在保持任务性能的同时提供更可靠的安全对齐。",
+        "method": "ShieldVLA用冻结VLM按结构化安全评分表把每帧观测转成连续安全裕度ell(o)，无需人工逐步代价标签；再用共享回放缓冲在线离策略训练HJ可达性安全评论家Qs_phi(o,a)，其TD目标为(1-gamma)ell(o)+gamma*done*min{ell(o), Qbar(o',a')}并配合Polyak目标网络。策略更新采用安全门控PPO：当Qs_phi(o, mean action)>delta时只优化标准PPO奖励，处于不可行区时用Lsafe=-Qs_phi(o, mean action)的确定性策略梯度把动作推向安全流形，beta_t由双升法按成本预算c_max调节。该评论家用视觉编码器加动作嵌入MLP，与VLA策略并发训练，部署时仅输出单一VLA策略，无需运行时屏蔽器。",
+        "result": "在Dubins-VL、TurtleBot-Nav、Safety-CHORES Nav、Safety-CHORES Fetch和Franka-Reach五个导航与操作基准、多个VLA主干上，ShieldVLA平均降低累计安全代价57%，任务成功率比SafeVLA提升0.13。结果说明安全门控能在可行区不施加惩罚、在危险区专门恢复，从而改善安全-性能折中。",
+        "conclusion": "基于HJ可达性的可行性感知安全对齐可避免拉格朗日方法持续奖励-代价耦合与过度保守问题，同时借助VLM评分表实现可扩展的视觉安全监督。ShieldVLA得到单个部署策略，无需额外运行时安全过滤器，在多个具身与基准上验证了有效性。其安全仍是经验性的，受评论家估计误差和VLM成本信号噪声影响。",
+        "key_details": "关键实现包括：用冻结VLM按碰撞风险、危险接近、机动空间等轴生成ell(o)；安全评论家独立于策略，编码器可从VLA编码器初始化并冻结或微调，MLP头输入编码特征与动作嵌入；每轮PPO在共享回放缓冲上做K步离策略TD，目标函数含Polyak平均、done指示和min备份。门控为不可微二值指示，训练时用stop-gradient作为样本掩码，仅在Qs接近delta边界时近似无偏；beta_t通过clip(beta+eta_beta*(mean cost-c_max), beta_min, beta_max)更新，仅作用于被判定不安全的转移。局限是缺乏形式化安全保证，安全集学习依赖有限数据与VLM评分质量，且门控阈值delta、单/双评论家与编码器冻结策略需按环境选择。"
+      },
+      "affiliations": [
+        "Microsoft Research",
+        "Indian Institute of Science (IISc)"
+      ],
+      "affiliations_text": "Microsoft Research, Indian Institute of Science (IISc)",
+      "score": 5.570520394316967,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2609.13171v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913171v1-a-derivative-fidelity-failure-mode-in-physics-informed-neural-networks-strengthened-benchmark-evidence-from-function-value-training",
+      "source": "arxiv",
+      "title": "A derivative-fidelity failure mode in physics-informed neural networks: strengthened benchmark evidence from function-value training",
+      "authors": [
+        "Koji Koyamada"
+      ],
+      "authors_text": "Koji Koyamada",
+      "abstract": "Physics-informed neural networks (PINNs) use automatic differentiation to impose differential-equation residuals, but good agreement in function values does not necessarily imply accurate derivatives. This paper formulates derivative fidelity as a failure mode of PINNs and tests it with one-dimensional benchmarks. Multilayer perceptrons are trained only on function values for sin(x) and exp(x), while second derivatives obtained by automatic differentiation are evaluated separately. The hypothesis is strengthened by additional tests over training-point density, activation functions, endpoint-dense evaluation, and both L2 and maximum-error diagnostics. The results show that visually accurate function approximation can coexist with substantially larger second-derivative errors, especially near high-curvature boundary regions. The experiment provides a diagnostic protocol for distinguishing value accuracy from physics-residual reliability.",
+      "url": "http://arxiv.org/abs/2609.13171v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13171v1",
+      "tldr": "This paper shows that physics-informed neural networks trained only on function values can fit smooth target functions accurately while their automatic-differentiated second derivatives remain substantially inaccurate—especially near high-curvature boundaries—revealing a derivative-fidelity failure mode and arguing that PINN validation must separately assess derivative and residual reliability.",
+      "detailed_reading": {
+        "motivation": "PINN通过自动微分把微分方程残差纳入训练，但函数值拟合好并不保证导数准确，而已有失败模式讨论多集中在优化和损失平衡。本文把导数保真度明确表述为PINN的一种失败模式，并在一维基准中隔离函数值精度与二阶导数精度，以检验其是否可能解释残差不可靠或结构保持失败。",
+        "method": "实验选取sin(x)于[-2π,2π]和exp(x)于[-2,2]两个一维光滑目标，其解析二阶导数已知；使用全连接MLP，3个隐层、宽度64、Adam优化、2500轮，仅用函数值均方误差损失训练，基线训练点128、tanh激活。训练后在均匀密集网格上评估函数误差和由自动微分得到的二阶导数误差，并加强验证训练点密度32、64、128、256、512，激活函数tanh、sine、gelu，exp(x)的端点密集评估及区域误差，以及统一报告RMSE和最大绝对误差。",
+        "result": "基线中sin(x)函数值误差约在1e-3或以下，但二阶导数误差在局部达到约1e-2至1e-1；exp(x)函数曲线视觉上仍接近真值，但二阶导数在x=1.6以后尤其x=2附近高曲率右边界显著劣化，误差比内部多数区域大若干数量级。加强验证显示，增加训练点不能单调消除exp(x)二阶导数误差，其二阶导数RMSE约1量级、最大绝对误差约1e1；sine激活在sin(x)上取得最低二阶导数RMSE约0.023，而exp(x)最大二阶导数误差仍达约3.93，tanh约6.21；端点密集评估把主要失败定位在右高曲率边界，最大误差指标揭示平均指标掩盖的局部失败。",
+        "conclusion": "结果表明，在仅做函数值训练、有限采样和固定架构/优化条件下，函数值精度不能作为导数精度或物理残差可靠性的替代指标；即使函数图看起来准确，含二阶导的PDE残差仍可能在高曲率或边界区域不可靠。因此PINN验证应把导数误差剖面、端点/高曲率诊断以及最大绝对残差/误差当作一等诊断，与函数值精度分开报告；该研究是诊断性证据而非通用不可能定理，更强训练目标或架构可能改善导数保真度。",
+        "key_details": "数据为解析已知的sin与exp一维函数，评价包含均匀密集网格和exp靠近x=2的端点密集网格；网络为3隐层宽64的MLP，Adam，2500轮，损失仅函数值MSE，二阶导数由自动微分获得而非直接拟合，基线128训练点与tanh激活。强化实验覆盖训练点密度扫描、tanh/sine/gelu激活比较、端点区域误差和L2与最大绝对误差诊断，核心指标为函数RMSE/最大误差与二阶导数RMSE/最大误差。局限在于任务为标量一维、网络族较小，未构成通用定理，也未测试导数增强损失、Sobolev训练、高曲率区重采样以及Poisson或热方程等PDE基准。"
+      },
+      "affiliations": [
+        "Osaka-seikei University"
+      ],
+      "affiliations_text": "Osaka-seikei University",
+      "score": 5.475511825946377,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2609.13204v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913204v1-gradrepair-ode-certified-gradient-repair-for-neural-ode-training",
+      "source": "arxiv",
+      "title": "GradRepair-ODE: Certified Gradient Repair for Neural ODE Training",
+      "authors": [
+        "Ziqian Bi",
+        "Xin Liang Chia"
+      ],
+      "authors_text": "Ziqian Bi, Xin Liang Chia",
+      "abstract": "Neural ordinary differential equations use numerical solvers inside the training loop. The solver determines the forward trajectory and also affects the gradient passed to the optimizer. That coupling creates a reliability problem for scientific machine learning and continuous-time generative modeling, including diffusion probability-flow ordinary differential equations and flow-matching models. Under loose step sizes, stiff dynamics, chaotic sensitivity, or event discontinuities, a differentiable ODE pipeline can return a finite gradient whose direction is numerically suspect. We introduce GradRepair-ODE, a reliability framework for checking, repairing, and rejecting ODE gradients at the optimizer step. The method computes several gradient candidates, compares them with directional finite-difference checks and solver diagnostics, diagnoses likely numerical failure modes, repairs selected gradients through path switching or stricter recomputation, and rejects steps whose descent direction cannot be certified. In six synthetic ODE systems, GradRepair-ODE leaves low-risk systems unchanged, repairs Robertson and Lorenz gradients to cosine similarity 1.000 against a strict reference, reduces unsafe accepted steps from 37 to 0, and rejects an event-discontinuous case instead of applying an uncertified update. The paper argues for a simple change in the training contract: an ODE gradient should reach the optimizer with numerical evidence attached.",
+      "url": "http://arxiv.org/abs/2609.13204v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13204v1",
+      "tldr": "GradRepair-ODE is a reliability framework that checks, repairs, or rejects Neural ODE training gradients at the optimizer step using multiple gradient candidates and finite-difference/solver diagnostics, ensuring updates are applied only when their descent direction is numerically certified.",
+      "detailed_reading": {
+        "motivation": "神经 ODE 把数值求解器放进训练循环，求解器既决定前向轨迹又影响回传给优化器的梯度，因此在步长过松、刚性动力学、混沌敏感或事件不连续等情形下，可微 ODE 流水线可能返回一个数值上有限但方向可疑的梯度。现有工作把步长控制、刚性、反向差分公式与灵敏度分析视为求解器层面的问题，但优化器接口通常只拿到一个形状正确、数值有限的张量，缺少关于其方向可靠性的证据。这类失败具有隐蔽性：梯度形状正确、损失曲线正常，但更新方向可能已经失去数值意义，而这一问题同样影响扩散概率流 ODE 与 flow matching 等连续时间生成模型。",
+        "method": "方法在优化器边界计算并按代价与保真度排序的多个梯度候选（coarse、disc、ckpt、strict 四条路径，分别对应默认粗解、更细步长离散重算、检查点式轨迹一致重算、以及高成本严格参考或修复目标），据此构造可靠性证书；证书组合成对余弦不一致 D_cos、相对范数不一致 D_norm、方向有限差分残差 R_FD，以及求解器不稳定证据 S 与刚性代理 K，加权得到经验不确定度 ε̂，并将候选判为 Trusted、Repairable、Unsafe 或 Failed，同时诊断失败模式（有限差分残差大→方向不一致，路径间分歧大→灵敏度路径不稳，求解器压力大→数值困难，事件标志→光滑伴随模型与轨迹不匹配）。修复采用代价感知策略：当证据指向积分过松时收紧容差，当灵敏度路径分歧但存在更精细路径时切换路径，对刚性或混沌情形在仍可修复时做严格重算，并求解 min C_i s.t. Cert(g_i)=Trusted 且 Δ_i>0，若可行集为空则拒绝该步；步级认证采用 η‖ĝ‖² > ηε‖ĝ‖ + m 判断下降信号是否超过数值不确定度，训练中还配合梯度裁剪与 Armijo 线搜索作为保障，整体在六个合成 ODE 系统（涵盖光滑、刚性、混沌、事件驱动与神经向量场动力学）上验证检查—修复—拒绝流程。",
+        "result": "在六个合成 ODE 系统中，GradRepair-ODE 对低风险系统不做任何改动，即保持原梯度不变；对 Robertson（刚性）与 Lorenz（混沌）系统，将梯度修复到与严格参考的余弦相似度达到 1.000；把不安全却被接受的步数从 37 降到 0；对事件不连续情形则选择拒绝，而不是施加未经认证的更新。",
+        "conclusion": "论文主张对训练契约做一处简单但关键的改变：ODE 梯度应当带着数值证据到达优化器，即在数值近似转化为优化动作的位置放置一张可记录的可靠性证书。该证书能够信任良性梯度、把可修复梯度路由到更安全的路径、或在光滑梯度证据崩塌时扣下更新，从而把隐藏的优化风险转化为显式的信任、修复或拒绝事件。作者强调这不是新的 ODE 架构或通用求解器，而是补上了缺失的梯度信任接口，且其价值在于每一步更新流都有数值账目可查，而非训练稳定性的个例轶事。",
+        "key_details": "理论层面依赖两个局部假设：损失在更新邻域内梯度 M-Lipschitz，以及 ε̂ 被校准为当前步梯度误差的经验代理（弱校准只会使证书更保守）；在不确定集 G_i={g':‖g'-ĝ_i‖≤ε̂_i} 上，支撑函数给出 sup⟨g',-ĝ_i⟩=-‖ĝ_i‖²+ε̂_i‖ĝ_i‖，故认证下降裕度 Δ_i=‖ĝ_i‖²-ε̂_i‖ĝ_i‖-m>0，配合 Mη²/2 项得到 L(θ-ηĝ) 的下降界。另有三条性质：Δ_i 对 ε̂_i 严格递减（证据越多证书只会更保守）、误差小于 ‖ĝ‖ 时真梯度落在半角 sinα≤ε/‖ĝ‖ 的下降锥内（方向与幅度同时被评估）、以及中心差分 D_h 的误差为 O(h²)+O(u/h)，故符号分歧仅在 h 避开截断与舍入两个主导区间时才有意义，并用 k 个独立方向的方向一致率 A_k 作为方向脆弱性的经验证据（是证据而非证明）。关键约束与局限包括：证书是经验可靠性估计而非数学上界；对刚性、混沌或事件驱动动力学通常无法给出全局收敛保证；事件不连续且无事件感知导数时只能拒绝；需要额外计算多个梯度候选，因而成本随修复路径上升；实验限于六个合成 ODE 系统，超参涉及各证据项权重 w_cos、w_norm、w_FD、w_solver、w_stiff 及裕度 m 的设定。"
+      },
+      "affiliations": [
+        "Rice University",
+        "Purdue University"
+      ],
+      "affiliations_text": "Rice University, Purdue University",
+      "score": 5.237455683323644,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2609.13243v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913243v1-gzdrl-reproducible-and-scalable-deep-reinforcement-learning-with-gazebo",
+      "source": "arxiv",
+      "title": "GzDRL: Reproducible and Scalable Deep Reinforcement Learning with Gazebo",
+      "authors": [
+        "Amal Dev Haridevan",
+        "Junjie Kang",
+        "Jinjun Shan"
+      ],
+      "authors_text": "Amal Dev Haridevan, Junjie Kang, Jinjun Shan",
+      "abstract": "We present GzDRL, a novel single-process reinforcement learning (RL) framework for Gazebo that overcomes longstanding bottlenecks in scalable, reproducible robotics experimentation. Unlike conventional middleware-based RL-Gazebo integrations that suffer from nondeterminism and irreproducibility, GzDRL introduces a systematic, middleware-free environment-stepping mechanism that directly synchronizes agent actions and physics updates. This design enables deterministic, high-throughput data collection, efficient vectorization, and reproducible RL training and evaluation. Comprehensive benchmarks demonstrate that GzDRL achieves the highest workstation throughput among the evaluated frameworks while remaining competitive with GPU-accelerated simulators on laptop hardware, and maintains precise agent-environment synchronization, multi-agent scalability, and experiment-level reproducibility. We further validate sim-to-real transfer by deploying learned policies directly onto a physical quadrotor, without fine-tuning. Our results establish GzDRL as an accessible and reproducible platform for advancing RL in robotics and automation.",
+      "url": "http://arxiv.org/abs/2609.13243v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13243v1",
+      "tldr": "GzDRL is a single-process, middleware-free reinforcement learning framework for Gazebo that directly synchronizes agent actions with physics updates to enable deterministic, high-throughput, reproducible, and scalable robot training, validated by benchmarks and zero-shot sim-to-real transfer to a quadrotor.",
+      "detailed_reading": {
+        "motivation": "传统基于ROS或Gazebo Transport等中间件的RL-Gazebo集成存在动作与观测配对延迟，可能引入非马尔可夫效应并损害学习稳定性、样本效率与可复现性，同时中间件通信限制并行吞吐。GPU加速仿真器虽然并行度高，但缺少Gazebo在真实机器人模型、模块化物理、传感器和ROS部署流程上的生态兼容性。因此，需要一种可直接嵌入Gazebo、确定性高吞吐、可复现且可扩展的强化学习框架。",
+        "method": "GzDRL是单进程框架，每个环境包含一个gz::sim::Server与一个Gazebo world，由DRLServer直接同步策略动作与物理更新；对策略动作先经Pi预处理，在K个物理步内由可选控制器Ci基于最新状态产生控制u，并通过Server::Run(1)推进仿真，PostUpdate阶段由DRLHelperSystem读取位姿、速度、加速度、传感器和接触信息，支持随机化与重置，最后由Psi输出观测、奖励和终止标志。向量化提供两条路径：Python端AsyncDRLServerPool使用任务队列、每个DRLServer一个C++工作线程、CPU绑定并释放GIL；C++端GazeboPool扩展EnvPool，维护NE个环境、NT个线程、动作队列和轮转状态缓冲，支持NB≤NE部分批处理、零拷贝NumPy观测视图，以及多机器人联合观测、团队奖励和共享终止。平台还支持多旋翼6-DoF刚体动力学、13维状态、一阶执行器滞后，以及Velocity、Jerk、Snap层级和RPM、SRT、CTBT、CTBR、Wrench、Velocity/Angular Velocity、High-Level Guidance等控制模式；训练或推理时RL策略在所选抽象层输出动作，经上述流水线批量采样并可直接部署。",
+        "result": "基准评测表明，GzDRL在评测框架中取得最高工作站吞吐，在笔记本硬件上可与GPU加速仿真器竞争，CPU吞吐达到78.6×10^3环境步/秒。它同时保持精确的智能体-环境同步、多智能体可扩展性和实验级可复现性，并对状态转移与训练可复现性进行了定量验证。学习到的策略可零样本直接部署到物理四旋翼，无需微调。",
+        "conclusion": "GzDRL通过无中间件的ECS直连与受控物理步进，解决了Gazebo强化学习在可扩展性和可复现性上的长期瓶颈，在吞吐、同步、并行与sim-to-real迁移方面表现突出。该工作为机器人强化学习实验提供了一个可访问、可复现且兼容Gazebo与ROS工作流的平台。",
+        "key_details": "关键实现细节包括：每个环境独立server并序列化构造以兼容全局静态变量；K步物理步进与PostUpdate保证状态观测的确定性转移契约，但渲染传感器受Gazebo渲染管线影响，该确定性保证主要适用于状态观测；重置与运行时域随机化通过缓存SDF修改质量、惯量、插件参数并重生实体，避免重建世界；支持部分批次、动态线程取任务和零拷贝观测共享；关键参数有NE、NT、NB、K和作动器时间常数tc；局限性在于基于CPU Gazebo，吞吐可能仍低于大规模GPU并行仿真，且传感器渲染确定性与多环境资源竞争需按任务评估。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.170032334007887,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2609.13270v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913270v1-conflict-predictive-variable-horizons-in-multi-drone-distributed-model-predictive-control",
+      "source": "arxiv",
+      "title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control",
+      "authors": [
+        "Linda Mümken",
+        "Michael Schwung",
+        "Stefan Lier",
+        "Andreas Schwung"
+      ],
+      "authors_text": "Linda Mümken, Michael Schwung, Stefan Lier, Andreas Schwung",
+      "abstract": "In distributed model predictive control for multi-drone collision avoidance, a fixed prediction horizon forces a compromise: a short horizon is inexpensive but reacts late to approaching neighbors, whereas a long one anticipates conflicts at a per-step cost that grows superlinearly with its length. We propose a conflict-predictive variable horizon that each drone sets locally, leaving the distributed model predictive control itself unchanged. From a short history of observed positions, a drone extrapolates the flight lines of its neighbors, tests each against its own using confidence funnels that narrow with prediction range, and obtains each time to conflict in closed form. The horizon is then the smallest admissible value whose planning window covers the farthest predicted conflict. It collapses to its minimum in clear airspace and grows only when a conflict lies ahead. Provided this minimum meets a single computable feasibility bound, we prove that recursive feasibility and asymptotic stability are preserved for every horizon the policy can select. These guarantees hold for a linear model, and a cascaded inner loop reduces each quadrotor's translational dynamics to a perturbed double integrator, so they carry over to the linearized quadrotor model and, as practical stability, to the full nonlinear one. In simulation on dense antipodal-swap benchmarks, the variable horizon reduces both per-step solver cost and total computation well below those of a long fixed horizon, and it maintains separation in every run, which a short fixed horizon of comparable per-step cost does not.",
+      "url": "http://arxiv.org/abs/2609.13270v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13270v1",
+      "tldr": "The paper proposes a conflict-predictive variable prediction horizon for multi-drone distributed MPC, where each drone locally lengthens its horizon only when lightweight neighbor extrapolation with confidence funnels predicts an upcoming conflict, preserving recursive feasibility and stability while reducing computation and maintaining collision separation.",
+      "detailed_reading": {
+        "motivation": "在多无人机分布式模型预测控制（DMPC）避撞中，预测时域是决定成败的核心参数：短时域计算便宜但对逼近的邻居反应太迟，长时域能提前化解冲突但每步优化代价随时域长度超线性增长。然而冲突在时空上是间歇且稀疏的，无人机大部分时间处于清空空域，固定时域却必须按最坏密集度设定，从而在每一步都付出前瞻代价。现有动态时域方法要么把时域作为优化变量造成非凸/混合整数负担，要么依据受控系统自身状态而非邻居几何来调整，且没有把安全保证与自适应信号解耦。",
+        "method": "提出冲突预测型可变时域，由每架无人机本地设定，完全不改动分布式MPC本身，仅替换其核心参数H。每个控制步，无人机用轻量线性预测器从一段短滚动观测历史中外推各邻居的飞行直线，并用随预测距离收窄的置信漏斗（容差管）将其与自身航线做检验，从而对每个邻居以闭式解得到冲突时间；时域取最小的可行值，使其规划窗口刚好覆盖最远的预测冲突，在空域清空时收缩到最小值H_min，仅在检测到冲突时才向H_max增长。为把结论推广到旋翼平台，采用级联内环将四旋翼平动动力学约化为带扰动的双积分器，底层DMPC沿用速度相关安全球、成对间隔约束与异步Gauss–Seidel迭代。",
+        "result": "理论方面证明：只要最小可容许时域H_min满足单一可计算的可行性界H_min^feas，则策略可能选择的每一个时域都保持递归可行性与渐近稳定性；时域仅通过有限时域近似残差进入分析，该残差在[H_min,H_max]上一致有界，并被一个仅依赖无人机物理状态的证书吸收。仿真方面，在稠密对跖交换（antipodal-swap）基准上，可变时域把每步求解代价与总计算量显著降到长固定时域之下，完成了长固定时域无法完成的交换任务，并在每次运行中都保持安全间隔，而每步代价相当的短固定时域则做不到。",
+        "conclusion": "由于可行性与稳定性建立在与冲突预测无关的时域下界之上，预测失误只会削弱前瞻能力并损失效率，绝不会危及安全，这使该时域策略与保证解耦，区别于现有动态时域方案。该保证对线性模型严格成立，并经由级联内环传递到线性化四旋翼模型（渐近稳定）以及完整非线性模型（实用稳定），且自适应安全半径与原有分布式控制器公式均无需修改。",
+        "key_details": "输入为机载感知或广播获得的时间戳邻居位置，无人机维护短滚动历史，邻居速度与自适应半径均由这些位置计算得到，避撞采用速度相关安全球与成对间隔约束。置信漏斗是随预测范围单调收窄的容差管，使得冲突判定可闭式求时间，冲突越远越需要更贴近才计为重叠。算法保持线性预测以保证轻量，并兼容可学习预测器而不影响保证。关键条件是H_min≥H_min^feas这一可计算界；底层分析依赖异步Gauss–Seidel/ADMM的分布式MPC、收缩论证与基于物理能量的Lyapunov函数。局限包括：线性外推的误预测只能降低前瞻性，理论结果对非线性动力学仅为实用稳定，验证目前限于仿真而非实飞，且性能受H_min、H_max与漏斗参数选择影响。"
+      },
+      "affiliations": [
+        "Ruhr University Bochum",
+        "South Westphalia University of Applied Sciences"
+      ],
+      "affiliations_text": "Ruhr University Bochum, South Westphalia University of Applied Sciences",
+      "score": 4.976432487759309,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.13236v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913236v1-self-evolving-ai-for-humanoids-mechanisms-safety-and-evaluation-of-post-deployment-self-improvement",
+      "source": "arxiv",
+      "title": "Self-Evolving AI for Humanoids: Mechanisms, Safety, and Evaluation of Post-Deployment Self-Improvement",
+      "authors": [
+        "Loc X. Nguyen",
+        "Avi Deb Raha",
+        "Huy Q. Le",
+        "Eui-Nam Huh",
+        "Dusit Niyato",
+        "Choong Seon Hong"
+      ],
+      "authors_text": "Loc X. Nguyen, Avi Deb Raha, Huy Q. Le, Eui-Nam Huh, Dusit Niyato, Choong Seon Hong",
+      "abstract": "Humanoid robots are becoming an important part of embodied artificial intelligence, driven by advances in reinforcement learning for locomotion, world models for prediction, and vision-language-action models for general control. However, most of these systems remain static after deployment. A policy is trained offline for a fixed objective and then frozen, even though the tasks, environments, and robot bodies keep drifting over time. An emerging paradigm of self-evolving agents aims to address this problem by allowing systems to improve from their own post-deployment experience. Since most existing studies focus on disembodied software agents, this survey examines how self-evolution changes when an agent has a physical body. We first define self-evolution for humanoids and represent a deployed robot using a state tuple that includes its policy, perception, memory, workflow, and body. This state is updated by an evolution operator in a slow outer loop with a lifelong objective. We then organize the literature into four complementary mechanisms of self-evolution, presented in increasing order of autonomy: self-learning, self-adaptation, self-optimization, and self-generation. Since changes to a humanoid can introduce physical hazards, we treat safety and uncertainty as key design dimensions of the evolution operator, and further formulate admissible evolution as a constraint enforced by a world-model verification gate within a human-oversight envelope. Finally, we present that evaluation should track the robot's evolving trajectory rather than a fixed checkpoint, and we identify the lack of a benchmark designed specifically for self-evolving humanoids. Moreover, we outline open challenges spanning AI algorithms, on-board systems, and governance.",
+      "url": "http://arxiv.org/abs/2609.13236v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13236v1",
+      "tldr": "This survey examines post-deployment self-improvement for humanoid robots by formalizing their evolving policy, perception, memory, workflow, and body as a state updated through a safety-constrained evolution operator, taxonomizing self-evolution mechanisms from self-learning to self-generation, and advocating trajectory-level evaluation while identifying the lack of dedicated benchmarks and open algorithmic, systems, and governance challenges.",
+      "detailed_reading": {
+        "motivation": "人形机器人虽受益于强化学习、世界模型和视觉-语言-动作模型，但多数系统部署后被冻结，面对任务、环境、用户乃至本体硬件持续漂移时性能会退化。现有自演化智能体研究主要针对无实体软件智能体，缺少对具身系统中身体变化和实时物理安全约束的讨论，因此需要重新定义并系统梳理部署后人形机器人自我改进的机制、安全与评估。",
+        "method": "本文将部署后人形机器人形式化为状态元组 sτ=(πτ,Φτ,Mτ,Wτ,Bτ)，分别对应策略、感知、记忆、工作流与身体，部署经验 eτ 通过演化算子 E 在慢外循环中更新状态，并以终身目标 V 和元更新 F 调整演化机制本身；E 可分解为策略、感知、记忆、工作流和身体五类子算子，子算子相互耦合。方法上按自主性递增将文献组织为自学习、自适应、自优化和自生成四类机制，并按机制、子算子、触发条件、平台和更新时机分类，同时将安全与不确定性建模为演化算子的约束，要求候选更新位于可接受区域 C 并经过世界模型验证门与人类监督包络。评估则从固定检查点转向轨迹级评价，提出自适应速率、遗忘速率、瞬态代价和安全回退率四类指标，并规划面向自演化人形机器人的基准套件。",
+        "result": "该综述通过对比相关调查指出，现有人形机器人、VLA、运动规划、持续学习和自演化智能体综述均未同时覆盖具身性、部署后自我改进、身体或硬件演化、实时安全约束和终身轨迹评估，而本文将五者均作为核心议题。文献分析发现三个趋势：部署后变化越来越通过小型可逆模块而非直接修改主模型权重实现，验证责任逐渐从人工监督转向世界模型，以及在持续变化环境中一定程度的遗忘对适应是必要的。同时识别出两个安全缺口：现有系统未显式强制单调性以防止安全关键能力丢失，且当前防护很大程度上忽视身体算子；标准化评估与专用基准仍然缺失。",
+        "conclusion": "本文的结论是，人形机器人应从一次离线训练后冻结部署转向终身、安全约束下的自演化，其中安全应被视为演化算子自身的属性而非事后补丁。评价也应跟踪机器人随时间演化的轨迹，而不是只比较固定检查点，因此需要建立专门面向自演化人形机器人的基准与治理框架，并在算法、机载系统和治理层面继续解决开放挑战。",
+        "key_details": "关键细节包括：状态五元组分别映射到感知编码器与状态估计、RL或VLA控制策略、技能库或回放或世界模型、任务分解与规划、标定与运动学动力学自模型；部署经验来源涵盖图像、视频、力触觉、本体感知、成败轨迹和人类反馈。方法遵循快内循环毫秒至秒级固定状态行动、慢外循环小时至月级用经验更新，并受可塑性与稳定性权衡约束，终身目标 V 对应约束优化而非单一损失。评估指标为自适应速率、遗忘速率、瞬态代价和安全回退率。局限在于本文是综述，缺少统一实验与基准，四类机制和五层安全框架的成熟度不同，身体算子风险、实时验证复杂度、不确定性校准、机载算力与治理约束仍未被充分解决。"
+      },
+      "affiliations": [
+        "Kyung Hee University",
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "Kyung Hee University, Nanyang Technological University",
+      "score": 4.798390638544886,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.13224v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913224v1-seeing-what-the-vehicle-sees-video-augmented-virtual-reality-for-physical-autonomous-vehicles",
+      "source": "arxiv",
+      "title": "Seeing What the Vehicle Sees: Video-Augmented Virtual Reality for Physical Autonomous Vehicles",
+      "authors": [
+        "Md Tanjemul Islam",
+        "Mohammad Shafin",
+        "Md Rafiul Kabir"
+      ],
+      "authors_text": "Md Tanjemul Islam, Mohammad Shafin, Md Rafiul Kabir",
+      "abstract": "Autonomous vehicles are expected to improve road safety and efficiency, but passengers often remain uncertain about what the vehicle perceives and why it acts as it does. Virtual reality (VR) offers a safe and repeatable medium for presenting this information, yet most passenger-facing VR studies rely on fully simulated vehicles or pre-scripted scenarios, so the motion and perception shown to the user do not originate from a physically operating autonomous system. This paper presents a video-augmented VR framework that couples a physical ROS 2 autonomous robot vehicle to a Unity 6 application deployed on a Meta Quest 3S headset. The vehicle state and live onboard camera stream are transmitted over two independent communication channels, allowing the virtual vehicle to mirror the physical robot's motion while the passenger simultaneously views the vehicle's first-person camera feed and its navigation decisions through an in-vehicle dashboard interface. We evaluate the framework over 20 repeated closed-loop navigation trials. The system achieves a mean state-update latency of 29.63 ms, a mean relative route-progress error of 2.28% between the physical and virtual vehicles, and video delivery at 10.006 frames per second with 0.25% frame loss. All monitored navigation decisions were correctly reflected in the VR interface with no missed or incorrect notifications. The results indicate that the framework can support temporally synchronized, semantically consistent, and accurate route-progress representation for immersive observation of physical autonomous-vehicle behavior.",
+      "url": "http://arxiv.org/abs/2609.13224v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13224v1",
+      "tldr": "This paper presents a video-augmented VR framework that streams a physical ROS 2 autonomous vehicle’s state and live onboard camera feed over independent UDP channels to a Unity/Meta Quest 3S headset, enabling passengers to observe synchronized vehicle motion, first-person perception, and navigation decisions with low latency and high accuracy.",
+      "detailed_reading": {
+        "motivation": "自动驾驶有望提升道路安全与效率，但乘客往往不清楚车辆感知到了什么以及为何采取某动作；VR可安全、可重复地呈现这些信息，但现有面向乘客的VR研究多依赖完全模拟车辆或预脚本场景，其运动与感知并非来自真实运行的自动驾驶系统。",
+        "method": "本文提出视频增强VR框架，将物理ROS 2自动驾驶机器人车辆与部署在Meta Quest 3S上的Unity 6应用耦合，分为物理机器人层、双UDP通信层、VR应用层和沉浸可视化层。物理车执行基于摄像头的车道跟随与交通标志识别，输出时间戳、位置、朝向、速度、加速度、车道状态、标志检测和导航决策；状态与640×480 RGB视频经两个独立UDP通道传输，视频以JPEG质量65编码并以单UDP数据报在2.4 GHz Wi-Fi上发送，目标10 FPS。Unity接收后同步虚拟车运动、解码并显示实时第一人称视频，在内舱仪表板呈现导航决策；实验前将ROS平面坐标映射到Unity X-Z平面并做轴与航向校正。评估在20次重复闭环导航试验中进行，每次约70秒，记录机器人状态、VR状态、传输包、视频帧和显示通知。",
+        "result": "20次闭环试验中，系统平均状态更新延迟为29.63 ms（标准差12.86 ms，RMSE 32.29 ms），物理车与虚拟车平均相对路线进度误差为2.28%，两者路线进度轨迹高度重叠，仅在速度与方向变化时出现小偏差。视频流达到10.006 FPS，接近10 FPS目标，丢帧率0.25%，单向UDP平均延迟6.03 ms，最大152.89 ms，标准差3.85 ms。所有监测到的导航决策均在VR界面中正确反映，无遗漏或错误通知；停车、限速50、建议速度35、铁路道口和学校区域等5类交通标志触发的预定动作均正确同步显示。",
+        "conclusion": "结果表明，该框架可为物理自动驾驶车辆行为提供时间同步、语义一致且路线进度准确的沉浸式观察。当前工作仍是技术评估，后续需要人类受试者研究验证组合视频与决策显示是否改善乘客意识、可预测性与信任，并可通过提高视频帧率和硬件加速提升视觉通道响应性，以及引入乘客输入实现双向交互。",
+        "key_details": "关键输入包括ROS 2导航系统的位姿、速度、加速度、车道状态、交通标志检测与导航决策，以及640×480 RGB车载摄像头画面；测试场景覆盖停车、限速、速度建议、铁路道口和学校区域标志。通信采用状态与视频分离的双独立UDP通道，视频为JPEG质量65、单UDP数据报、2.4 GHz Wi-Fi、目标10 FPS，Raspberry Pi与VR工作站通过校园NTP同步，偏移约1 ms。延迟定义为T_L=T_exe−T_send，视频延迟仅统计Raspberry Pi到工作站的单向UDP包传输，不包含相机采集、编码、解码和渲染；同步准确度用相对进度误差E_p=|P_r−P_v|/P_r×100计算。方法未给出感知模型训练细节或损失函数，实验为20次约70秒的闭环重复试验；局限性包括仅有技术评估而非人因研究、视频帧率10 FPS、单向通信，且未覆盖视频全流水线延迟和更广泛真实道路条件。"
+      },
+      "affiliations": [
+        "Central Michigan University"
+      ],
+      "affiliations_text": "Central Michigan University",
+      "score": 4.599068964386218,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2609.13194v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913194v1-diagnosing-faults-in-reinforcement-learning-simulators-and-world-models-with-canonical-polynomial-invariants",
+      "source": "arxiv",
+      "title": "Diagnosing Faults in Reinforcement Learning Simulators and World Models with Canonical Polynomial Invariants",
+      "authors": [
+        "Tesfay Zemuy Gebrekidan",
+        "Hadush Hailu Gebrerufael"
+      ],
+      "authors_text": "Tesfay Zemuy Gebrekidan, Hadush Hailu Gebrerufael",
+      "abstract": "A large literature builds physical structure into learned dynamics on the premise that models respecting the underlying physics predict better. We test that premise using exact polynomial invariants recovered from trajectories and canonicalised as reduced Gröbner bases over $\\mathbb{Q}$. On Acrobot, exactness provides little benefit for prediction: a consistency regulariser reduces algebraic residual while leaving rollout fidelity essentially unchanged, and a shaping potential recovered from a system with a 100% mass error accelerates learning as effectively as the correct potential. Exact canonical invariants instead prove valuable for diagnosis. We develop two procedures: screening, which identifies the violated physical constraint, and attribution, which recovers the faulty invariant and identifies the responsible physical parameter. To enable this, we introduce normal-form deflation and quotient-space recovery. Across fifteen injected faults, screening localises every broken constraint with no false alarms, whereas observation-space baselines do not localise any; attribution recovers the responsible parameter on all seven parameter faults. Paired difference tests detect all faults, showing that the advantage is localisation rather than detection. Perturbing reference generators by $10^{-4}$ preserves 14--15/15 localisations, showing that screening does not require exactness, whereas ideal-equality decisions distinguish perturbations of only $10^{-12}$, showing that exactness is required for algebraic comparison. Applied to 350 release pairs across eleven RL environments, the diagnostic finds no evidence of changed simulator dynamics, instead revealing properties of the benchmark implementations themselves.",
+      "url": "http://arxiv.org/abs/2609.13194v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13194v1",
+      "tldr": "TLDR: Exact canonical polynomial invariants recovered as reduced Gröbner bases offer little predictive benefit for RL dynamics but enable a powerful diagnostic that screens for violated physical constraints and attributes faults to the responsible parameters, reliably localizing simulator and world-model errors.",
+      "detailed_reading": {
+        "motivation": "大量工作将物理结构（守恒律、哈密顿/拉格朗日架构、运动学约束）注入学习动力学，前提是尊重物理的模型预测更好，但这一前提很少用最强形式的结构——精确且规范的物理不变量——来检验，因为现有方法用的是学习到的或数值近似的不变量。同时，RL 依赖模拟器而模拟器是软件，会存在错写常数、漏项、积分器替换、观测向量顺序错误等问题，而现有检测工具（验证误差、rollout 偏差曲线、两样本检验）只返回标量，无法指出“哪里错了”。作者因此主张：精确规范的不变量对预测价值有限，但对故障诊断价值很大，因为只有规范形才能提供可判定的相等性。",
+        "method": "方法从轨迹中恢复精确多项式不变量并规范化为 Q 上约化 Gröbner 基。对消没约束使用消失理想 I(M)，对守恒量则因守恒量构成子代数（E 守恒则 E² 也守恒）改用差分字典 Δ_d={m(s')−m(s)}，其零空间向量对所有能量层同时守恒，并用 Jacobian 秩提取极大函数独立子集去冗余。为可扩展性引入两个组件：法形式亏缩（normal-form deflation）用已知生成元约化 Gröbner 基的 NF 一步精确删除全部代数冗余倍数（如 ⟨g⟩∩P_d 整块空间），以及商空间恢复：在精确有理算术下先算出 NF 映射像空间的正交基 Π，再对差分设计矩阵做 ΦΠ^T 并取最小奇异值方向，从而完全不做基于容差的零空间维数估计，仅保留无量纲谱间隙阈值 σ_min/σ_next=0.1。诊断分两级：筛选对每个生成元计算按数据尺度 RMS(‖x‖^deg p) 归一化的残差（消没约束用 RMS，守恒量用沿轨迹 std），把两系统轨迹切成 32 个连续块，对每个生成元做单侧 Mann–Whitney U 检验并做 Bonferroni 校正以定位被破坏的约束；归因则把恢复出的不变量方向按规范自由度（尺度 α 与可加常数 β）拟合参数模板 p(x;θ)，每次只放开一个物理参数、其余固定在规格值，给出参数故障、与规格一致、无法用参数故障解释三种判决。",
+        "result": "在 Acrobot 上，精确性对预测几乎没有收益：一致性正则项降低了代数残差但 rollout 保真度基本不变，而从一个质量误差达 100% 的系统恢复出的塑造势与正确势在加速学习上效果相当。相反，精确规范不变量在诊断上表现突出：15 个注入故障中筛选定位出每一个被破坏的约束且无误报，而观测空间基线一个都定位不出；归因在全部 7 个参数故障上都找回了责任参数；成对差分检验能检测所有故障，说明优势在于定位而非检测。将参考生成元扰动 1e-4 仍保留 14–15/15 的定位，表明筛选并不需要精确性；而理想相等性判定能区分仅 1e-12 的扰动，说明代数比较必须依赖精确性。将诊断应用于 11 个 RL 环境的 350 个 release 对，未发现模拟器动力学发生改变的证据，反而揭示了基准实现本身的性质（积分器敏感性、Reacher 的观测不一致性、混沌动力学对长时程 release 比较的限制）。",
+        "conclusion": "该工作表明，把物理结构以最强形式（精确、规范的 Gröbner 基不变量）引入，对预测能力的提升十分有限，其真正价值在于诊断：规范形带来的可判定相等性使两个不变量理想是否相同、某约束是否成立都能被精确判定。基于此构建的筛选加归因诊断能够定位被违反的物理约束并找出负责的物理参数，在注入故障上全面优于观测空间基线，并且筛选对生成元扰动鲁棒、精确性仅在代数相等性判定时必需。由于理论结果是带必要性/充分性缺口的可靠性保证，该诊断应仅作为必要条件来解读，其价值在于指出“哪里错了”而非取代系统辨识或完整验证。",
+        "key_details": "关键实现细节包括：必须区分消失理想（可规范化）与守恒量子代数（不可规范化，需差分字典与 Jacobian 秩去冗余，且极大独立子集不唯一，仅证明非冗余而非规范）；法形式亏缩是归因的前置条件而非效率优化，缺少该投影时最小变化方向会完全落在琐碎子空间内（实测占比 1.0000），14 维退化导致无法确定方向，加上投影后与真能量对齐度达 1.0000；谱间隙阈值固定为 0.1，对字典列缩放与样本量不变，列归一化会迫使 Π 重新正交化；故意不做 snap-rounding，因为有理先验等同于假设系统正确，会把故障系数抹平；筛选残差必须按生成元次数归一化，否则高阶生成元在大量级速度上会被误判，检验使用 32 个连续块（因守恒漂移定义在轨迹片段上），但同轨迹切块并非独立重复，水平膨胀在局限性一节量化，同时报告以整条轨迹加精确置换零假设的版本；归因的规范自由度不可省，因为 Acrobot 能量每个系数都含 m₂，没有无参数单项式可用于归一化；模板单项式多于参数，错误假设表现为大残差；理论保证（命题 1、2）只给出必要性方向的可靠性，且在群体层面残差仅通过生成元作用于状态，重播种无法改变。限制包括：规范形不保证最小性、不保证物理正确性，也不构成完整诊断流程。"
+      },
+      "affiliations": [
+        "MIU",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "MIU, Independent Researcher",
+      "score": 4.592600576495171,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2609.13289v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913289v1-extending-the-speed-limit-of-quadrupedal-locomotion-via-refined-actuator-modeling-and-adaptive-command-scheduling",
+      "source": "arxiv",
+      "title": "Extending the Speed Limit of Quadrupedal Locomotion via Refined Actuator Modeling and Adaptive Command Scheduling",
+      "authors": [
+        "Yucheng Tao",
+        "Shaowen Cheng",
+        "Guorong Lan",
+        "Yanyan Yuan",
+        "Yongbin Jin",
+        "Hongtao Wang"
+      ],
+      "authors_text": "Yucheng Tao, Shaowen Cheng, Guorong Lan, Yanyan Yuan, Yongbin Jin, Hongtao Wang",
+      "abstract": "Achieving high-speed locomotion in quadrupedal robots remains highly challenging, as actuators operate near their physical limits and exhibit pronounced nonlinearities. However, many existing methods neglect actuator nonlinearities and physical constraints during training, leading to a significant sim-to-real gap under highly dynamic motions and limiting achievable performance. To address this issue, we propose a high-speed locomotion framework that reduces sim-to-real discrepancies and stabilizes learning over a wide command distribution. A refined actuator model explicitly captures high-speed voltage coupling and magnetic saturation, enabling a more accurate representation of the torque-speed envelope. In addition, a reinforcement learning framework incorporating a two-stage curriculum and adaptive command scheduling (ACS) ensures stable training. Experiments on the 36.5 kg quadruped BlackPanther2 (BP2) demonstrate speeds of up to 13.2 m/s on a treadmill and 11.65 m/s outdoors, establishing a new state-of-the-art and, to the best of our knowledge, a world record for quadrupedal robot locomotion. The results further highlight the importance of accurate actuator modeling in preventing non-physical policy exploitation, and show that ACS improves robustness without sacrificing performance.",
+      "url": "http://arxiv.org/abs/2609.13289v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13289v1",
+      "tldr": "This paper presents a high-speed quadrupedal locomotion framework that combines refined actuator modeling of high-speed voltage coupling and magnetic saturation with a two-stage curriculum and adaptive command scheduling, enabling the 36.5 kg BlackPanther2 robot to achieve record sprinting speeds of 13.2 m/s on a treadmill and 11.65 m/s outdoors.",
+      "detailed_reading": {
+        "motivation": "高速四足运动时执行器接近物理极限并呈现强非线性，但现有训练常忽略执行器非线性与物理约束，导致高速动态下sim-to-real差距大且性能受限；同时从静止到10 m/s以上的宽指令分布使DRL训练不稳定、收敛差，难以兼顾性能与鲁棒性。",
+        "method": "方法上先建立精细执行器模型：在同步dq坐标系采用i_d=0，保留d轴与q轴电压，用电压椭圆约束v_d^2+v_q^2≤(γV_bus/√3)^2并解二次不等式得到临界转速ω_c，从而刻画受d轴电压耦合而收缩的力矩-速度包络，同时用τ_output=τ_c(1-α|τ_c|/τ_m)建模磁饱和；训练采用非对称actor-critic与VAE估计器，从历史观测推断16维隐变量z和8维结构化估计向量（线速度、基座高度、足端接触），actor输入45维本体感知，critic输入52维含仿真真值；课程为两阶段：Stage I从[-1,1]扩到[-2,6] m/s，Stage II扩到[-2,12] m/s并加入自适应权重正则，ACS根据机器人瞬时速度动态约束指令邻域而非固定加速度上限；仿真中动作映射为关节力矩并受执行器极限约束，硬件部署时低层电机控制器直接跟踪指令力矩。",
+        "result": "在36.5 kg四足机器人BlackPanther2上实现跑步机13.2 m/s、户外11.65 m/s的冲刺速度，作者称其刷新四足机器人运动速度的state-of-the-art与世界纪录；结果表明精确执行器建模能防止策略利用非物理仿真漏洞，ACS在不牺牲性能的前提下提高鲁棒性，并显著降低高速运动中的不稳定。",
+        "conclusion": "该工作说明，将高速执行器非线性与物理可行性边界显式纳入RL训练，并配合自适应指令调度，是把四足机器人推向物理速度极限的关键；精细力矩-速度包络可缩小高速sim-to-real差距，两阶段课程与ACS则在宽指令范围内稳定学习，为高动态电驱四足控制提供了可落地范式。",
+        "key_details": "关键实现包括：采用γ=0.95电压利用系数、i_d=0策略，电压约束保留v_d和v_q并求解ω_c二次方程，磁饱和修正中α由离线力矩-电流数据拟合；RL使用VAE推断z∈R^16和估计向量∈R^8，actor观测45维（角速度、重力、指令、关节位置/速度、上一动作），critic 52维含仿真真值；线速度指令范围[-2,12] m/s、角速度[-1,1] rad/s，Stage I为[-1,1]到[-2,6] m/s，Stage II到[-2,12] m/s，奖励含线/角速度跟踪、基座高度/姿态/关节功率/动作平滑/足滑/偏航率等多项分阶段权重；局限性在于执行器模型仍是低维结构化近似且依赖离线辨识参数，摘要与预览未报告复杂地形、负载变化和长期耐久性下的泛化。"
+      },
+      "affiliations": [
+        "ZJU-Hangzhou Global Scientific and Technological Innovation Center",
+        "MirrorMe Robotics Co., Ltd.",
+        "Zhejiang University"
+      ],
+      "affiliations_text": "ZJU-Hangzhou Global Scientific and Technological Innovation Center, MirrorMe Robotics Co., Ltd., Zhejiang University",
+      "score": 4.578720556705776,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2609.13234v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/16/260913234v1-harnessing-human-expertise-for-high-precision-robotic-assembly-in-industrialized-construction-a-sample-efficient-installer-in-the-loop-interactive-reinforcement-learning-framework",
+      "source": "arxiv",
+      "title": "Harnessing human expertise for high-precision robotic assembly in industrialized construction: A sample-efficient installer-in-the-loop interactive reinforcement learning framework",
+      "authors": [
+        "Zekai Jin",
+        "Huiguang Wang",
+        "Xiaoning Sun",
+        "Yi Shao"
+      ],
+      "authors_text": "Zekai Jin, Huiguang Wang, Xiaoning Sun, Yi Shao",
+      "abstract": "Industrialized construction imposes stringent precision requirements on robotic assembly of modular components such as prefabricated window units. In tolerance-critical operations, the central bottleneck is not only mechanical clearance but also converting tacit installer expertise into data-efficient autonomy under sparse acceptance feedback, contact variability, and millimeter-scale constraints. We present an installer-in-the-loop interactive reinforcement learning framework that acquires expertise through offline teleoperated demonstrations, sparse event-driven binary takeovers at contact-failure boundaries, and acceptance-aligned terminal rewards, logged under a unified schema for traceable offline-to-online adaptation. A temporally abstract action-sequence policy built on Q-chunking with Flow Q-Learning captures multimodal recovery maneuvers under sparse terminal rewards, while a non-updating warm-start phase stabilizes the offline-to-online transition. The framework is evaluated in MuJoCo across the workflow from suction acquisition through clearance-limited seating, under structured staging and end-to-end randomized placement. Within a defined stress-test regime with 2 mm per-side clearance, bounded pose perturbations, and friction randomization, the pipeline attains 100\\% autonomous seating with 12--15 min of cumulative installer supervision over 3.0 h of online training, and reaches the 95\\% success milestone in approximately 0.5 h and 1.5 h in the two experiments. We also report wall-clock adaptation time, cumulative takeover minutes, intervention-rate decay, and stage-wise failure attribution to inform supervision budgeting. Ablations isolate the complementary contributions of temporal abstraction, installer intervention, and warm-start value calibration.",
+      "url": "http://arxiv.org/abs/2609.13234v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13234v1",
+      "tldr": "The paper presents an installer-in-the-loop interactive reinforcement learning framework that combines offline teleoperated demonstrations, sparse event-driven human takeovers, and acceptance-aligned terminal rewards with a temporally abstract Q-chunking/Flow Q-Learning policy to achieve sample-efficient, high-precision robotic assembly in industrialized construction, reaching 100% autonomous seating under 2 mm clearance with only 12–15 minutes of human supervision.",
+      "detailed_reading": {
+        "motivation": "工业化建造中预制窗单元等模块化构件的机器人装配对毫米级公差极为敏感，终端插入与就座阶段受接触多变、间隙狭小和验收反馈稀疏制约，核心瓶颈不只是机械间隙，而是如何把安装工人的隐性纠错经验转化为数据高效的自主策略。现有建筑机器人自动化多在自由空间搬运和粗定位表现良好，一旦进入持续多面接触与绑定、楔紧、卡死等失效边界，脚本控制和常规RL都难以发现并稳定执行退让、偏转、再插入等多步恢复动作。",
+        "method": "该研究提出安装工在环的交互式强化学习框架，统一采集三类经验：离线遥操作演示、在线训练中接触失败边界处的事件驱动二值接管、以及与验收语义对齐的终端稀疏奖励，并按统一日志模式存入离线与在线回放缓冲。学习核心采用基于Q-chunking with Flow Q-Learning的时间抽象动作序列策略，在固定长度动作块空间做块级Q学习，用基于流的教师行为模型提供多模态序列先验并蒸馏到噪声条件学生演员，由评论家评估已执行动作块；训练分三阶段：离线行为初始化、非更新warm-start价值校准、在线微调并允许安装工二值接管覆盖高层动作接口。系统在MuJoCo中覆盖从吸盘获取、搬运、对齐到间隙受限插入与就座的完整工作流，在结构化分段和端到端随机放置两种设置下评估，高层控制接口为10 Hz，观测包括双视角RGB和本体感觉，动作块由统一低层跟踪控制器展开执行。",
+        "result": "在每侧2 mm间隙、有界位姿扰动和摩擦随机化的定义压力测试场景中，该流程实现100%自主就座；实验A和B分别仅需约12分钟和15分钟累计安装工监督，对应3.0小时在线训练，并在约0.5小时和1.5小时达到95%成功里程碑。论文还报告了真实时钟适应时间、累计接管分钟数、干预率衰减和分阶段失败归因，用于监督预算与故障诊断；消融实验表明时间抽象、安装工干预和warm-start价值校准各自具有互补贡献，其中时间抽象与多模态序列建模在压力测试区间内均属必要。",
+        "conclusion": "该框架把公差关键建筑装配中的隐性安装技能分解为结构化演示、事件触发恢复干预和验收对齐评估，证明安装工在环交互强化学习可以在稀疏终端奖励和毫米级约束下显著提升样本效率与自主就座成功率。其方法贡献不在于提出通用RL新算法，而在于面向预制幕墙装配的领域工程信息化实例化，为细粒度机器人建造技能提供了可追溯、可核算监督成本的训练模板。当前证据来自MuJoCo压力测试，为仿真部署导向指标而非现场保证，后续需验证从仿真到物理环境的迁移边界。",
+        "key_details": "关键实现包括：有限时域MDP建模，观测为双视角RGB加本体感觉，动作块在10 Hz高层接口上决策并由统一低层控制器执行；奖励采用验收对齐的终端二值成功信号，避免密集塑形错位；二值接管仅发生在接触失败边界，兼具安全包络约束和将回放数据偏向高价值恢复片段的作用；非更新warm-start阶段在梯度更新前校准评论家以适应在线分布，缓解离线到在线分布漂移；QC-FQL中流教师提供多模态动作序列先验，学生演员为噪声条件、常数时间推理，评论家进行块级价值学习，从而支持退让-偏转-再插入等恢复模式；评估固定2 mm每侧间隙、有界位姿扰动和摩擦随机化，并统计干预率衰减、接管分钟和阶段失败归因；局限在于全部结果来自仿真，未给出真实工地泛化保证。"
+      },
+      "affiliations": [
+        "McGill University"
+      ],
+      "affiliations_text": "McGill University",
+      "score": 4.302049950778575,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.13197v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913197v1-algorithmic-information-dynamics-of-learning-a-certified-differentiable-complexity-controller-for-grokking",
+      "source": "arxiv",
+      "title": "Algorithmic Information Dynamics of Learning: A Certified, Differentiable Complexity Controller for Grokking",
+      "authors": [
+        "Luan Ozelim",
+        "Hector Zenil"
+      ],
+      "authors_text": "Luan Ozelim, Hector Zenil",
+      "abstract": "Algorithmic Information Dynamics (AID) studies systems by perturbing them and measuring changes in algorithmic complexity, but its usual estimator, the Block Decomposition Method, is piecewise constant, restricting the calculus to finite differences. We use $K^{\\mathrm{CDM}}_{\\mathrm{s}F}$, a certified, differentiable estimator, to bring the calculus into learning dynamics: grokking, where a complexity order parameter is known but has not been made to act. A\\empts a transient loss kick, the estimator becomes a controller that accelerates grokking in Levin's description-length--versus-time sense, within a data-dependent Occam boundary whose finite-size trend, $f_c\\sim\\ln p/p$, is consistent with a coupon-collector interpretation. Ablations show that a complexity gate matches a train-loss gate in rescuing failing seeds with $27\\%$ less intervention; among the tested signals, only map complexity marks the transition's completion; the certified prior and the per-parameter $\\nabla K$ attribution are both fungible (a uniform-prior sensor makes bit-identical gate decisions, and random supports match $\\nabla K$-selected ones above a sparsity threshold); and direct field perturbation shows a nucleation-like response to the Occam field (no linear regime is resolved over the probed amplitudes, so these measurements do not justify a fluctuation--dissipation surrogate), with a finite-field response growing by orders of magnitude toward the transition. These measurements account for the empirically tuned staircase: bang--bang pulses, stall-fired and released on yield, whose iteration plausibly builds the response it exploits. The kick transfers to sparse parity and to a transformer; a sustained weight-space loss fails. The algorithmic estimator's distinct contribution is timing (when to fire and when to release), not attribution.",
+      "url": "http://arxiv.org/abs/2609.13197v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13197v1",
+      "tldr": "By replacing the usual piecewise-constant complexity estimator with a certified, differentiable one, the paper turns algorithmic complexity from a passive monitor into a transient controller and timing gate that accelerates grokking, rescues failing seeds, and operates within a data-dependent Occam boundary—its key contribution being when to intervene, not attribution.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Oxford Immune Algorithmics",
+        "King's College London"
+      ],
+      "affiliations_text": "Oxford Immune Algorithmics, King's College London",
+      "score": 4.209125833136915,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.13235v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913235v1-learning-manipulation-sufficient-representations-via-outcome-bottlenecks",
+      "source": "arxiv",
+      "title": "Learning Manipulation-Sufficient Representations via Outcome Bottlenecks",
+      "authors": [
+        "Md Selim Sarowar",
+        "Sungho Kim"
+      ],
+      "authors_text": "Md Selim Sarowar, Sungho Kim",
+      "abstract": "Networked manipulation endpoints couple perception to actuation across compute- and bandwidth-limited links, yet commonly exchange dense geometric states optimized for fidelity rather than action outcomes. A stochastic representation is learned with a policy-free, action-conditioned outcome bottleneck: marginal outcome log-loss supplies distortion and a KL term regularizes rate. The construction is motivated by the minimal statistic that preserves the outcome distribution of every admissible action, while the implemented finite model is evaluated as a rate-regularized mixture predictor. The same encoder and outcome head support grasp selection, singleton conformal filtering, active viewpoint selection, and latent test-time adaptation. A finite-probe theorem identifies the local level-set tangent space with the null space of an outcome Jacobian. The synthetic oracle verifies this result; on scanned objects, an analytic surrogate agrees with measured simulator invariances within \\(0.56^\\circ\\). Across 11,979 simulated grasps on 13 objects, a reconstructed-geometry wrench score attains 0.542 AUC against lift success and falls below chance on curved objects, while our representation attains 0.876. At 25\\% commitment, executed-grasp success is 0.503 versus 0.984. The 512-byte interface is \\(288\\times\\) smaller than one RGB-D frame and runs at 16\\,ms per CPU decision. Independent synthetic points track the tested conformal levels; scanned-object all-pair coverage is reported as a clustered empirical diagnostic. On unseen objects, within-scene AUC falls to 0.569, and a full-feedback update raises empirical mean pairwise coverage from 0.728 to 0.883.",
+      "url": "http://arxiv.org/abs/2609.13235v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13235v1",
+      "tldr": "The paper proposes learning a compact, stochastic manipulation-sufficient representation via a policy-free, action-conditioned outcome bottleneck, achieving stronger grasp-outcome prediction and executed-grasp success than reconstructed-geometry baselines with a 512-byte, 16 ms perception-to-decision interface.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yeungnam University"
+      ],
+      "affiliations_text": "Yeungnam University",
+      "score": 4.079699087079076,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.13191v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913191v1-early-prediction-of-satellite-collision-probability-using-a-hybrid-tcn-transformer-model-for-a-cdm-based-conjunction-analysis-framework",
+      "source": "arxiv",
+      "title": "Early Prediction of Satellite Collision Probability Using a Hybrid TCN-Transformer Model for a CDM-Based Conjunction Analysis Framework",
+      "authors": [
+        "Rabia Tüylek Tok",
+        "Burak Yağlıoğlu",
+        "Enes Dağ",
+        "Emre Onur Kahya"
+      ],
+      "authors_text": "Rabia Tüylek Tok, Burak Yağlıoğlu, Enes Dağ, Emre Onur Kahya",
+      "abstract": "The rapid expansion of operational satellites and orbital debris has increased the frequency of close approach events in low Earth orbit (LEO), creating a higher operational burden for satellite operators. This problem is especially critical for satellites using electric propulsion, where low-thrust maneuver capability imposes additional time constraints on collision avoidance planning. In current practice, Conjunction Data Messages (CDMs) provide relative state, covariance, miss distance, time of closest approach, and probability of collision (PoC) information for conjunction assessment. However, the nonlinear propagation of orbital uncertainties and the sensitivity of PoC to covariance evolution make the interpretation of sequential CDMs challenging. This study proposes a learning-based framework for early prediction of satellite conjunction risk by estimating the PoC expected in the subsequent CDM update of the same close approach event. In the proposed methodology, an Unscented Transform-based propagation and backpropagation framework is first used to evaluate the sensitivity of the collision risk metric to CDM parameters. In addition, Principal Component Analysis is applied to the numerical CDM parameters to identify the features most relevant to PoC variation. The results obtained from the sensitivity analysis and PCA are then used to justify the selected raw CDM parameters and to construct derived metrics representing relative motion, encounter geometry, and covariance-related uncertainty. Using the resulting sequential enriched conjunction dataset, a hybrid Temporal Convolutional Network (TCN)-Transformer model is trained to learn the temporal evolution of conjunction risk. The framework is applied to CDMs received and analyzed within TÜBİTAK UZAY, demonstrating its potential for earlier and more consistent operational risk evaluation for LEO satellite conjunctions.",
+      "url": "http://arxiv.org/abs/2609.13191v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13191v1",
+      "tldr": "This paper proposes a hybrid TCN–Transformer model that predicts the next CDM’s collision probability from sequential, physically enriched conjunction data to enable earlier and more consistent satellite collision risk assessment in LEO.",
+      "detailed_reading": null,
+      "affiliations": [
+        "TÜBİTAK UZAY",
+        "Istanbul Technical University"
+      ],
+      "affiliations_text": "TÜBİTAK UZAY, Istanbul Technical University",
+      "score": 3.922984858302045,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.13198v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913198v1-spice-simple-polysemantic-feature-interpretation-via-clustering-based-explanation",
+      "source": "arxiv",
+      "title": "SPICE: Simple Polysemantic Feature Interpretation via Clustering-based Explanation",
+      "authors": [
+        "Sehyun Lee",
+        "Dahee Kwon",
+        "Damin Lee",
+        "Jaesik Choi"
+      ],
+      "authors_text": "Sehyun Lee, Dahee Kwon, Damin Lee, Jaesik Choi",
+      "abstract": "One of the pivotal recent challenges in neural network interpretability is polysemanticity, where a single neuron is activated by multiple, often unrelated concepts, hindering clear functional understanding. Although prior work has explored this phenomenon, existing approaches remain architecture-specific and depend on manual heuristics such as a fixed number of concept clusters ($K$), limiting their generality and scalability--especially for modern Transformer-based models. To address these limitations, we introduce SPICE (\\textbf{S}imple \\textbf{P}olysemantic Feature \\textbf{I}nterpretation via \\textbf{C}lustering-based \\textbf{E}xplanation), a generalizable framework for analyzing polysemanticity in deep vision architectures. SPICE avoids architecture-dependent propagation rules, enabling the first systematic comparison of polysemanticity across both CNNs and Transformers, and automatically determines the number of concept clusters per neuron, eliminating reliance on a preset $K$ and supporting scalable analysis for large models. Using SPICE, we conduct a comprehensive investigation into how polysemanticity emerges, varies across depth and architecture, and forms through distinct computational pathways.",
+      "url": "http://arxiv.org/abs/2609.13198v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13198v1",
+      "tldr": "SPICE is a generalizable clustering-based framework that automatically disentangles polysemantic neurons by inferring the number of concept clusters per neuron, enabling systematic comparison of polysemanticity across CNNs and Transformers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Korea Advanced Institute of Science and Technology (KAIST)",
+        "INEEJI"
+      ],
+      "affiliations_text": "Korea Advanced Institute of Science and Technology (KAIST), INEEJI",
+      "score": 3.7997260349849764,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.13290v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913290v1-breaking-speed-scaling-in-quadrupedal-robots-via-huygens-coupled-pendulum-dynamics",
+      "source": "arxiv",
+      "title": "Breaking speed scaling in quadrupedal robots via Huygens' coupled-pendulum dynamics",
+      "authors": [
+        "Yucheng Tao",
+        "Yongbin Jin",
+        "Shaowen Cheng",
+        "Xianwei Liu",
+        "Yanyan Yuan",
+        "Yanhong Liang",
+        "Chengkai Su",
+        "Chaojie Fu",
+        "Guorong Lan",
+        "Wei Yang",
+        "Hongtao Wang"
+      ],
+      "authors_text": "Yucheng Tao, Yongbin Jin, Shaowen Cheng, Xianwei Liu, Yanyan Yuan, Yanhong Liang, Chengkai Su, Chaojie Fu, Guorong Lan, Wei Yang, Hongtao Wang",
+      "abstract": "Achieving biological-level running speeds has largely been pursued through advances in control algorithms, which improve the utilization of existing hardware. However, the ultimate speed limits remain governed by the underlying force and torque requirements of rapid locomotion, which are typically addressed through increased actuator capacity. Inspired by Huygens' coupled pendulums, we demonstrate that superior locomotion can emerge from principled exploitation of intrinsic dynamics rather than brute-force hardware scaling. Inter-limb inertial coupling redistributes energy across the gait cycle and reduces peak joint torque required for rapid periodic motion, thereby expanding the achievable speed without proportional increases in actuator capability. Incorporating hardware parameters as additional design variables further extends this analysis into a co-optimization framework, enabling the systematic utilization of inertial coupling in robot design. Guided by this framework, a quadruped robot achieves a running speed of 10.74 m/s (Froude number 21.4) and completes a 100-meter sprint in 12.2 seconds, representing the first legged robot to surpass 10 m/s. These results establish inertial coupling as an underlying mechanism governing high-speed legged locomotion and highlight its role in reducing force requirements, offering new insights into the design of agile robotic systems.",
+      "url": "http://arxiv.org/abs/2609.13290v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13290v1",
+      "tldr": "Inspired by Huygens’ coupled pendulums, this work exploits inter-limb inertial coupling and hardware–trajectory co-optimization to reduce peak joint torque, enabling a quadruped robot to reach 10.74 m/s and become the first legged robot to surpass 10 m/s.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ZJU-Hangzhou Global Scientific and Technological Innovation Center",
+        "Zhejiang University",
+        "Mirrorme Technology Co., Ltd."
+      ],
+      "affiliations_text": "ZJU-Hangzhou Global Scientific and Technological Innovation Center, Zhejiang University, Mirrorme Technology Co., Ltd.",
+      "score": 3.7218527222452518,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.13199v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913199v1-discovering-and-preserving-category-correlation-knowledge-via-adaptive-reciprocal-knowledge-distillation",
+      "source": "arxiv",
+      "title": "Discovering and Preserving Category Correlation Knowledge via Adaptive Reciprocal Knowledge Distillation",
+      "authors": [
+        "Dawen Jiang",
+        "Zhishu Shen",
+        "Zeyu Liu",
+        "Tiehua Zhang"
+      ],
+      "authors_text": "Dawen Jiang, Zhishu Shen, Zeyu Liu, Tiehua Zhang",
+      "abstract": "Knowledge distillation aims to improve the performance of lightweight student models by transferring knowledge from larger and more powerful teacher models. However, a substantial size gap between teacher and student models often impedes effective knowledge transfer. Most existing approaches adopt a static, one-way teacher-to-student distillation paradigm, which overlooks the dynamic nature of student learning and fails to provide targeted guidance on hard samples. In this paper, we propose adaptive reciprocal knowledge distillation (AR-KD), a novel method that improves knowledge transfer by simplifying the teacher's output distribution. Specifically, AR-KD performs reciprocal adaptation on the teacher by matching its class correlation matrix to the student's relational representation, which reshapes the teacher's prediction structure to better suit the student's capacity. This relational alignment mitigates the collapse of inter-class dark knowledge caused by overconfident teachers, enabling the student to learn from richer and more compatible supervisory signals. We evaluate AR-KD on CIFAR-100 and ImageNet-1k classification datasets, where it outperforms state-of-the-art knowledge distillation baselines. Specifically, AR-KD improves student performance across homogeneous and heterogeneous setups: up to 7.13% accuracy gain for students, 1.42% to 4.15% higher than vanilla KD on average, and further improvements when integrated with other advanced methods. Our code is available at https://anonymous.4open.science/r/ARKD/.",
+      "url": "http://arxiv.org/abs/2609.13199v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13199v1",
+      "tldr": "Adaptive Reciprocal Knowledge Distillation (AR-KD) is a bidirectional distillation framework that adapts the teacher by matching its class-correlation matrix to the student’s relational representation, thereby simplifying overconfident outputs and improving student accuracy on CIFAR-100 and ImageNet-1k.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wuhan University of Technology",
+        "Tongji University"
+      ],
+      "affiliations_text": "Wuhan University of Technology, Tongji University",
+      "score": 3.6058679526797355,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.13201v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913201v1-criticality-in-dissimilar-decomposition-and-undersampling-of-random-datasets-with-anomalies",
+      "source": "arxiv",
+      "title": "Criticality in Dissimilar Decomposition and Undersampling of Random Datasets with Anomalies",
+      "authors": [
+        "Ghurumuruhan Ganesan"
+      ],
+      "authors_text": "Ghurumuruhan Ganesan",
+      "abstract": "Training datasets for upcoming LLMs would include a significant amount of AI text/image data generated from current LLMs. In such a scenario, it is important to understand how this affects batch decompositions and thereby, the performance of the resultant new LLM. In this paper, we consider AI generated data as anomalies ``linked\" to main data points and study decomposition and undersampling properties of the overall random dataset. We use redundancy graphs and iteration techniques to obtain bounds for the minimum size of a strongly dissimilar (SD) decomposition and demonstrate a phase transition phenomena, wherein the minimum size is essentially determined by the \\emph{main} data points when the number of anomalies is small and is ``taken\" over by the anomalies above a certain threshold. We also establish a size criticality result for the strong similarity of a randomly undersampled dataset and illustrate our results with examples involving categorical datasets, whose overall space size is much larger than the size of the dataset.",
+      "url": "http://arxiv.org/abs/2609.13201v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13201v1",
+      "tldr": "This paper shows that random datasets with linked anomalies exhibit a phase transition in the minimum size of a strongly dissimilar batch decomposition—controlled by main data below a threshold and by anomalies above it—and derives a critical size for strong similarity under random undersampling.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bristol"
+      ],
+      "affiliations_text": "University of Bristol",
+      "score": 3.3431201849649184,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.13195v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913195v1-machine-unlearning-for-speech-question-answering-in-large-audio-language-models",
+      "source": "arxiv",
+      "title": "Machine Unlearning for Speech Question Answering in Large Audio-Language Models",
+      "authors": [
+        "Zhe Liu"
+      ],
+      "authors_text": "Zhe Liu",
+      "abstract": "Large Audio-Language Models (LALMs) have recently shown strong capabilities in speech understanding and question answering (QA), but they also inherit privacy risks from large-scale training data, including the unintended memorization of sensitive information. In this work, we study machine unlearning for speech QA in LALMs, a setting that is more challenging than prior work on text-based Large Language Models (LLMs) or Automatic Speech Recognition (ASR) due to the tight coupling between acoustic perception and factual knowledge. We present and evaluate multiple unlearning strategies, including gradient ascent, task arithmetic, and alignment-based fine-tuning methods that enforce safe refusal responses, to remove private knowledge while still preserving performance on core capabilities. Through extensive experiments on speech QA datasets, we show that these unlearning methods can reduce the privacy leakage rate by up to 80% while maintaining near-neutral performance on non-private speech QA and general speech understanding benchmarks.",
+      "url": "http://arxiv.org/abs/2609.13195v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13195v1",
+      "tldr": "This paper presents and evaluates machine unlearning strategies for speech question answering in large audio-language models, showing that gradient ascent, task arithmetic, and alignment-based refusal fine-tuning can reduce private information leakage by up to 80% while largely preserving non-private speech QA and general audio understanding performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Meta Platforms, Inc."
+      ],
+      "affiliations_text": "Meta Platforms, Inc.",
+      "score": 3.3038108073832144,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.13202v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913202v1-do-tabular-foundation-models-still-need-feature-engineering",
+      "source": "arxiv",
+      "title": "Do Tabular Foundation Models Still Need Feature Engineering?",
+      "authors": [
+        "Yifan WU",
+        "Pinjun Dong",
+        "Jiran Tao",
+        "Binyan Jiang"
+      ],
+      "authors_text": "Yifan WU, Pinjun Dong, Jiran Tao, Binyan Jiang",
+      "abstract": "Feature engineering has long been a cornerstone of tabular machine learning. Tabular foundation models (TFMs) are pretrained on a wide range of tabular datasets and applied via in-context learning. Their rise raises a natural question: does manual feature construction still matter as these models become more capable? To answer this, we perform a controlled study across several versions of two major TFM families, testing a wide range of existing feature engineering techniques on benchmark datasets from TabArena. We find a consistent pattern: feature engineering gains are concentrated in earlier model generations and become negligible for the strongest models. These results suggest that stronger TFMs depend less on explicitly engineered input representations. In a complementary experiment, however, adding in-context information from related datasets still improves performance. Our findings indicate a shift in the source of performance gains for stronger TFMs: re-representing existing inputs becomes less effective, while providing additional task-relevant context remains beneficial.",
+      "url": "http://arxiv.org/abs/2609.13202v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13202v1",
+      "tldr": "A controlled study of TabPFN and TabICL shows that generic feature engineering becomes largely unnecessary for stronger tabular foundation models, with gains concentrated in earlier generations, while providing additional task-relevant in-context examples from related datasets still improves performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Hong Kong Polytechnic University"
+      ],
+      "affiliations_text": "The Hong Kong Polytechnic University",
+      "score": 3.2395801911216315,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.13185v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913185v1-llms-or-naive-bayes-old-gems-or-new-ways",
+      "source": "arxiv",
+      "title": "LLMs or Naive Bayes? Old Gems or New Ways",
+      "authors": [
+        "Mohammad Firas Sada",
+        "Dmitry Mishin",
+        "John Graham",
+        "Seungmin Kim",
+        "Mahidhar Tatineni",
+        "Frank Würthwein"
+      ],
+      "authors_text": "Mohammad Firas Sada, Dmitry Mishin, John Graham, Seungmin Kim, Mahidhar Tatineni, Frank Würthwein",
+      "abstract": "Large language models (LLMs) prompt a recurring question in research computing: should classical methods like Naive Bayes (NB) be retired? We benchmark Complement Naive Bayes against zero-shot and few-shot LLMs spanning four model families and a 37x range in scale (27B to a 1T-parameter mixture-of-experts) across text classification tasks. LLMs dominate only in zero-data regimes (98.0% vs 88.2% on Amazon Polarity sentiment), and even that win is contamination-prone: on a low-contamination sentiment task NB beats the zero-shot LLM (81.7% vs 73.0%). However, once labeled data is available (e.g., AG News), NB reaches 89.1% accuracy, statistically indistinguishable from the zero-shot 27B LLM (89.0%) and better than the 397B frontier model (84.8%), at thousands of samples/sec on a commodity CPU. Fine-tuned DistilBERT reaches 90.6% but at far lower throughput than NB at batch size 1 (Table 2). Our measured GPU throughput analysis shows small-LLM batched inference is 40-486x slower than NB CPU inference (the multiplier depends strongly on the host CPU), exposing a structural gap bounded by memory bandwidth, with roughly two orders of magnitude lower energy per sample. For resource-constrained HPC practitioners performing text classification with labeled data, NB remains the optimal choice. We show the decision line is task-dependent (NB reaches LLM parity around $N \\sim 10^4$ labels for topic classification, while zero-data sentiment favors the LLM at all N tested) and provide a Kubernetes Helm operator that automates model selection using configurable thresholds and verifiable Prometheus metrics.",
+      "url": "http://arxiv.org/abs/2609.13185v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13185v1",
+      "tldr": "This paper benchmarks Complement Naive Bayes against zero-shot and few-shot LLMs across text classification tasks, finding that LLMs only dominate in zero-data (and contamination-prone) regimes, while with labeled data Naive Bayes matches or exceeds LLM accuracy at 40–486× higher throughput and far lower energy, and it provides a task-dependent decision line plus a Kubernetes Helm operator for automated model selection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yonsei University",
+        "Lawrence Berkeley National Laboratory",
+        "University of California, San Diego"
+      ],
+      "affiliations_text": "Yonsei University, Lawrence Berkeley National Laboratory, University of California, San Diego",
+      "score": 3.1994871624747425,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.13203v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913203v1-scalable-partial-information-decomposition-for-symptom-networks-via-supervised-embeddings",
+      "source": "arxiv",
+      "title": "Scalable partial information decomposition for symptom networks via supervised embeddings",
+      "authors": [
+        "Cillian Hourican",
+        "Eric Dignum",
+        "Rick Quax",
+        "Debraj Roy"
+      ],
+      "authors_text": "Cillian Hourican, Eric Dignum, Rick Quax, Debraj Roy",
+      "abstract": "Pairwise relationships among mental-health symptoms are routinely summarised asscalar edge weights, which cannot express whether two symptoms carry overlapping information about a third or information that appears only in combination. Partial information decomposition (PID) addresses this gap but is computationally intractable beyond a few sources.\n  We introduce embedding-based PID (ePID), a scalable pipeline that compresses all nonfocal symptoms into a low-cardinality discrete embedding and computes a tractable two-source PID, yielding source-unique, remainder-unique, redundant, and synergistic components for each ordered source-target pair. We benchmarked 13 candidate embeddings on synthetic Bayesian networks calibrated to PHQ-9 and on 83 real-world datasets across five PID measures.\n  A supervised Agglomerative Conditional Information Bottleneck (ACIB) embedding recovered the reference decomposition most accurately of the 13 embeddings tested, and did so for every PID measure yielding non-negative atoms once four or more symptoms were compressed (synergy recovery r = 0.92). The two instruments then diverged sharply. In PHQ-9 networks (UK Biobank,N = 154,291; Xinxiang student sample, N = 24,292) the surrounding symptom context carried most pairwise dependence through redundant and remainder-unique channels; synergy contributed 6 to 9%, and no directed edge was synergy-dominated in either cohort. In the 28-item Interpersonal Reactivity Index, 45% of source pairs were. The identical pipeline, applied without parameter changes, therefore returned opposite profiles for the two instruments, each consistent with how that instrument was constructed.\n  By separating overlapping from interaction-dependent information, ePID provides a scalable, model-agnostic complement to standard symptom-network methodology to distinguish redundant and synergistic contributions to observed correlations.",
+      "url": "http://arxiv.org/abs/2609.13203v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13203v1",
+      "tldr": "The paper introduces embedding-based partial information decomposition (ePID), a scalable supervised-embedding pipeline that compresses non-focal symptoms to compute tractable two-source PID and distinguish redundant from synergistic information in symptom networks, recovering instrument-specific profiles for PHQ-9 and the Interpersonal Reactivity Index.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Amsterdam"
+      ],
+      "affiliations_text": "University of Amsterdam",
+      "score": 3.1767553034936546,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.13149v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913149v1-budgetbench-a-budget-tiered-protocol-and-pilot-harness-for-memory-strategy-evaluation-in-local-large-language-model-agents",
+      "source": "arxiv",
+      "title": "BudgetBench: A Budget-Tiered Protocol and Pilot Harness for Memory Strategy Evaluation in Local Large Language Model Agents",
+      "authors": [
+        "Aditya Karnam Gururaj Rao",
+        "Arjun Jaggi"
+      ],
+      "authors_text": "Aditya Karnam Gururaj Rao, Arjun Jaggi",
+      "abstract": "For local large language model agents, active context is a scarce resource: memory capacity, prefill latency, cache growth, and service objectives all constrain how many input tokens each call can afford. We present BudgetBench, an active-budget protocol and reference harness that treats the per-call input-token budget as the independent variable when comparing memory strategies. Holding the model, task, sampler, and decoding fixed, it sweeps budgets over 2K, 4K, 8K, 16K, and 32K tokens and records quality, budget utilization, latency, and, as a first-class outcome, budget-violation rates. The core contribution is this reusable measurement surface: a swappable MemoryStrategy contract, explicit budget enforcement, deterministic or versioned graders, prompt-audit metadata, and reproducibility artifacts, released at https://github.com/aviskaar/budgetbench.\n  We substantiate the protocol with pilot studies rather than final rankings. Across a local qwen2.5:1.5b pilot (89 items each on SWE-bench Verified and LongBench v2), a hosted 50-item Qwen3 30B-A3B LongBench replication with exact tokenization, and a 500-item LongMemEval oracle study scored by the official GPT-4o evaluator, the harness exposes budget-compliance failures, non-monotonic quality curves, and operating points that single-budget evaluation hides. The budgeted-versus-full-context direction remains unresolved: the local slice is near-null and the hosted replication favors full context in point estimate. We report results transparently, including that the early pilot's tokenizer approximation undercounts some served-model prompts, so its violation rows are tokenizer-approximation diagnostics, not claim-bearing results; all timings are operational diagnostics. The reusable contribution is the protocol, harness, and failure-reporting discipline needed to scale fixed-budget memory-strategy evaluation.",
+      "url": "http://arxiv.org/abs/2609.13149v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13149v1",
+      "tldr": "BudgetBench introduces a reusable budget-tiered protocol and harness that sweeps per-call input-token budgets (2K–32K) to evaluate memory strategies in local LLM agents, recording quality, utilization, latency, and budget-violation rates, and uses pilot studies to show that fixed-budget evaluation exposes compliance failures and non-monotonic quality curves hidden by single-budget testing.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.1252178845121694,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2609.13244v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913244v1-physical-kernel-structured-visual-latents-for-dark-manipulation",
+      "source": "arxiv",
+      "title": "Physical Kernel: Structured Visual Latents for Dark Manipulation",
+      "authors": [
+        "Jinting Hang",
+        "Hong Li",
+        "Zhenhui Cai",
+        "Zhihao Zhao",
+        "Jian He"
+      ],
+      "authors_text": "Jinting Hang, Hong Li, Zhenhui Cai, Zhihao Zhao, Jian He",
+      "abstract": "We study dark manipulation: after a brief lit Write encodes z0 = Enc(rgb), a policy pi(z) and open-loop dynamics f(z,a) complete contact-rich skills without further pixels (dark_f). On ManiSkill StackCube (n=160; seed packs 0/1000), dark_f attains 68.1% stacked on the five-rung chain (near_A -> grasped -> lifted -> on_B -> stacked), compared with 35.6% for per-step lit_reenc and 0% for freeze/encode_black. On a shared Write->HOLD protocol (n=40), occlusion and camera-aligned GT contact-neighbor masks drive lit lift from 43% to 0%, while dark_f holds 82.5%; shuffling actions inflates dynamics MSE by ~9.4x; write-time appearance shifts break encoding (night: 0% stacked), yet the same shifts during HOLD leave dark_f lift unchanged; Write length Tw is flat once the stop phase is reached, while earlier stops and write-time blur/JPEG sharply cut stacked. A dedicated pi_write reaches 35% vision-budget stacked (n=80); matched Dreamer-style/pixel nulls without privileged geom stay at 0%. Privileged state-RSSM MPC reaches ~35% stacked with 9D dark observations -- a stronger-observation null, not a matched visual baseline.",
+      "url": "http://arxiv.org/abs/2609.13244v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13244v1",
+      "tldr": "This paper introduces a Physical Kernel that encodes a single lit RGB observation into structured visual latents, enabling “dark manipulation” where a latent policy and open-loop dynamics complete contact-rich skills without further pixels, achieving 68.1% stacking on ManiSkill StackCube versus 35.6% for per-step re-encoding and 0% for frozen/black baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvest Praxis"
+      ],
+      "affiliations_text": "Harvest Praxis",
+      "score": 3.040532331713393,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2609.13192v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913192v1-evaluating-llm-generated-rules-for-heart-disease-prediction",
+      "source": "arxiv",
+      "title": "Evaluating LLM-Generated Rules for Heart Disease Prediction",
+      "authors": [
+        "Feisal Alaswad",
+        "Batoul Aljaddouh",
+        "Maher Alrahhal",
+        "Wafaa Al Nassan",
+        "Talal Bonn"
+      ],
+      "authors_text": "Feisal Alaswad, Batoul Aljaddouh, Maher Alrahhal, Wafaa Al Nassan, Talal Bonn",
+      "abstract": "This study compares traditional machine learning models and Large Language Model (LLM)-generated rule-based systems for heart disease prediction using the UCI Heart Disease dataset. Several classifiers, including Logistic Regression, K-Nearest Neighbors (KNN), Support Vector Machine (SVM), Naive Bayes, Decision Tree, and Random Forest, were evaluated alongside rule-based systems generated using GPT-4o and Claude Sonnet 4.6. Model performance was assessed using accuracy, precision, recall, and F1-score metrics. Experimental results show that traditional machine learning models consistently outperform LLM-generated rule-based systems in predictive performance. Random Forest achieved the best overall performance with 90.2% accuracy, a precision of 0.829, perfect recall of 1.0, and an F1-score of 0.906. Naive Bayes followed closely with 88.5% accuracy and an F1-score of 0.881. In contrast, the LLM-generated rule models achieved lower performance, with Claude Sonnet 4.6 reaching 80.3% accuracy (F1-score: 0.833) and GPT-4o obtaining 70.5% accuracy (F1-score: 0.690). Despite the performance gap, the LLM-generated rules provide interpretable IF-THEN diagnostic logic that enhances explainability and transparency in clinical decision-making. These findings highlight the trade-off between predictive performance and interpretability in medical artificial intelligence systems. The complete implementation of all experiments, including machine learning models and LLM-derived rule classifiers, is publicly available in the GitHub repository at https://github.com/FeisalAlaswad/LLM-Rule-ML-Heart-Disease-Prediction .",
+      "url": "http://arxiv.org/abs/2609.13192v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13192v1",
+      "tldr": "Traditional machine learning models, especially Random Forest with 90.2% accuracy, outperformed GPT-4o- and Claude Sonnet 4.6-generated IF-THEN rule-based systems for heart disease prediction on the UCI dataset, though the LLM-generated rules provided greater interpretability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Sharjah",
+        "Amity University Dubai",
+        "SRM Institute of Science and Technology"
+      ],
+      "affiliations_text": "University of Sharjah, Amity University Dubai, SRM Institute of Science and Technology",
+      "score": 2.8776137062954046,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2609.13182v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/16/260913182v1-land-art-as-a-big-data-climate-sensor",
+      "source": "arxiv",
+      "title": "Land Art as a Big-Data Climate Sensor",
+      "authors": [
+        "Alev Cinbarci",
+        "Sean Kalaycioglu"
+      ],
+      "authors_text": "Alev Cinbarci, Sean Kalaycioglu",
+      "abstract": "Robert Smithson's 1970 land artwork Spiral Jetty, located in the north arm of Utah's Great Salt Lake, has alternated between submergence and exposure during severe lake decline. We analyze 1,744 co-registered Landsat 4-9 and Sentinel-2 image chips spanning every year and calendar month from 1984 to 2025. A 14-feature complexity signature combines Shannon entropy, multiscale permutation entropy, fractal dimension, lacunarity, gray-level co-occurrence texture, intensity statistics, and ImageNet-pretrained ResNet50 features. These measurements are compared with a 42-year monthly climate and hydrology panel from NASA GISTEMP, USGS NWIS, Open-Meteo, and the Global Carbon Budget. Bootstrap analysis shows that Shannon entropy is a weak proxy and does not support an earlier small-sample claim of positive correlation with global temperature. By contrast, coarse-scale permutation entropy and mean intensity track lake elevation strongly, with Spearman correlations of 0.85 to 0.88 and 95 percent confidence intervals excluding zero. The third principal component of the ResNet50 embeddings emerges without supervision as an AI climate axis, correlating 0.86 with cumulative CO2 and -0.83 with lake elevation. Image complexity leads lake stage by about three years, with Pearson r = 0.58 at lag +3 and a 95 percent confidence interval of 0.40 to 0.73. STL decomposition reveals a non-monotonic trend that rises from 1984 to 2015 and declines sharply thereafter as the lake approaches record-low elevations. Partial correlations controlling for month and sensor confirm robustness to seasonal and sensor effects. These results refine the art-as-thermometer metaphor into an art-as-leading-indicator-of-hydrological-state interpretation. The dataset, feature pipeline, and analysis code are released as a public benchmark.",
+      "url": "http://arxiv.org/abs/2609.13182v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.13182v1",
+      "tldr": "Analyzing 1,744 Landsat and Sentinel-2 images of Robert Smithson’s *Spiral Jetty* from 1984–2025 with a 14-feature complexity signature shows that multi-scale entropy and unsupervised CNN features track and lead Great Salt Lake hydrology, recasting the land artwork from a simple “art-as-thermometer” into a leading indicator of hydrological state while refuting an earlier Shannon-entropy/global-temperature correlation.",
+      "detailed_reading": null,
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.7648184204559616,
+      "score_text": "2.8"
+    }
+  ],
+  "errors": []
+}
