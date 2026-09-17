@@ -1,0 +1,752 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-17T00:43:41.224113",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2609.16058v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916058v1-driver-behavior-estimation-at-signalized-intersections-using-a-physics-constrained-decision-conditioned-autoregressive-transformer",
+      "source": "arxiv",
+      "title": "Driver Behavior Estimation at Signalized Intersections Using a Physics-Constrained Decision-Conditioned Autoregressive Transformer",
+      "authors": [
+        "Mohammad Khoshkdahan",
+        "Pavel Laskov",
+        "Alexey Vinel"
+      ],
+      "authors_text": "Mohammad Khoshkdahan, Pavel Laskov, Alexey Vinel",
+      "abstract": "Red-light violations and harsh braking at signalized intersections are major contributors to traffic accidents. This paper analyzes and predicts human driver decision-making and longitudinal trajectory behavior during traffic light signal transitions. We collected a diverse real-world dataset comprising 449 approach runs under varying speed and distance conditions. Vehicle motion was recorded using RTK-corrected GNSS with centimeter-level accuracy, and driver heart rate and multi-level comfort ratings were monitored. Spatial and temporal calibration ensured precise alignment between vehicle state and signal timing. Statistical analysis identifies required deceleration as the dominant single predictor of the stop-go decision, and heteroscedastic Gaussian modeling of peak deceleration reveals five empirical comfort ranges derived from human stopping behavior. Based on this insight, we propose a two-stage modeling framework. Stage 1 predicts the binary maneuver decision, and Stage 2 generates the longitudinal acceleration trajectory using a decision-conditioned autoregressive Transformer with physics constraints, including target-state conditioning and jerk limits. The proposed architecture outperforms baseline methods and achieves 0.49m/s^2 acceleration MAE and 0.62m distance MAE. It also estimates the future stopping-comfort level of the human driver from a single yellow-onset snapshot. Qualitative results demonstrate realistic human-like braking behavior. The dataset and source code are publicly available.",
+      "url": "http://arxiv.org/abs/2609.16058v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16058v1",
+      "tldr": "This paper presents a high-precision real-world dataset and a two-stage physics-constrained, decision-conditioned autoregressive Transformer that predicts drivers’ stop–go decisions and longitudinal deceleration trajectories at yellow-light signalized intersections while estimating stopping comfort from a single yellow-onset snapshot.",
+      "detailed_reading": {
+        "motivation": "信号交叉口绿灯转黄灯阶段的决策与制动行为直接关系到红灯违规和急刹追尾等事故风险，现有研究多只预测离散停走决策或缺少高精度连续轨迹与驾驶员舒适/生理信息。论文旨在同时建模驾驶员的停走选择与纵向减速轨迹，为自适应信号配时和V2I安全舒适干预提供依据。",
+        "method": "研究采集30名驾驶员共449次接近运行，含185109个RTK-GNSS样本，10 Hz记录车辆位置、速度、纵向加速度，并同步测量心率与五点制动舒适度评分；信号灯由Jetson控制，通过空间投影校准纵向距离并用142 ms固定延迟加ping延迟补偿黄灯触发时刻，使黄灯起始位置误差低于30 cm。分析阶段用贝叶斯分层logistic模型估计停走决策因素，用异方差高斯建模峰值减速度并提取五类经验舒适区间；预测阶段采用两阶段框架，Stage 1输出二分类停走决策，Stage 2以该决策为条件，用自回归Transformer生成纵向加速度轨迹，并加入目标状态条件与jerk限制等物理约束，推理时仅需黄灯起始单帧快照即可生成完整停车或通过轨迹及未来舒适等级。",
+        "result": "贝叶斯分层logistic的平均边际效应显示需求减速度a_req是停走决策的主导预测因子，停车试次中黄灯起始平均a_req为1.99 m/s²，中位数1.93，标准差0.70；决策边界大致沿等a_req轮廓，较大黄灯距离阈值对应约3–4 m/s²的停走转换，较短距离则降至约2–3 m/s²。所提两阶段决策条件自回归Transformer优于基线方法，达到0.49 m/s²的加速度MAE和0.62 m的距离MAE，并能从单个黄灯起始快照估计驾驶员未来停车舒适等级，定性结果呈现类人制动行为。",
+        "conclusion": "论文证明将决策条件、自回归生成与物理约束结合，可以在信号交叉口黄灯场景中同时预测停走决策并生成真实、平滑且符合人类舒适边界的纵向减速轨迹。该框架有望用于提前识别激进停车或闯红灯风险，并支持更平滑的V2I速度引导与自适应信号控制。",
+        "key_details": "数据覆盖40、50、60 km/h各112次及70 km/h 56次，黄灯阈值12–79 m，含392次正常停走分析运行和少量强制停车运行以捕获高减速度；场景为同一地点、同一车辆Audi A6、白天、8天实验，包含熟悉阶段和随机纯绿灯运行以降低预期偏差。贝叶斯分层logistic含参与者随机截距u_j ~ N(0, sigma_u^2)，似然为Bernoulli；峰值减速度采用异方差高斯并导出五档舒适范围。建模关键约束包括目标状态条件与jerk限制，推理由黄灯起始单快照驱动；但可见文本未给出具体损失函数、学习率、Transformer层数等超参。局限性包括单一交叉口与车辆、白天实验、70 km/h样本较少、GNSS记录器内部延迟未知且时变导致校准残留，以及强制停车试次可能改变自然决策分布；数据集与代码已公开于GitHub。"
+      },
+      "affiliations": [
+        "Halmstad University",
+        "University of Liechtenstein",
+        "Karlsruhe Institute of Technology"
+      ],
+      "affiliations_text": "Halmstad University, University of Liechtenstein, Karlsruhe Institute of Technology",
+      "score": 5.39259526700845,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2609.16056v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916056v1-managing-action-preconditions-in-neuro-symbolic-rl-three-placement-strategies-for-embodied-agents",
+      "source": "arxiv",
+      "title": "Managing Action Preconditions in Neuro-Symbolic RL: Three Placement Strategies for Embodied Agents",
+      "authors": [
+        "Norbert Oswald",
+        "Fabian Deuser",
+        "Thomas Bräunl"
+      ],
+      "authors_text": "Norbert Oswald, Fabian Deuser, Thomas Bräunl",
+      "abstract": "Humans carry behaviour knowledge of how to act in familiar situations into every new task rather than relearning it from scratch. There is no reason a Reinforcement Learning (RL) agent shouldn't do the same: known behaviour patterns need not be learned, only applied. Neuro-symbolic RL bridges prior knowledge and RL by injecting symbolic knowledge alongside a learned policy. The point at which this knowledge is integrated is critical: a poor choice can produce, for instance, hallucinated preconditions, which surface as safety and reliability problems in agents acting in changing environments. We formalise this behavioural knowledge as a precondition Bayesian network (BN) over the agent's \\emph{structural actions} - the actions whose legality depends on preconditions, such as picking up a key, grasping a block, toggling a door, or dropping an object. The BN restricts when these actions may fire, and we inject it into the RL loop at three placements: (1) a \\emph{symbolic verifier}, consulted only at inference, that fires a structural action once its preconditions hold; (2) a \\emph{symbolic enforcer}, active during both training and inference, that governs structural-action use throughout learning; and (3) a \\emph{symbolic learner}, which folds the knowledge into the network and learns the restriction and use of structural actions itself. To test the three variants we run experiments on two benchmarks with opposite regimes: one built on long, ordered planning chains, the other on continuous manipulation. We compare against strong baselines on solution quality, sample efficiency, and traceability. The payoff is substantial. On MiniGrid, all three placements improve the \\emph{solution quality} over the PPO+RND baseline, the symbolic enforcer leading at $98.2\\%$ against the baseline's $88.8\\%$. On Fetch, $\\dots$",
+      "url": "http://arxiv.org/abs/2609.16056v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16056v1",
+      "tldr": "This paper compares three placements for injecting precondition Bayesian-network knowledge into neuro-symbolic RL—an inference-time symbolic verifier, a training-and-inference symbolic enforcer, and an in-network symbolic learner—showing that where the knowledge enters critically shapes solution quality, sample efficiency, and traceability on embodied planning and manipulation benchmarks.",
+      "detailed_reading": {
+        "motivation": "强化学习智能体若一切从零试错，不仅学习缓慢，在稀疏奖励或大规模环境中甚至无法学到有效策略；而人类会把熟悉情境下的行为知识带入新任务，只做应用而非重新学习。神经符号 RL 通过把符号知识注入学习策略来弥合这一差距，但知识注入的时机与位置至关重要：选择不当会产生\"幻觉式前提条件\"，在动态环境中表现为安全性与可靠性问题。作者因此将行为知识形式化为作用于\"结构动作\"（拾取钥匙、抓取方块、开关门、放下物体等其合法性依赖前提条件的动作）的前提条件贝叶斯网络，并系统研究它应在 RL 回路的哪个位置注入。",
+        "method": "方法将任务建模为标准 MDP，并构造一个前提条件贝叶斯网络（precondition BN）：节点包含状态量（夹爪位置、物体位姿、关节速度等）、布尔谓词（如 gripper_at_block、holding，通过阈值 τ_reach、τ_closed 等判定）、子目标（reached、grasped 等里程碑谓词）以及按效果划分的导航动作与结构动作；每个结构动作 a 配有前提函数 ρ_a，对给定状态 s 由 BN 导出合法性掩码向量 ρ(s)。基于同一套规格比较三种注入位置：(1) 符号验证器 SV，训练阶段完全不感知 BN，仅在推理时用 ρ(s) 对策略 π_θ 的输出做门控，前提成立即自动触发结构动作、否则屏蔽非法触发；(2) 符号执行器 SE，同一外挂包装器在训练与推理全程生效，持续限制动作空间；(3) 符号学习器 SL，把谓词向量 φ(s) 与子目标向量 σ(s) 作为输入特征送入监督头 P_ψ，让网络自身学会结构动作的限制与使用。三者仅在 BN 被消费的位置上不同，策略网络与监督头分别记为 π_θ 与 P_ψ。",
+        "result": "在 MiniGrid ObstructedMaze（长序列有序规划）上，三种注入方式相对 PPO+RND 基线均提升解的质量，其中符号执行器 SE 以 98.2% 领先于基线的 88.8%；在 FetchPickAndPlace（连续操作）上，SAC+HER 本身已接近约 97% 的解决率上限，收益因此转向样本效率，SE 与 SL 约提前 2 倍达到该上限。在真实街道网络上的非具身路径规划任务中，外部注入方式同样领先，并能泛化到留出实例。除性能外，符号验证器 SV 与执行器 SE 还保持了行为的可检查性：只要落地前提条件不成立，结构动作就绝不会触发。",
+        "conclusion": "知识注入的位置会实质性地决定最终效果，三种放置并非可互相替代的工程选项，而是各有适用区间的设计选择：当基线已接近任务性能上限时，符号知识主要带来样本效率收益而非解质量收益；当任务由长程有序子目标链构成时，解质量提升最为显著。外部注入（尤其是训练期即生效的执行器）在性能、样本效率与可追溯性之间取得最佳平衡，并能在具身基准之外的真实路网任务上泛化。该工作首次在同一前提条件规格下对推理期、训练期与网络级三种注入方式做正面对比，为已知领域模型的服务机器人、仓储与辅助场景提供了设计依据。",
+        "key_details": "该 BN 是标准贝叶斯网络的确定性特例：条件取值均为布尔量，因此求合法性掩码等价于直接做布尔函数求值，而非概率信念更新；若改用 NOTEARS 类结构学习或 NSRT 等神经符号算子学习得到概率化模型，只需把硬掩码换成软概率掩码，整套框架无需改动即成立。前提函数在实现上只依赖其在 BN 中的父节点，典型如 ρ_GRASP = fingers_open ∧ ¬holding ∧ reached。实验以 MiniGrid ObstructedMaze（离散、长有序规划链）与 FetchPickAndPlace（连续操作）两个相反范式为基准，并额外在真实街道网络的非具身路由任务上验证排序是否可迁移，对比维度为解质量、样本效率与可追溯性。主要局限在于领域模型是给定的而非从数据中发现（作者明确面向任务结构清晰的服务机器人/仓储场景），且概率化推广、软掩码下的阈值与超参行为尚未实证。"
+      },
+      "affiliations": [
+        "University of the Bundeswehr Munich",
+        "The University of Western Australia"
+      ],
+      "affiliations_text": "University of the Bundeswehr Munich, The University of Western Australia",
+      "score": 4.9836712178705715,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.16074v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916074v1-world-action-models-for-robot-learning-and-control-a-survey",
+      "source": "arxiv",
+      "title": "World-Action Models for Robot Learning and Control: A Survey",
+      "authors": [
+        "Zuxing Lu",
+        "Hongjia Zhai",
+        "Guanzhi Wang",
+        "Huajian Zeng",
+        "Jiaqi Yang",
+        "Jingyu Liu",
+        "Lei Cheng",
+        "Yuantai Zhang",
+        "Yuheng Qiu",
+        "Zezhou Cheng",
+        "Ivan Laptev",
+        "Danfei Xu",
+        "Benjamin Riviere",
+        "Giuseppe Loianno",
+        "Eric Xing",
+        "Xingxing Zuo"
+      ],
+      "authors_text": "Zuxing Lu, Hongjia Zhai, Guanzhi Wang, Huajian Zeng, Jiaqi Yang, Jingyu Liu, Lei Cheng, Yuantai Zhang, Yuheng Qiu, Zezhou Cheng, Ivan Laptev, Danfei Xu, Benjamin Riviere, Giuseppe Loianno, Eric Xing, Xingxing Zuo",
+      "abstract": "Robots operating in open environments act under partial observability, physical constraints, and dynamic task contexts. Beyond mapping observations and language instructions to actions, they must anticipate how candidate actions may affect future states and task-relevant outcomes. Recent advances in world models, video generation, and Vision-Language-Action (VLA) policies have motivated the development of World-Action Models (WAMs), which couple future world prediction with executable action generation. This survey provides a robotics-oriented review of WAMs. We clarify their scope relative to conventional world models, model-based reinforcement learning, action-conditioned video generation, and reactive VLA policies, and organize existing methods through a unified taxonomy covering representations, transition modeling, action interfaces, architectures, training pipelines, data modalities, and scaling strategies. We further review applications of WAMs in manipulation, navigation, and autonomous driving, and we summarize the datasets, benchmarks, metrics, and protocols used to evaluate WAM systems. Finally, we discuss key challenges in action alignment, world-action factorization, spatial and multi-view consistency, long-horizon memory, neural simulation for closed-loop policy learning, and efficient inference. Taken together, this survey aims to provide a concise technical foundation for integrating predictive world modeling with action generation, toward more reliable embodied robot intelligence. Project page: https://rcl-robotics.github.io/Awesome-World-Action-Models.",
+      "url": "http://arxiv.org/abs/2609.16074v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16074v1",
+      "tldr": "This survey reviews World-Action Models (WAMs), which integrate predictive world modeling with executable action generation for robot learning and control, offering a unified taxonomy, cross-domain applications, evaluation protocols, and open challenges.",
+      "detailed_reading": {
+        "motivation": "开放环境中的机器人需要在部分可观测、物理约束和动态任务语境下长时间行动，除了把观测与语言指令映射为动作，还必须预判候选动作会如何改变未来状态与任务相关结果。然而主流 VLA 策略基本是反应式的，缺乏对动作后果的显式建模；传统世界模型又常与规划器、策略分离训练部署，导致预测保真度与控制效用错配，视觉上合理的未来未必可执行。加之相关文献分散在视频生成、具身基础模型、VLA、基于模型的强化学习与机器人模仿学习中，命名与评测口径不一，因此急需一篇面向机器人学的综述来厘清范围、设计轴与评价标准。",
+        "method": "该综述以 POMDP ⟨S,A,T,R,Ω,O⟩ 为统一形式化框架，把 WAM 定义为在观测历史 o_{<t} 与语言指令 ℓ 的条件下联合预测未来状态轨迹 ô_{t:t+H} 与动作块 â_{t:t+H} 的预测式控制模型，也涵盖先预测未来再经逆动力学接口反推动作的变体。作者沿表示空间、转移建模、动作接口、架构结构、训练流程、数据模态与扩展策略等维度构建统一分类法，覆盖潜动力学模型（Dreamer、TD-MPC 类）、动作条件视频生成、扩散与流匹配策略、逆动力学系统以及统一多模态架构，并配以演进时间线。随后按操作、导航、自动驾驶与通用具身机器人四个应用域梳理代表方法，归纳数据集、基准、指标与评测协议，并讨论开放挑战。",
+        "result": "作为综述，本文不提出新模型或新实验，而是给出统一视角：相比标准 VLA，WAM 引入了推理动作后果的预测结构；相比传统基于模型的强化学习，WAM 进一步融合多模态基础模型条件、大规模离线机器人数据与摊销式动作生成。作者指出当前评测将预测质量、模仿精度、规划性能与真机鲁棒性割裂衡量，尚无法回答想象出的未来是否物理可行、时序一致并真正提升闭环控制。文章还通过时间线刻画了从 TD-MPC、Dreamer、扩散策略到 Cosmos-Policy、FastWAM、DreamZero 等里程碑的逐步收敛，并提供可复现的分类清单与项目页。",
+        "conclusion": "综述的核心主张是把世界预测与动作生成耦合进同一学习或推理过程，是通向可扩展、可靠、可部署具身智能的关键路径，WAM 可作为统一分析这一类方法的透镜，并厘清其与传统世界模型、基于模型的强化学习、动作条件视频生成和反应式 VLA 的边界。作者呼吁在动作对齐、世界-动作因子分解、空间与多视图一致性、长时程记忆、面向闭环策略学习的神经仿真以及高效推理等方向继续攻关。",
+        "key_details": "形式化要点包括：隐状态空间 Z 是足以预测未来动力学的交互历史低维压缩编码，隐动作空间 U 是连接高层指令与低层电机控制的紧凑行为表示，语言指令 ℓ 作为行为条件；RSSM 以确定性状态 h_t 与随机状态 s_t 建模潜动力学，世界模型可显式训练（带解码器，如 Dreamer）或隐式训练（潜空间正则化，如 TD-MPC、DINO-WM、LeWM）。方法学关键轴为表示、转移建模、动作接口（联合预测或逆动力学）、架构、训练流程、数据模态与扩展策略。局限在于本文属综述性质，未在统一基准上给定量对比，WAM 与相邻范式的边界依赖作者定义，且评测碎片化、实时推理与安全部署约束仍是未解缺口。"
+      },
+      "affiliations": [
+        "Georgia Tech",
+        "New York University",
+        "Amazon FAR",
+        "University of Virginia",
+        "Caltech",
+        "UC Berkeley",
+        "MBZUAI"
+      ],
+      "affiliations_text": "Georgia Tech, New York University, Amazon FAR, University of Virginia, Caltech, UC Berkeley, MBZUAI",
+      "score": 4.885728839760193,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2609.16075v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916075v1-assemblygrid-v1-a-benchmark-for-multi-robot-production-with-temporary-coalitions-local-information-and-geometric-constraints",
+      "source": "arxiv",
+      "title": "AssemblyGrid v1: A Benchmark for Multi-Robot Production with Temporary Coalitions, Local Information, and Geometric Constraints",
+      "authors": [
+        "Fouad Bahrpeyma",
+        "David Heik",
+        "Dirk Reichelt"
+      ],
+      "authors_text": "Fouad Bahrpeyma, David Heik, Dirk Reichelt",
+      "abstract": "Flexible robotic production requires joint decisions on process progression, material routing, resource assignment, temporary cooperation, and simultaneous execution, since each decision can affect the feasibility of the others. The challenge is greater under decentralized control, where each robot acts from bounded local information while system progress depends on collective decisions, shared resources, material state, and workspace compatibility. These properties closely match cooperative multi-agent decision making under partial observability and resource contention. This paper introduces AssemblyGrid v1, a reproducible benchmark for repeated multi-robot production that combines explicit process progression, decentralized observations, material transfer, temporary multi-robot coalitions, productive concurrency, and geometry-dependent feasibility within one task-level formulation. The benchmark includes Flow, Coalition, and Concurrency workload families, each with three scenario levels. Task success and evaluation measures are defined independently of learning reward and solution method, allowing learning-based and non-learning methods to address the same production problem. AssemblyGrid v1 is evaluated through executable conformance checks, mechanism studies, and algorithmic experiments using a privileged centralized reference, structured decentralized controllers, and MARL methods including IPPO, MAPPO, and QMIX. Results demonstrate productive execution under centralized and decentralized control. The MARL experiments further show that decentralized policies can learn effective production behavior from local observations and actions, supporting AssemblyGrid as a controlled benchmark for studying cooperative decision making in flexible robotic production.",
+      "url": "http://arxiv.org/abs/2609.16075v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16075v1",
+      "tldr": "AssemblyGrid v1 is a reproducible benchmark for multi-robot production that integrates process progression, decentralized local observations, material routing, temporary robot coalitions, concurrency, and geometry-dependent feasibility across Flow, Coalition, and Concurrency workloads to evaluate centralized, decentralized, and MARL controllers.",
+      "detailed_reading": {
+        "motivation": "柔性机器人生产需要联合决定工序推进、物料路由、资源分配、临时协作与并发执行，这些决策相互耦合，且几何可行性会反过来限制任务与资源选择。去中心化控制下各机器人仅有有限局部信息，系统进度却依赖共享资源、物料状态与集体决策，这与部分可观测、资源竞争下的合作多智能体决策高度相似。现有基准通常把重复物料转化、临时联盟、局部执行和几何约束分散在不同问题设定中，缺少统一且可复现的任务级生产基准。",
+        "method": "论文提出AssemblyGrid v1，以任务级生产单元建模：固定基座机械臂位于规则栅格，原料从左进入、按显式配方工序加工、成品从右离开，重叠工作空间决定交互、临时联盟与并发冲突。环境向每个机器人提供局部观测，要求控制器选择工序、物料转移、资源分配、临时多机器人联盟及并发动作，并以几何可行性约束动作是否可执行；任务成功与评估指标独立于学习奖励和方法。评测流程包括可执行一致性检查、机制研究与算法实验，对比集中式特权参考、结构化去中心化控制器以及IPPO、MAPPO、QMIX等MARL方法；MARL采用集中训练与去中心化执行范式，从局部观测与动作学习生产策略。",
+        "result": "实验确认基准可执行且机制检查有效，集中式与去中心化控制均能实现生产性执行。MARL实验表明，去中心化策略能够仅凭局部观测和动作学习到有效的生产行为，说明AssemblyGrid可作为研究柔性机器人生产中合作决策的受控基准。评测覆盖Flow、Coalition、Concurrency三类负载族，每族含三个场景级别，用于系统变化过程、联盟和并发需求。",
+        "conclusion": "AssemblyGrid v1的主要贡献是把显式过程推进、临时操作级联盟、去中心化局部执行、生产并发与几何相关可行性整合到一个与控制器无关的基准中，使学习、规划、调度、优化和启发式方法可在同一生产问题上比较。该基准填补了相邻基准族之间机制分散的空白，并为工业多机器人生产中的MARL研究提供可复现实验平台。其当前形态是任务级抽象代理，几何与物理细节被简化，结果主要支持机制验证而非高保真装配性能结论。",
+        "key_details": "关键细节包括六项设计原则：部分工序需要多机器人合作；产品按配方显式推进；所需机器人组是临时且工序特定的；信息局部性与操作局部性分开表示；几何可行性约束任务和资源选择；基准结果独立于控制器目标。评测以任务级成功和生产率类指标为准，独立于学习奖励，包含可执行一致性检查、机制研究与IPPO、MAPPO、QMIX等参考实验。局限是几何仅为抽象代理，未覆盖完整任务与运动规划、接触动力学和真实硬件约束，摘要也未报告具体数值超参、损失函数或可复现指标数值。"
+      },
+      "affiliations": [
+        "Hochschule für Technik und Wirtschaft Dresden -- University of Applied Sciences"
+      ],
+      "affiliations_text": "Hochschule für Technik und Wirtschaft Dresden -- University of Applied Sciences",
+      "score": 4.85361201716274,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2609.16066v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916066v1-a-panoramic-aerodynamic-performance-prediction-method-for-turbomachinery-cascades-using-transformer-enhanced-neural-operator",
+      "source": "arxiv",
+      "title": "A panoramic aerodynamic performance prediction method for turbomachinery cascades using transformer-enhanced neural operator",
+      "authors": [
+        "Qineng Wang",
+        "Zhendong Guo",
+        "Liming Song",
+        "Tianyuan Liu"
+      ],
+      "authors_text": "Qineng Wang, Zhendong Guo, Liming Song, Tianyuan Liu",
+      "abstract": "To enable flexible and rapid aerodynamic performance evaluation in turbomachinery design, this paper proposes a panoramic performance prediction framework. Unlike most previous prediction models that directly predict the objective functions of interest, our approach first predicts the basic parameters of the Navier-Stokes equations, such as temperature, pressure, and density. Utilizing these basic physical quantities, it subsequently predicts key performance parameters of the turbine stage meridian plane. By adopting this methodology, our proposed panoramic performance prediction framework functions similarly to a CFD simulator, capable of predicting various objective of interest to the designers. To enhance prediction accuracy, a transformer-enhanced neural operator (TNO) is introduced within this framework. Using the Rotor 37 blades as a reference, the proposed TNO is trained to predict the performance of a transonic compressor blade in the meridian plane. The TNO can accurately predict total quantities such as isentropic efficiency, mass flow, and distributions of total pressure ratio. Remarkably, the prediction error of TNO is observed to be smaller than that of state-of-the-art deep learning operators such as the FNO and DeepONet. Furthermore, the TNO is applied to downstream tasks, including sensitivity analysis and optimization of various objective functions. The results confirm that the TNO can operate almost like a CFD simulator, while reducing the computational cost of downstream tasks by four orders of magnitude. The effectiveness and reliability of the proposed TNO for solving different kinds of downstream tasks have been well demonstrated.",
+      "url": "http://arxiv.org/abs/2609.16066v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16066v1",
+      "tldr": "This paper proposes a transformer-enhanced neural operator (TNO)-based panoramic prediction framework that first predicts basic Navier–Stokes flow variables and then derives various turbomachinery performance parameters, achieving CFD-like accuracy and cutting downstream task costs by four orders of magnitude.",
+      "detailed_reading": {
+        "motivation": "在涡轮机械气动设计中，CFD仿真精度高但单次计算昂贵，优化、敏感性分析和不确定性量化等下游任务需要大量重复计算，难以在有限时间与预算内完成。传统代理模型虽快却忽略丰富流场数据且呈黑箱特性，已有深度学习流场预测模型又常局限于特定物理场或特定目标，复用性差。为此，本文希望构建一种类似CFD模拟器的全景式性能预测框架，可复用于多种下游任务。",
+        "method": "本文提出全景性能预测框架，其映射逻辑为几何设计变量与状态参数先经TNO预测Navier-Stokes基本物理量（如温度、压力、密度、速度），再由这些基本场推导叶栅子午面关键性能参数。TNO采用分支-主干神经算子结构：分支网络用多层感知机编码28个Rotor 37叶片几何设计变量，主干网络用多个Galerkin注意力块和FFN编码查询坐标(r,z)，共享输出网络融合分支与主干特征。训练数据由拉丁超立方采样生成2900个Rotor 37样本，CFD采用Numeca FINE/TURBO求解RANS，Spalart-Allmaras湍流模型，Autogrid5生成H-O-I网格，单通道稳态计算。",
+        "result": "以Rotor 37跨声速压气机叶片为对象，TNO能准确预测等熵效率、质量流量和总压比分布等总体与分布量，且预测误差小于FNO、DeepONet等先进深度学习算子。将该模型用于敏感性分析和多目标优化等下游任务时，其表现接近CFD模拟器，同时把下游任务计算成本降低约四个数量级。CFD与实验对比中，压比曲线吻合良好，效率曲线平均偏差约2%，验证了数值模拟基准的可靠性。",
+        "conclusion": "所提出的全景式TNO预测框架能够以近实时方式给出流场与性能，并可作为CFD代理用于多种气动设计下游任务，兼顾精度、灵活性与复用性。结果表明该方法对跨声速压气机叶栅性能评估和优化具有有效性与可靠性，可显著缩短涡轮机械设计迭代周期并降低计算成本。",
+        "key_details": "数据与先验方面，研究对象为Rotor 37，28个几何变量通过NURBS参数化叶片吸力面与堆叠线，2900个样本用LHS在设计空间采样；CFD为单通道稳态RANS，SA湍流模型，绝热光滑壁面，入口给定总温总压，出口给定平均静压115000 Pa，网格约4e6节点，近壁首层厚度3e-6 m，单样本约800 s。模型方面，TNO沿用分支-主干算子思想，分支用MLP编码设计变量，主干用Galerkin注意力块编码非结构查询坐标并接FFN，最后共享输出网络融合p维特征；输出先为基本NS物理量，性能参数由预测场后处理得到。实现上无需像素化采样，可处理非结构坐标输入；局限在于方法验证集中于Rotor 37单通道与特定工况范围，跨几何/工况泛化仍需更多数据或重训练。"
+      },
+      "affiliations": [
+        "Hebei Key Laboratory of Compact Fusion",
+        "ENN Science and Technology Development China Co., Ltd.",
+        "Xi'an Jiaotong University"
+      ],
+      "affiliations_text": "Hebei Key Laboratory of Compact Fusion, ENN Science and Technology Development China Co., Ltd., Xi'an Jiaotong University",
+      "score": 4.786107486086931,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.16057v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916057v1-omniharness-harnessing-generalizable-visual-generation-via-symbolic-policy-learning",
+      "source": "arxiv",
+      "title": "OmniHarness: Harnessing Generalizable Visual Generation via Symbolic Policy Learning",
+      "authors": [
+        "Xu Xu",
+        "Jinxiu Liu",
+        "Zhangbo Qiao",
+        "Jiaxing Lu",
+        "Xiangyu Zhang",
+        "Yubin Gu",
+        "Fangwei Ning",
+        "Yan Shi"
+      ],
+      "authors_text": "Xu Xu, Jinxiu Liu, Zhangbo Qiao, Jiaxing Lu, Xiangyu Zhang, Yubin Gu, Fangwei Ning, Yan Shi",
+      "abstract": "Unified multimodal large language models (MLLMs) and multi-agent systems have advanced visual generation. However, three limitations remain. (1) Existing methods often distill task-specific experience with limited generalizability. (2) Reflection is often deferred until task completion. (3) Knowledge is often acquired only in response to downstream task demands. To address these limitations, we introduce OmniHarness, a framework for generalizable visual generation via symbolic policy learning. OmniHarness abstracts verified executions into symbolic policies for visual generation task families, capturing shared procedures and applicability conditions while removing instance-specific inputs. The harness instantiates, adapts, and composes these policies for new tasks. Intermediate verification guides refinement and failure recovery during execution. Through self-directed inquiry, OmniHarness autonomously generates and executes practice tasks near its capability limits before downstream objectives are specified. Execution feedback continually refines the policies while model parameters remain fixed. Experiments across six benchmarks, three MLLM backbones, and three visual agent frameworks demonstrate strong performance and continual capability expansion. On ComfyBench's Creative tasks, OmniHarness achieves a 95.0% resolve rate, exceeding the strongest baseline by 27.5 percentage points. Frozen policy snapshots improve existing visual agent systems through plug-and-play reuse.",
+      "url": "http://arxiv.org/abs/2609.16057v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16057v1",
+      "tldr": "OmniHarness is a symbolic policy learning framework that distills verified visual-generation executions into reusable, composable policies and uses self-directed inquiry plus intermediate verification to enable generalizable, continually improving visual generation, achieving 95.0% resolve on ComfyBench Creative and plug-and-play reuse across agent frameworks.",
+      "detailed_reading": {
+        "motivation": "现有统一MLLM与多智能体视觉生成方法有三个局限：经验蒸馏偏任务特化、反思常滞后到任务完成、知识只在任务需求出现后被动获取。核心问题是构建能超越个例泛化、边执行边反思、并通过自主探索学习的视觉生成系统。OmniHarness以符号策略学习回应这一问题。",
+        "method": "方法将已验证执行抽象为面向视觉生成任务族的符号策略，保留共享流程与适用条件而去除实例特定输入，并维护工作流库与失败库。训练/推理前先自导向探究：proposer基于能力空间、场景上下文和策略库状态生成候选任务（描述、T2I/I2I模态、所需能力、源图），过滤重复并规避已知失败；按新颖度与能力前沿得分 N(tau)=平均 1/sqrt(n+1)、C(tau)=4 r(1-r)（r为最弱必需能力的可靠性，峰值在0.5）选择任务执行。执行时planner实例化、适配、组合策略生成计划，计划验证器检查顺序/依赖/任务一致性，writer生成类Python的Code-as-Policy程序，经可逆解释器编译为以ComfyUI节点为函数、数据流为连接的workflow。中间验证检查可执行性、每步预期效果及输出是否满足描述与约束；失败时diagnoser定位步骤并从失败库取纠正，在保留已验证步骤的前提下局部修复，必要时由子代理提供可复用子工作流，循环至成功或重试预算耗尽。整个过程中模型参数冻结，仅策略库由执行反馈持续更新。",
+        "result": "实验覆盖六个基准、三种MLLM骨干与三种视觉agent框架，显示强性能与持续能力扩展。ComfyBench Creative任务上OmniHarness达到95.0% resolve rate，比最强基线高27.5个百分点。冻结的策略快照可通过即插即用方式提升现有视觉agent系统。",
+        "conclusion": "OmniHarness通过符号策略学习、反馈引导执行与自导向探究，将一次性执行经验转化为可复用、可迁移的任务族策略，在模型参数不变的情况下实现持续能力扩展。它缓解了任务特化、滞后反思和被动学习三个问题，并为视觉生成多智能体系统提供可插拔的自进化harness范式。",
+        "key_details": "关键实现细节包括：符号策略抽象共享过程与适用条件但不含实例输入；工作流库存策略模板，失败库存失败证据与纠正策略。任务选择使用能力新颖度与Goldilocks可学习性启发式，可靠性取适用且未暂停工作流的95%置信下界（无可用工作流时用小先验epsilon），任务可靠性由最弱必需能力决定。执行侧采用planner、plan verifier、writer、可逆解释器、diagnoser与子代理，支持中间验证、局部修复和已验证步骤保持，受重试预算约束。局限在于效果依赖验证器质量、失败库覆盖、能力空间与ComfyUI节点/工作流定义，且方法不更新模型参数，泛化边界由符号策略库和自导向探究分布决定。"
+      },
+      "affiliations": [
+        "Beihang University",
+        "National University of Singapore",
+        "The Chinese University of Hong Kong"
+      ],
+      "affiliations_text": "Beihang University, National University of Singapore, The Chinese University of Hong Kong",
+      "score": 4.320045492652234,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.16065v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916065v1-you-dont-need-to-train-agentic-heuristic-learning-studio-for-executable-human-activity-recognition",
+      "source": "arxiv",
+      "title": "You Don't Need To Train: Agentic Heuristic Learning Studio for Executable Human Activity Recognition",
+      "authors": [
+        "Siyu Yuan",
+        "He Zhang",
+        "Sizhen Bian",
+        "Bin Guo"
+      ],
+      "authors_text": "Siyu Yuan, He Zhang, Sizhen Bian, Bin Guo",
+      "abstract": "Human activity recognition (HAR) is usually framed as gradient-based training of neural networks. Agentic Heuristic Learning (AHL) Studio explores a complementary view inspired by human cognitive learning: people learn activities by remembering examples, forming rules, and repairing mistakes, not by backpropagating. This proposed tool implements AHL for HAR: a learning-time agent reasons over sensor protocols, proposes executable heuristic policies, records repair traces, and exports an LLM-free policy for edge deployment. We focus on the HAR benchmark family and provide an end-to-end workflow from dataset observation to edge-oriented export. On eleven HAR datasets evaluated so far, AHL policies reach strong executable-policy performance while remaining inspectable, editable, and replayable \\footnote{https://github.com/zhaxidele/ahl-ts-studio}.",
+      "url": "http://arxiv.org/abs/2609.16065v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16065v1",
+      "tldr": "AHL Studio replaces gradient-based neural training for human activity recognition with an LLM-assisted agentic heuristic learning workflow that produces inspectable, editable, executable policies achieving strong performance across eleven HAR datasets while enabling LLM-free edge deployment.",
+      "detailed_reading": {
+        "motivation": "HAR通常被设定为神经网络梯度训练，但学习到的参数向量不透明，且可穿戴部署受微控制器、体位变化、可解释性和故障修复等约束。AHL Studio受人类认知学习启发，探索记忆样例、形成规则、修复错误的互补视角，目标是在学习阶段借助智能体构建可检查、可编辑、可回放且推理阶段无需LLM的边缘可执行策略。",
+        "method": "输入为HAR数据集路径、协议、目标指标、可选数据集说明及SOTA论文；工具抽取数据集与论文笔记并推荐有界HAR语法原语，用户选择后进入智能体维护循环。语法原语包括时序投票、平滑、迟滞、最短持续时间，运动域的SMA、能量、频域摘要、紧凑统计，语义域的被试校准、体位假设、树规则集成，以及类质心、中例、紧凑原型、度量记忆等记忆基底，并标注运行成本、内存和可解释性。每轮循环包含观察、诊断、修复、验证、压缩；提示词包含数据摘要、SOTA目标、所选语法、历史反馈和活跃修复记忆，响应需给出失败假设、理由、候选策略增量、回归风险和压缩计划，并记录提示、原始响应、解析策略、验证事件和提升决策。最终产物是序列化为JSON的可执行策略和嵌入式工程包，导出到STM32类目标，推理不含LLM，只需特征提取、投票、原型查找或树规则评估。",
+        "result": "在目前已评估的十一个HAR数据集上，AHL策略取得较强的可执行策略性能；按文中报告，在可比较的神经基线上，AHL-TS在六个数据集上超过所列最强神经基线，在RecGym和SHO上差距在1个宏F1点以内，在UCI HAR和HAPT上低于基线。具体如MotionSense F1为96.04，对照TinierHAR 92.1、TinyHAR 91.4、DeepConvLSTM 91.6；DSADS为96.97，对照86.6、85.8、84.8；PAMAP2为88.80，对照76.9、76.0、75.9；USCHAD为84.50，对照73.5、74.8、75.4；UCI HAR为92.78，低于TinierHAR 95.5，HAPT为82.80，低于DeepConvLSTM 85.4。所选策略也不单一：MHEALTH和PAMAP2选用质心记忆，DSADS、HAPT、SHO、USCHAD和WISDM需要树规则划分。STM32部署侧给出延迟和RAM，例如MotionSense 5.1 ms与1.1 kB、USCHAD 16.8 ms与2.5 kB、MHEALTH 0.6 ms与1.0 kB；学习成本审计记录100/100轮LLM响应、0回退、总token 55,305，部署阶段LLM token为0。",
+        "conclusion": "AHL Studio将HAR模型开发重构为智能体辅助的启发式学习，而不仅是梯度训练，连接了类人记忆与修复、端到端数据集到边缘工具链、透明的token与能耗核算以及学习后仍可编辑的可执行策略。其结论是可为HAR研究提供兼顾精度、可检查、可回放和可部署的实用工具，但当前仍受有界语法、学习能耗核算分离以及LLM辅助学习在服务过载或长提示时较慢等限制。",
+        "key_details": "实现细节方面，LLM只在学习期使用，不写任意代码，只在该有界语法原语集内提出修复；每次运行记录模型提供方、提示文本、原始响应、token用量、来自外部LLM或回退模式，并用E_learn=N_ktok*e_ktok作为可配置token-能耗代理，导出策略推理零LLM token。可编辑策略示例为MotionSense中将prototype的k从5改为7、vote_window从5改为9；维护轨迹示例为初始0.9371，加入时序治理和选定HAR视图后0.9528，在回归门控下增加树深后0.9604，最后压缩并保留紧凑策略仍为0.9604。回放工件分离为发现记录、候选日志、修复记忆、回归套件和部署工件；部署目标为STM32N657X0，策略只含C风格逻辑，运行成本由所选原语族和保留记忆大小决定。局限性包括语法有界、尚未从零发现所有原语、学习能耗与实测MCU部署成本分离、LLM辅助学习可能因提供方过载或长提示而变慢，未来计划加入硬件在环能耗测量、用户研究、本地LLM、更强压缩和更丰富失败模式可视化。"
+      },
+      "affiliations": [
+        "Northwestern Polytechnical University",
+        "RPTU University Kaiserslautern-Landau"
+      ],
+      "affiliations_text": "Northwestern Polytechnical University, RPTU University Kaiserslautern-Landau",
+      "score": 4.126329826855042,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.16054v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916054v1-causal-neural-set-filtering-for-online-multi-target-tracking",
+      "source": "arxiv",
+      "title": "Causal neural set filtering for online multi-target tracking",
+      "authors": [
+        "Zhongdi Liu",
+        "Huangyu Dai"
+      ],
+      "authors_text": "Zhongdi Liu, Huangyu Dai",
+      "abstract": "Transformer-based multi-target tracking (MTT) jointly learns data association and state estimation, but MT3/Track-MT3-style trackers repeatedly re-encode measurement windows, incurring redundant computation. We propose Causal Neural Set Filtering (CNSF)\\footnote{\\href{https://github.com/daihuangyu/CNSF}{Code: https://github.com/daihuangyu/CNSF}}, a neural set filter that encodes only current measurements while carrying past evidence in a structured recursive track state. CNSF combines exclusive Sinkhorn association, association-conditioned Kalman-shaped updates with moment matching, and recurrent Bernoulli lifecycle modeling with measurement-driven birth. These mechanisms impose soft one-to-one constraints, propagate association-induced state uncertainty, and support existence estimation under missed detections and birth--death transitions. On a held-out three-regime simulated test set, CNSF reduces mean GOSPA and T-GOSPA relative to Track-MT3 by 19.3\\% and 30.4\\%, with 55.9\\% fewer parameters and a $3.76\\times$ speedup in single-thread CPU inference.",
+      "url": "http://arxiv.org/abs/2609.16054v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16054v1",
+      "tldr": "CNSF is a causal neural set filter for online multi-target tracking that encodes only current measurements while propagating a structured recursive track state with Sinkhorn association, Kalman-shaped moment-matched updates, and Bernoulli lifecycle modeling, reducing GOSPA and T-GOSPA by 19.3% and 30.4% over Track-MT3 with 55.9% fewer parameters and a 3.76× CPU inference speedup.",
+      "detailed_reading": {
+        "motivation": "现有 MT3/Track-MT3 等 Transformer 多目标跟踪器联合学习数据关联与状态估计，但会反复重编码测量窗口，造成冗余计算；其传播的查询也未在结构化滤波状态中显式携带运动不确定性与目标存在性。为此，CNSF 旨在用因果递归航迹状态替代窗口条件集合预测，仅编码当前测量并递归携带历史证据。",
+        "method": "CNSF 为每个航迹维护包含运动均值/协方差、学习查询、生命周期记忆、Bernoulli 存在概率和离散记账信息的递归状态。每帧仅用置换等变 Transformer 编码当前测量一次；预测阶段以匀速模型和傅里叶时间嵌入驱动轻量头，调整查询、加速度、过程协方差与生存概率。关联采用增广 Sinkhorn，在含 MISS、UNCLAIMED 和松弛项的分数矩阵上施加软一对一约束，分数融合学习对证据、物理马氏兼容门控和存在先验。对每个 PAIR 假设先用学习观测协方差执行带有限增益残差的 Kalman 形状更新和 Joseph 形式协方差更新，并用 GRU 更新查询；随后按 Sinkhorn 行权重重归一化，对 PAIR/MISS 假设做矩匹配，将多假设塌缩为单航迹高斯状态并保留关联诱导的协方差。生命周期通过 Bernoulli 存在概率、目标度加权支持和 GRU 记忆更新，未认领测量经 birth 头产生新航迹。训练使用跨帧目标对齐保持身份，Hungarian 仅用于出生候选匹配且离散分配在推理时不用，损失包含集合定位/分类、概率集合风险代理、关联、出生、存在、生存和基数项，并端到端 BPTT。",
+        "result": "在留出的三档仿真测试集上，CNSF 相对 Track-MT3 将平均 GOSPA 和 T-GOSPA 分别降低 19.3% 和 30.4%，同时参数量减少 55.9%，单线程 CPU 推理获得 3.76 倍加速。该测试覆盖出生率 0.04 到 0.12、检测概率 0.95 到 0.85、杂波率 5 到 15 的递增难度场景，评分帧为 20 到 99，并使用 GOSPA、Pro-GOSPA 与 T-GOSPA 评估。",
+        "conclusion": "CNSF 用结构化递归航迹状态替代窗口条件集合预测，仅编码当前测量，在软排他关联、关联条件矩匹配更新和 Bernoulli 生命周期/出生建模共同作用下，显式传播运动不确定性与存在性，并能处理漏检和出生死亡转换。结果表明该递归神经集合滤波器在仿真多目标跟踪中相较 Track-MT3 同时提升精度与效率，为在线 MTT 提供了可替代窗口重编码范式的方案。",
+        "key_details": "数据为三个 100 帧仿真点目标场景，dt=0.1，区域[-10,10]^2，初始与新生位置/速度采样自 N(0,3I2)，S1-S3 的出生率、生存概率、检测概率、过程噪声、测量噪声、杂波率为(.04,.99,.95,0,0,5)、(.08,.98,.90,.04,.02,10)、(.12,.97,.85,.08,.03,15)，起始目标数 6/6/10，真值基数上限 16，测试每档 50 条轨迹。损失权重为(1,.1,1,.5,.35,.25,.03)，风险截断 c_risk=2，关联事件权重(w_p,w_m,w_u)=(2,1,1)，漏检权重 lambda_miss=2，风险系数 rho 在 4k 到 6k 步渐增；Sinkhorn 在 log 空间执行 N_sk 次迭代并含温度 tau_sk。局限在于每个航迹仅保留矩匹配后的单高斯状态而不传播多关联假设，依赖匀速运动、高斯噪声和仿真身份监督；评估仅限仿真点目标，真实数据泛化与模型失配鲁棒性尚未验证，T-GOSPA 使用跟踪器原生身份且不做事后重连。"
+      },
+      "affiliations": [
+        "Hangzhou Applied Acoustics Research Institute",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Hangzhou Applied Acoustics Research Institute, Independent Researcher",
+      "score": 4.046289407189144,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.16071v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916071v1-schema-adaptive-action-conditioned-jepa-for-cross-machine-cnc-transfer-under-partial-sensor-overlap",
+      "source": "arxiv",
+      "title": "Schema-Adaptive Action-Conditioned JEPA for Cross-Machine CNC Transfer under Partial Sensor Overlap",
+      "authors": [
+        "Ayoub Louaye Bouaziz",
+        "Matthieu Ostertag",
+        "Anton Demasles"
+      ],
+      "authors_text": "Ayoub Louaye Bouaziz, Matthieu Ostertag, Anton Demasles",
+      "abstract": "Cross-machine deployment of industrial world models requires transfer across changes in dynamics, sensing interfaces, sampling regimes, and control units. We study a schema-adaptive action-conditioned Joint-Embedding Predictive Architecture (SAAC-JEPA) for CNC dynamics, where the source machine has 17 canonical sensor channels and the target shares only 10. Evaluation uses group-disjoint source splits, source-only normalization, held-out self-supervised validation, unit audits, and a sealed target test after model locking. Across five seeds, JEPA pretraining gives no clean-source forecasting gain: scratch and pretrained-body models obtain \\(\\mathrm{RMSE}=0.811\\pm0.022\\) and \\(0.813\\pm0.022\\). A source-only search over 20 candidates selects a schema-consistent action-conditioned JEPA after seven-seed stability checks. On the confirmatory target pass, the locked model reaches zero-shot \\(\\mathrm{RMSE}=0.546\\), \\(R^2=0.012\\), and \\(\\mathrm{NLL}=0.52\\), outperforming persistence but not RevIN-equipped PatchTST and iTransformer baselines (\\(0.503\\) and \\(0.498\\)). A pre-declared paired ablation shows that RevIN in the same architecture improves RMSE to \\(0.495\\pm0.004\\) over three seeds, but degrades target calibration (\\(\\mathrm{NLL}=20.6\\)) on stationary context windows. A pre-lock adaptation sweep further reduces RMSE to \\(0.520\\) with limited target support. These results show that source-domain forecasting accuracy alone is insufficient to assess industrial predictive representations, and that cross-machine adaptation under partial sensor overlap is a distinct evaluation axis.",
+      "url": "http://arxiv.org/abs/2609.16071v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16071v1",
+      "tldr": "This paper evaluates a schema-adaptive action-conditioned JEPA for cross-machine CNC transfer under partial sensor overlap, finding that source-domain forecasting accuracy alone is insufficient and that cross-machine adaptation is a distinct evaluation axis, with zero-shot target performance improving over persistence but not over RevIN-equipped baselines, while RevIN improves RMSE at the cost of poor target calibration.",
+      "detailed_reading": {
+        "motivation": "工业世界模型跨机部署需要同时应对动力学、感知接口、采样格式与控制单元变化，尤其是源机有17个规范传感器通道而目标机仅共享10个的部分传感器重叠场景。论文旨在检验模式自适应、动作条件化的JEPA能否在CNC跨机迁移中保持可用，并指出仅看源域预测精度不足以评价工业预测表示。",
+        "method": "研究构建SAAC-JEPA：以THWS五轴CNC铣削数据为源机17通道、62个程序会话，以FH JOANNEUM数据为目标机10通道、7次运行；所有机器重索引到源规范模式，缺失通道置0并给出存在掩码。上下文长度K=32、1 Hz网格，预测horizons为{1,2,4,8,16}且H=16，采用直接多horizon预测而非自回归；上下文编码器先用通道token transformer并仅对存在通道做均值池化，再加入动作投影，经6层、8头、d=256时间transformer得到z_c，预测器用z_c与未来区间(t,t+h]的平均命令在单次因果前向中产生各horizon潜变量，目标编码器用EMA更新并阻断梯度。自监督损失包含潜变量对齐、VICReg方差-协方差正则、模式一致性损失（同一轨迹的完整视图与保留概率κ=0.65的随机通道子视图预测潜变量做单侧smooth-L1对齐，λ_sch=0.10）和动作恢复损失（从z_c与EMA目标潜变量回归平均命令，λ_act=0.05）；评估采用分组不相交源划分、仅源归一化、留出自监督验证、单元审计、模型锁定后密封目标测试、20个候选的源域搜索与7种子稳定性检查，并包含锁定后预声明RevIN配对消融与锁定前少量目标支持适配扫描。",
+        "result": "五个种子的匹配比较显示JEPA预训练没有带来干净的源域预测增益：scratch与预训练体模型RMSE分别为0.811±0.022与0.813±0.022。源域搜索选出模式一致的动作条件JEPA后，锁定模型在确认性目标测试上一次零样本达到RMSE=0.546、R^2=0.012、NLL=0.52，优于persistence但不如带RevIN的PatchTST和iTransformer基线（0.503与0.498）。预声明的配对消融表明，同一架构内加入RevIN后RMSE改善至0.495±0.004（3种子），与基线持平，但在平稳上下文窗口上目标校准崩溃，NLL=20.6。锁定前适配扫描进一步将RMSE降至0.520，但目标支持有限，仅作为诊断证据。",
+        "conclusion": "源域预测精度本身不足以评估工业预测表示，JEPA的潜变量目标并未在零样本跨机CNC迁移中占优，输入归一化可能是关闭零样本RMSE差距的主导因素。跨机部分传感器重叠下的适配应被视为区别于同域预测的独立评估轴，并且反塌缩控制与表示稳定性对潜变量损失权重、方差-协方差正则和EMA动态敏感。论文支持的是一个窄结论：需在锁定目标机上同时报告误差、校准与动作敏感性，而不能以源域RMSE替代迁移可用性判断。",
+        "key_details": "关键实现包括：仅源域归一化与源域模型选择以防目标泄漏，目标测试在模型锁定后仅运行一次；缺失通道以0值加m=0结构化标记，编码器注意力和池化均排除缺失通道，区别于真实零读数；动作条件只使用未来区间平均命令的“水平”而非完整时序轮廓，各horizon槽共享z_c单次前向，评估的动作敏感性诊断阈值为打乱未来动作RMSE小于真实动作RMSE的1.02倍，锁定候选为1.058。损失细节上，VICReg无不变性项且按horizon作用于目标潜变量及池化上下文潜变量，仅上下文项贡献梯度；模式一致性保留每通道概率0.65且至少保留1个通道，完整视图被detach作参考；EMA的τ与VICReg各权重在预览中未完整给出。局限包括目标R^2仅0.012、确认性目标测试样本有限、适配扫描非确认性、RevIN虽改善RMSE但导致NLL=20.6的校准崩溃、结果来自公开CNC数据集且未构成闭环部署验证。"
+      },
+      "affiliations": [
+        "Université de Lorraine",
+        "Université de Bretagne Occidentale"
+      ],
+      "affiliations_text": "Université de Lorraine, Université de Bretagne Occidentale",
+      "score": 3.8837186057576862,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.16040v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/17/260916040v1-bi-mode-bilateral-control-based-imitation-learning-via-modifier-conditioned-decoding-for-modulation-of-execution-speed-and-contact-intensity",
+      "source": "arxiv",
+      "title": "Bi-MoDe: Bilateral Control-based Imitation Learning via Modifier-Conditioned Decoding for Modulation of Execution Speed and Contact Intensity",
+      "authors": [
+        "Takumi Kobayashi",
+        "Masato Kobayashi",
+        "Yuki Uranishi"
+      ],
+      "authors_text": "Takumi Kobayashi, Masato Kobayashi, Yuki Uranishi",
+      "abstract": "Bilateral control-based imitation learning captures both position and force information, making it well suited to contact-rich manipulation. However, existing approaches provide limited means for an operator to specify how a learned task should be executed at inference time, such as slowly or quickly, gently or firmly. We propose Bi-MoDe, a modifier-conditioned decoding framework that injects a constrained latent into every layer of the Transformer action decoder via adaLN-Zero, allowing behavioral directives to directly influence action-chunk generation. We evaluate the method on a real-world whiteboard wiping task with combinations of temporal and physical modifiers. Bi-MoDe improves physical directive following over the action-chunking baseline while maintaining comparable temporal control. An ablation further shows that decoder conditioning and latent-space composition interact, and that their combination is important for accurate physical directive following. Additional material is available at the https://mertcookimg.github.io/bi-mode/",
+      "url": "http://arxiv.org/abs/2609.16040v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16040v1",
+      "tldr": "Bi-MoDe is a bilateral control-based imitation learning framework that injects a constrained latent into every Transformer action-decoder layer via adaLN-Zero, enabling operator-specified modulation of execution speed and contact intensity at inference time and improving physical directive following over an action-chunking baseline on a real-world wiping task.",
+      "detailed_reading": {
+        "motivation": "双侧控制模仿学习能同时记录位置与力，适合接触丰富操作，但现有策略在推理时难以让操作者指定“慢/快、轻/重”等执行方式，行为特征通常被编码在训练数据中；已有 modifier directives 将标量标签对齐到约束潜变量，但动作分块 Transformer 仅在编码器阶段条件化，解码器需从弱约束潜变量中恢复指令，导致物理指令跟随不可靠。因此本文将行为指定视为条件化设计问题。",
+        "method": "基于 Oishi 等的 Transformer CVAE，潜变量分为受约束 z_c 与不受约束 z_u，输入为从动臂关节角、速度、力矩，输出主动臂动作块；数据采集用四通道双侧控制，关节角由编码器测量，力矩用 DOB/RFOB 估计，操作者在演示前为每次试验指定时间修饰符（慢/中/快）与物理修饰符（弱/中/强）标签。Bi-MoDe 将 z_c 通过两条路径注入：一条作为 token 与本体状态一起送入 Transformer 编码器，另一条经 adaLN-Zero 投影到动作解码器每一层，为自注意力、交叉注意力和前馈网络回归 scale/shift/gate，交叉注意力仅调制 query。训练损失为 L1 动作块重建、KL 正则与 modifier 预测 BCE 的加权和；推理时操作者选定修饰符等级，每个等级用训练集中该标签等级下 z_c 的中位数固定表示，并让指令经每层 adaLN-Zero 传播生成动作块。",
+        "result": "在真实白板擦拭任务上，Bi-MoDe 相比 action-chunking 基线提升了物理指令跟随，同时保持与基线相当的时间控制；2×2 消融显示解码器条件化与潜空间组合存在交互，二者结合对准确跟随物理指令重要。任务设置包括 3×3 时间/物理修饰符组合，每种条件 5 次演示共 45 次演示，推理每种配置在 9 条件下各 5 次 rollout，成功需完成三次擦拭 stroke。",
+        "conclusion": "Bi-MoDe 表明动作分块策略对修饰符指令跟随不佳的原因在于条件化位置，而非 modifier directives 本身；通过将受约束潜变量直接注入解码器每层，可在推理时实现执行速度与接触强度的操作者指定调制。解码器条件化与潜空间组合共同重要，为接触丰富操作提供可复现的行为级控制接口。",
+        "key_details": "关键实现包括：z_c 维度为 2、z_u 维度为 1，z_u 仍由 CVAE 编码器推断并受 KL 正则但排除出 latent token；adaLN-Zero 的输出层零初始化，使训练初始 gate α=0，且采用 (1+α) 残差门控而非 α，以适配 DETR 式解码器零初始化残差流，保留观测信息并避免对弱监督 z_c 施加随机调制。超参为编码器/解码器各 4 层、隐藏维 512、FFN 2048、8 注意力头、modifier head 隐藏宽度 [3,3]、AdamW，损失含 L1 重建、KL 和 BCE modifier 预测。评估用 OpenManipulator-X 双臂与 Joint2/Joint3 力矩作为物理特征；局限性在于仅验证单一白板擦拭任务与 action-chunking 主干，时间与物理修饰符间干扰未完全解决，且 z_c 命令值依赖模型、符号任意。"
+      },
+      "affiliations": [
+        "The University of Osaka",
+        "Kobe University"
+      ],
+      "affiliations_text": "The University of Osaka, Kobe University",
+      "score": 3.8160909767865023,
+      "score_text": "3.8"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.16069v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916069v1-beyond-distribution-matching-semantics-consistent-tabular-diffusion-with-weak-semantic-priors",
+      "source": "arxiv",
+      "title": "Beyond Distribution Matching: Semantics-Consistent Tabular Diffusion with Weak Semantic Priors",
+      "authors": [
+        "Yili Wang",
+        "Ruxue Shi",
+        "Mengnan Du",
+        "Hangting Ye",
+        "Yi Chang",
+        "Xin Wang"
+      ],
+      "authors_text": "Yili Wang, Ruxue Shi, Mengnan Du, Hangting Ye, Yi Chang, Xin Wang",
+      "abstract": "Synthetic tabular data can match real data distributions while still violating the semantic constraints that govern valid tabular rows. This reveals a key limitation of existing tabular generators: they mainly optimize distributional fidelity, but do not explicitly model weak semantic priors encoded in tabular schema and textual descriptions. In this paper, we propose \\ours, a semantics-consistent tabular diffusion framework for high-fidelity synthetic data generation under weakly specified semantic priors. \\ours\\ first constructs two types of priors, namely intra-column semantics and inter-column symbolic rules, with LLM-assisted extraction from metadata and validation on the real training split. These priors are then used as generation conditions rather than post-hoc filters. Specifically, \\ours\\ maps heterogeneous column values, column identities, and semantic priors into a unified semantic space, and performs column-wise forward corruption and prior-conditioned reverse denoising to preserve both marginal distributions and rule-consistent cross-column dependencies. Extensive experiments on six real-world tabular benchmarks show that \\ours\\ consistently improves distributional fidelity, semantic consistency, and downstream task utility over representative VAE-, GAN-, LLM-, and diffusion-based baselines. Additional analyses further demonstrate the robustness of \\ours\\ when semantic priors are partially unavailable.",
+      "url": "http://arxiv.org/abs/2609.16069v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16069v1",
+      "tldr": "TLDR: SCTab-Diff is a semantics-consistent tabular diffusion framework that uses LLM-extracted weak semantic priors—intra-column semantics and inter-column symbolic rules—as generation conditions rather than post-hoc filters to produce synthetic tables that are both distributionally faithful and semantically valid.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Jilin University",
+        "The Chinese University of Hong Kong, Shenzhen"
+      ],
+      "affiliations_text": "Jilin University, The Chinese University of Hong Kong, Shenzhen",
+      "score": 3.8076369053762713,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.16093v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916093v1-evaluating-open-weight-e-commerce-agents-with-environment-grounded-verification",
+      "source": "arxiv",
+      "title": "Evaluating Open-Weight E-Commerce Agents with Environment-Grounded Verification",
+      "authors": [
+        "Nimit Shah",
+        "Haitz Sáez de Ocáriz Borde"
+      ],
+      "authors_text": "Nimit Shah, Haitz Sáez de Ocáriz Borde",
+      "abstract": "A shopping conversation has many routes to the same cart, and a task-success rate reduces all of them to one score. We build a deterministic and reproducible e-commerce environment that precommits each trial's customer and trajectory parameters, including the persona, difficulty, target cart, and an item reveal schedule. A simulated consumer attempts to buy a target cart from the environment with assistance from the evaluated model. The environment guides the simulator's actions and records every assistant action alongside the environment state at that point. After the trial, these records allow the evaluator to assess individual parts of the conversation against the retained evidence. For example, the evaluator penalizes a search for failing to surface a target product only when the customer has already mentioned that product. We further use this evidence to apply different penalties to tool calls depending on how the assistant's actions compare with an expected tool-call set. Our environment also interacts with the simulator bidirectionally, reading its output to stop the trial when the simulator determines that the customer has become too frustrated and injecting directives in real time that specify when to explore, defer buying an item, or recall a previous exchange. This interaction creates an open-ended and verifiable simulation. Across eight open-weight agents from 20B to 35B parameters, with 160 trials per agent and 44 metrics, the resulting capability profiles distinguish under-action, over-purchase, unsupported product attributes, and poor search, all of which terminal success obscures.",
+      "url": "http://arxiv.org/abs/2609.16093v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16093v1",
+      "tldr": "This paper presents a deterministic e-commerce evaluation environment that precommits each trial’s customer persona, target cart, and item reveal schedule, then uses environment-grounded verification across 44 metrics to profile open-weight shopping agents and expose failure modes like under-action, over-purchase, unsupported product claims, and poor search that terminal success rates obscure.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AION"
+      ],
+      "affiliations_text": "AION",
+      "score": 3.806852041362854,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.16099v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916099v1-swb-dm-a-calibrated-sliced-wasserstein-barycenter-aggregator-with-delayed-momentum-caching-for-byzantine-robust-federated-learning-under-partial-participation",
+      "source": "arxiv",
+      "title": "SWB-DM: A Calibrated Sliced-Wasserstein-Barycenter Aggregator with Delayed-Momentum Caching for Byzantine-Robust Federated Learning under Partial Participation",
+      "authors": [
+        "Saranraj S",
+        "Saranya M S",
+        "Alex David S",
+        "Ajay Kumar A"
+      ],
+      "authors_text": "Saranraj S, Saranya M S, Alex David S, Ajay Kumar A",
+      "abstract": "Robust aggregation methods for federated learning quietly rest on a fragile assumption: that whoever shows up in a given round is a fair sample of the full population. In practice, they rarely are. When only a handful of clients participate per round, even a modest fraction of adversaries can dominate that sample and silently invalidate the finite-sample guarantees that coordinate-wise median, Krum, Bulyan, and trimmed mean all depend on.\n  We introduce SWB-DM to address this directly. SWB treats each slice of a client update as a one-dimensional distribution, computes a trimmed Wasserstein barycenter across clients, and recovers coordinate identity via a medoid-based gauge-fixing step -- a heuristic we developed and do not claim it belongs to standard optimal-transport theory. DeMoA-style delayed momentum then caches updates across the full client population each round, decoupling robustness from whoever happened to be sampled. Trim ratio calibration is not cosmetic: under-trimming causes collapse at corruption levels a properly calibrated model survives.\n  Across 448 CIFAR-10 configurations, plus CIFAR-100, FEMNIST, and a 500-client scalability run, we find several mechanistically distinct failure modes. Even-sample coordinate-wise median degrades to a deterministic wrong answer. Krum silently violates its own n greater than 2f+2 precondition and diverges without warning. Bulyan's n greater than or equal to 4f+3 threshold produces a sharp pass/fail boundary. On attacks, IPM defeats order-statistic defenses -- including SWB -- more reliably than ALIE, confirmed through delta-space measurements against a convergence bound.\n  SWB-DM's cache carries a real warm-up cost, but extending all baselines to the same round budget shows its CIFAR-10 gains are disproportionately large. On CIFAR-100, FLTrust benefits more -- for reasons entirely unrelated to caching.",
+      "url": "http://arxiv.org/abs/2609.16099v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16099v1",
+      "tldr": "SWB-DM combines a calibrated sliced-Wasserstein-barycenter aggregator with delayed-momentum caching over the full client population to achieve Byzantine-robust federated learning under partial participation, and extensive experiments show it mitigates sampling-induced failures of median/Krum/Bulyan while revealing caching warm-up costs and attack-specific vulnerabilities.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology"
+      ],
+      "affiliations_text": "Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology",
+      "score": 3.784415323560558,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.16067v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916067v1-a-dynamic-aggregation-strategy-enhanced-efficient-global-optimization-algorithm-for-solving-high-dimensional-turbomachinery-design-problems",
+      "source": "arxiv",
+      "title": "A Dynamic Aggregation Strategy Enhanced Efficient Global Optimization Algorithm for Solving High-Dimensional Turbomachinery Design Problems",
+      "authors": [
+        "Qineng Wang",
+        "Zhendong Guo",
+        "Yun Chen",
+        "Guangjian Ma",
+        "Liming Song",
+        "Jun Li"
+      ],
+      "authors_text": "Qineng Wang, Zhendong Guo, Yun Chen, Guangjian Ma, Liming Song, Jun Li",
+      "abstract": "In order to solve the high-dimensional ($d \\geq 30$) expensive black-box problems within budget, an efficient global optimization (EGO) algorithm with a dynamic aggregation strategy is proposed, labeled as DA-EGO. Specifically, the DA-EGO decomposes the original high-dimensional design space into a set of low-dimensional subspaces for efficient surrogate-based optimization search, and the optimal solutions of subspaces are combined as an elite point for the global search. Most importantly, the subspaces are not fixed. Instead, the subspace variables are updated in each iteration, according to the variable interaction analyses in the sub- and full-spaces. The perturbation method and the analysis of variance are used to detect variable interactions. To further accelerate the optimization progress, the searching ranges of subspaces are also adaptively adjusted according to the analyses of subspace optimization results of the previous iteration. Tests on 21 benchmark instances, comprising seven functions at 30, 60, and 90 dimensions, show that DA-EGO is effective on separable and partially separable problems under a budget of 1500 function evaluations. Its advantage is case-dependent: on the non-separable shifted Rosenbrock function, GSGA performs better at 60 and 90 dimensions, while the 30-dimensional results are statistically comparable to IKAEA and GSGA. Moreover, the advantage of DA-EGO is also seen in the aerodynamic optimization of a transonic rotor blade with 28 variables as well as the compressor stage optimization with 60 variables. With the above, the effectiveness of the proposed DA-EGO has been well demonstrated.",
+      "url": "http://arxiv.org/abs/2609.16067v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16067v1",
+      "tldr": "The paper proposes DA-EGO, a dynamic aggregation-enhanced efficient global optimization algorithm that decomposes high-dimensional expensive black-box problems into adaptively updated low-dimensional subspaces, demonstrating effectiveness on benchmark functions and turbomachinery aerodynamic design optimizations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AVIC Shenyang Engine Design Institute",
+        "Xi'an Jiaotong University"
+      ],
+      "affiliations_text": "AVIC Shenyang Engine Design Institute, Xi'an Jiaotong University",
+      "score": 3.7756595578313137,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.16155v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916155v1-llms-as-master-forgers-generating-synthetic-time-series-data-for-manufacturing",
+      "source": "arxiv",
+      "title": "LLMs as Master Forgers: Generating Synthetic Time Series Data for Manufacturing",
+      "authors": [
+        "Mantek Singh",
+        "Jeshwanth Challagundla",
+        "Prateek Karnal",
+        "Gagan Ganapathy",
+        "Vineet Shah",
+        "Ridam Arora"
+      ],
+      "authors_text": "Mantek Singh, Jeshwanth Challagundla, Prateek Karnal, Gagan Ganapathy, Vineet Shah, Ridam Arora",
+      "abstract": "This paper presents a novel framework leveraging Large Language Models (LLMs) to generate synthetic time series data for manufacturing processes. Motivated by the scarcity of labeled time-series data in real-world manufacturing settings, which hinders the development of robust machine learning models, we explore the potential of LLMs to learn complex temporal dependencies and generate realistic synthetic data. Our approach involves fine-tuning pre-trained LLMs on manufacturing process instructions and employing a Retrieval Augmented Generation (RAG) technique to enhance data diversity and realism. We evaluate our method against traditional time series modeling techniques like ARIMA and LSTMs, using quantitative metrics, PCA analysis, and downstream task performance (anomaly detection). Results demonstrate that our LLM-driven framework outperforms these baselines, generating high-quality synthetic time series data that effectively captures temporal dependencies and statistical properties of real manufacturing data, leading to improvements in downstream task performance.",
+      "url": "http://arxiv.org/abs/2609.16155v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16155v1",
+      "tldr": "This paper introduces an LLM-based framework that uses fine-tuning and retrieval-augmented generation to create high-quality synthetic manufacturing time-series data, outperforming ARIMA and LSTMs and improving downstream anomaly detection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stony Brook University",
+        "Liverpool John Moores University",
+        "UMass Amherst",
+        "IIT Patna",
+        "IIT Indore",
+        "University of Texas at Arlington"
+      ],
+      "affiliations_text": "Stony Brook University, Liverpool John Moores University, UMass Amherst, IIT Patna, IIT Indore, University of Texas at Arlington",
+      "score": 3.645469413925659,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.16091v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916091v1-distilling-foundation-models-for-agentic-what-if-reasoningcost-latency-and-governance-in-a-hybrid-llmslm-architecture",
+      "source": "arxiv",
+      "title": "Distilling Foundation Models for Agentic What-If Reasoning:Cost, Latency, and Governance in a Hybrid LLM+SLM Architecture",
+      "authors": [
+        "Sourish Dey",
+        "Aditya Kumar"
+      ],
+      "authors_text": "Sourish Dey, Aditya Kumar",
+      "abstract": "Tabular foundation models deliver strong zero-training predictive performance via in-context learning, but their high inference latency makes them impractical as hot-path decision backends in interactive agentic loops. We distill a TabPFN teacher into a compact feed-forward student across a business-decision simulation on UCI Adult and five OpenML benchmarks: the classification head compresses 53.2M parameters to 8,546 (6,220x); the deployed two-head loan pipeline compresses 111.4M parameters to 17,059 (6,532x). The student retains 95.4-100.5% accuracy and 96.8-100.0% AUC, with the lowest accuracy retention on credit-g at 95.4%; an alpha = 0 hard-label control shows that the teacher's soft targets provide a 2.1-7.0 AUC point gain.",
+      "url": "http://arxiv.org/abs/2609.16091v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16091v1",
+      "tldr": "The paper distills TabPFN tabular foundation models into tiny feed-forward students and deploys them in a hybrid cloud-LLM/on-prem SLM agentic workflow, achieving up to 6,532× parameter compression and 3.8–4.8× lower latency while retaining 95.4–100.5% accuracy, cutting cloud token cost, and improving data governance for interactive what-if decision reasoning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "SumUp",
+        "Johannes Gutenberg-Universität Mainz"
+      ],
+      "affiliations_text": "SumUp, Johannes Gutenberg-Universität Mainz",
+      "score": 3.6102411373615633,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.16158v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916158v1-the-fixed-point-bundle-method-over-product-of-simplex-domains-arising-from-game-equilibria",
+      "source": "arxiv",
+      "title": "The fixed-point bundle method over product-of-simplex domains arising from game equilibria",
+      "authors": [
+        "Hongbo Sun"
+      ],
+      "authors_text": "Hongbo Sun",
+      "abstract": "This paper extends the fixed-point bundle framework for finite-dimensional variational inequalities (VIs) from the simplex domain to the product-of-simplex domain, which is directly applicable to solving Nash equilibria. The fixed-point bundle for VIs on the product-of-simplex domain reveals a composite fiber bundle structure. The key innovation is to construct an equivalent VI on the simplex domain and establish the equivalence between the two fixed-point bundle frameworks via a fiber bundle isomorphism. Exploiting this geometric equivalence, the predictor-corrector path-following algorithm for the VI on the product-of-simplex domain is shown to inherit the convergence guarantee of the simplex-domain framework, namely, global convergence with linear gap reduction near solutions. Numerical experiments on 5600 randomly generated instances with dimensions ranging from 2-player 128-action to 128-player 2-action demonstrate robust performance. The algorithm converges in every tested instance.",
+      "url": "http://arxiv.org/abs/2609.16158v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16158v1",
+      "tldr": "The paper extends the fixed-point bundle method for variational inequalities to product-of-simplex domains by constructing an equivalent simplex-domain VI and proving a fiber-bundle isomorphism, enabling a predictor-corrector path-following algorithm for Nash equilibria with global convergence and linear gap reduction, validated on 5600 random instances.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5777162719894857,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.16063v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916063v1-signed-p-adic-residual-encodings-of-finite-domain-all-different-systems-with-a-sudoku-case-study",
+      "source": "arxiv",
+      "title": "Signed p-adic Residual Encodings of Finite-Domain All-Different Systems with a Sudoku Case Study",
+      "authors": [
+        "Greg Baker"
+      ],
+      "authors_text": "Greg Baker",
+      "abstract": "We study signed, weighted affine $p$-adic residual objectives as native encodings of finite-domain constraints. For primes that separate the finite alphabet, sufficiently weighted positive unary rows pin each coefficient to its allowed set, while negative rows reward unequal endpoints or clause satisfaction. A coordinatewise domination theorem places every global minimiser in the finite domain; there the loss is, up to an additive constant, the all-different conflict count or the negative number of satisfied CNF clauses. Standard Sudoku provides an $81$-coefficient case study without a one-hot lift. A client-side implementation exposes the generated dataframes, arithmetic, diagnostics, and searches.",
+      "url": "http://arxiv.org/abs/2609.16063v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16063v1",
+      "tldr": "This paper shows that signed weighted affine \\(p\\)-adic residual objectives can natively encode finite-domain all-different systems and CNF formulas, with positive rows pinning variables to allowed values and negative rows rewarding distinctness or clause satisfaction, so that global minimizers correspond to satisfying or minimum-conflict assignments, illustrated by an 81-coefficient Sudoku case study.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Australian National University"
+      ],
+      "affiliations_text": "Australian National University",
+      "score": 3.51258831355414,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.16089v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916089v1-structure-preserving-quantum-circuit-architectures-for-robot-kinematics",
+      "source": "arxiv",
+      "title": "Structure-Preserving Quantum Circuit Architectures for Robot Kinematics",
+      "authors": [
+        "Andrea Morghen",
+        "Pierluigi Arpenti",
+        "Roberto Schiattarella",
+        "Giovanni Acampora",
+        "Bruno Siciliano"
+      ],
+      "authors_text": "Andrea Morghen, Pierluigi Arpenti, Roberto Schiattarella, Giovanni Acampora, Bruno Siciliano",
+      "abstract": "Structured spatial data require quantum encodings that preserve geometric relations, expose measurable observables, and remain implementable on finite-depth hardware. This work introduces a quantum representation and circuit architecture for rigid-body transformations and specializes it to Denavit--Hartenberg kinematics of serial open-chain manipulators. Each translational contribution is factorized into a classical metric magnitude and a signed unit direction encoded by a single-qubit Bloch vector, while parameterized rotations reproduce the ordered propagation of frame directions. A selector register prepares probabilities proportional to the contribution magnitudes, and the reduced state of a designated readout qubit encodes their normalized weighted sum. The retained classical scale then reconstructs the metric end-effector position. Two additional readout qubits encode terminal-frame axes, providing a compact and geometrically interpretable pose interface. At the ideal expectation-value level, measured Pauli observables reproduce the corresponding classical kinematic quantities. Alternative circuit architectures realize the same representation with different tradeoffs in qubit count, circuit depth, controlled operations, and measurement requirements. Validation on a serial manipulator yields numerically negligible position and orientation reconstruction errors under ideal simulation. Finite-shot simulations, noisy executions, transpilation analysis, and a hardware demonstration further characterize statistical error, noise sensitivity, and implementation overhead without asserting computational advantage.",
+      "url": "http://arxiv.org/abs/2609.16089v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16089v1",
+      "tldr": "This paper presents structure-preserving quantum circuit architectures that encode Denavit–Hartenberg robot kinematics by separating classical metric magnitudes from qubit-encoded directions and using selector-based readout to reconstruct end-effector position and orientation, with validation under simulation, noise, and real hardware without claiming quantum advantage.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Naples Federico II"
+      ],
+      "affiliations_text": "University of Naples Federico II",
+      "score": 3.5032258705464834,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.16046v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916046v1-asymmetric-weighted-earliness-tardiness-scheduling-with-a-nonrestrictive-common-due-date",
+      "source": "arxiv",
+      "title": "Asymmetric Weighted Earliness-Tardiness: Scheduling with a Nonrestrictive Common Due Date",
+      "authors": [
+        "Nicholas G. Hall",
+        "Hans Kellerer",
+        "Miao Song"
+      ],
+      "authors_text": "Nicholas G. Hall, Hans Kellerer, Miao Song",
+      "abstract": "Single-machine asymmetric weighted earliness--tardiness (AWET) scheduling asks how to sequence jobs around a common synchronization date when early and late completion incur unrelated job-dependent penalties. At the boundary nonrestrictive date $d=\\sum_jp_j$, a compact V-shaped schedule reduces the continuous-time problem to a quadratic choice of a nonempty early set. We establish four complementary results for this model. First, the positive-integer problem is strongly NP-complete by a unary-polynomial reduction from Restricted Exact Cover by 3-Sets. Second, unrestricted AWET admits a polynomial-time $(3+2\\sqrt2+\\varepsilon)$-approximation based on an anchored semidefinite relaxation and deterministic marginal thresholding. Third, when the earliness and tardiness ratio orders are strict reversals, the problem is weakly NP-complete but has an exact two-resource pseudopolynomial dynamic program. Fourth, for fixed total refinements whose ratio permutation is separable, an exact separating-tree recurrence and coordinated geometric trimming yield an FPTAS. The proofs use different manifestations of the same canonical objective: scale-separated prefix penalties, positive-semidefinite minimum-kernel covariance, a dominant completed load square, and a bounded four-coordinate decomposition interface. Together, the results show that the decisive issue is not merely whether the two ratio orders agree, but whether their interaction can be controlled by a global certificate or compressed into a bounded constructive interface.",
+      "url": "http://arxiv.org/abs/2609.16046v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16046v1",
+      "tldr": "This paper studies single-machine asymmetric weighted earliness–tardiness scheduling with a nonrestrictive common due date, establishing strong NP-completeness, a polynomial-time constant-factor approximation, weak NP-completeness with an exact pseudopolynomial algorithm for reversed ratio orders, and an FPTAS for separable ratio-order refinements, thereby showing that the complexity hinges on how the two Smith-ratio orders interact.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.3885604779183747,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.16061v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916061v1-pospan-position-constrained-span-masking-for-language-model-pre-training",
+      "source": "arxiv",
+      "title": "POSPAN: Position-Constrained Span Masking for Language Model Pre-training",
+      "authors": [
+        "Zhenyu Zhang",
+        "Lei Shen",
+        "Yuming Zhao",
+        "Meng Chen",
+        "Xiaodong He"
+      ],
+      "authors_text": "Zhenyu Zhang, Lei Shen, Yuming Zhao, Meng Chen, Xiaodong He",
+      "abstract": "Span-level masked language modeling (MLM) has shown to be advantageous to pre-trained language models over the original single-token MLM, as entities/phrases and their dependencies are critical to language understanding. Previous works only consider span length with some discrete distributions, while the dependencies among spans are ignored, i.e., assuming that the positions of masked spans are uniformly distributed. In this paper, we present POSPAN, a general framework to allow diverse position-constrained span masking strategies via the combination of span length distribution and position constraint distribution, which unifies all existing span-level masking methods. To verify the effectiveness of POSPAN in pre-training, we evaluate it on the datasets from several NLU benchmarks. Experimental results indicate that the position constraint is capable of enhancing span-level masking broadly, and our best POSPAN setting consistently outperforms its span-length-only counterparts and vanilla MLM. We also conduct theoretical analysis for the position constraint in masked language models to shed light on the reason why POSPAN works well, demonstrating the rationality and necessity of POSPAN.",
+      "url": "http://arxiv.org/abs/2609.16061v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16061v1",
+      "tldr": "POSPAN introduces a general position-constrained span masking framework that combines span-length and position-distance distributions to improve masked language model pre-training, consistently outperforming span-length-only and vanilla MLM methods.",
+      "detailed_reading": null,
+      "affiliations": null,
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.3053449295715915,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.16102v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916102v1-a-decision-support-audit-protocol-for-supervision-drift-in-proxy-labeled-credit-risk-prediction",
+      "source": "arxiv",
+      "title": "A Decision-Support Audit Protocol for Supervision Drift in Proxy-Labeled Credit-Risk Prediction",
+      "authors": [
+        "Mehrdad Shoeibi",
+        "Muhammad Shabanpour",
+        "Waldemar Karwowski",
+        "Niloofar Yousefi"
+      ],
+      "authors_text": "Mehrdad Shoeibi, Muhammad Shabanpour, Waldemar Karwowski, Niloofar Yousefi",
+      "abstract": "Credit-risk models are trained on proxy labels and deployed under temporal and segment change, yet no single transfer metric separates base-rate shift, probability-scale shift, and feature-label relationship change. We contribute a design-science artifact: a locked, multi-signal audit protocol for supervision drift in proxy-labeled credit-risk prediction. Five layers (transfer performance, an oracle-gap probe, a calibration diagnostic, feature-label stability, and a synthetic positive control), thresholds, and decision rules were locked before interpretation; a bounded reading is a designed outcome. On a public LendingClub dataset (temporal 2013 to 2016 and cross-segment transfer), ranking is stable and oracle gaps are small; the clearest temporal signal is a prevalence and probability-scale mismatch that intercept-only diagnostic recalibration largely reduces, though its cause is not identifiable from the available release. The positive control responds only to larger injected shifts; subtler drift cannot be excluded. Mapping diagnostic patterns to governance actions is conceptual guidance, not validated here.",
+      "url": "http://arxiv.org/abs/2609.16102v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16102v1",
+      "tldr": "This paper proposes a locked, multi-signal audit protocol for diagnosing supervision drift in proxy-labeled credit-risk prediction, demonstrating on LendingClub data that ranking remains stable while the clearest temporal signal is a prevalence and probability-scale mismatch largely reduced by diagnostic recalibration, with the results offered as bounded evidence.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Central Florida",
+        "Northeastern University"
+      ],
+      "affiliations_text": "University of Central Florida, Northeastern University",
+      "score": 3.280162049878294,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.16041v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916041v1-mr-gli-mixed-reality-based-gripper-linked-overlays-for-underwater-robot-arm-teleoperation-via-bilateral-control",
+      "source": "arxiv",
+      "title": "MR-GLi: Mixed Reality-Based Gripper-Linked Overlays for Underwater Robot Arm Teleoperation via Bilateral Control",
+      "authors": [
+        "Masashi Sasago",
+        "Masato Kobayashi",
+        "Yuki Uranishi"
+      ],
+      "authors_text": "Masashi Sasago, Masato Kobayashi, Yuki Uranishi",
+      "abstract": "Visual torque feedback supports underwater bilateral teleoperation, but the benefit of mixed reality (MR) over conventional monitor presentation remains unclear. We present MR-GLi, an MR interface that spatially registers a reaction torque indicator and wrist-camera image to the robot gripper. Twenty participants performed lift and pick-and-place tasks with rigid and compliant objects in a counterbalanced within-subject comparison with a 2D monitor, using identical visual-feedback content and four-channel bilateral control. MR-GLi provided gripper-linked access to visual feedback while maintaining a similar level of torque-regulation performance to the 2D monitor. Subjective evaluation further indicated reduced perceived burden associated with shifting attention between the workspace and visual feedback. These results demonstrate the feasibility of gripper-linked MR overlays for underwater bilateral teleoperation and highlight the importance of considering information access in addition to task performance. Additional material: https://mertcookimg.github.io/mr-gli/",
+      "url": "http://arxiv.org/abs/2609.16041v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16041v1",
+      "tldr": "MR-GLi, a mixed-reality interface that spatially registers a reaction-torque indicator and wrist-camera image to the robot gripper during underwater bilateral teleoperation, matched a conventional 2D monitor in torque-regulation performance while reducing operators’ perceived burden of shifting attention between the workspace and visual feedback.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Osaka",
+        "Kobe University"
+      ],
+      "affiliations_text": "The University of Osaka, Kobe University",
+      "score": 3.112841488771738,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2609.16060v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916060v1-hintminer-automatic-question-hints-mining-from-qa-web-posts-with-language-model-via-self-supervised-learning",
+      "source": "arxiv",
+      "title": "HintMiner: Automatic Question Hints Mining From Q&A Web Posts with Language Model via Self-Supervised Learning",
+      "authors": [
+        "Zhenyu Zhang",
+        "JiuDong Yang"
+      ],
+      "authors_text": "Zhenyu Zhang, JiuDong Yang",
+      "abstract": "Users often need ask questions and seek answers online. The Question - Answering (QA) forums such as Stack Overflow cannot always respond to the questions timely and properly. In this paper, we propose HintMiner, a novel automatic question hints mining tool for users to help them find answers. HintMiner leverages the machine comprehension and sequence generation techniques to automatically generate hints for users' questions. It firstly retrieve many web Q\\&A posts and then extract some hints from the posts using MiningNet that is built via a language model. Using the huge amount of online Q\\&A posts, we design a self-supervised objective to train the MiningNet that is a neural encoder-decoder model based on the transformer and copying mechanisms. We have evaluated HintMiner on 60,000 Stack Overflow questions. The experiment results show that the proposed approach is effective. For example, HintMiner achieves an average BLEU score of 36.17\\% and an average ROUGE-2 score of 36.29\\%. Our tool and experimental data are publicly available.",
+      "url": "http://arxiv.org/abs/2609.16060v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16060v1",
+      "tldr": "HintMiner is a self-supervised language-model-based tool that mines relevant Q&A web posts and uses a transformer encoder-decoder with copying mechanisms to automatically generate helpful hints for user questions, achieving strong results on 60,000 Stack Overflow questions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 2.9510738665865692,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2609.16077v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/17/260916077v1-pseudo-label-augmentation-for-affect-sensing-in-small-collaborative-groups",
+      "source": "arxiv",
+      "title": "Pseudo-Label Augmentation for Affect Sensing in Small Collaborative Groups",
+      "authors": [
+        "Meisam Jamshidi Seikavandi",
+        "Tanya Ignatenko",
+        "Fabricio Batista Narcizo",
+        "Paolo Burelli",
+        "Jesper Bünsow Boldt",
+        "Andrew Burke Dittberner"
+      ],
+      "authors_text": "Meisam Jamshidi Seikavandi, Tanya Ignatenko, Fabricio Batista Narcizo, Paolo Burelli, Jesper Bünsow Boldt, Andrew Burke Dittberner",
+      "abstract": "Physiological affect sensing in naturalistic group interaction is often limited by sparse labels rather than sensor data: wearable devices produce many time windows, while self-reports are collected only a few times per session. Using GroupAffect-4, a four-person collaborative dataset with wearable physiology, eye tracking, Big Five personality, and post-task VAD labels, we study pseudo-label augmentation for affect sensing under sparse supervision. We compare no augmentation, Gaussian Process pseudo-labelling, personality-aware trust weighting, and joint personality-plus-confidence weighting within a shared target-construction pipeline. Results show that pseudo-label augmentation improves over the labelled-only baseline in the known-team setting. However, the narrow range of Big Five cosine similarities (0.91-0.99) makes fine-grained personality weighting ineffective; personality similarity functions mainly as a same-team filter rather than a calibrated trust signal. With smoothing, augmented SVM variants are effectively tied on Valence and Arousal, while the joint personality-plus-confidence variant gives the highest Dominance score. Cross-subject LOSO transfer remains encouraging, especially for Arousal, whereas strict session-isolated LOGO removes the augmentation benefit. Given only 10 groups, LOGO should be interpreted as a conservative lower bound on unseen-group transfer. Overall, the results suggest that pseudo-label augmentation can make better use of sparsely labelled collaborative affect data, while personality information is most useful as a within-team selection mechanism.",
+      "url": "http://arxiv.org/abs/2609.16077v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.16077v1",
+      "tldr": "This paper studies pseudo-label augmentation for sparse physiological affect sensing in small collaborative groups, finding that while augmentation improves known-team VAD prediction, Big Five personality similarity mainly acts as a same-team filter rather than a fine-grained trust signal, with cross-subject transfer encouraging but strict unseen-group transfer still limited.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IT University of Copenhagen",
+        "GN Hearing"
+      ],
+      "affiliations_text": "IT University of Copenhagen, GN Hearing",
+      "score": 2.7460819717678167,
+      "score_text": "2.7"
+    }
+  ]
+}
