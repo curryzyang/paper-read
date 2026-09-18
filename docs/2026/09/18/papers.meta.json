@@ -1,0 +1,713 @@
+{
+  "label": "2026-09-18",
+  "date": "2026-09-18",
+  "generated_at": "2026-09-18T00:35:07",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2609.17697v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917697v1-composite-gradient-learning-for-shared-control-authority-between-deep-reinforcement-learning-and-model-predictive-control",
+      "source": "arxiv",
+      "title": "Composite-Gradient Learning for Shared Control Authority Between Deep Reinforcement Learning and Model Predictive Control",
+      "authors": [
+        "Giray Önür",
+        "Azita Dabiri",
+        "Bart De Schutter"
+      ],
+      "authors_text": "Giray Önür, Azita Dabiri, Bart De Schutter",
+      "abstract": "Integrated deep reinforcement learning (DRL) and model predictive control (MPC) methods are increasingly used to control autonomous systems by combining their complementary capabilities. DRL learns control policies through interaction with the environment. MPC uses a system model to optimize control inputs while accounting for constraints. In DRL-MPC frameworks with shared control authority, both the DRL agent and the MPC controller each determine part of the control inputs. However, common learning formulations treat MPC as part of the environment and therefore do not explicitly account for MPC's contribution to control or its interaction with the DRL agent. This paper proposes a novel composite-gradient learning (CGL) method that integrates the MPC controller into the learning process by representing the DRL and MPC control inputs as a joint action and accounting for their interaction when updating the DRL agent during training. CGL is evaluated on two multi-class freeway traffic networks with different strengths of interaction between the DRL and MPC control inputs and it is compared with alternative methods that treat MPC as part of the environment or that only partially incorporate MPC into learning. The results show that CGL offers limited benefit under weak interaction, but learns higher-performing control policies than the alternative methods in a subset of training runs under strong interaction, although the average control-performance gains remain modest.",
+      "url": "http://arxiv.org/abs/2609.17697v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17697v1",
+      "tldr": "This paper proposes composite-gradient learning (CGL), which treats the DRL agent’s action and the MPC controller’s input as a joint action during training to explicitly account for their interaction, and shows on freeway traffic networks that it provides modest benefits mainly under strong DRL-MPC coupling.",
+      "detailed_reading": {
+        "motivation": "DRL与MPC在共享控制权限的分层框架中互补，但常见学习式表述把MPC视为环境的一部分，只从环境交互中更新DRL，未显式计入MPC控制输入对性能评估和DRL更新的贡献。MPC在预测未来状态时需要DRL的未来动作，因此DRL动作会通过影响MPC预测而间接影响高层控制输入，这种双向耦合在强耦合场景下会令学习表述不完整并限制性能。",
+        "method": "作者将分层DRL-MPC共享控制问题建模为MDP，把低层DRL动作与高层MPC控制输入组成联合动作。训练时，高层MPC在有限预测时域内使用系统模型、扰动预测和当前DRL策略副本进行带约束优化，并通过ZOH将高层输入作用于系统；低层确定性DRL策略根据观测输出高频控制输入，同样经ZOH施加。所提复合梯度学习在更新DRL时同时计算DRL动作的直接效应和经由MPC控制律产生的间接效应，并采用层级感知的数据存储与采样方案，在两次MPC更新之间复用MPC计算以降低训练成本。",
+        "result": "在两个具有不同DRL-MPC控制输入耦合强度的多类高速公路交通网络上，CGL与将MPC视为环境或仅部分纳入MPC学习的方法进行了对比。结果表明，弱耦合下CGL带来的收益有限；强耦合下CGL在部分训练运行中学习到比对比方法性能更高的控制策略，但平均控制性能提升仍然有限。",
+        "conclusion": "该工作说明在共享控制权限的DRL-MPC框架中，显式建模DRL与MPC之间的联合作用并在更新中计入MPC的贡献，可在强耦合情形下改善部分训练结果，而非在所有情形下稳定大幅提升。CGL的有效性依赖DRL与MPC控制输入之间的耦合强度，其实际收益呈现条件性和运行间差异性。",
+        "key_details": "关键实现包括：将高层MPC控制输入与低层DRL动作构成联合动作空间；MPC求解有限时域约束优化，预测模型中嵌入当前固定DRL策略副本；采用ZOH处理多时间尺度控制保持；状态与输入约束、扰动预测和预测观测映射均纳入MPC；DRL更新使用复合梯度同时捕捉直接与经由MPC的间接路径；层级感知数据存储和采样复用MPC计算。局限是平均性能增益温和，强耦合下也仅在部分训练运行中优于基线，评价场景限于多类高速公路交通网络。"
+      },
+      "affiliations": [
+        "Delft University of Technology"
+      ],
+      "affiliations_text": "Delft University of Technology",
+      "score": 5.94438981996335,
+      "score_text": "5.9"
+    },
+    {
+      "id": "2609.17638v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917638v1-lecture-notes-on-physics-informed-neural-networks-neural-operators-and-their-applications",
+      "source": "arxiv",
+      "title": "Lecture notes on Physics Informed Neural Networks, Neural Operators, and their applications",
+      "authors": [
+        "Alessandro Bombini"
+      ],
+      "authors_text": "Alessandro Bombini",
+      "abstract": "This is the set of lecture notes for the PhD course \\href{https://www.unibz.it/en/faculties/engineering/phd-computer-science/study-course-offering/2025/36967}{\\textit{Physics Informed Neural Network}, held at the University of Bozen/Bolzano} in the academic year 2025/2026.\n  The goal of the course was to introduce the concept of Physics Informed Deep Neural Networks (PINN) and Neural Operators (NOs), discuss their implementation from scratch in PyTorch and using advanced ad-hoc developed open-source libraries such as NVIDia PhysicsNeMo to address real-world problems in various fields (engineering, physics, petroleum reservoir). We discuss recent topics such as Mixture-of-Models, Fourier Neural Operators, Physics-Informed Kolmogorov-Arnold Networks (PIKANs) and Fourier Neural Operators.",
+      "url": "http://arxiv.org/abs/2609.17638v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17638v1",
+      "tldr": "These lecture notes provide a PhD-level introduction to Physics-Informed Neural Networks and Neural Operators, covering their implementation in PyTorch and NVIDIA PhysicsNeMo as well as applications in engineering, physics, and petroleum reservoirs, with recent topics such as Mixture-of-Models, Fourier Neural Operators, and Physics-Informed Kolmogorov-Arnold Networks.",
+      "detailed_reading": {
+        "motivation": "该材料的动机是服务于博岑/博尔扎诺自由大学2025/2026学年博士课程，向研究者介绍物理信息深度神经网络（PINN）与神经算子（NOs）的概念及实现。课程强调从零用PyTorch和NVIDIA PhysicsNeMo等开源库构建模型，以处理工程、物理和石油储层等现实问题。",
+        "method": "讲义以课程讲授和代码实践形式组织，输入/数据未在给定摘要与前言中展开；关键模块包括PINN、NOs、Mixture-of-Models、Fourier Neural Operators和Physics-Informed Kolmogorov-Arnold Networks（PIKANs）。实现路径同时覆盖从零PyTorch实现与使用NVIDIA PhysicsNeMo等专用开源库，目标是在多领域实际问题上应用这些方法；但具体建模、训练/推理流程与超参未在所给材料中给出。",
+        "result": "给定材料未报告实验指标、数据集、基准对比或可复现数值结果；其可见结果是形成一套博士课程讲义，并列出涵盖PINN、NOs、FNO、PIKANs等主题及PyTorch、PhysicsNeMo工具链的教学内容。LaTeX前言显示正文由lecture1至lecture5及附录A等章节组成。",
+        "conclusion": "该讲义定位为PINN与神经算子的教学与实现入门材料，强调从概念到开源库实践并面向工程、物理和石油储层应用。由于提供的是摘要和前言而非完整正文，无法据此得出具体科学结论或性能结论。",
+        "key_details": "关键细节包括课程于University of Bozen/Bolzano 2025/2026学年开设，标题为Physics Informed Neural Networks, Neural Operators, and their applications，作者为Alessandro Bombini（INFN Firenze）。文档使用memoir等LaTeX宏包并配置Python listings，include章节为abstract、acknowledgements、lecture1-5和appendixA，主题含Mixture-of-Models、FNO、PIKANs和PhysicsNeMo。主要局限性是全文预览仅含导言区，未提供数据、先验、损失函数、超参、复杂度约束及实验结果。"
+      },
+      "affiliations": [
+        "Istituto Nazionale di Fisica Nucleare"
+      ],
+      "affiliations_text": "Istituto Nazionale di Fisica Nucleare",
+      "score": 5.751145122550105,
+      "score_text": "5.8"
+    },
+    {
+      "id": "2609.17701v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917701v1-barrier-functions-against-safety-drift-in-shared-control",
+      "source": "arxiv",
+      "title": "Barrier Functions Against Safety Drift in Shared Control",
+      "authors": [
+        "M. Yusuf Uzun",
+        "Yildiray Yildiz"
+      ],
+      "authors_text": "M. Yusuf Uzun, Yildiray Yildiz",
+      "abstract": "Shared-control arbitration mechanisms can fail structurally when they are driven by quantities that evolve on the same automation-assisted trajectory that unsafe automation can corrupt. Under unsafe assistance, arising from faults or flawed design, the arbitration logic can adapt to the corrupted trajectory instead of resisting it. Focusing on workload regulation, this paper proposes a framework that prevents this problem by anchoring the safety constraints to an unassisted pilot trajectory. A baseline model evolving without automation assistance generates the acceptable workload envelope, while an assistance-induced deviation barrier and a closed-form mismatch bound relate actual and baseline workload evolution. The resulting control barrier function based quadratic program is always feasible and guarantees forward invariance of an augmented safe set. Simulations on an F-16 pitch-tracking problem show that the proposed method prevents workload-constraint drift under unsafe assistance.",
+      "url": "http://arxiv.org/abs/2609.17701v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17701v1",
+      "tldr": "This paper proposes a pilot-anchored control barrier function framework that prevents unsafe automation-induced workload safety drift in shared control by enforcing constraints relative to an unassisted baseline trajectory, guaranteeing feasibility and forward invariance, and demonstrating effectiveness on an F-16 pitch-tracking task.",
+      "detailed_reading": {
+        "motivation": "共享控制仲裁若依赖与自动化辅助轨迹共同演化的量（如工作量），在故障或错误设计导致持续不安全辅助时，仲裁逻辑可能适应被污染的轨迹而非抵抗它，形成“变坏”循环，因此需要把安全约束锚定到不受辅助影响的飞行员基线上。",
+        "method": "将人-被控对象耦合建模为聚合线性系统 dx/dt=A x+B_ya y_a+B_r r，其中飞行员模型为 k_p(T_p s+1)/(T_z s+1)，工作量定义为 w_p=y_h^2+dot(y_h)^2。构造仅飞行员、零辅助的基线模型 d x_bar/dt=A x_bar+B_r r，并以 x_bar(t0)=x(t0) 初始化；实际与基线偏差 e=x-x_bar 满足 de/dt=A e+B_ya y_a。安全滤波用三个障碍函数：工作量下界 b1=w_p-w_L、上界 b2=w_U-w_p，以及辅助诱导偏差障碍；通过 ACBF 条件在 y_a=0 处定义并在二次规划中最小化 ||y_a-y_a,nom||^2，约束为 L_a b_i+alpha_i(b_i)>=0，从而在线输出过滤后的辅助命令。",
+        "result": "在 F-16 俯仰跟踪问题上的仿真显示，所提方法在四类严重不安全辅助场景下防止了工作量约束漂移。摘要报告所得 ACBF 二次规划始终可行，并保证增广安全集的前向不变性；但可获取文本未给出具体数值指标或基线对比数据。",
+        "conclusion": "将安全包线从受调节的辅助中解耦，并锚定到无辅助飞行员基线，可避免不安全辅助通过污染仲裁变量而持续准入自身的结构性问题。该框架在保持 ACBF 仲裁系统性、模块化和可行性的同时，为共享控制中的安全漂移提供了一种防护方案。",
+        "key_details": "关键实现细节包括：仅针对线性被控对象与线性飞行员模型给出闭式工作量障碍和可计算失配界；假设输出相对度满足 C_p B_p=0 且 C_p A_p B_p≠0，从而 H B_ya=0，避免工作量代数依赖待求 y_a；若飞行员训练良好则 A 为 Hurwitz，参考信号 r 及其到所需阶导数已知；辅助集 Y_a 含原点，令 y_a=0 即保证可行性。局限是依赖模型、线性化与仿真验证，未报告 F-16 之外或真实飞行实验，也未给出定量性能数据。"
+      },
+      "affiliations": [
+        "Bilkent University",
+        "Illinois Institute of Technology"
+      ],
+      "affiliations_text": "Bilkent University, Illinois Institute of Technology",
+      "score": 5.44941817395709,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2609.17717v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917717v1-optimal-resource-extraction-under-distribution-learning-and-infinite-horizon-stochastic-hamilton-jacobi-equations",
+      "source": "arxiv",
+      "title": "Optimal Resource Extraction under Distribution Learning and Infinite-Horizon Stochastic Hamilton--Jacobi Equations",
+      "authors": [
+        "Ulrich Horst",
+        "Jinniao Qiu",
+        "Yang Yang"
+      ],
+      "authors_text": "Ulrich Horst, Jinniao Qiu, Yang Yang",
+      "abstract": "We study an infinite-horizon stochastic control problem for the optimal exploitation of an exhaustible resource with unknown total reserves. Information is generated both endogenously through continued extraction without depletion and exogenously through an external information flow. This interaction makes the natural problem non-Markovian and time-inconsistent. We show that it nevertheless admits an equivalent time-consistent formulation with the same optimal controls. The associated value function is characterized as the unique viscosity solution of a stochastic Hamilton--Jacobi equation with random coefficients. We prove comparison on the infinite horizon through a Snell-envelope-based strict-contact argument and establish uniqueness by an independent Brownian regularization and a BSDE correction, avoiding piecewise Markovian approximations. Finally, we identify the deterministic benchmark and show that, under persistent reserve uncertainty, the rescaled stochastic value function converges to a pathwise deterministic control problem, with the long-run optimal extraction rate determined by the asymptotic hazard rate of the limiting reserve distribution.",
+      "url": "http://arxiv.org/abs/2609.17717v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17717v1",
+      "tldr": "TLDR: This paper shows that an optimal exhaustible-resource extraction problem with unknown reserves and combined endogenous and exogenous learning admits an equivalent time-consistent formulation characterized by the unique viscosity solution of an infinite-horizon stochastic Hamilton–Jacobi equation, with the long-run optimal extraction rate determined by the asymptotic hazard rate of the limiting reserve distribution.",
+      "detailed_reading": {
+        "motivation": "可耗竭资源的最优开采自Hotelling以来就是核心问题，但总储量未知时，开采不仅消耗资源还会通过“未耗竭”产生内生学习，同时地质调查等外生信息流又持续更新储量信念。两种学习交织使问题天然非马尔可夫且时间不一致，经典确定性动态规划与Hamilton-Jacobi方法无法直接适用。",
+        "method": "在由Wiener过程生成的过滤下，建立单生产者模型，控制变量为开采率、过程在资源耗尽时终止；总储量X_bar非负、无原子、无界支撑，用条件生存函数F_hat(t,x)=P(X_bar>x|F_t)刻画路径依赖的学习。将条件归一化导致的时间不一致目标重构为等价时间一致问题并保持相同最优控制。值函数被刻画为带随机系数的无限时域随机Hamilton-Jacobi方程的粘性解；比较原理通过Snell包络构造严格接触停止时，唯一性通过独立布朗正则化、空间平移和线性BSDE修正构造上下障碍并做挤压论证。",
+        "result": "论文证明等价时间一致形式与原问题具有相同最优控制，且值函数是相应无限时域随机Hamilton-Jacobi方程的唯一粘性解；该证明避免分段马尔可夫近似。长期分析表明，在持续储量不确定性下，重标度随机值函数收敛到路径确定性的控制问题，长期最优开采率由极限储量分布的尾部危险率显式决定；确定性基准情形下值函数可分解为贴现因子和满足一阶边值问题的平稳分量。",
+        "conclusion": "该工作为未知总储量、内生与外生学习并存的资源开采提供了严格的无限时域随机控制与随机粘性解理论，并揭示残余尾部不确定性直接控制长期最优开采行为。其结果连接时间不一致控制、随机HJ方程和资源经济学，可作为信息流下长期开采政策的理论基准，但一般方程仍难以显式求解。",
+        "key_details": "关键细节包括：信息由布朗过滤生成，但条件生存函数依赖整段历史，因此系数可随机且路径依赖；假设总储量有限期望、无原子、无界支撑，且生存函数几乎处处为正并对状态Lipschitz。比较原理需处理随机测试函数的鞅项，相切通过条件期望与最优停止定义，并用Snell包络和鞅修正获得有限停止时；无限时域需一侧渐近条件排除排序违反逃逸至时空无穷。唯一性依赖独立布朗扰动使辅助方程一致超抛物，再做空间平移和线性BSDE修正；渐近收敛还需条件生存概率一致收敛、额外正则性及大储量极限危险率存在。"
+      },
+      "affiliations": [
+        "Humboldt-Universität zu Berlin",
+        "University of Calgary"
+      ],
+      "affiliations_text": "Humboldt-Universität zu Berlin, University of Calgary",
+      "score": 4.96469493155332,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.17682v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917682v1-dsd-learning-diverse-and-reusable-motor-skills-via-diffusion-skill-discovery",
+      "source": "arxiv",
+      "title": "DSD: Learning Diverse and Reusable Motor Skills via Diffusion Skill Discovery",
+      "authors": [
+        "Sun Woo Kim",
+        "Xue Bin Peng"
+      ],
+      "authors_text": "Sun Woo Kim, Xue Bin Peng",
+      "abstract": "Humans efficiently learn new tasks by reusing a rich repertoire of motor skills across different goals and contexts. A similar strategy can also be used to enable simulated characters to efficiently perform new tasks by leveraging reusable motor skills. To support a wide range of downstream tasks, the learned repertoire should be diverse, consisting of distinct behaviors as well as spatial and temporal variation within each behavior. A commonly used method for learning diverse skills is by maximizing the mutual information between skill latents and the states produced by a policy. The marginal state entropy promotes broad behavioral coverage, while the conditional entropy encourages consistent behaviors from each latent. However, directly estimating the marginal state entropy is intractable in high-dimensional control problems. Prior methods therefore rely on indirect latent-space approximations or coarse estimators of the state distribution. These approximations may not effectively promote broad coverage of the state space, resulting in skills with limited behavioral diversity and reduced utility for downstream tasks. In this work, we propose Diffusion Skill Discovery (DSD), a skill discovery method that uses a diffusion model to approximate the entropy gradient of the policy-induced state distribution through score matching. The resulting objective encourages the discovery of skills that produce a broader range of behaviors for high-dimensional humanoid control. The learned skills are reused in two downstream control settings: hierarchical control with a task-specific high-level policy and zero-shot control through latent selection from offline trajectories. Our experiments show that DSD discovers a broader repertoire of reusable motor skills than prior skill discovery methods, leading to the emergence of complex and agile behaviors that can be reused across downstream tasks.",
+      "url": "http://arxiv.org/abs/2609.17682v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17682v1",
+      "tldr": "DSD is a diffusion-based skill discovery method that approximates the state-entropy gradient via score matching to learn a broader repertoire of diverse, reusable motor skills for high-dimensional humanoid control, enabling effective downstream reuse through hierarchical control and zero-shot latent selection.",
+      "detailed_reading": {
+        "motivation": "模拟人形角色若要像人类一样高效完成新任务，就需要一个可复用的多样化运动技能库，而非针对每个任务从零训练。主流方法通过学习技能隐变量与状态之间的互信息来获得多样化技能，但其中最大化策略诱导状态分布边缘熵的一项在高维人形控制中不可解。现有工作因此退而使用潜空间变分近似或粒子最近邻、技能条件动力学等粗糙估计器，这些近似无法有效促进状态空间的广泛覆盖，学到的技能往往只是同一行为的微小变体，功能多样性有限、下游可用性差。",
+        "method": "DSD 训练一个以技能隐变量 z 为条件的低层策略 π(a|s,z)，并让扩散模型 ε_θ 与策略在 rollout 状态上联合训练，通过去噪分数匹配（DDPM/SDS 式的加权噪声预测目标）在线逼近策略诱导状态分布的熵梯度，再把该梯度转化为内在奖励，激励策略访问更广泛的新颖状态。为把行为组织成可区分的技能，方法引入技能编码器 q(z|s) 构造互信息目标，使不同隐变量产生不同行为；同时用 GAN 式判别器（动作先验）鼓励动作接近参考动作分布，三部分奖励合成后用于策略的强化学习优化。训练完成后技能库以两种方式复用：一是分层控制，由任务特定的高层策略输出隐变量驱动冻结的低层策略；二是零样本控制，从离线轨迹中依据适应度函数 F 选择最优隐变量 z*，无需任何再训练。",
+        "result": "在多个运动数据集上的实验表明，DSD 学到的技能库比先前技能发现方法覆盖更广的行为范围，能够涌现出复杂且敏捷的运动（如行走、跑跳、击打等行为及其空间与时间变体），并捕捉到同一技能内部的变化。在分层控制和零样本隐变量选择两类下游控制设定中，复用该技能库均取得更好表现，验证了更宽的状态分布覆盖确实转化为更强的下游任务效用。",
+        "conclusion": "研究表明，用扩散模型近似策略诱导状态分布的熵梯度，是替代不可解边缘熵估计、提升高维人形控制技能多样性的可行途径。DSD 是首个面向物理仿真人形、以扩散模型近似状态熵梯度的无监督技能发现框架，学到的多样化技能库可同时支持基于高层策略的分层控制与无需训练的零样本潜在选择。",
+        "key_details": "数据侧使用无标注的参考运动数据集，扩散模型在策略 rollout 产生的状态上在线联合训练，目标为分数匹配加权的噪声预测损失 w(k)‖ε_θ(x^k)−ε‖²，其梯度充当状态熵最大化的替代信号；技能一致性由隐变量条件编码器 q 的互信息项保证，运动自然性由 GAN 式判别器（类似 AMP 的动作先验）保证；论文针对高维人形控制提出了一系列实践性设计以提高训练稳定性与运动质量，并隐含了扩散模型评估的额外计算开销；下游复用分为高层策略分层控制与离线轨迹零样本隐变量选择两条路径；主要局限在于依赖参考动作分布作为先验、且熵梯度估计在高维状态下的可靠性仍是关键约束，具体超参与复杂度指标未在摘要层面给出。"
+      },
+      "affiliations": [
+        "Simon Fraser University",
+        "NVIDIA"
+      ],
+      "affiliations_text": "Simon Fraser University, NVIDIA",
+      "score": 4.7768569319068845,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.17728v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917728v1-raf-vla-representation-alignment-with-the-future-for-end-to-end-autonomous-driving",
+      "source": "arxiv",
+      "title": "RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving",
+      "authors": [
+        "Dogun Kim",
+        "Yongjae Lee",
+        "Joonhee Lim",
+        "Yeina Lee",
+        "Junhyeok Park",
+        "Moogeun Park",
+        "Dongsuk Kum"
+      ],
+      "authors_text": "Dogun Kim, Yongjae Lee, Joonhee Lim, Yeina Lee, Junhyeok Park, Moogeun Park, Dongsuk Kum",
+      "abstract": "Recent Vision-Language-Action (VLA) models for autonomous driving have incorporated world modeling by predicting future driving scenes alongside driving actions, demonstrating strong planning performance. Future driving scenes are utilized as dense supervision, encouraging the policy to learn rich internal representations useful for planning. However, these World-Modeling VLAs rely on explicit future generation to learn such representations, thereby introducing two key limitations: additional training burden and inference latency. To address these limitations, we propose RAF-VLA (Representation Alignment with the Future), a VLA-based autonomous driving framework that shapes planning-relevant internal representations through direct guidance from future-frame representations. RAF-VLA employs Future-Aligned Supervised Fine-Tuning, in which a straightforward regularization aligns the policy's hidden states with future-frame representations obtained from a pretrained world encoder while learning driving actions. This simple alignment allows RAF-VLA to avoid the training burden and inference latency associated with future generation. Extensive experiments on the NAVSIM benchmark show that RAF-VLA achieves competitive planning performance against state-of-the-art VLA planners with substantially fewer training samples seen. Moreover, RAF-VLA incurs only 3.8% training overhead and a negligible 1 ms inference overhead.",
+      "url": "http://arxiv.org/abs/2609.17728v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17728v1",
+      "tldr": "RAF-VLA aligns a driving policy’s hidden states with future-frame representations during supervised fine-tuning, avoiding explicit future generation and achieving competitive end-to-end planning performance on NAVSIM with far fewer training samples and minimal training/inference overhead.",
+      "detailed_reading": {
+        "motivation": "现有 World-Modeling VLA 通过显式预测未来驾驶场景来获得密集监督，从而学习规划相关内部表示，但这类方法需要优化额外生成目标，并带来额外训练负担与推理延迟。因此，作者希望在不生成未来场景的前提下，仍利用未来场景监督来塑造驾驶策略的内部表示。",
+        "method": "RAF-VLA 采用 Mixture-of-Transformers 架构，包含基于预训练 VLM 的 Vision-Language Expert 和轻量 Action Expert，两者通过层间联合注意力交互；输入为前视图像序列、导航指令和驾驶状态，输出未来 H 步 ego 轨迹航点。训练分两阶段：先进行 Future-Aligned SFT，在 Vision-Language Expert 中附加可学习 world queries，并用冻结的预训练 world encoder 从未来帧提取目标表示，再用可训练 MLP projector 将 world-query 隐状态投影到目标空间，以 MSE 对齐损失与动作预测损失联合优化；随后移除 world encoder 和 projector，保留 world queries，并进行 GRPO-based RFT，用 NAVSIM PDMS 规划奖励优化策略。",
+        "result": "在 NAVSIM 基准上，RAF-VLA 以显著更少的训练样本 seen 达到与最先进 VLA 规划器相当的规划性能；Future-Aligned SFT 仅带来 3.8% 训练开销，推理开销可忽略（约 1 ms）。消融和定性结果进一步支持该表示对齐方法的有效性。",
+        "conclusion": "RAF-VLA 表明，未来场景监督可仅在表示层面使用，无需显式未来生成即可塑造规划相关内部表示，从而避免世界模型 VLA 的训练负担和推理延迟，并为高效端到端自动驾驶提供可行路径。",
+        "key_details": "关键实现包括：world queries 作为未来对齐的表示槽，每个选定未来步分配 K 个，采用块因果注意力，同 horizon 内双向、后续 horizon 被 mask，且可关注图像和语言 token；Action Expert 对 VL Expert 为单向可见，AE 内部全双向；对齐损失为冻结 world encoder 特征与投影隐状态之间的均方误差，L_SFT=L_act+λ_align L_align。RFT 阶段使用 GRPO，从旧策略采样 G 条候选轨迹，按组内奖励归一化计算优势，使用 clip 和 KL 惩罚，奖励为 PDMS，评估采用 NAVSIM v1 闭环指标，部分对比设置使用 best-of-N（N=6）策略；局限性在于对齐目标依赖预训练 world encoder 的质量，具体超参和完整数值结果需参考原文。"
+      },
+      "affiliations": [
+        "Korea Advanced Institute of Science & Technology (KAIST)"
+      ],
+      "affiliations_text": "Korea Advanced Institute of Science & Technology (KAIST)",
+      "score": 4.774961730478463,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2609.17628v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917628v1-leap-learning-emergent-active-perception-for-quadruped-navigation",
+      "source": "arxiv",
+      "title": "LEAP: Learning Emergent Active Perception for Quadruped Navigation",
+      "authors": [
+        "Ü. Bora Gökbakan",
+        "Stéphane Caron",
+        "Philippe Souères"
+      ],
+      "authors_text": "Ü. Bora Gökbakan, Stéphane Caron, Philippe Souères",
+      "abstract": "Active perception allows autonomous agents to select their viewpoints rather than passively process the viewpoints given to them, enabling them to target where to reduce uncertainty about their environment. Learned systems typically encourage this behavior with hand-designed proxy objectives, such as coverage or curiosity bonuses, that may conflict with the task. In this work, we propose a method to learn emergent active perception (LEAP) without augmentation of the task objective. We formulate the problem of goal-oriented navigation over hazardous terrains with goals that must be discovered visually. We then propose an architecture for navigation policies with active perception, and train them on a terrain curriculum where task pressure alone leads to the emergence of gaze control. Key to this emergence, LEAP works on a gaze-invariant representation that integrates depth images into egocentric belief maps. We validate its performance in held-out evaluation scenarios, where it achieves a 92.7% success rate, compared to 74.2% for scripted or 34.5% for passive perception, and comes within 4.6 points of a privileged oracle. We validate that LEAP navigation policies, unchanged, can be directly applied to steering quadrupedal locomotion policies in physics simulation.",
+      "url": "http://arxiv.org/abs/2609.17628v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17628v1",
+      "tldr": "LEAP learns emergent active perception for goal-oriented quadruped navigation without any hand-designed sensing reward by using a gaze-invariant egocentric belief map so that task pressure alone produces gaze control, achieving 92.7% success and transferring to simulated quadruped locomotion.",
+      "detailed_reading": {
+        "motivation": "主动感知允许智能体选择视角以降低环境不确定性，但已有学习系统常依赖覆盖率、好奇心等手工代理目标，这些目标可能与导航任务本身冲突。本文研究危险地形上目标必须通过视觉发现的目标导向导航，旨在不增加任务目标的前提下学习涌现式主动感知。",
+        "method": "将导航建模为POMDP：状态包含基座位姿、传感器构型、目标位置与地形；动作由平面机体twist和相机pan-tilt速度组成；观测为当前相机位姿下的深度图加目标二值通道，目标不直接提供；奖励只依赖机体位置与任务进展，不对感知动作给任何奖励。策略用固定相机几何把深度图反投影到以机器人为中心的鸟瞰信念图，该表示对注视方向不变，并充当记忆；用批量高度图射线投射器在on-policy训练规模渲染深度。训练采用自适应地形课程，课程通过代价到目标场phi的梯度下降从最难出生点反向生成出生点；phi由可通行性约束及坡度/间隙代价定义。单个策略联合输出机体与相机动作，用强化学习训练，任务压力单独驱动注视控制涌现。",
+        "result": "在留出评测场景中，LEAP达到92.7%成功率，高于脚本式感知的74.2%和被动感知的34.5%，仅比特权oracle低4.6个百分点。导航策略无需改动即可直接用于物理仿真中的四足运动策略，在留出地形上完成全身sim2sim迁移并操纵独立训练的运动策略。对比表明涌现的注视行为由任务驱动，而非由感知代理奖励驱动。",
+        "conclusion": "LEAP证明无需在任务目标外增加覆盖、好奇心或重建等感知代理项，仅靠导航任务压力即可涌现主动注视控制。其关键在于注视不变信念表示和地形课程，使相机控制不被表示校准误差惩罚，并能将导航策略迁移到四足运动。",
+        "key_details": "POMDP中传感动作无直接奖励；深度相机带pan-tilt，观测为深度图叠加目标二值通道；信念图由固定几何反投影生成且无学习编码器，因此新注视只改变哪些栅格被观测，而不改变观测如何编码。代价到目标phi的约束包括最大可通行高度变化0.4 m、机身宽度排除过窄通道，运行代价含坡度项w_h=0.5和间隙项w_c=10、间隙截止0.575 m；训练用批量高度图射线投射器渲染深度，地形课程基于phi梯度下降生成出生点。局限：导航层将机体抽象为平面twist，四足实现分离，验证限于物理仿真与留出场景，未给真实机器人实验；课程依赖已知地形高度场和代价到目标计算。"
+      },
+      "affiliations": [
+        "Inria",
+        "CNRS",
+        "Sorbonne University",
+        "PSL",
+        "University of Toulouse"
+      ],
+      "affiliations_text": "Inria, CNRS, Sorbonne University, PSL, University of Toulouse",
+      "score": 4.749932794461973,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2609.17654v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917654v1-regularized-least-squares-training-of-quadratic-neural-networks-with-applications-to-system-identification",
+      "source": "arxiv",
+      "title": "Regularized Least Squares Training of Quadratic Neural Networks with Applications to System Identification",
+      "authors": [
+        "Luis Rodrigues",
+        "Zachary Yetman Van Egmond",
+        "Mohammad R. Amiri Fard"
+      ],
+      "authors_text": "Luis Rodrigues, Zachary Yetman Van Egmond, Mohammad R. Amiri Fard",
+      "abstract": "This paper proposes a least squares approach for the training of quadratic neural networks with regularization. The proposed methodology yields a lower bound on the solution of the training optimization problem for the case where the regularization coefficient is positive. Moreover, it yields closed-form expressions for the approximate solution and its sensitivity The lower bound is tight and the approximate solution is the optimal solution when the regularization coefficient is zero. Having a closed-form expression for the weights reduces considerably the computational time when compared with iterative numerical methods such as backpropagation that can get stuck in local minima. The proposed approach has three main contributions, namely, (i) it yields an analytical expression for the weights, (ii) an analytical expression for the sensitivity of the weights to errors in the data is also provided, (iii) it establishes a connection between the optimization to compute a lower bound and nuclear norm minimization. The proposed least squares training is successfully applied to a nonlinear system identification example where the proposed lower bound is compared with the optimal value.",
+      "url": "http://arxiv.org/abs/2609.17654v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17654v1",
+      "tldr": "This paper proposes a regularized least-squares training method for quadratic neural networks that provides closed-form weight and sensitivity expressions along with a tight lower bound on the training cost, and demonstrates its effectiveness in nonlinear system identification.",
+      "detailed_reading": {
+        "motivation": "两层二次神经网络在系统辨识等任务中具有良好表达能力和可解释性，但其训练通常是非凸优化，反向传播只能收敛到局部极小且计算迭代成本高。已有凸重构方法可求全局最优，却缺少闭式权重表达式；前期工作表明无正则QNN可用最小二乘闭式求解。本文旨在将这一思路推广到带1范数正则的QNN训练，给出训练代价下界、闭式近似权重及其灵敏度，并建立与核范数最小化的联系，从而降低计算量并增强可解释性。",
+        "method": "以N组输入x_i和标签y_i为数据（多输出可拆分为单输出，故不失一般性取单输出），采用两层二次网络，隐藏激活为σ(z)=a z^2+bz+c，输出为yhat_i=Σ_j σ(x_i^T w^j)α_j，隐藏权重w^j满足单位范数，训练目标为凸损失加βΣ|α_j|。利用单项式提升xbar_i=[x_i^T,1]把输出写成二次型yhat_i=xbar_i^T Z xbar_i，并令Z具有[[aZ1,(b/2)Z2],[(b/2)Z2^T,c Tr(Z1)]]的块结构；先证明该结构矩阵可分解为同结构半正定矩阵之差，再去掉原凸重构中的LMI/PSD约束，构造关于Z的正则最小二乘，用β惩罚与1范数对应的核范数/迹项。求解时把xbar_i^T Z xbar_i视为Z元素的线性模型，β=0时用标准最小二乘得到闭式解，β>0时用核范数正则最小二乘的SVD软阈值形式得到闭式近似解，并推导其对数据误差的灵敏度；最后将解分解回隐藏层权重并用于推理。",
+        "result": "理论上得到正则系数β≥0时原QNN训练最优代价的下界；当β=0时该下界是紧的，近似解即全局最优解；β>0时给出闭式近似权重及其对数据误差的灵敏度。权重解析表达避免了反向传播的迭代搜索和局部极小，计算时间显著减少，并揭示下界优化与核范数最小化之间的联系。在非线性系统辨识示例中方法成功应用，并将所提下界与最优值进行了对比，验证了理论下界的有效性，其中β=0时与最优值一致。",
+        "conclusion": "本文为正则化二次神经网络训练提供了一种最小二乘与核范数正则化相结合的凸近似框架，可给出闭式权重、训练代价下界和数据误差灵敏度，适用于非线性系统辨识，并可通过单项式提升推广到深层QNN。其核心价值在于用解析计算替代易陷入局部极小的反向传播，同时保持与凸QNN重构及核范数最小化的理论联系；局限是β>0时通常只保证下界和近似解，网络恢复效果与正则强度、数据噪声及分解条件有关。",
+        "key_details": "关键实现点包括：激活参数a,b,c需预先固定，常通过区间内ReLU的最小二乘拟合得到；隐藏层权重w^j单位范数；正则系数β≥0；单输出处理因多输出可拆分为独立QNN。核心数学工具是结构保持的PSD分解引理和去除LMI约束的松弛，下界紧性仅在β=0时保证。核范数/迹正则来自原L1惩罚，闭式解依赖最小二乘或SVD软阈值，灵敏度由解析导数给出；复杂度主要来自矩阵求逆或SVD而非迭代反向传播。局限性在于β>0时得到的是下界与近似解而非原非凸问题的精确全局最优，结果针对两层QNN，深层情形需输入单项式提升，且对数据误差的鲁棒性由所推导的灵敏度刻画。"
+      },
+      "affiliations": [
+        "Concordia University"
+      ],
+      "affiliations_text": "Concordia University",
+      "score": 4.70006498431167,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2609.17629v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917629v1-fenchel-young-duality-gaps-certified-early-stopping-for-regularized-inverse-problems",
+      "source": "arxiv",
+      "title": "Fenchel-Young Duality Gaps: Certified Early Stopping for Regularized Inverse Problems",
+      "authors": [
+        "Pierre-Cyril Aubin-Frankowski",
+        "Yohann de Castro"
+      ],
+      "authors_text": "Pierre-Cyril Aubin-Frankowski, Yohann de Castro",
+      "abstract": "We study computable error bounds and certified early stopping for regularized inverse problems, where a data-fidelity term is traded against a regularizer. The analysis relies on an exact duality-gap identity that splits the total gap of $F(Φμ)+λR(μ)$ into a data-fidelity Fenchel--Young loss and a regularizer Fenchel--Young loss, $ Δ(μ,h)=L_F(Φμ\\parallel h)+λL_R(μ\\parallelη),\\qquad η=-Φ^\\star h/λ, $ valid for any primal point $μ$ and any dual point $h$. The data-fidelity term $F$ is strictly convex, so wherever $F^\\star$ is differentiable the loss $L_F(Φμ\\parallel h)$ is the Bregman divergence of~$F$ between the prediction $Φμ$ and $\\nabla F^\\star(h)$, and it vanishes exactly at \\emph{Mirror Alignment} $h=\\nabla F(Φμ)$. Evaluated at a dual-feasible point $\\tilde h$, the gap~$Δ(μ,\\tilde h)$ is computable and \\emph{oracle-free}, meaning that it uses no knowledge of the solution, and it bounds the suboptimality of $μ$. Under the source condition, the same Fenchel--Young losses give \\emph{a priori} bounds on the estimation and prediction errors. Their scale is the irreducible model and noise error $L_F(Φμ^\\star\\parallel h^\\star)$, which vanishes exactly when Mirror Alignment holds at the certificate. This gives an early-stopping rule: run the algorithm until the regularizer Fenchel--Young loss falls below a tolerance $ε$. A constructive version of the Brøndsted--Rockafellar theorem then turns the current pair into an exact \\emph{dual-feasible} one, and this proxy lifts to an exact primal certificate. We build the proxy by a proximal step in the geometry of the fidelity, with Bregman kernel $F^\\star$ and tilted by the prediction $Φμ$: it recovers the Euclidean step of Carlier when $F$ is the squared error, and it reduces the duality gap by the regularizer Fenchel--Young loss, up to a second-order remainder that vanishes in the quadratic case. Our running example is the Generalized Beurling--Lasso (GBL), where $R$ is the total-variation norm on signed measures. It contains the classical Beurling--Lasso, obtained with the squared error, and also covers robust, logistic, entropic and inverse-optimal-transport losses. The same duality gap certifies deep-learning optimizers such as Lion-K and Muon, in their proximal form, as solvers of the regularized program. A companion paper by the same authors builds on these error bounds to establish exact support recovery for the GBL under a non-degenerate source condition.",
+      "url": "http://arxiv.org/abs/2609.17629v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17629v1",
+      "tldr": "The paper derives an exact Fenchel–Young duality-gap decomposition for regularized inverse problems that yields computable, oracle-free error bounds and certified early-stopping rules via dual-feasible proxies, illustrated on Generalized Beurling–Lasso and deep-learning optimizers such as Lion-K and Muon.",
+      "detailed_reading": {
+        "motivation": "正则化反问题需在数据保真项 F(Φμ) 与正则项 λR(μ) 间权衡，但实际算法常缺乏无需真实解即可计算的误差界与停机准则；已有工作多局限于二次保真或特定稀疏反卷积。本文动机是建立一般严格凸 F 与一般凸 R 下可计算、无神谕的对偶间隙证书，并统一覆盖 GBL、稳健/逻辑/熵/逆最优传输等损失及深度学习优化器。",
+        "method": "方法对任意原始变量 μ 和对偶变量 h 证明精确恒等式 Δ(μ,h)=L_F(Φμ||h)+λL_R(μ||η)，其中 η=-Φ*h/λ，L_F 在 F* 可微时等于 F 在预测 Φμ 与 ∇F*(h) 间的 Bregman 散度，并在 Mirror Alignment h=∇F(Φμ) 处为零。对偶可行代理 h̃ 下，Δ(μ,h̃) 可计算且无需知道最优解，并给出原始次优性上界；在源条件 η∈∂R(μ) 下，同一 Fenchel-Young 损失还给出估计/预测误差的先验界，尺度为不可约模型噪声项 L_F(Φμ*||h*)。停机规则是运行算法直到正则项 Fenchel-Young 损失 λL_R(μ||η) 低于容差 ε；随后用 Brøndsted-Rockafellar 构造性版本把当前对偶对变成精确对偶可行代理，并提升为满足精确源条件的原始证书。代理通过以 F* 为 Bregman 核、由预测 Φμ 倾斜的镜像近端步构造，二次损失时退化为 Carlier 的欧氏近端步，并把对偶间隙降低 λL_R 量，非二次时仅剩二阶余项。",
+        "result": "结果给出精确对偶间隙分解、Mirror Alignment 最优性刻画、无神谕次优性上界以及源条件下估计/预测误差界；GBL 实例中 TV 正则涵盖经典 BLASSO，并扩展到稳健、逻辑、熵和逆最优传输保真。构造性 Brøndsted-Rockafellar 代理可将正则项 Fenchel-Young 损失低于 ε 的迭代提升为精确原始证书，实现认证早停。数值上，Lion-K/ISTA 的 ℓ1 压缩感知和 Muon/SVT 的核范数矩阵感知在病态实例中，无神谕的 Fenchel-Young 间隙 Δ_t 稳步趋零并始终上界真实原始最优性间隙，证明这些优化器在其近端形式下求解 F+λR 问题。伴随工作进一步利用这些误差界在非退化源条件下建立 GBL 的精确支撑恢复。",
+        "conclusion": "本文表明 Fenchel-Young 对偶间隙可为正则化反问题提供统一、可计算且有理论保证的误差证书与早停准则，突破了二次保真限制。该框架把 Bregman 散度、Mirror Alignment 和 Brøndsted-Rockafellar 构造联系起来，并为 GBL 及深度学习中 Lion-K、Muon 等优化器的近端解释与认证提供基础。",
+        "key_details": "关键细节包括：F 严格凸、R 为正常下半连续凸函数、Φ 有界弱*连续、λ>0；F* 可微处 L_F 为 F 的 Bregman 散度，源条件 η∈∂R(μ) 与 Mirror Alignment h=∇F(Φμ) 同时成立时最优，反之原始解也存在这样的对偶。构造性代理使用核 F*、由 Φμ 倾斜的镜像近端步，对范数正则可无条件提升为精确原始证书，但非二次保真下间隙减少仅到二阶余项。实验设置包括双精度前 10000 次迭代、ℓ1 压缩感知 AR(1) 相关设计 ρ=0.9 与 λ=0.05、核范数矩阵感知 p=120 个高斯测量与 λ=0.1，且间隙曲线在病态问题上收敛较慢。局限在于需构造对偶可行代理并依赖源条件/非退化条件，精确支撑恢复与更细统计速率由伴随论文处理。"
+      },
+      "affiliations": [
+        "Institut Universitaire de France",
+        "École Centrale Lyon",
+        "Institut Polytechnique de Paris"
+      ],
+      "affiliations_text": "Institut Universitaire de France, École Centrale Lyon, Institut Polytechnique de Paris",
+      "score": 4.191645065703141,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.17625v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/18/260917625v1-predictive-varanus-combining-csp-conformance-monitoring-with-predictive-ltl-runtime-verification",
+      "source": "arxiv",
+      "title": "Predictive Varanus: Combining CSP Conformance Monitoring with Predictive LTL Runtime Verification",
+      "authors": [
+        "Angelo Ferrando",
+        "Matt Luckcuck",
+        "Pedro Ribeiro"
+      ],
+      "authors_text": "Angelo Ferrando, Matt Luckcuck, Pedro Ribeiro",
+      "abstract": "Runtime Verification is well suited to autonomous and robotic systems because it checks the behaviour that is actually observed during execution. Its main limitation, however, is that it is usually reactive: the monitor detects a violation only after the system has already performed a bad event. This can be too late in domains where failures are costly or unsafe. In this paper we present PREDICTIVE VARANUS, a two-stage verification pipeline that combines VARANUS, a runtime verifier that uses models written in the process algebra Communicating Sequential Processes (CSP), with predictive runtime verification for LTL. A CSP model is first used as a conformance gate over the observed event trace; the same model is then translated into a Buchi automaton that constrains the futures explored by a predictive LTL monitor. In this way, out-of-model behaviour is rejected immediately, while model-consistent prefixes can be classified as already guaranteeing satisfaction, already forcing violation, or still being inconclusive for the monitored temporal property. We formalise the combined monitor, explain its implementation, and illustrate the approach on a robotic rover for nuclear-store inspection. The case study shows how the combination of CSP validation and predictive LTL can provide earlier verdicts than standard runtime monitoring while reusing an existing design-time CSP model.",
+      "url": "http://arxiv.org/abs/2609.17625v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17625v1",
+      "tldr": "Predictive Varanus is a two-stage runtime verification pipeline that combines CSP-based conformance monitoring with predictive LTL monitoring by reusing the same CSP model as both a conformance gate and a Büchi automaton, enabling earlier verdicts on model-consistent traces, as demonstrated on a nuclear-inspection rover case study.",
+      "detailed_reading": {
+        "motivation": "运行时验证适合自主与机器人系统，因为它检查的是执行中实际观测到的行为，但其核心局限在于通常是被动反应式的：只有系统已经执行了坏事件之后监视器才能报出违规，这在失败代价高或不安全的领域中往往为时已晚。预测性运行时验证（PRV）可以提前给出结论，但需要系统模型；而许多机器人规范早已在设计阶段以CSP形式编写并通过FDR或RoboChart分析过，因此复用这些既有模型进行预测性监控具有很高的实用价值。",
+        "method": "提出两阶段流水线 PREDICTIVE VARANUS：第一阶段用 VARANUS 把确定性有限状态的 CSP 进程 P 作为一致性闸门，借助 FDR 完成 CSP 解析与状态空间生成并显式物化可达 LTS（S,s0,ΣP,→），逐事件判定观测轨迹 σ 是否满足 σ∈Lang(P)，不合规则立即拒绝并终止后续推理。第二阶段把同一 CSP 模型翻译为面向命题的 Büchi 自动机 B_P=(S,s0,2^AP,δ,F_P)，其中 AP={proj(a) | a∈ΣP}∪{skip}，每条迁移 s→a s' 对应标签 λ(a)={proj(a)} 的一热编码，终止状态加 skip 自环以补全无限 stuttering 后缀且令 F_P=S，并以 HOA 格式导出。预测监视器对 LTL 性质 φ 构造同步乘积 A+=B_P×B_φ 与 A−=B_P×B_¬φ，读入投影轨迹后取可达状态集 S+σ 与 S−σ：若 Lang(A−,S−σ)=∅ 判为 ⊤（必然满足），若 Lang(A+,S+σ)=∅ 判为 ⊥（必然违反），否则判为 ?（不确定）。",
+        "result": "通过核仓库巡检机器人 rover 的案例研究表明，CSP 一致性校验与预测性 LTL 的组合能够比标准运行时监控更早给出判定，同时完全复用已有的设计期 CSP 模型；流水线可区分两类情形——不符合 CSP 模型的行为被立即拒绝，而符合模型的前缀可被分类为已保证满足、已必然违反或仍不确定。",
+        "conclusion": "论文将标准预测性运行时验证的自动机语言空性判定规则与基于 CSP 的行为模型集成，形式化了组合监视器的判定函数与模型翻译，使监视器既能在观测到不合规事件时立即拒绝，又能在合规前缀上对时序性质给出三值预测判定；该流水线是模块化的，预测层实现为 LTL 检查但可替换为其他预测推理方式。",
+        "key_details": "关键点包括：假设 CSP oracle 是确定性有限状态进程，其迹语义前缀封闭（σ∈Lang(P) 表示当前迹仍与规范兼容）；VARANUS 支持 strict 与 permissive（忽略字母表外事件）两种模式；预测判定采用三值逻辑，是合并了 possibly-true/possibly-false 的粗化语义；投影 proj 把参数化事件 move.i 映射为不同原子命题 m_i，保留事件区分度但丢失其结构化表示；终止状态以 skip 自环补全，使有限最大执行诱导无限字以适配标准 LTL 语义；判定复杂度来自两个乘积自动机的语言空性检查；主要局限性是判定以模型为条件，只预测模型一致的结果（如任务中止、覆盖失败、保证完成），无法预测模型之外的任意故障。"
+      },
+      "affiliations": [
+        "University of Nottingham",
+        "University of Modena and Reggio Emilia",
+        "University of York"
+      ],
+      "affiliations_text": "University of Nottingham, University of Modena and Reggio Emilia, University of York",
+      "score": 4.178162236776446,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.17686v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917686v1-the-missing-i-dont-know-why-three-reasoning-reliability-findings-converge-on-calibrated-abstention",
+      "source": "arxiv",
+      "title": "The Missing \"I Don't Know\": Why Three Reasoning-Reliability Findings Converge on Calibrated Abstention",
+      "authors": [
+        "Srijith Ravikumar"
+      ],
+      "authors_text": "Srijith Ravikumar",
+      "abstract": "Three recent results describe what look like unrelated LLM reliability problems. Yin et al. (2026) show reasoning RL collapses tool-reliability representations. Suleymanov et al. (2026) show that under safety-constrained generation, large models rewrite flagged spans while small models truncate. Bastounis et al. (2024) prove any consistent-reasoning system without an implicit \"I don't know\" function must hallucinate infinitely often on broad problem classes. We argue these findings converge on a single intervention: calibrated abstention is what each independently identifies as the missing capability, even though the unavailability they document, a capability gap, a policy gap, and a recursion-theoretic gap, has a different source in each case. Honesty post-training has narrowed the gap in deployed models, but principled closure of the class Bastounis identifies requires a calibrated abstention function whose training signal at the leaderboard level is absent: dominant benchmarks assign zero reward to decline, so the leaderboard gradient that would select for the function does not exist. We propose four changes to evaluation: triple-scoring, abstention-rate reporting, capability-stratified evaluation, and mandatory calibration metrics. Benchmark reform is necessary, not sufficient, for closing the gap the theorem identifies.",
+      "url": "http://arxiv.org/abs/2609.17686v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17686v1",
+      "tldr": "Three seemingly unrelated LLM reliability findings—reasoning RL collapsing tool-reliability, safety-constrained generation causing scale-dependent truncation, and a proof that consistent reasoning without an implicit “I don’t know” function must hallucinate—converge on calibrated abstention as the missing capability, which current leaderboard benchmarks cannot select for because they assign zero reward to declining, so evaluation reform is necessary.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Amazon.com LLC"
+      ],
+      "affiliations_text": "Amazon.com LLC",
+      "score": 4.117324064625215,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2609.17691v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917691v1-accelerating-diffusion-sampling-via-speculative-draft-trees",
+      "source": "arxiv",
+      "title": "Accelerating Diffusion Sampling via Speculative Draft Trees",
+      "authors": [
+        "Marcello Bullo",
+        "Yanxiao Liu",
+        "Öykü Sıla Güner",
+        "Arpan Mukherjee",
+        "Deniz Gündüz"
+      ],
+      "authors_text": "Marcello Bullo, Yanxiao Liu, Öykü Sıla Güner, Arpan Mukherjee, Deniz Gündüz",
+      "abstract": "Speculative sampling accelerates diffusion model generation by drafting inexpensive candidate states and correcting them under a coupling that preserves the target distribution exactly, reducing the number of expensive target evaluations. Existing diffusion samplers, notably those based on reflection maximal coupling, are topologically constrained: their lookahead drafts form a chain graph, a single linear sequence, which inherently limits the acceptance rate per target evaluation. We connect speculative sampling in diffusion models to relative entropy coding (REC). This perspective shows the lookahead need not be linear and motivates our central contribution, draft trees, which enrich the candidates considered per round and lower the target function evaluations. We further adopt greedy rejection sampling, an REC algorithm, as the draft-target coupling, improving acceptance while guaranteeing exact target samples. Experiments across diverse target and draft models demonstrate up to 8.3% acceleration over the reflection coupling baseline in practical settings.",
+      "url": "http://arxiv.org/abs/2609.17691v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17691v1",
+      "tldr": "By connecting speculative diffusion sampling to relative entropy coding, this paper proposes speculative draft trees with greedy rejection sampling to replace linear draft chains, improving acceptance rates and accelerating exact diffusion sampling by up to 8.3% over reflection-coupling baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Imperial College London"
+      ],
+      "affiliations_text": "Imperial College London",
+      "score": 3.9896785050330053,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.17575v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917575v1-temperon-full-time-sam-quality-at-a-third-less-wall-clock",
+      "source": "arxiv",
+      "title": "Temperon: Full-Time SAM Quality at a Third Less Wall-Clock",
+      "authors": [
+        "Stamatis Mastromichalakis"
+      ],
+      "authors_text": "Stamatis Mastromichalakis",
+      "abstract": "Sharpness-aware minimization (SAM) doubles the cost of every training step, yet its benefit concentrates where training ends. We study where an expensive training mode should be spent and propose Temperon: a plain-SGD explorer for the first 43% of the epoch budget, then one scheduled hand-off that gives the entire final cosine anneal to a SAM-wrapped Muon refiner. On CIFAR-10/100, SVHN and Tiny ImageNet (five seeds, times reported as epochs-to-target times an idle-GPU-calibrated epoch cost), Temperon matches the best full-time-SAM recipe on accuracy everywhere while reaching the hardest common target 35%, 34% and 32% sooner on three of the four, and sits a tier above the published SAM+SGD recipe at level cost. Ablations make the attribution exact: the Muon refiner is worth +0.85pp with everything else fixed; the explorer's shape and its restarts are worth nothing, and we withdraw them as contributions. Re-running the closest rival, late-phase SAM, at matched budget shows the frontier: it is fastest to every mid-level target, but the tier the Muon refiner buys (0.83 on CIFAR-100, 0.97 on CIFAR-10) is reached by no SGD-refined method in any seed, and on Tiny ImageNet, where Muon buys no tier, the rival simply wins -- the measured boundary of the method. The allocation law transfers to GPT-2 pretraining (full-SAM quality at -29% wall-clock) and GLUE fine-tuning (never worse than full-time SAM at a third of its SAM cost). Two constants organize the economics: skipping SAM early buys a fixed credit, and a Muon epoch costs 1.50x a SAM+SGD epoch on all four datasets. Finally, the hand-off cannot be timed from the trajectory: under cosine schedules the accuracy curve is plateau-then-surge, so the information lives in the schedule, making the scheduled switch principled rather than convenient. Code and a pip-installable implementation are released.",
+      "url": "http://arxiv.org/abs/2609.17575v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17575v1",
+      "tldr": "Temperon matches full-time sharpness-aware minimization (SAM) accuracy at roughly a third less wall-clock by using plain SGD for the first 43% of training, then scheduling a single hand-off of the entire final cosine anneal to a SAM-wrapped Muon refiner, with the same allocation law transferring to GPT-2 pretraining and GLUE fine-tuning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.98040952532512,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.17540v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917540v1-human-centric-grasp-state-assessment-toward-transferring-subjective-evaluation-to-robots",
+      "source": "arxiv",
+      "title": "Human-Centric Grasp State Assessment: Toward Transferring Subjective Evaluation to Robots",
+      "authors": [
+        "Ryohei Kobayashi",
+        "Kosei Isomoto",
+        "Yuga Yano",
+        "Yuichiro Tanaka",
+        "Hakaru Tamukoh"
+      ],
+      "authors_text": "Ryohei Kobayashi, Kosei Isomoto, Yuga Yano, Yuichiro Tanaka, Hakaru Tamukoh",
+      "abstract": "We propose a framework that transfers tacit human subjective criteria to robotic systems for the appropriate grasping of deformable objects. Achieving such behavior is challenging because a semantic gap exists between qualitative human expectations and quantitative robotic measurements. Conventional deep learning approaches for bridging this gap also require prohibitive amounts of manually annotated data for each newly encountered object. To address these challenges, our framework integrates a Vision-Language Model (VLM)-based semi-automated supervisor generator with a lightweight grasp state predictor, using a minimal set of human-annotated trials as contextual anchors to propagate subjective criteria to unannotated data. The prediction model then enables rapid online adaptation by sequentially estimating the grasp state from time-series tactile and grasping force measurements. Through experiments on three representative deformable objects and a human evaluation study with 25 participants, we demonstrate the feasibility of the proposed framework for adjusting grasping force according to human-perceived grasp appropriateness in the evaluated task setting.",
+      "url": "http://arxiv.org/abs/2609.17540v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17540v1",
+      "tldr": "The paper proposes a human-centric framework that uses a vision-language model with few human-annotated anchors to semi-automatically generate supervision and trains a lightweight predictor on tactile and grasping-force time series, enabling robots to adjust grasping force on deformable objects according to human subjective grasp appropriateness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Kyushu Institute of Technology"
+      ],
+      "affiliations_text": "Kyushu Institute of Technology",
+      "score": 3.977447297717066,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.17714v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917714v1-vision-language-grounded-task-context-aware-imitation-learning-for-robotic-disassembly",
+      "source": "arxiv",
+      "title": "Vision-Language Grounded Task-Context-Aware Imitation Learning for Robotic Disassembly",
+      "authors": [
+        "Jeon Ho Kang",
+        "Igal Tamarkin",
+        "Ethan Niu",
+        "Ian Novales",
+        "Satyandra K. Gupta"
+      ],
+      "authors_text": "Jeon Ho Kang, Igal Tamarkin, Ethan Niu, Ian Novales, Satyandra K. Gupta",
+      "abstract": "Real-world robotic disassembly requires long-horizon execution, where robots must perform ordered sequences of manipulation tasks across multiple parts within a single scene. Multiple valid task goals and diverse assembly configurations make it difficult for imitation policies to infer the intended skill from raw observations alone, particularly when training data cannot cover the combinatorial diversity of real-world configurations and part geometries. We show that incorporating task context through language alleviates these challenges by providing explicit structure for skill selection and associating language-specified tasks with their corresponding manipulation targets in the visual scene. The proposed framework combines hierarchical task selection with task-context-aware imitation learning to ground language instructions in spatial visual representations for robotic disassembly. The resulting framework generalizes across diverse connector geometries and assembly configurations without requiring explicit object annotations. Our method improves end-to-end task success by 35 percentage points over the baseline diffusion policy and by 75 percentage points over the previous task-context-aware baseline.",
+      "url": "http://arxiv.org/abs/2609.17714v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17714v1",
+      "tldr": "This paper proposes a vision-language grounded, task-context-aware imitation learning framework that uses a VLM for hierarchical task selection and counterfactual language-object grounding to enable long-horizon robotic disassembly across diverse unseen configurations, improving end-to-end task success by 35 percentage points over a diffusion-policy baseline and 75 percentage points over a prior task-context-aware baseline.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 3.87217978653411,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2609.17571v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917571v1-where-grokking-happens-distributed-utility-and-fourier-recoding-without-a-module-switch",
+      "source": "arxiv",
+      "title": "Where Grokking Happens: Distributed Utility and Fourier Recoding Without a Module Switch",
+      "authors": [
+        "Dekun Yang"
+      ],
+      "authors_text": "Dekun Yang",
+      "abstract": "Where in a Transformer is the change from memorization to generalization functionally expressed? We introduce Transition Games--behavior-aligned exact activation games with paired non-generalizing controls--and find distributed utility gain with a prospective block-0 attention bias; selected degree-two modes account for 67--92% of its addition contrast across replacement games, and a disjoint exact path study confirms that block-1 MLP mediates more of their effect than all other tested downstream paths in 12/12 pairs. The sharper \"MLP memorizes, attention generalizes\" prediction instead reverses (-.331 bits/example at the memory anchor; 0/12 in the predicted direction), while routing onset, global rank collapse, and a prime-invariant architecture ridge also fail, identifying grokking here as spectral recoding of an existing distributed circuit rather than a module switch.",
+      "url": "http://arxiv.org/abs/2609.17571v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17571v1",
+      "tldr": "Using behavior-aligned exact activation games with paired controls, the paper shows that grokking in Transformers arises from distributed utility gains and Fourier spectral recoding of an existing circuit—centered on early attention and block-1 MLP pathways—rather than a module switch from MLP memorization to attention generalization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Zhejiang University",
+      "score": 3.714264157454839,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.17560v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917560v1-pay-only-for-disagreement-certified-no-regression-verdicts-for-model-updates-with-matching-label-complexity-bounds",
+      "source": "arxiv",
+      "title": "Pay Only for Disagreement: Certified No-Regression Verdicts for Model Updates with Matching Label-Complexity Bounds",
+      "authors": [
+        "Vishnu Bindu Balachandran"
+      ],
+      "authors_text": "Vishnu Bindu Balachandran",
+      "abstract": "Every production model is updated, by retraining, fine-tuning, quantization, or a silent vendor swap, and each update risks being worse than what it replaced. We formalize update promotion as certified paired risk-difference auditing. Our starting point is a support identity: the risk difference between two models lives on the inputs where they disagree, observable without labels. We build DISCERN, a sequential two-tier protocol. A zero-label tier certifies benign updates whose disagreement rate is below tolerance from unlabeled traffic alone. An audited tier labels only sampled disagreements through an anytime-valid confidence sequence, valid at every stopping time and under any label-routing rule, even an adversarial judge. We prove finite-sample validity and matching label-complexity bounds of order rho^2/eps^2 at the rate level, so exploiting free disagreement provably saves a factor 1/rho over any pairing-blind auditor, and the guarantee composes across an unbounded sequence of promotions from one error budget. Across 14,000+ replayed audit streams over 785 update pairs, including LoRA fine-tunes of language models up to 1.4B parameters, miscoverage is 0.0002 (nominal 5%), power 0.986 with zero false alarms, and 56% of benign updates certify with zero labels. Each audit emits a machine-checkable evidence record for post-market monitoring.",
+      "url": "http://arxiv.org/abs/2609.17560v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17560v1",
+      "tldr": "This paper introduces DISCERN, a sequential two-tier, anytime-valid auditing protocol that certifies model updates as non-regressing by exploiting the fact that paired risk differences depend only on disagreement inputs, thereby enabling zero-label certification for benign updates, labeling only sampled disagreements, and achieving matching label-complexity bounds with strong empirical validation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.6666391717538724,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.17627v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917627v1-flexible-body-modeling-kinematic-identification-and-assembly-accuracy-of-overconstrained-spatial-linkages",
+      "source": "arxiv",
+      "title": "Flexible-body Modeling, Kinematic Identification, and Assembly Accuracy of Overconstrained Spatial Linkages",
+      "authors": [
+        "Daniel Huczala",
+        "Michael Pieber",
+        "Johannes Gerstmayr",
+        "Andreas Mair",
+        "Frederik Schulte",
+        "Silvia Glas",
+        "Tomas Postulka",
+        "Ales Vysocky",
+        "Martin Pfurner"
+      ],
+      "authors_text": "Daniel Huczala, Michael Pieber, Johannes Gerstmayr, Andreas Mair, Frederik Schulte, Silvia Glas, Tomas Postulka, Ales Vysocky, Martin Pfurner",
+      "abstract": "Overconstrained rational single-loop linkages are efficient, compact, and low-cost custom mechanisms, yet their deployment in industrial settings is limited. In simulations, rigid body formulations fail due to redundant constraints. This study presents a flexible multibody modeling framework based on the floating frame of reference formulation, and delivers an overall accuracy analysis of assembled linkages prototypes. The approach is validated against 3D-printed PLA prototypes of a Bennett four-bar mechanism, including variants with intentional joint-axis misalignment, which theoretically, from the rigid body point of view, cannot be assembled. A supplementary contribution is delivered in the form of a kinematic parameter identification methodology suited for this type of mechanism with ill-conditioned Jacobian. The experimental and simulation results are compared and reveal that these overconstrained mechanisms exhibit a self-assembling tendency -- structural compliance drives the assembly toward the ideal geometric configuration, distributing constraint stress throughout the structure. Additional qualitative demonstrations using cardboard tubes and bamboo sticks as link building blocks confirm that functional mechanisms can be realized from low-cost, unconventional materials with limited manufacturing accuracy. The proposed modeling pipeline is fully algorithmic and enables design optimization in the future.",
+      "url": "http://arxiv.org/abs/2609.17627v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17627v1",
+      "tldr": "This paper develops a flexible multibody modeling and kinematic identification framework for overconstrained spatial linkages, validated on Bennett mechanisms, and shows that structural compliance enables self-assembly and functional low-cost prototypes despite manufacturing imperfections.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.666627483663021,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.17595v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917595v1-prior-free-competitive-ratios-for-improving-bandits-scale-curvature-and-horizon-are-free-but-not-jointly-under-noise",
+      "source": "arxiv",
+      "title": "Prior-Free Competitive Ratios for Improving Bandits: Scale, Curvature and Horizon Are Free, but Not Jointly Under Noise",
+      "authors": [
+        "Xuan Li"
+      ],
+      "authors_text": "Xuan Li",
+      "abstract": "In the improving multi-armed bandits problem, each of $k$ arms has an unknown nondecreasing, discretely concave reward curve $f_i$, and pulling arm $i$ for the $t$-th time yields $f_i(t)$. For sufficiently long horizons, Blum and Ravichandran (ALT 2025) proved that randomized algorithms achieve an $O(\\sqrt k)$ approximation to the best single arm when the scale $m=f^*(T)$ of the optimal arm is known ($T\\ge2k$), and $O(\\sqrt k\\log k)$ when it is not ($T>4k$), against an $Ω(\\sqrt k)$ lower bound. The logarithmic factor is unnecessary: a one-page \\emph{probe-and-commit} algorithm achieves competitive ratio $4\\sqrt3\\,\\sqrt k$ for $T\\ge2\\lfloor\\sqrt k\\rfloor$, without any knowledge of the scale, and we determine the optimal ratio for every horizon, $Θ(\\sqrt k+k/T)$, also for unknown horizons. Without noise, \\emph{no prior is needed at all}: a random-marginal probing algorithm reading neither the scale $m$, nor the concavity-envelope exponent $β$ of Blum, Garicano, Ravichandran and Sharma (UAI 2026), nor the horizon $T$, achieves the optimal $Θ(k^{β/(1+β)}+k/T)$ simultaneously for every $β$ and every horizon. Under the multiplicative noise model of Blum and Ravichandran, probe-and-commit keeps the same all-horizon order $Θ(\\sqrt k+k/T)$ without knowing the noise level (and $Θ(\\sqrt k)$ on the same range), but the price of priors jumps: for any fixed noise level $\\varepsilon\\in(0,1/2]$, the uniform price of adaptation $φ_\\varepsilon(k)$ --- the worst case over horizons $T\\ge16k$ of the loss relative to $k^{β/(1+β)}$ for algorithms knowing neither $m$ nor $β$ --- is $Θ_\\varepsilon(\\sqrt{\\log k/\\log\\log k})$, the lower bound asymptotic in $k$ at fixed positive $\\varepsilon$ and matched by a nested random-permutation probing algorithm, whereas knowing either $m$ or $β$ alone restores a constant price.",
+      "url": "http://arxiv.org/abs/2609.17595v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17595v1",
+      "tldr": "This paper shows that in improving multi-armed bandits, prior-free algorithms can attain optimal competitive ratios without knowing the reward scale, curvature exponent, or horizon in the noiseless setting, but under multiplicative noise jointly adapting to unknown scale and curvature costs a superconstant factor—\\(\\Theta(\\sqrt{\\log k/\\log\\log k})\\)—while knowing either one alone restores a constant price.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of New South Wales"
+      ],
+      "affiliations_text": "University of New South Wales",
+      "score": 3.663210945253477,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.17594v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917594v1-when-the-gradient-sees-rank-provable-necessity-causal-recruitment-and-composition-in-trained-matrix-memories",
+      "source": "arxiv",
+      "title": "When the Gradient Sees Rank: Provable Necessity, Causal Recruitment, and Composition in Trained Matrix Memories",
+      "authors": [
+        "Samuel Larson"
+      ],
+      "authors_text": "Samuel Larson",
+      "abstract": "Can gradient-based training learn the rank needed to store and compose associations in a matrix memory? In our earlier study, we used a matrix-augmented reasoner on a task that admits a rank-1 solution, leaving this question open. We train matrix memories on $K$ fresh key-value bindings whose exact linear recovery requires $\\mathrm{rank}(Z) \\geq K$. A fixed linear readout queries a single matrix state without access to the original bindings. Experiments measure recovery by cosine similarity greater than 0.9, a threshold distinct from mathematical equality. Learned effective rank increases with $K$ across the tested grid (Spearman $ρ= 1.0$ at $d = 16$). Training-time rank caps produce a recovery transition near $k = K$: at $d = 8$, $K = 4$, rank 3 gives at most 0.0004 recovery and rank 4 gives 0.97. Four of five seeds retain at least 0.9996 recovery through 21-fold self-application of the trained operator. On the entity subspace, the learned operator has effective rank close to $K$ and approximates the ideal cycle. For the single converged seed capped below $K$, a calculation using the entity-subspace operator and ideal cycle predicts the measured cosine within 0.008 through seven applications. Extending training resolves several initial failures, but recovery still declines at larger matrix dimensions with encoder width fixed.",
+      "url": "http://arxiv.org/abs/2609.17594v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17594v1",
+      "tldr": "TLDR: On matrix-memory tasks whose exact recovery requires rank at least \\(K\\), gradient training recruits the necessary effective rank—rank caps below \\(K\\) sharply impair recovery and the learned operator composes through repeated self-application—though recovery declines at larger dimensions with fixed encoder width.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pebble ML"
+      ],
+      "affiliations_text": "Pebble ML",
+      "score": 3.625223608556383,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.17564v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917564v1-beyond-static-rag-an-adaptive-tri-metric-routing-framework-for-efficient-long-context-inference-on-commodity-gpus",
+      "source": "arxiv",
+      "title": "Beyond Static RAG: An Adaptive, Tri-Metric Routing Framework for Efficient Long-Context Inference on Commodity GPUs",
+      "authors": [
+        "Saipraveen Vabbilisetty",
+        "Ajay Kumar Boddepalli",
+        "Deep Narayan Mishra",
+        "Shashank Kapadia",
+        "Haoan Wang",
+        "Anupriya Sharma"
+      ],
+      "authors_text": "Saipraveen Vabbilisetty, Ajay Kumar Boddepalli, Deep Narayan Mishra, Shashank Kapadia, Haoan Wang, Anupriya Sharma",
+      "abstract": "Deploying retrieval-augmented generation (RAG) on commodity GPUs such as the NVIDIA T4 (16 GB VRAM) exposes a practical failure mode we call the Compression Paradox: neural prompt compression can add key-value (KV) cache contention and preprocessing latency that outweigh generation-time savings, while skipping compression can cause out-of-memory (OOM) failures on long contexts. We identify two distinct failure mechanisms when a vLLM-served LLM and a PyTorch-based compressor are co-deployed under tight memory budgets, and introduce the Tri-Metric Router, a deterministic, training-free policy that selects among Raw, Neural (LLMLingua-2), and Lexical (BM25) pipelines. The router uses three CPU-side signals: spatial complexity ($L$), syntactic density ($ρ_{key}$), and type-token ratio (TTR). Unlike prior semantic-only adaptation, our dispatch signal is hardware-physical, based on VRAM headroom and a latency crossover point. Thresholds are calibrated from profiling on LongBench qasper, yielding an operating crossover near 4,332 words on T4; our contribution is this calibration methodology rather than a hardware-specific constant. On out-of-distribution holdouts, the method achieves 0% OOM failures, 88.5 $\\pm$ 4.4% oracle alignment, and 49.3% Combined F1, improving over always-on lexical compression by 5.2 points without additional VRAM or training cost.",
+      "url": "http://arxiv.org/abs/2609.17564v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17564v1",
+      "tldr": "The paper introduces a training-free Tri-Metric Router that uses hardware-physical signals to adaptively choose among raw, neural, and lexical compression for long-context RAG on commodity GPUs, eliminating OOM failures and improving efficiency and F1 without extra VRAM or training cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Walmart Inc."
+      ],
+      "affiliations_text": "Walmart Inc.",
+      "score": 3.624263625855269,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.17653v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917653v1-reflect-revise-reuse-training-free-skill-evolution-for-gui-agents",
+      "source": "arxiv",
+      "title": "Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents",
+      "authors": [
+        "Bofan Chen",
+        "Boxuan Zhang",
+        "Fei Tang",
+        "Zhengxi Lu",
+        "Yong Du",
+        "Tongbo Chen",
+        "Weiming Lu",
+        "Jun Xiao",
+        "Yueting Zhuang",
+        "Yongliang Shen"
+      ],
+      "authors_text": "Bofan Chen, Boxuan Zhang, Fei Tang, Zhengxi Lu, Yong Du, Tongbo Chen, Weiming Lu, Jun Xiao, Yueting Zhuang, Yongliang Shen",
+      "abstract": "GUI agents execute long-horizon tasks on dynamic graphical user interfaces, where pop-ups, delayed loads, and relocated widgets routinely invalidate plans fixed before execution. Recent agent-skill frameworks encapsulate reusable procedural knowledge to mitigate this, yet existing skill designs are largely developed without targeting GUI execution dynamics and treat skills as static artifacts produced before deployment rather than living procedural knowledge that improves through it. We argue that what GUI agents need is not better static skills, but skills that can be revised from execution feedback at deployment time, without additional training. We propose \\textbf{EvoSkill-GUI}, a training-free framework in which each skill is a structured multi-file package containing retrieval metadata, executable plans, backup localization, failure-recovery rules, accessibility utilities, and failure cases. EvoSkill-GUI operates through a \\textbf{\\emph{reflect-revise-reuse}} loop: the executor performs instant in-rollout revisions, an isolated critic diagnoses failed trajectories under strict information isolation, and the executor edits specific skill files through a restricted tool interface. Across MobileWorld, AndroidWorld, and OSWorld, three mainstream GUI benchmarks spanning mobile and desktop platforms, EvoSkill-GUI consistently improves multiple base models without any training, with maximum gains of $+16.2\\%$, $+6.0\\%$, and $+10.5\\%$ respectively, and evolved skill libraries continue to benefit related tasks rather than being rebuilt from scratch. Our code is available at https://github.com/ZJU-REAL/EvoSkill-GUI.",
+      "url": "http://arxiv.org/abs/2609.17653v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17653v1",
+      "tldr": "EvoSkill-GUI is a training-free framework that enables GUI agents to evolve structured, editable skill packages at deployment time through a reflect–revise–reuse loop, improving task success on MobileWorld, AndroidWorld, and OSWorld without additional training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UESTC",
+        "Zhejiang University"
+      ],
+      "affiliations_text": "UESTC, Zhejiang University",
+      "score": 3.496373370556457,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.17541v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917541v1-real-time-service-robot-replanning-via-simple-button-interaction-for-improved-task-success-and-user-experience",
+      "source": "arxiv",
+      "title": "Real-Time Service Robot Replanning via Simple Button Interaction for Improved Task Success and User Experience",
+      "authors": [
+        "Ryo Terashima",
+        "Yuga Yano",
+        "Koshun Arimura",
+        "Hakaru Tamukoh"
+      ],
+      "authors_text": "Ryo Terashima, Yuga Yano, Koshun Arimura, Hakaru Tamukoh",
+      "abstract": "Service robots must respond to unexpected instructions in real-world environments. However, robots cannot detect all failures and exceptions during a task. To address these issues, we propose a real-time feedback function that enables robots to modify their behavior based on human feedback. In this system, users can intuitively send feedback to the robot by pressing a single button on a tablet when the robot fails to act correctly. Robots use this feedback to consider their failures and replan appropriate actions to complete the task. We conducted experiments with and without the feedback function to verify the following hypothesis: \"Simple interactions do not cause a negative user experience.\" All questionnaire responses are evaluated on a five-point Likert scale. After adding the feedback function, the response score for the question \"Did you feel that the robot's behavior was unexpected?\" improved by 0.5 points, and that for \"Did you feel anxious about the robot's behavior at times?\" improved by 0.9 points. These results support the study's hypothesis and indicate that incorporating this real-time feedback function can simultaneously improve task success and the user experience.",
+      "url": "http://arxiv.org/abs/2609.17541v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17541v1",
+      "tldr": "This paper proposes a real-time, single-button tablet feedback system that lets users signal task failures so a service robot can replan, and experiments show it improves task success while reducing user anxiety and perceived unexpectedness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Research Center for Neuromorphic AI Hardware",
+        "Kyushu Institute of Technology"
+      ],
+      "affiliations_text": "Research Center for Neuromorphic AI Hardware, Kyushu Institute of Technology",
+      "score": 3.4222741894847952,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.17652v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917652v1-fathom-per-query-read-depth-for-sparse-decoding-over-offloaded-kv-caches",
+      "source": "arxiv",
+      "title": "Fathom: Per-Query Read Depth for Sparse Decoding over Offloaded KV Caches",
+      "authors": [
+        "Vivek Kalyanarangan"
+      ],
+      "authors_text": "Vivek Kalyanarangan",
+      "abstract": "When agentic sessions run to a million tokens with many sessions resident at once, the KV cache and the index that ranks it live in host memory, and the scan that ranks all n keys for a top-k step becomes the traffic that bounds decoding. We present Fathom, a key scan in which each query decides how many bits of each key channel to read. The 4-bit K cache is stored channel-major as bit planes, so a prefix of t planes is exactly the channel's t-bit quantizer, and the query spends its bit budget by reverse water-filling over the variance-weighted importance of its channels. At one million tokens on Qwen3-8B a decode step is 1.67x faster in GPU time than with the 136-bit scans of Double Sparsity, Loki and SparQ r=32, and in the same GPU time as SparQ's 68-bit read (r=16) Fathom reads 18% fewer bytes with lower attention error on six of seven model and context settings. On RULER-style tasks every per-token scan matches exact top-k decoding, and on real coding-agent sessions Fathom reaches the step agreement of the most accurate 136-bit scan at 92 bits. The store is the 4-bit K copy a quantized serving stack already holds, and the method is not faster when the index is resident in GPU memory.",
+      "url": "http://arxiv.org/abs/2609.17652v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17652v1",
+      "tldr": "Fathom is a per-query, bit-plane-based key-scanning method for sparse decoding over offloaded KV caches that adaptively reads only the needed bits per key channel, yielding up to 1.67× faster GPU decoding at million-token contexts while maintaining comparable or better accuracy at lower byte traffic.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.9919097760730184,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2609.17572v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/18/260917572v1-disentangling-algorithmic-bias-from-archival-artifacts-a-controlled-audit-of-vision-language-model-valuation-in-metropolitan-museum-archives",
+      "source": "arxiv",
+      "title": "Disentangling Algorithmic Bias from Archival Artifacts: A Controlled Audit of Vision-Language Model Valuation in Metropolitan Museum Archives",
+      "authors": [
+        "Manpreet Singh",
+        "Rhythm Bhatia",
+        "Rahul Joshi"
+      ],
+      "authors_text": "Manpreet Singh, Rhythm Bhatia, Rahul Joshi",
+      "abstract": "Auditing vision-language models (VLMs) for societal bias requires distinguishing direct algorithmic valuation disparities from confounders embedded within archival metadata. In this study, we audit Contrastive Language-Image Pretraining (CLIP) models using historical artwork metadata from the Metropolitan Museum of Art Open Access collection (N = 1,500 total objects; N = 743 attributed works: Male n = 534, Female n = 209; n = 618 anonymous).\n  We establish a quantitative audit framework evaluating zero-shot CLIP logit differential scores across three semantic prompt pairs (masterpiece, quality, and influence). Unadjusted evaluations demonstrate high score convergence without a statistically significant main gender effect under OpenAI CLIP (mu_F = -0.0067 vs mu_M = -0.0035, p = 0.1829) or OpenCLIP (mu_F = 0.0171 vs mu_M = 0.0237, p = 0.1224). Two One-Sided Tests (TOST) confirm statistical equivalence across Cohen's d >= 0.25 bounds (pTOST < 0.005).\n  Multivariate OLS regression controlling for artwork medium, creation era, and aspect ratio (R^2 < 0.02) confirms that artist gender has no statistically significant conditional effect (p > 0.20). High residual embedding variance (R^2 < 2%) indicates that global zero-shot valuation metrics operate near an embedding noise floor, showing that broad zero-shot prompt logit differentials are a coarse measurement instrument rather than proving absolute model fairness.\n  We highlight two key caveats: (i) macro-level score equivalence reflects metric insensitivity to fine-grained visual-semantic features and does not preclude localized micro-level visual biases, and (ii) excluding 41.2% unattributed holdings reflects institutional survival bias. These results demonstrate the necessity of multivariate confound control, equivalence testing, and archival provenance auditing when assessing AI fairness in cultural heritage collections.",
+      "url": "http://arxiv.org/abs/2609.17572v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.17572v1",
+      "tldr": "This controlled audit of CLIP vision-language models on Metropolitan Museum artwork metadata finds no statistically significant gender-based valuation gap after controlling for archival confounders, while cautioning that zero-shot prompt logit metrics are coarse and excluding unattributed works introduces archival survival bias.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Symbiosis International (Deemed University)",
+        "Boston University",
+        "University of Eastern Finland"
+      ],
+      "affiliations_text": "Symbiosis International (Deemed University), Boston University, University of Eastern Finland",
+      "score": 2.71282731289529,
+      "score_text": "2.7"
+    }
+  ],
+  "errors": []
+}
