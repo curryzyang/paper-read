@@ -13,12 +13,14 @@ from time import sleep
 from typing import Any, Callable, TypeVar
 from loguru import logger
 import requests
+import re
 
 T = TypeVar("T")
 
 DOWNLOAD_TIMEOUT = (10, 60)
 PDF_EXTRACT_TIMEOUT = 180
 TAR_EXTRACT_TIMEOUT = 180
+ARXIV_ID_VERSION_SUFFIX = re.compile(r"v\d+$")
 
 
 def _as_bool(value: object) -> bool:
@@ -28,6 +30,10 @@ def _as_bool(value: object) -> bool:
     if isinstance(value, str):
         return value.strip().lower() in {"1", "true", "yes", "y", "on"}
     return bool(value)
+
+
+def _normalize_arxiv_id_for_api(arxiv_id: str) -> str:
+    return ARXIV_ID_VERSION_SUFFIX.sub("", arxiv_id)
 
 
 def _download_file(url: str, path: str) -> None:
@@ -133,7 +139,7 @@ class ArxivRetriever(BaseRetriever):
         raw_papers = []
         allowed_announce_types = {"new", "cross"} if include_cross_list else {"new"}
         all_paper_ids = [
-            i.id.removeprefix("oai:arXiv.org:")
+            _normalize_arxiv_id_for_api(i.id.removeprefix("oai:arXiv.org:"))
             for i in feed.entries
             if i.get("arxiv_announce_type", "new") in allowed_announce_types
         ]
