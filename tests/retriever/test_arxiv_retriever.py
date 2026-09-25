@@ -110,7 +110,13 @@ def test_arxiv_category_string_is_supported_and_debug_uses_daily_total(config, m
 
         def results(self, search):
             paper_ids = set(search.id_list)
-            return (r for r in fake_results if r.entry_id.removeprefix("https://arxiv.org/abs/") in paper_ids)
+            return (
+                r
+                for r in fake_results
+                if arxiv_retriever._normalize_arxiv_id_for_api(
+                    r.entry_id.removeprefix("https://arxiv.org/abs/")
+                ) in paper_ids
+            )
 
     monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.arxiv.Client", FakeClient)
 
@@ -131,6 +137,51 @@ def test_arxiv_category_string_is_supported_and_debug_uses_daily_total(config, m
     assert parsed_urls
     assert "https://rss.arxiv.org/atom/eess.SY" in parsed_urls[0]
     assert len(papers) == 25
+
+
+def test_arxiv_retriever_normalizes_versioned_ids_for_api(config, monkeypatch):
+    mock_feed = SimpleNamespace(
+        entries=[
+            SimpleNamespace(
+                id="oai:arXiv.org:2607.00001v3",
+                title="Paper A",
+                get=lambda key, default=None: {"arxiv_announce_type": "new"}.get(key, default),
+            )
+        ],
+        feed=SimpleNamespace(title="arxiv feed"),
+    )
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.feedparser.parse", lambda _: mock_feed)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.base.sleep", lambda _: None)
+
+    fake_result = SimpleNamespace(
+        title="Paper A",
+        authors=[SimpleNamespace(name="A")],
+        summary="test",
+        pdf_url="https://arxiv.org/pdf/2607.00001v3",
+        entry_id="https://arxiv.org/abs/2607.00001v3",
+        source_url=lambda: "https://arxiv.org/e-print/2607.00001v3",
+    )
+
+    class FakeClient:
+        def __init__(self, **kw):
+            pass
+
+        def results(self, search):
+            if "2607.00001v3" in search.id_list:
+                raise arxiv_retriever.arxiv.HTTPError("bad", 0, 406)
+            assert search.id_list == ["2607.00001"]
+            return iter([fake_result])
+
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.arxiv.Client", FakeClient)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_html", lambda paper: None)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_pdf", lambda paper: None)
+    monkeypatch.setattr("zotero_arxiv_daily.retriever.arxiv_retriever.extract_text_from_tar", lambda paper: None)
+
+    retriever = ArxivRetriever(config)
+    papers = retriever.retrieve_papers()
+
+    assert len(papers) == 1
+    assert papers[0].title == "Paper A"
 
 
 def test_run_with_hard_timeout_returns_value():
