@@ -1,0 +1,15 @@
+# Active Causal Discovery Benchmark: Evaluating LLM Agents Under Budgeted Interventions
+
+- 区域：速读区
+- 排名：12
+- 匹配度：3.4/10
+- 来源：arxiv
+- 作者：Sagar Deb, Devam Shah, Ashwanth Krishnan
+- 机构：QpiAI
+- 链接：[arXiv / Source](http://arxiv.org/abs/2609.31675v1) · [PDF](https://arxiv.org/pdf/2609.31675v1)
+
+## TLDR
+The paper introduces the Active Causal Discovery Benchmark (ACDB), an SCM-grounded environment with a three-layer scoring contract for evaluating whether LLM agents can recover causal DAGs under budgeted hard interventions, finding that classical PC with a greedy active heuristic outperforms current LLM agents and that the results should be read as a benchmark calibration audit rather than evidence that LLMs solve active causal discovery.
+
+## Abstract
+We introduce the Active Causal Discovery Benchmark (ACDB), an SCM-grounded environment for evaluating whether LLM agents recover causal graph structure from observations and budget-constrained hard interventions. ACDB pairs a linear-Gaussian world generator with a fixed observe-intervene-submit API and a three-layer scoring contract that separates skeleton recovery, DAG recovery, and intervention efficiency. On the current six-level ladder, PC with a greedy active orientation heuristic is the strongest non-oracle method (directed F1 42.7%, SHD 4.79), ahead of Claude Sonnet 4.6 raw active (31.7%, 7.25) and GPT-5.4 raw active (22.9%, 9.27). The most informative diagnostic is the precision-recall decomposition: PC under-commits with high precision, LLMs over-commit with lower precision, and statistical-tool access often increases abstention rather than useful intervention. A structure-blind random DAG baseline reaches 23.6% directed F1 on this dense v0 ladder; a density probe lowers this floor to 16.9%, motivating the v1 calibration pass. The current results should therefore be read as a benchmark audit and calibration report, not as evidence that current LLMs solve active causal discovery.
