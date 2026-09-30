@@ -1,0 +1,15 @@
+# Binarization Flattens the Score Space
+
+- 区域：速读区
+- 排名：12
+- 匹配度：3.2/10
+- 来源：arxiv
+- 作者：Jacob Cole
+- 机构：UC Berkeley
+- 链接：[arXiv / Source](http://arxiv.org/abs/2609.35797v1) · [PDF](https://arxiv.org/pdf/2609.35797v1)
+
+## TLDR
+This paper shows that binarizing LLM-judge scores into pass/fail hides score-scale changes that can be removed by keeping at least three grades (e.g., 0/0.5/1), though some reference-like mean shifts remain indistinguishable and require external validation.
+
+## Abstract
+Large language model (LLM) judges are often used as rewards to train policies on objectives that deterministic verifiers cannot capture. However, these rewards are often collapsed to pass/fail ({0, 1}), which reports the verdict but not how well a response met each criterion. We model each pass/fail verdict as a score on an unreported scale, compared with one cutoff. A stretch of that scale moves every score proportionally toward or away from the cutoff, but never across it, so no verdict changes. A policy is therefore free to apply any stretch without changing anything the panel reports. Under a joint-Gaussian model, a third grade adds a second threshold and removes this affine stretch ambiguity. On MATH and SciBench outputs from one seven-criterion judge, all 14 constructed criterionwise stretches were invisible after binarization but visible with three grades. At $n=1{,}024$, a test given both population laws had at least 96.5% power at a $1.5\times$ stress. Retaining grades closes one blind spot created by binarization, but verdicts alone remain insufficient as some changes are still indistinguishable from genuine improvement. These include arbitrary within-grade changes and fixed-covariance, loading-aligned mean shifts -- the signature of a sycophancy-shaped lift the panel reads as competence. The shared-factor reference approximation fit MATH and SciBench but not HealthBench, delineating its empirical scope. We recommend keeping at least three grades (for example, asking the judge whether each criterion is fully, partially, or not met and rewarding {0, 0.5, 1}), and externally validating gains along the remaining direction, which no finer scale removes.

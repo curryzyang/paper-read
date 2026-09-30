@@ -1,0 +1,695 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-30T17:29:17.287686",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2609.35938v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935938v1-kernelonet-an-interpretable-neural-operator-based-on-kernel-functions",
+      "source": "arxiv",
+      "title": "KernelOnet: An Interpretable Neural Operator Based on Kernel Functions",
+      "authors": [
+        "Yuan Guo",
+        "Hanshu Chen",
+        "Qiang Xi",
+        "Timon Rabczuk",
+        "Zhuojia Fu"
+      ],
+      "authors_text": "Yuan Guo, Hanshu Chen, Qiang Xi, Timon Rabczuk, Zhuojia Fu",
+      "abstract": "This paper proposes an interpretable neural operator framework, the Kernel Operator Network (KernelOnet), which incorporates kernel functions explicitly into the neural operator architecture, so that the operator structure matches the kernel-expansion form used in boundary-type kernel-expansion methods. Unlike traditional neural operators such as DeepONet, which learn basis functions implicitly through deep networks, KernelOnet replaces the trunk network with explicit kernels and offers three complementary kernels: a data-driven learnable kernel, in which a neural network parameterizes a radial basis function learned from data, and which for constant-coefficient linear problems can be regarded as a non-singular fundamental solution; a physics-informed kernel, which embeds physical information such as analytic fundamental solutions into the network structure, so that the expansion satisfies the governing equation automatically and can be trained without supervision on boundary conditions alone, with no interior solution data; and a hybrid kernel, which splits the solution, according to the linear principal part of the governing equation, into a homogeneous part spanned by analytic fundamental solutions and a source part carried by low-rank learned correction kernels, thereby balancing physical priors against data fitting on nonlinear problems lacking an analytic fundamental solution. On three benchmarks and one engineering problem in a shallow-water waveguide, KernelOnet attains high accuracy; where comparable with DeepONet, it is more accurate with fewer learnable parameters. Its unsupervised configuration needs no interior solution labels, and its per-query inference cost is far below that of per-instance solvers, offering an effective route to acoustic propagation in unbounded exterior domains that general-purpose neural operators struggle to handle.",
+      "url": "http://arxiv.org/abs/2609.35938v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35938v1",
+      "tldr": "KernelOnet is an interpretable neural operator that replaces DeepONet’s implicit trunk network with explicit data-driven, physics-informed, or hybrid kernel functions, enabling more accurate and parameter-efficient PDE solution learning, unsupervised boundary-only training, and effective handling of unbounded exterior acoustic propagation.",
+      "detailed_reading": {
+        "motivation": "现有神经算子（如 DeepONet、FNO）依赖深度网络隐式学习基函数，其结构缺乏与具体控制方程的显式联系，导致可解释性差、物理一致性不足，且通常需要大量高保真数据、小样本泛化受限。与之相对，MFS、Trefftz、BEM 等边界型核展开数值方法从一开始就用显式核（如基本解）作基函数，兼具物理解释性与高效性，但依赖人工选择核函数与源点布局，难以自动适应复杂非线性问题。本文正是要在这两条路线之间架桥，把显式核函数引入神经算子架构。",
+        "method": "KernelOnet 是对 DeepONet 的直接改造：分支网络仍将输入函数（边界点离散值）映射为系数 β_k(a)，但把 trunk 网络替换为显式核函数，输出写成核展开形式 Σ_k β_k(a) K(x, y_k) + b_0，从而与边界型核展开方法的算子结构一致。作者给出三种核构造策略：数据驱动可学习核（KernelOnet-RBF）用浅层网络参数化径向基函数并从数据学习，常系数线性问题下可视为非奇异基本解；物理信息核（KernelOnet-PIKF）直接把控制方程的解析基本解嵌入网络，使展开自动满足控制方程，仅用边界条件即可无监督训练、不需任何内部解标签；混合核（KernelOnet-HK）按方程线性主部把解拆为解析基本解张成的齐次部分与 K_c 个低秩可学习修正核张成的源项部分，前者精确满足线性主部，后者承载无法用核函数表达的非线性源项。训练时监督配置最小化内部评估点上的数据均方误差，物理/无监督配置则最小化边界条件残差，对照的 PI-DeepONet 则以 λ_PDE 和 λ_BC 加权组合 PDE 残差（借助自动微分求高阶导数）与边界残差。",
+        "result": "在圆域 Laplace 方程、星形域非线性修正 Helmholtz 方程、无界外域复 Helmholtz 方程三个基准以及浅水波导中球壳振动引起的水下声辐射与传播工程问题上，KernelOnet 均取得高精度解。在与 DeepONet 可直接对比的算例上，它以更少的可学习参数获得更高精度；其无监督配置完全不需要内部解标签，且单次查询推理成本远低于逐实例求解器。针对浅水波导，作者分别用 Pekeris 核与简正模核构造核函数，使近场与远场都能无监督求解，并在多种声速剖面下表现出良好鲁棒性。",
+        "conclusion": "KernelOnet 通过把显式核函数嵌入神经算子，建立了神经算子与基于核展开的边界型数值方法之间的内在联系，在精度、可解释性和参数效率上同时取得收益，并为通用神经算子难以处理的无界外域声传播问题提供了有效途径。其关键前提是：物理信息核与混合核都要求控制方程或其线性主部存在可用的解析基本解，这正是该框架发挥作用的适用条件。",
+        "key_details": "输入为输入函数（边界条件/源项/初值）在离散点上的采样值，输出为任意空间坐标处的解值，分支网络输出展开系数、核中心（源点）位置可固定或学习，并保留可学习偏置 b_0，DeepONet 基线中 trunk 输出经 tanh 保证有界。损失设计分三类：监督用内部评估点均方误差，无监督用边界条件残差（PIKF 完全不用内部解标签），混合核与 PI-DeepONet 对照中涉及 λ_PDE、λ_BC 权重调节以及自动微分计算 PDE 残差所需的高阶导数。关键超参包括展开项数/核个数 p、混合核中的低秩修正核数 K_c 及权重组，计算上核展开使参数量显著少于隐式 trunk，但核中心布局、虚拟边界选择与无界域截断仍影响精度；物理先验主要来自解析基本解、浅水波导的 Pekeris 核与简正模核。主要局限在于 PIKF 与 HK 依赖解析基本解，DeepONet 分支网络对固定传感器布局的依赖也使输入侧分辨率无关性受限，而 PI-DeepONet 的软约束权重需人工调参且高阶级数计算代价大。"
+      },
+      "affiliations": [
+        "Bauhaus-University Weimar",
+        "Hohai University"
+      ],
+      "affiliations_text": "Bauhaus-University Weimar, Hohai University",
+      "score": 6.190589705282684,
+      "score_text": "6.2"
+    },
+    {
+      "id": "2609.35884v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935884v1-learning-in-the-transverse-subspace-a-minimal-representation-for-divergence-free-operator-learning",
+      "source": "arxiv",
+      "title": "Learning in the Transverse Subspace: A Minimal Representation for Divergence-Free Operator Learning",
+      "authors": [
+        "Yifei Sun"
+      ],
+      "authors_text": "Yifei Sun",
+      "abstract": "Divergence-free vector fields are fundamental state variables in incompressible flows and many PDE systems. Redundant parameterizations, including Neural Conservation Law (NCL) potentials, map multiple auxiliary representations to the same physical field. Our experiments show that this redundancy can reduce static representation-fitting error by enlarging the set of equivalent solutions, but the resulting many-to-one mapping does not provide a unique state for operator learning.\n  We introduce a minimal representation that encodes a real \\(D\\)-component divergence-free vector field on a \\(D\\)-dimensional domain as a real \\((D-1)\\)-component field on the same domain. Exploiting the transverse structure imposed by incompressibility in Fourier space, we use a Householder orthogonal transformation to construct the reduced coordinates directly. For periodic and closed impermeable fields, the transform is invertible, isometric, and angle-preserving. For open nonperiodic flows, Fourier extension constructs a compatible periodic field, and a minimum-energy rule selects a unique reduced representation.\n  Neural operators then learn temporal evolution entirely in this reduced space. At inference, the predicted \\((D-1)\\)-component field is decoded directly into a physical divergence-free \\(D\\)-component field, without predicting an ambient field or applying post-hoc projection.\n  Experiments on static fitting and temporal prediction reveal a task-dependent trade-off: redundancy facilitates static optimization, whereas unique invertible coordinates provide a well-defined state for temporal dynamics. By removing unconstrained longitudinal or null directions from the learned state space, the proposed formulation achieves lower prediction error and greater robustness while preserving divergence freedom by construction.",
+      "url": "http://arxiv.org/abs/2609.35884v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35884v1",
+      "tldr": "The paper proposes a minimal, invertible Fourier–Householder representation that encodes a \\(D\\)-dimensional divergence-free vector field as a \\((D-1)\\)-component transverse field, allowing neural operators to learn dynamics entirely in this reduced space and decode predictions directly into divergence-free fields with lower error and greater robustness than redundant or projection-based methods.",
+      "detailed_reading": {
+        "motivation": "散度自由矢量场是不可压缩流等 PDE 的基本状态量。NCL 等冗余势参数化把多个辅助表示映射到同一物理场；实验显示这种冗余可降低静态表示拟合误差，但其多对一映射不提供算子学习所需的唯一状态，因此需要为 D 维散度自由场构造最小且可逆的 D-1 维表示。",
+        "method": "利用 Fourier 空间的横向结构：在 ∇·u=0 且周期或不可渗透边界条件下，每个非零 Fourier 模满足 k^T û(k)=0，因此 û(k) 落在 D-1 维子空间 k⊥。对每个非零 k 用 Householder 正交变换 Q(k) 构造正交基 E(k)∈R^{D×(D-1)}，其列张成 k⊥；坐标变换为 û(k)=E(k) â(k) 与 â(k)=E(k)^T û(k)，零模单独处理，并令 Q(-k)=Q(k) 以保持共轭对称、保证逆变换得到实场。周期或闭合不可渗透场可直接可逆、等距、保角变换；开放非周期场先做 Fourier 延拓构造兼容周期场，再用最小能量规则从 A_E v=u 的解中选取唯一约化表示。训练时先将轨迹编码到 D-1 分量实场 a(x)，神经算子学习 a(·,t)→a(·,t+Δt) 的约化演化；推理时把预测的约化场经 FFT、乘 E(k)、逆 FFT 直接解码为 D 维散度自由场，无需预测环境场或后处理投影。",
+        "result": "实验包含静态拟合与时间预测。静态拟合中，冗余参数化因等价解更多可降低表示拟合误差；时间预测中，唯一可逆的约化坐标给出定义良好的状态，所提方法取得更低预测误差与更强鲁棒性。约化表示通过构造保持散度自由，并去除被投影或解码丢弃的纵向或零方向，避免该方向不约束导致的漂移或不稳定。",
+        "conclusion": "散度自由状态本质上只有 D-1 个横向自由度，直接在该横向子空间学习算子比在冗余环境空间学习再投影更合适。该 Fourier-Householder 最小表示把不可压缩几何与后续学习架构分离，为周期、闭合不可渗透及经 Fourier 延拓的非周期流提供统一状态坐标；在时序算子学习中更准确稳健，同时静态拟合的冗余优势提示任务依赖的取舍。",
+        "key_details": "关键实现包括：数据为 D 维域上实 D 分量散度自由矢量场，周期或闭合不可渗透情形直接变换，开放非周期情形用 Fourier 延拓；Householder 矩阵 Q(k)=I-2 v_k v_k^T/(v_k^T v_k)，v_k=e_D-κ/|κ|，退化对齐时 Q(k)=I，E(k) 为 Q(k) 去掉最后一列；非零模成对处理并保持 Q(-k)=Q(k)；零模单独处理。带宽用共轭对称模集 K 且 |K|=N 控制，直接情形 A_0=F_D^{-1} E F_{D-1}，延拓情形 A_E=M_D Fext_D^{-1} Eext Fext_{D-1}，截断情形 A_K=M_D Fext_D^{-1} Eext J_K F_{D-1,N}；延拓后限制回 Ω 一般多对一，用最小能量 v_E^*=A_E^† u 选唯一解。周期或闭合变换可逆、等距、保角；Fourier 延拓与限制一般不保距。预浏览未给出具体网络架构、损失函数与训练超参；论文也指出冗余在静态拟合可有利，但时序算子学习需要可识别状态。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.204438823756515,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2609.35880v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935880v1-from-static-policies-to-adaptive-priors-in-offline-reinforcement-learning",
+      "source": "arxiv",
+      "title": "From Static Policies to Adaptive Priors in Offline Reinforcement Learning",
+      "authors": [
+        "Tianwei Ni",
+        "Vineet Jain",
+        "Akash Karthikeyan",
+        "Pierre-Luc Bacon"
+      ],
+      "authors_text": "Tianwei Ni, Vineet Jain, Akash Karthikeyan, Pierre-Luc Bacon",
+      "abstract": "Offline reinforcement learning (RL) has traditionally focused on learning policies for direct deployment under conservative objectives, where uncertainty outside the offline dataset is treated pessimistically to ensure robustness. We argue that this formulation becomes incomplete when an offline-trained policy is subsequently updated through online interaction, as increasingly occurs in modern intelligent systems through test-time adaptation and online fine-tuning. This position paper argues that, in such settings, the objective of offline RL should extend beyond immediate deployment and instead prioritize learning adaptive policy priors: policies that preserve the capacity to improve during subsequent interaction through memory, exploration, and self-correction. We formalize this perspective as adaptive offline reinforcement learning (AORL), distinguish it from offline-to-online RL, and explain why adaptability becomes important under distributional shift, limited dataset coverage, and changing test-time conditions. We further discuss Bayesian offline RL as one principled direction for constructing adaptive policy priors by preserving epistemic uncertainty over plausible environments. Finally, we outline connections, open challenges, and research directions for treating offline RL as preparation for future experience rather than as a static deployment problem.",
+      "url": "http://arxiv.org/abs/2609.35880v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35880v1",
+      "tldr": "This position paper argues that offline reinforcement learning should move beyond static, conservative policies for direct deployment and instead learn adaptive policy priors—formalized as adaptive offline reinforcement learning (AORL)—that preserve memory, exploration, and self-correction for later test-time or online adaptation, with Bayesian offline RL as a principled direction.",
+      "detailed_reading": {
+        "motivation": "传统离线强化学习通常面向直接部署，以保守目标对离线数据之外的不确定性进行悲观处理，以保证策略安全与鲁棒。但本文指出，当离线训练得到的策略还要通过测试时适配或在线微调继续改进时，这种静态部署式表述并不完整，会因过度保守而牺牲后续适应能力。在分布偏移、离线数据覆盖不足以及测试条件变化等场景下，离线阶段应优先学习可继续改进的自适应策略先验，而不仅是固定策略。",
+        "method": "本文将问题形式化为自适应离线强化学习（AORL）：输入为静态离线数据集D和未知MDP M*，离线阶段不与环境交互，只学习策略先验，再用行为支持supp_D(s)刻画覆盖不足并保留对P*、R*的认知不确定性。核心方案是让策略先验具备记忆、探索和自我纠正三要素，通过历史依赖策略π:H_t→Δ(A)或隐式潜变量、规划、参数适配实现记忆，并通过保留对不确定但潜在有价值动作的概率实现探索与纠错。在线测试阶段可组合使用四类适配机制：测试时上下文学习、测试时规划、测试时训练和在线RL微调；其中上下文学习和规划不更新参数，测试时训练只做临时更新，在线微调做持续更新。作为原则性方向，贝叶斯离线RL把离线学习视为认知POMDP，在合理MDP上保持后验，使策略基于在线历史条件化，从而先探索不确定动作再转向利用。",
+        "result": "本文的核心论证是：经典离线RL的保守性在策略后续会继续交互改进时会产生机会成本，离线阶段应优化可适应性而非仅优化部署鲁棒性。文中通过对比表指出，经典离线RL通常采用马尔可夫决策、限制在离线支持内、只关注离线阶段，而AORL要求历史依赖、保留灵活性、协同离线与测试时阶段，并具备记忆、探索和自我纠正能力。论文还区分了AORL与offline-to-online RL：后者是一种具体适配流程，AORL关注的是离线阶段本身应保留可适应性，只有当下游离线阶段显式增强测试时适应性时，offline-to-online方法才实例化AORL。本文为立场论文，未提供定量实验指标，其可复现结论主要体现在概念框架、性质对比和适配机制分类上。",
+        "conclusion": "结论是，当离线训练得到的策略将随后续交互继续改进时，离线RL的目标应从学习静态策略转向学习自适应策略先验，把离线数据学习视为未来经验的准备而非最终部署问题。贝叶斯离线RL被视为构建此类自适应先验的原则性方向，因为它通过保持对合理环境的认知不确定性，使策略能够在测试时通过历史条件化进行探索和自我纠正。未来研究需要围绕离线优化与测试时适配的协同设计，重新定义离线RL的评价标准、算法目标和开放挑战。",
+        "key_details": "关键实现细节上，本文将标准无限时域折扣MDP扩展为可含POMDP的设定，定义历史h_t、行为支持supp_D(s)={a|Pr_D(a|s)>ε}，并把离线覆盖之外的动作视为认知不确定性来源而非固有坏动作。方法强调不应对所有OOD动作施加零概率或强惩罚，而应保留足够行为灵活性以支持探索和纠错，同时通过记忆机制让同一状态在不同历史信念下选择不同动作。适配机制按在线数据量、是否更新参数和机制类型区分：上下文学习为隐式推断，规划为显式推断，测试时训练为临时参数更新，在线RL微调为持续参数更新。贝叶斯视角通过对合理MDP保持后验来实现自适应先验，但本文属于立场论文，未给出具体算法、损失函数、超参数、复杂度分析或实证结果，局限在于框架仍偏概念化，分布偏移、有限高质量覆盖、测试条件变化及多种适配机制的组合仍是开放挑战。"
+      },
+      "affiliations": [
+        "Université de Montréal",
+        "Mila - Quebec AI Institute",
+        "McGill University"
+      ],
+      "affiliations_text": "Université de Montréal, Mila - Quebec AI Institute, McGill University",
+      "score": 5.11965049892404,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2609.35944v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935944v1-enjoi-ensemble-joint-score-filter-for-generative-data-assimilation",
+      "source": "arxiv",
+      "title": "EnJoi: Ensemble Joint Score Filter for Generative Data Assimilation",
+      "authors": [
+        "Julien Moreau",
+        "Marc Lelarge"
+      ],
+      "authors_text": "Julien Moreau, Marc Lelarge",
+      "abstract": "Data Assimilation (DA) aims to recover the full state of a dynamical system that is only partially observed. A solution is to use Score-based models to generate physically consistent trajectories that agree with the observations. These Autoregressive Diffusion models are trained by conditioning on the previous state; however, they do not take into account the uncertainty of their past predictions. We propose a new diffusion-based assimilation algorithm that dynamically balances the confidence in the current state and the new observations. Crucially, we choose to learn the distribution of the joint state containing both the past and future. This allows us to use a modified version of En4DVar, a classical DA algorithm that relies on the covariance of an ensemble of particles. Experiments on fluid and traffic flow simulations show improved reconstruction performance, especially in situations where observations are sparse and non-homogeneous.",
+      "url": "http://arxiv.org/abs/2609.35944v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35944v1",
+      "tldr": "EnJoi is a diffusion-based data assimilation method that learns the joint past-future state distribution and uses a modified ensemble-covariance En4DVar update to dynamically balance model and observation confidence, improving reconstruction for sparse, non-homogeneous observations.",
+      "detailed_reading": {
+        "motivation": "数据同化需要从部分观测中恢复动力系统完整状态，而现有基于分数的自回归扩散模型通常以过去状态为条件，忽略了历史预测本身的不确定性。作者希望动态平衡对当前状态先验的置信度与新观测的置信度，从而在观测稀疏且非均匀时仍能稳定重建轨迹。",
+        "method": "EnJoi 学习包含过去与未来状态的联合状态分布，并用去噪分数匹配训练扩散模型生成物理一致的短时窗联合轨迹。滤波阶段维护 N 个粒子的集合，对每个粒子改写 En4DVar 目标：观测似然 p(y^{k+1}|x^{k+1})、动力学转移 p(x^{k+1}|x^k) 与背景高斯 N(x^k|x^{k,(i)}, P^k) 联合优化，其中 P^k 为集合经验协方差。扩散模型提供的联合分数作为先验/动力学约束，En4DVar 则用集合协方差动态更新各粒子，最终输出经验分布近似后验。输入为部分观测序列、观测算子 H、模型误差与观测误差设定，训练在短时间窗上学 Markov 生成模型。",
+        "result": "在流体与交通流模拟实验中，EnJoi 的重建性能优于对比方法，尤其在观测稀疏且非均匀时提升明显。摘要未给出具体数值指标，但给出了可复现的结论：联合状态建模加集合滤波比仅条件于上一状态的自回归扩散 DA 更稳健。",
+        "conclusion": "该工作表明，将联合状态扩散分数与修改版 En4DVar 结合，可以在生成式数据同化中更合理地权衡历史预测不确定性与新观测信息。EnJoi 为稀疏、非均匀观测下的全状态估计提供了一种集合式生成滤波方案。",
+        "key_details": "关键点包括：使用非线性状态空间模型、线性观测矩阵 H、模型误差协方差 Q 与观测误差协方差 R；4DVar 损失由动力学、背景和观测三项组成；En4DVar 用粒子而非集合均值构造背景以避免集合坍塌，并以经验协方差 P^k 替代固定背景协方差。联合状态同时包含过去和未来，使扩散分数可表达过去预测的不确定性。潜在局限是高维下集合协方差估计、粒子数带来的计算瓶颈以及扩散采样/迭代优化成本；文中也指出传统粒子滤波易坍塌、Gaussian 线性方法易过度平滑。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.955976782163967,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2609.35926v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935926v1-normative-loss-landscape-navigation-a-trajectory-based-approach-to-mitigating-forgetting-in-incremental-learning",
+      "source": "arxiv",
+      "title": "Normative Loss Landscape Navigation: A Trajectory-Based Approach to Mitigating Forgetting in Incremental Learning",
+      "authors": [
+        "Isabelle Aguilar",
+        "Zayn Andre Zainal",
+        "Luis Fernando Herbozo Contreras",
+        "Zhaojing Huang",
+        "Omid Kavehei"
+      ],
+      "authors_text": "Isabelle Aguilar, Zayn Andre Zainal, Luis Fernando Herbozo Contreras, Zhaojing Huang, Omid Kavehei",
+      "abstract": "Continual learning models suffer from catastrophic forgetting when trained sequentially on non-stationary data distributions. Previously, this has been addressed through weight regularization. While preconditioning gradients offer a promising alternative to mitigate forgetting, current approaches are myopic. Conversely, standard regularization methods apply rigid, scalar Euclidean penalties that entirely ignore the underlying Riemannian geometry of the parameter space. To overcome this gap, we propose TMLN (Trajectory-Modulatory Landscape Navigation), a normative navigation policy that formalizes continual learning as an optimal control problem over a curved loss landscape. TMLN utilizes a memory-efficient diagonal empirical Fisher Information Matrix (FIM) to define a localized Riemannian manifold. To compensate for the spatial limitations of the diagonal approximation, TMLN dynamically modulates a preconditioner using the normalized historical trajectory of the network's parameter values. By integrating this trajectory-based preconditioning directly into the gradient update, we actively shield historically critical parameter directions without relying on additive penalties. Empirical evaluations on class- and domain-incremental benchmarks demonstrate that our method significantly reduces the loss barrier between consecutive tasks.",
+      "url": "http://arxiv.org/abs/2609.35926v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35926v1",
+      "tldr": "TMLN mitigates catastrophic forgetting in continual learning by framing sequential learning as optimal control over a Riemannian loss landscape and using a memory-efficient diagonal Fisher Information Matrix with trajectory-modulated preconditioning to protect critical parameters without additive penalties.",
+      "detailed_reading": {
+        "motivation": "连续学习模型在非平稳数据流上顺序训练时会发生灾难性遗忘，而现有权重正则方法多采用固定的标量欧氏惩罚，忽略了参数空间真实的黎曼几何结构；预条件梯度方法虽有潜力，但当前方案往往短视或依赖内存密集型回放。因此，论文希望把连续学习从离散约束梯度问题重构为弯曲损失景观上的规范导航与最优控制问题，以同时缓解遗忘和僵化。",
+        "method": "TMLN 将连续学习建模为部分可观测损失景观上的最优控制问题：在任务边界用小容量回放缓冲估计对角线经验 Fisher 信息矩阵 F，作为局部黎曼度量；训练每个 mini-batch 时混合当前任务样本与回放样本，计算损失和梯度 g，并用 F+λ1+γS_bar 对梯度做逐元素预条件更新 θ←θ-η g/(F+λ1+γS_bar)，其中 S_bar 是由历史参数轨迹调制得到的敏感性累积量。训练过程中同时累加路径积分 ω←ω-(g⊙Δθ)，任务结束时对 ω 做 ReLU 截断并按 1/2 F(Δθ)^2 归一化，得到参数敏感性分数后按每任务最大值归一化累加到 S_bar；随后更新回放缓冲、重算 Fisher、保存参数锚点并清零 ω。推理阶段沿用单头网络，评估时不需要任务标识。",
+        "result": "论文在 class-incremental 与 domain-incremental 基准上评估，包括 Split CIFAR-100 和 CORe50 的单头无任务标识设置，报告 TMLN 显著缩小连续任务之间的损失障碍，并在稳定性-塑性权衡上优于现有方法。方法保持内存 O(N+B)、每步计算 O(N)，避免显式二阶方法的 O(N^2) 内存与 O(N^3) 求逆开销。由于提供的全文预览截断，具体数值表格和逐基准提升幅度未在可见内容中给出。",
+        "conclusion": "论文主张将连续学习重铸为黎曼流形上的轨迹优化，通过轨迹调制的预条件梯度而非加性惩罚来主动屏蔽历史关键参数方向，从而在保护旧知识的同时保留新任务塑性。该框架桥接了自然梯度的几何严谨性与局部启发式方法的可扩展性，为高维连续学习提供了一种有原则的新范式。实际部署仍依赖回放缓冲和对角近似，且需要进一步验证完整实验细节与理论保证。",
+        "key_details": "关键实现包括：仅用回放缓冲 M 在任务边界估计对角经验 Fisher 以定义局部曲率；用历史轨迹路径积分累积参数对损失下降的贡献，ReLU 截断负贡献避免奖励振荡或有害更新；敏感性分数分母为 1/2 F(Δθ)^2+ε，并跨任务按最大值归一化累加为 S_bar。主要超参有学习率 η、基础 Tikhonov 阻尼 λ_base、轨迹强度 γ、回放容量 M 和训练轮数 E，算法复杂度与内存为 O(N+B)、每步 O(N)。局限在于对角 Fisher 忽略参数间 off-diagonal 相关性、仍需小型回放缓冲、性能依赖 γ/λ 等超参，且摘要和预览未给出完整数值结果与理论收敛保证。"
+      },
+      "affiliations": [
+        "University of Sydney"
+      ],
+      "affiliations_text": "University of Sydney",
+      "score": 4.708775599095302,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2609.35911v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935911v1-learn-now-use-next-trust-later-prequential-test-time-learning-for-llm-agents",
+      "source": "arxiv",
+      "title": "Learn Now, Use Next, Trust Later: Prequential Test-Time Learning for LLM Agents",
+      "authors": [
+        "Tong Zhao",
+        "Reed Li",
+        "Yuyang Hu",
+        "Yutao Zhu",
+        "Haijin Liang",
+        "Haibo Shi",
+        "Yu Lu",
+        "Zhicheng Dou"
+      ],
+      "authors_text": "Tong Zhao, Reed Li, Yuyang Hu, Yutao Zhu, Haijin Liang, Haibo Shi, Yu Lu, Zhicheng Dou",
+      "abstract": "Adapting large language model agents during deployment requires not only retaining past experience, but also turning new observations into timely guidance. Many test-time learning methods, however, acquire knowledge from completed episodes. Feedback from an ongoing interaction may therefore not be distilled into knowledge soon enough to help the next decision. Acquiring knowledge at the granularity of individual transitions could reduce this delay, but raises a separate challenge: a rule that is useful within one episode may not be reliable enough to guide future episodes. Waiting for validation can forfeit immediate benefits, whereas unrestricted reuse can propagate accidental or misattributed guidance. We introduce StepLearn, a nonparametric framework that separates immediate use from persistent trust. It turns informative transitions into hypotheses that can guide the next step, while requiring prospective validation before reuse across episodes. Their predicted effects are checked against subsequent observations outside the source episodes, and only sufficiently supported hypotheses become available for persistent guidance. This process updates external knowledge while keeping all model parameters fixed. Over five rounds on WebArena-Lite and ALFWorld, StepLearn achieves average success rates of 59.9% and 84.0% with GPT-5-mini, and 57.8% and 88.1% with Qwen3.5-35B-A3B, respectively. It outperforms EvoTest, the strongest baseline, by 2.2-12.7 percentage points across the four settings. Learning dynamics further shows that these gains are not restricted to the final repetition, with advantages already present on first task attempts in most settings.",
+      "url": "http://arxiv.org/abs/2609.35911v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35911v1",
+      "tldr": "StepLearn is a nonparametric test-time learning framework for LLM agents that converts individual transitions into hypotheses for immediate next-step guidance while requiring prospective validation across later episodes before persistent reuse, improving success on WebArena-Lite and ALFWorld without updating model parameters.",
+      "detailed_reading": {
+        "motivation": "现有LLM智能体测试时学习多依赖完整回合或轨迹来更新参数或外部知识，导致正在进行的交互反馈难以及时转化为下一步决策的指导；若改以单步转移粒度获取知识，又会面临局部规则即时有用但跨回合可信度不足的矛盾，等待验证会丧失即时收益，不加约束复用则可能传播偶然或错误归因的指导。",
+        "method": "StepLearn将交互转移τ_t=(o_t,a_t,o_{t+1},r_t)作为学习单元，用确定性检测器在导航或结果变化、显式报错、奖励变化、终止反馈或连续无进展时触发采集，并由辅助学习器L_ψ单次生成结构化假设k=(c_k,p_k,φ_k^+,φ_k^-,σ_k,u_k,S_k)，其中条件、自然语言策略、正负可观测效果谓词、作用域、动作类型和源回合集合共同定义可检验知识。每个有效假设同时产生运行时副本用于当前回合从t+1步起即时检索，以及持久候选副本进入候选记忆；运行时记忆在回合边界清空，候选与已验证记忆跨回合保留。动作选择阶段，智能体按环境或网站边界以及页面类型、任务模式、进度线索从运行时与已验证记忆中检索可选指导G_t，并以π_θ(a_t|H_t,G_t)行动，模型参数θ与辅助学习器参数ψ全程冻结。前瞻验证阶段，在演员选定a_t后按作用域和动作类型匹配候选，排除源回合S_k和已有结论回合D_k，冻结其效果谓词再执行动作，由确定性适配器把转移映射为结构化证据z_t，评估得到+1支持、-1反证或⊥未决；累计n_k与n_k^+，当n_k^+≥m且n_k^+≥ρn_k时提升到已验证记忆，反证累积后可撤出检索但保留身份。",
+        "result": "在WebArena-Lite与ALFWorld各五轮持续评测中，StepLearn配合GPT-5-mini平均成功率为59.9%与84.0%，配合本地Qwen3.5-35B-A3B为57.8%与88.1%，四个设置均超过最强基线EvoTest达2.2至12.7个百分点。消融显示逐步采集、即时复用和记忆保留各自有贡献，且小辅助学习器也能取得有竞争力的表现，辅助学习调用仅占约5.5%。学习动态表明优势不只在最终轮次，在多数设置的首轮任务尝试中已出现。",
+        "conclusion": "StepLearn把即时使用与持久信任解耦，证明以转移级可检验假设驱动的前瞻式测试时学习能在不更新模型参数的前提下，将当前交互经验及时用于下一步并只在后续非源回合验证后跨回合复用。该范式为部署期LLM智能体提供了兼顾响应速度与可靠性的外部知识演化方案，并在浏览器操作与具身任务规划上显示出稳定增益。",
+        "key_details": "评测数据为WebArena-Lite中排除4个Wikipedia任务和6个多网站任务后的155个任务（Shopping、Shopping Admin、GitLab、Map、Reddit）与ALFWorld valid_unseen的134个任务（Look、Pick、Clean、Cool、Heat、Two），对比基线包括Static、Memory、Reflexion、JitRL、AWM、EvoTest，本地模型另比SFT与TTRL，WebArena每回合最多25步并经BrowserGym交互，在线方法按任务五回合连续流评估并报告跨回合平均成功率。实现上无梯度更新或训练损失，知识项由辅助学习器生成，效果谓词由确定性适配器基于结构化证据进行受限比较而非生成可执行代码，检索受环境和网站边界约束，合并同义假设时保持候选身份并扩展源集合但不增加验证支持。关键超参为提升门槛m≥1与经验精度ρ∈(0,1]，候选验证每回合对每项至多产生一个结论且排除源回合，未决试验不计入支持或反证计数，终止反馈可解决延迟反馈但中间零奖励不等于失败。局限性在于持久记忆和候选会随交互累积、依赖作用域和动作类型匹配、稀疏或延迟反馈可能推迟提升，且只有通过前瞻验证的知识才可持久复用，可能牺牲某些即时有效但证据不足的局部规则。"
+      },
+      "affiliations": [
+        "Renmin University of China",
+        "Tencent"
+      ],
+      "affiliations_text": "Renmin University of China, Tencent",
+      "score": 4.620467068841959,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2609.35917v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935917v1-replication-failure-and-trivial-baselines-in-road-level-crash-prediction",
+      "source": "arxiv",
+      "title": "Replication Failure and Trivial Baselines in Road-Level Crash Prediction",
+      "authors": [
+        "Maurya Patel"
+      ],
+      "authors_text": "Maurya Patel",
+      "abstract": "Graph neural networks are increasingly applied to road-level crash prediction, but the stability of their reported gains has received little scrutiny. We independently reconstruct the data pipeline of a recent uncertainty-aware model and evaluate eleven of its design decisions across three London boroughs under an expanding-window protocol. Four survive replication on a second borough; seven do not, and four of those reverse sign rather than attenuate. Multi-seed evaluation is decisive: one effect reverses sign between random seeds within a single borough, and the reference architecture exhibits per-borough seed spreads of up to 35.7 points against 4 points for ours. We further compare both networks against a parameter-free baseline that ranks segments by cumulative past crash count. At matched history depth our model is statistically indistinguishable from that baseline ($-0.90$ points, $p=0.61$), and the reference architecture loses to it on 18 of 18 held-out windows ($-17.37$, $p<10^{-6}$). Sweeping the baseline's lookback horizon shows it spans 22.71% to 83.94% accuracy on that variable alone, and that every published figure in this line of work is matched by the baseline at a horizon of one to five years. We argue that the apparent margin of graph networks over historical baselines in this task is substantially an artefact of the short horizons those baselines were computed over, and recommend horizon-matched baselines and multi-seed reporting as minimum practice.",
+      "url": "http://arxiv.org/abs/2609.35917v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35917v1",
+      "tldr": "This paper finds that graph neural networks for road-level crash prediction have fragile, largely non-replicable gains and are matched or beaten by a trivial cumulative-crash-count baseline when evaluation horizons are properly matched, so it recommends horizon-matched baselines and multi-seed reporting.",
+      "detailed_reading": {
+        "motivation": "近年图神经网络被广泛用于路段级碰撞预测并报告显著提升，但这些提升的稳定性与基线可比性缺乏检验。本文独立复现一个近期不确定性感知模型的数据管线，审计其设计决策在西敏、塔村、兰贝斯三区及扩展窗口协议下的可复现性，并质疑历史基线是否按相同回看期计算。",
+        "method": "数据使用OS Open Roads按行政区多边形端点内裁剪并做line-graph构图，目标为STATS19 2021至2024年每日路段碰撞数；35个特征包含几何与节点度、星期、7/14/30/90/365天及2/3/5年碰撞历史、伤亡类型、年平均日交通量、OpenStreetMap兴趣点密度和多重剥夺指数，长历史用稀疏碰撞表累积和矩阵计算并按训练集统计标准化。模型按时间步做图注意力，随后接GRU，解码为零膨胀Poisson头，配置为3个注意力头、1层注意力、隐藏维度16和32、残差连接；Adam学习率0.01训练200轮，无权重衰减和早停，并用split conformal做90%预测区间。评测为扩展窗口walk-forward，20天输入、14天预测、90天步长，每区6个留出窗口，覆盖2023-07-15至2024-10-07，指标AccHR@20为每日真实碰撞落入前20路段的比例在窗口内平均；所有模型结果为5个随机种子均值，按窗口和种子配对做t检验与Wilcoxon检验。",
+        "result": "11项设计决策中仅4项在第二个行政区复现，7项失败且其中4项符号反转；效应量低于约4点种子噪声带的全部失败，但两个高于噪声带的效应也失败。参考架构的种子波动远大于本文模型，每区种子跨度最高35.7点而本文约4点；与无参数累计历史碰撞数排序基线在匹配历史深度下本文模型统计不可区分，差-0.90点，p=0.61，参考架构在18/18个留出窗口输给该基线，差-17.37点，p<10^-6。基线回看期从30天到9年扫描时AccHR@20从22.71%到83.94%，跨度61.2点，且该排序在1至5年回看期即可匹配本文及参考文献的已发表数字；三区合并本文模型80.08±2.62，参考论文报告72.60，但基准表显示约8年碰撞数排序83.94、HSM经验贝叶斯83.84、封顶5年排序80.99。",
+        "conclusion": "本文认为图网络在该任务上相对历史基线的表面优势很大程度上是基线回看期过短造成的评估假象，而非建模能力差异，应至少采用与预测历史深度匹配的强基线并报告多种子结果。由于复现失败常表现为符号反转而非简单衰减，单区域单种子效应不能作为真实效应的上界或方向依据。",
+        "key_details": "实现关键点包括长回看历史通过稀疏碰撞列表的累积和矩阵而非滚动路段日表计算，使回看期扫描近乎计算免费；特征标准化仅用训练实例统计；统计上n=5用t(4)=2.776，正态近似约低估置信区间40%；AccHR@20对排名粒度敏感。局限包括仅三个伦敦行政区、与Gao等非完全同数据同协议，因此其发表数值映射是提示性而非受控比较；参考论文仅给三个点估计无法配对检验；标准GNN实现即使固定随机种子也非确定；训练无早停和权重衰减等设置可能影响复现。"
+      },
+      "affiliations": [
+        "University of Westminster"
+      ],
+      "affiliations_text": "University of Westminster",
+      "score": 4.309001568384778,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2609.35935v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935935v1-passive-dynamic-walking-inspired-dynamics-guidance-for-energy-efficient-humanoid-locomotion",
+      "source": "arxiv",
+      "title": "Passive-Dynamic-Walking-Inspired Dynamics Guidance for Energy-Efficient Humanoid Locomotion",
+      "authors": [
+        "Hyeonjin Choi",
+        "Joongheon Kim",
+        "Daekyum Kim"
+      ],
+      "authors_text": "Hyeonjin Choi, Joongheon Kim, Daekyum Kim",
+      "abstract": "Learning energy-efficient humanoid locomotion requires discovering mechanically economical gait coordination, not merely reducing actuator effort. Reinforcement learning promotes efficiency through effort-related reward penalties, which guide the step-to-step mechanics of walking only indirectly. This article proposes a framework inspired by passive dynamic walking (PDW) that temporarily creates slope-equivalent conditions favorable to economical gait discovery and removes all PDW-specific guidance before nominal-dynamics optimization. During early training, a tilted-gravity field assists sagittal progression on flat collision geometry, complemented by curriculum-coupled reward terms. The core framework requires no reference trajectories, gait phases, or contact schedules. In a five-seed forward-locomotion study on a 29-DoF Unitree G1, the framework reduces mechanical cost of transport by 6.8-15.2% over commanded speeds of 0.5-2.0m/s without degrading velocity tracking. Mechanical-work decomposition attributes the reduction to positive actuator work, and reward-matched comparisons separate the guided regime's faster gait acquisition from the tilt's additional benefit to converged economy. The framework extends to unassisted omnidirectional locomotion, where its benefit persists once a walking-specific motion prior supplies kinematic coordination, the combination reducing speed-matched cost of transport by 18.7%. On hardware, forward cost of transport falls by 16.3% with the motion prior and by 4.5% without it, the latter within the trial-to-trial spread.",
+      "url": "http://arxiv.org/abs/2609.35935v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35935v1",
+      "tldr": "The paper proposes a passive-dynamic-walking-inspired reinforcement learning framework that temporarily uses tilted-gravity, slope-equivalent guidance during early training and then removes it, enabling a 29-DoF Unitree G1 humanoid to achieve 6.8–15.2% lower mechanical cost of transport while preserving velocity tracking.",
+      "detailed_reading": {
+        "motivation": "学习节能人形机器人步态的关键不只是降低执行器出力，而是要发现机械上经济的步态协调；现有强化学习多通过出力/平滑惩罚间接影响步态力学，而运动模仿先验又在运动学空间评分，难以直接对应机器人执行器功。受被动动态行走启发，本文希望在早期策略搜索中临时创造有利于经济步态发现的等效下坡条件，并在名义动力学优化前移除全部PDW特定引导，从而偏置最终无辅助策略。",
+        "method": "该框架在平坦碰撞几何上，通过命令条件化的虚拟倾斜重力场在早期训练中提供等效下坡的矢状面推进助力；训练分三阶段：Phase 1全倾斜、PDW奖励激活且命令以矢状为主，Phase 2倾斜线性衰减、PDW奖励按同一课程因子σ(k)缩放并扩展到全向命令，Phase 3移除所有PDW特定引导并在名义平地动力学和基线目标下优化。核心框架无需参考轨迹、步态相位或接触时序；基线目标仍包含速度跟踪、稳定性/姿态/关节运动/动作平滑/不良接触/执行器出力的正则。方向依赖倾斜角由θ(k)=θ_init σ(k)与前后倾比ρ=sinθ_back/sinθ_init给出，默认θ_init=5°，K_w=150、K_t=200；AMP作为独立因子可全程启用。仿真在29-DoF Unitree G1上进行5种子前向实验、2×2课程×AMP全向实验和硬件验证。",
+        "result": "在29-DoF Unitree G1五种子前向仿真中，该方法在0.5–2.0 m/s指令速度范围内将机械运输成本降低6.8–15.2%，且不损害速度跟踪；机械功分解显示收益主要来自正执行器功减少。奖励匹配对照将引导期更快的步态获得与倾斜对收敛后经济性的额外收益区分开。扩展到无辅助全向运动时，若加入步态专用运动先验提供运动学协调，组合条件将速度匹配运输成本降低18.7%。硬件上前向运输成本在含运动先验时下降16.3%，不含时下降4.5%，后者处于试次间波动范围内。",
+        "conclusion": "结论是，临时施加PDW启发的动力学引导可以偏置最终无辅助策略，使其收敛到更经济的步态，而不仅是加速技能获得；该方法与AMP式运动先验互补，且核心框架不需要参考轨迹、步态相位或接触时间表。其意义在于通过改变早期策略搜索所经历的动力学条件，为节能人形运动学习提供一条独立于奖励塑形和运动学模仿的机制。",
+        "key_details": "关键实现点包括：训练在平坦碰撞几何上使用命令条件化虚拟倾斜重力场，仅沿偏航对齐的矢状轴提供前向助力，横向运动靠命令课程而非旋转下坡方向；PDW奖励与倾斜按σ(k)同步退火，三阶段结束后全部移除。输入为平面速度/偏航率命令与29-DoF机器人状态，输出为关节动作，使用PPO类策略优化，基线奖励含执行器出力正则；核心方法不依赖参考轨迹、步态相位或接触时序。可调超参包括初始/后向倾斜角θ_init、θ_back、K_w、K_t及奖励权重，论文默认θ_init=5°、K_t=200、全向K_w=150，并做了初始角敏感性分析。主要局限是倾斜仅提供矢状面协助且碰撞几何保持水平，硬件上无运动先验的4.5%收益落在试次波动内，运动先验的加入对全向和硬件效果重要，设计参数和sim-to-real仍需调参。"
+      },
+      "affiliations": [
+        "Korea University"
+      ],
+      "affiliations_text": "Korea University",
+      "score": 4.1988626000847065,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2609.35793v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935793v1-learning-from-the-gap-between-passk-and-pass1",
+      "source": "arxiv",
+      "title": "Learning from the Gap Between Pass@K and Pass@1",
+      "authors": [
+        "Xuan Liu",
+        "Jingbin Qian",
+        "Haosheng Chen"
+      ],
+      "authors_text": "Xuan Liu, Jingbin Qian, Haosheng Chen",
+      "abstract": "Large language models (LLMs) are increasingly trained with reinforcement learning from verifiable rewards (RLVR). An exact verifier can also support test-time scaling by selecting a passing response from multiple samples, while other deployments use beam search, adaptive sampling, or tools. We study single-sample decoding, where each query receives one response without search, to ask whether search-exposed behavior can be absorbed into the model. Existing verified-response post-training recipes do not generally distinguish problems already solved on the first decode from failures recovered within K samples. Under a fixed budget, this can spend examples repeating behavior the deployed policy already has. We introduce GapFT, which selects training evidence by the source checkpoint's single-sample outcome and fine-tunes on the Pass@K-Pass@1 gap: problems the policy fails on one sample but solves within K samples. We match training examples, processed tokens, and optimizer steps while keeping the objective unchanged. GapFT fills the matched budget with recovered failures and uses an exact decomposition to distinguish corrections of recovered and missed failures from regressions on first-decode successes. On LogiQA 2.0 and ReClor with Llama-3.1-8B, GapFT improves Pass@1 by 14.4 and 13.9 points over the source model, outperforms budget-matched uniform verified RFT at the same learning rate, and matches fine-tuning on the full verified pool using one third of the data. A single decode matches the source model's verifier-selected Pass@4 accuracy. A randomized control attributes gains to covering distinct failures, and our analysis relates available gains to transferable failure support. A three-seed Qwen2.5-7B replication retains positive gains over uniform RFT on both logic tasks.",
+      "url": "http://arxiv.org/abs/2609.35793v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35793v1",
+      "tldr": "GapFT improves single-sample LLM performance by fine-tuning on the Pass@K–Pass@1 gap—problems the source policy fails on one sample but solves within K samples—rather than uniformly on verified responses, yielding large Pass@1 gains over budget-matched verified RFT.",
+      "detailed_reading": {
+        "motivation": "大语言模型 increasingly 用可验证奖励强化学习（RLVR）训练，同一验证器也可支持测试时扩展（多次采样后选一个通过的回答）。但在单样本解码部署时每个查询只有一个回答、没有搜索，因此需要把搜索暴露的行为吸收进模型。现有基于验证响应的后训练配方通常不区分“首次解码就成功”的问题与“K 次采样中恢复的失败”问题，在固定预算下会重复已掌握行为、挤占可恢复失败的学习名额。",
+        "method": "GapFT 先用冻结的源策略和精确验证器把发现问题分成三类：G_K（单样本成功）、S_K（单样本失败但 K 个样本内至少一个通过验证）、U_K（K 个样本都失败）。在匹配预算 (N,L,J) 下，即固定训练例数 N、处理 token 数 L 和优化步数 J，GapFT 用 S_K 中每个问题的一个验证通过回答（逻辑与代码取最短通过回答，MATH 取冻结生成顺序）填满数据槽位，保持最大似然 RFT 目标不变；uniform verified RFT 从 G_K∪S_K 无视状态抽样，solved replay 只从 G_K 抽样作为无搜索对照。评测在同一单样本解码流程下进行，审计集与发现集不相交，并用恒等式 ΔPass@1 = p_S κ_S + p_U κ_U − p_G ρ_G 把 Pass@1 变化精确分解为 S_K 与 U_K 上的纠正率和 G_K 上的回退率，其中 κ 为单样本错误在训练后变为正确的比例，ρ_G 为源成功变为错误的比例。",
+        "result": "在 Llama-3.1-8B 上，GapFT 在 LogiQA 2.0 和 ReClor 上分别把 Pass@1 相对源模型提升 14.4 和 13.9 个百分点，优于同学习率、预算匹配的 uniform verified RFT，并用约三分之一数据达到在全量验证池上微调的水平。单次解码即可达到源模型经验证器选择的 Pass@4 准确率；随机对照把增益归因于覆盖不同的失败问题。在 Qwen2.5-7B 上三个随机种子的复现实验在两个逻辑任务上均保持优于 uniform RFT 的正向增益，且分析表明可用增益与可迁移失败支持量相关。",
+        "conclusion": "按源 checkpoint 的单样本结果来分配验证证据，比只按正确性筛选更能把搜索收益转化为单样本部署能力；匹配预算下的状态感知选择可减少冗余、提高 Pass@1，并在不同模型家族上具有可复现性。该工作把放大已有行为（S_K 纠正）、获取观察支持外行为（U_K 纠正）与回退代价（G_K）统一在同一分解中，说明收益上限受审计集中可被搜索恢复的失败比例约束。",
+        "key_details": "设置与数据：离线 RFT，冻结源策略在发现集上采样，K 为搜索预算并与训练预算分开报告；G_K、S_K、U_K 只是有限搜索预算下的观测划分，U_K 不代表源策略对正确答案概率为零。选择规则在训练前冻结，S_K 每个问题只保留一个验证通过回答，即使多个样本通过也只取一个；replay 可对同一问题重复分配槽位。预算匹配要求 N=R|T|、R·Tok(T)≈L、Step(T;R)=J，并报告允许的 token 偏差；loss 只在响应 token 上计算，处理 token 含截断后的输入与响应但不含 padding。审计响应从不进入证据选择、训练或 checkpoint 选择；嵌套预算复用前 K 个样本作为前缀，审计划分在每个 K 重建；区间用 2000 次 bootstrap 重采样配对审计问题与耦合训练种子。分解是精确恒等式但不独立赋予因果，因果由匹配预算干预和随机对照承担；主要局限是收益受可迁移失败支持规模限制，且结论主要来自逻辑基准与两个 7B/8B 级模型。"
+      },
+      "affiliations": [
+        "William Marsh Rice University",
+        "East China Normal University",
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "William Marsh Rice University, East China Normal University, Shanghai Jiao Tong University",
+      "score": 4.049785124301344,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2609.35934v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/09/30/260935934v1-graph-neural-networks-for-sampling-invariant-embeddings-of-organized-signal-sets",
+      "source": "arxiv",
+      "title": "Graph neural networks for sampling-invariant embeddings of organized signal sets",
+      "authors": [
+        "Martin Bauw",
+        "Santiago Velasco-Forero",
+        "Jesus Angulo"
+      ],
+      "authors_text": "Martin Bauw, Santiago Velasco-Forero, Jesus Angulo",
+      "abstract": "Sensor networks and radars can deliver signals as organized sets, e.g. ordered signals, signals describing range cells within a grid or signals perceived as graph nodes. Within such sets, individual signals may be characterized by distinct sampling parameters. This paper investigates organized signal sets neural network encoders. In the context of this work, the purpose of such encoders is to project heterogeneously sampled signal sets into an arbitrary fixed-size vectors space. This new representation space is designed so that signal sets can be processed as vectors rid of sampling differences to allow for arbitrary topology-aware processing with no signal processing constraints. Within this representation space designed to reduce the influence of heterogeneous sampling parameters, the relevance of signal sets representations is evaluated by considering signal sets discrimination potential with a focus on waveforms separation. The encoding and embeddings discrimination experiments conducted rely exclusively on synthetic complex-valued radiofrequency signals.",
+      "url": "http://arxiv.org/abs/2609.35934v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35934v1",
+      "tldr": "This paper investigates graph neural network encoders that project heterogeneously sampled organized signal sets into fixed-size, sampling-invariant, waveform-aware embeddings for discrimination, evaluated on synthetic complex-valued radiofrequency signals.",
+      "detailed_reading": {
+        "motivation": "传感器网络和雷达会以有组织集合的形式给出信号，例如有序信号、距离单元网格中的信号或被视为图节点的信号，且集合内单个信号可能具有不同采样参数。本文研究有组织信号集合的神经网络编码器，目标是把异构采样信号集合投影到任意固定大小的向量空间，从而消除采样差异并以向量形式支持任意拓扑感知处理。该表示空间通过信号集合区分潜力评估，重点考察波形分离能力。",
+        "method": "将 P 个 M 维复信号 Z 与邻接矩阵 A 输入图神经网络 Φ，信号实际长度 M'≤M 并零填充到 M，批量输入 G∈C^{B×P×M}，输出嵌入 E∈R^{B×N}。提出的编码器为三层 GCN，均值池化得到 128 维信号集合嵌入，采用链状图且有向边指向中心节点，并以 NT-Xent 对比损失训练，正对为同标签信号集合，使用余弦相似度和温度 τ。基线包括忽略拓扑的 1D 自编码器、图自编码器，以及无学习得 raw_spectrum 的 320 维傅里叶特征和 raw_dsp 的 44 维统计信号特征，下游用决策树分类头，并用 silhouette、KNN 及 PCA、t-SNE、UMAP 评估潜在空间。",
+        "result": "在潜在表示空间分类中，GCN 编码器在 Train+ 上训练 60 epoch 后取得最佳信号集合模板分类表现，GCN 基线紧随其后，而 1D 自编码器训练 40 epoch 后表现较差并低于谱和统计特征。测试集混淆矩阵显示线性下扫频 chirp 与二次下扫频 chirp 间存在有限混淆，且仍难以区分集合内波形顺序，例如 chirp3_noise2 与 noise2_chirp3、chirpup2_fsk3 与 fsk3_chirpup2 混淆。raw_spectrum 和 raw_dsp 基线意外地难以击败，在某些未展示模板下系统性地优于训练神经编码器。",
+        "conclusion": "本文表明图神经网络适合编码有组织信号集合以用于下游判别，所提编码器在合成条件下产生对异构采样参数稳健的判别表示。考虑图结构使表示对集合内顺序敏感，适用于传感器网络和雷达单元邻域处理。实验也重申谱与统计特征作为嵌入的相对竞争力。未来将考虑更大更复杂信号集合、真实数据、更多波形，并以分类和异常检测评估嵌入，同时指出对训练未见波形的泛化仍具挑战，需研究图拓扑和注意力机制。",
+        "key_details": "数据为合成复基带射频信号，含 19 个五节点模板，每集合 5 个信号，受加性白高斯噪声污染并零填充到 M=4096；Train 与 Train+ 各 100000 个集合，Val 与 Test 各 10000 个集合，每个信号独立抽长度和采样率，SNR 每集合共享，训练、验证、测试参数池互斥，Train+ 扩展了采样与噪声参数。GCN 为三层、128 维、2.33M 参数；AE 为 1D 卷积、128 维瓶颈、1.28M 参数，GAE 未能取得实质可分性；NT-Xent 使用余弦相似度和温度 τ，AE 使用长度掩码 MSE。评估用 silhouette、KNN 和降维可视化，决策树分类，神经网络指标在三 seed 上平均；局限包括集合内顺序识别困难、无学习特征竞争力强以及未见波形泛化难。"
+      },
+      "affiliations": [
+        "PSL University",
+        "Université Paris-Saclay"
+      ],
+      "affiliations_text": "PSL University, Université Paris-Saclay",
+      "score": 3.876033153263814,
+      "score_text": "3.9"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.35929v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935929v1-cadence-a-confidence-adaptive-dual-expert-network-for-fast-and-accurate-time-series-classification",
+      "source": "arxiv",
+      "title": "CADENCE: A Confidence-Adaptive Dual-Expert Network for Fast and Accurate Time Series Classification",
+      "authors": [
+        "Onisa Mpaunda"
+      ],
+      "authors_text": "Onisa Mpaunda",
+      "abstract": "Time series classification (TSC) exhibits a sharp trade-off between accuracy and computational scalability. Meta-ensembles like HIVE-COTE 2.0 reach state-of-the-art accuracy but require extensive compute, whereas ultra-fast random convolutional transforms (e.g., MiniRocket, Hydra) run in seconds but struggle with phase-independent distributions, signal kinematics, and decision tree fragmentation on large class counts.\n  In this work, we present CADENCE (Confidence-Adaptive Dual-Expert Network for time series Classification Excellence), a unified, CPU-native dual-expert architecture. CADENCE decouples representation learning into two specialized pathways: (i) a Convolutional Linear Expert pairing 10,000 deterministic dilated features with closed-form L2-regularized Woodbury ridge classification, and (ii) a Distributional Interval Expert pairing competing dilated kernels (Hydra) with dyadic Cornish-Fisher moment approximations across signal kinematics and FFT spectral bands, fitted with an ExtraTrees ensemble. An internal validation meta-router with rare-class preservation dynamically selects between pure expert routing and confidence-weighted soft blending, followed by a full refit on 100% of training data.\n  Evaluated across all 109 equal-length UCR Archive datasets over 30 resamples (3,270 total runs), CADENCE achieves a grand mean accuracy of 0.8864. This ranks #2 across the archive, surpassed only by HIVE-COTE 2.0 (0.8895, p_Holm = 0.295, no statistically significant difference), while outperforming Hydra+MultiRocket (0.8818), MultiRocket (0.8797), and HIVE-COTE 1.0 (0.8786, p_Holm = 0.048). CADENCE closes the gap to HIVE-COTE 2.0 to 0.31 percentage points while taking an average of only 17.53 seconds per dataset on a dual-core CPU. Source code and evaluation scripts: https://github.com/onisa-jr/CADENCE.git",
+      "url": "http://arxiv.org/abs/2609.35929v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35929v1",
+      "tldr": "CADENCE is a CPU-native confidence-adaptive dual-expert time series classifier that routes between a convolutional linear expert and a distributional interval expert, achieving near state-of-the-art UCR accuracy (0.8864, comparable to HIVE-COTE 2.0) while running in about 17.53 seconds per dataset.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.77357270348662,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.35792v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935792v1-serverless-gossip-training-of-lstm-failure-detectors-a-matched-protocol-comparison-with-federated-local-and-centralized-learning-on-nasa-c-mapss",
+      "source": "arxiv",
+      "title": "Serverless gossip training of LSTM failure detectors: A matched-protocol comparison with federated, local and centralized learning on NASA C-MAPSS",
+      "authors": [
+        "Yusuf Öztürk",
+        "Enes Göktekin",
+        "Bengisu Atlı",
+        "Akın Öztürk",
+        "Zhixiang Wang",
+        "Ulas Bagci"
+      ],
+      "authors_text": "Yusuf Öztürk, Enes Göktekin, Bengisu Atlı, Akın Öztürk, Zhixiang Wang, Ulas Bagci",
+      "abstract": "Industrial predictive maintenance increasingly depends on learning from equipment spread across sites whose sensor data cannot easily be pooled. Federated averaging (FedAvg) solves this with a central aggregation server; gossip learning removes the server, but its behaviour for recurrent failure-detection models has not been measured under controlled conditions. We compare synchronous ring gossip with FedAvg, isolated local training and a centralized reference for a stacked LSTM that detects imminent failure on the NASA C-MAPSS turbofan benchmark. All methods share one open implementation, architecture, initialization, optimizer, data split and training budget, and the primary endpoint uses one terminal window per test engine to avoid the statistical dependence of overlapping windows. On FD001 (five seeds), gossip reached a terminal-window F1 of 89.6 +/- 1.3%, compared with 89.9 +/- 1.1% for FedAvg, 83.6 +/- 6.7% for local training and 93.5 +/- 2.1% for centralized training, while transmitting the same payload as FedAvg without a coordinator. Node models agreed closely but not exactly (1.8% pairwise decision disagreement versus 5.6% without communication). Across FD002-FD004, peer communication improved terminal-window F1 over local training by 13-28 points; gossip matched FedAvg on FD003 and FD004 but was 4.3 points lower on the multi-condition FD002 subset. Simulated message loss, node failure and server outage changed neither method appreciably, whereas larger rings degraded gossip faster. Ring gossip is therefore a practical serverless alternative when data heterogeneity is moderate, and faster-mixing topologies become important as heterogeneity grows.",
+      "url": "http://arxiv.org/abs/2609.35792v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35792v1",
+      "tldr": "Serverless synchronous ring gossip can train LSTM failure detectors on NASA C-MAPSS nearly as well as federated averaging—while outperforming isolated local training and approaching centralized performance—but its advantage shrinks as data heterogeneity and ring size increase.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Antalya Bilim University",
+        "Northwestern University",
+        "Ankara University"
+      ],
+      "affiliations_text": "Antalya Bilim University, Northwestern University, Ankara University",
+      "score": 3.7553405127331807,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2609.35790v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935790v1-sage-formalization-with-semantic-correction",
+      "source": "arxiv",
+      "title": "Sage: Formalization with Semantic Correction",
+      "authors": [
+        "Thomas Hirtz",
+        "Farzad Jafarrahmani",
+        "Abdelmouksit Sagueni",
+        "Xiang Zhou",
+        "Wenping Deng",
+        "Liang Zhang"
+      ],
+      "authors_text": "Thomas Hirtz, Farzad Jafarrahmani, Abdelmouksit Sagueni, Xiang Zhou, Wenping Deng, Liang Zhang",
+      "abstract": "While neural theorem provers have achieved impressive milestones in formal mathematics, they largely operate on the assumption that faithful Lean 4 formal statements are already provided. Translating informal natural language into a formal language is a critical data bottleneck plagued by an \"illusion of rigor\": standard type-checkers accept statements that compile but drop hypotheses, introduce vacuous truths, or subtly alter mathematical bounds. To resolve this, we introduce Sage (Semantic Agent-Guided Formalization Engine), an agentic framework that replaces monolithic translation with a four-stage decomposed generation pipeline coupled with a dual-signal semantic correction loop. By pairing Lean 4 compiler diagnostics with multi-dimensional semantic feedback, our correction loop enforces mathematical fidelity alongside syntactic validity. By explicitly accounting for the gap between open-ended queries and declarative formal targets, our pipeline prevents models from achieving high formalization rates by guessing unverified answers (exhibiting a 70.9% answer leakage rate). Consequently, Sage suppresses leakage to 2.7% while achieving 73.3% pass@4 joint compilation and semantic fidelity on the Omni-MATH without proofs (compared to 42.0% for a fine-tuned Goedel-Formalizer-V2 baseline). Finally, on IMO-Unformalized, a novel frontier of 175 unformalized International Mathematical Olympiad problems, Sage demonstrates effective zero-shot generalization with 87.4% pass@4 verified fidelity compared to just 19.4% for the baseline, winning over 79% of blind pairwise evaluations.",
+      "url": "http://arxiv.org/abs/2609.35790v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35790v1",
+      "tldr": "Sage is an agentic autoformalization framework that replaces monolithic natural-language-to-Lean 4 translation with a four-stage decomposed pipeline and a dual-signal semantic correction loop combining compiler diagnostics and semantic feedback, reducing answer leakage to 2.7% and achieving 73.3% pass@4 on Omni-MATH and 87.4% verified fidelity on IMO-Unformalized.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7174945733445512,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.35854v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935854v1-position-lets-strengthen-verifiability-if-we-cant-enforce-reproducibility",
+      "source": "arxiv",
+      "title": "Position: Let's Strengthen Verifiability If We Can't Enforce Reproducibility",
+      "authors": [
+        "Samet Hicsonmez",
+        "Nermin Samet",
+        "Renaud Marlet"
+      ],
+      "authors_text": "Samet Hicsonmez, Nermin Samet, Renaud Marlet",
+      "abstract": "In the field of Machine Learning, many papers contain empirical results supporting claimed statements or illustrating the performance of a proposed method. However, most practitioners know that (1) results are generally hard to reproduce, and increasingly so, (2) code is not often available to do so, and (3) it hinders the development of research. In this position paper, we analyze and quantify these issues, and make concrete proposals to improve result checkability, if not reproducibility. Code and supporting materials are available at https://github.com/giddyyupp/position-enforce-verifiability.",
+      "url": "http://arxiv.org/abs/2609.35854v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35854v1",
+      "tldr": "Given that many machine learning results are hard to reproduce and code is often unavailable, this position paper proposes concrete measures to improve the verifiability of reported experiments if full reproducibility cannot be enforced.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher",
+        "Valeo.ai"
+      ],
+      "affiliations_text": "Independent Researcher, Valeo.ai",
+      "score": 3.7124172784376404,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.35848v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935848v1-learned-compression-of-sar-phase-history-data-a-rate-honest-feasibility-study-on-gotcha",
+      "source": "arxiv",
+      "title": "Learned Compression of SAR Phase-History Data: A Rate-Honest Feasibility Study on GOTCHA",
+      "authors": [
+        "Alizishaan Khatri"
+      ],
+      "authors_text": "Alizishaan Khatri",
+      "abstract": "On-board compression of synthetic aperture radar (SAR) phase history is bandwidth-critical, and block-adaptive quantization (BAQ) remains the operational standard. We test whether a small convolutional autoencoder, with its encoder on the sensor, can compete with BAQ on complex phase-history patches from the AFRL GOTCHA collection. Every method is charged for all transmitted bits, rates are reported in bits per complex sample (b/cs), and detection is scored by one-to-one matching of CA-CFAR detections. The autoencoder (28,656 encoder parameters) loses at every rate. At 16 b/cs it reaches -2.87 dB NMSE, against -35.5 dB for 8-bit BAQ with $\\pm 3σ$ clipping and -41.0 dB with a tuned clipping range. It also loses to a $16 \\times 16$ block Karhunen-Loève transform (KLT), a local linear coder with a tenth of its encoder cost (-5.39 dB). Running the network in a companded Fourier domain helps, but its detection F1 remains bounded at 33%. The evidence points to this model, its normalization, and its objective, not to a fundamental limit of learned coding. Per patch, the data have modest lag-1 coherence ($|ρ| \\approx 0.3$) and patch-specific spectral concentration. Two findings concern evaluation itself. First, 97% of CFAR crossings on raw $64 \\times 64$ patches are border artifacts of the zero-padded detector. Second, on interior cells BAQ's clipping range decides detection: 8-bit BAQ keeps 69% F1 with tuned clipping but 17% at $\\pm 3σ$, and at 8 b/cs or less adaptive FFT thresholding preserves more detections than BAQ. We close with an evaluation protocol for learned radar compression.",
+      "url": "http://arxiv.org/abs/2609.35848v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35848v1",
+      "tldr": "This rate-honest GOTCHA feasibility study finds that a small convolutional autoencoder for on-board SAR phase-history compression fails to beat block-adaptive quantization, block KLT, or adaptive FFT thresholding at every rate, while exposing critical evaluation pitfalls and proposing a protocol for learned radar compression.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Wrynx Inc"
+      ],
+      "affiliations_text": "Wrynx Inc",
+      "score": 3.6541922022773625,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2609.35910v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935910v1-the-decision-value-of-perception-compute",
+      "source": "arxiv",
+      "title": "The Decision Value of Perception Compute",
+      "authors": [
+        "Hoang Pham Cong",
+        "Ho Viet Duc Luong"
+      ],
+      "authors_text": "Hoang Pham Cong, Ho Viet Duc Luong",
+      "abstract": "Adaptive perception spends extra computation on inputs where perception is expected to improve. When perception feeds a downstream decision system, a better perception output need not produce a better decision. We define the decision value of perception compute as the change in downstream loss from escalating an input from a cheap to an expensive perception mode. Because this value can be negative, the allocation of perception compute should be judged against a budget-constrained decision oracle, with uniform full-fidelity inference as a baseline rather than an upper bound. We introduce DEEP (Decision Evaluation for Escalated Perception), a benchmark that scores pre-escalation allocators against this oracle under selection, latency and energy budgets, charging each allocator for its own computation. With deployed monocular geometry on KITTI and nuScenes, we find that 34--54% of the escalations that change downstream loss make it worse; harmful escalations also occur for the published PDM-Closed planner, evaluated open-loop on nuPlan with real detector outcomes. On nuScenes, perception-level gain frequently disagrees in sign with decision value. This mismatch has practical consequences: choosing among fixed deployable signals by missed-object perception gain rather than by decision value reduces realized test decision gain by 7.4% of the all-cheap loss on average. Learned allocators recover part of the oracle's value by finding beneficial escalations but select nearly as much harm as random, and once their own computation is charged at a 20% latency budget, only the lightweight routers, at about 3.5\\% of a full detector pass, still beat random.",
+      "url": "http://arxiv.org/abs/2609.35910v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35910v1",
+      "tldr": "This paper defines the decision value of perception compute and introduces DEEP, a budget-constrained decision-oracle benchmark showing that better perception often fails to improve—and can even harm—downstream decisions, so adaptive perception should be allocated by decision-level value rather than perception-level gain alone.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6401656024020075,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2609.35852v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935852v1-a-mesoscopic-view-of-transformer-weights-through-row-and-column-scale-fields",
+      "source": "arxiv",
+      "title": "A Mesoscopic View of Transformer Weights Through Row and Column Scale Fields",
+      "authors": [
+        "Tiexin Ding"
+      ],
+      "authors_text": "Tiexin Ding",
+      "abstract": "Pooled statistics of Transformer weights obscure how magnitude is distributed across functional channels, while individual weights are too numerous to compare directly. We study the mesoscopic level between them: row and column scale fields, the median-centred log-RMS profiles of a weight matrix over its channels, which together with a global scale and a full balanced core represent the matrix exactly. Across public Pythia checkpoints at four sizes and controlled runs from three initialization families, balancing reveals similar measured core magnitude profiles. A mixture bridge, with its form fixed before the analysis and its coefficients fitted, predicts the pooled-shape departure from field width on held-out runs and data arms of the controlled grid. The indexed fields retain further structure: they align across projections that share a functional channel, and query/key profiles follow reassigned RoPE frequencies rather than fixed matrix coordinates. Training trajectories show early field formation followed by component-dependent broadening or recession. Extending the channel-based analysis to AdamW's second moment reveals related functional organization in its log-space row and column factors. Finally, edits of a frozen checkpoint separate reciprocal scale balance, which preserves the forward computation, from relative channel gain: flattening the gain increases in-distribution loss while preserving matrix norms and the balanced core. Row and column scale fields thus connect pooled magnitude statistics to channel organization and provide coordinates for tracking and testing trained weight structure.",
+      "url": "http://arxiv.org/abs/2609.35852v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35852v1",
+      "tldr": "This paper introduces row and column scale fields—median-centered log-RMS profiles of Transformer weight matrices—as a mesoscopic representation that, together with global scale and a balanced core, reveals stable core magnitude profiles, functional channel and RoPE-related alignment, training dynamics, analogous structure in AdamW’s second moment, and a loss-sensitive relative channel gain separable from invariant reciprocal balancing.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.476123168419269,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2609.35856v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935856v1-beyond-keywords-leveraging-generative-llms-and-label-aggregation-to-classify-economic-policy-uncertainty-in-news-articles",
+      "source": "arxiv",
+      "title": "Beyond Keywords: Leveraging Generative LLMs and Label Aggregation to Classify Economic Policy Uncertainty in News Articles",
+      "authors": [
+        "Paul Trust"
+      ],
+      "authors_text": "Paul Trust",
+      "abstract": "This research describes the adaptation of Large Language Models (LLMs) for economic monitoring in the public sector to automatically determine whether an article discusses Economic Policy Uncertanity (EPU) and to identify its specific type. Previous studies either rely on keywords, which often result in a high count of false positives, or use machine learning approaches that require a large number of quality human labeled data that is costly and time consuming to acquire. In this study, we propose approaches based on weak supervision techniques, using generative LLMs to create synthetic labels through prompting, making the approach both cost-effective and scalable. Additionally, we propose methods for for multi-label and hierarchical classification of articles related to EPU.",
+      "url": "http://arxiv.org/abs/2609.35856v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35856v1",
+      "tldr": "This paper proposes a cost-effective, scalable weakly supervised framework that uses generative LLMs to create synthetic labels via prompting and label aggregation for fine-tuning classifiers to perform binary, multi-label, and hierarchical classification of Economic Policy Uncertainty in news articles, reducing reliance on costly human annotation and keyword-based false positives.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.432096532380381,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.35840v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935840v1-matrix-vector-complexity-of-low-rank-approximation",
+      "source": "arxiv",
+      "title": "Matrix-Vector Complexity of Low-Rank Approximation",
+      "authors": [
+        "Haihan Zhang",
+        "Wendao Wu",
+        "Chenheng Zhang",
+        "Yanyi Li",
+        "Chunyuan Zheng",
+        "Cong Fang",
+        "Haoxuan Li",
+        "Zhouchen Lin"
+      ],
+      "authors_text": "Haihan Zhang, Wendao Wu, Chenheng Zhang, Yanyi Li, Chunyuan Zheng, Cong Fang, Haoxuan Li, Zhouchen Lin",
+      "abstract": "We establish matching polynomial query bounds for low-rank approximation from exact matrix--vector products. Given an unknown matrix $A\\in\\mathbb{R}^{m\\times n}$, at each step a randomized algorithm chooses either $v\\in\\mathbb{R}^n$ and receives $Av$, or $u\\in\\mathbb{R}^m$ and receives $A^\\top u$. The choice may depend measurably on all previous queries and replies and on the algorithm's private randomness; each vector product costs one query. The output is a rank-$k$ right projector with Schatten-$p$ residual at most $1+\\varepsilon$ times optimal. Write $N=\\min\\{m,n\\}$ and let $Q_p^*$ denote the worst-case query budget for success probability $2/3$ on every input. For every $1\\le k<N$ and sufficiently small $\\varepsilon$, our lower bounds, combined with existing Krylov upper bounds, give $Q_p^*=\\widetildeΘ\\!\\left(\\min\\{N,k\\min\\{p^{1/6}\\varepsilon^{-1/3},\\varepsilon^{-1/2}\\}\\}\\right)$ $(2\\le p<\\infty)$, $Q_\\infty^*=\\widetildeΘ\\!\\left(\\min\\{N,k\\varepsilon^{-1/2}\\}\\right)$. These bounds have universal constants and allow $p$ to vary with the problem parameters, identifying the transition at $p\\varepsilon\\asymp1$. A complementary result for each fixed $1\\le p<2$ gives $\\widetildeΘ_p(\\min\\{N,k\\varepsilon^{-1/3}\\})$, with constants and an accuracy threshold that may depend on $p$. Together, the results recover this fixed-norm rate for every fixed finite $p$, supplying the multiplicative rank dependence missing from previous lower bounds. Tildes suppress logarithmic factors. The proof extends adaptive Wishart deferred decisions to a rectangular factor with a $k$-dimensional nullspace. Posterior overlap gives a short fixed-norm argument, while persistence of small compression eigenvalues controls growing $p$ and the spectral endpoint. Exact range recovery handles target costs of order $k$; the Wishart family covers the remaining regimes.",
+      "url": "http://arxiv.org/abs/2609.35840v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35840v1",
+      "tldr": "This paper proves matching matrix-vector query bounds for relative-error rank-\\(k\\) low-rank approximation, showing that the optimal query complexity scales as \\(\\widetilde{\\Theta}(\\min\\{N, k\\min\\{p^{1/6}\\varepsilon^{-1/3}, \\varepsilon^{-1/2}\\}\\})\\) for \\(2\\le p<\\infty\\) and \\(\\widetilde{\\Theta}(\\min\\{N, k\\varepsilon^{-1/2}\\})\\) for \\(p=\\infty\\), thereby recovering the multiplicative rank dependence and identifying the transition at \\(p\\varepsilon \\asymp 1\\).",
+      "detailed_reading": null,
+      "affiliations": [
+        "Peking University"
+      ],
+      "affiliations_text": "Peking University",
+      "score": 3.4313716798432434,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.35855v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935855v1-mara-chain-rethinking-failure-as-a-stepping-stone-for-ai-system-auto-evolution",
+      "source": "arxiv",
+      "title": "Mara Chain: Rethinking Failure as a Stepping Stone for AI System Auto-Evolution",
+      "authors": [
+        "Yubin Lyu",
+        "Fu Li",
+        "Jiawei Fei",
+        "Yang Zhao",
+        "Weixing Mei",
+        "Yinan Wu"
+      ],
+      "authors_text": "Yubin Lyu, Fu Li, Jiawei Fei, Yang Zhao, Weixing Mei, Yinan Wu",
+      "abstract": "Optimizing deployed AI systems increasingly amounts to editing prompts, skills, harnesses, and code rather than model weights. Existing approaches commonly optimize these artifacts through propose-evaluate-select procedures, where candidate configurations are evaluated and only those meeting an acceptance criterion are selected. Yet our analysis shows that discarded candidates often contain information critical for subsequent optimization. Discarding them causes later proposals to revisit the same failure modes. We introduce Mara Chain, a refinement procedure that turns rejected candidates into stepping stones. Rather than discarding a rejected candidate, Mara Chain retains and iteratively refines it using evidence accumulated across preceding attempts. The procedure limits each refinement chain to a fixed depth and applies Pareto-filtered Top-N selection to bound the candidate pool. Across AppWorld skill optimization, TerminalBench 2.1 harness optimization, and MuSiQue retrieval-pipeline optimization, Mara Chain delivers greater task-performance gains with fewer rollouts. It outperforms GEPA, ACE, and SkillOpt-Lite by up to 20.5% in relative performance on AppWorld, reaching the target score with 65.5% fewer rollouts than GEPA. It improves the pass rate by 20.2 and 22.5 percentage points over AHE and Meta-Harness on TerminalBench 2.1, respectively, and improves MuSiQue test nDCG@10 and Recall@10 by 0.104 and 0.131 over a hand-written retrieval pipeline.",
+      "url": "http://arxiv.org/abs/2609.35855v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35855v1",
+      "tldr": "Mara Chain rethinks rejected candidates in AI system optimization as stepping stones that are iteratively refined using accumulated evidence, achieving larger performance gains with fewer rollouts than baselines across AppWorld, TerminalBench 2.1, and MuSiQue.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.409020295042228,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2609.35800v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935800v1-headguard-selective-head-protection-for-low-bit-vlm-kv-cache-quantization",
+      "source": "arxiv",
+      "title": "HeadGuard: Selective Head Protection for Low-Bit VLM KV-Cache Quantization",
+      "authors": [
+        "Nenad Banfic"
+      ],
+      "authors_text": "Nenad Banfic",
+      "abstract": "Low-bit key-value (KV) cache quantization saves storage but can sharply degrade vision-language model (VLM) accuracy. We introduce HeadGuard, a composable head-protection method that augments a base KV-cache quantizer with a fixed high-precision mask. Image-sensitivity and output-sensitivity scores select physical KV heads offline, with approximately 1/8 protected in the main experiments; their image keys and optionally values remain in bfloat16 (BF16), while the base quantizes unprotected image entries. Across eight VLMs, three base quantizers, and eight benchmarks (six discriminative and two generative), HeadGuard recovers a substantial fraction of lost accuracy on weaker quantizers, with the strongest gains for Qwen and InternVL. At 2 bits, the six-task discriminative mean over eight models rises from 0.436 to 0.580 on the weakest base; protection can also improve generated answers and caption fidelity to BF16 outputs. Mean accuracy gains persist across all three quantizers with both tested calibration datasets. Keys-only protection retains substantial recovery at lower modeled storage cost. Evaluated through simulated quantization, HeadGuard offers a composable way to improve low-bit VLM accuracy without replacing the underlying quantizer.",
+      "url": "http://arxiv.org/abs/2609.35800v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35800v1",
+      "tldr": "HeadGuard improves low-bit VLM KV-cache quantization by using offline image- and output-sensitivity scores to keep about 1/8 of physical KV heads’ image keys (and optionally values) in BF16 while the base quantizer handles the rest, substantially recovering accuracy across eight VLMs, three quantizers, and eight benchmarks without replacing the underlying quantizer.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft"
+      ],
+      "affiliations_text": "Microsoft",
+      "score": 3.291572354729083,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2609.35797v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935797v1-binarization-flattens-the-score-space",
+      "source": "arxiv",
+      "title": "Binarization Flattens the Score Space",
+      "authors": [
+        "Jacob Cole"
+      ],
+      "authors_text": "Jacob Cole",
+      "abstract": "Large language model (LLM) judges are often used as rewards to train policies on objectives that deterministic verifiers cannot capture. However, these rewards are often collapsed to pass/fail ({0, 1}), which reports the verdict but not how well a response met each criterion. We model each pass/fail verdict as a score on an unreported scale, compared with one cutoff. A stretch of that scale moves every score proportionally toward or away from the cutoff, but never across it, so no verdict changes. A policy is therefore free to apply any stretch without changing anything the panel reports. Under a joint-Gaussian model, a third grade adds a second threshold and removes this affine stretch ambiguity. On MATH and SciBench outputs from one seven-criterion judge, all 14 constructed criterionwise stretches were invisible after binarization but visible with three grades. At $n=1{,}024$, a test given both population laws had at least 96.5% power at a $1.5\\times$ stress. Retaining grades closes one blind spot created by binarization, but verdicts alone remain insufficient as some changes are still indistinguishable from genuine improvement. These include arbitrary within-grade changes and fixed-covariance, loading-aligned mean shifts -- the signature of a sycophancy-shaped lift the panel reads as competence. The shared-factor reference approximation fit MATH and SciBench but not HealthBench, delineating its empirical scope. We recommend keeping at least three grades (for example, asking the judge whether each criterion is fully, partially, or not met and rewarding {0, 0.5, 1}), and externally validating gains along the remaining direction, which no finer scale removes.",
+      "url": "http://arxiv.org/abs/2609.35797v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35797v1",
+      "tldr": "This paper shows that binarizing LLM-judge scores into pass/fail hides score-scale changes that can be removed by keeping at least three grades (e.g., 0/0.5/1), though some reference-like mean shifts remain indistinguishable and require external validation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UC Berkeley"
+      ],
+      "affiliations_text": "UC Berkeley",
+      "score": 3.2302535752703294,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.35795v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935795v1-calibration-first-cross-cohort-multimodal-temporal-learning-for-transferable-asthma-risk-forecasting",
+      "source": "arxiv",
+      "title": "Calibration-First Cross-Cohort Multimodal Temporal Learning for Transferable Asthma-Risk Forecasting",
+      "authors": [
+        "Taimoor Ahmad"
+      ],
+      "authors_text": "Taimoor Ahmad",
+      "abstract": "Asthma deterioration forecasting must remain reli- able when patient populations, sensor ecosystems, and available modalities change across cohorts. Existing models commonly optimize within-cohort discrimination and may produce poorly calibrated probabilities after transfer. We present CALIBRA, a calibration-first multimodal temporal framework for short- horizon risk prediction with incomplete data. Dedicated recurrent encoders process environmental, pulmonary, symptom, medication, wearable, and context streams; a reliability-conditioned gate suppresses stale or absent modalities, while gradient-reversal training discourages avoidable cohort signatures. A shrinkage- based hierarchical logistic layer calibrates probabilities using a patient-disjoint target subset, and split conformal prediction provides abstention-capable prediction sets. To avoid fabricating clinical evidence, we evaluate the complete implementation on a documented three-cohort semi-synthetic benchmark with controlled distribution shift, informative missingness, and sealed target patients. Across five configured seeds, CALIBRA achieved mean target-test AUPRC 0.224 versus 0.240 for the strongest non-ablation comparator, TemporalTransformer; mean AUROC was 0.717, and Brier score was 0.098. Experiments additionally assess complete-modality failures, calibration, conformal coverage, decision curves, subgroup behavior, ablations, runtime, and parameter count. The results verify the method and reproducible pipeline under controlled shift, but do not establish clinical effectiveness. External validation on harmonized real asthma. Overall this artifact provides evidence for carefully governed real-cohort validation.",
+      "url": "http://arxiv.org/abs/2609.35795v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35795v1",
+      "tldr": "The paper presents CALIBRA, a calibration-first multimodal temporal framework that combines reliability-gated recurrent encoders, cohort-adversarial training, hierarchical probability calibration, and split conformal prediction to forecast short-horizon asthma risk across cohorts with incomplete modalities, demonstrating reproducible controlled-shift performance on a semi-synthetic benchmark without establishing clinical effectiveness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Superior University Lahore"
+      ],
+      "affiliations_text": "Superior University Lahore",
+      "score": 3.2248251673142088,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.35876v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935876v1-hybrid-ensemble-learning-for-eeg-based-epileptic-seizure-forecasting",
+      "source": "arxiv",
+      "title": "Hybrid Ensemble Learning for EEG-Based Epileptic Seizure Forecasting",
+      "authors": [
+        "Mason Dana",
+        "Khandaker Mamun Ahmed"
+      ],
+      "authors_text": "Mason Dana, Khandaker Mamun Ahmed",
+      "abstract": "Epileptic seizure forecasting aims to provide actionable warnings before seizure onset, yet patient-independent generalization and false-alarm control remain major challenges. We propose a calibrated hybrid ensemble for EEG-based seizure forecasting that combines five deep learning models and three classical machine learning models through a logistic regression stacking meta-learner. The proposed pipeline integrates signal preprocessing, handcrafted feature extraction, class-imbalance handling, probability calibration, and clinically motivated post-processing. We evaluate the framework on CHB-MIT using strict Leave-One-Patient-Out (LOPO) cross-validation, with threshold and post-processing parameters selected only on held-out meta data. On the filtered cohort, excluding patients with anomalous preictal rates below 1\\% or above 15\\%, the model achieves 74.2\\% seizure-level sensitivity at 1.24 false alarms per hour, with an average warning time of 16.9 minutes. A test-tuned oracle constrained to the target false-alarm budget achieves 60.9\\% sensitivity at 0.951 false alarms per hour, highlighting the importance of reporting sensitivity together with realized false-alarm rates. Our code is available at: https://github.com/DanaMason/IEEE-CARS-Hybrid-Ensemble-Learning-for-EEG-Based-Epileptic-Seizure-Forecasting",
+      "url": "http://arxiv.org/abs/2609.35876v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35876v1",
+      "tldr": "This paper presents a calibrated hybrid ensemble that stacks five deep learning and three classical machine learning models via logistic regression for patient-independent EEG-based epileptic seizure forecasting, achieving 74.2% seizure-level sensitivity at 1.24 false alarms per hour with an average 16.9-minute warning time on CHB-MIT under strict leave-one-patient-out evaluation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Dakota State University"
+      ],
+      "affiliations_text": "Dakota State University",
+      "score": 3.1631437640857625,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2609.35867v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/09/30/260935867v1-relobgen-replayable-limit-order-book-message-generation",
+      "source": "arxiv",
+      "title": "ReLOBGen: Replayable Limit Order Book Message Generation",
+      "authors": [
+        "Junoh Kang",
+        "Kiseop Lee",
+        "Bohyung Han"
+      ],
+      "authors_text": "Junoh Kang, Kiseop Lee, Bohyung Han",
+      "abstract": "We propose ReLOBGen, a method for generating limit order book (LOB) messages that are replayable by construction. Replayability is required for closed-loop market simulation, yet existing LOB message generators may produce non-replayable raw messages, i.e., messages inconsistent with the current market state. These generators therefore rely on post-hoc correction or rejection followed by resampling, which may alter the replayed message distribution or increase inference cost. ReLOBGen instead ensures replayability during generation: it selects the referenced order from the resting orders in the current LOB and then generates the remaining message fields to be consistent with that order and the market state. For realistic reference selection, ReLOBGen samples from a learned distribution over eligible resting orders, efficiently computed from cached order representations and a context-dependent query. It then enforces the consistency of the remaining fields by masking out invalid tokens. Together, these components enable efficient generation of realistic messages without post-hoc correction or resampling. In 500-message rollouts, ReLOBGen achieves 100% replayability, improves market realism, particularly for top-of-book statistics and the relative prices of LOB messages, and provides a $2.7\\text{-}3.6\\times$ speedup per replayed message over the LOBS5 baseline.",
+      "url": "http://arxiv.org/abs/2609.35867v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.35867v1",
+      "tldr": "ReLOBGen generates limit order book messages that are replayable by construction—selecting a referenced resting order via a learned distribution and masking invalid fields—thereby achieving 100% replayability, improved market realism, and a 2.7–3.6× speedup over LOBS5 without post-hoc correction or resampling.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.8946464516255883,
+      "score_text": "2.9"
+    }
+  ]
+}
