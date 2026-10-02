@@ -1,0 +1,15 @@
+# The Hidden Costs of 99% Accuracy: A Trustworthiness Audit of the Telco Customer Churn Benchmark
+
+- 区域：速读区
+- 排名：12
+- 匹配度：2.8/10
+- 来源：arxiv
+- 作者：Soumyadeep Roy
+- 机构：St. Xavier's College (Autonomous)
+- 链接：[arXiv / Source](http://arxiv.org/abs/2610.00118v1) · [PDF](https://arxiv.org/pdf/2610.00118v1)
+
+## TLDR
+This paper audits the IBM Telco Customer Churn benchmark and finds that its headline 99% accuracy masks four trustworthiness failures—pre-split SMOTE leakage, algebraically redundant `TotalCharges` corrupting SHAP interpretation, inadequate probability calibration (with isotonic regression as the best default), and cost-optimal thresholds far below F1-optimal ones—and proposes a four-part reporting checklist for trustworthy churn modeling.
+
+## Abstract
+Customer churn prediction on the IBM Telco Customer Churn benchmark (n = 7,043) routinely reports test accuracies above 95%, with the most cited published study reporting 99.01%. We audit this benchmark for four trustworthiness failures invisible to the accuracy- and F1-centred reporting that dominates the literature. First, pre-split SMOTE inflates churn-class F1 by 13.1 percentage points across ten classifiers and fifteen seeds (Wilcoxon p < 10^-4 per classifier); the same leaky pipeline ordering paired with class weighting yields no inflation, isolating the effect to SMOTE's geometric construction. We measure the mechanism directly: approximately 36% of synthetic training points are nearest-neighbour interpolations of test-set instances. Second, the TotalCharges field is approximately determined by tenure multiplied by MonthlyCharges (R2 = 0.999); removing it changes accuracy by less than 0.2 percentage points, yet TreeSHAP ranks it ninth in mean absolute attribution - a pattern that materially corrupts SHAP-based interpretation. We propose an R2 > 0.95 pre-modelling diagnostic. Third, in a 15-seed calibration audit, isotonic regression is the strongest default; temperature scaling fails on class-weighted tree ensembles whose predicted-probability distribution is bimodal. Fourth, the cost-optimal decision threshold (under a 50 USD retention offer and 24-month CLV proxy) is approximately 5-10 times lower than the F1-optimal threshold, saving approximately 77,000 USD per 1,000 customers. We replicate F1 and F2 on Iranian Telecom Churn (within domain) and Bank Customer Churn (across domain): F1 generalises; F2 generalises only within telecom. We synthesise these findings into a four-component reporting checklist - pipeline disclosure, redundancy diagnostic, calibration audit, and cost-sensitive thresholds - and release a reproducible implementation.
