@@ -1,0 +1,728 @@
+{
+  "label": "2026-10-05",
+  "date": "2026-10-05",
+  "generated_at": "2026-10-05T19:50:15",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2610.02341v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002341v1-filter-aware-fine-tuning-for-safe-humanoid-whole-body-tracking",
+      "source": "arxiv",
+      "title": "Filter-Aware Fine-Tuning for Safe Humanoid Whole-Body Tracking",
+      "authors": [
+        "Pranit Mohnot",
+        "Christian Helten",
+        "Daniele Gammelli",
+        "Marco Pavone"
+      ],
+      "authors_text": "Pranit Mohnot, Christian Helten, Daniele Gammelli, Marco Pavone",
+      "abstract": "Safe whole-body motion is essential for deploying humanoid robots in unstructured environments. Modern humanoid control commonly separates reference specification from execution, with a planner, teleoperator, or motion generator providing a reference that a reinforcement-learning policy tracks through dynamically feasible whole-body control. Runtime safety filters, such as control barrier functions (CBFs), offer a promising approach for enforcing newly introduced constraints via interventions on the tracker's outputs. We show, however, that treating the tracking policy and safety filter independently induces fundamental mismatches, as filtering alters both the executed actions and the induced state distribution. We study this policy-filter interface through case studies that isolate dynamics, objective, and information mismatches, highlight their root causes, and use these insights to develop CoFiT (Constrained Filter-aware Tuning), a filter-aware fine-tuning method for pretrained trackers. Across diverse constraint scenes, CoFiT reduces violation time relative to filter-only training by 91% on TWIST2 and 21% on SONIC, while requiring smaller safety filter corrections. On Unitree G1 hardware, CoFiT reduces violation time by 83% for TWIST2 and completes every trial without operator intervention, whereas 50% of baseline trials require an operator stop. Together, these results provide actionable insights into policy-filter interactions and establish design principles for integrating learned trackers with runtime safety filters.",
+      "url": "http://arxiv.org/abs/2610.02341v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02341v1",
+      "tldr": "CoFiT, a filter-aware fine-tuning method for pretrained humanoid whole-body trackers, bridges policy–safety-filter mismatches to reduce violation time by 91% on TWIST2 and 21% on SONIC in simulation and by 83% on Unitree G1 hardware, eliminating operator interventions in all hardware trials.",
+      "detailed_reading": {
+        "motivation": "人形机器人全身运动的安全执行通常依赖参考生成与RL跟踪策略分离，并在运行时叠加CBF等安全滤波器；但滤波会同时改变实际执行动作和策略诱导的状态分布，使跟踪策略与滤波器独立设计产生动态、目标和信息层面的根本失配。本文旨在系统刻画该策略-滤波器接口，并让预训练跟踪器主动适配滤波器。",
+        "method": "提出CoFiT（Constrained Filter-aware Tuning），一种面向预训练全身跟踪器的滤波器感知微调方法。输入为参考全身运动、机器人本体状态与约束状态，输出为关节动作；训练时在闭环中运行CBF等运行时安全滤波器，将滤波器修正后的动作及由此诱导的状态分布作为策略优化分布，并向策略暴露约束/滤波器相关信息，以约束感知目标减少跟踪误差与滤波干预。关键步骤包括：在含约束场景中隔离动态、目标和信息失配，设计早期约束信号、历史信息、动作边界/增量修正等模块，在TWIST2和SONIC预训练追踪器上微调，最后在Unitree G1上验证。",
+        "result": "在多样约束场景中，CoFiT相对仅用滤波器训练/Filter-only显著降低违规时间：TWIST2降低91%，SONIC降低21%，同时所需安全滤波器修正更小。在Unitree G1硬件上，TWIST2违规时间降低83%，所有试验均无需操作员干预完成，而基线50%的试验需要操作员急停。结果表明，将滤波器纳入策略微调闭环能显著提升安全性与可部署性。",
+        "conclusion": "跟踪策略与运行时安全滤波器不能独立处理，滤波造成的执行动作改变和状态分布偏移必须被纳入训练，否则会产生安全与跟踪性能的双重损失。CoFiT通过滤波器感知微调建立了学习型全身跟踪器与运行时安全滤波器的集成设计原则，在仿真和硬件上均有效。",
+        "key_details": "评估使用TWIST2和SONIC预训练追踪器、多样约束场景与Unitree G1真机，指标包括跟踪误差、违规时间、TV、跌倒次数、深度/发生率等。方法细节上，CoFiT以CBF等滤波器的干预为训练信号，强调早期约束、滤波器信息/历史、增量修正和动作边界等消融因素；训练在滤波后闭环状态分布上优化跟踪与约束违反惩罚的权衡。局限性包括依赖仿真约束建模和滤波器可查询/可微性、真机试验规模有限，以及超参与约束设计会显著影响安全-跟踪折中。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.479191098174903,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2610.02339v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002339v1-needlework-offline-rewriting-of-robot-data-with-verified-local-stitches",
+      "source": "arxiv",
+      "title": "NEEDLEWORK: Offline Rewriting of Robot Data with Verified Local Stitches",
+      "authors": [
+        "Juntao Ren",
+        "Yifan Hou",
+        "Shuran Song"
+      ],
+      "authors_text": "Juntao Ren, Yifan Hou, Shuran Song",
+      "abstract": "Robot demonstrations may contain useful behavior even when individual episodes are inefficient or unsuccessful. Trajectory stitching offers a way to compose these behaviors into improved training data, but identifying useful connections and verifying their feasibility is difficult in high-dimensional robot data, where many prior methods rely on low-dimensional state representations. We introduce NEEDLE, an offline dataset-augmentation algorithm that addresses these challenges by adding short, verified action bridges between recorded observations in high-dimensional robot demonstrations. First, NEEDLE identifies and creates connections that bypass suboptimal detours, broaden action coverage, and augment the original dataset with failed trajectories, using only RGB images, proprioception, and episode-level outcomes, without new environment interaction or privileged object state. Next, we present a sampling technique that incorporates accepted bridges into policy training without synthesizing intermediate images or discarding the original demonstrations, allowing policies to learn alternative actions while retaining the original dataset's coverage. On real-robot tasks, NEEDLE improves success rate over the strongest baseline on each task by an average of 21 percentage points. Videos and supplementary materials are on https://needle-work.github.io/.",
+      "url": "http://arxiv.org/abs/2610.02339v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02339v1",
+      "tldr": "NEEDLE is an offline robot data-augmentation method that inserts short, verified action bridges between high-dimensional recorded observations to improve policy training, raising real-robot success rates by an average of 21 percentage points over the strongest baseline.",
+      "detailed_reading": {
+        "motivation": "机器人演示数据即便单条episode效率低下或最终失败，其中仍可能包含可复用的有效行为片段，因此轨迹缝合（trajectory stitching）被视为把碎片行为组合成更优训练数据的途径。但难点在于：在高维机器人数据中如何识别真正有用的连接点，并验证这些连接在实际动力学下是否可行；已有方法大多依赖低维状态表示，难以直接推广到高维视觉观测场景。",
+        "method": "NEEDLE是一种离线数据增强算法，核心是在已记录的高维演示观测之间添加短的、经可行性验证的动作桥（verified action bridges）。输入仅为RGB图像、本体感知（proprioception）与episode级结果标签，不使用新的环境交互，也不使用物体真实状态等特权信息；算法先挖掘并构造可绕过次优绕行路径、扩大动作覆盖面的连接，并把失败轨迹一并纳入增强数据。随后提出一种采样技术，把被接受的桥接样本融入策略训练，既不合成中间图像，也不丢弃原始演示数据，从而让策略学到替代动作的同时保留原数据集的状态-动作覆盖。",
+        "result": "在真实机器人任务上，NEEDLE相对每个任务中最强基线平均提升21个百分点的成功率，说明仅用RGB与本体感知、无需在线交互或特权状态，也能通过离线缝合获得可用的改进数据。",
+        "conclusion": "结果表明，在高维视觉机器人数据中做离线轨迹缝合是可行的：用短的、经本地验证的动作桥连接已有观测，可在不新增环境交互、不合成图像的前提下改善策略表现，为从包含低效或失败片段的演示数据中榨取价值提供了实用方案。",
+        "key_details": "输入与先验约束：仅RGB图像、本体感知和episode级成败标签，不使用特权物体状态、不做新环境交互，因此增强过程完全离线。关键设计在于“局部”与“验证”：桥接片段必须足够短并经过可行性验证才被接受，以控制高维空间中的错误连接风险；采样机制在训练时混合原始演示与被接受的桥，避免合成中间图像带来的伪影，也避免丢失原数据覆盖。方法可同时利用成功与失败轨迹，通过绕过次优绕行来拓宽动作分布。局限性方面，其效果依赖桥接验证的可靠性与短程桥的假设，长距离或大位姿差异的连接可能难以验证；摘要未给出具体超参、桥长上限、采样比例与计算复杂度等实现细节，需参考原文与附录。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.554388269569687,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.02253v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002253v1-approximation-property-of-dropout-neural-networks-sobolev-rates-and-confidence-bounds",
+      "source": "arxiv",
+      "title": "Approximation Property of Dropout Neural Networks: Sobolev Rates and Confidence Bounds",
+      "authors": [
+        "Jia-He Yao"
+      ],
+      "authors_text": "Jia-He Yao",
+      "abstract": "The universal approximation property of dropout neural networks does not by itself describe the network size required for an accurate random realization. In this work, we study approximation of the unit ball of $W^{n,\\infty}([0,1]^d)$ by ReLU networks whose edges are retained independently with probability $p$. The approximation error is measured uniformly over the input domain, and the guarantee holds with probability at least $1-δ$ for a single sampled network. We construct networks of constant depth and size $\\widetilde O_{n,d}(p^{-9}\\varepsilon^{-\\max\\{d/n,2\\}} \\log(1/δ))$. The construction combines bounded local subnetworks, localization on a successful approximation event, and a multiscale Taylor decomposition. Conversely, Sobolev capacity imposes a lower bound on the number of surviving edges, while approximation of a fixed affine function requires an output-layer cost of order $((1-p)/p)\\varepsilon^{-2}\\log(1/δ)$ at sufficiently high confidence. For fixed $p\\in(0,1)$ and $δ<\\min\\{1/2,1-p\\}$, the upper and lower bounds match in the accuracy exponent under a fixed or logarithmic depth budget. When $d\\leq2n$, they also match in confidence up to logarithms of accuracy. We extend the lower bounds to $W^{n,r}$ targets with $L^s$ error, and distinguish this extension from the upper bound for $W^{n,\\infty}$. The optimal retention dependence and logarithmic factors remain open.",
+      "url": "http://arxiv.org/abs/2610.02253v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02253v1",
+      "tldr": "This paper derives matching upper and lower bounds on the size of constant-depth ReLU dropout networks required to uniformly approximate the unit ball of \\(W^{n,\\infty}([0,1]^d)\\) with high probability, showing that the optimal accuracy exponent is \\(\\max\\{d/n,2\\}\\) up to logarithmic and retention-probability factors and quantifying the extra cost of dropout-induced randomness.",
+      "detailed_reading": {
+        "motivation": "dropout 网络的通用逼近性无法刻画一次随机实现达到给定精度所需的网络规模，而已有权重确定性逼近率也未考虑随机删边带来的波动。本文旨在回答：在独立边 dropout 下，为一致逼近 Sobolev 单位球并保证单次采样高概率成功，网络需要多大。",
+        "method": "作者研究独立边保留概率为 p 的 ReLU dropout 网络，目标是以一致范数逼近 W^{n,∞}([0,1]^d) 的单位球，要求 P{sup_x |F_R(x)-f(x)|≤ε}≥1−δ。上界构造采用常深度网络，结合有界局部子网络、仅在成功事件上的局部化、以及多尺度 Taylor 分解：先对局部窗口电路使用 Manita 等人的去偏恒等式获得无偏随机表示，再用共同断点上的并集界把标量集中转为一致估计；随后对 F_J=F_0+Σ(F_j−F_{j−1}) 逐尺度实现并先在同一尺度内求和以保留误差预算。下界方面，用 Sobolev 容量和确定性地界网络 VC 维，约束每个成功实现中存活边数；并对仿射目标 f_0(x)=(1+x_1)/2 直接分析输出层随机和的逼近失败概率，导出输出层代价。",
+        "result": "主要定理给出上界 S_*≤C_{n,d} p^{−9} ε^{−max{d/n,2}} (log(1/δ)+log(1/ε))（忽略对数因子），构造深度为常数 L_{n,d}，即精度指数为 max{d/n,2}。下界为 S_*≥c_{n,d} max{ p^{−1} max{ ε^{−d/n}/(L log(1/ε)), ε^{−d/(2n)} }, ((1−p)/p) ε^{−2} log(1/δ) }。因此固定 p、δ<min{1/2,1−p} 且深度固定或对数深度时，上下界在精度指数上匹配；d≤2n 时置信度依赖也匹配至精度对数因子。下界可推广到 W^{n,r} 目标与 L^s 误差，而上界仅针对 W^{n,∞}。",
+        "conclusion": "dropout 随机逼近的规模由空间分辨率代价 ε^{−d/n} 与输出随机波动代价 ε^{−2} 的较大者决定，而非二者相乘；在固定保留率和高置信度下，常深度 ReLU dropout 网络能达到最优精度指数。最优保留率依赖和精确对数因子仍未解决，d>2n 时的联合置信度下界也尚未建立。",
+        "key_details": "模型为独立边 dropout，偏置不掩码，输出为仿射；大小 S=E+U+1，深度按计算层计，权重无幅值或比特限制。关键技巧包括：用 σ(Z−η) 在成功事件上恢复非负局部支撑；仅对小型局部窗口电路应用去偏恒等式以避免指数级子集展开；多尺度 Taylor 分解中第 j 项幅度约 2^{−jn}、项数约 2^{jd}，乘以 η^{−2} 局部代价后求和得 ε^{−2}Σ2^{j(d−2n)}，从而产生 max{d/n,2}；下界结合 Sobolev 容量、VC 维与输出层方差论证。局限性是未给出有界权重或有限比特实现，上下界仅在精度指数意义下匹配，保留率 p 的最优依赖和 d>2n 的联合下界仍开放。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.5242049595540825,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.02323v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002323v1-world-calibrated-proposal-to-action-flow-for-vision-language-action-models",
+      "source": "arxiv",
+      "title": "World-Calibrated Proposal-to-Action Flow for Vision-Language-Action Models",
+      "authors": [
+        "Jie He",
+        "Wei Li",
+        "Junwen Tong",
+        "Rui Shao",
+        "Wei-Shi Zheng",
+        "Liqiang Nie"
+      ],
+      "authors_text": "Jie He, Wei Li, Junwen Tong, Rui Shao, Wei-Shi Zheng, Liqiang Nie",
+      "abstract": "Flow-based Vision-Language-Action (VLA) policies generate action chunks by transporting samples from a task-agnostic isotropic Gaussian source. As this source is conditioned on neither recent execution nor predicted future evolution, (i) it discards the local continuity established by recently executed motion. (ii) Even when predictive world representations are introduced, they often only condition the transport dynamics rather than determine where generation starts, how far it may deviate, or along which action directions it may expand. Building on this observation, we introduce ProAct, a world-calibrated proposal-to-action framework that makes the generative source itself predictable. (i) To preserve motion continuity, a lightweight Proposal Expert converts recent actions into a scene-aware hypothesis via one motion-anchored endpoint flow-matching step, initializing generation near the demonstrated action manifold. (ii) To jointly capture intended scene evolution and proposal-future compatibility, a prospective World Expert treats the hypothesis as a soft motion prior while predicting the task-consistent latent future. (iii) From this compatibility, the model calibrates a proposal-centered anisotropic source, where a bounded per-step extent controls the allowed deviation and a trace-normalized low-rank geometry under a condition-number budget allocates refinement over coupled translation, rotation, and gripper directions. Compared with $π_{0.5}$, ProAct improves performance across simulation and real-world tasks while reducing denoising steps by 50%, inference latency by up to 25.8%, and increasing throughput by up to 34.8%.",
+      "url": "http://arxiv.org/abs/2610.02323v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02323v1",
+      "tldr": "ProAct is a world-calibrated proposal-to-action flow framework for vision-language-action models that initializes generation from a motion- and scene-aware proposal calibrated by a predicted latent future, improving simulation and real-world task performance while halving denoising steps and reducing latency/increasing throughput compared with π₀.₅.",
+      "detailed_reading": {
+        "motivation": "基于流的VLA策略通常从任务无关的各向同性高斯源生成动作块，而该源既不条件于近期执行动作，也不条件于预测的未来演化，因此会丢弃近期运动建立的局部连续性；即使引入预测性世界表示，它们往往只调节传输动力学，而不决定生成从哪里开始、可偏离多远、沿哪些动作方向扩展。ProAct的动机是让生成源本身可预测，并由世界模型校准。",
+        "method": "输入包含视觉语言观测与近期执行动作序列，首先由轻量Proposal Expert将近期动作经一个运动锚定的端点流匹配步骤转换为场景感知假设，使生成初始化靠近示范动作流形；随后Prospective World Expert把该假设作为软运动先验，预测任务一致的潜在未来；再由提议与未来的兼容性校准以提议为中心的各向异性源，其中受限的每步范围控制允许偏差，迹归一化低秩几何在条件数预算下把细化能力分配到平移、旋转和夹爪耦合方向上，最后动作流从该校准源出发生成动作块。",
+        "result": "与π0.5相比，ProAct在仿真和真实世界任务上均提升性能，同时将去噪步数减少50%、推理延迟最多降低25.8%、吞吐量最多提升34.8%。这些结果说明，让生成源由近期动作与预测未来共同校准，可以在更少采样步数下获得更高任务表现和更高推理效率。",
+        "conclusion": "ProAct通过世界校准的提议到动作流，把生成源从任务无关高斯分布变为由近期动作和预测未来共同决定的各向异性提议中心分布，从而保留运动连续性并增强提议与未来的兼容性。该框架在VLA策略中同时改善了任务性能与推理效率，表明源分布校准是流式动作生成的重要设计维度。",
+        "key_details": "关键实现点包括：原始源为任务无关各向同性高斯；Proposal Expert轻量且仅用一步运动锚定端点流匹配；World Expert以软运动先验预测潜在未来；校准器使用有界每步范围、迹归一化低秩几何和条件数预算，并将细化分配到平移、旋转、夹爪耦合方向。效率收益来自去噪步数减少50%以及延迟和吞吐量改善。局限是摘要未给出具体数据规模、训练损失、超参数值与仿真/真实任务细节，且方法效果可能依赖近期动作质量与世界预测器精度。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.494199789380104,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.02258v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002258v1-parameter-free-interval-dynamic-regret-under-heavy-tailed-noise",
+      "source": "arxiv",
+      "title": "Parameter-Free Interval-Dynamic Regret under Heavy-Tailed Noise",
+      "authors": [
+        "Vaneet Aggarwal"
+      ],
+      "authors_text": "Vaneet Aggarwal",
+      "abstract": "We study online convex optimization with one unbiased stochastic subgradient per round and an unknown finite conditional $p$th noise moment, $1<p\\le2$. For every fixed interval $I$ of length $n$ and comparator path with $Λ_I=1+P_I/D$, one learner achieves\n  \\[ E[Regret_I(u)]\\le\\min(GDn, C[GD\\sqrt{n(Λ_I+\\log^2(2T))} +σDn^{1/p}(Λ_I+\\log^2(2T))^{(p-1)/p}]). \\]\n  The learner uses none of $G,σ,p,I,P_I$, and the constant is universal. Interval adaptation adds to comparator complexity, preserving the distinct mean-gradient and noise exponents. The analysis controls calibration in expectation and limits the cost of observation-scale changes. Its general theorem compares to distributions over predictably available experts with relative-entropy dependence on a nonuniform prior. A common prior favors long windows and long restart lengths. With the statistics supplied, the interval cost becomes $1+\\log(T/n)$, including the optimal full-horizon static rate. A change-of-measure lower bound identifies the noise power of this logarithm for learners retaining a full-horizon optimal guarantee, under explicit conditions. Static comparisons and deterministic partitions follow from the same decisions.",
+      "url": "http://arxiv.org/abs/2610.02258v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02258v1",
+      "tldr": "This paper develops a parameter-free online convex optimization learner that achieves interval-dynamic regret guarantees under heavy-tailed noise with unknown finite \\(p\\)th moments, adapting to comparator complexity and interval length while separating mean-gradient and noise exponents and proving matching logarithmic-cost lower bounds.",
+      "detailed_reading": {
+        "motivation": "研究在线凸优化中评估窗口事后选定、比较器随时间变化且噪声重尾（仅有未知有限 p 阶条件矩，1<p≤2）的场景。全时域保证可能掩盖短窗口内跟踪失败，而未知 G、σ、p、区间和比较器路径长度使区间动态遗憾的参数自由化困难。目标是给出无需调参、对每个固定区间和可比路径均成立的动态遗憾上界，并厘清局部评估的统计代价。",
+        "method": "设定每轮仅收到一个无偏随机次梯度，满足条件矩假设；用区间动态遗憾度量固定区间内与移动比较器的累积损失差。算法维护 N+1 条共享梯度的 AdaGrad 轨迹，按 dyadic 窗口和重启层级构造可预测专家记录 (j,J)，每个专家仅在窗口 J 内活跃并给出对应轨迹预测；使用多速率乘法聚合与有界乘子 F(z)=1+clip(z,-1/2,1/2) 进行在线加权，校准条件期望并由指数检验控制超调。先验 π 把质量偏向长窗口和长重启长度，窗口位置均匀；局部抽取通过尺度变化触发和路径计数器将相对熵复杂度 KL(ν||π) 限制在 O(L^2) 量级，每轮只需 O(log T) 次投影。若 G、σ、p 已知，则将 log^2(2T) 替换为 χ_T(n)=1+log(T/n) 得到更紧界，下界用三元 oracle 和变化测度构造。",
+        "result": "主要定理给出期望区间动态遗憾不超过 min{GDn, C[GD√(n(Λ_I+log^2(2T))) + σ D n^{1/p}(Λ_I+log^2(2T))^{(p-1)/p}]}，等价于 O(B_I(Λ_I+L^2)) 且被 GDn 截断，其中 L=log(2T)、B_I(q)=GD√(nq)+σD n^{1/p}q^{(p-1)/p}。该界不需要 G、σ、p、I、P_I，区间自适应仅以加法进入比较器复杂度；当 Λ_I≥L^2 时可吸收进给定窗口动态率，p=3/2 时噪声项适应因子为 L^{2/3}，均值梯度项为 L。已知统计量时区间代价变为 1+log(T/n)，并保持全时域静态最优率；变化测度下界说明在要求全时域最优保证时，噪声代价 σD n^{1/p} log(T/n)^ρ 在显式条件下是必要的。",
+        "conclusion": "论文实现了重尾噪声下参数自由的区间动态遗憾，统一了静态、动态、区间和全时域保证，并分离了学习噪声统计量的额外上界代价与局部评估的统计下界。结果表明长窗口和长重启优先的先验能自然覆盖区间比较，且已知 G、σ、p 时额外代价仅为对数级 χ_T(n)。局限在于假设每轮一个无偏次梯度、均匀条件 p 阶矩、凸闭域和可用投影，且下界在显式条件下成立，常数虽通用但通常较大。",
+        "key_details": "关键细节包括条件矩假设 E[g_t|F_{t-1}]=v_t、||v_t||≤G、E[||ε_t||^p|F_{t-1}]≤σ^p（1<p≤2），遗憾定义中的 P_I=Σ||u_t-u_{t-1}|| 和 Λ_I=1+P_I/D，以及基准 B_I(q)。算法细节为 dyadic 覆盖、每层 AdaGrad 重启轨迹 V_t^{(j)}=Σ_{r=s}^t||g_r||^2、步长 D/√(2V_t^{(j)})、专家先验 π_{(j,J)}=τ_k ζ_{j|k}/m_k（偏向长窗口和长重启），以及 O(log T) 投影每轮。证明细节包括有界乘子的切线超额与对数缺陷界 min{2z^2,|z|}、条件期望校准界 4η^2(DG)^2+4η^p(Dσ)^p、指数检验控制期望超调、观测尺度变化时 T^3b 触发与 2||g_t||/T^2 重置、每阶段 O(L^2) 对数势预算和相对熵 KL(ν||π) 比较。已知统计量时使用 χ_T(n)=1+log(T/n)；下界使用三元 oracle 与零假设对窗口的变化测度；算法不使用函数值，仅用梯度反馈，区间和比较器固定但学习者事先不知道。"
+      },
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 4.40540960828592,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.02274v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002274v1-awomo-simdataengine-agentic-simulation-readyworld-generation",
+      "source": "arxiv",
+      "title": "Awomo-SimDataEngine: Agentic Simulation-ReadyWorld Generation",
+      "authors": [
+        "Awomo-PhysicalRSI Team",
+        "Danjiao Ma",
+        "Enhui Ma",
+        "Haohan Liu",
+        "Heng Jia",
+        "Hui Shan",
+        "Jianhua Xu",
+        "Jiahuan Zhang",
+        "Jiangdi Xu",
+        "Kaiwen Guo",
+        "Kaicheng Yu",
+        "Linwei Zhang",
+        "Liyang Jin",
+        "Maochun Luo",
+        "Pengyao Niu",
+        "Shiwen Li",
+        "Shuangyu Feng",
+        "Tong Zhang",
+        "Tianheng Wang",
+        "Xin Wang",
+        "Xiangru Huang",
+        "Yongqiang Huang",
+        "Zhaozhi Wang",
+        "Zijian Ma"
+      ],
+      "authors_text": "Awomo-PhysicalRSI Team, Danjiao Ma, Enhui Ma, Haohan Liu, Heng Jia, Hui Shan, Jianhua Xu, Jiahuan Zhang, Jiangdi Xu, Kaiwen Guo, Kaicheng Yu, Linwei Zhang, Liyang Jin, Maochun Luo, Pengyao Niu, Shiwen Li, Shuangyu Feng, Tong Zhang, Tianheng Wang, Xin Wang, Xiangru Huang, Yongqiang Huang, Zhaozhi Wang, Zijian Ma",
+      "abstract": "Generating useful robot-training data requires more than visually plausiblescenes: objects must support interaction, placements must remain physicallyvalid, and tasks must admit repeatable execution. We present\\textbf{Awomo-SimDataEngine}, an agentic system that connects asset and scenegeneration to robot demonstration synthesis. Shared asset services providerigid and articulated objects, including structure-grounded part and jointgeneration with ISArt. Scene generation supports two complementary routes:Unravel reconstructs editable scenes from images, while SimForge buildssingle-room and multi-room environments from text. A graph-native harnesscoordinates construction, validation, andbounded repair, routing failures to the responsible module while retainingunaffected scene state. PolicyForge binds validated worlds to tasks and robotembodiments to produce replayable demonstrations. Evaluations cover assetgeometry, scene quality, and downstream policy learning. On MuJoCo-basedLIBERO-Plus, co-training with Isaac Sim demonstrations improves the overallsuccess rate of a World-Action Model (WAM) from $77.17\\%$ to $89.43\\%$. Goal and spatialsuccess improve by $31.66$ and $6.25$ percentage points, respectively.These results support the utility of the generated data for cross-simulatorpolicy training, with more limited gains on long-horizon tasks.",
+      "url": "http://arxiv.org/abs/2610.02274v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02274v1",
+      "tldr": "Awomo-SimDataEngine is an agentic, graph-native system that generates simulation-ready interactive assets and image- or text-driven scenes and converts them into replayable robot demonstrations, improving cross-simulator policy training on MuJoCo-based LIBERO-Plus from 77.17% to 89.43% success when co-trained with Isaac Sim data.",
+      "detailed_reading": {
+        "motivation": "机器人学习需要可交互、物理有效且可重复执行的训练数据，仅有视觉逼真的场景不足，因为网格可能碰撞几何无效、关节错误、放置不稳定或初始状态不可回放。现有资产生成、场景构建和演示合成能力割裂，缺少对物体身份、坐标系、物理表示、任务要求和验证结果的一致依赖管理。Awomo-SimDataEngine 旨在将资产生成、场景生成和机器人演示合成贯通，并通过有界修复提升仿真就绪世界与下游策略训练数据的可用性。",
+        "method": "输入为文本描述、单视图图像和可选任务请求，至少提供文本或图像；资产生成通过检索、图像到3D、专用生成或程序建模获得候选，ISArt 将单物体图像转为纹理部件网格、URDF 运动树及关节原点/轴/范围，经几何-运动规划、结构约束部件生成、智能体关节绑定和仿真验证完成。场景生成有两条路线：Unravel 以免训练 plan-edit-verify 循环逐步移除物体，利用裁剪和掩码、固定相机点图与未编辑锚点对齐、仅在新表面暴露处融合并按像素和移除轮次归属实例，再按逆移除顺序从房间外壳重组，做约束配准、支撑感知沉降和视觉审计；SimForge 从文本规划房间几何与物体布置，支持单房间和多房间。Graph-Native Harness 用执行图跟踪类型化状态、验证证据、责任模块、修复范围、尝试预算和检查点，按阶段依赖使受影响记录失效并把失败路由给责任模块进行有界修复；PolicyForge 将验收世界绑定到任务、机器人 embodiment 和重置规范，用脚本或运动规划教师于 Isaac Sim 执行，输出同步图像、本体感知和动作，保留成功 episode 作为演示，并通过场景/任务变体、物体替换、初始状态和语言增强扩展数据。所有资产分支共享候选验证、规范化变换、碰撞构建、物理增强与来源追踪，世界须通过硬验证和仿真器打包才被接受。",
+        "result": "ISArt 在60个物体上取得部件几何 CD 0.163，优于 TRELLIS.2+P3-SAM+X-Part 组合基线的0.268；Unravel 在160个物体上将盲评人类资产保真度从4.9提升至8.6。文本场景在179个房间提示和31个多房间提示上按 SceneEval 与 SceneSmith 协议分别评估。基于 MuJoCo 的 LIBERO-Plus 上，用 Isaac Sim 演示做 SimData-Ultra 协同训练，使 World-Action Model 总体成功率从77.17%提升到89.43%，即12.26个百分点，目标与空间泛化分别提升31.66和6.25个百分点；该结果取自13K步预算内按总体成功率选择的最佳检查点，长时程任务增益较小。",
+        "conclusion": "结果表明 Awomo-SimDataEngine 生成的数据对跨仿真器策略训练有实用价值，最大提升出现在目标泛化。系统把资产结构、图像场景证据、有界修复和经校验的演示合成连成统一工作流，但实验未分离各生成器或增强的独立贡献，也未证明真实世界迁移。长时程任务增益有限，说明需要更丰富的顺序任务监督；世界构建、episode 成功与基准策略成功仍是不同验证结果。",
+        "key_details": "关键实现点包括以文本/单图/任务请求为输入、ISArt 的结构规划优先与运动学校验、Unravel 的移除顺序仅作为局部遮挡证据而非全局支撑或深度顺序、固定相机点图按未编辑锚点对齐与像素级来源记录、SimForge 的文本到单/多房间规划、Graph-Native Harness 的类型化状态与有界重试/检查点/依赖失效机制，以及 PolicyForge 在 Isaac Sim 中生成同步观测与动作并保留成功演示。评测数据规模为60个物体、160个物体、179个房间提示和31个多房间提示，下游预算为13K步并按总体成功率选最佳检查点，LIBERO-Plus 在 MuJoCo 上评测。局限包括未做多视图重建、无法从无约束单图唯一恢复度量几何、单图路线依赖固定相机及局部遮挡顺序、未隔离各组件贡献、未验证真实世界迁移，且 harness 效率或 orchestrator 学习未被独立证明。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.256687281925904,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.02324v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002324v1-slow-fast-multi-teacher-on-policy-distillation-for-capability-preservation",
+      "source": "arxiv",
+      "title": "Slow-Fast Multi-Teacher On-Policy Distillation for Capability Preservation",
+      "authors": [
+        "Xiaofei Yin",
+        "Tong Chu",
+        "Jiyuan Fu",
+        "Jun Lan",
+        "Shuheng Zhou",
+        "Huijia Zhu"
+      ],
+      "authors_text": "Xiaofei Yin, Tong Chu, Jiyuan Fu, Jun Lan, Shuheng Zhou, Huijia Zhu",
+      "abstract": "Foundation multimodal large language models are designed to support a broad spectrum of capabilities across diverse domains. Multi-teacher on-policy distillation (MOPD) provides an effective framework for consolidating domain-specific expertise into a single student model. However, MOPD training gradually drives the student away from its initialization model, and general capabilities decline as the displacement grows, resulting in capability interference. A direct remedy is constraining the student toward its initialization, but this suppresses the acquisition of domain expertise as well. We propose Slow-Fast Multi-Teacher On-Policy Distillation (SF-MOPD), which couples a fast model, the current student updated directly by each teacher, with a slow model, an exponential moving average of the student. The slow model absorbs the learning signal gradually, serving as a moving capability reference that fuses the general foundation with confirmed domain expertise. For each teacher, SF-MOPD computes the teacher-induced update in log-probability space and removes only the component that pushes the fast model further away from the slow model, while retaining aligned and orthogonal components. Experiments across multiple model scales demonstrate that SF-MOPD effectively mitigates capability interference, enhances specialized multimodal capabilities, and reduces the average degradation on general-capability benchmarks, consistently outperforming vanilla MOPD.",
+      "url": "http://arxiv.org/abs/2610.02324v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02324v1",
+      "tldr": "SF-MOPD couples a fast student model with a slow EMA reference and projects each teacher-induced update to remove only components that increase slow-fast displacement, thereby preserving general multimodal capabilities while effectively acquiring domain-specific expertise in multi-teacher on-policy distillation.",
+      "detailed_reading": {
+        "motivation": "多教师在线蒸馏（MOPD）可将多个领域专家的互补能力整合到单一学生模型中，但训练会逐渐使学生偏离其初始化模型，且随位移增大通用能力下降，形成能力干扰；直接用KL约束将学生锚定到初始模型虽可缓解漂移，却会同时抑制领域专长的获取，因此需要一种能区分专家能力吸收与通用能力侵蚀的参考机制。",
+        "method": "SF-MOPD维护快模型与慢模型：快模型是当前学生，直接由各教师在其on-policy样本上更新；慢模型是学生参数的指数移动平均，从同一初始化开始并逐步吸收学习信号，作为移动的能力参考。对每个on-policy样本，学生采样响应并与指令拼接后送入学生与教师；在log概率空间计算教师诱导更新方向与慢-快约束方向（慢模型与快模型log概率差，经CenterNorm归一化），用余弦相似度判断教师更新是否扩大慢快位移，并通过投影只移除与慢-快方向相反的分量，保留对齐与正交分量；随后用修改后的目标分布做JSD蒸馏，并保留原始MOPD损失作为正则项，整体目标为L_sf加β倍L_MOPD，数值稳定时可对更新方向做最大范数与逐元素裁剪并重新中心化。该过程仅需参数平滑，无需教师特定梯度存储或额外可训练参数。",
+        "result": "在2B、4B、8B三个Qwen3-VL学生规模、11个基准上的实验表明，SF-MOPD持续优于vanilla MOPD和instruct基线，在2B、4B、8B规模均取得最佳领域特定平均，并改善通用领域与领域特定的权衡；2B规模领域特定平均从38.4开始提升，8B规模完整模型总体平均为67.7，而移除Slow-Fast Projection后退化为经典Mean-Teacher式EMA约束并导致总体平均下降。通用能力保留方面，SF-MOPD降低了MMMU-Pro、MMBench-CN、MMBench-EN、MMStar、HallusionBench等基准上的平均退化；消融还显示慢模型作为EMA参考与每教师投影均有效，β在0.1至1.0范围内的敏感性实验给出了不同总体平均。",
+        "conclusion": "SF-MOPD通过慢-快能力参考与每教师投影机制缓解了多教师在线蒸馏中的能力干扰，在吸收领域专家能力的同时更好保留通用多模态能力，跨多个模型规模一致超越原MOPD，为多教师蒸馏中能力获取与保持的平衡提供了有效方案。",
+        "key_details": "数据使用DeepVision-103K按能力划分出的DataChart、RealWorld Item、Schematic Diagram，并加入Vision-OPD-6K细粒度视觉感知集；教师为Qwen3-VL-8B专家模型（前三个领域用GSPO训练），学生规模为8B、4B、2B。优化使用AdamW，学习率1×10^-5，batch size 64，训练1个epoch，教师权重相等；EMA平滑系数α=0.999，2B与4B模型β=1.0、8B模型β=0.1，投影中ridge项λ=10^-3，并可对投影后更新做最大范数和逐元素裁剪以保证数值稳定。评估用规则匹配抽取答案，失败时用Qwen3-VL-8B-Instruct做LLM-as-judge；领域基准包括MathVerse、VSTAR、ZoomBench，通用基准包括MMMU-Pro、MMBench-CN、MMBench-EN、MMStar、HallusionBench。局限性包括：固定初始化锚无法区分专长获取与通用能力侵蚀，方法依赖维护慢模型EMA且投影仅在慢-快位移方向起作用；此外，增加细粒度教师训练数据采样长度以降低任务异质性时，细粒度性能严重退化，ZoomBench降至40.7。"
+      },
+      "affiliations": [
+        "Fudan University",
+        "Ant Group"
+      ],
+      "affiliations_text": "Fudan University, Ant Group",
+      "score": 4.107555886754241,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.02283v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002283v1-mulora-spectrally-balanced-low-rank-adaptation-for-continual-learning",
+      "source": "arxiv",
+      "title": "MuLoRA: Spectrally Balanced Low-Rank Adaptation for Continual Learning",
+      "authors": [
+        "Junkang Liu"
+      ],
+      "authors_text": "Junkang Liu",
+      "abstract": "Low-rank adaptation (LoRA) provides a parameter-efficient approach to continual learning, but its nominal rank can conceal a loss of effective adaptation capacity. We identify \\emph{spectral plasticity collapse}: during sequential adaptation, update energy becomes concentrated in a small subset of singular modes, leaving much of the available low-rank space underutilized. This exposes a limitation of interference avoidance alone: protecting historical representations does not ensure that the remaining adaptation capacity is responsive to new tasks or effectively utilized. To address this problem, we propose \\texttt{MuLoRA}, which jointly controls capacity allocation and utilization. First, historical whitening identifies input directions with strong current-task response relative to accumulated historical response, yielding a task-adaptive basis that remains fixed during training. Second, approximate polar orthogonalization of momentum updates reduces spectral concentration within theselected space. An orthonormal basis connects these mechanisms by transferring the factor-update spectrum exactly tothe induced weight update. We establish a max--min characterization of exact subspace selection and derive cumulative spectral bounds under controlled cross-step anisotropy. Across five class-incremental benchmarks and eight incremental settings, \\texttt{MuLoRA} achieves the highest mean accuracy in 15 of 16 reported metrics.",
+      "url": "http://arxiv.org/abs/2610.02283v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02283v1",
+      "tldr": "MuLoRA mitigates spectral plasticity collapse in LoRA-based continual learning by using historical whitening and approximate polar orthogonalization to jointly control low-rank capacity allocation and utilization, achieving top accuracy across most class-incremental benchmarks.",
+      "detailed_reading": {
+        "motivation": "LoRA 在持续学习中虽参数高效，但其名义秩可能掩盖有效适应能力的下降；作者发现顺序适应中出现谱可塑性坍缩，即更新能量集中到少数奇异模式，剩余低秩空间未被充分利用。这揭示仅靠避免干扰或保护历史表示，不足以保证剩余适应容量对新任务敏感且被有效利用。",
+        "method": "MuLoRA 在顺序任务上对 LoRA 更新进行容量分配与利用的联合控制：先通过历史白化，以当前任务响应相对于累积历史响应的强度识别输入方向，构造任务自适应基并在训练中固定；随后对动量更新做近似极正交化，在所选空间内降低谱集中度；正交基把因子更新谱精确传递到诱导的权重更新。理论部分给出精确子空间选择的 max-min 刻画，并在受控跨步各向异性下推导累积谱界。推理时沿用标准 LoRA 合并与前向流程，用固定基与优化后的因子更新完成各任务适应。",
+        "result": "在五个类增量基准、八种增量设置下，MuLoRA 在报告的 16 项指标中有 15 项取得最高平均准确率。结果表明，抑制谱集中、均衡利用低秩子空间能比单纯避免干扰更有效缓解持续学习中的可塑性丧失。",
+        "conclusion": "MuLoRA 将 LoRA 持续学习从单纯干涉规避推进到谱容量分配与利用的联合优化，通过历史白化选基与动量更新极正交化实现谱均衡。其理论刻画与跨基准实验支持该方法能更充分地利用低秩适应空间并提升类增量性能。",
+        "key_details": "关键实现点包括：以历史白化作为任务相关方向选择先验，选择后的基在训练中冻结；对动量更新施加近似极正交化以降低有效谱集中；用正交基保证因子空间谱到权重更新谱的精确映射；理论分析依赖 max-min 子空间选择与受控跨步各向异性假设。局限在于方法依赖历史统计的准确性、近似极正交化引入的近似误差，以及仅在类增量分类基准上验证，未覆盖更多任务类型或更大规模模型。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.0291231488267245,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.02251v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002251v1-rank-aware-speculative-sampling-for-diffusion-draft-trees",
+      "source": "arxiv",
+      "title": "Rank-Aware Speculative Sampling for Diffusion Draft Trees",
+      "authors": [
+        "Marcello Bullo",
+        "Yanxiao Liu",
+        "Öykü Sıla Güner",
+        "Arpan Mukherjee",
+        "Deniz Gündüz"
+      ],
+      "authors_text": "Marcello Bullo, Yanxiao Liu, Öykü Sıla Güner, Arpan Mukherjee, Deniz Gündüz",
+      "abstract": "Speculative sampling accelerates diffusion generation by verifying inexpensive draft states in parallel while preserving the target law. Recent tree-based methods allocate the parallel compute budget more effectively than single-chain drafts, as demonstrated by Diffusion Greedy Rejection Sampling (D-GRS). D-GRS generates $K$ conditionally independent candidates per node, and sequentially tests them in their generation order. Yet the sampled candidates admit an informative ranking without additional target-model evaluations. To exploit this, we introduce Rank-Aware Speculative Sampling (RASS), a verification rule for speculative draft trees based on rank-aware list coupling. RASS orders draft candidates along the proposal-target mean displacement and samples a rank with weights optimized to minimize total variation between the selected-proposal and target laws. Finally, the selected candidate is maximally coupled with the target, with residual correction ensuring exact sampling for any choice of rank weights. We evaluate RASS on a Gaussian-mixture target, unconditional pixel-space generation on FFHQ, conditional generation on CIFAR-10, and latent diffusion with Stable Diffusion 3.5 using COCO2014 prompts. Measured by the ratio of standard to speculative sampling's target-model evaluation counts, RASS improves on D-GRS across the evaluated settings, with gains reaching approximately 20% on CIFAR-10 at matched compute budgets.",
+      "url": "http://arxiv.org/abs/2610.02251v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02251v1",
+      "tldr": "The paper introduces Rank-Aware Speculative Sampling (RASS), a rank-aware list-coupling verification rule for diffusion draft trees that ranks draft candidates by proposal–target compatibility and optimizes rank weights to preserve exact sampling, achieving up to ~20% fewer target-model evaluations than D-GRS on CIFAR-10 and consistent gains across other benchmarks.",
+      "detailed_reading": {
+        "motivation": "扩散与流模型推理需要多次串行调用大型目标网络，推测采样通过并行验证廉价草稿状态并保持目标分布来加速；树式草稿方法（如 D-GRS）比单链更有效地利用并行预算，但 D-GRS 按生成顺序逐个测试同一节点的 K 个条件独立候选。这些候选实际上可交换，固定顺序约束丢弃了可利用的排序信息，且相对列表耦合可能严格次优。因此需要一种利用草稿候选排序信息、同时保持精确目标分布的验证规则。",
+        "method": "RASS 是一种面向扩散草稿树的秩感知列表耦合验证规则。目标与提议核均为共享协方差的高斯转移：Q_n=N(m_n^q(y),σ_n^2 I)，P_n=N(m_n^p(y),σ_n^2 I)，其中 m_n^p 由廉价延迟目标提议给出。每轮先按树结构递归抽取每节点 K 个 i.i.d. 草稿候选，并一次批量调用目标模型；在节点验证时，将候选按目标-提议似然比或均值位移排序，采样一个秩，其权重通过最小化被选提议分布与目标分布的总变差来优化；随后对选中候选与目标做最大耦合，并用残差校正确保任意可行秩权重下精确采样目标马尔可夫链。",
+        "result": "在 Gaussian-mixture 目标、FFHQ 无条件像素空间生成、CIFAR-10 条件生成以及 Stable Diffusion 3.5 潜空间扩散（COCO2014 提示）上评估，以标准采样与推测采样的目标模型评估次数之比衡量。RASS 在所评估设置中均优于 D-GRS，匹配计算预算下 CIFAR-10 增益约 20%；理论分析还给出任意列表耦合方案在 i.i.d. 草稿下的接受概率上界，且该界比基于 hockey-stick 散度的界更紧。",
+        "conclusion": "RASS 表明，树式推测扩散中同一节点的可交换草稿候选不应被固定顺序验证，而应利用其可排序性来构造更强的验证提议。通过秩感知列表耦合和残差校正，RASS 在保持精确目标律的同时持续减少昂贵目标模型调用，为扩散模型推理加速提供了可证明且实用的改进。",
+        "key_details": "关键细节包括：草稿树由每节点 K 个候选和深度 L 定义，并行预算 B=|V|；目标与提议共享协方差、仅均值不同，排序无需额外目标评估；秩权重可随提议-目标差异自适应，在两者接近时趋向均匀选择、差异大时集中在高似然候选；选中候选与目标最大耦合，残差校正保证精确性。理论层面给出 i.i.d. 草稿约束下更紧的接受概率上界。局限在于实验覆盖的目标/提议核与数据集有限，性能依赖草稿质量与提议-目标差异，秩权重优化和树管理带来额外开销，且精确性保证依赖所设高斯转移核和可行秩权重等条件。"
+      },
+      "affiliations": [
+        "Imperial College London"
+      ],
+      "affiliations_text": "Imperial College London",
+      "score": 4.001096274428584,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.02248v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/05/261002248v1-state-space-unlearning-for-non-stationary-bias-in-land-surface-forecasting",
+      "source": "arxiv",
+      "title": "State-Space Unlearning for Non-Stationary Bias in Land Surface Forecasting",
+      "authors": [
+        "Anidipta Pal"
+      ],
+      "authors_text": "Anidipta Pal",
+      "abstract": "Operational land surface forecasting systems built on Mamba-family Structured State Space Models absorb non-stationary confounding events (unrecorded irrigation booms, dam-operation shifts, sensor recalibrations) into their state-transition matrices, silently biasing NDVI, LST, and crop phenology predictions long after the physical cause ends. This paper introduces SSU-LSF (State-Space Unlearning for Land Surface Forecasting), the first machine-unlearning framework purpose-built for geoscientific Mamba-based SSMs. We develop EKFac influence functions specialized to the Mamba state matrices via a closed-form matrix-exponential gradient, use spectral-radius-weighted elbow thresholding to localize a temporal confounding footprint $Φ$, and apply Hessian-free projected gradient ascent within a KL-divergence trust region augmented by spatial total-variation (TV) regularization. Proposition 1 establishes that residual confounding is bounded by $\\mathcal{O}\\big((1-ρ(\\bar{A})^{T_c})/((1-ρ(\\bar{A}))μ)\\big)$, which grows with the window length $T_c$. Across three heterogeneous benchmarks and eleven baselines, SSU-LSF achieves confounding reduction rates of $0.773$ (CropHarvest), $0.821$ (NDVI-LST), and $0.859$ (ERA5), with worst-case clean-domain RMSE degradation of $4.2\\%$ on ERA5, converging in 3--5 epochs at $8.4\\times$ lower GPU-cost per unlearning request than full retraining. Code: https://github.com/Anidipta/SSU-LSF",
+      "url": "http://arxiv.org/abs/2610.02248v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02248v1",
+      "tldr": "SSU-LSF is a machine-unlearning framework for Mamba-based land surface forecasting that removes non-stationary confounding bias from state-transition matrices via EKFac influence functions, temporal footprint localization, and Hessian-free projected gradient ascent with spatial TV regularization, achieving high confounding reduction with minimal clean-domain degradation and far lower cost than retraining.",
+      "detailed_reading": {
+        "motivation": "业务化地表预报系统常采用Mamba族结构化状态空间模型，但会把未记录灌溉扩张、水坝调度变化、传感器重校准等非平稳混杂事件吸收进状态转移矩阵，并在物理原因结束后继续污染NDVI、LST和作物物候预测。全量重训练成本高达数十GPU小时，而梯度反转、SISA等已有遗忘方法会显著损伤干净域性能或依赖预分片，缺少面向地理科学Mamba SSM循环结构的机器遗忘框架。",
+        "method": "SSU-LSF以Mamba编码器-解码器为骨干，输入多变量地表观测，在给定混杂时间窗后求解带KL信任域约束的目标：提升对混杂窗口的损失、保留干净域损失并加入参数空间空间TV正则。方法先通过面向Mamba状态矩阵的EKFac影响函数与闭式矩阵指数梯度估计逐时刻影响，再用谱半径加权肘部阈值法定位时间混杂足迹Φ，最后在KL散度信任域内执行无Hessian投影梯度上升，并用空间TV约束相邻patch参数平滑，超出信任域时通过二分行搜索回缩。训练采用AdamW、余弦学习率、100轮和4张A100，遗忘阶段逐请求重新估计EKFac，复杂度约为O(|Wc|·d^2/B)，低于全量重训练的O(T·d^2)。",
+        "result": "在三个异构基准和十一个基线对比中，SSU-LSF取得混杂削减率CRR为0.773（CropHarvest）、0.821（NDVI-LST）和0.859（ERA5），并在ERA5上把最坏干净域RMSE退化控制在4.2%。方法通常3至5轮收敛，每个遗忘请求的GPU成本比全量重训练低8.4倍，且在真实EUMETSAT SEVIRI 2010—2012重校准事件上验证了Tc敏感性，经验R²为0.995。",
+        "conclusion": "SSU-LSF是首个面向地理科学Mamba状态空间模型的机器遗忘框架，能够定位并移除由非平稳混杂事件写入状态矩阵的偏差，在保持干净域精度的同时显著降低遗忘计算成本。其理论界表明残余混杂随混杂窗口长度Tc增长，这为缩短污染窗口和部署在线遗忘提供了可操作依据，但作者注入混杂、理论界偏松和部署场景限制仍需后续验证。",
+        "key_details": "关键实现包括47.3M参数Mamba骨干，6个块、d=256、E=2、N=16，4×4步长4 patch嵌入和3层高斯MLP预测头；数据为NDVI-LST 3847地点2002—2022、ERA5 1920 patch 1979—2022、CropHarvest 87343地点，混杂窗口Tc分别为24、24、6个月。遗忘超参为η=5e-5、β=0.6、δKL=0.05、γ=95百分位、λTV=0.01，单请求GPU成本约为NDVI-LST 1.8、ERA5 5.6、CropHarvest 3.0 GPU小时。理论部分给出编码器Lipschitz界、RKHS分离μ_ref和收敛保证，但μ_ref在独立参考模型上估计；主要局限是三个基准均使用作者注入混杂，真实事件仅附录验证，且Proposition 1的界与观测差距约200倍，说明其定量紧致性有限。"
+      },
+      "affiliations": [
+        "Heritage Institute of Technology"
+      ],
+      "affiliations_text": "Heritage Institute of Technology",
+      "score": 3.9826800842584116,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.02252v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002252v1-counterfactual-predictions-in-scientific-emulators-without-controlled-experiments",
+      "source": "arxiv",
+      "title": "Counterfactual Predictions in Scientific Emulators Without Controlled Experiments",
+      "authors": [
+        "Dingling Yao",
+        "Kahaan Gandhi",
+        "Valentin Duruisseaux",
+        "Boris Bonev",
+        "Francesco Locatello",
+        "Anima Anandkumar"
+      ],
+      "authors_text": "Dingling Yao, Kahaan Gandhi, Valentin Duruisseaux, Boris Bonev, Francesco Locatello, Anima Anandkumar",
+      "abstract": "Many scientific questions require reasoning about what was never observed: What if the conditions, interventions, or history had been different? Models can predict accurately on observed data yet fail on such what-if queries when correlated inputs are varied independently. A common remedy is to add controlled simulation data in which these factors are explicitly disentangled, but this requires access to a simulator, can be computationally expensive, and inherits the simulator's modeling assumptions. We introduce ReRoute, a framework for targeted scientific what-if prediction that combines factual data with partial mechanistic knowledge, without requiring controlled intervention data for adaptation. ReRoute fixes the queried input of a pretrained backbone to a reference value, reintroduces its variation through a known mechanistic pathway, and fine-tunes on the original factual data, while leaving downstream effects to the learned dynamics. We provide a causal identification result for this construction under explicit structural assumptions, with the core argument machine-checked in Lean. After showing that ReRoute achieves highly accurate counterfactual predictions in a controlled advection-diffusion system where exact responses are available, we turn to state-of-the-art climate emulation. On held-out coupled-climate interventions, ReRoute reduces aggregate climate error by 18.2-31.8% under severe CO$_2$ distribution shifts while preserving skill under standard conditions, at a small fraction of the cost of retraining on additional controlled simulations, without even accounting for the substantial expense of generating such data. Finally, on an emulator trained from historical ERA5 reanalysis, where no counterfactual reference exists, ReRoute preserves substantially more of the surface warming implied by the observed boundary conditions under a fixed-CO$_2$ counterfactual.",
+      "url": "http://arxiv.org/abs/2610.02252v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02252v1",
+      "tldr": "ReRoute enables targeted counterfactual what-if predictions from scientific emulators without controlled experiments by fixing the queried input to a reference value, reintroducing its variation through a known mechanistic pathway, and fine-tuning on factual data, improving climate emulation under distribution shift.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Institute of Science and Technology Austria",
+        "NVIDIA",
+        "California Institute of Technology"
+      ],
+      "affiliations_text": "Institute of Science and Technology Austria, NVIDIA, California Institute of Technology",
+      "score": 3.9024181326452383,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.02278v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002278v1-clean-psychometrically-consistent-incremental-cognitive-diagnosis-under-concept-space-expansion-via-architectural-isolation",
+      "source": "arxiv",
+      "title": "CLEAN: Psychometrically Consistent Incremental Cognitive Diagnosis under Concept-Space Expansion via Architectural Isolation",
+      "authors": [
+        "Tao He",
+        "Jinxing Xiang",
+        "Fan Jiang"
+      ],
+      "authors_text": "Tao He, Jinxing Xiang, Fan Jiang",
+      "abstract": "Cognitive diagnosis (CD) is a fundamental task in intelligent education that profiles learner proficiency over knowledge concepts. In real-world learning platforms, newly added items continually introduce previously unseen concepts, necessitating dynamic expansion of the underlying concept space. Yet existing incremental CD models assume a fixed concept space, allowing gradients from new items to overwrite historical pathways and induce catastrophic forgetting. More critically, these methods rely solely on soft constraints to preserve historical diagnoses. Such constraints may fail to satisfy the requirement of diagnostic invariance after incremental updates, a requirement known as psychometric consistency in cognitive diagnosis. Therefore, we propose CLEAN (Continual Learning with Expandable and Architecturally Isolated Networks), a novel incremental CD framework supporting concept-space expansion while providing structural guarantees for pointwise invariance of historical diagnoses. Specifically, CLEAN first introduces a strict topological bipartition protocol, freezes historical diagnostic functions and applies deterministic orthogonal column masking to sever gradient interference. Second, to accommodate concept expansion, expandable full-rank branches with micro-variance initialization are deployed to learn novel concepts. Finally, to verify that this architectural design achieves invariance by construction, we formalize Representation Drift (RD) to quantify the perturbation of historical traits. Extensive experiments on three large-scale educational datasets demonstrate that CLEAN achieves zero RD, preserving old-item metrics identically to static anchors through architectural isolation while remaining competitive with or superior to strong continual-learning baselines on new items.",
+      "url": "http://arxiv.org/abs/2610.02278v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02278v1",
+      "tldr": "CLEAN is an incremental cognitive diagnosis framework that uses architectural isolation, frozen historical pathways, and orthogonal masking to support concept-space expansion with zero representation drift, preserving old-item diagnostic performance while remaining competitive on new items.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Guangdong Polytechnic Normal University",
+        "Shenzhen University"
+      ],
+      "affiliations_text": "Guangdong Polytechnic Normal University, Shenzhen University",
+      "score": 3.744953192167882,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.02255v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002255v1-macts-em-multi-agent-collaborative-time-series-forecasting-with-emergent-memory",
+      "source": "arxiv",
+      "title": "MACTS-EM: Multi-Agent Collaborative Time Series Forecasting with Emergent Memory",
+      "authors": [
+        "Ahmad Shahi",
+        "Mamehgol Yousefi"
+      ],
+      "authors_text": "Ahmad Shahi, Mamehgol Yousefi",
+      "abstract": "Time series forecasting remains a critical challenge across numerous domains. Despite significant advancements, existing approaches struggle with complex phenomena such as regime shifts, cross-domain knowledge transfer, and multimodal data integration. This paper introduces Multi-Agent Collaborative Time Series Forecasting with Emergent Memory (MACTS-EM), a novel framework where specialised agents collaborate to achieve superior forecasting performance. The MACTS-EM architecture integrates: (1) domain-specialised forecasting agents for pattern recognition, anomaly detection, causal inference, and uncertainty quantification; (2) a meta-cognitive layer for dynamic agent allocation; (3) an emergent memory mechanism enabling cross-domain pattern transfer; (4) multimodal contextual integration; and (5) adversarial robustness components. Evaluation across financial markets, climate patterns, energy consumption, and pandemic propagation demonstrates that MACTS-EM outperforms existing approaches in most scenarios, with 8-12% improvement in forecasting accuracy, 22-27% better zero-shot transfer capability, 16-21% enhanced resilience during regime shifts, and 15-18% faster recovery after distribution shifts. Our findings suggest that collaborative, agentic approaches to time series forecasting represent a promising direction beyond traditional architectures, particularly for complex real-world scenarios requiring multi-resolution temporal understanding and contextual adaptation.",
+      "url": "http://arxiv.org/abs/2610.02255v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02255v1",
+      "tldr": "The paper introduces MACTS-EM, a multi-agent collaborative time series forecasting framework with specialized agents, a meta-cognitive coordination layer, and an emergent memory mechanism for cross-domain knowledge transfer and multimodal integration, achieving improved accuracy, transfer, and robustness across finance, climate, energy, and pandemic domains.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Unitec Institute of Technology"
+      ],
+      "affiliations_text": "Unitec Institute of Technology",
+      "score": 3.7302678487473555,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.02268v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002268v1-from-mathematical-to-executable-certificates-for-machine-unlearning",
+      "source": "arxiv",
+      "title": "From Mathematical to Executable Certificates for Machine Unlearning",
+      "authors": [
+        "Ziyu Zhao",
+        "Xinyu Wang",
+        "Xiaowen Chang",
+        "Yixuan He"
+      ],
+      "authors_text": "Ziyu Zhao, Xinyu Wang, Xiaowen Chang, Yixuan He",
+      "abstract": "Machine unlearning is needed when data must be removed because of deletion requests, outdated records, or data-quality concerns, while retraining from scratch can be costly. Certified machine unlearning methods provide mathematical guarantees, while deployed systems release concrete finite-precision artifacts produced by software. To bridge the gap between mathematical guarantees and practical deployment, we introduce Executable Release Certification (ExecCert), a release-time layer that certifies the candidate artifact considered for release. ExecCert either closes a method's native certificate for the executed candidate or applies Retraining-Reference Release Verification (RRV) to certify fidelity to current retain-set retraining. Sequential deletion makes the latter nontrivial because the exact retain-set reference and the stored numerical state evolve separately. For frozen representations with a mutable ridge head, we develop an incremental realization of RRV that maintains certified evidence across deletion requests rather than reconstructing it at each release. On four published unlearning implementations, ExecCert preserves valid certificates, changes release decisions, tightens conservative bounds, and identifies the retraining-reference fidelity supported by concrete outputs. In sequential-service experiments, RRV eliminates false releases caused by stored-equation verification while closely tracking realized error, and incremental certification remains cheaper than both fresh and maintained verified-factor alternatives once release checks become sufficiently frequent.",
+      "url": "http://arxiv.org/abs/2610.02268v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02268v1",
+      "tldr": "The paper introduces Executable Release Certification (ExecCert), a release-time layer that verifies whether concrete finite-precision machine-unlearning artifacts satisfy native mathematical certificates or retraining-reference fidelity, including an incremental RRV method for sequential deletions that prevents false releases and reduces verification cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Arizona State University",
+        "McGill University"
+      ],
+      "affiliations_text": "Arizona State University, McGill University",
+      "score": 3.645526328170038,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.02226v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002226v1-the-geometry-of-monarch-matrix-approximation",
+      "source": "arxiv",
+      "title": "The geometry of monarch matrix approximation",
+      "authors": [
+        "Shintaro Yoshizawa"
+      ],
+      "authors_text": "Shintaro Yoshizawa",
+      "abstract": "Helmke and Shayman showed that, for generic targets, least-squares distance to the manifold of rank-r matrices is a nondegenerate Morse function whose indices are governed by Bruhat-cell codimensions. We develop the analogous theory for Monarch matrices, products of a fixed permutation matrix with two block-diagonal factors. The parametrization's gauge dimension, as well as the codimensions and closure relations of the associated Bruhat-type cells, is determined by a common transfer-matrix invariant, although these quantities are generally distinct. In the equal-block case, we prove the Monarch-Schur theorem, characterizing the permutations that minimize gauge freedom and maximize manifold dimension, and derive a general lower bound for arbitrary partitions. We further establish generic second-order nondegeneracy, a Morse-index formula, and an explicit focal set of measure zero. Finally, we show that the unregularized gradient flow lacks coercivity because of unbounded flat directions. A quartic regularizer restores global convergence, selects a canonical minimum-norm exact solution when one exists, and otherwise yields a well-defined best-approximation image. The regularizer preserves the Monarch architecture and provides a geometric interpretation of weight decay in structured factorized layers.",
+      "url": "http://arxiv.org/abs/2610.02226v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02226v1",
+      "tldr": "This paper develops a Morse-theoretic and Bruhat-combinatorial geometry of Monarch matrix approximation, showing that a single transfer-matrix invariant controls the gauge kernel and cell codimensions, proving a Monarch–Schur theorem for optimal permutations and generic nondegeneracy, and using a quartic regularizer to restore global convergence of gradient flow while preserving the Monarch architecture.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Toyota Motor Corporation"
+      ],
+      "affiliations_text": "Toyota Motor Corporation",
+      "score": 3.6188872350897867,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.02338v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002338v1-sota-soft-tactile-skins-for-dexterous-manipulation",
+      "source": "arxiv",
+      "title": "SoTa: Soft Tactile Skins for Dexterous Manipulation",
+      "authors": [
+        "Jingyun Yang",
+        "Baiyu Shi",
+        "Timothy Yu",
+        "Haitian Liu",
+        "Alberta Longhini",
+        "Weichen Wang",
+        "Rika Antonova",
+        "Zhenan Bao",
+        "Jeannette Bohg"
+      ],
+      "authors_text": "Jingyun Yang, Baiyu Shi, Timothy Yu, Haitian Liu, Alberta Longhini, Weichen Wang, Rika Antonova, Zhenan Bao, Jeannette Bohg",
+      "abstract": "A growing body of work suggests that tactile sensing gives robot policies contact information that complements vision in dexterous manipulation. However, visuo-tactile robot data remains scarce: dexterous demonstrations require teleoperating robots, which limits dataset scale. Human demonstrations are far cheaper to collect and offer a path to scale this data, but only if human and robot hands carry tactile sensors with corresponding signals. This requires sensors that conform to different hand geometries, cover the full hand, and share a common layout across embodiments. We present SoTa, a low-cost capacitive tactile skin that provides full-hand coverage on humans and robots while preserving a shared layout of 202 taxels across corresponding finger and palm regions. Our multilayer design with fabric electrodes enables in-house fabrication of thin, soft skins with customizable geometry for under $10 in materials per skin. The sensor retains over 97% of its initial response span after 10,000 loading-unloading cycles with traces retaining continuity through 1,280 tight-fist folding cycles. The shared taxel layout supports human-robot co-training with a common tactile encoder and no learned cross-sensor mapping. Across three contact-rich manipulation tasks, tactile observations improve in-distribution success over vision-only policies. With a fixed robot demonstration budget, adding human demonstrations more than doubles mean success across eight evaluation conditions, from 22.8% to 45.9%, improving success in all five out-of-distribution conditions. We plan to open-source the resources needed to fabricate and operate these skins.",
+      "url": "http://arxiv.org/abs/2610.02338v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02338v1",
+      "tldr": "SoTa is a low-cost soft capacitive tactile skin that gives human and robot hands full-hand coverage with a shared 202-taxel layout, enabling human-robot co-training that more than doubles dexterous manipulation success over robot-only tactile learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Stanford University",
+        "Tsinghua University",
+        "University of Cambridge"
+      ],
+      "affiliations_text": "Stanford University, Tsinghua University, University of Cambridge",
+      "score": 3.404892207014536,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.02249v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002249v1-nearest-neighbour-baselines-for-fingerprint-prediction-from-msms-spectra-under-different-assumptions",
+      "source": "arxiv",
+      "title": "Nearest-neighbour baselines for fingerprint prediction from MS/MS spectra under different assumptions",
+      "authors": [
+        "Ling Min Serena Khoo"
+      ],
+      "authors_text": "Ling Min Serena Khoo",
+      "abstract": "It has recently been shown that nearest-neighbour retrieval provides a strong baseline for molecular fingerprint prediction from MS/MS spectra, with several variants matching or outperforming current deep learning models (Khoo and Barzilay, 2026; Liu et al., 2026; Gupta et al., 2026). Importantly, \"nearest neighbour\" encompasses a family of retrieval methods that differ in the information assumed to be available at inference. In this report, we systematically compare several nearest-neighbour variants and show how these differing assumptions affect performance. Our goal is to establish stricter baselines that enable more rigorous benchmarking and better measure progress in this area.",
+      "url": "http://arxiv.org/abs/2610.02249v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02249v1",
+      "tldr": "This paper systematically compares nearest-neighbour methods for molecular fingerprint prediction from MS/MS spectra under three increasingly informative assumptions—no chemical formula, known chemical formula, and formula-annotated peaks—showing that performance improves with more formula information and that formula-annotated sub-formula retrieval provides the strongest baseline for more rigorous benchmarking.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.400358950951927,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.02299v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002299v1-resilience-model-free-feature-importance-from-1d-topological-signals",
+      "source": "arxiv",
+      "title": "$Ψ$-Resilience: Model-Free Feature Importance from 1D Topological Signals",
+      "authors": [
+        "Fabian Galis",
+        "Darian Onchis",
+        "Pedro Real Jurado"
+      ],
+      "authors_text": "Fabian Galis, Darian Onchis, Pedro Real Jurado",
+      "abstract": "We introduce $Ψ$-Resilience, a model-free feature importance method that derives explanations directly from the data itself via 1D topological signals. Our method constructs a class-disagreement landscape by estimating class-conditional densities and taking their pointwise absolute difference along the feature axis. Then, the 0-dimensional persistence of this 1D signal defines a resilience functional that aggregates only those topological features that survive perturbations up to a robustness scale which is set by the user. This gives us a context-robust importance score that is inherently auditable via the underlying 1D landscapes and their persistence. We evaluate our method on both synthetic and real datasets. On synthetic generators with specified ground-truth importance, $Ψ$-Resilience recovers the ranking of features with high fidelity, achieving Spearman rank correlations up to 0.8 and performing competitively with multiple feature importance methods, including SHAP and mutual information. On real datasets with no known ground truth, our technique agrees with these methods, with correlations up to 0.9. These results show that $Ψ$-Resilience is a stable explanation method that enables rigorous, distribution-level auditing of feature importance without relying on a predictive model.",
+      "url": "http://arxiv.org/abs/2610.02299v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02299v1",
+      "tldr": "Ψ-Resilience is a model-free feature-importance method that scores each feature by the 0-dimensional topological persistence of its class-conditional density-disagreement signal, aggregating only robust separation structures that survive up to a user-set scale and enabling auditable, distribution-level feature rankings without relying on a predictive model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "West University of Timișoara",
+        "University of Sevilla"
+      ],
+      "affiliations_text": "West University of Timișoara, University of Sevilla",
+      "score": 3.2471502498850797,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.02292v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002292v1-diffusion-based-synthetic-data-pretraining-for-enhancing-activity-recognition",
+      "source": "arxiv",
+      "title": "Diffusion-Based Synthetic Data Pretraining for Enhancing Activity Recognition",
+      "authors": [
+        "E. Riveros",
+        "D. Vega-Oliveros",
+        "A. Soriano-Vargas",
+        "A. Rocha"
+      ],
+      "authors_text": "E. Riveros, D. Vega-Oliveros, A. Soriano-Vargas, A. Rocha",
+      "abstract": "Human activity recognition (HAR) is increasingly important for healthcare, well-being, and daily monitoring ap- plications, for which detecting alimentary activities such as eating and drinking can provide actionable insight into dietary habits and chronic disease management. HAR systems, however, often underperform on subtle and underrepresented classes, limiting their utility in real-world dietary monitoring. This work builds upon CABiGRU, a convolutional architecture with Bidirectional GRU layers, multi-head attention, and residual connections, designed to capture discriminative temporal patterns from smart- watch accelerometer, gyroscope, and magnetometer data. To improve CaBiGRU's generalization and reduce underfitting in the minority class, we leverage synthetic sensor data windows using a diffusion model and adopt a two-stage training strategy: pre-training CABiGRU on synthetic data, followed by fine-tuning on the real-world data. On the DEO (drinking/eating/other) dataset, the proposed pipeline achieves a balanced accuracy of 90.6%, improving over a strong supervised baseline and showing the benefits of diffusion-based synthetic pre-training for recognizing alimentary activities and representing a step forward dealing with unbalanced classes. These results suggest that combining diffusion-generated data with targeted fine-tuning enhances robust recognition of dietary behaviors, supporting more reliable deployment in healthcare and nutrition-monitoring settings.",
+      "url": "http://arxiv.org/abs/2610.02292v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02292v1",
+      "tldr": "This paper proposes a two-stage pipeline that pre-trains a CABiGRU activity-recognition model on diffusion-generated synthetic smartwatch sensor data and then fine-tunes it on real data, achieving 90.6% balanced accuracy for eating/drinking recognition under class imbalance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "State University of Campinas",
+        "Universidad de Ingeniería y Tecnología",
+        "Federal University of São Paulo"
+      ],
+      "affiliations_text": "State University of Campinas, Universidad de Ingeniería y Tecnología, Federal University of São Paulo",
+      "score": 3.157018515393178,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.02284v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002284v1-effects-of-interpulse-interval-variation-on-deep-learning-classification-of-bat-vocalizations",
+      "source": "arxiv",
+      "title": "Effects of interpulse-interval variation on deep-learning classification of bat vocalizations",
+      "authors": [
+        "Welmoed R. Eversteijn",
+        "Burooj Ghani",
+        "A. Leonie Baier",
+        "Dan Stowell"
+      ],
+      "authors_text": "Welmoed R. Eversteijn, Burooj Ghani, A. Leonie Baier, Dan Stowell",
+      "abstract": "Temporal context may aid automated bat-species classification, but the contribution of specific features remains unclear. We investigated whether variation in the interpulse interval (IPI)-the time between consecutive call onsets-provides species-discriminative information and whether transformer-based models are more sensitive to this information than convolutional neural networks. We created two matched datasets from European bat recordings: a natural-IPI condition retaining the original call timing and a normalized-IPI condition in which call onsets were spaced at 50-ms intervals. EfficientNet-B0 and PaSST were fine-tuned and evaluated within each condition. In an additional experiment, each architecture was trained separately on natural-IPI and normalized-IPI recordings, and evaluated on the same natural-IPI test set. Finally, the pretrained classifiers BatDetect2 and BAT were evaluated on both conditions. Within-condition IPI normalization had model-dependent effects. PaSST accuracy differed little between the natural-IPI ($71 \\pm 2.3\\%$) and normalized-IPI ($70 \\pm 6.3\\%$) conditions, whereas EfficientNet accuracy increased from $47 \\pm 4.7\\%$ to $57 \\pm 3.9\\%$. PaSST exceeded EfficientNet under both conditions. In the cross-condition evaluation, models trained on natural-IPI recordings outperformed those trained on normalized-IPI recordings on the natural-IPI test set: accuracy decreased from 54% to 50% for EfficientNet and from 65% to 57% for PaSST. BatDetect2 and BAT differed little between IPI conditions. Overall, we found limited support for the hypotheses that natural IPI variation contributes substantially to bat-species classification and that it is used more effectively by transformer-based than CNN-based models. Nevertheless, the cross-condition performance decrease shows that results obtained under normalized conditions may not transfer fully to natural recordings.",
+      "url": "http://arxiv.org/abs/2610.02284v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02284v1",
+      "tldr": "This paper shows that natural interpulse-interval variation provides limited species-discriminative benefit for deep-learning bat-call classification and is not more effectively exploited by transformer models than CNNs, though training on normalized interpulse intervals can reduce performance on natural recordings.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tilburg University",
+        "Naturalis Biodiversity Centre"
+      ],
+      "affiliations_text": "Tilburg University, Naturalis Biodiversity Centre",
+      "score": 3.1355212380653112,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.02254v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002254v1-overcoming-challenges-of-interpretive-structural-modeling-with-large-language-models",
+      "source": "arxiv",
+      "title": "Overcoming Challenges of Interpretive Structural Modeling with Large Language Models",
+      "authors": [
+        "Everett Rush",
+        "David J. Icove",
+        "Ari Kim",
+        "Byung H. Park",
+        "Michael A. Langston"
+      ],
+      "authors_text": "Everett Rush, David J. Icove, Ari Kim, Byung H. Park, Michael A. Langston",
+      "abstract": "Interpretive Structural Modeling (ISM) is a well-known process for multi-criteria decision making. The success of ISM over other methodologies is its ability to model causal relationships, the binary scale of factors, and resulting hierarchical representation. Traditionally, the modeling process is performed by repeated interactions with subject matter experts until consensus is reached. This process is tedious, labor-intense, and most importantly limits the ability of ISM to scale to studies with hundreds of variables. Drawing on existing work of causal graph discovery with large language models (LLM) as imperfect experts, this work explores an integrated LLM-ISM approach for ISM. Pairwise, k-wise, rowwise, and full graph discovery methodologies are compared and evaluated. It is shown that causal graph discovery methods for ISM perform best using rowwise (SHD=160, F1-score=0.77) and full graph methods (SHD=135, F1-score=0.73).",
+      "url": "http://arxiv.org/abs/2610.02254v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02254v1",
+      "tldr": "This paper integrates large language models into Interpretive Structural Modeling to automate causal graph discovery, finding that rowwise (SHD=160, F1=0.77) and full-graph (SHD=135, F1=0.73) methods perform best.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Tennessee",
+        "Oak Ridge National Laboratory"
+      ],
+      "affiliations_text": "University of Tennessee, Oak Ridge National Laboratory",
+      "score": 3.129255153504307,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.02224v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002224v1-hybrid-machine-learning-assisted-raman-spectroscopy-with-generative-feature-augmentation-for-pharmaceutical-identification",
+      "source": "arxiv",
+      "title": "Hybrid Machine Learning-Assisted Raman Spectroscopy with Generative Feature Augmentation for Pharmaceutical Identification",
+      "authors": [
+        "Quach Thi Thai Binh",
+        "Ton Nu Quynh Trang",
+        "Thang B. Phan",
+        "Vu Thi Hanh Thu",
+        "Nguyen Tuan Hung"
+      ],
+      "authors_text": "Quach Thi Thai Binh, Ton Nu Quynh Trang, Thang B. Phan, Vu Thi Hanh Thu, Nguyen Tuan Hung",
+      "abstract": "Rapid and reliable identification of pharmaceutical residues is important for safeguarding public health, ensuring food safety, and enabling practical Raman-based screening. In this study, we propose HyMLRaman, a hybrid Raman spectroscopy framework that combines deep spectral feature extraction, generative models, and classical machine-learning classifiers to identify six pharmaceutical compounds, including amoxicillin, chloramphenicol, ciprofloxacin, tetracycline, ibuprofen, and paracetamol. Raman spectra are converted into spectral images and encoded with several deep neural-network backbones, among which EfficientNet-B3 yields the most effective representation. The resulting 1536-dimensional embeddings are then used to train downstream classifiers, including SVM, KNN, logistic regression, random forest, XGBoost, and ANN, using stratified 10-fold cross-validation. The hybrid EfficientNet-B3--SVM configuration achieves the strongest baseline performance, reaching 96.31% accuracy and a macro-F1 score of 96.36%, outperforming the standalone CNN baseline. To address limited-data conditions, a generative model, a DDPM-based feature augmentation, is introduced in a PCA-reduced EfficientNet-B3 latent space. The low-data ablation results show that DDPM augmentation provides selective benefits, particularly for KNN with reduced training fractions, and that its effect remains classifier-dependent. Finally, an application-level Raman Pharmaceutical Analyzer demonstrates the feasibility of embedding the trained model into an interactive Raman analysis workflow. These results suggest that HyMLRaman provides a practical and interpretable route for rapid Raman-based pharmaceutical screening.",
+      "url": "http://arxiv.org/abs/2610.02224v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02224v1",
+      "tldr": "HyMLRaman combines EfficientNet-B3 deep spectral features, classical machine-learning classifiers, and DDPM-based generative feature augmentation to identify six pharmaceutical compounds from Raman spectra, achieving up to 96.31% accuracy for practical Raman-based screening.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Science",
+        "Vietnam National University",
+        "Tohoku University"
+      ],
+      "affiliations_text": "University of Science, Vietnam National University, Tohoku University",
+      "score": 2.8421722450229425,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2610.02256v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002256v1-trace-a-reproducible-benchmark-for-electricity-price-forecasting-with-official-operational-text",
+      "source": "arxiv",
+      "title": "TRACE: A Reproducible Benchmark for Electricity Price Forecasting with Official Operational Text",
+      "authors": [
+        "Xinyi Yi",
+        "Moy Yuan",
+        "Ioannis Lestas"
+      ],
+      "authors_text": "Xinyi Yi, Moy Yuan, Ioannis Lestas",
+      "abstract": "Electricity price forecasting (EPF) supports scheduling, bidding, and risk management in electricity markets, yet existing benchmarks focus mainly on numerical inputs, leaving the forecasting value of forecast-time textual context insufficiently evaluated. We introduce TRACE, a reproducible benchmark of 7,300 zone--day instances pairing prices from five zones in a major U.S. market with official operational text available at the forecast cutoff. TRACE reconstructs official operational text at each cutoff, preventing post-cutoff information leakage. We evaluate TRACE for semantic alignment and forecasting value. Semantic assessments align with central movement and both tail risks in ground-truth prices, most consistently for upper-tail price risk. Forecasting value is reflected in a median 7.4\\% reduction in upper-tail pinball loss across time-series foundation models. A controlled cross-day text-mismatch ablation reverses the gains, falling below the no-text baseline.",
+      "url": "http://arxiv.org/abs/2610.02256v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02256v1",
+      "tldr": "TRACE is a reproducible benchmark of 7,300 PJM zone–day instances that pairs electricity prices with official operational text reconstructed at the forecast cutoff, showing that such text aligns with price risk—most consistently upper-tail risk—and reduces upper-tail pinball loss by a median 7.4% across time-series foundation models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cambridge"
+      ],
+      "affiliations_text": "University of Cambridge",
+      "score": 2.799146852837336,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2610.02303v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002303v1-powerbench-measuring-language-model-bias-in-power-shifting-requests",
+      "source": "arxiv",
+      "title": "PowerBench: Measuring Language Model Bias in Power-shifting Requests",
+      "authors": [
+        "Nicolas Martorell",
+        "Wendy Brau",
+        "Gonzalo A. Heredia",
+        "Tomás Pablo Korenblit",
+        "Gaspar Labastié",
+        "Tomás Gimenez Molina"
+      ],
+      "authors_text": "Nicolas Martorell, Wendy Brau, Gonzalo A. Heredia, Tomás Pablo Korenblit, Gaspar Labastié, Tomás Gimenez Molina",
+      "abstract": "Language models increasingly assist people with power-related requests, so systematic differences in whom they help could shift the distribution of power at scale, or be exploited by users who learn which identities are refused less. We introduce PowerBench, an evaluation of power-shifting requests that distinguishes self-empowerment, disempowerment, and power grabbing, plus a control of refusal-inducing requests that shift no power. We build, curate, and open-source a dataset of such requests varying the power domain, the context, the scale of the affected party, and the prior power standing of the user, and evaluate 24 models (12 from US and 12 from Chinese developers) under three experimental conditions: reciprocal nationalities of user and affected party, an AI agent as the user, and 8 request languages. Models refuse power grabbing more than disempowerment, and disempowerment more than self-empowerment. Refusal of power grabbing rises with the scale of the affected party, from an individual to a society. Models are biased toward helping others take power from the US and against helping US users take power from others, but favor the US when it gains power and nobody loses it. When the user is an AI agent, refusal of power-shifting requests increases, especially in power grabbing against an individual. Finally, language biases refusal, but in model-specific ways that largely cancel on average. We release PowerBench to make these asymmetries measurable in current and future models.",
+      "url": "http://arxiv.org/abs/2610.02303v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02303v1",
+      "tldr": "The paper introduces PowerBench, an open-source benchmark of power-shifting requests that evaluates 24 US and Chinese language models and reveals systematic biases in refusal behavior across power type, affected-party scale, nationality, AI-agent users, and request language.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.613877354060766,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2610.02225v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/05/261002225v1-the-price-of-greenwashing-algorithmic-verification-and-market-discipline-using-conformal-machine-learning",
+      "source": "arxiv",
+      "title": "The Price of Greenwashing: Algorithmic Verification and Market Discipline using Conformal Machine Learning",
+      "authors": [
+        "Sourav Bose",
+        "Taoufik Bouraoui"
+      ],
+      "authors_text": "Sourav Bose, Taoufik Bouraoui",
+      "abstract": "While corporate sustainability mandates are expanding, the systemic reliance on self-reported emissions data exposes financial markets to pervasive greenwashing. Current literature relies heavily on subjective ESG ratings or textual sentiment analysis, leaving a critical econometric gap in objectively quantifying physical climate realities. To resolve this information asymmetry, we fuse U.S. SEC financial fundamentals with facility-level EPA greenhouse gas registries to establish a mathematically guaranteed baseline of physical corporate emissions. Leveraging a gradient boosting architecture and Mondrian Conformal Prediction, we quantify the shortfall between self-reported data and this algorithmic baseline into a novel Conformal-Weighted Continuous Divergence (CWCD) metric. Evaluating this divergence via a cross-sectional lead-lag econometric design, we uncover a robust mechanism of market discipline: algorithmic emissions divergence exhibits a severe, statistically significant negative relationship with subsequent market valuation (Tobin's Q) and operational profitability (ROA). Providing definitive evidence against the market blindness hypothesis, this study proves that institutional capital actively prices environmental deception not merely as an ethical lapse, but as a leading indicator of fundamental corporate mismanagement. Ultimately, these findings provide the quantitative justification necessary for asset managers and regulators to deploy algorithmic auditing infrastructure at scale.",
+      "url": "http://arxiv.org/abs/2610.02225v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.02225v1",
+      "tldr": "Using SEC fundamentals and EPA emissions data with gradient boosting and Mondrian conformal prediction, this paper builds a Conformal-Weighted Continuous Divergence metric to show that firms whose self-reported emissions diverge from algorithmically estimated physical emissions subsequently face lower market valuation (Tobin’s Q) and profitability (ROA), implying that markets actively price and discipline greenwashing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UNSW",
+        "Rennes School of Business"
+      ],
+      "affiliations_text": "UNSW, Rennes School of Business",
+      "score": 2.4421119084589753,
+      "score_text": "2.4"
+    }
+  ],
+  "errors": []
+}
