@@ -1,0 +1,15 @@
+# AdaEva: Accelerating LLM-Driven Algorithm Design with Adaptive Partial Evaluation
+
+- 区域：速读区
+- 排名：11
+- 匹配度：3.4/10
+- 来源：arxiv
+- 作者：Tai Nguyen, Fei Liu, Phong Le, Carola Doerr, Nguyen Dang
+- 机构：Unknown affiliation
+- 链接：[arXiv / Source](http://arxiv.org/abs/2610.03896v1) · [PDF](https://arxiv.org/pdf/2610.03896v1)
+
+## TLDR
+AdaEva is a drop-in adaptive partial-evaluation framework for LLM-driven algorithm design that incrementally evaluates candidate algorithms on growing subsets of training instances and prunes unpromising ones via successive halving or statistical racing, improving search efficiency, anytime performance, and held-out generalization under matched evaluation budgets.
+
+## Abstract
+Large Language Models (LLMs) are increasingly used for automated algorithm design. However the computational cost of evaluating the generated algorithms can be excessive. We consider the common LLM-driven automated algorithm design (LLM4AD) setting in which a candidate algorithm is evaluated by aggregating its performance over a shared set of training instances. This instance-wise structure raises a natural question: must every candidate be evaluated on the entire instance set before deciding whether it remains competitive? Taking inspiration from algorithm configuration, we introduce AdaEva, a drop-in adaptive partial-evaluation framework that progressively evaluates candidates on larger subsets of the same instance pool and eliminates unpromising candidates as evidence accumulates. Importantly, AdaEva leaves the underlying LLM4AD procedure and per-instance evaluator unchanged and requires no prior knowledge about instance difficulty. We instantiate this idea using successive halving (AdaEva-S) and statistical racing (AdaEva-R), and evaluate both mechanisms across three representative LLM4AD frameworks, multiple LLM backbones, and optimization domains spanning combinatorial and continuous black-box optimization. Under matched evaluation budgets, AdaEva more reliably balances evaluation effort across candidates than fixed partial-evaluation strategies, yielding strong search efficiency and anytime performance together with improved held-out generalization across the evaluated settings.
