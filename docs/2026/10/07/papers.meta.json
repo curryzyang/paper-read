@@ -1,0 +1,725 @@
+{
+  "label": "2026-10-07",
+  "date": "2026-10-07",
+  "generated_at": "2026-10-07T18:28:25",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2610.06952v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006952v1-do-neural-pde-solvers-learn-the-right-dynamics",
+      "source": "arxiv",
+      "title": "Do Neural PDE Solvers Learn the Right Dynamics?",
+      "authors": [
+        "Haonan Li",
+        "Yue Song",
+        "Bin Yang",
+        "Kaihong Luo"
+      ],
+      "authors_text": "Haonan Li, Yue Song, Bin Yang, Kaihong Luo",
+      "abstract": "Neural PDE solvers can achieve low prediction errors, but do they reproduce the dynamics of the systems they model? Prediction scores alone offer an incomplete answer: they measure agreement with reference solutions but provide limited insight into how errors accumulate, nearby states diverge, or extreme events arise. We propose an evaluation framework that directly examines these behaviors in deterministic and stochastic neural solvers. By evolving ensembles of nearby initial states and comparing them with direct numerical simulation, we assess three complementary aspects of learned dynamics: error formation, ensemble geometry, and extreme events. Experiments on two-dimensional Kolmogorov flow reveal limitations that conventional scores can obscure. Smaller trajectory errors can reflect weaker error amplification despite less accurate local updates. Models can match an ensemble's overall spread and effective dimension while failing to capture the spatial directions where nearby states diverge. Similarly, matching overall event frequencies can conceal failures to predict persistent extreme events. These findings show that improved prediction accuracy does not necessarily imply greater dynamical fidelity. Our framework makes this distinction measurable, providing concrete criteria for evaluating whether advances in neural PDE solvers better capture the underlying dynamics.",
+      "url": "http://arxiv.org/abs/2610.06952v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06952v1",
+      "tldr": "This paper proposes an evaluation framework that probes neural PDE solvers via nearby-initial-state ensembles to assess error formation, ensemble geometry, and extreme events, showing on 2D Kolmogorov flow that low prediction error does not guarantee faithful learned dynamics.",
+      "detailed_reading": {
+        "motivation": "神经偏微分方程求解器虽然能在常规预测误差上取得很低分数，但低误差并不等于学到了正确的动力学；仅比较参考解的点误差，无法揭示误差如何累积、邻近初值如何分离以及极端事件如何产生。本文因此提出一套评估框架，直接检验确定性及随机神经求解器是否复现底层系统的动力学行为，而不是只拟合轨迹。",
+        "method": "作者以二维Kolmogorov流为参考系统，从stationary-flow档案中采样时间去相关的基态，并用档案态之间重缩放的随机符号差构造空间结构化扰动，形成围绕每个案例的邻近初值集合；训练与验证只用未扰动轨迹，动力学诊断则用扰动测试成员并匹配DNS参考。对每个集合，同时用DNS和神经求解器向前演化，评估误差形成、集合几何和极端事件三方面。误差形成通过将单步误差分解为现有误差传播、局部残差及其耦合，并沿 rollout 累加；集合几何先对成员中心化，再用POD得到方差谱、RMS spread、r90、主导子空间与DNS子空间重叠度及时间重定向；极端事件则按初始条件集合比较事件频率与条件概率。评估涵盖U-Net、FNO、AFNO、DPOT、DySLIM、PDE-Refiner、ACDM、PFNO和DYffusion等配置，标签H、P、K分别表示输入历史长度、输出块长度和训练展开长度；随机求解器让集合成员共享同一随机路径并逐步注入新随机性，以分离初值扰动响应与模型随机性。",
+        "result": "在二维Kolmogorov流上，实验发现常规轨迹误差会掩盖动力学缺陷：U-Net H1相比H4常有更低的轨迹误差，但其累计残差注入更大，说明较低误差来自较弱的误差放大而非更准确的局部更新。FNO案例中，后期失败与非失败轨迹在50至100步的中位轨迹误差相近，但失败组的残差注入已显著更大，随后出现虚假振荡和幅值失控。DPOT控制实验显示，加入denoising会降低轨迹误差，却使集合离散度低于DNS，并增大中心化配对误差；多求解器上残差也普遍使集合相对于从当前求解器状态推进的DNS发生收缩，同时增大配对误差。几何上，多数模型能大致匹配集合总方差与有效维度，但在中间预测时刻与DNS主导子空间重叠度低；极端事件上，总体频率接近DNS的模型仍可能在单个初始条件集合中大幅高估或低估事件概率，并遗漏持续极端事件。",
+        "conclusion": "这些结果表明，预测精度提升不必然意味着动力学保真度提升；低轨迹误差可能由误差放大减弱所贡献，集合离散度与有效维度的匹配也不保证主导分离方向正确，总体事件频率正确也可能掩盖条件概率和持续性极端事件预测失败。作者提出的邻近初值集合探测框架，将误差形成、集合几何和极端事件三类诊断变为可测量标准，用于判断神经PDE求解器的进展是否真正更好捕捉了底层动力学。",
+        "key_details": "参考系统为带正弦强迫和周期边界条件的不可压Navier-Stokes方程，二维Kolmogorov流虽确定性但混沌并产生局域强涡；扰动是受控探针而非初值不确定性先验，集合诊断使用与DNS匹配的扰动测试案例。误差预算采用空间均方范数，将平方误差变化拆成传播项g、残差项j和耦合项c，并分别累加为G、J、C；集合几何用POD，方差按空间维归一化，RMS spread为方差和平方根，r90为解释90%方差的最少主模态数，子空间重叠用左右奇异向量矩阵的Frobenius范数平方按r归一化，r取DNS与求解器r90的较小值。DPOT对照实验在原始denoising流程基础上仅将噪声系数从0.0005设为0，其他设置和干净目标不变；由于公开预训练检查点在该流场上直接表现差，先在其训练案例上微调。局限性包括结论主要基于二维Kolmogorov流这一单一确定性混沌系统，诊断需要成对DNS集合与统一初值协议，且作者筛除了常规预测指标很差的配置后才做动力学评估，因此外推到其他方程、随机系统或实际业务场景仍需谨慎。"
+      },
+      "affiliations": [
+        "University College London",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "University College London, Tsinghua University",
+      "score": 5.618566547048629,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2610.06883v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006883v1-learning-when-to-refine-long-horizon-reinforcement-learning-for-budgeted-neural-operator-pde-solvers",
+      "source": "arxiv",
+      "title": "Learning When to Refine: Long-Horizon Reinforcement Learning for Budgeted Neural-Operator PDE Solvers",
+      "authors": [
+        "Ange Tong"
+      ],
+      "authors_text": "Ange Tong",
+      "abstract": "Neural operators provide fast surrogates for time-dependent PDEs, but autoregressive deployment creates a refinement-allocation problem: prediction errors vary over space and time, while only a finite number of local corrections can be committed along a trajectory. We formulate this as budgeted adaptive neural-operator solving. A global Fourier neural operator advances the full field, a local operator proposes patch-wise residual corrections, and a set-aware selector chooses where to refine. A macro policy decides when and how much of the remaining refinement budget to spend. We introduce rollout-verified policy improvement (RV-PI), which evaluates feasible refinement counts through actual continuation rollouts of the learned PDE solver, converts long-horizon advantages into conservative policy targets, and accepts an update only when held-out trajectory error improves. On the shallow-water benchmark with a 32-intervention budget, RV-PI achieves a three-seed mean trajectory relative L2 error of 0.6910, improving over immediate-only policy improvement by 5.37% and RandomMacro by 2.41%. On the forcing-driven Brusselator benchmark with a 76-intervention budget, RV-PI attains 0.09954, improving over immediate-only policy improvement by 2.31% and RandomMacro by 5.32%. These results show that, under a fixed refinement budget, the value of a local correction depends on its downstream effect on the autoregressive trajectory, not only on its immediate error reduction.",
+      "url": "http://arxiv.org/abs/2610.06883v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06883v1",
+      "tldr": "This paper introduces rollout-verified policy improvement (RV-PI), a long-horizon reinforcement learning method for budgeted neural-operator PDE solvers that decides when and how many local patch corrections to apply by evaluating their downstream trajectory effects through real solver rollouts, yielding lower trajectory error than immediate-only allocation on shallow-water and Brusselator benchmarks.",
+      "detailed_reading": {
+        "motivation": "神经算子虽能作为含时偏微分方程的快速代理求解器，但自回归部署会把自身预测作为下一步输入，导致局部误差在轨迹上传播累积；与此同时，只有有限次数的局部修正在整条轨迹上可以被提交，而误差在空间和物理时间上分布不均，因此核心问题不是再设计一个算子骨干，而是在固定预算下决定在哪里、何时以及投入多少局部修正。作者把该问题形式化为预算受限的自适应神经算子求解，并指出即时误差下降并不等价于长时程轨迹价值。",
+        "method": "方法采用分层固定网格求解器：全局条件FNO根据状态历史与外部上下文（浅水方程用静态条件场a(x,y)，Brusselator用已知标量强迫）产生临时下一状态；局部FNO从同一临时状态一次性为所有固定patch生成残差修正提案并冻结，以保证多patch动作语义与选取顺序无关；集合感知的Transformer选择器条件化地决定在哪些patch施加修正，宏策略在{0,1,2,4}中选择本步消耗的修正数q_t，在硬轨迹预算下由归一化重叠权重同时混合已选冻结修正，得到送入下一步物理转移的状态。宏策略先由仅用训练集的beam-search教师初始化，随后用RV-PI优化：在多个可部署策略采样的状态上枚举所有可行修正数，用真实学习求解器前向rollout到轨迹末端得到验证后的长时程回报与动作优势，将其转化为带行为正则和KL正则的保守soft策略目标，并仅在留出验证集轨迹相对L2误差下降时才接受该更新，否则回滚；对照的ImmediateOnlyPI仅把回报截断到当前转移。",
+        "result": "在官方浅水基准、32次干预预算下，RV-PI取得三seed平均轨迹相对L2误差0.6910，较ImmediateOnlyPI降低5.37%、较RandomMacro降低2.41%；在强迫驱动的Brusselator基准、76次干预预算下达到0.09954，较ImmediateOnlyPI降低2.31%、较RandomMacro降低5.32%，说明在同等的局部调用预算下RV-PI在两个差异很大的基准族上都最优。Brusselator骨干的对齐训练也显示，采用带轻度幅度保护的六步闭环目标后，验证轨迹相对L2从8.2505降到0.09369，同时单步误差也改善。",
+        "conclusion": "在固定修正预算下，一次局部修正的价值取决于它对自回归轨迹的下游影响，而不仅是它带来的即时误差下降；因此把时间分配建模为对物理时间的序贯决策、并用真实求解器rollout验证回报，比即时贪心或随机分配更能降低整条轨迹误差。",
+        "key_details": "数据与设定：浅水实验使用Laplace Neural Operator基准发布的官方条件场与72帧256×256轨迹，Brusselator使用39帧28×28轨迹加时变标量强迫；预算按已提交的修正干预次数计，而非端到端FLOPs，因为提案池是在一次批量局部算子前向中物化的。关键实现：所有候选patch修正均来自同一临时状态并被冻结，避免逐步重生成改变后续动作含义与开销；选择器采用集合感知结构以处理patch重叠与冗余；动作集为{0,1,2,4}；真值只在训练期用于构造选择器增益、rollout回报和验证接受，推理阶段完全无真值。RV-PI更接近可验证的近似策略迭代而非通用无模型RL，其更新目标与接受准则均以求解器的部署目标表达。局限：预算解释为干预次数而非直接的计算量度量，且整体框架依赖已训练好的全局算子与局部修正机制，骨干容量与算子族被刻意固定以隔离分配效应。"
+      },
+      "affiliations": [
+        "National Research Tomsk State University"
+      ],
+      "affiliations_text": "National Research Tomsk State University",
+      "score": 5.244246274069308,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2610.06926v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006926v1-swap-stepwise-action-policy-routing-for-vision-language-action-models",
+      "source": "arxiv",
+      "title": "SWAP: Stepwise Action Policy Routing for Vision-Language-Action Models",
+      "authors": [
+        "Mousumi Das",
+        "Aditeya Prajapati",
+        "Abrar Anwar",
+        "Jesse Thomason"
+      ],
+      "authors_text": "Mousumi Das, Aditeya Prajapati, Abrar Anwar, Jesse Thomason",
+      "abstract": "Robot manipulation systems using Vision-Language-Action (VLA) model backbones typically use just one VLA for task execution. However, individual VLAs do not perform well across different task states and environments. We introduce a framework for dynamically composing multiple VLA policies during execution: StepWise Action Policy Routing (SWAP). SWAP formulates policy routing as an offline reinforcement learning problem, learning a routing critic that selects the most appropriate policy at each decision step given the current observation. SWAP enables robots to select new policies to execute online rather than committing to a single policy for the duration of an episode. We evaluate SWAP on both real-world DROID manipulation tasks and LIBERO simulation experiments. SWAP improves over fixed-policy execution and routing baselines, giving absolute improvements in real-world task success up to 33% while reducing successful trajectory robot action step length by 28.3%.",
+      "url": "http://arxiv.org/abs/2610.06926v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06926v1",
+      "tldr": "SWAP is an offline reinforcement learning framework that learns a routing critic to dynamically select among multiple Vision-Language-Action policies at each execution step, improving real-world manipulation success by up to 33% and reducing successful trajectory length by 28.3% over fixed-policy and routing baselines.",
+      "detailed_reading": {
+        "motivation": "现有 VLA 机器人系统通常在整个 episode 中固定执行单一策略，但单个 VLA 难以在不同任务状态、场景分布和接触/恢复阶段中始终最优，因此需要多个互补策略的动态组合。SWAP 的核心动机是把机器人操作中的策略选择建模为逐步策略路由问题，而不是在回合开始时一次性选定控制器，从而让机器人在线切换最适合当前观测的策略。",
+        "method": "SWAP 将策略路由形式化为离散动作空间上的离线强化学习：给定候选 VLA 策略库 P={π1,...,πK}，机器人以底层 VLA 的 action chunk 为路由粒度，构建离线路由数据集 D={(o_t,z_t,r_t,o_{t+c},d_t)}，其中 o_t 为 chunk 起始观测，z_t 为所选策略，r_t 为稀疏二值成功奖励，o_{t+c} 为执行 c 步后的观测，d_t 为终止标志。训练时用冻结的 Qwen2.5-VL-3B 将当前视觉观测和语言指令编码为 2048 维嵌入，拼接可学习的候选策略身份嵌入后送入轻量 double-Q MLP 和独立 value 网络，并用 IQL 通过 TD 损失学习 Q1、Q2，再用 expectile 回归拟合 V，取 min(Q1,Q2) 抑制高估。推理时，SWAP 在当前观测下评估所有候选策略的 Q 值，选择 z_t=argmax_z min(Q1(o_t,z),Q2(o_t,z))，执行被选策略产生的短时 action chunk，随后重复该过程，实现执行中的在线策略切换；在真实 DROID 上还对多相机视角的 Q 值进行聚合以增强鲁棒性。",
+        "result": "在真实 DROID Franka 操作任务上，SWAP 平均成功率从最佳固定策略 π0-FAST 的 63.3% 提升到 96.7%，绝对提升约 33 个百分点，并优于随机路由的 66.7%；三个任务中 Marker→Bowl 和 Cube on Cloth→Bowl 达到 100%，Cube→Cup 达到 90%。同时，在成功轨迹中 SWAP 将机器人动作步长减少 28.3%，说明动态路由不仅提高成功率，也能选择更高效的下游策略。LIBERO 仿真实验（LIBERO-Plus spatial 子集）进一步验证了学习式策略路由在分布外任务变化下的有效性。",
+        "conclusion": "SWAP 表明，稳健的机器人执行不必只依赖更强的单体 VLA，而可以通过学习如何在多个已有 VLA 之间进行逐步路由来获得互补优势。该方法把策略路由作为离线 RL 问题，在部署时在线选择策略，不重训底层专家，能够提高真实操作成功率并缩短成功轨迹长度。这为构建可组合、可扩展的 VLA 策略库和测试时策略选择机制提供了可行方向。",
+        "key_details": "关键实现细节包括：候选策略被视为固定黑盒，只学习路由器，因此无需重训各 VLA 专家；离线数据需覆盖所有候选策略的成功与失败轨迹，奖励为稀疏二值信号；路由在底层 VLA 的 action chunk 级别进行，不打断 chunk，也不增加额外策略查询；IQL 使用双 Q 网络、min 双 Q 保守估计和 expectile 回归 value 函数；视觉语言骨干为冻结的 Qwen2.5-VL-3B，输出 2048 维嵌入，策略身份用可学习嵌入表示；真实 DROID 采用 7-DoF Franka 与多相机观测，推理时聚合多视角 Q 值；局限在于依赖离线数据对候选策略行为空间的覆盖，稀疏奖励导致长期信用分配困难，策略库固定时扩展新策略可能需要补充路由数据，且每个 chunk 需评估 K 个候选策略带来一定推理开销。"
+      },
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 5.142368171539288,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.06861v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006861v1-when-does-external-guidance-help-llm-reasoning-a-bias-variance-theory-of-guidance-augmented-grpo",
+      "source": "arxiv",
+      "title": "When Does External Guidance Help LLM Reasoning? A Bias-Variance Theory of Guidance-Augmented GRPO",
+      "authors": [
+        "Sofia Torres",
+        "Gabriel Almeida",
+        "Carter Adams",
+        "Camila Rocha"
+      ],
+      "authors_text": "Sofia Torres, Gabriel Almeida, Carter Adams, Camila Rocha",
+      "abstract": "Reinforcement learning with verifiable rewards (RLVR) has become the dominant paradigm for eliciting multi-step reasoning in large language models, and a recent wave of methods (LUFFY, ExPO, PAPO, TAPO) further augments RL with \\emph{external guidance} - expert traces, self-explanations, or retrieved thought patterns. Although each method reports empirical gains, none provides convergence rates, bias bounds, or an optimal weighting rule for the guidance signal. We close this gap with \\emph{Guidance-Augmented GRPO} (GA-GRPO), a unified theoretical framework that casts external guidance as a stochastic guidance operator G re-writing the question distribution, and analyses the resulting policy-gradient estimator as a biased on-policy estimator whose bias is bounded by the total-variation guidance divergence delta\\_G between the guidance-augmented sampling distribution and the policy's own distribution. The framework subsumes vanilla GRPO, LUFFY, ExPO, PAPO, and TAPO as special cases obtained by particular choices of G. Under smoothness and bounded-divergence assumptions we prove that GA-GRPO converges at rate O(1/sqrt(T)) to an O(delta sqrt(T))-neighbourhood of the GRPO stationary point, derive the closed-form MSE-optimal guidance weight lambda-star(T, delta, sigma\\_0 squared) = sigma\\_0 squared / (sigma\\_0 squared + R\\_max squared delta squared T), and prove a matching minimax lower bound showing the Omega(delta squared T) bias term is unavoidable. Experiments on Qwen2.5-Math-7B-Base across nine math and OOD benchmarks confirm that optimal-weight GA-GRPO matches or surpasses TAPO, LUFFY, ExPO, and vanilla GRPO while requiring 31\\% fewer GPU-hours, and eight analysis experiments validate each theoretical prediction.",
+      "url": "http://arxiv.org/abs/2610.06861v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06861v1",
+      "tldr": "This paper develops a bias-variance theory for guidance-augmented GRPO, showing that external guidance helps LLM reasoning only when its distribution shift is small relative to policy-gradient variance, and derives the optimal guidance weight with convergence and minimax lower bounds that unify methods like LUFFY, ExPO, PAPO, and TAPO.",
+      "detailed_reading": {
+        "motivation": "外部引导（专家轨迹、自解释、检索思维模式等）在 RLVR 中被广泛用于提升 LLM 多步推理，但 LUFFY、ExPO、PAPO、TAPO 等方法只报告经验增益，缺少收敛率、偏差界与最优权重规则，导致实践者无法预判引导何时有益、何时有害，也无法避免昂贵的网格调参。本文旨在建立统一的理论框架，回答外部引导在何种条件下可证明地帮助 GRPO 式推理训练，以及如何按偏差—方差权衡最优地使用引导信号。",
+        "method": "将 LLM 自回归推理建模为有限时域 MDP：问题 q 从 P(Q) 采样，策略 πθ 生成 rollout o，验证奖励 R(o|q)∈[0,Rmax]，并用组相对优势 A 构造 GRPO 目标。核心是引入随机引导算子 G: Q→Δ(Q)，把问题 q 重写为引导增强问题 g(q)，得到引导增强采样分布 πθ^G(o|q)=E_{g∼G(·|q)}[πθ(o|g(q))]，并以总变分引导散度 δ_G=sup_q D_TV(πθ^G,πθ) 刻画分布偏移；由此得到的策略梯度估计器是有偏 on-policy 估计器，偏差由 δ_G 控制。vanilla GRPO、LUFFY、ExPO、PAPO、TAPO 分别对应恒等、轨迹注入、自解释、感知反馈和模式检索等具体 G。训练流程为对问题施加 G 生成增强样本、按组采样 rollout 并计算可验证奖励与组相对优势、以权重 λ 混合引导信号并更新策略；在平滑性与有界散度假设下推导 MSE 最优引导权重 λ*(T,δ,σ0^2)=σ0^2/(σ0^2+Rmax^2 δ^2 T)，并证明收敛率与匹配的 minimax 下界。",
+        "result": "理论上，GA-GRPO 以 O(1/√T) 速率收敛到 GRPO 稳定点的 O(δ√T) 邻域，且 Ω(δ^2 T) 偏差项不可消除；最优权重随训练步数 T 衰减，其闭式解由初始方差 σ0^2、引导散度 δ 和奖励上界 Rmax 决定。实验在 Qwen2.5-Math-7B-Base 上覆盖 MATH-500、AIME 2024、AMC、Minerva Math、OlympiadBench、GSM8K、GPQA-Diamond、ARC-C、MMLU-Pro 九个数学与 OOD 基准，最优权重 GA-GRPO 匹配或超过 TAPO、LUFFY、ExPO 与 vanilla GRPO，同时减少 31% GPU 小时。八项分析实验进一步验证了理论预测：当 δ^2 T≪σ0^2 时引导有益，训练后期偏差累积且方差收缩时引导可能有害，最优引导权重随训练步数下降。",
+        "conclusion": "GA-GRPO 给出了外部引导增强 GRPO 的首个统一偏差—方差理论，说明引导本质上是在早期以偏差换方差、提升探索效率，但偏差会随训练累积，因此最优使用方式是让引导权重随 T 衰减。该框架将 TAPO、LUFFY、ExPO、PAPO 和 vanilla GRPO 纳入同一视角，并提供了可操作的权重选择规则与收敛保证。其核心实践结论是：外部引导并非总有益，只有当引导散度相对当前策略方差足够小且处于训练早期时，才应较强地使用，并需按 λ*(T,δ,σ0^2) 逐步退火。",
+        "key_details": "关键实现与假设包括：有限时域 MDP、问题分布 P(Q)、验证奖励 R∈[0,Rmax]、组相对优势与组采样；引导算子 G 为随机核，δ_G 用总变分距离定义并在 [0,1] 内有界；理论依赖平滑性与有界散度假设，收敛到稳定点的邻域而非精确稳定点，且 minimax 下界表明偏差不可避免。最优权重 λ* 依赖 σ0^2、δ、Rmax 与 T，大 T 时近似按 1/T 衰减；方法无需修改验证奖励，但引导质量 κ 和 δ 会影响收益。局限在于理论假设可能不完全匹配真实 LLM 训练的非凸性与复杂引导，实验主要在 Qwen2.5-Math-7B-Base 和九个基准上验证，跨模型、跨任务与在线估计 δ 的稳健性仍需进一步检验。"
+      },
+      "affiliations": [
+        "Federal University of Bahia"
+      ],
+      "affiliations_text": "Federal University of Bahia",
+      "score": 5.012130147258396,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.06931v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006931v1-near-optimal-sample-complexity-for-recursive-entropic-risk-reinforcement-learning-with-a-generative-model",
+      "source": "arxiv",
+      "title": "Near-Optimal Sample Complexity for Recursive Entropic Risk Reinforcement Learning with a Generative Model",
+      "authors": [
+        "Amirparsa Bahrami",
+        "Oliver Mortensen",
+        "Mohammad Sadegh Talebi"
+      ],
+      "authors_text": "Amirparsa Bahrami, Oliver Mortensen, Mohammad Sadegh Talebi",
+      "abstract": "In this paper, we study the sample complexities of value and policy learning in finite discounted Markov decision processes (MDPs) under recursive entropic risk preferences with risk parameter \\(β\\neq 0\\), assuming access to a generative model of the MDP. We provide a refined analysis of model-based risk-sensitive Q-value iteration (MB-RS-QVI), a plug-in model-based method introduced in prior work, and derive \\((\\varepsilon,δ)\\)-PAC guarantees for both learning the optimal \\(Q\\)-value function and an \\(\\varepsilon\\)-optimal policy. Our bounds improve the exponential dependence on the effective horizon \\(1/(1-γ)\\) compared with the best existing guarantees for this setting. In particular, they match the existing lower bounds in their exponential dependence on \\(|β|/(1-γ)\\), as well as in \\(S\\), \\(A\\), \\(\\varepsilon\\), and \\(|β|\\), up to logarithmic factors. Consequently, our analysis removes the exponential gap between the previously known upper and lower bounds, leaving only a polynomial gap in the effective horizon.",
+      "url": "http://arxiv.org/abs/2610.06931v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06931v1",
+      "tldr": "This paper provides refined \\((\\varepsilon,\\delta)\\)-PAC sample complexity bounds for model-based risk-sensitive Q-value iteration in finite discounted MDPs under recursive entropic risk, showing near-optimal value and policy learning guarantees that eliminate the previous exponential gap in the effective horizon and match existing lower bounds up to logarithmic factors.",
+      "detailed_reading": {
+        "motivation": "传统强化学习多面向风险中性期望回报，难以适用于医疗、交通、运筹等高风险场景；递归熵风险（ERM）可对每一步的回报风险建模，但已有生成模型下MB-RS-QVI的样本复杂度上界与下界在有效时域1/(1-γ)上存在指数差距。本文旨在给出更精细的分析，缩小该差距。",
+        "method": "研究有限折扣MDP，状态数为S、动作数为A、折扣因子为γ，风险参数β≠0，目标为递归熵风险准则；假设可访问生成模型，可对任意状态-动作采样。方法为基于模型的插件式风险敏感Q值迭代MB-RS-QVI：先对每个状态-动作采样估计经验转移与奖励，构造经验MDP，再在经验模型上执行递归ERM的Bellman算子或对数指数变换后的Q值迭代至收敛，最后输出最优Q值估计和贪心策略；理论分析结合集中不等式与风险敏感算子的收缩性质导出(ε,δ)-PAC保证。",
+        "result": "论文证明值学习样本复杂度为 tilde O(SA/(ε^2(1-γ)^2|β|^2)·e^{|β|/(1-γ)})，策略学习为 tilde O(SA/(ε^2(1-γ)^2|β|^2)·min{S,1/(1-γ)^2}·e^{|β|/(1-γ)})，且ε覆盖(0,1/(1-γ)]。相比先前上界的e^{2|β|/(1-γ)}，新界将指数项降为e^{|β|/(1-γ)}，在|β|/(1-γ)、S、A、ε、|β|上与现有下界匹配至对数因子，从而消除指数级上下界差距，仅保留有效时域上的多项式差距。",
+        "conclusion": "MB-RS-QVI在生成模型下对递归熵风险折扣MDP达到近乎最优的样本复杂度，说明插件式模型方法可有效处理风险敏感RL中的值学习和策略学习问题。该结果显著收紧了理论保证，并为后续研究更紧的策略学习界和进一步消除1/(1-γ)多项式差距提供了基础。",
+        "key_details": "关键设定是递归熵风险而非静态风险，β>0对应风险规避、β<0对应风险寻求，β→0退化为风险中性。算法核心是对经验MDP做风险敏感Q值迭代，分析难点在于指数效用与对数指数算子带来指数集中项，因此样本复杂度必然含有e^{|β|/(1-γ)}因子。上界仍含(1-γ)^-2以及策略学习中的min{S,1/(1-γ)^2}因子，与下界尚有有效时域多项式差距；结论限于表格有限折扣MDP和可任意状态-动作采样的生成模型，不直接覆盖在线、离线或函数逼近情形。"
+      },
+      "affiliations": [
+        "University of Copenhagen",
+        "Sharif University of Technology"
+      ],
+      "affiliations_text": "University of Copenhagen, Sharif University of Technology",
+      "score": 4.6934121555813455,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2610.06862v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006862v1-generalizable-robustness-testing-of-dnn-based-robotic-navigation-systems-via-xai-guided-search",
+      "source": "arxiv",
+      "title": "Generalizable Robustness Testing of DNN-Based Robotic Navigation Systems via XAI-Guided Search",
+      "authors": [
+        "Khizra Sohail",
+        "Miren Illarramendi",
+        "Aitor Arrieta"
+      ],
+      "authors_text": "Khizra Sohail, Miren Illarramendi, Aitor Arrieta",
+      "abstract": "**Context:** Deep Neural Networks (DNNs) increasingly control Cyber-Physical Systems (CPSs), yet small input perturbations can cause unsafe system-level behavior. Existing approaches often optimize perturbations for individual images and evaluate them only in simulation, limiting their generalizability and practical validity.\n  **Objectives:** This work aims to generate robustness tests that remain effective across operational observations and to evaluate whether the resulting failures transfer from simulation to a physical robot.\n  **Methods:** We propose an explainability-guided multi-objective evolutionary approach that generates sparse perturbations over representative images selected through visual and behavioral clustering. Aggregated Integrated Gradients guide mutations toward influential image regions. We evaluate the approach on a DNN-controlled LeoRover in Gazebo, conduct an ablation study, and validate a stratified subset of perturbations on the physical robot.\n  **Results:** The approach achieved a median success rate of 70.0%, compared with 53.85% for unguided search, and increased median hypervolume from 0.65 to 0.73. Multi-image optimization improved the success rate from 50.0% to 57.5%, while XAI guidance further increased it to 70.0%. In the sim-to-real evaluation, simulation achieved 0.95 precision and 0.67 recall, and simulated and physical failure times showed a significant positive correlation of 0.617.\n  **Conclusion:** Combining multi-image optimization with explainability-guided search improves robustness testing for DNN-controlled robotic systems. Simulation effectively identifies and prioritizes transferable failures, but physical validation remains necessary because some real-world failures are not reproduced in simulation.",
+      "url": "http://arxiv.org/abs/2610.06862v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06862v1",
+      "tldr": "This paper proposes an explainability-guided multi-objective evolutionary search that generates generalizable robustness tests across clustered representative images for DNN-based robotic navigation, achieving a 70% median success rate and demonstrating that simulation can prioritize transferable failures to a physical robot while still requiring real-world validation.",
+      "detailed_reading": {
+        "motivation": "现有DNN鲁棒性测试多针对单张图像优化扰动，容易过拟合特定场景而难以泛化到其他操作观测；同时多数研究仅在仿真中评估，未验证失败是否迁移到物理机器人。DNN控制的CPS中微小输入扰动可能传播为系统级不安全行为，因此需要生成跨操作观测仍有效的鲁棒性测试，并检验仿真到现实的迁移性。",
+        "method": "方法分为三阶段：首先用DINOv2(ViT-B/14)提取视觉嵌入并与机器人线速度、角速度等行为特征结合，降维后用HDBSCAN聚类，并从每个簇采样一张代表图像构成代表性场景集；其次对代表图像计算以零图为基线的Integrated Gradients，聚合绝对归因得到全局归因图并归一化为概率分布W；最后采用基于存档的多目标进化搜索，候选解编码稀疏圆形扰动区域，同一扰动在代表图像集上评估，以最大化转向输出偏差并最小化扰动像素数为目标，变异含Add、Remove、Move、Scale并按W偏向高归因区域，注入高斯噪声N(0,sigma^2)后更新Pareto存档，最终输出非支配扰动集合。",
+        "result": "该方法在Gazebo中的DNN控制LeoRover上取得中位成功率70.0%，高于无引导搜索的53.85%；中位超体积由0.65提升至0.73。消融显示，多图像优化将成功率从50.0%提高到57.5%，再加入XAI引导提高到70.0%。仿真到真实迁移中，仿真精度0.95、召回0.67，仿真与物理失败时间显著正相关，相关系数为0.617。",
+        "conclusion": "结果表明，将多图像优化与可解释性引导搜索结合，可提升DNN控制机器人导航系统鲁棒性测试的有效性与可迁移性。仿真能有效识别和优先排序可迁移失败，但其召回率有限，说明安全关键评估仍需物理验证。",
+        "key_details": "关键实现点包括：以视觉与行为联合特征聚类选择代表图像，HDBSCAN无需预设簇数并可标记噪声；用零基线Integrated Gradients的绝对归因聚合为全局先验W；候选扰动为稀疏圆形区域，通过Add、Remove、Move、Scale随机变异并注入高斯噪声；优化目标为转向偏差最大化与扰动像素数最小化的冲突目标，采用轻量存档式多目标搜索而非完整NSGA-II，以应对多图像评估开销和变长解结构；父代从Pareto存档均匀采样以避免过早偏向某一目标。评估在LeoRover的Gazebo仿真与分层物理子集上完成，主要局限是仿真精度0.95但召回0.67，部分真实失败无法在仿真中复现，因此物理验证仍必要。"
+      },
+      "affiliations": [
+        "Mondragon University"
+      ],
+      "affiliations_text": "Mondragon University",
+      "score": 4.648763231220808,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.06918v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006918v1-learning-from-unreliable-trajectories-adversarially-robust-federated-q-learning",
+      "source": "arxiv",
+      "title": "Learning from Unreliable Trajectories: Adversarially-Robust Federated Q-Learning",
+      "authors": [
+        "Sreejeet Maity",
+        "Aritra Mitra"
+      ],
+      "authors_text": "Sreejeet Maity, Aritra Mitra",
+      "abstract": "We study federated reinforcement learning in which multiple agents interact with a common Markov decision process and communicate through a central server to collaboratively learn the optimal state-action value function. Our goal is to understand whether the sample-efficiency benefits of collaboration can be retained when a fraction of the agents behave adversarially and transmit arbitrarily corrupted information. To address this problem, we introduce Robust Async-Fed-Q, an epoch-based federated learning algorithm that combines variance-reduced estimation of the Bellman optimality operator at the agents with robust aggregation at the server. We establish high-probability finite-time guarantees showing that the proposed method preserves the statistical gains of collaboration among the honest agents while tolerating adversarial corruption. In particular, the effect of the adversarial agents decreases as the amount of data collected by each honest agent grows and eventually vanishes in the infinite-sample limit. We complement these guarantees with information-theoretic lower bounds that characterize the unavoidable statistical cost of adversarial corruption, leading to the first nearly matching upper and lower bounds for adversarially robust federated reinforcement learning. We further extend our framework to accommodate single-trajectory Markovian sampling and heterogeneous partial coverage, where different agents may explore different regions of the state-action space and learning relies on their collective coverage. Finally, our epoch-based design substantially improves the best known communication complexity for federated Q-learning under asynchronous sampling.",
+      "url": "http://arxiv.org/abs/2610.06918v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06918v1",
+      "tldr": "The paper introduces **Robust Async-Fed-Q**, an epoch-based federated Q-learning algorithm that preserves the sample-efficiency gains of collaboration among honest agents even when a fraction of agents adversarially corrupt their communications, with finite-time guarantees, nearly matching information-theoretic lower bounds, and improved communication complexity under asynchronous sampling.",
+      "detailed_reading": {
+        "motivation": "联邦强化学习通过多智能体协作提升样本效率，但现有理论与算法大多假设所有智能体可靠且常要求全覆盖，现实中部分智能体可能故障或被对抗性操纵并发送任意损坏信息。核心张力是协作既能降方差也可能引入偏差，因此需要回答更多数据到底帮助还是损害学习，以及能否在异步采样、部分覆盖和低通信成本下保持协作收益。",
+        "method": "本文提出 Robust Async-Fed-Q，一种基于 epoch 的联邦 Q-learning 算法：多个智能体与同一 MDP 交互，在单轨迹异步/Markov 采样下于每个 epoch 内收集样本，构造对 Bellman 最优算子的方差缩减估计，并由服务器用鲁棒聚合规则融合各智能体估计。与传统每轮多次本地更新不同，该方法每个 epoch 只对整个 Q 表做一次同步更新，从而用异步数据实现更精确的同步方向，并扩展到 i.i.d. 采样、Markov 采样以及异构部分覆盖场景。",
+        "result": "在 i.i.d. 采样下，每智能体 T 个样本时得到高概率 l_inf 误差上界 O~(1/sqrt(λ_min N T) + ε/sqrt(λ_min T))；当 ε=0 时具有对 N 的线性加速并匹配已有联邦 Q-learning 速率，对抗性偏差随 T 增大而衰减并在无穷样本极限消失。信息论下界表明 ε/sqrt(T) 量级的腐坏代价不可避免，因而给出首个近乎匹配的对抗鲁棒联邦强化学习上下界；同时算法通信复杂度对 N 和 T 均为对数级，显著优于既有异步联邦 RL 工作。",
+        "conclusion": "该工作表明在存在任意对抗智能体时，诚实智能体仍可保留协作带来的统计增益，代价是不可避免但可随样本量消失的腐坏偏差项。它把对抗鲁棒联邦 Q-learning 从理想同步/全覆盖设定推进到异步 Markov 采样与异构部分覆盖，并提供近最优有限时间保证和基本下界，为现实不可靠轨迹数据下的联邦强化学习提供了较完整的理论图景。",
+        "key_details": "关键实现细节包括：对抗模型允许 ε 比例且 ε<1/2 的智能体任意外发损坏信息，MDP 为有限状态动作、折扣、奖励有界，λ_min 刻画最难访问状态动作对的访问频率；算法在每个 epoch 内用样本估计 Bellman 最优算子并做方差缩减，服务器端采用鲁棒聚合，每 epoch 仅一次 Q 表更新；Markov 单轨迹情形用耦合论证处理时间相关性，部分覆盖情形通过每个状态动作对的“信息源智能体”与信息冗余假设获得类似速率。理论贡献还包含信息论下界以刻画 ε/sqrt(T) 腐坏代价，通信复杂度对智能体数 N 和样本数 T 均为对数级；局限在于仍依赖有限 MDP、有界奖励、腐坏比例小于二分之一以及覆盖/采样假设。"
+      },
+      "affiliations": [
+        "North Carolina State University"
+      ],
+      "affiliations_text": "North Carolina State University",
+      "score": 4.482277440084224,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.06855v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006855v1-tempest-temporal-embeddings-for-scalable-driver-identification-via-angular-margin-learning",
+      "source": "arxiv",
+      "title": "TEMPEST: Temporal Embeddings for Scalable Driver Identification via Angular Margin Learning",
+      "authors": [
+        "Kyle Musgrove",
+        "Dylan B. Lewis",
+        "Sarah Powers",
+        "Emma J. Reid",
+        "Hector Santos-Villalobos"
+      ],
+      "authors_text": "Kyle Musgrove, Dylan B. Lewis, Sarah Powers, Emma J. Reid, Hector Santos-Villalobos",
+      "abstract": "Scalable driver identification requires embedding models that maintain discriminative performance as fleet size grows, yet existing triplet-loss formulations degrade rapidly with driver pool size and overfit to session-specific patterns under rigorous temporal evaluation. We introduce TEMPEST, a Temporal Convolutional Network embedding model trained with an additive angular margin (ArcFace) loss that enforces global class-level separation in a normalized angular space. TEMPEST maps 60-second multimodal driving windows to compact 96-dimensional embeddings, supporting truly dynamic enrollment without any retraining or classifier refitting. Under rigorous temporal evaluation on a 45-driver dataset, TEMPEST achieves 91.71% Rank-1 accuracy, outperforming the best classical model by 17.9 pp and the strongest triplet-loss baseline by 58.4 pp. TEMPEST degrades by only 4.3 pp when growing the subject pool from 10 to 45 drivers, compared to 22 pp and 32.5 pp for supervised and unsupervised triplet-loss baselines, and its cross-session advantage is corroborated on the public KIA Soul dataset, where it outperforms the best classical model by 7.3 pp within-session and 14.3 pp cross-session. With 720K parameters, a 2.80 MB footprint, and 50-epoch convergence, TEMPEST establishes a rigorous, reproducible baseline for scalable behavioral driver biometric identification.",
+      "url": "http://arxiv.org/abs/2610.06855v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06855v1",
+      "tldr": "TEMPEST is a Temporal Convolutional Network embedding model trained with an ArcFace angular margin loss that maps 60-second multimodal driving windows to compact embeddings for scalable, retraining-free driver identification, achieving strong accuracy and markedly better scaling than triplet-loss baselines.",
+      "detailed_reading": {
+        "motivation": "可扩展的驾驶员识别要求嵌入模型在车队规模增长时仍保持判别力，但现有 triplet-loss 方法随驾驶员池增大迅速退化，并在严格时间评估下过拟合会话特异模式。TEMPEST 用加性角边距学习在归一化角空间中强制全局类别级分离，以解决局部成对约束带来的不稳定与可扩展性差问题。",
+        "method": "TEMPEST 以 60 秒多模态驾驶窗口为输入，基于 ORNL DriverID 等数据预处理为 1 Hz、19 个行为特征，送入 TCN 编码器：单块 B=1、5 层 L=5 指数膨胀因果卷积，核大小 k=3，每层含膨胀 1D 卷积、批归一化、ELU 与 dropout，并有 1x1 残差投影；时间轴自适应平均池化后经全连接投影到 96 维并做 L2 归一化。训练用 ArcFace 损失，基于归一化嵌入与类权重余弦相似度加入角度 margin，m=0.21 rad、s=20.25 由 Optuna 在训练集验证子集上选择；推理冻结编码器，TEMPEST-Raw 用余弦最近邻检索，TEMPEST-SVM 用 RBF SVM（C=1.0）作分类头，支持动态注册而无需重训练或分类器重拟合。",
+        "result": "在 45 驾驶员 DriverID 严格时间评估中，TEMPEST 取得 91.71% Rank-1 准确率，比最佳经典模型高 17.9 个百分点，比最强 triplet-loss 基线高 58.4 个百分点；从 10 增至 45 名驾驶员仅下降 4.3 个百分点，而监督与非监督 triplet-loss 基线分别下降 22 和 32.5 个百分点。在公开 KIA Soul 数据集上，TEMPEST 比最佳经典模型在 within-session 高 7.3 个百分点、cross-session 高 14.3 个百分点；随机 10 折交叉验证因时间泄漏接近 99%，但按时间或跨会话划分后性能显著下降。模型仅 720K 参数、2.80 MB 占用，约 50 个 epoch 收敛。",
+        "conclusion": "TEMPEST 将角边距学习引入行为驾驶员生物识别，证明全局类别级角分离比局部 triplet 约束更可扩展且跨会话更稳健。其嵌入可直接用于余弦相似度匹配，实现免训练动态注册，为可扩展、可复现的驾驶员识别建立了严格基线。",
+        "key_details": "关键实现细节包括：DriverID 由 45 名驾驶员组成（G1 15、G2 14、G3 16），原始 816 个特征经滤波、1 Hz 重采样并移除车辆状态信号后保留 19 个行为特征；KIA Soul 含 10 名驾驶员、4 个会话、54 个特征中常用 15 个，采用 Leave-One-Drive-Out 跨会话划分。损失使用 L2 归一化嵌入与 L2 归一化类权重的余弦相似度，ArcFace 的 m=0.21 rad、s=20.25，编码器为 5 层膨胀卷积、核大小 3、膨胀率 2^l、单块 B=1、96 维嵌入，SVM 为默认 RBF 核且 C=1.0。DriverID 上深度学习模型跑 10 个随机种子而经典模型单次运行；主要局限是数据集与驾驶员规模有限，且随机划分可因时序泄漏将准确率膨胀最多约 80 个百分点，必须用时间或跨会话协议评估。"
+      },
+      "affiliations": [
+        "Oak Ridge National Laboratory",
+        "The University of Tennessee, Knoxville"
+      ],
+      "affiliations_text": "Oak Ridge National Laboratory, The University of Tennessee, Knoxville",
+      "score": 4.405908658623118,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.06958v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006958v1-learning-modular-policy-for-multi-floor-object-navigationa-factorized-framework-for-diagnostic-study",
+      "source": "arxiv",
+      "title": "Learning Modular Policy for Multi-Floor Object Navigation:A Factorized Framework for Diagnostic Study",
+      "authors": [
+        "Shichao Zhai",
+        "Shuhao Ye",
+        "Rong Xiong",
+        "Yue Wang"
+      ],
+      "authors_text": "Shichao Zhai, Shuhao Ye, Rong Xiong, Yue Wang",
+      "abstract": "Object-goal navigation (ObjectNav) in multi-floor scenarios presents a challenge due to sparse rewards caused by long-horizon decision-making. In this paper, we propose a diagnostic study based on a modular framework with an effective learnable policy to analyze failure factors in multi-floor scenarios. To achieve an effective policy for diagnosis, we design the hierarchical factorization policy that deconstructs a single global policy into an intra-floor exploration policy and an inter-floor switching policy. To providing an effective initialization for Reinforcement Learning (RL), the lightweight intra-floor policy is learned by distilling the exploration logic of Visual Language Models (VLMs). Under idealized assumptions, we show that the factorized policy is theoretically equivalent to a single global policy at the policy-representation level. Experiment results indicate that perception performance and stair climbing stability are the primary bottlenecks in multi-floor navigation.",
+      "url": "http://arxiv.org/abs/2610.06958v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06958v1",
+      "tldr": "This paper presents a diagnostic modular framework for multi-floor object-goal navigation that factorizes a global policy into a VLM-distilled intra-floor exploration policy and a learned inter-floor switching policy, finding that perception performance and stair-climbing stability—not decision-making—are the primary bottlenecks.",
+      "detailed_reading": {
+        "motivation": "多楼层ObjectNav因长时程决策导致奖励稀疏，且策略决策、感知与底层执行在完整流程中耦合，现有方法性能差异难以直接定位主要瓶颈。为把策略本身导致的瓶颈与其他因素解耦，需要在一个模块化框架中训练出有效可学习策略，但多楼层导航缺乏监督数据，在线RL训练单一全局策略交互成本极高。",
+        "method": "提出层次化因子化策略：将全局策略分解为楼层内探索策略和楼层间切换策略。地图维护局部滑窗多楼层表示M_multi=concat(M_l,M_c,M_u)，每层6通道含语义前沿、VLM值图、机器人状态、上一时刻前沿/值图和上一动作；楼层内策略以当前层地图为输入，经CNN+U-Net输出logit图并用前沿掩码取argmax子目标，楼层间策略以三层堆叠地图为输入输出Down/Stay/Up并用有效性掩码选择动作；二者分别每K_intra、K_inter步执行。训练先用VLFM及其改进版的探索逻辑蒸馏预训练楼层内策略，用完全探索当前楼层后再换层的贪心规则生成楼层间标签，再用交替SAC RL微调，每轮冻结一个策略更新另一个；底层用预训练PointNav控制器，爬楼可选传送或路点模式。",
+        "result": "诊断实验表明，多楼层导航的主要瓶颈不在决策，而在感知性能与爬楼稳定性：在GT感知下成功率超过YOLO感知，且GT感知与理想爬楼条件下框架优于现有方法；学习到的楼层间策略与贪心策略在GT感知和路点模式下表现相当，但两者在传送模式下均有提升。交替楼层内/楼层间训练每轮带来性能提升并优于零样本多楼层基线，被作为策略有效性的判据；具体数值指标在摘要与预览中未给出。",
+        "conclusion": "该工作提供一个用于诊断的模块化因子化框架，用有效可学习策略将多楼层ObjectNav失败因素分解，结论是感知可靠性与爬楼稳定性是当前主要瓶颈，而策略决策并非主导。理论上在理想化假设下，因子化策略在策略表示层面与单一全局策略等价，最大熵SAC目标取得相同最优值和最优动作分布；贡献还包括VLM探索逻辑蒸馏得到的轻量楼层内策略与交替RL优化流程。",
+        "key_details": "关键细节包括：输入为RGBD与位姿，动作空间为MoveForward/TurnLeft/TurnRight/LookUp/LookDown/Stop，成功判据为停止在d_succ内且不超过T_max；楼层内/间掩码将被遮蔽logit置为-inf，地图窗口随换层重定中心，可扩展到非三层建筑。训练损失未在预览中展开，RL奖励为成功2.5，否则负的地测地距离变化减0.01×Δk；交替RL只是降低耦合的实用策略，并非联合优化的理论保证。局限与约束包括等价性依赖理想化假设、楼层窗口局部性、依赖VLM值图和检测、爬楼稳定性可能受传送/路点设置影响，且K_intra、K_inter及网络超参在给出文本中未明确。"
+      },
+      "affiliations": [
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Zhejiang University",
+      "score": 4.37401935450143,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.06863v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/07/261006863v1-rmrrt-riemannian-barrier-metric-rrt-for-inequality-aware-steering-on-equality-manifolds",
+      "source": "arxiv",
+      "title": "RMRRT: Riemannian Barrier Metric RRT for Inequality-Aware Steering on Equality Manifolds",
+      "authors": [
+        "Minhyeong Kang",
+        "Sanghyun Kim"
+      ],
+      "authors_text": "Minhyeong Kang, Sanghyun Kim",
+      "abstract": "This paper presents a motion planning framework that unifies equality and inequality constraints within a single geometric formulation for sampling-based planning in high-dimensional robotic systems. In conventional sampling-based planners, equality constraints are typically enforced through projection, whereas inequality constraints are handled separately through binary validity checks such as collision testing, often leading to inefficient exploration. To address this limitation, we propose Riemannian Barrier Metric RRT (RMRRT), which constructs a unified local geometry for planning on equality-constrained manifolds. RMRRT first builds an ambient barrier metric from inequality-sensitive barrier terms and then induces a tangent-space metric via a (G)-orthogonal projection associated with the equality constraints. The resulting tangent-space metric is used consistently in both steering and nearest-neighbor selection, biasing exploration away from nearby inequality boundaries while preserving first-order equality consistency. In this work, the metric is instantiated from signed-distance-based geometric proxy inequalities to provide collision-informative tangent-space directions; hard feasibility is enforced separately through standard validity checks. Experimental results show that RMRRT achieves a 100% success rate across diverse constrained manipulation tasks in both simulation and real-world settings, while reducing planning time relative to representative constrained planning baselines. Ablation studies further demonstrate that the proposed metric improves exploration quality by reducing rejected samples and shortening path length. Experiment videos and source code are available at: https://rmrrt-anonymous.github.io",
+      "url": "http://arxiv.org/abs/2610.06863v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06863v1",
+      "tldr": "RMRRT is a sampling-based motion planner that unifies equality and inequality constraints by constructing a barrier-induced Riemannian tangent-space metric on equality-constrained manifolds and using it consistently in steering and nearest-neighbor selection to bias exploration away from inequality boundaries while preserving equality feasibility, yielding faster and more reliable constrained manipulation planning.",
+      "detailed_reading": {
+        "motivation": "在高维机器人采样规划中，等式约束通常通过投影维持，而不等式约束往往只在碰撞检测等二值有效性检查中事后处理，二者分离导致样本拒绝率高、转向不稳定，尤其在可行域狭窄或碎片化的环境中探索效率低下。因此，本文旨在为等式约束流形上的规划构建一个同时满足一阶等式一致性和不等式边界感知的统一局部几何框架。",
+        "method": "RMRRT首先利用不等式敏感的对数障碍项，从基于符号距离的几何代理不等式构造环境空间障碍度量；随后结合等式约束雅可比J(q)，通过G-正交投影将该环境度量诱导到切空间，得到切空间度量。该切空间度量在最近邻选择、局部转向和流形校正中一致使用：转向时选择朝目标有进展且远离邻近不等式边界的方向，最近邻选择也按同一度量衡量局部可连接性，从而在保持一阶等式一致性的同时使探索远离障碍边界。规划器采用双向RRT式树扩展，输入为配置q、等式约束g(q)=0、不等式h_i(q)>0，以及若干机体固定代理点p_j(q)及其到障碍物的符号距离d_j(q)和代理点雅可比J_j(q)；实际硬可行性仍由标准状态有效性与边有效性检查独立保证，因此该度量作为探索偏置而非硬约束。",
+        "result": "实验在多种受约束操作任务中验证，包括仿真与真实世界场景，RMRRT在同时存在闭链抓取等等式约束和碰撞避免等不等式约束的任务中达到100%成功率，并相对代表性约束规划基线减少规划时间。消融研究表明，所提出的度量通过降低被拒绝样本数量、缩短路径长度来提升探索质量。真实世界示例中，三台机械臂在保持闭链抓取约束并避碰的条件下协同搬运椅子，验证了方法的实际可行性。",
+        "conclusion": "本文提出RMRRT，将环境障碍度量、G-正交投影和诱导切空间度量统一到采样规划中，使等式可行性与不等式感知探索在同一局部几何下耦合。该方法在受约束多臂与人形操作任务中表现出较高可靠性和效率，说明将不等式边界几何嵌入转向与最近邻选择可显著改善采样探索；其度量用于探索偏置，硬可行性仍由有效性检查保证。",
+        "key_details": "关键实现细节包括：不等式采用严格形式h_i(q)>0，使对数障碍在内部有限并在边界发散，因此硬可行性必须由状态和边有效性检查另行执行；等式约束流形要求J(q)满行秩，切空间为J(q)v=0，维数为n-m_eq；代理点为附着于运动链的机体固定点，经正运动学映射到世界坐标，其3×n雅可比和到有向包围盒的解析符号距离作为障碍度量输入；切空间度量通过与环境障碍度量兼容的G-正交投影诱导，并一致用于最近邻选择和转向；需要设置度量正则化参数λ>0及代理点数量m_proxy等超参。局限性在于该几何构造依赖可微且可计算符号距离的几何代理不等式，缺乏可微结构的不等式仍只能由有效性检查处理，且所诱导度量不改变硬可行性判定，只提供探索偏置。"
+      },
+      "affiliations": [
+        "Kyung Hee University",
+        "Advanced Institute of Convergence Technology"
+      ],
+      "affiliations_text": "Kyung Hee University, Advanced Institute of Convergence Technology",
+      "score": 4.3149446091340184,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.06950v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006950v1-learning-to-decide-not-to-reason-parameter-efficient-decision-operators-via-low-rank-activation-steering",
+      "source": "arxiv",
+      "title": "Learning to Decide, Not to Reason: Parameter-Efficient Decision Operators via Low-Rank Activation Steering",
+      "authors": [
+        "Ran Li",
+        "Lei Chen"
+      ],
+      "authors_text": "Ran Li, Lei Chen",
+      "abstract": "Injecting skills into a frozen language model currently costs a million parameters and a reinforcement-learning pipeline. We introduce \\method{}, a System-1 decision operator trained by behavior cloning that lowers this cost by roughly two orders of magnitude. The default operator uses 330K parameters to match a 1.33M-parameter operator trained with reinforcement learning, exceeds or achieve comparable performance, while collapsing 3,685-token deliberation into a 6-token decision with no loss in accuracy. A rank-4 variant with 23K parameters, 1/58 of the strongest published skill operator, suffices for SearchQA and near-suffices for LiveMath, where higher rank still helps; the same recipe transfers across five tasks and three backbones, with out-of-distribution gains persisting on LiveMath problems released months after training. The gap to prior work is trainability, and it is set jointly by initialization and architecture: the initialization of prior operators zeroes the gradient of both large factor matrices at the first optimization step, whereas our zero-initialized output projection inside a shared low-rank backbone receives a gradient immediately, which a gradient-flow probe confirms directly. The gain isn't chain-of-thought compression: 23 of 57 LiveMath points beat the base model's best-of-8 sampling, and a logit-lens probe shows the operator amplifies the answer along the model's existing late-layer pathway, not writing it earlier. Gains track the base model's headroom across 13 base--task pairs, and skills compose as approximately linear operators that can be added, interpolated, and hot-swapped at inference time. Code on https://github.com/rlisml/decisionsteer.",
+      "url": "http://arxiv.org/abs/2610.06950v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06950v1",
+      "tldr": "DecisionSteer uses low-rank activation steering to train parameter-efficient System-1 decision operators via behavior cloning, matching or outperforming RL-based skill operators with far fewer parameters while compressing long deliberation into a few tokens without accuracy loss.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.297917140358527,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.06942v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006942v1-learning-to-remember-distilling-memory-retention-for-compact-recurrent-neural-networks",
+      "source": "arxiv",
+      "title": "Learning to Remember: Distilling Memory Retention for Compact Recurrent Neural Networks",
+      "authors": [
+        "Nilushika Udayangania",
+        "Kishor Nandakishora",
+        "Marimuthu Palaniswami"
+      ],
+      "authors_text": "Nilushika Udayangania, Kishor Nandakishora, Marimuthu Palaniswami",
+      "abstract": "Deep learning models, particularly recurrent neural networks and their variants, such as long short-term memory, have significantly advanced time series analysis. These models capture complex, sequential patterns in time series, enabling real-time assessments. However, their high computational complexity and large model sizes pose challenges for deployment in resource-constrained environments, such as wearable devices and edge computing platforms. Knowledge Distillation (KD) offers a solution by transferring knowledge from a large, complex model (teacher) to a smaller, more efficient model (student), thereby retaining high performance while reducing computational demands. Current KD methods, originally designed for computer vision tasks, neglect the unique temporal dependencies and memory retention characteristics of time series models. To bridge this gap, we propose a novel KD framework termed Memory-Discrepancy Knowledge Distillation (MemKD). MemKD leverages a specialized loss function to capture memory retention discrepancies between the teacher and student models across subsequences within time series data, ensuring that the student model effectively mimics the teacher's behaviour. This approach facilitates the development of compact, high-performing recurrent neural networks suitable for real-time, time series analysis tasks. We provide additional experiments, in-depth theoretical analysis, and insights into the proposed framework across extended time series benchmarks. Our experiments demonstrate that MemKD significantly outperforms state-of-the-art KD methods. Additionally, we demonstrate that it can match the teacher model's performance across a wide range of compression levels, achieving notable reductions in parameter count and memory usage without a significant loss in accuracy.",
+      "url": "http://arxiv.org/abs/2610.06942v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06942v1",
+      "tldr": "The paper introduces Memory-Discrepancy Knowledge Distillation (MemKD), a knowledge distillation framework that uses a specialized loss to align teacher and student memory retention across time-series subsequences, enabling compact recurrent neural networks to match teacher performance while significantly reducing parameters and memory usage.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.19895586003921,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.06890v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006890v1-event-driven-ml-pipeline-orchestration-for-manufacturing-an-aws-industry-experience",
+      "source": "arxiv",
+      "title": "Event-Driven ML Pipeline Orchestration for Manufacturing: An AWS Industry Experience",
+      "authors": [
+        "Zhengyang",
+        "Gu",
+        "Thomas Cook",
+        "Fredaljohn Rohrbaugh",
+        "Joseph E. Hernandez",
+        "Chris Couch"
+      ],
+      "authors_text": "Zhengyang, Gu, Thomas Cook, Fredaljohn Rohrbaugh, Joseph E. Hernandez, Chris Couch",
+      "abstract": "We present an industry experience report on three years of operating an event-driven cloud infrastructure for continuous machine learning training in automotive manufacturing. Our system orchestrates GPU-accelerated training of product-specialized model pairs, a physics prediction model and a reinforcement-learning control policy, across multiple plants, coordinating long-running GPU workloads triggered by manufacturing events. The architecture combines Amazon ECS with EC2 GPU capacity providers, SQS-based messaging with dead-letter queues, and an admission-controlled Lambda dispatcher that enforces cluster concurrency limits. A Conductor orchestrator on ECS Fargate initiates dependency-aware retraining chains on a weekly schedule. The entire infrastructure is codified in modular Terraform with multi-account separation. From 40000+ production training jobs we report a 72-78% cost reduction versus always-on GPU infrastructure. A discrete-event simulation confirms that admission control is necessary (naive dispatch loses 65% of jobs) and that queue-draining matches AWS Step Functions latency while eliminating per-job startup overhead. We provide lessons learned and release the simulator and Terraform module skeletons as open-source artifacts.",
+      "url": "http://arxiv.org/abs/2610.06890v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06890v1",
+      "tldr": "This industry experience report presents a three-year, event-driven AWS architecture for continuous GPU-accelerated training of product-specialized physics and reinforcement-learning model pairs across automotive manufacturing plants, using ECS, SQS, admission-controlled Lambda dispatch, and Terraform to achieve 72–78% cost savings over always-on GPU infrastructure while validating admission control as essential and releasing open-source simulator and Terraform artifacts.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Liveline Technologies"
+      ],
+      "affiliations_text": "Liveline Technologies",
+      "score": 4.0259744632310905,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.06936v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006936v1-qiyao-i-a-manifold-based-foundation-model-for-irregular-multivariate-time-series-forecasting",
+      "source": "arxiv",
+      "title": "QiYao-I: A Manifold Based Foundation Model for Irregular Multivariate Time Series Forecasting",
+      "authors": [
+        "Linfeng Wang",
+        "Ruitong Zhang",
+        "Kai Zhao",
+        "Yang Shu",
+        "Zhongwen Rao",
+        "Meng Wang",
+        "Yijie Li",
+        "Bin Yang",
+        "Chenjun Guo"
+      ],
+      "authors_text": "Linfeng Wang, Ruitong Zhang, Kai Zhao, Yang Shu, Zhongwen Rao, Meng Wang, Yijie Li, Bin Yang, Chenjun Guo",
+      "abstract": "Irregular multivariate time series forecasting is a challenging yet important problem in real-world applications, where observations are often irregularly sampled and asynchronously recorded across variables. Existing time series foundation models are mostly built on regularly sampled sequences, making them difficult to generalize to irregular time intervals and asynchronous cross-variable dependencies. To address these challenges, we propose QiYao-I, a manifold based foundation model for irregular multivariate time series forecasting. Specifically, we introduce a novel sampling-conditioned temporal manifold attention mechanism that maps real timestamps into a learnable temporal manifold feature space and injects temporal manifold biases into attention layers, enabling the model to capture both irregular time intervals and local sampling structures. Further, we propose a dynamic variable interaction mechanism with frequency awareness. It selectively performs cross-variable message passing under asynchronous observations. Extensive experiments on real-world irregular multivariate forecasting benchmarks demonstrate that QiYao-I achieves superior performance compared with both time series foundation models and end-to-end irregular forecasting models, showing strong generalization ability in zero-shot and few-shot settings.",
+      "url": "http://arxiv.org/abs/2610.06936v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06936v1",
+      "tldr": "QiYao-I is a manifold-based foundation model for irregular multivariate time series forecasting that uses sampling-conditioned temporal manifold attention and frequency-guided dynamic variable interaction to capture irregular time intervals and asynchronous cross-variable dependencies, achieving strong zero-shot and few-shot generalization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huawei Technologies Ltd.",
+        "East China Normal University"
+      ],
+      "affiliations_text": "Huawei Technologies Ltd., East China Normal University",
+      "score": 3.965340257931813,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.06921v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006921v1-does-a-learned-corrector-beat-a-simple-retreat-evidence-from-a-frozen-vla",
+      "source": "arxiv",
+      "title": "Does a Learned Corrector Beat a Simple Retreat? Evidence from a Frozen VLA",
+      "authors": [
+        "Chenchao Sheng",
+        "Zhuang Jiang",
+        "Liuhaichen Yang",
+        "Ningwei Bai",
+        "Zezhi Tang"
+      ],
+      "authors_text": "Chenchao Sheng, Zhuang Jiang, Liuhaichen Yang, Ningwei Bai, Zezhi Tang",
+      "abstract": "Before deploying runtime recovery for a frozen vision-language-action (VLA) policy, one must establish that an intervention improves success beyond ordinary run-to-run variation and that its complexity adds value over a simple action. We evaluate these questions on frozen $π_{0.5}$ across four RoboTwin tasks. For each test seed, we pair rollouts with and without correction and include a same-seed base-policy re-run as a placebo. Seed-cluster intervals and prespecified comparison rules assess net gains against stochastic outcome changes. Across 3,888 paired episodes, the full pipeline raises success on beat_allowbreak block_allowbreak hammer by $+13.5$\\,pp (95\\% interval $[+9.4,+17.7]$), with no detectable gain on the other three tasks at the deployed weight. Among failed base episodes on the responsive task, $43.2\\%$ succeed on a plain re-run, compared with $63.5\\%$ after correction; many nominal rescues therefore reflect the base policy's own variability. A fixed-time trigger and scripted return to an earlier joint configuration produce a net gain with no detected difference from the learned pipeline across two rounds, although our prespecified equivalence criterion is not met consistently. Pausing and a constant-action control do not yield comparable gains. On this benchmark, the decision to intervene depends strongly on the task, and a paired placebo plus a simple retreat baseline are needed to establish what learned correction contributes.",
+      "url": "http://arxiv.org/abs/2610.06921v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06921v1",
+      "tldr": "In a paired, placebo-controlled evaluation of a frozen π0.5 VLA across four RoboTwin tasks, a learned runtime corrector significantly improved success only on beat_block_hammer (+13.5 pp) and was not detectably better than a simple scripted retreat, showing that most apparent recovery gains reflect base-policy variability and task-specific recoverability rather than the learned corrector’s complexity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University College London"
+      ],
+      "affiliations_text": "University College London",
+      "score": 3.881330509017652,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.06882v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006882v1-geometric-coherence-via-weighted-matching-for-3d-heterogeneous-multi-agent-reach-avoid-games",
+      "source": "arxiv",
+      "title": "Geometric Coherence via Weighted Matching for 3D Heterogeneous Multi-Agent Reach-Avoid Games",
+      "authors": [
+        "Prajwal Vijay"
+      ],
+      "authors_text": "Prajwal Vijay",
+      "abstract": "We study assignment quality in 3D heterogeneous multi-agent reach-avoid games and identify a recurring failure mode of cardinality-only matching in geometrically structured scenarios, which we term \\emph{Geometric Sprawl}. In these cases, multiple maximum-cardinality assignments are available, but some induce spatially incoherent pairings and inefficient pursuit trajectories. Building on the evasion-space framework of Yan et al.~\\cite{yan2022}, we introduce a cardinality-first weighted sequential matching method in which the Hamilton--Jacobi--Isaacs interception value $z_I(s,j)$ is used as a secondary assignment weight. Each sequential stage is solved with a min-cost max-flow backend, while the unweighted baseline uses the same solver with the weight term removed. We evaluate both methods on a deterministic 35-scenario benchmark (7 families & 5 initialization variants) under two regimes: a diagnostic stationary-unmatched setting and a hybrid saddle-point setting with goal-directed unmatched evaders. On this benchmark, the weighted method resolves 13 of 15 geometric stress-test instances that cause repeated timeouts for the unweighted baseline in the diagnostic regime, and under the hybrid regime improves mean captures from $3.20$ to $3.91$ (22\\% increase) and mean interception height from $3.87$ to $5.36$ (40\\% increase). We also report lower path tortuosity and lower angular-effort proxy values, suggesting smoother pursuit trajectories in this first-order simulation model. We release the simulator and benchmark suite at \\href{https://github.com/Prajwal-Vijay/geometric-coherence-weighted-matching}{github.com/Prajwal-Vijay/geometric-coherence-weighted-matching} to support reproducible evaluation of assignment strategies for 3D reach-avoid games.",
+      "url": "http://arxiv.org/abs/2610.06882v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06882v1",
+      "tldr": "This paper introduces a cardinality-first weighted sequential matching method that uses the Hamilton–Jacobi–Isaacs interception value as a secondary assignment weight to resolve the “Geometric Sprawl” failure of cardinality-only matching in 3D heterogeneous multi-agent reach-avoid games, improving capture counts and interception heights on a deterministic benchmark.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IIT Madras"
+      ],
+      "affiliations_text": "IIT Madras",
+      "score": 3.867546465948113,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.06965v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006965v1-acg-wam-world-action-modeling-via-action-conditioned-geometric-latent-prediction",
+      "source": "arxiv",
+      "title": "ACG-WAM: World-Action Modeling via Action-Conditioned Geometric Latent Prediction",
+      "authors": [
+        "Jiangtao Liu",
+        "Zishang Xiang",
+        "Yage He",
+        "Lingguo Cui",
+        "Baihai Zhang",
+        "Runqi Chai",
+        "Senchun Chai"
+      ],
+      "authors_text": "Jiangtao Liu, Zishang Xiang, Yage He, Lingguo Cui, Baihai Zhang, Runqi Chai, Senchun Chai",
+      "abstract": "World action models jointly learn visual predictionand robot actions, providing a way to use observations ofscene evolution for policy learning. Their video and actionlosses, however, provide no explicit target for the geometricconsequences of a demonstrated action sequence. Moreover,visual features taken after temporal attention can contain futureobservations, making them unsuitable as the sole current visualinput to an auxiliary predictor. We introduce ACG-WAMand its auxiliary objective, the Action-Conditioned GeometricJoint-Embedding Predictive Architecture (ACG-JEPA), whichpredicts geometric features at several horizons from the currentobservation and intervening actions, using the future slot of afrozen VGGT encoding of each current and future image pairas the target. We apply this supervision from the head and wristcameras to a shared visual embedding before temporal mixing,and remove the teacher and auxiliary modules at inference.On 50 RoboTwin 2.0 tasks, ACG-WAM achieves 93.46%success in clean scenes, with the best randomized success(92.68%) and mean across both settings (93.07%) among thecompared methods; across three tasks on a real robot, itachieves 85.00% success and 91.67% partial completion score,exceeding Motus by 10.00 and 9.17 percentage points, respec-tively. Code:https://github.com/RoboOpus/ACG-WAM.Website:https://RoboOpus.github.io/ACG-WAM.",
+      "url": "http://arxiv.org/abs/2610.06965v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06965v1",
+      "tldr": "TLDR: ACG-WAM improves world-action robot policies by adding an auxiliary ACG-JEPA objective that predicts action-conditioned geometric features of future observations from a frozen VGGT teacher using the current observation and intervening actions, supervising the shared visual embedding before temporal mixing and removing the auxiliary modules at inference, achieving strong RoboTwin 2.0 and real-robot manipulation results.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beijing Institute of Technology",
+        "LimX Dynamics"
+      ],
+      "affiliations_text": "Beijing Institute of Technology, LimX Dynamics",
+      "score": 3.828979350791238,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.06881v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006881v1-comparative-review-of-hybrid-forecasting-models-for-short-term-prediction-of-building-thermal-load",
+      "source": "arxiv",
+      "title": "Comparative review of hybrid forecasting models for short-term prediction of building thermal load",
+      "authors": [
+        "Nikolaos A. Efkarpidis",
+        "Despoina Kothona",
+        "Georgios C. Christoforidis"
+      ],
+      "authors_text": "Nikolaos A. Efkarpidis, Despoina Kothona, Georgios C. Christoforidis",
+      "abstract": "In this paper, a comparative review of different hybrid models for short-term forecasting of building thermal demand is carried out. Particularly, the assessment tackles the comparison of data-driven models enhanced with other state-of-the-art techniques. At the first step, the existing techniques reported in the literature are analysed. It is concluded that Metaheuristics or a data-driven model are used to identify the parameters of the basic model. The qualitative evaluation includes for each method the input and output features, main advantages and drawbacks. At the second step, an existing dataset of historical thermal demand from Scottish households, as well as historical weather forecasts are utilized to assess additionally the performance of existing hybrid methods. From the assessment of 13 hybrid methods, the Empirical Modal Decomposition - long short-term memory - Markov (EMD-LSTM-Markov) model can predict with the highest accuracy the day-ahead power pattern of heating and domestic hot water (DHW) demands. Though local power peaks are also accurately predicted, high power swells and spikes are underestimated. Other methods, such as Support Vector Machine - Simulated Annealing (SVM-SA) and Random Forest - Improved Sparrow Search Algorithm - LSTM (RF-ISSA-LSTM) predict a smooth pattern of heating and DHW demand profiles with rapid changes underestimating most power peaks.",
+      "url": "http://arxiv.org/abs/2610.06881v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06881v1",
+      "tldr": "This comparative review evaluates 13 hybrid data-driven models for short-term building thermal load forecasting and finds that EMD-LSTM-Markov predicts day-ahead heating and domestic hot water demand patterns most accurately, although it and other leading methods tend to underestimate high power spikes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "VIVAVIS Schweiz AG",
+        "University of Western Macedonia"
+      ],
+      "affiliations_text": "VIVAVIS Schweiz AG, University of Western Macedonia",
+      "score": 3.63306248186142,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.06859v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006859v1-dynamic-modeling-efficiency-analysis-and-hierarchical-control-of-industrial-airborne-pulp-dryers",
+      "source": "arxiv",
+      "title": "Dynamic Modeling, Efficiency Analysis, and Hierarchical Control of Industrial Airborne Pulp Dryers",
+      "authors": [
+        "José M. Campos-Salazar",
+        "Jorge Gonzalez-Salazar"
+      ],
+      "authors_text": "José M. Campos-Salazar, Jorge Gonzalez-Salazar",
+      "abstract": "A first-principles dynamic modeling and control framework for industrial airborne pulp dryers is presented. The proposed nonlinear model integrates airflow, pressure, moisture, psychrometric, heat-transfer, and fan electromechanical dynamics within a unified state-space formulation. An efficiency analysis framework incorporating overall efficiency, thermal efficiency, fan efficiency, and specific moisture evaporation ratio (SMER) is also developed. To enhance process performance, a hierarchical DSM-based control architecture combining cascade and non-cascade control loops with supervisory optimization is proposed. The model was implemented in MATLAB/Simulink and evaluated under thermal, compositional, hydraulic, and mechanical disturbances. Simulation results demonstrated accurate moisture regulation, effective disturbance rejection, and favorable energetic performance, achieving an overall efficiency of 85.8%, a thermal efficiency of 86.9%, and an average SMER of 1.39 kg/kWh. To the best of the authors' knowledge, this work represents one of the first comprehensive dynamic modeling and control studies of industrial airborne pulp dryers and provides a proof-of-concept platform for future digital-twin, advanced control, and energy-optimization applications.",
+      "url": "http://arxiv.org/abs/2610.06859v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06859v1",
+      "tldr": "This paper develops a unified first-principles dynamic model, efficiency analysis, and hierarchical DSM-based control framework for industrial DryWay-type airborne pulp dryers, demonstrating in MATLAB/Simulink simulations accurate moisture regulation, effective disturbance rejection, and high energetic performance (85.8% overall efficiency, 86.9% thermal efficiency, and 1.39 kg/kWh average SMER) as a proof-of-concept for digital-twin and advanced energy-optimization applications.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidad de Los Lagos",
+        "Universidad de La Frontera"
+      ],
+      "affiliations_text": "Universidad de Los Lagos, Universidad de La Frontera",
+      "score": 3.6044895107949353,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.06955v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006955v1-roma-llm-system-for-real-world-object-centric-multi-sensory-active-perception",
+      "source": "arxiv",
+      "title": "ROMA: LLM System for Real-World Object-Centric Multi-Sensory Active Perception",
+      "authors": [
+        "Ruoxuan Feng",
+        "Yutong Chen",
+        "Ruihua Song",
+        "Huan Yang",
+        "Zhongyuan Wang",
+        "Guocai Yao",
+        "Di Hu"
+      ],
+      "authors_text": "Ruoxuan Feng, Yutong Chen, Ruihua Song, Huan Yang, Zhongyuan Wang, Guocai Yao, Di Hu",
+      "abstract": "Humans inherently understand the physical world through an active process. When sensory evidence is insufficient to infer physical properties, we naturally interact with the environment by deciding what information is missing, how to acquire it, and when sufficient evidence has been obtained. In stark contrast, existing multi-sensory robot systems mainly integrate sensory inputs rather than actively acquiring missing evidence through interactions. In this work, we introduce ROMA, an LLM-based system for Real-World Object-Centric Multi-Sensory Active Perception. ROMA integrates vision, audio, tactile, and force sensing into a reasoning-interaction-feedback loop. The model identifies missing evidence and determines the target objects, interactions, and modalities, while a physical interface executes the selected interactions and collects the multi-sensory feedback. To support this capability, we construct ROMI-2K, a large-scale real-world multi-sensory object interaction dataset covering nearly 2,000 objects and 6 atomic interactions with synchronized sensory feedback. Building on these data, we develop a two-stage training framework that aligns sensory modalities and equips the LLM to assess evidence sufficiency, select informative interactions, and reason over the multi-sensory feedback. We further characterize active perception as perception chains, where acquired evidence guides subsequent interactions and reasoning, and establish ROMA Bench to evaluate single-attribute, long-horizon multi-attribute, and intent-driven active perception. Experiments show that ROMA can actively acquire missing evidence and solve complex, long-chain multi-sensory perception tasks that existing methods struggle to handle, laying a strong perceptual foundation for active multi-sensory embodied agents.",
+      "url": "http://arxiv.org/abs/2610.06955v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06955v1",
+      "tldr": "ROMA is an LLM-based system that integrates vision, audio, tactile, and force sensing into a reasoning–interaction–feedback loop to actively acquire missing multi-sensory evidence in the real world, supported by the ROMI-2K dataset and ROMA Bench, enabling complex long-horizon object-centric active perception.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Beijing Jiaotong University",
+        "Renmin University of China",
+        "Beijing Academy of Artificial Intelligence",
+        "Beijing Key Laboratory of Research on Large Models and Intelligent Governance",
+        "AresoX",
+        "Peking University"
+      ],
+      "affiliations_text": "Beijing Jiaotong University, Renmin University of China, Beijing Academy of Artificial Intelligence, Beijing Key Laboratory of Research on Large Models and Intelligent Governance, AresoX, Peking University",
+      "score": 3.5599289492695103,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.06927v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006927v1-attsvdprompt-adaptive-low-rank-kv-cache-compression-via-attention-guided-svd",
+      "source": "arxiv",
+      "title": "AttSVD:Prompt-Adaptive Low-Rank KV Cache Compression via Attention-Guided SVD",
+      "authors": [
+        "Sara Abdali",
+        "Jongwoo Ko",
+        "Pashmina Cameron"
+      ],
+      "authors_text": "Sara Abdali, Jongwoo Ko, Pashmina Cameron",
+      "abstract": "The key-value (KV) cache of autoregressive transformers grows linearly with context length and dominates memory at long context. Most training-free remedies evict low-importance tokens, an irreversible choice along the sequence axis. We instead keep every token and store it more cheaply along the \"feature\" axis. We therefore propose AttSVD, a new \"interpretable\" low-rank compression whose basis is derived from each prompt's own attention geometry: an online, per-prompt truncated SVD that keeps only the directions attention actually reads, cutting persistent per-head KV memory in proportion to the retained rank. We propose two decode-time caching strategies, accumulating and streaming, for short and long generation regimes. Furthermore, we propose two refinements that make compression adaptive. A per-matrix energy rule sizes the logit space and the attention mass independently. An attention-aware basis truncates only in the spaces attention actually reads, preserving both the attention logits and the attention output. The same factors also provide free, per-head interpretability insights into the effective rank and the geometry attention consumes. Across multiple models, on both an agentic benchmark and the full LongBench suite AttSVD stays on par with the dense cache while using up to 50% of the KV-cache memory.",
+      "url": "http://arxiv.org/abs/2610.06927v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06927v1",
+      "tldr": "AttSVD is a training-free, prompt-adaptive KV-cache compression method that keeps all tokens but stores them as attention-guided low-rank SVD factors along the feature axis, matching dense-cache performance while using up to 50% of the KV-cache memory.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft"
+      ],
+      "affiliations_text": "Microsoft",
+      "score": 3.5560327191921246,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.06967v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006967v1-economic-resources-sporting-efficiency-and-uncertainty-a-stochastic-optimization-model-of-football-performance-in-africa",
+      "source": "arxiv",
+      "title": "Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa",
+      "authors": [
+        "Thierno Thioune",
+        "Babacar Mbaye Ndiaye"
+      ],
+      "authors_text": "Thierno Thioune, Babacar Mbaye Ndiaye",
+      "abstract": "We propose a stochastic optimization framework in which football performance is modeled as the result of an efficiency-driven production process under uncertainty. The model incorporates economic inputs, a latent efficiency variable evolving according to a stochastic differential equation, and a control variable representing investment in sports development. We derive the associated discounted Hamilton--Jacobi--Bellman (HJB) equation, characterize the optimal investment policy, prove a verification theorem under explicit growth conditions, and show that a bounded investment budget is required for the control problem to be well posed. We relate our efficiency measure to the stochastic frontier and data envelopment analysis (SFA/DEA) traditions used elsewhere in sports economics, and clarify what a dynamic control formulation adds relative to those static approaches. The theoretical results are illustrated with a numerical solution of the HJB equation -- validated by a grid-refinement convergence study -- and Monte Carlo simulations. A cross-sectional analysis of the 24 AFCON 2025 national teams, based on GDP, population, and FIFA ranking data, estimates country-specific conditional log-efficiency residuals using heteroskedasticity-robust inference.\n  We show that these residuals are mechanically and strongly correlated with FIFA points by construction, quantify this dependence, and interpret the results accordingly. Teams such as Senegal and Morocco consistently outperform their GDP-implied potential, whereas others, including South Africa and Tanzania, tend to underperform.\n  While these patterns are broadly consistent with observed AFCON outcomes, the estimated residual also captures unobserved factors, such as institutional quality, diaspora talent, and demographic structure, that are not included in the model.",
+      "url": "http://arxiv.org/abs/2610.06967v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06967v1",
+      "tldr": "The paper develops a stochastic optimal-control model of African football performance in which economic resources and investment drive a latent, uncertain efficiency process, then illustrates it numerically and with an AFCON 2025 cross-country analysis showing which teams over- or underperform relative to GDP and population.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cheikh Anta Diop"
+      ],
+      "affiliations_text": "University of Cheikh Anta Diop",
+      "score": 3.5318737904184037,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.06929v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006929v1-physical-twins-accelerating-and-enabling-robot-learning-with-phantom-platforms",
+      "source": "arxiv",
+      "title": "Physical Twins: Accelerating and Enabling Robot Learning with Phantom Platforms",
+      "authors": [
+        "Elizabeth Peiros",
+        "Derek Chen",
+        "Lucas Yager",
+        "Edward Lee",
+        "Kevin Wang",
+        "Zoe Samuels",
+        "Michael C. Yip"
+      ],
+      "authors_text": "Elizabeth Peiros, Derek Chen, Lucas Yager, Edward Lee, Kevin Wang, Zoe Samuels, Michael C. Yip",
+      "abstract": "Improvements in human-robot physical interaction (pHRI) can have major implications for physical therapy, search and rescue, and telemedicine. However, a major challenge concerns human constraints and safety in human-robot physical experiments. Concerns about human studies also include repeatability, scalability, and participant diversity. To conduct such experiments, an IRB and willing human participants are required. In this work, we present an improved phantom device, a physical twin, that enables real-world RL-type testing for physically interactive algorithms. The new device not only replicates the ball-and-socket motion of the shoulder but also renders scapular and protraction/retraction motions. The experiments showcase the device's ability to render multiple 3D joint limits and demonstrate a Franka Panda arm sensing limits and interacting with the device as an arm for ADLs (activities of daily living) and pHRI tasks.",
+      "url": "http://arxiv.org/abs/2610.06929v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06929v1",
+      "tldr": "This paper introduces an improved phantom shoulder device—a physical twin—that replicates ball-and-socket, scapular, and protraction/retraction motions to enable safe, repeatable real-world robot learning and testing of physically interactive algorithms, demonstrated with a Franka Panda arm.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, San Diego"
+      ],
+      "affiliations_text": "University of California, San Diego",
+      "score": 3.3094114605134255,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.06880v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006880v1-neutrosophic-ensemble-classification-for-uncertainty-aware-bearing-fault-detection-evidence-from-laboratory-and-variable-speed-industrial-benchmarks",
+      "source": "arxiv",
+      "title": "Neutrosophic Ensemble Classification for Uncertainty-Aware Bearing Fault Detection: Evidence from Laboratory and Variable-Speed Industrial Benchmarks",
+      "authors": [
+        "Maikel Leyva-Vazquez",
+        "Dayron Rumbaut Rangel",
+        "Lorenzo Cevallos-Torres",
+        "Alexis Matheu Perez"
+      ],
+      "authors_text": "Maikel Leyva-Vazquez, Dayron Rumbaut Rangel, Lorenzo Cevallos-Torres, Alexis Matheu Perez",
+      "abstract": "Machine learning classifiers for bearing fault detection produce scalar confidence scores that conflate confident errors with genuinely ambiguous predictions, and the conventional truth/falsity pair (F = 1 - T) is algebraically redundant by construction. We operationalize a refined neutrosophic decomposition of a Random Forest + XGBoost + Logistic Regression ensemble into four indicators -- T-hat (top-class evidence), F-hat (best-competitor evidence), predictive entropy I1-hat, and decision disagreement I2-hat -- evaluated on two bearing benchmarks (CWRU and JNU, 600-1000 rpm) under a leave-one-condition-out protocol. On CWRU, after correcting a file-to-class mapping error, the ensemble reaches 100.00 percent accuracy on three of four held-out loads (92.27 percent on the fourth), leaving too few errors for uncertainty analysis. On JNU, holding out 1000 rpm, accuracy collapses to 40.64 percent, below a majority-class baseline; Logistic Regression (57.91 percent) generalizes far better than the tree ensembles. I1-hat shows a robust association with error beyond T-hat/F-hat, while I2-hat contributes little; standalone Logistic Regression confidence outperforms the full decomposition, a boundary condition we report honestly. Two further results extend this: fusing a time-domain and a frequency-domain model of the same signal and scoring their Jensen-Shannon divergence beats that model own entropy (AURC 0.29 vs. 0.36 on the standard split; 0.54 vs. 0.73 under a harder single-condition reproduction), the only indicator moving correctly under a CWRU-versus-JNU distributional-shift contrast; and, on CWRU alone, literature-verified bearing fault frequencies, correctly demodulated via the envelope spectrum, separate most fault classes almost perfectly (99.57 percent) using three interpretable features. Code, logs, and figures are released for independent verification.",
+      "url": "http://arxiv.org/abs/2610.06880v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06880v1",
+      "tldr": "The paper proposes a lightweight neutrosophic ensemble decomposition (T-hat, F-hat, entropy, and disagreement) for uncertainty-aware bearing fault detection and shows across corrected CWRU and variable-speed JNU benchmarks that predictive entropy adds useful error signal beyond truth/falsity but that simpler logistic-regression confidence often matches or outperforms the full decomposition, with Jensen-Shannon model fusion and envelope-spectrum fault frequencies offering further promise.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidad Bolivariana del Ecuador",
+        "Universidad Bernardo O'Higgins",
+        "Universidad de Guayaquil"
+      ],
+      "affiliations_text": "Universidad Bolivariana del Ecuador, Universidad Bernardo O'Higgins, Universidad de Guayaquil",
+      "score": 3.150763951346133,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.06970v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/07/261006970v1-evformer-an-egocentric-vision-emg-bidirectional-attention-model-for-bimanual-hand-pose-estimation",
+      "source": "arxiv",
+      "title": "EVFormer: An Egocentric Vision-EMG Bidirectional Attention Model for Bimanual Hand Pose Estimation",
+      "authors": [
+        "JiaCheng Ge",
+        "SiYu Zhang",
+        "ShengJie Li",
+        "XinTong Yang"
+      ],
+      "authors_text": "JiaCheng Ge, SiYu Zhang, ShengJie Li, XinTong Yang",
+      "abstract": "Egocentric bimanual hand pose estimation is important for virtual interaction, wearable control, and rehabilitation, but visual observations are often degraded by self-occlusion, hand-hand contact, and object manipulation. We propose EVFormer, a multimodal framework that combines the current RGB frame with the preceding 200 ms of bilateral wrist surface electromyography (sEMG) to estimate 44 finger and wrist joint angles. EVFormer separately encodes visual spatial features and sEMG temporal features, enables cross-modal information exchange through sequential bidirectional cross-attention, and integrates the two modalities using feature-wise gated fusion. We evaluate EVFormer in a single-participant feasibility study using one synchronized public EgoEMG recording with chronologically separated training, validation, and test splits. On 296 test samples, EVFormer achieves a mean absolute error of 11.482 degrees, compared with 13.228-13.610 degrees for vision-only, sEMG-only, late-fusion, and training-mean baselines. This corresponds to relative error reductions of 13.20% compared with the vision-only model and 14.23% compared with late fusion. EVFormer also achieves the lowest error in four of the five evaluated gesture classes. These results provide preliminary evidence that feature-level interaction between egocentric vision and sEMG can improve bimanual hand pose estimation. Further evaluation across participants, recording sessions, sensor placements, and real-world interaction conditions is required to establish the generalizability of the approach.",
+      "url": "http://arxiv.org/abs/2610.06970v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.06970v1",
+      "tldr": "EVFormer is an egocentric vision–sEMG bidirectional-attention model that fuses RGB frames with preceding bilateral wrist sEMG via sequential cross-attention and gated fusion to estimate bimanual hand joint angles, achieving a lower test MAE of 11.482° than vision-only, sEMG-only, late-fusion, and mean baselines in a single-participant feasibility study.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.8645395479176203,
+      "score_text": "2.9"
+    }
+  ],
+  "errors": []
+}
