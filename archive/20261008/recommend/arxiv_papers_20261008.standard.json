@@ -1,0 +1,738 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-08T18:32:23.263909",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.08815v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008815v1-bounded-autonomy-and-verifiable-safety-for-agentic-ai-enabled-automation",
+      "source": "arxiv",
+      "title": "Bounded Autonomy and Verifiable Safety for Agentic AI Enabled Automation",
+      "authors": [
+        "Srini Ramaswamy",
+        "Deveeshree Nayak"
+      ],
+      "authors_text": "Srini Ramaswamy, Deveeshree Nayak",
+      "abstract": "Agentic AI-enabled automation cannot be safely deployed in high-stakes environments on probabilistic reasoning alone. A recurring risk is epistemic drift: as reasoning deepens, system behavior may move away from subject-matter-expert constraints for safe operation. This paper presents BRaVeS, a bounded reasoning and safety-governance framework termed the Defensible Next-Gen Reasoning System (DNRS). BRaVeS encodes SME-defined constraints as invariant anchors, proposes MoDA-Style (Mixture of Depths Attention) depth-aware access as a candidate mechanism for keeping these anchors visible during inference, and uses a state hierarchy (SMARtAutonomy) to reduce autonomy as epistemic risk increases. To formalize bounded recovery, we introduce the Lyapunov-Bounded Consensus Framework (LBCF), which maps continuous epistemic-risk signals into a finite K-bag abstraction and applies shielded state transitions that enforce Lyapunov-style energy descent or route the system to a human-mediated terminal state. The formal convergence result applies to the finite LBCF abstraction under fixed thresholds and feasible-shield assumptions; it does not prove safety of the full continuous neural activation space. We evaluate the framework through a discrete event Monte Carlo simulation using HAI 22.04 industrial-control-system time-series data with synthetic noise and sensor-degradation regimes. Across the tested parameter-grouping strategies and thresholds, the LBCF process achieved finite-step convergence and no safety-guard violations. These results provide simulation-based evidence that bounded governance behavior can be enforced under the stated abstraction, while motivating future work on deployed transformer implementations, live human-in-the-loop validation, and broader adversarial settings.",
+      "url": "http://arxiv.org/abs/2610.08815v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08815v1",
+      "tldr": "The paper presents BRaVeS/DNRS, a bounded governance framework for agentic AI that encodes subject-matter-expert constraints as invariant anchors, monitors epistemic drift to reduce autonomy via SMARtAutonomy, and uses the Lyapunov-Bounded Consensus Framework to enforce shielded convergence or human-mediated intervention in a finite abstraction, with Monte Carlo simulations showing finite-step convergence and no safety-guard violations under stated assumptions.",
+      "detailed_reading": {
+        "motivation": "高风险工业控制、医疗、电网等场景中的自治式AI不能仅依赖概率推理；随着推理加深，系统可能发生认知漂移，使SME定义的安全约束在深层推理中可见性下降，进而导致无依据行动选择和自治失控。因此需要把生成式推理视为受监控轨迹，将SME约束编码为可验证的治理边界，并在认知风险升高时降低或撤销自治权。",
+        "method": "BRaVeS/DNRS将SME规则ℛ_SME表示为(c,τ,p,v)结构化约束元组，经对比自编码器E_CAE编码为低维不变锚点I(X0)，并通过MoDA式深度感知访问将锚点的K0,V0与当前层K_l,V_l拼接为K_mix/V_mix，使后层仍可访问SME约束。推理时计算I(X_l)与I(X0)的发散D_l、基于预测分布与不变参考分布的KL预算B_KL,l及内部假设熵H_l，合成认知风险R_l=λ_D D_l+λ_KL B_KL,l+λ_H H_l；V&V回路将争议潜变量做成Dossier并经授权把I(X0)更新为I(X0)'而不重训底座模型。风险进入模糊SMARtAutonomy挡位（Stable、Meta-Cognitive、Assisted、Regulated Rt）逐步降低权限，并由LBCF将连续风险映射为有限K-bag抽象，使用shielding强制Lyapunov式能量下降或转入人工介导终止态。评估用HAI 22.04 ICS时序数据加合成噪声与传感器退化，在固定阈值和有限K-bag假设下做120,000次离散事件蒙特卡洛仿真，测试不同参数分组策略与阈值。",
+        "result": "在所有测试的参数分组策略和阈值下，LBCF过程均实现有限步收敛且未出现安全防护违规。该结果是在离散治理抽象与仿真条件下得到的，表明该有限抽象层可执行其收敛和guard规则。形式化收敛结论仅适用于固定阈值和可行shield假设下的有限LBCF抽象，并不证明完整连续神经激活空间的安全性。",
+        "conclusion": "论文结论是：在明确假设下，BRaVeS/DNRS可将可测认知漂移与显式自治状态转换绑定，实现有界治理行为而非证明模型内在安全。其贡献分离了架构提议、形式化抽象和仿真验证三层，未来需在已部署Transformer、实时人在回路验证及更广对抗场景中检验。该方法不是AGI蓝图，也不适用于无约束、领域无关或纯探索学习。",
+        "key_details": "关键细节包括：SME先验约束是前提，约束元组含语义条件c_i、阈值或谓词τ_i、优先级或严重度p_i、验证权威v_i；anchor维度d_anchor远小于d_model，CAE用于降维并过滤语言噪声；发散度量含稳定项η，KL预算用经验均值与方差μ_KL,l、σ_KL,l及敏感度κ，风险权重λ_D、λ_KL、λ_H需领域校准。MoDA实现上把不变锚点作为Layer 0的KV-cache前k个静态token，路由权重w_i=σ(W_route h_{l-1}+b_route)，超过τ_route走标准块，但无论路由均执行K_mix=[K_l||K0]、V_mix=[V_l||V0]的残差旁路读取；黑盒LLM可改用检索门控、工具路由、动作抑制或外部策略守卫。LBCF在有限K-bag、固定阈值与可行shield下提供有限步收敛保证，但局限是仅仿真、未部署验证、未做实时人在回路与对抗验证，且不覆盖完整连续神经状态或生产级MoDA。"
+      },
+      "affiliations": [
+        "DNRS.ai",
+        "University of Washington"
+      ],
+      "affiliations_text": "DNRS.ai, University of Washington",
+      "score": 5.405142509098278,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2610.08818v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008818v1-just-for-funs-llm-guided-spatio-temporal-graph-node-generation-for-forecasting-unobserved-node-states",
+      "source": "arxiv",
+      "title": "Just for FUNS: LLM-Guided Spatio-Temporal Graph Node Generation for Forecasting Unobserved Node States",
+      "authors": [
+        "Shuhao Li",
+        "Weidong Yang",
+        "Changan Liu",
+        "Wei Zhuo",
+        "Yingbo Zhou",
+        "Fan Zhang",
+        "Siqiang Luo"
+      ],
+      "authors_text": "Shuhao Li, Weidong Yang, Changan Liu, Wei Zhuo, Yingbo Zhou, Fan Zhang, Siqiang Luo",
+      "abstract": "Spatio-temporal forecasting is a cornerstone of logistics, urban planning, and intelligent transportation systems. However, constrained by deployment costs and maintenance resources, sensor networks often lack comprehensive spatial coverage, rendering Forecast Unobserved Node States (FUNS) a critical yet formidable challenge. Conventional models rely on historical observations and typically falter when encountering nodes without prior records. To address this, we redefine the problem as a conditional generation task on spatio-temporal graphs and propose GenST, a framework that introduces Large Language Models (LLMs) as a semantic bridge, leveraging a pre-trained LLM fine-tuned to extract rich semantic features from node descriptions, such as functional zones and road network structures, to compensate for missing spatio-temporal signals. Specifically, we design a two-stage generative architecture: a Spatio-Temporal VAE first compresses spatio-temporal dynamics into a latent space, followed by a Generative Transformer (GenT) that reconstructs the future states of unobserved nodes from noise, guided by multi-modal conditions including semantics, geographic coordinates, and neighborhood contexts. Experiments on six traffic and two non-traffic datasets show GenST significantly outperforms existing baselines in zero-shot prediction tasks, demonstrating the practical potential of semantic-guided generation for mitigating spatio-temporal data sparsity.",
+      "url": "http://arxiv.org/abs/2610.08818v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08818v1",
+      "tldr": "The paper introduces GenST, an LLM-guided generative spatio-temporal graph framework that reframes forecasting unobserved node states as conditional generation, using semantic node descriptions and a two-stage VAE/Transformer architecture to enable zero-shot prediction for nodes lacking historical data.",
+      "detailed_reading": {
+        "motivation": "传感器网络受部署成本与维护资源限制，普遍缺乏完整空间覆盖，导致大量无历史记录的未观测节点状态预测（FUNS）成为关键难题。传统时空图神经网络依赖历史观测且在转导设定下工作，面对无历史节点时时序建模机制失效，并存在语义盲区、空间异质性和点估计过平滑问题。为此，论文将FUNS重新定义为时空图上的语义引导条件生成任务，试图用LLM的开放世界知识弥补缺失的时空信号。",
+        "method": "GenST首先以节点文本描述为输入，冻结预训练LLM权重并注入LoRA低秩矩阵，提取功能分区与路网结构语义嵌入；同时用可学习高斯随机频率的Fourier映射编码经纬度，用Inductive GNN基于邻接矩阵、静态属性和观测邻居历史编码进行消息传递，未观测邻居以可学习mask token替代，再将语义、坐标、结构特征经Fusion MLP融合为多模态条件。随后ST-VAE用多层Conv1D编码器将观测时空动态压缩为连续隐空间并参数化高斯后验，GenT以生成式Transformer在隐空间执行去噪与重建，训练时学习以多模态条件为引导的生成过程。推理阶段，GenT从噪声出发，在语义、位置和邻域上下文条件下零样本合成未观测节点及全网未来状态。",
+        "result": "论文在六个交通数据集和两个非交通数据集上开展零样本FUNS预测实验，报告GenST显著优于现有基线，并在稀疏观测场景下保持稳健性能。摘要与预览未给出具体数值指标，但结论支持语义引导生成能缓解时空数据稀疏，并具有跨域应用潜力。",
+        "conclusion": "LLM可作为语义桥梁，将功能分区、道路等级和路网结构等文本知识转化为零样本条件先验，从而替代未观测节点缺失的历史数值信号。ST-VAE与GenT结合的隐空间条件生成范式为传感器覆盖不足和冷启动场景下的未观测节点预测提供了可行路径。",
+        "key_details": "关键实现包括LoRA微调时将原权重扩展为W=W0+(α/r)BA并取LLM最后隐状态经线性投影得到语义向量，坐标经Fourier特征映射保留绝对位置先验，Inductive GNN用邻接矩阵、静态属性和邻居历史编码进行归纳式消息传递，未观测邻居用mask token填补。多模态条件拼接后经LayerNorm-MLP融合，作为GenT交叉注意力的Key和Value；ST-VAE提供紧凑连续隐流形以降低高维扩散或生成的计算复杂度，训练目标围绕变分推断、去噪和重建展开。方法依赖文本描述质量、坐标与路网先验，LoRA秩r、缩放α及网络层数等超参在预览中未完整披露，完全无历史节点的零样本生成仍受语义可辨识性和条件覆盖程度约束。"
+      },
+      "affiliations": [
+        "Fudan University",
+        "Zhuhai Fudan Innovation Research Institute",
+        "Nanyang Technological University",
+        "Guangzhou University"
+      ],
+      "affiliations_text": "Fudan University, Zhuhai Fudan Innovation Research Institute, Nanyang Technological University, Guangzhou University",
+      "score": 4.990426519713143,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.08822v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008822v1-a-vehicle-integrated-approach-to-digital-twin-deployment-for-bridges-through-drive-by-sensing",
+      "source": "arxiv",
+      "title": "A Vehicle-Integrated Approach to Digital Twin Deployment for Bridges Through Drive-By Sensing",
+      "authors": [
+        "Zihao Liu",
+        "Daigo Kawabe",
+        "Jiaji Wang",
+        "Chul-Woo Kim",
+        "Mehrisadat Makki Alamdari"
+      ],
+      "authors_text": "Zihao Liu, Daigo Kawabe, Jiaji Wang, Chul-Woo Kim, Mehrisadat Makki Alamdari",
+      "abstract": "Ageing bridge infrastructure is a growing global concern, yet conventional Structural Health Monitoring (SHM) systems are costly and difficult to scale, and routine visual inspections remain subjective. Drive-by, or indirect, bridge inspection, in which a sensorised vehicle recovers structural information from vehicle-bridge interaction (VBI) and vehicle-road interaction (VRI) responses, offers a scalable alternative. However, key challenges remain unresolved, including separating bridge responses from road roughness, detecting damage under normal traffic, and generalising across diverse bridge types. This paper presents a vehicle-integrated digital twin framework that unifies physics-based modelling and machine learning for continuous monitoring of bridge and road conditions. The framework comprises three pillars. First, surrogate models of VBI and VRI are constructed using a Fourier Neural Operator that learns function-to-function mappings from operating conditions to vehicle responses. Trained on both simulated and field data, these surrogates deliver millisecond-scale inference, replacing computationally intensive full-order analyses. Second, the design of a custom electric inspection vehicle, its sensor layout, and signal processing chain are optimised through Bayesian optimisation to maximise bridge information yield while suppressing road and vehicle noise. Unsupervised damage-assessment pipelines based on adversarial autoencoders, matrix profiles, and transformer architectures have been developed and validated to process the resulting vehicle data. Third, the complete workflow is validated through coordinated multi-site field trials in Australia and Japan, covering a range of bridge types, traffic conditions, and environmental settings.",
+      "url": "http://arxiv.org/abs/2610.08822v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08822v1",
+      "tldr": "The paper proposes a vehicle-integrated digital twin framework that combines Fourier Neural Operator surrogates and machine learning to convert drive-by vehicle vibration data into scalable, continuous bridge and road condition monitoring, validated through multi-site field trials in Australia and Japan.",
+      "detailed_reading": {
+        "motivation": "全球桥梁老化使传统结构健康监测成本高、难扩展，而目视巡检主观且易漏早期损伤；drive-by或间接检测利用装有传感器的车辆从车桥相互作用与车路相互作用响应中反演结构信息，具备可扩展潜力，但仍需解决从路面粗糙度和车辆动力学中分离桥梁响应、正常交通下损伤检测以及跨桥型泛化等问题。将drive-by测量转化为桥梁状态本质上是对耦合车桥系统的反问题，而全阶有限元VBI仿真过慢，因此需要可随每次过桥快速更新的数字孪生。",
+        "method": "本文提出车辆集成数字孪生框架，包含三类支柱：用Fourier Neural Operator构建VBI/VRI代理模型，学习从运营条件到车辆响应的函数到函数映射，并用仿真与现场数据训练以实现毫秒级推理；通过Bayesian优化设计定制电动检测车、传感器布局和信号处理链，以最大化桥梁信息量并抑制路面与车辆噪声，同时用对抗自编码器、matrix profile和transformer等无监督损伤评估流程处理车辆数据；最后在澳大利亚和日本多站点现场试验中验证完整工作流。具体到Old Ada Bridge案例，建立29根构件的钢桁架有限元模型，损伤表示为单根构件杨氏模量折减，结构状态为29维severity向量；两轴车以恒定速度在固定路面谱上过桥，FNO以频谱参数化直接作用于响应频域；正向任务将29个severity作为常量输入通道并输出两轴整段过桥响应，且在损伤与健康响应残差上训练；反向任务以轴响应为输入，通过两个输出头返回损伤构件与severity；训练集为1160次仿真过桥、每构件40次、severity范围0.10至0.60，划分986训练、58验证、116测试。",
+        "result": "在116条留出过桥样本上，正向FNO预测的车辆响应与全阶有限元结果高度吻合，计算成本仅为有限元的一小部分，且精度随训练集增大持续提升，说明当前受数据量而非模型容量限制。反向配置在102/116条过桥中正确识别损伤构件，severity估计平均绝对误差为0.03；失败案例多将损伤误判为同一弦杆内相邻构件，但severity估计仍较准确，作者将其归因于相邻弦杆构件对车辆响应影响相近导致可区分性不足而非不可观测。Old Ada Bridge部分为数值算例，摘要还报告了在澳大利亚和日本开展多站点现场试验以覆盖不同桥型、交通和环境条件。",
+        "conclusion": "该神经算子数字孪生可在drive-by配置下同时执行正向响应预测和反向损伤识别，移动车辆作为覆盖全跨的传感器能捕捉包括近支座构件在内的损伤效应，而固定单点传感器难以做到。整体上FNO方法在车致过桥检测中表现良好，但本文Old Ada Bridge结果仍属数值案例研究，后续需用现场数据验证；摘要层面则强调该车辆集成框架可通过多站点试验向连续桥梁与路面状态监测部署。",
+        "key_details": "关键实现细节包括：测试桥为日本Old Ada Bridge，简支钢桁架，主跨59.2m、宽3.6m，1959年建、2012年退役，先前已有5种人工损伤场景的环境与车致振动基准数据；有限元模型含29根构件，分为下弦、上弦、竖杆和斜杆4组，损伤为单根构件杨氏模量折减，severity取0.10至0.60，状态为29维有限向量而非连续损伤场；仿真中两轴车恒速、固定路面谱过桥以控制差异仅来自结构状态；FNO在频域学习算子，正向输入为常量severity通道、输出为两轴响应，训练目标是损伤与健康响应残差，反向输入为轴响应并用双头输出构件与severity；数据为1160次仿真过桥、每构件40次，划分986/58/116；全阶FE单次过桥约需1分钟，FNO推理为毫秒级；局限是相邻同弦构件响应差异小导致误识别，且Old Ada Bridge部分为数值验证，摘要所述Bayesian优化车辆与传感器、无监督对抗自编码器、matrix profile、transformer及澳日现场试验的详细指标未在预览中给出。"
+      },
+      "affiliations": [
+        "Kyoto University",
+        "KyoCenseo Inc.",
+        "The University of Hong Kong",
+        "University of New South Wales"
+      ],
+      "affiliations_text": "Kyoto University, KyoCenseo Inc., The University of Hong Kong, University of New South Wales",
+      "score": 4.982710594320252,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.08960v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008960v1-directed-temporal-representations-for-offline-visual-control",
+      "source": "arxiv",
+      "title": "Directed Temporal Representations for Offline Visual Control",
+      "authors": [
+        "Chenyang Yuan",
+        "Haoyu Wang",
+        "Zhuo Sun",
+        "Xiaoyuan Cheng"
+      ],
+      "authors_text": "Chenyang Yuan, Haoyu Wang, Zhuo Sun, Xiaoyuan Cheng",
+      "abstract": "Predictive world models provide compact visual representations for control. Control requires a latent geometry aligned with temporal reachability rather than predictive similarity alone. We introduce Directed Temporal Representations for Control (DTRC), which learns such a geometry from offline visual trajectories on top of frozen LeWorldModel (LeWM) features. DTRC constructs a directed temporal quasimetric over the learned control representation. Short-range temporal offsets calibrate the distance scale. Bootstrapped targets extend temporal reachability across longer horizons. Action-conditioned consistency aligns the representation with local transition dynamics. The resulting distance estimates temporal reaching cost, and its change across a transition defines goal-relative temporal progress. We use this progress signal as a temporal critic for direct goal-conditioned policy learning. Model-assisted targets provide an additional training-time refinement under behavior-support and dynamics-agreement constraints. Across ten visual control tasks, DTRC achieves strong goal-conditioned control performance relative to planning and direct-policy baselines. Held-out diagnostics on the four LeWM tasks show consistent short-range temporal calibration, task-dependent long-range and directional structure, and positive transition-level progress. Temporal supervision improves the same flow-policy parameterization across all four LeWM tasks, while the resulting policy acts directly without iterative trajectory search at test time.",
+      "url": "http://arxiv.org/abs/2610.08960v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08960v1",
+      "tldr": "DTRC learns a directed temporal quasimetric over frozen visual world-model features from offline trajectories and uses its distance changes as a goal-relative progress critic to train a direct goal-conditioned policy, achieving strong control performance across ten visual tasks without test-time planning.",
+      "detailed_reading": {
+        "motivation": "预测式世界模型学到的视觉表征主要按预测相似性组织，但控制真正需要的是与时间可达性对齐的隐空间几何，因为视觉上相似的状态未必在控制上彼此易达。为此作者提出 Directed Temporal Representations for Control（DTRC），在冻结的 LeWorldModel（LeWM）特征之上直接学习一种有向的时间几何，使表征中的距离对应目标到达代价。",
+        "method": "输入为离线视觉轨迹，视觉编码沿用冻结的 LeWM 特征，只在其上学习控制表征。核心模块是一个有向时间拟度量（quasimetric，非对称，允许 d(s,s') 与 d(s',s) 不等）：用短程时间偏移样本标定距离尺度，用自举（bootstrapped）目标把时间可达性外推到更长的时间跨度，并用动作条件一致性把表征与局部转移动力学对齐。由此得到的距离估计时间到达代价，其沿一次转移的变化定义目标相对时间进度，该进度信号作为时间 critic 直接驱动目标条件策略（flow policy）学习；训练时另用模型辅助目标，在行为支撑与动力学一致性约束下做进一步细化。推理时策略直接输出动作，不做迭代轨迹搜索。",
+        "result": "在十个视觉控制任务上，DTRC 的目标条件控制性能优于规划类与直接策略类基线。在四个 LeWM 任务的 held-out 诊断中，观察到一致的短程时间标定、随任务变化的长程与方向结构，以及正向的转移级时间进度。用相同的 flow-policy 参数化，时间监督在四个 LeWM 任务上均带来提升，且所得策略在测试时直接行动，无需迭代轨迹搜索。",
+        "conclusion": "结果表明，面向控制的隐空间几何应以有向时间可达性（到达代价）为核心，而不仅是预测相似性。在冻结世界模型特征之上加一层时间拟度量监督，即可显著改善目标条件控制，并同时消除测试时的规划开销。",
+        "key_details": "数据为离线视觉轨迹（观测序列与动作），全程无在线交互，视觉骨干固定为 LeWM 特征以隔离表征学习效果；关键先验是有向拟度量假设，即到达代价非对称且满足三角不等式一类的拟度量结构。损失由短程时间标定项、长程自举目标项、动作条件一致性项、以时间进度为 critic 的目标条件策略损失，以及受行为支撑与动力学一致性约束的模型辅助目标组成。主要约束与局限在于：长程能力依赖自举目标的可靠性，可能出现偏差累积；模型辅助目标只在行为支撑覆盖范围内可信；整体性能受冻结 LeWM 特征质量与离线数据中目标状态覆盖度限制；测试时零迭代搜索使推理开销低，但也意味着策略质量完全由训练期的时间监督决定。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.880174880673714,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2610.08812v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008812v1-taming-an-end-to-end-autonomous-driving-policy-for-urban-navigation-of-quadruped-robots",
+      "source": "arxiv",
+      "title": "Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots",
+      "authors": [
+        "Joochan Kim",
+        "Chanuk Yang",
+        "Tackgeun You",
+        "Ziran Wang",
+        "Hwasup Lim"
+      ],
+      "authors_text": "Joochan Kim, Chanuk Yang, Tackgeun You, Ziran Wang, Hwasup Lim",
+      "abstract": "We present Go2-DrivoR, a goal-conditioned adaptation of the end-to-end autonomous driving trajectory planning framework DrivoR for urban navigation with quadrupedal robots. By conditioning trajectory generation on a local-frame subgoal through a goal token and adapting the vehicle-centric scoring formulation, the method extends DrivoR to short-horizon goal-conditioned local planning without redesigning its core decoders. Specifically, we redefine drivable-area compliance for sidewalk-oriented navigation and reformulate the original ego progress term as goal-conditioned ego progress. Trained exclusively on TartanGround simulation data, Go2-DrivoR improves waypoint-conditioned planning performance on unseen simulation environments and transfers zero-shot to open-loop real-world trajectory prediction.",
+      "url": "http://arxiv.org/abs/2610.08812v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08812v1",
+      "tldr": "Go2-DrivoR adapts the DrivoR end-to-end driving planner to goal-conditioned urban navigation for quadruped robots by adding local-subgoal token conditioning and redefining drivable-area and progress scores, enabling improved waypoint-conditioned planning in unseen simulations and zero-shot real-world open-loop trajectory prediction after training only on TartanGround simulation data.",
+      "detailed_reading": {
+        "motivation": "四足机器人在城市道路、人行道与混合区域导航时缺少车道中心线和固定路线几何，需在腿式运动约束下根据视觉与本体状态进行短时域、目标条件局部规划；现有面向车辆的端到端规划器DrivoR虽具备寄存器token视觉编码与解耦轨迹评分，但其可行驶区域合规与进度定义面向道路对齐，且缺乏对局部子目标的显式条件，因此难以直接迁移到四足机器人。",
+        "method": "方法基于DrivoR保留视觉特征提取器、轨迹解码器、评分解码器与winner-takes-all轨迹目标，输入四路鱼眼图像、机器人本体状态、高层方向指令以及当前自车坐标系下的二维局部目标；局部目标由当前时刻后4秒的专家位姿变换到自车系并除以d_scale=4 m归一化，经线性投影得到goal token，与本体状态token拼接融合后以残差方式加到K=64个可学习轨迹查询上，由轨迹解码器输出8个0.5秒间隔、跨4秒的(x,y,θ)候选轨迹。评分器从原六项改为五项监督分量：NOC、DAC、TTC、GEP与comfort，省略DDC；NOC/TTC沿用原公式但改用四足机器人足迹，DAC重定义为候选轨迹所有采样点在人行道得1、至少一点在道路且无点越界得0.5、否则得0，GEP=(1-α)EP+α·Goal，其中Goal为候选轨迹终点相对起点的位移在目标方向上的投影并裁剪到[0,1]，α=0.5。推理时用对数域组合分数log(NOC)+log(DAC)+log(5·TTC+5·GEP+2·Comfort)对候选排序，评分头用逐分量BCEWithLogits监督，轨迹损失与评分损失等权联合优化且评分梯度不经过预测轨迹回传到轨迹解码器。数据与训练上，仿真使用TartanGround的14,192个局部规划样本，将多相机针孔图重投影为前/左/右/后四路鱼眼，状态转至ENU/FLU，按滑动窗口构造局部样本，并以4秒后位姿作为局部目标与高层四向指令来源；真实数据用Unitree Go2四路GMSL Owl相机采集，人工遥操作轨迹作为专家，原始鱼眼图直接输入并将FRD转FLU，训练20个epoch，AdamW，3张H200，全局batch size 48，学习率5e-4，2 epoch warm-up后余弦退火。",
+        "result": "在TartanGround开环评测中，Go2-DrivoR在已见与未见地图上的PDMS风格聚合分数均高于匀速外推基线和零样本iPlanner，并在NOC、TTC、DAC、comfort上平均更高；iPlanner在未见地图上GEP略高，但综合分数仍低于Go2-DrivoR。真实Unitree Go2日志零样本开环测试中，Go2-DrivoR在ADE、FDE@1s、FDE@2s、FDE@4s和Heading MAE上全面优于匀速基线，且因以4秒前视路点做条件，FDE@4s提升最明显；定性示例显示路口处能选择转向目标的轨迹而匀速基线沿原方向前进。消融显示移除goal token会显著恶化轨迹预测与目标导向指标，α=0或α=1（仅EP或仅Goal）均差于α=0.5的融合GEP；论文中一个仿真定性样例的评分器预测NOC=0.993、DAC=1.000、TTC=0.994、GEP=0.924、comfort=1.000，聚合分0.959，真实样例聚合分0.693。",
+        "conclusion": "Go2-DrivoR通过局部帧子目标条件、面向人行道的DAC重定义和GEP重述，在不重设计核心解码器的前提下把DrivoR轻量适配为四足城市目的地导航的局部规划器。仅用TartanGround训练即可在未见仿真地图上提升规划表现，并零样本迁移到真实Go2开环轨迹预测。主要局限是使用专家导出的前视目标、仅做开环真实评测、未显式建模动态智能体；未来工作指向闭环社交导航、时序场景建模和更好的sim-to-real适配。",
+        "key_details": "关键实现包括：目标用4秒后位姿在当前自车系表达并归一化，轨迹固定为K=64、8个0.5秒间隔路点、4秒时域；评分分量权重为NOC与DAC先验约束、TTC与GEP各5、comfort为2，评估用NOC·DAC/12乘以加权和；损失为各分量BCEWithLogits，轨迹与评分等权联合训练但评分梯度不穿过预测轨迹。数据侧，TartanGround多相机图经双球相机模型重投影为四路鱼眼，语义点云投影成boundary/roadway/walkway 2D向量层用于评分标签，真实Go2使用90°间隔四目GMSL Owl相机并人工遥操作作为专家。推理复杂度体现为单张H200上batch size 1延迟10.8 ms、batch size 16延迟94.1 ms；局限还包括动态智能体未建模、真实数据仅开环评估、消融中goal token移除后劣于匀速的原因尚未定位到候选生成还是评分环节。"
+      },
+      "affiliations": [
+        "Purdue University",
+        "Korea Institute of Science and Technology (KIST)"
+      ],
+      "affiliations_text": "Purdue University, Korea Institute of Science and Technology (KIST)",
+      "score": 4.84741842025589,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.08852v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008852v1-autonomous-droplet-navigation-via-model-based-reinforcement-learning-zero-shot-transfer-and-emergent-dynamics",
+      "source": "arxiv",
+      "title": "Autonomous Droplet Navigation via Model-Based Reinforcement Learning: Zero-Shot Transfer and Emergent Dynamics",
+      "authors": [
+        "Rajneesh Anand",
+        "Mayuresh V. Kothare"
+      ],
+      "authors_text": "Rajneesh Anand, Mayuresh V. Kothare",
+      "abstract": "Self-driving laboratories (SDLs) are transforming chemical and materials discovery through closed-loop automation, yet automated infrastructure for physical manipulation of soft, deformable matter remains beyond current robotic platforms. A critical instance is autonomous droplet transport on an open surface, where contact-angle hysteresis, capillary pinning, and surface heterogeneity produce partially observable dynamics that pose significant challenges for classical model-based controllers. We introduce the first robotic platform for closed-loop autonomous liquid droplet navigation on an open, unconfined surface using model-based reinforcement learning. A two-axis tilting board coated with a thin silicone oil film drives the droplet, while an overhead camera provides real-time feedback. A learned policy was trained on just 50 to 150 physical episodes depending on geometric complexity, without simulation or analytical models. Beyond performance alone, the platform demonstrates three capabilities of interest to the SDL community: it robustly transfers zero-shot to unseen geometries; it autonomously discovers an oscillatory depinning strategy to free the droplet when it sticks; and it completes its full training pipeline in under 90 minutes. These results extend reinforcement-learning manipulation from rigid microrobots to deformable soft-matter systems for next-generation SDLs.",
+      "url": "http://arxiv.org/abs/2610.08852v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08852v1",
+      "tldr": "This paper presents the first robotic platform for closed-loop autonomous navigation of deformable droplets on an open surface using model-based reinforcement learning, trained offline from only 50–150 physical episodes without simulation or analytical models, achieving zero-shot transfer to unseen geometries, autonomously discovering an oscillatory depinning strategy, and completing training in under 90 minutes.",
+      "detailed_reading": {
+        "motivation": "自驱动实验室正在通过闭环自动化改变化学与材料发现，但软、可变形物质的物理操作自动化仍超出当前机器人平台能力。开放表面上的液滴运输是关键实例，其受接触角滞后、毛细钉扎和表面异质性影响，产生部分可观测动力学，使经典基于模型的控制器面临显著挑战。现有液滴运输平台多依赖预编程驱动序列或手动控制，因此需要实现开放无约束表面上的自主液滴导航。",
+        "method": "平台为 DropletRunner：将 BRIO Labyrinth 板改造成带定制 3D 打印 PLA 通道的板面，并涂覆薄硅油膜，用两个 Dynamixel 电机提供两轴重力倾斜驱动，顶置 See3CAM_24CUG 相机以 1920×1200、60 fps 提供 RGB 视觉反馈，红色染色水滴作为被控对象。控制单元采用双计算机架构，CPU 笔记本运行 ROS2 控制环和 U2D2 电机通信，GPU 平台用于离线训练，episode 在两者间传输，训练好的策略回传评估以避免训练延迟干扰实时控制。算法采用 DreamerV3 潜在世界模型进行基于模型的强化学习，完全离线在实验数据上训练，不使用模拟器或解析模型，在 50 到 150 个物理 episode 上学习策略，并以 20 Hz 闭环执行感知-动作控制。",
+        "result": "材料显示 MBRL 策略在复杂度递增的几何中达到 100% 成功率（数字在预览中截断），并与 PID 基线在五种几何的成功率图中进行对比；从 I 形训练出的策略零样本迁移到未见几何达到 95% 成功率（数字在预览中截断）。智能体还在几何收缩处自主发现交替极性的振荡脱钉策略，当液滴粘住时会升级幅度，该行为未经奖励塑形或编程，与振动诱导脱钉一致。整个训练流水线在 90 分钟内完成，且仅需 50 到 150 个物理 episode。",
+        "conclusion": "该工作提出首个用于开放、无约束表面上闭环自主液滴导航的机器人平台，用基于模型的强化学习控制可变形液体代理，将强化学习操作从刚体微机器人扩展到软物质系统。它证明无需仿真或解析模型即可在真实实验数据上离线训练世界模型策略，并具备零样本迁移和涌现物理策略，未来计划开源硬件与软件，作为低成本、低硬件复杂度的重力驱动油拖曳液滴导航真实世界基准。",
+        "key_details": "关键实现包括 BRIO Labyrinth 改造、3D 打印 PLA 通道、薄硅油膜（厚度不可观测）、两轴 Dynamixel 倾斜驱动、顶置 1920×1200 60 fps 相机、ROS2 控制环 20 Hz、U2D2 通信；训练在 CPU 控制与 GPU 离线训练解耦的双机架构上完成，episode 传输后策略回传。方法使用 DreamerV3 潜在世界模型，完全离线于 50 到 150 个物理 episode，无仿真或解析模型，材料未列出具体损失函数、网络结构与超参数。局限性包括接触角滞后、毛细钉扎、表面异质性和油膜厚度不可观测导致的部分可观测动力学，经典 MPC 难以建模；物理训练数据量小，且预览中成功率数值被截断，具体结果需查原文确认。评估几何包括直线 I 形、L 内/外、Arc 内/外，贡献部分另提及 Staircase 新几何。"
+      },
+      "affiliations": [
+        "Lehigh University"
+      ],
+      "affiliations_text": "Lehigh University",
+      "score": 4.816166116388711,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.08959v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008959v1-graphopd-graph-augmented-on-policy-distillation-for-llm-agents",
+      "source": "arxiv",
+      "title": "GraphOPD: Graph-Augmented On-Policy Distillation for LLM Agents",
+      "authors": [
+        "Bohan Lin",
+        "Liyi Chen",
+        "Zhuoning Guo",
+        "Muyang Li",
+        "Qimeng Wang",
+        "Yan Gao",
+        "Yao Hu",
+        "Yudong Zhang"
+      ],
+      "authors_text": "Bohan Lin, Liyi Chen, Zhuoning Guo, Muyang Li, Qimeng Wang, Yan Gao, Yao Hu, Yudong Zhang",
+      "abstract": "On-policy distillation post-trains large language model agents by supplying dense, step-level guidance from a teacher policy when the reinforcement-learning reward is sparse and arrives only once per trajectory. Existing instantiations allocate this guidance by the size of the teacher-student divergence at each step, on the single-turn intuition that a large disagreement marks a mistake worth correcting. Once decisions chain over many turns, that rule misfires, since an early drift enters every later context both policies condition on, leaving the teacher consistent with the drifted trajectory instead of flagging its cause, while interchangeable steps register large but outcome-irrelevant divergences. We demonstrate this on an agentic benchmark, where distilling the highest-divergence steps brings no consistent benefit over random selection. To this end, we introduce GraphOPD, the first method to bring graph-based structural augmentation into on-policy distillation for agent capabilities. It reads which steps enabled which later ones from the environment's own record of state changes, immune to the drift that corrupts the teacher-student gap, organizes them into a dependency graph, scores each step by a random-walk stationary distribution over it, and fuses that structural credit with the divergence signal into a trajectory-relative mask concentrating supervision on each rollout's highest-aptitude steps. Across three model scales and eleven baselines on ALFWorld, WebShop, and SearchQA, GraphOPD shows competitive performance throughout, improving over the strongest baseline by up to +5.8 pp. An executed-replay audit further shows that this structural credit score tracks true causal impact far above chance, that both fused signals are independently necessary, and that the same signal transfers to out-of-domain tool-integrated reasoning.",
+      "url": "http://arxiv.org/abs/2610.08959v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08959v1",
+      "tldr": "GraphOPD augments on-policy distillation for LLM agents with a step-dependency graph derived from environment state changes, scoring each step via a random-walk stationary distribution and fusing this structural credit with teacher-student divergence to focus supervision on high-impact steps, outperforming eleven baselines on ALFWorld, WebShop, and SearchQA by up to +5.8 pp.",
+      "detailed_reading": {
+        "motivation": "当强化学习奖励稀疏且只在轨迹结束时给出时，on-policy distillation 依赖教师策略提供逐步密集监督，但现有方法按教师-学生每步散度大小分配指导，默认高散度处就是值得纠正的错误。该单轮直觉在多轮 agent 中失效：早期偏差会进入后续所有上下文，使教师与已漂移轨迹保持一致而不再标记根因，同时可交换步骤会产生大但无关结果的散度。作者在 agentic benchmark 上验证，蒸馏最高散度步骤相对随机选择并无稳定收益。",
+        "method": "GraphOPD 将图结构增强首次引入面向 agent 能力的 on-policy distillation：它以学生 agent 与环境交互产生的 rollout 为输入，从环境自身记录的状态变化中读取哪些步骤使能了哪些后续步骤，从而构建步骤级依赖图。每个步骤作为节点，若前一步的状态变化为后一步创造了条件则连边，不依赖教师-学生散度，因此不受上下文漂移污染。随后在依赖图上做随机游走并计算平稳分布，作为该步骤的结构信用分数。最后将该结构信用与教师-学生散度信号融合，形成轨迹相对的掩码，把监督集中在每条 rollout 中“能力适配度”最高的步骤上，用于 on-policy 蒸馏训练。",
+        "result": "在 ALFWorld、WebShop 和 SearchQA 上，覆盖三种模型规模和十一种基线，GraphOPD 整体表现有竞争力，相对最强基线最高提升 +5.8 个百分点。执行重放审计进一步显示，结构信用分数对真实因果影响的追踪显著高于随机水平；融合中的结构信号与散度信号均独立必要；同一信号还能迁移到域外的工具集成推理任务。",
+        "conclusion": "GraphOPD 表明，多轮 LLM agent 的 on-policy distillation 不应只依赖教师-学生散度来分配逐步监督，而应利用环境状态变化提供的结构因果信息。通过依赖图与随机游走平稳分布对步骤进行信用评分，并与散度融合成轨迹相对掩码，可更稳定地提升 agent 后训练效果。该方法在多个基准和模型规模上优于强基线，并具备跨域迁移潜力。",
+        "key_details": "关键实现点包括：以环境状态变化记录构建步骤依赖图，避免使用可能被漂移污染的 teacher-student divergence 作为唯一依据；用随机游走平稳分布量化步骤结构信用；将结构信用与散度信号融合为 trajectory-relative mask，仅在每条 rollout 内选择高适配步骤施加蒸馏监督。评估覆盖三种模型规模、十一种基线、ALFWorld/WebShop/SearchQA，并用 executed-replay audit 验证因果追踪、两信号独立必要性与域外工具集成推理迁移。局限性在于方法依赖环境可提供可靠的状态变化记录，图构建与随机游走带来额外复杂度，融合权重与掩码阈值等超参可能影响效果，且对无状态记录或噪声环境未必适用。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.626918027910825,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.08863v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008863v1-trajectory-planning-without-trajectory-data-a-manifold-guided-approach",
+      "source": "arxiv",
+      "title": "Trajectory Planning without Trajectory Data: A Manifold-Guided Approach",
+      "authors": [
+        "Silong Yong",
+        "Anji Liu",
+        "Cunxi Dai",
+        "Carl Busart",
+        "Guanya Shi",
+        "Yilun Du",
+        "Katia Sycara",
+        "Yaqi Xie"
+      ],
+      "authors_text": "Silong Yong, Anji Liu, Cunxi Dai, Carl Busart, Guanya Shi, Yilun Du, Katia Sycara, Yaqi Xie",
+      "abstract": "A common way for trajectory planning is to leverage generative models trained on large collections of expert trajectories. At inference time, the model generates executable trajectories by conditioning on task goal constraints. However, trajectory-based methods rely on costly supervision, scale poorly with sequence length, and often generalize poorly to unseen constraints such as novel start-goal pairs. We propose an alternative to learn the underlying state-space manifold and use the geometry of the manifold for trajectory planning. This approach requires only state observations and enables generalization to unseen constraints by con- structing trajectories on the learned manifold of the state space. Experiments on Maze2D and robotic motion-planning benchmarks show that Ariadne constructs feasible paths from state-only supervision and generalizes to unseen start-goal combinations. On high-dimensional dual-arm planning, it remains competitive with trajectory-supervised and classical planners, while requiring no trajectory data for training.",
+      "url": "http://arxiv.org/abs/2610.08863v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08863v1",
+      "tldr": "Ariadne enables trajectory planning without trajectory data by learning the state-space manifold from state-only observations and using its geometry to construct feasible paths that generalize to unseen start-goal constraints.",
+      "detailed_reading": {
+        "motivation": "现有轨迹规划生成模型依赖大规模专家轨迹，监督成本高、随序列长度扩展差，并且对未见过的起止点组合等约束泛化不足，因为轨迹空间覆盖稀疏且模型偏向训练轨迹分布。作者提出仅用状态观测学习状态空间流形，并利用其几何结构在推理时构造可行轨迹，从而规避轨迹级分布外失败。",
+        "method": "Ariadne 先用仅状态数据训练扩散或 score 生成模型，假设有效状态位于低维数据流形上；利用 score 函数及 score 的 Jacobian 估计每个状态的切空间与法空间，获得法空间正交基。轨迹构造被看作在流形上积分一个向量场：先沿目标方向移动，再用法空间投影把位移拉回切空间；该移动-投影过程被解释为算子分裂 ODE。为同时满足流形约束与端点约束，作者提出 Correction-Projection ODE：dx/dt = x1 - x0 + (2-4t)φ + 2t(1-t)dφ/dt，其中 φ 累积投影修正项，并用 Euler 法配合算子分裂数值积分，从给定起点到终点生成状态序列。",
+        "result": "在 Maze2D 和机器人运动规划基准上，Ariadne 仅用状态监督即可构造可行路径，并能泛化到训练中未见的起止点组合。在 6 自由度机械臂桌面避障以及两个 7 自由度机械臂互避与避障的高维任务中，其表现与轨迹监督扩散规划器和经典规划器具有竞争力，且训练阶段不需要任何轨迹数据。",
+        "conclusion": "结果表明，不学习轨迹分布而学习状态流形几何，可把规划转化为受端点约束的流形上曲线生成，从而缓解轨迹数据偏置带来的泛化问题。该方法为低成本状态数据驱动的机器人轨迹规划提供了可行路线，但在数值离散和几何估计不完美时仍有残余流形漂移与端点误差。",
+        "key_details": "关键实现点包括：训练输入仅为状态观测，遵循流形假设；用 score 与 score Jacobian 估计低维流形的法空间，而非只用 score 方向；投影通过减去位移在法空间正交基上的分量完成，并可从 score 导出 Riemannian 度量以稳定投影。端点约束通过 CP-ODE 的修正项 φ 显式满足，φ 含投影尺度因子 ε，Euler 离散中投影项控制流形贴合。实验覆盖 Maze2D、6DoF 桌面避障、双 7DoF 机械臂规划，并评估端点误差与流形漂移；局限性是当参考方向与法空间对齐或离散化误差累积时，流形贴合和端点到达不具严格保证。"
+      },
+      "affiliations": [
+        "Harvard University",
+        "DEVCOM Army Research Laboratory",
+        "National University of Singapore",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Harvard University, DEVCOM Army Research Laboratory, National University of Singapore, Carnegie Mellon University",
+      "score": 4.597279606598727,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.08807v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008807v1-context-aware-adaptive-pesticide-spraying-for-agricultural-robots-under-changing-weather-and-terrain-using-vision-language-models",
+      "source": "arxiv",
+      "title": "Context-Aware Adaptive Pesticide Spraying for Agricultural Robots under Changing Weather and Terrain Using Vision-Language Models",
+      "authors": [
+        "Cong-Thanh Vu",
+        "Yen-Chen Liu"
+      ],
+      "authors_text": "Cong-Thanh Vu, Yen-Chen Liu",
+      "abstract": "Precision pesticide spraying is essential for optimizing application efficiency and ensuring uniform chemical distribution. Spraying performance is influenced by multiple factors, including environmental conditions such as temperature and wind speed, pesticide type, and the robot's capability to accurately perceive crops and target spray locations. Existing approaches predominantly emphasize crop detection and rely on predefined spraying parameters, whereas human operators dynamically adjust their spraying strategies by considering environmental conditions, region-specific crop characteristics, and the type of pesticide being applied. In this study, we propose a context-aware adaptive spraying framework based on Vision-Language Models (VLMs), which enables robots to leverage spatial reasoning and integrate information from multiple sources, including crop type, pesticide type, and weather data, to make adaptive and optimized spraying decisions. Subsequently, a trajectory-tracking controller based on Model Predictive Path Integral (MPPI) control is employed to ensure precise navigation and accurate spraying at crop locations. The comparative results demonstrate that the proposed method improves accuracy by at least 30% in detecting crop rows. In addition, the experimental evaluations conducted in two environments further demonstrate the robot's ability to flexibly adjust spraying volume and travel speed, while reducing pesticide drift.",
+      "url": "http://arxiv.org/abs/2610.08807v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08807v1",
+      "tldr": "This paper proposes a context-aware adaptive pesticide-spraying framework for agricultural robots that uses Vision-Language Models to integrate crop, pesticide, and weather information with MPPI-based trajectory tracking, improving crop-row detection by at least 30% while enabling flexible spray-volume and speed adjustments to reduce pesticide drift.",
+      "detailed_reading": {
+        "motivation": "现有精准喷洒多聚焦作物检测并依赖预设喷洒参数，缺乏像人类操作员那样综合天气、地形、作物类型和农药类型进行动态调节的能力，导致喷洒效率、漂移和化学浪费问题。研究旨在利用视觉语言模型的空间推理与多源信息融合，实现农业机器人上下文感知的自适应喷洒。",
+        "method": "系统先以3D LiDAR和IMU通过Fast-LIO2构建全局地图，并用ZED X相机与YOLOv8检测树木或作物，将局部坐标变换到全局并形成工作地图；随后将树木位置与ID投影为2D表示，用提示工程加少样本提示让VLM识别作物行，生成行间中心线并连接成锯齿形全局路径；喷洒阶段向VLM输入RGB图像、带行颜色与全局路径及Windy API风向的2D可视化，以及作物类型、地理位置、季节时间、农药类型、温湿度风速等语义信息，用思维链提示输出每行或每株对应的行驶速度与喷量；最后MPPI控制器跟踪路径并避障，按机器人到植株的欧氏距离阈值与喷洒侧触发喷头。",
+        "result": "对比结果显示，基于VLM的作物行检测准确率较KMeans、DBSCAN或人工调整等基线至少提升30%，并在两种田间环境中验证机器人能依据环境灵活调整喷量与行驶速度，同时减少农药漂移。",
+        "conclusion": "该框架把VLM的上下文推理能力引入农业机器人喷洒决策，使机器人能在变化天气与地形下做出类人自适应策略，并通过MPPI保证精准导航与定点喷洒。结果表明方法在行检测精度、变量喷洒和降低漂移方面具有潜力，为精准农业自主喷洒提供了新思路。",
+        "key_details": "关键实现包括Fast-LIO2建图、YOLOv8作物检测、局部到全局坐标变换、2D树木ID图输入VLM、行检测使用规则约束与少样本提示、喷洒决策使用CoT提示并约束输出ID与格式，喷洒触发依赖距离阈值和正确侧，速度由MPPI执行；硬件为Bunker Mini履带底盘、Jetson Orin、ZED X、Livox Mid-360、ROS2 Humble、左右独立泵与Arduino PWM驱动。局限性在于VLM推理对边缘算力与实时性有要求、性能依赖提示设计与外部天气API，且实验仅覆盖两种环境，完整量化指标和长期鲁棒性仍需更多验证。"
+      },
+      "affiliations": [
+        "National Cheng Kung University"
+      ],
+      "affiliations_text": "National Cheng Kung University",
+      "score": 4.408172792600187,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.08800v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/08/261008800v1-a-review-of-robotic-world-models-for-dynamic-environments-based-on-factor-and-scene-graphs",
+      "source": "arxiv",
+      "title": "A Review Of Robotic World Models For Dynamic Environments Based On Factor And Scene Graphs",
+      "authors": [
+        "Marco Giberna",
+        "Miguel Fernandez-Cortizas",
+        "Jose Luis Sanchez Lopez",
+        "Holger Voos"
+      ],
+      "authors_text": "Marco Giberna, Miguel Fernandez-Cortizas, Jose Luis Sanchez Lopez, Holger Voos",
+      "abstract": "Models based on graphs have emerged in robotics as a powerful foundation for internal world representations, where factor and scene graphs are among the most prominent model types found in the related literature and in successful robotic solutions. Initially, many of these models were assuming static environments as a simplification. Herein, factor graphs mainly provide uncertainty-aware geometric estimations while scene graphs enable a structured semantic abstraction. However, real-world robotic environments are often dynamic, posing severe challenges for purely static world representations. Therefore, this review presents a comprehensive view on how dynamic aspects of real-world environments can be addressed in such graph-based world models. We organize our assessments around three main aspects: (I) suitable representations, (II) pipelines to construct and update the representations, and (III) their exploitation for downstream tasks. We review approaches that are either based on factor or scene graphs, but put special emphasis on novel approaches that combine both types to form hybrid models. We mainly analyze how different types of dynamics can be modeled herein, and categorize common architectural patterns. Finally, emerging trends and open challenges are identified, including uncertainty propagation from learned perception through the representation layers, the observability of dynamic-entity motion and scale under minimal sensing, scalable lifelong maintenance, and the lack of datasets and evaluation protocols that ground world-model quality in downstream task performance under dynamics.",
+      "url": "http://arxiv.org/abs/2610.08800v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08800v1",
+      "tldr": "This review surveys factor- and scene-graph-based robotic world models for dynamic environments, organizing existing and hybrid approaches by representation, construction/update pipelines, and downstream exploitation while highlighting key open challenges.",
+      "detailed_reading": {
+        "motivation": "真实机器人环境本质动态，而传统因子图与场景图世界模型多假设静态，导致定位精度下降、数据关联错误、虚假地标以及下游任务失败。因子图擅长不确定性几何估计，场景图擅长结构化语义抽象，但二者都需扩展以处理连续运动、短期变化和长期结构演化，因此有必要系统综述动态环境下的图式机器人世界模型。",
+        "method": "该综述以因子图和场景图及其混合模型为对象，围绕三个问题组织：适合动态的表示、表示构建与更新管线、以及面向下游任务的利用与评估。技术上，因子图用二部图变量节点与因子节点表达联合概率分解，变量可包括机器人位姿、静态地图点、动态对象位姿和运动变换，因子可包括里程计、重投影、ICP、结构先验与语义运动先验，并用零均值高斯噪声和信息矩阵加权，通过 MAP 非线性最小二乘推断；场景图用对象节点、属性及 subject-predicate-object 关系边编码语义，生成流程通常包含特征提取、上下文关联、图构建与推理，结构上分扁平、分层和三维场景图；混合模型并行结合概率几何层与语义分层抽象。",
+        "result": "综述梳理出动态图式世界模型的三类主要路线：因子图、场景图与混合模型，其中混合模型如 Hydra 和 S-Graphs 将几何不确定性估计与语义分层抽象结合，是当前重要趋势。动态建模覆盖从连续运动到长期结构变化，并归纳了常见架构模式；同时指出开放挑战集中在学习感知到表示层的不确定性传播、最小感知下动态实体运动与尺度可观测性、可扩展终身维护，以及缺少将世界模型质量与动态下游任务性能绑定的数据集和评测协议。作为综述，它不提供新实验数值，而是给出分类框架与趋势判断。",
+        "conclusion": "该综述认为图式世界模型是动态机器人环境下内部表示的有力基础，但现有工作仍多在静态假设下发展。未来研究需在表示选择、构建更新和下游利用三个层面统一动态、不确定性、语义与长期维护，并建立以动态下游任务性能为导向的数据集和评测协议。",
+        "key_details": "关键实现细节包括：因子图形式化为 G={X,F,E}，联合分布因式分解，MAP 推断通常为非线性最小二乘；变量含机器人位姿、静态地图点、动态对象或智能体位姿及运动变换，因子含里程计、视觉重投影、点到面 ICP、位姿-平面、墙-房间和语义运动先验。场景图定义为 G=(O;E)，对象 o_i=(c_i,A_i)，边为 subject-predicate-object 三元组，关系类型涵盖空间、可见性与邻近、功能关系和可供性；生成方法分自顶向下两阶段和自底向上联合两类，结构分扁平、分层与三维场景图。局限与约束在于多数原始模型假设静态，动态会造成错误累积；最小感知下运动与尺度可观测性、终身可扩展维护、不确定性传播以及缺乏统一数据集和评价协议仍是待解决问题。"
+      },
+      "affiliations": [
+        "University of Luxembourg"
+      ],
+      "affiliations_text": "University of Luxembourg",
+      "score": 4.328321971033226,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.08802v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008802v1-safe-unified-slip-and-fracture-detection-with-low-cost-acoustic-sensing-in-robotic-grasping",
+      "source": "arxiv",
+      "title": "SAFE: Unified Slip and Fracture Detection with Low-Cost Acoustic Sensing in Robotic Grasping",
+      "authors": [
+        "Zerun Wang",
+        "Vivek Kamat",
+        "Shekhar Bhansali"
+      ],
+      "authors_text": "Zerun Wang, Vivek Kamat, Shekhar Bhansali",
+      "abstract": "Manipulating fragile objects remains challenging as robots must understand the state of what they grasp, such as slip or fracture, to respond appropriately, especially when material properties are unknown. In this paper, we present SAFE: a low-cost, general-purpose sensing approach that detects both slip and fracture in real time using two passive polyvinylidene fluoride (PVDF) acoustic sensors and motor proprioception, without relying on vision or prior material knowledge. The sensors are mounted on a compliant Fin Ray gripper, and a unified HistGradientBoosting classifier reports the state (normal, slip, or fracture) from a 79-dimensional feature vector. Under leave-one-grasp-out cross-validation, SAFE achieves an Alert-F1 of 0.884 with near-zero slip-fracture confusion, and ablations confirm that acoustic sensing is indispensable. An adaptive grasp controller built on this detection layer runs at 104 Hz on a Jetson Orin Nano, achieving 91.3% success across 46 closed-loop robot trials spanning diverse object categories, while each fixed-force strategy drops to 0% on object conditions that mismatch its preset. It further reaches 82.4% success on novel objects unseen during training, demonstrating robust, failure-aware grasp control without object-specific calibration.",
+      "url": "http://arxiv.org/abs/2610.08802v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08802v1",
+      "tldr": "SAFE is a low-cost, vision-free robotic grasping system that uses two passive PVDF acoustic sensors and motor proprioception with a unified HistGradientBoosting classifier to detect slip, fracture, or normal contact in real time and enable adaptive grasp control with 91.3% success and 82.4% success on unseen objects.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology",
+        "Vanderbilt University"
+      ],
+      "affiliations_text": "Georgia Institute of Technology, Vanderbilt University",
+      "score": 4.273398931544198,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.08816v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008816v1-the-cost-of-long-memory-state-context-and-stability-complexity-in-sequence-models",
+      "source": "arxiv",
+      "title": "The Cost of Long Memory: State, Context, and Stability Complexity in Sequence Models",
+      "authors": [
+        "Yuheng Song"
+      ],
+      "authors_text": "Yuheng Song",
+      "abstract": "Long-range temporal dependence poses a resource question for sequence models: for a specified predictive-memory law, how much state, context, or dynamical criticality is required in order to forecast accurately? We study this question directly in forecasting risk. For algebraically decaying predictive memory, we prove matching upper and lower approximation bounds for exponential and finite-state modes. The best $r$-mode forecast error decays as $e^{-Θ(\\sqrt r)}$, so reaching forecast error $τ$ needs $r=Θ(\\log^2(1/τ))$ states or modes. Earlier curse-of-memory results establish broad limitations of stable recurrent models under different approximation notions; here both sides match for one canonical predictive target in forecast risk, which fixes the optimal resource exponent for that target. We then show that genuine fractional long memory changes the geometry itself. In particular, forecast error is measured after fractional integration, prediction from a finite context of length $L$ has an exact $1/L$ leading order, and a fixed fractional strength $d$ keeps the square-log state-complexity law. Near the short-memory boundary, we identify the relevant $d^2$ and $d^4$ scales and give a uniform constructive law in the intermediate regime. For nonlinear contextual recurrences with uniformly contractive state dynamics, we derive an exponential first-chaos envelope and an explicit necessary condition that relates forecast accuracy to the contraction margin. Vanishing forecasting error on an algebraic target forces the recurrence quantitatively toward criticality, a condition that is necessary and not by itself sufficient. Finite-sample Kullback--Leibler calculations further connect the predictive geometry to statistical information. Theorem-matched experiments with contractive state-space, gated recurrent, and attention models reproduce the state and stability predictions.",
+      "url": "http://arxiv.org/abs/2610.08816v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08816v1",
+      "tldr": "For algebraically decaying predictive memory, the paper proves matching bounds showing that achieving forecast error τ with exponential or finite-state sequence models requires Θ(log²(1/τ)) states or modes, and it extends this resource analysis to context length, fractional long memory, and the stability margin needed by contractive nonlinear recurrences to avoid a forecasting floor.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huazhong University of Science and Technology"
+      ],
+      "affiliations_text": "Huazhong University of Science and Technology",
+      "score": 4.26639717522699,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.08862v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008862v1-cirra-dual-level-continual-instruction-reconciliation-with-ongoing-execution-for-embodied-robot-agents-in-interactive-household-tasks",
+      "source": "arxiv",
+      "title": "CIRRA: Dual-Level Continual Instruction Reconciliation with Ongoing Execution for Embodied Robot Agents in Interactive Household Tasks",
+      "authors": [
+        "Ci Zhang",
+        "Enfu Nan",
+        "Arman Akbari",
+        "Lin Zhao",
+        "Li Wang",
+        "Chen Wang",
+        "Weiwei Chen",
+        "Yanzhi Wang",
+        "Geng Yuan"
+      ],
+      "authors_text": "Ci Zhang, Enfu Nan, Arman Akbari, Lin Zhao, Li Wang, Chen Wang, Weiwei Chen, Yanzhi Wang, Geng Yuan",
+      "abstract": "Household robots must accommodate new user instructions while executing ongoing tasks. Existing agents often regenerate or extensively revise the remaining task sequence, introducing plan ambiguity, logical inconsistency, and redundant execution. We formulate continual instruction reconciliation and propose CIRRA (Continual Instruction Reconciliation for Robot Agents), a dual-level framework combining LLM-based semantic reasoning with rule-constrained structural integration. CIRRA first grounds incoming instructions to unique executable skills and resolves underspecified actions and execution locations. It then preserves the ongoing subtask sequence as an execution backbone and generates integration candidates by inserting incoming subtasks into location-matched segments. The semantic reasoner evaluates only modified segments to identify dependencies and conflicts and select the most logically coherent local integration. This structure-preserving process maintains alignment with ongoing execution, mitigates ambiguity and inconsistency, and reuses shared subtasks to reduce redundant execution. We also introduce CHIRP (Continual Household Instruction Reconciliation and Planning), a text-based benchmark of 120 episodes across eight household environments and six categories of everyday activities. On CHIRP, CIRRA achieves 74.2% decision agreement, exceeding the strongest replanning baseline by 30 percentage points; every correct fusion decision yields a correctly placed, conflict-free schedule. On a Unitree G1 humanoid, CIRRA interrupts ongoing skills at the correct moment in every trial and significantly outperforms all baselines on every metric.",
+      "url": "http://arxiv.org/abs/2610.08862v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08862v1",
+      "tldr": "CIRRA is a dual-level continual instruction reconciliation framework that preserves an ongoing household task’s execution backbone while semantically and structurally integrating new user instructions into location-matched segments, thereby reducing plan ambiguity, inconsistency, and redundant execution and significantly outperforming replanning baselines on the CHIRP benchmark and a Unitree G1 humanoid.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.137028403010866,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.08817v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008817v1-denoflow-flow-matching-for-ssvep-denoising-under-real-physiological-artifacts",
+      "source": "arxiv",
+      "title": "DenoFlow: Flow Matching for SSVEP Denoising under Real Physiological Artifacts",
+      "authors": [
+        "Zhentao He",
+        "Ziwei Wang",
+        "Dongrui Wu"
+      ],
+      "authors_text": "Zhentao He, Ziwei Wang, Dongrui Wu",
+      "abstract": "Electroencephalography (EEG)-based brain-computer interfaces (BCIs), particularly steady-state visual evoked potential (SSVEP) systems, are highly vulnerable to noise and artifacts, which severely degrade decoding accuracy. Although recent denoising approaches have shown promise, they are fitted without paired ground truth, can settle on reproducing their input, and are optimized on waveform distance alone, which says nothing about whether the output stays decodable. To address these issues, we propose DenoFlow, which casts SSVEP denoising as transport: instead of learning a direct map from a contaminated trial to a clean one, a field network regresses the velocity of the straight path between them, following the rectified-flow formulation, and denoising integrates that field forward from the observation. The field network is an encoder-decoder that sees the contaminated trial at every layer and the path position at its bottleneck, and a classifier trained alongside it supervises the integrated output. Because the observation itself is both the conditioning input and the starting point of the integration, the model never generates a trial from noise, and training reduces to regression, removing the adversarial min-max game. To obtain paired data on datasets with no ground truth, we injected physiological artifacts of the recorded electromyography (EMG) and electrooculography (EOG) signals under a controlled signal-to-noise target. Experiments on two public SSVEP datasets with five popular SSVEP decoders showed that DenoFlow outperformed seven baseline denoising models on both signal fidelity and downstream decoding accuracy. Code is available at https://github.com/wzwvv/DenoFlow.",
+      "url": "http://arxiv.org/abs/2610.08817v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08817v1",
+      "tldr": "DenoFlow reframes SSVEP EEG denoising as rectified-flow transport, learning a velocity field that integrates from contaminated trials to clean signals while jointly supervising a classifier, yielding better signal fidelity and downstream decoding under real EMG/EOG artifacts.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huazhong University of Science and Technology"
+      ],
+      "affiliations_text": "Huazhong University of Science and Technology",
+      "score": 4.12024395008315,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.08792v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008792v1-a-bayesian-mirror-architecture-for-emergent-consciousness-circular-hierarchies-self-manifolds-and-hybrid-event-self-binding",
+      "source": "arxiv",
+      "title": "A Bayesian Mirror Architecture for Emergent Consciousness: Circular Hierarchies, Self-Manifolds, and Hybrid Event-Self Binding",
+      "authors": [
+        "Eduardo Righi Capanema de Almeida"
+      ],
+      "authors_text": "Eduardo Righi Capanema de Almeida",
+      "abstract": "We present a foundational formulation of the Bayesian Mirror Architecture (BMA), a self-referential generative framework in which sensory abstractions, meta-abstractions, and a self-latent interact through circular recursion. The defining constraint is a closed update S_t <- H_{t-1}, where a hybrid event-self latent H_t binds self-representations to abstract world models and reinjects this coupling into the self-state. Consciousness, in a restricted sense, is not an optimization objective nor a semantic label, but an architectural property of systems possessing this circular structure.\n  Because inference operates over posterior beliefs, BMA's intrinsic state space is a space of probability measures equipped with optimal-transport geometry. Stability and coherence are formulated in the 2-Wasserstein metric on P_2, yielding coordinate-free notions of self-stability and hybrid coherence along belief trajectories. We define a Causal Learning Regime (CLR) via bounds on Wasserstein belief drift together with an integration index capturing sustained coupling between self and world latents. CLR diagnoses whether the environment contains learnable causal structure; it is not a marker of consciousness.\n  Global strict contractivity is not required: BMA may exhibit multiple coherent basins. We define self-manifolds basin-wise as supports of invariant measures under local Wasserstein contractivity. We identify Wasserstein epsilon-necks, transport bottlenecks where basins decouple, yielding a unique realized continuation in a vanishing-conductance limit. We interpret this selection as choice: internally determined yet externally unpredictable at finite resolution. Learning proceeds via variational free-energy minimization, with stability and agency emerging from what the environment affords to learn.",
+      "url": "http://arxiv.org/abs/2610.08792v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08792v1",
+      "tldr": "The paper formulates the Bayesian Mirror Architecture, a self-referential generative framework in which circular self-recursion and hybrid event–self binding produce consciousness as an architectural property, with belief dynamics analyzed through Wasserstein geometry, basin-wise self-manifolds, and transport bottlenecks that model choice, all learned via variational free-energy minimization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UFMG"
+      ],
+      "affiliations_text": "UFMG",
+      "score": 3.9506234978481976,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.08933v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008933v1-toward-evidence-driven-human-agent-robot-teaming-for-earth-independent-anomaly-triage",
+      "source": "arxiv",
+      "title": "Toward Evidence-Driven Human-Agent-Robot Teaming for Earth-Independent Anomaly Triage",
+      "authors": [
+        "Ignacio G Lopez-Francos",
+        "Alexis Gallagher",
+        "Samira Shalal"
+      ],
+      "authors_text": "Ignacio G Lopez-Francos, Alexis Gallagher, Samira Shalal",
+      "abstract": "Deep-space crews cannot rely on real-time ground support for urgent off-nominal events. Initial alerts may underdetermine cause, while discriminating evidence may reside in crew observations or at locations that are unsafe, costly, or unavailable for crew inspection. We present an evidence-driven architecture for human-agent-robot teaming in Earth-independent anomaly triage. Agentic AI is treated as a stateful coordinator over bounded, inspectable services rather than as a fully autonomous vehicle controller. A triage state manager maintains hypotheses, evidence provenance, uncertainty, operational context, and tool status; a crew-facing embodied agent elicits observations and explains assessment changes; and a mobile robot acquires targeted, localized evidence. Typed interfaces separate dialogue and orchestration from monitoring, robot command, context retrieval, and safety-critical control. Two scenarios illustrate the architecture: a crewed deep-space mission based on an actual ISS ammonia false alarm, where suspected contamination restricts crew access, and a power-interface anomaly at a crewed lunar base, where robotic inspection distinguishes a local connector fault from other causes ambiguous in remote telemetry. Our main contribution is an authority-bounded closed evidence-loop architecture, exercised in a hardware-in-the-loop integration prototype using Reachy Mini and an Innate MARS mobile robot.",
+      "url": "http://arxiv.org/abs/2610.08933v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08933v1",
+      "tldr": "The paper proposes an authority-bounded, evidence-driven human-agent-robot teaming architecture for Earth-independent anomaly triage, where an agentic coordinator uses a triage state manager, a crew-facing embodied agent, and a mobile robot to gather targeted evidence, refine hypotheses, and keep the crew in control, demonstrated through an ISS ammonia false-alarm scenario and a lunar power-interface anomaly in a hardware-in-the-loop prototype.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Austin",
+        "NASA Ames Research Center",
+        "University of Michigan",
+        "Repertory Robotics",
+        "SETI Institute"
+      ],
+      "affiliations_text": "The University of Texas at Austin, NASA Ames Research Center, University of Michigan, Repertory Robotics, SETI Institute",
+      "score": 3.9130280384855887,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.08823v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008823v1-hcpn-gcn-scaling-hierarchical-prototype-networks-with-cone-geometry-for-continual-graph-learning",
+      "source": "arxiv",
+      "title": "HCPN-GCN: Scaling Hierarchical Prototype Networks with Cone Geometry for Continual Graph Learning",
+      "authors": [
+        "Sammuel R. Silva",
+        "Vander L. S. Freitas",
+        "Gladston Moreira",
+        "Eduardo J. S. Luz",
+        "Rodrigo Silva"
+      ],
+      "authors_text": "Sammuel R. Silva, Vander L. S. Freitas, Gladston Moreira, Eduardo J. S. Luz, Rodrigo Silva",
+      "abstract": "Continual Graph Learning (CGL) aims to incrementally learn from graph-structured data while preserving knowledge acquired from previous tasks. A major challenge in this setting is catastrophic forgetting, where learning new tasks degrades performance on previously learned ones. Hierarchical Prototype Networks (HPNs) address this problem through a prototype-based memory mechanism that avoids storing historical data, but their reliance on linear feature extractors limits their ability to exploit graph topology, while point-based prototypes often lead to inefficient prototype growth on structurally diverse graphs. In this work, we propose HCPN-GCN, a graph-aware extension of HPN that replaces the original linear feature extractors with Graph Convolutional Networks (GCNs) and introduces cone-based prototypes with a diversity regularization objective. The proposed design produces richer graph-aware representations while compactly modeling the embedding space, reducing prototype proliferation without sacrificing discriminability. Experimental results on six continual graph learning benchmarks demonstrate that HCPN-GCN consistently improves average classification accuracy over the original HPN and representative continual learning baselines while maintaining near-zero forgetting. Furthermore, our analysis shows that the proposed model learns substantially richer class-level prototype hierarchies using approximately $30\\times$ fewer atomic prototypes than the original HPN, providing a more compact and effective memory representation for continual graph learning.",
+      "url": "http://arxiv.org/abs/2610.08823v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08823v1",
+      "tldr": "HCPN-GCN extends Hierarchical Prototype Networks for continual graph learning by replacing linear feature extractors with Graph Convolutional Networks and point prototypes with cone-based prototypes plus diversity regularization, improving average accuracy with near-zero forgetting while using about 30× fewer atomic prototypes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade Federal de Ouro Preto"
+      ],
+      "affiliations_text": "Universidade Federal de Ouro Preto",
+      "score": 3.786140306789399,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.08820v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008820v1-task-oriented-key-layer-kv-communication-for-efficient-latent-multi-agent-collaboration",
+      "source": "arxiv",
+      "title": "Task-Oriented Key-Layer KV Communication for Efficient Latent Multi-Agent Collaboration",
+      "authors": [
+        "Dongsen Zhang",
+        "Peipei Li",
+        "Zekun Li",
+        "Wenjun Xu"
+      ],
+      "authors_text": "Dongsen Zhang, Peipei Li, Zekun Li, Wenjun Xu",
+      "abstract": "Large language model-based multi-agent systems improve complex problem solving through collaboration, while latent communication directly transmits model internal states to avoid the high inference costs of natural language. However, existing KV-based latent communication methods prioritize sender-side state fidelity, leading to substantial communication and computation overhead and potentially introducing redundant information. To address these limitations, we revisit latent communication from a task-oriented perspective, shifting its objective from sender-side state fidelity to receiver-side task sufficiency. Under this formulation, we propose KITE, a training-free framework for task-oriented key-layer KV communication. KITE identifies a task-effective key layer using a receiver trajectory distortion criterion, transmits only the latent working memory associated with the key layer, and further uses the same layer as the entry point for autoregressive latent reasoning. Experiments on seven benchmarks across two model families and three model scales show that, compared with full-layer KV communication, KITE reduces communication volume by 28-36$\\times$, achieves up to 3$\\times$ end-to-end inference speedup, and improves accuracy by up to 23.3 percentage points.",
+      "url": "http://arxiv.org/abs/2610.08820v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08820v1",
+      "tldr": "KITE is a training-free framework that shifts latent multi-agent communication from sender-side state fidelity to receiver-side task sufficiency by identifying and transmitting only a task-effective key-layer KV cache, cutting communication volume by 28–36× and speeding up inference up to 3× while improving accuracy by up to 23.3 percentage points.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Santa Barbara",
+        "Beijing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "University of California, Santa Barbara, Beijing University of Posts and Telecommunications",
+      "score": 3.7439634164094193,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.08870v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008870v1-from-wearable-interfaces-to-dexterous-policies-contact-shifts-and-tactile-representations",
+      "source": "arxiv",
+      "title": "From Wearable Interfaces to Dexterous Policies: Contact Shifts and Tactile Representations",
+      "authors": [
+        "Ruitong Tian",
+        "Fang Xu",
+        "Noah B. Wilson",
+        "Xianyao Li",
+        "Eric Jing Du"
+      ],
+      "authors_text": "Ruitong Tian, Fang Xu, Noah B. Wilson, Xianyao Li, Eric Jing Du",
+      "abstract": "Unlike conventional teleoperation, wearable interfaces allow operators to collect dexterous demonstrations through their own hand motions while directly interacting with task objects. This direct interaction reduces dependence on the target robot during collection, but it also makes the collection hardware part of the physical process that generates each demonstration. Interface geometry can influence both how a task is performed and what tactile observations are recorded for learning. We study two versions of a DexUMI-family exoskeleton that share the same robot command definition, mapping procedure, and tactile module type but differ in hand-side geometry. The revised interface reduces reported physical demand, improves selected device ratings, enables tactile access in a precision grasp that is mechanically blocked by the baseline, and produces task-dependent changes in recorded contact. Lid twisting primarily exhibits a change in contact location, whereas egg carton opening primarily exhibits a change in contact occurrence. We then train matched policies using either a binary aggregate input or a spatial-plus-force input. On lid twisting and egg carton opening, policies trained on revised-interface demonstrations achieve higher success than those trained on baseline demonstrations, with a significant pooled interface effect. Across these and two additional tasks, USB insertion and soldering tool pick and place, the spatial-plus-force input likewise outperforms binary aggregation. These results show that wearable collection hardware is part of the data-generation process for robot learning. Such interfaces should therefore be evaluated not only through operator experience, but also through the tactile interactions they make recordable and the policy performance their demonstrations support.",
+      "url": "http://arxiv.org/abs/2610.08870v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08870v1",
+      "tldr": "A controlled revision of a wearable exoskeleton interface alters the tactile contact recorded during demonstration collection and, together with a spatial-plus-force tactile representation, improves downstream dexterous robot policy success, showing that wearable collection hardware is part of the data-generation process for robot learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Florida"
+      ],
+      "affiliations_text": "University of Florida",
+      "score": 3.5625188513532757,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.08819v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008819v1-hydrosphere-a-framework-for-governed-self-healing-wastewater-infrastructure",
+      "source": "arxiv",
+      "title": "HydroSphere: A Framework for Governed, Self-Healing Wastewater Infrastructure",
+      "authors": [
+        "Prabu",
+        "Fancy C",
+        "Suresh A",
+        "Srini Ramaswamy"
+      ],
+      "authors_text": "Prabu, Fancy C, Suresh A, Srini Ramaswamy",
+      "abstract": "Rapid industrialization and urban growth are increasing pressure on water quality and wastewater treatment systems, while conventional treatment plants often rely on static monitoring and control strategies that cannot easily adapt to changing pollutant conditions. This paper presents HydroSphere, a governed, data-driven framework for real-time water quality monitoring, forecasting, treatment optimization, and fault recovery. HydroSphere is evaluated using 2.82 million water-quality measurements collected between 1940 and 2023. The framework integrates three main components. First, a hybrid TCN-LSTM model performs multi-step forecasting across seven water-quality parameters, achieving an RMSE of 0.1417, MAE of 0.1047, and R2 of 0.3596. Second, the Adaptive Dosage Optimization Module uses PPO reinforcement learning to adjust chemical dosing, achieving a mean step reward of 1.059 compared with 1.017 for a fixed-dose baseline. The results also show that unconstrained reward optimization can lead to excessive dosing, demonstrating the need for explicit operational safeguards. Third, the SHADE anomaly detection module uses a deep autoencoder to identify sensor and process anomalies, achieving an F1 score of 0.651 under controlled fault injection. HydroSphere combines these capabilities with tiered governance, deterministic safety bounds, and human oversight to support safer and more adaptive water infrastructure. The framework provides a scalable foundation for intelligent wastewater management and supports the objectives of UN Sustainable Development Goals 6 and 13.",
+      "url": "http://arxiv.org/abs/2610.08819v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08819v1",
+      "tldr": "HydroSphere is a governed, self-healing wastewater framework that integrates TCN-LSTM forecasting, PPO-based adaptive chemical dosing, and autoencoder anomaly detection over 2.82 million water-quality measurements to enable safer, more adaptive real-time treatment infrastructure.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5160573596629336,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.08811v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008811v1-kvfetch-temporal-prefetching-for-the-missing-half-of-kv-cache-compression",
+      "source": "arxiv",
+      "title": "KVFetch: Temporal Prefetching for the Missing Half of KV Cache Compression",
+      "authors": [
+        "Linfeng Dong"
+      ],
+      "authors_text": "Linfeng Dong",
+      "abstract": "As context windows scale to tens or hundreds of thousands of tokens, KV cache compression has become essential for efficient LLM inference. Existing methods fall into three families: score-based eviction, summary compensation, and offload-and-recall. Yet all three decide what to keep or recall by content relevance to the current query. We show this shared design is structurally incomplete. A cache supports two access modes: associative lookup by content and sequential traversal by position; current compressors implement only the first. The gap matters in practice: retrieval-augmented generation, code completion, and structured-data extraction all require the model to reproduce identifiers, field values, or code tokens verbatim from the context. Under compression, content-based eviction retains the head of such a sequence but discards its continuation, causing verbatim copying to break irreversibly midway, a failure we call sequential forgetting. This failure resists better scoring, larger budgets, summary compensation, and dynamic re-scoring; it is the dominant source of remaining quality loss under compression. We propose KVFetch, a training-free, drop-in framework that opens a temporal recall channel for any score-based compressor. It demotes evicted candidates to a quantized cold tier, detects active copying through a monotone read pointer, and prefetches positional successors into fixed-size hot-tier slots without increasing attention cost. On RULER-16K under an iso-budget control, KVFetch recovers verbatim copying from 0.8 to 78.4 and raises the 13-task average by +8.4, with gains concentrating on tasks that require sequential access. On LongBench, where no task requires sequential access, the channel remains dormant and imposes no cost.",
+      "url": "http://arxiv.org/abs/2610.08811v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08811v1",
+      "tldr": "KVFetch is a training-free, drop-in framework that adds temporal prefetching to score-based KV cache compression, preventing sequential forgetting by recalling positional successors of evicted tokens to recover verbatim copying without extra attention cost.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4730248023755754,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.08810v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008810v1-transferability-and-operational-reliability-of-a-prithvi-crop-classification-foundation-model-under-phenological-and-geographic-shift-across-three-continents",
+      "source": "arxiv",
+      "title": "Transferability and operational reliability of a Prithvi crop classification foundation model under phenological and geographic shift across three continents",
+      "authors": [
+        "Venkatesh Kolluru",
+        "Rajat Shinde",
+        "Abdelhak Marouane",
+        "Caden Helbling",
+        "Deepak Shah",
+        "Othneil Drew",
+        "Srinivas Kolluru",
+        "Iksha Gurung",
+        "Manil Maskey",
+        "Rahul Ramachandran"
+      ],
+      "authors_text": "Venkatesh Kolluru, Rajat Shinde, Abdelhak Marouane, Caden Helbling, Deepak Shah, Othneil Drew, Srinivas Kolluru, Iksha Gurung, Manil Maskey, Rahul Ramachandran",
+      "abstract": "Fine-tuned geospatial foundation models (GeoFMs) pretrained on large satellite archives have been shown to improve crop classification accuracy and geographic transferability. However, their operational performance beyond the training distribution remains poorly characterized. We evaluated the out-of-distribution performance of a widely adopted GeoFM [Prithvi-EO-2.0] across 37 events in 12 countries on three continents and validated against regional reference products. Results indicated that the mean overall accuracy (OA) declined from 0.65 in the United States to 0.40 in Europe. Beyond accuracy metrics, we assessed five key aspects of model performance: whether model confidence indicates signal failure, sensitivity to observation windows, the effect of coarsening class schemes, and robustness to both band loss and cloud- and shadow-contamination. Accuracy collapsed when the observation window misaligned with local crop phenology, while deterministic confidence remained high. Expected calibration error increased for seven of eight paired events, and 12-51% of each affected scene was confidently mislabeled at near-zero precision. Monte Carlo dropout entropy registered the shift in all eight, indicating that much of the apparent cross-continent decline reflected phenological misalignment rather than spatial transfer. Two adjustments recovered accuracy without retraining. Consolidating 13 classes into 10, based on the model's dominant confusions, raised the mean OA by 8.4 percentage points. Compressing the window toward near-real-time use preserved accuracy across a 45- to 90-day plateau, peaking near 75 days, though arms tighter than 30 days fell about 0.11 below that plateau. Fine-tuned crop GeoFMs therefore transfer usefully only where observation windows match local growing seasons. We translate these findings into operational guidance for the reliable deployment of the released model.",
+      "url": "http://arxiv.org/abs/2610.08810v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08810v1",
+      "tldr": "A fine-tuned Prithvi crop classification foundation model transfers usefully across continents only when observation windows match local crop phenology, since geographic/phenological misalignment causes large accuracy drops and confidently mislabeled pixels that can be partly recovered by coarsening classes or adjusting the temporal window.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Alabama in Huntsville",
+        "Space and Earth Science Data Analysis",
+        "NASA Marshall Space Flight Center"
+      ],
+      "affiliations_text": "University of Alabama in Huntsville, Space and Earth Science Data Analysis, NASA Marshall Space Flight Center",
+      "score": 3.242454794105023,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.08948v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008948v1-quantifying-grid-forming-requirements-for-system-strength-how-much-and-where",
+      "source": "arxiv",
+      "title": "Quantifying Grid-Forming Requirements for System Strength: How Much and Where?",
+      "authors": [
+        "Ambuj Gupta",
+        "Balarko Chaudhuri",
+        "Mark O'Malley"
+      ],
+      "authors_text": "Ambuj Gupta, Balarko Chaudhuri, Mark O'Malley",
+      "abstract": "As power systems transition toward inverter-based resource (IBR)-dominated grids, Grid-ForMing (GFM) IBRs are increasingly expected to provide the voltage-source characteristics required to maintain adequate system strength. However, how many GFM IBRs are required, and where they should be located in the grid, remains unclear. This paper investigates the impact of the number and location of GFM IBRs on small-signal system strength. The Jacobian Voltage Stiffness Metric (JVSM), which quantifies the voltage-magnitude and voltage-phase stiffness from frequency-domain Jacobian characteristics, is used as a system-strength measure. The analysis demonstrates that increasing the number of GFM IBRs generally improves system strength; however, configurations with the same number of GFM IBRs can exhibit significantly different bus-wise system-strength characteristics depending on their locations. Thus, this paper provides a quantitative basis for specifying GFM requirements in terms of the resulting system strength, rather than solely in terms of penetration level or the number of GFM IBRs. Case studies on a modified IEEE 39-bus system demonstrate how JVSM can be used to quantify and compare the system-strength impact of different numbers and locations of GFM IBRs, with the resulting strength assessments validated against small-signal oscillatory stability.",
+      "url": "http://arxiv.org/abs/2610.08948v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08948v1",
+      "tldr": "This paper uses the Jacobian Voltage Stiffness Metric to show that both the number and location of grid-forming inverter-based resources significantly affect small-signal system strength, providing a quantitative basis for specifying GFM requirements by resulting strength rather than penetration or unit count alone.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Imperial College London"
+      ],
+      "affiliations_text": "Imperial College London",
+      "score": 2.980355187067356,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2610.08882v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008882v1-finvector-market-4b-a-controlled-study-of-lora-adaptation-for-structured-financial-tasks",
+      "source": "arxiv",
+      "title": "FinVector-Market-4B: A Controlled Study of LoRA Adaptation for Structured Financial Tasks",
+      "authors": [
+        "Alina Khaybullina"
+      ],
+      "authors_text": "Alina Khaybullina",
+      "abstract": "FinVector-Market-4B adapts Qwen/Qwen3.5-4B with rank-16 LoRA on a 22,000-example corpus for structured financial tasks. We evaluate the base and adapted models on the same 600-example benchmark under implicit and explicit JSON-schema contracts. Supplying the schema alone raises base-model JSON validity from 0% to 91.3%. Under matched explicit prompting, the frozen scores improve from 14.7% to 40.0% for FinQA answer exact match, from 48.0% to 82.7% for calculator-expression correctness, from 20.1% to 89.5% for scenario branch-label agreement, and from 52.4% to 87.2% for implication-direction agreement. A post-hoc policy-scoring audit shows that the reported macro-F1 decline reflects a changing label set; using the same three target classes gives 77.4% for the base and 83.1% for the adapter. Filing overlap and calculator-target inconsistencies qualify the benchmark's generalization claims. The results show that compact financial domain adaptation can produce substantial task-specific gains beyond output-format learning under matched prompting, with gains bounded by the evaluated task distribution and prompt contract.",
+      "url": "http://arxiv.org/abs/2610.08882v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08882v1",
+      "tldr": "FinVector-Market-4B demonstrates that rank-16 LoRA adaptation of Qwen3.5-4B on a 22k-example financial corpus yields substantial task-specific gains beyond output-format learning under matched explicit JSON-schema prompting, while remaining bounded by prompt sensitivity and benchmark limitations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 2.971215721493894,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2610.08809v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/08/261008809v1-beyond-baseline-severity-temporal-and-disease-specific-predictors-of-depression-outcomes-following-mindfulness-interventions",
+      "source": "arxiv",
+      "title": "Beyond Baseline Severity: Temporal and Disease-Specific Predictors of Depression Outcomes Following Mindfulness Interventions",
+      "authors": [
+        "Muhammad Jawad Chowdhury",
+        "Sultanus Salehin",
+        "Akib Jayed Islam"
+      ],
+      "authors_text": "Muhammad Jawad Chowdhury, Sultanus Salehin, Akib Jayed Islam",
+      "abstract": "Depression severity among patients with chronic or acute medical conditions is influenced by a complex interaction of baseline psychological state, demographic characteristics, clinical context, and engagement with behavioral interventions. This paper presents an interpretable machine-learning analysis of a multi-center longitudinal clinical cohort to predict Beck Depression Inventory-II (BDI-II) scores at 12 and 24 weeks following mindfulness-based intervention participation. The study uses demographic variables, clinical condition information, hospital-center identifiers, baseline BDI-II scores, and therapy engagement measures to model short-term and long-term depression outcomes. Missing follow-up outcomes were addressed using a model-based stochastic imputation procedure to preserve the modest sample size while maintaining outcome variability. Five regression models were evaluated, spanning regularized linear regression and tree-based ensemble methods. Ridge Regression achieved the best 12-week performance with an RMSE of 5.186 and R^2 of 0.474, while LightGBM achieved the best 24-week performance with an RMSE of 5.038 and R^2 of 0.525. Beyond prediction accuracy, the analysis reveals three clinically relevant patterns: baseline severity remains the strongest overall predictor, short-term outcomes are more strongly associated with clinical and hospital context, and long-term outcomes show greater dependence on behavioral adherence and demographic factors. Disease-specific and hierarchical subgroup analyses further indicate that predictors differ substantially across and within clinical categories. These findings support the use of interpretable, context-aware modeling to inform personalized mental-health support following mindfulness-based interventions.",
+      "url": "http://arxiv.org/abs/2610.08809v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.08809v1",
+      "tldr": "TLDR: Using interpretable machine learning on a multi-center longitudinal cohort, this paper predicts 12- and 24-week BDI-II depression outcomes after mindfulness-based interventions, showing that baseline severity is the strongest overall predictor while short-term outcomes depend more on clinical/hospital context and long-term outcomes on behavioral adherence and demographic factors, with predictors varying by disease subgroup.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Islamic University of Technology",
+        "Norwegian University of Science and Technology"
+      ],
+      "affiliations_text": "Islamic University of Technology, Norwegian University of Science and Technology",
+      "score": 2.4026284404236913,
+      "score_text": "2.4"
+    }
+  ]
+}
