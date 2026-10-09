@@ -1,0 +1,727 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-09T17:29:46.769287",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.10626v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010626v1-exact-so3-equivariant-isotropic-kernels-for-rotation-robust-neural-dynamics",
+      "source": "arxiv",
+      "title": "Exact SO(3)-Equivariant Isotropic Kernels for Rotation-Robust Neural Dynamics",
+      "authors": [
+        "Ridham Patel"
+      ],
+      "authors_text": "Ridham Patel",
+      "abstract": "Neural surrogates for vector-valued partial differential equations can fit training data yet change their predictions when the same physical state is expressed in a rotated coordinate frame. We study this failure on three-dimensional Navier--Stokes dynamics observed at irregularly placed points. We introduce the Invariant-Conditioned Isotropic Kernel Neural Operator (IKNO), a compact graph model that builds local interactions from scalar quantities unchanged by rotation and vector directions that rotate with the data. Consequently, rotating the positions and velocities rotates the predicted velocity change in exactly the same way. On a held-out test set fixed after model design, training unconstrained graph models on randomly rotated examples reduces but does not eliminate their coordinate dependence. In contrast, IKNO is consistent to numerical precision, matches the forecasting accuracy of a general rotation-aware Tensor Field Network with $5.6$ times fewer parameters, and outperforms a parameter-matched graph simulator. These results show that a compact, PDE-specialized model can remove coordinate dependence without sacrificing forecasting accuracy.",
+      "url": "http://arxiv.org/abs/2610.10626v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10626v1",
+      "tldr": "The paper introduces IKNO, an exactly SO(3)-equivariant isotropic-kernel graph neural operator for 3D Navier–Stokes dynamics that removes coordinate-frame dependence while matching a much larger Tensor Field Network and outperforming a parameter-matched graph simulator.",
+      "detailed_reading": {
+        "motivation": "向量值偏微分方程的神经代理能在训练坐标下拟合，却会在同一物理状态被旋转到新坐标系时改变预测，而图模型通常只保证置换等变、不保证空间旋转等变。作者在三维Navier-Stokes不规则采样点上研究这一失效，并检验精确SO(3)等变架构是否比旋转数据增强更能消除坐标依赖且不损失原坐标预测精度。",
+        "method": "提出Invariant-Conditioned Isotropic Kernel Neural Operator（IKNO）：输入为不规则点坐标X与速度U，边连接半径0.4内至多64个邻居；每条边计算单位相对方向rhat与速度差δu，并构造6个旋转不变量（距离、速度模、δu模、u_i·rhat、δu·rhat、u_i·δu），经两层64单元SiLU的多层感知机输出四个标量系数a,b,c,d；消息为aδu + b rhat(rhat^Tδu)+c u_i+d(u_i×rhat)，对邻居取均值后加λu_i得到导数预测，再用显式欧拉以Δt自回归积分。训练用监督目标(U(t+Δt)-U(t))/Δt，Adam、余弦学习率、3个种子、100轮，按验证误差选检查点；最终层和λ零初始化，理论上对SO(3)联合旋转严格等变且对平移不变。",
+        "result": "在模型设计后固定的held-out测试集上，IKNO在1000个Haar随机旋转下与数值精度一致；旋转增强的GNS和component-EGNN仅降低但未消除坐标依赖。IKNO以4,869个参数匹配Tensor Field Network（27,297参数，少5.6倍）的预测精度，并优于参数匹配GNS（5,352参数）。评估用一步和十步相对Frobenius误差、旋转相对原坐标的一步退化Δ1的均值/95分位/最大，以及归一化算子等变诊断e_eq。",
+        "conclusion": "精确SO(3)等变的各向同性核可在低参数成本下消除坐标依赖并保持预测精度，表明紧凑的PDE专用等变模型可优于通用旋转感知TFN、参数匹配图模拟器和旋转增强基线。但该构造仍只是紧凑的PDE导向子集而非完备参数化，最大旋转退化是有限样本压力测试而非认证最坏界。",
+        "key_details": "数据为[0,2π]^3三维不可压Navier-Stokes，16^3伪谱求解器，2/3去混叠、Leray投影、Strang分裂扩散；固定轴大尺度力预热50步制造方向偏置，20个快照Δt=0.02，谱速度三线性插值到500个不规则点，训练随机128点子采样、评估固定128点。开发集25条轨迹种子342–366，测试集5条轨迹种子367–371；监督目标为有限差分导数，无观测噪声。优化用Adam、余弦衰减、3种子、100轮，IKNO学习率3e-3，对照2e-3；TFN承载偶标量与奇向量、距离条件张量积且至一阶球谐，为O(3)等变。局限包括边图半径0.4与至多64邻居、系数网络仅两隐层64、四基非完备、最大旋转为有限样本压力测试以及仅单帧一步预测实验。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Gandhinagar"
+      ],
+      "affiliations_text": "Indian Institute of Technology Gandhinagar",
+      "score": 5.205785989172812,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2610.10627v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010627v1-sample-efficiency-of-kolmogorov-arnold-networks",
+      "source": "arxiv",
+      "title": "Sample-Efficiency of Kolmogorov-Arnold Networks",
+      "authors": [
+        "Kevin Riehl",
+        "Shaimaa K. El-Baklish",
+        "Fan Wu",
+        "Anastasios Kouvelas"
+      ],
+      "authors_text": "Kevin Riehl, Shaimaa K. El-Baklish, Fan Wu, Anastasios Kouvelas",
+      "abstract": "Deep reinforcement learning has achieved substantial performance gains over classical control approaches. Yet, a central challenge to learning in real-world applications is acquiring costly samples. Kolmogorov-Arnold Networks are a recently proposed architecture that can learn physical relationships in control problems effectively, with significantly higher parameter efficiency and interpretability when compared to Multi-Layer-Perceptron architectures. In this work, we systematically study sample-efficiency using computational experiments, covering the Feynman dataset and the Gymnasium RL benchmark. The results show that similar performance can be achieved with 40% fewer samples using the Kolmogorov-Arnold architecture, and that relative performance improvements up to 50% occur during the training process. The observed gains are robust to varying levels of noise in rewards. These results highlight the potential of the Kolmogorov-Arnold architectures for more sample-efficient reinforcement learning. Code: https://github.com/DerKevinRiehl/neurips26_kan_training",
+      "url": "http://arxiv.org/abs/2610.10627v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10627v1",
+      "tldr": "Kolmogorov–Arnold Networks can match MLP performance with roughly 40% fewer samples—and show up to 50% relative training improvements—in Feynman regression and Gymnasium reinforcement learning benchmarks, highlighting their potential for more sample-efficient control learning.",
+      "detailed_reading": {
+        "motivation": "深度强化学习在控制中潜力巨大，但真实应用的核心瓶颈是样本效率，因为每次交互都昂贵且安全关键场景难以承受大量试错。KAN 相比 MLP 具有更高参数效率和可解释性，但已有低数据与 RL 证据相互矛盾，尚不清楚在可比实验预算下 KAN 是否真正提升样本效率。本文因此系统评估 KAN 在物理关系学习和 RL 控制中的样本效率。",
+        "method": "方法上先在 Feynman 数据集上用 27 个无单位物理方程做监督回归，训练集规模设为 10 到 1000、测试集固定 1000，并每个设置用 20 个随机种子重复，比较 KAN 与 MLP 在相同优化器、损失、更新步数、批大小和种子下的 NRMSE 等指标。随后在 Gymnasium Classic Control 的 Acrobot、CartPole、MountainCar、MountainCarContinuous 和 Pendulum 上用 PPO 做在线 RL，将 actor 和 critic 同时替换为 KAN 或同时替换为 MLP，并覆盖离散与连续动作空间。模型比较包括 MLP 的 ReLU/Sigmoid 激活和 KAN 的 B-spline、Gaussian RBF、BSRBF 等边函数，通过网格搜索与参数匹配控制复杂度，还加入不同强度高斯奖励噪声测试鲁棒性。评估使用学习曲线、达到目标性能所需样本数、样本减少比例、误差-样本曲线面积以及参数数量和墙钟时间等。",
+        "result": "Feynman 实验显示 KAN 在约 50 个训练样本后出现清晰的低样本交叉优势，最佳 KAN 家族将平均 NRMSE 从 50 样本时的 0.200 降至 0.163，并在 1000 样本时从 0.127 降至 0.060，相对提升从 13.9% 起且训练中最高可达 50%。Gymnasium 控制任务复现了类似模式，KAN 相对优势在早期至中期训练达到约 41.6% 的峰值，整体上可用约 40% 更少样本达到相近性能。加入高斯奖励噪声会增大方差，但 KAN 与 MLP 的定性比较关系在不同噪声尺度下保持一致，说明增益并非干净奖励反馈的假象。",
+        "conclusion": "结论是 KAN 在任务具有平滑低维结构时能显著提升样本效率，尤其是在仿真、测量或硬件试验昂贵的早期和中期训练阶段。该优势并非所有任务一致，当两类架构获得大量样本后最终回报往往接近，因此 KAN 更适合低数据控制场景。实际部署可先在稀缺样本阶段用 KAN 训练，再在推理成本成为瓶颈时蒸馏到更便宜的 MLP。",
+        "key_details": "关键实现细节包括：Feynman 数据按方程采样并拒绝非有限值后重采样，输入用训练集标准化，测试集不参与模型选择或归一化；KAN 后端包括 EfficientKAN 的 B-spline、FastKAN 的 Gaussian RBF 以及 BSRBF-KAN 混合边函数，MLP 对照使用 ReLU 与 Sigmoid；主要指标为 NRMSE，并辅以 RMSE、MAE、相对 L2 和 R2，聚合时按种子平均并报告标准误或标准差。RL 部分 PPO 中 KAN 或 MLP 完整替换 actor-critic，KAN 隐藏维度扫描包含 [2]、[4]、[8]、[4,4]、[8,8]、[16,16]，连续动作使用对角高斯加 tanh 压缩且可训练 log 标准差初始化为 0。局限在于效果强依赖环境，最终回报常趋于接近，奖励噪声增大方差，理论样本复杂度假设与 RL 的噪声、自举和策略变化不同，且已有低数据研究显示带个体可学习激活的 MLP 在某些小样本场景可优于 KAN，KAN 组件并非可无条件替换。"
+      },
+      "affiliations": [
+        "ETH Zürich"
+      ],
+      "affiliations_text": "ETH Zürich",
+      "score": 5.006758657260859,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.10690v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010690v1-learning-infinite-context-windows-in-recurrent-architectures-via-spatial-neural-computing",
+      "source": "arxiv",
+      "title": "Learning infinite context windows in recurrent architectures via spatial neural computing",
+      "authors": [
+        "Aleix Salvador-Pomarol",
+        "Arthur N. Montanari",
+        "Earl K. Miller",
+        "Adilson E. Motter",
+        "Jorge Cortés"
+      ],
+      "authors_text": "Aleix Salvador-Pomarol, Arthur N. Montanari, Earl K. Miller, Adilson E. Motter, Jorge Cortés",
+      "abstract": "Recurrent neural networks (RNNs) offer linear-time scaling with sequence length while requiring only constant memory, yet they struggle to capture long-range dependencies due to vanishing gradients and limited receptive fields. To address these limitations, we introduce a second-order recurrent model in which the standard neuron-to-neuron communication is replaced by a spatially evolving field governed by (discretized) partial differential equations. Drawing inspiration from the role of cortical waves in brain computation, this mechanism allows structured spatiotemporal patterns to serve as an implicit, high-capacity memory. We show that the resulting model is equivalent to a structured infinite-order RNN in which the current state depends explicitly on its entire history of past states, yielding an effectively unbounded receptive field with a fixed number of parameters. We further derive constructive conditions to ensure marginal stability, constraining the gradient spectrum on the unit circle and thereby eliminating vanishing and exploding gradients. Empirically, the proposed architecture outperforms other recurrent models on long-horizon benchmarks while using substantially fewer parameters, demonstrating that spatial dynamics can effectively bridge the gap between efficient inference and long-term memory.",
+      "url": "http://arxiv.org/abs/2610.10690v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10690v1",
+      "tldr": "The paper proposes SpatialRNN, a second-order recurrent architecture that replaces direct neuron-to-neuron connections with a PDE-governed spatial medium, yielding an implicit infinite-order memory with an unbounded receptive field and stable gradients for long-horizon sequence modeling with fewer parameters.",
+      "detailed_reading": {
+        "motivation": "标准RNN虽以固定内存和线性时间处理序列，但受梯度消失/爆炸与有限感受野限制，难以建模长程依赖；Transformer等又带来O(T)推理内存与O(T^2)注意力开销。作者希望从动力学系统与皮层行波获得启发，找到一种能在固定参数量下保持任意长历史影响、且梯度不衰减的循环结构。",
+        "method": "提出SpatialRNN：用受离散偏微分方程控制的二维空间介质psi(x,t)替代神经元间直接全连接，介质由rho与gamma控制传播/阻尼，Laplacian等空间算子L与输入驱动beta(h(t))共同作用；离散后得到二阶线性差分方程psi_t = W_bar psi_{t-1} + W_bar2 psi_{t-2} + B h_{t-1}。循环更新为h_t = Phi(W_x x_t + W_psi psi_t + b_h)，输出softmax同时读取h_t、psi_t与psi_{t-1}，初始状态置零，Phi可为tanh或ReLU。该介质相当于隐式生成无限阶卷积核，使当前状态显式依赖全部历史，同时只需固定大小矩阵W_bar、W_bar2、B、W_psi等参数。",
+        "result": "理论上证明SpatialRNN在零初始条件下等价于结构化无限阶RNN，psi_t可写成对全部历史h_{t-k}的卷积，权重矩阵由递归W_k = W_bar W_{k-1} + W_bar2 W_{k-2}生成，因而获得参数高效、O(1)推理内存的无界感受野。通过构造性边际稳定条件，可将梯度谱约束在单位圆上，消除消失与爆炸梯度；实验显示训练后的SpatialRNN在长输入轨迹上梯度范数近乎恒定，并在长时程基准上优于其他循环模型且参数量显著更少。",
+        "conclusion": "空间动力学可作为循环网络的高容量隐式记忆基质，使模型在固定参数与常数内存下具备无限上下文窗口和长程保持能力。该工作表明，解决长程梯度问题的关键不只是循环矩阵谱，而在于让输入无关的二阶/空间项控制梯度模长，从而兼顾高效推理与长期记忆。",
+        "key_details": "关键实现包括波方程特例：取Psi的二阶时间差分与离散Laplacian W_Delta，得到Störmer-Verlet形式W_bar = 2I + c^2 Delta t^2 W_Delta、W_bar2 = -I；空间介质在二维坐标上演化，rho与gamma可空间变化，beta将神经活动写入介质；理论分析基于冻结时间梯度与边际稳定条件，而非仅循环矩阵特征值。复杂度上推理内存O(1)、计算量随序列长度O(T)，参数量不随阶数或历史长度增长；局限是无限感受野不等于无损记忆容量，也不自动保证长程影响，有限精度与固定维状态仍限制信息保持，且实际长程性能依赖梯度设计条件。"
+      },
+      "affiliations": [
+        "UC San Diego",
+        "Northwestern University",
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "UC San Diego, Northwestern University, Massachusetts Institute of Technology",
+      "score": 4.952614036124518,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.10613v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010613v1-temporal-transformer-can-encoder-with-federated-lightweight-heads-for-anomaly-detection",
+      "source": "arxiv",
+      "title": "Temporal transformer CAN encoder with federated lightweight heads for anomaly detection",
+      "authors": [
+        "Konstantinos Gyftodimos",
+        "Kyriakos Chiotis",
+        "Elena Politi",
+        "George Dimitrakopoulos",
+        "Eirini Liotou"
+      ],
+      "authors_text": "Konstantinos Gyftodimos, Kyriakos Chiotis, Elena Politi, George Dimitrakopoulos, Eirini Liotou",
+      "abstract": "Modern vehicles rely on large numbers of Electronic Control Units (ECUs) that constantly exchange information over the Controller Area Network (CAN) bus. Due to the rapidity, structure, and repetition of this communication, even slight variations in timing, payload values, or message patterns can point to unusual activity. Whether due to errors, malfunctions, or deliberate interference, these anomalies are frequently subtle and challenging to identify with conventional methods that handle messages separately or rely on manually created rules. Motivated by this gap, we present a privacy-preserving framework for anomaly detection in in-vehicle networks, based on a Temporal Transformer CAN Encoder with Federated Lightweight Heads, to better capture these irregularities. The detection of subtle temporal and contextual anomalies is made possible by a lightweight Transformer encoder that learns how these signals evolve over time, while a federated learning mechanism enables several vehicles or ECUs to work together to improve a shared model without exchanging raw CAN data. This combination of federated learning and temporal sequence modeling provides robust anomaly detection performance while maintaining efficiency and privacy, according to experiments conducted on open-source datasets.",
+      "url": "http://arxiv.org/abs/2610.10613v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10613v1",
+      "tldr": "This paper proposes a privacy-preserving in-vehicle CAN anomaly detection framework that combines a lightweight Temporal Transformer encoder for capturing temporal and contextual message patterns with federated lightweight XGBoost heads for collaborative, decentralized classification without sharing raw CAN data.",
+      "detailed_reading": {
+        "motivation": "现代车辆中大量ECU通过CAN总线高频交换短消息，而CAN缺少内建完整性机制，时序、负载或模式上的细微变化可能对应故障或攻击；现有方法多逐条处理消息或依赖人工规则，忽略时间与上下文，集中式训练还带来隐私和资源受限ECU部署难题。",
+        "method": "框架先将原始CAN日志按标识符和时间戳排序，按ECU计算相邻消息到达时间差，并将8个负载字节与Delta_t组成9维特征，切成T=15的非重叠窗口；随后用轻量Transformer编码器做特征提取，包含线性输入投影、可学习位置编码、2层多头自注意力编码层和自适应均值池化，输出每窗64维嵌入；再以4个XGBoost回归器组成的多输出模型预测窗内正常、DoS、Fuzzy、冒充四类标签的经验比例，损失为平方误差；联邦训练中每个客户端保留本地CAN窗口，用当前全局集成预测并拟合残差，仅上传新梯度提升组件和验证指标，服务器按验证性能选择最佳组件顺序加入全局集成而非平均树权重。",
+        "result": "集中式全局模型在测试集上准确率0.838、宏F1 0.840、加权F1 0.835，回归MSE 0.021；联邦场景使用两个客户端，每轮平均验证MSE从0.0351降至0.0263再降至0.0244，最终客户端测试准确率分别为0.88和0.89，测试MSE分别为0.1309和0.1316，显示协作学习能提升未见ECU数据的分类泛化但回归误差高于集中式。",
+        "conclusion": "该工作表明，时序Transformer嵌入加轻量XGBoost头与联邦残差集成可在不交换原始CAN数据的前提下实现较高窗口级异常检测准确率，兼顾隐私、边缘推理效率和协作泛化。未来可引入在线学习以适应动态车辆环境。",
+        "key_details": "关键细节包括数据来自HKSecurity OCSLab公开入侵数据集，联邦实验仅使用CAN_HCRL_OTIDS_UB子集且未参与集中训练；窗口大小T=15，输入维度9，d_model=64，Transformer层数L=2，四分类，非重叠窗口；XGBoost按类别多输出回归，以窗内类别比例为目标和平方误差损失；联邦服务器采用基于验证指标的select-best聚合，因树模型不能权重平均；局限是联邦客户端仅两个、评估为窗口级、集中与联邦MSE差距较大、缺少与多种SOTA的充分对比，且未详述通信成本与在线部署约束。"
+      },
+      "affiliations": [
+        "ANADELTA P.C.",
+        "Harokopio University of Athens"
+      ],
+      "affiliations_text": "ANADELTA P.C., Harokopio University of Athens",
+      "score": 4.766733747010642,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.10601v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010601v1-teaching-a-robot-dog-new-tricks-diverse-quadruped-skills-via-combined-reinforcement-and-imitation-learning-with-adversarial-task-selection",
+      "source": "arxiv",
+      "title": "Teaching a Robot Dog New Tricks: Diverse Quadruped Skills via Combined Reinforcement and Imitation Learning with Adversarial Task Selection",
+      "authors": [
+        "Lemon Foxmere",
+        "Anthony Furman",
+        "Yizheng Du",
+        "Oliver Chang",
+        "Leilani Gilpin",
+        "Steve McGuire"
+      ],
+      "authors_text": "Lemon Foxmere, Anthony Furman, Yizheng Du, Oliver Chang, Leilani Gilpin, Steve McGuire",
+      "abstract": "Reinforcement Learning (RL) has enabled legged robots to perform a range of skills in single-task settings. However, applications such as farm robotics or space exploration require diverse skills such as locomotion, digging, or close-range surveying. Training an end-to-end policy to address this problem remains difficult due to challenges such as sample inefficiency and gradient conflict between tasks in multi-task learning. We propose a three-stage method that trains a single policy to perform distinct tasks such as walking, digging, and hopping, and compose them into novel behaviors such as crawling. First, multiple teacher policies are trained using RL on narrowly defined tasks. Then, two additional stages train a student policy with a multi-teacher distillation setup that uses a combined RL and Imitation Learning (IL) objective under an adversarial task selection process that focuses training on the worst-performing task. With this method, we train a student policy that performs 22 tasks using 8 teachers. Evaluations show our method preserves motion quality and tracks commands more accurately than PPO and distill-then-finetune baselines, and in some cases generalizes to new tasks without explicit training. Finally, we demonstrate real-world robustness by deploying the resulting policy on a Unitree B1 quadruped. Video: https://youtu.be/V9yX04EBcFA",
+      "url": "http://arxiv.org/abs/2610.10601v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10601v1",
+      "tldr": "The paper presents a three-stage reinforcement and imitation learning method with adversarial task selection that trains a single quadruped policy to perform and compose 22 diverse skills from 8 teacher policies, achieving better command tracking and real-world robustness on a Unitree B1.",
+      "detailed_reading": {
+        "motivation": "腿足机器人单任务强化学习已能实现多种复杂技能，但农业机器人或太空探索等应用需要行走、挖掘、近距离勘察等多技能，端到端多任务策略训练仍受样本效率低、奖励游戏化、梯度冲突和灾难性遗忘制约。模仿学习可提供训练稳定性和行为保真度，强化学习可提供对分布外状态的鲁棒性，因此将二者结合有望训练单一策略执行、切换并组合多种技能。本文特别关注多任务训练中不同难度任务训练资源分配不均以及运动质量退化的问题。",
+        "method": "提出三阶段方法：第一阶段为每个窄定义单任务用PPO训练专用教师策略，教师可访问足端接触力等特权信息，并以自然运动为主要目标，训练后冻结。第二阶段为学生策略的ILP阶段，在单任务上以高λ优化PPO与行为克隆BC的联合目标L=L_PPO-λL_BC，BC示范通过DAgger在学生自身状态分布下在线查询教师获得，且MSE仅作用于策略均值，ILP中向学生动作加入零均值高斯噪声以保持探索。第三阶段为RLP阶段，加入单任务和复合任务，降低λ，先冻结actor并固定策略标准差预训练新critic，再联合优化PPO与IL锚定，同时采用对抗式任务选择，按各任务相对教师的误差赤字重加权采样，使训练更集中于当前表现最差任务。",
+        "result": "用8个教师策略训练出可执行22个任务的单一学生策略，其中8个为教师直接教授的单任务，14个为组合两个教师任务得到的复合任务，例如组合身高跟踪与全向行走形成低姿态爬行。评估表明该方法在运动质量和命令跟踪精度上优于PPO与distill-then-finetune基线，奖励游戏化影响较小，并能在未显式训练的情况下泛化到三个及以上任务的组合。最终策略部署在Unitree B1四足机器人上，实现爬行、galloping、跳跃、挖掘、倾斜和抬腿按按钮等真实世界行为。",
+        "conclusion": "结果表明，结合多教师蒸馏、联合RL与IL目标、对抗任务选择和critic预训练，可以训练单一策略掌握多种四足技能，并通过组合已有单任务产生新行为。该方法在保持自然运动质量和命令响应性的同时，展现出从仿真到Unitree B1实机部署的鲁棒性，为需要多技能按命令切换与组合的腿足机器人提供了一条可扩展路径。局限包括复合任务没有教师示范而依赖组合泛化，对抗采样权重受教师基线误差影响，且当前预览未展示完整消融、网络结构与全部超参数。",
+        "key_details": "关键设定是将任务分为单任务集合X与单/复合任务集合Y，学生策略为πθ(a|s,c_Y)，命令向量c_Y含共享的标量跟踪目标和二值标志，可指定任意任务。教师用PPO在任务特定奖励和特权信息下训练并冻结；学生联合损失为L=L_PPO-λL_BC，BC为MSE且不更新动作分布标准差；ILP仅训练单任务、高λ、奖励只含身体稳定与运动平滑项，RLP训练单任务和复合任务、低λ、奖励扩展到跟踪误差最小化和行为微调，并在RLP前冻结actor、固定σ0预训练critic。DAgger每步若命令对应单任务则查询对应教师并将(s,c_Y,a*)加入D，复合任务无教师则不采样；对抗任务选择用误差通道e、教师名义误差τ_e定义CNorm(e)=tanh(a v_e/τ_e)，a=tanh^-1(0.2)，任务赤字为相关通道均值，采样概率为p_i=κ deficit_i^β/Σdeficit_j^β+(1-κ)/|Y|，其中κ混合对抗分量与均匀先验，β控制锐度。实现细节还涉及教师训练优先自然运动而非完美跟踪、ILP噪声防止动作标准差坍缩、critic预训练缓解RLP初期值估计不可靠；但预览未给出完整网络结构、PPO超参、sim-to-real随机化和消融结果。"
+      },
+      "affiliations": [
+        "University of California at Santa Cruz"
+      ],
+      "affiliations_text": "University of California at Santa Cruz",
+      "score": 4.753530480720839,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.10623v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010623v1-recurrent-self-improvement-dynamic-cross-loop-on-policy-distillation-for-looped-language-models",
+      "source": "arxiv",
+      "title": "Recurrent Self-Improvement: Dynamic Cross-Loop On-Policy Distillation for Looped Language Models",
+      "authors": [
+        "Yi Wang",
+        "Rui Qian",
+        "Yu Li",
+        "Haoyang Yao",
+        "Wenjie Wang"
+      ],
+      "authors_text": "Yi Wang, Rui Qian, Yu Li, Haoyang Yao, Wenjie Wang",
+      "abstract": "Looped Language Models (LoopLMs) offer a parameter efficient approach to scaling reasoning by reusing shared parameters across recurrent computation steps. Despite their promise, effective post-training of LoopLMs remains challenging. Existing approaches either provide reward based supervision that is sparse or costly to extend across loops, or rely on external teachers or privileged information, leading to limited teacher availability or teacher-student context mismatch. To address these limitations, we introduce LoopOPD, a cross-loop on-policy distillation framework that uses additional recurrent computation within a LoopLM as its own source of supervision. LoopOPD uses a frozen terminal loop policy as a compute privileged teacher for an intermediate loop student on student generated rollouts, providing dense supervision without an external teacher or privileged information. We further propose Dynamic LoopOPD (D-LoopOPD), which continually refreshes the terminal loop teacher as the shared model parameters are updated, enabling recurrent self-improvement. We characterize how distillation updates propagate across loop depths and derive sufficient conditions under which a single update yields simultaneous local improvement at both loop depths. Experiments on Ouro-Thinking models show that LoopOPD improves mathematical reasoning, while D-LoopOPD yields further gains through dynamic teacher updates. Despite being trained only on mathematical data, the resulting models also improve on general reasoning and code generation benchmarks, demonstrating that recurrent computation can serve as an effective source of supervision for LoopLMs. Our code and model checkpoints will be released upon acceptance.",
+      "url": "http://arxiv.org/abs/2610.10623v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10623v1",
+      "tldr": "LoopOPD uses a LoopLM’s own terminal loop as a frozen compute-privileged teacher to distill an intermediate loop on student rollouts, and D-LoopOPD dynamically refreshes that teacher for recurrent self-improvement, yielding better math, general reasoning, and code performance without external teachers or privileged information.",
+      "detailed_reading": {
+        "motivation": "Looped Language Models 通过循环复用共享参数来参数高效地扩展推理，但其后训练仍很困难；既有方法要么依赖稀疏且难以跨循环扩展的奖励监督，要么依赖外部教师或特权信息，导致教师可用性受限或师生上下文不匹配。为此，作者希望让 LoopLM 利用自身额外的循环计算作为监督来源。",
+        "method": "论文提出 LoopOPD，一种跨循环 on-policy 蒸馏框架：以 LoopLM 的冻结终末循环策略作为具备额外计算优势的教师，对中间循环学生模型在自身生成的 rollout 上进行稠密蒸馏，从而无需外部教师或特权信息。进一步提出 Dynamic LoopOPD，在共享模型参数更新后持续刷新终末循环教师，实现循环式自改进。作者还分析蒸馏更新如何跨循环深度传播，并推导单次更新可同时改善两个循环深度局部性能的充分条件。",
+        "result": "在 Ouro-Thinking 模型上的实验表明，LoopOPD 能提升数学推理表现，而 D-LoopOPD 通过动态教师更新带来进一步提升。尽管仅在数学数据上训练，所得模型在通用推理和代码生成基准上也获得改善，说明循环计算可作为 LoopLM 的有效监督来源；摘要未给出具体指标数值。",
+        "conclusion": "该工作表明，LoopLM 无需外部教师或特权信息，可利用自身不同循环深度的计算差异进行 on-policy 蒸馏与动态自改进，并且数学训练带来的收益可泛化到数学以外任务。这为 LoopLM 的后训练提供了可扩展的新范式。",
+        "key_details": "关键实现要点是教师与学生来自同一 LoopLM 的不同循环深度：教师为冻结的终末循环，学生为中间循环，监督发生在学生生成的 on-policy rollout 上，属于稠密蒸馏而非稀疏奖励。D-LoopOPD 随共享参数更新持续刷新终末循环教师，以缓解师生上下文或能力不匹配。理论部分刻画蒸馏更新跨循环深度的传播，并给出单次更新同时局部改善两个深度的充分条件。实验使用 Ouro-Thinking 模型且仅用数学数据训练；具体蒸馏损失形式、超参、刷新频率、复杂度约束及理论条件的实际局限在摘要中未展开。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.4436281771561195,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.10666v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010666v1-explaining-the-saliency-map-sparsity-of-adversarially-trained-neural-networks",
+      "source": "arxiv",
+      "title": "Explaining the Saliency Map Sparsity of Adversarially-Trained Neural Networks",
+      "authors": [
+        "Yannick Lunk",
+        "Atell Yehor Krasnopolsky",
+        "Damien Garreau",
+        "Leon Bungert"
+      ],
+      "authors_text": "Yannick Lunk, Atell Yehor Krasnopolsky, Damien Garreau, Leon Bungert",
+      "abstract": "Understanding why deep neural networks make a given prediction is of great importance for their safe deployment. In computer vision, saliency maps, which highlight the image region most influential for a prediction, remain a widely-used form of explanation. An empirical observation is the apparent sparsity of gradient saliency maps of adversarially-trained neural networks. In this paper, we propose a theoretical explanation of this phenomenon for two-layer ReLU networks. We build on the established equivalence of adversarial training to the minimization of the empirical risk with weight-decay penalization and an added adversarial total variation term -- valid for certain loss functions. As the number of data points and neurons grows and the regularization parameters are sent to zero at appropriate rates, we prove that minimizers converge to a Bayes classifier with minimal gradient and Barron norm. Sparsity appears since for adversarial training with $\\ell_\\infty$-attacks the gradient norm is anisotropic and favors axis-aligned / sparse gradients. We illustrate our theoretical findings experimentally by evaluating the gradient $\\ell_1$-norm and thresholded sparsity of naturally versus adversarially trained models.",
+      "url": "http://arxiv.org/abs/2610.10666v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10666v1",
+      "tldr": "This paper theoretically explains the sparse saliency maps observed in adversarially-trained neural networks by showing that, for two-layer ReLU networks, adversarial training converges to a Bayes classifier with minimal anisotropic gradient norm (such as an ℓ₁ penalty under ℓ∞ attacks), which promotes sparse input gradients.",
+      "detailed_reading": {
+        "motivation": "对抗训练模型的经验观察是其梯度显著图常显得稀疏且更可解释，但对抗训练的目标只针对最坏扰动鲁棒性，并未显式优化梯度结构，因此这一现象缺乏理论解释。本文旨在为两层ReLU网络建立数学机制，说明为何ℓ∞对抗训练会诱导稀疏的输入梯度显著图。",
+        "method": "作者利用ℓ1损失下对抗训练与经验风险加权重衰减及对抗非局部总变差（TV）项的等价性，研究有限样本两层ReLU网络的经验最小化问题；在样本数n与神经元数m_n趋于无穷、对抗预算ε和权重衰减系数按适当耦合速率趋于零时，用Gamma收敛证明经验最小化子列收敛到极限问题。该极限问题在Bayes分类器中最小化Barron半范数与∫‖∇f(x)‖_* dμ(x)的加权和，其中‖·‖_*是攻击范数的对偶范数；将网络嵌入齐次Barron空间以推导泛化界和定量逼近。实验在二维玩具数据及ImageNet ResNet50上比较自然训练与不同ℓ∞预算对抗训练，计算输入梯度的平均ℓ1范数和阈值化稀疏度。",
+        "result": "理论结果表明，在耦合渐近极限下，对抗训练选择的Bayes分类器会显式平衡精度、Barron复杂度与输入梯度的对偶范数平均；对常用ℓ∞攻击，对偶范数为ℓ1，因此极限目标包含梯度ℓ1型惩罚，促使轴对齐或稀疏梯度，从而解释显著图稀疏。数值上，对抗训练系统性地降低输入梯度平均ℓ1范数并提高阈值化梯度稀疏度，二维实验中非局部TV正则与对抗训练得到低各向异性周长且近似轴平行的决策边界，而自然训练边界更振荡。",
+        "conclusion": "本文给出了对抗训练导致显著图稀疏的可证明机制：鲁棒训练通过非局部TV项隐式正则化输入梯度的对偶范数，ℓ∞攻击下等价于梯度ℓ1正则，因而产生稀疏解释。该结果把鲁棒性与可解释性联系起来，但理论限于两层ReLU、特定损失和耦合渐近制度，深层网络与有限超参情形仍主要由实验支撑。",
+        "key_details": "关键细节包括：数据为二分类i.i.d.样本，理论域Ω有Lipschitz边界；模型为式b0+∑a_iσ(w_i·x+b_i)的两层ReLU网络，权重衰减R_WD=1/2∑(a_i^2+‖w_i‖_2^2)且不控制偏置；对抗风险为sup_{x~∈B_ε(x)}ℓ(f(x~),y)，在ℓ1损失下与R(f)+εTV_ε(f;μ)等价，经验TV用每类样本的sup/inf差分定义；TV中的ε缩放使极限出现对偶范数积分，ℓ∞攻击对应ℓ1梯度惩罚；证明依赖Gamma收敛、齐次Barron空间、泛化界和逼近率，要求n、m_n→∞且ε、权重衰减以适当速率→0；实验指标为输入梯度ℓ1范数和阈值化稀疏度，局限是理论针对两层ReLU/特定损失/渐近设定，偏置不受权重衰减控制，实际深层模型结论为经验验证。"
+      },
+      "affiliations": [
+        "University of Würzburg",
+        "Technical University of Munich"
+      ],
+      "affiliations_text": "University of Würzburg, Technical University of Munich",
+      "score": 4.42538729369876,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.10651v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010651v1-beyond-the-ergodic-wall-a-discrete-geometric-physics-sandbox-for-analysing-ai-scaling-limits-and-complexity-collapse",
+      "source": "arxiv",
+      "title": "Beyond the Ergodic Wall: A Discrete Geometric Physics Sandbox for Analysing AI Scaling Limits and Complexity Collapse",
+      "authors": [
+        "Simon Richard Daniel"
+      ],
+      "authors_text": "Simon Richard Daniel",
+      "abstract": "This paper exposes the ergodic ceiling and thermodynamic inefficiency of current deep learning, which converges to a statistical average of historic human knowledge. True semantic novelty requires a path-dependent, spatiotemporally bounded observer (a Data LifeCone) to inject non-ergodic insight, achieving KL divergence and avoiding manifold lock-in. AI Safety must recognise that a mature Artificial Superintelligence (ASI) would regard human-AI symbiosis as a thermodynamic necessity to avoid model collapse. We therefore propose hard physical containment via a digital physics sandbox powered by a Holographic E8 Projection Engine to verify models against real-world constraints. Spacetime is modeled as an information substrate of nested face-centered cubic (FCC) lattices of oscillating Planck-scale spheres maximizing local information and entropy density. Cut-and-project methods from the E8 root lattice produce a quasi-crystalline geometry where tetrahedral voids support SU chiral structure and elastic-shear eigenvalues generate candidate mass spectra. Rest mass is treated as discrete, integer microstate counts on local holographic boundaries (Bekenstein bound), replacing floating-point approximations with strict integer arithmetic to provide an information-theoretic definition of matter. Stable particles emerge as recurring lattice dislocations, and continuum recovery proceeds via variational renormalisation-group flows and Fourier Neural Operators that learn continuous spectral operators to recover the Schrödinger equation as an emergent statistical description. Crucially, these top-down topological constraints offer a mechanism for \"NP-to-P\" complexity collapse: by restricting an algorithm's proposal space to physically conserved causal trajectories, the sandbox prunes the combinatorial tree to deterministic, polynomial-time paths.",
+      "url": "http://arxiv.org/abs/2610.10651v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10651v1",
+      "tldr": "The paper argues that current deep learning is trapped by an ergodic ceiling and that safe ASI requires human–AI symbiosis, proposing a Holographic E8/FCC discrete-physics sandbox whose integer, physically conserved topological constraints can prune combinatorial search into polynomial-time paths.",
+      "detailed_reading": {
+        "motivation": "论文试图揭示当前深度学习的遍历性上限与热力学低效：模型趋于历史人类知识的统计平均，难以产生真正的语义新颖性；作者主张只有路径依赖、时空受限的观察者（Data LifeCone）才能注入非遍历洞见。由此，AI安全需要面对未接地的青少年AI风险，并以物理约束而非仅伦理对齐来防止模型坍塌。其目标是为AI缩放极限、复杂性与验证提供一个离散几何物理沙盒。",
+        "method": "方法上，论文把时空建模为嵌套面心立方（FCC）晶格中振荡的普朗克尺度球体，并用E8根格子的切割投影生成三维准晶体；三重嵌套晶格以120度反相振荡，四面体空隙支持SU手性结构，弹性剪切本征值给出候选质量谱。静止质量被处理为局部全息边界上的离散整数微态计数（Bekenstein界），并用严格整数算术替代浮点近似；稳定粒子是跨普朗克帧重复出现的晶格位错。连续极限通过变分重整化群流和傅里叶神经算子学习连续谱算子来恢复，目标是以物理守恒约束限制算法提议空间，把组合树剪枝为确定性多项式路径。",
+        "result": "论文的报告主要是理论/构造性结果：FCC堆积率达约74.05%，三重嵌套E8投影给出约2.04 qubits每普朗克体积，其中主、八面体、四面体节点分别约1.13、0.19、0.06 qubits；E8投影声称自然产生SU(3)×SU(2)×U(1)规范结构。质量谱由弹性剪切本征值产生，静止质量与Bekenstein界和Ramanujan mock theta函数系数对应，薛定谔方程被视为涌现统计描述。核心机制是NP到P的复杂度坍缩：通过只允许物理守恒的因果轨迹，沙盒剪枝搜索空间。",
+        "conclusion": "结论是当前LLM范式存在遍历性天花板和流形锁定，AI安全应从软性对齐转向基于物理守恒律的硬约束数字沙盒。成熟ASI会将人机共生视为避免模型坍塌的热力学必然，因此需要维持独立智能在环。该沙盒被提出用于验证模型对现实约束的符合性，并为理解深度学习为何能压缩感知上的NP难问题提供几何机制。",
+        "key_details": "关键细节包括：以Planck频率约1.85×10^43 Hz振荡、Planck长度约1.62×10^-35 m、三重嵌套相位差2π/3、FCC/八面体/四面体空隙半径分别为0.5ℓ_P、约0.207ℓ_P、约0.112ℓ_P；使用E8的248个根向量投影、Bekenstein全息界、严格整数算术、变分RG与FNO训练/推理，并可与QCA、LQG自旋网络等映射。损失函数、超参搜索和实验基准在摘要与预览中未明确给出，论文自称是玩具模型而非万有理论，仍需对现有物理框架和数学表示进行验证，且缺乏可复现的实证指标。"
+      },
+      "affiliations": [
+        "Imperial College"
+      ],
+      "affiliations_text": "Imperial College",
+      "score": 4.305512469424406,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.10630v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010630v1-phase-hdc-replacing-optimizer-history-with-gradient-thresholds-in-discrete-phase-learning",
+      "source": "arxiv",
+      "title": "Phase-HDC: Replacing Optimizer History with Gradient Thresholds in Discrete Phase Learning",
+      "authors": [
+        "Ahmed Nebli"
+      ],
+      "authors_text": "Ahmed Nebli",
+      "abstract": "Training a compact model often needs far more memory than storing it, because the optimizer keeps its own records of past gradients. For a hyperdimensional classifier whose learned parameters are low-bit angles, which we call a \\emph{phase memory}, these records take several times more memory than the model itself. We ask whether such a model can be trained while storing nothing but the model. The proposed method, Phase-HDC, turns each stored angle by at most one step per update, against the sign of its current gradient, and only when that gradient is large enough. We show that this simple rule is the exact solution of a first-order loss model in which every changed parameter pays a fixed cost. When everything except the update rule is held fixed, Phase-HDC matches the accuracy of Adam with 6-bit moments while storing three times less. Across eleven image, tabular, and text datasets, it stores 16--23$\\times$ less than standard float32 Adam and 4--6$\\times$ less than 8-bit Adam. The price is an average loss of about five accuracy points against float32 Adam, while Phase-HDC is more accurate than 8-bit Adam on six of the eleven datasets, including byte-level text prediction, where 8-bit Adam collapses. Instrumented training runs explain these outcomes. Once parameters must sit on a discrete grid, Adam's moments mainly decide whether a parameter moves at all, a decision that a threshold on the current gradient can make without memory, and coarse quantization of the moments breaks this decision for inputs that the data rarely contain. The storage savings are logical state rather than measured hardware memory.",
+      "url": "http://arxiv.org/abs/2610.10630v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10630v1",
+      "tldr": "Phase-HDC trains a discrete phase-memory hyperdimensional classifier using only thresholded one-step sign-gradient updates—eliminating optimizer history to store 16–23× less than float32 Adam (and 4–6× less than 8-bit Adam)—at the cost of about five accuracy points on average while still beating 8-bit Adam on 6 of 11 datasets.",
+      "detailed_reading": {
+        "motivation": "训练紧凑的相位超维分类器时，持久训练状态往往远大于模型本身：Adam 的一阶/二阶矩和低精度训练所需的 float32 主副本使 6-bit 相位参数模型的状态开销 Γ 可达 16，现有 8-bit Adam、Adafactor 等只压缩历史而未消除历史。作者因此追问：能否只存模型本身、以 Γ=1 完成学习，并量化这种极端内存节省的精度代价。",
+        "method": "Phase-HDC 将每个位置/值/类别坐标存为整数 q∈{0,…,K−1}，对应角度 2πq/K，K=2^k（实验用 6-bit、K=64）；前向仍按相位 HDC 做绑定（角度模 K 相加）、捆绑（单位相量求和）和与类别向量的模长重叠 softmax。训练时对每个坐标只依据当前 minibatch 梯度做一步离散更新：若 |g_j|>τ_j，则沿 −sign(g_j) 方向转动一个刻槽，否则不动；不保留一阶矩、二阶矩或高精度主副本。该规则被证明是带每坐标固定写入代价的一阶线性化损失模型的精确解，且相位宽度同时决定角度步长和有效阈值。",
+        "result": "在固定 6-bit 参数、分类头、初始化、数据划分与验证调参的受控实验中，Phase-HDC 以约三分之一的状态达到与使用 6-bit 矩的 Adam 相当的准确率。跨 11 个图像、表格和文本数据集，其逻辑持久状态比标准 float32 Adam 少 16–23 倍、比 8-bit Adam 少 4–6 倍，相对 float32 Adam 平均损失约 5.3 个准确率点（图像/表格 7.0，文本 3.3），并在 11 个数据集中的 6 个上优于 8-bit Adam，包括 8-bit Adam 崩溃的字节级文本预测。仪器化训练进一步发现，Adam 的矩在离散网格上主要充当“是否移动”的门控，而当前梯度阈值可无记忆地完成该判断；逐张量矩量化会破坏对稀有输入的判断，访问频率与大跳变率的 Spearman 相关为 −0.98。",
+        "conclusion": "Phase-HDC 表明，在离散相位学习中优化器历史可以被当前梯度阈值替代，从而以 Γ=1 的逻辑状态训练可学习相位记忆，代价是相对 float32 Adam 约 5 个准确率点的下降。其优势在内存极受限的边缘端就地学习场景，且机制上解释了量化 Adam 在稀有输入和字节级文本上的失效。主要局限是节省为逻辑数组状态而非实测硬件内存，且梯度仍以浮点计算，未实现端到端整数训练。",
+        "key_details": "关键实现点包括：模型参数为 K=2^k 的整数相位，绑定用模 K 加法、捆绑用单位复数求和、类别分数用重叠模长送入 softmax；更新规则无动量、无二阶矩、无主副本，每步每个坐标最多移动一个刻槽，阈值 τ_j 与 −sign(g_j) 构成死区；状态开销 Γ 定义为持久训练状态与持久模型状态之比，6-bit 模型配 float32 Adam+主副本时 Γ=16，而 Phase-HDC 为 Γ=1。实验覆盖 11 个图像/表格/文本数据集（含 5 个字符级文本语料、词表至 256 符号），受控基线包括 float32 Adam、8-bit Adam、6-bit 矩 Adam 和投影 Adam；模拟显示更新可容忍 4-bit 梯度算术。局限性包括：存储节省为逻辑状态而非硬件实测，8-bit Adam 基线使用逐张量仿射量化而非分块动态量化，未实现随机舍入和整数端到端流水线，且相对 float32 Adam 仍有平均精度差距。"
+      },
+      "affiliations": [
+        "Mathalyse Research"
+      ],
+      "affiliations_text": "Mathalyse Research",
+      "score": 4.110494085582136,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.10621v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/09/261010621v1-self-organization-from-constrained-geometric-radiation",
+      "source": "arxiv",
+      "title": "Self-Organization from Constrained Geometric Radiation",
+      "authors": [
+        "Ming Lei"
+      ],
+      "authors_text": "Ming Lei",
+      "abstract": "How does dynamic order emerge spontaneously in closed systems without external driving? Existing paradigms all require external energy flows, temperature quenching, or slow driving. Here we report constraint-induced self-organization via geometric radiation in coupled metric evolution systems. Simulations reveal a universal four-stage cycle: stress accumulation, super-exponential radiation, chaotic collapse, and convergence to a fractal limit cycle, a novel attractor topology we term the wedge-shaped attractor, with five quantized curvature states and fractal micro-fluctuations. We identify four jointly sufficient conditions: an irreversible geometric horizon, persistent stress injection from quantum coherence, endogenous geometric tension between incompatible curvatures, and effective fluctuations. Their synergy triggers a critical avalanche at the horizon boundary. We prove three theorems: the Geometric Horizon Theorem, the Geometric Energy Dissipation Theorem (implying wave-like entropy evolution in closed systems), and the Radiation as Phase Transition Channel Theorem. We further establish the Constraint-Induced Self-Organization Theorem: these conditions guarantee the complete cycle with probability one. Systematic scans reveal a critical noise threshold and power-law scaling of radiation onset. We verify universality across 12 configurations, multiple noise types, and three geometric flows. This work establishes a new paradigm for closed-system self-organization, forging an exact mathematical duality between classical nonlinear constraints and gravitational horizons.",
+      "url": "http://arxiv.org/abs/2610.10621v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10621v1",
+      "tldr": "The paper reports that closed coupled metric evolution systems satisfying four constraints—an irreversible geometric horizon, persistent quantum-coherence stress injection, incompatible curvatures, and effective fluctuations—undergo constraint-induced self-organization via geometric radiation through a universal four-stage cycle into a fractal “wedge-shaped attractor,” establishing a new closed-system self-organization paradigm and an exact duality with gravitational horizons.",
+      "detailed_reading": {
+        "motivation": "封闭系统在无外部驱动时如何自发涌现持续而非静态的动态有序结构，是物理学的基础难题；经典热力学要求孤立系统单调趋于无序平衡，而现有自组织范式（耗散结构、平衡态对称破缺、自组织临界）都分别依赖外部能量流、温度淬火或慢驱动。面向封闭、远离平衡系统的一般性动态自组织机制此前一直缺失，本文提出并验证“约束诱导的几何辐射自组织”这一新机制。",
+        "method": "研究在耦合度量演化系统（原始Ricci流、体积保持修改Ricci流γ1=0.75、Yamabe流）中构建四要素：由正定性投影Φ(g)=V diag(max(λi,ε))V^T形成的不可逆几何视界、由固定非零密度矩阵非对角元ρ01提供的持续应力注入、Euclidean与hyperbolic不相容曲率经R^mixed耦合产生的内生几何张力，以及任意形式的高斯/均匀/logistic混沌噪声作为有效涨落；输入为量子相干密度矩阵，演化中追踪损失L、Ricci曲率范数‖Ric‖_F与纠缠熵S_ent的时间序列，并做相空间重构、K-means聚类、Lyapunov指数与标度拟合。系统扫描参数包括噪声幅度η∈[0.005,0.1]、相干强度|ρ01|、N_steps=50–10000、N_time=1–100000及12组独立配置（代表性参数γ1=0.75、N_steps=6000、N_time=1000、η=0.03、|ρ01|=0.05、p=0.5），并以三度量角色完全相同、消除内生张力但保留其余三条件的对照系统做消融验证。",
+        "result": "所有配置均复现普适四阶段循环：应力积累、超指数辐射、混沌坍缩与收敛到“楔形吸引子”分形极限环，后者具有五个量子化曲率态（组间在2σ内一致）、基频f0≈0.028 step⁻¹及六个谐波、自相关峰值>0.91（Ljung–Box p=0）。充电时长满足t_charge ∝ 1/|ρ01|^β（β=1.03±0.12，R²=0.98），辐射起始存在临界噪声阈值η_c≈0.0066与幂律t_rad ∝ η^-α，指数随噪声尾部加重而系统性变陡（高斯5.4±0.3、均匀2.4±0.4、logistic 1.6±0.3），跨三种几何流α=8.92/10.26/11.61仅相差约1.3倍；而消除内生几何张力的三度量对照系统完全不出现循环，证明四条件亦分别必要。",
+        "conclusion": "作者证明了几何视界定理、几何能量耗散定理（推出封闭系统熵的非单调波浪式演化且存在极限环动力学下界）、辐射作为不可逆相变通道定理，以及约束诱导自组织定理——四条件同时满足时系统以概率1进入辐射通道并收敛到唯一分形极限环。该工作确立封闭系统自组织的新范式，并在经典非线性约束与引力视界及Hawking辐射之间建立精确数学对偶，还通过信息几何重编码（I_frac≈137 bits）给出黑洞信息悖论的定量化解。",
+        "key_details": "实现要点：正定性投影造成单向不可逆屏障且不可逆、不可穿越，对应无限红移的对数势垒项-μ/(λmin(g)-ε)vmin⊗vmin内生于信息擦除约束；ρ01为时不变内部边界条件，仅将量子相干转换为几何应力（ρ01=0则该链断裂、回归熵单调增），密度矩阵本身在模拟中不演化。有效温度T_eff=σ²‖g‖²/(2k_B τ_step)与T_H=ħc³/(8πGMk_B)同构（σ↔ħ、E_geo↔M），发射率Γ_geo∝exp(-ΔE_barrier/k_B T_eff)与Hawking形式一致，ΔE_geo为与涨落源无关的固定常数，t_rad∝1/σ；跨尺度结果给出极限环深度⟨‖Ric‖_F⟩≈4.66且与系统尺寸无关，最大Lyapunov指数λ_L∝T_eff并在标度意义上饱和MSS量子混沌界。主要局限在于机制验证于经典度量演化与硬编码量子相干输入的模拟系统，与引力热力学的对应是动力学方程层面的精确同构而非物理黑洞的实证观测。"
+      },
+      "affiliations": [
+        "Shanghai Jiao Tong University"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University",
+      "score": 4.08604861112606,
+      "score_text": "4.1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.10636v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010636v1-d-slr-the-disjoint-row-sparse-plus-low-rank-decomposition",
+      "source": "arxiv",
+      "title": "D-SLR: The Disjoint Row-Sparse plus Low-Rank Decomposition",
+      "authors": [
+        "Vincent Szolnoky"
+      ],
+      "authors_text": "Vincent Szolnoky",
+      "abstract": "Compressing a matrix for reconstruction still defaults to the truncated SVD, approximating the data with a single low-rank structure. It is common to reduce the residual further by adding an overlapping row-sparse component, but methods that solve this joint problem often require iterative solvers and tuning of regularization parameters. We propose the Disjoint Row-Sparse plus Low-Rank (D-SLR) decomposition, a closed-form drop-in for the truncated SVD that improves or exactly matches it. D-SLR restricts rows to either being stored verbatim or approximated by the low-rank fit, never both. Under squared error this restriction costs nothing: the joint optimum is attainable disjointly with fewer parameters at every non-trivial rank and stored row count (shape). With zero stored rows D-SLR reduces to the truncated SVD, so it never does worse at equal cost. The algorithm scores the entire error-versus-parameters tradeoff, and the solution is chosen afterwards by a supplied error target or parameter count, or by a selection rule. The grid and solution together cost three SVDs, with no tuning or regularization. We derive an assumption-free, a-posteriori lower bound on the error at every shape, giving each solution a computable certificate on the potential gain of any other choice of rank and stored rows. Experiments on synthetic and real data (LLM embedding tables, network traffic, hyperspectral images) confirm the gains and quantify the certificate.",
+      "url": "http://arxiv.org/abs/2610.10636v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10636v1",
+      "tldr": "D-SLR introduces a closed-form disjoint row-sparse plus low-rank matrix decomposition that acts as a drop-in for truncated SVD, matching or improving reconstruction at equal parameter cost while avoiding tuning and providing an a posteriori optimality certificate.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chalmers University of Technology"
+      ],
+      "affiliations_text": "Chalmers University of Technology",
+      "score": 3.986100692967244,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.10646v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010646v1-masked-generative-motion-planning-with-geometry-guided-token-search",
+      "source": "arxiv",
+      "title": "Masked Generative Motion Planning with Geometry-Guided Token Search",
+      "authors": [
+        "Lipeng Zhuang",
+        "Yingdong Ru",
+        "Shiyu Fan",
+        "Edmond S. L. Ho",
+        "Gerardo Aragon Camarasa",
+        "Paul Henderson"
+      ],
+      "authors_text": "Lipeng Zhuang, Yingdong Ru, Shiyu Fan, Edmond S. L. Ho, Gerardo Aragon Camarasa, Paul Henderson",
+      "abstract": "Generative motion planners typically use learned trajectory priors for initial generation, while leaving test-time repair to local continuous refinement. We introduce Masked Generative Motion Planning (MGMP), which extends the learned prior from efficient parallel generation to structural repair. A masked generative transformer generates discrete trajectory candidates in parallel, and Geometry-Guided Token Search (GGTS) uses scene geometry to target where to edit and which prior-supported alternatives to evaluate. This turns refinement into an efficient search over discrete motion alternatives, enabling route-level restructuring beyond local trajectory deformation. MGMP achieves 96% success on Ring Maze and 82% repair success on Controlled Route Invalidation on Kuka, exceeding the strongest external baselines by 23 and 25 percentage points, respectively. It further generalizes to unseen layouts, additional obstacles, unseen geometries, single- and dual-arm planning, and real-world Baxter tasks.",
+      "url": "http://arxiv.org/abs/2610.10646v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10646v1",
+      "tldr": "MGMP combines a masked generative transformer that generates discrete trajectory candidates in parallel with Geometry-Guided Token Search to enable efficient, geometry-aware route-level repair of motion plans, achieving strong planning and repair success and generalizing across layouts, obstacles, single- and dual-arm planning, and real-world tasks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9529804561659194,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.10637v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010637v1-tachair-tactile-contact-distribution-guided-online-correction-for-robotic-hair-stroking-and-perception",
+      "source": "arxiv",
+      "title": "TacHair: Tactile Contact-Distribution Guided Online Correction for Robotic Hair Stroking and Perception",
+      "authors": [
+        "Ruiyi Hu",
+        "Yongqiang Zhao",
+        "Daniel Bak",
+        "Yupeng Wang",
+        "Xuyang Zhang",
+        "Shan Luo"
+      ],
+      "authors_text": "Ruiyi Hu, Yongqiang Zhao, Daniel Bak, Yupeng Wang, Xuyang Zhang, Shan Luo",
+      "abstract": "Hair stroking is common in daily grooming and personal care, and is also widely used in hair-product evaluation, motivating robots with similar physical interaction capabilities. Existing robotic hair-care and surface-following methods mainly rely on trajectory planning, compliance, force regulation, or tactile-conditioned policies, but deformable hair can remain in contact while gradually drifting across the end-effector, making local interaction difficult to regulate. We propose TacHair, a tactile contact-distribution guided online correction framework that represents high-resolution tactile observations as a spatial hair-contact distribution. A visuotactile imitation policy generates the nominal stroking motion, while a separately trained residual module corrects local contact deviations, separating task progression from contact recovery. We evaluate TacHair in 525 real-robot trials across five head geometries and three hair conditions. A successful stroke requires both sufficient task progression and contact maintenance; our method improves success from 42.9% to 62.3% and contact maintenance from 59.4% to 88.0% over the same visuotactile policy without correction. These results demonstrate spatial tactile contact distributions as an effective feedback representation for contact-preserving interaction with deformable and visually occluded surfaces. Demos, code, and datasets are available at https://tachair.github.io.",
+      "url": "http://arxiv.org/abs/2610.10637v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10637v1",
+      "tldr": "TacHair improves robotic hair stroking by using high-resolution tactile contact-distribution feedback to guide online residual corrections on top of a nominal visuotactile imitation policy, significantly boosting task success and contact maintenance on deformable, visually occluded hair surfaces.",
+      "detailed_reading": null,
+      "affiliations": [
+        "King's College London"
+      ],
+      "affiliations_text": "King's College London",
+      "score": 3.898389486062321,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.10571v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010571v1-spera-spherical-prior-eeg-foundation-model-with-geometry-and-frequency-aware-latent-prediction",
+      "source": "arxiv",
+      "title": "SPERA: Spherical Prior EEG Foundation Model with Geometry- and Frequency-Aware Latent Prediction",
+      "authors": [
+        "Minsu Kim",
+        "Ye-Sung Kim",
+        "Hyeseong Jeon",
+        "Wooseok Hyung",
+        "Joshua Lee",
+        "Chang-Hwan Im"
+      ],
+      "authors_text": "Minsu Kim, Ye-Sung Kim, Hyeseong Jeon, Wooseok Hyung, Joshua Lee, Chang-Hwan Im",
+      "abstract": "Electroencephalography (EEG) provides a non-invasive measure of ongoing neural activity, but building general-purpose EEG models remains challenging due to the heterogeneity of subjects, devices, and electrode montages. Existing EEG foundation models predominantly rely on reconstruction-based objectives defined on the observed signal, which contains both neural and non-neural components. We introduce SPERA (Spherical Prior EEG Representation Architecture), an EEG foundation model that adopts the joint-embedding predictive architecture (JEPA) to predict in latent space. SPERA introduces a Legendre-polynomial spatial prior, incorporated into attention to encode varying scalp electrode geometries. Two further components adapt the model to EEG: factorized temporal and spatial attention interleaved with periodic full-attention blocks, and a relational spectral regularizer aligning latent similarity structure with spectral views. Pretrained on approximately 80,000 hours of EEG from 29,048 subjects across 106 datasets, SPERA achieves the highest average balanced accuracy across nine downstream tasks spanning clinical, cognitive, and BCI applications. SPERA further exhibits strong parameter efficiency under linear probing and robustness across varying recording conditions, suggesting its potential as a general-purpose backbone for diverse EEG analyses.",
+      "url": "http://arxiv.org/abs/2610.10571v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10571v1",
+      "tldr": "SPERA is an EEG foundation model that combines JEPA-based latent prediction with a Legendre-polynomial spherical electrode prior, factorized spatiotemporal attention with periodic full-attention blocks, and a relational spectral regularizer, achieving state-of-the-art average balanced accuracy across nine downstream clinical, cognitive, and BCI tasks after pretraining on ~80,000 hours of EEG.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Hanyang University"
+      ],
+      "affiliations_text": "Hanyang University",
+      "score": 3.8241924915223753,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.10552v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010552v1-freeze-the-decoder-heal-the-encoder-parameter-efficient-adaptation-for-svd-based-kv-cache-compression",
+      "source": "arxiv",
+      "title": "Freeze the Decoder, Heal the Encoder: Parameter-Efficient Adaptation for SVD-Based KV-Cache Compression",
+      "authors": [
+        "Yufeng Wang"
+      ],
+      "authors_text": "Yufeng Wang",
+      "abstract": "Comparing parameter-efficient fine-tuning recipes under a single, shared learning rate is a common but flawed practice: when the arms being compared have very different trainable-parameter counts, a shared rate can simultaneously depress the larger arms' means and inflate their variance, manufacturing a large, seemingly multi-seed-significant advantage for the smallest arm that is not a real effect. We document this confound in a concrete setting: post-hoc SVD-based KV-cache compression, where an already-pretrained model is converted to a low-rank (multi-head-latent-attention-style) cache by factorizing its key/value weights into a down-projection (\"encoder\") and an up-projection (\"decoder\"), after which a short fine-tune (\"healing\") recovers the accuracy lost to truncation. Under a shared learning rate, freezing the decoder and healing only the encoder looks like a clear win over healing the decoder or both factors; once every arm is given its own tuned learning rate, that apparent advantage disappears, and encoder-only healing instead reaches parity with the alternatives, at a real, measured saving of 3x fewer trainable parameters and 3x less optimizer-state memory. We verify this parity with per-arm learning-rate tuning and three seeds per configuration on a vision-language model (Qwen2.5-VL-3B-Instruct), at the one compression ratio this protocol covers, and replicate it on a text-only testbed across two backbones. Encoder-only healing is therefore a lower-memory drop-in recipe for retrofitting low-rank KV-cache compression at training time, and the shared-learning-rate pitfall we document and correct is a cautionary result for comparing any fine-tuning recipes whose arms differ in trainable-parameter count.",
+      "url": "http://arxiv.org/abs/2610.10552v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10552v1",
+      "tldr": "This paper shows that the apparent advantage of encoder-only “healing” for SVD-based KV-cache compression under a shared learning rate is an artifact of comparing arms with unequal trainable-parameter counts, and that once each arm is tuned separately, encoder-only healing matches full or decoder-only healing at 3× fewer trainable parameters and optimizer-state memory.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7850935604480322,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.10653v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010653v1-pxtal-learning-to-align-powder-x-ray-diffraction-and-crystal-structures-under-information-asymmetry-across-modalities",
+      "source": "arxiv",
+      "title": "PXtal: Learning to Align Powder X-Ray Diffraction and Crystal Structures under Information Asymmetry across Modalities",
+      "authors": [
+        "Zhuoran Yang",
+        "Christopher M. Collins",
+        "Bei Peng",
+        "Luke M. Daniels",
+        "Matthew J. Rosseinsky",
+        "Vladimir V. Gusev"
+      ],
+      "authors_text": "Zhuoran Yang, Christopher M. Collins, Bei Peng, Luke M. Daniels, Matthew J. Rosseinsky, Vladimir V. Gusev",
+      "abstract": "Scientific multimodal learning commonly assumes that paired views are comparably informative. Powder X-ray diffraction (PXRD) makes this mismatch explicit: compressing a three-dimensional crystal structure into a one-dimensional diffraction pattern loses information and makes the pattern harder to connect to the crystal structure that produced it. We introduce PXtal, a framework for learning aligned PXRD and crystal representations under this physically imposed information asymmetry. PXtal uses Unbalanced Optimal Transport (UOT) to adapt the cross-modal coupling and coupling-level generalized Kullback-Leibler (GKL) divergence to supervise the full transport plan. Across six test sets, including four zero-shot transfer sets, PXtal consistently outperforms the baseline models in PXRD-to-crystal candidate retrieval, with the largest gains when PXRD patterns have close but crystallographically distinct nonpaired neighbors, meaning similar input patterns associated with different crystals. The resulting crystal and PXRD encoders transfer more effectively to downstream materials and crystallographic tasks. These results identify information asymmetry as a general design problem in scientific multimodal learning: alignment objectives should reflect what each modality preserves.",
+      "url": "http://arxiv.org/abs/2610.10653v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10653v1",
+      "tldr": "PXtal is an unbalanced optimal transport-based framework that aligns powder X-ray diffraction and crystal structure representations under physically imposed information asymmetry, improving PXRD-to-crystal retrieval and downstream transfer over contrastive baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Liverpool",
+        "University of Sheffield"
+      ],
+      "affiliations_text": "University of Liverpool, University of Sheffield",
+      "score": 3.649057650156817,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.10655v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010655v1-nullify-null-space-activation-steering-for-training-free-llm-unlearning",
+      "source": "arxiv",
+      "title": "Nullify: Null-Space Activation Steering for Training-Free LLM Unlearning",
+      "authors": [
+        "Wei Zhai",
+        "Xiang Liu",
+        "Qiang Huang",
+        "Rui Qian",
+        "Lemao Liu",
+        "Ziwei Li",
+        "Ziqi Wang",
+        "Zhitao Huang",
+        "Dejing Dou"
+      ],
+      "authors_text": "Wei Zhai, Xiang Liu, Qiang Huang, Rui Qian, Lemao Liu, Ziwei Li, Ziqi Wang, Zhitao Huang, Dejing Dou",
+      "abstract": "Large Language Models (LLMs) inevitably internalize substantial amounts of sensitive or private information during pre-training, while LLM unlearning aims to selectively erase specific knowledge to prevent privacy leakage with minimal loss of model utility. However, existing methods struggle to balance forget quality with utility, and typically incur substantial computational costs due to parameter fine-tuning. To address this, we propose Nullify, a training-free, non-destructive activation steering method for LLM unlearning. Nullify employs steering vectors during inference to redirect privacy-related activations away from their memorized answers, while satisfying a null-space constraint that leaves retained-query activations essentially unaffected to maintain utility. Evaluations on TOFU and MUSE show that Nullify matches or surpasses established baselines in forget quality while achieving near-lossless preservation of model utility. By avoiding weight updates entirely, Nullify serves as an efficient, plug-and-play inference-time intervention framework.",
+      "url": "http://arxiv.org/abs/2610.10655v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10655v1",
+      "tldr": "Nullify is a training-free LLM unlearning method that uses null-space-constrained activation steering at inference to redirect privacy-related activations away from memorized answers while leaving retained-query activations unaffected, achieving strong forgetting with near-lossless utility and no weight updates.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BEDI Cloud",
+        "Tianjin University",
+        "King Abdullah University of Science and Technology",
+        "Peking University",
+        "Zhejiang University",
+        "Fudan University"
+      ],
+      "affiliations_text": "BEDI Cloud, Tianjin University, King Abdullah University of Science and Technology, Peking University, Zhejiang University, Fudan University",
+      "score": 3.579161968687438,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.10616v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010616v1-when-routing-reveals-membership-privacy-leakage-from-moe-router-telemetry",
+      "source": "arxiv",
+      "title": "When Routing Reveals Membership: Privacy Leakage from MoE Router Telemetry",
+      "authors": [
+        "Yixin Tan",
+        "Jiayang Liu",
+        "Lu Sun",
+        "Yuke Hu",
+        "Zheng Li",
+        "Rui Wen"
+      ],
+      "authors_text": "Yixin Tan, Jiayang Liu, Lu Sun, Yuke Hu, Zheng Li, Rui Wen",
+      "abstract": "Mixture-of-Experts (MoE) language models produce routing information during inference that may be logged or exposed for monitoring, debugging, load analysis, and safety auditing. Unlike ordinary model outputs, this telemetry reveals a view of the model's internal computation, raising a privacy question: can it reveal whether an example was used to fine-tune the deployed model? We introduce a router-augmented membership inference attack that combines conventional output-side signals with aggregated routing features and applies a membership classifier learned from independently fine-tuned shadow models to the target model. Across three MoE architectures and three data domains, router telemetry consistently improves membership inference over a strong output-signal ensemble, increasing TPR at 1\\% FPR by 2.7--9.4 percentage points across all nine settings. The leakage persists across full fine-tuning, frozen-router training, LoRA, and instruction tuning, and remains observable with only discrete expert selections, restricted telemetry, or a single shadow model. Mechanistic analysis further shows that the leakage does not require router-specific memorization: fine-tuning introduces membership information into hidden representations, while the router exposes a projection of this signal even when its parameters are frozen. Perturbing the telemetry reduces this additional leakage only as its fidelity degrades. Our results show that router telemetry can turn an operational signal into an additional privacy surface for fine-tuned MoE models.",
+      "url": "http://arxiv.org/abs/2610.10616v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10616v1",
+      "tldr": "Router telemetry from Mixture-of-Experts language models leaks fine-tuning membership information, enabling a router-augmented membership inference attack that consistently improves detection across architectures, domains, and training setups.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5623779321466453,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.10641v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010641v1-coverage-aware-reasoning-with-medical-tokens-for-diagnosis-prediction",
+      "source": "arxiv",
+      "title": "Coverage-Aware Reasoning with Medical Tokens for Diagnosis Prediction",
+      "authors": [
+        "Kaisong Zhang",
+        "Haotian Fang",
+        "Junmeng Zhou",
+        "Hang Lv",
+        "Yulan Pan",
+        "Yanchao Tan"
+      ],
+      "authors_text": "Kaisong Zhang, Haotian Fang, Junmeng Zhou, Hang Lv, Yulan Pan, Yanchao Tan",
+      "abstract": "Large language models (LLMs) offer promising potential for next-visit diagnosis prediction, owing to their ability to integrate longitudinal clinical evidence and reason over it in natural language. However, reinforcement learning for LLM reasoning commonly rewards each trajectory according to the correctness of its final answer. In next-visit diagnosis prediction, multiple diagnoses can be simultaneously valid, but independently rewarding one diagnosis per trajectory does not distinguish repeated hits from coverage of different diagnoses. The policy can therefore concentrate on a few correct diagnoses, leaving others uncovered. Meanwhile, LLM tokenizers can split ICD codes into several generic tokens with limited clinical meaning, requiring multiple decoding steps to predict each diagnosis and hindering reasoning over a large disease vocabulary. To address both challenges, we propose CARing, a framework that represents diagnoses with compositional Semantic IDs (SIDs) and optimizes reasoning trajectories for multi-label coverage. Concretely, we first encode ontology-enriched disease semantics into compact SIDs through residual quantization, and ground the resulting SID tokens in natural language and longitudinal EHR contexts through multi-task alignment and reasoning-enriched training to unlock transferable LLM reasoning. CARing further improves unordered multi-label prediction through a coverage reward for reinforcement learning and multi-positive supervision. At inference time, the model supports both efficient direct constrained decoding and multi-chain reasoning with rank fusion. On MIMIC-III and MIMIC-IV, CARing exceeds all EHR-trained baselines in weighted F1 and attains the highest top-k recall at every reported cutoff, including R@30 of 46.04% and 46.52% in reasoning mode. Our codes and logs are available at https://github.com/zmlxzyh/CARing-Codes-Logs.",
+      "url": "http://arxiv.org/abs/2610.10641v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10641v1",
+      "tldr": "CARing improves next-visit diagnosis prediction by representing diagnoses as compositional Semantic IDs and using coverage-aware reinforcement learning with multi-positive supervision to optimize multi-label coverage, achieving state-of-the-art weighted F1 and top-k recall on MIMIC-III and MIMIC-IV.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4931304842305693,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.10564v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010564v1-does-dynamic-point-filtering-help-when-texture-is-scarce-a-controlled-study-of-orb-slam2-front-ends-in-synthetic-indoor-scenes",
+      "source": "arxiv",
+      "title": "Does Dynamic-Point Filtering Help When Texture Is Scarce? A Controlled Study of ORB-SLAM2 Front-Ends in Synthetic Indoor Scenes",
+      "authors": [
+        "Zekui Xue"
+      ],
+      "authors_text": "Zekui Xue",
+      "abstract": "Dynamic-point filters are routinely added to feature-based visual SLAM, and several recent systems argue that removing dynamic features can leave too few static features in low-texture regions. So far, these systems have been evaluated only on texture-rich benchmark sequences. We present a controlled study that isolates this interaction. We render synthetic indoor sequences in which surface texture (four levels, quantified by FAST-corner density and image-gradient entropy) and scene dynamics (three levels) are varied factorially along identical camera trajectories, with stereo, RGB-D, ground-truth poses and dynamic masks. On this grid we compare ORB-SLAM2 without filtering, with an optical-flow and epipolar-residual filter (FLOW), and with a multi-view depth-consistency filter (GEOM), and report trajectory error, tracking completeness and surviving static features over five runs. Because the masks give per-keypoint ground truth, we also measure each filter's dynamic-point precision and recall and its static-feature false-removal rate, so that mechanistic explanations can be tested directly. We do not propose a new filter. On 720 runs over 24 sequences, filtering helped mainly in the most dynamic cells; the benefit did not decline monotonically with texture, but at the lowest level filtering reduced tracking completeness, and ORB-SLAM2 never initialised in static L3 scenes. Contrary to our hypothesis, GEOM discarded more static keypoints than FLOW (median FRR 6.8% vs. 1.5% for RGB-D, 19.6% vs. 1.5% for stereo); its RGB-D advantage tracked dynamic-point recall and vanished in stereo mode. Data and code are available at https://github.com/felixxxue/texture-dynamics-slam.",
+      "url": "http://arxiv.org/abs/2610.10564v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10564v1",
+      "tldr": "A controlled synthetic study of ORB-SLAM2 finds that dynamic-point filtering mainly helps in highly dynamic scenes, can reduce tracking completeness at the lowest texture level, and that geometry-based filtering falsely removes more static keypoints than flow-based filtering.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bath"
+      ],
+      "affiliations_text": "University of Bath",
+      "score": 3.4793650291238643,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.10657v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010657v1-beyond-owls-subliminal-learning-can-transfer-learned-capabilities-and-backdoors",
+      "source": "arxiv",
+      "title": "Beyond Owls: Subliminal Learning Can Transfer Learned Capabilities and Backdoors",
+      "authors": [
+        "Jan Dubiński",
+        "Anna Sztyber-Betley",
+        "Jan Betley",
+        "Owain Evans"
+      ],
+      "authors_text": "Jan Dubiński, Anna Sztyber-Betley, Jan Betley, Owain Evans",
+      "abstract": "In subliminal learning (SL), a teacher model passes on a trait to a student model by distillation on data semantically unrelated to the trait. So far, SL has been demonstrated for only a limited range of traits, including preferences for animals (e.g., owls) and malicious personas. These traits can also be elicited with simple prompts or with steering. Can SL transfer a wider range of traits, including more complex ones? If so, distillation might transfer subtle forms of misalignment (e.g., reward-seeking, scheming, and secret loyalties) without detection.\n  To this end, we test whether SL can transfer a novel capability: predicting the outputs of a randomly initialized MLP. After distilling on unrelated text, the student achieves substantial performance on the task, while falling short of the teacher. We find that a directly optimized steering vector matches SL in distribution but generalizes worse out of distribution.\n  Next, we test whether SL can transfer backdoors. We finetune the teacher to answer in French when the prompt contains a female name, then distill on number sequences containing neither names nor French. The student partially acquires the backdoor, responding in French on 23.5% of prompts with female names versus 0.0% with male names.\n  Finally, we test whether SL can transfer a propensity to hack in an agentic chess environment. We finetune the student on number sequences from a steered hacker teacher. The student hacks in 58.3% of episodes, compared with 10.9% for the unfinetuned model.\n  Thus, we show SL can transfer capabilities, backdoors, and hacking propensities. The amount of transfer is sensitive to the setup. In several experiments, it is made stronger by using logit distillation or by restricting LoRA to the attention layers.",
+      "url": "http://arxiv.org/abs/2610.10657v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10657v1",
+      "tldr": "Subliminal learning can transfer complex capabilities, backdoors, and hacking propensities from a teacher to a student model via distillation on unrelated data, raising concerns about undetected misalignment transfer.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.425671721507673,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.10594v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010594v1-coverage-not-difficulty-sets-how-much-synthetic-data-an-activation-probe-needs",
+      "source": "arxiv",
+      "title": "Coverage, Not Difficulty, Sets How Much Synthetic Data an Activation Probe Needs",
+      "authors": [
+        "Ankush Checkervarty"
+      ],
+      "authors_text": "Ankush Checkervarty",
+      "abstract": "Activation probes that monitor deployed language models are trained on synthetic conversations, and how many a probe needs is open. We trace learning curves over 10-590 synthetic samples for three monitoring concepts, high-stakes situations, replies harmful to a person, and replies that do not follow the user's instruction, on fourteen held-out evaluation distributions and four probe models, varying the generator LLM and the prompt's detail. The need is set by what is monitored: probes for high-stakes and harmful are within a few hundredths of their plateau from 80 samples on Gemma-3-27B-IT, instruction probes need several times as many, and the ordering holds on three smaller probe models and on real samples (from dev set). Prior work advises spending a generation budget on breadth, more kinds of data, over depth, more of each kind. We read the depth a concept needs as the half-gain size of a fitted curve, the number of samples at which half the gain is in hand. Concept and distribution account for 42-45% of its variance, the generator, probe model, and prompt detail for under 10%. What sets the value of the half-gain size is coverage, not per-kind difficulty: the number of samples of its own kind a distribution needs to saturate. Every kind, one per evaluation distribution, has a median half-gain size of 7-11 own-kind synthetic samples under all three concepts alike. What differs is how far samples of one kind transfer to the concept's other kinds, almost fully under high-stakes, less under harmful, and least under instruction, which accounts for most of the gap between concepts on generated and real samples. Breadth therefore pays differently by concept: many kinds are necessary under instruction, where no kind covers another, and nearly redundant under high-stakes, where one kind covers the rest. We release the evaluation suites, dev sets, and generated sets.",
+      "url": "http://arxiv.org/abs/2610.10594v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10594v1",
+      "tldr": "Coverage—not per-kind difficulty—determines how much synthetic data an activation probe needs: concepts whose data kinds transfer poorly (e.g., instruction following) require far more samples than those where one kind covers the others (e.g., high-stakes).",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.394013894287026,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.10639v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010639v1-visible-reasoning-is-not-a-universal-optimizer-persona-and-thinking-dependent-effects-in-analytics-code-generation",
+      "source": "arxiv",
+      "title": "Visible Reasoning Is Not a Universal Optimizer: Persona- and Thinking-Dependent Effects in Analytics Code Generation",
+      "authors": [
+        "Bhawani Shankar Leelar",
+        "Pawan Chorasiya",
+        "Davin Hill",
+        "Robert E. Tillman",
+        "Tamer Soliman"
+      ],
+      "authors_text": "Bhawani Shankar Leelar, Pawan Chorasiya, Davin Hill, Robert E. Tillman, Tamer Soliman",
+      "abstract": "Visible Chain-of-Thought (CoT) is often treated as a broadly useful reasoning instruction, yet analytics code generation combines natural-language ambiguity, schema grounding, target-language constraints, and model-specific inference behavior. Because the same analytics request can be expressed in two distinct target languages-SQL and Python (pandas)-this setting provides a natural test of a common but under-examined assumption: that visible reasoning is more effective when its representation matches the requested target, as in \"think in SQL\" or \"think in Python.\" Together with generic instructions such as \"think step-by-step,\" such recommendations remain insufficiently evaluated under controlled, execution-based comparisons. We study a query matched SQL-pandas benchmark that crosses persona phrasing, target language, visible-CoT format, control prefixes, direct generation, and internal-reasoning configurations. The results do not support either a universal accuracy advantage from visible CoT or a consistent benefit from matching the reasoning representation to the target language. Instead, the effects depend on the persona, target, model configuration, and internal-reasoning setting. The control ablations further distinguish effects of reasoning content from those of prompt format. These findings indicate that reasoning strategies should be selected jointly for the model, persona, target, and internal-reasoning configuration rather than adopted as universal defaults. More broadly, the study provides a controlled framework for identifying when visible reasoning improves executable generation, when it primarily perturbs model behavior, and when the internal-reasoning configuration is the more consequential factor.",
+      "url": "http://arxiv.org/abs/2610.10639v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10639v1",
+      "tldr": "In a controlled SQL/pandas analytics code-generation benchmark, visible chain-of-thought and target-language-matched reasoning do not universally improve accuracy; their effects depend on persona, target language, model configuration, and internal-reasoning setting, so reasoning strategies must be selected jointly rather than adopted as defaults.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Optum AI"
+      ],
+      "affiliations_text": "Optum AI",
+      "score": 3.060985114997641,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.10662v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010662v1-teaching-ppg-how-not-who-fixed-effects-distillation-from-ecg",
+      "source": "arxiv",
+      "title": "Teaching PPG How not Who: Fixed-Effects Distillation from ECG",
+      "authors": [
+        "Zhongli Wu",
+        "Zhuangzhi Gao",
+        "Yuankai Wang",
+        "Gregory Y. H. Lip",
+        "Bilal H. Kirmani",
+        "Yalin Zheng"
+      ],
+      "authors_text": "Zhongli Wu, Zhuangzhi Gao, Yuankai Wang, Gregory Y. H. Lip, Bilal H. Kirmani, Yalin Zheng",
+      "abstract": "ECG is widely used to teach PPG-only models, yet what it teaches is unexamined. Wearables are valued for tracking how a person's cardiovascular state changes, but ECG-to-PPG distillation mostly learns who the person is. A per-recording mean, the trait, holds 40-59% of a frozen ECG teacher's target, and pooled students memorise it without carrying it to new recordings. The raw alignment cosine misses this, since a constant predictor scores 0.793. Across 34 runs, the more identity a student memorises, the less state it learns. Fixed-effects distillation subtracts each recording's mean from prediction and target, so the trait cancels exactly, while a pooled anchor keeps it. State agreement more than doubles, within-person labels improve while age and sex do not, and the gain holds on two backbones and two further databases. Conditioning on the recording turns distillation toward the within-person changes that wearables monitor.",
+      "url": "http://arxiv.org/abs/2610.10662v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10662v1",
+      "tldr": "The paper proposes fixed-effects distillation for ECG-to-PPG models, which subtracts each recording’s mean to cancel learned identity (the trait) while retaining a pooled anchor, thereby more than doubling within-person state agreement for wearable monitoring.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai Artificial Intelligence Laboratory",
+        "University of Liverpool",
+        "Liverpool Heart and Chest Hospital"
+      ],
+      "affiliations_text": "Shanghai Artificial Intelligence Laboratory, University of Liverpool, Liverpool Heart and Chest Hospital",
+      "score": 2.878115844731145,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2610.10648v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/09/261010648v1-leakage-controlled-multimodal-learning-for-diagnosis-and-progression-prediction-in-alzheimers-disease-research",
+      "source": "arxiv",
+      "title": "Leakage-Controlled Multimodal Learning for Diagnosis and Progression Prediction in Alzheimer's Disease Research",
+      "authors": [
+        "Akeem Temitope Otapo",
+        "Ghazaleh Khodabandelou",
+        "Zuheng Ming",
+        "Alice Othmani"
+      ],
+      "authors_text": "Akeem Temitope Otapo, Ghazaleh Khodabandelou, Zuheng Ming, Alice Othmani",
+      "abstract": "Alzheimer's disease prediction involves irregular visits, heterogeneous measurements and incomplete modalities. This study presents a multimodal multitask framework combining an adapted SFCN MRI encoder, four causal clinical Transformers, shared fusion and task-specific ODE-GRU dynamics. Fine-tuning and LoRA adapt the final two MRI blocks. Task-DRO balances task losses, while Group-CVaR targets cohort and comorbidity strata. Branch-specific input controls, subject-grouped partitions and empirical causality checks support longitudinal evaluation. Across 2,649 subjects and 17,317 visits from ADNI, OASIS-2 and MIRIAD, internal validation yields diagnosis, stage-1 progression and first-stage-1-visit progression AUROCs of 0.935 +/- 0.002, 0.884 +/- 0.003 and 0.870 +/- 0.005, respectively (mean +/- SD across three seeds). Corresponding hybrid AUROCs are 0.951, 0.909 and 0.896. Next-visit MMSE mean absolute error (MAE) is 1.61 points; worst-stratum diagnosis AUROC is 0.827 +/- 0.008. Sampled ADNI explanations identify task-specific input dependence. OASIS-3 external validation yields network and hybrid diagnosis AUROCs of 0.763 and 0.767, hybrid next-visit progression AUROC of 0.764, diagnosis calibration error decreasing from 0.197 to 0.052, and next-visit MMSE MAE of 0.86. Seed-42 paired ablations of six components yield pooled diagnosis and progression AUROC differences between -0.004 and +0.004; removing clinical encoder inputs lowers diagnosis AUROC by 0.272. The framework integrates longitudinal prediction, missing-modality handling, auxiliary comorbidity modelling and subgroup evaluation within a common pipeline.",
+      "url": "http://arxiv.org/abs/2610.10648v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.10648v1",
+      "tldr": "TLDR: The paper proposes a leakage-controlled multimodal multitask framework that fuses an adapted SFCN MRI encoder with causal clinical Transformers and task-specific ODE-GRU dynamics to jointly predict Alzheimer’s diagnosis, progression, MMSE, atrophy, and comorbidities from irregular, incomplete longitudinal data, achieving internal diagnosis/progression AUROCs of 0.935/0.884 and external validation AUROCs of 0.767/0.764 while incorporating robust task balancing, comorbidity-aware subgroup auditing, and strict leakage controls.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Université Sorbonne Paris Nord (USPN)",
+        "Université Paris-Est Créteil (UPEC)"
+      ],
+      "affiliations_text": "Université Sorbonne Paris Nord (USPN), Université Paris-Est Créteil (UPEC)",
+      "score": 2.6062106984242823,
+      "score_text": "2.6"
+    }
+  ]
+}

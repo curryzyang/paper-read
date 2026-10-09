@@ -1,0 +1,15 @@
+# Visible Reasoning Is Not a Universal Optimizer: Persona- and Thinking-Dependent Effects in Analytics Code Generation
+
+- 区域：速读区
+- 排名：13
+- 匹配度：3.1/10
+- 来源：arxiv
+- 作者：Bhawani Shankar Leelar, Pawan Chorasiya, Davin Hill, Robert E. Tillman, Tamer Soliman
+- 机构：Optum AI
+- 链接：[arXiv / Source](http://arxiv.org/abs/2610.10639v1) · [PDF](https://arxiv.org/pdf/2610.10639v1)
+
+## TLDR
+In a controlled SQL/pandas analytics code-generation benchmark, visible chain-of-thought and target-language-matched reasoning do not universally improve accuracy; their effects depend on persona, target language, model configuration, and internal-reasoning setting, so reasoning strategies must be selected jointly rather than adopted as defaults.
+
+## Abstract
+Visible Chain-of-Thought (CoT) is often treated as a broadly useful reasoning instruction, yet analytics code generation combines natural-language ambiguity, schema grounding, target-language constraints, and model-specific inference behavior. Because the same analytics request can be expressed in two distinct target languages-SQL and Python (pandas)-this setting provides a natural test of a common but under-examined assumption: that visible reasoning is more effective when its representation matches the requested target, as in "think in SQL" or "think in Python." Together with generic instructions such as "think step-by-step," such recommendations remain insufficiently evaluated under controlled, execution-based comparisons. We study a query matched SQL-pandas benchmark that crosses persona phrasing, target language, visible-CoT format, control prefixes, direct generation, and internal-reasoning configurations. The results do not support either a universal accuracy advantage from visible CoT or a consistent benefit from matching the reasoning representation to the target language. Instead, the effects depend on the persona, target, model configuration, and internal-reasoning setting. The control ablations further distinguish effects of reasoning content from those of prompt format. These findings indicate that reasoning strategies should be selected jointly for the model, persona, target, and internal-reasoning configuration rather than adopted as universal defaults. More broadly, the study provides a controlled framework for identifying when visible reasoning improves executable generation, when it primarily perturbs model behavior, and when the internal-reasoning configuration is the more consequential factor.
