@@ -1,0 +1,764 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-12T20:56:48.366942",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.12572v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012572v1-diffusionart-efficient-stable-and-scalable-reinforcement-of-diffusion-models",
+      "source": "arxiv",
+      "title": "DiffusionART: Efficient, Stable and Scalable Reinforcement of Diffusion Models",
+      "authors": [
+        "Zhenglin Wan",
+        "Jiayu Chen",
+        "Zhengfeiyang Zhang",
+        "Pengfei Zhou",
+        "Wangbo Zhao",
+        "Fangyuan Kong",
+        "Pengfei Wan",
+        "Kun Gai",
+        "Yang You"
+      ],
+      "authors_text": "Zhenglin Wan, Jiayu Chen, Zhengfeiyang Zhang, Pengfei Zhou, Wangbo Zhao, Fangyuan Kong, Pengfei Wan, Kun Gai, Yang You",
+      "abstract": "Online reinforcement learning (RL) fine-tunes diffusion models with black-box rewards, but reverse-process methods such as Flow-GRPO are limited in efficiency by poor credit assignment, while forward-process methods such as DiffusionNFT are efficient yet unstable without carefully tuned exponential-moving-average (EMA) off-policy training. We show that NFT-style objectives contain a hidden forward--reverse consistency force that joint positive--negative training cancels only partially, and that EMA stabilizes training through restoration rather than off-policy rollouts. We introduce DiffusionART (Diffusion Reinforcement with Aggregation-First Reward Tilting), which aggregates each prompt's rewards into a shared reward-improving direction for reverse-process states, removing the consistency force by construction, and adds a trust-region-masked second update for drift-adaptive restoration without EMA tuning. It requires no differentiable reward model, remains effective with fewer samples per prompt, and supports pairwise reward models (DiffusionART-Pairwise). Across image and video generation, DiffusionART trains efficiently and stably without per-task tuning. In particular, on HunyuanVideo-13B with equally weighted visual and motion quality rewards, DiffusionART reaches the late-stage mean reward levels of DiffusionNFT and Flow-GRPO-Fast with 12.02 and 11.72 times fewer GPU hours, respectively, while achieving 28.8% and 53.0% higher mean training rewards.",
+      "url": "http://arxiv.org/abs/2610.12572v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12572v1",
+      "tldr": "DiffusionART is an efficient, stable, and scalable online reinforcement learning method for diffusion models that aggregates each prompt’s rewards into a shared reward-improving direction to eliminate hidden forward–reverse consistency and avoid EMA tuning, adding a trust-region-masked second update for drift-adaptive restoration and achieving much faster, higher-reward image and video generation than Flow-GRPO and DiffusionNFT without differentiable rewards or per-task tuning.",
+      "detailed_reading": {
+        "motivation": "扩散模型在线强化学习可在仅有黑盒奖励时进行微调，但反向过程方法（如 Flow-GRPO）因信用分配差而效率受限，前向过程方法（如 DiffusionNFT）虽高效却依赖精细调参的 EMA 离策略训练才稳定。作者因此要解决效率与稳定性难以兼得、且需要逐任务调参的问题，并支持不可微奖励。",
+        "method": "DiffusionART（Aggregation-First Reward Tilting）面向文本到图像/视频的扩散或流模型：输入为文本 prompt 与预训练生成模型，对每个 prompt 采样若干生成轨迹并仅用黑盒奖励打分，先把同一 prompt 的奖励聚合成一个共享的奖励改进方向，在反向去噪状态上直接构造 reward-tilted 更新，从结构上消除 NFT 类目标中隐藏的前向-反向一致性力。训练包含两步更新：主更新执行聚合优先的奖励倾斜；第二更新经信任域掩码筛选，在策略相对参考/行为策略漂移过大时做自适应恢复，从而替代 EMA 的稳定作用。整个流程无需可微奖励模型，也无需 EMA 离策略调参，并可通过成对奖励模型扩展为 DiffusionART-Pairwise；微调后推理仍按原扩散采样流程执行。",
+        "result": "在图像与视频生成任务上，DiffusionART 无需逐任务调参即可稳定高效训练；在 HunyuanVideo-13B 上，当视觉质量与运动质量奖励等权时，它以比 DiffusionNFT 和 Flow-GRPO-Fast 分别少 12.02 倍和 11.72 倍的 GPU 小时达到两者后期平均奖励水平，同时平均训练奖励分别高 28.8% 和 53.0%。摘要还指出该方法在每 prompt 样本更少时仍有效，并能兼容成对奖励模型。",
+        "conclusion": "DiffusionART 表明 NFT 类前向过程目标中的稳定性问题可归因于隐藏的前向-反向一致性力，而 EMA 主要起恢复而非离策略采样作用；用聚合优先奖励倾斜与信任域掩码的第二更新即可同时获得高效、稳定和可扩展的扩散模型在线 RL 微调。该方法减少了对 EMA 调参、可微奖励和大量采样的依赖，为图像与视频生成模型的黑盒奖励对齐提供了更实用的方案。",
+        "key_details": "关键实现点包括：以 prompt 为单位聚合奖励，构造反向过程状态上的共享改进方向，从而按构造消除一致性力；奖励只需黑盒可查询，不要求可微，且支持 pairwise 奖励；第二更新受信任域掩码约束，用于漂移自适应恢复，替代 EMA 稳定机制；训练可用较少 prompt 内样本。评估覆盖图像与视频生成，重点为 HunyuanVideo-13B 上的视觉与运动质量等权奖励，报告 GPU 小时与平均奖励对比。局限方面，摘要未展开所有任务、奖励模型噪声/偏差、聚合粒度对多样性的影响以及具体超参与复杂度，落地时仍需关注奖励质量与信任域阈值选择。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.107012516817687,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.12541v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012541v1-enriched-holomorphic-neural-networks-for-2d-and-3d-laplace-problems",
+      "source": "arxiv",
+      "title": "Enriched Holomorphic Neural Networks for 2D and 3D Laplace Problems",
+      "authors": [
+        "Kalp Shah",
+        "Andrei Vlad Nicula",
+        "Mihnea Andrei Bârsan",
+        "Robert-Stefan Sofroni",
+        "Agneya Bhardwaj",
+        "Jan Jelínek",
+        "Alejandro Valverde Mahou"
+      ],
+      "authors_text": "Kalp Shah, Andrei Vlad Nicula, Mihnea Andrei Bârsan, Robert-Stefan Sofroni, Agneya Bhardwaj, Jan Jelínek, Alejandro Valverde Mahou",
+      "abstract": "Boundary-value problems for the Laplace equation develop singular behaviour near corners, edges and junctions that smooth approximators resolve poorly. We combine holomorphic neural networks with singular functions derived from the local geometry and boundary conditions. The representation is harmonic by construction, so no interior residual is needed: the network fits the smooth remainder from boundary data alone, and the enrichment terms capture the singular behaviour. Singular exponents are trainable, so the construction also applies when the local expansion is not known in advance. We extend the approach to three dimensions using independent networks evaluated along complex null directions. The enriched model is the most accurate tested method on every problem. Its margin is several orders of magnitude where the enrichment captures the singularity exactly, and a factor of about 1.7-2.1 over the next-best method on a CdZnTe radiation detector with many singular sites, in both two and three dimensions.",
+      "url": "http://arxiv.org/abs/2610.12541v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12541v1",
+      "tldr": "The paper introduces enriched holomorphic neural networks that combine harmonic-by-construction networks with trainable, geometry-derived singular functions to solve 2D and 3D Laplace boundary-value problems from boundary data alone, achieving state-of-the-art accuracy especially for domains with corners, edges, and junctions.",
+      "detailed_reading": {
+        "motivation": "拉普拉斯方程的边值问题在角点、棱边与交接处会产生奇异行为，光滑近似器（如常规物理信息神经网络）在这些位置收敛差、精度低。作者希望在保持神经网络无网格、易实现优势的同时，把由局部几何与边界条件决定的奇异结构显式纳入表示，从根本上提升对奇异解的逼近能力。",
+        "method": "方法为富集全纯神经网络（Enriched PIHNN）：用复值多层感知机构造满足柯西–黎曼条件的全纯函数，其实部/虚部天然调和，因此不需要任何内点 PDE 残差，损失只由边界数据拟合光滑余项；同时按每个奇异位点的局部几何与边界条件构造幂律型奇异基函数作富集项，其奇异指数作为可训练参数与网络权重联合优化，从而在局部展开未知时也适用；三维情形则沿复零（null）方向对若干独立网络求值，把二维全纯构造推广到 3D，并保持按构造成立的调和性。",
+        "result": "富集模型在所有测试问题上都是精度最高的方法：当富集项恰好捕捉到真实奇异形式时，误差比次优方法低数个数量级；在含大量奇异位点的 CdZnTe 辐射探测器算例上，二维与三维均比次优方法好约 1.7–2.1 倍，且该优势在 2D 与 3D 中一致成立。",
+        "conclusion": "将解析奇异先验与保调和的神经网络表示相结合，可在不引入内点残差、不增加配点训练的代价下大幅提升奇异边值问题的求解精度；可训练奇异指数进一步使该方法在局部展开未知的实际几何中依然可用，三维扩展也验证了其可推广性。",
+        "key_details": "实现要点：损失仅在边界上评估，表示按构造调和，故无内点配点与 PDE 残差项；富集项来自局部几何与边界条件推导的奇异函数，奇异指数可训练，需要注意初值与优化稳定性；3D 依赖沿复零方向的独立网络求值，奇异位点多时带来额外的网络与参数开销；评测覆盖角点、棱边、交接等 2D/3D 基准及 CdZnTe 探测器多奇异位算例；局限性在于需要先验知道奇异位置与奇异形式（否则只能靠可训练指数近似）、指数优化可能非凸、奇异位点众多时计算与调参成本上升。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.7244579337169785,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2610.12567v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012567v1-caster-formalizing-zero-shot-manipulation-from-synthetic-videos-as-constrained-optimization",
+      "source": "arxiv",
+      "title": "CASTER: Formalizing Zero-Shot Manipulation from Synthetic Videos as Constrained Optimization",
+      "authors": [
+        "Yinlong Dai",
+        "Homanga Bharadhwaj",
+        "Dylan P. Losey"
+      ],
+      "authors_text": "Yinlong Dai, Homanga Bharadhwaj, Dylan P. Losey",
+      "abstract": "Prior research on learning from humans often requires real human demonstrations. But advances in video generation models offer a new paradigm: we can now prompt these generators to make synthetic videos of the task. On the plus side, these synthetic videos take place in the robot's current environment, and do not require actual human teaching. However, while the generated videos appear to show plausible motions, they lack both physical consistency and robot grounding, and thus the robot cannot directly roll out the trajectory shown by the video. In this paper we seek to formalize the process of going from synthetic video generation to real-world robot trajectories for zero-shot manipulation tasks. We recognize that this problem is an instance of constrained optimization. The object trajectories extracted from the synthetic video provide an initial guess at the correct motion, and the robot must refine these trajectories (for instance, within a digital twin) while enforcing physical feasibility and semantic consistency. Our optimization-based formalism provides insights into the video generation properties necessary for success. Specifically, we show that the video generation must probabilistically seed the search within a semantic basin of attraction where the trajectory can be locally modified without losing its task alignment. Our analysis further reveals that state-of-the-art approaches can be viewed as instances of our unified formalism with key simplifications. In our experiments we remove these simplifications to more closely match the underlying optimization, leading to more robust zero-shot trajectories from synthetic videos and improving average task success by 34.1% compared to the best-performing baseline. See videos at our project website: https://collab.me.vt.edu/CASTER",
+      "url": "http://arxiv.org/abs/2610.12567v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12567v1",
+      "tldr": "CASTER formalizes zero-shot robot manipulation from synthetic videos as a constrained optimization problem that refines video-derived object trajectories in a digital twin to enforce physical feasibility and semantic consistency, improving average task success by 34.1% over the best baseline.",
+      "detailed_reading": {
+        "motivation": "现有从人类学习操作常需真实人类演示，数据采集昂贵；视频生成模型可在推理时根据任务和机器人当前环境生成合成视频，无需人类教学。但合成视频虽视觉合理，却缺乏物理一致性和机器人接地，无法直接作为轨迹执行。因此需要形式化从合成视频生成到真实机器人零样本操作轨迹的问题。",
+        "method": "CASTER将问题建模为约束优化：输入自然语言任务τ和初始视觉观测o，调用冻结的图文条件视频生成模型q_vid采样合成人类视频v，并用跟踪器f_track将视频映射为物体轨迹，作为待优化物体运动的初始猜测。优化变量是机器人动作轨迹ξ_a及其诱导的系统轨迹ξ，目标是使物体轨迹经任务特征映射φ后的差异最小化；约束为语义成功谓词G_τ(ξ)=1的概率不低于1-ε_sem，且物理可行集F_R内轨迹的概率不低于1-ε_phys。实现上在数字孪生中细化轨迹，提取并加权任务关键特征而非匹配每个路点，迭代满足碰撞避免、可达性、关节/速度限制和接触要求，最后输出可执行机器人动作。",
+        "result": "理论分析表明，要使零样本迁移成功，视频生成必须概率性地将搜索种子落在语义吸引盆内，使轨迹可局部修改而不丢失任务对齐；多合成视频可帮助播种搜索并识别任务关键特征。现有最先进方法可视为该统一形式化在不同简化假设下的实例。CASTER通过移除这些简化更接近底层优化，实验报告更鲁棒的合成视频零样本轨迹，平均任务成功率相比最佳基线提升34.1%。",
+        "conclusion": "该工作把从合成视频生成到真实机器人轨迹的零样本操作统一为约束优化，明确区分语义一致性与物理可行性，并给出视频生成模型需满足的可迁移条件。基于该形式化的CASTER通过任务特征对齐和数字孪生约束优化，提升了合成视频驱动操作的鲁棒性与成功率，并为分析和设计相关方法提供通用框架。",
+        "key_details": "细节包括：设定为零样本桌面操作，固定桌面工作区、静态相机、任务物体至少部分可观测，状态由物体状态s_o和机器人状态s_r组成，动作为关节位置变化与夹爪开合，轨迹含时域T内状态和动作。视频生成器q_vid被视为黑盒且冻结，不能微调、无梯度或内部表示，不提供显式几何/接触/运动学信息；f_track被假设能准确提取物体轨迹。损失采用φ映射后的物体轨迹特征距离，φ可实例化为相对轨迹或任务关键特征，ε_sem与ε_phys为语义和物理约束的容忍概率；物理可行集涵盖可达性、关节/速度限制、碰撞避免及必要接触。主要局限是依赖视频生成落入语义吸引盆、f_track准确性和数字孪生保真度，且假设固定工作区与有限时域，未给出显式复杂度数值。"
+      },
+      "affiliations": [
+        "Virginia Tech",
+        "Johns Hopkins University"
+      ],
+      "affiliations_text": "Virginia Tech, Johns Hopkins University",
+      "score": 4.592606293925734,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.12571v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012571v1-an-all-transistor-physical-learning-transformer-can-be-trained-to-perform-in-context-learning",
+      "source": "arxiv",
+      "title": "An all-transistor physical-learning transformer can be trained to perform in-context learning",
+      "authors": [
+        "Michael C. Abbott",
+        "Benjamin B. Machta"
+      ],
+      "authors_text": "Michael C. Abbott, Benjamin B. Machta",
+      "abstract": "Most systems trained by equilibrium propagation or coupled learning are in the same class as multi-layer perceptrons: while they may be universal function approximators, they struggle to learn associative tasks which are easy for transformers. Equilibrium propagation relies on a bidirectional flow of information through the physical system between input and output. The reverse flow is broken by more complex nonlinear systems, such as those performing multiplication which is needed to express dot-product attention. Here we explicitly restore this bidirectional flow by introducing extra circuit elements for this purpose into a double or dyadic circuit. We then use these ideas to construct an attention mechanism exploiting the exponential current law of sub-threshold MOSFET devices. We show that in simulations this circuit can be trained to perform a simple in-context learning task, despite using realistic reverse components which transmit only an approximate gradient. For this training to succeed we need cross-entropy loss (not mean squared error). We generate nudges appropriate for this loss using a novel floating circuit element, based on the same MOSFET sub-circuit used for softmax. We train the resistors in this circuit using the Lion optimiser, which can be implemented using one capacitor per parameter to store local memory of past gradient estimates.",
+      "url": "http://arxiv.org/abs/2610.12571v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12571v1",
+      "tldr": "This paper introduces an all-transistor physical-learning transformer that restores bidirectional error propagation using dyadic circuits and MOSFET-based attention, and shows in simulation that it can be trained to perform an in-context learning task.",
+      "detailed_reading": {
+        "motivation": "现有平衡传播或耦合学习系统多对应多层感知机，虽可万能逼近函数，却难以学习Transformer擅长的关联与上下文任务；其关键限制是平衡传播依赖输入输出间的双向信息流，而点积注意力所需的乘法等非互易非线性会阻断误差信号反向传播。本文因此试图显式恢复物理系统中的双向误差流，构建能表达并训练注意力机制的全晶体管物理学习电路，以检验其是否可完成上下文学习。",
+        "method": "作者采用双/二元电路：每个节点和元件成对复制，输入钳位，输出取两拷贝均值作为前向计算，训练时在输出对之间注入与损失梯度成正比的nudge，两拷贝差值编码反向误差，并用1/(4β)电压平方差估计每个可调电阻的梯度。注意力部分利用亚阈值MOSFET的指数电流律构造类似Bahdanau/bump的匹配机制，并以共享固定尾电流实现softmax；交叉熵损失及其nudge由同一MOSFET子电路构成的浮置元件产生。在仿真中，字符序列输入被编码为嵌入向量，目标是让末字符与先前字符匹配并检索邻近输出；所有电阻参数用Lion优化器更新，每个参数仅用一个电容存储过往梯度估计。",
+        "result": "仿真表明，该双电路可在使用仅近似反向梯度的现实元件条件下被训练完成简单上下文学习任务，即执行类似归纳头的匹配与检索。训练成功依赖交叉熵损失而非均方误差，且浮置交叉熵nudge电路与Lion优化器均可有效工作。这为物理学习电路能学习MLP难以学会的关联任务提供了具体证据。",
+        "conclusion": "通过显式恢复双向误差传播，物理学习系统可超越MLP类电路，构建具备注意力与Transformer式上下文学习能力的可训练模拟电路。作者进一步提出猜想：仅由成对互易相互作用、其状态最小化能量的物理学习系统，无法高效学习上下文学习任务。该工作为模拟计算与物理学习结合提供了新路线，但仍需真实硬件验证及更复杂任务检验。",
+        "key_details": "任务为字符级简单ICL，输入矩阵规模小于MNIST，但该关联任务对MLP很难；电路参数为可调电阻，并保持成对拷贝g_ab=g_a'b'，梯度估计为dL/dg_ab≈[ (Δv_ab)^2-(Δv_a'b')^2 ]/(4β)，在β足够小且二极管不翻转时对电阻-二极管网络精确。前向输出为成对节点电压均值，交叉熵nudge由基于MOSFET的浮置电路产生，注意力使用亚阈值指数律、bump电路和共享尾电流softmax；Lion优化器以每参数一电容实现局部梯度记忆。局限性包括结果仅来自仿真、反向元件只传近似梯度、必须用交叉熵而非MSE、任务较简单，且精确dyadic实现需要特殊二极管或额外元件，尚未证明大规模与真实器件鲁棒性。"
+      },
+      "affiliations": [
+        "Yale University"
+      ],
+      "affiliations_text": "Yale University",
+      "score": 4.579569321826898,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.12566v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012566v1-sample-adaptive-zeroth-order-post-training",
+      "source": "arxiv",
+      "title": "Sample-Adaptive Zeroth-Order Post-Training",
+      "authors": [
+        "Haiyuan Wan",
+        "Yanyi Li",
+        "Weicheng Lin",
+        "Cong Fang"
+      ],
+      "authors_text": "Haiyuan Wan, Yanyi Li, Weicheng Lin, Cong Fang",
+      "abstract": "Zeroth-order (ZO) optimization offers a memory-efficient alternative to backpropagation for fine-tuning large language models. However, existing ZO methods typically sample training examples uniformly, overlooking their evolving importance and leaving avoidable estimation variance. To address this limitation, we propose Sample-Adaptive Zeroth-Order Optimization (SAZO), which learns sample importance online and adaptively allocates queries to accelerate convergence. SAZO extracts gradient-norm information from existing directional differences to estimate sample importance without access to true gradients. Furthermore, to track evolving importance from sparse minibatch feedback, SAZO maintains per-example exponential moving averages that aggregate observations across updates. The method requires no additional model evaluations and only $O(N)$ additional scalar state compared with MeZO. We prove that SAZO asymptotically matches the leading convergence term of the minimum-variance sampling oracle, and achieves a strictly faster convergence rate than standard methods. Extensive experiments across four model families demonstrate improved average downstream performance and up to $6\\times$ faster convergence to the same training loss in terms of query count.",
+      "url": "http://arxiv.org/abs/2610.12566v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12566v1",
+      "tldr": "SAZO introduces a sample-adaptive zeroth-order optimization method that online-estimates per-example importance from existing directional differences and tracks it via exponential moving averages, enabling adaptive query allocation for memory-efficient LLM fine-tuning with up to 6× faster convergence than MeZO and no extra model evaluations.",
+      "detailed_reading": {
+        "motivation": "零阶（ZO）优化如 MeZO 仅用两次前向评估即可微调大模型，内存接近推理开销，但现有方法对训练样本均匀采样，忽视了样本重要性的差异及其随训练演化，从而留下可避免的估计方差；作者指出由于 ZO 梯度估计方差在最坏情况下比一阶方法大 Ω(d) 倍，ZO 对采样异质性更敏感，因此样本分配是尚未被利用的加速维度。",
+        "method": "SAZO 在 MeZO 式有限差分框架下工作：每步采样样本 I_t 与独立高斯方向 z_t，用 s_{i,t}=(f_i(x_t+μ_tz_t)-f_i(x_t-μ_tz_t))/(2μ_t) 计算方向差分，并按重要性加权更新 x_{t+1}=x_t-η·s_{I_t,t}/(N p_{I_t,t})·z_t，保持对全量 ZO 更新的无偏性（误差 O(μ_t²)），最优分配为 p*_i∝||∇f_i(x_t)||。为在无真实梯度下估计重要性，SAZO 复用已有的方向差分构造 Y_{i,t}=sqrt(π/2)|s_{i,t}| 作为梯度范数的近似无偏估计；为应对稀疏小批量反馈，对每个样本维护单独的指数滑动平均 m_{i,t+1}=(1-β)m_{i,t}+βY_{i,t}（仅对被采样样本更新，其余保持不变），再按 p_{i,t}=(1-ε)m_{i,t}/Σ_j m_{j,t}+ε/N 混合均匀探索后采样。实现上先用普通 MeZO 做 4 个完整无放回 burn-in pass 初始化 m_i 并计入预算，随后切换为有放回自适应采样；同一小批量共享一个扰动方向，重复抽样只评估一次但保留其重数于加权更新，推荐 β=0.05、ε=0.1。",
+        "result": "理论上，作者定义采样遗憾 Reg_T=Σ E[V_t(p_t)-V_t*]，其中 V_t(p)=(d+2)/N²·Σ a_{i,t}²/p_{i,t}、V_t*=(d+2)/N²·(Σ a_{i,t})²，证明在步长等超参满足 κ=192Λ_dη²/(εr²)<1（r=βε/N）时 SAZO 的采样遗憾有上界，渐近上匹配最小方差采样 oracle 的首阶收敛项，并比均匀采样等标准方法具有严格更快的收敛速率。实验上，在四个模型族上平均下游性能提升，在 MeZO 级内存与单步开销下，达到相同训练损失所需查询数最多减少 6×；在 SST-2 上可视化显示每样本梯度范数在 0/10K/30K 步存在显著跨样本异质性与时间演化，且 SAZO 的相对累积采样遗憾低于均匀采样和固定在初始化的 oracle 分配，对应更快的训练损失下降。",
+        "conclusion": "样本级查询分配是零阶微调中被忽视的有效加速维度：通过从已有方向差分中提取梯度范数信息并在线追踪其演化，SAZO 在不增加任何模型评估、仅增加 O(N) 标量状态的条件下显著降低梯度估计方差、加速收敛并提升下游性能，为 ZO 后训练提供了一个与参数空间自适应（如预条件、低秩扰动）正交的改进方向。",
+        "key_details": "关键实现细节包括：重要性估计 Y_{i,t}=sqrt(π/2)|s_{i,t}| 的期望等于 a_{i,t}+O(μ_t²)，即借助高斯方向投影的期望绝对值性质，无需额外查询；EMA 系数 β=0.05 与探索率 ε=0.1 在所有主实验统一使用且对较宽范围不敏感；初始化依赖 4 个完整稳定顺序的无放回 burn-in pass，这些查询计入总预算。存储成本为每样本一个标量，1000 个样本以 FP64 计约 8 KiB，远小于推理内存，每步查询数与 MeZO 相同。理论依赖假设：各 f_i 梯度全局 Lipschitz、F 平滑下有界、Hessian 全局 Lipschitz，并需满足 κ<1 的步长/超参条件。局限性在于需要保存全部样本的重要性状态并假设可分样本损失与平滑性，有限差分误差项 O(μ_t²) 的系数可能依赖采样概率与梯度范数，且遗憾分析为渐近/有限时域界，未覆盖极端非平滑或在线数据分布变化场景。"
+      },
+      "affiliations": [
+        "Peking University"
+      ],
+      "affiliations_text": "Peking University",
+      "score": 4.321664857129715,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.12609v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012609v1-graph-based-heuristics-for-minimum-constraint-removal-in-cluttered-robot-motion-planning",
+      "source": "arxiv",
+      "title": "Graph-Based Heuristics for Minimum Constraint Removal in Cluttered Robot Motion Planning",
+      "authors": [
+        "Antony Thomas",
+        "Fulvio Mastrogiovanni",
+        "Marco Baglietto"
+      ],
+      "authors_text": "Antony Thomas, Fulvio Mastrogiovanni, Marco Baglietto",
+      "abstract": "Humanoid and service robots operating in clut- tered human environments may encounter motion planning problems that are infeasible when all surrounding objects are treated as fixed obstacles. The Minimum Constraint Removal problem, which we refer to as MCR, addresses this situation by identifying the minimum number of constraints, such as movable objects, whose removal enables a collision-free path. However, computing an optimal MCR solution is NP-hard. In this work, we propose a graph-based heuristic pipeline that combines bidirectional feasible-set generation with fixed- length searches over reduced MCR graphs. We further derive an extended feasible-set generator for instances in which the candidates produced by the first generator do not contain a complete optimal removal set. Across six benchmarks, the evaluated pipeline matches the exact solution in three cases and, in the remaining cases, selects at most 31.25% more obstacles than the optimum, while being between 3.4 and 33.7 times faster than exact search. In one of the benchmarks, involving a manipulation task amidst clutter, selecting two rather than seven obstructing objects reduces the combined MCR, inverse- kinematics, and motion planning time from 84.72 s to 30.59 s. These results indicate that the proposed approach provides a practical compromise between computational efficiency and solution quality for motion planning among movable obstacles.",
+      "url": "http://arxiv.org/abs/2610.12609v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12609v1",
+      "tldr": "This paper proposes a graph-based heuristic pipeline that combines bidirectional feasible-set generation with fixed-length searches over reduced MCR graphs to compute near-optimal, low-cardinality constraint-removal sets for cluttered robot motion planning significantly faster than exact search.",
+      "detailed_reading": {
+        "motivation": "在杂乱人类环境中，人形和服务机器人常遇到将所有周围物体视为固定障碍时运动规划不可行的情况；最小约束移除问题（MCR）寻找最少可移动约束或物体子集，使其移除后存在无碰撞路径。然而最优MCR是NP-hard，精确图搜索计算昂贵，而贪婪剪枝又可能返回显著更多障碍，因此需要兼顾效率与解质量的实用方法。",
+        "method": "将配置空间划分为连通单元，构建带障碍标签I(v)的MCR图G=(V,E)，目标是最小化路径顶点标签并集大小。提出图启发式流水线：GFS-1从起点和终点双向探索，利用两侧搜索前沿共享的障碍标签生成候选移除集；随后Refine在约简MCR图上做固定长度路径搜索以精炼候选。GFS-2扩展可行集生成器，用于GFS-1候选未包含完整最优移除集的情况，并分析其计算复杂度。",
+        "result": "在六个基准中，GFS-1+Refine在三个实例与精确解一致；其余实例最多比最优多选31.25%的障碍，同时比精确搜索快3.4至33.7倍。一个杂乱操作任务中，选择2个而非7个遮挡物使MCR、逆运动学和运动规划总时间从84.72秒降至30.59秒。",
+        "conclusion": "该方法为可移动障碍物场景下的MCR提供了计算效率与解质量之间的实用折中，能快速生成可行低保额移除集，并显著降低下游操作规划开销。",
+        "key_details": "输入为已构建的MCR图，顶点对应配置空间连通单元，标签为相交障碍集合，移除代价统一为单位成本，移除抽象为将物体移出规划相关区域且不计算具体重定位。精确解用状态(v,R)的最佳优先搜索；关键难点是无标量最优子结构，同一顶点需保留多个R，局部最优前缀可能非全局最优。启发式无训练过程，核心超参为固定长度搜索的路径长度与候选集构造；局限是依赖图构建与标签，不判断物体操作难度、不规划如何何处移动物体，且只提供低保额近似而非最优保证。"
+      },
+      "affiliations": [
+        "University of Genoa",
+        "IIIT Hyderabad"
+      ],
+      "affiliations_text": "University of Genoa, IIIT Hyderabad",
+      "score": 4.311650151319365,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.12631v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012631v1-image-based-path-planning-for-navigation-of-soft-growing-robots-in-the-spinal-sub-arachnoid-space",
+      "source": "arxiv",
+      "title": "Image-Based Path-Planning for Navigation of Soft-Growing Robots in the Spinal Sub-Arachnoid Space",
+      "authors": [
+        "George Dimas",
+        "Panagiotis G. Kalozoumis",
+        "Panagiotis Vartholomeos",
+        "Dimitris K. Iakovidis"
+      ],
+      "authors_text": "George Dimas, Panagiotis G. Kalozoumis, Panagiotis Vartholomeos, Dimitris K. Iakovidis",
+      "abstract": "Recently, soft robotic procedures are being developed aiming at achieving targeted minimally invasive operations or drug administration in specific locations in the human body. Accordingly, specialized path-planning algorithms need to be investigated for the estimation of efficient paths that would protect the delicate tissue structures and simultaneously satisfy a set of requirements for the efficient navigation of the robot. In this context, we propose an image-based 3D pathplanning algorithm, which is an extension of the A* algorithm, for the navigation of a soft-growing robot inside the spinal subarachnoid space (SSS). The proposed algorithm is capable of estimating a safe pathway towards the goal location, while ensuring the establishment of anchor points that facilitate the efficient steering of the soft robot. The algorithm is evaluated using a highly detailed model of the SSS with respect to its capacity to satisfy the robot movement requirements and path efficiency.",
+      "url": "http://arxiv.org/abs/2610.12631v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12631v1",
+      "tldr": "This paper proposes an image-based 3D path-planning algorithm that extends A* to guide a soft-growing robot through the spinal sub-arachnoid space by generating safe, efficient paths while ensuring anchor points for reliable steering, evaluated on a detailed SSS model.",
+      "detailed_reading": {
+        "motivation": "针对软体生长机器人在脊髓蛛网膜下腔（SSS）内导航时需同时保护脆弱神经和血管结构并满足运动需求的问题，传统避障路径规划无法保证软体生长元件（GE）与周围结构形成锚定点以维持导管转向精度。因此需要一种基于影像的三维路径规划方法，在复杂SSS中估计安全且可锚定的路径，服务于微创靶向给药等任务。",
+        "method": "方法将MRI分割得到的SSS体数据表示为二值图像栈S∈{0,1}^{H×W×N}，其中0为自由空间、1为障碍或候选锚定结构；将机器人尖端建模为半径0.5 mm的导管圆盘和半径1 mm的GE圆环。在A*的f(n)=g(n)+h(n)基础上引入两个附加代价：c_a(n)奖励可形成锚定点的节点，c_b(n)惩罚远离障碍物的节点，c_a由自适应参数k(n)和陡峭度z=5控制。GE可通过性由交叉面积比不超过v=80%判定，锚定点定义为GE外圆在左右或上下相反弧段同时接触障碍；随后沿路径用相邻节点夹角估计作动节点（非零转角），并以锚定点百分比、平均距离和作动节点百分比评价路径。",
+        "result": "在由详细SSS数字模型生成的413层、223×128、0.547×0.547 mm²面内分辨率和1 mm层厚的分割图像栈上进行200次随机起止点实验。与原始A*、A*+c_a、A*+c_b相比，A*+c_a与A*+c_a+c_b获得最高锚定点百分比（APAP约19.41%和19.11%），但A*+c_a的平均作动节点百分比（APAN 32.87%）低于A*+c_a+c_b（38.83%），平均距离（ADT 1.10 mm）也更短；原始A*的ADT和APAN最低（1.09 mm、29.26%）但APAP仅14.37%。定性导入Siemens NX生成直径2 mm的GE管后，路径可避开神经根并沿SSS壁形成锚定，而传统A*在部分位置无法保证锚定。",
+        "conclusion": "研究表明，基于影像的三维扩展A*可在复杂SSS中规划出兼顾导管避障与GE锚定的路径，满足软体生长机器人“跟随领导者”导航对转向稳定性的关键要求。结果也显示锚定率、路径长度与作动复杂度之间存在权衡，单纯追求锚定或避障均不充分；路径中较突然的转向可通过后处理平滑而不破坏锚定点。总体而言，该方法为SSS内软体机器人导航提供了可行方案，但仍需真实MRI与更完整机器人动力学验证。",
+        "key_details": "关键实现细节包括：输入为SSS高精细数字模型经3D Slicer转换的分割图像栈，原始574层中保留413层；起止点随机取自首末层且属于导管与GE自由空间；导管半径0.5 mm、GE半径1 mm、GE安全通过率v=80%、k(n)陡峭度z=5；锚定由四个外圆弧的左右或上下接触同时判定，作动节点由相邻三点夹角a_act非零判定。方法假设仅机器人尖端部署于SSS且遵循“follow-the-leader”，未建模其余机器人本体、流体或压力动力学，也未在真实MRI上验证；此外锚定点增加可能提高路径复杂度和作动次数，需要多指标平衡。"
+      },
+      "affiliations": [
+        "University of Thessaly"
+      ],
+      "affiliations_text": "University of Thessaly",
+      "score": 4.214073362257066,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.12558v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012558v1-pantact-teaching-whole-body-dexterity-with-a-wearable-contact-interface",
+      "source": "arxiv",
+      "title": "PanTact: Teaching Whole-Body Dexterity with a Wearable Contact Interface",
+      "authors": [
+        "Xiaomeng Xu",
+        "Han Zhang",
+        "Zhian Ruan",
+        "Xiaofeng Guo",
+        "Jinkun Cao",
+        "Ruihan Yang",
+        "Carmelo Sferrazza",
+        "Shuran Song",
+        "Guanya Shi"
+      ],
+      "authors_text": "Xiaomeng Xu, Han Zhang, Zhian Ruan, Xiaofeng Guo, Jinkun Cao, Ruihan Yang, Carmelo Sferrazza, Shuran Song, Guanya Shi",
+      "abstract": "Humanoid robots have many degrees of freedom and contact surfaces, yet most loco-manipulation research restricts manipulation to the hands and avoids other body contacts with the environment. To extend manipulation beyond the hands, we present PanTact, a system that learns humanoid whole-body dexterity, the capability to manipulate with any suitable body surface, directly from robot-free human demonstrations. Our key idea is to use contact as manipulation-centric information that transfers across embodiments. Contact locations and timing specify the interactions needed to accomplish a task, while the robot chooses how to coordinate its body to realize them within its own physical constraints. Specifically, PanTact captures, learns, and executes whole-body contact via: 1) a wearable, robot-free data collection interface that augments egocentric vision and bimanual UMI grippers with whole-body modular contact patches to record body contact locations and states; 2) a visuomotor policy that mitigates the egocentric observation gap and predicts whole-body contact goals; and 3) contact-aware whole-body control formulations that realize active contact goals using suitable robot surfaces. We deploy PanTact on a Unitree G1 humanoid without additional body contact sensors, demonstrating whole-body dexterity involving body support, pushing, sweeping, and load-sharing. Website: https://pantact.github.io",
+      "url": "http://arxiv.org/abs/2610.12558v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12558v1",
+      "tldr": "PanTact teaches humanoid whole-body dexterity from robot-free human demonstrations by using wearable contact patches to capture body-contact information, a visuomotor policy to predict contact goals, and contact-aware whole-body control to let a Unitree G1 manipulate with any suitable body surface.",
+      "detailed_reading": {
+        "motivation": "现有人形机器人loco-manipulation研究大多把手部以外的身体仅用于行走与平衡，并主动回避身体其他部位与环境的接触，因而浪费了人形本体大量自由度与潜在接触面。要从人类演示中学习这种全身灵巧性，必须同时解决三个环环相扣的问题：如何采集演示者的身体接触、如何在人到机的策略迁移中保留接触信息、以及如何用全身控制器在满足平衡与物理约束下真正实现接触。作者的核心洞察是：接触位置与时序属于以操作为中心、可跨本体迁移的任务级信息，而用哪块身体表面和什么关节构型去实现接触则应由机器人自身决定。",
+        "method": "PanTact由采集、策略、控制三部分组成。数据端使用无机器人的可穿戴接口：头戴ZED X Mini立体相机与双腕ZED X One S鱼眼相机以60Hz采集视觉，头与双腕的HTC Vive追踪器以250Hz采集位姿，夹爪宽度以1kHz采集，并在前臂与膝盖等处贴附可重构的模块化接触贴片，每个44×44mm模块含一枚FSR，通过磁吸连接件拼成任意形状，经菊花链RS-485总线或USB由定制PCB以1kHz、16通道、12位ADC加8倍过采样读出，最终以同步的N×4接触数组记录每个传感器的二值接触状态与三维位置。策略端是一个10Hz扩散策略，输入为经体部几何掩膜处理的3D自我中心点云（对夹爪与接触贴片定义的朝向身体半空间取交集后在视觉编码器注意力层遮蔽）、双腕图像和本体感知，预测H=16步动作块，每步包含头部3D注视点、双末端位姿与夹爪宽度，以及N个接触目标（二值接触状态加接触位置），所有量都表达在最新观测到的左夹爪坐标系下。控制端把接触位置当作可选跟踪目标：仅当接触状态为激活时才请求机器人接触该点，并用候选机器人身体集合上的软最小距离（T=0.02m）构造任意表面接触目标，同时采用虚拟接触目标——把设定点推到接触点内侧，使残余跟踪误差转化为按压力，论文给出上半身接触感知IK、全身IK加密集跟踪器、以及直接稀疏接触跟踪三种实现。",
+        "result": "系统部署在Unitree G1人形机器人上，且未额外加装任何身体接触传感器，成功展示了涉及身体支撑、推动、扫掠和负载分担的全身灵巧技能。具体包括同时用抓取与躯干支撑搬运不同尺寸物体、用前臂表面扫掠多个物体、用手被占用时的腿部做非抓握操作并与移动同步进行，以及按顺序在不同身体部位间切换接触。消融与量化指标在预览文本中未完整给出，作者将结果视频置于项目主页 https://pantact.github.io 供查看。",
+        "conclusion": "PanTact表明接触可以作为一种跨本体的、以操作为中心的接口：人类演示只需提供接触发生的位置与时序，机器人便可在自身形状与运动学约束下自行选择用哪块身体表面和何种构型去实现接触并保持平衡。由此把手部之外的身体表面纳入操作范畴，实现了从无机器人的人类演示直接学习人形机器人全身灵巧性，为超越手部操作的loco-manipulation提供了完整可行的系统范式。",
+        "key_details": "关键实现细节包括：FSR会随温度和安装压力漂移，因此接触判定采用逐通道自适应基线的相对二值化而非绝对阈值；每个贴片配一个追踪器，通过刚体变换把传感器中心映射到跟踪世界系；点云、本体位姿、末端位姿与接触位置统一表达在最新左夹爪坐标系中以降低人机运动学差异敏感性；体部掩膜由夹爪与接触贴片的半空间交集近似得到，不依赖任何一方的外观模型，可扩展到任意数量贴片；虚拟接触目标通过在物体内侧偏移设定点把跟踪误差转成接触力；非激活接触不被跟踪，避免对自由空间身体运动过约束，控制器可自由分配剩余自由度以维持平衡。局限方面，评测主要限于Unitree G1与若干演示任务，人机身高与视角差异仍需靠掩膜与坐标系设计缓解，虚拟目标与软最小温度等超参需要调节，预览文本未给出完整的定量对比与失败案例分析。"
+      },
+      "affiliations": [
+        "Stanford University",
+        "Amazon FAR",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Stanford University, Amazon FAR, Carnegie Mellon University",
+      "score": 4.159358282575376,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.12637v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012637v1-distributed-harmonic-covariance-feedback-for-hole-closure-in-planar-robot-swarms",
+      "source": "arxiv",
+      "title": "Distributed Harmonic-Covariance Feedback for Hole Closure in Planar Robot Swarms",
+      "authors": [
+        "Jitian Liu",
+        "Subhrajit Bhattacharya"
+      ],
+      "authors_text": "Jitian Liu, Subhrajit Bhattacharya",
+      "abstract": "We consider hole closure in a planar multi-agent system whose sensing disks form a time-varying Čech complex. We propose a harmonic-covariance feedback that uses harmonic edge signals to locate holes and converts those signals into agent forces. For distributed evaluation, we use a fixed-degree polynomial of the regularized Hodge Laplacian. This polynomial is evaluated through local operator applications. The closed loop has a unique global trajectory from every safe initial state. The model data and initial state are supplied with procedures for approximation to any requested accuracy with explicit error bounds. We assume that hole area is measurable and bounded, holes evolve continuously without splitting or merging, and only finitely many temporary new holes appear. Under these conditions, offline finite calculations produce rational lower bounds for the cumulative hole area on the time horizon without querying trajectory data. These bounds converge to that cumulative area, whether finite or infinite. If it is finite, holes close in the time-averaged sense: the average normalized hole area over every fixed-length time window tends to zero as time tends to infinity. In a 15-second numerical demo, all holes close by 9.9s and remain closed through the end.",
+      "url": "http://arxiv.org/abs/2610.12637v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12637v1",
+      "tldr": "The paper proposes a distributed harmonic-covariance feedback controller that uses harmonic edge signals from the swarm’s time-varying Čech complex, evaluated via a polynomial of the regularized Hodge Laplacian, to drive planar robots to close coverage holes, with theoretical convergence guarantees and a numerical demo showing closure by 9.9 s.",
+      "detailed_reading": {
+        "motivation": "在机器人集群覆盖控制中，传感圆盘并集可能出现未覆盖的孔洞，而既有覆盖修复方法通常缺少仅基于模型和初始状态的孔洞闭合判据。本文针对平面多智能体系统提出分布式 harmonic-covariance 反馈，用代数拓扑信息定位孔洞并驱动其闭合。",
+        "method": "每个智能体具有二阶位置-速度动力学，控制器在线根据传感半径构建时变 Čech 2-复形，并用固定维度的 ambient roster 与光滑边权、三角权构造 regularized Hodge Laplacian L_w。随后用 L_w 的固定度数多项式通过局部算子应用逼近 harmonic projector，提取核空间 harmonic edge signals，再通过带 λ_R 正则的最小二乘 lift 将边信号转换为各节点二维力，并与排斥势和阻尼耦合形成闭环加速度。理论部分给出安全初始状态下轨迹唯一性、离线有理下界构造与收敛证明，数值部分用 15 秒仿真验证闭合效果。",
+        "result": "理论上，离线有限计算可给出累积孔洞面积的有理下界，该下界序列收敛到真实累积孔洞面积，无论其为有限或无限；若极限有限，则任意固定长度时间窗上的平均归一化孔洞面积随时间趋于零。数值上，15 秒演示中所有孔洞在 9.9 秒时闭合，并保持关闭直到仿真结束。",
+        "conclusion": "该工作表明，分布式 harmonic-covariance 反馈可在给定假设下实现平面机器人集群的孔洞闭合，并提供仅依赖模型与初始状态、无需查询轨迹的闭合判据。其贡献在于把代数拓扑孔洞检测与局部可实现的力控结合，但闭合结论是时间平均意义，并依赖孔洞不分裂合并等条件。",
+        "key_details": "关键细节包括传感半径 r_s、边与三角光滑阈值 ε_E 和 ε_F、边权 a_e 与三角权 b_f 的局部 Lipschitz 构造、ambient roster 维度为 N 选 2 和 N 选 3、保持 D1D2=0 的 D1 与 D2 设计、正则 Hodge Laplacian L_w=D1^T D1+D2D2^T，以及 lift 最小二乘中 λ_R 正则对应的解 G_i^{-1}T_i。超参还涉及排斥势参数 a、b、g、τ_U 和阻尼增益 α；控制力局部 Lipschitz 保证安全初始状态下轨迹唯一，近似可达到任意精度并有显式误差界，离线有理下界无需轨迹数据。局限包括三角形组合数随智能体数增长、孔洞面积需可测有界且连续演化不分裂不合并、仅有限临时新孔洞，以及数值验证仅为 15 秒演示。"
+      },
+      "affiliations": [
+        "Lehigh University"
+      ],
+      "affiliations_text": "Lehigh University",
+      "score": 4.1551426778143705,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.12549v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/12/261012549v1-fly-by-code-embodied-coding-agents-for-aerial-manipulation-with-active-visual-and-physical-feedback",
+      "source": "arxiv",
+      "title": "Fly-by-Code: Embodied Coding Agents for Aerial Manipulation with Active Visual and Physical Feedback",
+      "authors": [
+        "Jaewoo Lee",
+        "Jeongyeon Seo",
+        "Sihyun Cho",
+        "Gyeongrak Choe",
+        "Yutong Wang",
+        "Bavin Saravanan",
+        "Jia-Bin Huang",
+        "Furong Huang",
+        "Sebastian Scherer",
+        "Guanya Shi",
+        "H. Jin Kim",
+        "Seungjae Lee",
+        "Dongjae Lee"
+      ],
+      "authors_text": "Jaewoo Lee, Jeongyeon Seo, Sihyun Cho, Gyeongrak Choe, Yutong Wang, Bavin Saravanan, Jia-Bin Huang, Furong Huang, Sebastian Scherer, Guanya Shi, H. Jin Kim, Seungjae Lee, Dongjae Lee",
+      "abstract": "Embodied coding agents construct robot policies from natural-language instructions by generating executable programs and refining them from execution feedback. This refinement assumes that execution feedback reveals whether the task succeeded and, after a failure, provides sufficient evidence to guide program revision. Aerial manipulation violates this assumption in two ways. Payload constraints restrict onboard camera coverage and leave task-critical outcomes outside the robot's view (partial observability), while strong dynamic coupling and limited control margins make physical interactions fragile (limited interaction robustness) and leave failure causes unresolved. Re-examining the same feedback cannot recover observations that were never collected or separate failure causes that the available evidence does not distinguish. To acquire this missing evidence, we introduce Active Feedback (AF), an active \"View and Probe\" framework. When execution feedback leaves unresolved questions, the agent synthesizes a separate diagnostic program that runs in simulation to inspect unseen outcomes from informative viewpoints (View) or test hypotheses about failure causes through targeted physical interactions (Probe). Across six simulated aerial manipulation tasks with 60 trials per condition, AF reduces false completion declarations from 25 to 5 and raises final task success from 31.7% to 75% compared with terminal feedback under the same coding-agent configuration and task-execution limit. Using shared robot APIs, task programs refined with AF in simulation run on a physical aerial manipulator without task-program source-code modification and complete multi-stage manipulation tasks in the real world. These results show that executable diagnosis fills gaps in execution feedback for embodied coding agents, improving both completion assessment and program refinement in aerial manipulation.",
+      "url": "http://arxiv.org/abs/2610.12549v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12549v1",
+      "tldr": "Fly-by-Code introduces Active Feedback, a post-execution “View and Probe” diagnostic stage in which embodied coding agents generate executable programs to actively acquire missing visual or physical evidence in simulation, improving aerial manipulation success and enabling transfer to real-world hardware.",
+      "detailed_reading": {
+        "motivation": "具身编码智能体通过生成可执行程序并依据执行反馈迭代修正来构建机器人策略，但这一范式隐含假设反馈能揭示任务是否成功、并在失败后提供足以指导修改的证据。空中操作从两方面打破该假设：载荷限制压缩机上相机视野，使关键结果落在视野之外（部分可观测，造成“结果观测缺失”）；强动态耦合与有限控制裕度使物理交互脆弱，失败原因难以区分（交互鲁棒性受限，造成“失败原因未决”）。重复检视同一批反馈无法找回从未采集的观测，也无法区分现有证据无法分辨的失败原因，因此必须主动获取新证据。",
+        "method": "Fly-by-Code 在仿真程序精炼循环中引入 Active Feedback（AF）这一显式的“执行后诊断阶段”。输入是自然语言任务指令、执行日志、终端观测与语义地图摘要；智能体先写出调用共享机器人 API 的任务程序并执行，环境在诊断前已记录任务得分。随后智能体针对本次尝试的具体不确定性，编写一个独立的诊断程序（同一套 API，如 look、get_observation、goto_pose、open_gripper、release_and_hold、report），执行两类诊断动作：View 即飞行到能回答特定问题的信息性视角（必要时用语义地图查询定位物体），返回图像及智能体自写的检视说明与分割深度测量等控制台输出；Probe 即执行以信息价值而非任务进度为目标的定向物理交互（如不同接触点的推、门铰链测试、尝试举升以探测载荷能力）并测量响应。诊断程序从任务程序留下的状态出发，可定位到失败发生的那一步而无需重放。最后智能体综合诊断证据与原始执行日志，输出 FINISH 或 REGENERATE；环境重置物理状态但诊断信息保留在上下文中，用于下一轮任务程序修正。整个流程在同一提示词下跨任务通用，诊断程序按每次尝试单独合成。",
+        "result": "在六个仿真空中操作任务、每种条件 60 次试验的设定下，相同编码智能体配置与相同任务执行次数上限下，AF 将虚假完成声明从 25 次降至 5 次，将最终任务成功率从 31.7% 提升至 75%。案例层面，2-Objects Pick-and-place 中任务程序报告两件工具均已放置，View 诊断从俯视与地面附近视角发现工具实际掉落，智能体据此拒绝成功声明并选择 REGENERATE；Align 任务中连续推动使纸箱持续旋转，Probe 比较六个接触点的推动响应，下一版任务程序把测量结果转化为推-响应模型来选取接触位置。由于仿真与硬件共享任务级 API，经 AF 在仿真中精炼的任务程序无需修改源码即可部署到实体空中机械臂，并在初始位姿与朝向波动的条件下重复完成 2-Objects Pick-and-place 与 Cabinet 两阶段（含多阶段）操作任务。",
+        "conclusion": "结果表明，可执行诊断能够填补具身编码智能体执行反馈中的证据空缺，同时改善完成判定与程序修正：AF 用一次性的诊断程序把“无法从既有反馈回答的问题”转化为可执行的主动观测或物理探测，显著降低误报成功并提升最终成功率，且仿真精炼的程序可零源码修改地迁移到真实空中机械臂，验证了该范式的 sim-to-real 可用性。",
+        "key_details": "实现基于 Isaac Lab、在 AM-Bench 上扩展的六个任务，仿真体为全向空中机械臂，共享执行后端负责碰撞感知的全身运动规划并跟踪生成轨迹；智能体与诊断程序共用同一套高层机器人 API 与同一提示词，但因任务得分已在诊断前记录、且下一轮尝试前环境重置，诊断动作不计入任务收益，从而允许 Probe 执行诸如超载举升这类任务执行中不应做的动作。诊断证据以图像+智能体自写检视笔记+控制台测量（如分割深度物体位置、接触响应）形式回流到上下文，支持 View 与 Probe 在同一程序内组合。关键约束与局限：诊断在仿真中进行（真实世界仅做零修改部署验证），依赖语义地图与深度分割等感知模块质量，效果受仿真动力学与真实差异影响，未给出诊断程序生成的Token/时间开销、超参或复杂度分析。"
+      },
+      "affiliations": [
+        "Seoul National University",
+        "University of Maryland, College Park",
+        "Carnegie Mellon University",
+        "All Purpose AI",
+        "Kyung Hee University"
+      ],
+      "affiliations_text": "Seoul National University, University of Maryland, College Park, Carnegie Mellon University, All Purpose AI, Kyung Hee University",
+      "score": 4.10087403996887,
+      "score_text": "4.1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.12530v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012530v1-cachescope-exact-compute-allocation-for-training-free-diffusion-acceleration",
+      "source": "arxiv",
+      "title": "CacheScope: Exact-Compute Allocation for Training-Free Diffusion Acceleration",
+      "authors": [
+        "Qinhan Lyu",
+        "Jusheng Zhang",
+        "Zhixing Zhang",
+        "Hao Liu",
+        "Zijie Liang",
+        "Jin Jiang",
+        "Keze Wang"
+      ],
+      "authors_text": "Qinhan Lyu, Jusheng Zhang, Zhixing Zhang, Hao Liu, Zijie Liang, Jin Jiang, Keze Wang",
+      "abstract": "Training-free feature reuse accelerates diffusion transformer inference by replacing full denoising computation at selected steps with cached approximations. Existing methods mainly improve the reconstruction of skipped features, but we find that once a stable first-order reconstructor is used, increasing reconstruction complexity brings limited gains, whereas the placement of exact-computation steps has a much larger effect on fidelity. More importantly, absolute shallow-probe variation is jointly affected by input-trajectory displacement and network response strength, and therefore does not directly reflect cache risk. We address this confounding by normalizing probe-output variation with the corresponding input displacement, yielding a directional gain per unit trajectory movement. Based on this signal, we propose CacheScope, which identifies high-risk reuse steps online and selectively falls back to full denoising computation while leaving the underlying cache reconstructor unchanged. CacheScope requires no additional training, gradients, auxiliary networks, or prompt-specific offline schedule optimization. Across FLUX.1-dev, Wan2.1-T2V-1.3B, and Open-Sora 1.2, CacheScope achieves up to 3.57x acceleration and reduces median LPIPS by up to 70.1% over the strongest probe-based baseline.",
+      "url": "http://arxiv.org/abs/2610.12530v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12530v1",
+      "tldr": "CacheScope is a training-free diffusion acceleration scheduler that normalizes shallow-probe output variation by input-trajectory displacement to identify high-risk cache-reuse steps online and selectively fall back to exact denoising, achieving up to 3.57× speedup and up to 70.1% lower median LPIPS across image and video diffusion transformers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sun Yat-sen University"
+      ],
+      "affiliations_text": "Sun Yat-sen University",
+      "score": 4.083240145877339,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.12544v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012544v1-transformer-based-masked-diffusion-models-provably-learn-distributions-with-latent-structure",
+      "source": "arxiv",
+      "title": "Transformer-Based Masked Diffusion Models Provably Learn Distributions with Latent Structure",
+      "authors": [
+        "Jingda Wu",
+        "Changxiao Cai"
+      ],
+      "authors_text": "Jingda Wu, Changxiao Cai",
+      "abstract": "Masked diffusion models (MDMs) generate discrete data by iteratively unmasking multiple tokens in parallel using a learned mask predictor. Their output carries two errors: parallelization error due to parallel sampling, and estimation error from the mask predictor learned with finite samples. Existing theory treats these errors separately, and the available statistical bounds typically scale with the number $V^L$ of length-$L$ sequences over a vocabulary of size $V$, suffering from the curse of dimensionality. In this work, we establish end-to-end statistical guarantees showing that transformer-based MDMs learn structured distributions with a sample complexity governed by their latent structure. Specifically, we model this structure through mixtures of hidden Markov trees, which capture latent dependencies within components and heterogeneity across components. When the data distribution is well approximated by such a mixture, a transformer-based MDM with parallel unmasking schedules achieves $\\varepsilon$-accurate sampling in KL divergence with $\\widetilde{O}(LK_{\\mathrm{par}}/\\varepsilon)$ training samples, where $K_{\\mathrm{par}}$ is polynomial in $L$, $V$, the number of hidden states, and the number of mixture components. The transformer network and sampling procedure require no knowledge of the tree topologies or component parameters, thereby adapting to the unknown latent structure automatically. Overall, our results provide theoretical justification for the empirical effectiveness of MDMs on real-world data.",
+      "url": "http://arxiv.org/abs/2610.12544v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12544v1",
+      "tldr": "This paper proves end-to-end statistical guarantees for transformer-based masked diffusion models, showing that when data follow a mixture of hidden Markov trees they achieve ε-accurate KL sampling with Õ(LK_par/ε) samples—depending polynomially on latent-structure parameters rather than the full sequence space V^L—while automatically adapting to unknown tree topologies and component parameters.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Michigan"
+      ],
+      "affiliations_text": "University of Michigan",
+      "score": 4.0661175744541795,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.12495v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012495v1-kairos-toward-a-byte-level-foundation-model-for-every-modality",
+      "source": "arxiv",
+      "title": "Kairos: Toward a Byte-Level Foundation Model for Every Modality",
+      "authors": [
+        "Fabien Furfaro"
+      ],
+      "authors_text": "Fabien Furfaro",
+      "abstract": "Small language models trained on a single local machine leave little room for architectural trial and error. Kairos combines bidirectional gated-DeltaNet linear attention and sliding-window attention over shared projections (LiZAttention2), block-wise Attention-Residual aggregation, a sparse Mixture-of-Experts (MoE) feed-forward layer and a multi-scale byte-level codec, trained with a uniform-noise denoising objective over one byte space shared by text, image, audio, video, lidar and control streams; this report asks whether the combination optimizes at all before asking whether it is useful. We give code-derived algorithms for each component, including a cross-session recurrent-state memory gate, then run convergence sanity checks: overfittinga single 440-byte sentence at 1--15M parameters, text only, with three seeds for codec and attention choices and single-run sweeps for seven further factors. The two attention variants tested at 3\\,000 steps (LiZAttention2 and window attention alone) reach a minimum loss near $10^{-3}$. After 600 steps, the mean minimum loss ranges from 0.018 (patch codec) to 0.354 (depthwise convolutional codec) with an identical ranking on three seeds. An apparent advantage of shared over separate attention projections closes with more steps or more diverse data and reverses when the projections are frozen: it is a convergence-speed effect, not a capacity effect. These checks suggest that the implementation optimizes; they say nothing about generalization, multimodal training or comparison with existing models, which a planned pretraining run is meant to address. The Discussion sizes a 200M-total/25M-active target analytically; none of its throughput figures is measured. Code is available at https://github.com/fabienfrfr/Kairos . Python package at https://pypi.org/project/kairos-fm/ .",
+      "url": "http://arxiv.org/abs/2610.12495v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12495v1",
+      "tldr": "Kairos combines bidirectional gated-DeltaNet/window attention, block-wise Attention-Residual aggregation, sparse MoE, and a multi-scale byte-level codec into a single denoising model over text, image, audio, video, lidar, and control bytes, but this report only provides tiny-scale convergence sanity checks showing the architecture optimizes—not that it generalizes or outperforms existing models.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8517191263470214,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.12586v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012586v1-realism-vs-accuracy-event-sequence-forecasting-from-a-generative-modeling-perspective",
+      "source": "arxiv",
+      "title": "Realism VS Accuracy: Event Sequence Forecasting from a Generative Modeling Perspective",
+      "authors": [
+        "Dmitry Osin",
+        "Egor Surkov",
+        "Petr Mokrov",
+        "Igor Udovichenko",
+        "Ivan Karpukhin",
+        "Evgeny Burnaev",
+        "Egor Shvetsov",
+        "Alexander Korotin"
+      ],
+      "authors_text": "Dmitry Osin, Egor Surkov, Petr Mokrov, Igor Udovichenko, Ivan Karpukhin, Evgeny Burnaev, Egor Shvetsov, Alexander Korotin",
+      "abstract": "Event sequences are chains of random events, each described by heterogeneous (numerical and categorical) features. The problem of event sequence forecasting occurs in finance, healthcare, business process intelligence, and other fields. In this work, we study multi-horizon forecasting of event sequences as a conditional generative modeling problem. We evaluate forecasts not only for prediction accuracy, but also for distributional realism. To this end, we present a benchmark comprising metrics for both quality aspects, strong statistical baselines, recent models adapted from adjacent fields, and curated real-world datasets. Careful evaluation reveals that no method excels at both accuracy and realism, highlighting a fundamental trade-off between the two. Finally, we introduce Wasserstein BaryBooster, an algorithm that aggregates samples from a realism-strong diffusion model into a state-of-the-art predictor, demonstrating that distributional realism can be converted into prediction accuracy. Code is available at https://github.com/xaosina/event-sequence-forecasting.",
+      "url": "http://arxiv.org/abs/2610.12586v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12586v1",
+      "tldr": "This paper frames multi-horizon event sequence forecasting as conditional generative modeling, benchmarks prediction accuracy against distributional realism to reveal a fundamental trade-off, and introduces Wasserstein BaryBooster, which aggregates realism-strong diffusion samples into a state-of-the-art predictor to convert realism into accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Applied AI Institute",
+        "AXXX",
+        "ITMO University",
+        "Vega Institute Foundation",
+        "SB AI Lab"
+      ],
+      "affiliations_text": "Applied AI Institute, AXXX, ITMO University, Vega Institute Foundation, SB AI Lab",
+      "score": 3.7891153155400548,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.12561v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012561v1-what-should-embodied-agents-remember-benchmarking-and-evaluating-memory-modality-for-embodied-agents",
+      "source": "arxiv",
+      "title": "What Should Embodied Agents Remember? Benchmarking and Evaluating Memory Modality for Embodied Agents",
+      "authors": [
+        "Junxiang Wang",
+        "Yuchen Liu",
+        "Yi Wu",
+        "Guofei Chen",
+        "Nir Pechuk",
+        "Tao Chen",
+        "Zackory Erickson",
+        "Yuzhe Qin",
+        "Tianyu Li"
+      ],
+      "authors_text": "Junxiang Wang, Yuchen Liu, Yi Wu, Guofei Chen, Nir Pechuk, Tao Chen, Zackory Erickson, Yuzhe Qin, Tianyu Li",
+      "abstract": "Memory allows large language model (LLM) agents to use past experience, often stored as textual records, when responding to requests. For embodied agents that control robots, visual and spatial observations introduce a broader choice of memory modalities, affecting both the information available for subsequent tasks and the model inference costs of constructing and using memory. We introduce MeMoREval, a benchmark for studying this problem through a controlled experience-request protocol. Agents first experience a sequence of events without knowing the subsequent tasks, and subsequently they use memory to respond to information and action requests without receiving new observations. The benchmark comprises 53 tasks across four simulated indoor environments and measures task success alongside the inference costs of memory construction and use. Our reference evaluations reveal that storing frames outperforms storing generated descriptions at lower write-time inference cost for the primary model, while storing frames with scene graphs achieves the highest aggregate task success for every tested model. Extensions to accumulated experience, selective frame retention, and visual input to memory writers demonstrate how the benchmark accommodates further memory-design investigations. Two physical-robot demonstrations establish the feasibility of applying its protocol beyond simulation.",
+      "url": "http://arxiv.org/abs/2610.12561v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12561v1",
+      "tldr": "The paper introduces MeMoREval, a benchmark for evaluating how embodied LLM agents should store memory, finding that storing visual frames—especially with scene graphs—outperforms generated descriptions in task success or write-time inference cost across simulated and physical-robot tasks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.783110202930859,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.12496v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012496v1-an-input-dependent-readout-phase-for-resonant-sequence-models",
+      "source": "arxiv",
+      "title": "An Input-Dependent Readout Phase for Resonant Sequence Models",
+      "authors": [
+        "Shivesh Rane"
+      ],
+      "authors_text": "Shivesh Rane",
+      "abstract": "Sequence models with a fixed-size state avoid the quadratic cost of attention, but face a design choice. An input-dependent state transition gives content-dependent memory at the cost of FFT-based training, while a fixed transition keeps the O(T log T) convolutional path but reads memory the same way for every input. ResonatorLM, a recent model of the second kind, reads a bank of damped complex oscillators through a fixed learned phase per head. We make that readout phase a function of the current token, which adds input dependence to the read only, keeps the convolution exact, and costs 0.2 percent more parameters. An analysis of the untrained bank shows that phase does encode elapsed time, but an ordinary token falls below the background within 2-8 steps and no choice of damping extends linear reconstruction beyond about 16 tokens. In 6M-parameter character-level models on WikiText-2, the input-dependent phase matches the original at the training length and removes its failure beyond it: trained on 256 tokens and tested on 1024, perplexity falls from 12.81 to 3.76. We trace the failure to long-memory heads that accumulate more history than training exposed them to. The learned phase tracks the current character rather than distance and does not improve retrieval.",
+      "url": "http://arxiv.org/abs/2610.12496v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12496v1",
+      "tldr": "Making ResonatorLM’s fixed readout phase input-dependent adds content-dependent memory reading at negligible parameter cost, matches the original at training length, and removes its long-context failure (e.g., WikiText-2 character perplexity from 12.81 to 3.76 when trained on 256 tokens and tested on 1024), even though the learned phase tracks the current token rather than elapsed time.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.762598211925618,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.12599v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012599v1-staple-static-sparse-upcycling-of-pretrained-checkpoints-via-embedding-modules",
+      "source": "arxiv",
+      "title": "STAPLE: Static Sparse Upcycling of Pretrained Checkpoints via Embedding Modules",
+      "authors": [
+        "Ranajoy Sadhukhan",
+        "Euijin Hong",
+        "Sheng Cao",
+        "Zechun Liu",
+        "Shuowei Jin",
+        "Sha Li",
+        "Changlong Yu",
+        "Xin Liu",
+        "Qin Lu",
+        "Zhenyu Shi",
+        "Priyanka Nigam",
+        "Beidi Chen"
+      ],
+      "authors_text": "Ranajoy Sadhukhan, Euijin Hong, Sheng Cao, Zechun Liu, Shuowei Jin, Sha Li, Changlong Yu, Xin Liu, Qin Lu, Zhenyu Shi, Priyanka Nigam, Beidi Chen",
+      "abstract": "Sparse computation can scale the parametric capacity of LLMs without proportionally increasing active computation, but pretraining sparse architectures remains expensive and data-hungry. Existing sparse upcycling methods mainly target Mixture-of-Experts models, where expert homogeneity, sample inefficiency, and system overheads can limit practical scalability. Static sparse memory offers predictable access and token-specific updates that can help address these challenges, but naively integrating it into pretrained computation yields poor returns. In this work, we introduce STAPLE, a recipe built upon STEM for integrating static sparse memory into pretrained models. Whereas STEM replaces FFN up-projections with token-indexed embeddings, STAPLE retains them and adds the embeddings as a residual pathway, preserving pretrained computation while learning complementary token-specific information in a scalable manner. On OLMo-2 1B, STAPLE improves over continued dense training by 4.27 points on HumanEval, 2.80 on MBPP, 2.27 on GSM8K, and 1.65 on DROP. Average performance increases with static capacity, and improvements persist on the larger OLMo-2 7B backbone. STAPLE also outperforms static sparse baselines such as STEM and an Engram-style model, and achieves a higher average score than an MoE upcycling baseline while decoding 2x faster with less than half its GPU model memory and measured GPU energy per token in our throughput-oriented decoding evaluation. Importantly, despite introducing billions of parameters late in training, our host-offloaded implementation keeps generation throughput within 1.5% and training throughput within 3% of the dense baseline, while caching only the ~5% most frequent embeddings on GPU. These results show that static sparse memory can provide a sample-efficient, scalable, and sustainable path for expanding pretrained models without sparse pretraining from scratch.",
+      "url": "http://arxiv.org/abs/2610.12599v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12599v1",
+      "tldr": "STAPLE is a static sparse upcycling method that augments pretrained LLM checkpoints by retaining their FFN up-projections and adding token-indexed embedding tables as a zero-initialized residual pathway, enabling sample-efficient, scalable performance gains over continued dense training and MoE upcycling while preserving training and serving efficiency via CPU offloading.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Amazon Research",
+        "Meta AI",
+        "D. E. Shaw Research",
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Amazon Research, Meta AI, D. E. Shaw Research, Carnegie Mellon University",
+      "score": 3.7433653612132685,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.12538v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012538v1-efficient-learning-of-survival-analysis-models-under-outcome-dependent-truncation-and-censoring",
+      "source": "arxiv",
+      "title": "Efficient Learning of Survival Analysis Models Under Outcome-Dependent Truncation and Censoring",
+      "authors": [
+        "Itai Zilberstein",
+        "Ioannis Anagnostides",
+        "Arman Kilic",
+        "Tuomas Sandholm"
+      ],
+      "authors_text": "Itai Zilberstein, Ioannis Anagnostides, Arman Kilic, Tuomas Sandholm",
+      "abstract": "Modern machine learning models are typically trained on data assumed to be representative of the predictive tasks the model will face in the future, but practical datasets violate this assumption. We focus on outcome-dependent truncation in which an observation appears in the training data depending on its label. Our work connects two largely distinct literatures: efficient learning under truncation and survival analysis. Existing methods for truncated survival analysis do not characterize the optimization landscape and instead rely on iterative procedures such as expectation maximization. We address this gap and prove that Cox regression can be efficiently learned under truncated and right-censored data using first-order optimization when the baseline hazard is known (despite nonconvexity). In contrast, when the baseline hazard is learned jointly, we construct identifiable and correctly specified models whose negative log-likelihood contains strict suboptimal local minima. On experiments with four survival datasets, we show that accounting for truncation reduces the prediction bias induced by naive Cox regression and extends to neural networks. We also show orders of magnitude speedups compared to standard expectation maximization.",
+      "url": "http://arxiv.org/abs/2610.12538v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12538v1",
+      "tldr": "This paper proves that Cox survival models under outcome-dependent truncation and right-censoring can be efficiently learned via first-order optimization when the baseline hazard is known—though jointly learning the baseline can create suboptimal local minima—and demonstrates empirically that accounting for truncation reduces bias and yields orders-of-magnitude speedups over EM, extending to neural networks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Optimized Markets, Inc.",
+        "Medical University of South Carolina",
+        "Strategic Machine, Inc.",
+        "Carnegie Mellon University",
+        "Strategy Robot, Inc."
+      ],
+      "affiliations_text": "Optimized Markets, Inc., Medical University of South Carolina, Strategic Machine, Inc., Carnegie Mellon University, Strategy Robot, Inc.",
+      "score": 3.7235479210467655,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.12606v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012606v1-minimum-bounding-sets-for-n-1-1-branch-contingencies-under-thermal-and-voltage-limits-in-linear-network-models",
+      "source": "arxiv",
+      "title": "Minimum Bounding Sets for N-1-1 Branch Contingencies Under Thermal and Voltage Limits in Linear Network Models",
+      "authors": [
+        "Timothy N. Thacker"
+      ],
+      "authors_text": "Timothy N. Thacker",
+      "abstract": "N-1-1 contingency analysis studies the loss of one element followed by system adjustments and the loss of a second. The number of contingency pairs increases quadratically with the number of applicable elements, and traditional ranking-based screening methods cannot guarantee that omitted pairs are bounded. This paper determines the minimum bounding set of two-branch-outage pairs: the smallest set that can reproduce the worst value of every violated thermal and voltage limit of a linear network model. In the DC model, effects of an outage pair can be quantified by the extent of the coupling between the outages. The paper measures this by the cosine between the two outages in the network's cycle space, with a bound that splits into one term per outage and is within a near-ideal factor of $\\sqrt{1+\\varepsilon}$. This argument extends to every linear model in which an outage subtracts a positive semi-definite low-rank term from a symmetric positive definite matrix, with a tight bound and a collapse test. A model with voltage magnitudes is extracted by performing one Newton step on the energy function of the lossless network in rectangular coordinates. A best-first search built on these bounds reproduced brute force on public systems of up to 2{,}869 buses with 130 to 3{,}800 times fewer pair evaluations for flows and 170 to 23{,}700 times fewer for voltages. Gaps in translation to nonlinear models are explored on the IEEE 118-bus system.",
+      "url": "http://arxiv.org/abs/2610.12606v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12606v1",
+      "tldr": "The paper derives exact minimum bounding sets for N-1-1 branch contingencies in linear network models by using cycle-space cosine bounds on outage-pair interactions—extended to low-rank positive semidefinite updates—to build a best-first search that reproduces brute-force worst-case thermal and voltage violations with orders-of-magnitude fewer pair evaluations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Tennessee, Knoxville",
+        "CURENT"
+      ],
+      "affiliations_text": "The University of Tennessee, Knoxville, CURENT",
+      "score": 3.676049389767431,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.12527v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012527v1-behind-the-meter-photovoltaic-visibility-from-net-smart-meters-deployment-regimes-and-operational-insights",
+      "source": "arxiv",
+      "title": "Behind-the-Meter Photovoltaic Visibility from Net Smart Meters: Deployment Regimes and Operational Insights",
+      "authors": [
+        "Jack Zheng",
+        "Hao Wang"
+      ],
+      "authors_text": "Jack Zheng, Hao Wang",
+      "abstract": "Distribution operators need visibility of behind-the-meter photovoltaic (PV) generation, yet most residential customers are observed only through net smart meters. Deep-learning-based PV disaggregation can restore this visibility, but its operational value depends on whether the model serves known customers, new customers, future periods, or new regions. We quantify this dependence using four deployment regimes that separate household transfer from temporal extrapolation, applied to Ausgrid smart-meter data with cross-dataset adaptation to the Pecan Street data. Using a fixed training protocol, we benchmark representative deep sequence architectures for PV disaggregation under regime-matched evaluation. At a fixed 48-hour context length, daylight mean absolute error (MAE) of the best model rises from 0.104~kW on seen households in the future test period to 0.185~kW on unseen households over the same period, and under a fixed training contract the deployment regime explains far more of the error variation than model choice. Under target-domain normalization, fine-tuning on five target-region households reduces source-model transfer error by 28\\%--36\\%. Long input windows help known-customer extrapolation, while their new-customer benefits vary by model. These findings suggest regime-matched error budgets, limited target supervision for model adaptation in new regions, and use-case-dependent context selection for energy data analytics.",
+      "url": "http://arxiv.org/abs/2610.12527v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12527v1",
+      "tldr": "This paper shows that for deep-learning-based behind-the-meter PV disaggregation from net smart meters, the deployment regime—especially seen versus unseen households and temporal extrapolation—dominates model choice in determining error, with known-customer accuracy substantially underestimating new-customer errors and limited target-domain fine-tuning reducing cross-region transfer error by 28–36%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Monash University"
+      ],
+      "affiliations_text": "Monash University",
+      "score": 3.6690637233163614,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.12537v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012537v1-market-impact-estimation-via-causal-foundation-models",
+      "source": "arxiv",
+      "title": "Market Impact Estimation via Causal Foundation Models",
+      "authors": [
+        "Dennis Thumm",
+        "Ying Chen"
+      ],
+      "authors_text": "Dennis Thumm, Ying Chen",
+      "abstract": "When a trader executes a large order, the relevant question is not \\emph{what will the price be?} but \\emph{what would the price have been had I not traded?} Market impact is thus a causal quantity, yet classical models (Almgren--Chriss, propagators) regress price on flow, which is biased whenever informed flow moves prices through information as well as trading. We present a proof-of-concept \\emph{Causal Market Simulator}: a continuous-time causal prior-data fitted network (PFN) trained on a synthetic market prior in which a hidden informational flow confounds the flow--price relation by construction, with confounding strength an exact per-episode knob. On this prior, the naive estimator's bias follows a closed form we confirm empirically (up to 68\\% overestimation), while the PFN tracks the unbiased true-parameter oracle at high confounding. Its \\emph{do-ablated twin}, the same model with the intervention inputs removed, collapses onto the pre-window mean. Zero-shot, the model responds at the ground-truth scale to metaorders in an ABIDES limit-order book ($+0.38$ pre-onset standard deviations against seed-replay counterfactuals), and its intervention response replicates on about 2,300 detected flow bursts in BTC/ETH/SOL perpetuals and 3,800 on Nasdaq equities, evidence consistent with, though not proof of, causal transfer. Off-prior the response degrades gracefully, and split-conformal recalibration repairs interval calibration. Transfer hinges on encoding the metaorder as added flow rather than a clamped price level, not on more training. A recurrent state-space variant closes the remaining shape gap: its impact accrues over execution duration where the transformer's stays flat, raising the correlation with measured metaorder impact from $+0.68$ to between $+0.92$ and $+0.96$, at the cost of weaker on-prior deconfounding that traces to the training recipe rather than to recurrence.",
+      "url": "http://arxiv.org/abs/2610.12537v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12537v1",
+      "tldr": "**TLDR:** The paper introduces a continuous-time causal prior-data fitted network (PFN) trained on a synthetic market prior with controllable confounding, which avoids the information-channel bias of classical price-on-flow regressions and estimates market impact as a true interventional (do-operator) quantity, showing zero-shot transfer to ABIDES limit-order books and real crypto/equity metaorders.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Singapore"
+      ],
+      "affiliations_text": "National University of Singapore",
+      "score": 3.5741659863691497,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.12520v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012520v1-circuittree-composing-circuits-into-a-syllable-transcriber",
+      "source": "arxiv",
+      "title": "CircuitTree: Composing Circuits into A Syllable Transcriber",
+      "authors": [
+        "Jiankun Wei",
+        "Ewan Dunbar",
+        "Gerald Penn"
+      ],
+      "authors_text": "Jiankun Wei, Ewan Dunbar, Gerald Penn",
+      "abstract": "The goal of circuit discovery is to decompose a monolithic neural network into tiny modular subnetworks which are interpretable in the sense that each does an identifiable subtask. We develop a practical method for composing arbitrarily many circuits into a single model. We propose a greedy, density-scaled composition algorithm that overcomes limitations of previous attempts to compose circuits by naive union, then generalize it to $N$ circuits via CircuitTree, a new data structure built on a $Θ(N\\log N)$ tree-compose schedule. We compose circuits pruned from HuBERT for classifying individual phonemes into a syllable classifier, a capability none of the 39 phoneme circuits has individually. Chaining CircuitTrees into a hierarchy-of-circuits pipeline, we transcribe open syllables at 64.8\\% accuracy, within 1.2 points of a 66.0\\% ceiling that shares no circuitry at all, with 99.5\\% of circuit components shared.",
+      "url": "http://arxiv.org/abs/2610.12520v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12520v1",
+      "tldr": "CircuitTree is a greedy, density-scaled composition method and Θ(N log N) tree-merge data structure that combines many independently pruned HuBERT phoneme circuits into a shared syllable transcriber, achieving 64.8% open-syllable transcription accuracy—within 1.2 points of a no-sharing ceiling—while sharing 99.5% of circuit components.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Toronto"
+      ],
+      "affiliations_text": "University of Toronto",
+      "score": 3.4599713649144492,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.12494v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012494v1-algebraic-integer-quantization-for-machine-learning-applications",
+      "source": "arxiv",
+      "title": "Algebraic Integer Quantization for Machine Learning Applications",
+      "authors": [
+        "Anthony Kostal-Vazquez",
+        "Vassil Dimitrov",
+        "Branden Butler"
+      ],
+      "authors_text": "Anthony Kostal-Vazquez, Vassil Dimitrov, Branden Butler",
+      "abstract": "In this article, we propose algebraic integer number formats (AINF) as a framework for highly configurable and accurate compressed computation. A key property of AINF is its straightforward reduction to purely integer arithmetic, enabling error-free multiply-accumulate operations. We develop a matrix multiplication engine that exploits this property, obtaining performance within a predictable factor of the most efficient numerical counterparts on modern hardware accelerators. Another key advantage of AIQ is the freedom to select algebraic integers tailored to the numerical characteristics of a given use case, offering optimization opportunities that are fundamentally unavailable in floating-point or fixed-point formats. Motivated by these properties, we introduce algebraic integer quantization (AIQ), a lossy compression format for large language model (LLM) inference, and provide results demonstrating that AIQ achieves competitive accuracy compared to the industry-standard MX format across a diverse set of models and benchmarks at equivalent bit-per-parameter budgets. The experiments presented in this article employ algebraic integers of degree two (quadratic integers); generalizations to higher-order and, in particular, multidimensional algebraic integers promise even greater computational advantages and remain a promising direction for future work.",
+      "url": "http://arxiv.org/abs/2610.12494v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12494v1",
+      "tldr": "The paper introduces algebraic integer quantization (AIQ), a configurable algebraic-integer-based format that enables error-free integer-only multiply-accumulate operations and achieves competitive LLM inference accuracy versus the MX format at equivalent bit-per-parameter budgets, while supporting matrix multiplication performance close to standard numerical hardware accelerators.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lemurian Labs Research Group",
+        "University of Calgary"
+      ],
+      "affiliations_text": "Lemurian Labs Research Group, University of Calgary",
+      "score": 3.4369699101235134,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.12528v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012528v1-glucoprism-protocol-supervised-pretraining-for-cross-cohort-glucose-transfer",
+      "source": "arxiv",
+      "title": "GlucoPRISM: Protocol-Supervised Pretraining for Cross-Cohort Glucose Transfer",
+      "authors": [
+        "Adinath Madhavrao Dukre",
+        "Abdullah Mohammad",
+        "Yifan Lu",
+        "Eran Segal",
+        "Ahmed Metwally",
+        "Imran Razzak"
+      ],
+      "authors_text": "Adinath Madhavrao Dukre, Abdullah Mohammad, Yifan Lu, Eran Segal, Ahmed Metwally, Imran Razzak",
+      "abstract": "Continuous glucose monitoring (CGM) foundation models encode each day as one vector that mixes who the person is, what happened that day and how the sensor measured it, so measurement differences travel with the representation into new cohorts. We ask whether pretraining can place the measurement component that harms transfer in known coordinates, so that deployment drops them with a fixed projection and no target data. GlucoPRISM supervises a GlucoFM backbone with response contracts, rules for how each part of the representation should change when only the day or only the sensor changes: a 64-dimensional Trait band should change with neither, a 48-dimensional State band only across days, and a 16-dimensional Sensor band should track the device. Synthetic sensor views calibrated on paired Dexcom and Libre recordings, different-day pairs and glucose-summary targets supply this supervision without clinical labels. Across twelve cross-cohort directions, dropping the Sensor band from the same frozen encoder raises mean transfer AUROC from 68.75 to 73.57, against 69.3 for GlucoFM. The gain has two parts. Into CGMacros, the one target cohort recorded with two sensor types, filtering adds 11 to 19 points, and this holds when the generator is recalibrated on half of the participants and scored on the other half. On the other eight directions filtering is neutral and the encoder itself exceeds GlucoFM by 3.5 points. The device remains linearly decodable after filtering, so the filter removes a device-related component that harms transfer rather than all measurement information. The retained bands improve window AUROC on thirteen of fourteen public task--cohort cells (Holm-adjusted p=0.031) and correlation on fourteen of fifteen clinical endpoints in an external cohort of 9,303 participants.",
+      "url": "http://arxiv.org/abs/2610.12528v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12528v1",
+      "tldr": "GlucoPRISM uses protocol-supervised response contracts to separate CGM representations into Trait, State, and Sensor bands, enabling deployment-time removal of the sensor component and improving cross-cohort glucose transfer AUROC from 68.75 to 73.57 without target data.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.2488456295142036,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.12636v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/12/261012636v1-selectively-actuated-fiberbots-for-high-precision-minimally-invasive-surgery",
+      "source": "arxiv",
+      "title": "Selectively Actuated Fiberbots for High-precision Minimally Invasive Surgery",
+      "authors": [
+        "Jinshi Zhao",
+        "Libaihe Tian",
+        "Alex Ranne",
+        "Qindong Zheng",
+        "Yue Li",
+        "Xiaotong Guo",
+        "Ziqi Yang",
+        "Ali Anil Demircali",
+        "Mohamed E. M. K. Abdelaziz",
+        "Bruno Gil Rosa",
+        "Ferdinando Rodriguez y Baena",
+        "Burak Temelkuran"
+      ],
+      "authors_text": "Jinshi Zhao, Libaihe Tian, Alex Ranne, Qindong Zheng, Yue Li, Xiaotong Guo, Ziqi Yang, Ali Anil Demircali, Mohamed E. M. K. Abdelaziz, Bruno Gil Rosa, Ferdinando Rodriguez y Baena, Burak Temelkuran",
+      "abstract": "Long, slender instruments are essential for minimally invasive surgery (MIS), but achieving precise distal manipulation becomes increasingly difficult when actuation extends along the entire instrument. Here, we present an electrothermally actuated fiber-based robot designed for MIS procedures, in which Joule heating is concentrated in the distal active segment. The fiber is fabricated using a thermal drawing process and uses embedded metallic wires for thermal actuation. This robotic fiber, 1.9 mm in diameter and 1.2 m in length, can precisely manipulate surgical laser fibers with positional precision below 100 $μ$m. The compact size of the fiber robot allows it to pass through the working channel of a flexible endoscope, while keeping both devices mechanically uncoupled to allow independent motion. A phantom demonstration combining the robotic fiber with a da Vinci instrument conceptually demonstrated its compatibility with existing endoscopic systems for clinical applications. Our robotic fiber enables precise distal motion and holds the potential to improve clinical outcomes by enhancing precision in MIS procedures.",
+      "url": "http://arxiv.org/abs/2610.12636v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.12636v1",
+      "tldr": "A 1.9-mm-diameter, 1.2-m-long electrothermally actuated fiberbot that concentrates Joule heating in its distal segment achieves sub-100-μm precision manipulation for minimally invasive surgery and can integrate with flexible endoscopes and da Vinci instruments.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Imperial College London",
+        "University of Glasgow"
+      ],
+      "affiliations_text": "Imperial College London, University of Glasgow",
+      "score": 3.0766762036305026,
+      "score_text": "3.1"
+    }
+  ]
+}
