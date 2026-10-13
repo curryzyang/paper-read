@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-10-13
+  - [日报](/2026/10/13/README)
 - 2026-10-12
   - [日报](/2026/10/12/README)
   - [精读 · DiffusionART: Efficient, Stable and Scalable Reinforcement of Diffusion Models](/2026/10/12/261012572v1-diffusionart-efficient-stable-and-scalable-reinforcement-of-diffusion-models)
