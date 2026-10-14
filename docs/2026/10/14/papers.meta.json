@@ -1,0 +1,735 @@
+{
+  "label": "2026-10-14",
+  "date": "2026-10-14",
+  "generated_at": "2026-10-14T16:31:48",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2610.13994v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/14/261013994v1-posterior-flow-matching",
+      "source": "arxiv",
+      "title": "Posterior Flow Matching",
+      "authors": [
+        "Chenrui Ma",
+        "Xi Xiao",
+        "Lin Zhao",
+        "Xinru Jiang",
+        "Tianyang Wang",
+        "Yanning Shen",
+        "Ferdinando Fioretto"
+      ],
+      "authors_text": "Chenrui Ma, Xi Xiao, Lin Zhao, Xinru Jiang, Tianyang Wang, Yanning Shen, Ferdinando Fioretto",
+      "abstract": "Flow matching learns how to transport noise toward data, but its mean prediction does not directly report the endpoint uncertainty remaining at an intermediate state. This paper introduces Posterior Flow Matching (PFM), a general generative modeling framework that learns conditional velocity means and componentwise variances with a Gaussian posterior model. The same model evaluation supplies both a transport prediction and endpoint uncertainty, making posterior diagnostics available throughout generation. These learned moments support a mean-driven ordinary differential equation (ODE) and a posterior-driven stochastic differential equation (SDE), whose local noise scales adapt to the predicted uncertainty. Across image, point-cloud, molecular, and action generation, PFM improves generation quality and provides endpoint-posterior readouts throughout generation.",
+      "url": "http://arxiv.org/abs/2610.13994v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13994v1",
+      "tldr": "Posterior Flow Matching (PFM) extends flow matching by learning Gaussian posterior means and componentwise variances, enabling simultaneous transport prediction and endpoint-uncertainty diagnostics for improved generation across images, point clouds, molecules, and actions.",
+      "detailed_reading": {
+        "motivation": "流匹配能够学习将噪声输运到数据，但其均值预测并不直接报告中间状态处剩余的端点不确定性。该工作试图在生成模型中同时获得输运预测与端点后验诊断，使不确定性可在整个生成过程中被读取。",
+        "method": "PFM 以噪声到数据的流匹配为输入与训练场景，将条件速度分布建模为高斯后验，并由同一网络同时学习条件速度均值和逐分量方差。训练时拟合这些条件矩，推理时每次模型评估即可输出输运预测和端点不确定性；基于学到的矩可构造均值驱动的 ODE 采样器，以及由后验驱动、局部噪声尺度随预测不确定性自适应的 SDE 采样器。该框架覆盖图像、点云、分子和动作生成等多类数据模态。",
+        "result": "在图像、点云、分子和动作生成任务上，PFM 均提升了生成质量，并在生成全程提供端点后验读数。摘要未给出具体数值指标，但可复现结论是：同一模型评估即可同时支持高质量输运与不确定性诊断。",
+        "conclusion": "PFM 是一个通用生成建模框架，把端点不确定性直接嵌入流匹配的矩学习与采样过程。通过均值驱动 ODE 和后验驱动 SDE，它兼顾生成质量与生成过程的可诊断性。",
+        "key_details": "关键实现点包括：用高斯后验建模条件速度，学习均值和逐分量方差；同一次前向评估同时给出输运预测与端点不确定性；均值驱动 ODE 用于确定性输运，后验驱动 SDE 将局部噪声尺度与预测不确定性耦合；实验覆盖图像、点云、分子和动作生成。局限在于摘要未披露损失函数、方差参数化、噪声调度、额外计算开销与不确定性校准指标，SDE 采样还可能引入随机性及对步长和噪声尺度的敏感性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.312347113928856,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2610.14008v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014008v1-generalized-pinn-based-inverse-estimation-of-spatially-varying-heat-transfer-coefficients-with-transfer-learning",
+      "source": "arxiv",
+      "title": "Generalized PINN-Based Inverse Estimation of Spatially Varying Heat Transfer Coefficients with Transfer Learning",
+      "authors": [
+        "Pradipan Maitra",
+        "Jariful Hassan",
+        "Arijit Hazra"
+      ],
+      "authors_text": "Pradipan Maitra, Jariful Hassan, Arijit Hazra",
+      "abstract": "This study investigates generalized boundary representations and transfer learning for physics-informed neural-network (PINN) estimation of spatially varying convective heat transfer coefficients (HTCs) in jet impingement cooling. Piecewise-linear (PWL) and neural-network boundary estimators are inferred from transient interior-temperature measurements and evaluated against CFD-CHT reference HTC profiles at Reynolds numbers of 5000, 10000 and 15000. A discrete Adjoint-FEM formulation with gradient regularization based on the $H^1$-seminorm provides an independent inverse-method comparison. Transfer learning is investigated under two source-target conditions: transfer between noise levels at the same Reynolds number, and transfer from a controlled Gaussian-profile problem to CFD-CHT-derived target problems at different Reynolds numbers. For the representative Re = 5000 target with 5% measurement noise, quadratic, PWL, and neural-network PINNs achieve relative HTC-profile errors of 5.08, 5.31 and 5.19%, respectively, while generalized representations reduce the error for the Re = 15000 target from 16.76% for the quadratic PINN to 14.41% and 14.46%. Transfer learning reduces target-training time by 57.86-81.71% for fixed-Reynolds-number transfer and by 50.59-84.94% for Gaussian-to-CHT transfer. Its effect on reconstruction accuracy is target dependent: fixed-profile PWL transfer remains within 0.30 percentage points of scratch training, whereas Gaussian-to-CHT transfer produces differences of 0.10-1.52 percentage points across targets and representations. These results demonstrate that generalized PINN representations can accommodate spatially varying HTC profiles without a prescribed quadratic form, while transfer learning can substantially reduce target-training cost for repeated inverse estimation, with the resulting reconstruction accuracy depending on source-target compatibility.",
+      "url": "http://arxiv.org/abs/2610.14008v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14008v1",
+      "tldr": "This paper shows that generalized PINN boundary representations can estimate spatially varying convective heat transfer coefficients from transient interior temperature data without a prescribed quadratic form, while transfer learning cuts target-training time by roughly 50–85% with accuracy depending on source-target compatibility.",
+      "detailed_reading": {
+        "motivation": "空间变化的对流换热系数（HTC）反演常依赖预设函数形式，难以适应射流冲击冷却中复杂边界；同时重复开展 PINN 反演训练代价较高。本文因此研究广义边界表示与迁移学习，以提升 PINN 反演的适应性和效率。",
+        "method": "研究以瞬态内部温度测量为输入，在射流冲击冷却问题中用 PINN 反演空间变化 HTC，并比较二次型、分段线性（PWL）和神经网络边界估计器；同时采用基于 H^1 半范数梯度正则化的离散 Adjoint-FEM 作为独立逆方法对照。评估对象为 Reynolds 数 5000、10000 和 15000 下的 CFD-CHT 参考 HTC 剖面，迁移学习设置两类源到目标条件：同一 Reynolds 数下不同噪声水平之间迁移，以及从受控 Gaussian 剖面问题迁移到不同 Reynolds 数的 CFD-CHT 目标问题，并与从头训练比较训练时间和重建精度。",
+        "result": "在 Re=5000 且 5% 测量噪声的代表性目标上，二次型、PWL 和神经网络 PINN 的相对 HTC 剖面误差分别为 5.08%、5.31% 和 5.19%；对于 Re=15000 目标，广义表示把误差从二次型 PINN 的 16.76% 降至 14.41% 和 14.46%。迁移学习将目标训练时间在同 Reynolds 数迁移中减少 57.86-81.71%，在 Gaussian-to-CHT 迁移中减少 50.59-84.94%，但精度影响依赖目标：固定剖面 PWL 迁移与从头训练的差异在 0.30 个百分点内，而 Gaussian-to-CHT 迁移在不同目标和表示下的差异为 0.10-1.52 个百分点。",
+        "conclusion": "结果表明，广义 PINN 表示无需预设二次形式即可容纳空间变化 HTC 剖面；迁移学习能显著降低重复逆估计的目标训练成本，但最终重建精度取决于源目标兼容性。",
+        "key_details": "摘要给出的关键细节包括：数据为瞬态内部温度测量，含 5% 测量噪声情形，参考真值为 Re=5000、10000、15000 的 CFD-CHT HTC 剖面；方法比较二次型、PWL、神经网络边界估计器，并用离散 Adjoint-FEM 配合 H^1 半范数梯度正则化独立对照；迁移学习考察同 Reynolds 数噪声水平迁移与 Gaussian-profile 到 CFD-CHT 目标迁移，指标为相对 HTC 剖面误差、目标训练时间降幅及与从头训练精度差。局限性方面，迁移效果和重建精度依赖源目标兼容性，且给定材料未披露 PINN 网络结构、损失函数细节、优化器、训练轮数和计算复杂度等超参或实现约束。"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Palakkad"
+      ],
+      "affiliations_text": "Indian Institute of Technology Palakkad",
+      "score": 5.1153852586958415,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.14014v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014014v1-physics-informed-state-space-models-for-day-ahead-photovoltaic-power-forecasting",
+      "source": "arxiv",
+      "title": "Physics-Informed State Space Models for Day-Ahead Photovoltaic Power Forecasting",
+      "authors": [
+        "Phil Aupke",
+        "Muhammad Hassan",
+        "Khalid Ali",
+        "Seema",
+        "Andreas Kassler",
+        "Andreas Theocharis"
+      ],
+      "authors_text": "Phil Aupke, Muhammad Hassan, Khalid Ali, Seema, Andreas Kassler, Andreas Theocharis",
+      "abstract": "Accurate day-ahead photovoltaic (PV) power forecasting requires both strong temporal modeling and adherence to physical PV system constraints. Purely data-driven models often ignore the underlying PV conversion process and may produce predictions that are outside the operational range of a PV system. In this paper, we propose a physics-informed state space framework that combines a differentiable PV conversion model with a selective state space backbone (PowerMamba). Our approach follows a physics-residual decomposition. The physics module provides a structured baseline based on solar geometry, irradiance, temperature effects, and inverter limits, while the state space model learns residual corrections from numerical weather prediction (NWP) inputs over a 24-hour horizon. Experiments on one year of utility-scale PV data show that the proposed method significantly improves forecasting accuracy, reducing RMSE by 38.5% and MAE by 45.8% compared to a physics-only baseline, and outperforming a purely data-driven model. Results further show that incorporating system-level physics provides the largest performance gains, while additional refinements offer only marginal improvements. Beyond accuracy, the model improves robustness by constraining predictions toward physical feasibility, reducing unrealistic predictions under corrupted measurements.",
+      "url": "http://arxiv.org/abs/2610.14014v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14014v1",
+      "tldr": "The paper proposes a physics-informed state space framework that combines a differentiable PV conversion model with a PowerMamba selective state space backbone via physics-residual decomposition to improve day-ahead photovoltaic power forecasting accuracy and physical feasibility.",
+      "detailed_reading": {
+        "motivation": "日前光伏功率预测既需要强时序建模，也必须满足光伏系统物理约束；纯数据驱动模型忽略光伏转换过程，可能输出超出逆变器容量等运行范围的预测，并在传感器漂移、测量损坏或分布偏移下退化。现有物理信息方法通常只纳入热动态或温度效率等局部效应，尚未将系统级光伏转换物理与现代选择性状态空间模型结合用于 NWP 驱动的日前预测。",
+        "method": "提出物理-残差分解框架：输入历史观测窗口 L=288 步（3天）和未来 NWP 序列 H=96 步（24小时，15分钟分辨率），特征包括 NWP 全球辐照度、温度、风速、风向、NWP 功率估计、实测 PV 功率、太阳高度角、晴空功率以及小时/年积日正余弦编码。物理模块为可微光伏转换链，基于太阳几何与 POA 辐照转换、Faiman 温度模型、温度依赖效率和逆变器容量约束生成物理基线 P_phys；PowerMamba 选择性 SSM 以线性复杂度学习残差修正 P_res；最终预测为 ReLU(P_phys+P_res)。训练使用 MSE 加物理参数边界惩罚的复合损失，λ_phys=0.01，30 个 epoch、batch size 64、Adam、lr 1e-3，前 10 个 warm-up epoch 冻结残差骨干预拟合物理模块，随后联合训练；骨干为两个 Mamba 块，d_model=128、d_state=64、d_conv=2、扩展因子 2、dropout 0.2，并使用 RevIN。",
+        "result": "在河北某公用事业规模光伏电站一年数据（2018年7月至2019年6月，逆变器容量约13.2 MW）上，所提物理信息 PowerMamba 取得 RMSE 1.631 MW、MAE 0.756 MW、nRMSE 8.16%，相对物理-only 基线 RMSE 降低 38.5%、MAE 降低 45.8%。它同时优于纯数据驱动 PowerMamba（RMSE 2.035 MW、MAE 0.996 MW、nRMSE 10.15%）和 smart persistence（RMSE 2.272 MW、MAE 1.167 MW、nRMSE 11.36%）。消融显示系统级光伏转换物理带来主要精度增益，更高阶细化仅边际提升；在测量损坏下，嵌入物理模块可将预测约束向物理可行范围，减少不合理预测。",
+        "conclusion": "将系统级光伏转换物理与选择性状态空间骨干结合，并通过物理-残差分解联合优化，可显著提升日前光伏功率预测精度与鲁棒性。物理基线提供结构先验并约束输出可行性，数据驱动残差则修正 NWP 误差和站点效应，因此该框架优于纯物理和纯数据驱动方法。",
+        "key_details": "数据为 15 分钟分辨率实测功率、地面气象与约 4 km 空间分辨率 NWP 预报，采用四折按时间滚动的扩展窗口交叉验证；静态电站参数（纬度、经度、倾角、方位角、额定容量）作为物理模块配置输入。物理公式包括 T_c=T_a+G_POA/(U_0+U_1 v)、η=η_STC(1+γ(T_c-25))、P_phys=min(η G_POA A_eff, P_inv,max)，其中 η_STC、γ、U_0、U_1 可学习但受物理合理边界惩罚；ReLU 保证非负，逆变器限幅仅在物理项内通过平滑饱和实现。作者有意省略行间阴影、积灰、光谱失配和详细逆变器效率曲线，认为其低于 15 分钟与 4 km NWP 输入的噪声底；局限包括实验仅基于单一电站一年数据，结论外推需更多站点和更长时段验证。"
+      },
+      "affiliations": [
+        "Deggendorf Institute of Technology",
+        "Karlstad University"
+      ],
+      "affiliations_text": "Deggendorf Institute of Technology, Karlstad University",
+      "score": 4.603482679053977,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.13996v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/14/261013996v1-splicing-hints-into-reasoning-traces-learning-from-demonstrator-failures",
+      "source": "arxiv",
+      "title": "Splicing Hints into Reasoning Traces: Learning from Demonstrator Failures",
+      "authors": [
+        "Hamed Mahdavi",
+        "Pouria Mahdavinia",
+        "Majid Farhadi",
+        "Vasant Honavar"
+      ],
+      "authors_text": "Hamed Mahdavi, Pouria Mahdavinia, Majid Farhadi, Vasant Honavar",
+      "abstract": "Reinforcement learning with verifiable rewards improves mathematical reasoning when a final answer can be checked, but a correct answer does not certify the derivation behind it, and proof problems offer no answer to check. Replacing the check with a reasoning model as an in-loop verifier faces a fundamental obstacle: the policy must already produce occasional correct attempts for any reward to exist, which it may never do at olympiad level. We instead move verification and repair out of the training loop and into offline data generation with SPLICE, a workflow in which a second model, given only a reference solution, edits a reasoning model's traces as they are generated: it verifies progress, truncates a failed trace at its last verified step, and splices in an adaptively strengthened hint until progress resumes. The resulting dataset includes repaired examples whose sampled unaided trajectory failed, with failed continuations removed and progress repeatedly checked against the reference solution. A model finetuned on SPLICE traces outperforms the same model distilled from the reasoning model's unedited traces on AIME and, under a grading protocol validated against human grades, on olympiad proofs. The trained model's own traces show a corresponding behavioral signature: at difficult points it announces a branch in the style of the spliced hints and takes riskier steps, with predictive entropy rising there and just after, a pattern absent from the model trained on unedited traces.",
+      "url": "http://arxiv.org/abs/2610.13996v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13996v1",
+      "tldr": "TLDR: SPLICE improves mathematical reasoning by using a reference-solution-guided second model offline to truncate failed traces at the last verified step and splice in adaptively strengthened hints, yielding finetuning data that outperforms distilling unedited traces on AIME and olympiad proofs.",
+      "detailed_reading": {
+        "motivation": "可验证奖励强化学习依赖最终答案检查，但正确答案并不保证推导正确，证明题又没有答案可查；若把推理模型作为训练循环中的验证器，又要求策略已经能偶尔产生正确尝试，而在奥林匹克难度下这可能永远不会发生。因此需要将验证与修复移出训练循环，转而从失败示范中学习。",
+        "method": "提出 SPLICE 离线数据生成流程：给定参考解答，第二个模型在推理模型生成轨迹时逐步验证进展；一旦失败，就在最后一个已验证步骤处截断，并拼接自适应增强的提示，直到进展恢复。收集这些修复轨迹以及未编辑轨迹，对同一策略模型进行微调/蒸馏。关键模块包括进展验证、失败截断、自适应提示拼接、参考解对齐与离线数据构建。",
+        "result": "在 AIME 和奥林匹克证明题上，用 SPLICE 修复轨迹微调的模型优于用同一推理模型未编辑轨迹蒸馏的模型；证明题评估采用了与人工评分验证过的评分协议。训练后模型自身的轨迹还出现行为特征：在困难点以拼接提示的风格宣布分支并采取更高风险步骤，预测熵在该处及之后上升，而未编辑轨迹训练的模型没有这种模式。",
+        "conclusion": "将验证与修复从在线训练循环移到离线数据生成，可以绕过可验证奖励对“已有正确尝试”的依赖，使模型能从失败示范中的部分正确步骤学习，并提升数学推理与证明表现。行为证据表明模型学会了在困难点主动分支和探索，而不是仅模仿未编辑的成功路径。",
+        "key_details": "数据来自推理模型在数学题（含证明）上的采样轨迹；第二个模型仅依据参考解进行逐步验证、失败截断和自适应提示拼接；训练目标是对 SPLICE 修复轨迹进行微调，对比基线为未编辑轨迹蒸馏。评估包含 AIME 和奥林匹克证明，后者使用经人工评分验证的评分协议；行为分析使用预测熵。局限包括依赖参考解与外部编辑器、离线流程成本、提示拼接可能引入人工先验，且摘要未给出模型规模、超参、损失细节及对无参考解或不可验证领域的泛化验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.53894363679937,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.14001v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014001v1-preso-privileged-representation-isolation-for-on-policy-self-distillation",
+      "source": "arxiv",
+      "title": "PreSO: Privileged Representation Isolation for On-Policy Self-Distillation",
+      "authors": [
+        "Yuhang Yang",
+        "Mingxuan Xia",
+        "Chao Ye",
+        "Shuai Zhu",
+        "Shouqing Yang",
+        "Haobo Wang",
+        "Shenzhi Yang",
+        "Zhengqing Zang",
+        "Chenglong Wang"
+      ],
+      "authors_text": "Yuhang Yang, Mingxuan Xia, Chao Ye, Shuai Zhu, Shouqing Yang, Haobo Wang, Shenzhi Yang, Zhengqing Zang, Chenglong Wang",
+      "abstract": "On-policy self-distillation (OPSD) uses a self-teacher conditioned on privileged information to turn the sparse outcome signal of reinforcement learning with verifiable rewards (RLVR) into dense token-level supervision. Yet the teacher's advantage may depend on information unavailable to the student at inference, raising a central question: which privileged changes are worth distilling? We use cross-problem recurrence as an empirical cue for potentially reusable guidance. Comparing the representation shifts induced by full solutions and compact hints, we find that hint-induced shifts are more concentrated and directionally consistent across problems, and yield more sustained downstream gains despite revealing less information. Motivated by this association, we propose Privileged Representation Isolation for On-Policy Self-Distillation (PreSO). At the source, PreSO uses compact hints to limit the solution-specific detail entering the privileged shift. At the target, it estimates a leading low-rank subspace from shifts pooled across related problems, projects the privilege-induced correction onto this subspace, and adds it to the student's unprivileged representation to form the representation-level distillation target. The selected subspace serves as an operational proxy for recurring structure, rather than a guaranteed separation of transferable and instance-specific information. On five competition-level mathematics benchmarks, PreSO consistently outperforms strong baselines across Qwen3-1.7B, 4B, and 8B, improving average accuracy over the base model by 6.8, 9.0, and 10.0 points. Beyond peak accuracy, PreSO attains the highest final-checkpoint average at every model scale, with improvements that persist through the end of training.",
+      "url": "http://arxiv.org/abs/2610.14001v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14001v1",
+      "tldr": "PreSO improves on-policy self-distillation by using compact hints and projecting privileged representation shifts onto a low-rank subspace of cross-problem recurring structure, yielding consistent accuracy gains on competition-level mathematics benchmarks across Qwen3 models.",
+      "detailed_reading": {
+        "motivation": "暂无可提取到的动机信息。",
+        "method": "暂无可提取到的方法信息。",
+        "result": "暂无可提取到的结果信息。",
+        "conclusion": "暂无可提取到的结论信息。",
+        "key_details": "暂无可提取到的关键方法论细节。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.4559947972106775,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.14000v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014000v1-vh-gpo-verified-handoff-for-llm-agent-reinforcement-learning",
+      "source": "arxiv",
+      "title": "VH-GPO: Verified Handoff for LLM Agent Reinforcement Learning",
+      "authors": [
+        "Haoze Li",
+        "Peng Zhou",
+        "Peiyuan Wu",
+        "Weijie Zhao",
+        "Yinan Xin"
+      ],
+      "authors_text": "Haoze Li, Peng Zhou, Peiyuan Wu, Weijie Zhao, Yinan Xin",
+      "abstract": "Group-relative reinforcement learning methods such as GRPO train large language model (LLM) agents by comparing rollouts for the same task. When every trajectory in a group fails with the same reward, relative advantages collapse toward zero, leaving no useful learning signal. A frozen teacher can recover from a student-visited state, but letting it complete the task makes the recovered suffix entirely teacher-generated. We ask: after repairing a student failure, when should control return to the student? We propose outcome-verified teacher-student handoff, instantiated in Verified Handoff for Group Policy Optimization (VH-GPO). The teacher provides enough support to reach a state from which the student can succeed, then returns control so that successful experience is again student-generated. Given an environment-verified teacher recovery, VH-GPO selects the earliest independently confirmed handoff point found within a bounded search budget. With Qwen2.5-1.5B, VH-GPO increases success rates over GRPO from 59.38% to 94.79% on ALFWorld and from 71.62% to 77.34% on WebShop. Improvements also hold with the 7B student, for which additional teacher and student output tokens amount to 1.77% and 2.61% of regular student rollout output tokens on ALFWorld and WebShop, respectively. Ablation studies demonstrate the effectiveness of the key components. These results support using verified teacher assistance to repair failures while reinforcing the student's ability to complete tasks independently.",
+      "url": "http://arxiv.org/abs/2610.14000v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14000v1",
+      "tldr": "VH-GPO improves group-relative LLM agent reinforcement learning by using an environment-verified teacher to repair failed rollouts only up to the earliest confirmed handoff point and then returning control to the student, raising success rates from 59.38% to 94.79% on ALFWorld and 71.62% to 77.34% on WebShop with minimal extra teacher/student tokens.",
+      "detailed_reading": {
+        "motivation": "分组相对强化学习方法如GRPO通过比较同一任务的多个rollout来训练LLM智能体，但当组内所有轨迹都失败且奖励相同时，相对优势会塌缩到零，无法提供有效学习信号。冻结教师虽可从学生失败状态恢复任务，但若让教师直接完成全部剩余步骤，成功后缀完全由教师生成，难以强化学生独立完成任务的能力。因此核心问题是：在教师修复学生失败后，应在何时把控制权交还给学生。",
+        "method": "VH-GPO面向LLM智能体的组相对RL训练：对同一任务采样一组学生轨迹并用环境奖励评估；若组内失败，则调用冻结教师从学生访问过的失败状态生成环境可验证的恢复轨迹。随后在教师恢复轨迹上以有界搜索预算寻找最早交接点，即从该点让当前学生继续rollout后能由环境独立验证成功；选择最早确认点，把学生前缀、教师修复段以及交接后的学生后缀组成修复成功轨迹，并纳入GRPO式组内相对优势计算与策略更新，使成功经验尽可能由学生生成。教师仅用于失败修复和交接点确认，训练与推理流程仍沿用GRPO的采样、评估、策略更新闭环。",
+        "result": "在Qwen2.5-1.5B上，VH-GPO相比GRPO将ALFWorld成功率从59.38%提升到94.79%，将WebShop成功率从71.62%提升到77.34%；7B学生也保持提升。额外教师和学生输出token仅占常规学生rollout输出token的1.77%（ALFWorld）和2.61%（WebShop）。消融研究验证了关键组件的有效性。",
+        "conclusion": "用环境验证的教师辅助修复失败，并在最早可独立成功处交还控制权，可缓解组相对优势坍塌并提升LLM智能体任务成功率，同时让成功经验仍由学生生成。结果表明验证式师生交接是一种低开销且有效的失败修复与独立能力强化机制。",
+        "key_details": "关键点包括环境可验证奖励、冻结教师从学生失败状态恢复、交接点需通过学生独立rollout成功确认、有界搜索预算下取最早交接点，以及避免教师生成完整成功后缀。GRPO依赖组内奖励方差，VH-GPO通过修复失败样本提供非零正样本；实验覆盖ALFWorld与WebShop及Qwen2.5-1.5B/7B，额外token开销约1.77%和2.61%。局限是依赖教师能力、环境验证器和搜索预算，交接点确认可能带来额外rollout与验证成本。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.315922271924386,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.14018v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014018v1-roboharness-a-simple-harness-outperforms-vla-and-world-actions-models",
+      "source": "arxiv",
+      "title": "RoboHarness: A Simple Harness Outperforms VLA and World Actions Models",
+      "authors": [
+        "Bince Qu",
+        "Wei Chen",
+        "Bo Zhang"
+      ],
+      "authors_text": "Bince Qu, Wei Chen, Bo Zhang",
+      "abstract": "The rise of large language models (LLMs) has opened a path toward generalist embodied AI, raising the question of how LLMs can act in the physical world. One straightforward approach is training the model to generate actions: collect robot-action data and video demonstration, refine LLM architecture with an action head, and train a vision-language-action (VLA) model at scale. However, we argue that coding agents have the potential to realize generalist embodied manipulation. All they need is a simple yet effective robot harness. We present RoboHarness: a robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks. With RoboHarness, Qwen3.8-Flash-Next outperforms state-of-the-art VLA models on BEHAVIOR Challenge 2025 tasks. The implementation will be released as open source.",
+      "url": "http://arxiv.org/abs/2610.14018v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14018v1",
+      "tldr": "RoboHarness is a simple visual-geometric harness that lets LLM agents directly control robots without training, enabling Qwen3.8-Flash-Next to outperform state-of-the-art VLA and world-action models on BEHAVIOR Challenge 2025 tasks.",
+      "detailed_reading": {
+        "motivation": "LLM已具备任务分解、规划、空间推理与工具使用能力，但其世界知识停留在文本空间，需要桥梁连接物理世界。VLA与世界动作模型依赖大规模机器人动作数据和后训练，数据难以覆盖真实世界的物体、场景与任务多样性；已有可调用函数接口又受预定义任务、物体和策略限制。作者因此主张瓶颈在动作接口而非LLM能力， coding agents 只需一个简单而完备的机器人harness即可实现通用具身操作。",
+        "method": "RoboHarness无需训练模型，为LLM智能体提供视觉-几何控制面板：先定义统一相机坐标系，x向前、y向左、z向上；track_object工具让LLM在头部相机图像选点，harness用光流跨帧持续跟踪，再经深度图反投影得到机器人相机系下的度量坐标。动作工具集分两层：关键点约束工具让LLM指定on-hand与off-hand点的空间关系，harness采样候选动作、剔除逆运动学不可行或不可达候选、规划轨迹并执行；常见关系封装为touch、linear、line-vertical-plane、plane-parallel、line-vertical-ground、face to、move to reach、grasp等quick requests。底层调整工具则直接增量控制左右末端位姿、底盘、高度和俯仰，用于精细修正和滑落等失败恢复，整个流程是跟踪-约束-执行-验证的闭环。",
+        "result": "在BEHAVIOR Challenge 2025任务上，Qwen3.8-Flash-Next搭载RoboHarness后超过当前最优VLA模型。该方法无需微调即可直接求解BEHAVIOR-1K中的长时程家庭任务，并在完全分布外泛化测试中显著优于VLA和世界动作模型基线。作者同时声明实现将开源发布。",
+        "conclusion": "论文提出一种新的具身智能范式：通用LLM配合正确工具harness，可在不训练动作生成模型的情况下完成复杂操作，并优于VLA与世界动作模型。其核心结论是，构建通用具身操作的关键不在于让LLM生成更多动作，而在于提供表达充分、可组合、LLM友好的最小原始动作接口，并以空间 grounding 把语言能力接到物理世界。",
+        "key_details": "关键细节包括：完备性证明使用夹爪三点F_L、F_R、G，任意抓取位姿(f_l,f_r,θ)与表面点(a1,a2,a3)在overlap[a1,F_L]、overlap[a2,F_R]、linear[c,a3,G]约束下构成解析双射，其中c=(a1+a2)/2；已抓取时假设夹爪与物体刚性连接，任意目标空间关系可用两组关键点约束表示，因此工具集既极小又完备。track_object不使用仿真先验，依赖头部RGB、深度和光流跟踪；执行管线为候选采样、IK可行性过滤、运动规划、轨迹执行。约束模式表包含touch、linear、line-vertical-plane、plane-parallel、line-vertical-ground、face to、move to reach、grasp等，并允许通用坐标约束；调整工具以增量方式控制EEF位姿、底盘、高度和pitch。局限与约束在于依赖深度质量、光流鲁棒性、VLM二维点定位精度、IK可达性与约束求解稳定性，且全文未报告训练超参，因为方法本身不训练模型；评估涉及BEHAVIOR-1K、BEHAVIOR Challenge 2025、R1 Pro与RoboDojo ARX X5等平台。"
+      },
+      "affiliations": [
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Zhejiang University",
+      "score": 4.2591461702199815,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.13956v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/14/261013956v1-mdn-vjepa-multimodal-probabilistic-joint-embedding-world-models",
+      "source": "arxiv",
+      "title": "MDN-VJEPA: Multimodal Probabilistic Joint-Embedding World Models",
+      "authors": [
+        "Yongchao Huang"
+      ],
+      "authors_text": "Yongchao Huang",
+      "abstract": "Joint-Embedding Predictive Architectures (JEPAs) learn world models by predicting future representations rather than reconstructing observations. Variational JEPA (VJEPA) gives this prediction probabilistic semantics and permits flexible conditional predictive families. We propose MDN-VJEPA, a multimodal probabilistic JEPA that instantiates the latent predictor as a mixture density network (MDN), representing future states with a Gaussian mixture whose components encode alternative futures, their probabilities, and within-mode uncertainty. For sequential prediction, we address two additional structural requirements: multi-modal futures should remain temporally coherent across a trajectory, and predictive beliefs should remain consistent when propagated to the same horizon through different temporal path compositions, as motivated by the Chapman--Kolmogorov equation. Together, these considerations define a three-level hierarchy of multimodal prediction, coherent multimodal trajectories, and compositionally consistent multimodal dynamics. Controlled experiments show that MDN-VJEPA closely recovers known branching predictive laws, that retaining the complete multimodal belief rather than its conditional mean can lead to materially different and substantially better planning decisions under branching futures, and that trajectory-level coupling and distributional consistency improve temporal coherence and multi-horizon agreement. These results support a simple principle: a probabilistic JEPA should preserve not only how uncertain the future is, but which distinct futures constitute that uncertainty, how they form coherent trajectories, and how those beliefs compose through time.",
+      "url": "http://arxiv.org/abs/2610.13956v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13956v1",
+      "tldr": "MDN-VJEPA makes joint-embedding world models multimodal by predicting future latent states as Gaussian mixtures whose components represent distinct, temporally coherent, and compositionally consistent alternative futures, improving planning decisions under branching uncertainty.",
+      "detailed_reading": {
+        "motivation": "标准JEPA用点预测未来表征，在多未来分支下平方误差会收敛到条件均值，可能对应不可实现的未来；单高斯VJEPA只能表达单峰扩散，无法保留多个分离且各自可信的分支。机器人避障示例中左右绕行两个有效未来会被均值预测为穿过障碍的无效路径，因此需要显式保留不同未来假设及其概率。",
+        "method": "MDN-VJEPA在VJEPA概率预测框架下把潜在转移预测器实例化为神经混合密度网络，对给定Z_t和辅助ξ的未来状态Z_{t+h}建模为K分量高斯混合，输出混合权重π、分量均值μ和协方差Σ。为解决序列结构，它引入轨迹级共享离散模式M，使同一分量控制整个未来轨迹以保证多模态轨迹时间连贯；并基于Chapman-Kolmogorov思想对直接多步预测分布与递归组合一步转移得到的同视界分布施加分布路径一致性正则，采用基于样本的置换不变差异比较完整分布。整体还结合PIB压缩非预测历史、JEPA保留预测信息和MDN保留替代未来，推理/规划时保留完整混合信念而非仅用条件均值。",
+        "result": "受控实验表明MDN-VJEPA能紧密恢复已知的分支预测规律；在分支未来下，保留完整多模态信念而非条件均值会产生实质不同且显著更好的规划决策；轨迹级耦合与分布一致性还改善了预测轨迹的时间连贯性和多视界一致性。论文还指出，与Branch-JEPA式有限原子分支相比，连续高斯混合分量可额外表达分支内不确定性，但原子分支更利于保持尖锐分离支撑。",
+        "conclusion": "作者得出结论：概率化JEPA不仅应表示未来有多不确定，还必须保留哪些不同未来构成该不确定性、这些未来如何组成连贯轨迹以及这些信念如何随时间组合。因此，面向风险敏感规划的世界模型应保留完整的成分化多模态预测信念，而不应把分支未来压缩为均值或单一高斯。",
+        "key_details": "关键实现点包括：输入为潜在状态Z_t与可编码时间、动作序列、目标、物理约束的辅助变量ξ；预测器输出K个高斯分量，K=1退化为高斯VJEPA，固定各向同性协方差时高斯负对数似然与平方误差目标相关；训练目标结合PIB压缩、JEPA预测信息与MDN似然，并用stop-gradient的直接多步参考信念和基于样本的分布差异实现CK一致性。局限在于非线性MDN递归组合一般不闭合，直接与组合预测不必保持同类有限GMM，故只能分布比较；混合模型存在标签交换，分量语义和数量不由可识别性保证，实验主要为受控验证。"
+      },
+      "affiliations": [
+        "University of Aberdeen"
+      ],
+      "affiliations_text": "University of Aberdeen",
+      "score": 4.119232687395862,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.14017v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014017v1-barycentric-anchored-weight-search-for-robust-model-merging",
+      "source": "arxiv",
+      "title": "Barycentric Anchored Weight Search for Robust Model Merging",
+      "authors": [
+        "Antoni Buades",
+        "Jose-Luis Lisani"
+      ],
+      "authors_text": "Antoni Buades, Jose-Luis Lisani",
+      "abstract": "We propose Barycentric Anchored Search, a post-hoc weight-space procedure for improving fine-tuned vision models under distribution shift without additional gradient training or increased inference cost. Given a pre-trained initialization and two checkpoints fine-tuned on a source dataset, the method constructs barycentric candidate weights and performs a small derivative-free search along directions connecting each candidate to the pre-trained model. Candidate weights are selected using a small validation subset of one or more out-of-distribution (OOD) datasets; the selected model is then evaluated on the held-out portions of those datasets, on additional OOD benchmarks, and on the ImageNet validation set to quantify the robustness-accuracy trade-off. The method is inspired by simplex-based derivative-free optimization, including Nelder-Mead and Torczon multidirectional search, but is specialized to the geometry of neural network weight merging. Unlike Model Soup, which typically benefits from many fine-tuned checkpoints, and unlike Model Stock, which applies a fixed geometric merge, our approach uses only two fine-tuned checkpoints and iteratively adapts the merge using validation feedback from OOD data. Experiments with CLIP ViT-B/32 show that the proposed search substantially improves performance on held-out OOD data, including ImageNet-A, ImageNet-R, and ImageNet-Sketch, while keeping ImageNet accuracy competitive. The resulting weights also improve transfer to OOD datasets not used during candidate selection, outperforming the original fine-tuned checkpoints, naive model soups, and Model Stock in our evaluations. These results suggest that lightweight optimization in anchored weight space provides a practical alternative to fixed weight-averaging rules, geometric merging, or single-model selection.",
+      "url": "http://arxiv.org/abs/2610.14017v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14017v1",
+      "tldr": "TLDR: Barycentric Anchored Search is a lightweight, post-hoc, derivative-free weight-space merging method that uses a pre-trained anchor and two fine-tuned checkpoints, guided by small out-of-distribution validation subsets, to improve robust vision model performance under distribution shift without extra training or inference cost.",
+      "detailed_reading": {
+        "motivation": "标准微调虽提升目标域精度，却常导致分布偏移下的鲁棒性下降；现有模型融合如 Model Soup 依赖大量检查点，Model Stock 采用固定几何插值，难以用少量检查点自适应利用 OOD 验证反馈。本文旨在不增加梯度训练与推理成本的前提下，利用预训练模型作为锚点，在权重空间中对两个微调检查点进行后处理搜索，以改善 OOD 鲁棒性并保持 ImageNet 精度。",
+        "method": "给定预训练权重 ω_P 和两个在同源数据上微调得到的检查点 ω_1、ω_2，先构造重心 ω_3=(ω_1+ω_2)/2；对候选 i=1,2,3 生成锚定扰动 ω_i^λ=ω_i+λ(ω_P−ω_i)，λ>0 向预训练锚点收缩、λ<0 远离锚点，并用 OOD 验证子集的准确率 F 判断是否替换原候选。第一阶段 λ 取 {-0.8,-0.6,-0.4,-0.2,0.2,0.4,0.6,0.8}，更新后计算二级重心 ω_4=(ω_1+ω_2+ω_3)/3，第二阶段以更小步长 {-0.04,-0.03,-0.02,-0.01,0.01,0.02,0.03,0.04} 对 i=1..4 重复扰动与验证更新，最终取 F 最高的单模型权重。实验在 CLIP ViT-B/32 上进行，使用来自 Model Stock 仓库的预训练权重和两个 ImageNet 微调检查点，按 ImageNet、ImageNet-A/R/Sketch 划分验证与测试子集，仅做权重组合与评估，不做梯度训练。",
+        "result": "在 CLIP ViT-B/32 上，BAS 在 ImageNet-A、ImageNet-R、ImageNet-Sketch 等留出 OOD 测试集上相较原始微调检查点、朴素 soup 和 Model Stock 取得更优或更具竞争力的鲁棒性，同时 ImageNet 精度保持接近。表中以 ImageNet-A 验证集引导的 BAS 将 ImageNet-A 从 Model Stock 的 0.3239 提升到 0.3571、ImageNet-R 从 0.6710 提升到 0.7150、ImageNet-Sketch 从 0.4706 提升到 0.4828，但 ImageNet 从 0.7967 降至 0.7635；以 ImageNet 验证集引导时 ImageNet 为 0.7946、OOD 平均为 0.4749。结果还显示，用于候选选择的 OOD 数据之外的额外 OOD 基准也能获得迁移提升。",
+        "conclusion": "BAS 表明，在预训练锚点约束下的轻量、无导数、验证驱动的权重空间搜索，可作为固定权重平均、几何融合或单模型选择的实用替代方案，尤其适合只有两个微调检查点且关注分布偏移鲁棒性的场景。其核心价值在于后处理、单模型推理、不增加推理成本，并能利用少量 OOD 验证反馈自适应权衡鲁棒性与精度。",
+        "key_details": "关键实现细节包括：仅用两个微调检查点加一个预训练锚点；两阶段由粗到细的 λ 搜索，分别采用 0.2 间隔和 0.01 间隔；候选更新规则为仅当验证准确率提升时接受；最终按验证准确率取 argmax；验证集来自一个或多个 OOD 数据的小子集，测试集与之不相交。方法受 Nelder-Mead 和 Torczon 多方向搜索启发，但不维护完整 d+1 单纯形，且不声称收敛到极小值。局限在于依赖 OOD 验证数据，选择结果与验证分布相关，实验仅覆盖 CLIP ViT-B/32 与两个 ImageNet 微调检查点，且可能以 ImageNet 精度下降换取 OOD 鲁棒性；无额外梯度训练或推理开销，但需要多次前向评估候选权重。"
+      },
+      "affiliations": [
+        "Universitat de les Illes Balears"
+      ],
+      "affiliations_text": "Universitat de les Illes Balears",
+      "score": 4.076685175154055,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.14007v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/14/261014007v1-what-can-language-models-inherit-from-solomonoff-induction-limits-attainable-properties-and-what-served-conditionals-reveal",
+      "source": "arxiv",
+      "title": "What Can Language Models Inherit from Solomonoff Induction? Limits, Attainable Properties, and What Served Conditionals Reveal",
+      "authors": [
+        "Luan Ozelim",
+        "Abicumaran Uthamacumaran",
+        "Hector Zenil"
+      ],
+      "authors_text": "Luan Ozelim, Abicumaran Uthamacumaran, Hector Zenil",
+      "abstract": "A familiar line of reasoning runs as follows: language models are flexible approximators trained under a strictly proper loss, so scale brings them closer to Solomonoff induction, and their predictive success is evidence of that approach. We apply known results from algorithmic information theory, universal prediction and Bayesian consistency. In its uniform form the conclusion holds for no computable model: each has cheap environments it never learns, and every uniformly computable family of total predictors shares one on which each member fails beyond a horizon growing with its index, so ``closer'' can hold only pointwise, one environment at a time. Nor could the offered routes certify even that: finite evaluation cannot certify agreement on rarely reached contexts, perfect corpus fit selects the corpus law as prior, and asymptotic criteria cannot see the constants that carry Solomonoff's guarantee. Our lens is the Kraft inequality read for predictors. Every model has at most the same budget of predictive success, so Solomonoff's predictor, which leaves part of it unspent, differs from a language model not in having more of it but in where it spends it; on mutually singular families this is exact, and only full-mass Bayes mixtures reach the frontier. We then discuss what is inheritable, including in-context learning as amortised Bayesian inference; what survives within a context window; which Solomonoff-like properties a deployed system should have or avoid; and what served conditionals determine. A closing table states what common practices certify and what to report. Tests are developed in a companion paper.",
+      "url": "http://arxiv.org/abs/2610.14007v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14007v1",
+      "tldr": "This paper argues that language models cannot uniformly inherit Solomonoff induction’s universal predictive guarantees—since every computable model has cheap environments it never learns and scale yields only pointwise approximation—and recasts their success as a Kraft-inequality budget of where limited predictive competence is spent, clarifying which Solomonoff-like properties are attainable, certifiable, or should be avoided.",
+      "detailed_reading": {
+        "motivation": "论文针对一种常见论证：语言模型作为灵活逼近器在严格 proper 损失下训练，规模扩大会使其逼近 Solomonoff 归纳，预测成功即为此提供证据。作者要把这个强命题拆成可检验的理论边界，区分哪些性质可继承、哪些不可继承，并说明常用评估与训练证据究竟能证明什么。",
+        "method": "方法上把语言模型或一般预测器形式化为对上下文给出条件分布的半测度或概率测度，以对数损失、regret、excess loss 和 Solomonoff 混合预测器为基准；再用算法信息论、通用预测与贝叶斯一致性中的已知结果（Putnam/Legg 对角化、Kraft 不等式、Bayes mixture 前沿）建立统一分析框架。关键操作是把任何预测器的累积对数损失能力视为固定预算，比较其在不同环境上的分配，并分节讨论评估、规模、数据闭包、继承性、渐近性质、部署、性质排序和测量；作者自身不做语言模型实验，数值示例由脚本生成，测试留给 companion paper。",
+        "result": "核心结论是：命题 (C) 的均匀形式对任何可计算模型都不成立，每个模型都有复杂度不高于自身的廉价环境使其永不学会；任何一致可计算的总预测器族也共享一个环境，使各成员在随索引增长的 horizon 之后失败，因此向 Solomonoff 的“更接近”只能在逐点、逐个环境意义上成立。有限评测无法认证稀有上下文上的一致性，完美拟合语料等于把语料律选为先验，渐近一致性或合并等准则看不见承载 Solomonoff 保证的常数；Kraft 透镜表明所有预测器最多拥有同样多的预测成功预算，Solomonoff 的差别在于花在哪里，且在互奇异族上只有全质量 Bayes 混合达到前沿。可继承的部分包括在声明类上用 Bayes 混合达到 Solomonoff 型保证、把 in-context learning 解释为摊销贝叶斯推断，以及在上下文窗口、部署约束和 served conditionals 中可测量的内容。",
+        "conclusion": "因此，规模、压缩效率、基准提升和元学习 regret 下降都不能 certify 语言模型在均匀意义上逼近 Solomonoff 归纳；它们至多说明在特定语料、先验、测试分布或 horizon 上的分配表现。论文主张把问题从“是否更接近”转为“在声明类上分配哪些预算、报告哪些先验与常数、部署时保留或避免哪些 Solomonoff 式性质”，并建议可信系统应具有 Solomonoff 式信念但采用非 Solomonoff 式约束。",
+        "key_details": "关键细节包括：对数损失以 2 为底，regret 按源期望的 KL 累积定义，Solomonoff 对任意可计算 q 的超出至多 K(q)+O(1) 位；对角环境每步损失 log V（实值条件为 log(2V/3)）而 Solomonoff 只付常数；零 regret 于语料意味着与语料律重合，仅在绝对连续源上有有限 regret，受 c 支配时至多 log c。Kraft 预算给出长度 n 下最多 2^b 个字符串累积 log-loss 低于 b 位；示例称在约 2 bits/token、16-bit 权重、每参数至少 10^3 token 时，K(q)+O(1) 可低于语料编码长度 1%。局限是讨论性论文、多数结果已知、未测量具体语言模型，结论多为理想化预测器的点态或声明类性质，渐近准则对先验和常数不敏感，链式思考、工具或检索、上下文窗口、温度、截断和 tokenisation 等部署因素需单独处理。"
+      },
+      "affiliations": [
+        "King's College London",
+        "Oxford Immune Algorithmics"
+      ],
+      "affiliations_text": "King's College London, Oxford Immune Algorithmics",
+      "score": 4.05494855012558,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.14011v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014011v1-sirnet-causal-adaptation-of-pretrained-embeddings-for-semiparametric-treatment-effect-estimation-under-surrogacy",
+      "source": "arxiv",
+      "title": "SIRNET: Causal Adaptation of Pretrained Embeddings for Semiparametric Treatment-Effect Estimation Under Surrogacy",
+      "authors": [
+        "Lei Shi",
+        "Qiuran Lyu"
+      ],
+      "authors_text": "Lei Shi, Qiuran Lyu",
+      "abstract": "Modern experiments increasingly produce rich post-treatment objects---such as text, images, and video---that may provide early surrogate signals for outcomes that are delayed, expensive, or observed only for a subset of participants. A pretrained encoder can turn such an object into a strong generic embedding, but the embedding is not trained for the estimation tasks required by a causal estimator and may emphasize information irrelevant to the causal target. We propose SIRNET, a Surrogate-Informed Representation adaptation framework for neural-NETwork-based causal estimation in the presence of unstructured post-treatment surrogates. Starting from pretrained surrogate embeddings, SIRNET learns a shared adapter jointly for outcome prediction, treatment propensity, and arm-specific surrogate marginalization, beyond the generic pretraining objective. The resulting covariate and surrogate representations provide a common interface for these nuisance tasks. The final treatment-effect estimate and confidence interval are obtained from cross-fitted orthogonal scores that attain the semiparametric efficiency bound under the stated nuisance-rate conditions. We also validate SIRNET's performance in synthetic and semisynthetic experiments, as well as the Anti-Amyloid in Asymptomatic Alzheimer's Disease (A4) trial, using frozen pretrained brain-MRI embeddings as surrogates for a long-term outcome.",
+      "url": "http://arxiv.org/abs/2610.14011v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14011v1",
+      "tldr": "SIRNET adapts pretrained embeddings of unstructured post-treatment surrogates through a shared multitask adapter for outcome, propensity, and surrogate-marginalization nuisances, enabling semiparametric efficient treatment-effect estimation from partially observed outcomes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Adobe Research",
+        "UC Berkeley"
+      ],
+      "affiliations_text": "Adobe Research, UC Berkeley",
+      "score": 4.015022583213943,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.13995v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013995v1-gamesmith-scaling-zero-sum-self-play-with-synthesised-games",
+      "source": "arxiv",
+      "title": "GameSmith: Scaling Zero-Sum Self-Play with Synthesised Games",
+      "authors": [
+        "Weixian Waylon Li",
+        "Jiaxin Zhang",
+        "Han Zhou",
+        "Chengzu Li",
+        "Ke Wang",
+        "Fengxiang He",
+        "Yiwen Guo"
+      ],
+      "authors_text": "Weixian Waylon Li, Jiaxin Zhang, Han Zhou, Chengzu Li, Ke Wang, Fengxiang He, Yiwen Guo",
+      "abstract": "Post-training large language models (LLMs) on two-player zero-sum games provides a verifiable reward, and the gains have been shown to transfer to general reasoning. Existing pipelines, however, rely on a handful of hand-written games and on advantage estimators tied to them, so both the supply of games and the advantage estimate on a large corpus limit scaling. We present GameSmith, which scales both. An LLM synthesises games inside templates whose reward, observation, and hidden-information code is fixed. Each game is verified by seed-paired replay and by an independent re-implementation of its specification, then expanded into encoding, rule, and size variants, giving 26 new games in 29 families and 336 verified variants from the three SPIRAL templates. The model is distilled from the self-play of a larger teacher (Qwen3-32B) on these games and then trained by self-play reinforcement learning with CRAB, an advantage estimator that credits each decision against a shrinkage estimate of the expected return of its position and is defined on every variant. On Qwen3-4B-Base, distillation raises the 13-benchmark mean pass@1 from 45.5 to 62.5, above the three SPIRAL games at the same budget, and self-play with CRAB reaches 64.9. The ordering holds across models, and transfer grows with the number of game families.",
+      "url": "http://arxiv.org/abs/2610.13995v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13995v1",
+      "tldr": "GameSmith scales zero-sum self-play for LLM reasoning by synthesizing and verifying many game variants and training with the game-agnostic CRAB advantage estimator, raising Qwen3-4B-Base’s 13-benchmark mean pass@1 from 45.5 to 64.9.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.960661920571183,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.13991v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013991v1-predict-before-you-modify-learning-improvement-dynamics-for-self-evolving-agents",
+      "source": "arxiv",
+      "title": "Predict Before You Modify: Learning Improvement Dynamics for Self-Evolving Agents",
+      "authors": [
+        "Zixuan Xie",
+        "Chang Xu",
+        "Yuhua Jiang",
+        "Li Zhao"
+      ],
+      "authors_text": "Zixuan Xie, Chang Xu, Yuhua Jiang, Li Zhao",
+      "abstract": "Self-evolving agents improve through repeated cycles of modification and evaluation. However, existing methods receive feedback on modifications only after costly evaluations, and aggregate scores may obscure distinctions between failures that require different repairs. We introduce predictive self-evolution through an editable Improvement Dynamics Model (IDM). Before evaluation, the IDM predicts task-level outcomes of a proposed modification and guides an optional revision. After evaluation, past modifications and their observed outcomes are used to improve the IDM, allowing predictive knowledge to accumulate across generations. The system can thus improve how it solves tasks, proposes modifications, and predicts their effects. Building on HyperAgents, we evaluate this approach across multilingual coding, paper review, robotics reward design, and Olympiad-level mathematical grading. Our approach outperforms HyperAgents across all four domains, with up to 46% higher average performance over generations. Gains also persist under matched token budgets that include both agent evolution and task evaluation, and extend to held-out tasks. Forecast accuracy improves as the IDM evolves, and the learned predictive knowledge transfers to improve evolution in a new domain.",
+      "url": "http://arxiv.org/abs/2610.13991v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13991v1",
+      "tldr": "The paper introduces an editable Improvement Dynamics Model that predicts the task-level outcomes of proposed self-modifications before costly evaluation to guide revisions and accumulates predictive knowledge across generations, outperforming HyperAgents by up to 46% average performance across multilingual coding, paper review, robotics reward design, and Olympiad-level math grading.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.942527357233241,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.14004v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014004v1-showing-versus-doing-teaching-by-demonstration",
+      "source": "arxiv",
+      "title": "Showing versus Doing: Teaching by Demonstration",
+      "authors": [
+        "Mark K. Ho",
+        "Michael L. Littman",
+        "James MacGlashan",
+        "Fiery Cushman",
+        "Joseph L. Austerweil"
+      ],
+      "authors_text": "Mark K. Ho, Michael L. Littman, James MacGlashan, Fiery Cushman, Joseph L. Austerweil",
+      "abstract": "People often learn from others' demonstrations, and inverse reinforcement learning (IRL) techniques have realized this capacity in machines. In contrast, teaching by demonstration has been less well studied computationally. Here, we develop a Bayesian model for teaching by demonstration. Stark differences arise when demonstrators are intentionally teaching (i.e. showing) a task versus simply performing (i.e. doing) a task. In two experiments, we show that human participants modify their teaching behavior consistent with the predictions of our model. Further, we show that even standard IRL algorithms benefit when learning from showing versus doing.",
+      "url": "http://arxiv.org/abs/2610.14004v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14004v1",
+      "tldr": "This paper introduces a Bayesian model of teaching by demonstration that distinguishes intentionally showing a task from merely doing it, and shows experimentally that human teachers adapt their demonstrations accordingly, helping even standard inverse reinforcement learning algorithms learn more effectively.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Brown University",
+        "University of Wisconsin-Madison",
+        "Harvard University"
+      ],
+      "affiliations_text": "Brown University, University of Wisconsin-Madison, Harvard University",
+      "score": 3.939542426653464,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.13966v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013966v1-mrflow-mechanism-structured-residual-flow-matching-for-virtual-cell-perturbation-prediction",
+      "source": "arxiv",
+      "title": "MRFlow: Mechanism-Structured Residual Flow Matching for Virtual Cell Perturbation Prediction",
+      "authors": [
+        "Haojie Yang",
+        "Ran Su"
+      ],
+      "authors_text": "Haojie Yang, Ran Su",
+      "abstract": "Predicting cellular responses to chemical and genetic perturbations is a central test for AI virtual cells, yet many single-cell models reduce each condition to an average expression shift. This target is misaligned with perturbation biology: rare states, resistant subpopulations, and context-dependent effect sizes may coexist under the same intervention. MRFlow treats virtual-cell prediction as conditional transport between empirical single-cell measures. Control and perturbed cells are embedded in a variational latent state space, greedy low-cost supervision is constructed over detached minibatch states, and a conditional flow-matching vector field transports control populations toward perturbed populations. The field decomposes into a mechanism-structured affine dictionary, which recombines shared latent response operators with a low-rank condition-specific correction, and a spectrally controlled residual field for nonlinear cell-level variation. Genetic perturbations are encoded through a regulatory-graph GCN, chemical perturbations through Morgan fingerprints, and both enter the same conditional dynamics interface. Across eight gene and drug perturbation benchmarks, MRFlow attains the highest composite score while preserving competitive raw performance on differential-expression and distributional metrics. The results support latent distribution transport as a principled and empirically effective formulation for perturbation-aware virtual cell modeling.",
+      "url": "http://arxiv.org/abs/2610.13966v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13966v1",
+      "tldr": "MRFlow predicts single-cell perturbation responses as latent distribution transport, using mechanism-structured residual flow matching to move control cell populations toward perturbed populations and achieving top composite performance across gene and drug benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tianjin University"
+      ],
+      "affiliations_text": "Tianjin University",
+      "score": 3.896071776025542,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.14020v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014020v1-labinstruct-benchmarking-situated-instructional-video-generation-for-lab-procedures",
+      "source": "arxiv",
+      "title": "LabInstruct: Benchmarking Situated Instructional Video Generation for Lab Procedures",
+      "authors": [
+        "Yuming Fu",
+        "Weijia Wu",
+        "Jing Chen",
+        "Jiahao Tang",
+        "Feifei Chen",
+        "Hongyu Zhu",
+        "Xin Jin",
+        "Alex Jinpeng Wang"
+      ],
+      "authors_text": "Yuming Fu, Weijia Wu, Jing Chen, Jiahao Tang, Feifei Chen, Hongyu Zhu, Xin Jin, Alex Jinpeng Wang",
+      "abstract": "Self-driving laboratories (SDLs) aim to automate the full experimental loop, from scientific decision-making to physical execution. Ideally, AI-generated plans could be carried out directly by robotic systems, but reliable automation remains difficult in complex, open-world laboratory environments, where experiments often involve fine-grained manipulation, long-horizon procedures, and substantial variation across tasks and setups. Humans therefore remain an important execution interface between AI-generated plans and physical experiments, creating a need for clear and effective human-facing experimental guidance. Because laboratory procedures are inherently visual, spatial, and dynamic, video is particularly well suited to communicating apparatus configurations, manipulation actions, temporal dependencies, and state changes. Recent advances in video generation now make it possible to synthesize experimental demonstrations directly from an initial workspace image and a natural-language instruction. However, whether such models can reliably communicate real laboratory procedures has not been systematically studied. We introduce LabInstruct, a benchmark for situated instructional video generation in real laboratories. LabInstruct contains 204 tasks across 5 scientific disciplines, with real reference executions and structured annotations of objects, actions, contacts, and state transitions. Evaluating 8 frontier image-to-video models, we find that visually plausible generations frequently remain procedurally incorrect, revealing a substantial gap between visual realism and the reliability required for experimental instruction.",
+      "url": "http://arxiv.org/abs/2610.14020v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14020v1",
+      "tldr": "LabInstruct introduces a 204-task, 5-discipline benchmark for generating situated laboratory instructional videos from workspace images and natural-language instructions, revealing through evaluations of 8 frontier image-to-video models that visually plausible outputs are often procedurally incorrect and thus insufficient for reliable experimental guidance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Central South University",
+        "National University of Singapore",
+        "Monash University",
+        "Chinese Academy of Sciences",
+        "Beijing University of Posts and Telecommunications"
+      ],
+      "affiliations_text": "Central South University, National University of Singapore, Monash University, Chinese Academy of Sciences, Beijing University of Posts and Telecommunications",
+      "score": 3.846467327539024,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.14012v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014012v1-perfect-reconstruction-cannot-show-whether-two-codebooks-on-a-vaes-latent-space-agree",
+      "source": "arxiv",
+      "title": "Perfect Reconstruction Cannot Show Whether Two Codebooks on a VAE's Latent Space Agree",
+      "authors": [
+        "Yusuke Hayashi"
+      ],
+      "authors_text": "Yusuke Hayashi",
+      "abstract": "Many systems read the latent space of a variational autoencoder (VAE) as discrete codes, and rely on each latent being read back as the code it was written as. Shannon (1948) took such a shared codebook as given; inside a VAE nothing enforces it. We prove that no item of a standard training report can reveal whether the written and read codes agree on encoded data. We construct two VAEs that reconstruct every input perfectly, infer exactly, and match on every per-example ELBO and every code histogram, yet agreement is one in the first and zero in the second. We then show that the ELBO's own terms bound how far a measured agreement can move: the variational gap bounds the shift to exact inference, and the rate bounds the shift to generation from the prior. For Gaussian posteriors, a mean-field encoder pays an exact price in the gap that depends on its choice of axes. On probabilistic PCA the gap certifies a trained encoder in all 75 settings we test, at agreement between 0.76 and 0.97. On 240 trained VAEs, a floor set by the rate and the dataset size rules out rate-side certification in advance for 66 models, and none of them certifies. The results yield a simple protocol, Certify-or-Measure, for any pipeline that reads a VAE as codes.",
+      "url": "http://arxiv.org/abs/2610.14012v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14012v1",
+      "tldr": "The paper proves that perfect reconstruction and standard VAE training reports cannot determine whether a VAE’s written and read discrete latent codes agree, but shows the ELBO’s variational gap and rate can bound or certify that agreement, yielding a Certify-or-Measure protocol.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AI Alignment Network",
+        "Humanity Brain",
+        "Artificial Life Institute"
+      ],
+      "affiliations_text": "AI Alignment Network, Humanity Brain, Artificial Life Institute",
+      "score": 3.74602114762989,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.14006v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014006v1-coding-llms-can-be-harnessed-to-learn-interpretable-models-from-data",
+      "source": "arxiv",
+      "title": "Coding LLMs Can Be Harnessed to Learn Interpretable Models from Data",
+      "authors": [
+        "Aditya Kumar",
+        "Cassandra A. Cohen",
+        "William W. Cohen"
+      ],
+      "authors_text": "Aditya Kumar, Cassandra A. Cohen, William W. Cohen",
+      "abstract": "Since compact, interpretable classifiers correspond to simple programs, it is natural to ask if LLM-based coding agents can be used to learn interpretable models from data. In this paper we present a simple harness that repeatedly prompts a coding LLM to produce the next rule in a rule set, given a sample of labeled examples. We show that this approach is competitive with, and often superior to, state-of-the-art rule-learning methods on tabular data, especially with small training sets, and wins by large margins on text, including against another LLM-based rule learner; that this approach outperforms standard harnesses, and that the approach immediately leads to new kinds of interpretable models, since coding agents are not restricted to search a highly restricted hypothesis space. In addition to the advances made in learning interpretable models, these results are of interest because they introduce a new class of coding benchmarks - construction of interpretable classifiers - which includes quantitative measurements of output quality (i.e., test-set error) and existing mature ``specialist coding algorithms'' (i.e., existing learning methods).",
+      "url": "http://arxiv.org/abs/2610.14006v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14006v1",
+      "tldr": "A simple harness that repeatedly prompts coding LLMs to generate the next rule in a rule set can learn interpretable classifiers from data, outperforming state-of-the-art rule-learning methods on tabular and text tasks while introducing a new class of coding benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7264294444738266,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.13998v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013998v1-enhanced-trading-systems-with-intelligent-market-analysis",
+      "source": "arxiv",
+      "title": "Enhanced Trading Systems with Intelligent Market Analysis",
+      "authors": [
+        "Vedanth Padmaraman",
+        "Shreen Anand",
+        "Vamshi Vishruth J",
+        "Vineet V Pai",
+        "Arvind Srinath K. T",
+        "Subramanyam Natarajan",
+        "Shylaja S S"
+      ],
+      "authors_text": "Vedanth Padmaraman, Shreen Anand, Vamshi Vishruth J, Vineet V Pai, Arvind Srinath K. T, Subramanyam Natarajan, Shylaja S S",
+      "abstract": "This paper proposes a hybrid reinforcement learning trading framework integrating intraday market data with transformer-based financial sentiment signals. The system extracts sentiment dynamics and semantic event clusters from financial news and incorporates them into a PPO-based trading agent. Experiments on intraday NSE data demonstrate improved risk-adjusted returns compared to price-only baselines.",
+      "url": "http://arxiv.org/abs/2610.13998v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13998v1",
+      "tldr": "This paper presents a hybrid PPO-based reinforcement learning trading framework that integrates intraday market data with transformer-derived financial sentiment signals—including sentiment velocity/acceleration and de-biased semantic event clusters—to achieve improved risk-adjusted returns over price-only baselines on NSE intraday data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "PES University",
+        "Key Resource Person"
+      ],
+      "affiliations_text": "PES University, Key Resource Person",
+      "score": 3.6662491092824547,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.13982v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013982v1-prime-frequency-aware-unified-pruning-and-merging-for-moe-compression",
+      "source": "arxiv",
+      "title": "PRIME: Frequency-Aware Unified Pruning and Merging for MoE Compression",
+      "authors": [
+        "Shanfeng Huang",
+        "Rongqian Zhang",
+        "Zhou Fang",
+        "Song Xiao",
+        "Hai Du"
+      ],
+      "authors_text": "Shanfeng Huang, Rongqian Zhang, Zhou Fang, Song Xiao, Hai Du",
+      "abstract": "Mixture-of-Experts (MoE) models have emerged as an effective paradigm for scaling large language models, yet their massive parameter footprint poses severe memory challenges for deployment. Existing compression methods typically treat expert pruning and merging as disjoint operations and rely on greedy heuristics, often leading to irreversible information loss or representational pollution. In this paper, we propose PRIME, a unified optimization framework for MoE compression via adaptive PRunIng and MErging. PRIME casts the discrete prune-merge assignment step as a global Integer Linear Programming over a frequency-weighted surrogate objective, jointly selecting pruning and merging decisions while accounting for expert usage. We motivate the frequency-aware objective through an error-bound analysis under fixed representative assignments, and show that the formulation favors high-frequency experts as centroids, promoting routing stability. Extensive experiments on Qwen3-30B-A3B and Qwen3.5-122B-A10B demonstrate that PRIME achieves strong accuracy retention across knowledge, coding, math, and long-context tasks, while serving benchmarks of merged models quantify the memory and throughput benefits of expert compression in vLLM.",
+      "url": "http://arxiv.org/abs/2610.13982v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13982v1",
+      "tldr": "PRIME is a frequency-aware unified optimization framework that jointly prunes and merges Mixture-of-Experts experts via an integer linear program over a frequency-weighted objective, improving compression accuracy retention and deployment efficiency compared with disjoint greedy heuristics.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Baidu Inc"
+      ],
+      "affiliations_text": "Baidu Inc",
+      "score": 3.5083475547340153,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.14009v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014009v1-when-log-parsing-removes-what-matters-detecting-failures-in-distributed-gpu-workloads",
+      "source": "arxiv",
+      "title": "When Log Parsing Removes What Matters: Detecting Failures in Distributed GPU Workloads",
+      "authors": [
+        "Boyuan Cui",
+        "Yuyang Zeng",
+        "Yifang Tian",
+        "Hans-Arno Jacobsen"
+      ],
+      "authors_text": "Boyuan Cui, Yuyang Zeng, Yifang Tian, Hans-Arno Jacobsen",
+      "abstract": "Large AI models increasingly rely on distributed GPU execution, yet it remains unclear whether established failure analysis methods transfer effectively to this setting. We introduce GF-Bench, a PyTorch-based framework and dataset for generating diverse failures in distributed GPU workloads. The framework supports extensible workload and fault-injection logic; based on this design, the current release targets failures visible in multi-GPU communication logs and provides 220 labeled two-GPU executions covering normal runs, CUDA out-of-memory fail-stop failures, and persistent straggler fail-slow failures. Using GF-Bench, we evaluate three sequence-based methods (DeepLog, LogAnomaly, and LogBERT) and the LLM-based LogPrompt on parsed logs, and additionally evaluate LogPrompt on raw logs. On parsed inputs, no method reliably detects both failure classes, and the highest overall F1 score is 0.667. Raw inputs raise the overall F1 score of in-context LogPrompt to 0.983, at 9.0x its average input-token usage and 8.7x its per-run cost. These results expose a substantial trade-off between effectiveness and efficiency: generic log parsing lowers operational cost but discards the distributed execution context required for accurate failure detection. GF-Bench provides a reproducible basis for studying cost-efficient analysis methods and can be extended to additional GPU workloads and failure types.",
+      "url": "http://arxiv.org/abs/2610.14009v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14009v1",
+      "tldr": "GF-Bench, a PyTorch-based benchmark of 220 labeled two-GPU runs with CUDA out-of-memory and straggler failures, reveals that generic log parsing discards critical distributed execution context—limiting detection to at best 0.667 F1 on parsed logs—while raw-log in-context LogPrompt reaches 0.983 F1 at 9.0× token usage and 8.7× cost, exposing a fundamental effectiveness-efficiency trade-off in distributed GPU failure detection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Toronto"
+      ],
+      "affiliations_text": "University of Toronto",
+      "score": 3.3249261861625863,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.13990v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013990v1-dosa-dots-sparse-attention",
+      "source": "arxiv",
+      "title": "DoSA: Dots Sparse Attention",
+      "authors": [
+        "Fanxu Meng",
+        "Taosong Fang"
+      ],
+      "authors_text": "Fanxu Meng, Taosong Fang",
+      "abstract": "Sparse attention visits few keys, yet finding them can still require scoring every key with every indexer head. We introduce DoSA (Dots Sparse Attention), a lossless method for making this computation conditional while preserving exact token selection. Its central observation is that Top-K selection requires sufficient evidence to reject a candidate, not necessarily its full score. A seed set supplies a lower bound on the winning threshold. Nonnegative head projections and joint residual bounds upper-bound positive contributions, while activation-informed aggregation bounds the magnitude subtracted by negative heads. The certificate directs full scoring toward candidates that remain eligible; exact-score filtering further reduces writeback and selection work. We establish the certificate and its exact-selection conditions, and analyze how geometry and selection margins govern its effectiveness. Our GPU implementation accelerates the complete Indexer by up to 2.74 times over SGLang and 1.69 times over LiteTopK across English, Chinese, and code workloads. End-to-end evaluation on GLM-5.2 and DeepSeek-V3.2 achieves up to 1.94 times and 1.50 times time-to-first-token speedups over the two baselines, respectively.",
+      "url": "http://arxiv.org/abs/2610.13990v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13990v1",
+      "tldr": "DoSA is a lossless sparse-attention method that uses seed-threshold certificates and per-head upper/lower bounds to skip full scoring for tokens provably outside Top-K, preserving exact selection while accelerating the indexer by up to 2.74× and time-to-first-token by up to 1.94×.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xiaohongshu Inc."
+      ],
+      "affiliations_text": "Xiaohongshu Inc.",
+      "score": 3.1934543948629934,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.14016v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/14/261014016v1-dshuttlenet-a-badminton-doubles-dataset-for-evaluating-team-coordination",
+      "source": "arxiv",
+      "title": "DShuttleNet: A Badminton Doubles Dataset for Evaluating Team Coordination",
+      "authors": [
+        "Guan-Yi Jhang",
+        "Chiencheng Chiang",
+        "Wei-Kai Chen",
+        "Hui-Ching Yu",
+        "Hsu-Chao Lai",
+        "Hwai-Jung Hsu",
+        "Wang Chih-Chuan",
+        "Jhy-Cheng Huang",
+        "Jiun-Long Huang"
+      ],
+      "authors_text": "Guan-Yi Jhang, Chiencheng Chiang, Wei-Kai Chen, Hui-Ching Yu, Hsu-Chao Lai, Hwai-Jung Hsu, Wang Chih-Chuan, Jhy-Cheng Huang, Jiun-Long Huang",
+      "abstract": "Most existing sports datasets are individual-centric or ball-centric, focusing on individual player actions while ignoring interactions among teammates. In badminton doubles, tactical success is governed by rapid team formation and coordination, yet standard resources for modeling these player interactions are scarce. To bridge this gap, we present DShuttleNet, a comprehensive dataset for badminton doubles curated from elite BWF World Tour tournaments. Beyond trajectory data, DShuttleNet uniquely incorporates expert-labeled \"Loss Reasons,\" transforming the dataset into a diagnostic tool for causal tactical evaluation. We formally define two geometry-driven representations, Teammate-Relative Angle (TRA) and Vertical Shot Angle (VSA), to characterize coordination and shot aggressiveness. To quantify interpersonal synergy, we introduce novel metrics, Court Coverage Efficacy Index (CCEI) and Threat Load Asymmetry Index (TLAI), which evaluate the often-overlooked non-hitting partner's role and defensive coordination. Experimental results demonstrate that conventional models suffer from underfitting when failing to incorporate these coordination-centric features, highlighting the critical importance and potential impact of releasing DShuttleNet. Dataset is available at: https://doi.org/10.34740/kaggle/dsv/16097938.",
+      "url": "http://arxiv.org/abs/2610.14016v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.14016v1",
+      "tldr": "DShuttleNet is a new stroke-level badminton doubles dataset from elite BWF tournaments that provides synchronized four-player positions, expert-labeled loss reasons, and coordination-centric features and metrics to evaluate team coordination, showing that models ignoring teammate interactions underfit.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Yang Ming Chiao Tung University",
+        "Feng Chia University",
+        "Chang Gung University"
+      ],
+      "affiliations_text": "National Yang Ming Chiao Tung University, Feng Chia University, Chang Gung University",
+      "score": 2.9115891052631344,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2610.13959v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013959v1-lacrm-llm-guided-mining-of-directed-advertiser-competition-relationships-in-e-commerce-advertising",
+      "source": "arxiv",
+      "title": "LACRM: LLM-Guided Mining of Directed Advertiser Competition Relationships in E-Commerce Advertising",
+      "authors": [
+        "Xiang Shi",
+        "Yitian Kou",
+        "Bing Li",
+        "Shengsheng Niu",
+        "Chun Gan",
+        "Linghui Meng",
+        "Jie He",
+        "Zhangang Lin",
+        "Ching Law"
+      ],
+      "authors_text": "Xiang Shi, Yitian Kou, Bing Li, Shengsheng Niu, Chun Gan, Linghui Meng, Jie He, Zhangang Lin, Ching Law",
+      "abstract": "In e-commerce advertising, ad platforms typically fail to model the externalities among advertisers when making optimization decisions: an advertiser's actual performance is largely shaped by rivals competing for the same users; these rivals typically operate in overlapping product categories and at comparable budget scales. However, capturing this rivalry as an explicit, reusable signal is challenging because it is directed, multi-faceted, and partially observable. Existing paradigms such as interaction graphs, taxonomy rules, and single-embedding models do not fully capture these properties. In this paper, we propose LACRM (LLM-driven Advertiser Competition Relationship Mining), a novel framework that constructs directed competition graphs with continuous edge intensities via a three-stage pipeline. LACRM moves beyond symmetric similarity through LLM-driven role-separated profiling, which enables asymmetric multi-route retrieval to uncover both realized and latent rivals. The framework further incorporates listwise learning-to-rank aligned with temporal auction behavior to accurately model directed competition intensity. In offline retrieval experiments on an industrial benchmark, LACRM outperforms strong directed GNN baselines and ablation variants. Multi-LLM and human studies provide complementary evidence that the recovered latent rivals reflect meaningful market competition rather than merely model-generated artifacts. In production A/B tests, LACRM-guided bidding and incentive allocation increase advertising revenue by 1.73% and 1.14%, respectively. The results demonstrate the practical value of explicit competition modeling in large-scale advertising systems.",
+      "url": "http://arxiv.org/abs/2610.13959v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13959v1",
+      "tldr": "LACRM is an LLM-driven framework that mines directed, weighted advertiser competition graphs in e-commerce advertising via role-separated profiling, asymmetric multi-route retrieval, and listwise behavioral ranking, improving offline retrieval and raising production ad revenue by 1.73% for bidding and 1.14% for incentive allocation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "JD.com",
+        "East China Normal University"
+      ],
+      "affiliations_text": "JD.com, East China Normal University",
+      "score": 2.831344601870796,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2610.13999v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/14/261013999v1-semtree-judge-aware-semantic-decision-trees-for-inspectable-and-repairable-rule-decisions",
+      "source": "arxiv",
+      "title": "SemTree: Judge-Aware Semantic Decision Trees for Inspectable and Repairable Rule Decisions",
+      "authors": [
+        "Jincheng Gao",
+        "Wei Ding",
+        "Shuo Sun"
+      ],
+      "authors_text": "Jincheng Gao, Wei Ding, Shuo Sun",
+      "abstract": "Rule decisions such as content moderation, advertising compliance, and eligibility checks combine several conditions, exemptions, and missing-information cases, and an error can be fixed only once the failing condition is known. We introduce SemTree, a framework that represents a rule decision as a semantic decision tree: each node is a natural-language question with explicit Yes/No/Unknown criteria, a pluggable semantic judge answers it, and the branching structure is compiled on the answers that this judge actually gives. The executed path is the reasoning behind every decision, so errors are repaired where they occur: a reviewer corrects a single node and replays the rule, corrected nodes become training labels for the judge, and a tool-using LLM editor revises questions and subtrees while observing execution results. On all 8,276 ShARC test cases, a tree executed by a hosted judge reaches 67.70% accuracy with 2.99 questions per case, on par with asking the same judge for the final label (68.23%); an earlier tree compiled for a different judge scores 47.87% when executed by this judge, while a new tree compiled on this judge's answers to a 12-question initial pool already scores 64.39%. Node-level repair raises BANKING77 accuracy from 82.04% to 86.16%, an explicit exemption node cuts the false positives of a Chinese e-commerce moderation clause from 24 to 5, and a trained editor raises the development accuracy of edited trees from 64.47% to 73.35%.",
+      "url": "http://arxiv.org/abs/2610.13999v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.13999v1",
+      "tldr": "SemTree turns rule decisions into judge-aware semantic decision trees of natural-language Yes/No/Unknown questions, making each decision’s reasoning path inspectable and allowing targeted node-level repairs that improve accuracy and judge training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xiamen University",
+        "The Hong Kong University of Science and Technology (Guangzhou)"
+      ],
+      "affiliations_text": "Xiamen University, The Hong Kong University of Science and Technology (Guangzhou)",
+      "score": 2.808209829303729,
+      "score_text": "2.8"
+    }
+  ],
+  "errors": []
+}
