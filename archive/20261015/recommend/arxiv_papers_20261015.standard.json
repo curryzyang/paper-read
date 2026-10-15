@@ -1,0 +1,706 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-15T16:18:29.388845",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.19022v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019022v1-a-performative-control-approach-to-day-to-day-traffic-signal-retiming",
+      "source": "arxiv",
+      "title": "A Performative Control Approach to Day-to-Day Traffic Signal Retiming",
+      "authors": [
+        "Shuchang Jiang",
+        "Xinwu Qian",
+        "Santiago Segarra",
+        "Zhongyuan Zhao"
+      ],
+      "authors_text": "Shuchang Jiang, Xinwu Qian, Santiago Segarra, Zhongyuan Zhao",
+      "abstract": "Conventional fixed-time traffic signal optimization and recent day-to-day signal retiming generally model route adaptation under prescribed route-choice behavior and origin-destination (OD) demand, while neglecting the fact that travelers' behavior can be performative to the signal control policy. A signal timing policy learned from historical traffic observations must therefore account for how its own deployment changes the distribution on which it will be evaluated in the future. We formulate this problem as performative signal control under observed traveler responses and characterize performative stability of the coupled policy-demand system. We propose incremental day-to-day retiming using the local policy gradient at the current operating point, estimated offline through simulation-based zeroth-order optimization without an explicit day-to-day demand-response model. This gradual approach provides a feasible path for policy and demand to co-evolve toward stability. Experiments on a downtown Denver network show that our approach improves congestion, throughput, and stability, generalizes across different demand levels, and remains effective when the offline simulator contains mismatched travel demand and routing behaviors.",
+      "url": "http://arxiv.org/abs/2610.19022v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19022v1",
+      "tldr": "The paper proposes a performative day-to-day traffic signal retiming approach that uses offline simulation-based zeroth-order local policy gradients to incrementally update fixed-time signal timings, enabling signal policy and traveler demand/route choices to co-evolve toward performative stability while improving congestion, throughput, and robustness under mismatched demand and routing behaviors.",
+      "detailed_reading": {
+        "motivation": "传统固定配时优化与日复一日信号重配时通常把路径选择和OD需求视为外生给定，忽略信号策略会反过来改变出行者路径与是否出行的决策，即存在表演性效应。历史观测上训练的策略可能在部署后改变其未来被评估的需求分布，因此需要显式刻画策略-需求耦合系统的表演性稳定性。",
+        "method": "将路网中p个可控信号交叉口的每日固定时段配时策略x(t)（如绿信比）作为控制变量，以估计OD需求F(t)、观测交通响应Φ_G及OD成本C(t)为输入，目标最大化总社会剩余J=∑_k (|V_k|/T_h)(b_k-C_k)。控制器不显式建模未知的感知成本更新f_c与弹性需求响应f_d，而是在每天观测并估计F(t)后，用离线交通仿真做零阶梯度估计：采样M个高斯扰动x(t)+n_m，在相同估计OD需求下仿真评估总社会剩余及交叉口平均等待时间，采用多点ZOO或ZoRD（高斯过程代理与后验不确定性融合）估计∇J，并对TSS目标附加交叉口等待时间L1正则。随后按投影梯度上升更新x(t+1)=Π_Z[x(t)+η_t∇J]，其中Π_Z施加最小和最大绿时约束；感知成本按指数移动平均更新，需求根据感知成本自适应，使策略与需求逐步共同演化。",
+        "result": "在丹佛市中心网络实验中，所提日复一日重配时方法相比静态配时和响应式配时基线改善了拥堵、吞吐量和稳定性，并能泛化到显著不同的需求水平。当离线仿真器中的出行需求与路径行为同真实系统存在失配时，方法仍然有效，说明基于零阶梯度的增量更新对模拟器偏差和OD观测噪声具有一定鲁棒性。",
+        "conclusion": "本文将日复一日信号重配时表述为表演性控制问题，并证明通过局部策略梯度增量更新可为信号策略与出行需求提供一条共同演化至表演性稳定的可行路径。该方法无需显式的日间需求响应模型，适合依赖聚合观测而非实时细粒度感知的固定配时系统，但其目标主要是表演性稳定而非表演性最优。",
+        "key_details": "关键先验与数据包括未知的Φ_G、f_c、f_d，控制器仅能从交通感知和估计获得V(t)、C(t)、F(t)，并假设仿真器能局部近似真实响应；数值环境中感知成本用参数γ的指数移动平均生成，需求用含F_min、F_ref、c_ref和敏感度β_k的指数弹性模型生成。目标函数为相对外部选项的总社会剩余，实际观测含噪声，优化时用w≥0的等待时间L1正则增强交叉口级信用分配，ZoRD用全局GP拟合TSS并由局部GP建模各交叉口等待时间。超参与实现约束包括ZOO样本数M、扰动尺度σ、步长η_t、最小和最大绿时投影；每日需进行M次仿真查询，计算成本随交叉口数与样本数增长。局限性在于省略了表演性梯度中的长期诱导需求项∂F*/∂x，因而只追求一阶稳定而非最优，且性能依赖OD估计精度与仿真器对路由和需求行为的近似质量。"
+      },
+      "affiliations": [
+        "Rice University"
+      ],
+      "affiliations_text": "Rice University",
+      "score": 5.3914732763225075,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2610.19046v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019046v1-what-information-buys-in-active-inference",
+      "source": "arxiv",
+      "title": "What Information Buys in Active Inference",
+      "authors": [
+        "Melih Kandemir",
+        "Mustafa Mert Çelikok"
+      ],
+      "authors_text": "Melih Kandemir, Mustafa Mert Çelikok",
+      "abstract": "Information-theoretic exploration is of primary interest in methodological studies of reinforcement learning (RL) and computational cognitive neuroscience, while the established RL theory builds regret guarantees on confidence sets. This situation leaves open the conditions under which the information-driven exploration found in nature is more advantageous than the exploration of the established RL theory. We put the state-of-the-art methods of these two paradigms, Active Inference (AIF) and Bayes-UCBVI, on an equal footing: both act through the same state abstraction of a tabular MDP with $S$ states, and their greedy forms differ only in the exploration term. We find that AIF's information gain decays too fast to serve as a confidence width, locking greedy agents that explore by it out of the optimal action. Calibrating the information gain by a square root yields calibrated AIF, which attains regret of order $\\sqrt T$ for an exact abstraction, but no better guarantee than Bayes-UCBVI for a fixed reward. When an adversary chooses rewards from the agent's data, Bayes-UCBVI's value-specific widths lock out, whereas calibrated AIF pays a factor $\\sqrt S$, which no goal-memoryless agent avoids on some MDP whose start states the adversary also chooses. Calibrated information gain thus acts as a reward-agnostic $\\ell_1$ confidence set, preferable to value-specific widths when rewards are chosen from the agent's data, not when they are fixed.",
+      "url": "http://arxiv.org/abs/2610.19046v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19046v1",
+      "tldr": "The paper shows that Active Inference’s information gain, once square-root calibrated, serves as a reward-agnostic ℓ1 confidence set for exploration in tabular MDPs, making it preferable to value-specific methods like Bayes-UCBVI when rewards are adversarially chosen from the agent’s data but not when rewards are fixed.",
+      "detailed_reading": {
+        "motivation": "信息论探索在强化学习与计算认知神经科学中备受关注，但既有强化学习理论多基于置信集给出遗憾保证，二者优劣条件尚不明确。作者因此研究在何种条件下，自然启发的信息驱动探索比基于置信集的经典探索更具优势，并特别关注探索与状态抽象之间的耦合。",
+        "method": "作者将主动推断（AIF）与Bayes-UCBVI放在同一框架下比较：二者都在具有S个状态的表格型分幕MDP中行动，并使用相同状态抽象，其贪心形式仅在探索项上不同。方法上分析AIF信息增益作为置信宽度的衰减速度，提出用平方根校准信息增益得到calibrated AIF，并在精确抽象、固定奖励以及对手从智能体数据中选择奖励等设定下推导遗憾界与下界。比较的核心是每轮以后验/置信宽度构造奖励上界并贪心选动作，但AIF用奖励无关的信息增益，Bayes-UCBVI用价值特定的宽度。",
+        "result": "核心发现是AIF的原始信息增益衰减过快，不能作为有效置信宽度，会使贪心智能体被锁死在非最优动作之外。用平方根校准后，calibrated AIF在精确抽象下达到O(sqrt T)遗憾，但在固定奖励下并不优于Bayes-UCBVI。当奖励由对手从智能体数据中选择时，Bayes-UCBVI的价值特定宽度会失效，而calibrated AIF需付出sqrt S因子，且在某些起始状态也由对手选择的MDP上，任何无目标记忆智能体都无法避免该因子。",
+        "conclusion": "因此，校准后的信息增益可视为一种奖励无关的l1置信集：当奖励并非固定、而是由数据或对手选择时，它比价值特定宽度更可取；当奖励固定时，经典价值特定置信宽度仍更优。该工作澄清了主动推断中信息驱动探索真正“买到”的是什么，并给出了其适用边界。",
+        "key_details": "关键实现点在于：同一表格型MDP与同一状态抽象保证公平比较；贪心策略只差探索项；AIF需将信息增益开平方校准；理论保证涉及精确抽象假设、O(sqrt T)遗憾、sqrt S因子以及对手选择奖励和起始状态的最坏情形。局限是固定奖励时calibrated AIF无额外优势，精确抽象条件限制强，且下界针对无目标记忆智能体；论文以理论/反例分析为主，不依赖深度网络训练或特定超参。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.535155652599176,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.19042v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019042v1-loss-curvature-as-a-sampling-free-proxy-for-memorization-in-diffusion-models",
+      "source": "arxiv",
+      "title": "Loss Curvature as a Sampling-Free Proxy for Memorization in Diffusion Models",
+      "authors": [
+        "Shashank Sule",
+        "Xinyue Yu",
+        "Boonam Shin",
+        "Yuxuan Liu",
+        "Abolfazl Hashemi",
+        "Hayden Schaeffer"
+      ],
+      "authors_text": "Shashank Sule, Xinyue Yu, Boonam Shin, Yuxuan Liu, Abolfazl Hashemi, Hayden Schaeffer",
+      "abstract": "Understanding the mechanism behind why diffusion models memorize their training data remains an open question in generative modeling. In this paper, we examine this question from two perspectives: (a) the model-level perspective concerning the onset of memorization in a model during training, and (b) the sample-level perspective concerning the proclivity of an individual sample to be memorized by a given model. We show that the so-called input loss curvature, or the Frobenius norm of the Hessian of the diffusion model's training loss, is an effective metric for quantifying both perspectives on memorization. In particular, we empirically demonstrate that input curvatures averaged across training and validation samples can identify when a model is likely to start regurgitating its training data when tracked over training time. However, this metric is not sufficient for measuring an individual sample's likelihood of being memorized. To address this perspective, we introduce a counterfactual definition of memorization in diffusion models, extending the analogous notion from supervised learning proposed by [Feldman, 2019]. We prove that this counterfactual memorization is controlled by the input curvature of the leave-one-out model, thus establishing a direct theoretical link between a sample's local loss landscape and its generation likelihood. We validate our derived bounds through several empirical experiments and show that input-dependent curvature provides a proxy for memorization.",
+      "url": "http://arxiv.org/abs/2610.19042v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19042v1",
+      "tldr": "This paper proposes input loss curvature as a sampling-free proxy for memorization in diffusion models, showing that training-averaged curvature predicts when models begin regurgitating training data and that input-dependent curvature, theoretically linked to counterfactual memorization via the leave-one-out model, indicates which samples are likely to be memorized.",
+      "detailed_reading": {
+        "motivation": "扩散模型为何以及何时记忆训练数据仍是生成建模中的开放问题，且现有检测常依赖采样或仅关注模型整体行为。本文从模型级（训练过程中记忆何时开始）与样本级（单个样本为何易被记忆）两个角度研究该问题，并试图找到无需采样即可量化记忆的代理指标。",
+        "method": "论文将扩散模型训练损失关于输入的 Hessian 的 Frobenius 范数定义为输入损失曲率，并对每个样本计算该曲率；在模型级，对训练集与验证集样本的曲率取平均并随训练时间追踪，以识别模型可能开始复述训练数据的时刻。在样本级，论文引入扩散模型的反事实记忆定义，扩展 Feldman 2019 在监督学习中的对应概念，即通过比较包含与移除该样本（leave-one-out）训练所得模型在生成该样本上的似然或表现差异来定义记忆。理论上证明该反事实记忆由 leave-one-out 模型的输入曲率控制，从而建立样本局部损失景观与其生成可能性之间的直接联系；实验上训练扩散模型、计算输入依赖曲率并验证推导出的界。",
+        "result": "实验表明，训练集与验证集平均输入曲率随训练时间的轨迹能够指示模型何时可能开始 regurgitate 训练数据，但该平均或样本无关曲率不足以判断单个样本被记忆的概率。进一步实验验证了反事实记忆与 leave-one-out 模型输入曲率之间的理论界，说明输入依赖曲率可作为样本级记忆的代理。",
+        "conclusion": "输入损失曲率是一种采样无关的记忆量化指标，既能在模型级刻画训练过程中记忆 onset，也能在样本级通过反事实记忆与 leave-one-out 曲率建立理论联系。该工作为理解扩散模型记忆机制、检测潜在训练数据泄露以及后续缓解记忆提供了新的分析工具。",
+        "key_details": "关键细节在于曲率定义为训练损失关于输入的 Hessian 的 Frobenius 范数，因此需要二阶梯度或 Hessian-vector product 等实现，计算与显存开销是主要约束；模型级指标依赖对训练集和验证集样本做平均并沿训练时间追踪，样本级指标则依赖反事实/leave-one-out 比较，理论上由 leave-one-out 模型的输入曲率控制。潜在局限包括平均曲率不能直接判定单样本记忆、leave-one-out 或反事实评估可能训练成本高，以及曲率代理会受模型架构、数据分布和扩散噪声调度等因素影响。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.25502912764424,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.18878v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/15/261018878v1-inverse-reasoning-models-for-efficient-post-training-and-verification-from-answer-only-data",
+      "source": "arxiv",
+      "title": "Inverse Reasoning Models for Efficient Post-Training and Verification from Answer-Only Data",
+      "authors": [
+        "Eric O. Korman"
+      ],
+      "authors_text": "Eric O. Korman",
+      "abstract": "Post-training reasoning LLMs often requires making a tradeoff between costly supervision and compute inefficiency: supervised finetuning typically requires reasoning traces, which is data inefficient since in many applications one only has prompt-answer tuples and lacks the groundtruth chain-of-thought (CoT) sequence. On the other hand, reinforcement learning (with verifiable rewards, for example) can operate without CoT data but it is much more compute-inefficient since it requires multiple autoregressive completions per optimization step, none of which are guaranteed to give a non-zero policy gradient. In this work we explore a middleground, a self-distillation technique that uses answer-only data, treating CoT as latent variables. This relies on training a partner ``inverse reasoning LLM\" that generates the original's reasoning traces conditioned on the answer. The inverse model is trained once and reused across incoming batches of answer-only data, with all generation happening offline and up front, making the approach particularly suited to continual post-training. Using Qwen3-0.6B on the Countdown and GSM8K tasks, we show that after GRPO training has saturated, a single offline distillation round from the inverse model roughly doubles pass@1 on hard prompts and, on Countdown, outperforms rejection-sampling self-distillation on every hard-tail metric at every mix ratio (with smaller gains on GSM8K); rejection sampling by construction has no signal on problems the model never solves on its own. Continued GRPO on the fresh data retains an edge at hard pass@1 but trails distillation at pass@8 and pass@32 while regenerating rollouts at every step. As an added bonus we see that the inverse model has a second application as an accurate verifier of correctness. When used for best-of-$n$ selection at test time, it raises selection accuracy on Countdown from 0.753 (majority voting) to 0.969.",
+      "url": "http://arxiv.org/abs/2610.18878v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18878v1",
+      "tldr": "The paper proposes an “inverse reasoning LLM” that reconstructs chain-of-thought traces from answer-only data, enabling efficient offline self-distillation and accurate answer verification for post-training reasoning models without ground-truth reasoning traces.",
+      "detailed_reading": {
+        "motivation": "后训练推理大模型面临监督成本与计算效率的权衡：SFT需要推理链，导致数据效率低，因为很多应用只有prompt-answer对；而GRPO等RL虽可用答案验证奖励，却每一步需多次自回归采样且不一定有非零策略梯度。本文探索中间路线：把CoT视为隐变量，用仅含答案的数据做自蒸馏，训练一个答案条件下的逆推理模型来生成原模型的推理轨迹。",
+        "method": "方法基于变分推断与Fisher恒等式，用独立逆模型 q_phi(C|P,A) 近似后验 p_theta(C|P,A)。q_phi 由 p_theta 在正确完整样本上做NLL监督，并加入对比边距损失：对每个prompt从 p_theta 采样g个补全，保留同时含正确与错误答案的组，令正确/错误补全在 q_phi 下的平均对数概率差为 ell_+ - ell_-，用 max(m-(ell_+-ell_-),0) 迫使 q_phi 利用答案；总损失 L_q = L_nll + lambda L_cont。实现上 q_phi 从 p_theta 复制并用LoRA微调，[P;A]前缀内部非因果互见，CoT生成为因果，训练与验证器打分共用该掩码。蒸馏时对目标prompt-answer集 D' 用 q_phi 采样一条CoT，仅保留 p_theta 在给定P,C时能贪心解出正确答案的前向一致样本，并剔除 p_theta 已全对的prompt，再与 p_theta 自身拒绝采样得到的正确轨迹按混合比例 mu 混合做SFT；所有生成离线一次性完成，q_phi仅训练时使用，推理接口不变。",
+        "result": "在Qwen3-0.6B的Countdown与GSM8K上，GRPO饱和后单轮离线蒸馏使困难prompt的pass@1约翻倍，Countdown从0.08提到0.19，且在Countdown所有困难尾部指标和所有混合比例下优于拒绝采样自蒸馏，GSM8K增益较小。继续用新数据做GRPO在困难pass@1上略高（0.23），但pass@8和pass@32落后于蒸馏，且每步仍需重新生成rollout。逆模型作验证器用于best-of-n选择时，Countdown选择准确率从多数投票的0.753提升到0.969；FCR显示q_phi大幅扩展Countdown可解问题集，GSM8K增益集中在困难子集，基线pass@32已达0.94。",
+        "conclusion": "逆推理模型提供了一种仅用答案数据、以离线自蒸馏和验证为核心的后训练方案，在RL平台期后仍能提取额外推理能力，并避免在线RL的持续rollout开销。其关键价值在于把CoT当作隐变量并用摊销后验生成可用推理轨迹，同时同一模型可兼作正确性验证器。局限是q_phi训练仍需一次性多rollout与对比组，蒸馏中近似可能漂移，效果依赖环境，Countdown优于GSM8K。",
+        "key_details": "数据为程序生成的Countdown n=4共5万条按80/10/10划分，以及GSM8K官方train/test；硬prompt定义为起始模型最多25%通过率的子集，核心指标包括FCR@n、pass@1/8/32和best-of-n选择准确率。关键超参包括对比组大小g、边距m、对比损失权重lambda与蒸馏混合比例mu∈{0,0.25,0.5,0.75,1}，q_phi用LoRA从p_theta复制微调，验证分数为长度归一化的 log q_phi(C,eos|P,A)。复杂度优势来自所有CoT和拒绝采样轨迹在训练前批量生成一次并可跨批次复用；局限是q_phi只近似后验、蒸馏中固定数据可能偏离更新后的p_theta，且验证器在测试时引入额外前向计算。"
+      },
+      "affiliations": [
+        "Striveworks"
+      ],
+      "affiliations_text": "Striveworks",
+      "score": 4.2079914120285435,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.19027v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019027v1-optimization-for-one-feasibility-for-most-decoupling-optimization-from-feasibility-in-chance-constrained-programs",
+      "source": "arxiv",
+      "title": "Optimization for One, Feasibility for Most: Decoupling Optimization from Feasibility in Chance-Constrained Programs",
+      "authors": [
+        "Justin Dumouchelle",
+        "Shunyu Yao",
+        "Beste Basciftci",
+        "Thiago Serra"
+      ],
+      "authors_text": "Justin Dumouchelle, Shunyu Yao, Beste Basciftci, Thiago Serra",
+      "abstract": "Chance-constrained stochastic programs (CCSPs) require solutions that satisfy uncertain constraints with high probability. Standard approaches either embed scenarios directly into optimization by considering sample average approximation (SAA)-based reformulations, growing prohibitively expensive and often failing to find feasible solutions; or employ conservative reformulations that guarantee feasibility but sacrifice objective quality by design. We propose ACCESS (Adaptive Chance-Constrained Exploration via Structured Sampling), a structured sampling framework that decouples optimization from feasibility evaluation. First, high-quality candidate solutions are generated by solving many inexpensive single-scenario subproblems, avoiding sampling directly in the constrained high-dimensional solution space. Second, feasibility is assessed separately via large-scale batched simulation over a massive number of scenarios, which is naturally amenable to GPU parallelism. That reduces the search from a high-dimensional solution space to a two-dimensional parameter space controlling conservatism and scenario diversity; while concentrating on candidates near the feasibility boundary, where high-quality feasible solutions lie. We also introduce a variant, ACCESS($δ$), which provides certified feasibility guarantees with probability $1-δ$. Experiments across three benchmark classes and five scenario distributions show that ACCESS matches or exceeds the best objective found by any method in nearly every setting, while ACCESS($δ$) is empirically feasible on every instance. The conservative reformulations remain several percent worse in objective, and SAA is frequently infeasible while taking an order of magnitude longer on the harder benchmarks.",
+      "url": "http://arxiv.org/abs/2610.19027v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19027v1",
+      "tldr": "The paper introduces ACCESS, a structured sampling framework for chance-constrained stochastic programs that decouples optimization from feasibility by generating candidates from inexpensive single-scenario subproblems and evaluating feasibility via batched simulation, reducing the search to a two-dimensional conservatism–diversity space and achieving near-best objectives with strong or certified feasibility guarantees.",
+      "detailed_reading": {
+        "motivation": "机会约束随机规划要求解以高概率满足不确定约束，但现有主流做法存在两难：基于样本平均近似（SAA）的重构把场景直接嵌入优化，规模增长导致计算昂贵且在困难实例上常常找不到可行解；而保守重构虽能保证可行性，却以目标质量为代价。因此需要一种把优化与可行性评估解耦的框架，在可接受的预算下同时兼顾目标质量与可行性。",
+        "method": "本文提出 ACCESS（Adaptive Chance-Constrained Exploration via Structured Sampling）：首先通过求解大量廉价的单场景子问题生成高质量候选解，从而避免在受约束的高维解空间中直接采样；随后将可行性评估与优化分离，用海量场景的大规模批量仿真评估候选解，这种评估天然适合 GPU 并行。该设计把搜索从高维解空间降为控制保守性与场景多样性的二维参数空间，并让搜索聚焦于可行域边界附近，即高质量可行解所在区域。作者还给出变体 ACCESS(δ)，在给定 δ 时提供概率 1−δ 的认证可行性保证。整体推理流程为：批量求解单场景子问题得到候选集，批量仿真评估可行性，在二维参数空间自适应调整后输出最终解。",
+        "result": "在三个基准类别与五种场景分布的实验中，ACCESS 在几乎所有设置下匹配或超过任一对比方法所能找到的最佳目标值；其变体 ACCESS(δ) 在每一个实例上都经验可行。保守重构方法的目标值仍差几个百分点，而 SAA 在较难的基准上频繁不可行，并且耗时高出一个数量级。",
+        "conclusion": "将优化与可行性评估解耦、并在低维参数空间中搜索可行域边界附近候选解的思路，能够在不牺牲可行性的前提下取得与最强基线相当甚至更优的目标质量。ACCESS(δ) 进一步以概率 1−δ 提供可行性证书，使该方法在保证性与效率上都优于 SAA 与保守重构两类经典方案。",
+        "key_details": "关键实现点包括：用大量廉价单场景子问题替代受约束高维解空间采样来产生候选；可行性通过海量场景的批量仿真在 GPU 上并行评估；搜索空间被压缩为保守性与场景多样性两个参数；策略围绕可行性边界进行自适应集中采样；ACCESS(δ) 通过 δ 控制可行性证书的概率水平。评测覆盖三类基准与五种场景分布，并与 SAA 和保守重构对比目标值、可行率与运行时间。局限在于 ACCESS(δ) 的可行性在实验中为经验验证而非全部理论证明，且性能依赖仿真场景规模与批量评估预算。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.154613064842841,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.18991v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/15/261018991v1-contact-uan-unsupervised-actuator-networks-as-a-residual-world-model-for-humanoid-control",
+      "source": "arxiv",
+      "title": "Contact-UAN: Unsupervised Actuator Networks as a Residual World Model for Humanoid Control",
+      "authors": [
+        "Nolan Fey",
+        "Khai Nguyen",
+        "Yash Prabhu",
+        "Gabriel B. Margolis",
+        "Pulkit Agrawal"
+      ],
+      "authors_text": "Nolan Fey, Khai Nguyen, Yash Prabhu, Gabriel B. Margolis, Pulkit Agrawal",
+      "abstract": "Humanoid policies trained in simulation can transfer qualitatively to hardware while failing to transfer the force interactions learned during training, compromising torque efficiency, load regulation, and robustness to impacts. This failure can arise from actuator sim-to-real gaps because forces depend on actuator torques. We introduce Contact-UAN, a residual world model that preserves a simulator's physics priors while correcting actuator dynamics to align simulated rollouts with recorded hardware rollouts. For humanoid motion with contact, this requires contact-consistent replay: if hardware playback in simulation begins with misaligned contact wrenches, the residual model learns to correct reset artifacts rather than actuator discrepancies. Using only onboard proprioception, Contact-UAN infers the simulator-side stance-foot pose needed to initialize replay with consistent contact forces. We show that a UAN trained on 6.5 minutes of real-world walking data generalizes to tasks that benefit from accurate force and impulse regulation and produces policies that transfer seamlessly to the real world, yielding 20% lower running torque, 43% lower force-tracking error, extreme compliance, accurate impedance control, and dynamic, robust jumps.",
+      "url": "http://arxiv.org/abs/2610.18991v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18991v1",
+      "tldr": "Contact-UAN is an unsupervised actuator-network residual world model that uses proprioception-based contact-consistent replay initialization to correct actuator sim-to-real discrepancies in simulation, enabling humanoid policies trained on 6.5 minutes of real walking data to transfer force-sensitive behaviors with 20% lower running torque and 43% lower force-tracking error.",
+      "detailed_reading": {
+        "motivation": "仿真训练的人形策略虽能定性迁移到硬件，但往往无法迁移力交互，导致扭矩效率低、负载调节差和冲击鲁棒性不足。其根源是执行器动力学存在 sim-to-real 差距，因为地面力、外力和冲量都通过关节扭矩介导。已有域随机化或系统辨识难以同时保留模拟器物理先验并精确校正执行器，且许多平台没有可靠扭矩传感标签。",
+        "method": "Contact-UAN 分三阶段：先用本体感觉短历史估计接触概率、支撑脚位姿和基座线速度，仅对置信支撑样本回归模拟器侧穿透高度与倾角，并通过正运动学与接触概率融合得到接触一致的回放初始状态。随后把 UAN 作为残差世界模型只作用于执行器命令通道，输入各关节目标位置误差和关节速度短历史，按执行器类型共享两层 MLP 和 ELU，在 PPO 重放环境中用关节位置 MSE、关节速度 MSE 与残差速率惩罚训练，使模拟 rollout 匹配硬件轨迹而保留模拟器刚体动力学、接触求解和积分。最后冻结 UAN，将校正后的目标注入下游任务训练，策略输出关节位置目标，部署时只运行任务策略而 UAN 不参与。数据上先训练 WTW 行走策略并变步态频率和摆动高度采集真实硬件本体感觉数据，重标注后用于 UAN 训练。",
+        "result": "在 29 自由度 Unitree G1 上，Contact-UAN 使开环重放的全关节 commanded torque 聚合失配降低 69.2%，且在相同命令和初始化下把 ground-truth 初始化后的关节位置 RMSE 从 0.0720 降到 0.0184 rad，说明收益来自执行器建模改进而非重置伪影补偿。硬件 running 策略保持速度跟踪的同时降低扭矩使用 20%，力控制策略将测力计力跟踪误差降低 43%，并实现零力指令下的柔顺和仅本体感觉的阻抗位置控制。跳跃任务中参考跟踪策略均可迁移，但任务奖励微调提高跳高后无 UAN 策略落地失败，有 UAN 策略可稳定落地并抗推。仅用 6.5 分钟真实行走数据训练的 UAN 可泛化到跑步、力和跳跃任务，接触一致初始化把 sim-to-sim 下游 20 秒存活率从 49.8% 提升到 96.7%，接近 oracle 重置。",
+        "conclusion": "Contact-UAN 表明，保留模拟器物理先验并只学习执行器通道残差，配合接触一致的回放初始化，可以显著缩小人形机器人力与冲量层面的 sim-to-real 差距。该方法仅依赖 onboard proprioception 和短时真实行走数据，无需扭矩传感或额外机器人系统辨识，且训练后的 UAN 可冻结复用到多个下游任务。因此，对于运行、力调节、阻抗控制和动态跳跃等执行器敏感行为，执行器残差世界模型是一种有效且可迁移的仿真增强方案。",
+        "key_details": "实现上使用 29-DoF Unitree G1 和 BeyondMimic G1 名义模拟器参数，不额外执行机器人特定 SysID；接触位姿估计器在仿真训练并假设平地形，采用 root 与 yaw 不变帧，且刻意从观测中移除绝对基座高度以避免估计器复制高度而非学习负载相关线索。UAN 训练用 4096 个并行环境、24 步重放时域和同长度 PPO rollout，残差网络按相同执行器硬件共享参数；下游训练移除机器人特定域随机化，但仍随机化地形网格、地面摩擦和外力推力。主要超参与约束包括 6.5 分钟真实行走数据、5 分钟 WTW 与 5 分钟 running 的 sim-to-sim 数据设置、位置残差可避免扭矩监督并保留部署位置控制接口。局限是当前模型不捕捉耦合执行器效应和电机温度依赖效应，后者因温度慢变需要热建模或额外传感器。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.074749097498978,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.19016v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019016v1-ir-prm-with-previous-utility-prediction-constant-regret-and-best-iterate-convergence",
+      "source": "arxiv",
+      "title": "IR-PRM+ with Previous-Utility Prediction: Constant Regret and Best-Iterate Convergence",
+      "authors": [
+        "Michael Sullins",
+        "Ian A. Kash"
+      ],
+      "authors_text": "Michael Sullins, Ian A. Kash",
+      "abstract": "Regret matching (and its variants) and counterfactual regret minimization are central algorithms in practice for normal-form and extensive-form game solving. Yet these have historically lacked the stronger theoretical convergence guarantees available to optimistic and extra-gradient methods. Recent work introduced IREG-PRM+, a regret matching variant which does have strong theoretical convergence guarantees. However, it relies on a simultaneous, extra-gradient update. IREG-PRM+ is an instance of the more general IR-PRM framework, where empirically optimistic and alternating updates often have better performance. However, the prior extra-gradient analysis does not extend to these cases. We introduce a new approach that covers both settings. For simultaneous and alternating IR-PRM+ in finite two-player zero-sum matrix games, previous-utility prediction recovers the constant-regret and convergence-rate guarantees previously obtained with extra-gradient prediction: external regret bounded independently of T, an O(T^{-1}) average duality gap, and an O(T^{-1/2}) best-current-iterate gap. Moreover, the current duality gap vanishes and the current profile converges to the Nash equilibrium set. The key step bounds the component of consecutive strategy movement not controlled by the existing IR-PRM+ regret inequality using the relative growth of the nondecreasing regret-vector norm rho_t. Coupling this bound across the two players yields recurrences whose effective coefficient scales as 1/(rho_t^X rho_t^Y), preventing unbounded norm growth. We extend the analysis to finitely many simplex learners under a weighted Minty condition and, through the corresponding CFR variant IR-PCFR+, recover analogous guarantees for finite two-player zero-sum perfect-recall extensive-form games under the same full-reach condition as prior work.",
+      "url": "http://arxiv.org/abs/2610.19016v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19016v1",
+      "tldr": "The paper proves that IR-PRM+ with previous-utility prediction, for both simultaneous and alternating updates, retains constant regret, \\(O(T^{-1})\\) average duality gap, \\(O(T^{-1/2})\\) best-iterate convergence, and Nash convergence in two-player zero-sum games, with an extension to CFR for extensive-form games.",
+      "detailed_reading": {
+        "motivation": "后悔匹配、CFR及其变体是正规式和扩展式博弈求解的常用实用算法，但历史上缺乏乐观/外梯度方法所具备的更强收敛保证；近期IREG-PRM+虽有强保证，却依赖同时外梯度预测，无法覆盖实践中常更优的上一轮效用乐观预测与交替更新。Zhang等人明确将这两类设置留作开放理论问题，因此本文要为IR-PRM+框架补齐这些实用更新下的常数后悔与快速收敛理论。",
+        "method": "在有限二人零和矩阵博弈中，对IR-PRM+采用上一轮效用预测：首轮预测为零，t>=2时行玩家用A y_{t-1}、列玩家用-A^T x_{t-1}；每轮由非负累积后悔向量归一化得中间策略，加入预测后经唯一标量平移保持正部L2范数，得到实际策略并仅在所玩策略处评估博弈，再以中心化预测误差更新后悔向量。证明从RVU中间不等式出发，把预测误差中未被控制的从x_{t-1}到tilde x_t的事后位移，用非减后悔向量范数rho_t的相对增长rho_t-rho_{t-1}来界定；将两名玩家的界耦合得到系数约1/(rho_t^X rho_t^Y)的递推，从而抑制范数无界增长。对交替更新则使用第一名玩家更新后的中间剖面处理错时预测误差，并把分析推广到加权Minty条件下的有限多个单纯形学习器及IR-PCFR+。",
+        "result": "证明在同时和交替IR-PRM+中，上一轮效用预测无需外梯度即可恢复IREG-PRM+的保证：外部后悔被与T无关的常数界住，平均对偶间隙为O(T^{-1})，最佳当前迭代间隙为O(T^{-1/2})。当前对偶间隙趋于零，且当前策略剖面向纳什均衡集收敛。对IR-PCFR+在相同full-reach条件下，得到有限二人零和完美回忆扩展式博弈的类似序列形式保证。",
+        "conclusion": "本文表明后悔向量范数增长本身可作为一种自阻尼机制，控制上一轮效用预测和交替更新带来的额外策略移动，从而弥合了实用后悔匹配变体与一阶方法强收敛理论之间的差距。该分析将常数后悔与最优平均率扩展到更实用的IR-PRM+/IR-PCFR+更新方式，并给出了额外的双位移RVU界。",
+        "key_details": "关键细节包括：算法参数自由、尺度不变，除首轮外每轮仅一次博弈评估；初始化采用对称单位向量以避免除零，零初始化在附录F处理；每步通过选择唯一gamma_t使正部后悔向量L2范数保持为rho_t，预测误差g_t=(u_t-m_t)-<u_t-m_t,x_t>1，更新为正部。理论针对有限二人零和矩阵博弈和有限二人零和完美回忆扩展式博弈，依赖加权Minty条件与full-reach假设；收敛常数与T无关但依赖动作维度、Minty权重、初始化和博弈，属于当前迭代/最佳迭代保证而非一般最后迭代收敛率，且扩展式结果继承先前工作的full-reach限制。"
+      },
+      "affiliations": [
+        "University of Illinois Chicago"
+      ],
+      "affiliations_text": "University of Illinois Chicago",
+      "score": 4.044732130246975,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.18950v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/15/261018950v1-0-scaling-open-world-egocentric-human-data-for-humanoid-loco-manipulation",
+      "source": "arxiv",
+      "title": "$λ_0$: Scaling Open-World Egocentric Human Data for Humanoid Loco-Manipulation",
+      "authors": [
+        "Lambda-humanoid Team"
+      ],
+      "authors_text": "Lambda-humanoid Team",
+      "abstract": "Humanoid loco-manipulation requires coordinated whole-body interaction with the physical world, yet collecting robot demonstrations at scale remains costly. Human demonstrations offer a scalable alternative, but existing egocentric human supervision often omits locomotion and posture, while embodiment differences and controller dynamics hinder accurate end-effector execution. We introduce HumanVerse, a 500-hour dataset of open-world human loco-manipulation pairing egocentric video with synchronized body and hand motion. Our human-to-humanoid pipeline aligns camera viewpoints and arm appearance, and refines motion references and controller inputs offline to reduce end-effector errors while preserving whole-body coordination. We validate the pipeline through zero-shot transfer to Unitree G1 on representative whole-body manipulation and long-range loco-manipulation tasks, without target-task robot demonstrations. Building on this pipeline, we develop $λ_0$, a humanoid foundation model for whole-body loco-manipulation, with robot-aligned human demonstrations providing supervision for mid-training. Increasing whole-body human data consistently improves downstream task progress. $λ_0$ achieves 90.0% success on SIMPLE and 62.5% across real-world loco-manipulation tasks. We expect this study to guide scalable whole-body human data collection toward humanoid foundation models for richer interaction with the physical world. Homepage: https://lambdahumanoid.github.io/",
+      "url": "http://arxiv.org/abs/2610.18950v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18950v1",
+      "tldr": "The paper introduces HumanVerse, a 500-hour open-world egocentric human loco-manipulation dataset and human-to-humanoid alignment/refinement pipeline, and uses it to train λ₀, a humanoid foundation model that achieves 90.0% success on SIMPLE and 62.5% on real-world loco-manipulation tasks via zero-shot transfer to Unitree G1 without target-task robot demonstrations.",
+      "detailed_reading": {
+        "motivation": "人形机器人全身移动操作需要与物理世界协调交互，但大规模采集真实机器人演示成本高昂。人类第一视角演示是可扩展替代方案，但现有自视角人类监督常缺失移动与姿态信息，且具身差异与控制器动力学阻碍末端执行器精确执行。为此，本文提出HumanVerse数据集与人类到人形流水线，并构建人形全身移动操作基础模型λ0。",
+        "method": "本文构建500小时开放世界人类移动操作数据集HumanVerse，配对第一视角视频与同步身体和手部运动。人类到人形流水线先对齐相机视角与手臂外观，再离线精修运动参考和控制器输入，以降低末端执行器误差并保留全身协调。基于该流水线，作者在Unitree G1上验证零样本迁移，无需目标机器人任务演示；进而开发λ0人形全身移动操作基础模型，以机器人对齐的人类演示进行中期训练监督。",
+        "result": "零样本迁移到Unitree G1在代表性全身操作和长距离移动操作任务上得到验证，无需目标机器人任务演示。增加全身人类数据可持续提升下游任务进展。λ0在SIMPLE基准上达到90.0%成功率，在真实世界移动操作任务中平均成功率为62.5%。",
+        "conclusion": "研究表明，可扩展的全身人类数据采集能够为人类到人形迁移提供有效监督，并显著减少对真实机器人演示的依赖。HumanVerse与λ0为面向开放世界物理交互的人形基础模型提供了可复现的数据与训练路径。",
+        "key_details": "关键细节包括：500小时开放世界第一视角人类移动操作数据，含同步身体与手部运动；核心先验是全身协调与机器人对齐的人类演示；方法模块为视角对齐、手臂外观对齐、离线运动参考与控制器输入精修；λ0在中期训练阶段使用机器人对齐人类演示监督；评估为零样本迁移至Unitree G1，SIMPLE成功率90.0%，真实任务成功率62.5%。局限在于具身差异和控制器动力学仍需精修，真实世界成功率低于仿真，开放世界覆盖与规模化效果仍待进一步验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.038132084076861,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.19044v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019044v1-ringnav-task-shaped-circular-memory-for-visual-heading",
+      "source": "arxiv",
+      "title": "RingNav: Task-Shaped Circular Memory for Visual Heading",
+      "authors": [
+        "Naitri Rajyaguru",
+        "Aryan Tajne",
+        "Stephen Jardim",
+        "Cornelia Fermuller",
+        "Yiannis Aloimonos"
+      ],
+      "authors_text": "Naitri Rajyaguru, Aryan Tajne, Stephen Jardim, Cornelia Fermuller, Yiannis Aloimonos",
+      "abstract": "Tiny robots have limited computation and memory, yet visual navigation systems often maintain more state than a task requires. We ask whether persistent memory can instead be shaped by the task. We present \\textbf{RingNav}, a \\(10.6\\)k--parameter visual heading estimator that constrains its memory to the circular manifold \\(S^1\\). RingNav learns only the turn between consecutive images, while heading is composed directly on the circle. On the TartanAir Visual SLAM Challenge, RingNav reduces mean absolute turn error by \\(27\\%\\) and accumulated heading error over $4$ sec by \\(15\\%\\) relative to a similarly sized learned-memory model. The structured update also gives exactly zero turn for identical frames and exact cancellation under sequence reversal. Without fine-tuning, RingNav transfers to real-world drone experiments and continues estimating heading under severe visual degradation. RingNav runs at $27.3$Hz on Raspberry Pi Zero 2W and can be deployed on an ultra-low power GAP8 processor at $33.4$Hz.",
+      "url": "http://arxiv.org/abs/2610.19044v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19044v1",
+      "tldr": "RingNav is a 10.6k-parameter visual heading estimator that uses task-shaped circular memory on \\(S^1\\) by learning only the turn between consecutive images, improving heading accuracy, enabling exact identity and sequence-reversal behavior, transferring zero-shot to real drones, and running in real time on ultra-low-power edge hardware.",
+      "detailed_reading": {
+        "motivation": "小型机器人计算与内存受限，但视觉导航系统常维护超出任务所需的状态；作者提出任务塑形记忆，即在任务已知状态结构时固定状态及其更新规则，只学习观测如何改变状态。本文聚焦视觉航向，其状态是一维周期变量，天然位于圆环 S^1 上，因此不应让网络学习隐含的持久状态。RingNav 试图验证固定圆形记忆与更新能否以极小模型实现鲁棒航向估计。",
+        "method": "输入为相邻两张320x320 RGB图像，共享卷积编码器将按时间顺序拼接的图像对编码为24维特征，再经两层MLP和门控标量头得到有序预测；对正向和反向图像对分别推理，取半差作为反对称视觉转角估计。持久状态为S^1上的二维单位向量，用固定旋转矩阵R(Δψ)更新并重投影，航向由atan2读出，状态更新无可学习参数。训练使用24帧窗口、步长从{1,2}采样，损失包括4倍相邻转角循环误差、0.1倍多尺度路径积分损失（horizon 2/4/8）、分支监督和对称分量惩罚；推理时因果地逐帧配对前一帧，更新S^1状态。",
+        "result": "在TartanAir Visual SLAM Challenge上，RingNav相对同规模学习记忆模型将平均绝对转角误差降低27%，4秒累积航向误差降低15%。结构化更新保证相同帧输出严格为零转角，序列反转时转角严格反号并可精确抵消。无需微调即可迁移到真实Crazyflie飞行数据，在严重视觉退化下仍能估计航向；模型仅10.6k参数，在Raspberry Pi Zero 2W上27.3Hz、GAP8上33.4Hz运行。评估还覆盖CompTest、HDH-Bench（196条轨迹、四个未训练渲染场景）及35条Crazyflie序列共18,974个图像转换。",
+        "conclusion": "结果表明，将航向的持久记忆直接约束到S^1并固定其旋转更新，是面向资源受限机器人实现轻量视觉航向估计的有效任务塑形设计。学习只需承担图像间视觉转角的估计，从而带来更小状态、更好泛化和边缘部署可行性，并保持对重复、退化或缺失视觉输入的鲁棒性。该工作也为其他具有已知任务状态流形的导航问题提供了可检验的设计范式，但本文实验仅覆盖S^1航向。",
+        "key_details": "关键实现包括：图像归一化后按通道拼接，编码器为四层3x3步长2无偏置卷积，通道数8/12/16/24，各接BN和ReLU，全局平均池化后接32维隐藏/输出MLP；门控头用A、B、a、b、w_o生成标量。反对称性由半差投影构造，辅助L_br与L_sym仅正则化投影前的有序预测；S^1状态仅存2个FP32（8字节），R∈SO(2)后仅做有限精度归一化，无学习状态转移。训练数据含104条序列（80条TartanAir和24条渲染轨迹），验证8条TartanAir，评估含16条CompTest、196条HDH-Bench和35条Crazyflie；总损失权重为4、0.1、1、0.5。推理因果、无需未来帧、地图、关键帧或学习式隐状态转移；局限是仅实验验证了S^1航向，正反向图像因拼接需分别前向计算，且未扩展到完整VO/SLAM状态。"
+      },
+      "affiliations": [
+        "University of Maryland, College Park"
+      ],
+      "affiliations_text": "University of Maryland, College Park",
+      "score": 4.020646789486191,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.19059v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/15/261019059v1-first-order-optimization-methods-with-generalized-smoothness-for-low-rank-matrix-factorization",
+      "source": "arxiv",
+      "title": "First-order Optimization Methods with Generalized Smoothness for Low-rank Matrix Factorization",
+      "authors": [
+        "A. V. Bidanets",
+        "F. S. Stonyakin"
+      ],
+      "authors_text": "A. V. Bidanets, F. S. Stonyakin",
+      "abstract": "This paper studies several first-order methods for low-rank matrix minimization in the Burer--Monteiro form, where the target matrix is represented as the product of a nonnegative factor matrix and its transpose. Such a factorization destroys convexity of the objective function and global Lipschitz continuity of the gradient. We prove that for a quadratic objective function that is strongly convex only on the subspace of symmetric matrices, the Burer-Monteiro factorized objective possesses generalized smoothness with a fractional exponent 2/3. For a quadratic objective, the generalized smoothness property requires positive definiteness of the operator A only on the subspace of symmetric matrices, which relaxes the assumptions of Dragomir et al. On this basis, three methods are proposed: an adaptive gradient descent method with Armijo backtracking; an unconstrained SafeAdam method combining the Adam direction with a descent-angle certificate and a fallback to the normalized gradient; and a certified projected version for the nonnegativity constraint. Global convergence and explicit convergence rates for the proposed methods have been proved. The obtained convergence rate is better than the convergence rate of ordinary unaccelerated gradient descent in the case of a sufficiently large gradient. In the small-gradient regime, the convergence guarantee is of square-root type, and the corresponding complexity scales as the inverse square of the desired accuracy. In the large-gradient regime, the convergence guarantee is of three-quarters type, and the corresponding complexity is proportional to the inverse of the accuracy raised to the power of 4/3. Experiments on SymNMF using the TDT2, Reuters and CBCL datasets, which are standard benchmarks for document and image clustering, show that the methods match or outperform Dyn-NoLips without tuning the relative-smoothness kernel parameters.",
+      "url": "http://arxiv.org/abs/2610.19059v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19059v1",
+      "tldr": "This paper proves generalized smoothness with exponent 2/3 for Burer–Monteiro low-rank matrix factorization under relaxed assumptions and uses it to develop adaptive gradient, SafeAdam, and certified projected first-order methods with global convergence and improved complexity rates, matching or outperforming Dyn-NoLips on SymNMF benchmarks without kernel tuning.",
+      "detailed_reading": {
+        "motivation": "低秩矩阵分解常写为Burer-Monteiro形式 X≈HH^T，但该分解破坏目标凸性与梯度全局Lipschitz连续性，导致经典一阶优化收敛分析失效。本文旨在为仅在有对称矩阵子空间上强凸的二次目标建立广义光滑性，并设计无需精细调参的一阶方法。",
+        "method": "研究对象为二次目标下的对称非负矩阵分解（SymNMF），输入为相似度/核矩阵A，建模为 A≈HH^T，H为非负因子矩阵。作者证明BM分解后的目标具有指数为2/3的广义光滑性，仅要求算子A在对称矩阵子空间上正定，从而放松Dragomir等条件。据此提出三类算法：带Armijo回溯的自适应梯度下降；结合Adam方向、下降角证书与归一化梯度回退的无约束SafeAdam；以及面向非负约束的带证书投影版本。优化流程为迭代更新H，使用回溯/证书判断步长或方向安全性，必要时切换为归一化梯度或投影以保持下降与可行性。",
+        "result": "理论上获得全局收敛性与显式收敛率：梯度较大时优于普通未加速梯度下降；小梯度区域为平方根型保证，复杂度随目标精度ε反平方即O(ε^-2)；大梯度区域为三分之四型保证，复杂度为O(ε^-4/3)。在TDT2、Reuters和CBCL三个文档/图像聚类标准基准上的SymNMF实验表明，所提方法在未调相对光滑核参数的情况下达到或超过Dyn-NoLips。",
+        "conclusion": "作者表明，利用二次目标在对称子空间上的强凸性即可建立2/3指数广义光滑性，并据此得到可证明收敛且实际表现有竞争力的一阶优化框架。该框架统一处理无约束与带非负约束的BM低秩分解，并在标准聚类基准上验证了无需调核参数的优势。",
+        "key_details": "关键细节包括：目标为二次型，仅要求算子A在对称矩阵子空间上正定；BM因子化为X=HH^T且H非负；广义光滑指数为2/3；算法含Armijo回溯、Adam方向、下降角证书、归一化梯度回退与投影操作。复杂度方面，小梯度域O(ε^-2)，大梯度域O(ε^-4/3)，优于普通未加速GD的条件是梯度足够大。实验使用TDT2、Reuters、CBCL三个SymNMF基准，且不调相对光滑核参数。局限是理论主要针对二次目标与对称BM形式，非负约束需投影版本，非凸分解的全局最优性仍受初始化与问题结构影响。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.946531577254486,
+      "score_text": "3.9"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.18877v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/15/261018877v1-lotus-learning-to-understand-time-series-by-learning-to-forecast",
+      "source": "arxiv",
+      "title": "Lotus: Learning to Understand Time-series by Learning to Forecast",
+      "authors": [
+        "Van Dai Do",
+        "Huu Hiep Nguyen",
+        "Minh Hoang Nguyen",
+        "Manh Nguyen",
+        "Hung Le"
+      ],
+      "authors_text": "Van Dai Do, Huu Hiep Nguyen, Minh Hoang Nguyen, Manh Nguyen, Hung Le",
+      "abstract": "Time-series language models typically align numerical signals with language using labels, captions, or question-answer pairs. Although such supervision encourages linguistic representations, it does not explicitly require them to preserve information about how the underlying time-series signal evolves. We introduce forecast grounding, a pretraining principle that requires language-aligned time-series representations to remain predictive of the future evolution before they are adapted to downstream tasks. We instantiate this principle in LOTUS, which divides each time-series channel into non-overlapping patches and maps them into the LLM embedding space. It then predicts the next patch from the LLM hidden states of the time-series tokens, encouraging the learned representation to retain temporal information. To capture both temporal changes and periodic patterns, we also propose a temporal-spectral patch representation that combines each raw time-series patch with its spectral representation before mapping it into the LLM embedding space. Across three language model backbones and six downstream evaluation datasets, LOTUS achieves the best average performance with minimal trainable parameters, reaching 59.91% accuracy and outperforming the strongest matched baseline by 3.36%. Our representation analyses further show that LOTUS uses the numerical input and preserves temporal structure in its learned patch representations. These results establish forecast grounding as a promising pretraining principle, enabling compact time-series language models to outperform models 25 to 50 times their size on TSRBench.",
+      "url": "http://arxiv.org/abs/2610.18877v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18877v1",
+      "tldr": "LOTUS introduces forecast grounding, a pretraining principle that trains language-aligned time-series representations to predict future patches via temporal-spectral patch embeddings, enabling compact models to retain temporal structure and outperform much larger baselines on TSRBench.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9417413360402467,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.19064v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019064v1-how-inner-optimizers-shape-replica-scaling",
+      "source": "arxiv",
+      "title": "How Inner Optimizers Shape Replica Scaling",
+      "authors": [
+        "Eugene Belilovsky",
+        "Stefan Horoi",
+        "Edouard Oyallon",
+        "Benjamin Thérien"
+      ],
+      "authors_text": "Eugene Belilovsky, Stefan Horoi, Edouard Oyallon, Benjamin Thérien",
+      "abstract": "Training large language models (LLMs) across geographically distributed and poorly interconnected compute pools or data centers has become a topic of significant interest. This has led to increased study of local optimization methods such as DiLoco for LLMs, especially those that use local (or inner) adaptive or preconditioned optimizers, which are critical for high-performance LLM training. However, a central challenge remains: it is well known that increasing the number of model replicas (replica scaling) while fixing the total training budget leads to monotonically decreasing performance. Existing work has empirically demonstrated that the choice of inner optimizer (Muon v.s. AdamW) can significantly improve this trend, but offers only limited explanation of the performance difference. In this work, we consider a range of inner-optimizers and identify two important factors that impact replica scaling: (1) the covariance structure of the pseudo-gradients and (2) the impact of batch size on the pseudogradient's noise scale. Based on these insights, we theoretically and empirically demonstrate that whitening-based pre-conditioning is a powerful inner-optimizer desideratum. Our empirical evaluation extends the results to reveal that whitening-based inner-optimizers achieve strong replica scaling (for 8-96 replicas), with performance relative to DP improving as parameters and data are scaled.",
+      "url": "http://arxiv.org/abs/2610.19064v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19064v1",
+      "tldr": "The paper identifies pseudo-gradient covariance and batch-size-dependent noise scaling as key factors in replica scaling for distributed LLM training, and shows that whitening-based inner optimizers substantially improve performance as the number of replicas increases.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CNRS",
+        "Université de Montréal",
+        "Mila",
+        "Concordia University"
+      ],
+      "affiliations_text": "CNRS, Université de Montréal, Mila, Concordia University",
+      "score": 3.9141427010901495,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.19015v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019015v1-scaling-cheap-synthetic-pretraining-improves-indoor-radio-map-prediction",
+      "source": "arxiv",
+      "title": "Scaling Cheap Synthetic Pretraining Improves Indoor Radio-Map Prediction",
+      "authors": [
+        "Khoren Petrosyan",
+        "Artashes Mkrtchyan",
+        "Rafayel Mkrtchyan",
+        "Hrant Khachatrian",
+        "Theofanis P. Raptis"
+      ],
+      "authors_text": "Khoren Petrosyan, Artashes Mkrtchyan, Rafayel Mkrtchyan, Hrant Khachatrian, Theofanis P. Raptis",
+      "abstract": "Real measurements are too limited to train an accurate indoor pathloss predictor that works across a wide range of buildings. Large-scale synthetic pretraining offers a way forward, but real building layouts are also scarce, and accurate ray-tracing simulators are slow, expensive, and often proprietary. We address both problems by introducing a generator that automatically creates diverse indoor layouts and a fast, open-source approximate ray tracer that computes radio maps for them. Using this pipeline, we generate 128M synthetic samples, pretrain ResNet-101 and Swin-T encoder-decoders, and fine-tune them on high-quality benchmark data. Despite simulator mismatch, our ResNet-101 model reduces error by 15% on average relative to the best known methods across five indoor radio-map prediction tasks and improves transfer on a small real-measurement dataset. Both architectures show predictable data-scaling trends: power laws fitted on 2M-16M samples predict the mean normalized downstream RMSE at 32M-128M with 3.33% mean absolute percentage error for ResNet-101 and 7.10% for Swin-T. These results show that pretraining on large amounts of cheap simulated data can improve indoor radio-map prediction, even when real measurements and high-quality simulations are limited.",
+      "url": "http://arxiv.org/abs/2610.19015v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19015v1",
+      "tldr": "By generating 128M synthetic indoor layouts with a fast approximate ray tracer to pretrain ResNet-101 and Swin-T encoder-decoders, this paper shows that scaling cheap synthetic pretraining improves indoor radio-map prediction, reducing error by 15% on average across five benchmark tasks despite simulator mismatch.",
+      "detailed_reading": null,
+      "affiliations": [
+        "YerevaNN",
+        "Yerevan State University",
+        "National Research Council"
+      ],
+      "affiliations_text": "YerevaNN, Yerevan State University, National Research Council",
+      "score": 3.852763724129353,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.19067v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019067v1-tread-a-visuo-inertial-framework-for-terrain-and-locomotion-context-aware-gait-phase-and-speed-estimation-in-wearable-robotics",
+      "source": "arxiv",
+      "title": "Tread: A Visuo-Inertial Framework for Terrain and Locomotion Context-Aware Gait-Phase and Speed Estimation in Wearable Robotics",
+      "authors": [
+        "Debadrata Sarkar",
+        "Akash Bachhar",
+        "Aman Arora"
+      ],
+      "authors_text": "Debadrata Sarkar, Akash Bachhar, Aman Arora",
+      "abstract": "A wearable assistive robot must continuously estimate terrain, locomotion mode, gait phase, and walking speed. These quantities are commonly addressed by separate, terrain-specific models, with datasets rarely collected under a common protocol. This paper presents a visuo-inertial framework that connects these estimates through a causal pipeline using a chest-mounted camera and four lower-limb inertial measurement units (IMUs). Anticipatory Terrain Perception (ATP) classifies incoming terrain with 96.3% accuracy and anticipates terrain transitions by 1.46 s on average. Terrain-Aware Locomotion Mode Identification (TALMI) achieves 93.7% and 98.8% accuracy for its level-ground and stairs experts respectively, with mean transition latencies being below 200 ms. The relevant TALMI posterior is retained as a Probabilistic Locomotion Context (PLC) vector and provided to a shared Gait Kinematic Encoder (GKE), which supports 50-Hz bilateral gait-phase estimation and 2-Hz walking-speed estimation. Leave-one-subject-out evaluation yields gait-phase RMSEs of 1.75%, 2.97%, and 4.55% for level walking, stair ascent, and stair descent respectively while estimating speed over 3.5-5.5 km/h with a RMSE of 0.218 km/h. All inertial sensing based models use sensor-fused Euler angles as input rather than raw accelerometer and gyroscope signals, reducing dependence on sensor mounting variation.",
+      "url": "http://arxiv.org/abs/2610.19067v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19067v1",
+      "tldr": "Tread is a visuo-inertial wearable-robotics framework that uses a chest-mounted camera and four lower-limb IMUs in a causal pipeline to anticipate terrain and identify locomotion mode, then uses a probabilistic locomotion context to estimate bilateral gait phase and walking speed with high accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CSIR-Central Mechanical Engineering Research Institute"
+      ],
+      "affiliations_text": "CSIR-Central Mechanical Engineering Research Institute",
+      "score": 3.849987012304643,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.19043v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019043v1-graph-coarsening-enables-escaping-local-optima-in-compute-constrained-nonconvex-max-cut",
+      "source": "arxiv",
+      "title": "Graph Coarsening Enables Escaping Local Optima in Compute-Constrained Nonconvex MAX-CUT",
+      "authors": [
+        "M. Harper Langston",
+        "Pierre-David Letourneau",
+        "Dalton Jones",
+        "Harris Teague",
+        "Peter Scott",
+        "Mingu Lee",
+        "Richard Lethin",
+        "Chris Lott",
+        "Roland Memisevic",
+        "Fatih Porikli"
+      ],
+      "authors_text": "M. Harper Langston, Pierre-David Letourneau, Dalton Jones, Harris Teague, Peter Scott, Mingu Lee, Richard Lethin, Chris Lott, Roland Memisevic, Fatih Porikli",
+      "abstract": "Because its binary optimization landscape contains exponentially many local optima, MAX-CUT is highly sensitive to initialization. We study Particle Polynomial Relaxation (PPR), a moment-based nonconvex continuous reformulation possessing an advantageous optimization landscape. We warm-start PPR with Combinatorial Multigrid (CMG), a spectral graph-coarsening method that produces structure-aware initial solutions in near-linear time without training data. On \\texttt{t2g20} ($n=400$), benchmark instance with known exact optimum, the combined CMG+PPR pipeline reaches $97.5\\%$ of optimum on average and $98.4\\%$ on the best run. An extended variant with discrete local-search refinement reaches the published optimum on all sixty Biq Mac instances evaluated by a recent neural branch-and-bound method. Using a sparse CSR representation, the same approach scales to G-set instances with up to $20{,}000$ vertices reducing memory requirements by up to $3333\\times$ while maintaining a consistent improvement over the CMG warm start. Gains are largest on sparse weighted graphs; on dense graphs we complement the pipeline with spectral sparsification.",
+      "url": "http://arxiv.org/abs/2610.19043v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19043v1",
+      "tldr": "Combining a structure-aware spectral graph-coarsening warm start (CMG) with a moment-based nonconvex continuous relaxation (PPR) escapes local optima and improves compute-constrained MAX-CUT, achieving near-optimal and scalable results on structured sparse graphs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Qualcomm AI Research"
+      ],
+      "affiliations_text": "Qualcomm AI Research",
+      "score": 3.8346421031956544,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.19038v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019038v1-lag-a-mean-field-optimal-policy-for-online-assignment-with-reusable-resources",
+      "source": "arxiv",
+      "title": "Lag: A Mean-Field Optimal Policy for Online Assignment with Reusable Resources",
+      "authors": [
+        "Keerthana Gurushankar"
+      ],
+      "authors_text": "Keerthana Gurushankar",
+      "abstract": "We study online task assignment with reusable resources. This problem arises in peer reviewer assignment, skill-based call routing, rideshare matching, emergency dispatch, and crowdsourcing: Tasks arrive according to a geometric process and must be immediately assigned to servers that become temporarily busy, yielding rewards that depend on the task-server pair. The goal is to maximize long-run average reward.\n  We cast the problem as a contextual restless multi-armed bandit (CRMAB). We derive an occupancy-measure LP (OCC-LP) that upper-bounds the reward of any work-conserving policy. From its dual we obtain Lag, a closed-form index policy. We introduce a scaling regime in which the number of copies of each server and the number of arrivals per step grow together. This regime yields the first deterministic fluid limit for a contextual bandit. In it, Lag is asymptotically optimal.\n  Finally, we evaluate our algorithms on peer review datasets and call center routing. The Lagrangian index achieves 83-99% of the LP upper bound across all load levels. Moreover, the Lagrangian index policy significantly outperforms the natural greedy assignment scheme, improving reward by up to 12.3% on journal data and 36% on structured synthetic instances.",
+      "url": "http://arxiv.org/abs/2610.19038v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19038v1",
+      "tldr": "The paper introduces **Lag**, a closed-form Lagrangian index policy derived from an occupancy-measure LP for online task assignment with reusable resources, proves its asymptotic optimality in a mean-field scaling regime, and shows it outperforms greedy assignment on peer review and call center routing tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Carnegie Mellon University",
+      "score": 3.8279976723458784,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.19013v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019013v1-data-density-scaling-laws-for-image-self-distillation",
+      "source": "arxiv",
+      "title": "Data Density Scaling Laws for Image Self-Distillation",
+      "authors": [
+        "Alvard Barseghyan",
+        "Ani Vanyan",
+        "Hakob Tamazyan",
+        "Hrant Khachatrian"
+      ],
+      "authors_text": "Alvard Barseghyan, Ani Vanyan, Hakob Tamazyan, Hrant Khachatrian",
+      "abstract": "Current scaling law formulations suggest that increasing the number of unique samples in a dataset improves model performance, while repeated exposure to the same samples provides diminishing value. In this work, we examine this assumption for image self-distillation models. Through systematic experiments across diverse datasets, namely Maxar, SATLAS, Waymo, nuPlan, Ego4D, ImageNet, and YFCC15M, we demonstrate that the effects of sample repetition on downstream performance are non-trivial and dataset-dependent. We identify settings where repeatedly training on a smaller random subset can outperform training on a larger set of unique samples. This finding highlights a limitation of existing scaling laws. To address this gap, we propose a modified version of a Chinchilla-style scaling law that explicitly accounts for two factors: the number of unique samples and repetition per sample. This formulation provides a framework for understanding data-compute trade-offs and improves prediction in some regimes where repetition plays a central role, although its benefits are not consistent across datasets. Finally, we examine how subset selection and augmentation affect downstream performance.",
+      "url": "http://arxiv.org/abs/2610.19013v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19013v1",
+      "tldr": "This paper shows that in image self-distillation, repeated training on smaller random subsets can outperform training on larger unique datasets, and proposes a modified Chinchilla-style scaling law that explicitly accounts for both unique sample count and repetition density to better capture data-compute trade-offs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "YerevaNN",
+        "Yerevan State University"
+      ],
+      "affiliations_text": "YerevaNN, Yerevan State University",
+      "score": 3.630989211351986,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.18883v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/15/261018883v1-token-utility-for-on-policy-distillation-via-local-trust-region-optimization",
+      "source": "arxiv",
+      "title": "Token Utility for On-Policy Distillation via Local Trust-Region Optimization",
+      "authors": [
+        "Narayanan Sadagopan",
+        "Yilan Chen",
+        "Vijay Lingam"
+      ],
+      "authors_text": "Narayanan Sadagopan, Yilan Chen, Vijay Lingam",
+      "abstract": "Token-selection methods for on-policy distillation (OPD) prioritize student-visited positions using diverse signals, including uncertainty, teacher-student disagreement, and mismatch direction. We instead derive token importance from the distillation objective itself: how much can each position's loss decrease under an equal local KL budget on the student's predictive distribution? The answer is the utility $s_t=g_t^\\top F_t^\\dagger g_t$, where $g_t$ is the logit gradient and $F_t$ is the categorical Fisher matrix. For reverse-KL it equals the student-weighted variance of the student-teacher log-probability ratio, and for forward-KL it equals the Pearson $χ^2$ divergence, so the appropriate utility follows from the choice of objective. On shared training checkpoints, several independently motivated criteria, including student entropy, KL disagreement, and TIP, concentrate their importance on nearly the same positions as the derived utility at a 50\\% selection fraction, while diverging at stricter fractions and for direction-specific criteria. We instantiate the utility as Fisher Utility Weighting (FUW), a continuous, mean-normalized token weighting. Across seven mathematical reasoning benchmarks and three Qwen3 student-teacher pairs, FUW improves over matched uniform OPD under both reverse-KL (1.35-4.0 macro points) and forward-KL (1.08-2.71 macro points), and is competitive with existing selective methods using a single closed-form score derived from the training objective.",
+      "url": "http://arxiv.org/abs/2610.18883v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18883v1",
+      "tldr": "This paper derives token importance for on-policy distillation from a local KL trust-region optimization, yielding a Fisher-based utility (reverse-KL: student-weighted variance of the student–teacher log-probability ratio; forward-KL: Pearson χ²) that is instantiated as Fisher Utility Weighting and improves mathematical reasoning over uniform OPD.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UC San Diego",
+        "AWS AI Labs"
+      ],
+      "affiliations_text": "UC San Diego, AWS AI Labs",
+      "score": 3.6103720899860408,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.19033v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019033v1-how-many-ranks-does-a-token-need-a-noise-floor-squelch-for-rank-one-lora-experts",
+      "source": "arxiv",
+      "title": "How Many Ranks Does a Token Need? A Noise-Floor Squelch for Rank-One LoRA Experts",
+      "authors": [
+        "Mei Okonkwo",
+        "Owen Castellanos",
+        "Ingrid Solberg",
+        "Yusuf Demirel"
+      ],
+      "authors_text": "Mei Okonkwo, Owen Castellanos, Ingrid Solberg, Yusuf Demirel",
+      "abstract": "Low-rank adaptation (LoRA) applies every rank-one component of its update to every token, and mixture-of-experts variants replace this with a learned router that activates a fixed number of components. We argue that the number of components a token needs is a detection question with a classical answer. A token's responses to the rank-one components of a trained LoRA consist of a few large values on a Gaussian noise floor whose width matches that of an untrained adapter, and the floor carries cross-talk rather than adaptation. We introduce SQUELCH, a router-free mixture of rank-one experts that (i) soft-thresholds each token's responses at a multiple of its own robust noise level, so the active rank varies per token; (ii) chooses that multiple for each module by Stein's unbiased risk estimate, so no rank budget is specified; and (iii) replaces the resulting marginal keep-or-drop decisions by one explaining-away step on the value Gram matrix, which suppresses redundant co-active components and recruits complementary ones. SQUELCH adds no trainable parameters to LoRA. We prove that the squelch is within a logarithmic factor of the oracle input-dependent allocation, that the selected threshold is risk-consistent, and that explaining away is a descent step toward the joint sparse code whose error is controlled by the coherence of co-active components. On commonsense reasoning, knowledge, math, code, and GLUE with LLaMA-3.1-8B, Qwen3, and DeBERTaV3, SQUELCH improves over LoRA by 2.2--3.2 points and over the strongest mixture baseline by 0.8--1.2 points while activating 8.6 of 32 components per token on average.",
+      "url": "http://arxiv.org/abs/2610.19033v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19033v1",
+      "tldr": "SQUELCH is a router-free, parameter-free LoRA method that recasts per-token rank selection as sparse detection on a noise floor, using SURE-selected soft-thresholding and one explaining-away step to activate only the needed rank-one components per token and outperform LoRA and mixture baselines while averaging 8.6 of 32 components.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Edinburgh",
+        "Delft University of Technology"
+      ],
+      "affiliations_text": "University of Edinburgh, Delft University of Technology",
+      "score": 3.5740000659042304,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.18879v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/15/261018879v1-do-vision-cil-methods-transfer-to-protein-a-diagnostic-benchmark-of-frozen-protein-encoders",
+      "source": "arxiv",
+      "title": "Do Vision CIL Methods Transfer to Protein? A Diagnostic Benchmark of Frozen Protein Encoders",
+      "authors": [
+        "Ziyuan Gao"
+      ],
+      "authors_text": "Ziyuan Gao",
+      "abstract": "Protein function annotation operates over an expanding label space, making class-incremental learning (CIL) a natural framework for incorporating newly discovered functions without full retraining. Yet existing CIL methods have been developed largely in vision and have not been systematically evaluated over frozen protein representations. We conduct a controlled benchmark of nine representative CIL methods across five sequence-, structure-, and sequence--structure-based protein encoders and two enzyme function datasets at different scales, while keeping the encoders frozen and evaluation settings consistent across representations. We find that no method transfers reliably across encoders, and that these failures persist across alternative phase constructions. Diagnostic analyses reveal that this instability arises from weak gradient-based stability signals, substantial heterogeneity in embedding geometry, and covariance assumptions whose appropriate capacity changes with both dataset scale and encoder. These findings suggest that the representation itself should be treated as a central component of continual-learning design rather than a passive feature extractor. More generally, reliable protein CIL will require encoder-aware methods that adapt their statistical assumptions and capacity to the geometry of the representation on which they operate. Code is available at https://github.com/zygao930/ProteinCIL.",
+      "url": "http://arxiv.org/abs/2610.18879v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18879v1",
+      "tldr": "This paper systematically benchmarks nine vision-derived class-incremental learning methods on frozen protein encoders across multiple datasets and representations, finding that none transfer reliably because performance is strongly representation-dependent, and concludes that protein CIL requires encoder-aware methods that adapt to embedding geometry.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cambridge"
+      ],
+      "affiliations_text": "University of Cambridge",
+      "score": 3.5718062637866144,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.19041v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019041v1-tracing-morphology-semantics-and-divergence-in-language-acquisition",
+      "source": "arxiv",
+      "title": "Tracing Morphology, Semantics, and Divergence in Language Acquisition",
+      "authors": [
+        "Forough Shirin Abkenar",
+        "Haoshuo Fu",
+        "Liang Feng",
+        "Ning Yan",
+        "Masood S. Mortazavi"
+      ],
+      "authors_text": "Forough Shirin Abkenar, Haoshuo Fu, Liang Feng, Ning Yan, Masood S. Mortazavi",
+      "abstract": "Understanding the dynamics of language acquisition in Large Language Models (LLMs) is crucial for uncovering how statistical representations evolve into structured linguistic capabilities. However, most existing studies focus primarily on fully trained models, leaving the developmental trajectory across intermediate training stages largely underexplored. In this work, we leverage intermediate checkpoints from open-source models (e.g., Pythia and OLMo) under teacher-forcing evaluation to systematically investigate language acquisition across training steps and model scales. We focus on four core characteristics: morphological structure acquisition, embedding drift, repetition dominance, and co-occurrence effects. Our findings reveal that models acquire morphological structures well before semantic embeddings stabilize. Furthermore, we show that training dataset size has a positive impact on divergence recognition, while co-occurrence during pre-training and repetition during inference have a negative impact on divergence recognition and associative link generation.",
+      "url": "http://arxiv.org/abs/2610.19041v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19041v1",
+      "tldr": "This paper traces intermediate checkpoints of open-source LLMs to show that morphological competence emerges before semantic embeddings stabilize, and that while larger training datasets improve divergence recognition, pretraining co-occurrence and inference repetition impair divergence recognition and associative link generation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Futurewei Technologies"
+      ],
+      "affiliations_text": "Futurewei Technologies",
+      "score": 3.571211977003539,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.19053v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019053v1-deep-generative-models-for-phylogenetic-inference-with-complex-evolutionary-processes",
+      "source": "arxiv",
+      "title": "Deep Generative Models for Phylogenetic Inference with Complex Evolutionary Processes",
+      "authors": [
+        "Ethan Baron",
+        "Alan N. Amin",
+        "Andrew Gordon Wilson"
+      ],
+      "authors_text": "Ethan Baron, Alan N. Amin, Andrew Gordon Wilson",
+      "abstract": "Inference of phylogenetic trees from sequences plays a central role in understanding evolutionary relationships, with applications ranging from tracking pathogen spread to reconstructing the history of life. Conventionally, practitioners obtain posteriors over trees using likelihood-based methods like MCMC. However, likelihoods are only available for simple evolutionary models with restrictive assumptions. For realistic evolutionary models, inference using conventional methods is prohibitively expensive, inaccurate, or even impossible. In practice, practitioners settle for using as flexible a conventional method as possible, even though they expect it is misspecified. In principle, we could use simulation-based inference: simulate tree and sequence data from an evolutionary model and train a neural network to predict the posterior over trees given sequences. However it is a mathematical challenge to represent and train complex posterior distributions over trees. Here we present a flexible family of conditional generative models over trees. Our models iteratively build trees using three natural paradigms -- top-down, middle-out, or bottom-up -- and are trained using a discrete diffusion framework. For real and synthetic datasets of up to $65$ taxa and $>10^5$ tokens, our models recover MCMC posteriors much more accurately than the previous state-of-the-art simulation-based method Phyloformer 2. Finally, we compare to IQ-Tree, a popular flexible-but-misspecified conventional method. Our models match its tree estimates on simple data, but on more realistic data, our method is reliably more accurate.",
+      "url": "http://arxiv.org/abs/2610.19053v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19053v1",
+      "tldr": "TLDR: The authors propose a flexible family of discrete diffusion–trained conditional generative models that iteratively build phylogenetic trees via top-down, middle-out, or bottom-up paradigms for simulation-based Bayesian inference, achieving more accurate posteriors under complex evolutionary models than prior simulation-based methods and matching or surpassing conventional misspecified methods like IQ-Tree on realistic data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "New York University"
+      ],
+      "affiliations_text": "New York University",
+      "score": 3.5375654509140917,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.19035v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019035v1-who-should-we-listen-to-more-welfare-aware-preference-acquisition-for-pluralistic-alignment",
+      "source": "arxiv",
+      "title": "Who Should We Listen to More? Welfare-Aware Preference Acquisition for Pluralistic Alignment",
+      "authors": [
+        "Ruomeng Ding",
+        "Tianwei Gao",
+        "Lianrui Geng",
+        "Mohit Bansal",
+        "Zhun Deng"
+      ],
+      "authors_text": "Ruomeng Ding, Tianwei Gao, Lianrui Geng, Mohit Bansal, Zhun Deng",
+      "abstract": "Pluralistic alignment needs to accommodate diverse preferences under limited human feedback. Using AI simulators to label preference comparisons reduces annotation costs, but variation in simulation accuracy across individuals can leave some people's preferences poorly represented in training. We study how to allocate human feedback across people to construct training data for pluralistic alignment, and how this allocation affects the trained policy. To make this allocation explicit and controllable, we define a social welfare objective over individual supervision utilities that measure label quality. Each query's marginal welfare gain depends on its expected supervision improvement, the recipient's current utility, and application-designated priority. Welfare-Aware Preference Acquisition (WAPA) uses auxiliary reference models to estimate query gains and individual utilities, then selects queries by estimated marginal welfare gain while updating recipient utilities. We prove exact optimality of the acquisition algorithm for the estimated welfare objective under a fixed query budget and model predictions. Experiments on six Roleplay collections and four OpinionQA regions demonstrate improved supervision and controllable allocation tradeoffs. Policy training on four Roleplay collections improves preference prediction for both seen and unseen individuals. When prioritizing a designated group and poorly represented individuals, acquiring human labels for 20% of comparisons recovers 75-86% of the average predictive utility gap between policies trained entirely on AI-generated labels and entirely on ground-truth labels.",
+      "url": "http://arxiv.org/abs/2610.19035v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19035v1",
+      "tldr": "The paper introduces Welfare-Aware Preference Acquisition (WAPA), a method that optimally allocates limited human preference feedback across individuals according to a social welfare objective—especially prioritizing underrepresented groups—to improve pluralistic alignment, showing that labeling only 20% of comparisons can recover 75–86% of the predictive utility gap between AI-labeled and fully human-labeled training.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4193353221787386,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.18880v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/15/261018880v1-do-perturbation-predictors-learn-gene-interactions-diagnosing-extrapolation-in-agentic-screening",
+      "source": "arxiv",
+      "title": "Do Perturbation Predictors Learn Gene Interactions? Diagnosing Extrapolation in Agentic Screening",
+      "authors": [
+        "Ziyuan Gao"
+      ],
+      "authors_text": "Ziyuan Gao",
+      "abstract": "High-throughput perturbation screens increasingly use machine-learning models to predict the effects of gene combinations that were never measured. A difficult case arises when both genes in a test pair were seen individually during training, but their combination was not. In this setting, standard OOD methods often fail because neither gene appears unfamiliar on its own. We therefore compare each model prediction with a simple additive prediction obtained by summing the two observed single-gene effects. The difference between them, which we call additive disagreement (AD), measures how much extra interaction effect the model introduces for an unseen combination. Across eight prediction methods and three Perturb-seq datasets, specialised neural predictors do not consistently outperform this simple additive baseline. More importantly, predictions with larger deviations from the additive baseline tend to have larger errors. Conventional output-based and embedding-based confidence signals are inconsistent across datasets and models, whereas AD remains informative across all evaluated compositional settings. We further study how this signal can guide decisions in an agentic perturbation-screening workflow. The code is available at https://github.com/zygao930/OOD.",
+      "url": "http://arxiv.org/abs/2610.18880v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.18880v1",
+      "tldr": "This paper introduces additive disagreement (AD)—the deviation of a model’s predicted combinatorial perturbation effect from the sum of observed single-gene effects—to show that specialized perturbation predictors often fail to outperform a simple additive baseline on unseen gene combinations and that AD is a more consistent indicator of unreliable interaction extrapolation than standard OOD/uncertainty signals, making it useful for agentic screening.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cambridge"
+      ],
+      "affiliations_text": "University of Cambridge",
+      "score": 3.2589734488647832,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.19011v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/15/261019011v1-pmo-dock-benchmarking-docking-specificity-and-generalization-in-molecular-optimization",
+      "source": "arxiv",
+      "title": "PMO-Dock: Benchmarking Docking, Specificity, and Generalization in Molecular Optimization",
+      "authors": [
+        "Gor Simonyan",
+        "Tatevik Abrahamyan",
+        "Narek Abelyan",
+        "Tigran Fahradyan",
+        "Hrant Khachatrian"
+      ],
+      "authors_text": "Gor Simonyan, Tatevik Abrahamyan, Narek Abelyan, Tigran Fahradyan, Hrant Khachatrian",
+      "abstract": "The Practical Molecular Optimization (PMO) benchmark standardized evaluation in molecular optimization, but it is built on simple property-based oracles that do not capture structure-based drug design. As the field has moved to docking-based objectives, evaluation practice has become unstandardized, and different methods report results on different docking tasks, often without a shared protocol for fair comparison or sample-efficiency constraints. To address this, we introduce Practical Molecular Optimization for Docking (PMO-Dock), a benchmark and protocol for docking-based optimization consisting of 25 tasks covering hit generation, lead optimization, and a new specificity task requiring strong on-target binding while penalizing off-target interactions. The protocol separates model development from final evaluation: validation tasks are used for hyperparameter tuning, and test tasks are held out for final evaluation and are not used during development. Evaluation on the test tasks is done under a strict oracle budget to reflect realistic drug-discovery settings. We benchmark four diverse high-performing methods spanning different optimization paradigms, Saturn (reinforcement learning), GenMol (discrete diffusion), Genetic-guided GFlowNet, and ChemLlama (LLM-based evolutionary search). Our results show no universally best method across tasks, additional analyses of hyperparameter transfer (cross-task and cross-category) and sensitivity show that transfer is often limited and varies by method, motivating method-dependent selection strategies. This benchmark provides a concrete standard for evaluating generalization to unseen tasks and sample efficiency under a limited test-time oracle budget.",
+      "url": "http://arxiv.org/abs/2610.19011v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.19011v1",
+      "tldr": "PMO-Dock introduces a standardized benchmark and protocol for docking-based molecular optimization across 25 tasks, including specificity, under strict oracle budgets, and shows that no method universally dominates and hyperparameter transfer is limited, enabling fair evaluation of generalization and sample efficiency.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.115341250800505,
+      "score_text": "3.1"
+    }
+  ]
+}
