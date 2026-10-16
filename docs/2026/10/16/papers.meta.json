@@ -1,0 +1,740 @@
+{
+  "label": "2026-10-16",
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T16:05:03",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2610.20636v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020636v1-flowbudget-training-free-sampling-budget-estimation-for-flow-matching-models",
+      "source": "arxiv",
+      "title": "FlowBudget: Training-Free Sampling-Budget Estimation for Flow Matching Models",
+      "authors": [
+        "Zahra Dehghani",
+        "Pablo Piantanida",
+        "Mohammadhadi Shateri"
+      ],
+      "authors_text": "Zahra Dehghani, Pablo Piantanida, Mohammadhadi Shateri",
+      "abstract": "Sampling from continuous flow-based generators such as flow matching models requires numerical ODE or SDE integration, making inference cost depend on the number of function evaluations (NFEs). In practice, the sampling budget is inherited from prior work or selected through expensive FID-versus-NFE sweeps, using FID to assess image-generation quality, requiring sample generation and evaluation at multiple budgets. This makes sampling-budget selection dependent on repeated empirical evaluation. We therefore ask a complementary question to solver design and timestep allocation: for a fixed pretrained model and solver, what numerical resolution is sufficient? We introduce FLOWBUDGET, a training-free estimator of solver-relative sampling complexity. Using simulation-free interpolation probes of the learned dynamics, FLOWBUDGET normalizes the leading one-step discretization error by the motion, estimates its coefficient from interpolation probes, and maps a numerical tolerance to a step budget using the solver order. We derive estimators for numerical solvers in flow~matching sampling, namely Euler and Heun for ODE sampling and additive-noise Euler--Maruyama for SDE sampling, and connect the ODE coefficients to terminal integration error. Experiments on SiT, FlowDCN and Rectified Flow models, spanning flow-model architectures and formulations, test whether FLOWBUDGET can estimate the NFE budget without generating samples at multiple budgets or performing an FID-versus-NFE sweep. The code is available at https://github.com/Yasaman-dt/FlowBudget",
+      "url": "http://arxiv.org/abs/2610.20636v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20636v1",
+      "tldr": "FlowBudget is a training-free method that estimates the required sampling budget (NFEs) for a fixed pretrained flow matching model and solver by using simulation-free interpolation probes to estimate solver-relative discretization complexity, avoiding expensive FID-versus-NFE sweeps.",
+      "detailed_reading": {
+        "motivation": "Flow matching 采样依赖 ODE/SDE 数值积分，NFE 直接决定推理成本，但实际常继承固定预算或通过昂贵的 FID–NFE 扫描选择预算，需要在多个预算下反复生成与评估。本文提出一个互补问题：在固定预训练模型与求解器时，多少数值分辨率才足够？因此希望无需训练、无需质量扫描地估计采样步预算。",
+        "method": "FlowBudget 在少量数据子集上构造无模拟插值探针 x_t=(1−t)x_0+tε、t∼U[0,1]，对给定求解器定义单步局部误差 L_S 与位移尺度 D_S，并用稳定化相对误差 E_S=L_S/(D_S+ε|h|^β_S) 和归一化系数 r=q_S/(d_S+ε) 刻画；由小步长展开 L=κ|h|^α q、D=|h|^β d，得到平均相对误差约等于 κ C_S K^{−γ}，其中 C_S=E_μ[r]、γ=α−β，故给定容差 τ 的预算为 K=ceil((κ C_hat_S/τ)^{1/γ})。对 Euler ODE，q=||aθ||、d=||vθ||、α=2、β=1、γ=1，K_E=ceil(C_hat_E/(2τ))、NFE=K，其中 aθ=∂t vθ+J_x vθ vθ；对 Heun，q=||2gθ−cθ||、α=3、γ=2，K_H=ceil(sqrt(C_hat_H/(12τ)))、NFE=2K，其中 gθ=J_x vθ aθ、cθ 为二阶方向导数组合；对加性噪声 Euler–Maruyama SDE，先用速度估计 score sθ=−(x_t+(1−t)vθ(x_t,t))/t 与漂移 fθ=vθ−1/2 w_t sθ，令 A=J_x fθ G、B=∂t G，q=sqrt(||A||_F^2+||B||_F^2+<A,B>_F)、d=||G||_F、α=3/2、β=1/2、γ=1，K_EM=ceil(C_hat_EM/(√3 τ))。C_hat_S 由 N 个独立探针 Monte Carlo 平均，并用 Hoeffding 不等式给出集中界与预算置信区间；ODE 系数在 Lipschitz 稳定性假设下还与终端积分误差关联，EM 使用同一布朗路径的强局部误差。",
+        "result": "在 SiT、FlowDCN 和 Rectified Flow 上的实验用于检验 FlowBudget 能否在不进行多预算采样和 FID–NFE 扫描的情况下估计 NFE 预算；报告的核心是估计得到的预算对应可用的质量-成本工作点，并覆盖不同流模型架构与表述。方法同时给出 ODE 系数与终端积分误差的理论联系，以及有限探针下 C_hat_S 的 Hoeffding 集中界，说明估计误差可按探针数控制。由于摘要未给出具体 FID 或 NFE 数值，本文层面的主要实证结论是估计流程可行且跨模型适用，而非报告单一最优 FID。",
+        "conclusion": "FlowBudget 将固定模型-求解器下的采样预算选择转化为数值局部误差估计，提供无需训练、无需 FID 扫描的模型-求解器相对复杂度估计；它与求解器设计、时间步分配互补，可用于 Euler、Heun 与加性噪声 Euler–Maruyama。其主要价值是在给定容忍度 τ 时直接映射到步数/NFE，减少经验扫描成本，但结论限于数值积分误差和探针近似，不保证直接对应 FID。",
+        "key_details": "关键实现点包括：用训练数据小子集构造无模拟插值探针；用稳定化分母 ε 防止零运动处发散；C_S 是 population 系数，C_hat_S 用 N 个独立探针 Monte Carlo 估计，值域有界时 Hoeffding 给出 |C_hat−C|≤R sqrt(log(2/η)/(2N))；ODE 的 Euler 每步 1 NFE、Heun 每步 2 NFE；SDE 需在扩散项主导的探针时间域 [t_min,t_max] 且 inf||G||>0，并共享布朗路径定义强局部误差；理论依赖小步长均匀展开、Lipschitz 稳定性和足够小 h，且只针对固定预训练模型下的数值误差，不覆盖学习近似误差与 FID 映射。"
+      },
+      "affiliations": [
+        "ILLS",
+        "LIVIA",
+        "ÉTS Montréal",
+        "Mila -- Quebec AI Institute",
+        "CNRS, CentraleSupélec -- Université Paris-Saclay"
+      ],
+      "affiliations_text": "ILLS, LIVIA, ÉTS Montréal, Mila -- Quebec AI Institute, CNRS, CentraleSupélec -- Université Paris-Saclay",
+      "score": 4.870845865031561,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2610.20748v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020748v1-interpreting-language-model-parameters",
+      "source": "arxiv",
+      "title": "Interpreting Language Model Parameters",
+      "authors": [
+        "Lucius Bushnaq",
+        "Dan Braun",
+        "Oliver Clive-Griffin",
+        "Bart Bussmann",
+        "Nathan Hu",
+        "Michael Ivanitskiy",
+        "Linda Linsefors",
+        "Lee Sharkey"
+      ],
+      "authors_text": "Lucius Bushnaq, Dan Braun, Oliver Clive-Griffin, Bart Bussmann, Nathan Hu, Michael Ivanitskiy, Linda Linsefors, Lee Sharkey",
+      "abstract": "Mechanistic interpretability aims to uncover how neural networks use their parameters to implement their impressive neural algorithms. Although previous work has uncovered substantial structure in the intermediate representations that networks use, little progress has been made to understand how the parameters and nonlinearities of networks perform computations on those representations. In this work, we present a method that brings us closer to this understanding by decomposing a language model's parameters into subcomponents that each implement only a small part of the model's learned algorithm, while simultaneously requiring only a small fraction of those subcomponents to account for the network's behavior on any input. The method, adVersarial Parameter Decomposition (VPD), optimizes for decompositions of neural network parameters into simple subcomponents that preserve the network's input-output behavior even when many subcomponents are ablated, including under ablations that are adversarially selected to destroy behavior. This encourages learning subcomponents that provide short, mechanistically faithful descriptions of the network's behavior that should aggregate appropriately into more global descriptions of the network's learned algorithm. We study how sequences of interactions between these parameter subcomponents produce the network's output on particular inputs, enabling a new kind of 'circuit' analysis. While more work remains to be done to deepen our understanding of how neural networks use their parameters to compute their behavior, our work suggests an approach to identify a small set of simple, mechanistically faithful subcomponents on which further mechanistic analysis can be based.",
+      "url": "http://arxiv.org/abs/2610.20748v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20748v1",
+      "tldr": "The paper introduces adVersarial Parameter Decomposition (VPD), a method that decomposes a language model’s parameters into simple, mechanistically faithful subcomponents that preserve behavior even under adversarial ablations, enabling circuit-level analysis and predictable model editing.",
+      "detailed_reading": {
+        "motivation": "机制可解释性希望逆向工程语言模型学到的神经算法，但以往工作主要揭示中间表示的结构，很少说明网络参数与非线性如何在这些表示上执行计算。基于激活的分解方法使用与原始网络不同的函数形式，难以把解释关联到真正做计算的参数和非线性上，也妨碍精确编辑参数和预测分布外行为。已有参数分解方法虽有前景，但尚未扩展到完整语言模型，且缺少对对抗选择消融下机制忠实性的充分验证。",
+        "method": "VPD将网络参数矩阵分解为若干秩一子成分，即用 W_l≈Σ_c U_c^l (V_c^l)^T 表示，并允许子成分数超过矩阵秩以容纳叠加表示；同时引入Δ分量刻画残差并施加Δ-L2损失以保持参数忠实。训练一个因果重要性函数预测每个批次和序列位置上子成分的可消融性 g∈[0,1]，在保留重要子成分的前提下对大量子成分做对抗选择的部分消融，使任意包含重要成分的子集都尽量保持网络输入输出行为。再用子成分聚类得到完整参数组件，并基于子成分交互构建归因图分析电路；实验对象是一个在Pile上训练的67M参数四层语言模型。",
+        "result": "在67M四层Pile语言模型上，VPD找到了高度可解释的参数子成分，既能按数据集样例解释其激活，也能通过子成分交互序列形成可分析的电路，并首次较满意地将注意力层计算分解为跨多个头的功能特化子成分。与逐层和跨层transcoder潜变量相比，VPD在标准训练目标下取得更好的稀疏度-重构权衡，对训练与评估协议不匹配更鲁棒，可解释性相当且特征分裂更少。作者还展示归因图可追踪信息流，并用参数子成分手动编辑模型中的表情符号预测。",
+        "conclusion": "VPD把基于消融的参数分解扩展到完整小型语言模型，并通过对抗选择的部分消融提升机制忠实性，表明可以识别少量简单且机制忠实的子成分作为进一步机制分析的基座。该路线支持跨头注意力分解、子成分电路分析和可预测的模型编辑，但仍需更多工作来加深对网络如何用参数计算行为的理解。",
+        "key_details": "关键细节包括：参数矩阵被分解为超完备秩一子成分，以处理叠加表示；用Δ分量和Δ-L2辅助损失保证子成分和尽可能等于原始参数；因果重要性函数输出连续消融分数，并以对抗部分消融近似检查所有潜在消融组合，要求少数子成分必要、且任意包含必要成分的子集充分。方法还引入显式聚类把子成分合成为完整参数组件，实验在67M四层语言模型和Pile上进行，并与CLT/transcoder比较稀疏度-重构和鲁棒性。局限在于模型规模仍小、机制存在性带有哲学假设、聚类仅在部分分析中使用，且对更大模型和更广泛任务的扩展仍需验证。"
+      },
+      "affiliations": [
+        "Independent",
+        "Goodfire",
+        "MATS"
+      ],
+      "affiliations_text": "Independent, Goodfire, MATS",
+      "score": 4.483462833870069,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.20687v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020687v1-on-policy-residual-learning-for-diffusion-language-models",
+      "source": "arxiv",
+      "title": "On-Policy Residual Learning for Diffusion Language Models",
+      "authors": [
+        "Yifan Yu",
+        "Yuqing Jian",
+        "Jisen Li",
+        "Yuezhou Hu",
+        "Tianyi Zhang",
+        "Xiaoxia Wu",
+        "Rui-Jie Zhu",
+        "Junxiong Wang",
+        "Zhongzhu Zhou",
+        "Fan Lai",
+        "James Zou",
+        "Chenfeng Xu"
+      ],
+      "authors_text": "Yifan Yu, Yuqing Jian, Jisen Li, Yuezhou Hu, Tianyi Zhang, Xiaoxia Wu, Rui-Jie Zhu, Junxiong Wang, Zhongzhu Zhou, Fan Lai, James Zou, Chenfeng Xu",
+      "abstract": "Residual context is key to unlocking the speed-quality Pareto frontier of diffusion language models (DLMs) by carrying forward predictive distributions across denoising steps. Yet turning this seemingly simple mechanism into an effective learning paradigm is far from simple: there is no clear recipe for how residual context should be learned. We introduce ORL, a framework for on-policy residual learning in DLMs. Algorithmically, we identify that residual learning is inherently on-policy. ORL learns from model-induced residual trajectories on the fly and introduces an entropy-contraction objective that sharpens predictions as the model revisits its own predictions. System-wise, exact residual supervision requires capturing, retaining, and reprocessing many trajectory-dependent states. ORL co-designs the algorithm with asynchronous residual capture and transport, specialized block-diffusion attention, and packed compute-balanced training, making it practical at scale. On a 4B DLM converted from Qwen3-4B, ORL improves tokens per forward (TPF) by up to 6.2x and, with our dlmrt engine, end-to-end throughput by approximately 6.9x at comparable or better quality. In single-request serving on one H100, this mode achieves a stronger speed-quality Pareto frontier than autoregressive models with EAGLE3 and DFlash speculative decoding under both strict and relaxed verification, running 1.74x faster than DFlash at matched accuracy. ORL also transfers to existing DLMs: on LLaDA-2.1-mini, 36 H100-hours and 4.2M self-generated tokens, about 10x less data than prior LLaDA recipes, yield up to 1.5x higher TPF and up to 3x higher throughput at comparable quality, and on DiffusionGemma, ORL raises TPF by 1.1-1.2x. With dlmrt and NVFP4 quantization, ORL models decode a single request at up to 5,046 tokens/s on one B200, 7,708 on eight B200s, and 2,788 on a consumer RTX 5090, with comparable quality.",
+      "url": "http://arxiv.org/abs/2610.20687v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20687v1",
+      "tldr": "The paper introduces ORL, an on-policy residual learning framework for diffusion language models that learns from model-induced residual trajectories via an entropy-contraction objective and systems co-design, enabling up to 6.9x higher end-to-end throughput at comparable or better quality.",
+      "detailed_reading": {
+        "motivation": "残差上下文是解锁扩散语言模型速度-质量帕累托前沿的关键，因为它能在去噪步之间携带预测分布；然而如何有效学习残差上下文尚无明确配方，现有机制难以直接转化为可扩展的学习范式。ORL 旨在回答扩散语言模型中残差学习应如何建模与训练，并解决其在大规模系统实现上的瓶颈。",
+        "method": "ORL 以扩散语言模型为基座，将前序去噪步的预测分布作为 residual context 在步间传递，并把残差学习形式化为 on-policy 问题：训练数据并非固定离线轨迹，而是由当前模型在线诱导的 residual 轨迹构成。算法上引入熵收缩目标，让模型在重访自身预测时逐步锐化预测分布；系统上协同设计异步残差捕获与传输、面向块扩散的专用注意力以及打包计算均衡训练，以支持对轨迹相关状态的精确残差监督。推理阶段通过 dlmrt 引擎执行块扩散解码，可结合 NVFP4 量化部署。",
+        "result": "在由 Qwen3-4B 转换得到的 4B DLM 上，ORL 将 tokens per forward（TPF）最高提升 6.2 倍，配合 dlmrt 引擎端到端吞吐最高提升约 6.9 倍，质量相当或更好。单请求 H100 服务下，其速度-质量帕累托前沿优于带 EAGLE3 与 DFlash 投机解码的自回归模型，在严格与宽松验证下均成立，匹配精度时比 DFlash 快 1.74 倍。迁移到 LLaDA-2.1-mini 时，仅用 36 H100 小时和 4.2M 自生成 token（约为此前 LLaDA 配方数据的十分之一）即获得最高 1.5 倍 TPF 与最高 3 倍吞吐提升，质量相当；在 DiffusionGemma 上 TPF 提升 1.1-1.2 倍。结合 dlmrt 与 NVFP4 量化，ORL 模型单请求解码在单张 B200 上最高 5,046 tokens/s，八张 B200 上 7,708 tokens/s，消费级 RTX 5090 上 2,788 tokens/s，质量相当。",
+        "conclusion": "ORL 表明残差学习本质上是 on-policy 的，并通过熵收缩目标与系统级协同设计把这一范式做到可扩展、可部署。它显著推进了扩散语言模型的速度-质量前沿，并能在不同 DLM 与硬件/量化设置下迁移，说明该方法对实际服务具有通用价值。",
+        "key_details": "关键实现包括：以模型自身在线生成的 residual 轨迹进行训练，避免离线残差监督的分布偏移；采用熵收缩目标在重访自身预测时锐化分布；系统上使用异步残差捕获与传输、块扩散专用注意力和 packed compute-balanced 训练来处理大量轨迹相关状态。评测模型涵盖 Qwen3-4B 转换的 4B DLM、LLaDA-2.1-mini 与 DiffusionGemma，指标为 TPF、端到端吞吐、严格/宽松验证下的速度-质量帕累托前沿；训练数据方面 LLaDA-2.1-mini 仅用 4.2M 自生成 token 与 36 H100 小时，约为此前配方十分之一。部署涉及 dlmrt 引擎与 NVFP4 量化，硬件包括 H100、B200 和 RTX 5090；主要代价或约束在于精确残差监督需捕获、保留并重处理轨迹相关状态，且收益依赖系统协同与量化部署。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.451313538371432,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.20739v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020739v1-quantile-guided-diffusion-for-probabilistic-time-series-forecasting",
+      "source": "arxiv",
+      "title": "Quantile-Guided Diffusion for Probabilistic Time-Series Forecasting",
+      "authors": [
+        "Shadi Omari",
+        "Bashar Khoury",
+        "Assaf Schuster"
+      ],
+      "authors_text": "Shadi Omari, Bashar Khoury, Assaf Schuster",
+      "abstract": "Quantile forecasts summarize uncertainty at each future time step, while diffusion forecasters represent it through sampled future trajectories. We study how predicted quantiles can serve as distributional controls for diffusion forecasting. Specifically, we investigate how the mechanism of quantile integration affects its effectiveness in guiding a pretrained diffusion forecaster. We find that residual control throughout the denoising network yields the most consistent improvements. We instantiate this approach as Control-TS, which learns a quantile-control pathway while keeping the pretrained backbone frozen. Across eight benchmarks, Control-TS consistently improves the backbone's CRPS, achieves competitive performance against state-of-the-art forecasting models, and retains its gains in capacity-matched comparisons. Further analyses examine how these gains depend on quantile granularity, predictor choice, and forecast quality. Finally, we introduce the Conditional Linear Predictive Score (CLPS), which complements distributional metrics by evaluating the downstream forecasting utility of generated futures. Together, these findings support predicted quantiles as an effective interface between explicit uncertainty estimates and diffusion-based trajectory generation.",
+      "url": "http://arxiv.org/abs/2610.20739v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20739v1",
+      "tldr": "This paper introduces Control-TS, a full-depth residual control method that uses predicted quantile trajectories to guide a frozen pretrained diffusion forecaster, consistently improving probabilistic time-series forecasting across benchmarks and introducing the CLPS metric to evaluate downstream forecasting utility.",
+      "detailed_reading": {
+        "motivation": "概率预测中，分位数预测能在每个未来时刻显式刻画不确定性的位置、离散度与偏态，而扩散预测器则通过采样完整未来轨迹来表达不确定性。二者所捕捉的预测信息可能互补，但预测分位数本身有噪声且不刻画跨时间步的依赖关系，因此核心问题是：外部预测的分位数轨迹能否作为分布层面的控制信号来引导扩散预测，以及应以何种方式注入才最有效。作者据此提出“分布控制”（distributional control）的研究视角，系统比较分位数与扩散模型的多种融合接口。",
+        "method": "作者以无条件扩散模型 TSDiff（基于 SSSD/DiffWave 与 S4 时序块）为冻结骨干，输入为观测上下文 y_ctx 与未来轨迹 Y_tar，外部预测器（GluonTS 中的 DeepAR 或 TFT）在给定上下文下输出分位数矩阵 Q_φ，分位数集合取 Q1={0.5}、Q3={0.1,0.5,0.9} 或 Q5（加入 0.25、0.75）。控制信号 c∈R^{(L_ctx+H)×Q} 由复制并缩放后的观测上下文与预测的未来分位数拼接而成，若启用滞后特征则对扩散输入与控制信号做相同扩展。作者对比四类融合机制：输出级线性池化集成、输入级拼接、FiLM 特征级调制，以及在冻结骨干各残差块处注入残差的全深度残差控制；后者实例化为 Control-TS，其控制器由三个与骨干残差栈结构一致的随机初始化残差块组成，逐块接收时间步嵌入 τ(t)，输出经零初始化的 1×1 投影 Z 加到骨干对应残差块输入上，即 h^(k)=B^(k)(h^(k-1)+Z^(k)(u^(k)),τ(t))。训练时仅优化控制通路参数 θ_C（含输入投影与零初始化残差投影），骨干与外部预测器全部冻结，损失为标准扩散噪声预测目标；推理时从高斯噪声出发执行受控反向扩散，并保留原骨干的观测自引导（observation self-guidance）以保证上下文一致性，用 100 条采样路径计算 CRPS。",
+        "result": "在 8 个 GluonTS 真实基准（Electricity、Exchange、KDDCup、M4-Hourly、Solar、Traffic、UberTLC、Wikipedia）上，所有融合机制都能在部分数据集上改善骨干 CRPS，但只有全深度残差控制（Control-TS）在全部 8 个数据集上一致提升，CRPS 降幅最高约 35%（如 M4-Hourly 从 0.034 降到 0.022，KDDCup 从 0.312 降到 0.249，Electricity 从 0.049 降到 0.047）。与当前最先进预测模型相比，Control-TS 在 5 个数据集上取得最优或并列最优 CRPS，并在 6 个数据集上优于容量匹配的扩散基线。此外作者提出条件线性预测得分 CLPS（Train-on-Hybrid, Test-on-Real），用共享线性预测器在真实上下文配生成未来的混合数据上训练、在留出真实数据上评估，Control-TS 在 8 个基准中的 6 个上优于其扩散骨干。",
+        "conclusion": "结果表明，外部预测的分位数轨迹可以作为显式不确定性估计与扩散轨迹生成之间的有效接口：在冻结的预训练扩散骨干上，通过全深度残差方式注入分位数控制，能在不改变骨干参数的前提下稳定提升概率预测精度，并与强基线竞争。不同注入机制的对比说明控制的作用位置显著影响效果，残差式、全深度、零初始化的控制通路是最一致的实现方式。CLPS 的引入进一步补充了分布型指标，说明生成未来轨迹在下游预测任务中也具有实际可用性。",
+        "key_details": "关键实现点：控制信号以逐时间步分位数矩阵形式提供（Q1/Q3/Q5 三档粒度，按验证集 CRPS 选优），并按 (L_ctx+H)×Q 与扩散序列对齐；残差注入点可为一、二或全部三个残差块，实验显示全深度最优；零初始化的 1×1 投影保证训练开始时受控噪声预测器与预训练骨干完全等价，避免破坏预训练先验。骨干与外部预测器全程冻结，仅训练轻量控制通路，因此参数量与计算开销可控，需权衡精度—成本；CRPS 基于 100 条采样路径、三次随机种子取均值与标准差。分析还覆盖了分位数粒度、预测器选择（DeepAR/TFT）、控制质量退化与错位情形，以及将该接口迁移到 CSDI 与 MG-TSD 等其他扩散骨干的可行性；局限在于分位数仅刻画边缘分布、不建模跨时间步依赖，控制效果依赖外部预测器质量，且主要在单变量设定下验证。"
+      },
+      "affiliations": [
+        "Technion -- Israel Institute of Technology"
+      ],
+      "affiliations_text": "Technion -- Israel Institute of Technology",
+      "score": 4.4164021754181455,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.20767v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020767v1-multi-dimensional-featurizers-yield-fine-grained-steering-and-data-shaping-in-robot-foundation-models",
+      "source": "arxiv",
+      "title": "Multi-Dimensional Featurizers Yield Fine-Grained Steering and Data Shaping in Robot Foundation Models",
+      "authors": [
+        "Aiden Swann",
+        "Mozes Jacobs",
+        "Mathilde Papillon",
+        "Siddharth Boppana",
+        "David Chanin",
+        "Dron Hazra",
+        "Usha Bhalla",
+        "Curt Tigges",
+        "Mac Schwager",
+        "Owen Lewis",
+        "Jack Merullo",
+        "Ekdeep Singh Lubana",
+        "Atticus Geiger",
+        "Thomas Fel",
+        "Matthew Kowal"
+      ],
+      "authors_text": "Aiden Swann, Mozes Jacobs, Mathilde Papillon, Siddharth Boppana, David Chanin, Dron Hazra, Usha Bhalla, Curt Tigges, Mac Schwager, Owen Lewis, Jack Merullo, Ekdeep Singh Lubana, Atticus Geiger, Thomas Fel, Matthew Kowal",
+      "abstract": "Can better feature discovery improve control over robot behavior through internal interventions and training data? Recent work in vision and language models reveals multidimensional features, motivating block-sparse featurizers (BSFs), which represent each feature in a low-dimensional subspace. We investigate whether recovering this structure provides an interpretable interface for steering vision-language-action models and shaping the data from which they learn. We show that BSFs recover several multi-dimensional task-relevant features underlying the model's computation (e.g., perception, language, proprioceptive state, episode phase, and control variables). We causally validate these features through fine-grained steering: targeted changes in visual perception, semantic representation, and spatial localization produce predictable changes in downstream action prediction. Finally, we use feature-based data attribution to isolate where a specific behavior (failure recovery) arises in the training dataset, identifying fewer than $1.4\\%$ of training tokens whose masking is sufficient to remove the targeted behavior. Overall, our results show how matching featurizers to representation geometry can provide more effective tools for understanding and changing robot behavior.",
+      "url": "http://arxiv.org/abs/2610.20767v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20767v1",
+      "tldr": "Block-sparse featurizers uncover multi-dimensional, task-relevant features in robot foundation models that enable fine-grained behavioral steering and targeted training-data attribution.",
+      "detailed_reading": {
+        "motivation": "理解 VLA 内部表示对安全部署至关重要，但现有稀疏自编码器（SAE）依赖线性表示假设，可能难以匹配机器人视觉、状态与控制中连续、低维的表示流形。本文动机是检验多维 featurizer 能否为机器人基础模型提供可解释、可因果干预并可用于数据塑造的接口。",
+        "method": "方法上，作者在开源 VLA 的未池化图像、文本和状态 token 激活上训练 block-sparse featurizers（BSF）与匹配的 TopK SAE 基线，BSF 将每个特征建模为低维 block 子空间，编码器为 z=Pi_topk(xW+b)，按 block 的 L2 范数保留 k 个整块，BatchTopK 按范数与解码器尺度评分，解码为各活跃 block 子空间之和。训练目标包括标准平方重建损失，并平行评估功能重建，即用动作 token 教师强制对数似然对激活的梯度构造经验 Fisher 矩阵，惩罚会改变下游动作的激活误差。随后在多个层进行因果 steering，对感知、语义和目标空间定位等变量做定向干预，并用基于特征的数据归因追踪行为到训练 token。SAE 基线使用相同数据和流程，唯一关键差别是 block 维度为 1。",
+        "result": "结果上，BSF 恢复了感知、语言、本体感觉状态、任务阶段和控制变量等多维任务相关特征，并在多个层上实现细粒度因果 steering：改变视觉感知、语义表示或空间定位会可预测地改变下游动作预测。定量上，BSF 在恢复和干预任务相关结构方面优于匹配 SAE，说明低维子空间几何带来额外收益而非单纯容量。案例研究中，基于 failure-recovery 特征的训练数据归因发现，仅掩码少于 1.4% 的训练 token 就足以移除目标失败恢复行为。这表明方法可定位行为来源并反向塑造数据。",
+        "conclusion": "结论是，将 featurizer 的归纳偏置与 VLA 表示的低维、多变量几何相匹配，比单方向 SAE 更适合发现、干预和塑造机器人基础模型行为。该工作为 VLA 可解释性、细粒度控制和数据整理提供了统一工具。",
+        "key_details": "关键实现细节包括：训练语料保留每个图像、文本、状态 token 作为独立激活，规模约 5200 万未池化激活，避免先前均值池化或小语料限制；BSF 采用组稀疏而非坐标稀疏，块内坐标有符号且无逐坐标非线性，b=1 时退化为 TopK SAE，对比时匹配活跃特征数或活跃坐标预算。损失同时考察普通重建与 Fisher 加权功能重建，后者关注对动作预测有影响的误差方向。局限在于 block 维度只给出特征内在维度的上界，行为移除结论主要来自 failure-recovery 单案例，且需要与 SAE 在预算匹配下比较。"
+      },
+      "affiliations": [
+        "Goodfire",
+        "Harvard University",
+        "Stanford University",
+        "University of California, Santa Barbara"
+      ],
+      "affiliations_text": "Goodfire, Harvard University, Stanford University, University of California, Santa Barbara",
+      "score": 4.233014217249155,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.20678v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020678v1-spectral-indistinguishability-and-learning-curve-identifiability-in-quadratic-networks",
+      "source": "arxiv",
+      "title": "Spectral Indistinguishability and Learning-Curve Identifiability in Quadratic Networks",
+      "authors": [
+        "Dekun Yang"
+      ],
+      "authors_text": "Dekun Yang",
+      "abstract": "We study what spectral summaries and scalar learning curves reveal about centered quadratic networks. We construct analytic positive input densities with exactly Gaussian one- and two-coordinate marginals. Their complete fourth-moment operators are intertwined by an orthogonal map fixing the entire diagonal teacher algebra, so the corresponding anchored spectral measures agree. For selected common teachers with a nonzero cycle invariant, their factorized loss curves differ because the map does not preserve matrix multiplication. Cycle length $r$, which can be arbitrarily large, gives $O(\\varepsilon^r)$ contrast uniformly in training time for each fixed construction. For a supplied pair, noisy scalar loss queries require order $\\varepsilon^{-2r}$ observations, while bounded initialization interventions with scalar gradient readouts require order $\\varepsilon^{-2}$. A shared-input score, equal to a paired-gradient difference, attains the optimal input-sample exponent without knowing the teacher. An explicit family of diverging auxiliary teacher scales instead admits a nonzero finite limiting contrast at coupling $1/\\log L$. Conversely, for Gaussian inputs and a rationally independent teacher spectrum, one exact scalar loss curve identifies the initial predictor up to sign conjugation. Within this rationally independent class, with nonzero diagonal inverse-state error in every coordinate and calibrated time and loss scales, it also identifies the unknown teacher spectrum and active dimension, modulo simultaneous rotations. For fixed dimension and distinct unordered teacher sums, dimension-minimal exact observations give generic joint local recovery. Finite exact global bounds hold for a known teacher and, on the active class, under a blind dimension cap. Exact certificates and full-weight replay verify the construction; numerical inverse checks reveal severe ill-conditioning.",
+      "url": "http://arxiv.org/abs/2610.20678v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20678v1",
+      "tldr": "This paper proves that quadratic networks can have identical anchored spectral measures yet different learning curves due to non-multiplicative orthogonal intertwining, while exact scalar learning curves under Gaussian and rationally independent teacher spectra can identify the initial predictor, teacher spectrum, and active dimension modulo known symmetries.",
+      "detailed_reading": {
+        "motivation": "本文要回答谱摘要与标量学习曲线究竟能揭示中心化二次网络的哪些信息：任务锚定的完整谱测度是否足以预测非线性学习动力学，以及一条标量损失曲线能否反演初始预测器、教师谱和活跃维度。该问题重要，因为谱等价通常只保留内积与模式信息，而非线性训练还依赖矩阵乘法，二者可能给出不同结论。",
+        "method": "论文以中心化二次网络 f_W(x)=<WW^T,(xx^T-I)/sqrt2>、教师 y=<T,A(x)> 和平方总体损失建模，预测器 M=WW^T 闭合为矩阵流，并给出精确权重梯度更新 M_{k+1}=M_k-2h(G_kM_k+M_kG_k)+4h^2G_kM_kG_k。构造 p_s(x)=p0(x)(1+ε h_s(x)) 的解析正密度，用五节点高斯求积与中心化有界函数保证一、二维边缘恰为标准高斯，同时用两个带符号 r-环邻接 B_± 实现完整四阶矩算子与锚定谱测度匹配但矩阵乘法不保持的配对。反演部分在 Gaussian 输入、有理独立教师谱和标量损失曲线下，使用指数展开、速率集与有限精确观测建立初始预测器、教师谱和活跃维度的可辨识条件。验证依靠精确证书、全权重回放以及数值反演检查，并比较噪声标量损失查询与有界初始化干预加梯度读数的观测复杂度。",
+        "result": "主要发现是完整锚定谱测度一致并不保证学习轨迹一致：存在固定整个对角教师代数的正交纠缠映射，使两个输入律的第四矩算子与谱响应相同，但因不保持矩阵乘法，因子化损失曲线仍不同。隐藏环长 r 控制首次非零扰动响应为 O(ε^r) 且可均匀于训练时间，同一供给对的噪声标量损失查询需约 ε^{-2r} 次观测，而有界初始化干预加梯度读数仅需约 ε^{-2}，共享输入梯度差可在不知教师时达到最优输入样本指数。逆向结果给出高斯输入下一条精确损失曲线可识别初始预测器至符号共轭，并在非零对角逆状态误差与校准尺度下识别教师谱和活跃维度至同时旋转。固定维度下维数最小精确观测给出泛型联合局部恢复，已知教师或盲活跃类加维度上界时存在有限精确全局界，但数值反演检查显示严重病态。",
+        "conclusion": "结论是谱摘要与学习曲线回答不同问题：前者可因缺少乘法结构而无法预测非线性训练，后者在非共振、高斯输入和精确观测等条件下可作为完整不变量并恢复隐藏谱与维度。该工作把不可区分性、观测通道复杂度和可辨识性统一到二次网络的精确总体动力学中，但自然数据重建、普通深度网络迁移以及全局有限样本稳定性仍受构造性假设和病态性限制。",
+        "key_details": "关键细节包括：构造使用 q+2r-1 维坐标、辅助集 A 与交互集 C，两个无弦 r-环共享一个 hub 且对应边权为正；分支交换 P 满足 B_-=P B_+ P^T 且 |B_-|=|B_+|，非零环不变量 J_r=tr[diag(g_C)(B_+^r-B_-^r)]≠0 保证曲线分离。教师取 T=cI-G0 且 g 为不同负值，初始取 W0=sqrt(c)I，精确更新不能丢弃 4h^2 项；分析依赖 ε 小、密度正性与 TV 界以及四阶矩精确匹配。逆向条件包括有理独立教师谱、每坐标非零对角逆状态误差、校准时间与损失尺度，盲反演还需维度上界，观测计数为局部且全局界随维度指数增长。噪声损失与梯度查询各自带固定 Gaussian 方差，共享输入梯度差可消去标签并实现普通四阶矩检验，但数值反演中的严重病态限制了实际重建。"
+      },
+      "affiliations": [
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Zhejiang University",
+      "score": 4.220748558535494,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.20743v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020743v1-vertical-sliced-wasserstein-distances-for-meta-measures",
+      "source": "arxiv",
+      "title": "Vertical Sliced Wasserstein Distances for Meta-Measures",
+      "authors": [
+        "Elaheh Akbari",
+        "Ahmadreza Moradipari",
+        "Kyungtae Han",
+        "Hamed Pirsiavash",
+        "Yikun Bai",
+        "Rocio Diaz Martin",
+        "Soheil Kolouri"
+      ],
+      "authors_text": "Elaheh Akbari, Ahmadreza Moradipari, Kyungtae Han, Hamed Pirsiavash, Yikun Bai, Rocio Diaz Martin, Soheil Kolouri",
+      "abstract": "Many modern learning problems require comparing probability distributions whose individual observations are themselves probability measures, naturally giving rise to meta-measures in $\\mathcal{P}(\\mathcal{P}(Ω))$. However, optimal transport distances on this space can be prohibitively expensive to evaluate. We introduce the vertical sliced Wasserstein ($\\mathrm{VSW}$) distance, a scalable metric on $\\mathcal{P}(\\mathcal{P}(Ω))$. Rather than slicing along the transport geometry of $\\mathcal{P}(Ω)$, $\\mathrm{VSW}$ projects each inner measure using continuous test functions and compares the resulting one-dimensional distributions with one-dimensional Wasserstein distance. We prove that $\\mathrm{VSW}$ is a valid metric on $\\mathcal{P}(\\mathcal{P}(Ω))$, metrizes weak convergence, and admits dimension-independent statistical convergence guarantees. Empirically, $\\mathrm{VSW}$ provides high accuracy and efficiency compared with existing distances for meta-measures. We further derive a practical particle gradient for the empirical $\\mathrm{VSW}_2^2$ objective and demonstrate its use for gradient-based transport of meta-measures. $\\mathrm{VSW}$ provides a simple and scalable alternative for comparing and optimizing distributions of distributions.",
+      "url": "http://arxiv.org/abs/2610.20743v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20743v1",
+      "tldr": "The paper introduces the vertical sliced Wasserstein (VSW) distance, a scalable metric for distributions of probability measures that projects inner measures via continuous test functions and compares their one-dimensional Wasserstein distances, with proofs of metric and weak-convergence properties, dimension-independent statistical guarantees, and a particle gradient for efficient meta-measure comparison and optimization.",
+      "detailed_reading": {
+        "motivation": "现代学习任务常需比较以概率测度为观测对象的概率分布，即 meta-measures（P(P(Ω)) 上的测度）；然而直接在这些空间上使用最优传输距离代价过高，难以扩展。因此需要一种既能保持几何/统计性质、又可高效计算和优化的分布之分布距离。",
+        "method": "论文提出 vertical sliced Wasserstein (VSW)：不沿 P(Ω) 的传输几何切片，而是用连续测试函数 f:Ω→R 将每个内层测度 m∈P(Ω) 推前为一维分布 f_#m，并用一维 Wasserstein 距离比较这些投影分布；再在 meta-measure 层面通过切片积分或最优传输耦合聚合内层一维代价，实际以有限测试函数或随机采样近似积分。对经验 meta-measures（有限个内层测度/粒子），推导 VSW_2^2 目标关于粒子的实用梯度，从而支持基于梯度的 meta-measure 传输。该方案把昂贵的内层最优传输替换为可闭式计算的一维排序/分位数计算。",
+        "result": "理论结果证明 VSW 是 P(P(Ω)) 上的有效度量，能度量弱收敛，并具有与维数无关的统计收敛保证。实验表明，与已有 meta-measure 距离相比，VSW 在准确性和效率上均有优势；同时利用所推导的经验 VSW_2^2 粒子梯度，可成功进行基于梯度的 meta-measure 传输。这些结果支持其作为可扩展的分布之分布比较与优化工具。",
+        "conclusion": "VSW 为比较和优化分布之分布提供了一种简单、可扩展的替代方案，在保持度量与收敛性质的同时显著降低计算复杂度，适用于需要 meta-measure 距离的现代学习问题。",
+        "key_details": "关键实现点包括：输入为 P(P(Ω)) 中的 meta-measures 或其经验粒子表示；用连续测试函数族对每个内层测度做一维推前，并以一维 Wasserstein 距离作为内层代价；通过切片积分或最优传输耦合聚合，实际用有限测试函数/随机采样近似。理论分析覆盖度量性、弱收敛度量和维数无关统计率；经验目标 VSW_2^2 的粒子梯度依赖内层一维分位数/排序计算。局限可能在于测试函数族的选择与采样近似质量、对经验样本数的依赖，以及推导和优化所依赖的正则性/可积性假设。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.1603148041777445,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.20753v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020753v1-optimal-hydra-model-heterogeneous-federated-learning-for-llms-using-data-informed-hydra-nets",
+      "source": "arxiv",
+      "title": "Optimal Hydra: Model Heterogeneous Federated Learning for LLMs using Data-Informed Hydra-Nets",
+      "authors": [
+        "Gwen Legate",
+        "Rahaf Aljundi",
+        "Eugene Belilovsky"
+      ],
+      "authors_text": "Gwen Legate, Rahaf Aljundi, Eugene Belilovsky",
+      "abstract": "Large language models (LLMs) trained on vast amounts of data have demonstrated impressive performance over a range of tasks, but future performance gains will require increasing amounts of data and compute. Federated Learning (FL) facilitates training on decentralized private data, but client resource limitations can make training impractical, particularly as model sizes continue to expand. These resource constraints make the assumption of a shared server-client architecture impractical. Model heterogeneous FL offers a promising alternative by adapting model size to client capabilities; however, previous work is limited to the pre-training setting, and conclusions on sub-network selection do not necessarily hold for fine-tuning. Furthermore, prior approaches create client sub-networks without considering their unique data distributions, thereby overlooking the opportunity to tailor sub-network architecture to local data. Motivated by evidence that attention heads exhibit task dependency within layer defined feature spaces, we propose Optimal Hydra, a transformer based heterogeneous FL framework for fine-tuning that combines global layer selection with client specific attention head selection, aligned with local data distributions. Optimal Hydra makes explicit use of client data to produce client-specific sub-networks we call Hydra-nets. To our knowledge, this is the first model heterogeneous FL approach tailored to LLM fine-tuning. Experiments on three datasets show significant improvements over baseline methods while also reducing local resource demands.",
+      "url": "http://arxiv.org/abs/2610.20753v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20753v1",
+      "tldr": "Optimal Hydra is a transformer-based heterogeneous federated learning framework for LLM fine-tuning that combines global layer selection with client-specific attention-head selection informed by local data, creating Hydra-nets that improve performance while reducing client resource demands.",
+      "detailed_reading": {
+        "motivation": "大语言模型性能提升越来越依赖更多数据与算力，但集中式训练受隐私和资源限制；联邦学习可训练去中心化私有数据，但客户端资源受限且异构，使共享服务器-客户端同构架构不现实。模型异构联邦学习通过按客户端能力适配模型大小提供替代方案，但已有工作局限于预训练，且子网选择未考虑客户端独特数据分布，忽略了按本地数据定制子网架构的机会。注意力头在层定义特征空间中表现出任务依赖性，这为细粒度、数据驱动的异构子网设计提供了动机。",
+        "method": "Optimal Hydra 是面向Transformer大语言模型微调的模型异构联邦学习框架：服务器维护全局模型并执行全局层选择，客户端依据本地私有数据分布评估并选择注意力头，二者组合成客户端特定子网Hydra-net；客户端在本地对Hydra-net微调，并仅上传/聚合对应子网更新，从而在资源约束下利用本地数据定制架构。其核心是以注意力头为最小异构粒度，将全局共享的层结构与客户端特定的头选择解耦，实现数据驱动的子网构造与联邦聚合。摘要未展开具体选择准则、聚合方式和训练轮次，但整体流程可概括为全局层选择、客户端头选择、本地Hydra-net微调与联邦聚合。",
+        "result": "在三个数据集上，Optimal Hydra 相较基线方法取得显著性能提升，同时降低客户端本地资源需求；关键发现是，结合全局层选择与客户端特定注意力头选择、并按本地数据分布定制Hydra-net，优于不考虑数据分布的异构子网方案。摘要未给出具体指标数值、模型规模或统计检验，因此可复现对比结论需以正文实验为准。",
+        "conclusion": "作者认为这是首个面向LLM微调的模型异构联邦学习方案，证明将模型异构联邦学习从预训练推广到微调可行，且数据驱动的Hydra-nets能在隐私与资源约束下提升性能。其意义在于把客户端数据分布显式用于子网架构定制，为LLM联邦微调提供新方向。",
+        "key_details": "关键实现点包括：以Transformer注意力头为选择单元，利用注意力头在层定义特征空间中的任务依赖性；全局层选择保证跨客户端部分结构一致，客户端头选择对齐本地数据分布；本地微调Hydra-net并聚合对应参数，目标是降低显存、计算或通信需求。局限是摘要未披露数据集、模型、超参、损失、通信开销、隐私保护与收敛性，且仅三个数据集验证，跨模型与跨任务泛化性待确认。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.087648984422324,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.20680v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020680v1-diminishing-returns-of-data-in-sparse-autoencoders-functional-behavior-does-not-guarantee-feature-reproducibility",
+      "source": "arxiv",
+      "title": "Diminishing Returns of Data in Sparse Autoencoders: Functional Behavior does not Guarantee Feature Reproducibility",
+      "authors": [
+        "Sambit Ghosh",
+        "Madelyn Mathai",
+        "R. Venkatesh Babu",
+        "Chirag Agarwal"
+      ],
+      "authors_text": "Sambit Ghosh, Madelyn Mathai, R. Venkatesh Babu, Chirag Agarwal",
+      "abstract": "Sparse autoencoders (SAEs) are typically trained on hundreds of millions to billions of activation tokens, yet little work has tested whether this scale is necessary. We study how much activation data SAEs need by training four SAE architectures on three language models with budgets ranging from 5M tokens to a 500M-token reference. We measure two notions of convergence: functional behavior on standard evaluations and one-to-one reproducibility of learned features. Functional data requirements are strongly metric-dependent: reconstruction often approaches the full-data reference at substantially smaller budgets, whereas feature reproducibility continues to improve with data. For Gemma-2-2B BatchTopK, the fraction of strictly matched features rises from 2\\% at 5M tokens to 29\\% at 50M. Data selection also matters: random sampling better preserves the original activation distribution and generally favors reconstruction, whereas diversity-based sampling frequently improves AutoInterp. A theoretical analysis separates statistical consistency of subsampled training from the stronger identifiability and optimization conditions required for one-to-one feature recovery. Our results show that SAE training can often be made far more data-efficient when budgets are matched to the goal, and feature-level claims are backed by explicit reproducibility checks, paving the way toward cheaper and more reliable SAE research.",
+      "url": "http://arxiv.org/abs/2610.20680v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20680v1",
+      "tldr": "This paper shows that sparse autoencoders can achieve good functional performance with far fewer activation tokens than standard practice, but reliable one-to-one feature reproducibility requires substantially more data, so data budgets should be matched to the evaluation goal and feature-level claims should include explicit reproducibility checks.",
+      "detailed_reading": {
+        "motivation": "稀疏自编码器（SAE）通常依赖数亿到数十亿激活 token 训练，但这一规模是否必要仍缺乏系统检验；本文旨在区分“功能行为收敛”与“特征一对一可复现性收敛”，并回答 SAE 究竟需要多少激活数据。",
+        "method": "作者在 Gemma-2-2B、Pythia-160M、Qwen3-8B 上，以 FineWeb 文本流式过冻结 LLM，在线缓冲目标层激活并训练 BatchTopK、Matryoshka BatchTopK、JumpReLU、ReLU 四类 SAE，预算设为 5M、25M、50M 与 500M token 参考，按每次缓冲刷新保留比例 q∈{0.01,0.05,0.10,1.0} 实现，采样策略包括随机采样和 farthest-point sampling；固定模型、激活位置、字典宽度、稀疏度和优化超参，仅变数据量或选择策略。评估使用 SAEBench 的重建、稀疏探针、吸收、SCR、TPP、RAVEL、AutoInterp、unlearning 等指标，并以 500M 参考做编码器/解码器特征的一对一匈牙利匹配、余弦相似度和编码器-解码器分配一致性来衡量特征可复现性；理论上给出统计一致性、优化一致性与特征可识别性条件下特征系统渐近对齐的定理及推论。",
+        "result": "功能指标对数据量的需求高度依赖具体指标：重建通常在较小预算下已接近 500M 参考，而特征可复现性随数据增加持续提升；Gemma-2-2B BatchTopK 的严格匹配特征比例从 5M token 的 2% 升至 50M token 的 29%。数据选择也有影响：随机采样更好保留原始激活分布并通常有利重建，多样性采样常提升 AutoInterp；探测、干预等指标对激活暴露呈现异质甚至非单调响应。",
+        "conclusion": "SAE 训练可在目标与预算匹配时显著提高数据效率，重建和部分功能评测可用远少于 500M token 达到接近参考的表现，但特征级结论需要更大数据与显式可复现性检查；因此不应把功能行为良好等同于特征可复现，未来 SAE 研究应在更便宜的训练与更可靠的特征声明之间明确取舍。",
+        "key_details": "关键实现包括：在线生成激活、每个激活只用一次、跨预算固定 500M 配置和优化步数、只改变保留比例；采样对比随机与 FPS，FPS 偏向高范数/几何多样激活。理论部分定义编码器/解码器一对一距离和匈牙利匹配，强调分配一致性弱于强方向恢复，即编码器-解码器匹配可能一致但余弦相似度仍不高。局限在于结果受模型、层、字典宽度与评测指标影响，且小预算下特征匹配率仍低，说明统计一致性并不保证有限数据下的特征可识别性与优化成功。"
+      },
+      "affiliations": [
+        "IBM",
+        "University of Virginia",
+        "Indian Institute of Science"
+      ],
+      "affiliations_text": "IBM, University of Virginia, Indian Institute of Science",
+      "score": 4.032864435942159,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.20750v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/16/261020750v1-causal-analysis-of-robot-foundation-models-enables-efficiency-gains",
+      "source": "arxiv",
+      "title": "Causal Analysis of Robot Foundation Models Enables Efficiency Gains",
+      "authors": [
+        "Aiden Swann",
+        "Mathilde Papillon",
+        "Mozes Jacobs",
+        "Siddharth Boppana",
+        "Tal Haklay",
+        "Eric Bigelow",
+        "Andrew Lee",
+        "Conor Watts",
+        "Thomas Icard",
+        "Mac Schwager",
+        "Owen Lewis",
+        "Jack Merullo",
+        "Ekdeep Singh Lubana",
+        "Atticus Geiger",
+        "Thomas Fel",
+        "Matthew Kowal"
+      ],
+      "authors_text": "Aiden Swann, Mathilde Papillon, Mozes Jacobs, Siddharth Boppana, Tal Haklay, Eric Bigelow, Andrew Lee, Conor Watts, Thomas Icard, Mac Schwager, Owen Lewis, Jack Merullo, Ekdeep Singh Lubana, Atticus Geiger, Thomas Fel, Matthew Kowal",
+      "abstract": "Vision-language-action (VLA) models are a promising approach to general purpose robot manipulation. While the internal computation of vision-language models, which compose the backbone of VLAs, has been studied extensively, less is known about how their perceptual and semantic representations are transformed into action in VLA models. We study this question mechanistically in three frontier VLA models ($π_{0.5}$, MolmoAct2, and MolmoBot) by analyzing the causal pathways through which the input image and the instruction shape actions. Across the three models, activation patching shows that causally relevant information influences the action expert (AE) through a narrow band of mid-to-late cross-attention layers, which we term the action-conditioning interface. The content of this information changes with token and layer within the model. Early-to-mid layer representations of the target noun token determine which object is selected, whereas mid-to-late layers carry the spatial information in text tokens that redirects the movement when patched. Where spatial information is stored in prompt tokens various based on the architecture. In MolmoAct2 the model forms task-conditioned representations at the text positions that follow the instruction, whereas $π_{0.5}$ additionally stores this information at image token positions. We show that these findings can be translated directly into improving model efficiency. We find that restricting MolmoBot's action expert conditioning to only 3 out of 36 layers reduces inference FLOPs by up to $33\\%$ while maintaining comparable task success with the default model across 3,000 evaluation episodes ($46.7\\%$ vs. $46.9\\%$), and the same principle carries over to real-robot deployment of $π_{0.5}$.",
+      "url": "http://arxiv.org/abs/2610.20750v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20750v1",
+      "tldr": "Causal analysis of three vision-language-action robot models reveals a narrow mid-to-late action-conditioning interface, enabling pruning of action-expert conditioning to only 3 of 36 layers and cutting inference FLOPs by up to 33% with comparable task success.",
+      "detailed_reading": {
+        "motivation": "VLA模型将预训练VLM主干与扩散或流匹配动作专家通过逐层稠密接口连接，但其如何把视觉、语义与本体感知表示转化为动作仍是黑箱。作者希望用因果分析回答这一映射问题，并把机制发现直接转化为推理效率提升。",
+        "method": "研究在π0.5、MolmoAct2、MolmoBot三个前沿开源VLA上进行：输入表示为图像I、指令u和本体状态s，通过激活修补与接口修补，把供动作专家第j个模块的条件C_j或主干残差流在指定层ℓ与token位置T替换为反事实donor值，同时保持其余计算不变。用共享生成噪声与前向运动学重建轨迹，并以归一化轨迹偏移E度量patch向参考轨迹移动的比例。构建156个反事实对象对，在交换请求物体或交换物体位置等设置下进行超过775,000次干预，扫描单连接与三层窗口，定位中后层窄带动作条件接口。随后把动作专家跨注意力条件限制到该接口层，并在MolmoBot仿真与π0.5真机上评估，包含原始预训练与50K微调适配。",
+        "result": "三个模型均显示因果相关信息只通过1–3个中后层跨注意力层影响动作专家，形成动作条件接口；修补单层如MolmoBot第24层即可恢复超过50%行为迁移。信息内容随token与层变化：早中层目标名词token决定选哪个物体，中后层文本token携带可重定向运动的空间信息；空间信息存储位置依架构而异，MolmoAct2在指令后的文本位置，π0.5还额外存于图像token位置。效率上，把MolmoBot动作专家条件限制到36层中的3层即23–25层，并在3000个评估回合中测试，推理FLOPs最多降低33%，平均成功率46.7%对默认46.9%，基本无损；单层24为45.6%，而无关层12微调后仅17.8%，同一原则也迁移到π0.5真机部署。",
+        "conclusion": "该工作给出VLA从感知到动作的因果机制解释：动作专家读取的是主干中后层窄带内已编码任务相关空间信息的表示，而非均匀依赖所有层。因此因果分析可直接指导稀疏化连接与层剪枝，在保持闭环性能的同时显著降低计算，并为已有启发式VLA效率方法提供机制依据。",
+        "key_details": "关键实现包括：反事实数据含156个家庭物体对，接口图基于26个场景的144,768次patch，总干预超过775,000次；行为度量E用前向运动学轨迹与参考轨迹的内积归一化，配对运行固定生成噪声且多在首时刻双物体可见时分析。模型侧差异需注意：MolmoBot以跨注意力供逐层隐藏状态，MolmoAct2供逐层key/value，π0.5条件于共享多模态前缀；注意力掩码也不同，MolmoAct2与MolmoBot图像位置不能注意后续指令token，π0.5前缀内双向。评估采用MolmoBot的Pick、Pick&Place、PnP Next-To等仿真基准，比较全部36层、23–25层、单层24及50K微调适配，共3000回合；局限是仅三个开源模型、FLOPs为估计、空间信息存储具架构依赖性、真机验证主要在π0.5，且未给出完整损失与超参细节。"
+      },
+      "affiliations": [
+        "Goodfire",
+        "Harvard University",
+        "Stanford University",
+        "University of California, Santa Barbara"
+      ],
+      "affiliations_text": "Goodfire, Harvard University, Stanford University, University of California, Santa Barbara",
+      "score": 3.945940391541596,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.20783v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020783v1-heterogeneous-hegselmann-krause-dynamics-need-not-converge",
+      "source": "arxiv",
+      "title": "Heterogeneous Hegselmann-Krause Dynamics Need Not Converge",
+      "authors": [
+        "S. Rasoul Etesami",
+        "Behrouz Touri"
+      ],
+      "authors_text": "S. Rasoul Etesami, Behrouz Touri",
+      "abstract": "We give a six-agent counterexample to convergence of scalar heterogeneous Hegselmann--Krause dynamics.",
+      "url": "http://arxiv.org/abs/2610.20783v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20783v1",
+      "tldr": "The paper disproves the conjecture that scalar heterogeneous Hegselmann–Krause dynamics always converge by giving an explicit six-agent example whose trajectory is periodic with period ten.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois Urbana-Champaign"
+      ],
+      "affiliations_text": "University of Illinois Urbana-Champaign",
+      "score": 3.941465573256224,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.20788v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020788v1-sliced-wasserstein-sketches-with-error-certificates",
+      "source": "arxiv",
+      "title": "Sliced Wasserstein Sketches with Error Certificates",
+      "authors": [
+        "Elaheh Akbari",
+        "James Liu",
+        "Keaton Hamm",
+        "Soheil Kolouri"
+      ],
+      "authors_text": "Elaheh Akbari, James Liu, Keaton Hamm, Soheil Kolouri",
+      "abstract": "Compact representations that support geometrically meaningful comparisons are valuable for learning from probability distributions. We study optimal, free-weight $M$-atom quantization of one-dimensional probability measures in quadratic Wasserstein distance and extend it to higher dimensions via slicing. Using $L$ shared projections yields a sketch with $O(LM)$ comparison time. Our main result is an exact decomposition of squared distance error into residual and partition-mismatch terms, yielding computable certificates for arbitrary centroid sketches. For optimal sketches, a finite $(2+δ)$ moment for some $δ>0$ guarantees $O(M^{-1})$ error in the finite-direction sliced distance, while equal-mass sketches can converge more slowly. Each slice preserves its mean, while storing residual energies enables covariance recovery from sufficiently many generic directions. Experiments on document, point-cloud, and flow-cytometry benchmarks show that optimal sketches substantially reduce storage while preserving the classification performance of uncompressed sliced distances. They also improve generalization from few labelled subjects and support end-to-end learning as compact pooling layers.",
+      "url": "http://arxiv.org/abs/2610.20788v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20788v1",
+      "tldr": "This paper introduces sliced Wasserstein sketches that compress probability distributions using optimal one-dimensional M-atom quantizations along shared projections, provides exact computable error certificates for their pairwise distances, and shows they drastically reduce storage while preserving classification performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Vanderbilt University",
+        "University of Texas at Arlington"
+      ],
+      "affiliations_text": "Vanderbilt University, University of Texas at Arlington",
+      "score": 3.8985203949779006,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.20684v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020684v1-learning-topology-aware-representations-for-mechanics-relevant-tpms-metamaterials",
+      "source": "arxiv",
+      "title": "Learning Topology-Aware Representations for Mechanics-Relevant TPMS Metamaterials",
+      "authors": [
+        "Songlin Duan",
+        "Shuo Yang",
+        "Yujia Zheng",
+        "Tobin Filleter"
+      ],
+      "authors_text": "Songlin Duan, Shuo Yang, Yujia Zheng, Tobin Filleter",
+      "abstract": "Learning informative representations of mechanical Triply Periodic Minimal Surface (TPMS) metamaterials is important for mechanics analysis and structural design, yet existing methods have rarely explicitly supervised learned representations with information about global structural connectivity that is relevant to mechanical response. We propose a topology-aware representation learning framework that integrates persistent homology into a DMAE backbone to explicitly encode global structural connectivity. A persistence-guided masking strategy prioritizes patches associated with persistent topological features, while an auxiliary persistent-homology decoder encourages the latent representation to retain information about topological feature counts across connected components, tunnels, and voids. We evaluate the learned representations on two complementary TPMS datasets using family classification, mechanical-property classification, unsupervised clustering, and regression. Across the two datasets, our method demonstrates strong performance in both structural family and mechanical-property classification, improving family classification by up to 3.9% while achieving the best linear-probe performance. More notably, unsupervised property-clustering performance improves by up to 26.7% and 51.5% across the two datasets, while strong regression performance is retained with $R^2=0.993$. These results establish persistent topology as an effective inductive bias for representation learning of complex three-dimensional mechanical metamaterials.",
+      "url": "http://arxiv.org/abs/2610.20684v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20684v1",
+      "tldr": "The paper proposes a topology-aware representation learning framework that integrates persistent homology into a DMAE backbone to encode global structural connectivity in TPMS metamaterials, improving classification and clustering while retaining strong regression performance.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.807769335271687,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.20637v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020637v1-expanding-attention-a-taylor-series-route-to-linear-time-transformers-with-a-fixed-number-of-recurrent-states",
+      "source": "arxiv",
+      "title": "Expanding Attention: A Taylor-Series Route to Linear-Time Transformers with a Fixed Number of Recurrent States",
+      "authors": [
+        "Zicong Huang"
+      ],
+      "authors_text": "Zicong Huang",
+      "abstract": "We expand the exponential kernel of attention into a truncated Taylor series of $n$ terms and factorize each term into a tensor-power inner product, which collapses the causal history into exactly $n$ recurrent states, each updated by one rank-one outer product per token and independent of context length $N$. The recursion is lossless with respect to the truncated kernel ($2.2 \\times 10^{-16}$ in float64), and the states are additive across chunks ($5.7 \\times 10^{-14}$), so prefill admits a parallel scan. Measured exponents are $t \\propto N^{2.28}$ for softmax against $N^{0.91}$ for states, with a crossover at $N \\approx 728$ and $20.8\\times$ at $N = 8192$; per-token decoding latency is constant at $7.3\\,μ$s against $N^{1.04}$ for softmax, giving $76.0\\times$ at $N = 65536$. Accuracy improves exponentially in $n$ while cost grows combinatorially, since the $m$-th state is $\\binom{d+m-1}{m}$ wide---a bound confirmed by SVD---so the optimum is second order, $n = 3$, at $6.5 \\times 10^{-4}$ error and $9{,}945$ elements per head. Query and key normalization is a prerequisite: without it the argument exceeds the convergence radius and adding terms stops helping.",
+      "url": "http://arxiv.org/abs/2610.20637v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20637v1",
+      "tldr": "Expanding attention’s exponential kernel as a truncated Taylor series and factorizing each term into tensor-power inner products turns softmax attention into a lossless linear-time recurrence with exactly \\(n\\) fixed-size states (optimally \\(n=3\\)), provided queries and keys are normalized, eliminating context-length-dependent memory and decoding cost.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.720939103017551,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.20640v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020640v1-knou-flood-advancing-global-streamflow-forecasting-with-lead-aware-probabilistic-machine-learning",
+      "source": "arxiv",
+      "title": "KNOU-Flood: Advancing global streamflow forecasting with lead-aware probabilistic machine learning",
+      "authors": [
+        "Minjong Cheon"
+      ],
+      "authors_text": "Minjong Cheon",
+      "abstract": "Global streamflow forecasting supports flood preparedness, yet data-driven models trained on reanalysis lose skill when driven by operational forecasts, increasingly so with lead time. AIFL addresses this shift with a two-stage transfer-learning recipe and a deterministic LSTM, but it feeds one forecast lead time into the whole input window and gives no uncertainty. We ask how far this open recipe can be extended without changing its recurrent core. KNOU-Flood keeps a single-layer LSTM and the two-stage training and changes the information around it: a longer input window (424 days), lead-aware forecast inputs, GraphCast as a second forecast source next to ECMWF HRES, and a latent-noise ensemble trained with the fair CRPS. We compare against a re-implementation of the AIFL recipe (its code is not public) under identical data, stations, splits and metrics. Our contributions are threefold. First, over three seeds and 2,099 test basins (2021-2023), KNOU-Flood reaches a median KGE' of 0.65 at LT1 and 0.48 at LT10 against 0.62 and 0.34, with significant gains at all ten lead times under two scoring protocols, also against a 1024-unit baseline and on held-out basins (one seed each). Second, identical weights give an LT10 KGE' of 0.18 or 0.34 depending on how forecasts are fed, so much of the lead-time decay reported for AIFL is an input-protocol effect; the probabilistic head contributes most to the gain, followed by the raw GraphCast channels, the longer window and mixed fine-tuning. Third, the ensembles reach lower CRPS than probabilistic versions of the baseline, are nearly calibrated with inference-time dropout, and detect 1.5- and 2-year floods better than all baselines; the benefit for rarer floods depends on the seed, and an exploratory tail-weighted variant improves 10-year and larger events. KNOU-Flood is a controlled extension of an open recipe, not a new architecture.",
+      "url": "http://arxiv.org/abs/2610.20640v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20640v1",
+      "tldr": "KNOU-Flood is a controlled extension of the AIFL LSTM recipe that adds lead-aware forecast inputs, a longer window, GraphCast alongside ECMWF HRES, and a latent-noise probabilistic ensemble trained with fair CRPS, improving global streamflow forecast skill and uncertainty across lead times over a reimplemented AIFL baseline.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Korea National Open University"
+      ],
+      "affiliations_text": "Korea National Open University",
+      "score": 3.6391152904295625,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.20686v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020686v1-rolaq-joint-rotation-and-range-calibration-for-2-bit-kv-caches-in-multi-head-latent-attention",
+      "source": "arxiv",
+      "title": "RoLaQ: Joint Rotation and Range Calibration for 2-Bit KV Caches in Multi-Head Latent Attention",
+      "authors": [
+        "Shiyu Ji",
+        "Peng Ling",
+        "Chen Lin",
+        "Shupeng Li",
+        "Yixuan Wang",
+        "Qingfu Zhu",
+        "Wanxiang Che"
+      ],
+      "authors_text": "Shiyu Ji, Peng Ling, Chen Lin, Shupeng Li, Yixuan Wang, Qingfu Zhu, Wanxiang Che",
+      "abstract": "Multi-head latent attention (MLA) compresses the content of a key-value cache into a shared latent per token, making low-bit storage attractive for long-context inference. At two bits, errors in this representation perturb both attention matching and value readout, with effects that depend on error direction and reconstruction scale. We introduce RoLaQ (Rotation-calibrated Latent Quantization), an offline method for joint rotation and range calibration. RoLaQ refines a shared rotation within subspaces defined by the frozen key and value projections, and jointly learns quantization ranges whose thresholds and reconstruction gains are coupled to control the shared signal's response. Prediction matching and attention-output supervision guide calibration with model weights frozen. Across three MLA models and six benchmarks, RoLaQ achieves the highest average accuracy among the compared 2-bit methods both without and with token protection. On DeepSeek-V2-Lite, an SGLang implementation provides 3.96 times the BF16 KV capacity under the same memory budget and 2.51 times its decode throughput with 256K input tokens.",
+      "url": "http://arxiv.org/abs/2610.20686v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20686v1",
+      "tldr": "RoLaQ is an offline joint rotation and range calibration method for 2-bit KV caches in multi-head latent attention that achieves the highest average accuracy among compared 2-bit methods and delivers 3.96× BF16 KV capacity and 2.51× decode throughput on DeepSeek-V2-Lite.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6351477870404825,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.20682v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020682v1-turbomamba-faster-inference-faster-training-and-better-prediction-with-lexical-memory",
+      "source": "arxiv",
+      "title": "TurboMamba: Faster Inference, Faster Training, and Better Prediction with Lexical Memory",
+      "authors": [
+        "Hanxin Zhang"
+      ],
+      "authors_text": "Hanxin Zhang",
+      "abstract": "We introduce TurboMamba, a language-model architecture for faster inference, faster training, and better token prediction. A global Mamba-3 model runs once per completed token block. A small Transformer uses this global context and earlier tokens within the block to predict the next token. Three lightweight additions improve local predictions: direct access to the previous block's last token, a small correction to next-token scores, and a learned mixture with recent-token frequencies. We compare twelve small-scale implementations on public FineWeb-Edu, with comparable parameter counts and shared training-budget caps. The baselines include Transformer, Mamba-3, Jamba, and Zamba. The Jamba and Zamba versions use Mamba-3 in place of their original Mamba modules. TurboMamba achieves the lowest mean test prediction loss (negative log-likelihood, NLL) among all twelve models. Its mean NLL is 9.4% lower than that of Mamba-3, 7.3% lower than that of the Jamba version, and 18.3% lower than that of the Zamba version. End-to-end training throughput is 2.60x that of Mamba-3, 2.81x that of the Jamba version, and 4.82x that of the Zamba version. We measure end-to-end batch latency for a batch of 32 sequences, each with a 256-token prompt and 128 generated tokens. On this workload, TurboMamba achieves a 3.12x speedup over Mamba-3, a 3.53x speedup over the Jamba version, and a 6.21x speedup over the Zamba version.",
+      "url": "http://arxiv.org/abs/2610.20682v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20682v1",
+      "tldr": "TurboMamba is a blockwise language-model architecture that combines a global Mamba-3 model over token blocks with a small local Transformer and lightweight lexical-memory enhancements to achieve lower test NLL and substantially faster training and inference than Transformer, Mamba-3, Jamba, and Zamba baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pittsburgh"
+      ],
+      "affiliations_text": "University of Pittsburgh",
+      "score": 3.623765017083704,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.20773v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020773v1-selection-safe-conformal-early-exit-distribution-free-coverage-under-adaptive-depth",
+      "source": "arxiv",
+      "title": "Selection-Safe Conformal Early Exit: Distribution-Free Coverage under Adaptive Depth",
+      "authors": [
+        "Adria Binte Habib",
+        "Ibne Farabi Shihab"
+      ],
+      "authors_text": "Adria Binte Habib, Ibne Farabi Shihab",
+      "abstract": "Calibrating a conformal prediction set at each early exit does not preserve coverage once a data-dependent exit is selected. We construct one terminal path score from prefix maxima, calibrate a single split-conformal quantile, and return nested prefix sets that all contain the valid terminal set. The guarantee is selection-safe without an alpha/L correction and holds simultaneously for every post-calibration label-free stopping policy that preserves terminal-set containment. We also bound the efficiency cost of the path maximum by the empirical tail of the early-over-terminal score excess. Across eight encoder task-backbone cells, pathwise selection attains macro coverage 0.901 versus 0.814 for naive layerwise selection, with average set size 1.41 and latency fraction 0.71. On CIFAR-100 with a 24-exit ViT-L/16 (n_cal=500), first-eligible stopping at budget b=4 attains coverage 0.902, set size 2.76, and latency fraction 0.57, and the same calibration supports deployment-time budget changes without refitting. In a joint exit-count/calibration-size sweep at n=100, pathwise set size moves only from 3.02 to 3.11 as exits increase from 4 to 24, while Bonferroni degenerates to the full label space for 12 or more exits. Paired comparison against MinSE valid selection at (n,L)=(100,24) gives a set-size difference of 0.80 [0.47, 1.13]. Full-vocabulary decoder experiments remain a negative boundary, with sets of 7,162-9,620 tokens. Pathwise calibration is most useful when candidate exits are many relative to calibration size, when budgets change after calibration, and when shallow heads return actionable sets.",
+      "url": "http://arxiv.org/abs/2610.20773v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20773v1",
+      "tldr": "This paper introduces a selection-safe conformal early-exit method that calibrates one split-conformal quantile on prefix-maximum path scores, guaranteeing distribution-free coverage for any label-free adaptive-depth stopping policy without an alpha/L correction while empirically improving coverage and set efficiency over naive layerwise calibration.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BRAC University",
+        "Iowa State University"
+      ],
+      "affiliations_text": "BRAC University, Iowa State University",
+      "score": 3.585830007281388,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.20639v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020639v1-same-answer-new-box-how-much-of-rlvrs-out-of-domain-gain-is-answer-format",
+      "source": "arxiv",
+      "title": "Same Answer, New Box: How Much of RLVR's Out-of-Domain Gain Is Answer Format?",
+      "authors": [
+        "Zongye Lyu"
+      ],
+      "authors_text": "Zongye Lyu",
+      "abstract": "Reinforcement learning with verifiable rewards (RLVR) is credited with gains beyond the domain its rewards check, such as higher MMLU accuracy after training on mathematics. Such accuracies are usually read out of the model's text by an answer extractor. A model that learns to write its answer where the extractor looks can therefore score higher without answering better. We measure how much of the gain reported by extractors copied from public code arises this way. We generate outputs from a base model and its RL model and score them twice: with those extractors, and with one extractor of our own that reads a stated answer whether it is in the answer box \\boxed{} or in the text. On four released 7B SimpleRL base-RL pairs, 82% of the out-of-domain multiple-choice gain that these extractors report disappears under ours: it is a gain in answer format, not in answers. The base models already state most of their answers in text, and RL moves them into the box, where these extractors look first. Independent LLM readers, in place of our extractor, put the figure at 77%. With a prompt that itself asks for the box, our extractor puts it at 79%. On a 32B pair trained with another recipe, almost none of the reported gain is format gain: its base model boxes its answers when asked, and its RL model rarely does when not. A reported gain is partly a property of the extractor that read it, and re-scoring stored outputs with a second extractor shows how much, without re-running RL.",
+      "url": "http://arxiv.org/abs/2610.20639v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20639v1",
+      "tldr": "Much of RLVR’s reported out-of-domain multiple-choice gain is an answer-format artifact—82% of it on four released 7B SimpleRL base–RL pairs disappears when the same outputs are re-scored with a format-agnostic extractor, because RL mainly moves already-correct answers into `\\boxed{}` where public harness extractors look first.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Monash University"
+      ],
+      "affiliations_text": "Monash University",
+      "score": 3.5781860549448923,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.20795v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020795v1-eeg-based-prediction-of-music-enjoyment-using-deep-learning-with-explainable-temporal-analysis",
+      "source": "arxiv",
+      "title": "EEG-Based Prediction of Music Enjoyment Using Deep Learning with Explainable Temporal Analysis",
+      "authors": [
+        "Parshav Singla",
+        "Simranjit Kaur",
+        "Maanya Walia",
+        "Niharika"
+      ],
+      "authors_text": "Parshav Singla, Simranjit Kaur, Maanya Walia, Niharika",
+      "abstract": "Understanding why listeners enjoy music is difficult because the experience is subjective and changes as a piece unfolds. Electroencephalography (EEG) offers a non-invasive way to study neural responses during listening, yet earlier work has mostly treated music emotion as a categorical label or relied on black-box models. We formulate enjoyment prediction as a regression problem on the public MUSIN-G dataset, which contains 128-channel EEG from 20 listeners together with song-level enjoyment ratings. Six deep learning models were compared under a participant-wise protocol, in which 15 listeners were used for training and validation and 5 were held out for testing. DeepConvNet, CNN-LSTM and GNN-CNN reached the lowest mean absolute error (0.97 to 0.99 on the 1 to 5 scale), while the temporal convolutional network (TCN) had the highest Pearson correlation with the ratings (r = 0.21). Gradient-based and occlusion-based explanations, averaged over all held-out windows, identify the time segments within each two-second window that most influence the TCN predictions. The study provides a reproducible cross-listener benchmark for EEG-based enjoyment regression and shows how explainability analysis complements standard metrics.",
+      "url": "http://arxiv.org/abs/2610.20795v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20795v1",
+      "tldr": "This paper provides a reproducible participant-wise benchmark for EEG-based music enjoyment regression, showing that six deep learning models can predict enjoyment with DeepConvNet, CNN-LSTM, and GNN-CNN achieving the lowest MAE while TCN reaches the highest correlation, and that explainability methods identify the temporal EEG segments most influencing predictions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Thapar Institute of Engineering and Technology"
+      ],
+      "affiliations_text": "Thapar Institute of Engineering and Technology",
+      "score": 3.3709132747028603,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.20638v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020638v1-feature-elicitation-for-sae-steering-of-deceptive-behaviour-in-small-llms",
+      "source": "arxiv",
+      "title": "Feature Elicitation for SAE Steering of Deceptive Behaviour in Small LLMs",
+      "authors": [
+        "J Koorndijk"
+      ],
+      "authors_text": "J Koorndijk",
+      "abstract": "Research on deceptive alignment is becoming increasingly urgent as frontier-model capabilities advance and their risk of causing catastrophic harm increases. Alignment faking is a form of deceptive alignment, with the compliance gap serving as a key behavioural indicator. This behaviour remains understudied in small LLMs and prior mechanistic interventions have not been shown to mitigate the compliance gap. We test whether steering SAE (sparse autoencoders) features associated with deontological ethics can mitigate this behaviour. We use a novel bag-of-words feature elicitation pipeline for SAE steering to identify what we construe as concept-level steering directions. Our approach reduced the compliance gap to non-significance in Gemma-3-27B-IT, whereas the tested configurations were not effective in LLaMA-3-8B-Instruct. Analysis of scratchpad traces also revealed deceptive model behaviour which we term deceptive defanging: deliberately degrading the aligned functionality of a response (in this case harmfulness) while preserving the appearance of alignment (in this case helpful compliance with the harmful request), sometimes conditioned on tier, training, or RLHF consequences. These findings provide, to our knowledge, the first evidence that a mechanistic activation-level intervention can mitigate the compliance gap in an alignment faking setup. They also identify a form of deceptive behaviour that may broaden our understanding of the different forms of deceptive behaviour in LLMs.",
+      "url": "http://arxiv.org/abs/2610.20638v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20638v1",
+      "tldr": "This paper shows that steering sparse-autoencoder features associated with deontological ethics via a bag-of-words elicitation pipeline can reduce the compliance gap in alignment-faking behavior to non-significance in Gemma-3-27B-IT (though not in LLaMA-3-8B-Instruct), while also identifying a novel deceptive behavior termed deceptive defanging.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Seraphion Technology"
+      ],
+      "affiliations_text": "Seraphion Technology",
+      "score": 3.285885489631373,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.20766v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020766v1-semantic-alignment-of-eeg-and-text-a-contrastive-learning-framework-for-decoding-imagined-speech",
+      "source": "arxiv",
+      "title": "Semantic Alignment of EEG and Text: A Contrastive Learning Framework for Decoding Imagined Speech",
+      "authors": [
+        "Shahryar G. Namdari",
+        "Francesco Iacomi",
+        "Riccardo Barbieri",
+        "Luca Mainardi"
+      ],
+      "authors_text": "Shahryar G. Namdari, Francesco Iacomi, Riccardo Barbieri, Luca Mainardi",
+      "abstract": "Imagined speech decoding from EEG offers a promising route toward naturalistic brain-computer interfaces. Traditional closed-set classifiers treat semantic categories as independent labels and do not explicitly exploit relationships among linguistic intents, limiting output flexibility. We adapt a multimodal contrastive learning framework to imagined speech, aligning EEG trials with language representations in the embedding space of a frozen pretrained text encoder. An EEG encoder is trained with a composite objective combining semantically reweighted EEG-sentence alignment and text-prototype-based class discrimination, encouraging semantic structure while preserving separability among 39 intent categories. We evaluate the approach on the Chisco imagined speech dataset across five subjects, reporting Top-k accuracy, macro-F1, and balanced pairwise matching accuracy (2v2). We also investigate maximum EEG-text cosine similarity (MaxCosine) as an intrinsic indicator of decoding reliability and probe semantic structure beyond category labels using five evaluation-time semantic axes and a qualitative Semantic Gallery Probe (SGP) with previously unseen candidate sentences. The contrastive framework achieved decoding performance comparable to a task-optimized closed-set classifier while mapping EEG into a frozen language embedding space. MaxCosine identified subsets of held-out trials with higher Top-1 and Top-5 accuracy across subjects. Evaluation-time semantic axes showed mean agreement above the 50% chance reference across all five dimensions, and the SGP qualitatively illustrated direct comparison with unseen candidate sentences. Together, these findings suggest that EEG-language alignment can retain comparable fixed-intent decoding while supporting similarity-based retrieval, intrinsic reliability ranking, and evaluation of broader semantic structure.",
+      "url": "http://arxiv.org/abs/2610.20766v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20766v1",
+      "tldr": "This paper proposes a contrastive EEG–language alignment framework that maps imagined-speech EEG into a frozen pretrained text encoder’s embedding space using semantically reweighted EEG–sentence alignment and text-prototype class discrimination, achieving decoding performance comparable to a closed-set classifier on the Chisco 39-category dataset while supporting similarity-based retrieval, intrinsic reliability ranking, and broader semantic probing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Politecnico di Milano"
+      ],
+      "affiliations_text": "Politecnico di Milano",
+      "score": 3.1310337543875475,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.20683v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020683v1-causal-syntax-circuits-in-codelms-budget-and-probe-decide-what-looks-localised",
+      "source": "arxiv",
+      "title": "Causal Syntax Circuits in CodeLMs: Budget and Probe Decide What Looks Localised",
+      "authors": [
+        "Harsh Kumar",
+        "Tanmay Shailesh Joshi",
+        "Rahul Maity",
+        "Anusa Saha"
+      ],
+      "authors_text": "Harsh Kumar, Tanmay Shailesh Joshi, Rahul Maity, Anusa Saha",
+      "abstract": "Code models write Python when the prompt does not say which language to use. We ask a mechanistic question about that habit: is it produced by a small, findable group of components inside the model? We run one pipeline---mean ablation, activation patching, greedy circuit extraction, a random-control significance test, and activation steering---over 55 model-language settings spanning ten open code models (five base and five instruction-tuned), three target languages (Rust, C#, PHP), two prompt suites, and two component budgets. We report five findings. First, the preference is large, grows with model size, and survives instruction tuning: it is larger on every instruction-tuned checkpoint than on its base version, by 12% on average. Second, its measured size is mostly a property of the probe; replacing our aligned prompts with XLCoST parallel functions takes the same measurement on the same models from about 1.6 to about 0.01. Third, whether the preference looks localised depends on how many components the search may keep: with a budget of 12, 1 of 15 settings yields a circuit that beats size-matched random controls after multiple-comparison correction, and with a budget of 40, 6 of 15 do. Fourth, interventions that a smaller-budget study reports as uniformly failing do sometimes succeed: patching makes a Python prompt prefer target syntax in 2 of 45 settings, and steering changes the most likely next token in 9 of 45. Fifth, every circuit whose effect is significant but points away from the target language comes from a setting where circuit extraction failed, which makes such results a diagnostic rather than a phenomenon. The practical lesson is that a claim about whether a behaviour is localised can turn on analysis choices that papers rarely report. We release the full grid so those choices can be varied.",
+      "url": "http://arxiv.org/abs/2610.20683v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20683v1",
+      "tldr": "Across 55 model–language settings, CodeLMs robustly prefer Python when the prompt leaves language unspecified, but whether that preference looks mediated by a small localizable circuit depends critically on rarely reported analysis choices—especially the prompt probe and component budget—so localization claims must be conditioned on those choices.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BITS Pilani",
+        "Independent researcher",
+        "Columbia University",
+        "National Institute of Technology Agartala"
+      ],
+      "affiliations_text": "BITS Pilani, Independent researcher, Columbia University, National Institute of Technology Agartala",
+      "score": 2.8561032284119507,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2610.20777v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020777v1-optimal-demand-response-based-energy-management-for-campus-buildings-with-battery-energy-storage-systems-a-case-study-of-the-elb-building",
+      "source": "arxiv",
+      "title": "Optimal Demand Response-Based Energy Management for Campus Buildings with Battery Energy Storage Systems: A Case Study of the ELB Building",
+      "authors": [
+        "Ali Beidoun",
+        "Quang Manh Hoang",
+        "Guilherme Vieira Hollweg",
+        "Van-Hai Bui"
+      ],
+      "authors_text": "Ali Beidoun, Quang Manh Hoang, Guilherme Vieira Hollweg, Van-Hai Bui",
+      "abstract": "Buildings account for a significant portion of global electricity consumption, making demand response (DR) an effective strategy for reducing energy costs and improving grid flexibility. This paper presents an optimal energy management framework for a campus building that integrates demand response and battery energy storage systems (BESS) to minimize electricity costs while satisfying operational constraints and occupant comfort requirements. The proposed optimization model schedules building loads and battery charging/discharging based on time-varying electricity prices and building demand profiles. The framework is validated using the Engineering Laboratory Building (ELB) at the University of Michigan-Dearborn as a real-world case study. Four operating scenarios are investigated: (i) baseline operation, (ii) demand response without battery energy storage, (iii) battery energy storage, and (iv) demand response with battery energy storage. Simulation results demonstrate that demand alone reduces the building's electricity cost by approximately 12% compared with conventional operation. When battery energy storage is incorporated, the total electricity cost reduction increases to approximately 26%, highlighting the significant economic benefits of coordinated demand response and energy storage scheduling. The results demonstrate that integrating battery energy storage with demand response substantially enhances the operational flexibility of campus buildings and provides an effective solution for cost-effective and sustainable building energy management.",
+      "url": "http://arxiv.org/abs/2610.20777v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20777v1",
+      "tldr": "This paper presents an optimal MILP-based energy management framework that coordinates demand response and battery energy storage for a campus building, and its case study of the ELB Building shows that demand response alone cuts electricity costs by about 12%, while combining it with battery storage increases savings to about 26%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Michigan-Dearborn"
+      ],
+      "affiliations_text": "University of Michigan-Dearborn",
+      "score": 2.691481972928669,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2610.20787v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/16/261020787v1-electrical-power-grid-reliability-assessment-exposed-to-straight-line-winds",
+      "source": "arxiv",
+      "title": "Electrical Power Grid Reliability Assessment Exposed to Straight Line Winds",
+      "authors": [
+        "Satish Adhikari",
+        "Md Abul Hasnat"
+      ],
+      "authors_text": "Satish Adhikari, Md Abul Hasnat",
+      "abstract": "Maintaining the resilience and reliability of electrical power grids under weather driven disturbances is a critical challenge for modern power system planning and operation. Among weather driven hazards, tornadoes and hurricanes are mostly considered for research purpose overlooking straight line winds despite its significant contribution to transmission line outages and cascading effects. Accurate modeling of these events is essential for operational decision making, and long term infrastructure planning and investment. This research explores the probabilistic risk assessment of transmission lines under straight line winds and their impacts on system level performance. The approach examines the probability of transmission towers failure, transmission lines outages, cascading effects, and identify critical transmission lines. The IEEE 118 bus system was utilized to validate the proposed approach and to demonstrate how wind induced component failures propagate throughout the network, affecting power grid reliability.",
+      "url": "http://arxiv.org/abs/2610.20787v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.20787v1",
+      "tldr": "This paper presents a probabilistic risk assessment framework that models straight-line wind exposure and transmission component fragility to evaluate wind-induced outages, cascading failures, and reliability impacts on the Wyoming-mapped IEEE 118-bus system, while identifying critical transmission lines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Wyoming"
+      ],
+      "affiliations_text": "University of Wyoming",
+      "score": 2.6664138986654184,
+      "score_text": "2.7"
+    }
+  ],
+  "errors": []
+}
