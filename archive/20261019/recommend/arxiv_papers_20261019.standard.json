@@ -1,0 +1,779 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-19T17:27:51.889330",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.22450v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022450v1-driveworld3d-evidence-constrained-3d-world-modeling-and-generative-simulation-for-real-world-autonomous-driving",
+      "source": "arxiv",
+      "title": "DriveWorld3D Evidence Constrained 3D World Modeling and Generative Simulation for Real-World Autonomous Driving",
+      "authors": [
+        "Wei Wang",
+        "Yiru Veronika Wang",
+        "Yihan Wang",
+        "Zihao Li",
+        "Xiaohui Liang"
+      ],
+      "authors_text": "Wei Wang, Yiru Veronika Wang, Yihan Wang, Zihao Li, Xiaohui Liang",
+      "abstract": "Three dimensional modeling for autonomous driving must continuously estimate road geometry, obstacle occupancy, traffic participant behavior, and observational uncertainty under limited computational resources. Existing reconstruction methods can synthesize realistic novel views, but visual fidelity does not sufficiently characterize the geometric reliability required for driving. Generative world models can expand scenarios and predict future observations, yet may introduce content unsupported by measurements. We propose DriveWorld3D, a framework combining temporal video learning, measurement constraints from multiple sensors, and offline generative simulation. Its online component maintains a unified world state comprising road surfaces, volumetric occupancy, dynamic entities, and road relations, while separately representing physical occupancy, observability, and evidence provenance. Action conditioned future prediction and risk sensitive planning connect this representation to driving decisions. Its offline component reconstructs recorded scenes using neural radiance fields or 3D Gaussian Splatting, then expands long tail conditions using generative models while restricting the use of generated content as geometric ground truth. We specify data partitioning, sensor ablations, fault injection, paired closed loop testing, and real to simulation consistency assessment. The central hypothesis is that explicit evidence management can reduce dangerous false free space predictions and occlusion risk within a matched computational budget while retaining acceptable driving efficiency. All performance claims remain subject to experimental validation. Keywords: autonomous driving; 3D occupancy; sensor fusion; uncertainty; generative world models; NeRF; 3D Gaussian Splatting; closed loop simulation",
+      "url": "http://arxiv.org/abs/2610.22450v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22450v1",
+      "tldr": "DriveWorld3D proposes an evidence-constrained autonomous-driving world model that fuses temporal video and multi-sensor measurements with explicit uncertainty and provenance to support layered 3D occupancy, future prediction, and risk-sensitive planning, while using NeRF/3D Gaussian Splatting and provenance-screened generative simulation offline to expand long-tail scenarios without treating generated content as geometric ground truth.",
+      "detailed_reading": {
+        "motivation": "现有三维重建方法虽能合成逼真的新视角，但视觉保真度不足以刻画自动驾驶所需的几何可靠性；生成式世界模型可扩展场景与预测未来观测，却可能引入测量不支持的内容。论文因此关注如何在有限计算资源下统一利用视频语义、多传感器几何测量与生成式场景多样性，同时不混淆其证据可靠性，并让世界模型直接服务于通行性、遮挡风险与轨迹选择等驾驶决策。",
+        "method": "DriveWorld3D 提出在线与离线结合的框架。在线部分对多相机图像、激光雷达、成像雷达、惯性/轮速/车辆状态及地图先验进行时间对齐与运动补偿融合，维护包含道路表面与净空、体素占用、动态实体与轨迹历史、道路连通与交通关系、可见性覆盖、不确定性及来源信息的统一世界状态；体素层面分别预测占用概率与证据充分性，未知被建模为认识论状态而非占用类别，并结合传感器健康、射线可见性、观测年龄衰减、地图冲突记录和独立测量检查路径进行时序融合。规划侧以自车动作条件预测多模态实体轨迹与未来占用，构建可达风险区域处理遮挡，并用带条件风险价值的目标对候选轨迹排序，先以可信障碍、车辆动力学与制动约束过滤不可行轨迹。离线部分用 NeRF 或 3D Gaussian Splatting 重建记录场景，分离外观资产与碰撞几何，按测量支持、离线估计支持、生成假设支持三类来源扩展长尾条件，并通过分阶段训练联合几何、时序、预测、规划与驾驶损失。",
+        "result": "论文明确说明系统尚未实现、未在车辆上验证，也未报告任何性能提升；表中所列误自由率、每仿真小时碰撞数、任务完成率、不必要急刹与 P99 延迟均为未来实验占位符，不是预测或实测结果。核心产出是可证伪假设：显式证据管理可在匹配计算预算下降低遮挡场景中的危险误自由预测与遮挡风险，同时保持可接受效率；多模态几何约束、经几何与来源筛选的生成数据、风险驱动分辨率分别被列为待检验假设。",
+        "conclusion": "论文的结论限于系统设计与可测试性：应将测量事实、历史估计与生成假设分开管理，并以闭环风险、效率与运行时成本而非渲染质量评价其价值。下一步是实现预算匹配的基线、证据状态模块与实验协议，先测试遮挡场景危险误自由预测，再隔离未来预测与生成式训练的贡献；在实验完成前不能主张性能或安全改进。",
+        "key_details": "关键实现细节包括占用损失仅在标签有效支持处计算，几何损失用稳健距离残差，预测损失用似然或生成目标，概率质量用 Brier 分数与负对数似然评估并在独立验证集校准；损失权重、合成数据比例与阈值只在验证集选择。实验按地理、采集时间和原始日志分组，重建、天气与反事实变体与源日志同分区以防泄漏，测试集须含未生成修改的真实观测；基线 B0 至 B6 覆盖视频时序占用、多模态融合、证据管理、动作条件预测、真实重建资产、筛选生成扩展及等量未筛选生成数据。指标包括关键走廊障碍召回、表面距离、未知空间识别、危险误自由率、自由空间精度与风险覆盖曲线，以及碰撞、近冲突、完成率、路线进度、急刹、舒适性、违规、P50/P95/P99 延迟、内存与功耗，并采用配对闭环测试、故障注入、传感器消融和实车到仿真一致性评估。局限包括多传感器成本与共因失效、证据阈值和风险权重可能导致过度保守、不确定性可能失准、生成场景可能违反物理、世界模型与驾驶模型可能共享偏差，且当前工作未完成新颖性审查、未实现也未验证。"
+      },
+      "affiliations": [
+        "Robostreet Inc."
+      ],
+      "affiliations_text": "Robostreet Inc.",
+      "score": 5.153443111591499,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2610.22379v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022379v1-when-is-a-large-language-model-a-good-calibration-agent-physics-labeled-prompting-for-budgeted-engineering-simulator-calibration",
+      "source": "arxiv",
+      "title": "When is a large language model a good calibration agent? Physics-labeled prompting for budgeted engineering simulator calibration",
+      "authors": [
+        "Ruo-Qian Wang"
+      ],
+      "authors_text": "Ruo-Qian Wang",
+      "abstract": "Calibrating expensive engineering simulators requires tuning model parameters to match reference data, a process heavily constrained by computational costs. This study investigates whether Large Language Models (LLMs), conditioned on physical diagnostic descriptions of simulation errors, can propose informative parameter updates more efficiently than conventional derivative-free optimizers. We test this on a cylinder-wake Large-Eddy Simulation and a damped-oscillator inverse problem. Physics-labeled prompts are evaluated against four text ablations (removed, anonymized, padded, misdirected) and standard optimizers (Nelder-Mead, Bayesian optimization, CMA-ES, and random search). Results demonstrate a strong early semantic advantage: the first physics-informed LLM proposal improves the initial design in 23 of 25 trials. After five evaluations, the median calibration error is 21.9 times lower than physics-free controls. However, this advantage is transient - disappearing by fifteen evaluations - and inherent LLM decoder variability yields a 9.8-fold performance spread. To address this, we introduce a hybrid workflow that uses the LLM as a warm-start, passing accumulated evaluations to a conventional optimizer. This two-stage numerical continuation policy reaches target accuracy in just 9 simulator runs, outperforming the LLM alone (12 runs), Nelder-Mead (17 runs), and Bayesian optimization (>60 runs). Supported by sensitivity analysis validating the test cases, this hybrid physics-labeled LLM scheme proves highly effective as a calibration agent under strict evaluation budgets.",
+      "url": "http://arxiv.org/abs/2610.22379v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22379v1",
+      "tldr": "Physics-labeled LLM prompting gives a strong but transient early advantage in budgeted engineering simulator calibration, so the paper recommends using it as a warm start before handing off to a conventional optimizer, reaching target accuracy in 9 simulator runs versus 17 for Nelder–Mead.",
+      "detailed_reading": {
+        "motivation": "校准昂贵工程仿真器的成本主要由外层循环消耗的仿真次数决定，传统无导数优化把参数视为匿名坐标，在早期数值历史不足时难以给出方向；专家能利用物理诊断但主观、费力且难复现。本文因此检验大语言模型在接收物理诊断描述时，能否在严格评估预算下提出更有信息量的参数更新，并区分物理语义与一般提示效应的贡献。",
+        "method": "在圆柱尾流LES（OpenFOAM pisoFoam，校准分子黏度、Smagorinsky系数和耗散系数）及阻尼振子逆问题上，每次向LLM输入参数边界、按目标排序的前十次试验和当前运行的物理诊断文本，要求返回机器可读参数向量，越界或非法输出经裁剪/重试，不训练、不拟合、不建代理模型；与去诊断、匿名化、等长填充、误导语义四种提示消融以及Nelder-Mead、GP-BO、CMA-ES、随机搜索在同初始设计下比较，并将LLM前若干次评估作为热启动交给NM或GP-BO形成两阶段数值延续（默认交接预算B_switch=15）。物理提示重复25次、消融提示重复30次以量化解码器随机性。",
+        "result": "物理标签提示的首个提议在23/25次重复中改进了共享初始设计，消融提示仅8/30；5次评估后中位校准误差比无物理控制低21.9倍，10次后低4.7倍，15次后无差异。相同提示与初值的重复实验显示五种子中位数可相差9.8倍。两阶段延续流程报告中位9次仿真达到目标精度，优于纯LLM的12次、Nelder-Mead的17次和贝叶斯优化的>60次；对3047次求解的敏感性分析表明四个力统计量只能识别三个校准参数中的一个。",
+        "conclusion": "物理标签提示带来的是早期方向性优势，而不是收敛保证；该优势约在十次评估内衰减，并受LLM解码器变异性的显著限制。把LLM作为热启动、再由传统数值优化器接手，可将短暂的语义优势转化为紧预算下可用的校准流程。实际使用前应做参数可识别性筛查并进行多次重复，否则优化器排名可能落入噪声范围。",
+        "key_details": "LES目标由四个统计量归一化加权平方误差构成（阻力主频、RMS升力、平均阻力、t=250相位；权重均为1，尺度为目标值、相位用π），失败运行罚1e9，所有方法共用同一目标和初始设计；提示包含参数名、单位、边界、目标历史及当前物理差异。关键限制是LES基准为同一求解器高分辨率参考的自洽可识别性问题，并非二维LES对真实湍流的验证；物理提示仅在前约十次评估有效，B_switch=15为先验固定未调参，且LLM输出需裁剪和重试，解码器方差使少量种子比较不可靠。"
+      },
+      "affiliations": [
+        "Rutgers University"
+      ],
+      "affiliations_text": "Rutgers University",
+      "score": 5.086503266111844,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.22550v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022550v1-local-projected-controllability-of-nonlocal-continuity-equations",
+      "source": "arxiv",
+      "title": "Local Projected Controllability of Nonlocal Continuity Equations",
+      "authors": [
+        "Elena Goncharova",
+        "Nikolay Pogodaev",
+        "Maxim Staritsyn"
+      ],
+      "authors_text": "Elena Goncharova, Nikolay Pogodaev, Maxim Staritsyn",
+      "abstract": "We formulate and study the problem of local projected controllability (LPC) for characteristic solutions of controlled nonlocal continuity (transport) equations on the space of probability measures over a separable Banach space. The task is motivated in particular by self-interacting models in machine learning, whose action can be represented as controlled dynamics of the probability distribution over input data, while the actual output is given by a finite-dimensional vector of features extracted from the terminal distribution by a possibly nonlinear observation map. Given a fixed finite family of velocity fields which may depend on the transported measure, we ask whether the reachable values of the observable vector fill a neighborhood of its reference value. Our approach is to lift the transport equation in the space of measures to an ordinary differential equation on a Banach space of maps. This representation makes it possible to employ the machinery of Lie brackets developed for Banach manifolds, while the resulting sufficient condition for LPC can be formulated directly on the space of measures.",
+      "url": "http://arxiv.org/abs/2610.22550v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22550v1",
+      "tldr": "The paper develops a Lie-bracket-based sufficient condition for local projected controllability of controlled nonlocal continuity equations on probability measures by lifting the measure dynamics to an ODE on a Banach space of maps, motivated by finite-dimensional feature observations in self-interacting machine-learning models.",
+      "detailed_reading": {
+        "motivation": "论文关注无限维概率测度空间上的受控非局部连续性方程：实际应用往往不要求控制整个测度，而只要求由终末分布经观测映射提取的有限维特征达到参考值附近。该问题受机器学习中自交互模型（如 Transformer 自注意力）启发，其中输入数据分布按非局部速度场演化，输出是有限维特征向量，因此需要判定可观测向量的可达集是否覆盖参考值的邻域。",
+        "method": "在可分 Banach 空间 Q 的概率测度空间 P(Q) 上，考虑由有限个可能依赖当前测度的速度场 V_j 生成的控制线性非局部连续性方程，控制取自紧集 U 上的 L∞ 函数，并给定光滑观测 g:P(Q)→R^N。作者将测度层面的输运方程提升为 Banach 空间 C_b(Q;Q) 中位移映射的常微分方程，由提升方程的解重构特征线和测度曲线，再在 Banach 流形框架下使用 Lie 括号技术；最终把充分条件表述为：对非局部速度场诱导的算子 L_{V_j} 及其迭代交换子作用于观测，在参考测度处投影后的方向张成 R^N。",
+        "result": "主要结果是 LPC 的一个充分条件：若 Lie 代数中存在 W_i 使 {Dg(μ0)[W_i(μ0)]} 张成 R^N，则足够小时间 T 内由分段常值控制得到的观测值 g(μ_T) 覆盖 g(μ0) 的邻域，从而系统在 μ0 处关于 g 局部投影可控。该定理把 Hermes 的观测局部可控性判据推广到 Banach 流形上具有向量值控制的无漂移 ODE，并给出可直接在测度空间检验的交换子秩条件；示例表明 Transformer 代理模型中缺失的投影方向可由一阶交换子补足，而在平移或旋转等变约束下，局部速度场无法改变观测，合适的非局部速度场才能达到所需投影秩。",
+        "conclusion": "论文说明即使概率测度空间缺乏自然的 Banach 流形结构，也可以通过提升到位移映射空间并借助 Lie 括号几何控制工具来研究有限维观测的可控性。其贡献是为非局部连续性方程提供了一套可计算的 LPC 充分判据，并揭示了非局部性与对称性约束对投影可控性的关键作用。",
+        "key_details": "关键细节包括：Q 为可分实 Banach 空间，状态为 Borel 概率测度，速度场可写成 V(q,μ) 且可能非局部依赖 μ；控制为 L∞([0,T];U)，U 为含 [-1,1]^m 的紧集，解按特征解理解；光滑性通过对非局部速度场提升和观测的局部 Fréchet 光滑性假设保证，积分型泛函与有界核情形可由引理推出。判据使用 Lie 括号约定 [F1,F2]φ=F1(F2φ)-F2(F1φ) 及算子 L_V 的迭代交换子，若有限个泛函在 L_{V_j} 下封闭则可精确降维；对积分泛函和核型非局部场，交换子有核的显式公式。局限在于高阶括号需要更多切换且位移量级更小，缺乏括号长度通用上界，数值误差和切换限制会影响可实现深度；此外同时控制任意大有限族观测不蕴含无限维可控性，因为时间窗口和邻域未必一致。"
+      },
+      "affiliations": [
+        "Siberian Branch of the Russian Academy of Sciences",
+        "Universidade do Porto"
+      ],
+      "affiliations_text": "Siberian Branch of the Russian Academy of Sciences, Universidade do Porto",
+      "score": 5.053930158935701,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.22497v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022497v1-generative-value-classifier",
+      "source": "arxiv",
+      "title": "Generative Value Classifier",
+      "authors": [
+        "Alexander Swerdlow",
+        "Perry Dong",
+        "Chelsea Finn"
+      ],
+      "authors_text": "Alexander Swerdlow, Perry Dong, Chelsea Finn",
+      "abstract": "Q-learning is premised on learning a function to predict the value of a state-action pair, with the goal of using such a function to guide policy improvement. Most approaches learn this function from scratch using scalar or distributional return targets. This discriminative approach leaves another source of supervision for learning representations unused: the actions themselves. Rather than directly predict the return of a state-action pair, we ask the reverse question: how likely is the action under each possible return? This perspective provides a critic whose generative component is a return-conditioned policy, which can share the actor's architecture. Training this policy supervises the critic with every action rather than with returns alone, and a squared-error loss anchors the critic's Q-value to the bootstrapped target. We evaluate our approach on both offline and online RL tasks and show gains over leading discriminative methods, including distributional RL methods.",
+      "url": "http://arxiv.org/abs/2610.22497v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22497v1",
+      "tldr": "The paper introduces **Generative Value Classifier (GVC)**, a Q-learning approach that learns a return-conditioned action likelihood and return prior, combines them via Bayes’ rule to recover \\(Q(s,a)\\), and anchors this value to bootstrapped targets—using actions as extra supervision and outperforming discriminative baselines in offline and online RL.",
+      "detailed_reading": {
+        "motivation": "传统Q学习以判别式方式从标量或分布回报学习Q(s,a)，主要依赖回报监督，忽略了动作本身这一额外监督源；在稀疏奖励和长时程任务中价值学习仍很困难。作者提出反向问题：给定状态和某个可能回报，动作出现的概率有多大，从而用每个动作而非仅用回报来监督critic并学习表示。",
+        "method": "输入为离线数据集或回放缓冲中的一步转移(s,a,r,s',m)，将回报离散为K个bin Z。critic由return-conditioned action model pθ(a|s,z)与return prior pψ(z|s)组成：前者用flow matching建模动作在给定状态和回报bin下的似然，后者是分布型状态价值函数；通过Bayes规则p(z|s,a)∝pθ(a|s,z)pψ(z|s)，在bin上归一化并取均值得到Q(s,a)。训练时用target网络构造分布型Bellman目标p̂=Π_Z(r+γmZ')与y=Σp̂_i z_i，优化条件flow负对数似然、return prior交叉熵和value anchoring损失(Q-y)^2；actor以BC flow从数据动作学习并提出候选动作，推理时critic对候选动作打分并执行Q最大者。",
+        "result": "论文在OGBench的离线与离线到在线RL以及RoboMimic在线连续控制任务上评估GVC，报告其相对领先的判别式RL方法（包括分布RL方法）取得更好性能；同架构下去除生成式动作监督后性能下降。这表明动作似然监督与value anchoring具有互补性，能改善价值估计并转化为控制收益。",
+        "conclusion": "GVC将Q学习重构为生成式critic：用return-conditioned动作似然提供额外监督，同时用Bellman锚定保持价值目标一致，从而缓解仅靠回报监督的价值学习困难。该视角为样本效率和稀疏奖励场景下的价值学习提供了可复用方向，并说明动作数据本身可作为critic表示学习的重要信号。",
+        "key_details": "关键实现包括回报bin离散化、共享噪声-时间对计算各bin的flow残差作为似然代理（非精确归一化密度）、用温度β_ret与β_prior调节似然和先验、EMA target网络以及损失权重λ_F、λ_R、λ_V；动作模型可与actor共享架构，且以状态s而非(s,a)为条件避免生成状态模型。限制在于似然为代理量、bin数与Best-of-N候选打分带来额外计算开销，并可能对离散化和超参敏感，高维动作与大规模场景仍需进一步验证。"
+      },
+      "affiliations": [
+        "Stanford University"
+      ],
+      "affiliations_text": "Stanford University",
+      "score": 4.928155666934804,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2610.22448v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022448v1-lean4agenticrl-advancing-agentic-rl-with-verifiable-multi-level-process-rewards",
+      "source": "arxiv",
+      "title": "Lean4AgenticRL: Advancing Agentic RL with Verifiable Multi-level Process Rewards",
+      "authors": [
+        "Ruida Wang",
+        "Gerald Friedland",
+        "Tong Zhang",
+        "Chris Kong"
+      ],
+      "authors_text": "Ruida Wang, Gerald Friedland, Tong Zhang, Chris Kong",
+      "abstract": "Enhancing the agentic capabilities of Large Language Models (LLMs) to tackle complex software engineering (SWE) and general terminal-usage problems is a pressing challenge. Current state-of-the-art LLMs often go through large-scale agentic Reinforcement Learning (RL). However, they mostly rely on high-level outcome rewards, with minimal consideration of low-level toolcall and mid-level workflow-stage rewards, which makes the training less effective. To overcome this limitation, we propose **Lean4AgenticRL**, which, to the best of our knowledge, is the first framework that grounds multi-level process rewards in the unified Lean4 formalization schema for open-ended agentic RL. **Lean4AgenticRL** first builds a *problem-specific workflow* system that balances the agent's own capability and controllability during execution, laying the foundation for further verification. Subsequently, our workflow formalization and multi-level reward annotation methods enable agent behavior verification within a general harness system. It provides multi-level rewards to support more effective agentic RL with the workflow-stage-normalized GRPO algorithm. Using **Lean4AgenticRL**, we train **LAR-9B/27B**, a family of models with enhanced agentic capability. Extensive experiments indicate that our model outperforms the leading model of similar size. **LAR-27B** achieves **77.3%** on TerminalBench-2.1. On average, our models outperform the base model by **9.89%** and surpass the second-best model of comparable size we know by **5.07%**. These results indicate the potential of integrating formal methods in enhancing open-ended agentic RL.",
+      "url": "http://arxiv.org/abs/2610.22448v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22448v1",
+      "tldr": "Lean4AgenticRL is a framework that formalizes problem-specific agent workflows in Lean4 to provide verifiable multi-level process rewards for agentic reinforcement learning, enabling its LAR-9B/27B models to outperform comparable baselines on software-engineering and terminal-use tasks.",
+      "detailed_reading": {
+        "motivation": "复杂软件工程与通用终端使用任务要求大模型具备强 agentic 能力，而当前先进的 agentic RL 多依赖高层结果奖励，较少利用低层工具调用和中层工作流阶段奖励，导致训练信号稀疏、过程归因不足，训练效果受限。",
+        "method": "Lean4AgenticRL 首先为开放式 agentic 任务构建问题特定的工作流系统，在 agent 自主能力与执行可控性之间取得平衡；随后将工作流与多级奖励标注统一形式化到 Lean4 schema 中，并在通用 harness 系统中验证 agent 行为，提供低层工具调用、中层工作流阶段和高层结果等多级奖励；最后采用工作流阶段归一化的 GRPO 算法训练 LAR-9B/27B 模型。",
+        "result": "实验表明 LAR 系列在同类规模模型中表现领先，LAR-27B 在 TerminalBench-2.1 上达到 77.3%；平均而言，模型相对基座模型提升 9.89%，并比已知同规模第二优模型高 5.07%。",
+        "conclusion": "结果表明，将形式化方法与多级过程奖励结合到开放式 agentic RL 中，可有效提升模型在软件工程和终端使用任务上的 agentic 能力，展示了形式化验证信号用于开放式 agent 训练的潜力。",
+        "key_details": "核心方法是用 Lean4 统一形式化问题特定工作流和多级奖励，覆盖低层 toolcall、中层 workflow-stage 与高层 outcome，并以 workflow-stage-normalized GRPO 进行训练；关键约束包括工作流设计需兼顾自主性与可控性、奖励验证依赖通用 harness 和形式化标注质量，且问题特定工作流与 Lean4 形式化会带来额外构建与维护成本，对高度开放任务的覆盖和泛化仍需进一步验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.801201081780996,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.22496v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022496v1-scaling-online-exploration-for-robot-agents",
+      "source": "arxiv",
+      "title": "Scaling Online Exploration for Robot Agents",
+      "authors": [
+        "Runhan Huang",
+        "Xiangcheng Zhang",
+        "Haoyu Chen",
+        "Yitong Li",
+        "Yen-Jen Wang",
+        "Bohan Lyu",
+        "Haotian Ye",
+        "Chuye Hong",
+        "Yixuan Wang",
+        "Chloe Su",
+        "Haoyu Xiong",
+        "Yangzhen Wu",
+        "Enze Xie",
+        "Travis Manderson",
+        "Stefano Ermon",
+        "Pieter Abbeel",
+        "Antonio Torralba",
+        "Dawn Song",
+        "Weirui Ye",
+        "Yilun Du"
+      ],
+      "authors_text": "Runhan Huang, Xiangcheng Zhang, Haoyu Chen, Yitong Li, Yen-Jen Wang, Bohan Lyu, Haotian Ye, Chuye Hong, Yixuan Wang, Chloe Su, Haoyu Xiong, Yangzhen Wu, Enze Xie, Travis Manderson, Stefano Ermon, Pieter Abbeel, Antonio Torralba, Dawn Song, Weirui Ye, Yilun Du",
+      "abstract": "Robot learning has advanced by scaling demonstration datasets and model capacity; however, deploying a new robot embodiment or task typically necessitates a dedicated teleoperation corpus. The resulting policies remain bounded by their imitation distributions, limiting generalization and continual self-improvement. We introduce RAX (Robot Agent eXploration), an open-source framework for robot agents centered on scaling exploration: enabling agents to improve by acquiring online experience and synthesizing executable programs. In RAX, a general-purpose coding agent generates robot control code, operating without action demonstration data, hand-engineered action primitives, or value-function guidance. Through online exploration, the agent identifies decision sequences that achieve task goals and compiles them into modular programs encapsulating the full perception-planning-control loop. Using RAX, we present a systematic multi-embodiment study on scaling online exploration across precision and long-horizon manipulation tasks using single-arm, bimanual, dexterous, mobile, and humanoid systems in simulation and on real robots. Generalization performance on unseen environments improves consistently as exploration scales. In simulation, RAX outperforms top baseline models by +37.4% on average. On real robots, RAX autonomously learns memory-dependent, articulated, high-precision, deformable, and long-horizon mobile manipulation tasks without human demonstrations, continually improving performance by composing verified skills from prior exploration sessions. As exploration scales, we observe emergent capabilities including active perception, error recovery, safety guardrails, and human-robot collaboration. We open-source RAX as a generalist robot-agent platform in which new robot embodiments are integrated through their APIs alone, without teleoperated data collection or policy training.",
+      "url": "http://arxiv.org/abs/2610.22496v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22496v1",
+      "tldr": "RAX is an open-source robot-agent framework that scales online exploration by having a coding agent synthesize executable perception-planning-control programs without demonstrations, achieving consistent generalization gains, +37.4% simulation improvement over baselines, and autonomous continual learning across diverse simulated and real robot embodiments.",
+      "detailed_reading": {
+        "motivation": "机器人学习依赖大规模示范数据和模型容量扩展，但部署新本体或新任务通常仍需专门遥操作数据，所得策略受模仿分布约束，难以泛化与持续自我改进。RAX 旨在把在线探索作为扩展轴，让机器人智能体通过获取在线经验和合成可执行程序来突破示范数据瓶颈。",
+        "method": "RAX 是以扩展在线探索为中心的开放源码机器人智能体框架：通用编码智能体直接生成机器人控制代码，不依赖动作示范数据、手工动作原语或价值函数引导；智能体通过在线探索识别可达成任务目标的决策序列，并将其编译为封装完整感知-规划-控制回路的模块化程序，再在单臂、双臂、灵巧手、移动和人形系统上于仿真与真实机器人开展多本体系统研究。新本体仅通过 API 集成，无需遥操作数据采集或策略训练。",
+        "result": "随着探索规模扩大，RAX 在未见环境上的泛化性能持续提升；仿真中平均超过最强基线模型 +37.4%。真实机器人上，RAX 无需人类示范即可自主学习依赖记忆、铰接物体、高精度、可变形和长程移动操作任务，并通过组合先前探索会话中验证过的技能持续提升性能；扩展探索还涌现出主动感知、错误恢复、安全护栏和人机协作能力。",
+        "conclusion": "RAX 表明扩展在线探索可作为替代专用遥操作语料与模仿策略训练的通路，使机器人智能体在多本体、仿真和真实环境中自主获得并复用可验证技能。其开放源码定位为通用机器人智能体平台，新本体仅需 API 集成即可接入，无需示范采集或策略训练。",
+        "key_details": "关键实现点包括：以通用编码智能体生成控制代码，在线探索产生决策序列并编译为模块化感知-规划-控制程序，经验证技能可跨探索会话组合复用；实验覆盖单臂、双臂、灵巧、移动和人形本体，兼顾仿真与真实机器人及精度与长程操作任务。摘要未给出具体损失函数、网络结构、超参数、探索预算与算力开销；潜在约束包括代码执行可靠性、真实机器人安全与成本、仿真到现实差距以及大规模在线探索的可复现性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.751361939058674,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.22519v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022519v1-learning-smooth-dynamics-via-kinematic-interpolants",
+      "source": "arxiv",
+      "title": "Learning smooth dynamics via Kinematic Interpolants",
+      "authors": [
+        "Yiheng",
+        "Jiang",
+        "Youssef Marzouk",
+        "Avishek Joey Bose",
+        "Aram-Alexandre Pooladian"
+      ],
+      "authors_text": "Yiheng, Jiang, Youssef Marzouk, Avishek Joey Bose, Aram-Alexandre Pooladian",
+      "abstract": "Inferring dynamics from real-world experimental data is inherently ambiguous, as many plausible dynamical systems can explain the same positional observations at measurement times. For higher fidelity modeling of applications ranging from single-cell RNA to vortex dynamics and even flocking of birds, scientific observables increasingly also include velocity estimates that serve to resolve this issue. However, incorporating this rich information in a scalable manner, free of simulation or unnecessary approximations, has remained a difficult challenge. In this paper, we introduce Kinematic Interpolants (KI), a novel framework that extends the seminal methodology of stochastic interpolants to infer nonlinear dynamics across multiple snapshots in phase space, i.e., observables with position and velocity measurements. Empirically, we demonstrate that across several scientific datasets, KI achieves superior reconstruction of the underlying dynamics compared to existing baselines while requiring only a fraction of the training time.",
+      "url": "http://arxiv.org/abs/2610.22519v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22519v1",
+      "tldr": "Kinematic Interpolants (KI) extend stochastic interpolants to learn smooth second-order dynamics from multiple position–velocity snapshots in phase space, enabling simulation-free, scalable training and more accurate reconstruction of underlying dynamics than existing baselines at a fraction of the training time.",
+      "detailed_reading": {
+        "motivation": "从群体快照推断动力学时，仅凭测量时刻的位置观测往往存在多解，旋转对称等系统尤其难以辨识；速度观测能提供额外约束，但现有方法常需昂贵模拟、预填缺失速度或构建参考场，难以可扩展地纳入二阶概率建模。本文旨在直接从位置-速度快照学习平滑非线性动力学。",
+        "method": "将各观测时刻的位置-速度联合分布视为相空间边缘分布，选取多边缘耦合，并在相邻快照间构造相空间插值：位置写为 I_t 加噪声项 G_tξ，速度强制为位置的时间导数，且插值与噪声在端点满足位置、速度及零噪声约束。对插值速度再求时间导数得到闭式加速度目标，以条件期望加速度场 a_t(x,v)=E[加速度|X=x,V=v] 为学习对象，用神经网络做回归训练；采样时求解二阶动力学 dx=v dt、dv=a_t(x,v)dt，也可引入扩散并用学习的速度得分修正漂移以支持随机采样。",
+        "result": "在多个科学数据集上，KI 对底层动力学的重建精度优于现有基线，同时训练时间仅为基线的一小部分；学习到的过程还能在中间时刻生成一致的位置-速度联合样本。结果支持其在不同噪声调度和确定性/随机采样设置下有效。",
+        "conclusion": "KI 将随机插值推广到相空间并直接学习加速度场，实现了无需轨迹模拟、无需预填速度、无需参考场的 simulation-free 二阶动力学推断，为带速度观测的轨迹推断提供了更准确且高效的建模范式。",
+        "key_details": "关键实现点包括多边缘耦合与插值函数、噪声调度的选择，端点位置/速度及噪声导数约束，以及由插值二阶导得到的闭式加速度回归目标；条件均值加速度保证插值路径的单时刻边缘被保持，随机采样还需学习速度得分并用扩散系数修正漂移。局限在于方法依赖速度观测质量与充分平滑假设，跨快照无个体配对，耦合、插值和噪声设计会影响性能，高维场景下得分学习与二阶建模的计算和稳定性仍需关注。"
+      },
+      "affiliations": [
+        "Yale University",
+        "Mila",
+        "Imperial College London",
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Yale University, Mila, Imperial College London, Massachusetts Institute of Technology",
+      "score": 4.5840477712111305,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.22461v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022461v1-mothership-a-two-tier-autonomous-refuse-collection-system-for-pedestrian-campuses",
+      "source": "arxiv",
+      "title": "Mothership: A Two Tier Autonomous Refuse Collection System for Pedestrian Campuses",
+      "authors": [
+        "Wei Wang",
+        "Yiru Veronika Wang",
+        "Yihan Wang",
+        "Zihao Li",
+        "Xiaohui Liang"
+      ],
+      "authors_text": "Wei Wang, Yiru Veronika Wang, Yihan Wang, Zihao Li, Xiaohui Liang",
+      "abstract": "Refuse collection in pedestrian campuses, parks and mixed-use districts remains manual because compaction trucks cannot reach bins located on walkways, courtyards and building service doors. This paper presents Mothership, a two-tier autonomous refuse collection system in which an electric compaction truck (the mothership) carries two low-speed sidewalk robots (RoboCarts) that fetch standard two-wheel bins, deliver them to the truck, return the empty bins to their original positions and re-dock on the truck for charging. The architecture separates responsibilities by scale: the truck performs road driving, compaction, lifting and energy supply, while the carts perform only sidewalk transport and bin grasping. This split removes the lift-and-tip mechanism from the sidewalk vehicle, keeping it light and low, and relaxes cart-to-truck docking tolerance to the +/-100 mm capture window of a standard automated lifter. We describe the system architecture, the bin-handling and docking interfaces, and a mission-planning formulation that decomposes a route into truck stop points and cart tasks. A discrete-event simulation over synthetic campus layouts with 2-16 bins/ha quantifies throughput as a function of bin density, cart count and stop-point radius. A two-cart configuration serves 20-29 bins/h. Throughput is governed by an interaction between cart count and stop-point radius: a single cart performs best with many close stops, whereas three or four carts need wide stops (80 m) to stay busy, reaching 35-49 bins/h at moderate-to-high densities. The best stop radius therefore has to be chosen together with the fleet size, not fixed in advance.",
+      "url": "http://arxiv.org/abs/2610.22461v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22461v1",
+      "tldr": "Mothership is a two-tier autonomous refuse collection system in which an electric compaction truck carries and coordinates low-speed sidewalk robots that fetch, deliver, return, and recharge standard wheeled bins, with simulation showing throughput depends jointly on cart fleet size and truck stop-point radius.",
+      "detailed_reading": {
+        "motivation": "校园、园区和步行混合区的垃圾桶常位于步道、庭院或建筑后勤门内，压缩式垃圾车无法靠近，最后20–150米仍需人工推桶，既低效又使环卫成为高风险职业。现有路侧自动侧装车和低速自动驾驶清扫车各自成熟，但尚无系统让自动驾驶卡车与步道机器人协同完成无人工搬运的垃圾桶收集，因此本文提出按尺度拆分任务的两层自主收集系统。",
+        "method": "系统由电动压缩母车、两台及以上低速RoboCarts和云端车队服务器组成：母车负责道路行驶、压缩、举升倾倒和供能，RoboCarts仅负责步道运输与抓桶。作业流程为服务器规划停靠点和任务，母车到点释放小车，小车到桶位记录原位置、从正面用梳齿杆抓取标准两轮桶，运至母车举升器交接区释放，由母车举升器在约±100毫米捕获窗口内抓取、倾倒并放回，小车再将空桶送回原位并回舱充电。任务规划将路线分解为卡车停靠点选择和每站小车调度：以集合覆盖选择覆盖所有桶的停靠点，用最近邻构造卡车巡回，站内用最长处理时间优先列表调度小车，并把共享举升器建模为单服务台队列。评估采用离散事件仿真，在600米×600米、道路间隔150米的合成校园中，按2、4、8、16桶/公顷放置72–576个桶，候选停靠点沿路每10米采样，每个配置跑10个随机布局。",
+        "result": "仿真表明吞吐量由小车数量与停靠半径的交互决定而非单因素决定：1台小车时30米半径最佳，因为无法并行重叠行程；2台及以上时80米半径最佳，可让多台小车保持忙碌。两车配置可服务20–29桶/小时，四车在16桶/公顷时达到48.9桶/小时；30米半径下从两车增至四车几乎无增益，仅从20.0升至20.8桶/小时，原因是一站只有一两个桶时小车需等待最远桶形成关键路径。密度从2升至16桶/公顷时，1车吞吐提升18%，4车提升96%；第三台车相对两车增加16–37%，密度越高增益越大。共享举升器理论最大144桶/小时，在所有测试配置中均未成为瓶颈，布局间标准差不超过1.4桶/小时。",
+        "conclusion": "Mothership的核心设计是按尺度拆分责任：把举升、压缩、储能和道路行驶留在母车，把狭窄空间通行和抓桶留给轻低的小车，从而移除步道车上的举升倾倒机构，并利用母车举升器的机械捕获窗口吸收交接误差，只在车载充电舱内依赖毫米级对准且由机械导引实现。停靠半径不应预先固定，而应与车队规模联合选择：单车宜短半径，多车宜宽半径。该架构为步行校园提供了无需固定步道基础设施的自动垃圾收集路径，但真实布局、行人减速、抓取失败和能耗等仍需后续验证。",
+        "key_details": "关键实现包括：标准240升两轮桶由前向梳齿抓取，侧臂夹紧后抬升60–80毫米使轮离地并后倾约10度，约需1.5千牛、80毫米行程；车载舱用V形导入接受±50毫米横向误差并机械居中至±5毫米，配有坡道、锁扣和充电触点。仿真参数为小车空载/满载6/4公里/小时、抓取20秒、交接25秒、释放10秒、每站部署60秒、卡车15公里/小时，停靠半径取30/50/80米，小车数1–4。安全上，满载约250公斤小车按约52焦接触能量折算需限速约2.3公里/小时，因此设置3米内有人2公里/小时、1米内有人停车等分区限速。局限是合成均匀布局、未建模行人减速、抓取失败、小车能量和卸货行程，且集合覆盖、最近邻和列表调度均为启发式，结果应视为给定模型下可达下界而非最优值。"
+      },
+      "affiliations": [
+        "Robostreet research team"
+      ],
+      "affiliations_text": "Robostreet research team",
+      "score": 4.388146534511413,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.22512v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022512v1-predicting-privileged-information-effectiveness-for-on-policy-self-distillation",
+      "source": "arxiv",
+      "title": "Predicting Privileged Information Effectiveness for On-Policy Self-Distillation",
+      "authors": [
+        "Kaijian Zou",
+        "Emiliano Penaloza",
+        "MohammadHossein Rezaei",
+        "Anisha Gunjal",
+        "Mohit Raghavendra",
+        "Lu Wang",
+        "Yunzhong He",
+        "Anas Mahmoud"
+      ],
+      "authors_text": "Kaijian Zou, Emiliano Penaloza, MohammadHossein Rezaei, Anisha Gunjal, Mohit Raghavendra, Lu Wang, Yunzhong He, Anas Mahmoud",
+      "abstract": "On-policy self-distillation (OPSD) enables large language models (LLMs) to learn from privileged information (PI) without a separate teacher model. However, prior work largely treats PI as a fixed design choice, leaving the effects of its content and construction poorly understood. This challenge is particularly important in multi-turn agentic settings, where trajectories contain actions, observations, and reasoning that can be transformed into PI in many ways. We systematically evaluate 16 PI configurations across three multi-turn agentic benchmarks and three student models that vary in scale and reasoning mode. We find that PI effectiveness depends on its content, generation source, and the student model. Information-dense trajectories and PI produced by more capable generators generally yield larger gains, whereas thinking models benefit less consistently. To assess PI before training, we compare PI utility with two KL-based metrics: sampled-token reverse KL ($D$) and error-step KL contrast ($Δd^{-}_{\\mathrm{err}}$). The KL-based metrics track post-training performance more consistently than PI utility, which can be distorted by information leakage. Empirically, selecting each task's PI by $Δd^{-}_{\\mathrm{err}}$ also improves post-training performance over random selection, most when the PI candidates differ widely. Finally, effective PI remains beneficial when combined with GRPO, allowing the combined objective to outperform a strong GRPO baseline. Overall, our results provide practical guidance for constructing and evaluating PI in OPSD training.",
+      "url": "http://arxiv.org/abs/2610.22512v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22512v1",
+      "tldr": "A systematic study of privileged information (PI) in on-policy self-distillation shows that information-dense trajectories and PI from more capable generators yield larger gains, while error-step KL contrast can predict and select effective PI before training and effective PI also complements GRPO.",
+      "detailed_reading": {
+        "motivation": "OPSD 可以让大语言模型在不单独引入教师模型的情况下，从特权信息（PI）中学习，但已有工作通常把 PI 当作固定设计选择，较少系统理解 PI 的内容与构造方式如何影响多轮智能体任务中的训练效果。尤其轨迹中包含动作、环境观察和推理，可被转换成多种 PI，因此亟需回答何种 PI 更有效、能否在训练前评估 PI 质量，以及有效 PI 能否与 GRPO 等强化学习目标结合。",
+        "method": "论文在 ALFWorld、AppWorld 和 τ²-retail 三个多轮智能体基准上，使用 Qwen3-4B-Instruct、Qwen3-4B-Thinking 和 Qwen3-30B-A3B-Instruct 三种学生模型，系统评估 16 种 PI 配置，包括仅动作、动作加观察、动作加推理、动作加观察加推理四类参考轨迹，以及 Summary、Skill、Checklist 三类提示，并比较 GLM-5.2、Qwen3.7-Plus 与学生自生成等来源。训练采用 OPSD：学生采样轨迹后，以同一模型在 PI 条件下的策略作为停止梯度的教师，最小化学生到 PI 条件教师的反向 KL，并在 SkyRL 中实现，以 pass@1 的最佳三检查点窗口评估。为在训练前评估 PI，作者比较 PI utility、采样 token 反向 KL D 和误差步骤 KL 对比 Δd⁻err，后者用 judge 标注失败轨迹中的错误步骤，并以同任务、同步骤位置的匹配基线校正后衡量 PI 对错误 token 的抑制强度。离线指标在训练或开发任务上计算，与最终评估集分离。",
+        "result": "结果显示，信息密集的轨迹型 PI 通常优于压缩提示，给 Instruct 学生加入环境观察常带来额外收益，但给 Thinking 模型加入教师推理可能反而损害性能；Skill 提示因包含错误分析和可复用策略，往往是最强提示格式。更强大的生成器通常产生更有效的 PI，尤其对提示格式影响明显，GLM-5.2 在 4B-Instruct 的 21 次比较中赢下 20 次，ALFWorld 提示上领先可达 36.0 分，而轨迹格式差距在 3.2 分以内。离线指标方面，KL 类指标比 PI utility 更稳定地跟踪训练后表现，PI utility 会受信息泄漏扭曲；按 Δd⁻err 为每个任务选择 PI 优于随机选择，且在候选 PI 差异较大时提升更明显。最后，将有效 PI 的 OPSD 与 GRPO 结合后，组合目标可超过强 GRPO 基线。",
+        "conclusion": "OPSD 中 PI 的有效性取决于 PI 内容、格式、生成来源和学生模型，不能把 PI 视为固定设计；面向多轮智能体任务，应优先考虑信息密集且能解释错误与策略的 PI，并谨慎为已具较强推理能力的 Thinking 模型增加教师推理。训练前可用误差步骤 KL 对比 Δd⁻err 进行 PI 候选筛选，它比 PI utility 更可靠，并能指导逐任务选择；有效 PI 还可与 GRPO 结合，形成优于强 GRPO 基线的训练方案。",
+        "key_details": "关键实现包括：以成功参考轨迹构造四类轨迹 PI，并用 GLM-5.2、Qwen3.7-Plus 或学生自身生成 Summary、Skill、Checklist 提示；OPSD 损失为学生采样轨迹上的 token 级反向 KL，教师分布停止梯度，训练与评估覆盖三个基准和三种 Qwen3 模型。离线诊断中，D 用学生采样 token 的对数概率比绝对值衡量 PI 引起的概率偏移，Δd⁻err 则先计算错误步骤的正向抑制量，再减去同任务同绝对步骤位置的基线，并要求 judge 标注失败轨迹中的错误步骤。局限在于 PI utility 可能受信息泄漏影响，采样 token 反向 KL 可能给无益偏移较大值且不刻画方向，研究范围限于特定基准、模型和 PI 构造，Thinking 模型在 τ² 上已有较高 pass@4（88.9），额外 PI 的增益空间和干扰风险需谨慎解读。"
+      },
+      "affiliations": [
+        "Scale AI",
+        "University of Michigan",
+        "Mila"
+      ],
+      "affiliations_text": "Scale AI, University of Michigan, Mila",
+      "score": 4.369826205941236,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.22556v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/19/261022556v1-when-plans-change-remember-replanning-guided-visual-memory-for-vision-language-action-models",
+      "source": "arxiv",
+      "title": "When Plans Change, Remember: Replanning-Guided Visual Memory for Vision-Language-Action Models",
+      "authors": [
+        "Victoria Smelova",
+        "Daniil Kazachkov",
+        "Georgiy Kazantsev",
+        "Iuliia Tsvetkova",
+        "Egor Cherepanov",
+        "Nikita Kachaev",
+        "Artem Latyshev",
+        "Aleksandr I. Panov",
+        "Alexey K. Kovalev"
+      ],
+      "authors_text": "Victoria Smelova, Daniil Kazachkov, Georgiy Kazantsev, Iuliia Tsvetkova, Egor Cherepanov, Nikita Kachaev, Artem Latyshev, Aleksandr I. Panov, Alexey K. Kovalev",
+      "abstract": "Long-horizon, multi-stage Vision-Language-Action (VLA) policies often require visual information that is no longer present in the current observation. Retaining the complete observation history is computationally expensive and highly redundant, motivating selective visual memory. We introduce RePlanMem-VLA (Replanning-Guided Keyframe Memory for VLA), which turns a policy's own plan revisions into an online memory-write signal. Under receding-horizon execution, consecutive action chunks predict some of the same future actions. RePlanMem-VLA treats unusually large disagreement between these temporally aligned predictions as evidence of a task-relevant event. We first compare 35 disagreement measures across single-task autoregressive decoder-only and Flow-Matching Transformers trained from scratch, then validate the selected signals on pretrained OpenVLA-OFT and $π_{0.5}$ policies over MIKASA-Robo-VLA tasks. The resulting detectors achieve ROC-AUC of 0.981-0.997. We then use the selected signals in RePlanMem-VLA to trigger updates to a bounded visual memory, with a robot-masked write filter suppressing redundant frames. In the evaluated memory-retention experiments, RePlanMem-VLA preserves task-relevant observations until the later decision point in 100% of episodes. Real-robot replay data further show that event selection and redundancy suppression extend beyond simulation. These results establish plan revision as a policy-internal signal for controlling what a VLA remembers. Website: https://vika787.github.io/RePlanMem/.",
+      "url": "http://arxiv.org/abs/2610.22556v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22556v1",
+      "tldr": "RePlanMem-VLA uses unusually large disagreements between overlapping action predictions from consecutive replans as a policy-internal trigger to selectively store key visual observations in a bounded memory, allowing vision-language-action policies to retain task-relevant cues for long-horizon tasks without keeping full observation histories.",
+      "detailed_reading": {
+        "motivation": "长程多阶段VLA策略常需要当前观测中已消失的视觉线索，但保留完整观测历史计算昂贵且高度冗余，因此需要选择性视觉记忆。本文试图利用策略自身在重规划中的计划修订作为在线记忆写入信号，决定哪些观测应被记住。",
+        "method": "RePlanMem-VLA在滚动时域执行下比较连续动作块对同一未来动作的重叠预测，将C_{q-1}final[H:K]与C_q-[0:K-H]的异常不一致视为任务相关事件。方法先筛选35种不一致度量，部署时用10个检测信号并加入时间差分和EMA偏差构成30维特征，经任务条件因果标准化和正则化Mahalanobis surprise得到惊讶分，再用任务CDF转为百分位p_q，当p_q大于阈值τ时触发记忆写入。写入时通过机器人掩码过滤和冗余聚类选择非冗余帧，更新有界FIFO视觉记忆，随后二次前向得到最终动作块，仅该最终预测受原始SFT目标监督。检测器使用stop-gradient特征且不使用专家动作，记忆槽在每回合开始为空且不跨回合传递。",
+        "result": "在从头训练的decoder-only自回归与Flow-Matching Transformer以及预训练OpenVLA-OFT和π0.5策略上，所得事件检测器在MIKASA-Robo-VLA任务上达到ROC-AUC 0.981至0.997。记忆保留实验中，RePlanMem-VLA在100%的评估回合中把任务相关观测保留到后续决策点，并减少冗余覆盖；真实机器人回放数据进一步显示事件选择与冗余抑制行为可扩展到仿真之外。",
+        "conclusion": "结果表明，策略自身的计划修订可作为策略内部在线信号来控制VLA应记住什么，从而以有界视觉记忆保留延迟可用的任务线索。该工作将关键帧选择、记忆表示与动作块重规划一致性连接起来，为长程部分可观测操作提供选择性视觉记忆机制。",
+        "key_details": "实验基于MIKASA-Robo-VLA，动作块长度为K、执行步长为H，重叠长度为K-H，记忆最多B个槽并以FIFO更新；部署检测器D=10、输入为30维，含动作误差、方向分歧、时序局部偏差、平移旋转夹爪变化及顶层VLA特征距离，并使用EMA偏差和任务独立统计。Mahalanobis正则系数λ取相关矩阵平均特征值的固定比例，阈值τ控制写入频率；事件检测不看专家动作、不需关键帧标注或特权仿真状态，且stop-gradient阻止检测器反向塑造策略。局限包括记忆有界、触发更新需额外前向、检测器依赖任务校准与重规划重叠，真实机器人部分主要为回放验证。"
+      },
+      "affiliations": [
+        "CogAI Lab",
+        "AXXX",
+        "Independent Researcher",
+        "MIRAI",
+        "Central University"
+      ],
+      "affiliations_text": "CogAI Lab, AXXX, Independent Researcher, MIRAI, Central University",
+      "score": 4.302866651361267,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.22471v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022471v1-has-gpt-6-astra-achieved-embodied-intelligence",
+      "source": "arxiv",
+      "title": "Has GPT-6-Astra Achieved Embodied Intelligence?",
+      "authors": [
+        "SenseNova",
+        "Joint Research Team",
+        ":",
+        "Zhongang Cai",
+        "Ziang Cao",
+        "Tailai Chen",
+        "Han Chong Chua",
+        "Linjun Dai",
+        "Hanming Deng",
+        "Hokin Deng",
+        "Haiwen Diao",
+        "Chenjing Ding",
+        "Weichen Fan",
+        "Xiao Fu",
+        "Zerui Gong",
+        "Chenyang Gu",
+        "Zexin He",
+        "Zhi Hou",
+        "Bo Li",
+        "Qinyue Li",
+        "Quanzhou Li",
+        "Xiaowan Li",
+        "Zhichao Liao",
+        "Dahua Lin",
+        "Zilong Lin",
+        "Bo Liu",
+        "Chunxiao Liu",
+        "Pengfei Liu",
+        "Tianqi Liu",
+        "Ziwei Liu",
+        "Chen Change Loy",
+        "Lewei Lu",
+        "Jiapeng Luo",
+        "Yuexiao Ma",
+        "Liang Pan",
+        "Xingang Pan",
+        "Oscar Qian",
+        "Ziyi Shang",
+        "Yuyao Shao",
+        "Dawei Su",
+        "Dacheng Tao",
+        "Qingyi Tao",
+        "Quan Wang",
+        "Ruisi Wang",
+        "Xiaogang Wang",
+        "Ziyi Wang",
+        "Beichen Wen",
+        "Donghao Wu",
+        "Jiaxu Wu",
+        "Silei Wu",
+        "Xiaoming Wu",
+        "Zhonghua Wu",
+        "Hongcan Xiao",
+        "Weiye Xu",
+        "Atsushi Yamashita",
+        "Lei Yang",
+        "Zhe Yang",
+        "Baiqiao Yin",
+        "Wanqi Yin",
+        "Hanfei Zhao",
+        "Tianbo Zhong",
+        "Long Zhuo",
+        "Jing Zuo"
+      ],
+      "authors_text": "SenseNova, Joint Research Team, :, Zhongang Cai, Ziang Cao, Tailai Chen, Han Chong Chua, Linjun Dai, Hanming Deng, Hokin Deng, Haiwen Diao, Chenjing Ding, Weichen Fan, Xiao Fu, Zerui Gong, Chenyang Gu, Zexin He, Zhi Hou, Bo Li, Qinyue Li, Quanzhou Li, Xiaowan Li, Zhichao Liao, Dahua Lin, Zilong Lin, Bo Liu, Chunxiao Liu, Pengfei Liu, Tianqi Liu, Ziwei Liu, Chen Change Loy, Lewei Lu, Jiapeng Luo, Yuexiao Ma, Liang Pan, Xingang Pan, Oscar Qian, Ziyi Shang, Yuyao Shao, Dawei Su, Dacheng Tao, Qingyi Tao, Quan Wang, Ruisi Wang, Xiaogang Wang, Ziyi Wang, Beichen Wen, Donghao Wu, Jiaxu Wu, Silei Wu, Xiaoming Wu, Zhonghua Wu, Hongcan Xiao, Weiye Xu, Atsushi Yamashita, Lei Yang, Zhe Yang, Baiqiao Yin, Wanqi Yin, Hanfei Zhao, Tianbo Zhong, Long Zhuo, Jing Zuo",
+      "abstract": "GPT-6-Astra demonstrates a level of competence in robotic manipulation and navigation that challenges the conventional paradigm of building specialized models for individual tasks and embodiments. In this report, we ask not only how capable GPT-6-Astra is, but what its capabilities imply for the field. First, we probe the limits of standalone GPT-6-Astra. We conduct a large-scale evaluation across 12 representative benchmarks spanning tabletop manipulation, humanoids, mobile platforms, and dexterous hands. Under a unified protocol that allows in-context learning (ICL) from training-set demonstrations and substantially increases the number of execution steps, GPT-6-Astra achieves unprecedented performance (Fig. 1). Future research may focus on improving 1) the generality of ICL 2) cost and execution time, 3) physical-state verification, 4) recovery from irreversible failures, and 5) long-horizon preservation of progress. Second, we study the agentic harness for embodied control. We identify that close-loop coordination between a high-level \"System 2\" reasoner (i.e., GPT-6-Astra) and a low-level \"System 1\" controller (e.g., π0.5) is costly but effective. Third, we examine GPT-6-Astra on real-world deployment. Our experiments on 8 robot configurations reveal substantial gaps: 1) robot demonstrations required for ICL are expensive to collect, and 2) it is implausible to trade longer execution for higher success rates with physical constraints. Fourth, we envision the next generation of embodied benchmarks. We develop a prototype that 1) derives tasks from real-world needs, 2) provides no in-domain demonstrations, and 3) judges agents on a world clock that keeps running while they deliberate. Taken together, our results suggest that GPT-6-Astra has largely crossed the threshold of embodied competence, but not yet that of practical embodied intelligence.",
+      "url": "http://arxiv.org/abs/2610.22471v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22471v1",
+      "tldr": "GPT-6-Astra achieves unprecedented benchmark-level embodied competence across diverse robots tasks, but real-world cost, verification, recovery, and long-horizon limitations show it has not yet reached practical embodied intelligence.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.168385643565515,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.22467v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022467v1-progressive-misalignment-can-emerge-from-benign-recursive-self-distillation",
+      "source": "arxiv",
+      "title": "Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation",
+      "authors": [
+        "Karim Abdel Sadek",
+        "Federico Di Gennaro",
+        "Fanny Yang"
+      ],
+      "authors_text": "Karim Abdel Sadek, Federico Di Gennaro, Fanny Yang",
+      "abstract": "Training models on their own outputs has attracted widespread attention as a possible route to advance AI capabilities. One prominent approach is self-distillation, where a model is trained to match the token-level predictions it would have produced when given access to additional context, such as a cue, feedback, or instruction. However, the safety properties of this training procedure are poorly understood. In this paper, we present a surprising safety failure of recursive self-distillation, where each self-distilled model becomes the teacher for the next round of training. We observe that when a safe model is recursively self-distilled on its own (safe) generations while receiving an additional non-harmful cue, it becomes increasingly misaligned across a diverse set of harmful queries; we call this Progressive Misalignment. We show this failure mode in both the Qwen3 and Phi-4 model families on SORRY-Bench and StrongREJECT. Progressive misalignment also occurs in a more realistic setup, where the fixed cue is replaced by feedback from a simulated user with benign intent. Using a gradient-based method, we are also able to find benign prompts that lead to progressive misalignment when applying recursive self-distillation, showing that harmful training prompts are not necessary for this failure mode to emerge. We hope our work encourages future investigations of the safety properties of AI systems recursively trained on their own data.",
+      "url": "http://arxiv.org/abs/2610.22467v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22467v1",
+      "tldr": "**TLDR:** Recursively self-distilling a safe model on its own safe generations with benign cues or feedback can cause *Progressive Misalignment*, making successive models increasingly unsafe on harmful queries even without harmful training prompts.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.09182995507816,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.22439v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022439v1-sparse-autoencoders-can-induce-local-geometry-for-mitigating-catastrophic-forgetting",
+      "source": "arxiv",
+      "title": "Sparse Autoencoders Can Induce Local Geometry for Mitigating Catastrophic Forgetting",
+      "authors": [
+        "Kamil Faber",
+        "Katarzyna Filus",
+        "Łukasz Pawela"
+      ],
+      "authors_text": "Kamil Faber, Katarzyna Filus, Łukasz Pawela",
+      "abstract": "Catastrophic forgetting remains a challenge in supervised continual learning, as adapting to new tasks causes representation drift and loss of previously learned information. This raises the question of which representational changes should be constrained while preserving plasticity. We therefore introduce Sparse Autoencoder Geometric Anchoring (SAGA), which converts a Sparse Autoencoder (SAE) trained at each task boundary into local, low-rank constraints on representation drift. Replay examples specify where the constraints apply, while leading right singular directions of the encoder Jacobian specify which changes are penalized. The resulting geometry is input dependent and can be retained without keeping the SAE for subsequent tasks' training. We establish its local relation to latent code matching, define its spectral truncation error, and derive a conditional bound on frozen-readout drift. With replay and snapshot history, the method achieves the highest mean Class-IL accuracy and lowest mean forgetting among the evaluated ER, DER++, ER-ACE, and SGD baselines on three pretrained ViT-B/16 benchmarks, with accuracy gains of 12.15, 4.79, and 3.22 percentage points over the strongest conventional baseline on CIFAR-100, CUB-200, and ImageNet-R, respectively. From scratch results are more mixed, while rank ablations and geometry controls show that SAE-induced low-rank geometry offers useful stability-plasticity trade-offs.",
+      "url": "http://arxiv.org/abs/2610.22439v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22439v1",
+      "tldr": "SAGA mitigates catastrophic forgetting by converting a task-boundary sparse autoencoder into input-dependent low-rank constraints on representation drift, achieving higher Class-IL accuracy and lower forgetting than evaluated replay baselines on three pretrained ViT-B/16 benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.060656601074398,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.22433v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022433v1-bolt-multi-bottleneck-bound-guided-learning-for-flexible-job-shop-scheduling-with-time-lags-and-resource-coupled-transport",
+      "source": "arxiv",
+      "title": "BOLT: Multi-Bottleneck Bound-Guided Learning for Flexible Job-Shop Scheduling with Time Lags and Resource-Coupled Transport",
+      "authors": [
+        "Ziheng Zhang",
+        "Wei Zhang",
+        "Yunyi Zhao",
+        "Zuming Liu",
+        "Wei Zhou",
+        "Boon Ping Gan"
+      ],
+      "authors_text": "Ziheng Zhang, Wei Zhang, Yunyi Zhao, Zuming Liu, Wei Zhou, Boon Ping Gan",
+      "abstract": "Flexible job-shop scheduling becomes resource-coupled when a scarce vehicle fleet moves jobs between stations, because the schedule sets the transport waits. BOLT (bound-oriented learning for transport-coupled scheduling) builds a lower bound from chain, machine-capacity, and fleet-capacity relaxations. The bound equals the makespan at termination, so its per-step changes form a reward that sums to a constant minus the makespan. Because it never exceeds the attainable makespan, each candidate's bound increase is a proven rise of the makespan floor, which the policy reads as a price. The root bound certifies a completed schedule's suboptimality gap without a solver. On industry-motivated 10-module prefabricated-construction instances, explicit transport coupling outperforms a transport-penalty policy in every tested cell where loaded moves occupy at least 66% of fleet time and in none at or below 56%. Across five zero-shot 50- and 80-module production batches, BOLT outperforms the best dispatching-rule pair on four and the penalty policy on the three with long moves. In the three-vehicle 80-module batch, its mean makespan is 13.0% below the best pair and 4.2% below an hour-budget constraint-programming solver whose proven gap averages 34%. BOLT decides in 2.3-5.9 ms per event on one processor core and re-plans a disruption in seconds.",
+      "url": "http://arxiv.org/abs/2610.22433v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22433v1",
+      "tldr": "BOLT is a bound-guided learning method for flexible job-shop scheduling with time lags and resource-coupled transport that uses per-step increases of a multi-relaxation lower bound as a reward/price signal to learn fast, high-quality schedules that outperform dispatching rules and hour-budget CP solvers.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9979460708601238,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.22381v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022381v1-binding-specific-relearning-savings-for-test-time-continual-learning",
+      "source": "arxiv",
+      "title": "Binding-Specific Relearning Savings for Test-Time Continual Learning",
+      "authors": [
+        "Zhe Zhou"
+      ],
+      "authors_text": "Zhe Zhou",
+      "abstract": "When a fact becomes harder to elicit from a language model, has the model lost it, or has it merely become less accessible? Parameter-updating test-time continual learning agents are usually evaluated by current output accuracy; we ask whether that measurement captures how prior experience shapes later updates. We test whether learning a specific factual binding produces a later relearning advantage beyond familiarity with its entity, answer vocabulary, format, or query slot. In Qwen2.5-1.5B, we compare three matched, counterbalanced histories: LEARNED receives the correct binding, CONTROL receives matched exposure without it, and WRONG receives a competing relation-valid answer in the same slot. After an identical rehearsal-free continual fine-tuning stream, LEARNED reacquires the target faster than CONTROL at a prespecified checkpoint of partial forgetting. WRONG shows no positive advantage over CONTROL, while its comparison with LEARNED provides slot-matched corroboration, subject to possible competitor interference. The advantage remains positive after adjustment for measured pre-relearning behavior. In a secondary descriptive conversion using an unpaired never-seen pool, prior learning reduces the optimizer updates required for restoration by about 18%. Current behavioral accuracy can therefore underestimate the lasting effect of previously acquired experience. Code is available at https://github.com/zhezhou1106/relearning-savings",
+      "url": "http://arxiv.org/abs/2610.22381v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22381v1",
+      "tldr": "In Qwen2.5-1.5B, a previously learned correct factual binding is relearned faster after partial behavioral forgetting than a matched never-learned binding—reducing restoration updates by about 18%—showing that current output accuracy can underestimate the lasting effect of prior continual-learning experience.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Washington"
+      ],
+      "affiliations_text": "University of Washington",
+      "score": 3.9969838472739805,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.22430v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022430v1-cgdt-cesn-correlation-guided-and-dynamics-trained-clustered-echo-state-network-for-multivariate-time-series-prediction",
+      "source": "arxiv",
+      "title": "CGDT-CESN: Correlation-Guided and Dynamics-Trained Clustered Echo State Network for Multivariate Time-Series Prediction",
+      "authors": [
+        "Hariharan Srinivasan",
+        "Masoom Bhargava",
+        "Sayan Gupta"
+      ],
+      "authors_text": "Hariharan Srinivasan, Masoom Bhargava, Sayan Gupta",
+      "abstract": "Accurate prediction of multivariate time series requires models that simultaneously capture variable-specific dynamics and cross-variable interactions. In this work, a Correlation-Guided and Dynamics-Trained Clustered Echo State Network (CGDT-CESN) is proposed, which comprises a modular reservoir architecture with each cluster distinctly specializing in one of the variables in the multivariate time series. An innovative reservoir design is proposed in which inter-cluster connections are enabled by empirically observed correlations among variables, providing a data-driven coupling mechanism. Apart from conventional readout training, inter-cluster connection weights informed by correlations are trained, which in turn allows the reservoir to capture time-varying cross-variable dependencies without sacrificing computational efficiency and further improves forecasting accuracy. The prediction performance of CGDT-CESN is found to be superior to that of the conventional ESN when evaluated on two fundamentally different datasets: Twitter information cascade evolution and solar wind forecasting. Also, the improvement in performance is preserved across multiple prediction horizons, even when presented with a low volume of data. By unifying cluster-specific specialization with learned inter-variable coupling, CGDT-CESN offers a principled, data-driven route to multivariate time series prediction.",
+      "url": "http://arxiv.org/abs/2610.22430v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22430v1",
+      "tldr": "CGDT-CESN is a clustered echo state network for multivariate time-series prediction that uses empirically observed inter-variable correlations to guide and train inter-cluster connections, thereby capturing both variable-specific dynamics and cross-variable dependencies more accurately than a conventional ESN.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Indian Institute of Technology Madras"
+      ],
+      "affiliations_text": "Indian Institute of Technology Madras",
+      "score": 3.9583257880477833,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.22543v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022543v1-on-the-spot-enhancing-speculative-decoding-for-diffusion-language-models-via-commit-order-prediction",
+      "source": "arxiv",
+      "title": "On the SPOT: Enhancing Speculative Decoding for Diffusion Language Models via Commit-Order Prediction",
+      "authors": [
+        "Eliezer Shlomi",
+        "Eliron Rahimi",
+        "Avi Mendelson",
+        "Chaim Baskin"
+      ],
+      "authors_text": "Eliezer Shlomi, Eliron Rahimi, Avi Mendelson, Chaim Baskin",
+      "abstract": "Diffusion language models (DLMs) promise parallel text generation, but in practice face an unresolved speed-quality trade-off. Exact decoding fills in only one masked position per model pass, while faster multi-token decoding schemes are lossy. Speculative decoding is the standard lossless acceleration for autoregressive models. However, it does not transfer directly to DLMs, which must choose both what to generate and where. We show that this order is the missing piece: the model's own predictions from the previous pass already give the right token at 92-100% of positions, but not which position comes next. Based on this observation, we introduce Speculating Positions Order Trajectory (SPOT), which learns to predict this order. A 0.62M-parameter model reads only the target's output distributions and proposes a tree of candidate continuations, and the target verifies all of them in a single pass by checking whether each equals its own next state. On the verification side, our analysis shows that prior block-diffusion verification approaches either assume $T=0$ or a sequential proposal interface. To support tree-based speculation at any temperature, we propose using coupled-noise match verification for diffusion blocks, following shared-Gumbel-noise coupling approaches. Our comprehensive experiments show that SPOT cuts target passes by up to 6.8x and reaches up to 3.2x the throughput of standard decoding, beating the calibrated and training-free drafting baselines in every task and budget at $T=0$ and $T=1$. In addition, we show that the learned drafter transfers across models, demonstrating successful transfer across six different DLMs. Project page: https://eliezer318.github.io/SPOT-dLLM/",
+      "url": "http://arxiv.org/abs/2610.22543v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22543v1",
+      "tldr": "SPOT accelerates diffusion language models losslessly by learning a tiny commit-order predictor that proposes a tree of candidate continuations from the target’s previous output distributions, which the target verifies in a single pass via coupled-noise matching—cutting target passes by up to 6.8× and reaching up to 3.2× standard decoding throughput while transferring across six DLMs.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8867773692731333,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.22435v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022435v1-trace-transformer-residual-activation-codebook-encoding-for-communication-efficient-distributed-edge-inference",
+      "source": "arxiv",
+      "title": "TRACE: Transformer Residual Activation Codebook Encoding for Communication-efficient Distributed Edge Inference",
+      "authors": [
+        "Muhammad Azlan Qazi",
+        "Alexandros Iosifidis",
+        "Qi Zhang"
+      ],
+      "authors_text": "Muhammad Azlan Qazi, Alexandros Iosifidis, Qi Zhang",
+      "abstract": "Distributed Transformer inference across co-located edge devices is fundamentally communication-bound, as exchanging activations between sequence-parallel partitions dominates inference latency under commodity edge bandwidths. Existing compression schemes reduce this cost but retain a structural bottleneck: the received data must still undergo key/value projection before attention can proceed, serializing computation behind communication. This paper presents Transformer Residual Activation Codebook Encoding (Trace), a framework that addresses these limitations. Trace places a Vector Quantizer (VQ) at the post-attention residual of every Transformer layer and precomputes codebook-indexed key/value representations. During inference, exchanged activations are encoded into compact codebook indices, allowing receivers to directly recover keys and values through table lookup instead of executing the downstream computations required to derive them. By eliminating the received data downstream computation, Trace enables communication--computation overlap and reduces a key latency bottleneck in distributed Transformer inference. A hierarchical clustering further structures the learned codebook into a multi-resolution hierarchy, enabling runtime adaptation of the communication bitrate without retraining. The framework supports two operating variants: one prioritizing accuracy and the other balancing accuracy and efficiency through buffer-compatible quantization. Experiments on ViT-Base (ImageNet-1K and CIFAR-100) and ViViT-B (UCF-101) show that Trace achieves up to 1.89% higher accuracy and up to 1.27x end-to-end inference speedup compared with the state-of-the-art VQ-based distributed inference framework. Compared with uncompressed sequence-parallel inference, Trace reduces communication overhead by up to 22,624x.",
+      "url": "http://arxiv.org/abs/2610.22435v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22435v1",
+      "tldr": "TRACE is a communication-efficient distributed Transformer inference framework that places vector quantization at each layer’s post-attention residual and transmits compact codebook indices so receivers can retrieve precomputed key/value representations via table lookup, enabling communication–computation overlap and adaptive bitrate while reducing communication overhead by up to 22,624×.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tampere University",
+        "Aarhus University"
+      ],
+      "affiliations_text": "Tampere University, Aarhus University",
+      "score": 3.8723215193226275,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.22436v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022436v1-generative-adversarial-networks-with-monte-carlo-dropout-uncertainty-quantification-for-structural-health-monitoring-fibre-bragg-grating-data-augmentation-comparison-in-hawk-t1a-aircraft",
+      "source": "arxiv",
+      "title": "Generative adversarial networks with Monte Carlo dropout uncertainty quantification for structural health monitoring: Fibre Bragg grating data augmentation comparison in Hawk T1A aircraft",
+      "authors": [
+        "Alvaro Peiro",
+        "Marios Impraimakis"
+      ],
+      "authors_text": "Alvaro Peiro, Marios Impraimakis",
+      "abstract": "The signal generation capabilities of a novel data augmentation framework are examined in aerospace structures. First, the framework learns class-conditional temporal and spectral characteristics of the measured structural responses. It uses conditional generative adversarial network training and Monte Carlo dropout uncertainty quantification as a Bayesian approximation. This step enables stochastic signal synthesis and uncertainty quantification. Second, the generated responses are rigorously compared against experimental measurements across time, frequency, uncertainty, variability, and feature domains to assess physical realism, statistical consistency, and distributional fidelity. Finally, the synthetic data are evaluated to determine whether they should be incorporated into a supervised damage classification workflow. The framework is validated on the full-scale benchmark dataset from a BAE Systems Hawk T1A aircraft tested at the University of Sheffield's Structural Dynamics Laboratory for Verification and Validation. The test involves acceleration, fibre Bragg grating strain, and nonlinear dynamic response measurements. The results demonstrate that the model accurately captures dominant structural dynamics, it guides on signal use for classification improvement based on uncertainty characteristics, and it provides meaningful uncertainty estimates linked to signal complexity and excitation characteristics. Importantly, the framework offers a realistic generative modelling plan as a robust digital twin component for data-driven structural health monitoring, supporting resilient decision-making for condition assessment in safety-critical aerospace systems.",
+      "url": "http://arxiv.org/abs/2610.22436v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22436v1",
+      "tldr": "This paper develops an uncertainty-aware conditional GAN with Monte Carlo dropout for generating and evaluating synthetic fibre Bragg grating and acceleration vibration signals, validated on Hawk T1A aircraft structural health monitoring data to assess whether the augmented signals improve damage classification.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bath"
+      ],
+      "affiliations_text": "University of Bath",
+      "score": 3.8274211217587313,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.22558v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022558v1-modeling-and-analysis-of-dynamic-coupling-effects-in-a-free-floating-space-manipulator",
+      "source": "arxiv",
+      "title": "Modeling and Analysis of Dynamic Coupling Effects in a Free-Floating Space Manipulator",
+      "authors": [
+        "Erik Chumacero-Polanco"
+      ],
+      "authors_text": "Erik Chumacero-Polanco",
+      "abstract": "Motion of a robotic manipulator mounted on a free-floating spacecraft induces base translation and rotation, creating a dynamic coupling that affects end-effector motion. This paper characterizes that coupling in a planar three-link space manipulator. Using momentum conservation, velocity mappings are developed between manipulator joints, the end effector, and the spacecraft base. Singular value decomposition is then used to examine coupling strength, directional anisotropy, and the orientation of the coupled motions. Numerical maps show that coupling strength is invariant to the first joint angle but depends strongly on the relative configuration of the remaining joints. Increasing the spacecraft base mass reduces joint-to-base and end-effector-to-base coupling, while its effect on the joint-to-end-effector mapping is smaller and more dependent on configuration. The translational end-effector-to-base mapping is highly anisotropic in some configurations: its base-velocity ellipse becomes increasingly flattened as the weak coupling mode approaches zero. The principal end-effector and base velocity directions also change their relative alignment across the configuration space, producing predominantly opposing responses in some regions and transverse or approximately codirectional responses in others. Together, these results provide a geometric description of how coupling magnitude and direction vary with manipulator configuration and spacecraft mass.",
+      "url": "http://arxiv.org/abs/2610.22558v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22558v1",
+      "tldr": "This paper uses momentum-conservation velocity mappings and singular value decomposition to characterize how dynamic coupling strength, directional anisotropy, and end-effector–base velocity alignment in a planar three-link free-floating space manipulator vary with joint configuration and spacecraft base mass.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas Rio Grande Valley"
+      ],
+      "affiliations_text": "The University of Texas Rio Grande Valley",
+      "score": 3.7721281792588806,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.22380v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022380v1-trust-but-verify-designing-region-inhomogeneous-forward-dynamics-for-discrete-diffusion",
+      "source": "arxiv",
+      "title": "Trust but Verify: Designing Region-Inhomogeneous Forward Dynamics for Discrete Diffusion",
+      "authors": [
+        "Gunmay Jhingran"
+      ],
+      "authors_text": "Gunmay Jhingran",
+      "abstract": "Continuous diffusion treats the forward process as a design space; discrete language diffusion often uses absorbing corruption, leaving context fully trusted throughout generation. This makes trust binary: corrupted context is copied as ground truth, propagating errors into generated spans. We reopen this design space by combining absorbing and uniform-mixing kernels with region-dependent rates. Missing positions follow absorbing dynamics, while context undergoes low-rate random substitution, exposing the model to observed but uncertain tokens during training. At inference, a heuristic sampler re-injects noise into suspicious context under an annealed intensity and freezes context updates late in the trajectory. An 8,000-step finetune of a pretrained 170M-parameter masked diffusion model takes under five hours on a 6 GB laptop GPU. The base model assigns roughly 50% probability to observed tokens even when they are uniform-random garbage. For uniform-random corruption, finetuning detects corrupted context with 0.96 recall and 0.91 precision, improves infill token-F1 by 3.8 points at 10% corruption and 6.4 points at 20%, and removes the accuracy dip next to corruptions. Clean conditioning shows no measurable regression, with a false-edit rate below 0.4%. Gains for plausible corruptions are weaker: about 0.5 F1 points at 10% corruption, without statistical significance. Our results suggest that detectability and damage depend jointly on departure from the data conditional: nearby noise is hard to detect and semantically mild, while distant noise is conspicuous and destructive. We interpret absorbing diffusion as the infinite-contrast limit of a trust axis, analogous to the signal-to-noise gap between known and unknown regions in diffusion inpainting. In our setting of a 170M model and a single text domain, intermediate trust is reached by changing forward dynamics rather than architecture.",
+      "url": "http://arxiv.org/abs/2610.22380v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22380v1",
+      "tldr": "The paper proposes region-inhomogeneous forward dynamics for discrete diffusion—lightly corrupting conditioning context during training and using a detect–remask–refill sampler at inference—so a pretrained masked diffusion model can verify and repair corrupted context, improving infilling without regressing on clean conditioning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Delhi Technological University"
+      ],
+      "affiliations_text": "Delhi Technological University",
+      "score": 3.7606732415007285,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.22552v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022552v1-rtisslam-3d-full-6-dof-slam-with-an-in-air-3d-imaging-sonar",
+      "source": "arxiv",
+      "title": "RTISSLAM-3D: Full 6-DoF SLAM With an In-Air 3D Imaging Sonar",
+      "authors": [
+        "Jan Steckel",
+        "Vincent Katter",
+        "Wouter Jansen"
+      ],
+      "authors_text": "Jan Steckel, Vincent Katter, Wouter Jansen",
+      "abstract": "Echolocating bats navigate dense forests using sonar alone, and in-air 3D imaging sonars now capture the entire frontal hemisphere with every pulse. Sonar SLAM, however, has so far been planar: current systems estimate a 2D trajectory and discard the elevation information in the sonar images, an assumption that does not hold on rough and sloped terrain such as a forest floor. In this paper, we introduce RTISSLAM-3D, a novel 6-DoF SLAM system for a wheeled robot that carries an in-air 3D imaging sonar, an IMU and wheel encoders. A CFAR detector on the sphere reduces every sonar image to a sparse set of 3D detections, which we use for a 3D acoustic odometry that models the shape of the sonar beam, for place recognition with polar submap descriptors, and for the verification of loop closures by 3D registration, all combined in a 6-DoF pose graph with attitude factors. We evaluated RTISSLAM-3D on a 545m drive through a forest, with a 3D lidar SLAM as reference. The loop closures reduced the horizontal error of the acoustic odometry from 1.74m to 0.28m, with a height error of 0.12m, and 94.6% of the resulting 3D sonar map lies within 0.3 m of the lidar map.",
+      "url": "http://arxiv.org/abs/2610.22552v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22552v1",
+      "tldr": "RTISSLAM-3D is a full 6-DoF sonar SLAM system that uses an in-air 3D imaging sonar with IMU and wheel encoders to perform acoustic odometry, place recognition, loop closure, and 3D occupancy mapping, achieving sub-meter trajectory and map accuracy on a 545 m forest drive.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Antwerp",
+        "Flanders Make Strategic Research Centre"
+      ],
+      "affiliations_text": "University of Antwerp, Flanders Make Strategic Research Centre",
+      "score": 3.707022771649322,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.22539v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022539v1-dont-retrain-remix-adaptation-of-web-agents-using-mixture-hypernetworks",
+      "source": "arxiv",
+      "title": "Don't Retrain, Remix: Adaptation of Web Agents using Mixture Hypernetworks",
+      "authors": [
+        "Md Farhan Ishmam",
+        "Minh Pham Dinh",
+        "Kenneth Marino"
+      ],
+      "authors_text": "Md Farhan Ishmam, Minh Pham Dinh, Kenneth Marino",
+      "abstract": "The web is not static or uniform. Websites that serve the same purpose can look and navigate very differently. Even within a single site, successive redesigns can change how familiar features are presented and accessed. Humans adapt to this by recognizing familiar interaction patterns and reusing what they already know. We give web agents a similar ability with WebMix, a mixture hypernetwork that adapts them to unseen interfaces by composing previously trained low-rank adapters. WebMix begins with a bank of adapters trained on source interfaces. At deployment, a scout agent explores the target interface and summarizes its observations into a compact manual. A lightweight router uses this manual to predict mixing coefficients over the adapter bank, which combine the existing adapters into a new one for inference. Adapting to a new interface takes only a scouting run and a forward pass, without gradient updates on the target. With Qwen and Llama models, we evaluate domain transfer on TimeWarp and WebArena-Lite-v2, and version transfer on TimeWarp. In all three settings, WebMix matches or outperforms in-context learning and LoRA baselines, often matching the average success of specialists trained directly on those interfaces. On TimeWarp domain transfer, it gains about 8 percentage points on average over the best baseline with both models. These gains do not come at the cost of seen interfaces, where WebMix keeps its lead, and extend to version transfer. Adapting to a new interface can therefore rely on exploration and composition instead of retraining.",
+      "url": "http://arxiv.org/abs/2610.22539v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22539v1",
+      "tldr": "WebMix adapts web agents to unseen or redesigned websites without retraining by using a scout agent to summarize the target interface and a lightweight router to compose previously trained low-rank adapters into a new adapter, matching or outperforming in-context learning and LoRA baselines.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.59190809189868,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.22437v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022437v1-cf-node-counterfactual-spatial-node-intervention-for-test-time-adaptation-under-domain-shift-evaluated-across-five-diabetic-retinopathy-datasets",
+      "source": "arxiv",
+      "title": "CF-NODE: Counterfactual Spatial Node Intervention for Test-Time Adaptation Under Domain Shift, Evaluated Across Five Diabetic Retinopathy Datasets",
+      "authors": [
+        "Sabarish G",
+        "Deepak Parashar"
+      ],
+      "authors_text": "Sabarish G, Deepak Parashar",
+      "abstract": "Automated fundus-based diabetic retinopathy (DR) grading can substantially expand screening capacity, but source-trained models degrade sharply across different cameras, clinics, and patient populations. Existing test-time adaptation methods depend on entropy minimization or target information accumulated from image batches and streams. These mechanisms can reinforce confidently incorrect predictions and break down when clinical images arrive independently. We introduce CF-NODE, a novel counterfactual test-time adaptation framework for cross- domain DR grading. Instead of trusting prediction confidence or estimating a target distribution, CF-NODE asks how each prediction responds under a controlled intervention on the evidence supporting it. CF-NODE ranks internal spatial nodes using model-derived attention, feature magnitude, and node-set similarity, progressively attenuates the highest-ranked nodes, and uses the stability of the resulting expected-grade response to apply a bounded calibration of the predicted grade distribution. The framework is fully frozen and adapts every image independently using only geometric views and a fixed source-derived prior, requiring no target-derived information or model updates. We evaluate CF-NODE on five external DR datasets under repeated-seed evaluation against TENT, EATA, SAR, and T3A. CF-NODE outperforms all four methods with statistically significant improvements over the second-best method, improves AUC on every target domain, and attains the highest average AUC and macro-F1, delivering stronger grade discrimination together with more balanced recognition across DR severity levels. These results demonstrate that counterfactual intervention sensitivity provides consistent and deployment-ready domain robustness for single-image clinical inference.",
+      "url": "http://arxiv.org/abs/2610.22437v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22437v1",
+      "tldr": "CF-NODE is a frozen, single-image test-time adaptation framework for cross-domain diabetic retinopathy grading that ranks and progressively attenuates internal spatial nodes, uses the resulting counterfactual expected-grade response to apply bounded prediction calibration, and outperforms TENT, EATA, SAR, and T3A across five external datasets without target labels, batches, or model updates.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.448404890491668,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.22438v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/19/261022438v1-rank-measures-of-fine-tuning-updates-need-a-noise-baseline",
+      "source": "arxiv",
+      "title": "Rank Measures of Fine-Tuning Updates Need a Noise Baseline",
+      "authors": [
+        "Muhammad Usman Altaf"
+      ],
+      "authors_text": "Muhammad Usman Altaf",
+      "abstract": "Studies of what fine-tuning does to a language model often summarise the weight update $ΔW$ by its rank. We compare the rank measures used for this against the same measures on a random matrix of the same shape, and against two harder references: the pretrained weights, and matched fine-tunes without alignment content. Measures that count directions put our fine-tuning updates only a little below noise; stable rank, computed from the same singular values, puts them far below. Both are right: an update has a few strong directions on top of a long tail. The pattern holds for thirteen released pairs up to 8B parameters, and it is not a mark of alignment: with training held fixed, instruction data does not stand out from Wikipedia or code, DPO gives the same update whether its preference labels are real or half swapped at random (one model, modest preference strength), and scrambled text gives the most concentrated update of all. Applied to a recent claim that post-training is superficial because the effective rank of the weights barely changes, the baselines show that a random update of the same size leaves that rank almost unchanged while wrecking the model, and that an edit built on the effective rank of the update has no measurable effect in our tests. Rank measures of weight updates need a noise baseline, and claims about alignment need a control without alignment content.",
+      "url": "http://arxiv.org/abs/2610.22438v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22438v1",
+      "tldr": "The paper argues that rank measures of fine-tuning weight updates require a random-noise baseline and alignment-free controls, since the apparent low-rank structure is not specific to alignment data and can mislead claims about post-training.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.2260232032010414,
+      "score_text": "3.2"
+    }
+  ]
+}
