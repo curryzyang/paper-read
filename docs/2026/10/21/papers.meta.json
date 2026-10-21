@@ -1,0 +1,785 @@
+{
+  "label": "2026-10-21",
+  "date": "2026-10-21",
+  "generated_at": "2026-10-21T16:10:46",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2610.27132v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/21/261027132v1-glass-box-deep-reinforcement-learning-for-high-speed-flow-control",
+      "source": "arxiv",
+      "title": "Glass-Box Deep Reinforcement Learning for High-Speed Flow Control",
+      "authors": [
+        "Ameya D. Jagtap"
+      ],
+      "authors_text": "Ameya D. Jagtap",
+      "abstract": "Deep reinforcement learning (DRL) is challenging long-held assumptions in active flow control. By learning directly from interaction with a flow, DRL agents can find actuation strategies for nonlinear, unsteady flows without explicit models, often exploiting mechanisms that classical control would not anticipate. High-speed flows are a demanding test of this promise: shocks, shock/boundary-layer interactions, transition, aerothermal loading and microsecond-scale dynamics strain both algorithms and hardware. Yet most demonstrations remain idealized, low-speed simulations with limited evidence of robustness, interpretability, transferability or experimental deployment. In this perspective, we examine what constrains DRL-based high-speed flow control, including compressible simulation cost and fidelity, data efficiency, sensing in extreme environments, reward design, explainability, and generalization across Mach and Reynolds number. We argue that these limits reflect a tension between data-driven optimization and the structured physics, constraints and uncertainties of real flows. We then highlight where DRL may go beyond conventional approaches: adaptive control of shock-induced separation and turbulent boundary layers, coordination of distributed actuators, and discovery of unconventional flow-manipulation mechanisms.The central challenge, however, is translating these capabilities into reliable technology, which will require validated compressible simulation environments, physics- and constraint-aware learning, robustness to off-design conditions and sensor degradation, real-time operation, hardware-in-the-loop and wind-tunnel validation, and credible pathways to safety and certification.",
+      "url": "http://arxiv.org/abs/2610.27132v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27132v1",
+      "tldr": "This perspective argues that deep reinforcement learning is promising for high-speed flow control but will only become reliable technology if the simulation-to-reality gap is closed through validated compressible simulation environments, physics- and constraint-aware interpretable learning, robustness to off-design conditions and sensor degradation, and real-time experimental validation with credible safety and certification pathways.",
+      "detailed_reading": {
+        "motivation": "DRL 已证明可在无显式模型时通过交互学习非线性非定常流动控制策略，但现有成功多集中于理想化低速二维仿真，缺乏鲁棒性、可解释性、迁移性与实验部署证据。高超声速/高速流动中的激波、激波/边界层干扰、转捩、气热载荷和微秒尺度动力学对算法与硬件提出更严峻挑战，因此需要系统审视制约 DRL 高速流动控制的关键因素及其技术转化路径。",
+        "method": "本文是一篇观点/综述性论文，而非提出新算法或开展新实验：以 DRL 控制闭环为框架，将智能体策略 πθ(a_t|s_t)、状态/动作/奖励、CFD 或实验环境联系起来，区分无模型与基于模型、同策略与异策略学习，并按亚声速、跨声速、超声速和高超声速分 regime 梳理求解器需捕捉的物理、数值误差如何误导智能体以及相关文献证据。分析维度覆盖可压缩仿真成本与保真度、数据效率、极端环境传感、奖励设计、可解释性、跨马赫数与雷诺数泛化，并讨论物理约束感知学习、多保真/降阶代理、实时运行、硬件在环与风洞验证等路线。",
+        "result": "核心发现是 DRL 高速流动控制的性能上界由训练环境保真度决定，求解器的湍流闭合、激波捕捉耗散、限制器切换和热化学建模误差会被策略学习放大甚至被利用，导致策略稳定数值伪特征而非真实流动结构。基于模型学习在简单流动中数据效率高，但在湍流、高维和激波主导 regime 中模型误差累积会削弱优势；跨马赫数/雷诺数、几何与传感条件泛化，以及对噪声、延迟和执行器限制的鲁棒性，仍是部署的主要障碍。可解释策略对建立信任、揭示被利用流动物理和支持认证不可或缺。",
+        "conclusion": "作者结论是 DRL 不应被视为经典控制的替代品，而应作为互补技术，其价值取决于能否在零样本条件下可靠运行。中心挑战是缩小高速流动的 sim-to-real 差距，需要经过验证的可压缩仿真环境、物理与约束感知学习、非设计工况与传感器退化下的鲁棒性、实时运行、硬件在环和风洞验证，以及可信的安全与认证路径。",
+        "key_details": "关键细节包括按流动 regime 建立的求解器需求与失效模式表：亚声速关注分离/涡脱落与低马赫耗散，跨声速关注抖振和激波运动，超声速关注激波拓扑、SBLI 分离泡及 carbuncle/限制器伪影，高超声速关注转捩、真实气体、壁面热流和人工加热伪影。方法上强调 URANS、混合 RANS-LES 或壁模 LES 的闭合选择、高阶低耗散数值格式和足够时间分辨率；奖励在长时域累积会放大小误差，尺度解析与热化学完整仿真成本限制交互次数，因而常用降阶代理和多保真训练。局限是论文为观点性总结，未提供统一基准、定量对比或新实验验证。"
+      },
+      "affiliations": [
+        "Worcester Polytechnic Institute"
+      ],
+      "affiliations_text": "Worcester Polytechnic Institute",
+      "score": 5.418675553549049,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2610.27012v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/21/261027012v1-exploration-via-activation-space-steering-for-reinforcement-learning-with-verifiable-rewards",
+      "source": "arxiv",
+      "title": "Exploration via Activation-Space Steering for Reinforcement Learning with Verifiable Rewards",
+      "authors": [
+        "Yunan Zeng",
+        "Jinhao Jing",
+        "Xi Cheng",
+        "Yuwang Wang"
+      ],
+      "authors_text": "Yunan Zeng, Jinhao Jing, Xi Cheng, Yuwang Wang",
+      "abstract": "Reinforcement learning with verifiable rewards (RLVR) trains a language model by sampling responses, scoring them with an automatic verifier, and updating the policy from the resulting rewards. The policy therefore receives direct learning signals only from trajectories that appear in its rollouts. Yet repeated sampling from the same policy can concentrate on similar reasoning paths, leaving useful alternatives unexplored under a fixed rollout budget. We introduce Activation-Space Exploration (ASE), an online method for diversifying training rollouts. By clustering activation differences between correct and incorrect responses to the same problem, ASE builds a structured bank of latent exploration vectors. Different vectors are then applied to subsequent rollouts to explore alternative reasoning paths. On Qwen3-1.7B-Base and Qwen3-8B-Base trained on DAPO-Math-17k, ASE improves average Mean@8 across six mathematical reasoning benchmarks over GRPO by 4.87 and 1.87 percentage points, respectively, under the same rollout budget.",
+      "url": "http://arxiv.org/abs/2610.27012v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27012v1",
+      "tldr": "**TLDR:** The paper introduces Activation-Space Exploration (ASE), an online RLVR method that clusters activation differences between correct and incorrect responses to build a bank of latent steering vectors and applies them to diversify training rollouts, improving mathematical reasoning over GRPO under the same rollout budget.",
+      "detailed_reading": {
+        "motivation": "RLVR 的训练信号只来自策略实际采样到的轨迹，固定 rollout 预算下重复采样容易集中在相似推理路径，导致有用替代解探索不足。ASE 旨在不增加采样成本的前提下，通过干预模型内部激活来提升训练 rollout 的多样性。",
+        "method": "ASE 是面向 RLVR 的在线探索方法：训练时对同一问题采样多个回答并用自动验证器判分，收集正确与错误回答对应的激活差异，对这些差异做聚类形成结构化的潜在探索向量库；后续 rollout 时选择不同探索向量注入/作用于模型激活，引导策略探索不同推理路径，再按常规 RLVR 流程用验证奖励更新策略。",
+        "result": "在 DAPO-Math-17k 上训练 Qwen3-1.7B-Base 与 Qwen3-8B-Base，并在六个数学推理基准上评估，ASE 在相同 rollout 预算下相对 GRPO 将平均 Mean@8 分别提升 4.87 和 1.87 个百分点。",
+        "conclusion": "结果表明，直接利用正确/错误回答间的激活差异构造探索方向，可在不增加 rollout 预算的情况下缓解 RLVR 的路径同质化，提升数学推理的平均表现，说明激活空间 steering 是增强 RLVR 探索的有效补充手段。",
+        "key_details": "关键实现依赖同题多回答的验证器判分、正确-错误激活差收集、差异聚类与探索向量库，以及在线 rollout 时的向量选择与激活干预；实验使用 DAPO-Math-17k 和 Qwen3-1.7B/8B-Base，并以 Mean@8 和相同 rollout 预算对比 GRPO。摘要未披露具体干预层、聚类数、向量库规模、选择策略、损失形式与额外计算开销，且结论主要限于数学推理任务，跨任务泛化与实现复杂度仍需进一步验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.976414558220779,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.26959v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/21/261026959v1-dynamic-system-inspired-continuous-large-language-model-for-ai4science-tasks",
+      "source": "arxiv",
+      "title": "Dynamic System Inspired Continuous Large Language Model for AI4Science Tasks",
+      "authors": [
+        "Zhaoxin Fan",
+        "Zheng Zhu",
+        "Yuqing Ma",
+        "Faguo Wu",
+        "Jian Yang",
+        "Wenjun Wu"
+      ],
+      "authors_text": "Zhaoxin Fan, Zheng Zhu, Yuqing Ma, Faguo Wu, Jian Yang, Wenjun Wu",
+      "abstract": "Scientific foundation models increasingly operate on continuous phenomena, yet still use discrete residual computation. We ask whether pretrained residual transformations can support additional latent computation without expanding the backbone. To test this possibility, we introduce Continuum-LM, which reuses these transformations as dynamical operators in a continuous-depth language model. Its hidden states evolve through an ordinary differential equation evaluated by higher-order numerical integration, with solver order and step size controlling computation. Across eight scientific tasks, Continuum-LM trains stably and improves mean exact-match accuracy by 7.77 and 10.96 percentage points over discrete counterparts at the 0.6B and 1.7B scales, respectively. At 0.6B, it also outperforms an Ouro-style recurrent control under matched parameter and residual-function evaluation budgets. Together, these results support extensible computational depth through parameter reuse, identifying continuous hidden-state evolution as a practical design dimension for scientific language models beyond parameter scaling.",
+      "url": "http://arxiv.org/abs/2610.26959v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26959v1",
+      "tldr": "Continuum-LM reuses pretrained residual transformations as continuous-depth ODE operators in a language model, enabling extra latent computation without expanding the backbone and improving mean exact-match accuracy on eight AI4Science tasks by 7.77 and 10.96 points over discrete counterparts at 0.6B and 1.7B scales.",
+      "detailed_reading": {
+        "motivation": "科学基础模型 increasingly 处理连续现象，却仍采用离散残差计算和固定深度架构，扩展主要依赖数据、领域知识与参数规模。作者追问：预训练残差变换能否在不扩大骨干参数的情况下，通过连续深度和额外潜在计算提升 AI4Science 任务，并使求解器阶数与步长成为可控的计算维度。",
+        "method": "将预训练 Qwen3 的每个注意力与 FFN 残差分支分别视为局部 ODE dh/dt=F_j(h)、h(0)=h_j、t∈[0,1]，原残差更新对应单位步 Euler 离散，转换时复用原参数并用 RK2/RK4 高阶积分在中间隐状态重算归一化与变换，tokenizer、embedding、归一化结构、位置编码和输出头保持不变。默认采用两步中点 RK2，先进行连续深度 base training（主模型 10 万步，求解器消融 2 万步），再冻结连续深度骨干，在注意力 q/k/v/o 与 FFN up/gate/down 上插入 LoRA，在八个 AI4Science 任务上微调，并与参数匹配 Qwen3 及 Ouro 式循环控制比较。",
+        "result": "Continuum-LM 在两个参数尺度、八个任务上均优于同参数 Qwen3，平均 exact-match 在 0.6B 和 1.7B 分别提升 7.77 和 10.96 个百分点，达到 17.83% 和 24.33%；0.6B 超过 Qwen3-1.7B@SFT，1.7B 超过 Qwen3-4B@SFT 并接近 Qwen3-8B@SFT。0.6B 在匹配参数和残差函数评估预算下优于 Ouro 式循环控制；转换的边际计算回报为 1.05 个百分点/TFLOP，高于 0.6B→1.7B 缩放的 0.73，1.7B 路径为 0.52 对 0.49。",
+        "conclusion": "连续隐状态演化与预训练参数复用可作为科学语言模型除参数扩展外的实际架构设计维度，能够稳定训练并提供可扩展的计算深度。其收益具有任务与指标依赖性且需要额外推理计算，应被视为可调的计算组织方式，而非唯一真实推理轨迹的物理类比。",
+        "key_details": "参数尺度扫描在 1000 个训练样本上以 teacher-forced next-token 交叉熵评估，多数层—分支的最小损失系数接近 c=1，支持直接沿用预训练尺度初始化；求解器消融显示 RK2/RK4 在 2 万步内损失下降，默认两步中点 RK2 每个残差分支需 4 次函数评估，推理 FLOP 按 C≈2νP(Tin+Tout) 估计，采用 1024 输入/输出 token、batch size 1、KV cache，离散模型 ν=1、默认连续模型 ν=4，主实验 LoRA rank=16 并做三次独立运行。局限包括 NFE 与 FLOP 为 leading-order 近似、四倍分支评估带来推理成本、任务级及 rank 从 16 继续增大时收益不一致，且连续路径不假定存在唯一真实轨迹。"
+      },
+      "affiliations": [
+        "Beihang University",
+        "GigaAI"
+      ],
+      "affiliations_text": "Beihang University, GigaAI",
+      "score": 4.805789436776352,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.27003v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/21/261027003v1-replan-for-error-recovery-training-embodied-vlms-through-verifiable-interaction-with-action-grouped-turn-gspo",
+      "source": "arxiv",
+      "title": "Replan for Error Recovery: Training Embodied VLMs through Verifiable Interaction with Action-Grouped Turn-GSPO",
+      "authors": [
+        "Zhuoran Wang",
+        "Keqing Fan",
+        "Yang Li",
+        "Jinbo Su",
+        "Ke Wang",
+        "Sijia Luo",
+        "Yuanzheng Tan",
+        "Junken Peng",
+        "Jing Zhang"
+      ],
+      "authors_text": "Zhuoran Wang, Keqing Fan, Yang Li, Jinbo Su, Ke Wang, Sijia Luo, Yuanzheng Tan, Junken Peng, Jing Zhang",
+      "abstract": "Embodied VLMs can execute increasingly complex manipulation tasks, yet execution errors can leave the environment in states that require replanning for recovery. Existing recovery methods either rely on inference-time mechanisms with fixed policies or learn from failure examples and reference corrections rather than verified action outcomes. To enable recovery learning through verifiable interaction, we introduce the Embodied Replanning for Recovery Environment (ERR-Env), which provides feedback on task progress and execution errors. We further construct ERR-Bench, a benchmark with held-out tasks spanning nominal, intermediate, and error states for evaluating recovery capability and execution reliability. We then propose Action-Grouped Turn-GSPO (AGT-GSPO), an online reinforcement learning method combining turn-level rewards for task progress and error states with action-grouped advantage estimation, and use it to train ERR-VLM, a compact 2B embodied VLM. Evaluation on ERR-Bench reveals a mismatch between task progress and execution reliability across diverse VLMs. AGT-GSPO improves ERR-VLM by 10.25 percentage points in Strict Success Rate for error-free completion and 22.95 percentage points in Recovery Rate, while ablations and zero-shot transfer further validate the effectiveness of our method.",
+      "url": "http://arxiv.org/abs/2610.27003v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27003v1",
+      "tldr": "The paper introduces ERR-Env and ERR-Bench for verifiable error-recovery learning, proposes Action-Grouped Turn-GSPO to train a compact 2B embodied VLM (ERR-VLM), and reports gains of 10.25 points in Strict Success Rate and 22.95 points in Recovery Rate on ERR-Bench.",
+      "detailed_reading": {
+        "motivation": "具身视觉语言模型已能执行复杂操作任务，但执行错误会使环境进入需要重新规划才能恢复的状态。现有恢复方法要么依赖推理时的固定策略，要么从失败样例和参考纠正中学习，而不是从可验证的动作结果中学习，因此需要一种通过可验证交互来训练恢复能力的方法。",
+        "method": "论文提出ERR-Env环境，为任务进展和执行错误提供反馈，并构建ERR-Bench基准，覆盖留出任务以及正常、中间和错误状态，用于评估恢复能力与执行可靠性。随后提出AGT-GSPO在线强化学习方法，将面向任务进展和错误状态的轮级奖励与按动作组聚合的优势估计相结合，并用于训练紧凑的2B具身视觉语言模型ERR-VLM，使其通过与环境交互学习重规划恢复。",
+        "result": "ERR-Bench评估显示多种视觉语言模型在任务进展与执行可靠性之间存在不匹配。AGT-GSPO使ERR-VLM在无误完成任务的严格成功率上提升10.25个百分点，在恢复率上提升22.95个百分点；消融实验和零样本迁移进一步验证了该方法的有效性。",
+        "conclusion": "通过可验证交互学习恢复，并结合轮级奖励和动作组优势估计的在线强化学习，能够同时提升紧凑具身视觉语言模型的任务执行可靠性和错误恢复能力。该工作表明恢复能力不应仅依赖推理时机制或参考纠正，而可由环境反馈驱动的策略学习获得。",
+        "key_details": "关键设计在于ERR-Env提供任务进展与执行错误两类可验证反馈，ERR-Bench按正常、中间和错误状态组织留出任务以分离评估执行可靠性与恢复能力，AGT-GSPO以轮级奖励建模任务进展和错误状态并用动作组优势估计匹配操作序列的信用分配。摘要层面未给出具体损失函数、超参数和训练规模等实现细节，方法有效性依赖可验证环境反馈，零样本迁移虽有验证，但跨环境和真实场景的泛化与反馈获取成本仍是潜在约束。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.577177452108045,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.26911v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/21/261026911v1-dynamic-regret-and-tightened-constraint-violation-for-communication-efficient-distributed-online-bilevel-optimization",
+      "source": "arxiv",
+      "title": "Dynamic Regret and Tightened Constraint Violation for Communication-Efficient Distributed Online Bilevel Optimization",
+      "authors": [
+        "Fan Li",
+        "Xinlei Yi",
+        "Guanghui Wen",
+        "Yang Shi",
+        "Tao Yang"
+      ],
+      "authors_text": "Fan Li, Xinlei Yi, Guanghui Wen, Yang Shi, Tao Yang",
+      "abstract": "This paper investigates the distributed online bilevel optimization problem with time-varying inequality constraints. In this setting, a multi-agent network is confronted with a hierarchical decision-making task characterized by coupling between the inner and outer optimization levels. We first propose a communication-efficient single-loop distributed online primal--dual algorithm based on communication compression, which tracks both the inner-level solution and the Hessian-inverse-vector product using only one update per-round. We show that this algorithm achieves a dynamic network regret bound of $\\mathcal{O}(T^{\\max\\{θ_1,1-θ_1\\}}+T^{θ_1 } P_T+H_{1,T}+E_{1,T})$, where~$θ_1 \\in (0,1)$, $P_T$ is the outer-level path variation, $H_{1,T}$ is the inner-level path variation, and $E_{1,T}$ is the gradient path variation alongside a network cumulative constraint violation bound of $\\mathcal{O}(T^{1-θ_1/2})$, which is further reduced to $\\mathcal{O}(T^{1-θ_1})$ under Slater's condition. Furthermore, to eliminate the dependence of regret on the inner-level and gradient path variation, we propose a novel adaptive multi-loop distributed online algorithm to control the inner-level approximation accuracy at each round. By dynamically adjusting the number of inner-level updates based on a gradient-norm tolerance condition, this algorithm yields an improved dynamic network regret bound of $\\mathcal{O}(T^{\\max\\{θ_1,1-θ_1\\}}+T^{θ_1 } P_T)$ which depends solely on the outer-level path variation while maintaining the same network cumulative constraint violation bound. Finally, numerical simulations verify the effectiveness of the proposed algorithms.",
+      "url": "http://arxiv.org/abs/2610.26911v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26911v1",
+      "tldr": "The paper proposes communication-compressed distributed online bilevel optimization algorithms—a single-loop primal–dual method and an adaptive multi-loop variant—that achieve dynamic regret and tightened cumulative constraint violation, with the latter removing dependence on inner-level and gradient path variation.",
+      "detailed_reading": {
+        "motivation": "论文针对多智能体网络中的分布式在线双层优化问题，该问题具有内外层耦合、环境时变和时变不等式约束，现有分布式双层算法多面向静态环境且依赖嵌套循环，集中式在线双层算法又未同时处理网络不一致、约束满足和通信压缩；因此需要设计通信高效且具有动态遗憾与累计约束违反保证的分布式在线算法。",
+        "method": "在凸外层、强凸内层和时变不等式约束设定下，将多智能体分层在线决策建模为分布式在线双层优化。首先提出基于通信压缩的单环分布式在线原始-对偶算法：每轮每个智能体仅执行一次内层解跟踪更新和一次 Hessian-逆向量积近似跟踪，并与压缩后的网络共识及原始-对偶约束更新耦合。随后提出自适应多环算法，根据梯度范数容忍条件动态调整每轮内层更新次数以控制内层近似精度，同时保持压缩通信和约束对偶更新。",
+        "result": "理论分析表明，单环算法达到动态网络遗憾 O(T^{max{θ1,1-θ1}}+T^{θ1}P_T+H_{1,T}+E_{1,T}) 和网络累计约束违反 O(T^{1-θ1/2})，在 Slater 条件下约束违反界收紧为 O(T^{1-θ1})。自适应多环算法将动态网络遗憾改进为 O(T^{max{θ1,1-θ1}}+T^{θ1}P_T)，仅依赖外层路径变化 P_T，并保持相同的累计约束违反界；数值仿真验证了两种算法的有效性。",
+        "conclusion": "论文首次在分布式在线双层优化中同时实现通信压缩、时变不等式约束处理以及 Slater 条件下的约束违反收紧，并通过自适应内层精度消除遗憾对内层路径变化和梯度路径变化的显式依赖，为通信受限动态网络中的分层在线决策提供了可证明的算法框架。",
+        "key_details": "关键点包括：通信压缩作用于智能体间信息交换，但压缩扰动会经外层迭代传播到内层解跟踪和 Hessian-逆向量积近似，因此需在原始-对偶与跟踪模块中联合分析；Slater 条件下的收紧依赖在正则化拉格朗日中保留原始约束以利用严格可行裕度；超参 θ1∈(0,1) 调节遗憾与约束违反的权衡，路径变化由 P_T、H_{1,T}、E_{1,T} 刻画。复杂度上单环算法梯度查询和 HvP 均为 O(T)，自适应多环约为 O(T log(√T)+H_{1,T}) 与 O(T log T)。局限性在于理论依赖凸外层、强凸内层等假设，且主要用数值仿真验证。"
+      },
+      "affiliations": [
+        "Southeast University",
+        "Northeastern University",
+        "University of Victoria",
+        "Tongji University"
+      ],
+      "affiliations_text": "Southeast University, Northeastern University, University of Victoria, Tongji University",
+      "score": 4.447903068484277,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.27039v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/21/261027039v1-embodied-playground-a-long-horizon-agentic-robotics-benchmark-for-physical-strategic-and-spatial-reasoning",
+      "source": "arxiv",
+      "title": "Embodied Playground: A Long-Horizon Agentic Robotics Benchmark for Physical, Strategic, and Spatial Reasoning",
+      "authors": [
+        "Feng Chen",
+        "Pei Zhou",
+        "Lixuan He",
+        "Yunchao Yao",
+        "Li Sun",
+        "Shenghua Gao",
+        "Mingyu Ding",
+        "Kaifeng Zhang",
+        "Kaichen Zhou",
+        "Yi Ma"
+      ],
+      "authors_text": "Feng Chen, Pei Zhou, Lixuan He, Yunchao Yao, Li Sun, Shenghua Gao, Mingyu Ding, Kaifeng Zhang, Kaichen Zhou, Yi Ma",
+      "abstract": "Foundation models offer a promising basis for robotic agents, but long-horizon tasks require them to sustain coherent reasoning and reliable physical execution across interdependent stages. We introduce Embodied Playground, a benchmark for evaluating how foundation-model agents coordinate physical, strategic, and spatial reasoning throughout such tasks. Agents must track task progress, satisfy intermediate constraints, and revise their plans using execution feedback as earlier actions shape subsequent decisions. The playground comprises 410 task environments spanning basic manipulation, sequential puzzles, and multi-stage household activities, with variations in planning depth, geometric constraints, and physical execution demands. We curate EP-100, a representative selection of 100 tasks across five suites and 16 task types, together with the EP-Easy and EP-Hard difficulty splits and the compact EP-20 selection. A shared protocol specifies observation and tool access, resource budgets, repeated trials, and independent checks of goal completion, task-rule compliance, and physical validity. Embodied Playground provides a unified framework for studying whether foundation-model agents can sustain effective reasoning and action over extended task horizons. https://winniechen2002.github.io/Agent-bench-website/",
+      "url": "http://arxiv.org/abs/2610.27039v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27039v1",
+      "tldr": "The paper introduces Embodied Playground, a 410-environment robotics benchmark—with a representative 100-task EP-100 subset—for evaluating whether foundation-model agents can sustain physical, strategic, and spatial reasoning and revise plans from execution feedback across long-horizon tasks.",
+      "detailed_reading": {
+        "motivation": "基础模型在机器人任务中展现出视觉理解、空间与物理推理及策略制定潜力，但长时程任务要求智能体在相互依赖的阶段之间持续保持连贯推理与可靠物理执行，且早期动作会改变后续条件。现有机器人基准多聚焦控制策略的性能与泛化，缺少以基础模型智能体为中心、评估其跟踪进度、满足中间约束并依据执行反馈修订计划的能力。",
+        "method": "论文构建 Embodied Playground 模拟机器人基准，包含410个任务环境，覆盖基础操作、顺序谜题和多阶段家务活动，并从中选取100个任务形成EP-100，划分为五个套件和16种任务类型，同时提供EP-Easy、EP-Hard与紧凑版EP-20。所有环境共享describe、observe、step、finish接口，规定观测与工具访问级别、资源预算、重复试验，并由独立评估器检查目标完成、任务规则合规和物理有效性；智能体通过公共SDK编写并执行代码，利用相机、本体感觉和任务元数据及允许的感知或规划工具，根据执行反馈更新计划。环境后端使用MuJoCo、Isaac Lab和ManiSkill，涵盖双Panda、FR3-Sharpa、浮动Sharpa、ALOHA、Fetch、xArm7-Allegro、UR10e-Shadow等 embodiments。",
+        "result": "基准共包含410个任务-具身组合，EP-100覆盖Launch、Tower、Lock、Cube、Home五个套件和16种任务类型，并通过规划深度、几何约束、质量摩擦、动态交互与目标顺序等变化系统调节空间、物理和策略推理难度。预览图中的示例对比了GPT-6-Astra与Opus-5.5-extra在各套件上的Pass@2、条件结果和成功尝试平均时长，但给定摘要与预览未提供完整数值结果。",
+        "conclusion": "Embodied Playground 提供了一个统一框架，用于研究基础模型智能体能否在长时程任务中维持有效推理与行动，并支持跨推理需求和机器人具身的可解释比较。该基准强调进度跟踪、中间约束满足、执行反馈驱动重规划和物理有效性，有助于识别单一聚合分数掩盖的能力强弱与局限。",
+        "key_details": "任务包含Launcher、Hanoi、口袋魔方、Rubik魔方、孔明锁、书架及ManiSkill家务/几何/动力学任务，不同任务使用不同模拟器与具身；EP-100优先选择多数智能体可运行的任务，因此平行夹爪获得较多名额，灵巧手仅取较易原生配置的小样本，Launcher仅评估预装第一发弹丸的loaded模式并从80个已有完整成功记录的场景中抽取。协议规定累计访问级别、观测读取不推进物理时间、动作经声明控制器生效，并检查释放与稳定性等物理条件；种子和初始操作模式定义试验条件，部分案例标识跨具身复用以便比较平行夹爪与灵巧手。局限包括评测在仿真中完成、任务选择受可负担性影响而偏向平行夹爪，且给定预览未展示完整实验数值与统计结论。"
+      },
+      "affiliations": [
+        "Sharpa",
+        "Tsinghua University",
+        "University of North Carolina at Chapel Hill",
+        "Stanford University",
+        "MIT",
+        "HKU"
+      ],
+      "affiliations_text": "Sharpa, Tsinghua University, University of North Carolina at Chapel Hill, Stanford University, MIT, HKU",
+      "score": 4.419053192394593,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.26932v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/21/261026932v1-expert-guided-rubrics-as-dense-reward-signals-for-reinforcement-learning-in-non-verifiable-domains",
+      "source": "arxiv",
+      "title": "Expert-Guided Rubrics as Dense Reward Signals for Reinforcement Learning in Non-Verifiable Domains",
+      "authors": [
+        "Ashish Bansal",
+        "Hossam Amer",
+        "Keerat Kaur Guliani",
+        "Parinita Edke",
+        "Lesley Matheson",
+        "Leizer Teran"
+      ],
+      "authors_text": "Ashish Bansal, Hossam Amer, Keerat Kaur Guliani, Parinita Edke, Lesley Matheson, Leizer Teran",
+      "abstract": "Large language models (LLMs) are increasingly deployed as autonomous agents in non-verifiable domains such as financial services, where they must interpret user intent, rewrite queries, and retrieve information under domain-specific constraints. Although reinforcement learning (RL) can train such agents from the consequences of their actions, recent successes largely rely on verifiable tasks with automatically computed binary rewards. In non-verifiable retrieval tasks, assessing query quality requires scarce subject-matter expert (SME) judgment that is inherently graded rather than binary. With Group Relative Policy Optimization (GRPO), sparse rewards yield no useful learning signal when all sampled outputs within a group receive the same outcome, causing optimization to stall. We introduce a method that converts a small, fixed investment of SME judgment into a dense reward and combines it with retrieval-based metrics to form a hybrid, GRPO-compatible training signal. Experiments show improvements of up to 6\\% in Recall@3 and 6.7\\% in MRR@3 compared with sparse-reward baselines.",
+      "url": "http://arxiv.org/abs/2610.26932v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26932v1",
+      "tldr": "The paper proposes converting a small, fixed amount of subject-matter-expert judgment into a validated rubric-based dense reward blended with retrieval metrics, enabling GRPO training for query rewriting in non-verifiable domains and improving Recall@3 and MRR@3 over sparse-reward baselines.",
+      "detailed_reading": {
+        "motivation": "在金融服务等不可验证领域，LLM智能体需要理解用户意图、改写查询并检索文档，但查询改写是否“好”依赖稀缺且带等级的专家判断，无法像数学或代码任务那样自动给出二值奖励。GRPO依赖组内奖励方差形成优势；稀疏二值奖励在同一提示的所有采样成败一致时方差为零，梯度消失，优化停滞。因此需要把少量固定的SME判断转化为密集、可扩展且与GRPO兼容的奖励信号。",
+        "method": "方法采用四步SME引导的奖励构建流程：首先对约100个分层采样的问答-改写对，由专家给出0/1/2结果标签并解释原因，归纳为是否保留信息需求、保留显著实体、提升具体性、保持良好形式四个准则；随后将解释蒸馏为带权重的LLM可执行评分量表R_SME，并在训练前用留出SME标签验证其保真度及对强改写与基线改写的区分和排序能力；再将R_SME与确定性检索信号融合为R=aR_retrieval+(1-a)R_SME，其中R_retrieval=g×γ_faith×γ_form，g为对包含金答案字符串的答案承载段落计算并截断的DCG@3，两个乘法门控惩罚不忠实或形式异常的改写；最后固定检索器、答案合成器和评分 judge，仅用GRPO微调查询改写器，按组采样、计算组相对优势并优化带裁剪和KL正则的策略目标。",
+        "result": "实验表明，与稀疏奖励基线相比，该方法在Recall@3上最高提升6%，在MRR@3上最高提升6.7%。核心发现是密集奖励能在二值奖励失效的近失配情形中继续对改写进行排序，使组内奖励方差非零并产生有效梯度；因此奖励的分辨率而不仅是正确性，是GRPO在不可验证查询改写任务中可训练性的关键决定因素。",
+        "conclusion": "论文证明，将少量固定SME判断蒸馏为经过验证的评分量表，并与自动检索指标组成混合密集奖励，可在无逐查询金答案、无学习型奖励模型的条件下有效训练非可验证领域的查询改写智能体。该工作连接了RLVR与评分量表式RL，说明面向中间查询改写动作的密集奖励设计能缓解GRPO稀疏奖励退化，并提升检索效果。",
+        "key_details": "关键实现包括约100个分层SME样本、0/1/2分级结果标签、四准则加权评分量表、训练前留出验证、冻结judge与冻结检索器、仅改写器可训练、R_SME与检索信号按权重a融合、检索项采用答案承载段落的截断DCG@3及忠实性和形式门控、GRPO无价值网络且使用组相对优势与KL正则；正文示例中G=4或G=8，并显示稀疏奖励在高难度提示上可导致约43%退化组。局限在于SME样本小且固定、评分量表可能误设、依赖金答案字符串和特定金融检索场景，方法主要验证于查询改写器而非端到端答案生成。"
+      },
+      "affiliations": [
+        "The Vanguard Group"
+      ],
+      "affiliations_text": "The Vanguard Group",
+      "score": 4.32378807101364,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.26979v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/21/261026979v1-latent-projection-for-latent-planning",
+      "source": "arxiv",
+      "title": "Latent Projection for Latent Planning",
+      "authors": [
+        "Yoo Sung Jang",
+        "Michael Ryoo"
+      ],
+      "authors_text": "Yoo Sung Jang, Michael Ryoo",
+      "abstract": "Latent world models let an agent plan in latent space. The planner searches for an action sequence that minimizes a cost, and that cost is often the $\\ell_2$ distance between the predicted terminal latent and the goal latent. The latent, however, is partly noise: the regularizer that prevents collapse during world model training promotes variance in the directions carrying no signal. We show that the same regularizer also supplies the structure to prune that noise in the latent. SIGReg drives the latent marginal to a standard Gaussian at every step, and assuming further that the latent sequence is a Gauss-Markov process, the transition is linear with its covariance pinned by the map itself, $z' \\mid z \\sim \\mathcal{N}(Az,\\, I - AA^\\top)$. Fitting the state dynamics $A$ therefore yields the covariance at no additional cost, and in its eigenbasis each latent direction carries its own uncertainty. Furthermore, constraining $A$ to be a normal matrix fixes that basis across timesteps, so one eigenbasis measures the uncertainty over an arbitrary number of steps and serves as a stable basis to compute the planning cost on. We then restrict the $\\ell_2$ cost to the $k$-dimensional subspace the state dynamics carry forward with the least uncertainty. The correction is post hoc: the encoder, the predictor, the rollout, and the planner are all left untouched, and only a single constrained matrix, $A$, is fit. We evaluate across six environments and show large gains on the 2D navigation tasks, TwoRoom and PointMaze, raising success rate over the plain $\\ell_2$ cost by up to $+54.7$ points under a harder planning setting. Code is available at https://github.com/yjang43/lp2.",
+      "url": "http://arxiv.org/abs/2610.26979v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26979v1",
+      "tldr": "The paper proposes a post hoc latent projection that fits a constrained normal state-dynamics matrix under SIGReg’s Gaussian Gauss–Markov assumptions and restricts the ℓ2 planning cost to the lowest-uncertainty eigen-subspace, improving latent planning success by up to 54.7 points on 2D navigation tasks without modifying the encoder, predictor, rollout, or planner.",
+      "detailed_reading": {
+        "motivation": "潜在世界模型常用终端潜在与目标潜在之间的ℓ2距离作为规划代价，但SIGReg等正则项在防止坍缩的同时会在无信号方向注入方差，编码器也保留与任务无关的内容，导致代价部分沿无信息方向计算。作者希望在不改动编码器、预测器和规划器的前提下，利用正则项诱导的分布结构剪除噪声方向，得到更可靠的规划信号。",
+        "method": "在LeWM框架中冻结编码器f和预测器g，先把轨迹观测编码为潜在序列，再以最小二乘拟合动作无关的线性状态动力学A；拟合同时约束I−AA^T为半正定协方差且A为正规矩阵AA^T=A^TA，并对H步未来帧联合最小化∑_{t=1}^H E||A^t z−z^(t)||^2。由Gauss–Markov与标准高斯边际假设得到z'|z∼N(Az,I−AA^T)，对协方差做特征分解，取最小k个特征值对应特征向量U_k构成低不确定性子空间；规划时仍用冻结预测器rollout候选动作序列，但把终端潜在与目标潜在先投影到U_k，再用||U_k^T(ẑ_T−z_g)||_2排序候选。",
+        "result": "在六个环境中评估，投影代价在二维导航任务TwoRoom和PointMaze上相对原始ℓ2代价取得大幅提升，较难规划设置下成功率最高提高54.7个百分点；摘要强调编码器、预测器、rollout和规划器均不变，仅拟合一个受约束矩阵A即可获得该收益。",
+        "conclusion": "论文表明SIGReg带来的标准高斯结构不仅能稳定世界模型训练，还能把潜在噪声与状态动力学协方差绑定，从而为规划提供可解释的不确定性度量。将ℓ2代价限制在状态动力学最确定的方向上是一种低成本、后处理式的规划改进，尤其有利于存在大量无关或噪声潜在方向的导航任务。",
+        "key_details": "关键实现点包括：A在冻结编码器产生的潜在转移上一次性拟合，训练目标为多步平方误差且动作无关；正规性约束使协方差特征基跨时间步共享，因为A^t(A^t)^T=(AA^T)^t，从而可用同一U_k计算任意horizon的投影代价；A可按实正规矩阵分解为1×1静态块和2×2运动块，默认采用全平面布局P=floor(n/2)，并需选择保留维数k与拟合步长H。局限在于依赖Gauss–Markov、线性转移和正规矩阵假设，A只描述数据生成策略下的动力学，且收益主要在二维导航环境中验证。"
+      },
+      "affiliations": [
+        "Stony Brook University"
+      ],
+      "affiliations_text": "Stony Brook University",
+      "score": 4.1817263808920355,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.27000v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/21/261027000v1-orbit-autoregressive-time-series-generation-via-next-frequency-band-prediction",
+      "source": "arxiv",
+      "title": "ORBIT: Autoregressive Time Series Generation via Next Frequency-Band Prediction",
+      "authors": [
+        "Chunyi Hou",
+        "Xiangfei Qiu",
+        "Hanyin Cheng",
+        "Chenchen Sun",
+        "Yisheng An",
+        "Yang Shu",
+        "Jilin Hu",
+        "Bin Yang"
+      ],
+      "authors_text": "Chunyi Hou, Xiangfei Qiu, Hanyin Cheng, Chenchen Sun, Yisheng An, Yang Shu, Jilin Hu, Bin Yang",
+      "abstract": "Deep generative models provide an effective modern solution to alleviating the problem of data scarcity by synthesizing realistic time series. However, despite the considerable progress achieved by existing deep time series generators, two key challenges remain: (1) learning hierarchical representations for heterogeneous temporal patterns; and (2) coordinating the generation process of heterogeneous temporal dynamics. To address these key bottlenecks, in this work, we propose ORBIT, a unified deep generative framework for time series. Specifically, we develop two key components: the Frequency-Hierarchical VQ-VAE (FH-VQ-VAE) and the Frequency-Band Autoregressive Transformer (FBAR). The former learns hierarchical representations by decomposing latent temporal representations into different frequency bands and applying residual quantization with increasing token budgets. The latter establishes a novel low-to-high frequency autoregressive direction, yielding a time series generation process that first constructs global temporal structures and then incrementally incorporates fine-grained temporal details. These compact designs not only disentangle heterogeneous temporal patterns for more effective representation learning but also mitigate potential interference among different temporal dynamics during generation. Extensive experiments on multiple challenging real-world benchmarks demonstrate that ORBIT achieves state-of-the-art overall performance while exhibiting superior inference efficiency compared with advanced baselines.",
+      "url": "http://arxiv.org/abs/2610.27000v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27000v1",
+      "tldr": "ORBIT is a unified deep generative framework that uses a Frequency-Hierarchical VQ-VAE to tokenize time series into hierarchical frequency bands and a Frequency-Band Autoregressive Transformer to generate them from low to high frequency, enabling coordinated modeling of global structure and fine-grained dynamics with state-of-the-art performance and efficient inference.",
+      "detailed_reading": {
+        "motivation": "真实时间序列常由不同频率尺度上的异质动态叠加而成，现有两阶段生成器通常将慢变全局结构与快变局部波动纠缠在单一表示中，并在GPT式从左到右的自回归过程中于同一步共同生成，易造成模式干扰。因此，如何学习保留全局结构与局部细节的分层表示，并协调异质时序动态的生成，是提升合成时间序列质量的关键瓶颈。",
+        "method": "ORBIT采用两阶段框架：第一阶段训练频率分层VQ-VAE（FH-VQ-VAE），对通道独立的时间序列经1D卷积残差编码器得到潜在表示，利用FFT和非重叠频带掩码分解到多个频带，再IFFT回时域，按低频到高频进行残差量化，并通过插值将各频带残差调整到逐级增加的token预算后查询共享码本，辅以轻量精化模块并累积重建，最后由解码器重建原序列；第二阶段冻结FH-VQ-VAE并训练频带自回归Transformer（FBAR），根据已生成频带的码本索引重建并累积历史频带表示，经插值、投影及时序位置和频带嵌入构造输入，在频带因果注意力下用交叉熵预测下一频带索引。推理时从条件或无条件下开始，按低频到高频逐频带生成，每个频带内所有token并行采样，累积表示最终送入冻结解码器合成时间序列。",
+        "result": "论文在多个具有挑战性的真实世界基准上开展域内与跨域生成实验，报告ORBIT取得当前最优的整体生成性能，并相较先进基线展现出更优的推理效率。摘要层面强调其生成质量与效率优势具有一致性，但全文预览未给出具体指标数值，需以正式实验表为准。",
+        "conclusion": "ORBIT通过频率分层离散表示与“下一频带预测”的自回归范式，将异质时序模式在表示学习和生成过程两个层面解耦，先构建全局时序结构再逐步引入细粒度细节，从而兼顾生成保真度与推理效率。该工作为时间序列生成提供了一条以频带为自回归单元的新技术路线。",
+        "key_details": "关键先验是低频对应慢变全局结构、高频对应快变局部细节，因此采用低频少token、高频多token的逐级残差量化；码本在各频带间共享，量化使用直通估计器训练，频带间通过因果注意力显式建模依赖。实现上采用通道独立策略，第二阶段冻结tokenizer并以真实索引进行教师强制训练，推理时用已生成索引累积历史并频带内并行解码以降低时延。局限性包括全文预览未展示完整损失项、频带划分与token预算等超参细节，频带边界和数量可能影响性能，通道独立建模可能弱化跨通道依赖，且VQ类方法仍受码本利用与量化误差约束。"
+      },
+      "affiliations": [
+        "East China Normal University",
+        "Chang'an University"
+      ],
+      "affiliations_text": "East China Normal University, Chang'an University",
+      "score": 4.140210675995968,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.26950v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/21/261026950v1-beyond-policy-discrepancy-capability-aware-multi-teacher-on-policy-distillation",
+      "source": "arxiv",
+      "title": "Beyond Policy Discrepancy: Capability-Aware Multi-Teacher On-Policy Distillation",
+      "authors": [
+        "Xuanfeng Yang",
+        "Le Gui",
+        "Jiaming Wang",
+        "Xuan Zhang"
+      ],
+      "authors_text": "Xuanfeng Yang, Le Gui, Jiaming Wang, Xuan Zhang",
+      "abstract": "Multi-teacher on-policy distillation (MOPD) integrates domain specialists into a shared student, but determining how strongly each teacher should supervise remains challenging. Existing discrepancy-based allocation can assign strong supervision even when the student already matches or exceeds the teacher's task performance, since behavioral mismatch does not necessarily imply a remaining capability deficit. We propose Capability-Aware Multi-Teacher On-Policy Distillation (CA-MOPD), which combines specialist merging with capability-guided allocation to account for what the student has already learned. CA-MOPD first merges reinforcement-learning specialists into a strong student initialization, then uses verifier-estimated teacher--student capability gaps to adjust domain-level distillation strength. Supervision decreases as capability gaps close and increases when estimated student capability regresses, while dense token-level guidance remains provided by the teachers. Across six benchmarks spanning mathematics, code generation, and instruction following, CA-MOPD achieves an average score of 32.22, outperforming naive MOPD, Open-MOPD, and the merged initialization by 0.86, 0.83, and 0.74 points, respectively. Controlled comparisons further support the benefits of merged initialization and capability-gap guidance under matched training budgets.",
+      "url": "http://arxiv.org/abs/2610.26950v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26950v1",
+      "tldr": "CA-MOPD improves multi-teacher on-policy distillation by initializing the student from merged RL specialists and allocating teacher supervision based on verifier-estimated capability gaps rather than policy discrepancy, achieving a 32.22 average score across mathematics, code, and instruction-following benchmarks.",
+      "detailed_reading": {
+        "motivation": "多教师在线策略蒸馏需要把数学、代码和指令遵循等领域专家整合进一个共享学生模型，但现有方法主要按教师与学生之间的策略差异分配监督强度，而行为分布不匹配并不必然意味着教师仍有任务级能力优势，学生可能在合并专家后已经追平甚至超过教师。论文因此主张从“剩余可迁移能力”而非单纯策略差异出发分配蒸馏强度。",
+        "method": "CA-MOPD首先用Task Arithmetic将共享MixSFT基座上的多个RL专家合并为学生初始化，合并系数取α_d=1；随后在留出校准集上用领域验证器估计各教师能力T_d，并估计合并学生的初始能力C_d^(0)与历史最佳C_d^★。训练中复用学生已有在线rollout的验证器分数，以指数滑动平均更新学生能力C_d^(k)，计算有符号能力差g_d=T_d−C_d和正剩余空间H_d=[g_d]_+，用剩余空间比例r_d=H_d/H_d^(0)生成headroom因子，并在检测到能力回退时用guard因子提高监督；最终能力因子与token-share平衡因子b_d=q_d/s_d相乘，经全局缩放F=max_j f_j归一化为每token权重w_d，对原有稠密OPD信号做sg[w_d A]加权并用token归一化PPO目标优化。",
+        "result": "在数学、代码生成和指令遵循六个基准上，CA-MOPD取得平均32.22，分别比Naive MOPD的31.36、Open-MOPD的31.39和ParamMerge-TA初始化的31.48高0.86、0.83和0.74分。它在该平均指标上最高，并在AIME24、AIME25和IFBench上领先，其中相对Open-MOPD在AIME24提升2.19分、在IFBench提升3.34分；但LiveCodeBench v5/v6相对合并初始化有所下降。消融显示ParamMerge-TA初始化本身把平均分从24.92提高到31.48，而相同200步预算下从合并初始化训练到32.22，优于从MixSFT训练得到的31.53。",
+        "conclusion": "论文的核心结论是策略差异不能替代能力缺口，MOPD应按验证器估计的剩余教师优势和能力回退风险动态分配领域监督。将RL专家合并作为强初始化，再叠加能力引导的域级权重，可在匹配训练预算下提升多领域聚合性能；但收益并非各领域均匀提升，代码性能下降说明存在跨域能力权衡。",
+        "key_details": "实验使用SmolLM3-3B的MixSFT检查点及Open-MOPD发布的数学、代码、指令遵循三个RL专家，主模型从三专家Task Arithmetic合并初始化并训练200个外层步，六个基准为AIME24、AIME25、LiveCodeBench v5/v6、IFEval、IFBench，采用等权平均。方法关键点包括固定教师能力参考T_d、学生能力EMA跟踪、历史最佳C_d^★、headroom比例幂次与clip、回退阈值τ与有界guard、token-share平衡q_d/s_d、全局缩放F=max_j f_j，以及保持教师token级稠密监督不变而只改域级优化压力。局限与约束包括能力估计依赖领域验证器和校准集，控制器超参及附录细节未在正文给出，结果集中在单一3B模型和三类领域，且代码能力相对合并初始化下降，表明并非一致改进。"
+      },
+      "affiliations": [
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Tsinghua University",
+      "score": 4.097123862102633,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.27030v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027030v1-hilbert-scale-stability-of-posterior-diffusion-priors-for-ill-posed-signal-recovery",
+      "source": "arxiv",
+      "title": "Hilbert-Scale Stability of Posterior Diffusion Priors for Ill-Posed Signal Recovery",
+      "authors": [
+        "Bahman Moraffah",
+        "Raha Moraffah"
+      ],
+      "authors_text": "Bahman Moraffah, Raha Moraffah",
+      "abstract": "Indirect and noisy observations are difficult to invert when the forward operator smooths out the unknown signal. In this case, the unstable modes are precisely the modes that the data reveals least, thus the success of any reconstruction method depends on how prior information interacts with the geometry of the operator across regularity scales. Diffusion priors have become ubiquitous for such problems; however, the current theory still does not determine when a learned score remains informative under ill-posed forward operators. In this paper, we study posterior diffusion for linear inverse problems on Hilbert scales and derive a stability theory under an explicit score-amplification condition. Under a smoothing condition on the forward map, a source condition on the truth, and weak-norm control of score error, we derive non-asymptotic recovery bounds in \\(\\Hs^s\\) that separate observation noise, score approximation, and reverse-time discretization. These bounds give a recoverable regularity threshold determined jointly by operator smoothing, truth regularity, score regularity, and the posterior correction. The threshold specifies the Hilbert-scale norms \\(\\Hs^s\\) in which weak-norm score error remains controlled after propagation through the posterior reverse dynamics. For larger regularity indices \\(s\\), the inverse geometry magnifies the same error, and the Hilbert-scale recovery estimate no longer gives uniform stability. We also prove that a posterior correction adapted to the forward operator improves stability relative to isotropic guidance in the regularity ranges where the smoothing action of the forward map matters most. The recovery estimates give a regularity-sensitive theory of posterior diffusion and show how learned score error, operator smoothing, and reconstruction norm jointly determine the stable range predicted by the analysis.",
+      "url": "http://arxiv.org/abs/2610.27030v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27030v1",
+      "tldr": "The paper develops a Hilbert-scale stability theory for posterior diffusion priors in smoothing linear inverse problems, deriving non-asymptotic recovery bounds and a recoverable regularity threshold that determines when weak-norm score errors remain controlled and shows that operator-adapted posterior corrections improve stability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Worcester Polytechnic Institute"
+      ],
+      "affiliations_text": "Worcester Polytechnic Institute",
+      "score": 4.02144690220278,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.26914v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026914v1-steerable-pluralistic-policy-alignment-from-anonymized-crowd-feedback",
+      "source": "arxiv",
+      "title": "Steerable Pluralistic Policy Alignment from Anonymized Crowd Feedback",
+      "authors": [
+        "Akansha Kalra",
+        "Ellen R. Novoseller",
+        "Vernon J. Lawhern",
+        "Daniel S. Brown"
+      ],
+      "authors_text": "Akansha Kalra, Ellen R. Novoseller, Vernon J. Lawhern, Daniel S. Brown",
+      "abstract": "Pluralistic alignment requires AI systems to learn from diverse populations whose preferences may reflect heterogeneous or even conflicting objectives, and to personalize their behavior to individual users. Existing approaches in pluralistic alignment often assume access to annotator identities and rely on powerful pretrained representations to model individual preference variations. We propose Preference-PCA Pluralistic Learning (P3L), a novel framework for pluralistic alignment that jointly learns trajectory embeddings and the shared basis of preference directions via PCA decomposition from heterogeneous crowd feedback without requiring annotator identities. At test time, our approach enables rapid and accurate personalized reward learning and downstream policy optimization. Experiments across multiple embodied control tasks demonstrate that P3L enables steerable personal alignment that generalizes beyond the offline dataset to out-of-distribution new users and attains competitive RL and test performance, while substantially reducing computational cost and supporting variable adaptation query budgets.",
+      "url": "http://arxiv.org/abs/2610.26914v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26914v1",
+      "tldr": "P3L learns a shared PCA-based preference basis from anonymized, heterogeneous crowd feedback—without annotator identities—to enable rapid test-time personalized reward learning and steerable policy alignment for new users.",
+      "detailed_reading": null,
+      "affiliations": [
+        "U.S. Army DEVCOM Army Research Laboratory",
+        "University of Utah"
+      ],
+      "affiliations_text": "U.S. Army DEVCOM Army Research Laboratory, University of Utah",
+      "score": 3.9865484006776715,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.27040v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027040v1-ace-brain-06-scaling-spatial-grounding-for-physical-foundation-models",
+      "source": "arxiv",
+      "title": "ACE-Brain-0.6: Scaling Spatial Grounding for Physical Foundation Models",
+      "authors": [
+        "Yinhe Wang",
+        "Tao Tao",
+        "Zexin He",
+        "Shuang Luo",
+        "Wei Mao",
+        "Yao Mu",
+        "Feng Pan",
+        "Hanming Deng",
+        "Lewei Lu",
+        "Zhi Hou",
+        "Xingang Pan",
+        "Dahua Lin",
+        "Dacheng Tao",
+        "Xiaogang Wang"
+      ],
+      "authors_text": "Yinhe Wang, Tao Tao, Zexin He, Shuang Luo, Wei Mao, Yao Mu, Feng Pan, Hanming Deng, Lewei Lu, Zhi Hou, Xingang Pan, Dahua Lin, Dacheng Tao, Xiaogang Wang",
+      "abstract": "General-purpose multimodal models, including GPT-6 Astra and Claude Opus 5.5, demonstrate broad capabilities in embodied manipulation. Our analysis indicates that this generality is accompanied by strong spatial perception, as Astra can determine where to interact with task-relevant entities amid visual distractors. Because spatial perception connects high-level reasoning to the physical scene, we investigate scaling visual grounding to strengthen the perceptual foundation of general embodied operation. We develop a unified data pipeline that combines robot manipulation recordings with complementary visual data from diverse sources. After automatically annotating the robot recordings, the pipeline converts the collected data into verifiable grounding supervision. Fine-tuning Qwen3.5-9B on approximately 1.5 million samples produced by this pipeline yields ACE-Brain-0.6. The model outperforms GPT-6 Astra on four of seven public grounding benchmarks, with an overall average score of 75.41 compared with Astra's 73.68. Under a fixed Qwen3.5-9B fine-tuning setup, aggregate grounding performance improves steadily as successive data releases expand the training collection to cover a broader range of grounding scenarios. These results show that scaling verifiable grounding supervision from diverse sources can strengthen the spatial perception of an open 9B model for general embodied operation.",
+      "url": "http://arxiv.org/abs/2610.27040v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27040v1",
+      "tldr": "By converting diverse robot and visual data into roughly 1.5 million verifiable grounding samples and fine-tuning Qwen3.5-9B, ACE-Brain-0.6 shows that scaling spatial grounding supervision strengthens an open 9B model’s embodied spatial perception, outperforming GPT-6 Astra on four of seven grounding benchmarks with a higher overall average (75.41 vs. 73.68).",
+      "detailed_reading": null,
+      "affiliations": [
+        "ACE-Brain Team"
+      ],
+      "affiliations_text": "ACE-Brain Team",
+      "score": 3.9386546861712306,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.26992v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026992v1-coasfl-coupled-consistency-optimization-for-asynchronous-split-federated-learning",
+      "source": "arxiv",
+      "title": "CoASFL: Coupled Consistency Optimization for Asynchronous Split Federated Learning",
+      "authors": [
+        "Junhao Cheng",
+        "Yunming Liao",
+        "Hongli Xu",
+        "Yang Xu",
+        "Zuan Xie"
+      ],
+      "authors_text": "Junhao Cheng, Yunming Liao, Hongli Xu, Yang Xu, Zuan Xie",
+      "abstract": "Split Federated Learning (SFL) has emerged as a promising paradigm for training large-scale deep models on resource-constrained edge devices. Although asynchronous SFL alleviates the straggler bottleneck caused by system heterogeneity, it inevitably introduces two coupled dimensions of inconsistency: horizontal inconsistency across clients and vertical inconsistency between clients and the server. These inconsistencies, further exacerbated by statistical heterogeneity, result in biased activation representations, model divergence, and severe client drift. To address these challenges, we propose CoASFL, an inconsistency-aware asynchronous SFL framework that incorporates a dynamic activation merging mechanism and a consistency-aware model aggregation mechanism. Specifically, CoASFL constructs more consistent activation sequences from heterogeneous clients to alleviate horizontal inconsistency, and dynamically adjusts aggregation weights according to client participation frequencies and progress gaps to mitigate vertical inconsistency. By jointly coordinating activation-level and model-level consistency, CoASFL effectively suppresses inconsistency propagation during asynchronous training. Extensive experiments on an 80-device heterogeneous edge testbed demonstrate that CoASFL consistently outperforms state-of-the-art SFL approaches, accelerating training by 1.61$\\times$ to 3.74$\\times$ and improving final model accuracy by up to 3.26\\% under heterogeneous scenarios.",
+      "url": "http://arxiv.org/abs/2610.26992v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26992v1",
+      "tldr": "CoASFL is an inconsistency-aware asynchronous split federated learning framework that jointly optimizes activation merging and model aggregation to mitigate horizontal and vertical inconsistencies caused by system and statistical heterogeneity, thereby accelerating training and improving accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Science and Technology of China"
+      ],
+      "affiliations_text": "University of Science and Technology of China",
+      "score": 3.8862669776047367,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.27123v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027123v1-reconstruction-optimized-expert-pruning-for-mixture-of-experts-language-models",
+      "source": "arxiv",
+      "title": "Reconstruction-Optimized Expert Pruning for Mixture-of-Experts Language Models",
+      "authors": [
+        "Jelena Markovic-Voronov",
+        "Petros Prastakos",
+        "Kayhan Behdin",
+        "Jincheng Cao",
+        "Zhipeng Wang",
+        "Shayan Mohajer Hamidi",
+        "Yuanda Xu",
+        "Zhengze Zhou",
+        "Wenhui Zhu",
+        "Rahul Mazumder"
+      ],
+      "authors_text": "Jelena Markovic-Voronov, Petros Prastakos, Kayhan Behdin, Jincheng Cao, Zhipeng Wang, Shayan Mohajer Hamidi, Yuanda Xu, Zhengze Zhou, Wenhui Zhu, Rahul Mazumder",
+      "abstract": "Mixture-of-Experts (MoE) models reduce computation through sparse expert activation, but deployment still requires storing a large number of expert parameters. We study post-training expert pruning using task-domain calibration data as a subset-selection problem: given a pretrained MoE layer, select a fixed number of experts that best reconstruct its original output. Exact subset search is combinatorial and becomes intractable for modern MoE models with many experts per layer. We develop OptEP, a scalable continuous relaxation that directly optimizes differentiable expert-selection variables, followed by a lightweight reconstruction-based update of the retained expert weights. Across multiple MoE architectures and tasks spanning mathematical reasoning and code generation, our approach improves over the strongest existing expert-pruning baselines, with absolute accuracy gains of up to 15.05% on Qwen3-30B-A3B, 14.55% on Qwen3-235B-A22B, 11.06% on GLM-4.5-Air, and 16.20% on Mixtral-8x7B. The improvements are particularly pronounced under aggressive pruning, demonstrating that reconstruction-driven expert selection and weight adaptation can preserve substantially more of the original model's performance while reducing the number of retained experts.",
+      "url": "http://arxiv.org/abs/2610.27123v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27123v1",
+      "tldr": "OptEP prunes Mixture-of-Experts language models by using a scalable continuous relaxation to select experts that best reconstruct the original layer output and then lightly updating the retained expert weights, outperforming strong baselines with absolute accuracy gains of up to 16.20% and especially preserving performance under aggressive pruning.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.875730274896509,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.26866v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026866v1-high-dimensional-layer-state-trajectories-reveal-the-internal-dynamics-of-transformer-inference",
+      "source": "arxiv",
+      "title": "High-dimensional layer-state trajectories reveal the internal dynamics of transformer inference",
+      "authors": [
+        "Heng Zhao",
+        "Yufei Wang",
+        "Ruidian Song",
+        "Weisheng Chen"
+      ],
+      "authors_text": "Heng Zhao, Yufei Wang, Ruidian Song, Weisheng Chen",
+      "abstract": "Mechanistic studies of large language models localize function in parameters, attention heads or neurons, but those parts do not specify how one inference unfolds. We treat the ordered layer-state trajectory as the empirical process and test whether layer order defines a measurable computation. Across representative Qwen, Llama and Gemma checkpoints, realized order produced paths 1.60--2.24 times as aligned with their endpoint chord as endpoint-preserving shuffles. The order effect transferred to a lexical task, but was stronger in three random initializations of the same Qwen architecture, identifying an architecture-compatible scaffold rather than a training-specific law. Direct hidden states provided stronger mechanism coordinates than vocabulary readbacks, and a task-defined coordinate made candidate competition computable. After additive interventions failed, local transition actuators selectively controlled internal trajectories across checkpoints. A confidence gate then drove 17 of 87 held-out Qwen closure trajectories across the full-vocabulary top-1 candidate boundary while leaving all 203 non-closure top-1 outputs unchanged. Safety-matched action reassignment performed similarly, locating the gain in selective gating and the bounded actuator family rather than fine-grained dose assignment. Layer order exposes an observable, computable and behaviourally consequential process of transformer inference without establishing a complete theory of LLM dynamics or control of answer correctness.",
+      "url": "http://arxiv.org/abs/2610.26866v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26866v1",
+      "tldr": "Treating ordered layer-state trajectories as the empirical object, the paper shows that transformer inference follows an architecture-compatible, geodesic-biased competitive flow whose layer order is behaviorally consequential and can be selectively steered by local transition actuators and confidence gating without altering non-closure predictions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "China Mobile Communications Group Co., Ltd.",
+        "Sinotrans Logistics Co., Ltd.",
+        "China Innovation Center of Roche (CICoR)",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "China Mobile Communications Group Co., Ltd., Sinotrans Logistics Co., Ltd., China Innovation Center of Roche (CICoR), Independent Researcher",
+      "score": 3.8544827406695643,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.26962v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026962v1-dexgraspflow-topology-aware-se3-flow-matching-for-cross-embodiment-dexterous-grasp-generation",
+      "source": "arxiv",
+      "title": "DexGraspFlow: Topology-Aware SE(3) Flow Matching for Cross-Embodiment Dexterous Grasp Generation",
+      "authors": [
+        "Bin Zhou",
+        "Boyu Ma",
+        "Xinyu Zhou",
+        "Jiahua Dong",
+        "Chuhao Zhou",
+        "Yizhou Liu",
+        "Hao Wan",
+        "Jianfei Yang"
+      ],
+      "authors_text": "Bin Zhou, Boyu Ma, Xinyu Zhou, Jiahua Dong, Chuhao Zhou, Yizhou Liu, Hao Wan, Jianfei Yang",
+      "abstract": "Differences in hand geometry, joint parameterization, and kinematic topology pose challenges for cross-embodiment dexterous grasp generation. However, spatial relations among links alone are insufficient to fully capture the hand's kinematic topology. We propose DexGraspFlow, a conditional link-level $\\mathrm{SE}(3)$ flow-matching framework integrating geometric relations and kinematic topology. The framework encodes local object geometry, link geometry, and current poses. A dual-stream DiT models link--link coordination and link--object interaction, while attention biases derived from kinematic-tree distances provide explicit structural information for modeling evolving geometric interactions. The model jointly learns translational and rotational velocity fields, integrates them to generate link poses, and recovers joint configurations through inverse kinematics. Additionally, inference-time palm-orientation guidance enables controllable grasp generation without retraining. Across three robotic hands and 30 object--hand pairs, DexGraspFlow achieves a 95.33\\% average simulation success rate, with an average generation latency, including inverse kinematics, approximately 49\\% lower than that of a state-of-the-art baseline. Further experiments demonstrate zero-shot adaptability to seven finger-removal variants and palm-orientation control. A model trained on demonstrations for the deployed hand achieves a 91\\% success rate over 100 real-robot grasping trials, supporting the framework's applicability to physical grasp execution.",
+      "url": "http://arxiv.org/abs/2610.26962v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26962v1",
+      "tldr": "DexGraspFlow is a topology-aware link-level SE(3) flow-matching framework that combines geometric relations with kinematic-tree structure via a dual-stream DiT to generate cross-embodiment dexterous grasps, recover executable joint configurations through inverse kinematics, and enable training-free palm-orientation control with high success and reduced latency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanyang Technological University",
+        "ROKAE Robotics"
+      ],
+      "affiliations_text": "Nanyang Technological University, ROKAE Robotics",
+      "score": 3.682324611198993,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.27029v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027029v1-egime-entropy-guided-model-evaluation-in-few-shot-learning",
+      "source": "arxiv",
+      "title": "EGiME: Entropy-Guided Model Evaluation in Few-Shot Learning",
+      "authors": [
+        "Dequan Jin",
+        "Tao Li",
+        "Lifeng Xing",
+        "Shihui Ying",
+        "Hui Zhao"
+      ],
+      "authors_text": "Dequan Jin, Tao Li, Lifeng Xing, Shihui Ying, Hui Zhao",
+      "abstract": "The feature-extraction quality of pre-trained models sets the ceiling of downstream transfer learning, yet few-shot model selection remains difficult: supervised evaluation on scarce labels is unstable and yields fluctuating rankings. We propose Entropy-Guided Model Evaluation (EGiME), a semi-supervised criterion that assesses a candidate model from the clustering structure of its feature space without any classifier training. EGiME performs $K$-means clustering over all labeled and unlabeled samples, then combines two entropy terms: an inter-cluster entropy measuring global separability, and an intra-cluster entropy measuring the compactness of labeled anchors, fused through an inverse-frequency weight that emphasizes small clusters. On five few-shot benchmarks and nine pre-trained models, EGiME achieves a correlation score of 0.966 with the full-pool ground-truth accuracy obtained by averaging the accuracies of K-means, KNN, and SVM. At labeling ratios of 4\\%--20\\%, it produces markedly more stable model rankings than cross-validated supervised baselines, establishing it as a practical alternative to conventional supervised evaluation for pre-trained model selection under data scarcity.",
+      "url": "http://arxiv.org/abs/2610.27029v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27029v1",
+      "tldr": "EGiME is a classifier-free, semi-supervised few-shot model-selection criterion that scores pre-trained feature spaces by K-means clustering all labeled and unlabeled samples and fusing inter-cluster separability and intra-cluster compactness entropy terms, yielding stable rankings highly correlated with full-pool accuracy under scarce labels.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai University",
+        "Guangxi University"
+      ],
+      "affiliations_text": "Shanghai University, Guangxi University",
+      "score": 3.5484555726056772,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.26974v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026974v1-transformers-learn-two-competing-sorting-algorithms-and-only-one-length-generalizes",
+      "source": "arxiv",
+      "title": "Transformers Learn Two Competing Sorting Algorithms, and Only One Length-Generalizes",
+      "authors": [
+        "Khashayar Gatmiry",
+        "Nathan W. Henry",
+        "Chloe H. Su",
+        "Emmanuel Abbe",
+        "Samy Bengio",
+        "Melanie Weber",
+        "Jonathan A. Kelner",
+        "Peter L. Bartlett"
+      ],
+      "authors_text": "Khashayar Gatmiry, Nathan W. Henry, Chloe H. Su, Emmanuel Abbe, Samy Bengio, Melanie Weber, Jonathan A. Kelner, Peter L. Bartlett",
+      "abstract": "We show that two-layer transformers trained to near-zero loss on a sorting task converge to one of two mechanistically distinct solution classes depending on their initialization. One solution class consists of solutions that do not use the second attention layer to sort, but also fail to length-generalize. The other, which uses both attention layers, length-generalizes perfectly, despite only being trained to sort sequences of a fixed length. By carefully choosing the weight initialization, we demonstrate that we can steer the model toward learning one solution or the other. We identify input types that are rare at the training length but increasingly common at longer sequence lengths as a source of this disparity in length-generalization, and find that layer-wise specialization of the second class of solutions allows them to handle these rare sequences more accurately. In the second class, we discover a mechanism by which the second layer attention can use the contextual information gathered by the first layer attention to reduce its search space. On the related task of finding the minimum of a sequence, we find a similar two solution-type phenomenon, but with the opposite generalization pattern, where a different form of layer-wise specialization causes the two-layer solution to length-generalize worse than the single-attention solution.",
+      "url": "http://arxiv.org/abs/2610.26974v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26974v1",
+      "tldr": "Two-layer transformers trained on fixed-length sorting converge—depending on initialization—to either a single-stage solution that fails to length-generalize or a two-stage solution that uses both attention layers to length-generalize perfectly, with the latter’s advantage explained by layer-wise specialization on rare small-gap sequences and cross-layer “hinting” that narrows the second layer’s search space.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Google DeepMind",
+        "UC Berkeley",
+        "EPFL",
+        "MIT",
+        "Harvard University",
+        "Apple"
+      ],
+      "affiliations_text": "Google DeepMind, UC Berkeley, EPFL, MIT, Harvard University, Apple",
+      "score": 3.539963298798108,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.27078v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027078v1-leaf-lut-aware-efficient-attention-on-fpgas",
+      "source": "arxiv",
+      "title": "LEAF: LUT-aware Efficient Attention on FPGAs",
+      "authors": [
+        "Arianna Cox",
+        "Chang Sun",
+        "Lauri Laatu",
+        "Benedikt Maier",
+        "Aadeesh Sharma",
+        "Leo Rozanov",
+        "Wayne Luk",
+        "Maria Spiropulu",
+        "Alexander Tapper",
+        "Zhiqiang Que"
+      ],
+      "authors_text": "Arianna Cox, Chang Sun, Lauri Laatu, Benedikt Maier, Aadeesh Sharma, Leo Rozanov, Wayne Luk, Maria Spiropulu, Alexander Tapper, Zhiqiang Que",
+      "abstract": "We introduce Lookup-table (LUT)-aware Efficient Attention on FPGAs (LEAF). LEAF is the first nanosecond-scale LUT-aware transformer for FPGAs. Deploying transformers that are large enough to perform well, small enough to fit on an FPGA, and fast enough to meet the sub-microsecond timescales required by real-time systems such as those at CERN remains difficult, since the same attention mechanism that gives these models their high expressivity also makes them costly to implement in hardware. LEAF converts the query, key, and value projections and the final output feed-forward layer into FPGA-native layers with LUT-aware training, creating the first LUT-aware transformer and linformer layers built for ultra-low-latency inference. Attention resists LUT-aware training because it multiplies two activations where the method needs a constant weight to tabulate; LEAF tabulates the attention block's constant matrix-vector multiplications and leaves the rest in arithmetic form. On a standard jet tagging benchmark this improves accuracy by 1.8 percentage points while using 2.9 times fewer LUTs than the previous state-of-the-art sub-microsecond transformer at the same input size. Our most efficient LEAF-based linformer with 64 input particles reaches 80.4% classification accuracy at 28k LUTs and 35ns.",
+      "url": "http://arxiv.org/abs/2610.27078v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27078v1",
+      "tldr": "LEAF introduces the first nanosecond-scale LUT-aware transformer for FPGAs by converting attention’s constant matrix-vector multiplications into LUT-based layers while leaving activation-activation products in arithmetic form, achieving 1.8 percentage points higher accuracy with 2.9× fewer LUTs than prior sub-microsecond transformers and reaching 80.4% jet-tagging accuracy at 28k LUTs and 35 ns.",
+      "detailed_reading": null,
+      "affiliations": [
+        "California Institute of Technology",
+        "University of Bristol",
+        "Imperial College London"
+      ],
+      "affiliations_text": "California Institute of Technology, University of Bristol, Imperial College London",
+      "score": 3.488353457407916,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.26999v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026999v1-cortexforge-scenario-based-rf-dataset-generation-on-real-testbeds",
+      "source": "arxiv",
+      "title": "CorteXforge: Scenario-Based RF Dataset Generation on Real Testbeds",
+      "authors": [
+        "Andréa Joly",
+        "Leonardo S Cardoso",
+        "Jean-Marie Gorce"
+      ],
+      "authors_text": "Andréa Joly, Leonardo S Cardoso, Jean-Marie Gorce",
+      "abstract": "Deep learning for radio frequency (RF) signal analysis relies on large annotated datasets, yet synthetic datasets trade physical realism for controllability, while uncontrolled over-theair measurements offer realism but limited reproducibility. We present CorteXforge, a scenario-based framework for generating realistic and reproducible RF datasets on programmable software defined radio (SDR) testbeds. High-level RF scenarios are automatically translated into synchronized experiments executed on the SLICES-RI/CorteXlab platform, producing fully annotated Signal Metadata Format (SIGMF) datasets that capture hardware impairments and propagation effects. We validate CorteXforge through automatic modulation classification using ModForge, an over-the-air (OTA) dataset generated with the framework. Cross-domain experiments reveal a synthetic-to-real performance gap and show that synthetic pretraining remains beneficial for adaptation to OTA data. CorteXforge provides a practical foundation for reproducible RF dataset generation and future research on domain generalization.",
+      "url": "http://arxiv.org/abs/2610.26999v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26999v1",
+      "tldr": "CorteXforge is a scenario-based framework that automatically translates high-level RF scenarios into synchronized over-the-air experiments on programmable SDR testbeds to generate realistic, reproducible, fully annotated SigMF datasets, validated via the ModForge modulation-classification dataset, which reveals a synthetic-to-real performance gap and shows that synthetic pretraining aids adaptation to OTA data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "INSA Lyon",
+        "Inria"
+      ],
+      "affiliations_text": "INSA Lyon, Inria",
+      "score": 3.3997009724877314,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.27079v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027079v1-clockmark-adaptive-and-host-dependent-watermarking-for-large-language-models",
+      "source": "arxiv",
+      "title": "ClockMark: Adaptive and Host-Dependent Watermarking for Large Language Models",
+      "authors": [
+        "Yupeng Qiu",
+        "Han Fang",
+        "Ee-Chien Chang"
+      ],
+      "authors_text": "Yupeng Qiu, Han Fang, Ee-Chien Chang",
+      "abstract": "Large language model (LLM) watermarking operates on the next-token distribution that evolves during generation. In streaming generation, each sampled token becomes part of the text and affects subsequent distributions. Embedding therefore proceeds with a changing host, unlike classical watermarking, which adapts embedding to an existing host signal. To accommodate this difference, we formulate a novel embedding framework for LLM watermarking based on two principles. We first argue that embedding should be adaptive, retaining the state of previous sampling decisions to better guide subsequent choices. We further argue that embedding should be host-dependent, using the current LLM distribution to constrain both token selection and state updates. Guided by these principles and the two requirements of distribution preservation and robustness to text editing, we propose ClockMark. It combines adaptive and host-dependent embedding with message spreading, embedding the full payload in each watermarked token. Theoretically, we prove that ClockMark preserves the original LLM sequence distribution, thereby maintaining generation quality. Empirically, extensive experiments against 12 baselines demonstrate improved robustness to text editing, with gains of up to 16.08 percentage points in bit accuracy over the strongest tested baseline.",
+      "url": "http://arxiv.org/abs/2610.27079v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27079v1",
+      "tldr": "ClockMark is an adaptive, host-dependent LLM watermarking method that embeds the full payload through stateful countdown sampling guided by the model’s evolving token probabilities, provably preserving the original generation distribution while improving robustness to text editing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Singapore",
+        "University of Science and Technology of China"
+      ],
+      "affiliations_text": "National University of Singapore, University of Science and Technology of China",
+      "score": 3.237026416090881,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.26967v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/21/261026967v1-when-weak-submodularity-meets-matroids-how-does-standard-greedy-behave",
+      "source": "arxiv",
+      "title": "When Weak Submodularity Meets Matroids: How Does Standard Greedy Behave?",
+      "authors": [
+        "Qixin Zhang",
+        "Shi Fu",
+        "Shengminjie Chen",
+        "Chao Qian",
+        "Dacheng Tao"
+      ],
+      "authors_text": "Qixin Zhang, Shi Fu, Shengminjie Chen, Chao Qian, Dacheng Tao",
+      "abstract": "Weakly submodular maximization finds numerous applications in machine learning, data mining and statistics. In particular, under a cardinality constraint, the standard greedy algorithm is known to attain the tight $(1-e^{-γ})$-approximation guarantee, where $γ$ denotes the submodularity ratio. However, when considering general matroid constraints, \\emph{how well standard greedy can perform} has remained a longstanding open question. In this paper, we resolve this question by studying the worst-case approximation guarantee $R_{\\mathrm{gr}}(γ,r)$ of standard forward greedy, where $r$ is the rank of matroid. Specifically, our first contribution is the following refined lower bound \\begin{equation*} R_{\\gr}(γ,r)\\ge \\max\\left\\{ \\fracγ{r}, \\frac{γ^2} {B_γ+\\sqrt{γ(r-1)}}, \\frac{γ^{r+1}} {2-γ+γ^{r+1}}, \\frac{γ^2} {14\\left(B_γ+\\sqrt{γ(1-γ)(r-1)}\\right)} \\right\\}, \\end{equation*} where $B_γ\\triangleq2-γ+γ^2$. This lower bound not only strictly improves upon the previous guarantee of $0.4γ^2/(1+\\sqrt{γr})$, but also can recover the classical $1/2$-approximation guarantee at $γ=1$. Subsequently, a corresponding upper bound is established for $R_{\\mathrm{gr}}(γ,r)$, namely, \\begin{equation}\\label{eq_upper_abstract} R_{\\gr}(γ,r) \\le\\min\\left\\{\\frac{1}{2},20\\max\\left\\{\\fracγ{r}, \\frac{γ^2}{B_γ+ \\sqrt{γ(1-γ)(r-1)}}\\right\\}\\right\\}. \\end{equation} For every fixed $γ\\in(0,1)$, this Eq.\\eqref{eq_upper_abstract} effectively sharpens the recent $O_γ(1/\\log(n-1))$ upper bound to $O_γ(r^{-1/2})$, where $n$ is the size of ground set. Putting all these results together, we eventually can obtain \\[R_{\\gr}(γ,r) =\nΘ\\!\\left( \\max\\left\\{\\fracγ{r}, \\frac{γ^2} {1+\\sqrt{γ(1-γ)r}}\\right\\} \\right).\\]",
+      "url": "http://arxiv.org/abs/2610.26967v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26967v1",
+      "tldr": "This paper resolves the longstanding open question of how standard forward greedy performs for weakly submodular maximization under matroid constraints by establishing asymptotically tight worst-case approximation bounds of \\(\\Theta(\\max\\{\\gamma/r,\\ \\gamma^2/(1+\\sqrt{\\gamma(1-\\gamma)r})\\})\\).",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanjing University",
+        "Nanyang Technological University",
+        "Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Nanjing University, Nanyang Technological University, Chinese Academy of Sciences",
+      "score": 2.955340267325863,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2610.27107v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027107v1-rgh-gnn-risk-gated-heterogeneous-graph-neural-network-for-financial-fraud-detection",
+      "source": "arxiv",
+      "title": "RGH-GNN : Risk-Gated Heterogeneous Graph Neural Network for Financial Fraud Detection",
+      "authors": [
+        "Mythreyee Hari",
+        "Subin Sahayam",
+        "Vegesna S M Srinivasavarma"
+      ],
+      "authors_text": "Mythreyee Hari, Subin Sahayam, Vegesna S M Srinivasavarma",
+      "abstract": "Credit card fraud is a significant problem for financial institutions, resulting in substantial monetary loss each year. Fraud patterns and methods are continuously evolving, with fraudulent transactions often disguised to resemble legitimate activity. Real world transaction data for fraud detection is severely affected by class imbalance making it harder to detect these transactions. Fraudulent transactions are rarely isolated. Accounts, devices, and other common attributes are often shared across fraudulent activity, revealing relational patterns that individual transaction features alone cannot capture. Graph-based approaches model these relationships explicitly. However, standard graph neural networks aggregate neighbourhood information uniformly, which can dilute the already scarce signal carried by fraudulent transactions and limit detection of camouflaged fraud. This work presents RGH-GNN, a heterogeneous graph neural network that addresses this limitation by incorporating transaction-level risk scores, generated by a supervised LightGBM classifier as edge weights. It is used to guide message passing through a learnable risk-gated aggregation mechanism. It ensures that high-risk transactions contribute more strongly to learned representations rather than being diluted by uniform neighbourhood aggregation. RGH-GNN is evaluated on the IEEE-CIS fraud detection dataset against standard graph neural network models that are trained on the same heterogeneous graph. RGH-GNN outperforms all baselines across every evaluation metric, with an AUC-ROC score of 0.914. This demonstrates that incorporating engineered risk signals into graph-based message passing substantially improves fraud detection performance.",
+      "url": "http://arxiv.org/abs/2610.27107v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27107v1",
+      "tldr": "RGH-GNN is a heterogeneous graph neural network that uses LightGBM-generated transaction risk scores as edge weights and a learnable risk-gated aggregation mechanism to prevent rare fraud signals from being diluted, achieving an AUC-ROC of 0.914 on the IEEE-CIS fraud detection dataset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shiv Nadar University"
+      ],
+      "affiliations_text": "Shiv Nadar University",
+      "score": 2.871880887086436,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2610.27001v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/21/261027001v1-hierdta-hierarchical-structure-aware-representation-learning-for-drug-target-affinity-prediction",
+      "source": "arxiv",
+      "title": "HierDTA: Hierarchical Structure-Aware Representation Learning for Drug--Target Affinity Prediction",
+      "authors": [
+        "Huangchao Xu",
+        "Baohua Zhang",
+        "Qian Liu",
+        "Zhong Jin",
+        "Yi Du"
+      ],
+      "authors_text": "Huangchao Xu, Baohua Zhang, Qian Liu, Zhong Jin, Yi Du",
+      "abstract": "Drug--target affinity (DTA) prediction plays an important role in computer-aided drug discovery, where reliable computational models can help prioritize compound--protein pairs before experimental validation. A key challenge in DTA prediction is to effectively mine multi-level molecular information from drug structures while accurately modeling the binding-site environment of target proteins. To address these issues, we introduce HierDTA, a hierarchical structure-aware framework for DTA prediction. \\textcolor{black}{HierDTA represents each drug as an atom--motif heterogeneous graph and introduces an augmentation module that propagates functional-motif semantics to the corresponding atoms. For proteins, kinase-domain structures are converted into residue interaction graphs. The resulting atom and residue representations are integrated using cross-attention to capture pair-specific relationships, while molecule fingerprints and pretrained ESM-2 embeddings provide complementary global information. Compared with state-of-the-art methods, HierDTA achieves superior performance on the Davis dataset across all metrics and attains the highest \\(r_m^2\\) of 0.791 on KIBA. It also exhibits strong generalization under cold-start settings, particularly on KIBA, where MSE is reduced by 21.7\\% in the unseen-protein scenario. Ablation study and interpretability analysis supported the contributions of the hierarchical augmentation and interaction components.} Case studies further showed that HierDTA provided early enrichment of candidate bioactive compounds. These results indicate that HierDTA is an effective framework for affinity prediction and target-specific virtual screening.",
+      "url": "http://arxiv.org/abs/2610.27001v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27001v1",
+      "tldr": "HierDTA is a hierarchical structure-aware framework for drug–target affinity prediction that combines atom–motif drug graphs with motif-to-atom semantic augmentation, kinase-domain residue interaction graphs, atom–residue cross-attention, and global fingerprint/ESM-2 features to achieve state-of-the-art accuracy and strong cold-start generalization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Chinese Academy of Sciences",
+        "Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "University of Chinese Academy of Sciences, Chinese Academy of Sciences",
+      "score": 2.709280498283702,
+      "score_text": "2.7"
+    }
+  ],
+  "errors": []
+}
