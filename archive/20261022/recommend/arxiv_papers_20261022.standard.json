@@ -1,0 +1,737 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-22T15:55:41.634138",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.28788v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028788v1-arcflow-training-flow-policies-for-multiple-solver-budgets",
+      "source": "arxiv",
+      "title": "ArcFlow: Training Flow Policies for Multiple Solver Budgets",
+      "authors": [
+        "Hieu Tran",
+        "Hong Yu"
+      ],
+      "authors_text": "Hieu Tran, Hong Yu",
+      "abstract": "Flow-matching policies adjust inference cost through the number of solver steps, but reinforcement learning at a single fixed solver budget can hide degradation at cheaper deployment budgets and even erase useful one-step behavior present in a pretrained policy. We introduce Action-Ratio-Clip Flow (ArcFlow), a deployment-aware algorithm for training one flow policy across a specified range of solver budgets. ArcFlow combines action-aligned supervision, budget exposure, and worst-budget checkpoint selection. For reconstruction objectives, its bridge aggregates temporal probes into one surrogate ratio and one PPO-style clip per action, with a boundary residual exactly equal to deployed one-step reconstruction error. Cycling exposes the shared field to the deployment range, and selection optimizes its performance floor. For native velocity objectives, multi-budget endpoint supervision applies the same principle without replacing the native update. Both realizations preserve the architecture and deployment-time cost. Across DM Control, manipulation, and locomotion, ArcFlow attains the highest mean one-step return among five flow-policy baselines on 25 of 30 tasks under each method's reported training settings. Component studies identify complementary improvements from boundary supervision, the fixed-grid bridge, budget exposure, and deployment selection. These results establish deployment-budget-aware training as an effective route to strong low-step control with one policy serving multiple inference costs.",
+      "url": "http://arxiv.org/abs/2610.28788v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28788v1",
+      "tldr": "ArcFlow is a deployment-aware training algorithm that trains one flow-matching policy across a range of solver budgets using action-aligned supervision, budget exposure, and worst-budget checkpoint selection, achieving stronger low-step control than baseline flow policies across most tasks.",
+      "detailed_reading": {
+        "motivation": "Flow-matching 策略可通过增减求解器步数调节推理成本，但只在单一固定求解预算上做强化学习，可能掩盖更低部署预算下的性能退化，甚至抹掉预训练策略已有的一步生成能力。因此需要一种面向部署预算的训练方法，使同一个流策略在指定的一整套求解器预算上都具有可用性能。",
+        "method": "ArcFlow（Action-Ratio-Clip Flow）在预训练流策略与给定预算区间上做部署感知训练：对重构型目标，将同一动作在时间/求解器探针上的监督聚合为一个动作级代理比率，并只做一次 PPO 风格裁剪，同时加入边界残差项，该项精确对应部署时一步重构误差；训练中循环暴露不同预算（固定网格/预算 cycling），并以最差预算表现选择检查点。对原生速度目标，则采用多预算端点监督实现同一原则，不替换原有更新；推理时仍用原流策略架构和标准求解器，仅改变步数，不增加部署成本。",
+        "result": "在 DM Control、操作与 locomotion 任务上，按各方法报告的设置评估，ArcFlow 在 30 个任务中的 25 个取得五种流策略基线中最高的平均一步回报；消融/组件研究显示边界监督、固定网格桥接、预算暴露和部署式检查点选择带来互补提升，并支持一个策略服务多个推理成本。",
+        "conclusion": "结果表明，部署预算感知训练是获得强低步控制性能的有效路径：它避免单预算 RL 对廉价部署预算的忽视，在保持架构与推理成本不变的前提下，用单个流策略覆盖多个求解器预算。",
+        "key_details": "关键实现包括：以预训练流策略为初始化，在指定预算集合上采样/循环训练，输入为环境交互或轨迹中的状态-动作及预训练流策略；重构目标使用时间探针聚合的动作级 surrogate ratio 与单次 PPO clip，边界残差锚定一步重构误差；原生速度目标使用多预算端点监督；检查点按最差预算性能（性能下限）选择。方法不改变网络架构或部署时求解器成本，但依赖预设预算范围与探针/裁剪等超参，摘要未给出具体数值；实验结论基于所报告训练设置和 30 个任务的一步回报均值。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.1417119272703875,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.28770v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028770v1-reapo-retry-aware-policy-optimization-for-efficient-exploration-in-llm-reasoning",
+      "source": "arxiv",
+      "title": "ReAPO: Retry-Aware Policy Optimization for Efficient Exploration in LLM Reasoning",
+      "authors": [
+        "Nghi Dao",
+        "Calder Morton-Ferguson",
+        "Noah Golowich",
+        "Adam Block"
+      ],
+      "authors_text": "Nghi Dao, Calder Morton-Ferguson, Noah Golowich, Adam Block",
+      "abstract": "RLVR improves language-model reasoning, but commonly relies on independent stochastic rollouts for exploration, which can repeatedly sample similar failed strategies. Prior work has seen success with approaches that guide exploration by introducing dependence into the sampling process by including incorrect solutions in the context for subsequent attempts. Still, these methods introduce the additional question of how to assign credit to each attempt. We propose to view the credit assignment through the lens of Stochastic Shortest Paths, a framework in classical reinforcement learning that seeks to minimize the expected cumulative cost to reach a terminal state (in our case, a verified successful response). We show that, under suitable simplifying assumptions, this perspective naturally leads to a simple modification to GRPO, which we call Retry-Aware Policy Optimization (ReAPO). ReAPO allocates additional generation to failed trajectories, allowing successful retries to be reinforced without rewarding preceding failures, and assigns credit in a theoretically principled way to each attempt. Across Qwen3 and OLMo-2 models from 0.6B to 4B and eight mathematical and scientific reasoning benchmarks, ReAPO improves first-attempt performance over GRPO as well as natural recent baseline algorithms, while additional ablations demonstrate the utility of both serial sampling and ReAPO's credit assignment. On Qwen3-0.6B, ReAPO also outperforms GRPO with twice the group size or twice the training steps, reaching their peak accuracy with 39% and 31% fewer generated tokens, respectively. Taken together, our results suggest that ReAPO is a simple yet effective approach for improving LM reasoning performance through improved exploration and retry-aware credit assignment.",
+      "url": "http://arxiv.org/abs/2610.28770v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28770v1",
+      "tldr": "ReAPO is a simple GRPO modification that frames retry-based credit assignment as a stochastic shortest path problem, enabling additional attempts after failed reasoning trajectories so successful retries are reinforced without rewarding preceding failures, thereby improving exploration and token efficiency in LLM reasoning.",
+      "detailed_reading": {
+        "motivation": "RLVR 能提升语言模型推理，但常见做法依赖相互独立的多条随机 rollout 进行探索，容易反复采样到相似的失败策略，导致探索效率低。已有方法通过在上下文中加入错误解来引导后续尝试，从而引入采样依赖性，但也带来如何对每次尝试进行信用分配的新问题。本文旨在用有原则的信用分配改善失败后的重试探索，并提升首次尝试推理表现。",
+        "method": "ReAPO 将重试式推理建模为经典强化学习中的随机最短路径问题，目标是最小化到达已验证成功终态所需的期望累计代价，并在适当简化假设下推导出对 GRPO 的简单修改。训练时对失败轨迹分配额外生成机会，把先前错误解作为后续尝试的上下文进行串行采样，仅强化成功重试而不奖励先前失败，并按理论推导对每次尝试分配信用。实验在 Qwen3 与 OLMo-2 的 0.6B 到 4B 模型上，于八个数学与科学推理基准上对比 GRPO 及近期自然基线，并通过消融检验串行采样和 ReAPO 信用分配的作用。",
+        "result": "ReAPO 在多个模型规模和八个数学与科学推理基准上提升了首次尝试性能，优于 GRPO 以及近期自然基线算法。消融表明串行采样与 ReAPO 的信用分配均有实际贡献。在 Qwen3-0.6B 上，ReAPO 还优于组大小翻倍或训练步数翻倍的 GRPO，并分别以少 39% 和少 31% 的生成 token 达到其峰值准确率。",
+        "conclusion": "ReAPO 是一种简单而有效的 LLM 推理改进方法，通过失败轨迹上的额外重试探索与理论化的重试感知信用分配，提高探索效率与首次尝试准确率。其结果说明，将重试过程纳入策略优化并避免奖励失败前缀，可在不单纯增加组大小或训练步数的情况下获得更优的 token 效率。",
+        "key_details": "关键实现点包括：以随机最短路径视角定义到达成功终态的期望累计代价，在简化假设下将信用分配给各次尝试；对失败轨迹追加生成以形成串行重试，仅对成功重试给予强化，不奖励此前失败；与 GRPO 结合，使用组内相对优势式更新但改变采样与信用结构。实验覆盖 Qwen3/OLMo-2 0.6B 至 4B 和八个推理基准，并报告首次尝试准确率、生成 token 效率及串行采样/信用分配消融；局限性在于理论推导依赖简化假设，且主要验证于数学与科学推理任务。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.1025749445544175,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.28703v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028703v1-scalable-stress-constrained-topology-optimization-a-super-resolution-and-simultaneous-approach-based-on-machine-learning",
+      "source": "arxiv",
+      "title": "Scalable Stress-Constrained Topology Optimization: A Super-resolution and Simultaneous Approach Based on Machine Learning",
+      "authors": [
+        "Xiangyu Sun",
+        "Shirin Hosseinmardi",
+        "Ramin Bostanabad"
+      ],
+      "authors_text": "Xiangyu Sun, Shirin Hosseinmardi, Ramin Bostanabad",
+      "abstract": "Large-scale topology optimization (TO) remains computationally demanding, especially for stress-constrained problems. To address this challenge, we propose the simultaneous neural topology optimization (SNTO) framework where we represent state, adjoint, and design variables with custom neural networks (NNs) whose parameters are jointly optimized within a single optimization loop that leverages continuous adjoint analysis and automatic differentiation. This optimization minimizes a multi-component loss function that combines the design objective, an aggregation of the local stress constraints, and the potential energy functionals. Our NNs have a unique architecture that accelerates convergence while enabling the networks to capture sharp gradients and boundaries which are critical to stress-constrained TO. To achieve scalability to millions of degrees of freedom (DoF), we develop a hardware-aware training scheme in which the design domain is partitioned into subdomains that are distributed across multiple GPUs. To control peak GPU memory usage, we further slice each subdomain into smaller regions whose loss gradients are evaluated sequentially and accumulated to update the NN parameters. Unlike domain decomposition approaches, our partitioning naturally ensures field continuity across the subdomains and does not require the introduction of additional terms into the loss function. For validation, we first evaluate the proposed framework on various 2D stress-constrained benchmarks and compare our results to a conventional finite element-based approach, showing that SNTO produces super-resolution designs with sharper boundaries, smaller gray areas, and lower volume fractions. We then consider large-scale 3D problems with up to eight million collocation points and distribute the training over up to eight GPUs.",
+      "url": "http://arxiv.org/abs/2610.28703v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28703v1",
+      "tldr": "The paper proposes a simultaneous neural topology optimization (SNTO) framework that jointly trains custom neural networks for state, adjoint, and design variables using continuous adjoint analysis and automatic differentiation, with hardware-aware multi-GPU partitioning and slicing to enable scalable, super-resolution stress-constrained designs at millions of degrees of freedom.",
+      "detailed_reading": {
+        "motivation": "大规模应力约束拓扑优化因局部应力约束数量随离散分辨率增长、传统嵌套分析设计每轮需多次有限元求解而计算代价极高，现有机器学习方法又多局限于二维或较小规模问题。作者希望借助连续神经网络参数化与同时分析设计范式，在避免全局刚度矩阵组装和重复有限元求解的同时，实现高分辨率、可扩展到数百万自由度且可在多GPU上高效训练的应力约束拓扑优化。",
+        "method": "提出同时神经拓扑优化SNTO框架，用三个定制神经网络分别表示状态场、伴随场和设计场，并在单一优化循环中联合训练；训练采用连续伴随分析与自动微分计算灵敏度，最小化由设计目标、局部应力约束聚合项和势能泛函组成的多分量物理损失。为实现大规模扩展，设计域被划分为子域并分配到多GPU，每个子域再切片为更小区域以顺序评估损失梯度并累加更新网络参数；由于场由连续神经网络表示，分区天然保持跨子域场连续性，无需额外界面损失项。",
+        "result": "在多种二维应力约束基准上，SNTO相对传统有限元方法得到超分辨率设计，表现为边界更锐利、灰度区域更小和体积分数更低；在三维大规模问题中测试到约八百万个配点并分布到最多八个GPU，摘要报告训练时间随GPU数量近似线性下降，且增加子切片数量可降低峰值GPU显存。",
+        "conclusion": "SNTO将状态、伴随和设计变量的神经网络参数化与同时优化结合，为应力约束拓扑优化提供了无需全局刚度矩阵组装、可超分辨率且可多GPU扩展的机器学习路径。结果表明该方法在有限计算资源下处理大规模应力约束问题具有可行性，并为高分辨率局部约束优化提供了新框架。",
+        "key_details": "关键实现包括以配点求和构成物理损失，使约束评估分辨率可独立于可训练参数数量；不组装、存储或分解全局刚度矩阵；采用能捕捉锐利梯度和边界的定制网络结构，并以应力约束聚合项控制局部约束。多GPU分区只用于计算分配，不引入需调权的界面损失，子域切片通过梯度顺序评估与累积控制显存。局限包括摘要仅给出定性对比和扩展性趋势而未列具体误差或超参数，应力聚合精度仍依赖聚合策略，当前大规模验证上限约为八百万配点和八个GPU。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.779081456217465,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.28699v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028699v1-reinforcement-learning-for-hardware-acceleration-and-system-level-optimization-on-fpga-and-integrated-circuit-platforms-a-survey",
+      "source": "arxiv",
+      "title": "Reinforcement learning for hardware acceleration and system-level optimization on FPGA and integrated-circuit platforms: A survey",
+      "authors": [
+        "Hamza Kheddar"
+      ],
+      "authors_text": "Hamza Kheddar",
+      "abstract": "Reinforcement learning (RL) enables adaptive and autonomous decision-making in embedded, edge, and heterogeneous computing systems. Field-programmable gate arrays (FPGAs) and integrated circuits (ICs) offer low latency, energy efficiency, and architectural flexibility for RL deployment, while introducing challenges in resource constraints, implementation complexity, and hardware-algorithm co-design. This review surveys more than 100 studies on RL implementations across FPGA and IC platforms, emphasizing architectures, implementation strategies, performance evaluation, and applications. The literature is organized by RL family, including model-based Markov decision processes, classical value-based methods, deep RL, actor-critic, policy-gradient, and multi-agent approaches. We further classify studies by abstraction level, hardware realization strategy, and application domain, examining how RL algorithms map onto reconfigurable and fixed hardware. Unlike surveys restricted to particular algorithms or platforms, this work provides a unified analysis of FPGA and IC implementations, covering acceleration, reconfigurable architectures, energy-aware control, and system-level optimization. Comparative assessments consider resource utilization, latency, throughput, power consumption, and reported performance gains. Finally, we identify recurring architectural patterns, practical limitations, open challenges, and research directions for efficient RL-driven hardware systems. The survey offers a consolidated reference for researchers developing and evaluating RL solutions on specialized hardware.",
+      "url": "http://arxiv.org/abs/2610.28699v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28699v1",
+      "tldr": "This survey provides a unified, hardware-centric review of more than 100 studies on reinforcement learning implementations across FPGA and IC platforms, organizing them by RL family, hardware realization strategy, and application domain while comparing performance trade-offs and identifying architectural patterns, limitations, and open research directions.",
+      "detailed_reading": {
+        "motivation": "随着嵌入式、边缘与异构计算系统对自适应、自主决策的需求增强，传统静态控制和启发式优化难以应对动态工作负载、功耗预算与时延约束。FPGA与IC平台具有低时延、高能效和架构可定制优势，但将RL从CPU/GPU软件实现迁移到硬件面临资源受限、实现复杂和软硬件协同设计等挑战，因此需要系统梳理该交叉领域。",
+        "method": "该文采用系统性文献综述方法，以Scopus为主检索源，使用覆盖RL/DRL与FPGA/ASIC/IC/SoC的布尔查询，限定2015—2026年英文期刊与会议论文，并依据硬件实现细节、评估结果和相关性进行筛选，最终分析100余篇（正文称120篇）研究。文献按RL族（MDP、值方法、深度RL、Actor-Critic、策略梯度、多智能体等）、抽象层级、硬件实现策略和应用域分类，并从资源利用率、时延、吞吐、功耗和报告性能增益等维度进行比较。",
+        "result": "综述提供了FPGA与IC平台上RL实现的统一分析框架，覆盖RL作为硬件加速负载和作为硬件系统控制机制的双重角色，涉及加速器设计、可重构架构、能耗感知控制和系统级优化。文章归纳出反复出现的架构模式，汇总不同RL算法到可重构与固定硬件的映射方式，并指出现有研究报告指标不统一、实现细节不足和可复现性有限等问题。",
+        "conclusion": "RL在FPGA/IC平台上具有实现低时延、高能效和自适应智能硬件的潜力，但尚受资源约束、设计复杂度、部署灵活性和软硬件协同设计难度制约。未来需要发展可复用架构、量化与能效优化方法、统一评估基准以及面向实际部署的RL驱动硬件系统设计流程。",
+        "key_details": "关键方法细节包括：以Scopus为主并覆盖IEEE Xplore、Elsevier、ACM、Web of Science等来源；检索式联合RL/DRL与FPGA/ASIC/IC/SoC关键词；时间窗为2015—2026年；仅纳入英文期刊和会议论文；排除缺乏硬件实现细节、缺少有效评估或与RL-FPGA/IC弱相关的研究。综述以表格化基准对比目标应用、最佳性能/改进、局限和实现说明，但作为综述其局限在于依赖文献报告结果、指标口径不一致且难以进行统一实验复现。"
+      },
+      "affiliations": [
+        "University of Medea"
+      ],
+      "affiliations_text": "University of Medea",
+      "score": 4.697517422666051,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2610.28716v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028716v1-offline-apprenticeship-learning-for-human-centric-environments",
+      "source": "arxiv",
+      "title": "Offline Apprenticeship Learning for Human-Centric Environments",
+      "authors": [
+        "Md Mirajul Islam"
+      ],
+      "authors_text": "Md Mirajul Islam",
+      "abstract": "Effective decision-making in human-centric environments such as Intelligent Tutoring Systems (ITSs) and clinical healthcare requires policies that are adaptive, data-efficient, and ethically deployable. Apprenticeship Learning (AL) infers policies directly from expert demonstrations by recovering the underlying reward structure, enabling strictly offline learning without environment interaction. This dissertation develops a progression of offline AL frameworks organized around two challenges: reward modeling and demonstration quality. For reward modeling, EM-EDM clusters demonstrations by latent reward functions and induces cluster-specific policies, and THEMES partitions trajectories into temporally coherent sub-trajectories guided by a hierarchically learned reward regulator; across one educational and three clinical datasets, THEMES outperforms flat and hierarchical AL baselines. For demonstration quality, HALIDE integrates continuous quality signals into hierarchical policy induction, enabling principled reuse of mixed-quality data under distribution shift. CCHAL further attributes quality to individual decisions via Bayesian credit assignment, dual-arm criticality scoring that contrasts expert and non-expert behavior, and a Bradley-Terry contrastive IRL objective over failure trajectories, outperforming baselines including HALIDE on three clinical EHR datasets and an ITS dataset. Finally, a real-world classroom evaluation of StuEDM, an EDM-induced policy that preserves student agency and intervenes only on disagreement, shows significant learning gains over an Expert baseline and a higher pretest-adjusted posttest score than a CQL policy trained on a far larger corpus, while overriding students less than half as often. Together, this work establishes offline AL as a practical, data-efficient, and ethically viable paradigm for human-centric environments.",
+      "url": "http://arxiv.org/abs/2610.28716v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28716v1",
+      "tldr": "This dissertation develops a progression of offline apprenticeship learning frameworks that recover reward structure from expert demonstrations while addressing reward modeling and mixed-quality demonstration data, enabling data-efficient and ethically deployable policies for human-centric environments such as intelligent tutoring systems and clinical healthcare.",
+      "detailed_reading": {
+        "motivation": "智能辅导系统与临床医疗等人本环境中的决策，需要同时具备自适应性、数据高效性和伦理可部署性的策略，而在线试错学习往往代价高昂甚至不可接受。学徒学习（AL）能从专家示范中反推潜在奖励结构，从而完全离线地推断策略，无需与环境交互。然而现有 AL 仍面临两个核心挑战：奖励建模不足，以及示范数据质量参差不齐。",
+        "method": "论文提出一系列离线 AL 框架，均只以专家示范为输入，不与环境交互。针对奖励建模，EM-EDM 用潜在奖励函数对示范进行聚类，并为每个簇归纳簇专属策略；THEMES 则在层次化学习的奖励调节器引导下，将整条轨迹划分为时间上连贯的子轨迹，再在子轨迹层面进行策略归纳。针对示范质量，HALIDE 将连续质量信号整合进层次策略归纳流程，使混合质量数据在分布偏移下也能被有原则地复用；CCHAL 进一步通过贝叶斯信用分配把质量归因到单个决策，用双臂关键性评分对比专家与非专家行为，并在失败轨迹上引入 Bradley-Terry 对比式逆强化学习目标。最后将 EDM 归纳出的 StuEDM 策略部署到真实课堂，按“仅在与学生判断不一致时干预”的规则保留学生自主性。",
+        "result": "在一个教育数据集和三个临床数据集上，THEMES 优于扁平式与层次式 AL 基线；CCHAL 在三个临床 EHR 数据集和一个智能辅导数据集上优于包括 HALIDE 在内的基线。真实课堂评估中，StuEDM 相对专家基线取得显著学习增益，经前测调整后的后测成绩高于用远大规模语料训练的 CQL 策略，同时覆盖学生决策的频率不到后者的一半。",
+        "conclusion": "该论文表明，离线学徒学习可作为人本环境中实用、数据高效且伦理可行的建模范式：它既能从有限的示范中恢复可用的奖励与策略，又能通过质量感知机制稳健利用混合质量数据，并在真实部署中以低干预率保持人的自主性。",
+        "key_details": "数据覆盖教育智能辅导系统、三个临床 EHR 数据集及真实课堂示范，强调严格离线、无环境交互的设定。方法关键点包括：能量模型式示范建模（EDM）与潜在奖励聚类、层次化奖励调节器驱动的子轨迹划分、连续质量信号注入、贝叶斯信用分配与双臂关键性评分，以及失败轨迹上的 Bradley-Terry 对比 IRL 目标。部署侧的约束是仅在策略与学生判断不一致时干预，以保留学生自主性；主要局限在于需依赖示范质量信号与分布偏移假设。"
+      },
+      "affiliations": [
+        "North Carolina State University"
+      ],
+      "affiliations_text": "North Carolina State University",
+      "score": 4.614707638120296,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.28761v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028761v1-human-robot-interaction-via-meta-learning-based-mode-recognition-and-adaptive-control",
+      "source": "arxiv",
+      "title": "Human-Robot Interaction via Meta-Learning Based Mode Recognition and Adaptive Control",
+      "authors": [
+        "Nuo Chen",
+        "Ya-Jun Pan"
+      ],
+      "authors_text": "Nuo Chen, Ya-Jun Pan",
+      "abstract": "In human-robot interaction (HRI) tasks, humans may interact with the robot in either an active guiding or passive following state, resulting in distinct control objectives for each interaction mode. Most existing approaches rely on predefined switching thresholds to distinguish interaction modes, but their performance can be sensitive to measurement noise. To address this limitation, we propose a novel framework with the following key contributions. First, a neural network (NN) trained via meta-learning is developed to recognize human intention without manually defined thresholds. By successfully incorporating force-dependent parameters from the controller, the recognition rates are improved from 90.1\\% to 99.1\\% for the passive mode and from 79.8\\% to 97.1\\% for the active mode. Second, an adaptive meta-learning controller is introduced to compensate for human disturbances and enable online adaptation to varying interaction forces. Third, a multiple-trajectory meta-learning algorithm is designed to jointly learn an environment-basis representation and force-dependent parameters, allowing the controller to deal with unmodeled dynamics efficiently. Experimental results demonstrate that the proposed framework achieves robust and accurate control performance, while providing reliable mode recognition for safe and adaptive physical HRI.",
+      "url": "http://arxiv.org/abs/2610.28761v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28761v1",
+      "tldr": "The paper proposes a meta-learning-based framework that recognizes human intention without predefined thresholds by incorporating force-dependent controller parameters, and combines it with an adaptive meta-learning controller trained on multiple trajectories for robust, safe, and adaptive physical human-robot interaction.",
+      "detailed_reading": {
+        "motivation": "在人机交互任务中，人类可能处于主动引导或被动跟随两种状态，二者对应不同的控制目标，因此机器人需要可靠识别交互模式并采取相应控制策略。现有方法多依赖预定义切换阈值或外力传感器区分模式，对测量噪声敏感，且纯数据驱动方法缺乏稳定性保证、基于模型的控制适应能力有限。力相关交互数据采集困难且噪声大，促使作者提出一个统一框架，将无阈值模式识别与自适应学习控制结合，以兼顾适应性、稳定性和安全性。",
+        "method": "作者以7自由度Franka机械臂为平台，在关节空间建立动力学模型，并将外部扰动近似为共享神经网络phi(q,qdot)与力相关线性参数a的乘积，其中phi刻画未建模动态，a对应人类外力并支持在线自适应。模式识别网络N以估计外部力矩和控制器估计的力相关参数为输入，采用模型无关元学习MAML训练，通过任务内适应集梯度更新与任务间元损失更新学习初始化，从而无需人工阈值地区分主动与被动模式。控制端设计自适应元学习控制器，其反馈项受非奇异终端滑模NTSM启发，并通过自适应律在线调节力相关参数以补偿未知外部扰动；当识别为被动模式时执行补偿控制，识别为主动模式时切换为跟随控制。为训练phi，作者提出多轨迹元学习MTML算法：采样多轨迹任务并划分适应集与训练集，先用最小二乘解出各轨迹参数，再按同一力条件计算均值参数，以rho1和rho2平衡单轨迹拟合与类内一致性并做范数约束，随后用重构损失减去辅助网络对抗损失更新phi，同时用交叉熵训练辅助网络t预测轨迹索引，以抑制phi中的轨迹特定信息并提升对未见过轨迹的泛化。",
+        "result": "摘要报告的核心指标是：将控制器中的力相关参数引入模式识别网络后，被动模式识别率由90.1%提升到99.1%，主动模式识别率由79.8%提升到97.1%。实验在仿真和真实机器人上验证了该框架能够提供可靠模式识别，并在人机物理交互中实现稳健、准确的跟踪控制。文中还声称，与仅使用单轨迹训练及相关基线控制器相比，所提自适应元学习控制器在未见过轨迹上具有更准确的跟踪性能，但预览文本未给出完整控制误差数值。",
+        "conclusion": "该工作表明，将元学习模式识别与自适应元学习控制耦合，可以在不依赖人工切换阈值的情况下识别人类主动引导或被动跟随意图，并提升对测量噪声和变化交互力的适应能力。所提方法把数据驱动的未建模动态学习与基于模型的控制和Lyapunov收敛分析结合，在仿真与真实机械臂实验中实现了可靠模式识别和稳健跟踪，为安全、自适应的人机物理交互提供了一种可验证框架。",
+        "key_details": "关键实现细节包括：对象为7自由度Franka机械臂，关节力矩接口信号频率1 kHz；动力学模型含惯性、科氏/离心和重力项，外部扰动采用phi(q,qdot)a线性参数化，并假设最优参数a*有界且一阶可微；模式识别采用MAML式内循环/外循环元训练，MTML在多轨迹任务上联合学习环境基网络phi和力相关参数a，使用最小二乘解、同类力条件均值约束、rho1与rho2更新、参数范数上界bar_a以及对抗辅助网络t的交叉熵损失和权重delta；控制器采用NTSM启发反馈加自适应律，并依据模式识别结果切换控制目标；局限性在于轨迹与力的解耦仅通过正则化和对抗训练鼓励而非严格保证，力传感器数据稀缺且噪声较大，元学习与网络训练依赖离线数据质量，在线适应主要局限于低维力相关参数。"
+      },
+      "affiliations": [
+        "Dalhousie University"
+      ],
+      "affiliations_text": "Dalhousie University",
+      "score": 4.576297428177113,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.28771v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028771v1-motion-equivariant-convolutional-lstm-when-motion-becomes-a-gauge-symmetry",
+      "source": "arxiv",
+      "title": "Motion Equivariant Convolutional LSTM: When Motion Becomes a Gauge Symmetry",
+      "authors": [
+        "Vahid Hosseinzadeh",
+        "T. Anderson Keller",
+        "Michael Puthawala"
+      ],
+      "authors_text": "Vahid Hosseinzadeh, T. Anderson Keller, Michael Puthawala",
+      "abstract": "Objects move, cameras pan, and weather drifts with the wind: much of what changes in sequential data is motion. Motion changes where things are, not what they are, and is therefore a symmetry of the data. Yet standard recurrent networks are not equivariant to it: their memory stays put while the input moves on. Flow equivariant recurrent networks first brought this symmetry into sequence models, for motions of constant velocity, or flows, by enumerating a bank of velocities. We extend this idea in three directions: from simple recurrent networks to convolutional LSTMs, from flows to motions whose velocity changes in time, and from enumerating velocities to estimating them. Treating a sequence as a field over time, we show that motion becomes a gauge symmetry: a global symmetry made local in time. Built on this view, our motion equivariant convolutional LSTM (MELSTM) uses its velocity model as the gauge field and is provably equivariant to every motion. Across future-frame prediction, classification of digits visible only through their motion, and action recognition under camera shake, MELSTM outperforms a convolutional LSTM and its flow equivariant counterpart with the same number of parameters: it is more accurate, generalizes to longer horizons and to unseen motions, and carries a fraction of the flow equivariant model's state.",
+      "url": "http://arxiv.org/abs/2610.28771v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28771v1",
+      "tldr": "The paper introduces MELSTM, a convolutional LSTM that treats motion as a time-local gauge symmetry and estimates time-varying velocities as a gauge field to transport its memory, making it provably equivariant to arbitrary motion and outperforming ConvLSTM and flow-equivariant models on future-frame prediction, motion-only classification, and action recognition.",
+      "detailed_reading": {
+        "motivation": "序列数据中大量变化源于运动：物体移动、相机平移或抖动、天气漂移。运动改变的是位置而非内容，因此应视为数据的对称性；但标准循环网络的内存停原地，输入运动时隐藏状态不随之传输，导致拖影。已有流等变循环网络只处理常速度流，并通过枚举速度副本实现，状态大、速度离散且变速时历史会丢失。",
+        "method": "作者把序列视为时间上的场，将运动建模为随时间变化的群作用，把全局对称性在时间上局部化后视为规范对称性；MELSTM在卷积LSTM中引入速度模型，读取序列并在每步输出李代数元素u_t，生成传输算子T_t，将隐藏状态和细胞状态从前一步传输到下一步。速度模型可为可训练或免参数模块，其等变条件是按规范联络规律变换；对多物体局部运动，模型用少量槽位分别传输，并通过槽位跟踪用自身隐藏状态匹配当前帧来估计各槽速度，避免显式帧间对应。",
+        "result": "在Moving MNIST未来帧预测、仅通过运动可见的数字分类以及相机抖动下KTH动作识别三个任务上，MELSTM在参数量与ConvLSTM和流等变对照相同的情况下均更准确；它是唯一在运动统计变化时性能不下降的模型，并能泛化到更长预测时域和未见运动。Moving MNIST上训练每epoch约比流等变模型快6倍，外推到训练时域的8.5倍时误差低37倍，且所需状态仅为流等变模型的一小部分。",
+        "conclusion": "论文表明仅靠权重约束不足以让卷积LSTM获得流或一般运动等变，因为流等变仅对应测度零的核集合，时空核在非零时间延迟下会被迫在空间上恒定；真正需要的是让记忆随输入运动而传输。以估计速度生成规范传输的MELSTM可证明对所有运动等变，并能通过槽位叠加扩展到局部多运动场景，说明运动等变性是提升序列模型泛化与效率的有效归纳偏置。",
+        "key_details": "关键实现是把速度模型视为规范场，传输算子实现平行传输，速度在输入被运动ψ变换时须满足u_t变为ψ_t u_t ψ_t^{-1}+dotψ_t ψ_t^{-1}，这是保证定理成立的核心约束。与FERNN枚举速度格点副本不同，MELSTM估计连续速度，避免状态随速度库膨胀并支持时变速度；槽位跟踪在隐藏状态内完成分割和速度估计，无需解帧间对应。局限性包括依赖李群运动结构与速度模型满足规范变换，局部运动用少量槽位近似表示，理论等变性与实际离散实现之间仍需数值近似。"
+      },
+      "affiliations": [
+        "Cusp AI",
+        "Harvard University",
+        "South Dakota State University"
+      ],
+      "affiliations_text": "Cusp AI, Harvard University, South Dakota State University",
+      "score": 4.502041994988412,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.28769v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028769v1-learning-enhanced-observer-for-sensorless-task-null-space-compliant-control",
+      "source": "arxiv",
+      "title": "Learning-Enhanced Observer for Sensorless Task-Null-Space Compliant Control",
+      "authors": [
+        "Nuo Chen",
+        "Ya-Jun Pan",
+        "Onur Toker"
+      ],
+      "authors_text": "Nuo Chen, Ya-Jun Pan, Onur Toker",
+      "abstract": "This paper presents a novel framework integrating a robust wrench observer with a hybrid pose and force controller for physical Human-Robot Interaction (pHRI). In pHRI tasks, robots are expected to perform task-space motions robustly while remaining compliance with human disturbance, which proposes distinct control objectives. Most existing approaches focus mainly on either robustness or compliance and rely on force sensors for real-time tracking. To address these limitations, we propose a novel framework with the following key contributions. Firstly, a neural network (NN) is trained to improve the observer performance by compensating for system friction and unmodeled dynamics. Secondly, a task-null-space decomposition is applied to separate the joint velocity and reduce the effect of the human disturbance on the observer. Finally, a hybrid pose and force controller is introduced to achieve the end-effector pose and force tracking. Experimental results demonstrate that the proposed framework provides robust and accurate wrench estimation while maintaining reliable pose and force tracking performance. The proposed approach offers an effective solution and framework for pHRI without the need of force/torque sensor measurements which can be applied to many robotic manipulator platforms which do not have force/torque sensors.",
+      "url": "http://arxiv.org/abs/2610.28769v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28769v1",
+      "tldr": "The paper proposes a neural-network-enhanced momentum observer with task-null-space decomposition and a hybrid pose/force controller to enable robust, sensorless wrench estimation and compliant pose/force tracking for physical human–robot interaction without force/torque sensors.",
+      "detailed_reading": {
+        "motivation": "物理人机交互要求机器人同时具备任务执行鲁棒性与对人扰动的柔顺性，但现有方法多偏重鲁棒或柔顺之一，且常依赖力/力矩传感器进行实时跟踪。无传感器力估计又受关节摩擦、未建模动态以及冗余机械臂零空间人扰动污染任务空间估计的影响，因此需要一种无需力/力矩传感器、能区分任务空间与零空间交互并同时实现位姿与力跟踪的统一框架。",
+        "method": "论文面向7自由度Franka Emika Panda机械臂，先基于广义动量观测器从关节运动与指令力矩估计外部wrench，避免使用噪声较大的加速度和惯性矩阵求逆；再训练神经网络对观测器进行补偿，以减小关节摩擦和未建模动态造成的sim-to-real误差。随后引入任务-零空间分解，将关节速度分离为任务空间速度与零空间速度，其中任务空间速度输入神经网络以降低人扰动对力估计的影响，零空间速度用于零空间柔顺控制。控制器侧构建混合位姿与力控制器，融合笛卡尔位置与姿态跟踪、力调节、任务空间导纳控制以及零空间柔顺控制，输出指令力矩，实现3D曲面上的位置、姿态和力同时跟踪。",
+        "result": "实验在配置3 kg负载、1 kHz关节力矩控制接口的7自由度Franka Emika Panda上进行，并使用三轴光学力传感器采集数据与验证观测器输出。结果表明，所提框架能够提供鲁棒且准确的外部wrench估计，同时保持可靠的位姿与力跟踪性能；在不同轨迹和交互场景下，力估计性能得到改善，位姿与力跟踪准确，并在零空间产生有效的柔顺响应。该框架无需力/力矩传感器测量即可完成任务执行与交互，避免了依赖模式切换的鲁棒/柔顺控制可能带来的不稳定问题。",
+        "conclusion": "论文提出并实验验证了一种学习增强观测器与混合位姿力控制相结合的无传感器物理人机交互框架，能够在冗余机械臂上同时实现任务空间鲁棒跟踪、外部力估计和零空间柔顺响应。其核心价值在于将神经网络补偿、任务-零空间分解与位姿力混合控制统一起来，为未安装力/力矩传感器的机械臂平台，包括水下机械臂等难以在末端安装传感器的场景，提供了可行方案。",
+        "key_details": "关键实现包括：采用广义动量观测器，观测器增益取kO=10，残差经J^{-T}映射为末端wrench；神经网络用于补偿关节摩擦和未建模动态，任务空间速度作为其输入以减少零空间人扰动对任务力估计的污染；控制器综合位置、姿态、力跟踪、任务空间导纳与零空间柔顺控制，末端沿法向有0.09 m固定偏移，实验用OptoForce OMD-20-FG-100N仅用于数据采集和验证。局限与约束在于全文预览未给出神经网络结构、训练损失、数据集规模及量化误差指标，方法依赖机器人动力学模型、雅可比与任务-零空间分解质量，实际性能可能受摩擦建模误差和神经网络泛化能力影响。"
+      },
+      "affiliations": [
+        "Florida Polytechnic University",
+        "Dalhousie University"
+      ],
+      "affiliations_text": "Florida Polytechnic University, Dalhousie University",
+      "score": 4.466201779035085,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.28707v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028707v1-simhack-predicting-the-onset-of-detectable-reward-hacking-before-rl-training",
+      "source": "arxiv",
+      "title": "SimHack: Predicting the onset of detectable reward hacking before RL training",
+      "authors": [
+        "Junwei Deng",
+        "Alex Bie",
+        "Natalia Ponomareva"
+      ],
+      "authors_text": "Junwei Deng, Alex Bie, Natalia Ponomareva",
+      "abstract": "When training LLMs to code with reinforcement learning, reward hacking is often detectable but difficult to prevent, since (a) environment hardening is increasingly difficult as training environments grow more complex; and (b) training-time interventions incentivize models to obfuscate hacking behavior to bypass detection.\n  We instead study whether we can predict when detectable reward hacking becomes dominant before executing an RL run, enabling us to select lower-risk recipes in advance. We find that the initial hacking rate alone does not determine onset, which varies substantially across training recipes and repeated runs. We thus formulate this problem as predicting the distribution of the reward hacking onset step under a target training recipe.\n  We introduce SimHack, a simulator that learns reward hacking training dynamics from a handful of smaller-scale reference RL runs and generates counterfactual simulation runs of unseen target recipes without costly retraining. Across unseen target recipes, SimHack predicts the median onset to a relative error of 11.3% and achieves across-recipe rank correlation of 0.85, while generalizing to differences in model scale, curriculum, number of rollouts, and learning rate between reference and target recipes. As an application, we show that SimHack can guide training decisions by screening candidate RL curricula, discovering curricula over the same set of scenarios that train for 96.6% longer without hacking.",
+      "url": "http://arxiv.org/abs/2610.28707v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28707v1",
+      "tldr": "SimHack learns reward-hacking dynamics from a few small-scale reference RL runs to predict the onset distribution of detectable reward hacking for unseen training recipes before RL training, enabling lower-risk curriculum selection that trains 96.6% longer without hacking.",
+      "detailed_reading": {
+        "motivation": "在 LLM 代码强化学习训练中，奖励投机常在可检测时已难以阻止，因为复杂环境加固困难且训练时干预会促使模型遮蔽投机行为；因此作者希望在执行 RL 前预测可检测奖励投机何时成为主导，从源头选择低风险训练配方。",
+        "method": "SimHack 将问题形式化为在给定目标训练配方下预测奖励投机起始步的分布：先用少量较小规模参考 RL 运行学习奖励投机的训练动态，再以模型规模、课程、rollout 数量、学习率等目标配方条件为输入，生成未见目标配方的反事实模拟轨迹，无需对每个目标配方重新训练；通过模拟得到 onset 分布用于风险排序和配方筛选。",
+        "result": "实验发现初始投机率本身不能决定 onset，且不同配方与重复运行差异显著；在未见目标配方上，SimHack 对 onset 中位数的相对误差为 11.3%，跨配方排序相关性达 0.85，并能泛化到模型规模、课程、rollout 数量和学习率的差异；应用上可筛查候选课程并找到在相同场景集合上训练时长增加 96.6% 而未发生投机的课程。",
+        "conclusion": "结果表明，在 RL 训练前预测可检测奖励投机的发生时机是可行的，能够把奖励投机治理从训练中被动检测和干预前移到训练配方选择阶段，为低风险课程和超参筛选提供决策依据。",
+        "key_details": "关键实现点是以少量小规模参考 RL 运行作为训练动态数据源，学习配方条件到奖励投机动态的模拟器，并用反事实模拟推断目标配方的 onset 分布；该方法避免环境加固和训练时干预，降低实验成本，但依赖可检测奖励投机的定义、参考运行覆盖范围与模拟器对复杂训练动态的保真度，摘要未给出具体损失函数、超参和计算复杂度细节。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.436674648237025,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.28807v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/22/261028807v1-hybrid-ppo-based-multi-objective-optimization-for-uav-mounted-star-ris-with-energy-harvesting",
+      "source": "arxiv",
+      "title": "Hybrid PPO-Based Multi-Objective Optimization for UAV-mounted STAR-RIS with Energy Harvesting",
+      "authors": [
+        "Anas Hussin",
+        "Khaled M. Rabie",
+        "Mahmoud M. Salim",
+        "Ali H. Muqaibel",
+        "Louai A. Al-Awami"
+      ],
+      "authors_text": "Anas Hussin, Khaled M. Rabie, Mahmoud M. Salim, Ali H. Muqaibel, Louai A. Al-Awami",
+      "abstract": "This paper investigates a multi-objective optimiza tion framework for UAV-mounted reconfigurable intelligent sur face (STAR-RIS)-assisted Sixth Generation (6G)-enabled Internet of Things (IoT) systems. The considered framework jointly supports communication enhancement and radio-frequency (RF) energy harvesting (EH) through adaptive STAR-RIS transmission and reflection control. A weighted multi-objective optimization problem is formulated to jointly optimize the base station (BS) beamforming vectors, STAR-RIS transmission and reflection coefficients, RF power-splitting factor, and UAV trajectory under quality-of-service (QoS), power, and mobility constraints. Due to the strong coupling among the communications, EH, and UAV mobility variables, the resulting problem is highly non convex and difficult to solve using conventional optimization methods. To address this challenge, a hybrid proximal policy optimization (H-PPO) framework is proposed. The developed hybrid actor-critic architecture combines a categorical policy for discrete UAV movement decisions with Beta-distributed policies for continuous communication-control variables. In addition, a two-stage reward mechanism is introduced to enforce QoS feasibility while balancing system sum rate, energy efficiency, and harvested energy. Simulation results demonstrate that the proposed H-PPO framework achieves faster convergence and more stable training behavior than proximal policy optimization (PPO) and twin delayed deep deterministic policy gradient (TD3) baselines. In particular, H-PPO achieves approximately 66% and 60% faster convergence than PPO and TD3, respectively, while maintaining more stable training behavior. Furthermore, the proposed framework effectively balances communication performance and EH under different QoS requirements, STAR RIS sizes, transmit power levels, and user densities.",
+      "url": "http://arxiv.org/abs/2610.28807v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28807v1",
+      "tldr": "This paper proposes a hybrid PPO (H-PPO) framework to solve a weighted multi-objective optimization problem in UAV-mounted STAR-RIS-assisted 6G IoT systems, jointly optimizing beamforming, STAR-RIS transmission/reflection coefficients, RF power splitting, and UAV trajectory to balance communication performance, energy efficiency, and RF energy harvesting while achieving faster and more stable convergence than PPO and TD3 baselines.",
+      "detailed_reading": {
+        "motivation": "现有UAV辅助STAR-RIS与能量收集研究多只优化系统子集：或考虑EH与UAV移动但采用单面RIS，或研究STAR-RIS但假设固定/地面部署且不含表面RF能量收集；同时多数DRL方法把动作空间视为全连续，忽略UAV移动天然离散/类别化的结构，导致高维耦合控制学习效率受限。本文因此面向6G物联网构建UAV搭载STAR-RIS、同时服务透射侧与反射侧用户并支持RF能量收集的统一多目标优化框架。",
+        "method": "系统由多天线基站、UAV搭载的N单元STAR-RIS及透射/反射两组用户构成，假设直连链路被遮挡，通信经BS-STAR-RIS-UT级联链路完成；在时隙化移动场景中联合优化BS波束成形向量、STAR-RIS透射与反射幅度/相位系数、RF功率分配因子和UAV轨迹。将通信增强与EH的冲突建模为加权多目标问题，在QoS、发射功率、STAR-RIS硬件和UAV移动/速度约束下最大化系统和速率、能量效率与收集能量；由于变量强耦合且非凸，提出H-PPO：状态为环境/信道与系统状态，动作为“离散UAV移动的categorical策略+Beta分布连续通信控制变量”的混合动作，采用混合actor-critic并以PPO裁剪机制训练。奖励采用两阶段机制，先以QoS违约量约束可行性，再对和速率、能量效率和收集能量进行归一化加权平衡。",
+        "result": "仿真表明H-PPO较PPO和TD3收敛更快且训练更稳定，收敛速度分别约快66%和60%；所提框架能在不同QoS要求、STAR-RIS规模、发射功率和用户密度下有效平衡通信性能与RF能量收集。",
+        "conclusion": "该工作验证了将STAR-RIS配置、UAV移动性与RF-EH纳入统一多目标DRL框架的可行性，说明显式混合动作空间设计与两阶段奖励能提升高维耦合控制问题的学习效率与稳定性，为能量受限、动态部署的6G IoT场景提供通信与供能协同优化方案。",
+        "key_details": "关键实现点包括：动作空间显式分为离散UAV移动与连续波束成形、STAR-RIS系数和功率分配，连续变量用Beta分布保证有界；奖励含QoS违约项及和速率、EE、EH归一化权重w_Rate、w_EE、w_EH，目标加权系数为λ1、λ2、λ3；约束覆盖QoS、BS发射功率、STAR-RIS幅度/相位硬件限制及UAV最大速度V_max。局限在于验证主要基于仿真、固定UAV高度、直连链路不可用与特定信道/EH建模假设，全文预览未给出完整超参数与复杂度分析。"
+      },
+      "affiliations": [
+        "King Fahd University of Petroleum and Minerals (KFUPM)"
+      ],
+      "affiliations_text": "King Fahd University of Petroleum and Minerals (KFUPM)",
+      "score": 4.345405175300956,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.28803v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028803v1-towards-realistic-models-of-change-a-causal-perspective-on-decision-making-and-dynamical-systems",
+      "source": "arxiv",
+      "title": "Towards Realistic Models of Change: A Causal Perspective on Decision-Making and Dynamical Systems",
+      "authors": [
+        "Isacco Beretta"
+      ],
+      "authors_text": "Isacco Beretta",
+      "abstract": "While statistical learning has made remarkable progress in recent decades, driven by large datasets and data-driven protocols that have transformed scientific practice, it still faces a key limitation: it struggles to generalize beyond the data it has seen, often failing under distribution shift. Causality offers a promising solution: causal models focus on the underlying mechanisms of change rather than surface-level associations, enabling robust reasoning under external interventions. This allows systems not only to learn from data, but also to reason about hypothetical scenarios, adapt to new environments, and inform better decisions. This thesis explores how these approaches can inform each other, in two parts.\n  The first part examines algorithmic recourse, that is, identifying which changes an individual can make to overturn an unfavorable decision. We propose an alternative perspective to the established framework, arguing for a more realistic cost function, a reformulation of the problem in causal terms, and the inclusion of a temporal dimension in policy evaluation.\n  The second part focuses on dynamical systems, extending the notions of causal interventions and effects to discrete and continuous stochastic processes. We show that the equilibria of these processes, and how they change following an intervention, can be linked to Structural Causal Models (SCMs), viewed as compressed representations of the underlying temporal dynamics. We argue for the relevance of such temporal causal models, since in real-world scenarios actions take time to produce their effects.\n  The common goal of both parts is practical: the utility, robustness, and trustworthiness of these models depend critically on their ability to realistically represent the underlying phenomena.",
+      "url": "http://arxiv.org/abs/2610.28803v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28803v1",
+      "tldr": "This thesis argues that integrating causality into algorithmic recourse and dynamical systems—via realistic cost functions, causal reformulations, and temporal dynamics—enables more robust, trustworthy models of change for decision-making under interventions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pisa"
+      ],
+      "affiliations_text": "University of Pisa",
+      "score": 4.301144328790871,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.28784v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028784v1-extreme-low-state-quantized-transformer-for-electricity-load-forecasting",
+      "source": "arxiv",
+      "title": "Extreme Low-State Quantized Transformer for Electricity-Load Forecasting",
+      "authors": [
+        "Muhammad Sabbir Alam",
+        "Harindra Sandun Mavikumbure",
+        "Victor Cobilean",
+        "Milos Manic",
+        "Jayasimha Atulasimha"
+      ],
+      "authors_text": "Muhammad Sabbir Alam, Harindra Sandun Mavikumbure, Victor Cobilean, Milos Manic, Jayasimha Atulasimha",
+      "abstract": "Aggressive low-state weight quantization can substantially reduce neural-network representational flexibility, making predictive performance difficult to preserve when only a few discrete weight states are available. We investigate this regime for Transformer-based electricity-load forecasting using 3-, 5-, 7-, and 16-state weight quantization across feed-forward-only and attention-plus-feed-forward quantization. Two tasks predict either the next hour or the next 24 hours from the preceding 48 hours across two co-primary electricity-consumption datasets. Direct post-training quantization (PTQ) increased mean normalized root-mean-square error (NRMSE) relative to full precision by 6.25 and 7.04 percentage points in Datasets A and B, whereas quantization-aware fine-tuning (QAT-FT) recovered approximately 90.2% and 94.5% of these penalties. Quantization-aware training from random initialization (Scratch-QAT) also produced competitive low-state solutions, with particularly favorable behavior at three states. We further introduce accumulated-update thresholding, which accumulates optimizer-proposed weight changes before commitment. Relative to paired Scratch-QAT controls, this reduced committed shadow-weight updates by approximately 99.7% and discrete state transitions by approximately 77--80%, while mean NRMSE changed by only +0.042 and +0.197 percentage points. These results show that useful Transformer forecasting can be retained under highly discrete weight representations while strongly suppressing target-state activity, supporting a prospective route toward compact, low-activity edge forecasting using multilevel synaptic devices.",
+      "url": "http://arxiv.org/abs/2610.28784v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28784v1",
+      "tldr": "This paper shows that Transformer-based electricity-load forecasting remains effective under extreme 3–16-state weight quantization—especially with quantization-aware fine-tuning or training from scratch—and introduces accumulated-update thresholding that reduces committed weight updates and state transitions by orders of magnitude with negligible NRMSE cost, pointing toward compact, low-activity edge forecasting with multilevel synaptic devices.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.1541200839464665,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.28785v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028785v1-measure-first-then-allocate-calibrated-rollout-budgets-for-mcp-agents-in-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Measure First, Then Allocate: Calibrated Rollout Budgets for MCP Agents in Reinforcement Learning",
+      "authors": [
+        "Hieu Tran",
+        "Zonghai Yao",
+        "Sunjae Kwon",
+        "Hong Yu"
+      ],
+      "authors_text": "Hieu Tran, Zonghai Yao, Sunjae Kwon, Hong Yu",
+      "abstract": "Training tool-using language models requires costly interaction, yet identical rewards within a rollout group provide no group-relative learning signal. We use reward disagreement to guide harness evaluation and the allocation of rollouts for policy training in Model Context Protocol (MCP) environments. We first introduce Discord, which tests harness edits using exact paired inference and decision-preserving early stopping: only disagreeing paired outcomes favor one harness over another. This insight motivates prospective allocation in BRACE (Bank-calibrated Rollout Allocation under Correlated Episodes). BRACE combines historical task evidence, uncertainty in task success rates, and a correlated reward model to forecast mixed-reward groups before allocating generation budget. Controlled harness experiments favor Discord, while live MCP experiments expose a retention-cost trade-off. At three Qwen3-VL model scales, BRACE exceeds the strongest plotted baseline peaks with fewer new training rollouts; historical-bank collection is counted separately. It also leads the compared methods on BFCL and NESTFUL without further training. Ablations probe the bank, estimator, and allocation score; prospective evaluation checks forecast calibration. These results support forecasting reward contrast before generation.",
+      "url": "http://arxiv.org/abs/2610.28785v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28785v1",
+      "tldr": "The paper introduces Discord and BRACE to use reward disagreement for harness evaluation and to forecast mixed-reward rollout groups before allocating training rollouts, improving the sample efficiency and performance of MCP agents in reinforcement learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Massachusetts Amherst",
+        "University of Massachusetts Lowell"
+      ],
+      "affiliations_text": "University of Massachusetts Amherst, University of Massachusetts Lowell",
+      "score": 4.14173779569192,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.28773v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028773v1-building-a-nested-ladder-for-llm-unstructured-post-training-pruning",
+      "source": "arxiv",
+      "title": "Building a Nested LADDER for LLM Unstructured Post-Training Pruning",
+      "authors": [
+        "Nicolás Mauricio Cuadrado Ávila",
+        "Ivo Gollini Navarrete",
+        "Martin Takáč",
+        "Samuel Horváth"
+      ],
+      "authors_text": "Nicolás Mauricio Cuadrado Ávila, Ivo Gollini Navarrete, Martin Takáč, Samuel Horváth",
+      "abstract": "Non-uniform allocation can improve post-training pruning of large language models, yet quality can still degrade sharply at high sparsity. To control degradation as sparsity increases, we introduce LADDER (Layer-Wise Allocation via Damage-Driven Evaluation and Refinement), which allocates sparsity incrementally. At each step, it evaluates pruning an additional fraction of weights from each eligible layer and commits the layer update that causes the least end-to-end degradation per removed parameter. This process produces non-uniform sparsity profiles and exactly nested masks across multiple budgets. We evaluate LADDER on five OPT, Llama, and Qwen models across 10-90% sparsity, using SparseGPT as its candidate-generation backend and comparing against uniform and adaptive allocation baselines. Results reveal a clear operating-regime trade-off: LADDER is comparable or slightly weaker at benign sparsity but becomes substantially more robust from 70% onward. This high-sparsity advantage largely persists after posterior distillation across four of five models and translates into improved retention of aggregate zero-shot accuracy.",
+      "url": "http://arxiv.org/abs/2610.28773v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28773v1",
+      "tldr": "LADDER is an incremental layer-wise post-training pruning method that greedily assigns additional sparsity to the layers causing the least end-to-end degradation, producing nested non-uniform masks that are comparable at low sparsity but substantially more robust than uniform and adaptive baselines at high sparsity (70–90%) across OPT, Llama, and Qwen models.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.027934235226403,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.28798v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028798v1-an-explicit-feedback-contract-for-iterative-ml-agent-harnesses",
+      "source": "arxiv",
+      "title": "An Explicit Feedback Contract for Iterative ML-Agent Harnesses",
+      "authors": [
+        "Kehui Yao",
+        "Chuanbo Hu",
+        "Jiao Chen",
+        "Ramin Giahi",
+        "Reza Yousefi Maragheh",
+        "Lalitesh Morishetti",
+        "Ziwei Hong",
+        "Yiyun Su",
+        "Jianpeng Xu",
+        "Evren Korpeoglu",
+        "Kannan Achan"
+      ],
+      "authors_text": "Kehui Yao, Chuanbo Hu, Jiao Chen, Ramin Giahi, Reza Yousefi Maragheh, Lalitesh Morishetti, Ziwei Hong, Yiyun Su, Jianpeng Xu, Evren Korpeoglu, Kannan Achan",
+      "abstract": "Iterative ML agents develop models by editing code, running experiments, reading a validation score, and choosing what to try next. In current harnesses this loop is served by an exact validation score returned after every attempt, which leaves the validation split open to adaptive selection. In this work, we introduce an explicit feedback contract for ML-agent harnesses, which specifies what an agent may observe, when iteration should stop, and when the test split may be touched. The contract releases a validation score only when a submission clears a noise threshold computed from the paired standard error, so no margin has to be tuned. We ran experiments on click-through-rate prediction, learning to rank, and a control task with no signal to find. The control is the sharpest case, because the true gain there is zero by construction: an agent reading exact scores ended by reporting a gain of 0.0157, while under the contract it reported 0.0033. On both real tasks the contract narrows the validation-test gap, and test performance is slightly higher rather than lower. The largest difference is in when the agents stop. Exact feedback used its entire budget of thirty submissions on two of the three tasks, including the one where nothing can be learned, while the contract halted after four to twelve. A run that exhausts its budget is usually read as diligence. It is better read as a symptom: when the feedback channel is unbounded, noise keeps supplying improvements to chase.",
+      "url": "http://arxiv.org/abs/2610.28798v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28798v1",
+      "tldr": "The paper introduces an explicit feedback contract for iterative ML-agent harnesses that releases validation scores only when improvements clear a paired-standard-error noise threshold and specifies stopping and test-access rules, thereby curbing adaptive overfitting, narrowing the validation–test gap without hurting test performance, and stopping agents far earlier than exact-score feedback.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lehigh University",
+        "Rutgers University",
+        "Walmart Global Tech"
+      ],
+      "affiliations_text": "Lehigh University, Rutgers University, Walmart Global Tech",
+      "score": 3.8859059647480736,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.28779v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028779v1-second-thoughts-exploring-and-planning-through-comparative-imagination-in-world-models",
+      "source": "arxiv",
+      "title": "Second Thoughts: Exploring and Planning through Comparative Imagination in World Models",
+      "authors": [
+        "Hieu Tran",
+        "Hong Yu"
+      ],
+      "authors_text": "Hieu Tran, Hong Yu",
+      "abstract": "World models let agents compare imagined outcomes before acting, but an agent must still decide which alternatives to explore and when a proposed plan should replace its learned policy. We introduce SDI (Sibling Disagreement in Imagination), which connects these decisions through a shared actor-based reference. SDI compares action sequences imagined from the same model state, using repeated rollouts of the actor's own sequence to measure variation under fixed behavior. This reference scales both the spread across candidate returns, which provides an exploration signal, and a proposed plan's predicted advantage, which governs action acceptance. The agent executes a planned action when its advantage exceeds the reference variability by a fixed factor; otherwise, it follows the actor. SDI reuses the base agent's world model, actor, and critic without requiring an additional disagreement ensemble. Exploration and planning guide training data collection, while evaluation uses the learned actor alone. Across Meta-World, Adroit, and DM-Control, SDI achieves a higher observed task-average score than every compared baseline in each suite and matches or exceeds the strongest baseline's performance on 15 of 18 tasks. Component ablations and robustness analyses further examine the roles of exploration, planning exposure, and action acceptance. Paired evaluations from identical simulator states show that the gate improves both recovery from actor failures and preservation of successful behavior relative to ungated planning, while substantially reducing return degradation. Together, these results support comparing imagined alternatives against a shared actor reference as a unified approach to exploring and planning with world models.",
+      "url": "http://arxiv.org/abs/2610.28779v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28779v1",
+      "tldr": "SDI (Sibling Disagreement in Imagination) uses repeated imagined rollouts of the actor’s own action sequence as a shared reference to scale both exploration and the acceptance of planned actions, enabling world-model agents to selectively plan without extra disagreement ensembles and improving performance across Meta-World, Adroit, and DM-Control.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Massachusetts Amherst",
+        "University of Massachusetts Lowell"
+      ],
+      "affiliations_text": "University of Massachusetts Amherst, University of Massachusetts Lowell",
+      "score": 3.7916552300772137,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.28701v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028701v1-real-time-ground-normal-vector-estimation-for-spherical-mobile-3d-mapping-using-lidar-inertial-odometry",
+      "source": "arxiv",
+      "title": "Real-Time Ground Normal Vector Estimation for Spherical Mobile 3D Mapping using LiDAR-Inertial Odometry",
+      "authors": [
+        "Tim Schubert",
+        "Fabian Arzberger",
+        "Andreas Nüchter"
+      ],
+      "authors_text": "Tim Schubert, Fabian Arzberger, Andreas Nüchter",
+      "abstract": "Accurate ground plane normal estimation is essential for odometry in spherical mobile mapping systems (SMMS), which face challenges from rapid rotations and limited ground coverage. We propose two RANSAC-based approaches: single-scan estimation with normal vector scoring and multi-step validation, and LiDAR-inertial odometry (LIO)-based estimation using a global 3D map. Evaluated across diverse real-world datasets against terrestrial laser scanner ground truth, results show that LIO-based estimation significantly outperforms single-scan methods in accuracy and robustness. Integrating ground normal estimates into the motion model improves pose estimation, supporting autonomous navigation in challenging and hazardous environments.",
+      "url": "http://arxiv.org/abs/2610.28701v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28701v1",
+      "tldr": "The paper proposes two RANSAC-based ground normal vector estimation methods for spherical mobile 3D mapping—single-scan estimation and LIO-based estimation using a global 3D map—and shows that the LIO-based approach is significantly more accurate and robust and improves pose estimation when integrated into the motion model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Julius-Maximilians-Universität Würzburg"
+      ],
+      "affiliations_text": "Julius-Maximilians-Universität Würzburg",
+      "score": 3.787816916085292,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.28709v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028709v1-star-xpc-set-transformer-for-estimating-x-ray-transmission-in-polymer-composites",
+      "source": "arxiv",
+      "title": "STAR-XPC: Set Transformer for Estimating X-ray Transmission in Polymer Composites",
+      "authors": [
+        "Can Erer",
+        "H. Birkan Yilmaz",
+        "Nebahat Aral"
+      ],
+      "authors_text": "Can Erer, H. Birkan Yilmaz, Nebahat Aral",
+      "abstract": "Evaluating the energy transmission ratio of an X-ray beam through a polymer composite is a challenging task in radiation shielding studies. The reference solution with Monte Carlo transport simulation is highly accurate but computationally expensive: each of our reference simulations is capped at $4\\times10^9$ photon histories and a 20,000 s (over 5 hours) time limit, while closed-form analytical methods fail to represent such complex scenarios. We present an artificial neural network model that maps the unordered multi-set of molecular constituents, their mass fractions, and four bulk physical descriptors directly to the transmission ratio $I(t)/I_0$ in 1-3 milliseconds. The model is a Set Transformer, which makes it permutation invariant by construction and accepts mixtures of different sizes up to 11 constituents within a fixed-size padded set. Each constituent is embedded with a chemistry-pretrained transformer language model, ChemBERTa. In our proposed method, training data are produced by an automated PENELOPE/penEasy pipeline using the radiation source at 30, 80, 100, and 120 kV tube voltages over polyethylene-based shielding composite slabs of thicknesses spanning 0.15-2.5 mm. After preprocessing, the dataset contains $n = 4697$ simulated configurations on which a leakage-free, jointly stratified 10-fold cross-validation is performed, attaining mean squared error MSE = $(1.12 \\pm 0.56)\\times10^{-4}$, normalized-MSE percentage NMSE% = 0.0294% $\\pm$ 0.0147%, and $R^2 = 0.9988$. The corresponding per-sample percentage errors give an alpha-trimmed ($α= 0.10$) absolute percentage error (APE) of 1.66% and a median APE of 1.15%. Our model's inference is several orders of magnitude faster than the underlying Monte Carlo simulation (sub-millisecond per query vs. several hours for the reference run) with effective accuracy in predicting $I(t)/I_0$.",
+      "url": "http://arxiv.org/abs/2610.28709v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28709v1",
+      "tldr": "STAR-XPC is a chemistry-aware, permutation-invariant Set Transformer that predicts polychromatic X-ray transmission ratios through polymer composites in 1–3 ms with \\(R^2=0.9988\\), offering a fast surrogate for computationally expensive Monte Carlo simulations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Boğaziçi University",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Boğaziçi University, Independent Researcher",
+      "score": 3.697039651348308,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.28791v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028791v1-vericalib-verifiable-target-based-lidar-camera-calibration",
+      "source": "arxiv",
+      "title": "VeriCalib: Verifiable Target-Based LiDAR-Camera Calibration",
+      "authors": [
+        "Xiangcheng Hu",
+        "Xieyuanli Chen",
+        "Feiyi Chen",
+        "Shengli Ren",
+        "Shiyang Chen",
+        "Guoqiang Ye",
+        "Hao Wang",
+        "Ping Tan",
+        "Steven L. Waslander",
+        "Fuchun Sun",
+        "Jin Wu"
+      ],
+      "authors_text": "Xiangcheng Hu, Xieyuanli Chen, Feiyi Chen, Shengli Ren, Shiyang Chen, Guoqiang Ye, Hao Wang, Ping Tan, Steven L. Waslander, Fuchun Sun, Jin Wu",
+      "abstract": "Target-based extrinsic calibration estimates the rigid transform between sensors from a few observations of a known target, and its result is commonly assessed by the root-mean-square error of the fitted residuals. However, this scalar error is computed on the same observations and therefore cannot indicate whether to accept the result, re-extract, recollect or add observations. This paper presents VeriCalib, which formulates extrinsic calibration as a verifiable estimation problem and reports a calibration state. The key insight is a two-level extrinsic compensation mechanism, in which the extrinsic compensates the rigid part of each observation error at the residual level, and rotation and translation compensate each other at the parameter level. Consequently, the fitted residual can reveal neither an inconsistency between the observations and the model nor whether the estimated extrinsic is reliable in every direction. Accordingly, we assess the calibration through a structured covariance that jointly propagates the uncertainty of the camera and LiDAR board features with a known-geometry prior, and estimate its scale as a variance component from the residuals. On this covariance, we decouple rotation and translation to resolve the precision along each direction and guide data collection toward the weakest one. Since this precision presumes consistent observations, we further develop within-view and cross-view checks that examine the internal residual and the rigid discrepancy between observations, respectively, with thresholds that hold their significance level under an unknown noise level. We also extend the minimal detectable bias to the extrinsic to bound the smallest detectable fault along each direction. These criteria form a calibration state that indicates whether to accept the result or how to collect the data...",
+      "url": "http://arxiv.org/abs/2610.28791v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28791v1",
+      "tldr": "VeriCalib formulates target-based LiDAR–camera extrinsic calibration as a verifiable estimation problem, using structured covariance, consistency checks, and direction-wise detectability bounds to output a calibration state that tells users whether to accept the result or how to improve data collection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Defense Technology",
+        "Independent Researcher",
+        "Tsinghua University",
+        "University of Science and Technology Beijing",
+        "X Square Robot Technology (Shenzhen) Co., Ltd.",
+        "University of Toronto",
+        "Hong Kong University of Science and Technology"
+      ],
+      "affiliations_text": "National University of Defense Technology, Independent Researcher, Tsinghua University, University of Science and Technology Beijing, X Square Robot Technology (Shenzhen) Co., Ltd., University of Toronto, Hong Kong University of Science and Technology",
+      "score": 3.685668858667123,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.28637v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028637v1-to-keep-or-not-to-keep-learning-kv-cache-retention-in-disaggregated-llm-serving-systems",
+      "source": "arxiv",
+      "title": "To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems",
+      "authors": [
+        "Dong Liu",
+        "Yanxuan Yu",
+        "Eric Jiang",
+        "Shu Wang",
+        "Ying Nian Wu"
+      ],
+      "authors_text": "Dong Liu, Yanxuan Yu, Eric Jiang, Shu Wang, Ying Nian Wu",
+      "abstract": "Disaggregated \\textsc{LLM} serving separates prefill and decode across node pools, placing a network fabric between \\textsc{KV}-cache computation and consumption. This breaks a key assumption of classical cache policies: a miss no longer incurs only local recomputation, but also network transfer to the decode node. Likewise, admitting a block to the global cache requires an additional transfer, so poor retention decisions waste both memory and bandwidth. We present \\textbf{KVLearn}, a learning-based framework for cost-aware \\textsc{KV}-cache retention in disaggregated serving. KVLearn includes: (i) a lightweight Prefix Reuse Predictor (\\textsc{PRP}) that estimates reuse probability from structural and temporal prefix features without modifying model weights; (ii) a Cost-Aware Retention Score (\\textsc{CARS}) that converts reuse probability into keep/admit decisions using recomputation, transfer, and storage costs; and (iii) an Adaptive Threshold Controller (\\textsc{ATC}) that adjusts admission thresholds online from observed hit rates and memory pressure. We integrate KVLearn into a globally disaggregated serving topology and evaluate it on text and multimodal workloads, including large image/video-derived \\textsc{KV} blocks with heterogeneous reuse patterns. KVLearn reduces end-to-end time-to-first-token by up to 56% versus No-Cache, 38% versus LRU-Pool, and 33% versus Mooncake-style baselines, while cutting inter-node \\textsc{KV} transfer volume by up to 53% versus LRU-Pool. On MM-Session, throughput remains within ${\\sim}5%$ of oracle. Code is available at https://github.com/FastLM/KVLearn.",
+      "url": "http://arxiv.org/abs/2610.28637v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28637v1",
+      "tldr": "KVLearn is a learning-based, cost-aware KV-cache retention framework for disaggregated LLM serving that predicts prefix reuse and adaptively decides which KV blocks to keep or admit, reducing time-to-first-token and inter-node KV transfer.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Los Angeles",
+        "Columbia University"
+      ],
+      "affiliations_text": "University of California, Los Angeles, Columbia University",
+      "score": 3.6281503042820424,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.28712v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028712v1-warping-the-workspace-expanding-visual-access-with-adjustable-reach-mapping-for-humanoid-teleoperation",
+      "source": "arxiv",
+      "title": "Warping the Workspace: Expanding Visual Access with Adjustable Reach Mapping for Humanoid Teleoperation",
+      "authors": [
+        "Keigo Minamida",
+        "Koya Dendo",
+        "Yuto Nakamura",
+        "Jun Rekimoto"
+      ],
+      "authors_text": "Keigo Minamida, Koya Dendo, Yuto Nakamura, Jun Rekimoto",
+      "abstract": "First-person humanoid teleoperation ties access to side and rear targets to operator rotation. We present coupled visual--motor remapping, pairing a panoramic azimuth warp with its inverse upper-limb yaw transform. A working prototype implements Global Zoom (GZ) and Focus+Context (F+C). In a within-subject study (N=8); 72 trials), GZ had the largest completion count (23/24; Fixed: 20/24; F+C: 21/24), whereas F+C was preferred by 6/8 participants. Therefore, completion and preference favored different mappings in this sample.",
+      "url": "http://arxiv.org/abs/2610.28712v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28712v1",
+      "tldr": "The paper proposes coupled visual–motor remapping that pairs a panoramic azimuth warp with an inverse upper-limb yaw transform to expand humanoid teleoperators’ frontal access to side and rear targets, and its prototype study finds that Global Zoom maximizes task completions while Focus+Context is preferred by most participants.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Tokyo",
+        "Sony CSL - Kyoto"
+      ],
+      "affiliations_text": "The University of Tokyo, Sony CSL - Kyoto",
+      "score": 3.4184807555109566,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.28797v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028797v1-calliope-private-insights-into-ai-use-without-embeddings",
+      "source": "arxiv",
+      "title": "CALLIOPE: Private Insights into AI Use, Without Embeddings",
+      "authors": [
+        "Edith Cohen",
+        "Vadym Doroshenko",
+        "Badih Ghazi",
+        "Charlie Harrison",
+        "Pritish Kamath",
+        "Alexander Knop",
+        "Ravi Kumar",
+        "Ethan Leeman",
+        "Pasin Manurangsi",
+        "Mikhail Pravilov",
+        "Adam Sealfon",
+        "Yurii Sushko",
+        "Marika Swanberg",
+        "Chiyuan Zhang"
+      ],
+      "authors_text": "Edith Cohen, Vadym Doroshenko, Badih Ghazi, Charlie Harrison, Pritish Kamath, Alexander Knop, Ravi Kumar, Ethan Leeman, Pasin Manurangsi, Mikhail Pravilov, Adam Sealfon, Yurii Sushko, Marika Swanberg, Chiyuan Zhang",
+      "abstract": "We introduce CALLIOPE, a top-down framework for discovering topic hierarchies in large corpora of unstructured data (e.g., LLM conversations), while supporting differential privacy (DP). Unlike traditional and even recent LLM-augmented approaches that ultimately rely on clustering vector embeddings, our framework leverages LLM capabilities directly for the entire pipeline. Experiments demonstrate that this approach provides better utility over existing (embedding-based) methods in the DP setting, especially in the high privacy regime. We evaluate the quality of CALLIOPE outputs using a variety of traditionally studied clustering metrics, as well as some novel utility metrics that we introduce.",
+      "url": "http://arxiv.org/abs/2610.28797v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28797v1",
+      "tldr": "CALLIOPE is a differentially private, top-down framework that discovers topic hierarchies in unstructured data by using LLMs directly in the text domain—without vector embeddings—and achieves better utility than embedding-based methods, especially in high-privacy regimes.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Google Deepmind",
+        "Google",
+        "Google Research"
+      ],
+      "affiliations_text": "Google Deepmind, Google, Google Research",
+      "score": 3.2832378556179416,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.28693v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028693v1-interaction-gated-time-frequency-learning-for-parameter-efficient-ppg-based-heart-rate-estimation",
+      "source": "arxiv",
+      "title": "Interaction-Gated Time-Frequency Learning for Parameter-Efficient PPG-Based Heart Rate Estimation",
+      "authors": [
+        "Anh Khoi Pham",
+        "Phat Lam",
+        "Thien Truong Nguyen Ly",
+        "Lam Pham"
+      ],
+      "authors_text": "Anh Khoi Pham, Phat Lam, Thien Truong Nguyen Ly, Lam Pham",
+      "abstract": "Photoplethysmography (PPG) enables low-cost and non-invasive heart rate (HR) monitoring but remains sensitive to waveform distortion, physiological variability, and measurement interference. Temporal waveform characteristics and frequency-domain periodicity provide complementary information for HR estimation; however, effectively exploring and integrating these representations within a compact model remains challenging. This paper proposes TF-IG, a parameter-efficient interaction-gated time-frequency learning framework for PPG-based HR estimation. TF-IG employs a dual-branch architecture in which a temporal branch captures pulse morphology via dilated depthwise-separable convolutions, while a frequency branch extracts cardiac periodicity information from bounded log-spectrogram representations. To combine the two domains, we introduce an interaction-gated fusion module that explicitly models feature agreement and discrepancy, while also learning feature-wise weights to balance temporal and spectral information. A parameter-shared regression head further maps the temporal, spectral, and fused representations into the final HR prediction space. Experiments on the benchmark BIDMC PPG and Respiration Dataset using a subject-exclusive training, validation, and test protocol show that TF-IG achieves a mean absolute error (MAE) of 1.227 BPM, a root mean square error (RMSE) of 2.060 BPM, a Pearson correlation coefficient of 0.9934, and 92.28 percent of estimates within 3 BPM, while remaining parameter-efficient with only 84.6K parameters. Ablation results further demonstrate the complementary contributions of the temporal and frequency branches, interaction-gated fusion, and shared regression head. These results indicate that explicitly modeling cross-domain interactions provides an effective accuracy-complexity trade-off for lightweight PPG-based HR estimation.",
+      "url": "http://arxiv.org/abs/2610.28693v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28693v1",
+      "tldr": "The paper proposes TF-IG, a lightweight dual-branch time–frequency framework with interaction-gated fusion that combines PPG pulse morphology and spectral periodicity for accurate, parameter-efficient heart rate estimation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Austrian Institute of Technology",
+        "International University, Vietnam National University HCMC",
+        "University of New Brunswick",
+        "Ho Chi Minh City University of Technology"
+      ],
+      "affiliations_text": "Austrian Institute of Technology, International University, Vietnam National University HCMC, University of New Brunswick, Ho Chi Minh City University of Technology",
+      "score": 3.222202391063073,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.28714v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028714v1-big-claims-small-margins-do-reported-graphllm-gains-survive-simple-baselines",
+      "source": "arxiv",
+      "title": "Big Claims, Small Margins: Do Reported GraphLLM Gains Survive Simple Baselines?",
+      "authors": [
+        "Michal Podstawski"
+      ],
+      "authors_text": "Michal Podstawski",
+      "abstract": "LLM-based methods for node classification on text-attributed graphs (TAGs) routinely report state-of-the-art accuracy. We ask how these results compare with inexpensive baselines run on the same splits. On the splits of three recent studies, we tune four baseline representatives with validation-only selection and compare them with the highest mean that each paper reports for an LLM-based method in the matched setting. Correct & Smooth on TF-IDF features trails this reference by a median of 2.3 percentage points, and an MLP on frozen e5-large-v2 embeddings by 2.8 points. Correct & Smooth is within 3 points of the reference or better on 15 of 24 tasks, but the reference is significantly higher on 12 of 22 testable tasks, so several reported gains remain substantial. Reading released code next to the papers, we also document evaluation risks: selection of hyperparameters or checkpoints on the test set, labels of test-pool nodes used in training, baseline numbers reused without disclosure, and a text-label misalignment in a released Cora loader. Reports of the same method on the same split also differ by up to 12.5 points across papers whose configurations are not documented to match.",
+      "url": "http://arxiv.org/abs/2610.28714v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28714v1",
+      "tldr": "On the papers’ own splits, simple baselines come within a median of 2.3–2.8 percentage points of reported GraphLLM results—though several gains remain significant—while released code reveals evaluation leakage, undocumented baseline reuse, and up to 12.5-point inconsistencies across reports.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NASK National Research Institute"
+      ],
+      "affiliations_text": "NASK National Research Institute",
+      "score": 3.105599585606267,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.28804v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/22/261028804v1-robust-procurement-planning-for-community-choice-aggregators-managing-market-price-uncertainty",
+      "source": "arxiv",
+      "title": "Robust Procurement Planning for Community Choice Aggregators: Managing Market Price Uncertainty",
+      "authors": [
+        "Manar Jaradat",
+        "James Himelic",
+        "Neha Patankar"
+      ],
+      "authors_text": "Manar Jaradat, James Himelic, Neha Patankar",
+      "abstract": "Community Choice Aggregators (CCAs) play an important role in the energy transition by procuring renewable electricity for local communities while balancing affordability, resource adequacy, and clean-energy requirements. In California, these long-term procurement decisions are coordinated through integrated resource planning (IRP). However, conventional IRP frameworks typically represent wholesale electricity prices deterministically, even though price uncertainty can expose CCAs to substantial financial risk by affecting the cost of market imports and, particularly, the value of export opportunities. This paper develops a robust optimization framework for CCA resource procurement that hedges against uncertainty in wholesale import and export prices. We extend the open-source GenX capacity expansion model with a budgeted robust optimization formulation that protects procurement decisions against adverse price realizations while remaining computationally tractable for large-scale, multistage planning studies. Using data from a California CCA, we show that market price uncertainty can materially change optimal procurement strategies. Rather than aggressively expanding renewable capacity based on expected export revenues, robust portfolios reduce dependence on uncertain market revenues, leading to more conservative renewable investments and less reliance on market exports. We demonstrate that moderate uncertainty budgets provide most of the risk-reduction benefits of robust planning at limited additional cost, whereas higher robustness levels yield diminishing benefits as portfolio conservatism increases. These findings provide guidance for selecting uncertainty budgets in IRP studies and demonstrate how robust optimization can support affordable and resilient procurement decisions as CCAs contribute to the transition toward low-carbon electricity systems.",
+      "url": "http://arxiv.org/abs/2610.28804v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.28804v1",
+      "tldr": "The paper extends GenX with a budgeted robust optimization framework to show that hedging community choice aggregator procurement against wholesale import/export price uncertainty leads to more conservative renewable investments and less reliance on uncertain market export revenues, with moderate uncertainty budgets capturing most risk-reduction benefits at limited additional cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Binghamton University",
+        "First Principles Advisory"
+      ],
+      "affiliations_text": "Binghamton University, First Principles Advisory",
+      "score": 2.8969108839169255,
+      "score_text": "2.9"
+    }
+  ]
+}
