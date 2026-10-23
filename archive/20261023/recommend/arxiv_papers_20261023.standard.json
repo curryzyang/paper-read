@@ -1,0 +1,730 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-23T15:58:19.169094",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.30147v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030147v1-sufficient-conditions-for-exact-convergence-time-in-prescribed-time-control",
+      "source": "arxiv",
+      "title": "Sufficient Conditions for Exact Convergence Time in Prescribed-Time Control",
+      "authors": [
+        "Jiyuan Kuang"
+      ],
+      "authors_text": "Jiyuan Kuang",
+      "abstract": "In this paper, we propose a series of theoretical results for prescribed-time control to rigorously prove that the closed-loop system will not reach the equilibrium point before the prescribed time. Thus, it is convenient to prove that the settling time is exactly equal to the prescribed time instant. In other words, conservative estimation of the settling time, which often accompanies classical finite-/fixed-time or prescribed-time control results, is theoretically avoided in this paper. Specifically, we introduce a local Lipschitz condition, a local homogeneous linear-growth condition, and an Osgood condition in sequence. Both reduction to absurdity and the Lyapunov method are applied to demonstrate that the system cannot converge to zero before the prescribed time instant. Finally, the proposed framework is applied to prescribed-time controllers based on adaptive backstepping, parametric Lyapunov equations, and distributed leader-following consensus, demonstrating the generality of the proposed results.",
+      "url": "http://arxiv.org/abs/2610.30147v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30147v1",
+      "tldr": "This paper establishes local Lipschitz, local homogeneous linear-growth, and Osgood-type sufficient conditions to rigorously exclude premature convergence in prescribed-time control, thereby proving that the settling time is exactly the prescribed time rather than merely bounded by it.",
+      "detailed_reading": {
+        "motivation": "现有有限时间、固定时间和预设时间控制通常只能保证在预设时刻 T 之前或至多 T 收敛，往往给出保守的 settling time 估计；而机器人击键、航天器编队和协同打击等任务要求系统恰好在预设时刻到达平衡点。论文旨在为预设时间闭环系统建立可验证的充分条件，严格排除在 T 之前提前收敛，从而证明 settling time 精确等于 T。",
+        "method": "本文是纯理论控制研究，不涉及数据训练；研究对象为含时变增益的闭环系统 dot x=P0(t,x)+sum Pk(x)/Phi_k(T-t)，在 Carathéodory 条件和已知 T-finite-time stable 假设下分析精确收敛。核心步骤是先利用连续性把提前到达原点转化为原点邻域内的局部可达性问题，再依次引入局部 Lipschitz 条件、局部齐次线性增长条件和 Osgood 型增长条件，结合反证法与 Lyapunov 方法证明任意非零初值轨迹在 [0,T) 内不能到达原点。最后将该判据应用于自适应反步法、参数 Lyapunov 方程和分布式领导跟随一致性等预设时间控制器。",
+        "result": "理论结果表明，在上述充分条件下闭环系统不会在预设时刻之前到达平衡点，因此若已有结果保证不晚于 T 收敛，则 settling time 可严格等于预设时间 T，理论上避免了经典 finite/fixed/prescribed-time 控制中的保守估计。文中两个反例说明仅 T-finite-time stable 或 prescribed-time stable 并不蕴含精确 T 收敛：任意小但持续的非零扰动可使标量系统提前命中原点，二阶系统也可在 T 前收敛。三类条件按正则性由强到弱给出了逐步推广的可验证判据，并成功覆盖自适应反步、参数 Lyapunov 方程和多智能体领导跟随一致性等代表性场景。",
+        "conclusion": "论文建立了用于证明预设时间控制精确收敛的充分条件框架，将精确 T 收敛分解为不晚于 T 收敛和在 [0,T) 内不可达原点两个互补性质。该框架可用于严格认证闭环 settling time 恰为预设 T，并为时间关键的多智能体协调任务提供理论依据。其价值在于把原有预设时间稳定性结果提升为精确收敛结论，同时保持判据仅在原点邻域内验证的便利性。",
+        "key_details": "关键实现细节包括要求 f(t,0)=0 以保证原点不变性并排除持续非消失扰动，假设闭环系统已 T-finite-time stable 且 x(t) 有界、t→T^- 时趋于零，并在每个紧子区间满足 Carathéodory 条件以保障解的存在性；充分条件只需局部成立，局部 Lipschitz、局部齐次线性增长和 Osgood 条件依次减弱，证明依赖连续性、反证法和双侧 Lyapunov 分析。多智能体情形通过协调误差化为 disagreement dynamics 后套用同一判据。局限性在于结论依赖原点不变性和已有 T 收敛前提，主要给出定性充分条件而非鲁棒性能或收敛速度的定量刻画，且不处理持续扰动下的提前命中问题。"
+      },
+      "affiliations": [
+        "Harbin Institute of Technology"
+      ],
+      "affiliations_text": "Harbin Institute of Technology",
+      "score": 5.3467197781579205,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2610.30219v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030219v1-ergodic-linear-quadratic-optimal-control-with-stochastic-coefficients",
+      "source": "arxiv",
+      "title": "Ergodic Linear-Quadratic Optimal Control with Stochastic Coefficients",
+      "authors": [
+        "Xuyang Lin",
+        "Nizar Touzi"
+      ],
+      "authors_text": "Xuyang Lin, Nizar Touzi",
+      "abstract": "We investigate ergodic linear-quadratic optimal control problems with stochastic coefficients and introduce the associated stochastic ergodic Hamilton-Jacobi-Bellman (HJB) equation, in which the classical ergodic constant is replaced by a random process $λ$. We establish well-posedness of the equation and show that $λ$ characterizes the optimal ergodic costs for a general class of averaging kernels, including those corresponding to normalized finite-horizon and discounted costs. For random-periodic coefficients, we construct a random-periodic solution and show that the optimal ergodic costs associated with all admissible averaging kernels coincide. We also establish stability of the optimal ergodic costs under perturbations of the coefficients.",
+      "url": "http://arxiv.org/abs/2610.30219v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30219v1",
+      "tldr": "The paper introduces a stochastic ergodic Hamilton–Jacobi–Bellman framework for linear–quadratic optimal control with stochastic coefficients, in which a random process replaces the classical ergodic constant and characterizes optimal ergodic costs across general averaging kernels, including random-periodic and perturbed settings.",
+      "detailed_reading": {
+        "motivation": "随机系数线性二次控制是经典且可处理的控制问题，但无限时域与遍历准则在系数随机时缺乏统一刻画，已有工作常限制漂移项或只能处理先折扣后取极限的次序。本文旨在为一般随机系数、含非零漂移项的遍历LQ问题建立随机遍历HJB方程，并用随机过程替代经典常数遍历成本，以统一覆盖归一化有限时域与折扣型平均核。",
+        "method": "考虑带随机有界系数A、B、C、D、f、g和半正定状态成本S的受控线性随机微分方程，控制属于H^2_∞，运行成本为S_t x·x+|u|^2；引入随机遍历HJB方程λ_t=inf_u{ℓ_t(x,u)+L_t^u V_t(x)}，其中V为半鞅随机场、λ为实值随机过程。技术路线是研究无限时域后向随机Riccati方程及对偶BSDE，在已有Riccati存在性基础上把对偶方程存在性推广到有界f、g，并证明唯一性与一致估计；引入 uniformly local conditional 空间L^p_unif及范数sup_t ||E[∫_t^{t+1}|Y_s|^p ds|F_t]||_∞^{1/p}，证明Riccati解Q、k属于L^2_unif、λ属于L^1_unif。随后通过验证定理处理一般平均核K_ρ(t)=ρK(ρt)，其中K非负、非增、右连左极且积分为1，并构造最优仿射反馈控制；对随机周期系数构造随机周期解，并分析系数扰动下的稳定性。",
+        "result": "建立了随机遍历HJB方程的适定性和验证定理，并证明λ刻画了一般平均核下的最优遍历成本：liminf_{ρ↓0} inf_ν J^{K_ρ}=inf_ν liminf_{ρ↓0} J^{K_ρ}=liminf_{ρ↓0} E∫_0^∞ K_ρ(t)λ_t dt，limsup情形亦有对应等式。该框架统一覆盖K=1_[0,1)的归一化有限时域平均和K=e^{-t}的折扣成本，并在折扣情形下得到inf与liminf可交换的等式。对于随机周期系数，构造随机周期解并证明所有容许平均核对应的最优遍历成本相同；同时给出Riccati解、对偶解及最优遍历成本在系数扰动下的稳定性。",
+        "conclusion": "本文把经典遍历HJB中的常数λ推广为随机过程，为随机系数遍历LQ控制提供了统一的理论框架，涵盖一般平均核、验证原理、最优仿射反馈、随机周期情形和系数扰动稳定性。结果弥补了以往在对偶方程存在性、非零g以及inf与liminf次序等方面的限制。论文属于理论分析工作，未报告数值实验或实际数据应用。",
+        "key_details": "关键假设包括系数A、B、C、D、f、g和S有界，S取值于半正定矩阵锥，控制成本对u为|u|^2；平均核K需非负、非增、右连左极且∫K=1，K_ρ(t)=ρK(ρt)。方法核心是无限时域后向随机Riccati方程与对偶BSDE、Itô-Wentzell算子、L^p_unif一致局部条件空间、唯一性和一致估计，以及验证与局部化论证；得到Q、k∈L^2_unif和λ∈L^1_unif。局限在于结果依赖有界系数与二次LQ结构，稳定性主要为理论刻画，未给出数值算例或定量收敛率。"
+      },
+      "affiliations": [
+        "New York University"
+      ],
+      "affiliations_text": "New York University",
+      "score": 5.005425508337695,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.30141v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030141v1-consensus-aware-co-design-of-wireless-multi-agent-control-and-communication-systems",
+      "source": "arxiv",
+      "title": "Consensus-Aware Co-design of Wireless Multi-Agent Control and Communication Systems",
+      "authors": [
+        "Atefeh Termehchi",
+        "Sajedeh Soleimani",
+        "Shiva Kazemi Taskooh",
+        "Mehdi Rasti",
+        "Ekram Hossain"
+      ],
+      "authors_text": "Atefeh Termehchi, Sajedeh Soleimani, Shiva Kazemi Taskooh, Mehdi Rasti, Ekram Hossain",
+      "abstract": "Autonomous multi-agent control systems (MACSs) enable distributed coordination in emerging applications such as smart power grids and autonomous vehicle or drone networks. In many of these applications, inter-agent communication relies on wireless networks. However, conventional MACS designs neglect the interaction between the communication and control subsystems. At the same time, conventional wireless designs reserve communication resources based on worst-case MACS requirements. Consequently, control performance is degraded and wireless resources are utilized inefficiently. To address these challenges, we propose a consensus-aware co-design approach for MACSs and wireless communication systems. We introduce a system model in which agents achieve consensus by exchanging information through device-to-device (D2D) links that share spectrum with cellular users under limited bandwidth resources. Based on this model, we formulate a joint optimization problem for consensus-topology selection and wireless resource allocation to minimize bandwidth consumption while guaranteeing consensus and satisfying the quality-of-service (QoS) requirements of both MACSs and cellular users. Although the resulting problem is a mixed-integer nonlinear program (NP-hard in general), a structural property of the optimal solution enables a sequential two-stage optimization algorithm with polynomial complexity. Simulations on a smart power grid case study demonstrate that the proposed approach achieves 24-27% bandwidth savings compared with the two baselines while maintaining consensus and satisfying all QoS requirements of the control agents and the communication users.",
+      "url": "http://arxiv.org/abs/2610.30141v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30141v1",
+      "tldr": "This paper proposes a consensus-aware co-design framework that jointly optimizes consensus-topology selection and D2D/cellular wireless resource allocation via a polynomial two-stage algorithm to minimize bandwidth while guaranteeing multi-agent consensus and QoS, achieving 24–27% bandwidth savings in a smart-grid case study.",
+      "detailed_reading": {
+        "motivation": "传统多智能体控制系统设计通常把智能体间通信抽象为连通图或时延、丢包等指标，忽略无线通信子系统与控制子系统的双向耦合；同时无线资源又按最坏情况预留，导致控制性能下降和带宽利用低效。面向智能电网、车联网和无人机网络等无线使能多智能体应用，需要显式建模通信与控制交互，并联合优化一致性拓扑与无线资源。",
+        "method": "论文构建由基站、多个控制智能体和多个蜂窝用户组成的系统模型，控制智能体通过D2D链路共享频谱交换状态信息，时间划分为时隙且每个时隙内资源分配与通信图保持不变、跨时隙可变化。基于连续时间多智能体动力学和时变无向图，联合优化一致性拓扑选择与无线资源分配，在保证MACS一致性、控制智能体与蜂窝用户最小QoS以及总带宽预算约束下最小化带宽消耗。该问题为混合整数非线性规划且一般NP难，但利用最优解的结构性质将搜索空间无损缩减，设计按每个时隙顺序执行的两阶段多项式复杂度算法。",
+        "result": "在智能电网案例仿真中，所提一致性感知联合优化方法相比两个基线实现24–27%的带宽节省，同时维持MACS一致性并满足控制智能体和蜂窝用户的全部QoS要求。结果说明利用联合连通性和控制-通信耦合可以在不牺牲控制与通信服务质量的前提下显著降低无线带宽消耗。",
+        "conclusion": "论文表明无线多智能体控制系统需要将一致性拓扑选择与D2D无线资源分配联合设计，而非分别按最坏情况处理；所提出的结构性质与两阶段算法为无线使能MACS提供可计算且有效的协同设计途径。该工作凸显了控制感知无线资源管理在提升带宽效率和保障控制性能方面的潜力。",
+        "key_details": "关键建模细节包括：D2D链路与蜂窝用户共享总带宽但分配互不重叠子带以在频域避免干扰；若某时隙内两智能体间D2D资源足以支持信息交换并满足可允许传输时延界，则图中对应边存在；系统动力学为带分段常数切换通信拓扑的连续时间多智能体模型，可用图拉普拉斯描述。优化约束涵盖一致性、控制智能体与蜂窝用户QoS及总带宽预算，核心理论点是Lemma 2给出的最优解结构性质使NP难MINLP可化为每时隙多项式复杂度的顺序两阶段求解。局限性包括时隙内资源与拓扑恒定、频域正交假设简化了干扰、主要基于智能电网仿真验证。"
+      },
+      "affiliations": [
+        "Amirkabir University of Technology",
+        "University of Manitoba",
+        "University of Oulu"
+      ],
+      "affiliations_text": "Amirkabir University of Technology, University of Manitoba, University of Oulu",
+      "score": 4.897655805568546,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2610.30140v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030140v1-the-smfce-paradigm-a-unified-modeling-framework-based-on-state-cost-and-extremal-evolution",
+      "source": "arxiv",
+      "title": "The SMFCE Paradigm: A Unified Modeling Framework Based on State, Cost, and Extremal Evolution",
+      "authors": [
+        "Wei Ba",
+        "Ang Fu",
+        "Shengsong Kong",
+        "Zhongchuan Fu"
+      ],
+      "authors_text": "Wei Ba, Ang Fu, Shengsong Kong, Zhongchuan Fu",
+      "abstract": "This paper proposes a unified modeling framework centered on \"state-cost-extremal evolution,\" referred to as the SMFCE paradigm. The paradigm represents the effective state of a system as a point in a state space, characterizes state cost by a single-valued scalar field, and describes system evolution through local cost descent or local extremum selection. Its mathematical core employs classical tools from differential geometry, gradient systems, and dynamical systems. The contribution of this paper is not to reintroduce these foundational results, but to organize them into two operational modeling principles. On finite-dimensional smooth Riemannian manifolds under appropriate regularity conditions, the path independence of cost differences and the cost monotonicity of negative gradient flows follow directly from classical results, while the descent property of discrete local-minimum transitions follows directly from the definition of a minimum. For same-level iterative emergence and present-centeredness, the paper provides conditional mathematical formulations using, respectively, parameterized gradient systems and bifurcation theory, and Markov processes and receding-horizon optimization. The paper further introduces three layered metrics: cost quantity, directed coupling degree, and commitment fulfillment rate, at the state, transition, path, and system levels. Finally, the paper discusses semantic modeling of large language model training and inference within this framework, explicitly distinguishes classical mathematical results, conditional propositions, and empirical adaptation models, and provides reproducible empirical testing procedures for the two modeling principles.",
+      "url": "http://arxiv.org/abs/2610.30140v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30140v1",
+      "tldr": "This paper proposes the SMFCE paradigm, a unified and testable modeling framework that represents systems as states in a Riemannian manifold with a scalar cost field and models their evolution via local cost descent or local extremum selection, organizing classical differential-geometric and dynamical-systems tools into two operational modeling principles and illustrating them through large language model semantic modeling and three layered metrics.",
+      "detailed_reading": {
+        "motivation": "复杂系统常涉及状态表示、评价机制、局部决策与宏观结构形成，但缺乏统一数学对象时容易停留在概念类比。本文不以断言所有系统服从同一动力学为目标，而是提出可检验的建模条件，使路径性质、稳定性、跨系统对应和多尺度行为能够被统一分析。其动机还在于用同一语言连接连续系统、离散决策系统和大型语言模型语义过程。",
+        "method": "SMFCE将系统有效状态表示为有限维光滑黎曼流形上的点，以单值标量场刻画状态代价，并在单周期近似静态条件下用负梯度流、约束投影动力系统或离散邻域argmin描述局部演化。论文提炼“充分状态表示”和“代价-极值演化”两条建模原则，并给出数据驱动检验：状态充分性用条件独立零假设、嵌套模型风险差与置换检验，梯度演化用速度残差、方向余弦、降本转移比例和留出轨迹预测。对同级迭代涌现与当下中心性，分别用参数化梯度系统与分岔理论、马尔可夫过程与滚动时域优化作条件化表述；进一步定义代价量、定向耦合度和承诺履行率三层指标，并以语义等价类、语义熵及训练-推理双时间尺度示例大语言模型语义建模。",
+        "result": "在适当正则条件下，代价差的路径无关性由精确1形式的线积分性质直接得到，冻结代价场下负梯度流满足Lyapunov单调下降，离散局部最小转移的降本性由最小值定义直接推出。时变场需额外满足沿轨迹的代价时间偏导不超过梯度范数平方乘以系数，才能保证实际代价不增；且单调下降本身不保证极限点是局部最小。同级迭代涌现与当下中心性仅为条件命题，大语言模型语义建模是示例性适配而非普遍定律；论文提供可复现检验流程和指标，但未报告具体实验数值。",
+        "conclusion": "SMFCE把连续、离散和语义过程组织为以状态、代价和局部极值为核心的统一可检验建模语言，其贡献在操作化建模原则、条件化命题、分层指标与测试流程，而非声称提出新的经典数学工具。框架适用性依赖状态充分性、代价可标量化、单周期近似静态和局部极值规则等假设，因此应明确区分经典数学结果、条件命题和经验适配模型。实际应用中需通过预注册容差、样本拆分和替代模型比较，避免梯度流等假设因过拟合而不可证伪。",
+        "key_details": "关键条件包括代价场C^1或C^2、梯度局部Lipschitz、紧子水平集与LaSalle不变性、约束流形的投影切锥或法锥、离散邻域有限或紧等；状态充分性检验要求存在独立于状态定义的观测代价，否则检验会退化为同义反复，且不拒绝零假设不能解释为严格证明。若代价、度量和步长均用同一轨迹自由拟合，需要样本拆分与复杂度控制；三层指标覆盖状态、转移、路径和系统层，分别刻画代价量、标准化局部优势和实际耦合对参考水平的达成度。局限性在于未提供全局最优保证、条件命题适用范围有限，且大语言模型部分主要作为方法论示例而非充分实证。"
+      },
+      "affiliations": [
+        "Independent Researcher",
+        "Harbin Institute of Technology"
+      ],
+      "affiliations_text": "Independent Researcher, Harbin Institute of Technology",
+      "score": 4.512159942064084,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.30139v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030139v1-a-general-variable-neighborhood-search-for-logistic-network-flow-design-with-nonlinear-edge-costs-and-transshipment-capacities",
+      "source": "arxiv",
+      "title": "A General Variable Neighborhood Search for Logistic Network Flow Design with Nonlinear Edge Costs and Transshipment Capacities",
+      "authors": [
+        "Varvara Kovaleva",
+        "Alexander Ponomarenko"
+      ],
+      "authors_text": "Varvara Kovaleva, Alexander Ponomarenko",
+      "abstract": "We study the problem of routing multiple commodities through a logistic transport network so as to minimise the joint cost of vehicle movements and of transshipment (reload) operations at intermediate storages. The problem combines two features that are common in practice but rarely treated together: edge costs that are nonlinear in the transported volume, because freight is carried by vehicles of fixed capacity, and hard upper bounds on the volume that can be reloaded at each node. We formulate the problem as a mixed integer linear program in both an arc-based and a path-based form, derive its linear relaxation, and propose a metaheuristic solver based on General Variable Neighborhood Search (GVNS). The method works in the path space and relies on three problem-specific neighborhoods that generate new candidate paths by (i) shortest paths under a reload-aware metric, (ii) edges carrying partially loaded vehicles, and (iii) detours around congested storages. We evaluate the method on our open benchmark for this problem (arXiv:2606.20653): a corpus of realistic logistic networks calibrated on real road graphs of nine European countries, five U.S. states and the European part of Russia, with near-planar topology (Zipf city sizes, a spatial-network budget model, and a doubly constrained gravity demand model). On 35 synthetic and 15 real-geometry instances with up to 150 storages, GVNS returns solutions within about one percent of the best dual bound on small networks -- a branch-and-bound lower bound substantially tighter than the LP relaxation -- is stable across random seeds, and for a comparable wall-clock budget is up to 55% better than a time-limited exact solver on the medium instances.",
+      "url": "http://arxiv.org/abs/2610.30139v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30139v1",
+      "tldr": "The paper formulates a multi-commodity logistic network flow design problem with vehicle-capacity-induced nonlinear edge costs and hard transshipment capacities as arc- and path-based MILPs and proposes a path-space General Variable Neighborhood Search with three problem-specific neighborhoods, which yields near-optimal, seed-stable solutions and outperforms a time-limited exact solver by up to 55% on medium benchmark instances.",
+      "detailed_reading": {
+        "motivation": "现实物流网络中的多商品流路由需要同时考虑固定容量车辆导致的边成本非线性（车辆数按流量向上取整）以及中转仓储的硬性换装容量；这两类特征常见但很少联合建模，且该问题为NP难，精确求解在中大规模上代价高，因此需要可扩展且高质量的启发式方法。",
+        "method": "论文先建立弧基与路径基等价的混合整数线性规划，并推导LP松弛，松弛后可消去车辆数变量。求解器采用路径空间的通用变邻域搜索GVNS：预处理用全图最短路补全图，并以上述松弛的直接起讫边解作初始解；N1基于含装卸成本的辅助权重建最短路，N2依据边残载量模C构造偏好未满载边的图，N3按中转节点overload比排序并删除最拥堵节点重算绕行路径。每次邻域处理为每类商品生成候选路径加入路径池，以当前流为热启动在限时MILP中重新分配流量，若目标改进则保留非零流新路径并剪除零流路径，否则丢弃；VND系统扫描邻域，Shake随机扰动，邻域变更按改进重置或推进。",
+        "result": "在包含35个合成实例和15个真实几何实例、最多150个仓储的开放基准上，GVNS在小网络上得到与最佳对偶界（分枝定界下界，明显紧于LP松弛）约1%以内的解，且跨随机种子稳定；在中等实例相同墙钟预算下，比限时精确求解器最多好55%。",
+        "conclusion": "GVNS通过路径池扩张与限时MILP再优化，配合重装成本感知、部分装载车辆和拥堵绕行三类问题特定邻域，能有效处理带非线性边成本与中转容量约束的多商品物流网络设计；结果支持其作为实际规模实例的高质量实用求解框架，并提供了与精确对偶界可比的评估。",
+        "key_details": "关键实现包括：边成本c_e按每车计、车辆容量C、节点单位换装成本f_v与容量W_v；路径松弛目标为每单位流量路径成本（路径边c_e/C之和加中转f_v），车辆数由y_e=ceil(总流/C)或松弛中y_e=总流/C确定。N1权重c'_{vu}=f_v+f_u+c_{vu}/C；N2用load_e=总流 mod C，满载边最不吸引且保留G'权重，否则c''_{vu}=f_v+f_u+(load_{vu}/C)(c_{vu}/C)^α（α≤1）；N3按overload_v=中转量/W_v排序删点。VND与Shake的候选路径数、拥堵阈值（0.75/0.5）和节点子集大小（约|V|/5至|V|/4或|V|/4至|V|/3）等为关键超参；局限是外层为启发式且子问题MILP需限时求解，不保证全局最优，质量依赖基准与参数设置。"
+      },
+      "affiliations": [
+        "HSE University"
+      ],
+      "affiliations_text": "HSE University",
+      "score": 4.286169004349732,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.30144v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030144v1-forward-tangent-centered-sinkhorn-dro-exact-nominal-recovery-from-optimal-transport-to-kl",
+      "source": "arxiv",
+      "title": "Forward Tangent-Centered Sinkhorn DRO: Exact Nominal Recovery from Optimal Transport to KL",
+      "authors": [
+        "Junjie Guo"
+      ],
+      "authors_text": "Junjie Guo",
+      "abstract": "Fixed-reference entropy-regularized transport yields smooth distributionally robust optimization (DRO) objectives, but its value as a function of the adversarial marginal is generally minimized at a kernel-smoothed law rather than at the nominal distribution. Consequently, the smallest raw ambiguity set need not recover nominal risk. Building on prior information-geometric plan-KL orientations, we study the forward tangent-centered discrepancy obtained by subtracting the value and first variation at the nominal law. This is the unique affine recentering, up to the simplex gauge; for symmetric costs, its plan-KL representation coincides with the forward candidate noted by Amari et al. (2018). The representation shows that the discrepancy dominates marginal KL, is uniquely zero at the nominal law, and is strongly convex in total variation. The resulting DRO problem retains a scalar log-sum-exp dual and closed-form conditional adversarial weights. On finite supports with symmetric zero-diagonal costs, the discrepancy converges uniformly to the unregularized transport cost at low temperature; for any finite cost, its rescaled value converges uniformly to marginal KL at high temperature. We derive its exact local Hessian, an explicit finite-sample containment radius, and a generalized chi-square calibration for multinomial data. Controlled simulations verify nominal centering, both limiting regimes, and practical plug-in coverage.",
+      "url": "http://arxiv.org/abs/2610.30144v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30144v1",
+      "tldr": "The paper proposes a forward tangent-centered Sinkhorn discrepancy for distributionally robust optimization that subtracts the nominal-law tangent from entropy-regularized optimal transport, ensuring exact recovery of the nominal distribution while preserving a tractable log-sum-exp dual and interpolating between optimal transport and KL divergence across temperature regimes.",
+      "detailed_reading": {
+        "motivation": "固定参考熵正则最优传输虽使Sinkhorn DRO目标光滑易解，但其关于对抗边际的最小点通常是名义分布的核平滑版本，而非名义分布本身，因此最小的原始模糊集不必然恢复名义风险。本文旨在去除这种固定参考漂移，同时保留DRO所需的凸性与log-sum-exp可解结构。",
+        "method": "在有限支撑上定义熵正则传输值Tγ(q,p)，先刻画其原始最小点为核平滑qγ°(p)，再对q↦Tγ(q,p)在名义p处减去值与一阶变分，构造前向切中心差异Dγ^TC(q||p)=F(q)-F(p)-ν^T(q-p)，并证明其是单纯形上唯一的仿射重新中心。方法核心包括：利用最优传输计划得到Dγ^TC=γKL(Πγ^{q,p}||Πγ^{p,p})及边际KL链式分解；将DRO鲁棒风险写为Dγ^TC≤ρ约束下的线性损失最大化，推导仅含标量传输乘子的强对偶和闭式条件最坏耦合/对抗权重；进而分析低温OT极限、高温KL极限，并用条件softmax协方差给出局部Hessian、有限样本包含半径和多项数据的广义卡方校准，最后以受控仿真验证名义居中、两温度极限和插件覆盖。",
+        "result": "理论结果显示Dγ^TC唯一在p处为零、支配边际KL并在全变差下强凸，故ρ=0时鲁棒风险精确等于名义风险p^T L(θ)，实现精确名义恢复。对有限支撑对称零对角成本，低温下Dγ^TC一致收敛到未正则传输成本，误差界为εγ=2γ[1+2log m+log(√m/p_min)]；任意有限成本高温下Dγ^TC/γ一致收敛到边际KL，且非退化KL极限需取ρ=γτ。鲁棒风险也有一致收敛界，如低温下与Wasserstein型DRO风险的差异不超过2Bεγ/ρ；仿真验证了名义居中、两个极限 regime 及插件式覆盖。",
+        "conclusion": "前向切中心化可在不牺牲Sinkhorn DRO凸性和标量对偶可解性的前提下，消除固定参考熵正则造成的名义分布漂移，使模糊集真正以名义分布为中心。该构造在低温端连接离散最优传输、在高温端连接KL-DRO，提供了一个由温度控制的建模连续谱，并给出可操作的局部校准与有限样本半径。",
+        "key_details": "关键实现点包括：熵以计数测度为参考，固定参考矩阵经正行列缩放或成本加行列势不改变Dγ^TC；名义p需在单纯形内部，成本有限，理论主要覆盖有限维分类/情景约简/加权支撑。对偶每次评估为O(m^2)的稠密核log-sum-exp，名义自势由一次Sinkhorn缩放预计算；ρ=0无需求解即得名义风险，ρ>0需一维乘子优化。高温柔性依赖ρ=γτ缩放，固定ρ会收缩到{p}；局部几何由条件softmax协方差刻画，并给出多项数据广义卡方校准。局限性是未提供连续支撑采样定理，也不处理学习得到的支撑或ground cost。"
+      },
+      "affiliations": [
+        "Rutgers University"
+      ],
+      "affiliations_text": "Rutgers University",
+      "score": 4.110143202532407,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.30207v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030207v1-spectral-uncertainty-decomposition-for-sparse-bayesian-learning",
+      "source": "arxiv",
+      "title": "Spectral Uncertainty Decomposition for Sparse Bayesian Learning",
+      "authors": [
+        "Ismail Huseynov",
+        "Stefan Haufe"
+      ],
+      "authors_text": "Ismail Huseynov, Stefan Haufe",
+      "abstract": "Estimating distributed neural sources from M/EEG measurements is an ill-posed inverse problem where principled uncertainty quantification remains challenging. The usual conditional Gaussian posterior covariance does not explicitly distinguish uncertainty along likelihood-visible source directions from uncertainty that is invisible to the measurements. We propose a spectral framework based on the singular value structure of the prior-preconditioned forward operator, which provides an exact, interpretable decomposition of the posterior covariance into data-informed and indeterminacy epistemic components. This formulation identifies uncertainty contributions that are reducible by better measurements from those that are fundamentally irreducible by sensing geometry. We further derive an equivalent subtractive decomposition that expresses the prior covariance as the sum of posterior and data-driven reduction terms, enabling precise accounting of uncertainty reduction through Bayesian learning. Together, these complementary representations offer both theoretical insight and practical tools for interpretable uncertainty quantification in M/EEG source imaging for linear-Gaussian Bayesian inverse solvers where the posterior covariance is available in closed form.",
+      "url": "http://arxiv.org/abs/2610.30207v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30207v1",
+      "tldr": "The paper proposes a spectral decomposition of the posterior covariance—based on the SVD of the prior-preconditioned forward operator—that exactly separates data-informed, reducible uncertainty from nullspace, irreducible uncertainty (and equivalently expresses the prior covariance as posterior plus data-driven reduction), enabling interpretable uncertainty quantification for sparse Bayesian learning and linear-Gaussian M/EEG source imaging.",
+      "detailed_reading": {
+        "motivation": "M/EEG源成像是从少量传感器测量反演大量神经源活动的严重病态逆问题，原则化的不确定性量化仍然困难。常规条件高斯后验协方差不能显式区分似然可见源方向上的不确定性与测量不可见方向上的不确定性，因此需要一个可解释的后验协方差分解来区分可由更好测量降低的认知不确定性与由传感几何决定的不可约不确定性。",
+        "method": "在线性高斯前向模型Y=LX+E、对角先验协方差Σprior和噪声σ^2I下，定义先验预条件前向算子A=LΣprior^{1/2}并做紧SVD，得到可见子空间Vvis、奇异值s_i和零空间Vnull；利用后验协方差Σpost=Σprior^{1/2}(I+σ^{-2}A^TA)^{-1}Σprior^{1/2}，推导出可见块Σprior^{1/2}Vvis(I+Λvis)^{-1}Vvis^TΣprior^{1/2}与不可辨识块Σprior^{1/2}VnullVnull^TΣprior^{1/2}的精确加性分解，并给出等价的先验减去数据缩减形式Σpost=Σprior-Rdata；Type-II稀疏贝叶斯学习先用边际似然估计源方差γ，再将超参固定于条件高斯后验。",
+        "result": "核心结果是后验协方差可精确分解为数据信息认知不确定性和不可辨识认知不确定性两部分，且每个可见模态的先验方差被数据移除比例为s_i^2/(σ^2+s_i^2)、后验收缩因子为r_i=(1+s_i^2/σ^2)^{-1}。该结果给出逐模态的诊断量，可将可由更大奇异值或更小噪声降低的方差与零空间中由传感几何根本不可约的方差分开，并适用于任何具有闭式高斯后验协方差的线性高斯贝叶斯逆求解器。",
+        "conclusion": "该谱框架为M/EEG源成像提供了补的加性与减性后验协方差表示，使贝叶斯学习带来的不确定性缩减可以被精确记账。它适用于固定或学习对角先验的Type-I与Type-II线性高斯逆问题，为稀疏贝叶斯学习等求解器提供可解释的不确定性量化工具。",
+        "key_details": "方法关键是用先验协方差的半正定平方根避免对奇异先验求逆，从而兼容稀疏贝叶斯学习中γ_i趋零导致的秩亏先验；后验协方差本身只表示认知不确定性，aleatoric噪声仅通过收缩因子参数化并加性出现在预测传感器协方差LΣpostL^T+σ^2I中。该分解依赖对角先验和闭式高斯后验，且Type-II中不传播超参数不确定性；稀疏经验贝叶斯剪枝会使某些方向后验方差为零，这是实际应用中的退化局限。"
+      },
+      "affiliations": [
+        "Technische Universitat Berlin",
+        "Charité–Universitätsmedizin Berlin",
+        "Physikalisch-Technische Bundesanstalt"
+      ],
+      "affiliations_text": "Technische Universitat Berlin, Charité–Universitätsmedizin Berlin, Physikalisch-Technische Bundesanstalt",
+      "score": 4.0806187401613405,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.30143v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030143v1-the-last-iterate-of-the-projected-stochastic-subgradient-method-pays-a-logarithm-even-in-dimension-one",
+      "source": "arxiv",
+      "title": "The Last Iterate of the Projected Stochastic Subgradient Method Pays a Logarithm, Even in Dimension One",
+      "authors": [
+        "Guglielmo Beretta",
+        "Tommaso Cesari",
+        "Roberto Colomboni"
+      ],
+      "authors_text": "Guglielmo Beretta, Tommaso Cesari, Roberto Colomboni",
+      "abstract": "We prove that the projected stochastic subgradient method with the standard anytime stepsizes $η_t = γ/\\sqrt t$ can suffer expected last-iterate optimization error of order $(\\log n)/\\sqrt n$ already on the real line. Combined with the classical in-expectation upper bound, this establishes the sharp worst-case order of the projected stochastic subgradient method.",
+      "url": "http://arxiv.org/abs/2610.30143v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30143v1",
+      "tldr": "The paper proves that the projected stochastic subgradient method with standard anytime stepsizes \\(\\eta_t=\\gamma/\\sqrt t\\) can incur expected last-iterate error of order \\((\\log n)/\\sqrt n\\) even in one dimension, establishing this as the sharp worst-case rate.",
+      "detailed_reading": {
+        "motivation": "投影随机次梯度方法在条件无偏且二阶矩有界的随机一阶 oracle 下，使用 anytime 步长 η_t=γ/√t 时，last iterate 的期望优化误差已知有 O(log n/√n) 上界，但该上界是否最坏情形紧、对数因子是否必要尚不明确。本文旨在证明该上界在实数轴一维情形已经紧，从而确定算法的尖锐最坏阶，并辨析对数损失来自 anytime 步长调度而非噪声假设。",
+        "method": "对任意 b,γ>0 和 n≥2，构造一维凸目标 f(x)=ε|x|（唯一极小点 0、ε-Lipschitz）及次梯度选择 g(x)=ε sign(x)（g(0)=0），噪声取 W_t=(b-ε)ξ_t，其中 ξ_t 为 i.i.d. Rademacher，更新为 X_{t+1}=X_t-(γ/√t)(g(X_t)+W_t)，X_1=0。展开第 n 步迭代，用三角不等式控制 g 项，并用 Khintchine-Szarek 不等式估计 μ=E|Σ_{t=1}^{n-1}ξ_t/√t|，再选取 ε=(b/2)μ/(μ+s)，s=Σ_{t=1}^{n-1}1/√t，最后用调和和与积分估计把下界化为对数除以根号 n 的形式。",
+        "result": "证明对每个 b,γ>0 和 n≥2，存在满足 f 的 Lipschitz 常数≤b/2、噪声为幅度≤b 的 i.i.d. 缩放 Rademacher 的实例，使随机次梯度 g(X_t)+W_t 一致有界于 b，且第 n 次迭代满足 E[f(X_n)-min f]≥(γb²/24)(log n/√n)。这与经典期望上界 O(log n/√n) 合并，得到投影随机次梯度方法在最坏情形下的精确阶 Θ(log n/√n)，即使在一维也成立。",
+        "conclusion": "投影随机次梯度方法的 anytime 步长 η_t=γ/√t 的 last-iterate 最坏期望误差确实为 Θ(log n/√n)，经典上界不可去掉对数因子。该下界在加性、状态无关、一致有界 i.i.d. 噪声这一良性设置下已出现，说明对数损失可归因于 anytime 步长调度本身；相较之下，固定时域常数步长 γ/√n 在一维同类噪声下可达到 O(n^{-1/2})，无对数因子。",
+        "key_details": "关键构造是 f(x)=ε|x| 与 W_t=(b-ε)ξ_t，且 ε 依 n、b 和 μ,s 选取，保证 0<ε<b/2 并平衡噪声主导项与次梯度累积项。证明使用 Khintchine-Szarek 不等式得到 μ²≥h/2、μ≤√h（h=Σ_{t=1}^{n-1}1/t），并用 h≥log n、s≤2√n、h≤n 推出常数 1/24；核心限制是结论针对期望 last iterate、一维构造和加性状态无关有界 i.i.d. 缩放 Rademacher 噪声，且 Lipschitz 上界 b/2 与噪声幅度 b 分别设定。"
+      },
+      "affiliations": [
+        "University of Ottawa",
+        "University of Bristol",
+        "Aarhus University"
+      ],
+      "affiliations_text": "University of Ottawa, University of Bristol, Aarhus University",
+      "score": 4.069392754229858,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.30197v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030197v1-alpha-systematic-fault-injection-and-robustness-evaluation-for-llm-driven-embodied-manipulation",
+      "source": "arxiv",
+      "title": "Alpha: Systematic Fault Injection and Robustness Evaluation for LLM-Driven Embodied Manipulation",
+      "authors": [
+        "Jona Joy"
+      ],
+      "authors_text": "Jona Joy",
+      "abstract": "Large language models (LLMs) are increasingly integrated into embodied robotic planning, yet standard benchmarks primarily evaluate end-to-end task completion in nominal environments, obscuring failure origins across the execution stack. We present Alpha, a systematic fault-injection and robustness-evaluation framework for LLM-driven manipulation in simulation. Alpha injects calibrated faults across perception (sensor lag), actuation (grip slip), kinematics (unreachable targets), and planning (planner-output corruption), alongside concurrent conditions. To separate physical vulnerabilities from planner sensitivities, we introduce a matched methodology pairing an LLM agent (Llama-3 via Ollama) against a deterministic Scripted Oracle planner across a balanced 150-episode matrix under identical seeds, geometries, and safety criteria. Across the matrix, the Oracle achieves 64.0% (48/75) success while the LLM achieves 44.0% (33/75) (paired McNemar p = 3.01 x 10^-4). Crucially, excluding planner-output corruption, performance across all physical and kinematic conditions is identical: 55.0% (33/60) for both planners with zero discordant pairs (McNemar p = 1.00). This demonstrates that physical actuator slip, kinematic reach boundaries, and perceptual staleness affect deterministic controllers and LLM planners equivalently. The performance gap is driven entirely by planner-output corruption (100% Oracle vs. 0% LLM), isolating the prompt-to-JSON serialization and validation interface rather than a cognitive reasoning deficit. We also audit 169 historical pilot attempts for transparency.",
+      "url": "http://arxiv.org/abs/2610.30197v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30197v1",
+      "tldr": "Alpha is a fault-injection framework for LLM-driven embodied manipulation that, through matched comparison against a scripted oracle, shows physical, kinematic, and perceptual faults affect both planners equally while the LLM’s performance gap is caused entirely by planner-output corruption at the JSON serialization/validation interface rather than by a reasoning deficit.",
+      "detailed_reading": {
+        "motivation": "现有具身操作基准多评估名义环境下的端到端完成率，难以定位感知、规划、运动学与执行各层的故障来源；LLM 规划器的失败也缺少与确定性基线在相同条件下的反事实对照。Alpha 旨在通过系统故障注入和匹配评测，把物理/环境脆弱性与规划器接口敏感性分开。",
+        "method": "Alpha 在 PyBullet 仿真中构建 Brain/Body 执行链，通过 ChaosRoboticsWrapper 在四个边界注入校准故障：感知传感器滞后 F1、执行抓握滑移 F2、运动学不可达 IK 目标 F3、规划输出 JSON 损坏 F4，并设置 F1+F2 并发条件；故障强度由 I∈{0.33,0.66,1.00} 参数化。评测采用 150 个平衡 episode（LLM 与 Scripted Oracle 各 75），二者共享随机种子、场景几何、物理参数和安全阈值；LLM 为 Ollama 上的 Llama-3，Oracle 直接生成无碰撞抓放轨迹并绕过 JSON 序列化。执行中每步以 240 Hz 安全监控接触力、工作空间和去重事件，记录遥测并统计成功率、校验拒绝和事件。",
+        "result": "全矩阵 Oracle 成功率 64.0%（48/75），LLM 44.0%（33/75），配对 McNemar p=3.01×10^-4。排除 F4 后，两者在所有物理/运动学/感知条件上完全一致，均为 55.0%（33/60），不一致对为零，McNemar p=1.00；性能差距完全来自规划输出损坏条件下 Oracle 100% 对 LLM 0%。",
+        "conclusion": "物理执行滑移、运动学可达边界和感知陈旧对确定性控制器与 LLM 规划器影响等价，LLM 的主要脆弱点不是认知推理缺陷，而是 prompt 到 JSON 的序列化与校验接口。因此具身 LLM 评测应报告分层故障归因，并优先增强结构化输出解析、校验失败恢复与安全降级，而非仅优化端到端成功率。",
+        "key_details": "关键实现包括 3000 N 暴力接触阈值、工作空间 x∈[0.15,0.95] m、y∈[-0.45,0.55] m、z∈[0.55,1.25] m，以及 15 个仿真步（约 0.0625 s）的事件去重窗口；F1 因初始历史缓冲仅 0.500 s 而强度饱和，空间陈旧约 0.025 m，F3 偏移 0.03+0.27I 且放置误差可 >0.17 m，F4 以 P=0.20+0.80I 注入并使 Pydantic 校验失败后中止为空计划。方法在 PyBullet DIRECT 仿真、单一 Llama-3/Ollama 与 150 episode 小矩阵上验证，未训练模型，存在仿真到现实、样本规模和 F1 饱和等局限；另审计了 169 次历史 pilot 尝试以降低丢弃偏差。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.0011565219862835,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.30145v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/23/261030145v1-elimination-geometry-ii-integrability-representation-and-structural-limits",
+      "source": "arxiv",
+      "title": "Elimination Geometry II: Integrability, Representation, and Structural Limits",
+      "authors": [
+        "Mian Huang",
+        "Xueqin Wang"
+      ],
+      "authors_text": "Mian Huang, Xueqin Wang",
+      "abstract": "Elimination geometry studies the exact nonnegative defect left after an auxiliary variable is optimized out. Part~II audits this certified-elimination interface through three theorem families.\n  For integrability, local gaps form a repeated partial-elimination tower precisely under nonnegativity, touching, and zero elementary-square circulation. Hodge projection constructs nearest finite-space repairs and separates curvature, certification, and global period taxes. For representation and price, a descent gate characterizes surjective refinements and rules out strictly convex separable, duplication-invariant weight penalties. Dummy and target-calling lifts show that unrestricted lift design is vacuous, whereas the Fidelity-coherence frontier isolates irreducible cost. A modal Gram block classifies unconstrained quadratic lift-coupling germs and yields aligned Gaussian risk ledgers. Bernstein spectral functions preserve graph-Laplacian structure. Graph-universal Markov resolvents exist exactly up to first-order fractional qualification, and universal polynomial spectral penalties reduce to nonnegative Laplacian multiples. This linear limit does not preclude Part~I's nonlinear CDF repair and sharp CRPS theory.\n  For converses, finite-order target-jet preservation uniquely requires subtraction of the corresponding defect jet, up to flat terms; approximate jets yield quasi-descent and stationary limits. Fixed-marginal coupling obeys a dependence-benefit frontier. Reversing certified KL in entropy-regularized control eliminates dimension-free guarantees, while a fixed measurement preserves all Umegaki defects of a faithful Gibbs family exactly when that family commutes.",
+      "url": "http://arxiv.org/abs/2610.30145v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30145v1",
+      "tldr": "This paper audits certified elimination geometry by proving when local defect certificates integrate into a global objective, which lift representations and spectral penalties are valid, and what target-preservation, representation, and impossibility results structurally limit auxiliary-variable coupling.",
+      "detailed_reading": {
+        "motivation": "论文关注辅助变量被优化掉后留下的精确非负缺陷，即消除几何中的认证接口问题：局部报告的间隙何时能整合为同一目标、哪些表示变换合法、目标保持会强制哪些逆命题以及哪些扩展不可能。Part I 给出构造性认证演算，Part II 反过来审计该接口的可积性、表示有效性与结构极限。",
+        "method": "以认证最小消除 J(Θ)=inf_A H0(Θ,A) 和非负缺陷 DΘ(A)=H0(Θ,A)−J(Θ) 为原始对象，分三组定理推进：可积性上用布尔格上的部分消除塔、非负且触底的边缺陷及基本消除方块上的零环流刻画整合条件，并用 Hodge 投影与见证约束二次规划构造最近认证修复；表示与价格上用提升门、满射细化下的纤维最小化相干下降、保真度—相干性前沿、增广模态 Gram 块和 Bernstein 谱函数分析表示不变量与线性谱惩罚极限；逆命题上用目标 k-jet 保持、近似 jet 扰动、固定边缘耦合、熵正则控制中的 KL 方向和 Gibbs 纤维测量检验强制形式与不可能性。",
+        "result": "得到的核心结论包括：局部间隙构成重复部分消除塔当且仅当非负、触底且在每一基本消除方块上零环流，修复成本可分解为曲率税、认证税和全局周期税；不存在非平凡严格凸可分离且对重复输出等价分量不变的原始权重惩罚，无限制提升设计是空洞的，而保真度—相干性前沿分离不可约相干成本与外部设计低效；Bernstein 谱函数保持图 Laplacian 结构，且 (I+λL^ν)^{-1} 对所有加权图和 λ>0 为 Markov 恰在 0<ν≤1，图通用多项式谱惩罚只能是非负 Laplacian 倍数；目标 jet 保持唯一要求减去相应缺陷 jet（至平坦项），反向认证 KL 会破坏所有无量纲性能模量，固定测量精确保持忠实 Gibbs 族全部 Umegaki 缺陷当且仅当该族交换。",
+        "conclusion": "论文表明认证消除接口具有严格的结构边界：可积性、表示不变性和目标保持都不是免费的，许多看似自然的提升、谱惩罚或 KL 证书在给定条件下会失效。所得的是有范围的一阶耦合无免费原则而非普适守恒律；线性表示障碍不排除 Part I 的非线性 CDF 修复及其图有效维风险界和匹配 minimax CRPS 速率。",
+        "key_details": "关键实现与限制在于：理论条件化于声明的认证提升和相干泛函 R，缺陷必须是原目标单位下的真实插入成本；Bregman 型提升给出相对熵或 LogDet 缺陷，二次实验室给出显式缺陷、前沿和诱导变分滤波器；可积性依赖非负、触底和基本方块环流，修复依赖 Hodge 投影与二次规划约束；谱结论区分概率有效性、有限跳局部性与逼近阶，且 ν、λ 和图权重是核心参数；逆命题只在模平坦项意义下唯一，近似 jet 需可和认证误差，固定边缘耦合受依赖—收益前沿约束，非交换情形需族交换；论文为纯理论审计，无经验数据或训练流程，主要局限是结论相对于声明提升和线性/无约束二次类等设定，不能外推为普适不可能性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.912026423938748,
+      "score_text": "3.9"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.30149v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030149v1-a-tutte-like-theorem-for-injective-flows-on-meshes",
+      "source": "arxiv",
+      "title": "A Tutte-Like Theorem for Injective Flows on Meshes",
+      "authors": [
+        "Darsh Kaushik",
+        "Noam Aigerman"
+      ],
+      "authors_text": "Darsh Kaushik, Noam Aigerman",
+      "abstract": "This work proves a theorem regarding injectivity of continuous flows that are defined via discrete vector fields on triangle meshes. In similar fashion to Tutte's embedding, the theorem shows a connection between harmonicity and injectivity. Specifically, a discrete harmonic function is computed over a spherical mesh, and its $90^\\circ$-rotated gradients are taken as the vector field. We show that this leads to an injective flow over the mesh, i.e., when two points are advected along the vector field, their trajectories are guaranteed to not intersect. The core insight behind this theorem is that the characterization of the Poincaré-Hopf indices of discrete harmonic 1-forms is paralleled in the combinatorial rules for injective vector fields. Similarly to Tutte's embedding, the injective vector field can be computed by simply solving a sparse linear system. Furthermore, it is differentiably dependent on the entries of the Laplacian, enabling unconstrained gradient-based optimization of the vector field while preserving injectivity. The advection itself can be computed by a quick and accurate algorithm. We experimentally validate the injectivity of the results, as well as show examples of differentiable optimization, such as computing an injective approximation to a given non-injective vector field, and fitting an injective vector field to satisfy constraints.",
+      "url": "http://arxiv.org/abs/2610.30149v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30149v1",
+      "tldr": "The paper proves a Tutte-like theorem showing that the 90°-rotated gradient of a discrete harmonic function on a spherical triangle mesh defines an injective flow computable via a sparse linear system and differentiably optimizable through Laplacian weights.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Université de Montréal",
+        "Mila - Quebec Artificial Intelligence Institute"
+      ],
+      "affiliations_text": "Université de Montréal, Mila - Quebec Artificial Intelligence Institute",
+      "score": 3.8746422156110816,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.30215v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030215v1-ai-mindmeld-a-latent-interconnect-protocol",
+      "source": "arxiv",
+      "title": "AI Mindmeld: A Latent Interconnect Protocol",
+      "authors": [
+        "Siavash Golkar",
+        "Jake Kovalic",
+        "Shirley Ho"
+      ],
+      "authors_text": "Siavash Golkar, Jake Kovalic, Shirley Ho",
+      "abstract": "LLMs can act as scientific agents using tools to consult specialists and run experiments. Yet specialist information must enter their context, generally as text, images, audio or video: a bottleneck between models with rich, high-dimensional representations. We advocate direct representation exchange: a mindmeld conveying many properties, including information an LLM would not think to request. It should be extensible to new specialists, flexible across questions and tasks, and compositional across independently connected specialists without joint training.\n  The Latent Interconnect Protocol (LIP) learns connectors mapping specialist representations into LLM internal states. Training only connectors keeps this practical as LLMs grow and evolve. We connect three protein and three small molecule specialists to Gemma 3 (4B and 12B parameters) and Kimi K2.6 (1T total, 32B active), freezing all pretrained models. Independently trained connectors provide useful information without changing the LLM or existing connectors, supporting familiar and new question types about unseen objects. We demonstrate zero-shot transfer to cross-domain tasks without joint training. Task performance and compositionality generally improve with LLM capability, with especially strong gains in zero-shot task transfer. Limitations remain: current LLMs were not trained for specialist representations as native inputs; access does not ensure reliable interpretation, integration or use in reasoning. We call on specialist developers to provide consistent representation interfaces and, especially, on LLM developers to train models to receive, combine and reason with these inputs. These efforts could expand scientific agents' information while preserving conventional tools' flexibility.\n  Data, pretrained connectors, and code for training, evaluation and interactive inference: https://github.com/PolymathicAI/AI-Mindmeld",
+      "url": "http://arxiv.org/abs/2610.30215v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30215v1",
+      "tldr": "The paper introduces the Latent Interconnect Protocol (LIP), which trains lightweight connectors to inject frozen specialist-model representations directly into the internal states of frozen LLMs at multiple layers, enabling extensible, compositional, zero-shot latent information exchange—demonstrated by linking protein and small-molecule specialists to Gemma 3 and Kimi K2.6 without joint training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Flatiron Institute",
+        "Polymathic AI",
+        "Princeton University",
+        "Yale University",
+        "New York University"
+      ],
+      "affiliations_text": "Flatiron Institute, Polymathic AI, Princeton University, Yale University, New York University",
+      "score": 3.809681111429997,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.30220v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030220v1-when-reconstruction-is-not-enough-doubly-robust-counterfactual-and-interventional-mediation-analysis-with-learned-multimodal-representations",
+      "source": "arxiv",
+      "title": "When Reconstruction Is Not Enough: Doubly Robust Counterfactual and Interventional Mediation Analysis with Learned Multimodal Representations",
+      "authors": [
+        "Cong Cao"
+      ],
+      "authors_text": "Cong Cao",
+      "abstract": "Learned representations of high-dimensional multimodal health records are increasingly used to adjust for confounding, yet they are usually trained to reconstruct the data rather than preserve the information that causal identification requires. We study counterfactual outcomes under alternative treatments, including phenotype-specific effects and patient-level counterfactual risk profiles of the kind digital twins provide, and interventional direct and indirect effects under exposure-induced intermediate confounding. We give conditions under which a representation preserves identification and show that interventional mediation is more demanding than counterfactual comparison. We prove that no covariate-only training objective, whether reconstruction, contrastive, or physics-informed, can certify that a representation is sufficient, and that, in a linear structural model, a representation can lose arbitrarily little reconstruction accuracy yet induce arbitrarily large bias. We decompose the error of cross-fitted doubly robust estimators into a first-order representation bias, which neither double robustness nor cross-fitting removes, and a second-order remainder of nuisance-estimation errors, so coverage worsens as the sample size grows when the representation is insufficient. We propose a workflow combining modality-specific variational autoencoders trained outside the estimation sample, cross-fitted doubly robust estimators, locked phenotypes, select-then-confirm pathway analysis, portable representations, and diagnostics for representation insufficiency, exposure leakage, and sensitivity. In simulations, discarding a rare, moderately strong confounder gave indirect-effect intervals with 2% coverage at n = 3,000; reconstruction loss missed the problem, and a simple predictive diagnostic flagged it in every replicate.",
+      "url": "http://arxiv.org/abs/2610.30220v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30220v1",
+      "tldr": "The paper shows that reconstruction-trained multimodal representations can fail to preserve the information needed for causal identification—especially for interventional mediation—inducing first-order bias that doubly robust estimation and cross-fitting cannot remove, and proposes a workflow with diagnostics to detect representation insufficiency and avoid misleading causal conclusions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yale University",
+        "Stanford University"
+      ],
+      "affiliations_text": "Yale University, Stanford University",
+      "score": 3.8007394965971555,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.30137v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030137v1-scaling-local-solvers-with-the-many-body-expansion",
+      "source": "arxiv",
+      "title": "Scaling Local Solvers with the Many-Body Expansion",
+      "authors": [
+        "Federico Zahariev",
+        "Amr Sabry"
+      ],
+      "authors_text": "Federico Zahariev, Amr Sabry",
+      "abstract": "We introduce a Many-Body Expansion framework for scaling black-box solvers for discrete optimization. The method decomposes a large problem into fragments, repeatedly improves each fragment with the rest of the assignment held fixed, and then applies targeted corrections on unions of fragments. The solver itself is unchanged: it only receives a restricted subproblem and returns a candidate assignment. The framework separates decomposition from solver design. Moebius inversion gives an exact fragment expansion of the objective, and for pairwise objectives such as graph coloring, MAX-CUT, and QUBO the expansion closes at second order. The promoted solver is monotone by construction, terminates in finitely many productive sweeps for non-negative integer-valued objectives, and connects to junction-tree dynamic programming when the fragment interaction structure is acyclic and full response functions are propagated. On graph coloring benchmarks, the promoted versions of TabuSearch and simulated annealing (SA) generally outperform flat applications of the same solvers, often finding better solutions in less CPU time, and the gain proves insensitive to the choice of graph partition. A facility-location study delimits the claim: there the partition must respect the objective's interaction locality, and the promoted solver reaches within 0.3-1.4% of GLPK-certified optima at every tested size. The same wrapper interface is used in each solver-swap case, and the facility-location check reuses the same monotone guard with a sign-adjusted interaction diagnostic; the improvements therefore come from the MBE promotion mechanism rather than solver-specific tuning.",
+      "url": "http://arxiv.org/abs/2610.30137v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30137v1",
+      "tldr": "The paper introduces a Many-Body Expansion framework that scales black-box local solvers for discrete optimization by decomposing problems into fragments, repeatedly improving fragments and targeted unions under a monotone non-worsening rule, and demonstrating better performance than flat solver applications on graph coloring, MAX-CUT, and facility-location benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ames Laboratory",
+        "Indiana University",
+        "Iowa State University"
+      ],
+      "affiliations_text": "Ames Laboratory, Indiana University, Iowa State University",
+      "score": 3.760168175093202,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.30148v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030148v1-do-machine-learning-guided-proactive-full-capacity-protocols-mitigate-emergency-department-overcrowding-a-simulation-based-evaluation",
+      "source": "arxiv",
+      "title": "Do Machine Learning-Guided Proactive Full Capacity Protocols Mitigate Emergency Department Overcrowding? A Simulation-Based Evaluation",
+      "authors": [
+        "Khalid Aram",
+        "Orhun Vural",
+        "Bunyamin Ozaydin",
+        "James Booth",
+        "Abdulaziz Ahmed"
+      ],
+      "authors_text": "Khalid Aram, Orhun Vural, Bunyamin Ozaydin, James Booth, Abdulaziz Ahmed",
+      "abstract": "Objective: Emergency department (ED) overcrowding threatens care quality, yet Full Capacity Protocols (FCPs) are typically activated only after crowding thresholds have been exceeded. This study evaluated whether machine learning-guided proactive FCP activation improves ED crowding control compared with conventional reactive activation.\n  Materials and Methods: We developed and validated an integrated machine learning and discrete-event simulation framework representing ED patient flow and capacity management. An embedded machine learning model predicted hourly waiting-room crowding six hours ahead and triggered proactive FCP activation. Using empirically calibrated operational parameters from a large US hospital, we compared proactive and reactive deployment strategies over a 365-day simulation horizon with 10 independent replications. Outcomes included ED length of stay, wait time, percentage of time above the crowding threshold, number of FCP activations, and protocol duration.\n  Results: Proactive deployment produced statistically significant reductions in the percentage of time above the crowding threshold and average protocol duration across all threshold settings. It also reduced crowding variability and extreme congestion events, resulting in smoother ED operations. Although proactive deployment generally improved ED length of stay and wait time, these differences were not statistically significant.\n  Conclusion: Embedding machine learning predictions within an operational simulation enables proactive, prediction-guided capacity management before severe congestion develops. These findings support the feasibility and potential value of proactive FCP deployment as a decision-support strategy for improving ED crowding control and provide evidence to support prospective implementation in clinical practice.",
+      "url": "http://arxiv.org/abs/2610.30148v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30148v1",
+      "tldr": "Using a 365-day simulation calibrated to a large U.S. emergency department, machine-learning-guided proactive Full Capacity Protocol activation six hours ahead significantly reduced time above crowding thresholds and protocol duration and smoothed crowding variability compared with reactive activation, although length-of-stay and wait-time improvements were not statistically significant.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Alabama at Birmingham",
+        "Emporia State University"
+      ],
+      "affiliations_text": "University of Alabama at Birmingham, Emporia State University",
+      "score": 3.712731309155874,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.30228v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030228v1-benchmarking-model-compression-techniques-across-heterogeneous-edge-platforms-a-predictive-maintenance-use-case-for-rotating-machinery",
+      "source": "arxiv",
+      "title": "Benchmarking Model Compression Techniques Across Heterogeneous Edge Platforms: A Predictive Maintenance Use Case for Rotating Machinery",
+      "authors": [
+        "Matheus Calheira Guimarães de Oliveira",
+        "Marco Aurélio da Silva Cruz",
+        "Regis Cardoso",
+        "Lucas Cambuim",
+        "Rafael Macieira",
+        "Arthur Paim",
+        "Helaine Neves",
+        "Alex Santos",
+        "Lilian Guarieiro",
+        "Jean Schmith",
+        "Prashant Kumar",
+        "Erick G. Sperandio Nascimento"
+      ],
+      "authors_text": "Matheus Calheira Guimarães de Oliveira, Marco Aurélio da Silva Cruz, Regis Cardoso, Lucas Cambuim, Rafael Macieira, Arthur Paim, Helaine Neves, Alex Santos, Lilian Guarieiro, Jean Schmith, Prashant Kumar, Erick G. Sperandio Nascimento",
+      "abstract": "To enable Industry 5.0, where autonomous systems are widely adopted and integrated with people to promote sustainable development in industries, it is imperative to adapt complex deep learning models to operate efficiently on resource-constrained hardware for edge inference. However, adapting these models remains challenging due to the hardware heterogeneity of edge computing in industrial settings, performance degradation caused by model compression, and the lack of clear guidance on which compression techniques are practical and effective for applications such as predictive maintenance. To address these challenges, this paper presents a comprehensive comparative analysis of four state-of-the-art model compression techniques applied to a high-performance convolutional neural network for predictive maintenance using a real-world dataset of rotating machinery, equipment typically used in industry. The compressed models were evaluated across a heterogeneous set of nine computing platforms, ranging from highly constrained edge computing devices to general purpose and high-performance processors, reflecting the diversity and fragmentation typical of industrial edge environments. By jointly prioritizing classification performance, inference speed, and compression ratio, we found that compression using knowledge distillation emerged as the most effective approach. The model had more than 90% speedup across all devices while maintaining a 91.22% balanced F-score, with a very small drop in predictive performance relative to the uncompressed model, along with a 98.9% size reduction. Through successful deployment across multiple edge platforms and a systematic comparison of compression strategies, we demonstrated a clear path to achieving Industry 5.0 targets, drastically cutting computational costs and, consequently, energy consumption without sacrificing predictive performance.",
+      "url": "http://arxiv.org/abs/2610.30228v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30228v1",
+      "tldr": "This paper benchmarks four model compression techniques for a CNN-based rotating-machinery predictive maintenance model across nine heterogeneous edge platforms and finds knowledge distillation most effective, delivering over 90% inference speedup, a 91.22% balanced F-score, and 98.9% size reduction.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Center for Advanced Studies and Systems of Recife (CESAR)",
+        "SENAI Institute of Innovation in Embedded Systems",
+        "UNISINOS University",
+        "University of Surrey",
+        "SENAI Institute for Innovation in Sensing Systems",
+        "Federal Rural University of Pernambuco (UFRPE)",
+        "SENAI CIMATEC University"
+      ],
+      "affiliations_text": "Center for Advanced Studies and Systems of Recife (CESAR), SENAI Institute of Innovation in Embedded Systems, UNISINOS University, University of Surrey, SENAI Institute for Innovation in Sensing Systems, Federal Rural University of Pernambuco (UFRPE), SENAI CIMATEC University",
+      "score": 3.7100030188822757,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.30156v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030156v1-advance-versus-spot-selling-in-queueing-systems-the-effect-of-uncertainty-sources",
+      "source": "arxiv",
+      "title": "Advance versus Spot Selling in Queueing Systems: the Effect of Uncertainty Sources",
+      "authors": [
+        "Yumeng Liu",
+        "Dongyuan Zhan"
+      ],
+      "authors_text": "Yumeng Liu, Dongyuan Zhan",
+      "abstract": "We develop an unobservable M/M/1 queueing model to analyze advance selling and spot selling under uncertainty. Customers are heterogeneous in waiting costs, drawn from a uniform distribution. We disentangle two fundamental sources of uncertainty: customer valuation and service capacity. We derive the respective revenue functions for both advance and spot selling strategies and compare their performance. Our analysis reveals that advance selling is more profitable when customer valuations are uncertain. Conversely, spot selling emerges as the more profitable strategy when uncertainty originates from service capacity. When both sources are present, our numerical experiments suggest that the preferred regime depends on the relative dispersion of the two uncertainties: advance selling tends to be favored when valuation uncertainty is sufficiently pronounced relative to capacity uncertainty, whereas spot selling tends to be favored when capacity uncertainty is more pronounced. These results highlight how the origin and magnitude of uncertainty shape the optimal selling strategy in service queues and offer practical guidance for platforms and service providers deciding between advance and spot selling.",
+      "url": "http://arxiv.org/abs/2610.30156v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30156v1",
+      "tldr": "In an unobservable M/M/1 queue, advance selling is more profitable under customer-valuation uncertainty, spot selling is more profitable under service-capacity uncertainty, and when both exist the preferred strategy depends on their relative dispersion.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Science and Technology of China"
+      ],
+      "affiliations_text": "University of Science and Technology of China",
+      "score": 3.5750754780619856,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.30146v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030146v1-a-reciprocal-graph-deviation-functional-structural-identifiability-from-controlled-equilibrium-maps",
+      "source": "arxiv",
+      "title": "A reciprocal graph-deviation functional: structural identifiability from controlled equilibrium maps",
+      "authors": [
+        "Jonathan Washburn",
+        "Megan Simons"
+      ],
+      "authors_text": "Jonathan Washburn, Megan Simons",
+      "abstract": "We constructed a reciprocal graph-deviation functional for positive ratios on a finite weighted graph. Its scalar generator $J(x)=\\tfrac12(x+x^{-1})-1$ was characterized previously by ratio-composition and unit log-curvature. Our principal new result was structural identifiability: already on a two-site, one-edge system, the complete minimizer-location map obtained by sweeping the boundary and site-to-edge weight ratio determines any reciprocal generator whose log-coordinate representation is $C^2$ with everywhere-positive curvature, up to a positive scale; unit-curvature calibration fixes that scale. For the calibrated reciprocal family~$J_p$ we obtained the equilibrium response in closed form. A synthetic $15$-condition sweep with seven simulated measurements per condition and log-scale noise $σ=0.05$ selected $J$ over~$J_{1.1}$ with probability~$0.997$ under exact boundary and weight parameters; a declared representation-uncertainty screen lowered that value to approximately~$0.88$. These probabilities characterize the simulated design under the declared data-generating model. The finite sweep discriminated prespecified generators, whereas nonparametric recovery required the complete response map. We also recorded the associated convex gradient-flow and Langevin dynamics.",
+      "url": "http://arxiv.org/abs/2610.30146v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30146v1",
+      "tldr": "The paper proves that a reciprocal graph-deviation generator on weighted graphs is structurally identifiable—up to a positive scale fixed by unit-curvature calibration—from the complete equilibrium minimizer-location map, even for a two-site, one-edge system, and it shows that finite controlled sweeps can discriminate nearby calibrated generators under simulated noise.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Recognition Physics Institute"
+      ],
+      "affiliations_text": "Recognition Physics Institute",
+      "score": 3.556400521466832,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.30150v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030150v1-the-gittins-index-for-a-transparent-one-armed-bandit-with-a-continuous-payoff-spectrum-in-equilibrium-states",
+      "source": "arxiv",
+      "title": "The Gittins Index for a Transparent One-Armed Bandit with a Continuous Payoff Spectrum in Equilibrium States",
+      "authors": [
+        "Marcin Makowski",
+        "Edward W. Piotrowski",
+        "Jan L. Cieśliński"
+      ],
+      "authors_text": "Marcin Makowski, Edward W. Piotrowski, Jan L. Cieśliński",
+      "abstract": "We present an analogue of the classical Gittins index for a one-armed decision problem with a continuous spectrum of payoffs. The model assumes that the decision-maker observes independent realizations of a random variable and, at each step, decides whether to accept the current opportunity or continue observing. We show that the optimal strategy takes the form of a threshold rule, while the corresponding reservation index is determined by a one-dimensional fixed-point equation with a direct decision-theoretic interpretation. The model is illustrated with an example of bookmaker betting related to horse racing and the Kelly criterion. This perspective allows the proposed index to be viewed as a threshold of informational advantage. This, in turn, points to potential applications in optimal stopping problems and decision-making under uncertainty.",
+      "url": "http://arxiv.org/abs/2610.30150v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30150v1",
+      "tldr": "The paper derives a Gittins-index analogue for a transparent one-armed stopping problem with continuous payoffs, showing that the optimal policy is a threshold rule whose reservation index solves a one-dimensional fixed-point equation and can be interpreted as a threshold of informational advantage.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher",
+        "University of Białystok"
+      ],
+      "affiliations_text": "Independent Researcher, University of Białystok",
+      "score": 3.5482610007918525,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.30206v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030206v1-moezip-routing-aware-kv-cache-compression-for-sparse-mixture-of-experts-llms",
+      "source": "arxiv",
+      "title": "MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs",
+      "authors": [
+        "Minsang Kim",
+        "Seungjun Baek"
+      ],
+      "authors_text": "Minsang Kim, Seungjun Baek",
+      "abstract": "Mixture-of-Experts (MoE) language models scale model capacity efficiently by activating a small subset of parameters per token. However, in long-context inference, memory remains a major bottleneck because the KV cache grows linearly with sequence length. Existing KV cache compression methods reduce this cost for dense transformers, but overlook a problem specific to MoE: KV eviction can change which experts are selected during answer generation, degrading the generation quality. We propose MoEZip, a routing-aware KV cache compression for sparse MoE language models. To estimate the sensitivity of expert routing to perturbation, we propose a novel metric based on the Fisher information matrix of routing distributions. MoEZip combines this metric with attention weights for routing-aware scoring of contexts. Finally, we compose a complementary scoring system that combines eviction methods for dense and sparse-MoE architectures. Experiments show that MoEZip achieves robust performance under aggressive cache compression on various benchmarks. At a KV retention ratio of 10\\%, MoEZip improves over the SoTA baseline by +24 and +20 points on average on LongBench and RULER, corresponding to 2.3$\\times$ and 4.9$\\times$ higher scores, respectively.",
+      "url": "http://arxiv.org/abs/2610.30206v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30206v1",
+      "tldr": "MoEZip is a routing-aware KV cache compression method for sparse MoE LLMs that combines attention weights with a Fisher-information-based routing-fragility score to preserve expert selection during cache eviction, achieving large performance gains under aggressive compression such as 10% KV retention.",
+      "detailed_reading": null,
+      "affiliations": [
+        "SK Telecom",
+        "Korea University"
+      ],
+      "affiliations_text": "SK Telecom, Korea University",
+      "score": 3.4635942624325837,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.30211v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030211v1-prediction-is-not-calibration-item-parameter-recovery-and-representation-coupling-in-knowledge-tracing",
+      "source": "arxiv",
+      "title": "Prediction Is Not Calibration: Item Parameter Recovery and Representation Coupling in Knowledge Tracing",
+      "authors": [
+        "Wenrui Yuan",
+        "Stéphanie M. van den Berg",
+        "Johannes Steinrücke"
+      ],
+      "authors_text": "Wenrui Yuan, Stéphanie M. van den Berg, Johannes Steinrücke",
+      "abstract": "Knowledge tracing (KT) models can estimate item parameters through an item response decoder trained solely for next-response prediction, yet predictive accuracy does not guarantee parameter recovery. We study 2PL, GPCM, and NRM decoders paired with LSTM, Transformer, and DKVMN encoders. Response-model derivatives show why discrimination and option slope updates depend directly on the scale and spread of estimated ability. Affine logit identities show how item-dependent shifts and rescaling in estimated ability are absorbed into item parameters without changing response probabilities. In simulations, difficulty, mean threshold, and correct-option intercept recovery remain high under shuffled order across representation widths, whereas discrimination and keyed option slope contrast recovery require wider item representations and degrade further under fixed item order. Separating the sequence item representation (width $d_S$) from the item parameter key (width $d_M$), and pairing a wide key with a thin sequence representation ($\\mathrm{SK}(64,8)$), reduces fixed-order ability distortions and improves recovery and cross-order consistency without sacrificing test accuracy or increasing model size relative to a shared width-64 baseline ($\\mathrm{SH}(64)$). On TIMSS and EdNet, widening $d_M$ consistently improves agreement with an offline IRT reference, while the trade-off from narrowing $d_S$ depends on the encoder's reliance on sequence width for prediction. These findings show why item parameters, especially discrimination and option slopes, must be evaluated separately from response prediction.",
+      "url": "http://arxiv.org/abs/2610.30211v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30211v1",
+      "tldr": "In knowledge tracing, high next-response prediction accuracy does not ensure item-parameter recovery—especially for discrimination and option slopes—because shared item representations and fixed item order couple ability estimates with item parameters, whereas separating a wide item-parameter key from a thin sequence representation improves recovery and cross-order consistency without sacrificing test accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Twente"
+      ],
+      "affiliations_text": "University of Twente",
+      "score": 3.319337213210099,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.30225v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030225v1-ganet-a-lightweight-group-attention-network-for-plant-disease-identification-on-embedded-systems",
+      "source": "arxiv",
+      "title": "GANet: A Lightweight Group Attention Network for Plant Disease Identification on Embedded Systems",
+      "authors": [
+        "Anubhab Tripathi",
+        "Bibek Das",
+        "Asfak Ali",
+        "Sheli Shinha Chaudhuri"
+      ],
+      "authors_text": "Anubhab Tripathi, Bibek Das, Asfak Ali, Sheli Shinha Chaudhuri",
+      "abstract": "Global warming and climate change are major catalysts for plant diseases, significantly affecting food production worldwide. Addressing this issue requires continuous monitoring and early detection of plant diseases. While recent advancements in deep learning offer potential solutions, most models demand high processing power and struggle to perform efficiently on low-end electronic hardware. Furthermore, many existing works focus on specific crop diseases, limiting their broader applicability. This paper presents a lightweight Group Equivariance Attention Network (GANet) designed for the prediction and monitoring of 38 types of plant diseases. GANet introduces a novel Group Attention block and Group-Wise Feature Fusion block, making it both sparse and efficient. With only 0.001M parameters, the model achieves an impressive 99.99% accuracy on the PlantVillage dataset. Additionally, GANet is optimized for deployment on edge devices such as the Raspberry Pi 4b and Jetson Nano, where it reaches 5 FPS and 11 FPS, respectively, demonstrating its potential for real-time plant disease monitoring on low-power devices.",
+      "url": "http://arxiv.org/abs/2610.30225v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30225v1",
+      "tldr": "GANet is a 0.001M-parameter lightweight group-equivariant attention network that identifies 38 plant disease types with 99.99% accuracy on PlantVillage and enables real-time edge deployment at 5–11 FPS on Raspberry Pi 4B and Jetson Nano.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Jadavpur University"
+      ],
+      "affiliations_text": "Jadavpur University",
+      "score": 3.179429265131594,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2610.30142v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030142v1-strongly-regular-graph-construction-via-quadratic-binary-optimization",
+      "source": "arxiv",
+      "title": "Strongly Regular Graph Construction via Quadratic Binary Optimization",
+      "authors": [
+        "D. Osorio",
+        "P. Andagana",
+        "V. González",
+        "J. Czartowski",
+        "D. Goyeneche"
+      ],
+      "authors_text": "D. Osorio, P. Andagana, V. González, J. Czartowski, D. Goyeneche",
+      "abstract": "Strongly regular graphs, hereafter SRGs, are highly structured combinatorial objects of central interest in algebraic graph theory and quantum information, whose explicit construction becomes rapidly intractable as the number of vertices grows; Conway's still unresolved $99$-graph problem is an emblematic example. The matrix equation defining SRGs is quadratic in the binary edge variables, so the natural penalty enforcing it, a sum of squared residuals, is quartic and lies outside quadratic unconstrained binary optimization, known as QUBO. We prove a considerably stronger obstruction, namely that no quadratic function of the edge variables has the labeled SRGs as its exact set of global minimizers, except for three degenerate families given by the perfect matchings, the cocktail-party graphs and the pentagon. In particular, we formally establish that the $99$-vertex graph of Conway's problem cannot be obtained from any QUBO over the edge variables without auxiliary variables. Guided by this theorem we develop two complementary algorithms. The first operates within pure QUBO, solves the degenerate families exactly, and beyond them works as a generate--prune--verify pipeline whose output is a reduced set of candidates certified by a polynomial-time classical test. The second solves the full problem by quadratizing this quartic penalty through Rosenberg auxiliary variables, whose number grows as $Θ(N^3)$ with the number of vertices $N$. We test the pure-QUBO route under simulated annealing on all feasible families with at most $18$ vertices and the auxiliary-variable route on representative targets up to $16$ vertices, and tabulate the algebraically feasible parameter sets for graphs with at most $49$ vertices.",
+      "url": "http://arxiv.org/abs/2610.30142v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30142v1",
+      "tldr": "The paper proves that strongly regular graphs cannot generally be encoded as the exact global minimizers of a pure QUBO over edge variables—except for three degenerate families—and therefore develops two complementary QUBO-based approaches: a pure-QUBO generate–prune–verify pipeline and an auxiliary-variable quadratization that exactly solves the full problem.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Trinity College Dublin",
+        "Universidad de Antofagasta",
+        "Pontificia Universidad Católica de Chile",
+        "Jagiellonian University"
+      ],
+      "affiliations_text": "Trinity College Dublin, Universidad de Antofagasta, Pontificia Universidad Católica de Chile, Jagiellonian University",
+      "score": 3.102569780414405,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.30223v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030223v1-how-prompt-style-affects-ai-accuracy-and-speed-in-competitive-programming",
+      "source": "arxiv",
+      "title": "How Prompt Style Affects AI Accuracy and Speed in Competitive Programming",
+      "authors": [
+        "Saad B. Alarifi",
+        "Mohammed A. Alam"
+      ],
+      "authors_text": "Saad B. Alarifi, Mohammed A. Alam",
+      "abstract": "Large language models are increasingly used in competitive programming, and their outputs are sensitive to how a prompt is phrased. Prior work has compared prompt strategies for accuracy on competitive programming, but not for runtime speed, and has not situated the results against human performance. In an exploratory study of one prompt in each of nine styles on GPT-5.5 across three accuracy tasks from the International Olympiad in Informatics (IOI) and two NP-hard speed tasks, we found that no single prompt was best: the strongest prompt depended on the task type and on whether results were summarized by the mean or the median, suggesting that, at least for these tasks, prompt style should be matched to the objective rather than treated as universal. Many differences in mean scores came from a few outlier runs, showing that evaluating prompting by a single metric can obscure how much its effectiveness varies. Compared descriptively with human IOI contestants, who worked under different conditions, the AI was neither strictly better nor strictly worse, exceeding the average contestant on one task but falling short on the other two. By extending prompt comparison from accuracy to runtime speed and grounding it against human performance, this study gives a broader picture of how prompt style affects competitive programming performance.",
+      "url": "http://arxiv.org/abs/2610.30223v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30223v1",
+      "tldr": "In an exploratory study of nine prompt styles on GPT-5.5 across IOI accuracy tasks and NP-hard speed tasks, no single prompt was universally best—the strongest style depended on task type and whether results were summarized by mean or median, with many differences driven by outlier runs—so prompt style should be matched to the objective, and the AI was neither uniformly better nor worse than human IOI contestants.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Riyadh Schools",
+        "Northwestern University"
+      ],
+      "affiliations_text": "Riyadh Schools, Northwestern University",
+      "score": 2.6964737656370734,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2610.30229v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/23/261030229v1-automated-screening-of-privacy-risks-in-medical-ai",
+      "source": "arxiv",
+      "title": "Automated screening of privacy risks in medical AI",
+      "authors": [
+        "Konstantinos Vrettos",
+        "Eleftherios Tzanis",
+        "Haridimos Kondylakis",
+        "Evangelia E. Vassalou",
+        "Florence X. Doo",
+        "Michail E. Klontzas"
+      ],
+      "authors_text": "Konstantinos Vrettos, Eleftherios Tzanis, Haridimos Kondylakis, Evangelia E. Vassalou, Florence X. Doo, Michail E. Klontzas",
+      "abstract": "Medical artificial intelligence (AI) models are often shared without their training data, assuming this protects the patients who contributed them. However, a model can reveal whether a patient's records were used in training, a privacy breach known as a membership inference attack. This risk is usually reported as a cohort average, which can appear negligible while individual patients are almost certainly exposed. Identifying potentially vulnerable records before developing a production model could make privacy assessment more practical. We measured each patient's vulnerability to membership inference attack, across 7,789 models trained on six clinical datasets in four modalities, including two adapted pretrained medical models. Training choices changed how many patients had high attack scores, but the patients who ranked highest by risk largely stayed the same across the configurations we tested. Stronger weight decay reduced the exposed cohort up to threefold, yet largely the same patients remained most at risk across training recipes, architectures and initializations, including foundation models. Therefore, we developed a lightweight screening tool that uses four small models to identify patients with high risk of exposure before production-model training. We also assessed if flagged patients could be protected without removing their data. Privacy screening should become incorporated into data preparation for clinical AI.",
+      "url": "http://arxiv.org/abs/2610.30229v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.30229v1",
+      "tldr": "A large-scale audit of 7,789 medical AI models shows that membership-inference privacy risk is concentrated in specific patients and remains predictable across training choices, enabling a lightweight screening tool to flag at-risk patients before production-model training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "FORTH",
+        "University of Maryland",
+        "University Hospital of Heraklion",
+        "University of Crete",
+        "Karolinska Institute"
+      ],
+      "affiliations_text": "FORTH, University of Maryland, University Hospital of Heraklion, University of Crete, Karolinska Institute",
+      "score": 2.6641766285035393,
+      "score_text": "2.7"
+    }
+  ]
+}
