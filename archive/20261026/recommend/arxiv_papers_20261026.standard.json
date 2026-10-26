@@ -1,0 +1,747 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-26T17:16:56.783613",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.31790v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031790v1-rapid-stabilization-for-stokes-and-navier-stokes-systems-with-localized-disturbance",
+      "source": "arxiv",
+      "title": "Rapid stabilization for Stokes and Navier-Stokes systems with localized disturbance",
+      "authors": [
+        "Christian Calle",
+        "Patricio Guzmán",
+        "Hugo Parada",
+        "Jefferson Prada"
+      ],
+      "authors_text": "Christian Calle, Patricio Guzmán, Hugo Parada, Jefferson Prada",
+      "abstract": "In this study, we analyze the rapid stabilization of Stokes and the two- and three-dimensional Navier-Stokes systems in the presence of an unknown spatially localized disturbance. A multivalued feedback control strategy is proposed which combines the Lyapunov frequency method with the multivalued sign operator. This methodology connects Lyapunov-based stability analysis with spectral inequalities, while the inclusion of the sign operator provides robustness against disturbance. The closed-loop system is governed by a differential inclusion, for which well-posedness is proved via the theory of maximal monotone operators. This approach guarantees global rapid exponential stabilization for the Stokes system and local rapid exponential stabilization for the two- and three-dimensional Navier-Stokes systems, with arbitrarily large disturbance bounds. In three dimensions, we obtain global strong solutions and rapid exponential stabilization for initial data sufficiently small in the $L^2$-norm with a prescribed, arbitrarily large bound in the $H^1$-norm.",
+      "url": "http://arxiv.org/abs/2610.31790v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31790v1",
+      "tldr": "This paper proposes a multivalued Lyapunov-frequency feedback with a sign operator to achieve robust rapid exponential stabilization of Stokes and 2D/3D Navier–Stokes systems under unknown spatially localized disturbances, with well-posedness established via differential inclusions and guarantees allowing arbitrarily large disturbance bounds.",
+      "detailed_reading": {
+        "motivation": "本文关注在未知空间局部扰动下，Stokes方程以及二维、三维不可压Navier–Stokes系统的快速指数稳定问题。已有频率Lyapunov方法能实现任意指定衰减率，多值符号反馈能增强鲁棒性，但将二者结合并推广到含不可压约束、压力项、非线性对流和三维适定性难题的流体系统仍非平凡。论文旨在给出显式、鲁棒且可证明适定的快速稳定反馈机制，并允许扰动幅值上界任意大。",
+        "method": "在光滑有界区域Ω中，控制与未知扰动均通过指示函数1_ω局部作用于控制区ω，扰动仅假设满足d∈L1_loc(0,∞;L2(ω))且ess sup||d(·,t)||L2(ω)≤D。作者构造多值反馈Gλ:H→2^{L2(Ω)}，将Xiang的频率Lyapunov方法与多值sign算子结合：利用Lebeau–Robbiano谱不等式设计低频有限维反馈，并以sign型多值项抵消匹配的局部未知扰动。闭环系统写成微分包含，借助极大单调算子理论证明Stokes闭环的适定性；对二维和三维Navier–Stokes系统，先构造截断系统的强解并建立H与V能量估计，再分别在二维直接移除截断、三维结合H小范数与V有界性移除截断。整体流程包括反馈设计、谱不等式估计、先验稳定估计、闭环适定性与截断去除。",
+        "result": "对Stokes系统，任意y0∈H和任意满足假设的扰动d均得到唯一广义解，并满足||y(t)||H≤Cλ e^{-λt/4}||y0||H。对二维Navier–Stokes系统，当||y0||H≤ρλ时得到唯一广义解及相同指数衰减；对三维系统，当y0∈V、||y0||V≤R/2且||y0||H≤ρ_{λ,D,R}时，对任意T得到唯一全局强解，H范数按e^{-λt/4}衰减，且sup_{t≥0}||y(t)||V≤R/√2。稳定常数可显式取为Cλ=√μλ=C1e^{C1√λ}，仅依赖Ω、ω和λ，且扰动界D可任意大而不要求扰动随时间衰减或幅值小。",
+        "conclusion": "论文证明多值频率Lyapunov–sign反馈可在未知局部匹配扰动下实现精确扰动抑制和任意指定速率的快速指数稳定：Stokes为全局稳定，二维Navier–Stokes为局部稳定，三维在H范数小且V范数有给定界的初值条件下获得全局强解与稳定。该结果将鲁棒快速稳定框架从热方程推广到不可压Stokes/Navier–Stokes系统，并给出显式稳定常数和适定性分析；主要限制是三维情形需要足够小的H初值，且扰动界越大所需初值越小。",
+        "key_details": "关键实现点包括：扰动仅在控制通道1_ω内匹配进入，并只知道L2(ω)意义下的一致上界D；反馈是多值的，因而闭环为微分包含，适定性依赖极大单调算子理论；频率Lyapunov部分使用Lebeau–Robbiano谱不等式处理低频模态，sign算子提供对未知扰动的鲁棒性；二维和三维均通过截断系统先证强解，再以H和V能量估计移除截断，三维额外保留完整Stokes耗散并利用V范数有界控制非线性项；衰减率为λ/4，稳定成本常数随√λ指数增长；局限在于三维要求||y0||H≤ρ_{λ,D,R}且ρ随D增大而减小，结果本质为局部稳定，且假设Ω光滑、ω非空、扰动仅具L2(ω)有界性而不具结构信息。"
+      },
+      "affiliations": [
+        "Pontificia Universidad Católica de Chile",
+        "Université de Lorraine",
+        "Universidad Técnica Federico Santa María"
+      ],
+      "affiliations_text": "Pontificia Universidad Católica de Chile, Université de Lorraine, Universidad Técnica Federico Santa María",
+      "score": 5.469837226888448,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2610.31721v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031721v1-end-to-end-differentiable-diffusion-conditioning-for-physics-informed-optimization",
+      "source": "arxiv",
+      "title": "End-to-End Differentiable Diffusion Conditioning for Physics-Informed Optimization",
+      "authors": [
+        "Ricardo Luna Gutierrez",
+        "Vineet Gundecha",
+        "Rahman Ejaz",
+        "Varchas Gopalaswamy",
+        "Riccardo Betti",
+        "Sahand Ghorbanpour",
+        "Aarne Lees",
+        "Soumyendu Sarkar"
+      ],
+      "authors_text": "Ricardo Luna Gutierrez, Vineet Gundecha, Rahman Ejaz, Varchas Gopalaswamy, Riccardo Betti, Sahand Ghorbanpour, Aarne Lees, Soumyendu Sarkar",
+      "abstract": "Optimizing high-dimensional physical systems under expensive evaluations and complex constraints is a central challenge in science and engineering. In offline model-based optimization (MBO), methods must improve designs using only a fixed dataset and no test-time access to the true objective. However, existing methods typically suffer from conservatism, unconstrained surrogate exploitation, or function as static inference-time samplers that cannot refine candidates against precise physical objectives. In this paper, we propose Differentiable Diffusion Conditioning (D2C) for offline MBO, which leverages the fact that deterministic sampling makes the reverse denoising chain differentiable with respect to the conditioning signal. D2C turns a frozen conditional diffusion model into an end-to-end gradient-based optimizer by directly optimizing conditioning variables at test time via gradients from frozen surrogate objectives and physics-informed penalties backpropagated through the reverse chain. We implement this idea in a composed proposer-evaluator framework and evaluate it on laser pulse optimization for inertial confinement fusion, sustainable data-center workload scheduling, and four Design-Bench tasks. Our method achieves the strongest results on the two real-world tasks and the best average rank across four Design-Bench tasks.",
+      "url": "http://arxiv.org/abs/2610.31721v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31721v1",
+      "tldr": "The paper proposes D2C, which converts a frozen conditional diffusion model into an end-to-end gradient-based optimizer for offline physics-informed design by backpropagating surrogate and physics-penalty gradients through deterministic denoising to optimize the conditioning signal at test time, achieving strong results on real-world laser pulse optimization and data-center workload scheduling as well as Design-Bench tasks.",
+      "detailed_reading": {
+        "motivation": "高维物理系统在评估昂贵、约束复杂且需离线学习的场景下优化困难；现有离线模型优化方法存在过度保守、无约束代理利用或仅在推理时静态采样而无法按精确物理目标精修候选的问题。需要建立从物理目标到生成过程的可微路径，并在严格可行性约束下搜索高性能设计。",
+        "method": "D2C将冻结的条件扩散模型作为提议器、冻结的代理模型作为评估器；训练提议器时联合去噪损失、重构损失、物理保真损失和代理一致性损失，并采用空嵌入丢弃与EMA。推理时使用零随机项的确定性DDIM，使反向去噪链对条件可微，将条件拆为固定c_fix和可优化c_opt，仅通过复合物理损失经冻结扩散链反传更新c_opt；结合CFG、多次噪声采样、Dirichlet随机多目标权重和有效性优先筛选形成候选池并选最佳可行设计。",
+        "result": "D2C在惯性约束聚变激光脉冲优化和数据中心可持续负载调度两个真实任务上取得最强结果，并在四个Design-Bench任务上取得最佳平均排名；消融表明优化条件信号优于优化潜在噪声。核心比较结论是冻结提议器-评估器加端到端条件优化能在多个任务上同时提升性能与可行性。",
+        "conclusion": "将冻结扩散提议器与冻结代理评估器组合，并在确定性反向链上端到端优化条件变量，可在保持数据分布先验的同时由代理目标和物理惩罚引导出可行高性能设计，缓解保守性与无约束代理利用。该框架为安全关键物理设计提供了一种可微、可约束的离线模型优化途径。",
+        "key_details": "关键实现是仅更新c_opt且所有损失只依赖实际生成设计x_0，不直接依赖c_opt，从而避免目标标签漂移；梯度经完整T步DDIM与CFG反传，条件在每个时间步注入形成梯度捷径，引导尺度w影响梯度幅度和优化稳定性。推理需对N_z个噪声样本分别进行J步条件优化，计算和显存随T、J、N_z增长；物理约束包括积分守恒、幅值界和谱正则等，非光滑max/min用自动微分次梯度处理；损失项需按任务设计并保持可比尺度，存在任务依赖、固定噪声条件优化及多次采样成本等局限。"
+      },
+      "affiliations": [
+        "Hewlett Packard Enterprise",
+        "University of Rochester"
+      ],
+      "affiliations_text": "Hewlett Packard Enterprise, University of Rochester",
+      "score": 4.995030985628539,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.31812v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031812v1-prefo2o-zero-shot-preference-based-reinforcement-learning-via-offline-to-online-latent-preference-transfer",
+      "source": "arxiv",
+      "title": "PrefO2O: Zero-Shot Preference-Based Reinforcement Learning via Offline-to-Online Latent Preference Transfer",
+      "authors": [
+        "Ruiqi Wang",
+        "Dezhong Zhao",
+        "Xuesu Xiao",
+        "Erdem Biyik",
+        "Byung-Cheol Min",
+        "Guohua Chen"
+      ],
+      "authors_text": "Ruiqi Wang, Dezhong Zhao, Xuesu Xiao, Erdem Biyik, Byung-Cheol Min, Guohua Chen",
+      "abstract": "Preference-based reinforcement learning (PbRL) has emerged as a promising paradigm for learning robot behaviors aligned with human intent. However, its scalability is fundamentally limited by the need to collect expensive human preference labels for every new task. In this work, we present PrefO2O, an offline-to-online latent preference transfer framework that enables zero-shot PbRL on unseen target tasks without requiring any human feedback. The core idea is to learn a task-invariant latent preference space from a small amount of offline preference data on source tasks, where transferable preference structures are disentangled from task-specific variations. This learned manifold allows PrefO2O to transfer preference structures and reward priors to new tasks under distribution shift, while confidence-weighted optimal transport alignment generates reliable pseudo-preference supervision for online reward adaptation. Extensive experiments on robotic manipulation and locomotion benchmarks demonstrate that PrefO2O substantially outperforms existing preference-transfer baselines and matches or exceeds PbRL methods trained with real human feedback, while generalizing across multi-to-one and one-to-one transfer settings as well as across different robot embodiments.",
+      "url": "http://arxiv.org/abs/2610.31812v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31812v1",
+      "tldr": "PrefO2O learns a task-invariant latent preference space from offline source-task preference data and transfers it online via confidence-weighted optimal transport alignment, enabling zero-shot preference-based reinforcement learning on unseen target tasks without human feedback.",
+      "detailed_reading": {
+        "motivation": "偏好强化学习能让机器人行为对齐人类意图，但每个新任务都从零收集人类偏好标签，成本高且难以扩展；现有合成反馈、元学习和零样本偏好迁移方法仍受反馈不一致、目标任务标注需求、原始轨迹空间对齐脆弱及状态动作维度共享假设等限制。本文旨在利用少量源任务离线偏好数据，实现对未见目标任务无需任何人类反馈的零样本 PbRL。",
+        "method": "PrefO2O 采用离线到在线两阶段框架：离线阶段聚合多个源任务偏好数据，联合训练带任务专属输入适配器和共享时序池化的轨迹编码器、以成对轨迹表征差分为输入的偏好 VAE，以及按 Bradley-Terry 偏好交叉熵训练的元奖励模型；VAE 通过重构损失和 KL 正则诱导任务不变的隐偏好流形。在线阶段在目标任务上冻结偏好 VAE，用预训练轨迹编码器和奖励模型热启动，采样目标轨迹对并在隐空间执行熵正则 Gromov-Wasserstein 最优传输，将源任务偏好标签传播为目标轨迹对的伪偏好，并以 OOD 感知置信度加权监督在线奖励适配与策略优化。",
+        "result": "在机器人操作和运动基准上，PrefO2O 显著优于现有偏好迁移基线，并能匹配或超过使用真实人类反馈训练的 PbRL 方法；方法在无目标任务人类反馈条件下实现零样本迁移，且在 multi-to-one、one-to-one 迁移以及同/跨机器人本体设置中展现泛化能力。摘要未给出具体数值指标，但可复现结论是隐空间偏好迁移与置信度加权最优传输对性能提升关键。",
+        "conclusion": "PrefO2O 表明，人类偏好中存在可跨任务复用的共享结构，将其学习为任务不变隐偏好空间后，可把源任务奖励先验和偏好监督迁移到未见目标任务，从而消除新任务的人类偏好标注瓶颈。该框架为可扩展、跨任务和跨本体的零样本偏好强化学习提供了可行路径。",
+        "key_details": "关键实现包括按任务适配器处理异构状态动作维度、共享步编码器与时间平均池化形成轨迹隐表征、以轨迹表征差分而非绝对轨迹作为偏好 VAE 输入、VAE 的重构与 KL 正则、元奖励模型的 Bradley-Terry 偏好损失，以及在线阶段冻结 VAE 作为稳定参考并用熵正则 Sinkhorn 近似求解 Gromov-Wasserstein 传输。伪偏好由传输矩阵传播并加 OOD 置信度权重；论文假设源与目标任务属于相关领域且偏好结构可迁移，具体源偏好预算、网络宽度、传输熵系数等超参数在摘要和预览中未完整给出，跨分布迁移时伪标签可靠性和传输计算成本仍是限制。"
+      },
+      "affiliations": [
+        "Indiana University Bloomington",
+        "Beijing University of Chemical Technology",
+        "George Mason University",
+        "University of Southern California"
+      ],
+      "affiliations_text": "Indiana University Bloomington, Beijing University of Chemical Technology, George Mason University, University of Southern California",
+      "score": 4.581841739341728,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.31762v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031762v1-see-what-i-need-dream-what-i-want-a-navigation-foundation-model-on-a-self-constructed-representation-space",
+      "source": "arxiv",
+      "title": "See What I Need, Dream What I Want: A Navigation Foundation Model on a Self-Constructed Representation Space",
+      "authors": [
+        "Jiawei Chen",
+        "Yinxi Wang",
+        "Zihan Yang",
+        "Meijun Gao",
+        "Yaowei Liu",
+        "Shuming Zhang",
+        "Zecheng Li",
+        "Xiangju Mi",
+        "Yuxuan Liu",
+        "Runzhong Huang",
+        "Tianlin Li",
+        "Xun Zhang",
+        "Zhengyang Wang",
+        "Xu Miao",
+        "Tong Yang"
+      ],
+      "authors_text": "Jiawei Chen, Yinxi Wang, Zihan Yang, Meijun Gao, Yaowei Liu, Shuming Zhang, Zecheng Li, Xiangju Mi, Yuxuan Liu, Runzhong Huang, Tianlin Li, Xun Zhang, Zhengyang Wang, Xu Miao, Tong Yang",
+      "abstract": "What visual representation should a navigation policy act on? Navigation policies built on vision foundation models largely leave representation design to the encoders' pretraining objectives. We present RepresentNav, a navigation foundation model built on a self-constructed representation space: a visual representation constructed by the policy's own objectives from vision foundation models. RepresentNav builds this space with Representation Residuals, a compact three-layer transformer that attends over features spanning the full depth of multiple complementary vision foundation models, so that the policy learns to see what it needs for navigation. In the same space it dreams what it wants: before every action a latent chain-of-thought predicts the representation of the scene a moment ahead. The dream is trained end-to-end with the policy as a joint-embedding predictive architecture (JEPA), with a next-representation prediction loss and a regularizer on its targets. RepresentNav sets a new state of the art on VLNVerse, VLN-CE R2R, EVT-Bench, and two point-goal benchmarks, and its gains carry over to a physical robot amid clutter and moving people. On VLNVerse fine-grained, RepresentNav achieves 83.80% success, outperforming the previous state of the art by 20.05 percentage points, and on EVT-Bench distracted tracking it reaches 85.5% with a single camera (+10.1). With the same encoders, the self-constructed space clearly outperforms concatenating their outputs and learns to weight their layers unevenly, and a dream in it cuts collisions by a quarter. A single dreamed latent decodes into the depth, semantics, and 3D occupancy of the scene a moment ahead, more accurately than pretrained encoders applied to the real future frame, although occupancy is never supervised, and the rollout tracks the robot's own motion over the next second: the dream emerges as a compact latent world model.",
+      "url": "http://arxiv.org/abs/2610.31762v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31762v1",
+      "tldr": "RepresentNav is a navigation foundation model that learns a self-constructed representation space over multi-depth vision-foundation-model features and uses a JEPA-trained latent “dream” of the next scene to guide actions, achieving state-of-the-art navigation performance on benchmarks and real robots.",
+      "detailed_reading": {
+        "motivation": "导航策略应当基于何种视觉表征来决策仍缺乏系统设计，现有方法大多把表征设计交给视觉基础模型的预训练目标，导致策略看到的不一定是导航所需。作者提出应构建由策略自身目标驱动的自构造表征空间，使策略既能“看到所需”，也能“想象所要”。",
+        "method": "RepresentNav 输入单相机视觉观测，并提取多个互补视觉基础模型全深度层特征；用仅三层的 Transformer 模块 Representation Residuals 对这些跨模型、跨深度特征进行注意力融合，形成自构造表征空间。在每个动作前，策略在该空间中通过 latent chain-of-thought 预测未来一刻的场景表征，并以 JEPA 方式与策略端到端联合训练，采用下一表征预测损失和对预测目标的正则化。推理时先“梦想”下一时刻表征，再结合当前表征输出导航动作。",
+        "result": "RepresentNav 在 VLNVerse、VLN-CE R2R、EVT-Bench 和两个 point-goal 基准上取得新的 SOTA，并迁移到杂物与行人环境中的实体机器人。VLNVerse fine-grained 成功率 83.80%，比此前 SOTA 高 20.05 个百分点；EVT-Bench distracted tracking 单相机达到 85.5%，提升 10.1。相同编码器下，自构造空间明显优于简单拼接多模型输出，并学会非均匀地加权各层；其“梦想”使碰撞减少约四分之一。",
+        "conclusion": "结果表明，导航表征应由策略目标自构造，而非完全继承视觉基础模型的预训练目标；将表征学习与未来表征预测结合，可同时提升导航性能和鲁棒性。 dreamed latent 还能无 occupancy 监督地解码未来深度、语义和 3D occupancy，并跟踪机器人未来一秒运动，说明其涌现为紧凑的潜在世界模型。",
+        "key_details": "关键实现是三层 Transformer 的 Representation Residuals 对多 VFM 全深度特征做注意力聚合，以控制复杂度并学习层间非均匀权重；JEPA 训练使用下一表征预测损失加目标正则化，latent chain-of-thought 在每个动作前预测未来表征。梦想 latent 可解码深度、语义和 3D occupancy，其中 occupancy 从未被显式监督，且单相机即可在实体机器人上验证；局限包括依赖预训练 VFM 特征、预测时域约未来一秒，具体损失权重与训练超参摘要未给出，需查原文复核。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.461284462659003,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.31818v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031818v1-nested-sparsity-for-scalable-pretraining-and-continual-learning",
+      "source": "arxiv",
+      "title": "Nested Sparsity for Scalable Pretraining and Continual Learning",
+      "authors": [
+        "Tianzhe Chu",
+        "Druv Pai",
+        "Yi Ma"
+      ],
+      "authors_text": "Tianzhe Chu, Druv Pai, Yi Ma",
+      "abstract": "Mixture-of-experts (MoE) transformers, the standard backbone for modern large-scale deep learning, employ conditional computation: only a sparse subset of model weights is used in each forward pass. In MoE transformers, this sparsity arises in the MoE operator, which generalizes the multi-layer perceptron in the classical transformer. In this work, we explore an alternative mechanism for conditional computation that analogously generalizes the attention operator. The sparsity induced by this mechanism naturally nests (i.e., hierarchically composes) with the sparsity induced by the MoE operator. We show that a transformer employing this nested sparsity mechanism, which we call Nestor, performs better than a conventional MoE transformer at equal compute and equal sparsity in language model pretraining. We also show that Nestor is well-suited for continual pretraining: it can be adapted to longer contexts more effectively than conventional MoEs, as well as adapt more efficiently to new domains while forgetting less on old domains. Furthermore, we demonstrate that these benefits persist as model size, dataset size, and context length grow. Our results demonstrate the potential of alternative conditional computation mechanisms for deep neural network architectures. Code and checkpoints are available on GitHub at https://github.com/Ma-Lab-Berkeley/Nestor .",
+      "url": "http://arxiv.org/abs/2610.31818v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31818v1",
+      "tldr": "The paper introduces **Nestor**, a transformer that adds an attention-side conditional-computation mechanism whose sparsity hierarchically nests with MoE sparsity, outperforming conventional MoE transformers at equal compute and sparsity in pretraining and continual learning as scale grows.",
+      "detailed_reading": {
+        "motivation": "现代大模型主要依靠MoE在MLP上做条件计算，每个token只激活少量专家，但注意力参数仍被所有token共享，且长上下文下注意力计算占比很高。作者因此追问：能否像MoE泛化MLP那样泛化注意力算子，并让注意力稀疏与专家稀疏自然嵌套，从而在同等算力下获得更低损失并提升持续预训练能力。",
+        "method": "提出Nestor嵌套稀疏Transformer：每个块先用column router将token路由到C列中的K_c列，每列包含M层独立注意力和E个专家，每层再由expert router选择K_e个专家，token只使用被选中的列内注意力和专家参数。该设计同时引入注意力权重稀疏、注意力图稀疏和专家稀疏，并层次化组合；作者在语言模型预训练中做100M到1B活跃参数的缩放律研究，在持续预训练中测试新领域适配和4k到64k长上下文扩展，并与同等算力、同等稀疏度的MoE及稠密Transformer对比，同时用层次潜变量统计模型给出理论解释。",
+        "result": "在同等算力和同等稀疏度下，Nestor的语言模型预训练表现优于传统MoE：相对MoE约有1.13到1.29倍算力效率，相对稠密Transformer约有3.1到4.1倍算力效率，且优势不随规模增大而缩小。持续预训练中，Nestor在新领域上的收益约与MoE相当，但对旧预训练分布遗忘更少，且持续数据上每token训练FLOPs更低；从4k扩展到最长64k上下文时，等持续token数下保持优势，等持续FLOPs下优势随上下文变长而扩大。理论模型在层次潜结构数据上复现了预训练算力效率、随上下文长度增长的优势和更少遗忘。",
+        "conclusion": "结果表明条件计算不必局限于MLP，将注意力稀疏与专家稀疏嵌套组合是设计可扩展Transformer的有效方向。Nestor可视为MoE Transformer的泛化，同时利用三种耦合稀疏轴，在预训练和持续学习场景中均展现出优于强MoE基线的潜力，作者已开源代码和检查点。",
+        "key_details": "关键实现在于列级路由与层内专家路由的层次嵌套，示意设置为C=4列选K_c=2、每列E=4专家选K_e=2，使token只激活少量注意力和专家参数；评估强调同等算力与同等稀疏度的公平对比，覆盖100M到1B活跃参数、语言模型预训练、领域持续预训练和4k到64k长上下文扩展。理论部分采用可解析的层次潜变量数据模型解释算力效率与遗忘差异。局限性在于实验规模受作者算力上限约束，理论为风格化模型，路由负载均衡、具体损失与超参等实现细节需参考附录和开源代码。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.4297014016799885,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.31726v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031726v1-cognitively-constrained-partners-for-zero-shot-coordination-in-real-time-partitioned-control",
+      "source": "arxiv",
+      "title": "Cognitively Constrained Partners for Zero-Shot Coordination in Real-Time Partitioned Control",
+      "authors": [
+        "Ash Simmons",
+        "George De Ath",
+        "Richard M. Everson"
+      ],
+      "authors_text": "Ash Simmons, George De Ath, Richard M. Everson",
+      "abstract": "Effective human-machine teaming requires agents that coordinate with unpredictable human partners. Reinforcement learning from live human feedback or large behavioural datasets is expensive, while purely simulated training overfits to artificial conventions and fails at Zero-Shot Coordination with real people. We propose a framework for training teaming agents against Cognitively Constrained Partners: simulated partners whose diversity emerges from procedural constraints grounded in human physiological literature, specifically reaction delays and perceptual limitations, rather than from reward shaping or historical training checkpoints. In a modified Lunar Lander environment, we report preliminary evidence that these partners play more like real people than unconstrained agents do, and that agents trained against them match the strongest cross-play baselines while being the only ones whose performance does not depend on how their training partners were generated. We also describe a human-participant study designed so that its rankings can be compared directly against cross-play, testing how well that standard evaluation predicts real human-agent teaming.",
+      "url": "http://arxiv.org/abs/2610.31726v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31726v1",
+      "tldr": "The paper proposes training zero-shot coordination agents against simulated “Cognitively Constrained Partners” whose diversity comes from human-like reaction delays and perceptual limits, rather than human data or reward shaping, and provides preliminary evidence that such partners behave more like real people and yield robust teaming performance in a partitioned Lunar Lander control task.",
+      "detailed_reading": {
+        "motivation": "人机协同要求智能体能够与不可预测的人类伙伴实时配合，但依赖真人反馈或大规模行为数据训练代价高昂，纯模拟训练又容易过拟合人工约定，在零样本协同中面对真人时性能崩溃。共享控制常把智能体降为辅助安全网，而严格分区控制下的人机协同在强化学习基准中研究不足，因此需要一种不依赖人类数据、又能产生类人多样性的伙伴训练框架。",
+        "method": "作者在改造的Lunar Lander中把控制权严格分区：主引擎与侧向推进器分别由两个伙伴控制，并用多离散动作包装器让双方每帧并发行动。伙伴端加入基于人类生理文献的认知约束包装器：处理延迟、机械延迟和不应期均从指数修正高斯分布采样，均值在80–110 ms、70 ms、120–150 ms区间随机初始化，动作至少持续4帧；同时对水平速度、垂直速度和倾角施加Weber定律感知阈值，并加入下限约束和斜向效应，每个伙伴采样唯一感知敏感度。由于延迟造成部分可观测，伙伴和团队智能体均采用循环PPO；先训练无包装的 solo 智能体，再从 solo 智能体部分迁移权重训练团队智能体，团队智能体只控制主引擎，并把伙伴实际执行的侧向动作作为第9维观测，每个回合从45个认知约束伙伴池中均匀抽取伙伴。基线包括FCP、PBT和MARL，训练池均匹配为45个伙伴，并在50个不相交的留出伙伴上做交叉评估。",
+        "result": "初步证据表明，认知约束伙伴的行为比无约束智能体更接近真实人类玩家；与它们训练出的团队智能体在交叉评估中达到最强基线水平，并且是唯一性能不依赖训练伙伴如何生成的方法。行为验证来自20名新玩家的非正式试点，每人完成10个固定种子的单人回合，并与45个认知约束智能体和45个无约束智能体比较；论文还描述了可直接与交叉评估排名对照的人类被试研究设计，用以检验交叉评估能否预测真实人机协同。",
+        "conclusion": "该工作表明，把反应延迟和感知限制等认知约束作为伙伴多样性的来源，可以在不收集大规模人类数据、也不依赖自博弈检查点的情况下生成更类人的训练伙伴，并训练出对伙伴生成方式更稳健的零样本协同智能体。严格分区控制迫使双方持续协调各自不可替代的输入，为搜索救援、空中交通管制和机器人手术辅助等实时人机协同场景提供了有前景的训练范式，但当前结果仍属初步，需在更多环境和真实人类实验中验证。",
+        "key_details": "关键实现包括：使用8维Lunar Lander状态和主引擎{0,1}、侧向{0,1,2}的多离散联合动作；共享奖励由环境势函数差分和推进器逐帧消耗组成，并加入着陆点中心惩罚；延迟分布的标准差固定为0.6/0.5/1.0，指数参数在处理和不应期取1.5、机械延迟取0.5，以保留重尾但保持感觉运动抖动较小；感知过滤只作用于水平速度、垂直速度和倾角，阈值按Weber分数4.5–8%随伙伴采样并设下限，倾角在接近垂直和水平方向更敏感；训练时伙伴策略冻结以避免“秘密握手”式共同适应，FCP和PBT采用对冻结伙伴的最佳响应，MARL保留共同适应但使用交错更新；团队智能体从solo智能体部分迁移权重，并以伙伴实际执行动作作为额外观测。局限包括试点样本小、仅一个环境、延迟随机性和人类研究结果尚未完整报告。"
+      },
+      "affiliations": [
+        "University of Exeter"
+      ],
+      "affiliations_text": "University of Exeter",
+      "score": 4.411498234685627,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.31728v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031728v1-when-and-how-does-muon-precondition-the-role-of-structured-gradient-noise",
+      "source": "arxiv",
+      "title": "When and How Does Muon Precondition? The Role of Structured Gradient Noise",
+      "authors": [
+        "Xiaoran Chen",
+        "Binghui Li",
+        "Liwei Wang",
+        "Pinyan Lu"
+      ],
+      "authors_text": "Xiaoran Chen, Binghui Li, Liwei Wang, Pinyan Lu",
+      "abstract": "Muon has become a popular optimizer for large language model training, yet its theoretical foundations remain poorly understood. In this work, we study how gradient noise geometry shapes Muon's preconditioning benefits. We first show, theoretically and empirically, that under the classical isotropic noise assumption, Muon offers no acceleration beyond a rescaling of the learning rate. This motivates us to investigate structured noise arising from mini-batch sampling in associative memory with heterogeneous task frequencies. We establish an exact balancing threshold for two tasks and extend the analysis to multiple tasks, revealing how task coverage and gradient reliability jointly shape learning. Our analysis shows that Muon can soften the dependence on task frequency from linear to square-root, helping balance the learning of frequent and rare tasks. We further identify rotation-induced negative transfer in SignSGD that Muon avoids, and explain how momentum reduces sampling noise while tracking changing gradients. Controlled numerical experiments validate these mechanisms, and a preliminary LLM pretraining study illustrates the practical promise of fast-slow momentum.",
+      "url": "http://arxiv.org/abs/2610.31728v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31728v1",
+      "tldr": "**TLDR:** Muon’s preconditioning benefits arise specifically under structured gradient noise from heterogeneous task frequencies, where it softens task-frequency dependence from linear to square-root, balances frequent and rare tasks, and avoids SignSGD’s rotation-induced negative transfer, while momentum helps reduce sampling noise and track changing gradients.",
+      "detailed_reading": {
+        "motivation": "Muon 已成为大语言模型训练中的常用优化器，但其理论依据仍不清楚，尤其不清楚梯度噪声几何如何决定其预条件收益。经典各向同性噪声假设下 Muon 仅等价于学习率缩放，这促使作者研究真实小批量采样带来的结构化噪声，以及异构任务频率下频繁任务与稀有任务的学习平衡问题。",
+        "method": "作者建立以梯度噪声几何为核心的理论分析框架：输入为联想记忆多任务设定中的小批量样本，各任务按异构频率采样，梯度被建模为真实方向与结构化采样噪声的叠加；关键模块包括 Muon 预条件、SignSGD 符号与旋转分析、动量及 fast-slow momentum，通过分析各优化器的更新方向和有效学习率来推导两任务精确平衡阈值并推广到多任务。验证流程包括受控数值实验检验理论机制，以及初步 LLM 预训练实验考察 fast-slow momentum 的实际表现。",
+        "result": "理论推导表明，在各向同性噪声下 Muon 除学习率重标定外没有加速；在结构化噪声下，Muon 可把任务频率依赖从线性软化为平方根，从而缓解频繁任务与稀有任务之间的不平衡。两任务情形存在精确平衡阈值，多任务分析显示任务覆盖与梯度可靠性共同决定学习效果；同时识别出 SignSGD 中由旋转导致的负迁移而 Muon 可避免，并说明动量在降低采样噪声与跟踪变化梯度之间的权衡。受控实验验证了这些机制，初步 LLM 预训练显示 fast-slow momentum 具有实际前景。",
+        "conclusion": "Muon 的收益并非无条件存在，而是依赖结构化梯度噪声几何；其预条件作用主要体现在异构任务频率下软化频率依赖并规避旋转诱导的负迁移。动量设计，尤其是 fast-slow momentum，有望在降低小批量噪声的同时保持对动态梯度的跟踪，为优化器设计和数据/任务配比提供理论线索。",
+        "key_details": "关键方法点包括对比各向同性噪声与由小批量采样产生的结构化噪声，采用联想记忆中的异构任务频率构造两任务和多任务分析，推导两任务精确平衡阈值并考察任务覆盖、梯度可靠性，分析 Muon 与 SignSGD 在旋转方向上的差异及动量的噪声-跟踪权衡，并用受控数值实验和初步 LLM 预训练验证。局限性在于理论依赖理想化噪声与任务模型，LLM 证据仅为初步预训练；全文预览未提供完整损失函数、批量大小、模型规模及具体超参数，相关实现细节无法从可见文本确认。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.186323186934663,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.31801v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031801v1-kirose-using-kinematic-data-for-efficient-segmentation-of-robot-demonstrations",
+      "source": "arxiv",
+      "title": "KiRoSe: Using Kinematic Data for Efficient Segmentation of Robot Demonstrations",
+      "authors": [
+        "Shuangyu Xie",
+        "Kaiyuan Chen",
+        "Muhammad Zubair Irshad",
+        "Richard Cheng",
+        "Sergey Zakharov",
+        "Ken Goldberg"
+      ],
+      "authors_text": "Shuangyu Xie, Kaiyuan Chen, Muhammad Zubair Irshad, Richard Cheng, Sergey Zakharov, Ken Goldberg",
+      "abstract": "Segmenting robot demonstration data into disjoint temporal and semantic subsegments is valuable for learning, cleaning, retrieval, and analysis. Segmentation is often performed manually in a tedious and error prone process. Multimodal Large Language Models (MLLMs) have the potential for automating this process, but directly ingesting raw multi camera video streams into MLLMs can be costly and can quickly exhaust context windows. In this paper, we introduce KiRoSe (Kinematics for Robot Segmentation), a novel framework that focuses on the companion stream of robot kinematic data. Inspired by the principle of classical entropy coding, such as Huffman coding, where frequently occurring symbols are represented more compactly, we propose Sparse Motion Tokens (SMTs), a discrete kinematic vocabulary designed to compactly represent recurring, temporally localized motion patterns, which we refer to as kinematic events. SMTs are learned by encoding kinematic trajectories with temporal segment supervision and quantizing the resulting features. We use increasingly available robot demonstration subtask annotations to supervise an open language model to interpret the resulting token sequences. Evaluation against human labeled segmentation shows that KiRoSe can substantially outperform baseline segmentation methods in F1 quality and transfers zero shot to unseen robot embodiments and egocentric human motion, while preserving the language models open vocabulary knowledge. Beyond segmentation, KiRoSe tracks task progress on an unseen robot and detects when an action is being reversed.(website: https://berkeleyautomation.github.io/kirose/)",
+      "url": "http://arxiv.org/abs/2610.31801v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31801v1",
+      "tldr": "KiRoSe introduces Sparse Motion Tokens—a compact, transition-supervised kinematic vocabulary—so an open language model can efficiently and accurately segment robot demonstrations into semantic subtasks, outperforming baselines and transferring zero-shot across embodiments.",
+      "detailed_reading": {
+        "motivation": "机器人示范数据的时序与语义分段对学习、清洗、检索和分析都很有价值，但人工标注繁琐且易错；多模态大模型直接处理多相机原始视频成本高并迅速耗尽上下文窗口。运动学信号比视频更紧凑且信息密度高，但原始轨迹是高频率、高自由度的连续时间序列，难以直接供语言模型使用。KiRoSe因此探索用紧凑离散运动表示来自动识别子任务边界与动作描述。",
+        "method": "KiRoSe分两阶段：首先用残差时间卷积编码器将机器人运动学序列编码为时序上下文特征，并用辅助边界预测头与软边界目标、focal二分类交叉熵联合训练以保留子任务转换信息；随后冻结编码器，在均匀时间网格上池化特征，并用K=512的K-means码本量化得到Sparse Motion Tokens（SMT）。第二阶段把512个运动词元加入预训练语言模型词表并学习嵌入，输入包含任务指令、SMT序列和每秒文本时间标记，参考分段序列化为含起止时间与自然语言描述的JSON，按自回归语言建模损失只对响应词元训练，运动分词器保持冻结。",
+        "result": "在200条留出YAM回合上，KiRoSe的1秒容差边界F1为0.63，显著高于最强替代运动学分词器的0.42；零样本迁移到未见过的AgiBot本体时，0.5秒容差边界F1为0.61，而GPT-6 Astra为0.30。它还能在未见人类任务上生成训练标注中未出现的开放词汇动作描述，并在AgiBot上检测动作反向，任务进度相关系数为-0.68，而基于视频的ReWiND基线为+0.88。",
+        "conclusion": "KiRoSe表明，以子任务转换监督学习低码率运动词元，并让开放语言模型读取这些词元，可以在保持开放词汇知识的同时高效完成机器人示范的时序分段、语义描述、跨本体零样本迁移和任务进度理解。相比直接使用视频或重建导向的运动分词器，该方法在分割质量和跨本体泛化上具有明显优势。",
+        "key_details": "实现上采用左右臂末端执行器共享的14维表示，包括线速度、角速度和归一化夹爪开合速率，使机器人夹爪与人类手部可共享输入空间；训练使用ABC-130K中5,478条YAM回合、140个任务，评测含200条同本体留出回合、2,653条AgiBot World回合和193条Ego-Exo4D人类手部轨迹。关键设计是先以转换监督塑造编码特征而非决定词元位置，再在均匀网格池化后量化，码本仅在训练特征上拟合且在语言模型适配时冻结；局限包括依赖机器人运动学伴随流、部分基线因成本仅在子集评测，以及跨数据集语义重叠和标注粒度差异会影响迁移。"
+      },
+      "affiliations": [
+        "Toyota Research Institute",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "Toyota Research Institute, University of California, Berkeley",
+      "score": 4.041873287275648,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.31779v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031779v1-flora-an-open-model-suite-for-scaling-robotics-data-engines",
+      "source": "arxiv",
+      "title": "FLORA: An Open Model Suite for Scaling Robotics Data Engines",
+      "authors": [
+        "Sicong Leng",
+        "Yunze Man",
+        "Zhiqi Li",
+        "Jing Wang",
+        "Yuhe Zhang",
+        "Ryan Punamiya",
+        "Siddharth Patki",
+        "Kaiyuan Zheng",
+        "Zi-ang Cao",
+        "Zhiding Yu",
+        "Sifei Liu",
+        "Danfei Xu",
+        "Ben Levin",
+        "Jan Kautz",
+        "Yuke Zhu",
+        "Johan Bjorck",
+        "Linxi \"Jim\" Fan"
+      ],
+      "authors_text": "Sicong Leng, Yunze Man, Zhiqi Li, Jing Wang, Yuhe Zhang, Ryan Punamiya, Siddharth Patki, Kaiyuan Zheng, Zi-ang Cao, Zhiding Yu, Sifei Liu, Danfei Xu, Ben Levin, Jan Kautz, Yuke Zhu, Johan Bjorck, Linxi \"Jim\" Fan",
+      "abstract": "The life-cycle of robotics foundation models crucially depends on data labels. Outcome reward labels are needed for monitoring real-world deployments. Process reward labels are needed during RL post-training. Timestamped captions are needed for filtering and balancing pretraining data. We present Flora, an industrial-quality data engine used for training GR00T models, that simultaneously covers these capabilities. Flora achieves SOTA scores on the captioning benchmark WGO-Bench and reward benchmarks RoboReward and Robometer. On internal benchmarks it is competitive with GPT-6 Astra while beating other frontier models. The model is substantially cheaper than API-based alternatives, roughly 125 times cheaper than GPT-6 Astra. Florais battle tested at scale, labeling 200,000 hours of data per day across 512 GB300s. By open-sourcing our data engine, we enable researchers to scale custom robotics datasets and explore emerging applications such as physical auto-research and human-to-robot transfer.",
+      "url": "http://arxiv.org/abs/2610.31779v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31779v1",
+      "tldr": "Flora is an open-source, industrial-scale robotics data engine that unifies timestamped captioning and process/outcome reward labeling for GR00T-style foundation models, achieving competitive SOTA benchmark performance at roughly 125× lower cost than GPT-6 Astra while labeling 200,000 hours of data per day.",
+      "detailed_reading": {
+        "motivation": "机器人基础模型的全生命周期高度依赖高质量数据标签：部署监控需要结果奖励，RL后训练需要过程奖励，预训练数据筛选与配比需要带时间戳的动作描述。现有系统通常只覆盖单一标注类型，通用前沿模型虽可多任务标注，但在现代机器人数据规模下成本过高。",
+        "method": "Flora是用于训练GR00T模型的工业级数据引擎，由分割、描述和奖励三类模型组成。带时间戳描述采用两阶段流程：先将视频切为重叠窗口，分割模型预测窗口内起止时间及左右越界延续标志，经确定性过滤保留中心区域片段，再按时间重叠与延续标志拼接为整段事件区间，并用平移窗口做边界细化；随后对每个区间取目标帧及前后最近非重叠事件的上下文帧，由描述模型生成动作指令。奖励模型统一支持结果奖励、稠密/过程奖励以及测试时用户自定义rubric奖励。推理时使用验证集选出的分割与描述RL检查点，并可按固定提示完成分割、描述和联合标注。",
+        "result": "Flora在描述基准WGO-Bench以及奖励基准RoboReward和Robometer上取得SOTA，内部基准上与GPT-6 Astra竞争并优于其他前沿模型。WGO-Bench联合标注达到50.3，较Refiner平均分割F1提升16.9点、联合F1提升7.3点，黄金窗口描述准确率相近。RoboRewardBench结果奖励MAE为40.0，优于GPT-6 Astra的55.4和专用RoboReward的66.5；Robometer OOD排序为72.0对Astra的82.3，ID VOC 98.9持平、OOD VOC 99.6；DenseRewardBench宏F1为46.2，失败召回53.3%。RubricBench池化L1为6.5，优于十个通用模型中的九个，但仍落后Astra的3.6；系统约比GPT-6 Astra便宜125倍，并已在512块GB300上每天标注20万小时数据。",
+        "conclusion": "Flora以一套开放模型套件同时覆盖带时间戳描述、过程/结果奖励和rubric奖励，并在质量、成本与规模化吞吐之间取得有竞争力的平衡。开源该数据引擎可让研究者扩展自定义机器人数据集，并探索物理自动研究和人到机器人迁移等新应用。",
+        "key_details": "关键实现包括重叠窗口分割、中心区域过滤、基于时间重叠和延续标志的片段拼接、平移窗口边界细化，以及带前后上下文的逐区间描述；奖励侧统一建模结果、稠密和rubric奖励。评测覆盖WGO-Bench的25个人类自我中心、50个DROID外部视角和25个Galaxea头相机回合，分割用tIoU阈值和描述部分得分，DenseCaptionBench含300个完整回合，DenseRewardBench含40个双臂回合和4861个时间步。需注意多数对比是系统级比较，视觉输入、帧预算和解码设置因模型而异，专用奖励模型沿用原协议；VOC只衡量成功回合排序，不证明失败检测精度，rubric能力仍落后最强闭源模型。"
+      },
+      "affiliations": [
+        "NVIDIA"
+      ],
+      "affiliations_text": "NVIDIA",
+      "score": 4.0074826883421295,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.31733v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/26/261031733v1-learning-to-be-monitored-causal-bounds-and-intervention-aware-post-training-recipes-for-chain-of-thought-monitorability",
+      "source": "arxiv",
+      "title": "Learning to Be Monitored: Causal Bounds and Intervention-Aware Post-Training Recipes for Chain-of-Thought Monitorability",
+      "authors": [
+        "Qiang Fu",
+        "Xinyue Li",
+        "Andre Wibisono",
+        "Arman Cohan"
+      ],
+      "authors_text": "Qiang Fu, Xinyue Li, Andre Wibisono, Arman Cohan",
+      "abstract": "Chain-of-thought (CoT) monitoring aims to detect potentially harmful behaviors in large language models (LLMs) from their CoTs. Intervention-based evaluations measure this property by asking whether a monitor can detect the role of an intervention from the CoT when the targeted behavior occurs, typically using minimal-criterion sensitivity ($\\mathsf{TPR_{mc}}$) proposed by~\\citep{guan2025monitoring}. However, a target behavior observed under intervention is not necessarily caused by it, and we show that this metric can overestimate how often a monitor detects target behaviors actually caused by the intervention. Specifically, we establish $\\mathsf{TPR_{mc}}$ as an upper bound on this causal detection rate and derive a complementary lower bound, which provides a tighter evaluation framework for CoT monitorability. With this framework, we study whether LLMs can be trained to make their CoTs easier to monitor. We first construct a training dataset of paired control--intervention tasks spanning multiple intervention types. Using the dataset, we design and apply three intervention-specific training methods based on off-policy self-distillation, reinforcement learning, and on-policy self-distillation to train separate variants of each base model. Across various model-monitor configurations, all three methods generally improve CoT monitorability over the corresponding base models under our extended evaluation framework. Our code is available at https://github.com/xinyue-lxy/learning-to-be-monitored.",
+      "url": "http://arxiv.org/abs/2610.31733v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31733v1",
+      "tldr": "The paper establishes tighter causal bounds for chain-of-thought monitorability and shows that intervention-aware post-training methods based on off-policy self-distillation, reinforcement learning, and on-policy self-distillation generally improve LLM CoT monitorability under this framework.",
+      "detailed_reading": {
+        "motivation": "链式思维监控希望从大语言模型（LLM）的CoT中检测潜在有害行为，而干预式评估通过监控器能否从CoT识别干预作用来衡量可监控性。作者指出，在干预下观察到的目标行为未必由干预导致，因此常用的最小准则敏感度TPR_mc可能高估监控器对“真正由干预导致的目标行为”的检测率。",
+        "method": "作者首先将TPR_mc建立为因果检测率的上界，并推导互补下界，形成更紧的CoT可监控性评估框架。随后构建覆盖多种干预类型的控制-干预配对任务训练集，针对不同干预设计三种训练方法：离策略自蒸馏、强化学习与在策略自蒸馏，并分别训练各基模型变体。最后在多种模型-监控器配置下，用扩展评估框架比较训练后模型与对应基模型的CoT可监控性。",
+        "result": "核心发现是TPR_mc会高估监控器对干预因果导致行为的检测频率，因而仅用该指标会偏乐观；作者给出的上界与互补下界提供了更紧的评估区间。实验上，在多种模型-监控器配置中，三种干预特定训练方法总体上均较对应基模型提升CoT可监控性。",
+        "conclusion": "研究表明，CoT可监控性不仅需要干预式指标，还应采用因果检测率的上界与下界进行更严格评估；在此框架下，通过配对数据与干预特定后训练，LLM可以被训练得使其CoT更容易被监控。",
+        "key_details": "关键方法点包括：以控制-干预配对任务构造训练数据，按干预类型分别采用离策略自蒸馏、强化学习和在策略自蒸馏；评估需跨多种模型-监控器配置，并以因果检测率界而非单一TPR_mc为核心。局限性在于目标行为在干预下出现不等于干预导致，TPR_mc只能作为上界；摘要未披露具体损失权重、超参数、计算复杂度及更细的模型规模约束。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.982083441331876,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.31799v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031799v1-exposing-noise-deficiency-signatures-of-deep-learning-based-false-data-injection-attacks-through-ac-state-estimation",
+      "source": "arxiv",
+      "title": "Exposing Noise-Deficiency Signatures of Deep Learning-Based False Data Injection Attacks Through AC State Estimation",
+      "authors": [
+        "Yichen Liu",
+        "Hongyu Wu",
+        "Bo Liu"
+      ],
+      "authors_text": "Yichen Liu, Hongyu Wu, Bo Liu",
+      "abstract": "Deep learning (DL)-based false data injection (FDI) attacks can resemble normal measurements and evade both conventional bad data detection (BDD) and measurement-space data-driven detectors. This paper identifies a previously overlooked signature of such attacks in state-estimation (SE) residual space. The residuals of reconstruction-based DL attacks exhibit deficient stochastic variation, manifested as abnormally small residual energy and reduced directional dispersion. We establish the conditions under which this signature emerges and explain why the attacks carrying it can evade conventional BDD. We show that SE can reveal residual-space differences obscured by operating-state variation in measurement space. We then explain the origin of the signature through the noise-suppression mechanism of DL attack generation. A generator can learn the reproducible structure of historical measurements but cannot reproduce stochastic measurement components that are unpredictable from its input. This signature enables label-free detection using a simple two-sided test on the conventional BDD statistic, while the full residual vector can also be exploited when labeled attack samples are available. Experiments on the IEEE 14-bus and 118-bus AC systems show that the label-free test detects up to 99% of three representative DL attacks at a false-alarm rate comparable to that of BDD, which detects at most 5%. Ablation studies further examine the effects of residual representation, decision rule, and measurement-noise magnitude and distribution.",
+      "url": "http://arxiv.org/abs/2610.31799v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31799v1",
+      "tldr": "The paper shows that reconstruction-based deep-learning false-data-injection attacks suppress unpredictable measurement noise, leaving abnormally low and directionally concentrated residual energy in AC state-estimation residual space, which enables label-free detection via a simple two-sided test on the conventional BDD statistic—detecting up to 99% of representative attacks at false-alarm rates comparable to BDD.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.919568981296611,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.31702v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031702v1-collaborative-in-context-learning-for-indoor-radio-map-estimation",
+      "source": "arxiv",
+      "title": "Collaborative In-Context Learning for Indoor Radio Map Estimation",
+      "authors": [
+        "Yuanzhe Peng",
+        "Jie Xu"
+      ],
+      "authors_text": "Yuanzhe Peng, Jie Xu",
+      "abstract": "Indoor radio map estimation (RME) is essential for wireless applications such as coverage planning, localization, and network deployment. However, most existing methods follow a supervised learning paradigm that requires costly labeled data and task-specific model training. Moreover, indoor environments involve privacy-sensitive information, such as building layouts and structures, that often cannot be centralized. To address these challenges, we make the first attempt to formulate indoor RME as a collaborative in-context learning (ICL) problem. We propose Poly-Ripple, a framework in which multiple clients perform ICL using large autoregressive vision models (LAVMs) without model updates. Each client is prompted by its private demonstrations and predicts the radio map for the same scene query. To capture the causal structure of wireless propagation outward from the transmitter (Tx), we adopt ripple-ordered autoregressive modeling. We further introduce importance-aware aggregation to exploit heterogeneous contextual knowledge distributed across clients under the context length constraint. We provide theoretical analysis and conduct extensive experiments on a public indoor RME benchmark. The experimental results show that Poly-Ripple consistently outperforms representative ICL baselines, while aligning with our theoretical analysis.",
+      "url": "http://arxiv.org/abs/2610.31702v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31702v1",
+      "tldr": "The paper proposes **Poly-Ripple**, a privacy-preserving collaborative in-context learning framework that enables multiple clients to estimate indoor radio maps using large autoregressive vision models with ripple-ordered modeling and importance-aware aggregation—without model updates—and consistently outperforms representative ICL baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Florida",
+        "University of North Florida"
+      ],
+      "affiliations_text": "University of Florida, University of North Florida",
+      "score": 3.790931117095937,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.31778v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031778v1-benchmarks-are-surprisingly-compaction-friendly",
+      "source": "arxiv",
+      "title": "Benchmarks Are Surprisingly Compaction-Friendly",
+      "authors": [
+        "Jeanne Salle",
+        "Hardik Bhatnagar",
+        "Matthias Bethge",
+        "Sahar Abdelnabi",
+        "Maksym Andriushchenko"
+      ],
+      "authors_text": "Jeanne Salle, Hardik Bhatnagar, Matthias Bethge, Sahar Abdelnabi, Maksym Andriushchenko",
+      "abstract": "Long horizon agentic tasks are now pushing LLM agents past their context window. To continue the task, the agent scaffold has to free up the context window, a process known as context compaction. Compaction is generally lossy by design: agents can silently lose task constraints, instructions, or their reasoning behind earlier decisions. Although compaction is a standard component of coding agent scaffolds, it has not been studied systematically with frontier models on realistic, long horizon agentic tasks. Previous work evaluate smaller open weight models on toy or synthetic trajectories. We fix the agent scaffold (OpenCode), implement five compaction strategies inside it, and evaluate three frontier models on three long horizon benchmarks (PaperBench, ProgramBench, PostTrainBench). For the two 1M context models, the compaction threshold does not measurably affect the task performance, whereas GPT-5.3-Codex, the model with the smallest context window, performs worse at lower thresholds on PaperBench and, less clearly, on PostTrainBench. No compaction method outperforms default self-summarization, and methods that discard more content cost some models up to 20 points while leaving other models the same. Compaction can, however, silently remove task constraints: on ProgramBench, the first compaction summary already drops about one third of the task's anticheating rules on average, and this rises monotonically with the number of compactions. On real user-agent sessions from SWE-chat, instructions about how the agent should work and what it should not do are dropped around 6 times more than specifications of what to build. We argue that current benchmarks are compaction-friendly: i.e., the objective is fixed and the agent's progress stays on disk, so most of what compaction discards can be recovered, except constraints that don't exist anywhere else.",
+      "url": "http://arxiv.org/abs/2610.31778v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31778v1",
+      "tldr": "Current long-horizon agentic benchmarks are “compaction-friendly”: performance is largely robust to context compaction and no strategy beats default self-summarization, but compaction silently drops unique task constraints and behavioral instructions that cannot be recovered elsewhere.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7674887706584146,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.31815v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031815v1-a-graph-decomposition-approach-for-the-synthesis-of-emps-in-directed-acyclic-networks",
+      "source": "arxiv",
+      "title": "A graph decomposition approach for the synthesis of EMPs in directed acyclic networks",
+      "authors": [
+        "Eduardo Mapurunga",
+        "Michel Gevers",
+        "Alexandre Bazanella"
+      ],
+      "authors_text": "Eduardo Mapurunga, Michel Gevers, Alexandre Bazanella",
+      "abstract": "This paper considers the identifiability of dynamical networks whose topology is a Directed Acyclic Graph (DAG), in the context where not all nodes are excited and not all nodes are measured. The objective is to construct a valid and parsimonious\n  Excitation and Measurement Pattern (EMP), i.e. a selection of excited and measured nodes, that allows to identify the whole network with a small number of excitations and measurements. We show first that a DAG can be decomposed into a set of trees and parallel paths networks. We propose an algorithm that achieves this decomposition and computes an EMP that combines EMPs for the individual trees and parallel paths networks.\n  We formally show that this algorithm yields an EMP capable of identifying the whole network.",
+      "url": "http://arxiv.org/abs/2610.31815v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31815v1",
+      "tldr": "This paper proposes a DAG decomposition into trees and parallel-path networks to synthesize a parsimonious valid Excitation and Measurement Pattern that guarantees identifiability of the entire dynamical network with few excited and measured nodes.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.750552743831022,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.31718v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031718v1-towards-adversarially-robust-multigraph-neural-networks-for-financial-crime-analysis",
+      "source": "arxiv",
+      "title": "Towards Adversarially Robust Multigraph Neural Networks for Financial Crime Analysis",
+      "authors": [
+        "Dennis Heijmans",
+        "H. Çağrı Bilgi",
+        "Rui Wang",
+        "Kubilay Atasu"
+      ],
+      "authors_text": "Dennis Heijmans, H. Çağrı Bilgi, Rui Wang, Kubilay Atasu",
+      "abstract": "Financial transaction networks are naturally represented as multigraphs, where repeated transactions between the same pair of accounts are modeled as distinct edges. Recently proposed multigraph neural network architectures leverage this structure explicitly to achieve a strong performance on anti-money laundering (AML) tasks. However, their robustness to adversaries that manipulate transaction structures to evade detection remains largely unexplored. We present the first scalable framework for structural attacks and adversarial training of multigraph neural networks using node-edge incidence matrices, adapting projected gradient descent and projected randomized block coordinate descent methods to optimize structural perturbations over such matrices. We further introduce a cycle-based regularizer that penalizes changes in the global counts of directed 2- and 3-cycles, providing a structural measure of attack plausibility. Experiments on synthetic pattern-detection and realistic AML datasets show that our learned attacks substantially outperform non-learnable perturbation baselines in reducing detection performance (PR-AUC), while adversarial training consistently improves robustness against these attacks. These results demonstrate that multigraph neural networks are vulnerable to learned structural attacks and that adversarial training provides an effective defense. Our code is available at https://github.com/denheijmans/robust_multignn.",
+      "url": "http://arxiv.org/abs/2610.31718v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31718v1",
+      "tldr": "The paper introduces the first scalable framework for learned structural attacks and adversarial training on multigraph neural networks using node–edge incidence matrices and a cycle-based plausibility regularizer, showing that these models are vulnerable to such attacks but can be made more robust through adversarial training.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Delft University of Technology"
+      ],
+      "affiliations_text": "Delft University of Technology",
+      "score": 3.717688132358767,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.31786v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031786v1-not-all-retained-clients-are-equal-client-selection-for-federated-unlearning",
+      "source": "arxiv",
+      "title": "Not All Retained Clients Are Equal: Client Selection for Federated Unlearning",
+      "authors": [
+        "Thanh Linh Nguyen",
+        "Quoc-Viet Pham"
+      ],
+      "authors_text": "Thanh Linh Nguyen, Quoc-Viet Pham",
+      "abstract": "Federated unlearning (FU) aims to remove a designated target client's influence from a trained model without the prohibitive cost of retraining from scratch. Existing methods largely treat unlearning as a post-hoc, stateless operation, overlooking that client influence is path-dependent: contributions made during training, particularly during critical learning periods (CLPs), can have disproportionate and persistent effects. Moreover, knowledge overlap and intermittent client availability make relying on all retained clients inefficient and impractical. We introduce PDF, a path-dependent client-selection framework based on the insight that retained clients are not equally valuable for unlearning. During training, PDF maintains lightweight, target-agnostic, CLP-weighted histories summarizing each client's accumulated update direction and global-model alignment. Upon an unlearning request, these histories identify and rank retained clients that are globally informative yet weakly coupled to the target, enabling retraining-based unlearning with only the top-$k$ clients over a small number of rounds. Experiments on FMNIST, CIFAR-10, and CIFAR-100 under IID and non-IID settings show that PDF achieves effective forgetting and strong retained utility with substantially fewer retained clients. In particular, PDF achieves $0\\%$ forgetting accuracy with retraining-like MIA AUC on non-IID CIFAR-10, improves retained accuracy by up to $6.91$ percentage points over the strongest competing FU baseline on CIFAR-100, and reduces communication by approximately $69\\%$ and computation by $57$--$61\\%$ relative to Retrain.",
+      "url": "http://arxiv.org/abs/2610.31786v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31786v1",
+      "tldr": "TLDR: The paper proposes PDF, a path-dependent client-selection framework for federated unlearning that uses lightweight CLP-weighted training histories to rank and retrain with only the top-k retained clients that are globally informative yet weakly coupled to the target client, achieving effective forgetting with strong retained utility and substantially lower communication and computation than full retraining.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Trinity College Dublin"
+      ],
+      "affiliations_text": "Trinity College Dublin",
+      "score": 3.7094212010422014,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.31716v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031716v1-does-leworldmodel-preserve-local-action-geometry",
+      "source": "arxiv",
+      "title": "Does LeWorldModel Preserve Local Action Geometry?",
+      "authors": [
+        "Vasil Vasilev",
+        "Siddharth Nayak"
+      ],
+      "authors_text": "Vasil Vasilev, Siddharth Nayak",
+      "abstract": "We examine how closely pretrained LeWorldModel (LeWM) reproduces the effects of small action changes. Using matched simulator and model responses, we measure action sensitivity with Gram matrices at three perturbation scales. Across nearly a thousand states from Reacher and OGBench Cube, the most sensitive action directions differ by median angles of about $36^\\circ$ and $42^\\circ$, respectively, at the smallest scale. Increasing the perturbation tenfold reduces median normalized Gram discrepancy by roughly 70\\% on Reacher and 47\\% on Cube. Geometry measured in pixels and embeddings varies more across scales than the chosen physical-state geometry. On held-out directions, environment Grams achieve median embedding response errors of 17\\% and 28\\%, compared with 26\\% and 38\\% for an isotropic reference with the same trace. LeWM's errors are higher at this scale. These findings support scale-specific evaluation of action sensitivity; its effect on control remains an open question.",
+      "url": "http://arxiv.org/abs/2610.31716v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31716v1",
+      "tldr": "**TLDR:** Pretrained LeWorldModel only partially preserves local action geometry—its most sensitive action directions are misaligned with the simulator by median angles of about 36° (Reacher) and 42° (Cube) at the smallest perturbation scale, with agreement improving at larger scales and depending on the output metric—so action sensitivity should be evaluated scale-specifically, while its effect on control remains open.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technological School Electronic Systems (TUES)",
+        "Massachusetts Institute of Technology"
+      ],
+      "affiliations_text": "Technological School Electronic Systems (TUES), Massachusetts Institute of Technology",
+      "score": 3.4848814345738877,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.31722v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031722v1-autoregressive-multimodal-anomaly-detection-with-large-language-models-for-microservice-systems",
+      "source": "arxiv",
+      "title": "Autoregressive Multimodal Anomaly Detection with Large Language Models for Microservice Systems",
+      "authors": [
+        "Yixiang Tang",
+        "Fagui Liu",
+        "Guoxiang Zhong",
+        "Xi Yao",
+        "C. L. Philip Chen"
+      ],
+      "authors_text": "Yixiang Tang, Fagui Liu, Guoxiang Zhong, Xi Yao, C. L. Philip Chen",
+      "abstract": "Microservice systems have become a dominant architecture for large-scale cloud applications, enabling rapid deployment and elastic scaling. However, ensuring the reliability and availability of microservice systems critically relies on effective anomaly detection, as failures and performance anomalies can quickly propagate across services and severely impact end-to-end system behavior. Existing multimodal anomaly detection approaches for microservice systems often struggle with two fundamental limitations: (i) the neglect of modality-specific characteristics in favor of cross-modality fusion, and (ii) the \"identity-shortcut\" problem that affects the feature reconstruction process. To address these issues, we propose LLMMAD, an autoregressive multimodal anomaly detection framework for microservice systems based on Large Language Models (LLMs). Initially, to reconcile cross-modality fusion with modality-specific preservation, LLMMAD embeds and recombines multimodal data into a unified sequence for LLM processing to model inter-modality relationships, while employing modality-wise reconstruction heads to retain modality-specific information. Subsequently, to eliminate the identity-shortcut, we implement a prediction-driven autoregressive objective, under which the model predicts future states rather than copies current inputs. Finally, we conduct extensive experiments on three real-world datasets. The results demonstrate that LLMMAD consistently outperforms state-of-the-art methods, achieving F1-score improvements of 3.1%, 1.4%, and 0.9%, respectively, thereby providing a more reliable solution for microservice monitoring.",
+      "url": "http://arxiv.org/abs/2610.31722v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31722v1",
+      "tldr": "The paper proposes LLMMAD, an LLM-based autoregressive multimodal anomaly detection framework for microservice systems that unifies metrics, logs, and traces into a sequence while preserving modality-specific information and predicts future states to avoid the identity-shortcut problem, outperforming state-of-the-art methods on three real-world datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Peng Cheng Laboratory",
+        "South China University of Technology"
+      ],
+      "affiliations_text": "Peng Cheng Laboratory, South China University of Technology",
+      "score": 3.344825572112626,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.31809v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031809v1-curaloc-repository-level-fault-localization-via-planned-code-inspection",
+      "source": "arxiv",
+      "title": "CuraLoc: Repository-Level Fault Localization via Planned Code Inspection",
+      "authors": [
+        "Sangeeta Warrier",
+        "Anush Sankaran",
+        "Ryen White"
+      ],
+      "authors_text": "Sangeeta Warrier, Anush Sankaran, Ryen White",
+      "abstract": "A bug report describes what went wrong, but rarely where the code should change. Existing repository-level localization methods often let language models iteratively decide what code to inspect next, requiring repeated model calls and substantial token usage. We investigate whether these inspection decisions can instead be planned before source retrieval. In this research, we introduce CuraLoc, which first selects candidate files and represents their symbols using compact behavioral and structural descriptions. In a single planning decision, the model jointly selects starting symbols, chooses code relationships to inspect from each, and forms hypotheses about likely edits. Deterministic retrieval collects the requested source for a final ranking informed by those hypotheses, concentrating model reasoning on choosing and comparing code rather than directing each retrieval step. We demonstrate the efficacy of our proposed approach on the SWE-Bench Lite and Verified datasets. On SWE Bench Verified with GPT-5.2, CuraLoc raises Func@1 from LocAgent's 53.8% to 59.3% while using 90.3% fewer recorded tokens, and also outperforms RepoSearcher (56.2%) and Agentless (39.6%) on Func@1. On SWE-bench Lite, CuraLoc achieves a high 83.8% Func@5 accuracy improving on Agentless by more than 15% in relative accuracy. Additionally, CuraLoc supports different model backbones, with strong localization accuracy demonstrated using both GPT-5.2 and GPT-6 Astra. These results provide evidence that repository-level code inspection can be planned effectively without iterative model-controlled navigation.",
+      "url": "http://arxiv.org/abs/2610.31809v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31809v1",
+      "tldr": "CuraLoc improves repository-level fault localization by using a single planned model decision to select starting symbols, code relationships to inspect, and edit hypotheses from compact symbol descriptions before deterministic source retrieval and hypothesis-informed ranking, achieving higher Func@1 accuracy with far fewer tokens than iterative agent-based methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft"
+      ],
+      "affiliations_text": "Microsoft",
+      "score": 3.2643800674831622,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2610.31768v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031768v1-efficient-omni-modal-large-language-model-inference-via-per-query-modality-selection",
+      "source": "arxiv",
+      "title": "Efficient Omni-modal Large Language Model Inference via Per-Query Modality Selection",
+      "authors": [
+        "Shuqi Liu",
+        "Yuzhou Cao",
+        "Luke Ong"
+      ],
+      "authors_text": "Shuqi Liu, Yuzhou Cao, Luke Ong",
+      "abstract": "Omni-modal large language models (Omni-LLMs) can jointly process a broad range of modalities, such as text, audio, and video, enabling stronger multimodal understanding and reasoning capabilities, but often at substantial inference cost. We observe that the benefit of additional modalities varies across queries, indicating that a fixed modality configuration can be inefficient. Motivated by this, we study query-wise modality selection, which keeps the underlying Omni-LLM fixed while adaptively selecting which modalities to provide for each query. We formulate the problem as an accuracy-cost optimization problem and develop a cost-sensitive learning approach for modality selection. We evaluate our approach on WorldSense using Qwen2.5-Omni and Qwen3-Omni under three inference-cost measures: input tokens, latency, and monetary cost. Across both models, query-wise modality selection consistently improves the accuracy-cost trade-off and can even outperform the standard setting in which all available modalities are provided to the Omni-LLM. For Qwen2.5-Omni, our cost-sensitive approach matches or exceeds this full-modality accuracy while requiring only approximately 41% of the input tokens, 39% of the latency, and 61% of the monetary cost.",
+      "url": "http://arxiv.org/abs/2610.31768v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31768v1",
+      "tldr": "This paper proposes a cost-sensitive per-query modality selection framework that adaptively chooses which modalities to provide to a fixed Omni-LLM, improving the accuracy–cost trade-off and matching full-modality accuracy with substantially lower input tokens, latency, and monetary cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "Nanyang Technological University",
+      "score": 3.094399731695967,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.31774v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031774v1-the-strength-of-root-cuts-in-an-extended-abstract-branch-and-cut-model",
+      "source": "arxiv",
+      "title": "The Strength of Root Cuts in an Extended Abstract Branch-and-Cut Model",
+      "authors": [
+        "Boyang Han",
+        "Aleksandr M. Kazachkov"
+      ],
+      "authors_text": "Boyang Han, Aleksandr M. Kazachkov",
+      "abstract": "The branch-and-cut paradigm has led to effective solvers for a wide range of mathematical optimization problems. Despite significant theoretical work on pure branching and pure cutting, less is known about their interaction. We study an extended abstract branch-and-cut model to investigate tradeoffs between branching and cutting, including the time to generate cuts. We prove that, under symmetric branching, some minimal-time tree has all cuts at the root, before the first branching node, and that there is an asymmetric setting where some minimal-time tree has no internal cuts, i.e., cuts both preceded and followed by branching. For other settings, although a root-cut tree may be suboptimal and differ substantially in structure from a minimal-time tree, it nevertheless provides a reliable approximation whose tree time does not deviate arbitrarily from the optimum. For constant cut strength and bounded time functions, we show that the best root-cut tree is asymptotically optimal as the target bound grows. In addition, under a single-cut-per-path restriction, we characterize when some minimal-time tree has an internal cut. Lastly, simulations indicate that the best root-cut tree is much closer to a minimal-time tree than our worst-case approximation guarantee suggests.",
+      "url": "http://arxiv.org/abs/2610.31774v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31774v1",
+      "tldr": "Using an extended abstract branch-and-cut model, the paper shows that root-only cutting can be optimal or a reliable—and asymptotically optimal in certain regimes—approximation to minimal-time branch-and-cut trees, while also characterizing settings where internal cuts are necessary.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Florida"
+      ],
+      "affiliations_text": "University of Florida",
+      "score": 3.0662151320276,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.31704v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031704v1-the-path-to-nde-40-a-review-of-algorithms-techniques-and-strategies-for-autonomous-inspection",
+      "source": "arxiv",
+      "title": "The Path to NDE 4.0: A Review of Algorithms, Techniques, and Strategies for Autonomous Inspection",
+      "authors": [
+        "Ashiqur Rahmana",
+        "Venkata Devesh Reddy Seethi",
+        "Zachary Kral",
+        "Austin Yunker",
+        "Rajkumar Kettimuthu",
+        "Hamed Alhoori"
+      ],
+      "authors_text": "Ashiqur Rahmana, Venkata Devesh Reddy Seethi, Zachary Kral, Austin Yunker, Rajkumar Kettimuthu, Hamed Alhoori",
+      "abstract": "Non-Destructive Inspection (NDI) is a cornerstone of modern quality assurance, critical for ensuring the safety and reliability of infrastructure and manufactured components without causing damage. This paper presents a comprehensive review of the current NDI landscape, analyzing the field through four distinct lenses, namely, computational algorithms, physical techniques, industrial applications, and research objectives. We synthesize a broad range of academic literature to illustrate the rapid evolution from manual, analog interpretation to a digitized, data-centric paradigm known as NDE 4.0. Our analysis highlights the dominance of ultrasound and visual inspection as primary physical techniques, while revealing a significant shift toward deep learning and generative models for automated defect recognition. Despite these technological strides, the industry faces critical bottlenecks, notably the scarcity of standardized open-access datasets and the \"black box\" nature of AI models, which hinders widespread adoption. By charting these developments and identifying key research gaps, such as the need for explainable AI (XAI) and standardized digital twin protocols, this review offers a strategic roadmap for future research. It concludes that the future of NDI research should focus on the successful integration of intelligent, autonomous fusion of inspection data with advanced sensor technologies into asset lifecycle management.",
+      "url": "http://arxiv.org/abs/2610.31704v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31704v1",
+      "tldr": "This review charts NDI’s transition to NDE 4.0 across algorithms, inspection techniques, industrial applications, and research objectives, highlighting deep learning and generative models for automated defect recognition while identifying standardized open datasets, explainable AI, digital twin protocols, and autonomous inspection-data fusion as critical bottlenecks and future directions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northern Illinois University",
+        "Spirit AeroSystems (Boeing)",
+        "Argonne National Laboratory"
+      ],
+      "affiliations_text": "Northern Illinois University, Spirit AeroSystems (Boeing), Argonne National Laboratory",
+      "score": 3.055949642913187,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2610.31731v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031731v1-consmsa-semantic-distribution-consistency-learning-for-multimodal-sentiment-analysis",
+      "source": "arxiv",
+      "title": "ConsMSA: Semantic Distribution Consistency Learning for Multimodal Sentiment Analysis",
+      "authors": [
+        "Pan Wang",
+        "Lipeng Ke",
+        "Huajun Ying",
+        "Pritish Mohapatra",
+        "Rohan Sarkar",
+        "Suresh Lakhani",
+        "Sankar Venkataraman",
+        "Jingtong Hu"
+      ],
+      "authors_text": "Pan Wang, Lipeng Ke, Huajun Ying, Pritish Mohapatra, Rohan Sarkar, Suresh Lakhani, Sankar Venkataraman, Jingtong Hu",
+      "abstract": "Multimodal sentiment analysis (MSA) aims to predict human sentiments by integrating signals from different modalities such as text, video, and audio. However, raw multimodal sequences often suffer from semantic inconsistency--exhibiting redundancy or conflicts within and across modalities--which hinders robust understanding and increases computational cost. To this end, we introduce ConsMSA, which explicitly formalizes semantic distribution consistency across both $\\textit{intra}$- and $\\textit{inter}$-modality, providing a consistency-aware mechanism for robust and efficient multimodal sentiment prediction. Specifically, ConsMSA projects multimodal token features into a shared sentiment space to compute an Intra- and Inter-modality Consistency Score ($I^2CS$). By coupling this score with predictive relevance, we formulate consistency-aware importance signals that are utilized: (i) as a consistency regularizer to align latent distributions during training, (ii) to derive semantic-aware weights for adaptive multimodal token reweighting, and (iii) as a practical criterion to prune redundant or conflicting tokens. Extensive experiments on CMU-MOSI, CMU-MOSEI, and CH-SIMS demonstrate that ConsMSA achieves state-of-the-art performance while remaining robust under aggressive token compression--retaining only 10% of tokens yields comparable accuracy. These results establish semantic distribution consistency as a promising foundation for synergizing predictive robustness with computational efficiency.",
+      "url": "http://arxiv.org/abs/2610.31731v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31731v1",
+      "tldr": "ConsMSA enhances multimodal sentiment analysis by measuring intra- and inter-modality semantic distribution consistency in a shared sentiment space and coupling it with predictive relevance to regularize learning, reweight tokens, and prune redundant or conflicting tokens, achieving state-of-the-art accuracy while retaining comparable performance with only 10% of tokens.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pittsburgh",
+        "Amazon"
+      ],
+      "affiliations_text": "University of Pittsburgh, Amazon",
+      "score": 2.979547124106656,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2610.31791v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031791v1-paperscorer-how-predictable-is-paper-acceptance",
+      "source": "arxiv",
+      "title": "PaperScorer: How Predictable Is Paper Acceptance?",
+      "authors": [
+        "Sachin Konan",
+        "Jonathan Liu",
+        "Zhuang Liu"
+      ],
+      "authors_text": "Sachin Konan, Jonathan Liu, Zhuang Liu",
+      "abstract": "Automated research is largely evaluated by benchmark performance, but the value of research rarely reduces to a single score. Humans judge a work's holistic contribution through peer review, which is hard to model because it is noisy and depends on many factors. However, what if, given only the paper, we could predict its peer-review decision directly? We introduce PaperScorer, a family of models that predict a paper's accept or reject decision from its extracted text or page screenshots, training only on the decision after removing author identity and formatting shortcuts. Vision models are the most predictive (68% accuracy on ICLR papers and 77% on ML papers from arXiv), beating text-only and frontier reasoning models. Unlike plain text, page images retain figures, layout, and presentation. This signal is robust, surviving smaller models and even compressing the whole paper into a single image. But accurate predictions are not evenly spread. PaperScorer is strongest on the lowest and highest rated papers, while papers rated in the middle stay unpredictable for our models and frontier systems alike. Additionally, its confidence is calibrated, so its most confident predictions are also its most accurate. Overall, PaperScorer shows how much of the decision a paper carries on its own, marking a first step toward AI-driven research evaluation.",
+      "url": "http://arxiv.org/abs/2610.31791v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31791v1",
+      "tldr": "PaperScorer demonstrates that anonymized paper content—especially page images—contains a robust but limited, calibrated signal for predicting peer-review acceptance (68% on ICLR and 77% on arXiv), with accuracy concentrated on clearly low- or high-rated papers while mid-rated papers remain largely unpredictable.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 2.9391095149490427,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2610.31769v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/26/261031769v1-asset-normalized-distribution-reliability-budget-optimization-using-historical-outage-benefits-and-work-type-learning",
+      "source": "arxiv",
+      "title": "Asset-Normalized Distribution Reliability Budget Optimization Using Historical Outage Benefits and Work-Type Learning",
+      "authors": [
+        "Hritik Gopal Shah",
+        "Catherine Tajmajer"
+      ],
+      "authors_text": "Hritik Gopal Shah, Catherine Tajmajer",
+      "abstract": "Reliability investments compete for constrained capital but are often evaluated in separate programs. This paper presents a data-driven framework that translates historical work orders, geographic asset records, outage events, and costs into comparable customer-minute and customer-interruption benefits at the circuit-zone level. A normalization process maps historical device names and non-isolating assets to current automaticisolating-device zones and links investments to pre- and postconstruction outage histories. Utility data covering more than $250 million in investments completed from 2010 to 2020 are used to estimate benefit factors for seven work types. Those factors feed a mixed-integer portfolio model that selects at most one applicable action per zone under a capital budget. Observed reductions range from 32% to 94% for customer-minutes interrupted and from 43% to 93% for customer interruptions. The framework provides a traceable path from heterogeneous utility records to zone-level reliability investment decisions",
+      "url": "http://arxiv.org/abs/2610.31769v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.31769v1",
+      "tldr": "This paper presents a data-driven, asset-normalized framework that links historical utility work orders and outages to circuit-zone reliability benefits, learns work-type improvement factors from over $250 million in investments, and uses a mixed-integer model to optimize budget-constrained reliability portfolios, achieving observed reductions of 32–94% in customer-minutes interrupted and 43–93% in customer interruptions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Eversource Energy"
+      ],
+      "affiliations_text": "Eversource Energy",
+      "score": 2.6522546387390546,
+      "score_text": "2.7"
+    }
+  ]
+}
