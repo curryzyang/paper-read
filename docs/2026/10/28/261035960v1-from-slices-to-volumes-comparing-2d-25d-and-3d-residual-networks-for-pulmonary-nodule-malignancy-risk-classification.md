@@ -1,0 +1,18 @@
+# From Slices to Volumes: Comparing 2D, 2.5D, and 3D Residual Networks for Pulmonary Nodule Malignancy-Risk Classification
+
+- 区域：速读区
+- 排名：15
+- 匹配度：2.9/10
+- 来源：arxiv
+- 作者：Bahodir Nazarov, Zineb Gharib, Fatima Zazoul
+- 机构：Sichuan University
+- 链接：[arXiv / Source](http://arxiv.org/abs/2610.35960v1) · [PDF](https://arxiv.org/pdf/2610.35960v1)
+
+## TLDR
+In a patient-disjoint LIDC-IDRI comparison of 2D, 2.5D, and 3D ResNet models for pulmonary nodule malignancy-risk classification, mild augmentation improved every track, momentum-contrast pretraining reduced performance, and augmented 2.5D achieved the best observed results (three-class Macro-F1 0.6537; binary Macro-F1 0.8664).
+
+## Abstract
+Purpose: To compare 2D, 2.5D, and 3D residual networks for pulmonary nodule malignancy-risk classification and evaluate momentum-contrast pretraining, mild augmentation, and exclusion of indeterminate ratings.
+  Methods: A retrospectively prepared LIDC-IDRI cohort contained 2,654 nodules labeled benign, indeterminate, or malignant using median radiologist ratings. Patient-disjoint splits comprised 1,876 training, 382 validation, and 396 test nodules. Representations included one axial slice, five neighboring slices, and a local CT volume. Each track evaluated a randomly initialized baseline, momentum-contrast pretraining followed by fine-tuning, and supervised training with mild augmentation. Checkpoints were selected by validation Macro-F1. The 2D experiments used three seeds; 2.5D and 3D results were single-run estimates. A separate binary experiment excluded indeterminate nodules.
+  Results: Augmented models achieved test Macro-F1 values of $0.6134\pm0.0075$ for 2D, $0.6537$ for 2.5D, and $0.5403$ for 3D; the 2D uncertainty denotes population standard deviation across seeds. Corresponding accuracies were $0.6128$, $0.6869$, and $0.5455$. Augmentation improved Macro-F1 within every track, whereas the tested pretraining recipes reduced it. Binary Macro-F1 values were $0.8227$, $0.8664$, and $0.7554$, respectively.
+  Conclusion: Augmented 2.5D achieved the highest observed performance. Differences in preprocessing, optimization, capacity, and replication limit attribution to dimensionality. Labels reflect radiologist-assessed malignancy risk rather than pathology-confirmed cancer. Code and experimental results are available at https://github.com/CT-DeepLearning-Team/CT-2D-2.5D-3D-DeepLearning.

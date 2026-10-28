@@ -1,0 +1,759 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-28T17:32:35.646868",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.35967v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/10/28/261035967v1-data-driven-discovery-of-lie-symmetries-and-first-integrals-with-latent-odes",
+      "source": "arxiv",
+      "title": "Data-driven Discovery of Lie Symmetries and First Integrals with Latent ODEs",
+      "authors": [
+        "Matt L. Wiemman",
+        "Peter Melchior"
+      ],
+      "authors_text": "Matt L. Wiemman, Peter Melchior",
+      "abstract": "We present LatentLieODE, a novel neural ODE method to discover linear Lie symmetries and first integrals of the learned dynamics from timeseries observations such as video inputs. It starts with an autoencoder, which learns a low dimensional representation of the observed system and then maps trajectories to decorrelated latent coordinates $z \\in \\mathbb{R}^d$. A bank of linear infinitesimal generators $\\mathbf{A}_k \\in \\mathbb{R}^{d \\times d}$ is fitted jointly against a differentiable Lie-bracket residual $\\mathbf{J}_f(z)\\mathbf{A}z - \\mathbf{A} f(z)$, while an MLP optimises the latent ODE $f(z) = \\mathrm{d}z/\\mathrm{d}t$ to reconstruct the observation-space timeseries. After suitable generators and $f$ are found, we fit a third network $H_φ$ to generate the first integral of the system. Across six benchmark systems (harmonic oscillator, simple and twin pendulums, Lotka-Volterra, pixel pendulum, sphere geodesics) we find each system's relevant symmetries, and the discovered invariants match ground-truth conserved quantities at $|ρ| \\geq 0.978$. On the sphere, the pipeline recovers a non-abelian $\\mathfrak{so}(3)$, certified by the negative-definite Killing form of its recovered structure constants. This work presents significant advances in data-driven discovery of symmetries and provides a new pathway for neural surrogates of dynamical systems.",
+      "url": "http://arxiv.org/abs/2610.35967v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35967v1",
+      "tldr": "LatentLieODE is a neural ODE framework that learns a decorrelated latent representation from time-series or video observations and jointly discovers linear Lie symmetry generators via a differentiable Lie-bracket residual and first integrals via a learned conservation network, accurately recovering known symmetries and conserved quantities across six benchmark systems.",
+      "detailed_reading": {
+        "motivation": "从含噪时间序列或视频观测中反推动力系统的连续对称性与守恒量，是物理与数据驱动建模的重要逆问题。现有方法多在观测空间搜索对称性，或以对抗方式学习群作用且预先固定群维数；而许多在观测空间中非线性的对称性，在合适坐标下会变为线性作用，因此需要一种能同时学习潜在坐标、线性Lie生成元与首次积分的端到端方法。",
+        "method": "LatentLieODE先用自编码器把状态或视频轨迹编码到低维潜空间，并通过基于批统计的中心化与保方差去相关构造潜坐标；再用MLP学习潜ODE f(z)=dz/dt，以重构观测时间序列并加入圆轨道与匀速惩罚促使周期运动呈作用量-角变量结构。随后联合训练一组过完备线性生成元A_k，最小化归一化Lie括号残差E[||J_f(z)A_k z-A_k f(z)||^2/(||f(z)||^2+ε)]，用前向模式Jacobian-向量积计算，并配合stop-gradient正交化、范数预算与谱间隙检测确定代数维数；最后用多个H_φ网络以cos^2(∇H,f)和Noether兼容项cos^2(sg[∇H],Az)学习首次积分。",
+        "result": "在谐振子、单摆与双摆、Lotka-Volterra、像素单摆和球面测地线六个基准系统上，方法均恢复出相关对称性，发现的守恒量与真值匹配达到|ρ|≥0.978；在球面上还恢复了非阿贝尔so(3)，并由其结构常数的负定Killing形式加以验证。生成元范数谱的乘性间隙使代数维数成为输出而非预设超参数，成对括号投影还用于检验闭合性。",
+        "conclusion": "该工作表明，仅凭时间序列或视频观测即可数据驱动地发现线性Lie对称性、代数结构及对应首次积分，为神经动力系统代理模型提供了新路径。其核心贡献在于可微Lie括号目标、谱间隙维数检测、尺度不变的首次积分学习及物理单位校准；但搜索空间限于学习潜坐标中可线性表示的对称性，且不假设Hamilton/Lagrangian结构，H_φ是首次积分而非生成动力学的Hamilton量。",
+        "key_details": "实现上，潜坐标去相关使用批方差与相关矩阵逆平方根，Newton-Schulz迭代并加ε=1e-8；生成元以过完备bank训练，stop-gradient正交化避免坍缩，范数预算含总范数约束与γ=0.05的逐生成元单位范数吸引；Lie括号残差在编码真实轨迹加小扰动的样本上以jax.jvp计算。训练时对称性项权重低于重构项并逐步升权，多首次积分用多头网络加梯度去相关；关键局限是仅搜索线性生成元、受潜空间宽度约束、对动作无表达性保证，且视频输入需以像素时间方差加权重构以抑制静态背景平凡解。"
+      },
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 5.404342644865241,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2610.35954v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/10/28/261035954v1-curriculum-driven-deep-reinforcement-learning-for-autonomous-far-range-rocket-landing",
+      "source": "arxiv",
+      "title": "Curriculum-Driven Deep Reinforcement Learning for Autonomous Far-Range Rocket Landing",
+      "authors": [
+        "Atin Chowdhury",
+        "Piyush Joshi"
+      ],
+      "authors_text": "Atin Chowdhury, Piyush Joshi",
+      "abstract": "Autonomous vertical landing of reusable launch vehicles is a critical yet formidable challenge in aerospace engineering, primarily due to highly nonlinear dynamics, stringent precision require- ments, and inherent environmental uncertainties. While reinforcement learning (RL) has emerged as a promising alternative to traditional model-based control, existing approaches frequently rely on flat training paradigms and highly simplified initial conditions, drastically limiting their real-world applicability. This paper proposes a comprehensive curriculum-driven deep reinforcement learning framework designed to master both far-range navigation and precision landing. By employing a three-stage curriculum augmented with a critic warm-up procedure and a rehearsal mechanism to prevent catastrophic forgetting, alongside a high-dimensional observation vector utilizing a full 3 X 3 rotation-matrix, the agent is trained to navigate from an initial horizontal distance of 1,000 to 1,500 units vastly farther than prior benchmarks before executing a soft touchdown. Crucially, we intro- duce a redesigned reward function that reduces unnecessary computational overhead and addresses limitations of earlier formulations, including poorly calibrated reward components and potentially conflicting optimization objectives. The redesigned function bounds the per-step reward magnitude by (O(1)), while its progress term accumulates the total distance closed over the trajectory. The available 100,000-episode results report a 99.98% success rate for the proposed policy and 68.31% for the baseline under the evaluation conditions. In the evaluation, the proposed policy retained 69.1% of its initial fuel capacity and achieved a mean final distance from the pad centre of 7.07 units, compared with 13.10 units for the baseline. Landing visualizations are available in Video 1 and Video 2.",
+      "url": "http://arxiv.org/abs/2610.35954v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35954v1",
+      "tldr": "This paper proposes a curriculum-driven deep reinforcement learning framework that uses a three-stage curriculum, critic warm-up, rehearsal to prevent forgetting, rotation-matrix observations, and a redesigned bounded reward to achieve far-range autonomous rocket navigation from 1,000–1,500 units and precise soft landing with a 99.98% success rate.",
+      "detailed_reading": {
+        "motivation": "可重复使用运载火箭垂直着陆面临强非线性动力学、严苛精度与环境不确定性；现有强化学习方法多采用平坦训练和高度简化的初始条件，横向远距离接近被弱化，难以外推到真实任务。本文因此要让智能体在1000至1500单位的初始水平距离下同时掌握远距离导航与精确软着陆。",
+        "method": "在继承基线常数的确定性60 Hz逐帧物理仿真器中，每3帧聚合为一次决策，状态为29维向量，含完整3×3旋转矩阵、机体坐标系位置与速度投影、高度误差、径向速度、制动余量和近台精细量；动作为推力二值、俯仰三值与滚转三值组成的18种联合离散动作。训练采用三阶段课程：远距离接近至悬停点、近台软下降、完整远距着陆，阶段间转移权重，并用critic预热和排练机制防止灾难性遗忘；奖励按阶段设计，远距阶段以距离进展、速度包络和推力对齐塑形，着陆阶段跟踪软下降参考速度并加入近地姿态、台距和水平速度惩罚。策略在仿真中通过试错优化，推理时仅用观测直接输出联合动作。",
+        "result": "在可用10万回合评估中，所提策略成功率99.98%，基线68.31%；最终距台中心平均7.07单位，基线13.10单位；保留初始燃料69.1%。这些指标表明在更远初始距离下仍能高成功率软着陆，并兼顾精度与燃料。",
+        "conclusion": "三阶段课程、critic预热与排练、旋转矩阵观测和重设计的O(1)奖励共同支撑远距自主着陆，显著优于基线；但结论基于确定性仿真与特定离散动作和奖励设定，真实环境鲁棒性与sim-to-real仍需验证。",
+        "key_details": "仿真常量包括重力-0.007、推力0.02、角阻尼0.985、倾斜上限80°、着陆高度13、台半径16、垂直速度不低于-0.15、水平速度不高于0.25、燃料1000（基线500）；成功需同时满足倾角不超过10°、距台中心不超过16、vz不低于-0.15、vh不高于0.25。奖励将每步幅值约束为O(1)，手工常数由15降至8，进展项累计轨迹闭合距离（阶段三约+9缩放回报），制动包络用v_cap=sqrt(2A_H d_h)+0.05，软下降参考v_des=-max(0.07,sqrt(2*0.0078*h))，阶段三关闭倾角惩罚。训练含权重转移、critic预热、排练混合；评估10万回合。局限是确定性仿真、无真实飞行与环境扰动验证、离散动作与燃料翻倍设定，奖励权重仍为人工设计。"
+      },
+      "affiliations": [
+        "Indian Institute of Information Technology, Sri City"
+      ],
+      "affiliations_text": "Indian Institute of Information Technology, Sri City",
+      "score": 5.272856291892624,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2610.36079v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/10/28/261036079v1-closed-loop-aware-planning-via-imitation-free-speed-scoring-for-end-to-end-autonomous-driving",
+      "source": "arxiv",
+      "title": "Closed-Loop Aware Planning via Imitation-Free Speed Scoring for End-to-End Autonomous Driving",
+      "authors": [
+        "Emad Aghajanzadeh",
+        "Thomas Schwarzfischer",
+        "Marc Kaufeld",
+        "Moritz Thoma",
+        "Ryan Pégoud",
+        "Manoj Rohit Vemparala",
+        "Pierpaolo Mori",
+        "Nael Fasfous",
+        "Johannes Betz",
+        "Daniel Mueller-Gritschneder",
+        "Ulf Schlichtmann"
+      ],
+      "authors_text": "Emad Aghajanzadeh, Thomas Schwarzfischer, Marc Kaufeld, Moritz Thoma, Ryan Pégoud, Manoj Rohit Vemparala, Pierpaolo Mori, Nael Fasfous, Johannes Betz, Daniel Mueller-Gritschneder, Ulf Schlichtmann",
+      "abstract": "End-to-end autonomous driving has predominantly relied on open-loop imitation learning for training, which presents two limitations. First, expert demonstrations show only one behavior per scenario, so the model cannot learn alternative valid behaviors and, in turn, cannot adapt to user-specified preferences at test time. Second, noise or ambiguity in these demonstrations can produce inconsistent, unreliable supervision for the end-to-end models. Driving is inherently multi-modal: multiple different behaviors can be valid responses to the same scene, and this diversity arises largely from speed rather than path. We introduce a planning paradigm that learns the path through imitation while scoring a set of candidate speeds across multiple criteria with a learned function supervised by physically grounded safety constraints. We realize this paradigm as Closed-Loop Aware Planning for Autonomous Driving (CLAP-AD), a plug-in planning head that integrates with existing end-to-end driving models and, to our knowledge, is the first to enable explicit test-time control over their speed selection without speed-conditioned training. On Bench2Drive-Speed, CLAP-AD sets a new state of the art Speed-Adherence Score of 82.53, topping TFv6, the strongest baseline on this metric, by 12.9 points while retaining strong closed-loop driving performance. On Bench2Drive, it improves driving score by +28.5 and +32.7 over UniAD and VAD, and on NAVSIM v2, built on real-world driving data, EPDMS by +6.1 over its backbone. Project page: https://clap-ad.github.io",
+      "url": "http://arxiv.org/abs/2610.36079v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36079v1",
+      "tldr": "The paper introduces CLAP-AD, a plug-in planning head for end-to-end autonomous driving that learns path prediction via imitation while scoring candidate speeds with safety-grounded multi-criteria functions, enabling explicit test-time speed control and improving closed-loop driving and speed-adherence performance.",
+      "detailed_reading": {
+        "motivation": "端到端自动驾驶主要依赖开环模仿学习，但专家示范每个场景只展示一种行为，模型无法学习其他同样有效的行为，也无法在测试时适应用户偏好；同时示范中的噪声或歧义会带来不一致监督。驾驶本质上是多模态的，同一场景存在多种有效行为，而这种多样性主要来自速度而非路径。因此需要将路径与速度分开，用不同目标学习：路径保留模仿学习，速度改用多准则评分。",
+        "method": "CLAP-AD是一个可插入现有端到端模型的规划头：先由统一规划查询、导航命令和上游运动/检测查询经MLP融合后送入GRU，自回归预测基于距离的路径点；再将路径表示分别送入碰撞、交通灯和停车标志三个评分分支，每个分支用路径MLP与准则相关上下文查询做交叉注意力，并由评分MLP输出各预定义速度类的安全logit。训练时路径用模仿学习，速度评分不用专家速度模仿，而由开环日志数据构造物理约束监督：碰撞目标取固定时域内沿预测路径与其他动态交通参与者的最小距离并做结构化路径增强，交通灯/停车标志目标由所需减速度a_req=v^2/(2d_stop)按舒适减速度与最大减速度分段生成。推理时各评分头输出独立安全分数而非概率分布，将全部准则超过阈值的速度类视为可行，再按用户目标速度选择最近可行类，无可行类则回退到0 m/s制动，最后由横向PID跟踪路径、纵向PID根据目标速度与当前车速生成油门/制动。",
+        "result": "在Bench2Drive-Speed上，CLAP-AD取得82.53的Speed-Adherence Score，比该指标最强基线TFv6高12.9分，并在每个骨干上提升速度依从性最多25.2分；其变体是对比中唯一达到70以上高可控区的方案。在Bench2Drive闭环评测中，相比UniAD和VAD分别提升驾驶分数+28.5和+32.7；在基于真实驾驶数据的NAVSIM v2上，相比LTFv6骨干提升EPDMS +6.1，而在TFv6上驾驶性能保持在基线数分以内。",
+        "conclusion": "结果表明，将路径模仿学习与多准则速度评分解耦，可在不进行速度条件训练的情况下为现有端到端模型提供显式测试时速度控制，并在提升可控性的同时保持较强闭环驾驶性能。该设计使安全评分可解释、可按准则归因失败，并作为可扩展插件规划头适配不同上游架构。",
+        "key_details": "实验覆盖Bench2Drive的1000段开环训练片段、44个CARLA场景和220条闭环测试路线，Bench2Drive-Speed的48条按Easy/Medium/Hard划分路线，以及NAVSIM v2真实数据伪仿真；指标包括DS、SR、Efficiency、SA和EPDMS，且因测量问题未报告Comfort。关键实现包括碰撞监督仅考虑动态参与者并排除静态物体、用路径增强提升碰撞监督多样性、交通灯/停车标志按所需减速度在舒适与最大减速度之间平滑衰减、速度分支前对路径表示做梯度截断以隔离速度评分对路径学习的影响。评分头将各速度类视为独立安全度量而非归一化概率，部署时依赖固定阈值筛选可行速度类并按用户请求选择最近类，因此无需改架构或重训练。局限性在于准则仅覆盖碰撞、交通灯和停车标志三类代表性安全因素，评分依赖上游检测/运动查询质量，且开环日志构造目标与固定阈值选择策略在更复杂交互场景中的鲁棒性仍需验证。"
+      },
+      "affiliations": [
+        "Technical University of Munich",
+        "BMW Group",
+        "TU Wien"
+      ],
+      "affiliations_text": "Technical University of Munich, BMW Group, TU Wien",
+      "score": 5.1315886283517065,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.36068v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/10/28/261036068v1-rollback-experience-backtracking-in-world-models-for-policy-improvement",
+      "source": "arxiv",
+      "title": "Rollback: Experience Backtracking in World Models for Policy Improvement",
+      "authors": [
+        "Jiayi Luo",
+        "Yang Zhang",
+        "Liliang Chen",
+        "Nan Wang",
+        "Chen Gao",
+        "Boxiang Qiu",
+        "Zhuoxuan Li",
+        "Baorui Peng",
+        "Chuankang Li",
+        "Yuxiang Yan",
+        "Si Liu",
+        "Qingyun Sun",
+        "Shuicheng Yan",
+        "Maoqing Yao",
+        "Jianxin Li",
+        "Guanghui Ren"
+      ],
+      "authors_text": "Jiayi Luo, Yang Zhang, Liliang Chen, Nan Wang, Chen Gao, Boxiang Qiu, Zhuoxuan Li, Baorui Peng, Chuankang Li, Yuxiang Yan, Si Liu, Qingyun Sun, Shuicheng Yan, Maoqing Yao, Jianxin Li, Guanghui Ren",
+      "abstract": "Action-conditioned world models offer a scalable alternative to costly real-world interaction for improving robot policies. However, existing world-model-based methods largely treat world models as forward-only surrogates of the physical environment, leaving untapped a capability no physical environment affords: rewinding to past decision points to explore counterfactual futures. We introduce Rollback, a policy improvement paradigm that turns world models from passive simulators into counterfactual engines: it rolls back to critical decision points, branches into alternative actions, and contrasts their outcomes to attribute success to individual decisions. This concentrates imagination where it matters most and distills counterfactual outcomes into fine-grained, action-level supervision without a separately learned value model. We build a scalable training system that unifies distributed world-model search with asynchronous real-robot execution, forming a self-reinforcing cycle: real-world experience continually sharpens the world model, and a sharper world model in turn drives further policy improvement. We term the world-model side of this cycle test-time physics grounding, a capability that hand-built physics simulators lack: while the world model serves as the training environment, real transitions from the policy it trains correct its dynamics through a lightweight LoRA pipeline. Experiments on three challenging real-world tasks show that Rollback improves success rates over the strongest baseline by an absolute 10.67%, 11.11%, and 11.85% on block extraction, ball tossing, and tabletop curling, respectively, while achieving more stable improvement throughout training. Although initialized from teleoperated demonstrations far below human level, Rollback surpasses the average success rate of human players on both ball tossing and tabletop curling within 8 hours of training.",
+      "url": "http://arxiv.org/abs/2610.36068v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36068v1",
+      "tldr": "**TLDR:** Rollback transforms action-conditioned world models from forward-only simulators into counterfactual engines that rewind to critical decision points, branch into alternative actions, and contrast outcomes to distill action-level supervision—yielding 10.67%, 11.11%, and 11.85% absolute success-rate gains on block extraction, ball tossing, and tabletop curling, and surpassing average human performance within 8 hours of training.",
+      "detailed_reading": {
+        "motivation": "动作条件世界模型为机器人策略改进提供了可扩展的替代真实交互的途径，但现有方法多把世界模型当作只能前向预测的物理环境代理，忽略了真实环境不具备的能力：回退到过去决策点并探索反事实未来。作者希望把想象集中在对任务成败最关键的决定上，从而更高效地改进策略。",
+        "method": "Rollback 将世界模型从被动模拟器转变为反事实引擎：先回退到关键决策点，分支采样替代动作，对比不同分支结果，把成功归因到具体动作决策，并将反事实结果蒸馏为动作级细粒度监督，无需单独学习价值模型。系统层面统一分布式世界模型搜索与异步真实机器人执行，形成真实经验持续修正世界模型、更准确世界模型再驱动策略改进的自增强循环；其中“测试时物理接地”用被训练策略产生的真实转移，通过轻量 LoRA 管线校正世界模型动力学。",
+        "result": "在三个真实世界任务上，Rollback 相对最强基线分别将成功率绝对提升 10.67%、11.11% 和 11.85%（方块提取、抛球、桌面冰壶），且训练过程中提升更稳定。虽然从远低于人类水平的遥操作演示初始化，Rollback 在抛球和桌面冰壶上训练 8 小时内即超过人类玩家平均成功率。",
+        "conclusion": "结果表明，把世界模型用作可回溯、可分支的反事实引擎，能够将想象聚焦于关键决策并提供有效的动作级监督，从而显著且稳定地改进真实机器人策略。分布式世界模型搜索与异步真实执行结合形成的自增强循环，为可扩展的策略改进提供了可行范式。",
+        "key_details": "方法关键点包括：以关键决策点回退和替代动作分支生成反事实轨迹，通过结果对比进行动作级归因和蒸馏，不依赖独立价值模型；训练系统采用分布式世界模型搜索与异步真实机器人执行，并用轻量 LoRA 由真实转移校正世界模型动力学。实验基于遥操作演示初始化，在三个真实任务上以成功率对比最强基线，并在 8 小时内达到超过人类平均表现；主要约束是系统效果依赖世界模型保真度、真实转移校正质量以及真实机器人异步执行成本。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.790774876541967,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.35965v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/10/28/261035965v1-generalization-in-learning-eyring-formula-and-predator-prey-model",
+      "source": "arxiv",
+      "title": "Generalization in Learning: Eyring Formula and Predator-prey Model",
+      "authors": [
+        "S. V. Kozyrev",
+        "I. A. Lopatin",
+        "Alexander Pechen"
+      ],
+      "authors_text": "S. V. Kozyrev, I. A. Lopatin, Alexander Pechen",
+      "abstract": "In this work, generalization in machine learning is investigated using a predator-prey model. We overview biological and chemical interpretation of the stochastic gradient Langevin dynamics and generative adversarial network. For a particular example of recovering an unknown function by a polynomial of fixed degree from a set of noisy data, the predator-prey model provides better approximation compared to the gradient descent method. Further, thermodynamical arguments, in particular Eyring formula, are used to explain grokking (delayed generalization) phenomenon in machine learning.",
+      "url": "http://arxiv.org/abs/2610.35965v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35965v1",
+      "tldr": "The paper uses a predator-prey model and thermodynamic Eyring-formula arguments to explain improved generalization in stochastic gradient learning and GANs, the delayed-generalization “grokking” phenomenon via entropy-driven motion on a zero-risk manifold, and better polynomial approximation than gradient descent in a noisy-data recovery example.",
+      "detailed_reading": {
+        "motivation": "论文关注机器学习中的过拟合与泛化问题，尝试用统计物理和生物捕食者-猎物模型解释随机梯度Langevin动力学、GAN以及grokking（延迟泛化）现象。其核心动机是借助宽（平坦）极小值、算法稳定性和Eyring公式，说明噪声随机优化为何倾向选择泛化更好的解，并给出可操作的过拟合抑制思路。",
+        "method": "作者将随机梯度下降建模为以经验风险为势能的随机梯度Langevin动力学SDE，并用Fokker-Planck方程、Gibbs分布和Eyring反应速率公式分析宽极小值选择；将GAN的判别器与生成器分别视为猎物与捕食者，写成两个耦合SDE，用捕食者追逐猎物解释判别器被推离窄极大值。数值部分以带噪声数据恢复未知函数f(x)=sin(πx)为例，用固定次数多项式作为单层网络模型，以训练集MSE为损失，比较普通梯度下降与捕食者-猎物方法的训练/测试MSE，并考察不同多项式次数下的过拟合与泛化表现。",
+        "result": "理论分析表明，Eyring公式e^{-β(F1-F0)}使高熵宽势阱具有更低自由能和更高占据概率，从而解释随机梯度优化的更好泛化；grokking被分解为快速记忆阶段（带漂移扩散，距离约随时间t增长）和沿零风险流形的慢速泛化阶段（零势Brownian运动，距离约随√t增长），与实验中约10^3步记忆、约10^6步泛化的时间尺度相符。GAN中生成器作为捕食者推动判别器离开窄极大值，可降低过拟合。数值回归实验中，摘要报告捕食者-猎物模型在固定次数多项式恢复噪声数据时相较梯度下降取得更好的逼近/泛化表现。",
+        "conclusion": "论文结论是，随机梯度Langevin动力学、Eyring公式和捕食者-猎物动力学为理解泛化、过拟合控制及grokking提供了统一的物理/生物视角；宽极小值与零风险流形的高熵区域对应更稳定、泛化更好的解，捕食者-猎物式优化可作为一种抑制窄极小值的过拟合控制策略。",
+        "key_details": "关键实现包括：训练集N1=20、测试集N2=10，噪声为标准差0.2的高斯噪声，候选模型为d=1,3,5,7次多项式，损失为训练MSE并以测试MSE评价，梯度下降与捕食者-猎物方法采用相同步数和学习率。理论部分依赖温度θ、逆温度β、自由能F=E-θS、Eyring过渡速率以及零风险流形熵随样本量近似线性下降等假设；GAN分析使用判别器/生成器参数空间上的耦合SDE。局限在于数值验证仅针对小型一维正弦函数回归和低阶多项式，grokking解释含唯象假设，且摘要未给出完整定量表格与所有超参数。"
+      },
+      "affiliations": [
+        "Ivannikov Institute for System Programming of the Russian Academy of Sciences",
+        "Steklov Mathematical Institute of Russian Academy of Sciences"
+      ],
+      "affiliations_text": "Ivannikov Institute for System Programming of the Russian Academy of Sciences, Steklov Mathematical Institute of Russian Academy of Sciences",
+      "score": 4.646582522109405,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.35877v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/10/28/261035877v1-calibrated-for-which-policy-conformal-uncertainty-for-fixed-world-models-under-intervention",
+      "source": "arxiv",
+      "title": "Calibrated for Which Policy? Conformal Uncertainty for Fixed World Models Under Intervention",
+      "authors": [
+        "Ayush Mittal",
+        "Dhruv Gupta"
+      ],
+      "authors_text": "Ayush Mittal, Dhruv Gupta",
+      "abstract": "Changing a deployment policy can invalidate a world model's uncertainty while leaving the physical transition mechanism and predictor unchanged. For one-step prediction, if source and target laws share the conditional mechanism $P(Y|X)=Q(Y|X)$, then the intervention is identified by the pre-outcome change of measure $w(X)=dQ_X/dP_X$. For policy-controlled dynamics this ratio factors into state-occupancy and action-propensity terms. Weighted conformal calibration transports marginal coverage to the target law; with an estimated ratio $\\hat w$, $P_Q\\{Y \\in C_{\\hat w}(X)\\} \\ge 1-α-TV(Q,\\hat Q) \\ge 1-α-E_P|w-\\hat w|$. Population log-loss regret for a source-versus-target domain classifier bounds the same ratio error. If $h$ is its clipped target posterior, $ρ$ is the target-domain prior, and $Δ(h)$ is population log-loss regret, then $E_P|w-\\hat w_h| \\le (1/(ργ))\\sqrt{Δ(h)/2}$. An exact cancellation improves the dependence from a generic odds-map bound of order $γ^{-2}$ to $(ργ)^{-1}$. Our experiments use a released DINO-feature world model and physical Franka trajectories. Under the strongest controlled state-action shift, ordinary 90% conformal sets cover 55.0%, whereas oracle and learned-ratio calibration cover 91.0% and 90.9%. The learned surrogate remains within 0.9% total variation of the target law. Calibration is relative to the deployment law: the model can remain fixed while calibration follows the intervention. We machine-check in Lean 4 the finite-support algebraic and causal identities used in the classifier-regret argument, including its coverage-composition step.",
+      "url": "http://arxiv.org/abs/2610.35877v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35877v1",
+      "tldr": "The paper shows that fixed world models under policy intervention must recalibrate uncertainty to the deployment law using weighted conformal prediction with an intervention-induced density ratio, for which it derives coverage guarantees and validates them empirically under controlled policy shifts.",
+      "detailed_reading": {
+        "motivation": "部署策略变化会在物理转移机制和预测器不变的情况下使世界模型原有的不确定性校准失效，因为状态—动作查询分布已从采集律转向目标律。论文要解决的是固定世界模型在策略干预下如何按部署律而非采集律给出有效覆盖。",
+        "method": "在单步预测且源域与目标域共享条件机制 P(Y|X)=Q(Y|X) 时，用结果前密度比 w(X)=dQ_X/dP_X 识别干预；对策略控制动力学，该比值分解为状态占用比与动作倾向比。若比值未知，则用源/目标协变量训练域分类器得到后验 h，并用裁剪参数 gamma 和目标域先验 rho 构造估计比值，再做加权保形校准：保持世界模型不重训，仅用源域校准分数和测试点权重计算加权分位数。理论部分给出目标律覆盖下界 P_Q{Y in C_w(X)} >= 1-alpha-TV(Q,Qhat) >= 1-alpha-E_P|w-what|，并用分类器的总体对数损失遗憾 Delta_log(h) 控制比值误差 E_P|w-what_h| <= 1/(rho gamma) sqrt(Delta_log(h)/2)。",
+        "result": "在发布的 DINO 特征世界模型和真实 Franka 轨迹实验中，最强受控状态—动作偏移下，普通 90% 保形集仅覆盖 55.0%，而 oracle 比值校准和学习的比值校准分别达到 91.0% 与 90.9%。学习得到的替代目标分布与目标律的总变差保持在 0.9% 以内，说明估计比值足够接近 oracle 时覆盖恢复接近名义水平。",
+        "conclusion": "校准必须相对于部署策略定义：世界模型可以固定不变，而校准应随干预引起的查询分布变化而迁移。只要共享条件机制且比值可估，加权保形校准即可把源域覆盖保证输运到目标部署律，并用比值误差显式付出覆盖惩罚。",
+        "key_details": "关键实现是用源/目标域分类器估计结果前密度比，总体对数损失遗憾通过精确测度变换恒等式控制比值误差；裁剪下界 gamma 会影响有效样本量与总变差，从而形成覆盖与方差/稳定性的权衡。实验数据为物理 Franka 轨迹和 DINO 特征世界模型，评估的是单步预测的边际覆盖而非条件覆盖，依赖重叠/绝对连续性与共享条件机制假设。论文还在 Lean 4 中机器检查了有限支撑下的代数与因果恒等式，包括分类器遗憾论证中的覆盖复合步骤；主要局限是单步、边际覆盖、比值估计误差和裁剪带来的保守性。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.57320261974245,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.36075v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/10/28/261036075v1-jaxnasium-embracing-pytrees-for-any-agent-cross-suite-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Jaxnasium: Embracing PyTrees For Any-Agent, Cross-Suite Reinforcement Learning",
+      "authors": [
+        "Koen Ponse",
+        "Aske Plaat",
+        "Thomas M. Moerland"
+      ],
+      "authors_text": "Koen Ponse, Aske Plaat, Thomas M. Moerland",
+      "abstract": "Hardware-accelerated reinforcement learning in JAX has gained rapid popularity in recent years and has proven to be a successful method of scaling online reinforcement learning. The resulting ecosystem, however, is fragmented: environment suites define their own interfaces, and algorithm implementations are typically written for a single suite, a single type of space, and either JAX-native or host-based environments. Here we present Jaxnasium, a library for JAX-based reinforcement learning, aiming to make the field more accessible. Jaxnasium represents observation and action spaces as PyTrees, and uses this structure to build networks and support multi-agent processing. Through this, its near-single-file implementations run on discrete, continuous, image, and composite spaces, as well as in multi-agent environments, without any changes to the algorithm code. The same files serve as readable, research-friendly algorithms, as well as importable algorithms for more applied workloads. Through a minimal Gymnasium-style interface and wrappers for 11 suites, over 300 environments are available on which a small PPO implementation with default hyperparameters is able to run. Additionally, through a simple wrapper, we can run Gymnasium and EnvPool environments with the same algorithm and training loop, with no performance loss compared to architectures specifically built for training JAX algorithms on host-based environments. Jaxnasium further provides tools for multi-seed evaluation, hyperparameter sweeps, and project scaffolding. Jaxnasium is open-sourced at https://github.com/ponseko/jaxnasium",
+      "url": "http://arxiv.org/abs/2610.36075v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36075v1",
+      "tldr": "**TLDR:** Jaxnasium is a JAX-based reinforcement learning library that uses PyTrees to represent observation and action spaces, enabling the same near-single-file algorithm implementations to run unchanged across discrete, continuous, image, composite, multi-agent, and host-based environments across 11 suites and 300+ environments.",
+      "detailed_reading": {
+        "motivation": "JAX 硬件加速在线强化学习近年快速发展，但生态碎片化严重：不同环境套件定义各自接口，算法实现通常只针对单一套件、单一空间类型，并且区分 JAX 原生环境与 host-based 环境。Jaxnasium 旨在通过统一抽象降低使用门槛，使同一算法代码能够跨环境套件、跨空间类型和跨智能体设置复用。",
+        "method": "Jaxnasium 将观测空间和动作空间统一表示为 PyTree，并利用该结构自动构建网络及支持多智能体处理；算法以接近单文件的形式实现，因此无需修改算法代码即可运行在离散、连续、图像和复合空间以及多智能体环境中。库提供最小化的 Gymnasium 风格接口，并为 11 个环境套件提供封装，合计开放 300 多个环境；同一算法和训练循环可通过简单封装运行 Gymnasium 与 EnvPool 的 host-based 环境。此外还提供多种子评估、超参数扫描和项目脚手架工具。",
+        "result": "论文展示了一个小型 PPO 实现在默认超参数下即可在 300 多个可用环境上运行，体现了跨套件、跨空间的通用性。对于 Gymnasium 和 EnvPool 等 host-based 环境，Jaxnasium 通过简单封装即可用同一算法和训练循环训练，且与专门为在 host-based 环境上训练 JAX 算法而构建的架构相比没有性能损失。",
+        "conclusion": "Jaxnasium 通过 PyTree 统一空间表示和轻量接口，缓解了 JAX 强化学习生态在环境接口、空间类型和 host/JAX 环境之间的碎片化问题。它同时提供可读、研究友好的算法实现和可导入的算法组件，兼顾研究与实际应用负载，并支持多智能体与跨套件训练。",
+        "key_details": "关键实现点是把观测和动作空间编码为 PyTree，并以此驱动网络构建和多智能体批处理；算法接近单文件，避免针对空间类型写分支。系统通过 11 个套件封装提供 300 多个环境，并用简单 wrapper 将 Gymnasium/EnvPool 环境接入相同训练循环。评估侧提供多种子评估和超参数扫描，默认超参数的小型 PPO 被用作通用可运行性验证；但论文主要强调接口统一与可运行性，并未声称在所有环境上达到最优性能，且 host-based 封装虽无性能损失，整体生态覆盖仍依赖所封装的 11 个套件。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.336437400067129,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2610.35972v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/10/28/261035972v1-multiple-leak-localization-in-water-distribution-networks-through-graph-neural-networks",
+      "source": "arxiv",
+      "title": "Multiple Leak Localization in Water Distribution Networks through Graph Neural Networks",
+      "authors": [
+        "Arvin Ajoodani",
+        "Sara Nazif",
+        "Pouria Ramazi"
+      ],
+      "authors_text": "Arvin Ajoodani, Sara Nazif, Pouria Ramazi",
+      "abstract": "Leak localization in water distribution networks is challenging when multiple leaks occur simultaneously, particularly under sparse monitoring. Existing data-driven methods often assume a single or predefined number of leaks or require extensive enumeration of leak combinations. This study proposes a graph neural network (GNN) model that localizes a variable number of simultaneous leaks without specifying the leak count in advance or exhaustively generating every possible combination of leak locations for training. The model is evaluated on two benchmark networks of different sizes, the 31-node Hanoi network and the larger 92-node NET3 network, under variable demand, sparse pressure-sensor coverage, variable leak magnitudes, and varying numbers of simultaneous leaks. The GNN outperforms multilayer perceptron, support vector machine, K-nearest neighbors, and random forest classifiers by up to 12% and 20% in accuracy respectively in Hanoi and NET3 networks. Consistent performance across both networks supports the scalability of the proposed approach.",
+      "url": "http://arxiv.org/abs/2610.35972v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35972v1",
+      "tldr": "A graph neural network localizes a variable number of simultaneous leaks in water distribution networks without requiring the leak count in advance or exhaustive leak-combination training, outperforming conventional classifiers on benchmark networks under sparse monitoring.",
+      "detailed_reading": {
+        "motivation": "水分配网络同时发生多处泄漏时定位困难，稀疏监测下尤其突出；现有数据驱动方法常假设单一或预先给定泄漏数量，或需穷举泄漏位置组合，随候选节点增加计算不可行且泛化受限。论文旨在不预先指定泄漏数、不穷举所有组合的条件下定位可变数量的同时泄漏。",
+        "method": "论文用EPANET生成泄漏场景：随机选择1至N个候选节点同时泄漏、随机时间步，需求乘0.8至1.2随机因子，按Q=CP^0.5的发射器公式为每个泄漏独立赋0<C≤10，并保留总漏量小于同时段基线总流入30%的场景；目标为每个候选节点的二值多标签向量。输入仅取少量压力传感器，先由水头h=p+z和反管长边权构造加权图拉普拉斯，固定传感器水头并最小化连接节点加权差以插值未观测节点水头，再转压力形成全网节点压力特征；随后用GCN做节点级多标签分类，通过多层邻域聚合融合拓扑与水力信息，输出每个节点泄漏概率。GCN以BCE损失和Adam训练，按训练损失10次迭代改进小于1%收敛；数据按80/20划分开发集与测试集，在开发集内用五折交叉验证按平均F1选超参，测试集仅最终评估，并以交叉验证F1学习曲线连续两次数据增量提升小于0.01作为停止生成场景的准则；MLP、SVM、KNN、RF使用相同输入和目标进行对比。",
+        "result": "在31节点Hanoi网络和92节点NET3网络上，GCN在变化需求、稀疏压力传感器覆盖、变化泄漏强度及不同同时泄漏数下均优于MLP、SVM、KNN和RF，准确率在Hanoi最高提升12%、在NET3最高提升20%。实验使用Hanoi 2000至22000个场景、NET3 4000至44000个场景，并以节点级precision、recall、F1和accuracy评估，两个规模网络表现一致支持方法可扩展性。",
+        "conclusion": "该研究表明，基于GCN的节点级多标签框架可在不预先指定泄漏数量、不穷举泄漏位置组合的情况下定位可变数量的同时泄漏，并能利用网络拓扑在稀疏传感器条件下重建和传播水力信息。跨两个不同规模基准网络的一致优势说明该思路对更复杂水分配网络具有应用潜力。",
+        "key_details": "关键实现包括：泄漏数从1到全部候选节点随机采样以覆盖多标签配置而非复现真实频率；泄漏仅在随机选定的单个时间步活跃，未研究泄漏持续时间；需求不确定性采用±20%均匀扰动；泄漏强度用发射器系数0<C≤10且指数0.5，阈值按总漏量小于30%基线流入过滤。输入先验是反管长加权图的平滑性，通过拉普拉斯分块求解未观测水头，传感器位置人为选定为4个Hanoi节点和11个NET3节点。训练损失为所有候选节点和场景上的BCE，超参包括GCN层数1至7、每层隐神经元8至256、MLP层数与神经元、KNN的K、SVM的C/核/多项式阶数、RF树数与最大深度。局限包括仅两个基准网络、传感器布设固定、C范围和30%阈值含工程判断、场景随机采样不反映真实泄漏频率、未考虑泄漏时长，且指标为节点级平均。"
+      },
+      "affiliations": [
+        "University of Tehran",
+        "University of Calgary"
+      ],
+      "affiliations_text": "University of Tehran, University of Calgary",
+      "score": 4.052708492982758,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.36097v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/10/28/261036097v1-minimax-optimal-small-loss-bounds-for-online-linear-optimisation-on-ellp-balls",
+      "source": "arxiv",
+      "title": "Minimax-Optimal Small-Loss Bounds for Online Linear Optimisation on $\\ell_p$ Balls",
+      "authors": [
+        "Jack J. Mayo"
+      ],
+      "authors_text": "Jack J. Mayo",
+      "abstract": "We study full-information online linear optimisation on the unit $\\ell_p$ ball in $\\mathbb{R}^d$, for fixed $2\\le p<\\infty$ and losses of dual norm at most one. Let $Δ_T$ denote the cumulative loss of the best fixed action above each round's minimum. A follow-the-regularised-leader (FTRL) algorithm attains, on every loss sequence and without knowing $T$ or $Δ_T$, regret $O_p(1+\\min\\{Δ_T^{1-1/p},\\, d^{1/2-1/p}\\sqrt{Δ_T}\\})$. Matching lower bounds show that this rate is minimax for each fixed $p$, and its constant $(2+o(1))p/\\log p$ is optimal as $p\\to\\infty$ among guarantees uniform in $d$ and $T$. The algorithm uses a bounded radial regulariser and switches at most once to its quadratic augmentation. On some paths where follow-the-leader (FTL) has regret one, its regret grows with $T$. A switching extension keeps the sharp constant and also guarantees $\\mathrm{Reg}_T\\le 2\\,\\mathrm{Reg}_T^{\\mathrm{FTL}}$. For i.i.d. losses whose mean has no zero coordinates, we compute the exact $\\log T$ coefficient of the expected regret, which separates FTL's variance term from the bias of the regulariser.",
+      "url": "http://arxiv.org/abs/2610.36097v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36097v1",
+      "tldr": "The paper constructs an anytime follow-the-regularised-leader (FTRL) algorithm for online linear optimisation on \\(\\ell_p\\) balls that, without knowing the horizon or the cancellation slack \\(\\Delta_T\\), achieves the minimax-optimal small-loss regret \\(O_p\\!\\left(1+\\min\\{\\Delta_T^{1-1/p},\\,d^{1/2-1/p}\\sqrt{\\Delta_T}\\}\\right)\\), with matching lower bounds, a sharp \\(p\\to\\infty\\) constant, and a switching extension that also guarantees regret at most twice that of follow-the-leader.",
+      "detailed_reading": {
+        "motivation": "论文研究ℓp球上的全信息在线线性优化，目标是在不预知时间跨度T和最优固定动作累计损失（以小损失/抵消松弛Δ_T刻画）的情况下，取得同时覆盖多项式分支与维度相关平方根分支的最优后悔界。已有自适应正则化可达到依赖T的最优worst-case率，但能否用Δ_T替代T且不损失dimension crossover与常数最优性尚不明确。",
+        "method": "在B_p^d上设定每轮先选x_t、再观测满足‖θ_t‖_r≤1的全损失向量，并将损失平移为ℓ^+(x,θ)=‖θ‖_r+⟨x,θ⟩，用Δ_T=Σ‖θ_t‖_r−‖Σθ_t‖_r衡量最优动作相对每轮最小损失的累计松弛。算法为standalone FTRL：先用有界径向正则化构造其稳定性项可由学习者自身shifted loss支付的势函数，得到Δ_T^{1−1/p}分支；再加入该正则化的二次增广，得到d^{1/2−1/p}√Δ_T分支，并根据累计shifted loss自适应调节、至多从径向形式切换到增广形式一次，无需知道T或Δ_T。另设切换扩展，在FTL与standalone FTRL之间切换以控制平滑代价，并用i.i.d.分析计算期望后悔的log T系数。",
+        "result": "证明standalone FTRL对任意损失路径达到Reg_T≤O_p(1+min{Δ_T^{1−1/p},d^{1/2−1/p}√Δ_T})，且不需知道T或Δ_T；匹配下界表明该率对每个固定p是minimax的，且当p→∞时前导常数(2+o(1))p/log p在d、T一致保证中最优。切换扩展在保持该sharp常数和小损失界的同时额外保证Reg_T≤2Reg_T^{FTL}，无重启或加性比较项；对均值为非零坐标的i.i.d.损失，给出期望后悔的精确log T系数，分离FTL方差项与正则化偏差。",
+        "conclusion": "论文给出了ℓp球上固定p≥2的minimax最优小损失后悔界，说明通过一次切换的有界径向/二次增广FTRL即可实现horizon-free且常数渐近最优的保证。切换版本同时限制平滑相对FTL的路径代价，并给出随机损失下log T系数的可解释分解，为ℓp在线优化的小损失与FTL竞争问题提供了较完整刻画。",
+        "key_details": "关键实现是shifted loss、cancellation slack Δ_T及恒等式S_t=Δ_t+Reg_t，径向正则化在边界有有限值但斜率发散，二次增广提供维度上限；切换阈值由累计shifted loss触发，切换时势能增加不超过切换前近似误差，sharp常数还需半径相关FTL界和小slack修正。下界与上界联合确定minimax率，切换扩展不重启也不重置累计损失向量；随机部分要求i.i.d.且均值无零坐标以得到精确log T系数。适用范围为固定有限p≥2、已知损失范数界并可使用精确support/action oracle，FTL在某些路径仅有1后悔而standalone FTRL可增至√T/16（p=2）或log T量级（p>2），需切换扩展来消除这一平滑代价。"
+      },
+      "affiliations": [
+        "University of Amsterdam",
+        "Kurtos.ai"
+      ],
+      "affiliations_text": "University of Amsterdam, Kurtos.ai",
+      "score": 4.015282747999917,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.36082v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/10/28/261036082v1-how-much-does-the-hint-matter-scope-conditions-for-hindsight-self-distillation-in-financial-reasoning",
+      "source": "arxiv",
+      "title": "How Much Does the Hint Matter? Scope Conditions for Hindsight Self-Distillation in Financial Reasoning",
+      "authors": [
+        "Johnny Yu",
+        "Cyril Gorlla"
+      ],
+      "authors_text": "Johnny Yu, Cyril Gorlla",
+      "abstract": "Financial institutions operating under data-residency constraints are restricted to open-weight models small enough to locally host, which trail frontier systems on multi-step quantitative reasoning. On-policy distillation narrows such gaps by supervising a student on its own rollouts, but traditional OPD requires a strong external teacher, and on-policy self-distillation (OPSD) conditions on a full reference solution. We ask how much of that signal is necessary. We present Fin-SD, a localized hindsight self-distillation recipe for multi-step reasoning. Given a problem the student fails, the student itself identifies the first incorrect reasoning step and writes a short critique of that step. We truncate the student's trajectory immediately before the error (aiming to obtain a correct prefix), condition a frozen copy of the student on the same prefix plus the hint, and distill that hint-conditioned teacher into the student over a short rollout under reverse KL. No external model contributes a gradient. We apply Fin-SD to GPT-OSS-20B on a custom multi-step financial reasoning benchmark that requires deriving formula inputs from realistic scenarios via accounting conventions. We find: (i) replacing the critique with a generic-feedback control matches Fin-SD's entire 3.03 pp accuracy gain over the base model on the FinanceReasoning Hard subset, suggesting the gain comes from where supervision is applied, not hint content; (ii) the model writing the hint does not need to be stronger than the model receiving it: hints from same-family GPT-OSS-120B, at roughly 6x the parameters, yield no materially greater benefits than self-written hints; and (iii) Fin-SD matches on-policy self-distillation from full reference solutions on accuracy while generating 9.5% fewer tokens. With Fin-SD, general reasoning on MMLU-Pro and a fourteen-metric compliance audit on FinTrust show no material regression.",
+      "url": "http://arxiv.org/abs/2610.36082v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36082v1",
+      "tldr": "Fin-SD is a hindsight self-distillation method that localizes a student model’s first reasoning error and distills a hint-conditioned frozen copy of itself over a short truncated rollout, showing that most gains come from where supervision is applied rather than hint content, that no stronger hint-writing model is needed, and that it matches full-reference on-policy self-distillation with fewer tokens and no material compliance or general-reasoning regression.",
+      "detailed_reading": {
+        "motivation": "金融机构受数据驻留约束，只能本地部署小型开放权重模型，而这些模型在多步定量金融推理上落后于前沿系统；传统on-policy蒸馏依赖强外部教师，on-policy自蒸馏又依赖完整参考解。本文因此追问：在失败轨迹上做事后自蒸馏时，究竟需要多少提示信号，以及该方案能否在提升能力的同时保持合规与成本可接受。",
+        "method": "Fin-SD先让GPT-OSS-20B在自建多步金融推理题上采样，判错后用同一学生权重的冻结提示模型读取问题、失败轨迹和标准答案，定位首个错误片段并生成简短批评及错误类型；算术或舍入失误不产生梯度。随后在错误前截断得到学生自身前缀，让冻结的教师副本在同一前缀上额外接收提示，学生在100 token的短rollout上按逐token反向KL对齐教师分布，仅rollout位置计入损失；每个epoch重新挖掘失败集并重冻教师，用梯度累积和AdamW更新，全程无外部模型提供梯度。",
+        "result": "在FinanceReasoning Hard子集上，Fin-SD相对基座提升3.03个百分点；把批评替换为通用反馈的对照取得3.36个百分点，与Fin-SD的增益相当，说明增益主要来自监督施加的位置而非提示内容。由参数量约6倍的GPT-OSS-120B写提示并未显著优于学生自写提示；Fin-SD在准确率上匹配基于完整参考解的OPSD，同时评测生成token少9.5%，并在预算内完成率上方向性高2.44个百分点。MMLU-Pro通用推理和FinTrust十四项合规审计未见实质回退。",
+        "conclusion": "结果表明，在受数据驻留约束的金融推理场景中，局部化的事后自蒸馏可在不引入更强外部教师的情况下缩小能力差距；关键不是完整参考解或具体提示内容，而是准确找到首个推理错误并在学生自身前缀上施加密集监督。Fin-SD提供了一个兼顾准确率、token效率与合规风险的可落地后训练方案，但其结论仍受单一模型、自建基准和有限合规审计的约束。",
+        "key_details": "关键实现包括：以FinanceReasoning函数库的3,133个函数构造需按会计惯例推导公式输入的语料，并在238题Hard子集评估；错误定位通过让模型复述错误片段而非精确token位置来截断；L=100、反向KL、前缀掩码、教师按上一epoch学生权重重冻、失败集每epoch重挖；算术失误只不计梯度但仍计为错误，错误类型分类器非正式审计约96%准确；还做了通用反馈、120B提示模型及KL方向的消融，并用MMLU-Pro和FinTrust检查副作用。"
+      },
+      "affiliations": [
+        "CTGT",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "CTGT, University of California, Berkeley",
+      "score": 4.014335397742842,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.35963v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035963v1-condition-enhanced-generative-adversarial-network-for-aerodynamic-configuration-design-of-commercial-aircraft",
+      "source": "arxiv",
+      "title": "Condition-Enhanced Generative Adversarial Network for Aerodynamic Configuration Design of Commercial Aircraft",
+      "authors": [
+        "Youzheng Yu",
+        "Jiaqing Kou",
+        "Weiwei Zhang"
+      ],
+      "authors_text": "Youzheng Yu, Jiaqing Kou, Weiwei Zhang",
+      "abstract": "Generative machine learning provides an end-to-end framework for aerodynamic design optimization by generating diverse aerodynamic configurations conditioned on target performance. However, the generated designs may violate geometric constraints or deviate from the prescribed aerodynamic performance. Therefore, we propose a Condition-Enhanced Generative Adversarial Network (CEGAN) that embeds geometric and aerodynamic information into the generative process. A condition-informed loss function is developed by combining a geometry-guided feasibility penalty with an aerodynamic performance penalty evaluated by surrogate models trained on the same dataset. Additionally, an output filtering mechanism discards infeasible designs using these surrogate models, ensuring compliance with prescribed conditions. The method is demonstrated on aircraft configurations similar to the Cessna Citation X. Each configuration is represented by 28 shape parameters, whose aerodynamic performance is evaluated using OpenVSP. Interpolation and extrapolation tests are conducted for different network architectures and conditioning strategies. Compared with the baseline model, CEGAN reduces the average generation error by at least 36% for interpolated conditions and by at least 46% under extreme extrapolation conditions, while successfully producing diverse and physically feasible designs that extend beyond the training distribution. Therefore, the proposed CEGAN framework offers a robust and accurate tool for rapid aerodynamic configuration exploration during the conceptual design phase.",
+      "url": "http://arxiv.org/abs/2610.35963v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35963v1",
+      "tldr": "The paper proposes a Condition-Enhanced Generative Adversarial Network (CEGAN) that embeds geometric feasibility and surrogate-evaluated aerodynamic performance into the generative process and filters infeasible outputs, enabling more accurate and diverse commercial aircraft configuration designs that satisfy prescribed performance conditions, especially under extrapolation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Key Laboratory of Aircraft Configuration Design",
+        "Northwestern Polytechnical University"
+      ],
+      "affiliations_text": "National Key Laboratory of Aircraft Configuration Design, Northwestern Polytechnical University",
+      "score": 3.839507776015674,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.36011v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/10/28/261036011v1-e05-from-reconstructive-to-future-predictive-3d-foundations-for-robotic-world-action-modeling",
+      "source": "arxiv",
+      "title": "E0.5: From Reconstructive to Future-Predictive 3D Foundations for Robotic World-Action Modeling",
+      "authors": [
+        "X-Era AI Lab Team",
+        ":",
+        "Jianhao Lai",
+        "Zhihao Zhan",
+        "Zhiquan Liao",
+        "Qichang Li",
+        "Shubin Chen",
+        "Zhiyuan Liu",
+        "Hongsen Lei",
+        "Jianman Lin",
+        "Xiaoxin Lin",
+        "Ke Gong",
+        "Baiyue Gu",
+        "Shiming Chen",
+        "Junlin He",
+        "Longqi Yang",
+        "Junrong Xiao",
+        "Haolin Luo",
+        "Xiaojuan Su",
+        "Jianfeng Li",
+        "Yu Luo",
+        "Xu Sun",
+        "Likui Zhang",
+        "Jusheng Zhang",
+        "Qinhan Lyu",
+        "Tianshui Chen",
+        "Liang Lin",
+        "Guangrun Wang"
+      ],
+      "authors_text": "X-Era AI Lab Team, :, Jianhao Lai, Zhihao Zhan, Zhiquan Liao, Qichang Li, Shubin Chen, Zhiyuan Liu, Hongsen Lei, Jianman Lin, Xiaoxin Lin, Ke Gong, Baiyue Gu, Shiming Chen, Junlin He, Longqi Yang, Junrong Xiao, Haolin Luo, Xiaojuan Su, Jianfeng Li, Yu Luo, Xu Sun, Likui Zhang, Jusheng Zhang, Qinhan Lyu, Tianshui Chen, Liang Lin, Guangrun Wang",
+      "abstract": "World-action models (WAMs) offer a promising framework for embodied intelligence, yet mainstream approaches remain centered on video foundation models or vision-language models. Even when geometric features extracted by 3D models such as VGGT are incorporated, they are typically passed into a video model or VLM that serves as the primary backbone, leaving 3D geometry as an auxiliary input or prediction target rather than the native foundation for world modeling. We present E0.5, a geometry-native world-action model built directly on 3D foundation models. E0.5 introduces two key innovations. First, it adopts a 3D foundation model as the primary backbone, making 3D geometry the native representation for both world modeling and action prediction. Second, it explicitly predicts future 3D states together with actions, enabling the model to capture geometric world dynamics beyond action-only modeling or future video prediction. Experiments on RoboTwin 2.0 first demonstrate the effectiveness of E0.5 without embodied-data pretraining, achieving success rates of 89.90\\% and 50.09\\% under clean and randomized settings, respectively. Building on these results, we further pretrain E0.5 on more than 160k robot trajectories from AgiBotWorld-Beta, jointly learning robot actions and future geometry within the pretrained 3D foundation. This embodied pretraining improves mean real-world manipulation success rates by approximately 15 and 7 percentage points on AgileX Piper and Zerith H1, respectively. Together, these results demonstrate the potential of geometry-native foundations to acquire robot interaction knowledge and transfer it to physical manipulation. E0.5 embodies this geometry-native approach as a member of the VWA family of world-action models.",
+      "url": "http://arxiv.org/abs/2610.36011v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36011v1",
+      "tldr": "**TLDR:** E0.5 is a geometry-native world-action model that uses a 3D foundation model as its primary backbone and jointly predicts future 3D geometry and robot actions, improving manipulation performance and out-of-distribution generalization over video- or VLM-centered world-action models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "X-Era.AI"
+      ],
+      "affiliations_text": "X-Era.AI",
+      "score": 3.8172477386485006,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2610.35869v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035869v1-kora-deterministic-first-execution-control-for-ai-workloads",
+      "source": "arxiv",
+      "title": "KORA: Deterministic-First Execution Control for AI Workloads",
+      "authors": [
+        "Albert Heekwan Kim"
+      ],
+      "authors_text": "Albert Heekwan Kim",
+      "abstract": "AI applications often invoke a model before they determine whether inference is necessary. That default is useful for ambiguous generative tasks, but it is poorly matched to work that is structured, deterministic, policy-bound, lookup-oriented, or directly verifiable. KORA introduces deterministic-first execution control: a pre-inference control layer that represents requests as task paths, attempts deterministic or structured routes first, validates route outcomes, records telemetry, and escalates to a model-candidate path only when deterministic handling is insufficient. This paper presents KORA as a deterministic-first execution-control architecture and reports bounded evidence from reproducible benchmark and validation workloads. In a reproducible 100-task deterministic-heavy benchmark, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline, with zero mismatches in the deterministic subset. The workload is intentionally deterministic-heavy: it includes categories such as FAQ lookup, policy/rule checking, schema or format validation, deterministic transformation, and a smaller set of model-needed ambiguous or generative tasks. A separate synthetic customer-support local/no-network validation workload demonstrates route measurement and avoided model-call accounting in an application-shaped setting. These results support bounded model-invocation reduction and validation visibility in documented workloads. They do not establish production behavior, real-provider outcomes, energy outcomes, API-cost reduction, or broad superiority.",
+      "url": "http://arxiv.org/abs/2610.35869v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35869v1",
+      "tldr": "KORA proposes a deterministic-first pre-inference control layer that routes requests through deterministic or structured handlers when possible, validates outcomes, records telemetry, and escalates to model inference only when necessary, reporting a bounded benchmark result of avoiding 80 of 100 simulated model calls with zero mismatches in the deterministic subset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Krako Labs"
+      ],
+      "affiliations_text": "Krako Labs",
+      "score": 3.71751160794744,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.36009v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/10/28/261036009v1-duplextune-coupled-state-replay-for-memory-efficient-mixture-of-experts-adaptation",
+      "source": "arxiv",
+      "title": "DuplexTune: Coupled-State Replay for Memory-Efficient Mixture-of-Experts Adaptation",
+      "authors": [
+        "Paul Raj",
+        "Simon Caldwell",
+        "Daniel Whitmore",
+        "Mutlu Mete"
+      ],
+      "authors_text": "Paul Raj, Simon Caldwell, Daniel Whitmore, Mutlu Mete",
+      "abstract": "Sparse expert execution does not remove the stored states needed to adapt a mixture-of-experts language model. We present DuplexTune, a framework for replaying coupled hidden states through pretrained attention and expert modules. Trainable width bridges connect two residual streams to the backbone. Bridge warm-up precedes backbone adaptation, with router weights kept frozen. We analyze the implicit state-recovery equation and identify the convergence and replay conditions needed for reconstruction. On Qwen1.5-MoE-A2.7B, the single-H800 evaluation reports 38.8 GB peak memory, versus 64.8 GB for supervised fine-tuning with checkpointing, and throughput of 25.1 versus 19.9 samples/s. DuplexTune achieves 67.2% MMLU, 75.6% GSM8K, and 7.69 MT-Bench, with a weaker multilingual score than the checkpointed baseline. The results characterize a configuration-dependent tradeoff among state storage, throughput, and adaptation quality.",
+      "url": "http://arxiv.org/abs/2610.36009v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36009v1",
+      "tldr": "DuplexTune enables memory-efficient Mixture-of-Experts language model adaptation by replaying coupled hidden states through frozen-router pretrained attention and expert modules using trainable width bridges and bridge warm-up, achieving lower peak memory and higher throughput than checkpointed supervised fine-tuning on Qwen1.5-MoE-A2.7B while trading off some multilingual performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Michigan State University",
+        "Texas A&M University-Commerce"
+      ],
+      "affiliations_text": "Michigan State University, Texas A&M University-Commerce",
+      "score": 3.7064047536441485,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.35975v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035975v1-a-graph-informed-kriging-model-for-sample-efficient-bayesian-optimization-of-wind-farm-layouts",
+      "source": "arxiv",
+      "title": "A Graph-informed Kriging model for sample-efficient Bayesian optimization of wind farm layouts",
+      "authors": [
+        "Zhen-Fan Wang",
+        "Kai Zhang",
+        "Xianping Du",
+        "Zhaolong Han",
+        "Dai Zhou",
+        "Onur Bilgen"
+      ],
+      "authors_text": "Zhen-Fan Wang, Kai Zhang, Xianping Du, Zhaolong Han, Dai Zhou, Onur Bilgen",
+      "abstract": "Wind farm layout optimization becomes increasingly difficult as turbine count grows, especially when high-fidelity aerodynamic models are used. Conventional Kriging-based Bayesian optimization often suffers from low sample efficiency in high-dimensional layout spaces because sparse training data provide limited domain coverage. We develop a Graph-informed Kriging framework that embeds reusable aerodynamic interaction information into the surrogate mean function. The wind farm is represented as a directed aerodynamic graph, where pairwise turbine interactions defined in a low-dimensional relative-coordinate space are assembled into a farm-scale mean. This structured mean captures the dominant variation in annual energy production (AEP), allowing the Gaussian process to model only the residual structure and uncertainty. Numerical experiments show that Graph-informed Kriging consistently improves AEP prediction accuracy over ordinary and generic-trend Kriging under sparse-data conditions, with increasing benefits as layout dimension and wake-interaction strength grow. Embedded in Bayesian optimization, it substantially improves sample efficiency and achieves competitive solutions for the IEA Wind Task 37 benchmark with about 280 AEP evaluations. In a controlled 16-turbine case, it also outperforms ordinary and multi-fidelity Kriging under the same high-fidelity evaluation budget. The framework is further extended to a 48-turbine wind farm, demonstrating applicability to large-scale CFD-based layout optimization. These results show that Graph-informed surrogate modeling can enable more efficient use of high-fidelity aerodynamic models for reliable large-scale wind farm layout design.",
+      "url": "http://arxiv.org/abs/2610.35975v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35975v1",
+      "tldr": "This paper develops a Graph-informed Kriging surrogate that embeds reusable pairwise turbine aerodynamic interactions as a structured mean function, enabling more sample-efficient Bayesian optimization of wind farm layouts with high-fidelity models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shanghai Jiao Tong University",
+        "Sun Yat-Sen University",
+        "Southern Marine Science and Engineering Guangdong Laboratory (Zhuhai)",
+        "Rutgers University"
+      ],
+      "affiliations_text": "Shanghai Jiao Tong University, Sun Yat-Sen University, Southern Marine Science and Engineering Guangdong Laboratory (Zhuhai), Rutgers University",
+      "score": 3.706037181681317,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.35955v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035955v1-rescom-activation-residual-compensation-for-large-language-model-quantization",
+      "source": "arxiv",
+      "title": "ResCom: Activation Residual Compensation for Large Language Model Quantization",
+      "authors": [
+        "Ning Yang",
+        "Bohan Cui",
+        "Zhuowen Liu",
+        "Yuting Wang"
+      ],
+      "authors_text": "Ning Yang, Bohan Cui, Zhuowen Liu, Yuting Wang",
+      "abstract": "Low-bit weight--activation quantization reduces the memory and computation needed to deploy large language models, but activation rounding can still degrade accuracy after calibration. Reconstruction from rounded inputs cannot distinguish activations within the same quantization bin. We propose ResCom, a low-rank correction that uses the activation rounding residual to compensate for the resulting layer-output error. An output-aware calibration procedure selects residual directions by their contribution to output reconstruction and computes the correction in closed form, without gradient training or updates to the calibrated weights. On Llama-3-8B with 4-bit weights and activations, rank-32 attention corrections reduce WikiText-2 perplexity from 7.708 to 7.147, improve MMLU by 2.89 percentage points, and raise five-shot GSM8K accuracy from 23.96 to 36.16 percent. Evaluations on models from 1B to 70B parameters and on held-out C4 test the method beyond this setting. The evaluated FP32 implementation adds 2.25 percent to 4K prefill time; a separate compact-storage implementation retains a 27.7 percent peak-memory reduction relative to FP16.",
+      "url": "http://arxiv.org/abs/2610.35955v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35955v1",
+      "tldr": "ResCom is a post-calibration low-rank correction that uses activation rounding residuals to compensate for layer-output errors in low-bit LLM quantization, improving accuracy without retraining or modifying calibrated weights.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fudan University",
+        "The Chinese University of Hong Kong",
+        "Chinese Academy of Sciences",
+        "University of Chinese Academy of Sciences"
+      ],
+      "affiliations_text": "Fudan University, The Chinese University of Hong Kong, Chinese Academy of Sciences, University of Chinese Academy of Sciences",
+      "score": 3.682873075334058,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2610.35989v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035989v1-layerwise-repacking-variable-length-hybrid-attention-training-without-an-extra-redistribution-pass",
+      "source": "arxiv",
+      "title": "Layerwise Repacking: Variable-Length Hybrid-Attention Training without an Extra Redistribution Pass",
+      "authors": [
+        "Jiahao Zhang",
+        "Junwei Feng",
+        "Dongliang Huang",
+        "Xiaoling Zhou",
+        "Yiqiao Liao",
+        "Chengru Song"
+      ],
+      "authors_text": "Jiahao Zhang, Junwei Feng, Dongliang Huang, Xiaoling Zhou, Yiqiao Liao, Chengru Song",
+      "abstract": "Variable-length training creates conflicting parallelism requirements across the layers of a hybrid-attention model. The longest samples require wide sequence-parallel (SP) groups of 16 or 32 ranks for full attention, whose cost grows quadratically with sequence length. Sparse-attention layers, dominated by near-linear MoE work, can instead balance most evaluated workloads within node-local SP8 groups. Reusing the wide groups for these layers pushes their all-to-all communication across nodes, where the observed effective rate is 7.0x lower. Yet switching to smaller groups changes which ranks own each sample; a separate redistribution at every full-sparse boundary would introduce another data transfer.\n  Layerwise Repacking keeps each SP16/32 parent for full attention and repacks its samples into node-local sparse children at SP{1, 2, 4, 8}, where hidden states persist between full layers. The layout change rides on the two existing full-layer Ulysses sites: at each, one variable-size all-to-all performs both the head exchange and the sample repacking, so no redistribution pass is added. Because the balance the children can reach depends on which samples share a parent, an auxiliary parent solver rebalances parent membership before the children are formed.\n  On all 22 steps with SP16/32 parents among the first 200 training steps of a 1F3S hybrid-attention model (one full-attention layer per three sparse-attention layers), repacking alone reduces the mean end-to-end time by 5.95% and raises model FLOPs utilization (MFU) by 3.75 percentage points over the baseline with repacking disabled; with the improved solver, end-to-end time falls by 7.61% and MFU rises by 4.83 percentage points.",
+      "url": "http://arxiv.org/abs/2610.35989v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35989v1",
+      "tldr": "Layerwise Repacking enables variable-length hybrid-attention training by keeping wide sequence-parallel groups for full-attention layers while repacking samples into smaller node-local groups for sparse-attention layers—fused into existing Ulysses all-to-all exchanges without an extra redistribution pass—and adds a parent solver for load balance, reducing end-to-end time by 7.61% and raising MFU by 4.83 percentage points.",
+      "detailed_reading": null,
+      "affiliations": [
+        "KlingAI Research"
+      ],
+      "affiliations_text": "KlingAI Research",
+      "score": 3.6338622405049597,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.35985v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035985v1-let-the-gate-decide-per-lookup-precision-for-quantized-conditional-memory-in-llms",
+      "source": "arxiv",
+      "title": "Let the Gate Decide: Per-Lookup Precision for Quantized Conditional Memory in LLMs",
+      "authors": [
+        "Tianqi Chen",
+        "Xunchao Li",
+        "Linchuan Xie",
+        "Guanghua Yu",
+        "Jianchen Zhu",
+        "Peisong Wang",
+        "Jian Cheng"
+      ],
+      "authors_text": "Tianqi Chen, Xunchao Li, Linchuan Xie, Guanghua Yu, Jianchen Zhu, Peisong Wang, Jian Cheng",
+      "abstract": "Conditional memory layers, such as DeepSeek's Engram, attach large hashed n-gram tables to a language model, and removing them from DeepSeek-V4.1-Flash costs 36.8 PopQA points. Low-bit quantization loses long-tail facts first, and the standard remedy, giving more bits to frequently accessed rows, backfires: refining lookups by access frequency is worse than refining them at random. We trace this to the gate that scales each retrieved row. A lookup's quantization error is weighted by its gate, which is small for frequent n-grams, large for the rare n-grams of long-tail entities, and computable from a 1-bit code. GateRQ therefore stores each row as a ladder of 1-bit residual codes, keeps level 1 in GPU memory to compute the gate, and reads deeper levels only for the lookups the gate ranks highest. Without retraining, GateRQ cuts GPU table memory by 7.8x on DeepSeek-V4.1-Flash, which raises vLLM throughput by 11%-31% over FP8 tables, while losing about 1 PopQA point at 1.50 bits read per lookup and 0.2 points at 2.10 bits across two models.",
+      "url": "http://arxiv.org/abs/2610.35985v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35985v1",
+      "tldr": "GateRQ uses the retrieval gate to set per-lookup precision for quantized conditional-memory rows—storing 1-bit residual ladders, keeping level 1 for gate computation, and reading deeper levels only for highest-gate lookups—yielding 7.8× GPU table-memory reduction and 11–31% vLLM throughput gains on DeepSeek-V4.1-Flash with only ~1 PopQA point loss at 1.50 bits/lookup and no retraining.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5735456780391317,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.35957v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035957v1-distributed-llm-inference-via-communication-efficient-speculative-decoding",
+      "source": "arxiv",
+      "title": "Distributed LLM Inference via Communication-Efficient Speculative Decoding",
+      "authors": [
+        "Joohyun Shin",
+        "Byeonghyeon Park",
+        "Keumseo Ryum",
+        "Joonhyuk Kang"
+      ],
+      "authors_text": "Joohyun Shin, Byeonghyeon Park, Keumseo Ryum, Joonhyuk Kang",
+      "abstract": "Distributed speculative decoding has emerged as a promising approach for device--server collaborative large language model (LLM) inference, but its decoding speedup is often limited by the vocabulary-scale communication overhead. In existing distributed speculative decoding methods, exact rejection sampling requires transmitting full token distributions over the LLM vocabulary between the device and the server, which becomes costly in bandwidth-constrained environments. To address this issue, we propose DISCO, a communication-efficient framework for distributed speculative decoding, that eliminates vocabulary-scale distribution transfer while preserving the exact target distribution. DISCO achieves this by introducing a server-side replica of the draft small language model (SLM), which enables the server to locally obtain the draft-side distribution required for rejection sampling. As a result, DISCO exchanges only drafted token indices and scalar probability values between the device and the server. Experimental results on multiple datasets show that DISCO consistently achieves higher decoding speedup than existing distributed speculative decoding methods, particularly under stringent bandwidth constraints.",
+      "url": "http://arxiv.org/abs/2610.35957v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35957v1",
+      "tldr": "DISCO is a communication-efficient distributed speculative decoding framework that places a replica of the draft small language model on the server to eliminate vocabulary-scale distribution transfer, enabling only token indices and scalar probabilities to be exchanged while preserving exact target sampling and improving decoding speedup under bandwidth constraints.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Korea Advanced Institute of Science and Technology (KAIST)"
+      ],
+      "affiliations_text": "Korea Advanced Institute of Science and Technology (KAIST)",
+      "score": 3.551151006171884,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2610.36095v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/10/28/261036095v1-instruction-capacity-behavior-and-degradation-of-language-models-under-controlled-load",
+      "source": "arxiv",
+      "title": "Instruction Capacity: Behavior and Degradation of Language Models under Controlled Load",
+      "authors": [
+        "Hennadii Kutomanov"
+      ],
+      "authors_text": "Hennadii Kutomanov",
+      "abstract": "The quality with which language models follow instructions falls as the load grows, yet there is still no quantity that expresses the limit of a model in units of load with an uncertainty. We propose an instrument in which the load consists of rules that replace single-token words in a text without meaning: such an instruction is atomic, the rules are independent by the construction of the task, and the outcome of every application of a rule is determined by a computable reference answer. Every occurrence of a word to be replaced becomes a Bernoulli trial with a known position in the answer and a known rule number. The statistical model first measures the shape of the dependence of the probability of a right replacement on the text length, the word position, the replacement density, the number of rules and the rule number, then describes it by smooth laws and restores a reference level that does not depend on the choice of the coding. The model yields the instruction capacity - the number of rules held at a given share of right replacements - with an uncertainty. A measurement of GPT-4o mini (2958 requests, 642,430 trials) gave regular laws for every load factor and for the collapse of the answer; the instruction capacity was about 37-38 rules at a share of right replacements of 0.95, and about 18-19 rules at the full replacement density. The code of the instrument, the measurement data and the passport are open, and every number of the passport is recomputed from the published points. The passport of a model serves as the calibration of a future meter of the instruction load of prompts.",
+      "url": "http://arxiv.org/abs/2610.36095v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36095v1",
+      "tldr": "The paper introduces a controlled-load instrument that measures a language model’s **instruction capacity**—the number of independent atomic word-replacement rules it can follow at a given accuracy—using a statistical model over Bernoulli trials, and reports that GPT-4o mini holds about **37–38 rules at 95% correct replacements** and **18–19 rules at full replacement density**.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent researcher"
+      ],
+      "affiliations_text": "Independent researcher",
+      "score": 3.4948279273309386,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.35962v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035962v1-h1-a-taste-of-the-bitter-lesson-in-automated-theorem-proving",
+      "source": "arxiv",
+      "title": "h1: A Taste of the Bitter Lesson in Automated Theorem Proving",
+      "authors": [
+        "Skander Moalla",
+        "Ahmad Rammal",
+        "Niket Patel",
+        "Remi Munos",
+        "Julia Kempe"
+      ],
+      "authors_text": "Skander Moalla, Ahmad Rammal, Niket Patel, Remi Munos, Julia Kempe",
+      "abstract": "While progress in informal mathematics has come largely from scaling the chain-of-thought and agentic reasoning of frontier language models, formal theorem proving has increasingly relied on human-designed workflows around these models, such as planning, decomposition, and orchestrating specialized provers. This raises a bitter-lesson question: can a simple agentic loop that scales test-time compute match these workflows? The answer matters as formal verification must scale to keep up with frontier models producing research mathematics, yet new workflows rarely settle it, as their gains are often confounded with stronger models or more compute. We study this question with h1, a simple harness that gives a model an efficient interface to Lean 4 and keeps it working through verifier feedback and self-reflection, without imposing a decomposition or search structure. h1 reaches state-of-the-art results on PutnamBench, FATE-X, and FormalConjectures100-Solved, settles eight open problems in FormalConjectures, and, at matched models, matches or outperforms specialized workflows such as Goedel-Architect and AlphaProof Nexus, surprisingly showing that a single attempt (pass@1) can often scale to solve open problems. Through ablations and matched-model comparisons with Claude Code and AxProverBase, we find that simplicity alone is not enough: an efficient Lean interface largely determines cost and solve rate. We thus recommend that future work evaluate frontier models with efficient execution feedback before prescribing workflows, at the risk of bitter lessons.",
+      "url": "http://arxiv.org/abs/2610.35962v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35962v1",
+      "tldr": "A simple agentic test-time-scaling loop with an efficient Lean 4 interface can match or outperform specialized automated theorem-proving workflows, showing that efficient execution feedback matters more than prescribed decomposition or search.",
+      "detailed_reading": null,
+      "affiliations": [
+        "FAIR at Meta",
+        "New York University",
+        "Institut Polytechnique de Paris",
+        "EPFL"
+      ],
+      "affiliations_text": "FAIR at Meta, New York University, Institut Polytechnique de Paris, EPFL",
+      "score": 3.4842311012557534,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.35958v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035958v1-exponential-wake-up-overshoot-in-explicit-gaussian-point-process-filters",
+      "source": "arxiv",
+      "title": "Exponential Wake-Up Overshoot in Explicit Gaussian Point-Process Filters",
+      "authors": [
+        "Hanwu Qin",
+        "Dianhai Wang"
+      ],
+      "authors_text": "Hanwu Qin, Dianhai Wang",
+      "abstract": "When events resume after a long silence, explicit Gaussian point-process filters amplify the first update exponentially in the silence duration. We give the exact distribution of this update and a computable index that predicts when it overshoots. For the explicit (single-scoring-step) filter and its implicit posterior-mode counterpart, we derive second-order silence expansions of the state variance with opposite-sign logarithmic corrections. The crossing index determines when the post-wake prediction exceeds the resumed rate, separating the bin width at which the amplification exponent reaches one from the larger width at which the true rate is overshot. At fixed bin width, the implicit filter's expected loss grows logarithmically with silence duration, whereas a continuous-time counterexample rules out a bound uniform in bin width and silence duration. Experimental evaluation confirms these predictions in all 73 crossing cells and on exchange trade data, while variance caps reduce explicit overshoot but mostly hurt the implicit filter.",
+      "url": "http://arxiv.org/abs/2610.35958v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35958v1",
+      "tldr": "The paper shows that explicit Gaussian point-process filters can exponentially overshoot on the first event after a long silence, derives the exact wake-up update distribution and a computable crossing index, and contrasts this with the implicit filter’s logarithmic risk and lack of a uniform bin-width/silence-duration bound, confirmed experimentally.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang University"
+      ],
+      "affiliations_text": "Zhejiang University",
+      "score": 3.477916076228564,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.35961v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035961v1-knowledge-distillation-across-teacher-architectures-for-compact-diabetic-retinopathy-grading",
+      "source": "arxiv",
+      "title": "Knowledge distillation across teacher architectures for compact diabetic retinopathy grading",
+      "authors": [
+        "Mossa Manisa",
+        "Habiba Jahan Priya",
+        "A. K. M. Fakhrul Hossain"
+      ],
+      "authors_text": "Mossa Manisa, Habiba Jahan Priya, A. K. M. Fakhrul Hossain",
+      "abstract": "Diabetic retinopathy grading from retinal fundus photographs is important but difficult to deploy on resource-constrained hardware. We conducted a controlled study of offline response-based knowledge distillation for five-class diabetic retinopathy grading on APTOS 2019, comparing ResNet-50, MobileNetV3-Large, and Swin Transformer-Tiny (Swin-T) teachers distilled into a MobileNetV3-Small student. A 3 x 4 x 2 grid of teacher, temperature, and hard-label weight was screened at one seed, while six configurations and the no-distillation baseline were evaluated across three seeds. The highest observed single-seed quadratic weighted kappa was 0.9093 (macro-F1 0.6851) for Swin-T at temperature 4 and hard-label weight 0.7; the corresponding three-seed mean was 0.9024, compared with 0.8804 for the baseline. The student used 1.52 M parameters and 5.94 MB, representing an 18.07x parameter reduction relative to Swin-T. Temperature and hard-label weight effects were teacher- and configuration-dependent, while small performance differences were sensitive to random seed. Knowledge distillation produced a compact student with competitive performance under the evaluated protocol, but independent external validation remains necessary.",
+      "url": "http://arxiv.org/abs/2610.35961v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35961v1",
+      "tldr": "Offline response-based knowledge distillation from ResNet-50, MobileNetV3-Large, or Swin-T into a MobileNetV3-Small student yields a compact five-class diabetic retinopathy grader with competitive APTOS 2019 performance (best three-seed mean QWK 0.9024 vs. 0.8804 baseline) at 18.07× fewer parameters than Swin-T, pending external validation.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4493248305798097,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.36020v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/10/28/261036020v1-exploratory-creative-pre-ranking-hierarchical-empirical-bayes-thompson-sampling-for-real-time-creative-optimization",
+      "source": "arxiv",
+      "title": "Exploratory creative pre-ranking: Hierarchical empirical-Bayes Thompson sampling for real-time creative optimization",
+      "authors": [
+        "Jiale Han",
+        "Ajith Moparthi",
+        "Dan Xie",
+        "Xiaowu Dai"
+      ],
+      "authors_text": "Jiale Han, Ajith Moparthi, Dan Xie, Xiaowu Dai",
+      "abstract": "Dynamic creative optimization decides which creative of an ad to render for each request. Recent work places that choice before ad ranking, but relies on deterministic point predictors with no calibrated uncertainty. AI-generated content has made creatives nearly free, while feedback per creative remains sparse and selection faces a tight latency budget. We introduce a creative pre-ranker that scores every recalled creative and shortlists each campaign's pool before the per-user ranker runs. Creatives sit in a hierarchy of audience segment, advertised item, campaign and creative, so a cold creative falls back on what its parent levels have earned, and how much it borrows from its parents is set in closed form from historical logs, with one parameter per level and nothing tuned. To stay within the latency budget, the pre-ranker predicts for an audience segment rather than an individual user, from per-attribute counters. It selects by a single Thompson draw per creative, balancing exploration and exploitation so that a new creative still has a chance to be learned. Replaying Roblox Sponsored-ads traffic over campaigns with competing creatives, the shortlist lifts predicted play-through rate by 8.14% against 2.80% for an equally sized random shortlist, forwards more than 40% fewer creatives than the full pool, and adds only 0.2% to serving time. After an A/B test on live traffic, the method now serves in production at Roblox.",
+      "url": "http://arxiv.org/abs/2610.36020v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36020v1",
+      "tldr": "The paper proposes an exploratory creative pre-ranker that uses hierarchical empirical-Bayes Thompson sampling with audience-segment-level marginal counters to cheaply shortlist each campaign’s creatives before ad ranking, enabling calibrated exploration of cold creatives and improving predicted play-through rate with negligible serving latency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "UCLA",
+        "Roblox"
+      ],
+      "affiliations_text": "UCLA, Roblox",
+      "score": 3.0395834023975388,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2610.35960v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/10/28/261035960v1-from-slices-to-volumes-comparing-2d-25d-and-3d-residual-networks-for-pulmonary-nodule-malignancy-risk-classification",
+      "source": "arxiv",
+      "title": "From Slices to Volumes: Comparing 2D, 2.5D, and 3D Residual Networks for Pulmonary Nodule Malignancy-Risk Classification",
+      "authors": [
+        "Bahodir Nazarov",
+        "Zineb Gharib",
+        "Fatima Zazoul"
+      ],
+      "authors_text": "Bahodir Nazarov, Zineb Gharib, Fatima Zazoul",
+      "abstract": "Purpose: To compare 2D, 2.5D, and 3D residual networks for pulmonary nodule malignancy-risk classification and evaluate momentum-contrast pretraining, mild augmentation, and exclusion of indeterminate ratings.\n  Methods: A retrospectively prepared LIDC-IDRI cohort contained 2,654 nodules labeled benign, indeterminate, or malignant using median radiologist ratings. Patient-disjoint splits comprised 1,876 training, 382 validation, and 396 test nodules. Representations included one axial slice, five neighboring slices, and a local CT volume. Each track evaluated a randomly initialized baseline, momentum-contrast pretraining followed by fine-tuning, and supervised training with mild augmentation. Checkpoints were selected by validation Macro-F1. The 2D experiments used three seeds; 2.5D and 3D results were single-run estimates. A separate binary experiment excluded indeterminate nodules.\n  Results: Augmented models achieved test Macro-F1 values of $0.6134\\pm0.0075$ for 2D, $0.6537$ for 2.5D, and $0.5403$ for 3D; the 2D uncertainty denotes population standard deviation across seeds. Corresponding accuracies were $0.6128$, $0.6869$, and $0.5455$. Augmentation improved Macro-F1 within every track, whereas the tested pretraining recipes reduced it. Binary Macro-F1 values were $0.8227$, $0.8664$, and $0.7554$, respectively.\n  Conclusion: Augmented 2.5D achieved the highest observed performance. Differences in preprocessing, optimization, capacity, and replication limit attribution to dimensionality. Labels reflect radiologist-assessed malignancy risk rather than pathology-confirmed cancer. Code and experimental results are available at https://github.com/CT-DeepLearning-Team/CT-2D-2.5D-3D-DeepLearning.",
+      "url": "http://arxiv.org/abs/2610.35960v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.35960v1",
+      "tldr": "In a patient-disjoint LIDC-IDRI comparison of 2D, 2.5D, and 3D ResNet models for pulmonary nodule malignancy-risk classification, mild augmentation improved every track, momentum-contrast pretraining reduced performance, and augmented 2.5D achieved the best observed results (three-class Macro-F1 0.6537; binary Macro-F1 0.8664).",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sichuan University"
+      ],
+      "affiliations_text": "Sichuan University",
+      "score": 2.890284344939853,
+      "score_text": "2.9"
+    }
+  ]
+}
