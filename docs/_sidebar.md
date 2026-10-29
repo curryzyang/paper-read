@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-10-29
+  - [日报](/2026/10/29/README)
 - 2026-10-28
   - [日报](/2026/10/28/README)
   - [精读 · Data-driven Discovery of Lie Symmetries and First Integrals with Latent ODEs](/2026/10/28/261035967v1-data-driven-discovery-of-lie-symmetries-and-first-integrals-with-latent-odes)
