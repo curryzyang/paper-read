@@ -1,0 +1,743 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-02T21:25:34.097406",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2610.40931v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040931v1-learning-stabilizing-latent-feedback-controllers-via-multi-step-backward-losses",
+      "source": "arxiv",
+      "title": "Learning Stabilizing Latent Feedback Controllers via Multi-Step Backward Losses",
+      "authors": [
+        "Paul Lutkus",
+        "Lars Lindemann",
+        "Stephen Tu"
+      ],
+      "authors_text": "Paul Lutkus, Lars Lindemann, Stephen Tu",
+      "abstract": "Can learned latent dynamics models support the design of feedback controllers that provably stabilize the original system? For linear time-invariant systems, we show that learning linear autoencoders and latent dynamics with multi-step prediction-reconstruction losses $\\unicode{x2014}$ which we term \"backward losses\" as they encourage latent trajectories to reconstruct full state trajectories $\\unicode{x2014}$ provably recovers the structure needed for stabilization. Specifically, a sufficiently long reconstruction horizon ensures that a minimum ${H}_\\infty$-norm controller designed using the learned latent model stabilizes the original system through output-feedback via the corresponding encoder, provided the latent dimension is large enough to capture all non-stable modes of the underlying system. We also show why both reconstruction and a multi-step horizon are essential: forward prediction losses that require only low prediction error along latent trajectories admit global loss minimizers that discard unstable modes regardless of horizon length, while single-step reconstruction losses can yield latent models whose stabilizing controllers fail to stabilize the original system. Finally, experiments on a non-linear flexible-arm system illustrate the practical implications of our results for learning non-linear autoencoders and latent dynamics.",
+      "url": "http://arxiv.org/abs/2610.40931v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40931v1",
+      "tldr": "The paper proves that training latent linear dynamics models with sufficiently long multi-step reconstruction (“backward”) losses—rather than forward-prediction or single-step losses—provably yields latent models whose \\(H_\\infty\\) output-feedback controllers, applied through the encoder, stabilize the original LTI system when the latent dimension captures all unstable modes, and illustrates the implications on a nonlinear flexible-arm system.",
+      "detailed_reading": {
+        "motivation": "潜动力学模型/世界模型能从轨迹数据中以无模型、统一算法方式学习低维替代模型，但其用于反馈控制时缺乏闭环稳定性保证；传统降阶方法往往依赖真实动力学，且可能因截断或输出映射选择产生不稳定零动态。本文因此追问：用机器学习方法学到的潜动力学与编码器，能否设计出可证明稳定原系统的反馈控制器。",
+        "method": "针对线性时不变系统，论文学习线性自编码器（编码器E与解码器）及潜在线性动力学，并用多步预测-重构损失训练：在长度为H的滚动窗口内，要求潜轨迹不仅能预测，还能重构完整状态轨迹，作者称之为“backward losses”。随后在学到的潜模型上设计最小H∞范数控制器K(z)，再通过编码器构成输出反馈u=K(E(x))作用于原系统；理论分析给出充分条件：潜维数足以捕获原系统全部非稳定模态，且重构时域足够长，则该潜控制器可稳定原系统。非线性柔性臂实验用非线性自编码器和潜动力学比较不同损失，验证多步预测-重构损失的实际作用。",
+        "result": "理论上证明，多步预测-重构损失能可证明地恢复稳定化所需结构：只要潜维数覆盖所有非稳定模态且重构时域足够长，基于学习潜模型设计的最小H∞范数输出反馈控制器即可稳定原系统。论文还给出反例说明两个要素缺一不可：仅要求潜轨迹低预测误差的前向预测损失，无论时域多长都存在丢弃不稳定模态的全局最小解；单步重构损失则可能得到其稳定化控制器无法稳定原系统的潜模型。柔性臂实验中，只有多步预测-重构损失L_bwd使潜输出反馈控制器实现稳定。",
+        "conclusion": "多步预测-重构的“backward loss”为从数据学习潜动力学并设计可证明稳定的输出反馈控制器提供了理论基础，表明重构完整状态轨迹与多步时域对保留非稳定模态至关重要。该工作把世界模型式学习与闭环稳定性保证连接起来，并为非线性系统的经验表现提供启示；但严格保证目前限于线性时不变情形，非线性实验主要说明实践含义。",
+        "key_details": "关键实现与理论要点包括：对象为线性时不变系统，使用线性自编码器与潜在线性动力学，从轨迹片段学习而非依赖已知模型；损失为多步预测-重构损失，重构时域H需足够长，潜维数需至少覆盖全部非稳定模态；控制器为潜空间最小H∞范数控制器并经编码器做输出反馈。分析强调前向预测损失只约束潜预测误差会允许丢弃不稳定模态，单步重构也不充分，因此重构和多步缺一不可。假设可获得全状态以隔离降阶问题，未处理部分可观测与滤波；有限样本统计保证与非线性理论保证未给出，柔性臂实验为非线性实践验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.574466208800221,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2610.40922v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040922v1-confidence-modulated-safety-filtering-for-end-to-end-policies",
+      "source": "arxiv",
+      "title": "Confidence-Modulated Safety Filtering for End-to-End Policies",
+      "authors": [
+        "Javier Borquez",
+        "Jaime F. Fisac"
+      ],
+      "authors_text": "Javier Borquez, Jaime F. Fisac",
+      "abstract": "End-to-end policies, from task-specific controllers to robot foundation models, learn complex behavior from raw observations but are not guaranteed to remain safe, so they are often wrapped in a safety filter. The resulting system operates under two domains: the filter's operational design domain (ODD), where its assumptions hold and safety is certified, and the policy's competence domain, where it is reliable. Filters typically fix their conservativeness regardless of the policy's competence, trading performance inside the ODD against margin beyond it. We ask whether the policy's confidence should set that level, and propose a filter-agnostic pipeline that modulates it at runtime: inside the ODD, where every setting is safe, confidence buys performance; beyond it, low confidence adds margin, which helps when it flags where the filter's model fails. Preliminary F1TENTH simulations, where this holds, show the modulated filter combining the strengths of permissive and conservative filters.",
+      "url": "http://arxiv.org/abs/2610.40922v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40922v1",
+      "tldr": "The paper proposes a filter-agnostic safety-filtering pipeline that uses an end-to-end policy’s runtime confidence to modulate the filter’s conservativeness—remaining permissive inside the filter’s certified ODD to preserve performance while becoming more conservative beyond it to add safety margin.",
+      "detailed_reading": {
+        "motivation": "端到端策略从原始观测学习复杂行为，但无法保证安全，常需外加安全过滤器。现有过滤器通常固定保守程度，忽视策略自身的能力域：在过滤器运行设计域内过度保守会损害高性能策略，在域外过度宽松又可能在策略不可靠时失去安全余量。本文因此追问：任务策略的置信度是否应在线决定安全过滤器的保守程度。",
+        "method": "论文提出与过滤器无关的置信度调制流程：以回退策略、安全监控器和干预方案构成基础安全过滤器，并以基础监控器给出的安全余量定义保守性偏序和分级过滤器族；置信度监控器将当前信息状态映射为[0,1]的信任分数，再用非增调度函数把该分数映射到分级族参数，低置信度选择更保守过滤器，系统执行调制后的干预动作，且在运行设计域假设成立时继承基础安全证书。实验在F1TENTH仿真中进行，任务策略为输入两层LiDAR扫描的TD3端到端策略，置信度取策略观测自编码器的重构误差，过滤器为带直行制动、全左转和全右转三种备份机动的backup CBF，按离散CBF条件构造分级族，调度将无信任时的γ设为0.08、全信任时的γ设为0.55；过滤器按标称摩擦μ=1.05构建，并以μ=0.6测试域外泛化。",
+        "result": "在每方法60圈的F1TENTH仿真中，无过滤器在ODD内碰撞45圈、域外60圈全部碰撞。ODD内各过滤器均无碰撞，调制过滤器完成60圈且圈时30.2±0.2秒，接近最宽松固定γ=0.55的30.4±0.2秒，快于最保守固定γ=0.08的31.4±0.2秒。域外最宽松固定过滤器有10圈碰撞、2圈超时、48圈完成，而调制过滤器完成全部60圈，与最保守固定过滤器一样安全，但圈时30.8±0.2秒，比其31.3±0.2秒快约0.5秒；图示调制过滤器在直道和缓弯保持宽松，在策略置信度下降的急弯转为保守，而固定宽松过滤器在同一急弯碰撞。",
+        "conclusion": "论文提出用任务策略置信度调制安全过滤器保守性，以同一流程在过滤器ODD内换取性能、在ODD外增加安全余量。初步F1TENTH仿真支持该假设：调制过滤器在ODD内达到最宽松固定过滤器的性能，在ODD外达到最保守固定过滤器的安全性且更快。作者指出结果仍需更广泛的仿真和真实机器人验证，并认为该流程只依赖置信度分数，可扩展到能力不均衡的机器人基础模型。",
+        "key_details": "关键细节包括：保守性由基础监控器在干预后保留的安全余量比较，分级族需满足过滤器条件且参数有序；置信度调度须非增，低置信度对应更保守成员；调制不要求系统知道ODD边界，但依赖两个条件，即低置信度处策略更可能不安全，以及ODD外监控器失效处置信度较低。实验中置信度来自自编码器重构误差，无法观测摩擦变化，因此急弯处置信度下降既反映几何不熟悉，也对应低摩擦使监控器失效。局限是仅初步单一仿真基准、每方法60圈、域外仅通过降低摩擦构造，尚未在真实机器人验证；文中未给出额外计算复杂度或训练损失细节。"
+      },
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 5.089230010501522,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2610.40897v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040897v1-incremental-stability-of-gradient-flows-under-generalized-polyak-ojasiewicz-inequalities-and-its-implications-for-general-systems",
+      "source": "arxiv",
+      "title": "Incremental Stability of Gradient Flows under Generalized Polyak-Łojasiewicz Inequalities and Its Implications for General Systems",
+      "authors": [
+        "Andreas Oliveira",
+        "Arthur C. B. de Oliveira",
+        "Mario Sznaier",
+        "Eduardo Sontag"
+      ],
+      "authors_text": "Andreas Oliveira, Arthur C. B. de Oliveira, Mario Sznaier, Eduardo Sontag",
+      "abstract": "Gradient flows of twice continuously differentiable strongly convex and convex objectives are, respectively, incrementally exponentially stable and non-expansive in the Euclidean metric. In this work, we investigate to what extent these properties extend to nonconvex objectives satisfying generalized Polyak-Łojasiewicz inequalities. For objectives with a unique minimizer, we establish conditions under which the gradient flow is contracting in a state-dependent Riemannian metric and incrementally exponentially stable. For objectives with nonunique minimizers, we generalize the non-expansivity of convex objectives to incremental stability for more general nonconvex objectives. We focus on incremental stability due to its implication to convergence to equilibrium points; when paired with a Lyapunov function it implies pointwise convergence to a minimizer and continuity of the endpoint map. Along the way, we derive new structural results for incrementally stable nonlinear systems and extend the analysis to Heavy-Ball and Dynamical Inertial Newton flows.",
+      "url": "http://arxiv.org/abs/2610.40897v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40897v1",
+      "tldr": "The paper shows that nonconvex gradient flows satisfying generalized Polyak–Łojasiewicz inequalities can be incrementally stable—contracting in a state-dependent Riemannian metric when the minimizer is unique and incrementally stable when minimizers are nonunique—yielding convergence and endpoint-map continuity guarantees and extending to Heavy-Ball and Dynamical Inertial Newton flows.",
+      "detailed_reading": {
+        "motivation": "强凸与凸目标的梯度流分别具有增量指数稳定性和非扩张性，但非凸目标即使在广义Polyak–Łojasiewicz不等式下也只能保证目标值或梯度范数意义下的收敛，未必给出状态轨迹收敛到具体极小点的保证。本文旨在研究广义PL型梯度流在多大程度上继承增量稳定性，并借此把目标值收敛提升为状态空间中的收敛、端点映射连续性等结构性结论。",
+        "method": "以连续时间梯度流xdot=-∇f(x)为对象，设f为二次连续可微、下有界并达到最小值，采用广义PL不等式‖∇f(x)‖≥α(f(x)-f*)刻画梯度支配性，其中α为连续正定比较函数并可属于K、K∞或更一般的Kc类。针对唯一极小点的情形，利用收缩理论构造状态依赖的Riemannian度量，分析梯度流在该度量下的严格收缩与增量指数稳定性，并给出该度量与Euclidean度量一致等价的两种充分条件：不充分凸区域有界，或全局下曲率界配合梯度支配函数增长。针对非唯一极小点情形，转而研究增量稳定性而非严格收缩，推导增量稳定非线性系统的结构结果，并将其应用于经典PL目标和一类新的广义PL目标；随后把分析扩展到Heavy-Ball与Dynamical Inertial Newton流。",
+        "result": "在唯一极小点且极小点局部强凸时，可构造全局Riemannian收缩度量，使梯度流具有增量指数稳定性；该度量是proper且诱导Euclidean拓扑，但不一定与Euclidean度量一致等价。在不充分凸区域有界或全局下曲率界加比较函数增长条件下，该度量与Euclidean度量一致等价，从而得到Euclidean范数下的全局增量指数稳定性，通常带有非单位超调。对非唯一极小点，经典PL目标的梯度流是增量稳定的，且存在一类新的广义PL目标也具有增量稳定性，该类与经典PL类互不包含；由此得到逐点状态收敛、端点映射连续以及极小点集路径连通，而无需严格收缩或增量指数稳定。还给出一个新的对数范数判据：若系统全局渐近稳定且在一个不含平衡点的紧集之外处处无穷小收缩，则系统全局增量指数稳定；Heavy-Ball和Dynamical Inertial Newton流在所述凸性正则条件下也具增量稳定性，DIN在经典PL下亦如此。",
+        "conclusion": "本文将强凸/凸梯度流的收缩与非扩张性质推广到满足广义PL不等式的非凸目标，说明增量稳定性可作为连接目标值收敛与状态轨迹收敛、端点映射连续性和极小点集拓扑性质的关键桥梁。结果把优化动力学分析与控制理论中的增量稳定性工具相结合，并为Heavy-Ball、Dynamical Inertial Newton等惯性优化动力学提供统一分析框架。",
+        "key_details": "核心输入是二次连续可微目标及其梯度流，关键先验是广义PL不等式中的比较函数α、唯一极小点处的局部强凸性，以及非唯一极小点下的增量稳定性定义；稳定性度量允许为proper且与Euclidean拓扑兼容的Riemannian度量，速率κ和超调c是主要定量参数。技术上依赖Riemannian收缩度量、对数范数判据、Lyapunov函数与端点映射；在非唯一极小点情形避免要求严格收缩，改用类K函数界定的增量稳定性，并利用全局半稳定性刻画端点映射连续性和平衡集连通性。实现层面的约束包括全局收缩度量不必与Euclidean度量一致等价，只有不充分凸区域有界或全局下曲率加α增长时才得到Euclidean意义下的全局增量指数稳定性；惯性动力学结果需要相应凸性与正则性假设，且新广义PL类与经典PL类不可相互包含。"
+      },
+      "affiliations": [
+        "Northeastern University"
+      ],
+      "affiliations_text": "Northeastern University",
+      "score": 4.981990663416255,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2610.40888v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040888v1-addendum-to-optimal-steering-of-a-linear-stochastic-system-to-a-final-probability-distribution-part-ii",
+      "source": "arxiv",
+      "title": "Addendum to \"Optimal Steering of a Linear Stochastic System to a Final Probability Distribution, Part II\"",
+      "authors": [
+        "Yongxin Chen",
+        "Tryphon T. Georgiou",
+        "Michele Pavon"
+      ],
+      "authors_text": "Yongxin Chen, Tryphon T. Georgiou, Michele Pavon",
+      "abstract": "We hereby fill in a gap in an induction argument used in the proof of a theorem on state-covariance controllability of linear stochastic systems in an earlier paper by the authors. The mathematical statement is true. The missing point in the proof concerns the assertion that, in the canonical single-input case, the control can be assigned arbitrary endpoint values. We amend the argument by proving a slightly stronger induction statement that permits arbitrary finite endpoint jets of the control. An independent approach to homogeneous state-covariance controllability was provided in a paper by Abdelgalil and Georgiou (2025) as a corollary of strong controllability results on $\\GLp(n,\\mathbb R)$, and shown herein that it extends to the case of additive noise as well.",
+      "url": "http://arxiv.org/abs/2610.40888v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40888v1",
+      "tldr": "This addendum fixes a gap in the induction proof of state-covariance controllability for linear stochastic systems by proving a stronger induction that permits arbitrary finite endpoint jets of the control, while also noting an independent proof via strong controllability on \\(\\mathrm{GL}^+(n,\\mathbb{R})\\) that extends to additive noise.",
+      "detailed_reading": {
+        "motivation": "原文定理断言线性随机系统的状态协方差可控，但原证明在对可控规范单输入情形做归纳时，隐含假设辅助控制可在两端取任意端点值，而该性质未被归纳步骤保持。本文旨在补上这一证明缺口，并说明定理陈述仍然成立。",
+        "method": "作者给出两条技术路线：其一是强化规范单输入情形的归纳命题，允许控制及其有限阶端点 jet 任意给定；将协方差分块，把 p 作为低维子系统的控制，借助对数变换与 Hermite 插值构造具有指定端点 jet 的正函数，再用 Schur 补保证正定性并反解控制。其二是利用 Abdelgalil–Georgiou 关于 GLp(n,R) 强可控性的结果，由状态转移矩阵构造 homogeneous Lyapunov 轨迹，并通过积分项 Gamma(tau) 与短时拼接把结论扩展到 Q>=0 的加性噪声情形。",
+        "result": "补正后的归纳证明表明，只要 (A,B) 可控，对任意 T>0、Sigma0,SigmaT 正定和 Q>=0，均存在光滑控制使差分 Lyapunov 系统在整个区间保持 Sigma(t) 正定并满足两端协方差条件。独立 GLp(n,R) 路线也给出同样的可达性结论，并在本文中被扩展到带加性噪声情形，因此可达协方差集合仍为正定锥。",
+        "conclusion": "原论文关于状态协方差可控性的数学结论正确，缺口在于端点控制值可插值性未被纳入归纳假设。本文通过允许任意有限阶端点 jet 的更强归纳命题修复证明，同时保留光滑性断言，并给出与独立强可控性方法一致的交叉验证。",
+        "key_details": "关键数学条件为 (A,B) 可控、Sigma0,SigmaT>0、Q>=0、T>0 以及有限 jet 阶数 r；规范情形取 B_n=e_n，控制到协方差变化率的映射在规范单输入下是单射，因此端点插值必须内置于归纳。证明只实际需要 r=0，但为保持光滑性需同时证明所有有限阶 jet；加性噪声通过 Gamma(tau)=int_0^tau e^{sA}Qe^{sA^T}ds 的小时间拼接处理。本文是证明补遗，不含数值实验或新数据集，独立路线依赖 Ballantine 型分解及后续显式因子构造算法。"
+      },
+      "affiliations": [
+        "Università di Padova",
+        "Georgia Institute of Technology",
+        "University of California, Irvine"
+      ],
+      "affiliations_text": "Università di Padova, Georgia Institute of Technology, University of California, Irvine",
+      "score": 4.940355464126044,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2610.40799v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040799v1-captain-a-pipeline-for-post-training-code-as-policy-robot-agents",
+      "source": "arxiv",
+      "title": "CaPtain: A Pipeline for Post-Training Code-as-Policy Robot Agents",
+      "authors": [
+        "Yijia Fan",
+        "Xilin He",
+        "Yilei Jiang",
+        "Dongming Wu",
+        "Jiaxu Wang",
+        "Xiangyu Yue"
+      ],
+      "authors_text": "Yijia Fan, Xilin He, Yilei Jiang, Dongming Wu, Jiaxu Wang, Xiangyu Yue",
+      "abstract": "Across coding, web, and tool-use tasks, language-model agents are now routinely trained with the same recipe: supervised fine-tuning (SFT) to learn the interface, then multi-turn reinforcement learning (RL) to master it. Code-as-policy (CaP) casts robot manipulation in the same form, as the policy writes code against robot APIs and reads back the results, so the same recipe should apply. Yet existing CaP agents sidestep training: they either prompt closed frontier models or delegate manipulation to pre-trained vision-language-action models (VLAs) and high-level skills, while small open vision-language models (VLMs) fail outright. We present CaPtain, an open post-training pipeline that turns a small open VLM into a capable CaP agent, with no VLA, frontier model, or privileged state at test time. CaPtain trains and deploys the policy inside CaPtain-Harness, which exposes low-level perception, geometry, and guarded-motion primitives across simulation and real hardware. We first align the base model via SFT on synthetic trajectories generated with GPT-6 Astra, then apply multi-turn RL. Multi-turn RL must credit tens of agent requests, whose physical effects often surface turns later, from a single end-of-episode outcome. We therefore introduce a physical critic that reads privileged simulator state, never seen by the policy, and credits each request by how much it changes the predicted chance of success. Starting from Qwen3.5-4B (0% zero-shot), CaPtain-4B reaches 55.4% held-out LIBERO success after SFT and 73.8% after RL. On LIBERO-PRO, it reaches 78.5%, surpassing several frontier-model agents, and its RL gains persist across three perturbation suites (+17.6 to +21.2 points). Without target-domain training, it attains 83.3% on SimplerEnv WidowX, exceeds frontier models on CaP-Bench, and runs on a real robot after simulation-only adaptation. We release all code, data, and model weights.",
+      "url": "http://arxiv.org/abs/2610.40799v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40799v1",
+      "tldr": "CaPtain is an open SFT-then-multi-turn-RL pipeline that trains a small open VLM into a capable code-as-policy robot agent by using a privileged simulator critic for per-request credit, achieving strong simulated and zero-shot real-robot manipulation without VLAs, frontier models, or privileged state at test time.",
+      "detailed_reading": {
+        "motivation": "现有代码即策略（CaP）机器人智能体多依赖闭源前沿模型提示、冻结VLA或高层技能，小开源VLM直接控制机器人几乎失败；缺少一套像语言智能体那样、在低层感知与运动原语上完成SFT加多轮RL的完整后训练方案。",
+        "method": "CaPtain在CaPtain-Harness中训练与部署策略：该执行环境仅暴露22个低层感知、几何测量与受保护运动原语，策略每轮编写Python代码调用API，并读取结构化文本回执和新图像，最多60次请求；先用GPT-6 Astra生成的同格式合成多轮轨迹对Qwen3.5-4B做SFT，再进行多轮RL，其中模拟器评论家读取策略不可见的特权物理状态，按每个请求对预测成功概率的改变分配信用，结合SAO流式RL与非对称actor-critic训练，测试时移除评论家，仅用相机图像和回执。",
+        "result": "从Qwen3.5-4B零样本0%起步，SFT后在留出LIBERO上达到55.4%，RL后提升至73.8%；LIBERO-PRO达到78.5%，超过多个前沿模型智能体，RL增益在三个扰动套件上保持+17.6至+21.2点；无目标域训练时在SimplerEnv WidowX达到83.3%，在CaP-Bench超过前沿模型，并仅经仿真适配即可运行于真实机器人。",
+        "conclusion": "结果表明，机器人在低层执行框架上的操作可以像其他语言智能体一样通过SFT加多轮RL后训练，小开源VLM无需测试时VLA、前沿模型或特权状态即可成为独立CaP智能体；作者释放代码、数据和模型权重，但RoboTwin 2.0与RoboDojo等迁移仍有限。",
+        "key_details": "关键设计是22个仅低层原语构成的便携执行框架、每轮结构化物理回执、最多60轮交互，以及仅训练期使用的特权模拟器评论家；信用在固定时间索引上度量成功概率变化，使纯感知/验证请求信用接近零而抓取与放置获得主要信用，评论家从不暴露给策略；SFT数据由GPT-6 Astra在框架内合成，RL结合SAO与asymmetric actor-critic，具体损失与完整超参见附录；局限包括跨基准/ embodiment迁移有限、真实机器人仅仿真适配、依赖模拟器特权状态训练。"
+      },
+      "affiliations": [
+        "NovaXBot",
+        "The Chinese University of Hong Kong"
+      ],
+      "affiliations_text": "NovaXBot, The Chinese University of Hong Kong",
+      "score": 4.7769275324487515,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2610.40728v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040728v1-bayesian-distribution-system-state-estimation-with-flow-matching",
+      "source": "arxiv",
+      "title": "Bayesian Distribution System State Estimation with Flow Matching",
+      "authors": [
+        "Nan Lin",
+        "Peter Palensky",
+        "Pedro Vergara Barrios"
+      ],
+      "authors_text": "Nan Lin, Peter Palensky, Pedro Vergara Barrios",
+      "abstract": "Medium-voltage feeders have few real-time measurements, so distribution system state estimation (DSSE) rests on pseudo-measurements of the secondary substations, a prior in Bayesian terms. Weighted least squares keeps the power flow exact but reduces this prior to a mean and variance, while supervised deep learning estimators also learn the power flow and are tied to one measurement set. We propose PoSE (posterior sampling for state estimation), which keeps the Bayesian structure of DSSE and learns only what the distribution system operator does not know, namely the distribution of substation injections, modelled by a neural network trained with flow matching on historical data. The power flow equations, grid topology and measurements enter only at sampling, through a noise-aware Kalman-type correction. The neural network therefore never approximates the power flow, but every posterior sample is a physically consistent operating point, and one trained prior serves any measurement set, noise level and topology. On the IEEE 33-bus feeder, PoSE lowers the probabilistic injection error (CRPS) by 6.7-7.5% against a full-covariance Gaussian prior in all 12 tested settings. It provides reliable uncertainty: the 90% intervals contain the true injection almost exactly as often as exact posterior samples would, whereas those of supervised estimators contain it in only 37-78% of cases. On the 240-bus unbalanced three-phase Iowa feeder, it gives the lowest injection, voltage and branch-current errors of all estimators. A fast variant matches this accuracy at 0.2-0.6s per snapshot and, without retraining, beats Gaussian priors and retrained supervised estimators on seven reconfigured topologies.",
+      "url": "http://arxiv.org/abs/2610.40728v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40728v1",
+      "tldr": "PoSE is a Bayesian distribution system state estimation method that learns a flow-matching prior over substation injections and combines it at sampling with a noise-aware AC power-flow correction to produce calibrated, physically consistent posterior samples, improving accuracy and uncertainty while avoiding retraining across measurement sets, noise levels, and topologies.",
+      "detailed_reading": {
+        "motivation": "中压配电网实时量测稀少，配电系统状态估计主要依赖二次变电站注入的伪量测，也就是贝叶斯框架中的先验；但加权最小二乘把这一先验简化为均值与方差，监督式深度学习又绑定单一量测配置且需近似潮流。作者希望同时保留贝叶斯结构、AC潮流一致性和校准不确定性，并让一个先验可服务任意量测集、噪声水平和拓扑。",
+        "method": "PoSE先用历史二次变电站注入数据训练条件流动匹配先验：对注入按节点标准化，在线性路径上回归速度场，网络为带自适应层归一化的残差MLP，月份、时刻用傅里叶特征、日类型用嵌入表示；该先验不包含传感器、噪声或电网模型。推理时从先验采样，并在每个Euler步用Kalman型端点校正把样本拉向量测：残差始终通过AC潮流h计算，校正矩阵H取LinDistFlow线性化，噪声协方差用R_eff=R+Σ_lin吸收线性化误差；三相不平衡网络通过固定的不平衡LinDistFlow线性算子和相别功率分配进入校正，无需重训先验。最终每个后验样本再经AC潮流映射为物理一致运行点；PoSE-fast仅沿量测方向构造端点协方差，使计算量随量测数而非状态维数增长。",
+        "result": "在IEEE 33节点馈线上，PoSE在全部12种测试设置中把注入概率误差CRPS相对全协方差高斯先验降低6.7%–7.5%；其90%区间对真实注入的覆盖率接近精确后验样本，而监督式估计器仅37%–78%。在240节点不平衡三相Iowa馈线上，PoSE取得所有估计器中最低的注入、电压和支路电流误差；PoSE-fast每快照耗时0.2–0.6 s并保持精度，且不重训即在7种重构拓扑上优于高斯先验和重训的监督式估计器。",
+        "conclusion": "PoSE表明，将DSO已知的潮流方程、拓扑与量测噪声作为似然，把未知的变电站注入联合分布作为一次性学习的生成先验，可以在推理时得到校准且物理一致的后验样本。该方法无需按量测配置或拓扑重训，能直接给出电压越限和支路过载概率，适合作为可迁移的贝叶斯DSSE方案。",
+        "key_details": "关键实现包括：先验仅在注入空间学习，网络不近似潮流；校正残差用AC模型而H用LinDistFlow，并将AC与线性化量测差异的协方差Σ_lin并入R_eff；三相不平衡通过固定线性H和相别功率分配处理。训练使用AdamW、学习率1e-3、1000步预热后余弦衰减、批量1024、权重衰减0.1、dropout 0.1、EMA 0.999，训练10000步并按验证流动匹配损失选模；网络4个残差块、宽度512（Fluvius数据256）、嵌入128维。局限在于先验依赖历史数据代表性，快速变体对端点协方差做量测方向近似，线性化误差仅以协方差补偿而非严格消除。"
+      },
+      "affiliations": [
+        "Delft University of Technology"
+      ],
+      "affiliations_text": "Delft University of Technology",
+      "score": 4.596590880747697,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.40757v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040757v1-autohebb-self-modifying-neural-networks-that-zero-shot-infer-and-continually-learn",
+      "source": "arxiv",
+      "title": "AutoHebb: Self-Modifying Neural Networks that Zero-Shot Infer and Continually Learn",
+      "authors": [
+        "Daniel Levine",
+        "David van Dijk",
+        "Kenneth Kay"
+      ],
+      "authors_text": "Daniel Levine, David van Dijk, Kenneth Kay",
+      "abstract": "Humans and animals have a unique capacity to generalize and learn in novel circumstances, including \"0-shot\" inference (ZI) and continual learning (CL) -- two powerful cognitive abilities. Despite this importance, efforts to model ZI and CL are seriously limited in several ways. First, existing models typically lack components critical to ZI and CL in the brain, namely, strong inductive biases (for ZI) and autonomous control of learning (for CL). Second, models can be less tractable to analysis if model components are overly complex (lacking simplicity), or too task-restricted if model components are overly bespoke (lacking expressivity). Here we introduce autonomous Hebbian networks (\"AutoHebb\"), a class of online learning feedforward neural networks that realize strong inductive biases and autonomously controlled learning, and are both simple and expressive. Unlike standard models that learn via externally controlled optimization (e.g. gradient descent), AutoHebb networks combine external feedback with internally generated activity to produce a global learning signal ('neuromodulator') fed back to the network. The neuromodulator in turn gates a biologically grounded local learning rule (3-factor Hebbian rule) that updates networks' plastic weights. Using meta-learning to search for fixed (non-plastic) weights, we find that AutoHebb networks (1) succeed on ZI tasks, (2) show emergent (untrained) ZI/CL abilities, (3) admit reverse-engineering into explicit algorithms, and (4) outperform modern learning models on ZI/CL tasks. Lastly, performance comparisons to related models implied an essential role for three model components: meta-learning, Hebbian plasticity, and autonomous control of learning. These findings indicate that AutoHebb may be useful in hypothesis generation, analysis, and discovery of biologically grounded forms of learning and generalization.",
+      "url": "http://arxiv.org/abs/2610.40757v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40757v1",
+      "tldr": "AutoHebb is a class of self-modifying feedforward neural networks that use meta-learned fixed weights and a neuromodulated three-factor Hebbian plasticity rule to achieve strong zero-shot inference and continual learning, outperforming modern models and revealing emergent learning abilities.",
+      "detailed_reading": {
+        "motivation": "现有模型在零样本推理（ZI）和持续学习（CL）上常缺少大脑式关键要素：ZI所需的强归纳偏置，以及CL所需的自主学习控制；同时模型若过于复杂就难分析，若过于专用又缺乏表达力。作者据此提出AutoHebb，试图用自生成学习信号门控局部可塑性，在简单前馈网络中同时实现强先验和在线持续学习。",
+        "method": "AutoHebb由主网络和控制网络组成，权重分为固定与可塑两类；主网络按 h_i=g((W_i+A_i⊙P_i(t))h_{i-1}+b_i) 前向计算并用固定线性读出加sigmoid产生二值响应，控制网络接收最后隐藏层h_L与外部反馈φ（正确为1、错误为0）并输出标量神经调质m。每个trial依次执行输入、输出、控制和更新：m门控三因子Hebbian局部规则 P_i(t+1)=λP_i(t)+ηm h_i h_{i-1}^T，仅用突触前后活动与全局m更新可塑权重。固定权重、塑性参数A、学习率η和衰减λ通过元学习外环优化，内环在episode内进行Hebbian在线更新且每个episode开始时P置0，外环用梯度下降和交叉熵基于episode表现更新固定参数。",
+        "result": "在四个具有简单零样本推理结构的ZI/CL任务上，AutoHebb成功完成ZI，并表现出未训练的涌现ZI/CL能力，包括快速知识组装和长度泛化；网络还可被反工程为显式学习-推理算法。对比结果显示其优于现代学习模型，包括需要学习多个零样本任务的情形；与缺少特定组件的相关模型比较表明，元学习、Hebbian可塑性和自主神经调质控制三者对性能均必不可少。",
+        "conclusion": "AutoHebb把强归纳偏置与自主学习控制结合在简单且可表达的前馈架构中，既能处理ZI/CL任务，又便于反工程和理论分析。它可作为研究生物基础学习与泛化的假设生成、分析和发现框架，并可能用于神经科学、心理学及应用场景。",
+        "key_details": "关键实现包括：任务为{0,1}二值响应，反馈φ仅指示对错；固定参数经元学习承载先验结构，可塑权重每episode初始化为0，三因子Hebbian更新含固定学习率η与衰减λ≤1；控制网络使用固定权重但可扩展为可塑。架构刻意限制为前馈、将神经调质生成隔离到控制子网并局部化可塑权重，以提升可分析性和任务适用范围；外环采用梯度下降交叉熵但也可换其他优化器。局限在于当前主要验证四个简单零样本结构任务，生物学习信号的具体身份与作用仍开放，且控制网络固定等设计约束了更广泛结论。"
+      },
+      "affiliations": [
+        "UCSF",
+        "Yale University",
+        "University of Rochester",
+        "Howard Hughes Medical Institute"
+      ],
+      "affiliations_text": "UCSF, Yale University, University of Rochester, Howard Hughes Medical Institute",
+      "score": 4.594549653879369,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2610.40740v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040740v1-certified-behavioral-retention-for-continual-adaptation-with-held-out-anchors",
+      "source": "arxiv",
+      "title": "Certified Behavioral Retention for Continual Adaptation with Held-Out Anchors",
+      "authors": [
+        "Ahanaf Hasan Ariq",
+        "Abrar Shahid"
+      ],
+      "authors_text": "Ahanaf Hasan Ariq, Abrar Shahid",
+      "abstract": "Continual adaptation requires deciding not only how to update a model, but whether to commit an update without exceeding a declared budget for changes to protected behavior. We introduce Certified Anchor-Based Adaptation (CABA), a candidate-agnostic post-update gate that reserves historical observations from candidate optimization, compares old and candidate policies on frozen representations, and selects the largest tested interpolation coefficient whose worst-anchor forward KL divergence remains within budget. The finite check requires neither action labels nor complete trajectories. We develop a theory-led certification framework that separates measured anchor retention from conditional off-anchor guarantees. Under explicit representation-coverage and Lipschitz assumptions, an accepted update satisfies a uniform behavioral-divergence bound on protected support. The analysis gives regularity bounds for affine softmax heads, probabilistic coverage and compression guarantees, interpolation monotonicity conditions, grid-resolution bounds, and trajectory-level and sequential-composition guarantees. In a controlled UCI Human Activity Recognition study used as a non-stationary sensor-policy proxy, CABA reduces mean forgetting from 1.01 percent for unconstrained adaptation to 0.00 percent at budget epsilon = 0.05, while reducing final average accuracy from 93.04 percent to 88.48 percent. The experiment illustrates a retention-plasticity trade-off and does not establish foundation-model or robotic performance. CABA provides an auditable retention check for candidate generators exposing comparable policy distributions and a declared update path, while deployment also requires separate evidence of current-task utility.",
+      "url": "http://arxiv.org/abs/2610.40740v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40740v1",
+      "tldr": "The paper introduces Certified Anchor-Based Adaptation (CABA), a candidate-agnostic post-update gate that uses held-out historical anchors and worst-anchor forward KL on frozen representations to accept the largest interpolation step within a declared behavioral-change budget, providing an auditable retention check with conditional off-anchor guarantees and illustrating a retention–plasticity trade-off.",
+      "detailed_reading": {
+        "motivation": "持续适应中，模型更新既要提升当前任务，也必须避免破坏已受保护的历史行为，因此需要一个候选无关的提交门控来判断是否提交以及提交多大比例的更新，并在预声明预算内提供可审计证据。现有回放、正则化和信任域方法多在候选优化过程中施加约束，缺少将优化与最终接受分离的保留性检查。",
+        "method": "CABA将历史观测或冻结表示保留为不参与候选优化的审计锚点，对任意候选更新构造旧参数与候选参数之间的插值路径，在累积的held-out锚点上计算旧策略到插值候选策略的前向KL散度，并以最坏锚点散度作为约束，在有限网格中选择满足预算的最大插值系数，不需要动作标签或完整轨迹。理论部分将有限锚点测量与锚点外保证分离：在表示覆盖为ρ-net且散度关于表示L-Lipschitz的假设下，被接受更新在受保护支撑上满足ε+Lρ的一致散度界，并给出高概率覆盖、压缩锚点惩罚、网格分辨率、轨迹级和序列组合界。",
+        "result": "在UCI-HAR的非平稳传感器策略代理实验中，使用561维冻结特征和线性softmax头、5个按受试者时间段划分的流式任务、3个随机种子，当预算ε=0.05时，CABA将无约束微调的平均遗忘从1.01个百分点降至0.00个百分点，但最终平均准确率从93.04%降至88.48%，显示明确的保留性—可塑性权衡。理论上，接受更新在覆盖与Lipschitz假设下获得均匀行为散度界，压缩锚点将界扩展为ε+L(ρ+η)，序列组合界则表明逐次可接受更新仍可能累积退化。",
+        "conclusion": "CABA为暴露可比策略分布和声明更新路径的候选生成器提供可审计的保留性门控，其有限检查适合作为部署前的第二把钥匙，但不等同于当前任务效用、公平性、安全性或全局安全保证。部署时仍需在路径选择后用新鲜数据单独验证当前任务效用，并注意重复接受或拒绝反馈仍可能泄露锚点信息。",
+        "key_details": "实验每个进入训练组最多贡献256个表示作为未来锚点，总锚点数上限1280，候选训练从不使用CABA审计锚点，插值网格为{0,0.05,…,1}，采用最坏锚点而非平均散度，空锚点分数记为零，并可在有数值误差界e_num时要求估计散度加e_num不超过预算。理论关键点包括ρ-net覆盖、散度Lipschitz性、高概率覆盖所需的独立采样条件、压缩表示带来的η惩罚、网格分辨率下相对连续最优系数的损失，以及单调性仅对仿射softmax头插值成立而不保证一般LoRA因子插值。局限是锚点集完整性、覆盖假设、评估代码可信性和受保护支撑外风险均未由有限检查解决，也不能防御恶意候选或证明任务准确率保持。"
+      },
+      "affiliations": [
+        "Ideal School and College",
+        "Notre Dame College"
+      ],
+      "affiliations_text": "Ideal School and College, Notre Dame College",
+      "score": 4.530221303094045,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2610.40828v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040828v1-from-teleoperation-to-long-horizon-dexterity-evaluating-visuomotor-skills-and-offline-proxies-for-dexterous-manipulation",
+      "source": "arxiv",
+      "title": "From Teleoperation to Long-Horizon Dexterity: Evaluating Visuomotor Skills and Offline Proxies for Dexterous Manipulation",
+      "authors": [
+        "Ammar N. Abbas",
+        "Aayush Jain",
+        "Prashanth Viswanath",
+        "Nivesh Gadipudi",
+        "Giulia Vilone",
+        "Jim Gibbons"
+      ],
+      "authors_text": "Ammar N. Abbas, Aayush Jain, Prashanth Viswanath, Nivesh Gadipudi, Giulia Vilone, Jim Gibbons",
+      "abstract": "Imitation learning policies are intended to make robotic manipulation robust to variations in object pose, appearance, and environment that challenge pre-programmed motion. However, real-world performance remains difficult to predict, as conventional optimization signals such as validation loss show no consistent relationship with robot success. To identify the design choices that govern real-world performance, 281 imitation-learning policies spanning seven policy families were evaluated in approximately 1,700 real-robot trials of RJ45 connector grasping and insertion using a five-fingered robotic hand. Controlled ablations showed that observation and action representations dominated conventional optimizer and sampling choices. For point-cloud policies, region-of-interest cropping, representation in the robot-base frame, and normalization within the point encoder each improved success by 70-100 percentage points. For the vision-language-action policy, absolute rather than relative action prediction improved insertion success by up to 70 percentage points. Skill decomposition, multi-view perception, and recovery demonstrations were associated with the strongest-performing systems, although their effects were not independently isolated. Of 67 offline metrics evaluated, only five measures of predicted-motion smoothness and directness reliably correlated with insertion success (r = -0.70 to -0.80), and only within a single policy family. These results identify representation choices as key determinants of real-world imitation-learning performance and show that offline metrics can shortlist policies, but cannot replace real-robot evaluation.",
+      "url": "http://arxiv.org/abs/2610.40828v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40828v1",
+      "tldr": "In ~1,700 real-robot trials of dexterous RJ45 grasping and insertion, observation and action representation choices dominated imitation-learning success far more than optimizer or sampling choices, and offline metrics could only shortlist policies rather than replace real-robot evaluation.",
+      "detailed_reading": {
+        "motivation": "模仿学习策略在真实世界中的表现难以由验证损失等常规离线信号预测，尤其多指灵巧手接触丰富任务缺乏系统性设计证据；作者希望通过大规模真机消融识别决定RJ45抓取与插入成功率的观测/动作表示等设计选择，并检验离线指标能否替代真机评估。",
+        "method": "在Franka Research 3加Tesollo DG5F五手指平台上采集遥操作演示（30 Hz，策略10 Hz），任务分为经典运动到预设起点、学习抓取、经典搬运、学习插入四阶段；策略输入腕部RGB-D（RGB及2048点云，部分加第三方视角），输出10维末端平移3、欧拉角3和四个手关节命令（内部6D旋转时13维）。比较DP、DP3、iDP3、flow matching、ACT、等变扩散和π0.5 VLA共七类281个策略，关键消融包括ROI裁剪、相机/机器人基座坐标系、点编码器内归一化、绝对/相对动作、预测时域、优化器与采样器；用FoundationPose识别夹具，按F/G/P/I嵌套阶段和Fisher精确检验评分，并在67个离线指标上做留出验证与多检验校正/留一策略稳健性分析。",
+        "result": "约1700次真机试验显示表示选择远强于优化器和采样器：点云策略中ROI裁剪、机器人基座坐标系和点编码器内归一化分别带来70–100个百分点提升，π0.5采用绝对动作较相对动作插入提升至多70个百分点。最佳iDP3+ROI在两夹具均100%插入，匹配微调VLA而推理显存约为其1/8，并在光照、背景、场地和阳光变化下保持80–100%插入，但更紧公差插座降至0–40%。67个离线指标中仅5个预测轨迹平滑/直接性指标在单一iDP3族内与插入成功率相关（r=-0.70至-0.80），无指标追踪抓取成功率或跨策略族泛化。",
+        "conclusion": "真实机器人模仿学习的首要决定因素是观测与动作表示，而非优化器/采样器等二阶调参；接触丰富任务应分解为抓取与插入技能并结合多视角和恢复演示。离线平滑性指标只能在同一策略族内筛选插入检查点，不能替代真机评测；紧凑点云策略可在该任务上以更低内存匹敌预训练VLA。",
+        "key_details": "数据含中心/左夹具等五种放置的遥操作演示，抓取技能用按起始位姿簇均衡的数据、插入技能用全部回合，并加入恢复演示；观测为腕部D455 RGB 848×480与2048点云，双视角增加静态第三人称相机，动作10维、策略10 Hz。实现上比较ImageNet/R3M初始化、LoRA微调π0.5、PointNet/多阶段点编码器及扩散去噪、流匹配速度回归、ACT条件自编码器解码，训练在4×H100，最佳点云技能约69M参数、每epoch约18s、训练/推理显存约6.0/1.0GB；评分采用嵌套F/G/P/I并以Fisher检验比较单变量配对消融。局限包括多因素改动（技能分解、多视角、恢复演示）未独立隔离，离线相关性仅来自21个iDP3双夹具插入检查点且五项指标彼此高度相关，抓取失败涉及首次接触而回放观测难复现。"
+      },
+      "affiliations": [
+        "Analog Devices, Inc."
+      ],
+      "affiliations_text": "Analog Devices, Inc.",
+      "score": 4.3597508373304255,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2610.40919v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/02/261040919v1-approximate-dynamic-programming-for-link-reconfiguration-to-reduce-malicious-input-controllability-in-consensus-networks",
+      "source": "arxiv",
+      "title": "Approximate Dynamic Programming for Link Reconfiguration to Reduce Malicious Input Controllability in Consensus Networks",
+      "authors": [
+        "Nathaniel Mailhot",
+        "Mohammad Pirani",
+        "Davide Spinello"
+      ],
+      "authors_text": "Nathaniel Mailhot, Mohammad Pirani, Davide Spinello",
+      "abstract": "Communication links influence how strongly a malicious input at one sensor affects a consensus network. We study how a defender can reduce this influence by selecting one additional link after observing the currently attacked sensor. The attacked sensor changes over time, and vulnerability is measured by the trace of a finite-horizon controllability Gramian. A prescribed local epsilon-greedy attacker response rule defines a discounted Markov decision process for the defender. Exact dynamic programming (DP) provides an optimal policy using the full Gramian payoff matrix and attacker transition model. We then introduce approximate dynamic programming (ADP) that learns from sampled attacker transitions and empirical Gramian costs estimated from measured impulse responses. Under conditionally unbiased costs and standard sampling and learning-rate conditions, the learned action-value table converges to the exact DP solution. The analysis uses Bellman contraction and bounds the effect of persistent Gramian estimation bias, establishing when measured responses recover optimal defender decisions without constructing the full payoff matrix. In simulations on 20- and 100-node graphs, empirical ADP rollout costs are within 0.23% and 1.76%, respectively, of exact DP. In a two-dimensional intruder tracking example, both policies reduce network-wide root-mean-square tracking error spread by approximately 25% relative to an unmitigated attack.",
+      "url": "http://arxiv.org/abs/2610.40919v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40919v1",
+      "tldr": "This paper proposes an approximate dynamic programming method that learns which additional communication link to activate after observing the currently attacked sensor, reducing malicious-input controllability in consensus networks without constructing the full Gramian payoff matrix and achieving near-exact-DP performance.",
+      "detailed_reading": {
+        "motivation": "共识网络中通信链路会决定单一传感器处恶意输入对全网状态的影响强度。防御者在观测到当前被攻击传感器后，只能激活一条额外链路来降低有限时域可控性格拉姆矩阵迹所度量的脆弱性。由于被攻击传感器随时间变化且防御动作会改变下一次攻击转移，需要研究序贯链路重构策略。",
+        "method": "将基础共识图、候选额外链路及防御后拉普拉斯矩阵作为输入，以被攻击节点为MDP状态、额外链路为动作，并用有限时域可控性格拉姆矩阵迹构造单阶段代价；给定攻击者局部epsilon-greedy响应规则后形成带动作依赖转移概率的折扣MDP。精确方案先计算全部被攻击节点与防御动作对应的Gramian代价矩阵并求解Bellman方程得到最优策略，再引入ADP，用采样得到攻击者转移和由实测脉冲响应估计的经验Gramian代价更新动作价值表，推理时在每个被攻击状态选择最小学习动作价值对应的链路。",
+        "result": "精确DP给出利用完整Gramian代价矩阵和攻击转移模型的最优防御基准。ADP在条件无偏代价及标准采样和学习率条件下收敛到精确DP解，并能界定持续Gramian估计偏差的影响；在20节点和100节点图仿真中，经验ADP rollout代价分别与精确DP相差约0.23%和1.76%。在二维入侵者跟踪示例中，两种策略相对未缓解攻击均将全网均方根跟踪误差离散度降低约25%。",
+        "conclusion": "研究表明，防御者无需预先构造完整可控性代价矩阵，也可通过采样攻击转移和实测脉冲响应学习近最优链路重构策略。该框架把移动攻击下的链路防御表述为序贯网络重构，并在给定攻击响应规则与估计偏差足够小的条件下恢复最优防御决策。",
+        "key_details": "关键假设包括代价条件无偏、攻击转移可采样、标准学习率条件以及有限时域Gramian估计偏差有界；分析利用Bellman收缩性在无穷范数下证明收敛并约束持续偏差影响。实现上每阶段仅激活一条额外链路，基础边数保持不变，攻击者按局部移动半径和epsilon探索规则转移，平局选最小节点编号，且需设定折扣因子和Gramian时域。精确代价矩阵可利用共享特征分解将构造复杂度降至约O(mn^3)，而逐对Gramian实现约为O(mn^4)；局限性在于攻击者响应规则为预设、仿真规模有限且持续估计偏差会影响最优决策恢复。"
+      },
+      "affiliations": [
+        "University of Ottawa",
+        "Carleton University"
+      ],
+      "affiliations_text": "University of Ottawa, Carleton University",
+      "score": 4.270727831485634,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.40914v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040914v1-no-channels-left-behind-understanding-diffusion-acceleration-through-residual-gates",
+      "source": "arxiv",
+      "title": "No Channels Left Behind: Understanding Diffusion Acceleration through Residual Gates",
+      "authors": [
+        "Junha Park",
+        "Jaemyung Yu",
+        "Jaehui Hwang",
+        "Jong-Seok Lee",
+        "Dongyoon Han"
+      ],
+      "authors_text": "Junha Park, Jaemyung Yu, Jaehui Hwang, Jong-Seok Lee, Dongyoon Han",
+      "abstract": "Training acceleration methods for diffusion transformers, such as REPA and dispersive regularization, are commonly explained by additional supervision, spatial-structure priors, or improved feature geometry. We revisit this view and uncover a striking internal change: the AdaLN-Zero residual gate $α$, which directly controls how conditioned updates enter the residual stream, is substantially reorganized by these methods. This observation motivates our hypothesis that acceleration arises, at least in part, from reshaping the residual gating pathway rather than solely from the feature structures explicitly imposed by auxiliary objectives. Supporting this view, accelerated models are markedly more sensitive to perturbations of $α$, and their gate geometry reflects semantic relationships among classes. We further introduce the normalized participation ratio (nPR) to characterize the channel-wise organization of the gates and find that, across REPA teachers, projector architectures, and radial-objective targets, broader gate participation accompanies better generation quality. Guided by this insight, we propose a simple teacher-free radial objective that promotes broader gate participation through feature-norm regularization, without pairwise feature comparisons. On ImageNet $256\\times256$ with SiT-B/2, our method improves FID over dispersive loss while increasing mean gate participation over timesteps and classes, further supporting the link between gate organization and training acceleration. Our results identify residual-gate reorganization as a measurable axis of diffusion training acceleration and suggest a simple direction for further acceleration.",
+      "url": "http://arxiv.org/abs/2610.40914v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40914v1",
+      "tldr": "This paper shows that diffusion-transformer training acceleration is driven in part by reorganization of AdaLN-Zero residual gates, introduces normalized participation ratio to measure gate channel usage, and proposes a teacher-free radial objective that broadens gate participation and improves FID.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yonsei University",
+        "NAVER AI Lab"
+      ],
+      "affiliations_text": "Yonsei University, NAVER AI Lab",
+      "score": 4.234872970022475,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.40748v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040748v1-worldbridge-bridging-video-and-action-for-task-generalization-in-world-action-models",
+      "source": "arxiv",
+      "title": "WorldBridge: Bridging Video and Action for Task Generalization in World Action Models",
+      "authors": [
+        "Jun Cen",
+        "Yubo Guo",
+        "Hao Li",
+        "Liangkai Li",
+        "Yaoxu Lyu",
+        "Meng Wei",
+        "Zeqi Xiao",
+        "Sizhe Yang",
+        "Yuqiang Yang",
+        "Yifan Ye",
+        "Shanghang Zhang",
+        "Duo Zheng"
+      ],
+      "authors_text": "Jun Cen, Yubo Guo, Hao Li, Liangkai Li, Yaoxu Lyu, Meng Wei, Zeqi Xiao, Sizhe Yang, Yuqiang Yang, Yifan Ye, Shanghang Zhang, Duo Zheng",
+      "abstract": "Achieving the broad task generalization of embodied models in physical environments remains a central challenge in robot learning. We study this challenge in World Action Models (WAMs) through two complementary capabilities: video generalization, which predicts the visual evolution of new tasks, and action generalization, which translates these predictions into executable behavior through a video-to-action bridge. By varying video and action supervision for tasks outside an initial training set, we examine their respective contributions to task transfer. On RoboTwin 2.0, using only in-distribution video-action supervision yields a 25.07% success rate on out-of-distribution tasks. Introducing videos of these tasks without their action labels raises success to 55.90%, while adding just one action-labeled demonstration per task further improves it to 70.70%. These findings suggest that broader video coverage enables task transfer by leveraging existing inverse-dynamics capabilities, while even sparse action supervision further strengthens those capabilities. Guided by this perspective, we introduce WorldBridge, a WAM with separate video and action experts connected through structured attention and trained with joint flow matching. WorldBridge incorporates visual memory at two temporal scales and action forcing, alongside a unified data processing pipeline that standardizes and filters heterogeneous robot trajectories and egocentric hand-derived supervision. Across multiple manipulation benchmarks, WorldBridge achieves state-of-the-art performance among the compared methods, including 96.23% on RoboTwin 2.0 full data setting and 80.9% on clean to random setting, 82.8% on RoboCasa GR1 TableTop, and 57.6% on DOMINO Level-1. Our study highlights the complementary roles of video prediction and action grounding in developing robots that generalize across tasks.",
+      "url": "http://arxiv.org/abs/2610.40748v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40748v1",
+      "tldr": "WorldBridge is a World Action Model that separates video and action experts—linked by structured attention and trained with joint flow matching—to leverage broad video prediction for task generalization and sparse action supervision for grounding these predictions into executable robot behavior, achieving state-of-the-art manipulation performance.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.2301591659678905,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.40857v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040857v1-frozen-in-time-how-a-physics-foundation-model-forgets-under-sim-to-real-adaptation",
+      "source": "arxiv",
+      "title": "Frozen in Time: How a Physics Foundation Model Forgets Under Sim-to-Real Adaptation",
+      "authors": [
+        "Haaris Mian",
+        "Miles Cranmer",
+        "Alessandro Favero",
+        "Payel Mukhopadhyay"
+      ],
+      "authors_text": "Haaris Mian, Miles Cranmer, Alessandro Favero, Payel Mukhopadhyay",
+      "abstract": "Scientific foundation models (SciFMs) have achieved remarkable performance on a wide range of PDEs, including the ability to efficiently adapt to unseen data distributions with additional finetuning. As with all neural architectures, finetuning such models comes with the risk of catastrophic forgetting, whereby adapting to new tasks degrades prior knowledge of the model. We study catastrophic forgetting in Walrus-1.3B, a SciFM for continuum dynamics, over the course of a two-stage sim-to-real adaptation: first finetuning on simulated flow around a cylinder and then adapting to experimental data of the same system. We find that finetuning on the simulations rapidly degrades rollout performance on the original pretraining datasets, with one-step errors increasing up to 35x after just 20 epochs. Subsequent adaptation to real data further erodes performance on the simulated task. We characterize the potential drivers of forgetting, such as dataset dependence and task representation similarity. We then show that replaying as little as 1% simulated data during real-data finetuning recovers most of the lost simulation performance while retaining effective adaptation to the experimental dynamics. Our results identify catastrophic forgetting as a practical obstacle to sim-to-real adaptation of SciFMs and show that lightweight replay strategies significantly improve retention.",
+      "url": "http://arxiv.org/abs/2610.40857v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40857v1",
+      "tldr": "Finetuning the Walrus-1.3B physics foundation model through two-stage sim-to-real adaptation causes rapid catastrophic forgetting—up to 35× higher one-step errors after just 20 epochs—but replaying as little as 1% simulated data during real-data finetuning recovers most lost simulation performance while retaining effective real-data adaptation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Polymathic AI",
+        "University of Cambridge"
+      ],
+      "affiliations_text": "Polymathic AI, University of Cambridge",
+      "score": 4.222078927619432,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.40871v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040871v1-tensorssm-memorizing-spatial-position-in-dynamic-state-space-for-tensor-core-generation",
+      "source": "arxiv",
+      "title": "TensorSSM: Memorizing Spatial Position in Dynamic State Space for Tensor Core Generation",
+      "authors": [
+        "Sheng Zhang",
+        "Xinyi Wang",
+        "Maolin Wang",
+        "Xiangyu Zhao"
+      ],
+      "authors_text": "Sheng Zhang, Xinyi Wang, Maolin Wang, Xiangyu Zhao",
+      "abstract": "High-dimensional tensors are ubiquitous in real-world applications but lead to massive storage overhead. Functional tensor decomposition addresses this by employing neural networks to map element coordinates to tensor cores, significantly reducing the parameters for data compression. However, existing functional methods typically flatten high-order tensors into 1D sequences. This folding operation causes highly overlapping local coordinate sequences and struggles to capture complex cross-mode spatial dependencies, severely limiting their expressiveness on diverse datasets. To tackle these challenges, we propose TensorSSM, a novel Implicit Neural Representation (INR) for functional decomposition method that memorizes spatial positions within a dynamic State Space Model (SSM). Specifically, TensorSSM first decomposes mode-wise coordinates into sequences spit by K-ary rule, encoding spatial tokens from coarse to fine, which effectively captures spatial variations. Furthermore, we extend the SSM's state space to explicitly map cross-mode spatial dependencies, allowing inter-mode interactions to enhance the updates of each mode. By integrating cross-mode information from previous hidden states into the current state transitions, TensorSSM effectively expands tensor representation along two dimensions: the sequence dimension for coarse-to-fine spatial tokens, and the state dimension for cross-mode memorization. This design effectively integrates spatial information into the state space and the tensor core, substantially advancing the state adaptability and enhancing the expressiveness of the data compression. Extensive experiments demonstrate that TensorSSM achieves significantly high reconstruction accuracy and storage efficiency, exhibiting robust expressiveness across diverse tensor datasets without relying on strict spatial assumptions.",
+      "url": "http://arxiv.org/abs/2610.40871v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40871v1",
+      "tldr": "TensorSSM is a functional tensor-decomposition method that uses K-ary coarse-to-fine coordinate tokenization and a spatial-aware state space model to memorize cross-mode spatial dependencies, enabling more expressive and storage-efficient high-dimensional tensor reconstruction.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.214218037385611,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2610.40858v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040858v1-faro-function-space-adaptive-return-to-risk-optimization-via-cross-block-equal-risk-contribution-budget-allocation",
+      "source": "arxiv",
+      "title": "FARO: Function-Space Adaptive Return-to-Risk Optimization via Cross-Block Equal-Risk-Contribution Budget Allocation",
+      "authors": [
+        "Xiaojun Wu",
+        "Cehao Yang",
+        "Xuhui Jiang",
+        "Chengjin Xu",
+        "Jia Li",
+        "Jian Guo"
+      ],
+      "authors_text": "Xiaojun Wu, Cehao Yang, Xuhui Jiang, Chengjin Xu, Jia Li, Jian Guo",
+      "abstract": "Training a large language model is compute-bound, and current recipes divide the work between optimizers by hand: orthogonalized momentum for attention and MLP matrices, Adam-style updates for the rest. This division rests on human priors about which layer type deserves which geometry, and it fixes a single global update budget that every parameter block shares. We introduce FARO, a function-space adaptive optimizer that makes the partition of parameters into blocks the unit of decision. FARO gives each block a geometry by its realized counterfactual return, then freezes the routes and reallocates the frozen per-block budget by cross-block equal risk contribution (ERC), the risk-parity principle from portfolio theory. On a GPT-style model trained on FineWeb, the framework gives two results. First, its FARO-Adaptive arm reaches 3.2780 nats at the full schedule, matching NorMuonAndAdam (3.2794), the best hand-designed recipe: it recovers the human prior without hand-setting per-layer geometry. Second, FARO-ERC improves on that arm: it lowers the clean-data loss at every one of 6 seeds, by 0.0136 nats on average, a modest but robust gain. Its sign test, paired test, and confidence interval all agree, and it exceeds the measured run-to-run noise at no added time or memory. It works by trimming the riskiest blocks rather than expanding the safest, and it holds up under a corrupted stream, still lowering the mean loss and winning the seed majority. The source code is available at https://github.com/wxj630/FARO.",
+      "url": "http://arxiv.org/abs/2610.40858v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40858v1",
+      "tldr": "FARO is a function-space adaptive optimizer that learns each parameter block’s update geometry from its realized counterfactual return and then reallocates a fixed update budget across blocks using equal-risk-contribution, matching the best hand-designed GPT training recipe and yielding small but robust loss improvements without extra time or memory.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.136096580415521,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2610.40861v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040861v1-near-optimal-first-order-regret-for-bandits-with-feedback-graphs",
+      "source": "arxiv",
+      "title": "Near-Optimal First-Order Regret for Bandits with Feedback Graphs",
+      "authors": [
+        "Mengxiao Zhang",
+        "Yuheng Zhang",
+        "Haipeng Luo",
+        "Paul Mineiro"
+      ],
+      "authors_text": "Mengxiao Zhang, Yuheng Zhang, Haipeng Luo, Paul Mineiro",
+      "abstract": "We study first-order regret guarantees for adversarial bandits with a fixed, known directed feedback graph. For strongly observable graphs, [ACBDK15] establishes a minimax regret of $\\widetildeΘ(\\sqrt{αT})$, where $α$ denotes the independence number of the graph and $T$ denotes the horizon. On the other hand, the best existing first-order bound scales as $\\widetilde{O}(\\sqrt{(κ+1) L^\\star})$ [LLZ20], where $κ$ denotes the clique partition number, satisfying $κ+1\\geqα$, and $L^\\star$ denotes the cumulative loss of the best arm, leaving a gap between the graph dependence in worst-case and first-order guarantees. In this paper, we bridge this gap by obtaining an expected regret bound of $\\widetilde{O}(\\sqrt{αL^\\star}+α)$. Our first result is an algorithm for the special case of self-aware graphs, in which every vertex has a self-loop. The algorithm combines the update of EXP3 [ACBFS02] with a sampling rule inspired by exploration by optimization [LS20]. More specifically, we construct a map whose fixed points yield sampling distributions that control the one-round regret remainder in terms of the learner's loss and the graph's independence number, which is crucial in deriving optimal first-order guarantees. We further show that a sufficiently accurate fixed point can be computed in polynomial time by a geometrically convergent iteration. Finally, we extend the algorithm to general strongly observable graphs and achieve the same $\\widetilde{O}(\\sqrt{αL^\\star}+α)$ guarantee by adapting the two-level aggregation approach of [LLZ20].",
+      "url": "http://arxiv.org/abs/2610.40861v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40861v1",
+      "tldr": "The paper closes the gap between worst-case and first-order regret for adversarial bandits with known directed feedback graphs by giving algorithms that achieve expected regret \\(\\widetilde{O}(\\sqrt{\\alpha L^\\star}+\\alpha)\\) for self-aware and general strongly observable graphs.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9616161143769357,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2610.40700v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040700v1-automatic-construction-of-strong-simple-baselines",
+      "source": "arxiv",
+      "title": "Automatic Construction of Strong Simple Baselines",
+      "authors": [
+        "Caleb N. Ellington",
+        "Jiaqi Wang",
+        "Sohan Addagudi",
+        "Elijah Cole"
+      ],
+      "authors_text": "Caleb N. Ellington, Jiaqi Wang, Sohan Addagudi, Elijah Cole",
+      "abstract": "To rigorously establish the value of a novel deep learning method, it must be compared against appropriate baselines. As deep learning has become increasingly common in the physical and life sciences, there have been numerous cases in which apparent progress has turned out to be an artifact of omitted or missing baselines. In this work, we investigate whether this problem can be mitigated by using large language models to automate the construction of baselines. We assemble 36 supervised classification and regression tasks from peer-reviewed studies in Nature, Science, and Cell-family journals that investigate novel deep learning methods for scientific applications. We then use a language model to construct simple baselines for each task. These automatically constructed baselines are strong, recovering a median of 95.5% (mean 85.7%) of the gap between a trivial predictor and the score of the deep learning model. The median simple baseline matches or exceeds the performance of the deep learning model in 12 studies. We further examine the variation across scientific domains and publication venues and we characterize the effects of test-time compute and access to different levels of study context. As human peer review has struggled to keep up with the rapidly increasing volume of research articles in recent years, our results suggest that automated baseline construction is a practical and scalable check on deep learning contributions in the physical and life sciences.",
+      "url": "http://arxiv.org/abs/2610.40700v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40700v1",
+      "tldr": "Using a large language model to automatically build simple baselines for 36 scientific deep-learning tasks, the authors find these baselines recover a median of 95.5% of the performance gap over trivial predictors and match or exceed the published deep-learning method on 12 tasks, suggesting automated baseline construction is a practical, scalable check on deep-learning claims in the physical and life sciences.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University",
+        "Sunday Scientific",
+        "University of Washington"
+      ],
+      "affiliations_text": "Carnegie Mellon University, Sunday Scientific, University of Washington",
+      "score": 3.9017785858740157,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.40732v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040732v1-dont-just-impute-detect-task-aware-diffusion-pipelines-for-edge-anomaly-detection",
+      "source": "arxiv",
+      "title": "Don't Just Impute, Detect: Task-Aware Diffusion Pipelines for Edge Anomaly Detection",
+      "authors": [
+        "Jeongsu Park",
+        "Taehyeon Yun",
+        "Geonwoo Kim",
+        "Yuji Lim",
+        "Moohong Min"
+      ],
+      "authors_text": "Jeongsu Park, Taehyeon Yun, Geonwoo Kim, Yuji Lim, Moohong Min",
+      "abstract": "Industrial Internet of Things (IIoT) edge pipelines routinely lose contiguous blocks of multi-sensor data to network dropouts and hardware faults. The standard remedy is a disjointed \"impute-then-detect\" pipeline whose imputer is trained only for Mean Squared Error (MSE). Such an imputer fills a missing block with the most probable normal pattern: a partially observed anomaly is smoothed back toward normality, and boundary artifacts on normal data raise false alarms. We call this imputation bias and propose the Task-Aware Diffusion Refiner (TADR), a conditional diffusion refiner trained against the loss landscape of a frozen downstream detector. Because back-propagating through the sampling trajectory is intractable, the task-aware terms act on the one-step clean-window estimate that the noise prediction already yields, so training costs no more than plain diffusion training. Under strict Point-to-Point evaluation over five seeds with paired significance tests, TADR raises F1 by $0.338$ over the unrefined detector on SMD ($p = 0.0015$), and the anomaly enhancement objective alone contributes $0.463$ in ablation. We also characterise when the method helps: the gain tracks the continuous, mutually redundant channels available and the anomaly evidence the outage removes, and it is absent on telemetry datasets dominated by one-hot command channels and on PSM. At ten sampling steps TADR runs in $41.4$ ms per window on a single CPU core, sustaining about $24$ concurrent 1 Hz streams from a $4.03$ MB model. Code and per-seed results are available at https://github.com/int-park422/TADR.",
+      "url": "http://arxiv.org/abs/2610.40732v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40732v1",
+      "tldr": "The paper proposes TADR, a task-aware conditional diffusion refiner that aligns block-missing data imputation with a frozen downstream anomaly detector’s objective rather than MSE, thereby preserving anomaly evidence, reducing false alarms, and improving edge anomaly detection while remaining CPU-deployable.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sungkyunkwan University"
+      ],
+      "affiliations_text": "Sungkyunkwan University",
+      "score": 3.888740643171451,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.40902v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040902v1-flapsim-a-composable-mujoco-simulation-platform-and-reduced-order-aerodynamic-model-hierarchy-for-flapping-wing-robotics",
+      "source": "arxiv",
+      "title": "FlapSim: A Composable MuJoCo Simulation Platform and Reduced-Order Aerodynamic Model Hierarchy for Flapping-Wing Robotics",
+      "authors": [
+        "Mingshan He"
+      ],
+      "authors_text": "Mingshan He",
+      "abstract": "Flapping-wing simulation must reconcile high-frequency wingbeat aerodynamics with the slower dynamics relevant to flight control and reinforcement learning. We present FlapSim, a modular open-source MuJoCo simulation platform that combines robot descriptions, wing geometry, and composable aerodynamic models in a deterministic simulation pipeline. Across $48$ held-out scenarios spanning frequency, gimbal, wind, frequency-step, gust, and cross-robot flat-plate regimes, we compare five reduced-order configurations operating at $1\\,\\text{ms}$ with a $50\\,μ\\text{s}$ quasi-steady blade-element reference. The built-in hover cycle-averaged baseline achieves a $67.51\\times$ CPU speedup but only $0.6593$ mean wrench fidelity. Combining multirate $21$-substep clock synchronization, three-dimensional linear/quadratic inflow and gust coupling, analytical blade-element geometry scaling, and phase-locked $1f\\text{--}6f$ harmonics raises mean fidelity to $0.9646$ at a $65.19\\times$ speedup in a five-block model. A streamlined four-block model without explicit step-transient lag states achieves $0.9662$ fidelity at a $67.98\\times$ speedup. Controlled ablations show that stroke harmonics are particularly important during frequency transitions, improving held-out frequency-step fidelity by $+0.3176$. Transfer-function analysis explains this effect: fixed-window cycle averaging retains harmonic contributions when the wingbeat frequency changes, so within-cycle reconstruction also improves the filtered wrench. Once phase alignment and harmonic synthesis are included, explicit transient lag states provide no additional benefit in this benchmark. These results characterize the accuracy--computation tradeoff of the aerodynamic hierarchy and identify timing, inflow, geometry, and harmonic representation as central considerations for reduced-order flapping-wing simulation.",
+      "url": "http://arxiv.org/abs/2610.40902v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40902v1",
+      "tldr": "FlapSim is a modular open-source MuJoCo platform for flapping-wing robotics whose composable reduced-order aerodynamic hierarchy achieves about 0.966 mean wrench fidelity at roughly 68× speedup over a 50 μs blade-element reference by combining multirate timing, 3D inflow/gust coupling, analytical geometry scaling, and phase-locked stroke harmonics, which are especially important during frequency transitions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Institute of Science Tokyo"
+      ],
+      "affiliations_text": "Institute of Science Tokyo",
+      "score": 3.8812025246149204,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2610.40822v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040822v1-quantifying-linepack-storage-potential-of-hydrogen-networks",
+      "source": "arxiv",
+      "title": "Quantifying Linepack Storage Potential of Hydrogen Networks",
+      "authors": [
+        "Ulrike Herrmann",
+        "Hans Würfel",
+        "Albertus Johannes Malan",
+        "Anton Plietzsch",
+        "Johannes Schiffer"
+      ],
+      "authors_text": "Ulrike Herrmann, Hans Würfel, Albertus Johannes Malan, Anton Plietzsch, Johannes Schiffer",
+      "abstract": "Future hydrogen systems depend on large-scale storage to balance supply and demand. Hydrogen networks can store energy in the pipelines themselves, but the potential of this linepack storage has not been quantified comparably to dedicated storage facilities. We transfer metrics established for conventional storage, such as volume capacity and full-cycle equivalents, to hydrogen networks. To evaluate them, we formulate an optimization problem maximizing linepack storage utilization, subject to non-convex PDE-based constraints describing transient gas flow. We solve the optimization problem over a full-year horizon to capture seasonal variations and to assess the interaction with cavern storage. For computational tractability, we propose a simulation-informed sequential convex programming approach with adaptive time stepping that reduces problem size by up to 98% at accuracy comparable to fixed-resolution methods. For the GasLib-40 topology with German scenario data, the network provides a volume capacity of 24 million normal cubic meters at 28 full-cycle equivalents per year.",
+      "url": "http://arxiv.org/abs/2610.40822v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40822v1",
+      "tldr": "The paper quantifies the linepack storage potential of hydrogen networks by transferring conventional storage metrics (volume capacity and full-cycle equivalents) to pipelines and solving a full-year transient gas-flow optimization with a new simulation-informed sequential convex programming method, finding for GasLib-40 under German scenario data a capacity of 24 million Nm³ at 28 full-cycle equivalents per year.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Fraunhofer IEG",
+        "Voith Hydro Holding GmbH & Co. KG",
+        "Potsdam Institute for Climate Impact Research (PIK)",
+        "Brandenburg University of Technology Cottbus-Senftenberg"
+      ],
+      "affiliations_text": "Fraunhofer IEG, Voith Hydro Holding GmbH & Co. KG, Potsdam Institute for Climate Impact Research (PIK), Brandenburg University of Technology Cottbus-Senftenberg",
+      "score": 3.545288701110093,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.40901v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040901v1-tsflab-a-self-improving-agent-agnostic-workbench-for-time-series-forecasting-research",
+      "source": "arxiv",
+      "title": "TSFLab: A Self-Improving Agent-Agnostic Workbench for Time Series Forecasting Research",
+      "authors": [
+        "ChengAo Shen",
+        "Yanjun Zhao",
+        "Haoxin Liu",
+        "Bonnie Chen",
+        "Miles Ma",
+        "Dongjin Song",
+        "Hanghang Tong",
+        "Qingsong Wen",
+        "Jingrui He",
+        "Jingchao Ni"
+      ],
+      "authors_text": "ChengAo Shen, Yanjun Zhao, Haoxin Liu, Bonnie Chen, Miles Ma, Dongjin Song, Hanghang Tong, Qingsong Wen, Jingrui He, Jingchao Ni",
+      "abstract": "As publications and products on time series forecasting (TSF) proliferate, researchers face a growing burden of analyzing existing work. First, not all publications release code. For instance, only about 20% of arXiv TSF papers have a code link in the surveyed period. Second, released code also requires manual maintenance. Thus, TSF researchers must constantly adapt or implement existing works. However, independent implementations can differ in experimental settings and are difficult to maintain. We therefore propose to use AI agents for benchmarking TSF research and even supporting autoresearch, e.g., developing new TSF models. Yet directly applying existing coding agents, such as Claude Code and Codex, is suboptimal: prohibitive costs, limited scalability to large research projects (e.g., benchmarking), and lack of self-maintenance. To address these challenges, we propose TSFLab, a self-improving agent-agnostic \"workbench\" that equips compatible coding agents with shared resources and tools for low-cost TSF research and continuous maintenance of research resources. Our experiments cover reproduction, benchmarking, and new method development. In reproduction and benchmarking, TSFLab improves task completion by 20-163% and cuts fresh tokens per completed task by 11-66% across baselines. A pilot study of agent-driven method development also shows improved forecasting accuracy via TSFLab, with 32.8-73.6% fewer fresh tokens and 9.2-68.8% less development time than the other settings.",
+      "url": "http://arxiv.org/abs/2610.40901v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40901v1",
+      "tldr": "TSFLab is a self-improving, agent-agnostic workbench that equips coding agents with shared TSF resources and tools to enable low-cost, consistent reproduction, benchmarking, and development of time series forecasting models while reducing token usage and development time.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Illinois Urbana-Champaign",
+        "University of Houston",
+        "Squirrel AI",
+        "Abel",
+        "University of Nottingham",
+        "Georgia Institute of Technology",
+        "University of Connecticut"
+      ],
+      "affiliations_text": "University of Illinois Urbana-Champaign, University of Houston, Squirrel AI, Abel, University of Nottingham, Georgia Institute of Technology, University of Connecticut",
+      "score": 3.5204537749683222,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2610.40872v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040872v1-simple-cuts-simple-landscape-dimension-free-rank-bounds-for-burer-monteiro-factorizations-via-rank-width",
+      "source": "arxiv",
+      "title": "Simple Cuts, Simple Landscape: Dimension-Free Rank Bounds for Burer-Monteiro Factorizations via Rank-Width",
+      "authors": [
+        "Hongjin Wu"
+      ],
+      "authors_text": "Hongjin Wu",
+      "abstract": "In this work, we study Burer-Monteiro factorizations of semidefinite programs with unit diagonal constraints. For a real symmetric cost matrix whose rank-width over $\\mathbb{R}$ is at most $k$, we prove that every non-flat second-order stationary point of the factorized problem is globally optimal whenever the factorization rank is at least $2k$, independently of the matrix size.",
+      "url": "http://arxiv.org/abs/2610.40872v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40872v1",
+      "tldr": "For unit-diagonal semidefinite programs, if the cost matrix has real rank-width at most \\(k\\), then every non-flat second-order stationary point of the Burer–Monteiro factorization is globally optimal whenever the factorization rank is at least \\(2k\\), independent of matrix size.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.439077402735852,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.40881v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040881v1-dynamic-persuasion-managing-reputation-under-censored-feedback",
+      "source": "arxiv",
+      "title": "Dynamic Persuasion: Managing Reputation under Censored Feedback",
+      "authors": [
+        "Ahmet E. Arcaklioglu",
+        "Ceyhun Eksin"
+      ],
+      "authors_text": "Ahmet E. Arcaklioglu, Ceyhun Eksin",
+      "abstract": "We study a long-run sender who repeatedly communicates about a state to a sequence of myopic receivers and whose credibility is a public score updated from past interactions. Receivers face a lemon loss and an opportunity loss, and their behavior depends on these only through a single index, the tolerance. Because the score records only detected misrepresentations, it rests above the sender's true honesty rate; we characterize this credibility premium in closed form. In a fluid limit in which the score adjusts slowly, no policy earns more than operating at a single credibility level, and the sender's gain from managing credibility equals the value of the premium: against receivers who correct for imperfect detection, that gain vanishes. At a fixed adjustment speed, every policy is bounded by the fluid value plus a term linear in the speed. We then study three policy classes, linear, (s,S), and threshold, obtain the optimal parameters of the linear and threshold classes in closed form, show how receiver losses shape them, and show that, under an approximation, the optimal (s,S) band collapses to a threshold. Simulations of the dynamics agree with the closed forms and indicate where the single-level conclusion stops: bands pay when switching modes is costly, and cycles pay when demand is seasonal.",
+      "url": "http://arxiv.org/abs/2610.40881v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40881v1",
+      "tldr": "This paper shows that under censored feedback, a sender’s public credibility score is inflated relative to its true honesty because only detected lies are penalized, and this “credibility premium” is the entire value of dynamic reputation management: in the slow-adjustment limit no policy beats operating at a single credibility level (and the gain vanishes if receivers correct for censoring), while closed-form optimal linear and threshold policies obtain and $(s,S)$ bands collapse to thresholds, with simulations showing bands or cycles pay only when mode-switching is costly or demand is seasonal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Texas A&M University"
+      ],
+      "affiliations_text": "Texas A&M University",
+      "score": 3.3967387403070957,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.40918v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040918v1-fast-and-accurate-hydro-unit-commitment",
+      "source": "arxiv",
+      "title": "Fast and Accurate Hydro Unit Commitment",
+      "authors": [
+        "Shaked Regev",
+        "Evan J. R. Brody"
+      ],
+      "authors_text": "Shaked Regev, Evan J. R. Brody",
+      "abstract": "We introduce a fast novel algorithm to commit hydro-generators. We show that our algorithm can commit 56 generators for 200 days 10,000 times faster than Hexaly, the leading commercial solver for scheduling problems, without sacrificing solution quality. Our method can commit 1792 generators for an entire year in approximately 20 seconds on commodity hardware. Hexaly is unable to solve problems of this size in reasonable time. We attain this runtime improvement by introducing a greedy-heuristic tailored for hydro units. We provide a direction for a possible proof that the error our solver makes decreases with the problem size. This is supported by our experimental results. We prove that our solver's runtime scales log-linearly in the number of generators and time periods.",
+      "url": "http://arxiv.org/abs/2610.40918v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40918v1",
+      "tldr": "The paper introduces a greedy heuristic for hydro unit commitment that achieves solution quality comparable to the leading commercial solver Hexaly while being up to 10,000× faster and scaling log-linearly, enabling scheduling of 1,792 generators for an entire year in about 20 seconds.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Oak Ridge National Laboratory"
+      ],
+      "affiliations_text": "Oak Ridge National Laboratory",
+      "score": 3.3922663876832986,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2610.40736v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/02/261040736v1-unsupervised-feature-selection-using-local-intrinsic-dimensionality-extended-version",
+      "source": "arxiv",
+      "title": "Unsupervised Feature Selection Using Local Intrinsic Dimensionality -- Extended Version",
+      "authors": [
+        "Oussama Chelly",
+        "Michael E. Houle",
+        "Ken-ichi Kawarabayashi",
+        "Muhammad Rajabinasab",
+        "Arthur Zimek"
+      ],
+      "authors_text": "Oussama Chelly, Michael E. Houle, Ken-ichi Kawarabayashi, Muhammad Rajabinasab, Arthur Zimek",
+      "abstract": "High dimensionality degrades both the efficiency and the effectiveness of learning algorithms, and in many applications no class labels are available to guide dimensionality reduction. This paper proposes LIDFS, an unsupervised feature selection method based on Local Intrinsic Dimensionality (LID). The method builds on the formal equivalence between LID and the indiscriminability of distance measures. The data matrix is transposed so that each feature is treated as a point, and the LID of each feature is estimated by maximum likelihood from the distances to its $k$ nearest neighboring features. Features with lower LID exhibit greater local discriminability and receive higher importance scores. A refinement step then retains one representative per feature neighborhood and demotes locally redundant features. The result is a complete ranking from which any number of features can be selected without rerunning the procedure. LIDFS does not use any information about labels or the number of classes, and runs in $\\mathcal{O}(d^2 n)$ time for $n$ instances and $d$ features. LIDFS is compared with classic and state-of-the-art methods and a random baseline on 23 high-dimensional datasets, the classic benchmark collection. The evaluation uses classification accuracy and AUC with five downstream classifiers, as well as clustering accuracy and normalized mutual information, over both full and aggressive selection ranges. LIDFS ranks first in the supervised evaluations and first or tied second in the clustering-based evaluations. It belongs to the top statistical group together with methods that require the number of classes, and it runs faster than its closest competitor. Several recent methods, by contrast, fail to outperform the random baseline. A sensitivity analysis shows that small neighborhood sizes yield the best results.",
+      "url": "http://arxiv.org/abs/2610.40736v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.40736v1",
+      "tldr": "The paper proposes **LIDFS**, an unsupervised feature-ranking method that treats each feature as a point and scores it by its maximum-likelihood Local Intrinsic Dimensionality to favor locally discriminative, nonredundant features without labels, producing a complete feature ranking in \\(\\mathcal{O}(d^2 n)\\) time with strong performance on high-dimensional benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Oratio Technologies",
+        "National Institute of Informatics",
+        "New Jersey Institute of Technology",
+        "University of Tokyo",
+        "University of Southern Denmark"
+      ],
+      "affiliations_text": "Oratio Technologies, National Institute of Informatics, New Jersey Institute of Technology, University of Tokyo, University of Southern Denmark",
+      "score": 3.275897448512986,
+      "score_text": "3.3"
+    }
+  ]
+}
