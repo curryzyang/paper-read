@@ -1,0 +1,15 @@
+# OCELOT: Planetary-Scale Species Distribution Modeling with Satellite Foundation Embeddings
+
+- 区域：速读区
+- 排名：8
+- 匹配度：3.5/10
+- 来源：arxiv
+- 作者：Bart van Merriënboer, Lauren Harrell, Keith Anderson, Burcu Karagol Ayan, Elise Kleeman, Tom Denton, Drew Purves
+- 机构：Unknown affiliation
+- 链接：[arXiv / Source](http://arxiv.org/abs/2611.00284v1) · [PDF](https://arxiv.org/pdf/2611.00284v1)
+
+## TLDR
+OCELOT is a planetary-scale species distribution model that fuses spatial coordinates with satellite foundation embeddings and is trained on 2 billion GBIF records across 100,000 taxa, improving geographic extrapolation to remote regions by 51% over coordinate-only models while matching or exceeding interpolation baselines.
+
+## Abstract
+Large-scale repositories of species observations now contain billions of occurrence records from around the world, but these sightings cluster heavily in human-accessible areas. Existing models use only a small fraction of these records and are not evaluated on extrapolating to remote, unvisited regions--where species distribution models can be used as geographic priors to help classify data from camera traps and acoustic recorders. We scale relative occurrence species distribution models by training a multimodal implicit neural representation network called OCELOT that fuses spatial coordinates with satellite foundation embeddings on two orders of magnitude more observations than previous work: 2 billion GBIF records across 100,000 taxa. Scaling to this regime requires co-designing the data pipeline, taxonomic representation, loss formulation, and model architecture: spatiotemporal thinning and sub-linear cell sampling correct for spatial redundancy and observer bias, while an additive taxonomic readout shares representations across species, genera, and families to improve predictions for rare taxa. To evaluate performance in remote areas, we benchmark geographic extrapolation using the NDCG metric on spatial block holdouts up to 600 km. Satellite foundation embeddings improve extrapolation by 51% over coordinate-only models and outperform classical bioclimatic rasters. The resulting model also matches or outperforms existing baselines on established interpolation benchmarks, demonstrating that optimizing for geographic extrapolation does not compromise in-distribution accuracy.
