@@ -1,0 +1,746 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-04T19:00:41.301069",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.03825v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103825v1-a-tutorial-on-shape-servoing-of-deformable-objects-part-ii-advanced-concepts",
+      "source": "arxiv",
+      "title": "A Tutorial on Shape Servoing of Deformable Objects-Part II: Advanced Concepts",
+      "authors": [
+        "Ignacio Cuiral-Zueco",
+        "Alessio Caporali",
+        "Miguel Aranda",
+        "Gianluca Palli",
+        "Gonzalo López-Nicolás",
+        "Youcef Mezouar"
+      ],
+      "authors_text": "Ignacio Cuiral-Zueco, Alessio Caporali, Miguel Aranda, Gianluca Palli, Gonzalo López-Nicolás, Youcef Mezouar",
+      "abstract": "In robotics, shape control, or shape servoing, refers to the automatic manipulation of a deformable object toward a desired shape. This article is the second of a two-part tutorial on data-driven, Jacobian-based shape control, in which the deformation Jacobian, a local model of how robot motion changes the measured shape, is estimated from measurements. Part I built the shape-servoing loop and derived a local stability condition. This paper starts by using the singular value decomposition of the deformation Jacobian to identify shape changes that can be produced by small robot motions, those that require large robot motions, and those that are locally unavailable. It then analyses how the choice of shape features determines how the controller regulates the object's shape and, therefore, how much the object deforms on its way to the target. It then describes three ways in which the shape control loop can fail: loss of controllability, loss of observability, and occurrence of mechanical instabilities. It closes with shape-control extensions to time-varying targets, secondary tasks, and three-dimensional objects.",
+      "url": "http://arxiv.org/abs/2611.03825v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03825v1",
+      "tldr": "This tutorial’s second part advances data-driven Jacobian-based shape servoing of deformable objects by using SVD to analyze controllable shape directions, examining how shape-feature choice affects deformation and how controllability, observability, and mechanical instability failures arise, and extending the framework to time-varying targets, secondary tasks, and 3D objects.",
+      "detailed_reading": {
+        "motivation": "Part I 已建立数据驱动、基于变形雅可比的形状伺服回路并给出局部稳定性条件，但尚需解释雅可比的奇异结构如何决定可实现的形状变化、特征选择如何影响控制行为，以及回路何时会失效。本文作为两部分教程的第二部分，面向研究者系统梳理这些高级概念，并扩展到时变目标、次级任务和三维对象。",
+        "method": "方法沿用形状伺服回路：由相机测量 y 提取特征 s=f(y)，以目标 s* 构造误差 e=s*-s，用估计雅可比 Jhat 的伪逆生成速度指令 u=αJhat^+e，并在离散迭代中利用动作—响应对（dq_{k-1}、ds_k）按 Broyden 规则更新 Jhat，预测误差为 r_k=ds_k-Jhat_{k-1}dq_{k-1}，初始 Jhat0 由小范围探索运动的回归或对象模型获得。核心分析是对 Jhat=ΦΣΨ^T 做 SVD，将机器人自由度组合为方向 ψ_l、特征变化模式 φ_l，并以奇异值 σ_l 表示方向增益；伪逆按每个非零奇异值分别求逆，同时用可操作度 w=∏σ_l 和条件数 cond=σ_max/σ_min 描述整体响应与方向各向异性。本文进一步比较点坐标、边向量与曲率/转角特征对刚体平移、旋转和非刚性变形的响应，并分析可控性丧失、可观性丧失和机械失稳三类失效，最后讨论时变目标、零空间次级任务和三维对象扩展。运行示例采用双臂平面操作弹性杆：Kirchhoff 杆离散为 25 节点并受重力，准静态平衡，每臂 3 个自由度共 m=6，跟踪 5 个材料点使 n=10，Jhat0 由 24 次探索运动（每个自由度 4 次）回归得到。",
+        "result": "SVD 分析表明，大奇异值对应小机器人运动即可产生的形状变化，小奇异值对应需要较大机器人运动的弱方向，零奇异值对应局部不可产生的形状变化；控制律将误差沿 φ_l 分解，并按 α(φ_l^T e)/σ_l 在 ψ_l 方向施加机器人速度，因此强特征方向产生小指令、弱特征方向产生大指令、Null(Jhat^T) 中的误差不产生指令。特征选择会改变控制器实际调节的形状量以及对象到达目标过程中的变形路径，点坐标、边向量和转角特征对刚体平移、旋转与非刚性变形的敏感度不同。论文还给出可控性、可观性和机械稳定性三类失效的检测与缓解思路，并说明时变目标、零空间次级任务和三维对象的扩展；配套公开代码和交互演示可复现运行示例与数值结果。",
+        "conclusion": "基于 SVD 的奇异方向、增益和子空间分析为 Jacobian 型形状伺服提供了可解释的诊断与设计工具：它把机器人运动与可观测形状变化联系起来，说明特征选择本身就是控制设计的一部分。实际部署时需要同时监测可控性、可观性和机械稳定性，并利用零空间和扩展框架处理次级任务、时变目标与三维对象。该教程为可复现的形状伺服分析与实验提供了统一框架。",
+        "key_details": "关键假设包括准静态操作、速度级控制、任务相关变形可测量、机器人运动与变形关系平滑变化；Jacobian 仅是局部模型，局部最多改变 rank(J)≤min(n,m) 个独立特征方向，n≤m 且满行秩时完整误差可局部收敛，n>m 时只能修正 Range(J) 分量。目标需区分可行性与可达性，Broyden 更新在 dq 过小时跳过并拒绝不合理的大修正；可操作度和条件数依赖坐标单位，比较时需统一单位或归一化。局限性在于局部线性化、奇异/弱方向导致的大指令、可控性与可观性丧失、机械失稳以及三维扩展中的建模与感知约束。"
+      },
+      "affiliations": [
+        "University of Bologna",
+        "University of Zaragoza",
+        "Clermont Auvergne INP"
+      ],
+      "affiliations_text": "University of Bologna, University of Zaragoza, Clermont Auvergne INP",
+      "score": 4.603907698717661,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.03737v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103737v1-sspe-robust-sequential-staypoint-extraction-in-degraded-trajectory-data",
+      "source": "arxiv",
+      "title": "SSPE: Robust Sequential Staypoint Extraction in Degraded Trajectory Data",
+      "authors": [
+        "Yueyang Liu",
+        "Lance Kennedy",
+        "Andreas Züfle"
+      ],
+      "authors_text": "Yueyang Liu, Lance Kennedy, Andreas Züfle",
+      "abstract": "Extracting semantically meaningful staypoints from raw trajectory streams is a foundational prerequisite for mobility analytics. However, real-world trajectory data is frequently degraded by severe spatial noise and protracted temporal dropouts. Classic threshold-based extraction methods, such as the widely adopted sliding-window algorithm, are highly sensitive to these anomalies, routinely fracturing continuous stationary episodes into disjointed fragments. To overcome this limitation, we propose the Sequential Staypoint Extraction (SSPE) algorithm. SSPE employs a resilient, state-driven architecture that replaces static spatial anchors with a dynamic centroid and introduces an $n$-step lookahead heuristic to structurally tolerate transient coordinate drift. Concurrently, it utilizes temporal bridging mechanisms to prevent artificial fragmentation during prolonged signal loss. Since optimal extraction parameters vary significantly across datasets, we further introduce a fully unsupervised, consensus-based parameter estimation framework. This framework derives baseline statistical scales directly from the raw trajectory data and identifies the optimal parameter configuration by maximizing structural agreement, thereby eliminating the reliance on annotated ground truth. We evaluate SSPE on the ExtraSensory dataset, a real-world mobility corpus with manually verified ground-truth staypoints, against the sliding-window implementation of Trackintel, one of the most widely adopted extraction baselines in the field. Empirical results demonstrate that SSPE achieves superior accuracy, yielding higher F1-scores while simultaneously improving computational efficiency over this standard.",
+      "url": "http://arxiv.org/abs/2611.03737v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03737v1",
+      "tldr": "The paper proposes SSPE, a robust state-driven sequential staypoint extraction method combining dynamic centroid tracking, n-step lookahead, temporal bridging, and unsupervised parameter estimation to handle noisy and sparse trajectory data, outperforming Trackintel’s sliding-window baseline in both F1-score and runtime.",
+      "detailed_reading": {
+        "motivation": "真实轨迹常受严重空间噪声和长时间时间断采影响，传统滑动窗口等阈值方法对此高度敏感，容易把连续停留切碎并产生虚假或缺失停留点，从而破坏后续移动性分析。论文旨在提出一种能同时容忍坐标漂移和信号中断的稳健停留点提取方法，并解决无标注数据下参数难以校准的问题。",
+        "method": "SSPE以按时间排序的轨迹点(uid, lat, lon, t)为输入，使用锚点指针和评估指针顺序扩展候选停留序列；每个新点与候选序列的动态质心计算Haversine距离，并检查与前一保留点的时间间隔。若时间间隔超过τmax则终止扩展；若距离不超过δdist则加入序列并更新质心；若距离超限则启动n步前瞻，在未来n个点中若存在点重新落入质心邻域且累计时间间隔不超过τmax，则将当前点视为瞬态异常并跳过，否则确认离开并终止。候选序列结束后，若首末时间跨度不小于τmin，则输出停留点(uid, 质心, 首时间, 末时间)，并将锚点跳到序列末点之后，否则丢弃并前进一个点。参数校准采用无监督ABPE框架：由正时间间隔中位数得到采样间隔g，仅保留Δt≤5g的正常步长，对log10步长距离做200-bin直方图并用Otsu阈值分离静止噪声与移动，得到空间阈值ε和静止步长90分位数σ；对时间间隔做Otsu得到τOtsu并以max(τOtsu,5g)作为τbase；由跳跃后1至5步内恢复到跳跃前位置的最小恢复长度L的90分位数向上取整估计n；再围绕σ和5g构造δdist、τmax候选网格，τmin按停留概念固定，最终选择使各参数配置提取结果两两结构一致性平均最高的配置。",
+        "result": "在ExtraSensory真实移动轨迹数据上，SSPE的F1为0.7878、精确率0.7226、召回率0.8659，显著高于Trackintel滑动窗口基线的F1 0.5098、精确率0.4342、召回率0.6173；使用无监督ABPE参数估计后，SSPE达到F1 0.8107、精确率0.8854、召回率0.7476，也优于Trackintel经Hyperband调参后的F1 0.6305、精确率0.5747、召回率0.6983。论文还报告SSPE在取得更高F1的同时具有更低的运行时间。",
+        "conclusion": "SSPE通过动态质心、n步前瞻和时间桥接机制，在噪声与断采并存的退化轨迹中比传统滑动窗口更不容易碎片化连续停留，并能以无监督共识搜索替代人工标注调参。结果表明该方法在真实数据上兼顾更高准确性和更好计算效率，适合大规模移动性分析部署。",
+        "key_details": "评估数据为ExtraSensory，且作者手工核验了全部真值停留点；方法依赖δdist、τmin、τmax、n四个参数，ABPE用Otsu阈值、90分位数、恢复长度统计和共识最大化进行无监督选择，空间网格可细化为σ·1.25^k或粗化为固定倍数，τmax网格为5g·2^k，τmin不估计而按停留语义固定；前瞻仅检查最多n步，恢复长度估计最多检查5步，参数搜索会带来额外计算开销，且实验仅覆盖单一数据集，跨数据集泛化仍需验证。"
+      },
+      "affiliations": [
+        "Emory University"
+      ],
+      "affiliations_text": "Emory University",
+      "score": 4.533372619390515,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.03675v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103675v1-learning-directional-randers-geometry-for-latent-space-exploration",
+      "source": "arxiv",
+      "title": "Learning Directional Randers Geometry for Latent-Space Exploration",
+      "authors": [
+        "Théau Blanchard",
+        "Stéphanie Allassonnière"
+      ],
+      "authors_text": "Théau Blanchard, Stéphanie Allassonnière",
+      "abstract": "Deep neural networks extract powerful latent representations from images, enabling fast and efficient downstream analysis. However, these latent spaces lack explicit geometric structure, leading to possibly poor interpolation fidelity and misleading extrapolation. Latent interpolation techniques assume symmetric transition costs which are often not the case for real world data. Their symmetric nature cannot capture directional processes, such as disease progression, where certain transitions are impossible (e.g. tumor growth dynamics or cognitive improvement in Alzheimer's disease). Although Riemannian metrics extend Euclidean geometry by incorporating curvature, they remain symmetric. We show that understanding asymmetry and not curvature alone directly addresses these problems. To do so we propose a new Finsler-Randers metric learning framework. It incorporates direction-dependent distances, thus enabling the computation of trajectories respecting monotonic sequential constraints. We demonstrate its potential for interpolation and extrapolation on controlled cross-sectional datasets.",
+      "url": "http://arxiv.org/abs/2611.03675v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03675v1",
+      "tldr": "The paper introduces a Finsler–Randers metric learning framework that equips latent spaces with direction-dependent asymmetric distances, enabling interpolation and extrapolation along monotonic trajectories that respect irreversible real-world processes such as disease progression.",
+      "detailed_reading": {
+        "motivation": "深度网络从图像中提取的潜表示虽便于下游分析，但潜空间缺乏显式几何结构，常导致插值保真度差和外推误导。现有潜空间插值多假设对称转移代价，难以刻画真实数据中的方向性过程，例如疾病进展中肿瘤增长或阿尔茨海默病认知改善等不可逆或单向约束。因此需要一种能显式建模非对称方向距离的潜空间几何框架。",
+        "method": "论文提出 Finsler-Randers 度量学习框架：先将图像编码到潜空间，在该空间中参数化具有方向依赖性的 Randers 度量，使距离不再对称；再利用受控横截面数据中的单调顺序约束学习度量参数，并基于学习到的非对称几何计算插值与外推轨迹。关键模块包括潜空间编码、Randers 度量参数化、方向约束训练以及非对称测地线/轨迹求解，推理时沿满足顺序约束的路径生成中间或外推样本。",
+        "result": "在受控横截面数据集上，该框架能够计算方向依赖距离并生成尊重单调顺序约束的插值和外推轨迹，验证了非对称几何用于潜空间探索的可行性。核心发现是：仅靠黎曼曲率仍受对称性限制，而显式建模非对称性才能直接处理不可逆方向过程，避免反向或错误过渡。",
+        "conclusion": "Finsler-Randers 几何为潜空间探索提供了一种可表达方向依赖距离的原则性方法，特别适合疾病进展等具有单调性和不可逆转移的过程。该工作表明非对称性而非单纯曲率是解决此类插值/外推问题的关键，但当前验证仍限于受控横截面数据，真实纵向与临床场景的泛化需进一步检验。",
+        "key_details": "数据为受控横截面数据集；核心先验是序贯过程具有单调性且部分反向转移不可行；实现上需在潜空间参数化 Randers 度量的黎曼部分与方向线性项，并以有序约束驱动度量学习。摘要未披露具体损失权重、正则形式和超参，计算约束主要来自非对称测地线/轨迹求解；局限性是验证规模和真实纵向数据覆盖有限。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.202897230024543,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.03653v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103653v1-four-extensions-of-the-universal-law-of-robustness-log-concave-covariates-heterogeneous-mixtures-vector-valued-predictors-and-markovian-data",
+      "source": "arxiv",
+      "title": "Four Extensions of the Universal Law of Robustness: Log-Concave Covariates, Heterogeneous Mixtures, Vector-Valued Predictors, and Markovian Data",
+      "authors": [
+        "Tobias J. Peter"
+      ],
+      "authors_text": "Tobias J. Peter",
+      "abstract": "Bubeck and Sellke's universal law of robustness says that fitting $n$ noisy samples below the noise level with a class of $p$ real parameters forces a Lipschitz constant of order $\\sqrt{nd/p}$, when the covariate distribution on $\\mathbb{R}^d$ is isoperimetric: smooth interpolation costs a factor $d$ of overparametrization. Its hypotheses are Gaussian-type concentration, a homogeneous covariate law, scalar outputs, and independent samples; we relax each one. Exponential concentration suffices, at the unchanged rate and absolute constant and at the price of a capacity burn-in, some form of which we show is necessary; this gives the law for normalized log-concave covariates, with a $\\log d$ loss from the current KLS bound. For heterogeneous mixtures the worst component constant is replaced by the weighted average of the component constants, under a typicality condition on the mixture composition. For vector-valued predictors the bound at the Frobenius Lipschitz scale is free of the output dimension $K$, and the Euclidean bound loses only $K^{-1/2}$, a loss that covariate-independent noise removes. Stationary Markov covariates retain the i.i.d. rate, the pseudo-spectral gap entering only the sample-size conditions. One master theorem carries the shared argument, and constants are explicit throughout.",
+      "url": "http://arxiv.org/abs/2611.03653v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03653v1",
+      "tldr": "The paper extends Bubeck and Sellke’s universal law of robustness to log-concave/exponentially concentrated covariates, heterogeneous covariate mixtures, vector-valued predictors, and stationary Markovian data through a unified master theorem with explicit constants.",
+      "detailed_reading": {
+        "motivation": "Bubeck 与 Sellke 的通用鲁棒性定律表明，在等周型协变量分布下，用 p 个参数把 n 个带噪样本拟合到噪声水平以下会强制 Lipschitz 常数达到 sqrt(nd/p) 量级，但原始结论依赖高斯型集中、同质协变量、标量输出和独立样本等强假设。本文旨在逐一放松这四个结构假设，使该定律适用于更广泛的分布、混合数据、向量值预测和相依数据场景。",
+        "method": "论文在统一的函数类框架下考虑具有 J-Lipschitz 参数化且参数集直径不超过 W 的 p 参数模型，以 n 个带噪样本、噪声水平 sigma^2、低于噪声的拟合裕度 eps 和失败概率 delta 为输入，定义复杂度项 Q=p log(48WJ/eps)+log(16/delta)。核心技术路线是先证明一个主定理：低于噪声的拟合迫使标签噪声与拟合函数的中心化波动相关，再用有限参数网把对函数类的均匀控制化为网上的尾概率界，并要求该尾界压过网的熵。四个扩展分别验证主定理所需的具体槽位：指数集中加容量预热、异质混合分量的典型性条件、向量输出下的 Frobenius Lipschitz 与欧氏 Lipschitz 比较、以及平稳 Markov 链下条件独立的标签配对；并由主定理回收 i.i.d. 标量基线。",
+        "result": "主要结果显示四类放松均保持原定律的核心速率：指数集中可在不改变速率和绝对常数的情况下替代等周性，但需容量预热 Q 不超过约 61n，且论文证明某种预热限制是必要的；对归一化对数凹协变量得到 c=O(kappa log d) 的常数，仅比当前 KLS 界多一个 log d 损失。异质混合情形把最坏分量常数替换为加权平均常数 cbar=sum lambda_k c_k，代价是混合组成的典型性条件；向量值预测的 Frobenius Lipschitz 下界不含输出维数 K，欧氏下界仅损失 K 的平方根分之一，而协变量无关噪声可消除该损失。平稳 Markov 协变量仍保持 i.i.d. 的 sqrt(nd/p) 速率，伪谱隙 gamma 只进入样本量条件。",
+        "conclusion": "论文表明通用鲁棒性定律对高斯型集中、同质分布、标量输出和独立样本这四个假设具有较强稳健性，平滑插值导致过参数化需求的结论可推广到对数凹协变量、混合分布、向量输出和平稳 Markov 数据。所有主定理常数显式给出，但结论仍是有限样本下界而非算法保证，且部分结构性假设和容量预热条件仍不可完全去除。",
+        "key_details": "关键实现细节包括显式复杂度 Q 与各定理的有限样本条件，例如对数凹情形需 n eps^2 至少约 2^12 log(16/delta) 且 n 至少 Q/61，Markov 情形需 gamma n eps^2 至少约 2^13 log(16/delta) 并满足额外容量条件。混合情形使用 rho=cmax/cbar 与典型性尺度 (rho-1)log(1/delta)，标签只通过协变量依赖而不携带潜在分量信息；向量情形利用 Frobenius Lipschitz 与欧氏 Lipschitz 的 sqrt(K) 比较关系，Markov 情形依赖平稳链、伪谱隙和给定轨迹后的条件独立标签。局限性在于对数凹推广受当前 KLS 界限制而多出 log d，容量预热并非证明为最优，混合与 Markov 结果保留较强建模假设，且所有常数未优化。"
+      },
+      "affiliations": [
+        "ZHAW Zurich University of Applied Sciences"
+      ],
+      "affiliations_text": "ZHAW Zurich University of Applied Sciences",
+      "score": 4.090635763449116,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.03756v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103756v1-language-models-can-benefit-from-domain-specific-inductive-biases",
+      "source": "arxiv",
+      "title": "Language Models Can Benefit from Domain-Specific Inductive Biases",
+      "authors": [
+        "Damien Teney",
+        "Liangze Jiang",
+        "Zachary Shinnick",
+        "Hemanth Saratchandran",
+        "Simon Lucey"
+      ],
+      "authors_text": "Damien Teney, Liangze Jiang, Zachary Shinnick, Hemanth Saratchandran, Simon Lucey",
+      "abstract": "Language models are typically trained with a single choice of architecture on diverse domains and data sources. Modern transformers have been extensively refined for such general-purpose learning, but are they equally effective across different subsets of the pretraining data? We investigate this question by training small language models from scratch on representative subsets of pretraining data such as web text, code, and mathematics. We introduce variants of transformers in which standard activation functions are replaced with learned splines tuned on specific datasets, providing a simple way to modify their inductive biases. Using a mix-and-match of architectures and datasets, we evaluate cross-domain transfer, i.e. how well does an architecture tuned for one domain perform on data from another? We find that the tuned transformer variants improve training efficiency or generalization on all seven of our tested datasets, but the gains are often domain-specific. For example, architectures tuned on a natural language dataset such as FineWeb perform well on TinyStories, whereas those tuned on mathematics perform poorly on natural language. We identify several mechanisms underlying these improvements, including wider loss basins and more abundant \"lottery tickets\". Our results show that different subsets of pretraining data can benefit from different learning mechanisms, highlighting a limitation of the prevailing trend towards a small set of general-purpose architectures and optimizers. This points to an opportunity to improve data efficiency by developing domain-specific learning strategies that retain the ability to train general-purpose models.",
+      "url": "http://arxiv.org/abs/2611.03756v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03756v1",
+      "tldr": "TLDR: Tuning transformer nonlinearities as learned splines for specific pretraining domains improves training efficiency and generalization, but these domain-specific inductive biases often transfer poorly across domains, suggesting that domain-tailored learning mechanisms could outperform a single general-purpose architecture while still supporting general-purpose model training.",
+      "detailed_reading": {
+        "motivation": "当前语言模型通常以单一架构和优化器在多样预训练数据上训练，但不同数据子集是否同等受益于同一归纳偏置尚不清楚。受无免费午餐定理和激活函数强烈决定神经网络归纳偏置的启发，作者追问通用Transformer是否对每个数据域最优，以及域特定学习机制能否提升数据效率与泛化。",
+        "method": "作者从零训练40–120M参数的小语言模型，在FineWeb、Enwik8、TinyStories、Shakespeare、CodeSearchNet-Java/Python和DeepMind-Math等七个子集上做架构与数据的交叉组合评估。核心方案是把标准GeLU和softmax非线性替换为可学习线性样条，在源域通过warm-up预训练这些样条，再冻结并将少量参数迁移到目标域训练模型，以考察跨域迁移。实现上移除held-out优化、加入多模型错峰启动并调整注意力层非线性位置，使用NanoGPT speedrun记录模型作强基线，并在固定token预算下比较验证损失或准确率。",
+        "result": "调优后的Transformer变体在全部七个数据集上提升训练效率或泛化，但收益往往具有域特异性：在FineWeb等自然语言数据上调优的架构能较好迁移到TinyStories，而在数学数据上调优的架构迁移到自然语言表现较差。机制分析显示专用架构使梯度下降更容易找到有效解，收敛更快且对学习率衰减依赖更低，提示更宽的损失盆地，并在初始化时包含更多与目标任务相关的电路，符合彩票假设。",
+        "conclusion": "不同预训练数据子集可以受益于不同学习机制，这揭示了当前偏向少量通用架构和优化器的趋势存在局限。未来应发展保留通用模型训练能力的域特定学习策略，并探索多种专用学习机制之间的交互，以提升数据效率和系统泛化；但结论基于小模型和困惑度评价，向大模型及下游任务推广仍需验证。",
+        "key_details": "关键细节包括七个代表性子集、40–120M参数小模型、超过6000次训练、固定token预算以及验证损失或准确率评估；线性样条提供无偏的R→R参数化，相比小MLP避免平滑性和单调性等先验，每条样条约64个值，且跨域迁移只涉及极少量冻结参数。方法改进包括去掉held-out优化、采用错峰启动和重定位注意力层非线性；局限是模型规模较小、主要评估困惑度而非下游性能，机制解释基于损失盆地和彩票假设。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.9773458050577815,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.03764v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103764v1-the-role-of-injected-noise-in-diffusion-model-generalization",
+      "source": "arxiv",
+      "title": "The role of injected noise in diffusion model generalization",
+      "authors": [
+        "Vincent Emmerling",
+        "Felix Günther",
+        "David Kappel"
+      ],
+      "authors_text": "Vincent Emmerling, Felix Günther, David Kappel",
+      "abstract": "Diffusion models trained on distinct datasets can produce highly similar samples when prompted with the same noise input, suggesting that they learn a generalized data distribution. We investigate the role of noise injected during the sampling process, and show that it plays an important role in making or breaking this strong generalization effect. Based on this finding we investigate the robustness of sample similarity to changes in the injected noise, and find that its impact is largest in the sampling regime where broad structure already exists but the precise identity of the sample is not yet determined.",
+      "url": "http://arxiv.org/abs/2611.03764v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03764v1",
+      "tldr": "The injected noise sequence—especially during the central “speciation” regime—largely determines whether diffusion models produce consistent, generalized samples, while the starting noise has only a minor effect.",
+      "detailed_reading": {
+        "motivation": "扩散模型在不同数据集上训练后，若使用相同噪声输入可生成高度相似样本，提示其学习到泛化的数据分布；但已有研究同时固定了起始噪声和整个采样注入噪声序列，尚不清楚强泛化究竟由哪一部分噪声或哪个采样阶段驱动。本文旨在拆解起始噪声与逐步注入噪声的作用，并定位采样过程中对注入噪声最敏感的时间区间。",
+        "method": "基于Kadkhodaie等提供的预训练UNet（7.6M参数，CelebA约10^5张下采样图像）复现实验，采样采用Euler-Maruyama离散更新x_{t+1}=x_t+h_tu_t(x_t)+σ_tz_t，显式生成并传入每一步的注入噪声序列z_t，固定总步数T=250；比较共享/不共享起始噪声、共享/不共享注入噪声序列以及不同预训练模型下的最终样本一致性，以余弦相似度为指标并重复100次试验。进一步记录中间采样状态x_t和不加噪去噪状态x̂_t=x_t+u_t(x_t)的相似度随步数变化，并把注入噪声序列等分为五段、逐段替换为新噪声，以检验不同采样区间对噪声扰动的鲁棒性。附录中还训练两个DDPM UNet（各500张Butterflies图像、50个epoch）做跨架构/数据/采样器消融，并用x_0=αx*+(1−α)z_start的插值初始化检验较高信噪比下注入噪声的影响。",
+        "result": "共享注入噪声序列时最终样本平均余弦相似度为0.91，不共享时仅0.02；在共享注入噪声下，同/不同起始噪声分别为0.93和0.89，说明注入噪声序列而非起始噪声或具体模型是样本一致性的主导因素。共享注入噪声时中间状态相似度在约20个去噪步内快速升至接近1.0；不共享时最终不一致，但去噪状态在最初约50步仍高度相似，对应区域I。分段替换实验显示对注入噪声的敏感性在区域II最强、区域I和III较弱，即广义结构已出现但样本身份尚未锁定的阶段最关键；附录Butterflies小数据消融复现了注入噪声主导效应，但区域划分不明显且早期去噪能力较弱。",
+        "conclusion": "扩散模型的强泛化与样本一致性主要由采样中注入的噪声序列决定，尤其是区域II的物种分化阶段；起始噪声和模型差异影响较小。结果支持将扩散采样划分为布朗运动、物种分化和坍缩三阶段的动力学解释，并表明通过控制注入噪声可更可靠地比较和复现不同模型生成的样本。",
+        "key_details": "核心设置为显式注入噪声序列、固定T=250、余弦相似度评价、100次独立试验，并对相邻区间敏感性做双侧配对t检验且α=0.05；同时区分采样状态x_t与无噪去噪状态x̂_t以观察模型引导方向。附录消融使用500张Butterflies图像训练50个epoch的两个DDPM UNet，并修改diffusers噪声生成以返回指定注入噪声；小数据集模型早期去噪不足，导致区域现象不清晰，是外推局限。插值初始化实验固定注入噪声并保留原始SNR停止准则以避免高α样本过去噪，结果显示对纯噪声生成样本与目标图像x*的相似度呈S形权衡且方差较大。"
+      },
+      "affiliations": [
+        "Bielefeld University"
+      ],
+      "affiliations_text": "Bielefeld University",
+      "score": 3.961952246789364,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.03738v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103738v1-ratsift-resolution-adaptive-transformer-for-solar-irradiance-forecasting-and-temporal-downscaling",
+      "source": "arxiv",
+      "title": "RATSIFT: Resolution-Adaptive Transformer for Solar Irradiance Forecasting and Temporal Downscaling",
+      "authors": [
+        "Jesto Peter",
+        "Timothy M. Hansen",
+        "Hossein Moradi Rekabdarkolaee"
+      ],
+      "authors_text": "Jesto Peter, Timothy M. Hansen, Hossein Moradi Rekabdarkolaee",
+      "abstract": "Accurate forecasting and temporal downscaling of solar irradiance is critical for reliable renewable energy integration and grid management. Traditional methods often struggle to capture rapid irradiance variability. In this work, we develop a Transformer-based architecture for simultaneous forecasting and temporal downscaling. The model takes input data at arbitrary resolutions and generates outputs at any resolutions represented within the training data, leveraging both global and local contextual information. To improve training efficiency, a genetic algorithm-based optimization framework is implemented to identify suitable model hyperparameters, while reducing the computational cost of exhaustive grid search. The effectiveness of the proposed model is shown by analyzing real data in Dallas, Texas. The proposed model achieved root mean square error (RMSE) values of 28.785, 29.544, 30.157, 32.132~W/m\\(^2\\) for 15-, 30-, 60-minute, and irregularly spaced global input and producing forecast at 5-minutes resolution, respectively. Furthermore, this model produced reliable uncertainty estimates, exhibiting wider prediction intervals for high-resolution inputs during volatile solar conditions, whereas coarser-resolution inputs result in narrower intervals and significantly lower training time and computational cost. Our approach provides a scalable and efficient framework for multi-resolution solar irradiance forecasting and temporal downscaling, suitable for practical energy forecasting and grid management applications.",
+      "url": "http://arxiv.org/abs/2611.03738v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03738v1",
+      "tldr": "RATSIFT is a resolution-adaptive Transformer that simultaneously forecasts and temporally downscales solar irradiance from arbitrary input resolutions to finer outputs, using genetic-algorithm hyperparameter optimization to improve efficiency and providing uncertainty estimates for grid-management applications.",
+      "detailed_reading": {
+        "motivation": "光伏渗透率提升使太阳辐照度的准确预测与时序降尺度对并网稳定、分布式资源聚合和电力市场运行至关重要。传统方法难以捕获快速辐照度波动，而现有Transformer预测器通常假设输入输出分辨率固定且对超参数选择敏感，难以适应异质时间分辨率数据和高分辨率预测需求。",
+        "method": "基于得克萨斯州达拉斯2024年NSRDB 15分钟GHI与本地5分钟地面观测，构建分辨率自适应Transformer：输入任意粗分辨率或不等间隔GHI，经Conv1D令牌嵌入、月日星期小时分钟五分量学习式时间嵌入和正弦位置编码后送入多层自注意力编码器，解码器以标签段加末值重复填充并通过交叉注意力一次性输出未来24小时5分钟预测。数据预处理包括重复时间戳保留首条、缺失值PCHIP插补、原始幅值不标准化，并用遗传算法以RMSE为评价指标搜索超参数，与Informer、Autoformer、FEDformer和非平稳Transformer对比。",
+        "result": "在达拉斯真实数据上，15、30、60分钟及不规则间隔全局输入对应5分钟分辨率预测的RMSE分别为28.785、29.544、30.157和32.132 W/m^2。模型能给出可靠不确定性估计，波动条件下高分辨率输入预测区间更宽，粗分辨率输入区间更窄且训练时间和计算成本显著降低。",
+        "conclusion": "结果表明RATSIFT可在统一框架内完成多分辨率太阳辐照度预测和时序降尺度，在精度、不确定性和计算效率之间取得可扩展平衡，适合实际能源预测与电网管理应用。该工作为异质分辨率时序数据的单次多步预测提供了可行范式，并提示可通过更丰富特征和实际部署约束进一步扩展。",
+        "key_details": "数据包含NSRDB 35,136条15分钟GHI无缺失和本地103,744条5分钟观测，后者有12个重复时间戳与1,910个缺失值并用保形PCHIP插补；模型输入特征数为1，目标为5分钟分辨率，解码器由T_label观测段和重复末值填充段构成，GA通过随机种群、按RMSE保留前n个候选、交叉变异迭代至收敛来降低网格搜索成本。实现上使用原始数据不做标准化，卫星GHI相对地面观测更平滑导致幅值与高频变异性不匹配，位置编码按批内行偏移生成而非真实时间位置，且注意力复杂度和超参数搜索成本仍是主要约束。"
+      },
+      "affiliations": [
+        "Bowling Green State University",
+        "Colorado State University"
+      ],
+      "affiliations_text": "Bowling Green State University, Colorado State University",
+      "score": 3.9409921445303313,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.03850v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103850v1-roboscope-kit-unified-interfaces-for-fast-and-scalable-embodied-ai-evaluation",
+      "source": "arxiv",
+      "title": "RoboScope Kit: Unified Interfaces for Fast and Scalable Embodied-AI Evaluation",
+      "authors": [
+        "Deng-Ke Wu",
+        "Yifan Jin",
+        "Yida Yang",
+        "Lei Qian",
+        "Zhaoye Zhou",
+        "Hongru Zhang",
+        "Kai Ye",
+        "Shuyuan Hu",
+        "Yiran Mao",
+        "Zewei Ye",
+        "Bo Zhao"
+      ],
+      "authors_text": "Deng-Ke Wu, Yifan Jin, Yida Yang, Lei Qian, Zhaoye Zhou, Hongru Zhang, Kai Ye, Shuyuan Hu, Yiran Mao, Zewei Ye, Bo Zhao",
+      "abstract": "Simulation benchmarks are the standard way to compare robot policies, but each benchmark brings its own evaluator, observation layout, and action convention, and evaluation is slow: 500 RoboTwin Easy episodes with one simulator and one model on one GPU take 359.7 minutes. Profiling the official StarVLA evaluator shows that simulation occupies CPU cores while the GPU averages 14.3% utilization. RoboScope Kit wraps each model once in a Python class called a Policy, and each benchmark once in an adapter around the benchmark's own evaluator, so the benchmark's rules and scoring stay unchanged. Scheduling runs simulator workers and Policy replicas as separate pools, sizes both from measured probes, and shards work deterministically across GPU instances; runtime optimization renders only the observations an action-chunk Policy reads. Adapters cover six benchmark families. On LIBERO-Long with a StarVLA checkpoint on one 48 GiB RTX 4090, the concurrency search selects twelve simulator workers sharing three Policy replicas, which evaluate 500 episodes 4.45$\\times$ faster than the official StarVLA evaluation with equivalent success rates, 2.78$\\times$ faster than RLinf, and 1.52$\\times$ faster than vla-eval at its tuned configuration. With CUDA MPS, which lets the replicas run their kernels concurrently, the search selects sixteen workers sharing four replicas, 6.16$\\times$ faster than StarVLA, 3.85$\\times$ faster than RLinf, and 2.10$\\times$ faster than vla-eval. On RoboTwin Easy, four GPUs with chunk-boundary observation complete the 500 episodes in 14.4 minutes, 25.04$\\times$ faster than the single-GPU baseline, with identical success outcomes and terminal steps.",
+      "url": "http://arxiv.org/abs/2611.03850v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03850v1",
+      "tldr": "RoboScope Kit unifies embodied-AI model and benchmark integration via Policy wrappers and benchmark adapters, then accelerates evaluation with separate simulator/Policy pools, automatic concurrency search, deterministic sharding, and chunk-aware rendering—achieving up to 25.04× speedups while preserving official benchmark outcomes.",
+      "detailed_reading": {
+        "motivation": "具身智能策略通常依赖仿真基准比较，但各基准自带评估器、观测布局和动作约定，导致每对模型与基准都要重复集成，且评估极慢，例如单 GPU 上 500 个 RoboTwin Easy episode 需 359.7 分钟。对官方 StarVLA 评估器剖析显示仿真主要占用 CPU，而 GPU 平均利用率仅 14.3%，同时动作块策略在每个控制步都渲染却只读取块边界观测，造成大量无效计算。因此需要统一、忠实、高效、自动且可扩展的评估基础设施。",
+        "method": "RoboScope Kit 将每个模型一次性封装为 Policy 类，保留模型自身预处理并声明所需观测特征、支持套件、动作块长度、动作表示和观测步长；将每个基准封装为围绕其原生评估器的 adapter，保持任务、初始状态、终止与评分规则不变。Control Runtime 将基准套件展开为 episode key 清单和工作项，启动 K 个 simulator worker 进程与 g 个 Policy replica 进程作为独立池，通过请求-响应传递带 episode 标识的观测和动作块，并支持跨 GPU 实例确定性分片。运行前进行接口校验，随后用短探针测量吞吐、CPU 占用、GPU 利用率、节流和显存，以对角搜索自动选择 K 和 g，可选 CUDA MPS 让副本并发执行内核。Simulation Runtime 依据 Policy 声明的观测步长，仅渲染动作块边界所需观测，并在 worker 内复用 SAPIEN 引擎与渲染器。",
+        "result": "在单张 48 GiB RTX 4090、LIBERO-Long 和 StarVLA checkpoint 上，并发搜索选出 12 个 simulator worker 共享 3 个 Policy replica，500 个 episode 比官方 StarVLA 评估快 4.45 倍且成功率等价，比 RLinf 快 2.78 倍、比调优后的 vla-eval 快 1.52 倍。启用 CUDA MPS 后选出 16 个 worker 共享 4 个 replica，比 StarVLA 快 6.16 倍、比 RLinf 快 3.85 倍、比 vla-eval 快 2.10 倍，文中对应 485 秒对 2990 秒。在 RoboTwin Easy 上，四 GPU 加块边界观测使 500 个 episode 在 14.4 分钟内完成，较单 GPU 基线快 25.04 倍，且成功结果和终止步数完全一致。",
+        "conclusion": "该工作表明，通过统一 Policy 与 benchmark adapter 接口，并在不改动基准评分规则的前提下分离仿真与推理、自动配置并发和跳过未被消费的渲染，可以显著加速具身智能策略评估并保持结果忠实。该方法支持从单 GPU 扩展到多 GPU 实例，适合比较不同 checkpoint、随机种子和训练阶段，并为多基准多策略评估提供可复用的系统工程方案。",
+        "key_details": "关键实现包括规范化的观测/动作契约（如 images.head、state.joints、language.instruction 的名称、类型、dtype 和形状）、按 episode id 隔离 reset 到 end_episode 的状态、加载到卸载的副本级资源，以及 rollout 前后对字段、dtype、固定维度和动作形状的校验。并发搜索用真实 Policy 和短 episode 集探针，稳态吞吐每 worker 给 3 个工作项并丢弃首项和尾部项，探针失败条件包括 worker 缺失、OOM、超时或成功率低于 85%，候选受 CPU 核数、显存和节流约束，对角搜索先增 worker 后按 r=K/g 增 replica，并以 25% 与 epsilon 阈值和 tau_c/tau 预算控制。效率收益依赖 Policy 正确声明观测步长与动作块，块边界优化只跳过不改变物理步进、动作执行和成功判定的渲染；跨实例分片需确定性 episode 清单以保证可复现。局限性在于适配覆盖六个基准族，自动搜索和 MPS 收益依赖硬件、工作负载和模型实现，且可比较性仍要求记录 episode 列表、checkpoint、软件版本与硬件。"
+      },
+      "affiliations": [
+        "Central South University",
+        "Shanghai Jiao Tong University",
+        "Nanjing University",
+        "ShanghaiTech University",
+        "Tongji University",
+        "Chinese Academy of Agricultural Sciences"
+      ],
+      "affiliations_text": "Central South University, Shanghai Jiao Tong University, Nanjing University, ShanghaiTech University, Tongji University, Chinese Academy of Agricultural Sciences",
+      "score": 3.933893326621848,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.03777v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103777v1-adaptive-low-rank-quantum-kernel-acquisition-under-finite-shot-measurements-perturbation-guarantees-for-qsvms",
+      "source": "arxiv",
+      "title": "Adaptive Low-Rank Quantum Kernel Acquisition under Finite-Shot Measurements: Perturbation Guarantees for QSVMs",
+      "authors": [
+        "Duong The Do",
+        "Duong Tung Nguyen"
+      ],
+      "authors_text": "Duong The Do, Duong Tung Nguyen",
+      "abstract": "Quantum kernel methods require estimating entries of a dense Gram matrix through repeated circuit measurements, making kernel construction expensive and statistically noisy. For a dataset of size $n$, dense construction requires $O(n^2)$ kernel queries, while existing approximation methods typically assume inexpensive access to kernel entries or use non-adaptive sampling. We study adaptive low-rank quantum kernel acquisition when the kernel is accessible only through a finite-shot quantum overlap oracle. Our framework, ICAQKL, uses residual-driven incomplete Cholesky construction to acquire informative kernel columns sequentially and form a positive-semidefinite rank-$r$ surrogate, reducing the training-kernel acquisition cost to $O(nrN_s)$ circuit executions for $r\\ll n$, where $N_s$ is the number of shots per queried entry. The central difficulty is that finite-shot errors perturb both the queried kernel values and the adaptive pivot sequence that determines the low-rank factor. We develop a non-asymptotic perturbation framework for this stochastic adaptive process, establishing concentration over the realized queries, stability of noisy pivot selection and factor construction, and propagation of the coupled sampling and approximation errors to the QSVM objective, optimizer, prediction function, and classification margin. The resulting rank--shot conditions characterize when ICAQKL approaches the full QSVM induced by the same quantum feature map. Experiments on benchmark and biomedical datasets show favorable accuracy--query-cost tradeoffs, competitive performance with the full QSVM, and competitive or improved performance relative to the evaluated Nyström baselines under comparable settings. ICAQKL is intended to enable measurement-efficient and theoretically controlled use of a selected quantum kernel, rather than to establish quantum advantage over classical kernels.",
+      "url": "http://arxiv.org/abs/2611.03777v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03777v1",
+      "tldr": "ICAQKL adaptively acquires informative kernel columns via residual-driven incomplete Cholesky under a finite-shot quantum overlap oracle, reducing QSVM kernel-query cost to \\(O(nrN_s)\\) while providing non-asymptotic perturbation guarantees that control how coupled shot noise and low-rank approximation errors propagate to the QSVM objective, optimizer, predictions, and margin.",
+      "detailed_reading": {
+        "motivation": "量子核方法需通过重复电路测量估计稠密Gram矩阵元素，数据量为n时稠密构造需O(n^2)次核查询，既昂贵又受有限测量噪声影响；现有近似方法通常假设核元素可廉价获取或采用非自适应采样，难以直接适用于仅能通过有限shots量子重叠预言机访问核的场景。",
+        "method": "论文提出ICAQKL框架：以有限shots量子重叠预言机作为唯一核访问方式，采用残差驱动的不完全Cholesky分解顺序获取信息量大的核列，并构造正半定秩r代理核，使训练核获取成本降为O(nrN_s)。方法包含自适应枢轴选择、噪声核值下的低秩因子构造，以及针对随机自适应过程的非渐近扰动分析，将有限shot采样误差与低秩近似误差耦合传播到QSVM目标、优化器、预测函数和分类间隔。",
+        "result": "理论分析给出集中不等式、含噪枢轴选择与因子构造的稳定性，以及采样和近似误差向QSVM各环节的传播界，并导出使ICAQKL逼近同一量子特征映射诱导的完整QSVM的秩—shot条件。基准和生物医学数据实验显示较好的精度—查询成本权衡，性能与完整QSVM有竞争力，并在可比设置下相对所评估的Nyström基线表现有竞争力或有所提升。",
+        "conclusion": "ICAQKL面向仅能有限shot访问的选定量子核，提供测量高效且理论可控的低秩核获取方案，可在显著降低训练核查询成本的同时接近完整QSVM表现；作者明确目标是实现选定量子核的测量高效与理论可控使用，而非证明相对经典核的量子优势。",
+        "key_details": "关键实现点包括：输入为数据集和有限shot量子重叠预言机，每查询条目执行N_s次电路测量；用残差驱动的不完全Cholesky自适应选择枢轴并形成秩r正半定代理，r远小于n；核心难点是有限shot误差同时扰动核值和自适应枢轴序列，因此分析覆盖已实现查询上的集中、噪声枢轴稳定性、因子构造稳定性及误差传播；需满足秩—shot条件以控制目标、优化器、预测和间隔偏差；局限在于结论依赖该条件及代理秩选择，且不主张量子优势。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8564933079816526,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.03771v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/04/261103771v1-isac-assisted-proactive-handover-in-mmwave-networks-value-of-foresight-and-localization-requirements",
+      "source": "arxiv",
+      "title": "ISAC-Assisted Proactive Handover in mmWave Networks: Value of Foresight and Localization Requirements",
+      "authors": [
+        "Seyed Bagher Hashemi Natanzi",
+        "Bo Tang"
+      ],
+      "authors_text": "Seyed Bagher Hashemi Natanzi, Bo Tang",
+      "abstract": "Millimeter-wave (mmWave) links can lose tens of decibels within milliseconds when a person or vehicle crosses the line of sight, and reactive handover recovers only after the outage has begun. Integrated sensing and communication (ISAC) promises to let the network see blockers coming and move users to another cell in advance. This paper asks how much such foresight is worth relative to the best reactive handover, and what sensing accuracy is needed to harvest it. We formulate cost-aware cell selection with knowledge of the future signal-to- noise ratio as a sequential decision problem, define the value of foresight through a policy-independent bound, and develop an ISAC-assisted handover framework in which a radio unit senses blockers with its own communication waveform and a simulated Open RAN xApp plans handovers. Ray-traced experiments in a 28 GHz street canyon, reported on held-out scenarios, show that, with a short look-ahead, perfect foresight closes most of the gap between service-aware (Layer-3) reactive handover and an instantaneous oracle. Harvesting this value, however, requires the user and nearby blockers to be localized to about a decimeter, well beyond what our radar tracker and meter- level user positioning provide; with realistic errors, even an uncertainty-aware planner largely defers to reactive handover.",
+      "url": "http://arxiv.org/abs/2611.03771v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03771v1",
+      "tldr": "This paper shows that ISAC-enabled proactive handover in mmWave networks can recover most of the gap between reactive and oracle handover with short look-ahead, but only if users and blockers are localized to roughly a decimeter—realistic sensing and positioning errors largely eliminate the benefit, making an uncertainty-aware planner mostly defer to reactive handover.",
+      "detailed_reading": {
+        "motivation": "毫米波链路在行人或车辆遮挡视距时会在毫秒级损失数十dB，现有切换多为反应式，只能在链路劣化甚至中断后恢复，难以保障时延和速率敏感业务。ISAC使基站可用通信波形感知遮挡物并提前切换，但此前研究很少区分完美前瞻的理论价值与真实传感误差下可实现的收益，也未明确所需定位精度。",
+        "method": "论文将已知未来SNR下的代价感知小区选择建模为序贯决策问题，并用动态规划精确求解，从而给出与策略无关的前瞻价值上界。系统方案中，射频单元用自身OFDM通信波形探测第三方遮挡物，结合数字孪生感知处理进行跟踪、逐小区SNR预测，并由模拟O-RAN xApp执行切换规划，另设不确定性感知规划器。仿真基于Sionna RT 2.2构建空间一致的28GHz街道峡谷射线追踪场景，使每个运动体既是3GPP雷达目标又是通信路径遮挡物，并在留出场景评估。",
+        "result": "留出场景实验表明，在较短前瞻约0.5s且采用代价感知切换时，完美前瞻可弥合服务感知Layer-3反应式切换A5与瞬时oracle之间的大部分可改善差距。但要兑现该价值，用户和附近遮挡物需定位到约分米级，远高于本文雷达跟踪器和米级用户定位所能提供的能力；在现实误差下，即使不确定性感知规划器也大多退化为反应式切换。",
+        "conclusion": "ISAC辅助主动切换的理论收益显著，但其可实现收益受定位与感知精度严格约束，分米级用户和遮挡物定位是收获前瞻价值的关键瓶颈。论文因此把前瞻价值与传感可实现性分离，指出未来需改进雷达跟踪、数据关联、数字孪生校准和多源定位，而不能仅靠更复杂的切换策略。",
+        "key_details": "关键实现包括以服务感知A5反应式切换和瞬时oracle为基线、用动态规划界定任何主动策略的上界、以约0.5s规划时域和切换代价约束决策；仿真采用28GHz街道峡谷、60s运行及不同车辆和行人密度，遮挡物同时作为雷达目标和通信遮挡体。局限性在于结果主要来自射线追踪仿真和模拟xApp，雷达跟踪与米级定位误差使不确定性感知规划也难超越反应式基线，尚未给出硬件实测验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.82158091580912,
+      "score_text": "3.8"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.03815v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103815v1-airoa-0-long-horizon-precise-cross-embodiment-manipulation-from-handheld-data",
+      "source": "arxiv",
+      "title": "AIRoA-0: Long-Horizon, Precise, Cross-Embodiment Manipulation from Handheld Data",
+      "authors": [
+        "Yueh-Hua Wu",
+        "Kei Ota",
+        "Hanlong Li",
+        "Hayata Yuasa",
+        "Jason Wang",
+        "Kengo Ikeuchi",
+        "Kensuke Chiyoma",
+        "Makoto Sugiura",
+        "Masafumi Takahashi",
+        "Masatoshi Tateno",
+        "Naoaki Kanazawa",
+        "Nicola Scianca",
+        "Petr Khrapchenkov",
+        "Satoshi Otsubo",
+        "Takehiko Ohkawa",
+        "Takuya Okubo",
+        "Tatsuya Matsushima",
+        "Yuki Noguchi",
+        "Yuma Shin",
+        "Zixuan Zhong"
+      ],
+      "authors_text": "Yueh-Hua Wu, Kei Ota, Hanlong Li, Hayata Yuasa, Jason Wang, Kengo Ikeuchi, Kensuke Chiyoma, Makoto Sugiura, Masafumi Takahashi, Masatoshi Tateno, Naoaki Kanazawa, Nicola Scianca, Petr Khrapchenkov, Satoshi Otsubo, Takehiko Ohkawa, Takuya Okubo, Tatsuya Matsushima, Yuki Noguchi, Yuma Shin, Zixuan Zhong",
+      "abstract": "AIRoA-0 (A-0) is a bimanual manipulation system learned from 16,151 hours of handheld demonstrations, with no robot data collected at any stage. The demonstrations are recorded with YUBI, our open-source handheld gripper, which lets people record manipulation data anywhere with no robot present. From a single instruction, A-0 sorts more than a dozen small parts into their numbered cells and changes the mop pads and brush of a robot vacuum; among other tasks, it unzips a pencil case and folds a towel. It performs these tasks using only a camera on each wrist, with no head or scene camera, at a site where none of its training data was recorded. Across the ten tasks of our evaluation, it averages a success rate of 78%, against 27% for the strongest of four other vision-language-action models post-trained on the same task demonstrations. We collect no teleoperation data and use no reinforcement learning or on-robot corrections, and the robot appears only at test time. The system learns which regions of each wrist view matter for the task, predicts the stage the task has reached, and decodes actions as a continuous stream. A-0 is embodiment-agnostic: it runs on robots that mount the YUBI gripper, such as a bimanual Franka, TX-G2, OpenArm and UR. We are releasing the dataset, to our knowledge the largest open dataset of handheld-gripper demonstrations with task and subtask instructions, together with the pre-trained weights and the post-training recipe. Videos of A-0 on every task are on the project page, https://a-0.airoa.io. Anyone can build the gripper, record a task of their own and post-train the model on it in under four hours on a single node of eight H200 GPUs.",
+      "url": "http://arxiv.org/abs/2611.03815v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03815v1",
+      "tldr": "AIRoA-0 is a bimanual, embodiment-agnostic manipulation system trained solely on 16,151 hours of handheld-gripper demonstrations—with no robot, teleoperation, or reinforcement-learning data—that achieves 78% average success across ten long-horizon precise tasks using only wrist cameras and transfers to multiple robot platforms.",
+      "detailed_reading": null,
+      "affiliations": [
+        "AIRoA"
+      ],
+      "affiliations_text": "AIRoA",
+      "score": 3.7835297193494593,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.03655v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103655v1-mixture-of-wide-experts-sparse-routing-for-interpretable-native-coordinates",
+      "source": "arxiv",
+      "title": "Mixture of Wide Experts: Sparse Routing for Interpretable Native Coordinates",
+      "authors": [
+        "Tavish Mankash",
+        "Vardhaman Kalloli",
+        "Keshava Prasad",
+        "Deepan Muthirayan"
+      ],
+      "authors_text": "Tavish Mankash, Vardhaman Kalloli, Keshava Prasad, Deepan Muthirayan",
+      "abstract": "Language models often spread a concept across many internal dimensions, making their features difficult to interpret. Sparse autoencoders (SAEs) recover clearer features after training. We ask whether models can instead learn interpretable output coordinates directly. We introduce Mixture of Wide Experts (MoWE), a sparse feed-forward layer in which selected experts read the full representation but write to fixed, disjoint output coordinates. On a controlled task with known hidden causes, this design preserves predictive performance while localizing causes more clearly than dense and standard mixture-of-experts (MoE) models.\n  At approximately matched compute, we train two 19-layer runs of each architecture for 10 billion tokens. MoWE achieves evaluation cross-entropy 2.417 versus 2.452 for dense, while standard MoE reaches 2.22.\n  We measure native-coordinate readability by asking a language-model judge to describe each coordinate from passages where it is strongly active and test that description on new passages. Correcting for descriptions that also fit other coordinates gives a specificity score of 0.523 for MoWE, 0.375 for dense, and 0.268 for standard MoE. TopK SAEs trained on the same FFN updates score 0.489 for dense and 0.556 for MoWE, making native MoWE comparable to the dense SAE.\n  In the first case study, we identify a four-coordinate causal path supporting the model's prediction of degrees after the prompt A right angle is 90. We then copy seven angle-related coordinate values into the model as it processes A rectangle has four, changing its next-token prediction from sides to degrees. In the second, one fixed coordinate set detects hazardous requests and another steers the next token toward refusal. These examples show that MoWE combines sparse conditional computation with coordinates that can be identified and reused directly.",
+      "url": "http://arxiv.org/abs/2611.03655v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03655v1",
+      "tldr": "The paper introduces Mixture of Wide Experts (MoWE), a sparse feed-forward layer in which selected experts read the full representation but write to fixed, disjoint output coordinates, yielding more interpretable and directly steerable native features while maintaining predictive performance comparable to dense models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Plaksha University"
+      ],
+      "affiliations_text": "Plaksha University",
+      "score": 3.7619746662628275,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.03656v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103656v1-stress-testing-the-robustness-of-llm-based-causal-inference",
+      "source": "arxiv",
+      "title": "Stress-Testing the Robustness of LLM-Based Causal Inference",
+      "authors": [
+        "Ankitkumar Patel",
+        "Jigarkumar Patel",
+        "Amit Kumar",
+        "Supreetha Sreeram",
+        "Venkatesh Kulkarni"
+      ],
+      "authors_text": "Ankitkumar Patel, Jigarkumar Patel, Amit Kumar, Supreetha Sreeram, Venkatesh Kulkarni",
+      "abstract": "Why do some of the world's most powerful Artificial Intelligence (AI) systems still struggle to reason about cause and effect? Causal discovery, the ability to discern the underlying drivers of a system, is fundamental to scientific inquiry and has traditionally relied on structured data and statistical methods. Recently, Large Language Models (LLMs) have been explored as an alternative paradigm for causal inference, leveraging their broad knowledge and reasoning capabilities. Yet, despite their linguistic fluency, LLMs often rely on surface-level pattern recognition rather than genuine causal logic. While it is known that LLMs stumble in this domain, we lack a precise map of where, why, and how significantly these failures occur. In this paper, we propose a systematic stress-test framework across six critical dimensions: model scale, causal graph complexity, prompting strategy, metadata quality, data quality, and sensitivity to uncertainty. Our findings reveal a significant \"optimism bias\" in LLMs; models consistently overestimate causal links, leading to low precision across the board. Furthermore, we demonstrate that traditional evaluation metrics can be deceptive: while reasoning-heavy models lead in performance, the highest scores often occur when uncertainty in inference is overlooked. Once uncertainty is integrated into the evaluation, performance drops, providing a more honest reflection of causal reliability. We also find that, while scaling model size improves outcomes, these gains are fragile; performance degrades sharply as the quality of metadata decreases. This work serves as a practical guide to the blind spots of LLMs, offering a clear-eyed assessment of when these tools can be integrated into a causal discovery pipeline and when they are likely to lead researchers astray.",
+      "url": "http://arxiv.org/abs/2611.03656v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03656v1",
+      "tldr": "This paper systematically stress-tests LLM-based causal discovery across six dimensions and finds that LLMs overestimate causal links, that conventional metrics can be misleading unless evaluated with a proposed uncertainty-aware framework, and that scaling gains are fragile under declining metadata quality.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Texas A&M University--Corpus Christi",
+        "Pondicherry University",
+        "IntelliQuest Venture",
+        "University of Texas at Dallas",
+        "IIT - Guwahati"
+      ],
+      "affiliations_text": "Texas A&M University--Corpus Christi, Pondicherry University, IntelliQuest Venture, University of Texas at Dallas, IIT - Guwahati",
+      "score": 3.6930527628482563,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.03779v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103779v1-robot-matched-soft-fingers-for-umi-data-collection-lessons-from-100-hours-of-pick-and-place",
+      "source": "arxiv",
+      "title": "Robot-Matched Soft Fingers for UMI Data Collection: Lessons from 100 Hours of Pick and Place",
+      "authors": [
+        "Kobi Kelemen",
+        "Tomasz Niedziałkowski",
+        "Marcin Paszczak",
+        "Victoriano Montesinos"
+      ],
+      "authors_text": "Kobi Kelemen, Tomasz Niedziałkowski, Marcin Paszczak, Victoriano Montesinos",
+      "abstract": "Training robot policies for multi-task pick and place requires demonstrations on many objects, which handheld Universal Manipulation Interfaces (UMIs) can collect quickly and cheaply. However, existing UMIs depend on external base stations, use rigid fingers that give no signal about contact forces, or use parallel-jaw fingers that limit grip strength. We present a battery-powered handheld interface, built on YUBI, whose soft, angled fingers wrap around objects, deform visibly under load as a visual proxy for force, and match the grippers of the robot. With it, we collect a 99.7-hour dataset over 53 objects, train $π_{0.5}$ policies on 49 of them, and hold out the other 4 as unseen objects. We find that a top camera raises success by 13 points even when only about half of the data includes it, and that mid-training on our multi-task data raises success after fine-tuning on unseen objects from 35% to 57%. Finger design, dataset, and data processing code: https://lute-corp.github.io/soft-yubi-site/",
+      "url": "http://arxiv.org/abs/2611.03779v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03779v1",
+      "tldr": "This paper introduces a battery-powered handheld UMI with robot-matched soft, angled fingers that visibly deform as a force proxy, uses it to collect a 99.7-hour, 53-object pick-and-place dataset, and shows that adding a top camera boosts success by 13 points and multi-task mid-training improves fine-tuned success on unseen objects from 35% to 57%.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Lute"
+      ],
+      "affiliations_text": "Lute",
+      "score": 3.688384860065565,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.03767v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103767v1-quantifying-out-of-distribution-data-severity-with-wasserstein-distances-benchmarking-large-language-models-for-alloy-property-prediction",
+      "source": "arxiv",
+      "title": "Quantifying out-of-distribution data severity with Wasserstein distances: benchmarking large language models for alloy property prediction",
+      "authors": [
+        "YuJie Liu",
+        "Dezhen Xue",
+        "Jun Sun",
+        "Xiangdong Ding",
+        "Zhibin Gao",
+        "Turab Lookman"
+      ],
+      "authors_text": "YuJie Liu, Dezhen Xue, Jun Sun, Xiangdong Ding, Zhibin Gao, Turab Lookman",
+      "abstract": "As general-purpose Large Language Models (LLMs), such as Gemini and DeepSeek, exhibit increasingly advanced reasoning capabilities, a critical question arises: how do their property prediction abilities compare to those of domain-specific pretrained materials models? In this study, we evaluate predictions for Ti, steels, high-entropy alloy (HEA) and Al, demonstrating that general-purpose LLMs surprisingly outperform SteelBERT, MatSciBERT, and SciBERT. To further enhance performance, we introduce a hybrid approach that utilizes numerical priors from a prior model, such as CatBoost or SteelBERT, to guide the general LLMs (Deepseek V3.1, Gemini-2.5-Flash). By inputting these initial estimates from a prior model as prompts, the LLM acts as a reasoning corrector, achieving accuracy superior to the prior model and \"unguided mode\". Furthermore, we investigate the impact of data strategy using a similarity-based metric, revealing that data quality dominates quantity; using merely 5% of high-similarity reference data of training set as input yields performance similar to the results of using 100% of training set. Additionally, the LLMs demonstrate excellent uncertainty calibration, where self-reported \"high\" confidence strongly correlates with minimal deviation from ground truth. Our findings suggest that synergizing general-purpose LLMs with prior model numerical baselines and high-quality data curation creates a cost-effective and accurate paradigm for materials discovery, reducing the need for expensive domain-specific pretraining.",
+      "url": "http://arxiv.org/abs/2611.03767v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03767v1",
+      "tldr": "This paper benchmarks general-purpose LLMs against domain-specific materials models for alloy property prediction and shows that a prior-guided hybrid LLM correction framework, combined with high-similarity data retrieval and Wasserstein-based out-of-distribution severity quantification, achieves accurate, cost-effective predictions where data quality dominates quantity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Xi’an Jiatong University",
+        "AiMaterial Research"
+      ],
+      "affiliations_text": "Xi’an Jiatong University, AiMaterial Research",
+      "score": 3.6781164684936325,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.03744v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103744v1-care-kt-continuity-aware-retrieval-augmented-reasoning-for-knowledge-tracing",
+      "source": "arxiv",
+      "title": "CaRe-KT: Continuity-Aware Retrieval-Augmented Reasoning for Knowledge Tracing",
+      "authors": [
+        "Mehrnoush Mohammadi",
+        "Kamal Berahmand",
+        "Mohammad Morsali",
+        "Shazia Sadiq",
+        "Wojtek Tomaszewski",
+        "Hassan Khosravi"
+      ],
+      "authors_text": "Mehrnoush Mohammadi, Kamal Berahmand, Mohammad Morsali, Shazia Sadiq, Wojtek Tomaszewski, Hassan Khosravi",
+      "abstract": "Knowledge tracing (KT) estimates learners' evolving knowledge states from interaction histories to support adaptive learning. Retrieval-augmented KT improves these estimates using cross-learner behavioral evidence, but existing approaches typically separate evidence retrieval from downstream prediction. This creates a retrieval-inference alignment gap because evidence relevance varies with the learner's evolving state and prediction context. We propose CaRe-KT, a query-adaptive framework that maintains relevance continuity between evidence acquisition and inference without equating retrieval relevance with predictive utility. CaRe-KT introduces an Evidence-Graph Cache (EGC) that combines persistent question-level relational compatibility with interaction-level temporal validity to construct query-specific evidence subgraphs. Historical learning trajectories retrieved through these subgraphs are encoded alongside the target learner's history in a shared representation space using outcome-supervised contrastive learning. An attention mechanism combines acquisition relevance with learned query-evidence compatibility, allowing relevance to inform, rather than determine, each trajectory's predictive influence. Experiments across five benchmarks show that CaRe-KT outperforms strong KT baselines and remains robust under sparse-history and cold-start conditions. These findings support relevance continuity as a design principle for retrieval-augmented knowledge tracing.",
+      "url": "http://arxiv.org/abs/2611.03744v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03744v1",
+      "tldr": "CaRe-KT is a query-adaptive retrieval-augmented knowledge tracing framework that maintains relevance continuity between evidence retrieval and inference through an Evidence-Graph Cache and relevance-informed attention, improving predictive performance and robustness under sparse-history and cold-start conditions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universitat Politècnica de Catalunya",
+        "RMIT University",
+        "The University of Queensland"
+      ],
+      "affiliations_text": "Universitat Politècnica de Catalunya, RMIT University, The University of Queensland",
+      "score": 3.591964203994028,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.03755v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103755v1-honest-small-decision-models-for-finance-scale-specialization-collapse-and-mixed-corpus-remediation",
+      "source": "arxiv",
+      "title": "Honest Small Decision Models for Finance: Scale, Specialization Collapse, and Mixed-Corpus Remediation",
+      "authors": [
+        "Ajitabh Kumar"
+      ],
+      "authors_text": "Ajitabh Kumar",
+      "abstract": "Financial workflows need fast, calibrated, auditable decisions, not just generated text. We train System-1 decision models, small language models fine-tuned to answer typed questions (choice/score/noul) with a probability in a single forward pass, across two model families (K2-Horizon and Qwen3.5/3.8) and nine rungs from 0.8B to 32B parameters, using one frozen LoRA recipe on a public decision benchmark and two new finance corpora: a programmatic-gold policy corpus (rule-reading with exact labels) and a reality-labeled outcome corpus (19,640 realized forward-return questions in walk-forward splits, plus a sealed 2026 test of 1,360 questions). Narrow fine-tuning costs general decision competence 9-45 percentage points, a data-mixture effect that shrinks with model scale and is associated with narrow-gradient volume. On reality-labeled questions, every trained rung from 0.8B to 32B lands at the horizon-conditioned prior baseline (accuracy 0.37-0.38, no detectable conditional edge under our controls); the models respond with flat, well-calibrated probabilities that track per-horizon base rates: naturally honest uncertainty, with a mid-scale calibration sweet spot (ECE 0.026 at 2B, degrading to 0.043-0.044 at 9-32B under prior drift). A mixed-corpus remediation carries all competencies in one adapter at modest cost: it matches or slightly exceeds the generalist specialist on the public benchmark while holding the policy ceiling and near-specialist outcome calibration, yielding a deployable artifact with per-domain temperature regimes and a band-dispatch escalation analysis: sharp, dispatchable bands where rules determine answers; flat, review-routing bands where reality does not.",
+      "url": "http://arxiv.org/abs/2611.03755v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03755v1",
+      "tldr": "Fine-tuning small language models into calibrated finance decision models shows that narrow specialization erodes general decision accuracy (though less at larger scales), reality-labeled outcome questions yield honest near-base-rate uncertainty rather than predictive edge, and a single mixed-corpus adapter can preserve policy, outcome calibration, and general competence for deployable use.",
+      "detailed_reading": null,
+      "affiliations": [
+        "IntelCast"
+      ],
+      "affiliations_text": "IntelCast",
+      "score": 3.555176304675978,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.03724v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103724v1-does-the-trust-boundary-hold-over-time-a-long-horizon-benchmark-for-receiver-directed-federated-learning",
+      "source": "arxiv",
+      "title": "Does the Trust Boundary Hold over Time? A Long-Horizon Benchmark for Receiver-Directed Federated Learning",
+      "authors": [
+        "Ting Xu",
+        "Henry Leung"
+      ],
+      "authors_text": "Ting Xu, Henry Leung",
+      "abstract": "In receiver-directed federated learning, each site draws a trust boundary. For every source and model component it judges, on its own data, whether the transfer helps (admit), harms (reject) or cannot yet be told (abstain). We ask whether this boundary holds over hundreds of rounds. Our benchmark has a federation of thirteen semi-synthetic sites, an exact oracle for every evaluated transfer, paired seeds, an attack protocol, fourteen methods over 600 rounds and Qwen3-1.7B LoRA sites over 500. The answer depends on which boundary is measured. Across 20 paired CPU seeds, a gate judging against a fixed reference better identified transfers useful relative to the site's starting model. Yet it admitted 29% of transfers harmful to the model the site now has. A gate judging against the current model admitted 2% of harmful transfers on that target in the CPU tier, but missed many transfers useful to the starting model. Two short propositions explain these distinct failures. We also evaluate a held out audit that leaves gate verdicts intact. After training, it decides whether each final model is deployed or the site falls back to local training, and reports admissions that have gone stale. With independent audit data its guarantees hold after any training history. At 600 rounds the audit deployed 65 to 72% of models, none with negative benefit on its target, and kept 98% of the gain. No stale report had the wrong sign in our runs. With 20,000 audit observations, a variance-adaptive bound found 99% of stale transfers that cost at least 0.01 in log loss. A common-target Qwen3 comparison on 60 selected transfers shows the same tension over 100 rounds. With 38% adversarial sites, FedFomo and CS-Gate were the only evaluated methods with positive mean gain in every honest group.",
+      "url": "http://arxiv.org/abs/2611.03724v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03724v1",
+      "tldr": "This paper introduces a long-horizon federated learning benchmark with exact per-transfer oracles and shows that receiver-directed trust gates cannot simultaneously preserve usefulness relative to a fixed starting model and safety relative to the current model, while a separate held-out audit can preserve deployment guarantees and detect stale admissions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Calgary"
+      ],
+      "affiliations_text": "University of Calgary",
+      "score": 3.5520581916408425,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.03652v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103652v1-latent-cluster-separation-as-a-regularizer-for-lifelong-anomaly-detection",
+      "source": "arxiv",
+      "title": "Latent Cluster Separation as a Regularizer for Lifelong Anomaly Detection",
+      "authors": [
+        "Sabarish Radhakrishnan",
+        "Nathalie Japkowicz"
+      ],
+      "authors_text": "Sabarish Radhakrishnan, Nathalie Japkowicz",
+      "abstract": "Lifelong (continual) anomaly detection systems must learn a sequence of tasks without forgetting how to recognize anomaly types seen earlier -- a property known as backward transfer. A common way to try to improve backward transfer is to reshape a model's internal representation around learnable concept centroids, typically coupled with a new way of scoring anomalies based on distance to those centroids. Because these two design choices are usually introduced together, it is unclear which one is actually responsible for any performance gain. In this paper, we unbundle the two mechanisms within a VAE-based lifelong anomaly detector and study them separately. We find that used purely as a training-time regularizer -- while leaving anomaly scoring unchanged -- latent cluster separation can improve detection quality and backward transfer, though whether it outperforms the alternative scoring approach depends on the dataset's underlying representation. Switching to distance-based scoring is instead where most of the instability commonly associated with this class of method actually originates; we identify and explain the underlying mechanism. This benefit depends on the dataset's underlying representation, and we report this as practical guidance for choosing between the two design choices, rather than as a list of caveats.",
+      "url": "http://arxiv.org/abs/2611.03652v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03652v1",
+      "tldr": "Using latent cluster separation purely as a training-time regularizer with reconstruction-error scoring improves detection quality and backward transfer in a VAE-based lifelong anomaly detector, whereas switching to distance-to-centroid scoring is the main source of instability—though the better scoring choice depends on the dataset.",
+      "detailed_reading": null,
+      "affiliations": [
+        "John Champe High School / Academies of Loudoun",
+        "American University"
+      ],
+      "affiliations_text": "John Champe High School / Academies of Loudoun, American University",
+      "score": 3.545640756684965,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.03862v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103862v1-dr-no-feature-steering-for-abstention-in-vision-language-models",
+      "source": "arxiv",
+      "title": "Dr. No: Feature Steering for Abstention in Vision-Language Models",
+      "authors": [
+        "Farid Hasanov",
+        "Riccardo Renzulli",
+        "Bahram Zonooz",
+        "Mykola Pechenizkiy",
+        "Decebal Constantin Mocanu"
+      ],
+      "authors_text": "Farid Hasanov, Riccardo Renzulli, Bahram Zonooz, Mykola Pechenizkiy, Decebal Constantin Mocanu",
+      "abstract": "Large foundation models often answer even when the available visual or textual evidence is insufficient to support a reliable conclusion. This failure to abstain makes them hard to trust in high-stakes or information-seeking settings, where a confident but unsupported answer can be worse than no answer at all. It also raises a natural question: can the internal mechanisms behind this behaviour be identified and controlled at inference time? We present Dr. No, a feature-steering approach that mines sparse autoencoder (SAE) features associated with abstention and commitment, then modulates a small set of them during the prefill pass, without retraining the base model.\n  Dr. No is evaluated on LLaVA-1.6 Mistral 7B across multimodal abstention benchmarks, including UNK-VQA and MM-UPD, and additionally benchmarked on language reasoning tasks using Qwen3.5-2B on AbstentionBench subsets. Against multiple uncertainty-based abstention baselines, feature steering achieves a more favourable balance between correct answering and appropriate abstention than post-hoc rejection methods. The gains are strongest on UNK-VQA and on MM-UPD cases involving image--question or question--answer incompatibility, and transfer most clearly to mathematical reasoning subsets of AbstentionBench. However, performance is more limited on absent-answer detection and retrieval-heavy multi-hop QA, such as MuSiQue. These results suggest that sparse internal features provide lightweight control handles for shaping uncertainty-aware behaviour in foundation models, while also showing that abstention control is source-dependent rather than governed by a single universal signal.",
+      "url": "http://arxiv.org/abs/2611.03862v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03862v1",
+      "tldr": "Dr. No is a training-free, inference-time feature-steering method that identifies sparse autoencoder features associated with abstention versus commitment and modulates them during the prefill pass of frozen vision-language models to improve the balance between answering and appropriately abstaining, with gains that depend on the source of unanswerability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Turin",
+        "University of Luxembourg",
+        "Eindhoven University of Technology"
+      ],
+      "affiliations_text": "University of Turin, University of Luxembourg, Eindhoven University of Technology",
+      "score": 3.513396457006336,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.03734v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103734v1-minimal-superior-penalties-characterising-and-calibrating-decision-aware-proper-scoring-rules",
+      "source": "arxiv",
+      "title": "Minimal Superior Penalties: Characterising and Calibrating Decision-Aware Proper Scoring Rules",
+      "authors": [
+        "Rouhollah Ahmadian"
+      ],
+      "authors_text": "Rouhollah Ahmadian",
+      "abstract": "Training a classifier means letting a validation metric decide which model is kept and when training stops. A natural requirement on that metric is superiority: every correctly classified forecast should score better than every incorrectly classified one, however close the underlying probabilities are. Neither the Brier score nor the logarithmic score satisfies this on its own. We show that superiority is governed by the separation between two endpoints -- the supremum of the score on correct predictions and the infimum on incorrect predictions -- and derive both in closed form for each score. Their difference is the infimal penalty, the greatest lower bound on the penalty needed to restore superiority. Prior work restores superiority with a penalty calibrated from the first endpoint alone; for the Brier base, our infimal penalty is smaller than that published penalty by a factor ranging from 4.00 at three classes to 2.11 at twenty. We further embed the published and infimal penalties in a one-parameter family and show that, under a single-valued tie convention, every member of the family is strictly proper. In a pre-specified two-dataset case study, mean selected-model macro-F1 rises with the penalty in the reported ten-class regimes, though not distinguishably from noise once seed/selection-mode nesting is accounted for; a fifth regime at forty-seven classes does not reproduce even this descriptive pattern. The intended no-superiority baseline is algebraically a rescaling of the family under test, so the experiment cannot attribute the observed pattern specifically to superiority. When superiority itself is the objective, any penalty strictly above the infimal value suffices; choosing a larger penalty is a separate calibration trade-off rather than a requirement for the guarantee.",
+      "url": "http://arxiv.org/abs/2611.03734v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03734v1",
+      "tldr": "The paper characterizes decision-aware superiority for Brier and logarithmic scoring rules as separation between closed-form score ranges on correct versus incorrect predictions, derives the minimal penalty needed to guarantee it (substantially smaller than prior published penalties), and embeds these penalties in a strictly proper one-parameter family, while a pre-specified case study finds only inconclusive descriptive evidence linking larger penalties to higher selected-model macro-F1.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Amirkabir University of Technology (Tehran Polytechnic)"
+      ],
+      "affiliations_text": "Amirkabir University of Technology (Tehran Polytechnic)",
+      "score": 3.425561603537073,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.03844v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103844v1-probabilistic-steering-of-generative-priors-for-lab-in-the-loop-antibody-optimization",
+      "source": "arxiv",
+      "title": "Probabilistic Steering of Generative Priors for Lab-in-the-Loop Antibody Optimization",
+      "authors": [
+        "Anisha Parsan",
+        "Sebastian Ober",
+        "Calvin McCarter",
+        "Nick Bhattacharya",
+        "Hunter Elliott"
+      ],
+      "authors_text": "Anisha Parsan, Sebastian Ober, Calvin McCarter, Nick Bhattacharya, Hunter Elliott",
+      "abstract": "Therapeutic antibody development is often framed as comprising two discrete stages: initial discovery of novel binders followed by iterative optimization to refine these hits into therapeutic-grade molecules. Models and methods often reflect these stages, with generative structure models applied to discovery and probabilistic black-box optimization methods applied to refinement. Here we propose to unify these stages by smoothly transitioning a generative discovery model into iterative optimization, allowing the handoff between the structure-based prior and supervision from wet lab data to be guided by the posterior uncertainty of a probabilistic surrogate. We show that this yields improvements in optimization efficiency in the low-N regime, as well as improved diversity amongst the optimized molecules.",
+      "url": "http://arxiv.org/abs/2611.03844v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03844v1",
+      "tldr": "The paper introduces CHAD, which unifies de novo antibody discovery and iterative optimization by steering a frozen structure-based generative prior at inference time with a probabilistic surrogate acquisition reward, using posterior uncertainty to smoothly hand off from prior-driven exploration to lab-data-driven exploitation and thereby improving low-N optimization efficiency and molecular diversity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Massachusetts Institute of Technology",
+        "BigHat Biosciences"
+      ],
+      "affiliations_text": "Massachusetts Institute of Technology, BigHat Biosciences",
+      "score": 3.409929673502439,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.03768v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103768v1-multi-layer-indexer-overlapping-selection-and-attention-in-deepseek-sparse-attention",
+      "source": "arxiv",
+      "title": "Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention",
+      "authors": [
+        "Serdarcan Dilbaz",
+        "Arjun Krishna",
+        "Kiran Kamble",
+        "Daniel M. Bikel"
+      ],
+      "authors_text": "Serdarcan Dilbaz, Arjun Krishna, Kiran Kamble, Daniel M. Bikel",
+      "abstract": "Sparse attention cuts the cost of long-context inference by making the attention matrix sparse: each query attends only a subset of the sequence, chosen by a fixed pattern or, in recent production LLMs, learned per query. In DeepSeek Sparse Attention (DSA), the attention of DeepSeek-V3.2 and the GLM-5 family, every layer is preceded by a lightning indexer that scores the whole cache and keeps the k=2048 highest-scoring tokens for the layer to attend. At long context this indexer scan, not the sparse attention it feeds, is where the decode time goes. But adjacent layers select nearly the same tokens, so a layer can attend the selection of the previous indexer layer instead of its own. This removes the dependency: each indexer then runs concurrently with the attention of its layer. The resulting Multi-layer Indexer (MLI) needs no retraining and no new weights. Its default realization changes no kernel, running inside SGLang's production decode graph; an optional fused decode kernel accelerates it further on DeepSeek-V3.2. MLI composes with IndexCache (the cross-layer reuse GLM-5.2 ships as IndexShare): IndexCache drops the indexer from some layers, and MLI hides the scan on the rest. We serve DeepSeek-V3.2 and GLM-5 under IndexCache's protocol at retentions 1/2 to 1/32 (the fraction of layers that keep an indexer) and contexts 10K to 195K. At equal retention the composition decodes faster than IndexCache: up to 14.5% faster on DeepSeek-V3.2 and 9.8% on GLM-5 at 1/2, and 7.9% and 5.1% at 1/4, largest where IndexCache keeps the most indexers and growing with context. At retention 1/r it is faster still than IndexCache at 1/(2r) while keeping twice the fresh selections: at 128K it reaches 1.32x the unmodified model's decode throughput at 1/4, above IndexCache's 1.28x at 1/8. Its LongBench, RULER and LongBench v2 accuracy stays within a few percentage points of IndexCache's.",
+      "url": "http://arxiv.org/abs/2611.03768v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03768v1",
+      "tldr": "**TLDR:** The Multi-layer Indexer (MLI) speeds up long-context decoding in DeepSeek Sparse Attention by letting each layer attend to the previous layer’s token selection so its indexer scan can run concurrently with attention—requiring no retraining or new weights, and composing with IndexCache to achieve up to 14.5% faster decoding on DeepSeek-V3.2 and 9.8% on GLM-5 at equal retention with minimal accuracy loss.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Writer, Inc."
+      ],
+      "affiliations_text": "Writer, Inc.",
+      "score": 3.2647629067776247,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.03727v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103727v1-auditing-a-model-hub-benchmark-data-quality-training-budgets-and-side-information-in-huggingbench",
+      "source": "arxiv",
+      "title": "Auditing a Model-Hub Benchmark: Data Quality, Training Budgets, and Side Information in HuggingBench",
+      "authors": [
+        "Michal Podstawski"
+      ],
+      "authors_text": "Michal Podstawski",
+      "abstract": "Benchmarks built from model hubs combine interaction data, knowledge graphs (KGs) and resource documentation, but valid files do not ensure that these artifacts describe the same objects. Treating the release as a data product, we audit HuggingBench (SIGIR 2025), a benchmark for recommending Hugging Face resources, through data validation, a replication of its eleven recommendation methods and controlled experiments with three training seeds. In three of its four external KGs, the files pass key and range checks but violate the item-entity identity constraint on which KG recommenders rely. Correcting this join improves every KG-based method in every seed, by up to 73% in mean Recall@10, and consistently reverses ten of 27 comparisons between KG configurations. The protocol matters as well: the 100-epoch budget ends before early stopping in seven to eight of 29 validation-selected settings, and 21 of 23 such setting-seed pairs improve with a longer budget. The released item text, which no reported method uses, is the strongest signal: closed-form linear models with text and the item graph exceed the best reported Recall@10 by 18% while fitting in minutes on a CPU. Checks of other recommendation releases show that individually valid releases of one dataset can use incompatible identifiers. We release corrected files, mappings, validators and logs, and derive practices for preserving identity and provenance across the artifacts of benchmarks and model lakes.",
+      "url": "http://arxiv.org/abs/2611.03727v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03727v1",
+      "tldr": "TLDR: An audit of the HuggingBench model-hub benchmark reveals key data-quality flaws—especially item–entity identity violations in its knowledge graphs—along with truncated training budgets and neglected item text, and shows that fixing the KG join, extending training, and using simple text-plus-graph linear models substantially improve recommendation performance while releasing corrected artifacts and provenance practices.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.9165076269401506,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2611.03654v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/04/261103654v1-towards-automatic-heart-murmur-characterization-from-multi-spot-phonocardiograms",
+      "source": "arxiv",
+      "title": "Towards Automatic Heart Murmur Characterization from Multi-spot Phonocardiograms",
+      "authors": [
+        "Marcelo Nogueira",
+        "Jorge H. Oliveira",
+        "Carlos G. Ferreira",
+        "Miguel T. Coimbra",
+        "Alípio M. Jorge"
+      ],
+      "authors_text": "Marcelo Nogueira, Jorge H. Oliveira, Carlos G. Ferreira, Miguel T. Coimbra, Alípio M. Jorge",
+      "abstract": "Cardiac auscultation traditionally detects the presence of a heart murmur, but clinicians further characterize it by timing, shape, pitch, quality, and grade. Most automatic phonocardiogram analysis systems stop at binary detection and do not estimate this richer description. In this work, we formulate automatic murmur characterization as five patient-level classification tasks and compare three multi-spot strategies on recordings from the aortic, pulmonary, mitral, and tricuspid auscultation locations. First, classical and deep-learning classifiers are trained independently at each location, and predictions are combined via a maximum-severity late-fusion rule. Second, a synchronous multi-input CNN jointly processes one representative segment per location for a single task. Third, a unified multi-input, multi-output CNN predicts all five attributes from one shared multi-spot representation. Using 735 patients from the CirCor DigiScope dataset with complete four-spot recordings, the best late-fusion configurations reach an unweighted mean sensitivity between 85.56% and 93.81% across the five tasks, with class-specific recalls between 80.00% and 100.00% for every relevant category. The multi-input CNN trails late fusion by 7-16 points depending on the task, while the multi-output model reaches values between 72.59% and 79.40%, estimating all five attributes from one shared representation. We further show that naively balancing training data by adding all minority-class segments degrades patient-level performance under the maximum-severity rule, since it introduces non-representative, noisy segments not filtered by the clustering-based segment selection used for evaluation. These results indicate multi-spot murmur characterization is feasible with both fusion-based and jointly learned architectures, outlining a path toward automatic, structured murmur reports complementing binary screening.",
+      "url": "http://arxiv.org/abs/2611.03654v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03654v1",
+      "tldr": "This paper formulates automatic heart murmur characterization as five patient-level classification tasks—timing, shape, pitch, grade, and quality—from four-spot phonocardiograms and shows that multi-spot strategies, especially maximum-severity late fusion, can estimate these attributes with high sensitivity, offering a path toward structured automatic murmur reports beyond binary detection.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade da Maia",
+        "INESC TEC",
+        "Universidade do Porto",
+        "Instituto Superior de Engenharia do Porto"
+      ],
+      "affiliations_text": "Universidade da Maia, INESC TEC, Universidade do Porto, Instituto Superior de Engenharia do Porto",
+      "score": 2.8159730623870995,
+      "score_text": "2.8"
+    }
+  ]
+}
