@@ -1,0 +1,723 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-05T19:20:36.621109",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.05533v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105533v1-data-driven-stochastic-lqr-control-with-probabilistic-guarantees-and-uncertainty-refinement",
+      "source": "arxiv",
+      "title": "Data-Driven Stochastic LQR Control with Probabilistic Guarantees and Uncertainty Refinement",
+      "authors": [
+        "Amir Modares",
+        "Charalambous Themistoklis",
+        "Hamidreza Modares"
+      ],
+      "authors_text": "Amir Modares, Charalambous Themistoklis, Hamidreza Modares",
+      "abstract": "This paper presents a probabilistic framework for the direct, data-driven synthesis of the stochastic linear- quadratic output-feedback control for linear systems sub- ject to process and measurement noise. Using delayed input-output measurements, we derive a lifted parameter- ization together with an equivalent lifted linear quadratic cost, enabling controller synthesis without explicitly identi- fying the lifted dynamics. Two complementary closed-loop formulations, based on trajectory and covariance represen- tations, are then developed, whose uncertainties depend only on the realized but unknown lifted noise. We char- acterize the relative performance of the two formulations in finite-data regimes. High-probability uncertainty bounds are developed for realized noises, leading to a convex optimization solution to the problem, whose feasibility cer- tifies probabilistic mean-square stability (p-MSS) and per- formance guarantees. To reduce conservatism, Gaussian zonotopes are used to refine uncertainty sets by elimi- nating noise realizations inconsistent with measured data, and a novel intersection rule enables the consistent fusion of data-driven and physics-informed information. These components are integrated into an adaptive framework that unifies indirect (identification-based) and direct (control- oriented) data-driven linear-quadratic output-feedback con- trol. Unlike existing direct data-driven LQR methods that verify stability a posteriori, our by-construction approach achieves robust stability alongside reduced conservatism and superior performance. Simulation results show that the proposed controller approaches the ideal optimal solution while outperforming existing data-driven methods under noisy measurements.",
+      "url": "http://arxiv.org/abs/2611.05533v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05533v1",
+      "tldr": "This paper proposes a probabilistic direct data-driven framework for stochastic LQR output-feedback control from noisy input-output data, using lifted parameterization, convex optimization with high-probability mean-square stability and performance guarantees, and Gaussian-zonotope uncertainty refinement to reduce conservatism and approach optimal performance.",
+      "detailed_reading": {
+        "motivation": "直接数据驱动控制可绕过系统辨识，但现有数据驱动LQR方法多依赖无噪声状态测量，或在含噪输出场景下缺乏非渐近概率稳定性与性能保证，且鲁棒性常依赖保守不确定集和人工正则参数。本文旨在仅利用含过程噪声与测量噪声的单条输入-输出轨迹，直接合成随机LQR输出反馈控制器，并在构造上同时保证概率均方稳定性和近优性能。",
+        "method": "基于单条有限含噪输入-输出轨迹构造延迟Hankel数据与提升状态，并建立等价的提升线性二次代价，从而无需显式辨识提升动态即可直接设计控制器；随后给出轨迹级与协方差级两种闭环参数化，其不确定性仅取决于已实现但未知的提升噪声。为处理提升坐标中状态与噪声的统计相关性，引入延迟工具变量恢复外生性，并利用提升噪声的有限记忆导出非渐近高概率不确定界，将问题转化为凸优化/LMI，其可行性直接认证概率均方稳定性和性能界。进一步采用高斯zonotope剔除与实测数据不一致的噪声实现，并通过新的交集规则融合数据驱动信息与物理先验，形成统一间接与直接数据驱动LQR的自适应框架。",
+        "result": "理论上刻画了轨迹级与协方差级两种闭环公式在有限数据下的相对性能：随数据长度T增大，协方差级不确定性相对名义项趋于消失，而轨迹级不确定性比值保持O(1)。所提凸优化若可行，即以构造方式认证p-MSS与性能保证，且高斯zonotope不确定性精化可降低保守性；仿真表明控制器接近理想最优解，并在噪声测量下优于现有数据驱动方法。",
+        "conclusion": "论文提出了一套面向含噪输入-输出数据的概率直接数据驱动随机LQR输出反馈框架，将提升建模、非渐近概率界、凸优化稳定性认证与不确定性精化统一起来。该方法无需状态测量和显式辨识，在构造上保证鲁棒稳定性并降低保守性，实现了接近最优的控制性能，同时统一了直接与间接数据驱动设计思路。",
+        "key_details": "关键实现包括：用深度Ly的输入-输出Hankel矩阵和持续激励条件构造提升数据，Ly需不小于可观测性指数且输入满足相应阶次PE；过程噪声与测量噪声为已知协方差W、V的零均值高斯且互不相关，系统矩阵先验用高斯zonotope表示，并假设(A,B)可控、(A,C)可观测、A非奇异及(A,Q^{1/2}C)可检测。技术核心是延迟工具变量恢复外生性、利用提升噪声有限记忆推导非渐近集中界、以LMI可行性认证p-MSS，以及约束高斯zonotope交集规则融合数据一致性与物理先验；局限在于依赖高斯/已知协方差与先验、单条有限轨迹及仿真验证，LMI规模随提升维数和数据尺度增长，且不确定集精化后仍可能存在一定保守性。"
+      },
+      "affiliations": [
+        "University of Cyprus",
+        "Michigan State University"
+      ],
+      "affiliations_text": "University of Cyprus, Michigan State University",
+      "score": 5.929170803791814,
+      "score_text": "5.9"
+    },
+    {
+      "id": "2611.05439v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105439v1-learning-implicit-solves-for-dynamic-simulations",
+      "source": "arxiv",
+      "title": "Learning Implicit Solves for Dynamic Simulations",
+      "authors": [
+        "Chawit Kaewnuratchadasorn",
+        "Jiaji Wang",
+        "Xin Nie"
+      ],
+      "authors_text": "Chawit Kaewnuratchadasorn, Jiaji Wang, Xin Nie",
+      "abstract": "High-fidelity simulation of dynamical systems is central to scientific discovery and engineering design, yet remains computationally demanding. Here we introduce the Implicit Neural Operator Solver (INOS), which learns the implicit solve and encodes a time integrator. INOS pretrains a neural operator from static equilibrium solutions and reuses it within Newmark-$β$ integration. At each time increment, the integrator forms an effective equilibrium problem, the pretrained neural operator infers the next-step solution field, and the Newmark relations advance the dynamic state. Numerical examples in linear and nonlinear elastodynamics demonstrate accurate full-field predictions without dynamic trajectory supervision. Comparative results show that INOS, evaluated zero-shot, achieves higher predictive accuracy than neural solver baselines trained on dynamic simulations. In addition, INOS delivers over 4,600$\\times$ speedup in nonlinear simulations over sequential classical finite-element solvers. INOS natively accommodates changes in dynamic conditions and enables reuse of the pretrained operator across spatial and temporal discretizations. Further evaluation demonstrates a stable million-step rollout. These findings establish INOS as a reusable neural implicit solver for accurate, efficient, and robust dynamic modeling.",
+      "url": "http://arxiv.org/abs/2611.05439v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05439v1",
+      "tldr": "INOS is a reusable neural implicit solver that pretrains a neural operator on static equilibrium solutions and embeds it in Newmark-β integration to deliver accurate, efficient, zero-shot dynamic simulations without dynamic trajectory supervision.",
+      "detailed_reading": {
+        "motivation": "高保真动力系统仿真对科学发现和工程设计至关重要，但传统隐式时间积分在大规模线性和非线性问题中计算代价高，而现有神经求解器多依赖动力轨迹监督，训练成本高且跨时间离散与载荷变化的外推稳定性不足。作者希望把算子学习的表达能力与Newmark隐式积分的结构化状态更新结合，仅学习静态平衡求解并在动力 rollout 中零样本复用。",
+        "method": "INOS先在线性/非线性静态平衡问题上预训练神经算子，输入为附加刚度场和等效力/载荷及空间坐标，输出平衡位移场；其中静态问题采用附加节点弹簧刚度K_spring，动力问题经Newmark-β递推转化为有效平衡问题，附加刚度为a0M+a1C，在集中质量和质量比例阻尼下为对角节点系数。每个时间步由当前状态和下一时刻外载构造有效力，预训练算子一次性预测下一时刻位移，再由Newmark关系更新速度和加速度，仅平衡映射被学习，时间积分和输入构造均按预设格式执行；结构化网格用FNO，非结构化网格用Transolver，静态标签由Newton法生成。",
+        "result": "在线性和非线性弹性动力学基准上，INOS无需动力轨迹监督即可零样本给出全场预测，并在相同骨干家族内多数IID、OOD(F)和OOD(H)设置下取得低于轨迹训练神经基线的误差；非线性仿真相对顺序有限元求解取得超过4600倍加速，并展示百万步稳定rollout。对比也显示个别极端外推情形仍有不足，例如1D Transolver版INOS在力幅外推下误差高于轨迹训练的FNO。",
+        "conclusion": "INOS表明，将静态平衡神经算子嵌入Newmark隐式积分可形成可复用、可微且模块化的神经隐式求解器，在不依赖动力轨迹训练的情况下实现准确、高效和较稳健的动力仿真。其性能依赖静态预训练对有效平衡输入空间的覆盖，并为跨空间/时间离散复用和长时程rollout提供了可行路径。",
+        "key_details": "关键实现包括：用静态平衡数据预训练，动力测试对轨迹监督为零样本；Newmark有效平衡中的附加刚度由a0M+a1C给出，采用集中质量和质量比例阻尼使其对角化并以节点系数输入；每个非线性基准使用与所选Δt匹配的固定附加刚度场，且该场作为算子输入；局部平衡预测误差会随自回归步累积，因此预训练覆盖、载荷外推和时间步变化是主要约束，OOD力幅/时域和固定Δt设置构成局限性。"
+      },
+      "affiliations": [
+        "The University of Hong Kong",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "The University of Hong Kong, Tsinghua University",
+      "score": 5.710019874258543,
+      "score_text": "5.7"
+    },
+    {
+      "id": "2611.05577v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105577v1-readable-is-not-steerable-pre-registered-tests-of-physical-structure-in-learned-fluid-representations",
+      "source": "arxiv",
+      "title": "Readable Is Not Steerable: Pre-Registered Tests of Physical Structure in Learned Fluid Representations",
+      "authors": [
+        "Manvendra Modgil"
+      ],
+      "authors_text": "Manvendra Modgil",
+      "abstract": "Self-supervised world models are often said to organize their latents around physical quantities. We test this on 2D decaying Navier-Stokes flow in three pre-registered studies, each tested once on held-out data. In Study 1, a joint-embedding predictive architecture (JEPA) trained to predict the flow fails the pre-registered criteria for organizing its latent around fluid quantities better than an untrained network of the same architecture (not supported); a JEPA trained on non-physical linear dynamics and a static invariance model that never sees time do as well or better. In Study 2, plain autoencoders that render the field make enstrophy prominent in their slowest unsupervised latent directions (best r 0.80-0.86 vs 0.38 untrained; fresh seeds, sealed data). Adding VICReg lowers this prominence in every comparison, though not by the pre-registered margin for vorticity, while raising the autoencoders' linear decodability (partially supported). In Study 3, we build steerable directions (\"dials\") by routing: the decoder gets overall scale only through a small conditioning code, while its other pathway carries a degraded copy of spectral shape. Label-free rules find a loudness dial in all 8 trained models and a shape dial in 3 of 5 fresh seeds on sealed data, against a pre-registered bar of 4; neither control shows a shape dial (partially supported). Across the studies, what a latent contains and what can be controlled through it come apart. In exploration, a supervised direction reading spectral shape almost perfectly moved nothing when steered. During the build, the loudness dial had to be found by its effect on the output (closest to a pure rescaling), not by data variance; for shape, a variance rule and an effect-constrained rule each worked in 3 of 5 seeds. The program used about 70 logged hours on one consumer GPU; all pre-registrations, deviations, code and outputs are public.",
+      "url": "http://arxiv.org/abs/2611.05577v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05577v1",
+      "tldr": "Across three pre-registered studies on 2D decaying Navier–Stokes flow, the paper finds that physical quantities may be readable from learned latent representations but are not reliably steerable, showing that what a latent contains and what can be controlled through it are distinct properties.",
+      "detailed_reading": {
+        "motivation": "自监督世界模型常被认为会把潜空间组织成物理量，但线性可解码或与守恒量相关并不等于模型真正表示或可控制该物理量。论文在二维衰减 Navier-Stokes 流上预注册三项研究，区分可解码性、显著性和可操控性，并用对照实验检验“潜空间组织围绕物理”这一说法。",
+        "method": "数据为周期域 64×64 二维不可压衰减 Navier-Stokes 涡量流，伪谱求解器、2/3 去混叠、Lawson 四阶 Runge-Kutta、CFL 0.3、float64，按轨迹划分训练/验证/测试；编码器为带循环填充、GELU、Kaiming 初始化且无归一化的小卷积网络，输出 8×8×128 特征并池化为 128 维潜变量。研究 1 训练 JEPA 在潜空间预测流场，以 EMA 目标和 VICReg 式方差-协方差正则防塌缩，并设非物理线性动力学 JEPA、静态不变模型和未训练网络对照；研究 2 训练重建流场的普通自编码器及加 VICReg 版本，考察最慢无监督方向与 enstrophy 的相关。研究 3 通过路由构造可操控“旋钮”：解码器仅经小条件码获得整体尺度，另一通路只携带退化的谱形状，并用 FiLM 条件调制；操控评估沿方向 d 解码 z+ασ_d d，α 从 -2 到 +2 步长 0.5，测幅值 logE 与形状 log(Z/E)，判据包括效应≥0.2 log 单位、单调 Spearman≥0.9、重编码相关≥0.9 且增益 0.5–2、帧特异性、谱现实性及形状选择性阈值。每项确认性研究先提交假设、规则和分析代码，冻结脚本一次性打开封存测试集，并记录偏差、代码、输出与检查点哈希。",
+        "result": "研究 1 中，预测流场的 JEPA 未达到预注册标准，未能比同架构未训练网络更好地围绕流体量组织潜空间；非物理线性动力学 JEPA 和从未见时间的静态不变模型表现相当或更好，假设不支持。研究 2 中，普通自编码器使 enstrophy 在最慢无监督方向中显著，最佳 |r| 为 0.80–0.86，未训练对照仅 0.38；加入 VICReg 在每次比较中都降低该显著性，但涡量降幅未达预注册边际，同时提高线性可解码性，结论为部分支持。研究 3 中，无标签规则在全部 8 个训练模型找到响度旋钮，在封存数据的 5 个新种子中 3 个找到形状旋钮，低于预注册门槛 4，两个对照均未出现形状旋钮，结论为部分支持。探索中还发现，能近乎完美读出谱形状的监督方向在操控时几乎不改变输出；整个项目约在一张消费级 GPU 上记录 70 小时计算。",
+        "conclusion": "三项预注册研究表明，潜变量“包含什么”和“能通过它控制什么”是分离的性质：可读、可解码甚至显著，并不保证可操控。作者据此提出“可读不等于可操控”，并强调需要干预式评估和严格对照，而不能仅凭线性探针或慢方向相关推断模型学到了物理结构。",
+        "key_details": "关键实现包括：2D 周期衰减流、单一模拟器与初始条件分布、按轨迹而非帧划分、结构探针需偏回归掉时间与初始条件族；显著性用 z-score 潜变量、32 主成分和轨迹内/间广义特征问题找最慢方向，并以轨迹平均投影与 log 初始 enstrophy 的最大 |r| 衡量。操控判据要求效应、单调性、重编码一致性、帧特异性和谱包络现实性同时满足，形状选择性 σ_shape 对形状旋钮≥0.7、响度旋钮≤0.2；响度旋钮须按输出效应而非数据方差识别。局限性是范围窄：仅 64×64 二维周期衰减流、一个模拟器、小卷积编码器，结果不宣称可迁移到三维流、更大模型或其他数据；显著性不等于模型知道守恒，探针可解码也不等于模型使用该信息。预注册、偏差、代码和输出公开，但研究 1 测试集为协议性单次使用而非代码封存，部分探索性分析与事后解读需按标签区分。"
+      },
+      "affiliations": [
+        "Modint Intelligence"
+      ],
+      "affiliations_text": "Modint Intelligence",
+      "score": 4.9339853855295965,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.05448v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105448v1-jev-with-foresight-safe-language-guided-autonomous-driving-via-a-language-world-model",
+      "source": "arxiv",
+      "title": "Jev with Foresight: Safe Language-Guided Autonomous Driving via a Language World Model",
+      "authors": [
+        "Yansong Qu",
+        "Jiancong Chen",
+        "Samuel Labi"
+      ],
+      "authors_text": "Yansong Qu, Jiancong Chen, Samuel Labi",
+      "abstract": "Large language models understand passengers' driving commands, but as driving agents they reason in generated text for seconds and must infer each action's consequences implicitly from the scene. We present Jev-AD, which pairs Jev, a typed decision model that answers predefined questions with probabilities, not generated text, with a language world model that predicts for every candidate action how nearby vehicles move over the next two seconds. Code turns these predictions into foreseen consequences, which Jev compares instead of inferring them from coordinates. In simulated highway merging (500 car-episodes), this foresight lowers the same decision model's collision rate from 26.0% to 2.4% at 0.25 seconds per decision, and Jev-AD achieves the passenger's intent in 93% of free-form command trials. In 500 replayed real-world NGSIM episodes, foresight lowers the collision rate from 48.2% to 2.8%, and the world model, learned from this traffic, foresees 93% of dangerous actions. Project page: https://ys-qu.github.io/jev-ad-website.",
+      "url": "http://arxiv.org/abs/2611.05448v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05448v1",
+      "tldr": "Jev-AD pairs a fast typed decision model with a language world model that foresees each candidate action’s near-future consequences, enabling safe, language-guided autonomous driving with far fewer collisions and high passenger-intent success.",
+      "detailed_reading": {
+        "motivation": "大语言模型能理解乘客的自由语言驾驶指令，但作为驾驶智能体时往往需要生成文本链式推理，耗时可达秒级，而且只能从场景坐标中隐式推断每个动作的后果，在汇入等密集交互中容易失效。因此需要一种既快又安全的语言引导驾驶框架，让决策模型显式比较候选动作的预见后果，而不是依赖缓慢文本推理或隐式推断。",
+        "method": "Jev-AD 用类型化决策模型 Jev 先将自由语言指令一次性落地为四个概率化问题：是否明确要求撞击/伤人/违法、是否与驾驶无关、激进度评分以及请求的机动类型，并按预设阈值拒绝、暂缓、忽略或执行；每个决策步再让 Jev 在 Left、Idle、Right、Faster、Slower 中选择一个动作。语言世界模型以 Qwen2.5-0.5B 加 LoRA r=16 为骨干，输入自车及最多 8 辆近邻车最近四帧、速度航向加速度、AV 设定速度/目标车道和自车/他车最近三次动作等文本，控制头在自车候选动作和他车动作嵌入条件下预测最多 9 辆车未来 2 秒内 10 个关键帧的加速度与转角，意图头预测他车动作，插值到 20Hz 后用运动学自行车模型积分成轨迹。每次决策对全部候选动作查询一次世界模型，对每个自车动作执行一步后接 Idle 三步，并考虑他车概率不低于 0.2 的动作，保留最严重结果；代码计算是否/何时碰撞、最小 TTC、最终车道与速度、是否完成汇入，并转成短语后果。Jev 的决策输入包含已落地指令、简短场景描述和每个动作的预见后果，指令要求在有安全选项时避免 Collision 或 Danger，并选择最符合乘客意图的安全动作。",
+        "result": "在 500 个仿真高速公路汇入 car-episode 中，同一决策模型加入预见后碰撞率从 26.0% 降到 2.4%，每次决策约 0.25 秒；在自由语言指令试验中，Jev-AD 有 93% 达成乘客意图。在 500 个回放的真实 NGSIM episode 中，预见使碰撞率从 48.2% 降到 2.8%，且从该交通数据学习的世界模型能预见 93% 的危险动作。",
+        "conclusion": "结果表明，将快速类型化决策模型与语言世界模型结合，用代码把预测转成可比较的碰撞、TTC、车道和速度后果，可以在语言引导驾驶中显著提升安全性并保持实时性。作者强调起主要作用的是预见本身而非预测器形式，但当前验证仍限于仿真与真实数据回放，并依赖 AV 间共享设定点和历史动作等协作假设。",
+        "key_details": "实验覆盖 highway-env/KoMA 的汇入、三车道汇入和环岛场景，以及 US-101 与 I-80 的 NGSIM 回放数据，仿真中其他车采用 IDM/MOBIL，NGSIM 按车辆 ID 划分训练/验证/测试。关键超参包括 0.5 秒决策周期、2 秒预测时域、10 个关键帧、20Hz 轨迹积分、最多 9 辆车、他车动作概率阈值 0.2、TTC 小于 1.5 秒记为 Danger，以及指令不安全概率 0.8 拒绝、0.2 至 0.8 暂缓、离题概率 0.5 忽略，这些阈值在评估前固定。Jev 单次约 0.13 秒，整体约 0.25 秒/决策，满足 0.5 秒决策周期；数值计算如间距、相对速度和 TTC 由代码完成而非语言模型。局限在于他车当前动作未知且只按概率枚举，AV 间假设可共享设定点和历史动作，实验为仿真和回放而非真实车辆部署，场景与动作空间也受 highway-env 元动作限制。"
+      },
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 4.864045592925783,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.05591v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105591v1-c-grpo-conformal-group-relative-policy-optimization",
+      "source": "arxiv",
+      "title": "C-GRPO: Conformal Group Relative Policy Optimization",
+      "authors": [
+        "Arya Fayyazi",
+        "Seyedarmin Azizi",
+        "Mehdi Kamal",
+        "Massoud Pedram"
+      ],
+      "authors_text": "Arya Fayyazi, Seyedarmin Azizi, Mehdi Kamal, Massoud Pedram",
+      "abstract": "Reasoning-oriented language model training increasingly relies on multiple on-policy rollouts, but standard Group Relative Policy Optimization (GRPO) uses a fixed group size, wasting compute on easy prompts and under-exploring hard ones. Existing adaptive-budget methods alleviate this inefficiency, yet their stopping rules are heuristic and do not provide a finite-sample calibration guarantee. We propose CGRPO, which replaces the fixed rollout budget of standard GPRO with calibrated conformal thresholds over task-specific nonconformity scores, combining Adaptive Prediction Set (APS)-style calibration for closed-form reasoning, a first-success score for execution-based code, automatic miscoverage selection, and periodic re-calibration. We prove finite-sample coverage for the resulting stopping rule and show that, under monotone policy improvement, recalibration induces a non-increasing expected training budget. Across six benchmarks spanning mathematics, graduate-level science, and code generation, CGRPO reduces mean training rollouts by 49-70% relative to fixed-budget GRPO while retaining strong fixed-budget accuracy, achieves the strongest pass@1 among evaluated static and dynamic baselines on different datasets, and transfers across model families with up to 82% rollout savings.",
+      "url": "http://arxiv.org/abs/2611.05591v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05591v1",
+      "tldr": "C-GRPO replaces GRPO’s fixed rollout budget with calibrated conformal stopping thresholds that adaptively allocate more rollouts to hard prompts and fewer to easy ones, providing finite-sample coverage guarantees while reducing training rollouts by 49–70% without sacrificing accuracy.",
+      "detailed_reading": {
+        "motivation": "标准GRPO对每个提示使用固定组大小，导致简单题浪费 rollout、困难题探索不足；已有自适应预算方法多依赖启发式停止规则，缺乏随策略演化仍成立的有限样本校准保证。C-GRPO的动机是把自适应组大小构造为训练期共形校准问题，在保持准确率的同时将算力重新分配给困难样本。",
+        "method": "C-GRPO在固定预算网格上为每个预算k维护共形阈值，使用与训练集不相交的校准集和每个查询K_max次采样计算任务特定非一致性分数；闭式数学与科学题采用带随机化分数质量和随机打破并列的APS分数，代码执行题采用首个成功样本位置j*/k作为first-success分数。对每个k用分裂共形分位数ceil((n+1)(1-delta))计算阈值qhat_k，并加入自动miscoverage选择与周期性重校准以跟踪策略改进。训练时对每个提示从最小预算开始采样，当非一致性分数不超过对应校准阈值时停止并构造自适应组，再用该组计算GRPO相对优势并更新策略；整体无需显式约束优化，校准阈值隐式决定每步计算预算。",
+        "result": "在覆盖数学、研究生级科学和代码生成的六个基准上，C-GRPO相对固定预算GRPO将平均训练rollout减少49%至70%，同时保持强固定预算准确率。在GSM8K、HumanEval、MBPP和MATH-500上，其pass@1等于或略高于所评估的静态与动态基线，差异处于二项噪声范围内，且每个提示所需rollout最少；在Llama-3.1-8B上GSM8K无需重新调参即可达到最高82%的rollout节省。",
+        "conclusion": "C-GRPO表明共形预测可作为训练期计算控制机制，而不仅是推理后处理工具，为自适应组大小提供有限样本覆盖与错误停止控制。理论上给出每个预算下的false-stop控制、在多重性校正下自适应选择预算的同时覆盖保证，并在单调策略改进的理想条件下推出重校准使期望训练预算非增；实验上形成简单题早停、困难题保留算力的自步课程。",
+        "key_details": "关键实现包括独立校准集、预算网格、K_max次采样、delta选择、共形分位数有限样本校正以及定期重校准；APS的随机化分数保证连续性并带来精确边际覆盖，first-success分数在代码任务中避免因答案字符串唯一而导致APS退化。理论保证依赖样本可交换性，自适应预算的同时覆盖需多重性校正，单调策略改进下预算非增是理想化条件而非无条件结论；自动delta用于避免训练早期阈值退化。该方法不显式求解目标计算约束C，而是通过校准阈值间接控制每查询预算，实际节省幅度受校准集规模、预算网格粒度、任务验证器可靠性和策略演化漂移影响。"
+      },
+      "affiliations": [
+        "University of Southern California"
+      ],
+      "affiliations_text": "University of Southern California",
+      "score": 4.781446660526475,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.05615v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105615v1-mathcalcinfty-smooth-trajectory-planning-with-application-to-soft-robots",
+      "source": "arxiv",
+      "title": "$\\mathcal{C}^\\infty$ Smooth Trajectory Planning with Application to Soft Robots",
+      "authors": [
+        "Reinhard M. Grassmann",
+        "Abdulaziz Y. Alkayas",
+        "Lingyun Chen",
+        "Sami Haddadin"
+      ],
+      "authors_text": "Reinhard M. Grassmann, Abdulaziz Y. Alkayas, Lingyun Chen, Sami Haddadin",
+      "abstract": "High motion performance and avoiding structural vibrations rely on smooth trajectory planning. The smoothness requirement depends on the robot's complexity in terms of the number of degrees of freedom and system order due to the flexibility of the joints and links. For industrial robots, the smoothness requirements have been determined and subsequently taken into account. Although unknown for soft continuum robots, the exact smoothness requirement can potentially be much larger than previously considered ones such as $\\mathbf{\\mathcal{C}^4}$ for collaborative robots and $\\mathbf{\\mathcal{C}^5}$ for quadcopter drones. To address this gap, we introduce a $\\mathbf{\\mathcal{C}^\\infty}$-smooth trajectory generator that respects defined kinematic limits and generates infinitely differentiable trajectories. The generated path addresses and generalizes to all smoothness requirements, where a transition between sequential states is needed. Therefore, all trajectories have continuous velocity, acceleration, jerk, snap, crackle, pop, etc. Of particular interest is the case of null boundary conditions, i.e., all derivatives at the start and end of the trajectory are equal to zero. We verified and evaluated our proposed approach in simulations and on hardware.",
+      "url": "http://arxiv.org/abs/2611.05615v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05615v1",
+      "tldr": "The paper introduces a \\(\\mathcal{C}^\\infty\\)-smooth trajectory generator based on an infinitely differentiable path primitive that respects kinematic limits, enabling vibration-avoiding motion for soft continuum robots and other flexible systems, with validation in simulation and on hardware.",
+      "detailed_reading": {
+        "motivation": "软连续体机器人自由度和柔性环节近似无限，结构振动抑制与高跟踪性能要求轨迹具有任意阶连续导数；现有工业、协作机器人和无人机轨迹多为C3至C5平滑，软体机器人常用线性插值或位置控制且常未指定平滑性，已有C∞基元经几何缩放后仍可能不满足端点任意阶导数为零，因此需要一种尊重运动学限制、适用于顺序状态过渡的C∞轨迹生成器。",
+        "method": "在归一化时间τ∈[0,1]上构造路径基元：先用平坦函数ψ(τ)=exp(-1/τ)（τ>0）、0（τ≤0），再经归一化φ(τ)=ψ(τ)/(ψ(τ)+ψ(1-τ))得到满足φ(0)=0、φ(1)=1、端点各阶导数为零、单调且点对称的C∞路径基元s(τ)；通过几何缩放q(t)=qs+(qg-qs)s(τ)，导数按q^(k)=Δq/(Δt)^k s^(k)(τ)计算，并用最大速度、加速度、加加速度等运动学限制确定持续时间Δt，从而生成关节空间点到点轨迹；实现上采用分段定义和稳健求导处理τ=0处，可同步多状态并支持零边界条件。",
+        "result": "提出的基元产生的轨迹速度、加速度、jerk、snap、crackle、pop等直至任意阶均连续，满足C∞平滑和零边界条件，并能通过调整持续时间遵守给定运动学限制；与多项式基元及Havercosine、指数、逻辑函数等对比，后者分别存在平滑阶次有限、端点导数跳变或路径跳变等问题；作者在肌腱驱动软体机器人仿真和7自由度FR3机械臂硬件上验证了方法，摘要未报告具体数值误差或速度指标。",
+        "conclusion": "该工作提供了可工程实现的C∞平滑点到点轨迹生成框架，将软连续体机器人对无穷阶平滑的潜在需求转化为简单的归一化路径基元加几何缩放方案，并证明其可推广到柔性关节或连杆机器人、无人机等需要高阶平滑过渡的场景；其主要意义在于以低实现成本替代线性插值和低阶多项式轨迹，降低振动并改善跟踪，但当前范围限于关节空间直线路径且定量性能仍待更全面评估。",
+        "key_details": "关键实现点包括：输入为起止关节状态和速度、加速度、加加速度上限，无学习训练过程；ψ为在0处平坦的非解析光滑函数，φ由ψ与其时间反转组合归一化，保证端点全阶导数为零、单调、点对称和φ(τ)=1-φ(1-τ)；路径采用直线几何缩放，曲线路径可化为角度等标量插值；持续时间由运动学限制缩放得到，多轴可同步；数值上需处理τ=0附近exp(-1/τ)下溢和分段导数，复杂度为逐点闭式求值、较低；局限是主要讨论关节空间点到点直线轨迹，硬件和仿真验证规模有限，摘要未给出与低阶方法的具体定量对比。"
+      },
+      "affiliations": [
+        "Mohamed bin Zayed University of Artificial Intelligence"
+      ],
+      "affiliations_text": "Mohamed bin Zayed University of Artificial Intelligence",
+      "score": 4.740404506971812,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.05601v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105601v1-ridge-state-conditioned-reward-blending-for-behavioral-coverage-in-deep-rl-game-agents",
+      "source": "arxiv",
+      "title": "RIDGE: State-Conditioned Reward Blending for Behavioral Coverage in Deep RL Game Agents",
+      "authors": [
+        "AL Muqshith Mohammed Shifan",
+        "Kevin Christopher Chua",
+        "Ali Neshati",
+        "Loutfouz Zaman",
+        "Cristiano Politowski"
+      ],
+      "authors_text": "AL Muqshith Mohammed Shifan, Kevin Christopher Chua, Ali Neshati, Loutfouz Zaman, Cristiano Politowski",
+      "abstract": "A deep RL agent trained on a fixed persona reward plays one way: an Explorer keeps exploring while starving, a Survivor hoards on an empty map. Since each persona fixes its own reward, automated playtesting trains N agents for N styles. Changing reward composition mid-episode runs into the switching-stability dilemma: PPO degrades under non-stationary rewards. We present RIDGE, a single-agent architecture that sidesteps the dilemma with two design choices: a state-conditioned blender that computes softmax-normalized sigmoid weights from slow-moving state variables, and a multi-head critic that trains one value head per persona on its own stationary signal. On Crafter with four personas, one \\ridge agent acquires both branches of the wood-tier crafting/combat split that no fixed-persona baseline solves jointly, and a sharpness ablation confirms state-conditioning drives the gain. We position these results as demonstrations of the blending mechanism's dynamics across n=3 seeds per condition; larger multi-seed sweeps remain future work.",
+      "url": "http://arxiv.org/abs/2611.05601v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05601v1",
+      "tldr": "RIDGE enables a single PPO game agent to cover multiple playstyle personas by smoothly blending persona rewards using state-conditioned weights while a multi-head critic keeps each persona’s value learning stationary, avoiding the instability of mid-episode reward switching.",
+      "detailed_reading": {
+        "motivation": "固定人格奖励训练的深度强化学习智能体只会表现单一行为，自动玩法测试需为N种风格训练N个智能体，且难以覆盖同一回合内随状态变化的行为切换；而在回合中改变奖励组合又会触发切换稳定性困境，使PPO因奖励非平稳而退化。RIDGE旨在用单智能体实现状态条件化的奖励混合，从而兼顾多风格行为覆盖与训练稳定性。",
+        "method": "在Crafter上为Explorer、Survivor、Craftsman、Warrior定义可解释的人格奖励，并由状态条件混合器从新地块、生命体征最小值、制作进度、敌人接近度等慢变状态特征计算各人格Sigmoid激活，经偏置、尺度与全局锐度α得到归一化混合权重，聚合奖励为各人格奖励的加权和。策略网络共享编码器，critic采用每人格一个价值头的多头结构，各头用GAE在各自平稳的人格回报上训练；策略更新使用按混合权重组合的混合优势代入PPO裁剪目标，价值头以逐头MSE损失训练。训练流程为采集rollout、逐时刻计算权重与人格奖励、计算各人格回报与优势、混合优势后做K轮PPO优化与价值头更新；实验设α=1.0四头RIDGE、四个单头固定人格基线及α∈{0.0,0.5,1.5,2.0}消融，统一1M环境步和相同PPO/Adam超参，每条件n=3种子。",
+        "result": "在Crafter的木材层级分叉上，RIDGE单个智能体同时取得Wood Pickaxe 0.32和Wood Sword 0.26，而Craftsman为0.70/0.16、Warrior为0.12/0.79，说明专家基线只在自身分支强、RIDGE能跨分支覆盖且在本分支低于专家，体现覆盖—专精权衡；三者均能到达共同前置Place Table（RIDGE 0.75、Craftsman 0.90、Warrior 0.88）。RIDGE还在Wake Up上达到0.66，远高于Explorer/Craftsman的0.15和Warrior的0.01。锐度消融显示α=0的均匀混合（无状态条件）比状态条件变体低约30%–50%，α=1.5/2.0略优于1.0但差异在种子波动范围内；RIDGE价值损失约0.04，接近最稳定的Explorer，低于Craftsman/Warrior，而Survivor-only为0.3–0.5。",
+        "conclusion": "结果表明，状态条件化的平滑奖励混合与多头critic可绕开切换稳定性困境，使单一智能体在同一训练过程中获得跨分支制作/战斗覆盖和生命体征管理行为，且增益主要来自状态条件化而非仅使用四个人格奖励。多头critic通过让每个价值头学习平稳的人格信号，保持了与最稳定专家相当的价值学习稳定性。作者将n=3种子的结果定位为混合机制动态的演示而非确定性结论，后续需更大规模多种子扫描，且Crafter绝对分数受编码器和基线设置差异影响不宜直接横向比较。",
+        "key_details": "关键实现细节包括：四个可读的人格奖励分别奖励新地块、生命/饥饿/口渴/能量维持及阈值下悬崖惩罚、制作成就、战斗成就，制作/战斗奖励按科技树深度缩放；混合器权重为sigmoid(α k^i(σ_t^i−b^i))后按人格求和归一化，α→0退化为均匀混合、α→∞接近硬argmax；每个价值头以各自人格回报的GAE和MSE训练，策略使用混合优势。实验在Crafter标准1M环境步下用PyTorch PPO，条件间共享编码器、Adam、rollout长度、batch大小、GAE系数、PPO clip和熵奖励，仅改变奖励信号、锐度与critic头数，每条件n=3种子。局限性是种子预算小、结果属初步演示、状态条件区间内的最优α尚需更多种子确定，且Crafter成就沿科技树顺序依赖，深层成就低成功率反映整条前置链；代码、数据和检查点已公开。"
+      },
+      "affiliations": [
+        "Ontario Tech University"
+      ],
+      "affiliations_text": "Ontario Tech University",
+      "score": 4.540083270615184,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.05571v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105571v1-ela-end-to-end-latent-action-policy-learning-from-video-demonstrations",
+      "source": "arxiv",
+      "title": "ELA: End-to-End Latent Action Policy Learning from Video Demonstrations",
+      "authors": [
+        "Cheng-Chun Hsu",
+        "Peter Stone"
+      ],
+      "authors_text": "Cheng-Chun Hsu, Peter Stone",
+      "abstract": "Robot imitation learning is limited by the scarcity of action-labeled data, while action-free demonstrations such as videos are abundant. Recent latent-action methods learn action-relevant representations from observation transitions, but they do not optimize latent actions for downstream control, leading to latent representations that are difficult for policies to model and difficult to accurately decode into continuous robot actions. This paper introduces ELA, an end-to-end framework for learning from video demonstrations via latent actions jointly optimized for policy learning and action decoding. ELA jointly trains a latent action model, latent action policy, and action decoder, enabling policies to leverage abundant video data with only a handful of action-labeled robot demonstrations. Experiments on simulated and real-world manipulation tasks show that ELA consistently outperforms prior latent action baselines. Moreover, it integrates seamlessly with existing imitation learning methods through lightweight 4M-parameter action decoders, requiring no changes to policy architectures or training objectives. Additional materials can be found on: https://end2end-latent-action.github.io/",
+      "url": "http://arxiv.org/abs/2611.05571v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05571v1",
+      "tldr": "ELA is an end-to-end framework that jointly trains a latent action model, latent action policy, and lightweight action decoder so latent actions are optimized for both policy learning and accurate action decoding, enabling robot imitation learning from abundant video demonstrations plus only a handful of action-labeled demonstrations.",
+      "detailed_reading": {
+        "motivation": "机器人模仿学习受限于动作标注数据稀缺，而无动作视频演示（如人类视频、未标注机器人轨迹）更易大规模获取。现有 latent action 方法多采用两阶段流程，先学 latent action 再作为固定目标训练策略，未针对下游控制联合优化，导致 latent 表示难以被策略建模、也难以准确解码为连续机器人动作。",
+        "method": "输入为无动作视频轨迹 V={o_t} 与少量动作标注数据 R={(o_t,a_t)}；用 IDM 从 (o_t,o_{t+k}) 推断 k 步 latent action z_t，FDM 以 (o_t,z_t) 重建 o_{t+k}，并用 iFSQ 量化作信息瓶颈；latent policy π(o_t)->z_t 用 L2 监督，action decoder ψ(z_t)->a_{t:t+k} 仅在标注数据上用 L2 训练；联合训练采用 LAM-update 与 Policy-update 交替：前者冻结策略、将 alignment/action/FDM 损失回传 LAM，后者冻结 LAM、用 alignment/policy 损失更新策略，alignment 将策略编码器中层特征经 MLP 投影后与冻结 DINOv3 参考特征做余弦相似度对齐；先进行 5k 迭代 warm-up 仅优化 FDM 与 action loss，部署时策略输出 latent 再由解码器转连续动作。",
+        "result": "在 LIBERO-10 的 50 条机器人演示中仅 5/10/20 条带动作标签，并加入无动作机器人视频；真实世界任务使用人类视频加少量机器人动作数据。论文报告 ELA 在仿真与真实操作任务上稳定优于先前 latent action 基线，并与使用更大数据预算训练的 IDM 基线对比分析 decodability 与 modelability；给定预览未提供具体成功率和数值表。",
+        "conclusion": "ELA 通过学习同时面向 modelability 与 decodability 联合优化的 latent action 空间，使策略能利用大量无动作视频并只需少量动作标签即可解码为连续控制。其轻量 4M 参数 action decoder 可无缝集成现有模仿学习方法，无需修改策略架构或训练目标，在仿真和真实操作任务上优于既有 latent action 方法。",
+        "key_details": "关键实现包括 k 步观测转移、transformer encoder 加 register tokens 聚合、iFSQ 量化瓶颈、FDM 图像重建 L2、action 解码 L2、policy 预测 L2 以及基于 DINOv3 冻结特征的余弦 alignment；act loss 仅用于有标签样本，交替更新与共享参考表示用于防止 latent action collapse；action decoder 约 4M 参数且开销与策略规模无关。局限在于解码器依赖少量动作标签、对齐依赖冻结感知编码器，k 步、量化与对齐权重等超参及交替训练约束需调优，且给定预览未给出完整消融与数值细节。"
+      },
+      "affiliations": [
+        "The University of Texas at Austin"
+      ],
+      "affiliations_text": "The University of Texas at Austin",
+      "score": 4.487815519383247,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.05594v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105594v1-relevance-propagation-as-entropic-optimal-transport-on-filippov-neural-networks-sinkhorn-propagation-and-region-relevance-in-image-classifiers",
+      "source": "arxiv",
+      "title": "Relevance Propagation as Entropic Optimal Transport on Filippov Neural Networks: Sinkhorn Propagation and Region Relevance in Image Classifiers",
+      "authors": [
+        "Olivier Gibaru",
+        "Eric Nyiri"
+      ],
+      "authors_text": "Olivier Gibaru, Eric Nyiri",
+      "abstract": "Relevance propagation, which redistributes a network's prediction backward through the layers, is usually treated as a heuristic. We show that it is the solution of a single variational problem: Layer-wise Relevance Propagation (LRP) is the divergence-free flow on the active computational graph of zero relative entropy to the backward transition law of the forward activation flow; for a non-negative reference, this is a relative entropy between Markov measures on backward paths. The rules LRP$_0$, LRP$_{z^+}$ and LRP$_{α,β}$ follow from this principle by the choice of a reference, and are instances of one rule, LRPN$_{α,β}$, whose weights may vary from node to node, for instance with the node's activity, in the spirit of Hebb's principle. The principle rests on a measure-theoretic formalization of feed-forward networks as directed acyclic graphs of Filippov operators, which covers piecewise-smooth and discontinuous architectures (e.g. hard-routed Mixture-of-Experts) with a Clarke-Filippov generalized-gradient calculus; it also characterizes backpropagation as the adjoint equation of a Lagrangian relaxation. On networks of ReLU and max-pooling nodes, LRP$_0$ is Gradient$\\times$Input, with an explicit jump across a kink where LRP$_{z^+}$ stays continuous. Taking the entropy edge by edge yields a new rule, Sinkhorn Relevance Propagation. Aggregated over an input region, the flow of a non-negative reference tells, with exact accounting, which hidden units carry its evidence, the conditioned flow being a Schrödinger bridge. On VGG-16, the conservation identities hold to round-off, and the rules are told apart by the sign of their maps, the share of the output left to the bias nodes, faithfulness, localization and class dependence; on ConvNeXt-Tiny, LRPN$_{α,β}$ conserves the output and its Hebbian weights give the highest ABPC of the rules tested.",
+      "url": "http://arxiv.org/abs/2611.05594v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05594v1",
+      "tldr": "The paper recasts Layer-wise Relevance Propagation as a divergence-free entropic optimal-transport flow on the active computational graph of Filippov neural networks, unifying existing LRP rules—including a new Sinkhorn Relevance Propagation—under one variational principle and enabling exact region-level evidence attribution, validated on VGG-16 and ConvNeXt-Tiny.",
+      "detailed_reading": {
+        "motivation": "LRP等相关性传播长期被视为启发式，缺乏统一变分解释；作者希望证明其是单一变分问题的解，并将多种规则纳入统一框架，同时把理论推广到分段光滑/不连续网络。",
+        "method": "将前馈网络形式化为Filippov算子的有向无环图，用Clarke-Filippov广义梯度处理ReLU、max-pooling及hard-routed MoE等；把LRP定义为活动计算图上与正向激活流后向转移律零相对熵的无散度流，非负参考下为后向路径马尔可夫测度间相对熵。由此选择参考可导出LRP0、LRPz+、LRPαβ，并统一为节点权重可变的LRPNαβ（如按节点活动性设Hebbian权重）；逐边取熵得到Sinkhorn Relevance Propagation，反向传播被刻画为拉格朗日松弛的伴随方程。推理时给定输入前向得到活动图，再按选定参考后向传播相关性，区域聚合时用条件流（Schrödinger bridge）精确分配证据。",
+        "result": "在VGG-16上守恒恒等式达到舍入误差（约10^-6–10^-7），LRP0在ReLU/max-pooling扭结处等于Gradient×Input并出现显式跳跃，而LRPz+保持连续；规则可由映射符号、偏置节点份额、忠实性、定位和类别依赖性区分，LRPαβ点定位0.990、质量定位0.855，高于随机约0.575。ConvNeXt-Tiny上LRPNαβ保持输出守恒（约5×10^-6），其Hebbian权重在测试规则中取得最高ABPC。",
+        "conclusion": "该工作把相关性传播从经验规则提升为基于相对熵/最优传输的统一变分理论，给出可计算的后向流与区域证据核算，并证明不同LRP规则只是参考选择或节点权重的特例；Sinkhorn传播和Filippov形式化扩展了适用架构。实验支持守恒性、忠实性与定位优势，但主要在VGG-16和ConvNeXt-Tiny上验证。",
+        "key_details": "关键实现包括：以非负参考定义相对熵并保证无散度流；LRPNαβ允许逐节点权重（如Hebbian活动依赖）；Sinkhorn规则逐边做熵正则归一化；区域解释用条件流/Schrödinger bridge精确记账；守恒以数值误差检验（VGG约10^-6，ConvNeXt约5×10^-6）。实验使用200张图像、50类设置，比较LRP0、LRPz+、LRPαβ、SRP及随机基线；局限在于依赖参考与活动图、需广义梯度处理不连续节点，且评测架构和样本规模有限。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.443264280549302,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.05507v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/05/261105507v1-ctrl-f-force-as-an-interface-for-humanoid-loco-manipulation",
+      "source": "arxiv",
+      "title": "Ctrl-F: Force as an Interface for Humanoid Loco-Manipulation",
+      "authors": [
+        "Mengjie Zhao",
+        "Yuxin Chen",
+        "Yiyang Shao",
+        "Chuye Hong",
+        "Jiakang Chen",
+        "Koushil Sreenath",
+        "Masayoshi Tomizuka"
+      ],
+      "authors_text": "Mengjie Zhao, Yuxin Chen, Yiyang Shao, Chuye Hong, Jiakang Chen, Koushil Sreenath, Masayoshi Tomizuka",
+      "abstract": "Humanoid motion tracking has scaled to general policies that reproduce diverse human motion, but the resulting behavior is in free-space: the tracker knows where the body should be, not how it should interact with the environment. Other work makes the object part of the objective, yet abstracts that interaction to contact or geometry, which leaves the demanding cases under-explored. We argue that force is a natural command channel between motion imitation and object interaction, one that specifies not just where to make contact but how hard. We present Ctrl-F, a hierarchical motion-force framework that augments motion tracking with an explicit force command, a 3-D force at each designated contact body such as a hand or a foot. The hierarchical framework comprises: (1) A unified motion-force controller tracks the reference motion while applying the commanded force to the world. (2) A high-level force planner that issues a force command online based on object state and proprioception observations. In simulation and on hardware, Ctrl-F completes loco-manipulation that demands large, sustained interaction force and adjusts its command online as the load changes, both out of reach of a force-blind tracker. On hardware, Ctrl-F demonstrates hand-based dragging, pushing, and lifting, as well as foot-based kicking, successfully manipulating boxes weighing up to 20kg in pushing and kicking tasks where the force-blind baseline fails, while adapting online to additional loads introduced mid-task.",
+      "url": "http://arxiv.org/abs/2611.05507v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05507v1",
+      "tldr": "Ctrl-F is a hierarchical motion–force framework that augments humanoid motion tracking with explicit 3-D force commands at designated contact bodies, combining a low-level motion–force tracker with a high-level force planner to enable force-aware loco-manipulation and online load adaptation, demonstrated on hardware by dragging, pushing, lifting, and kicking objects up to 20 kg.",
+      "detailed_reading": {
+        "motivation": "现有的人形机器人运动跟踪已能复现多样人体动作，但行为仍停留在自由空间：跟踪器只知道身体该到哪里，不知道应如何与环境用力交互；已有物体交互工作多把交互抽象为接触或几何，未充分探索需要大力、持续力的困难场景。作者认为力是连接运动模仿与物体交互的自然命令通道，因为它不仅指定接触位置，还指定作用力度。",
+        "method": "Ctrl-F采用分层运动—力框架：低层统一运动—力控制器输入参考运动、每个指定接触身体（如手、脚）的三维力命令和本体感受，输出全身关节位置目标；训练时无物体，采用逆力训练，在负载掩码标记为可施力的身体上采样力命令并施加相反wrench，使策略为跟踪参考而学会产生等大反向力，并通过从零力到全范围的课程学习。高层力规划器冻结低层控制器，输入机器人及物体参考运动、物体期望接触点、物体测量状态和本体感受，输出力命令；其训练以分析力模型为教师，该模型用物体位姿/速度PD误差经牛顿—欧拉动力学、重力前馈和库仑摩擦补偿计算所需空间wrench，再经抓取矩阵闭式分配为接触力，并以DAgger式在线监督加退火模仿损失和PPO强化学习联合优化，奖励与成功定义在物体上，训练中随机化物体质量并在episode内改变负载。",
+        "result": "在仿真和硬件上，Ctrl-F完成了需要大且持续交互力的loco-manipulation，并能在负载变化时在线调整力命令，而无力感知的跟踪器无法做到。硬件在Unitree G1上展示了手部拖动、推动、举起以及脚部踢击，在推动和踢击任务中成功操作最重达20kg的箱子，力盲基线在这些任务中失败。实验中力盲跟踪器举起1.5–6kg箱子时因箱子从手掌滑落而零成功，Ctrl-F还能适应任务中途额外增加的负载。",
+        "conclusion": "论文表明力可作为通用且可命令的交互接口，将通用运动跟踪扩展到物体交互：低层无需物体即可学习力执行，高层基于物体状态和本体感受在线生成力命令。该框架在无需部署时力测量或物体质量的情况下，实现了仿真到硬件的多种全身操作任务和对负载变化的在线适应。",
+        "key_details": "低层训练使用每身体负载掩码，仅编码物理可行性而非任务语义，用以决定何时何地可采样力命令；每个接触身体有固定力范围，课程先零力后逐步放大。高层分析力模型虽使用特权物体状态和真实质量、不可直接部署，但只作粗引导，模仿损失权重退火使强化学习可偏离模型；任务以抓取矩阵、可行力集和负载三元组进入分配问题并闭式批量求解。部署时高层不需要力传感器或物体质量，闭环依赖物体状态与本体感受；实验涵盖举起、系绳箱、踢箱、推箱和拖箱，质量与摩擦设置见表，局限包括依赖参考运动与指定接触点、分析教师使用特权信息以及主要在特定任务集合上验证。"
+      },
+      "affiliations": [
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "University of California, Berkeley",
+      "score": 4.317686261913561,
+      "score_text": "4.3"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.05585v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105585v1-contact-implicit-whole-body-trajectory-optimization-for-dynamic-humanoid-locomotion-on-parameterizable-uneven-terrain",
+      "source": "arxiv",
+      "title": "Contact-Implicit Whole-Body Trajectory Optimization for Dynamic Humanoid Locomotion on Parameterizable Uneven Terrain",
+      "authors": [
+        "Roberto Mauceri",
+        "Stefano Dafarra",
+        "Giulio Romualdi",
+        "Marco Gabiccini",
+        "Daniele Pucci"
+      ],
+      "authors_text": "Roberto Mauceri, Stefano Dafarra, Giulio Romualdi, Marco Gabiccini, Daniele Pucci",
+      "abstract": "This letter presents a trajectory planner for humanoid robots to perform dynamic motions on complex, parameterizable terrains using a contact-implicit whole-body optimization framework. The planner generates feasible movements without predefined contact sequences, considering the robot's full dynamics and kinematics. To plan bipedal locomotion on steps, ramps, and other terrains, we propose a mathematical model to approximate ground geometry with a smooth surface. The rigid interaction between the robot and the ground is modeled via novel contact constraints, extending the domain of applicability from flat and horizontal surfaces to any arbitrary smooth surface. Effectiveness is demonstrated using nonlinear programming to plan motions on various terrain topologies. We also explore dynamic trajectory generation by embedding high-level requirements in the cost function and the initial guess. Preliminary feasibility tests were conducted over non-coplanar terrains, both in simulation and on the real robot ErgoCub.",
+      "url": "http://arxiv.org/abs/2611.05585v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05585v1",
+      "tldr": "This paper presents a contact-implicit whole-body trajectory optimization planner that enables humanoid robots to generate dynamic, feasible locomotion over parameterizable uneven terrains by using a smooth terrain approximation and generalized contact constraints, validated in simulation and on the ErgoCub robot.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Pisa",
+        "Istituto Italiano di Tecnologia",
+        "University of Manchester"
+      ],
+      "affiliations_text": "University of Pisa, Istituto Italiano di Tecnologia, University of Manchester",
+      "score": 4.291869106735022,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.05605v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105605v1-transport-along-local-annealing-paths-wasserstein-geometry-and-multimodal-sampling",
+      "source": "arxiv",
+      "title": "Transport along Local Annealing Paths: Wasserstein Geometry and Multimodal Sampling",
+      "authors": [
+        "Han Chen",
+        "Sifan Liu"
+      ],
+      "authors_text": "Han Chen, Sifan Liu",
+      "abstract": "Variational approaches to learning transport maps for multimodal sampling can suffer from mode collapse. One way to mitigate this problem is to learn transport along a prescribed path of intermediate distributions defined by geometric annealing. We show that annealing can take a substantial detour in Wasserstein space: when mass moves between modes, the path can be much longer than the distance between its endpoints. We further link path geometry to transport learning, showing that long annealing paths can slow population optimization, while sufficiently regular paths permit rapid convergence. Motivated by these findings, we propose componentwise annealed transport (CAT) to reduce the need for mass transfer between modes. Starting from a mode-informed mixture reference, CAT constructs an exact mixture decomposition of the target and learns separate transport maps along componentwise annealing paths. We estimate the component weights separately and show that these estimates remain consistent even when the learned flows are inexact. We also develop adaptive annealing schedules guided by transport effort. Experiments on multimodal synthetic distributions and Bayesian inference problems demonstrate improvements in transport learning and sampling efficiency.",
+      "url": "http://arxiv.org/abs/2611.05605v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05605v1",
+      "tldr": "The paper shows that global annealing paths can be inefficient in Wasserstein space due to costly mass transfer between modes, and proposes componentwise annealed transport (CAT), which learns separate transport maps along local componentwise annealing paths from a mode-informed mixture reference—with consistent weight estimation and adaptive schedules—to improve multimodal sampling and transport learning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Duke University"
+      ],
+      "affiliations_text": "Duke University",
+      "score": 4.273427907800669,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.05609v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105609v1-on-the-generalization-limitation-of-on-policy-distillation-for-post-rl-consolidation",
+      "source": "arxiv",
+      "title": "On the Generalization Limitation of On-Policy Distillation for Post-RL Consolidation",
+      "authors": [
+        "Yichen Wang",
+        "Yufa Zhou",
+        "Siqi Zhu",
+        "Haozheng Luo",
+        "Jingzhi Bao",
+        "Zhichao Liu",
+        "Zijun Wei"
+      ],
+      "authors_text": "Yichen Wang, Yufa Zhou, Siqi Zhu, Haozheng Luo, Jingzhi Bao, Zhichao Liu, Zijun Wei",
+      "abstract": "Multi-teacher on-policy distillation (MOPD) extends on-policy distillation (OPD) to consolidate capabilities from multiple teachers. Although prior work reports near-perfect in-distribution (IND) distillation performance, we find that this can mask incomplete capability consolidation beyond the supervised distribution. A preliminary study on synthetic reasoning shows that OPD does not fully transfer teachers' generalization capabilities. We then extend this investigation to real-world tasks, evaluating extrapolative and compositional generalization across mathematical reasoning, coding, agent, and long-context capabilities using Qwen3 models. Across extrapolative settings, OPD and MOPD reach 96.04-102.73% of their teachers' IND scores. Yet their out-of-distribution (OOD) scores remain 2.45-16.25% below the base model's. Across three compositional settings, MOPD improves IND performance over the base model, but its performance on composed tasks as OOD remains 18.19-24.34% below that of the best teachers. To understand these gaps, we examine teacher capability and data coverage as two potential bottlenecks. Jointly alleviating these bottlenecks eliminates OOD forgetting in our experiments and suggests the potential for generalization beyond the teacher. (M)OPD also reduces OOD forgetting on average relative to its reinforcement learning (RL) baselines. Analysis of the associated update geometry reveals smaller and more spectrally concentrated updates on average than those of the RL baselines, along with greater shared update structure under MOPD. Motivated by these findings, we propose geometry-based patching and base-preserving replay to improve OOD performance while largely preserving IND performance. Our findings identify a blind spot in capability consolidation via (M)OPD, highlighting the need for algorithms that explicitly support OOD retention and generalization.",
+      "url": "http://arxiv.org/abs/2611.05609v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05609v1",
+      "tldr": "This paper shows that on-policy distillation and multi-teacher on-policy distillation can achieve near-teacher in-distribution performance during post-RL consolidation while still failing to transfer teachers’ out-of-distribution generalization, and it identifies teacher capability and data coverage as key bottlenecks and proposes geometry-based patching and base-preserving replay to mitigate this OOD forgetting.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.217685870176586,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.05567v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105567v1-mesa-an-evaluation-framework-for-compositional-semantic-and-spatial-generalization-in-robotics",
+      "source": "arxiv",
+      "title": "MESA: An Evaluation Framework for Compositional, Semantic, and Spatial Generalization in Robotics",
+      "authors": [
+        "Albert Wilcox",
+        "Frank Chang",
+        "Nhi Nguyen",
+        "Aishani Chakraborty",
+        "Jeremy A. Collins",
+        "Vaibhav Saxena",
+        "Benjamin Joffe",
+        "Siddharth Karamcheti",
+        "Animesh Garg"
+      ],
+      "authors_text": "Albert Wilcox, Frank Chang, Nhi Nguyen, Aishani Chakraborty, Jeremy A. Collins, Vaibhav Saxena, Benjamin Joffe, Siddharth Karamcheti, Animesh Garg",
+      "abstract": "Despite growing interest in foundation models for robotic manipulation, systematic evaluation of their capabilities remains elusive. Existing benchmarks are either narrow and saturated, offering little signal on SOTA methods, broadly scoped, providing diversity at the cost of controlled experimentation, or require training on large, messy open-source datasets. We introduce MESA, an evaluation framework designed for precise, reproducible measurement of language-conditioned policy generalization. MESA provides five evaluation suites that isolate in-distribution performance and four distinct axes of generalization: spatial configuration, object instance, object category, and subtask composition, enabling researchers to diagnose where and why policies fail, not just whether they fail. To populate these suites at scale, we develop MESA-Gen, a pipeline for task and demonstration generation built by improving MimicGen. We instantiate the framework on two platforms and release both: the single-arm MESA suite, and BiMESA, the first large-scale benchmark for bimanual generalization. We evaluate seven baseline methods spanning diffusion policies, VLM-based approaches, and pretrained VLAs, finding that the strongest model achieves only 52% on MESA and 49% on BiMESA, providing meaningful signal while leaving ample room for progress. MESA rankings are broadly consistent with RoboArena scores, suggesting that MESA captures method-level differences relevant beyond simulation. Project website: https://pairlab.github.io/MESA.",
+      "url": "http://arxiv.org/abs/2611.05567v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05567v1",
+      "tldr": "MESA is a reproducible evaluation framework and benchmark for language-conditioned robotic manipulation that isolates in-distribution performance and four axes of generalization—spatial configuration, object instance, object category, and subtask composition—using a scalable data-generation pipeline and both single-arm and bimanual suites to diagnose where and why current policies fail.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.213001379699043,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.05508v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105508v1-generalized-disjunctive-programming-with-derivative-free-configuration-search",
+      "source": "arxiv",
+      "title": "Generalized Disjunctive Programming with Derivative-Free Configuration Search",
+      "authors": [
+        "Albert Joon Lee",
+        "Woosik Kim",
+        "David E. Bernal Neira"
+      ],
+      "authors_text": "Albert Joon Lee, Woosik Kim, David E. Bernal Neira",
+      "abstract": "Generalized disjunctive programming (GDP) describes process design alternatives with Boolean variables, disjunctions, and logical propositions, and fixing one configuration leaves a subproblem in the continuous variables. Conventional GDP methods require explicit equations, which a simulator may not expose, and mixed-integer nonlinear programming (MINLP) reformulations can be intractable for nonconvex models. The external-variable reformulation turns configuration choice into an optimization over an integer lattice whose objective is the subproblem value, which derivative-free optimization (DFO) can search while the GDP model continues describing the alternatives. We pair GDP models with surrogate DFO methods and the direct-search method NOMAD and compare them with discrete steepest descent (D-SDA), logic-based and MINLP solvers, and enumeration on nine process models, 21 test functions, a pharmaceutical flowsheet simulated in PharmaPy, and a catalytic distillation column with 100,947 configurations. On the largest reactor network, the surrogate methods MISO and RBFOpt reach the reference in nine or ten of ten runs with about 30 subproblem solves, whereas logic-based methods solve nearly one subproblem for each admissible configuration and most D-SDA descents end at one local minimum. In the flowsheet example, where GDP solvers do not apply, RBFOpt and MISO find the best of 36 simulated configurations in every run with 20 evaluations. For the catalytic column, D-SDA and MISO reach the best known design with 100 evaluations, whereas MINLP solvers find no design within 15% of it and global solvers return contradictory certificates. This search pays off when the configuration space is too large to enumerate, has deceptive local minima, or has MINLP reformulations that fail, and enumeration or a direct reformulation is simpler for small algebraic models.",
+      "url": "http://arxiv.org/abs/2611.05508v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05508v1",
+      "tldr": "The paper shows that generalized disjunctive programming models can be solved by reformulating configuration choices as an integer-lattice search over fixed-configuration subproblem evaluations using derivative-free and surrogate optimization methods, which is effective for large or simulator-based process design problems where explicit equations are unavailable or MINLP reformulations fail.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 4.096722796012729,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.05546v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105546v1-fedsharp-byzantine-robust-decentralized-federated-learning-under-noisy-channel",
+      "source": "arxiv",
+      "title": "FedSharp: Byzantine Robust Decentralized Federated Learning Under Noisy Channel",
+      "authors": [
+        "Ojaswi Sinha",
+        "Amin Farajzadeh",
+        "Animesh Yadav",
+        "Melike Erol-Kantarci"
+      ],
+      "authors_text": "Ojaswi Sinha, Amin Farajzadeh, Animesh Yadav, Melike Erol-Kantarci",
+      "abstract": "Decentralized federated learning (DFL) eliminates the central aggregation server but remains vulnerable to data heterogeneity, Byzantine attacks, and channel noise. We show that noise accumulates as models propagate across nodes, becoming increasingly significant as the learning rate decays. Moreover, accumulated noise enables Byzantine attackers to exploit loss-based model selection by mimicking honest model averages. To address these challenges, we propose screened, hop-aware, ranked, proximal averaging, a robust DFL framework (FedSharp). In this approach, each node maintains models from its 2b predecessors, ensuring at least b honest candidates when at most b nodes are Byzantine. FedSharp screens suspicious models using coordinate-wise median deviations, averages the b lowest-loss candidates to reduce fresh channel-noise variance by a factor of b, and applies noise-adaptive gradient-norm regularization and proximal training to mitigate accumulated noise and non-IID drift. Experiments on a 100-node ring with 33 Byzantine nodes show that FedSharp achieves 93.5-94.9% accuracy on MNIST, compared with 29.4-38.1% for a state-of-the-art single-model-selection benchmark, and 32.8-48.8% on CIFAR-10, compared with 10.0-30.5%, across Gaussian and hidden attacks under IID and non-IID data. On MNIST, FedSharp also achieves accuracy within approximately one percentage point of the benchmark operating without channel noise.",
+      "url": "http://arxiv.org/abs/2611.05546v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05546v1",
+      "tldr": "FedSharp is a Byzantine-robust decentralized federated learning framework that combines suspicious-model screening, low-loss candidate averaging, and noise-adaptive proximal regularization to jointly mitigate channel-noise accumulation, Byzantine attacks, and non-IID drift, substantially outperforming benchmark methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ohio University",
+        "University of Ottawa"
+      ],
+      "affiliations_text": "Ohio University, University of Ottawa",
+      "score": 4.074182207534325,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.05506v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105506v1-objective-conditioned-active-preference-learning-for-multi-objective-alignment",
+      "source": "arxiv",
+      "title": "Objective-Conditioned Active Preference Learning for Multi-Objective Alignment",
+      "authors": [
+        "Duc Anh Vu",
+        "Thong Nguyen",
+        "Hoang Pham",
+        "Ponhvoan Srey",
+        "Luu Anh Tuan"
+      ],
+      "authors_text": "Duc Anh Vu, Thong Nguyen, Hoang Pham, Ponhvoan Srey, Luu Anh Tuan",
+      "abstract": "Aligning large language models (LLMs) with several objectives, such as helpfulness, harmlessness, and honesty, typically relies on preference judgment for each objective, growing the annotation cost linearly with the number of objectives. Active preference learning can reduce this cost by selecting the comparisons whose labels are expected to change the policy most. Existing remedies either lack an objective-aware query selection mechanism for the multi-objective setting or regard conflicting preferences as harmful, therefore excluding them from the training data. We introduce OGC-DPO (Objective-conditioned Gradient Coverage DPO), an active learning framework that treats each (response pair, objective) combination as a separate query and measures its informativeness through the policy's own implicit gradient, without relying on an external reward model. OGC-DPO then selects the queries that most expand each objective's gradient coverage. Empirical experiments across varying numbers of objectives demonstrate the effectiveness of OGC-DPO over existing active preference learning methods under the same annotation cost. Further analysis demonstrates that informative conflicts, rather than being uniformly harmful, provide a useful policy training signal.",
+      "url": "http://arxiv.org/abs/2611.05506v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05506v1",
+      "tldr": "OGC-DPO is an active preference learning framework for multi-objective LLM alignment that treats each (response pair, objective) as a separate query and selects those most expanding objective-specific gradient coverage via the policy’s own implicit gradient, improving alignment under fixed annotation cost while showing that informative preference conflicts can be useful rather than harmful.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Singapore",
+        "VinUniversity",
+        "Nanyang Technological University"
+      ],
+      "affiliations_text": "National University of Singapore, VinUniversity, Nanyang Technological University",
+      "score": 4.001297627095525,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.05527v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105527v1-tight-lower-bounds-under-matched-high-order-hlder-smoothness-and-uniform-convexity",
+      "source": "arxiv",
+      "title": "Tight Lower Bounds under Matched High-Order Hölder Smoothness and Uniform Convexity",
+      "authors": [
+        "Cedar Site Bai"
+      ],
+      "authors_text": "Cedar Site Bai",
+      "abstract": "In this paper, we provide tight lower bounds for minimizing high-order Hölder-smooth and uniformly convex functions when their orders match. Specifically, we consider functions whose $p^{th}$-order derivatives are Hölder continuous with degree $ν$ and parameter $H$, and that are uniformly convex with degree $q$ and parameter $σ$. When these orders match, namely, $q = p + ν$, we show that any deterministic algorithm with access to derivatives up to order $p$ requires $Ω\\left(\\left(\\frac{H}σ\\right)^{\\frac{2}{3(p+ν)-2}}\\log\\frac{Δ_0}ε\\right)$ oracle calls to reduce an initial optimality gap of $Δ_0$ to $ε$. This matches the corresponding upper bound and establishes a higher-order uniformly convex counterpart to Nesterov's classical first-order lower bound for strongly convex functions. Rather than directly generalizing Nesterov's classical quadratic-chain construction, we develop a multiscale phase-wise construction that preserves previous oracle responses while maintaining global Hölder smoothness and uniform convexity. Our result resolves the matched case left open by existing lower bounds for the two asymmetric regimes.",
+      "url": "http://arxiv.org/abs/2611.05527v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05527v1",
+      "tldr": "This paper proves a tight lower bound showing that minimizing functions with matched high-order Hölder smoothness and uniform convexity, where \\(q=p+\\nu\\), requires \\(\\Omega((H/\\sigma)^{2/(3(p+\\nu)-2)}\\log(\\Delta_0/\\epsilon))\\) deterministic oracle calls, matching the known upper bound and resolving the previously open matched case.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Purdue University"
+      ],
+      "affiliations_text": "Purdue University",
+      "score": 3.9661750014962163,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.05557v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105557v1-support-vector-machines-directly-minimise-kl-divergence",
+      "source": "arxiv",
+      "title": "Support Vector Machines Directly Minimise KL Divergence",
+      "authors": [
+        "Ivan Silajev"
+      ],
+      "authors_text": "Ivan Silajev",
+      "abstract": "Support vector machines (SVMs) are fundamentally grounded in geometric margin maximisation and currently lack a mainstream probabilistic interpretation. This keeps them theoretically isolated from probabilistic machine learning models that are naturally comparable and combinable. In this paper, we bridge this gap by proving that the dual objectives of both support vector classification and support vector regression are exact, constrained Kullback-Leibler (KL) divergence minimisation tasks between two Gaussian measures. We further show that this same divergence formulation recovers the exact objective function for kernel ridge regression when domain constraints are removed and $L^2$ regularisation is applied. By demonstrating that SVM duals directly minimise relative entropy, our results provide a unified information-theoretic model for standard kernel machines and lay the foundation for unifying broader kernel-based algorithms under probability theory.",
+      "url": "http://arxiv.org/abs/2611.05557v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05557v1",
+      "tldr": "The paper proves that the dual objectives of support vector classification and regression are exactly constrained KL-divergence minimizations between Gaussian measures, giving SVMs a probabilistic interpretation and unifying kernel machines under an information-theoretic framework.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.885119253021578,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.05538v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105538v1-recasting-visual-language-models-as-eeg-foundation-models-for-clinical-neurodiagnostics",
+      "source": "arxiv",
+      "title": "Recasting Visual Language Models as EEG Foundation Models for Clinical Neurodiagnostics",
+      "authors": [
+        "Xin Zhou",
+        "Elena Sergeeva",
+        "Nan Bi",
+        "Wenyu Song",
+        "Lijun Yin",
+        "Hao Deng"
+      ],
+      "authors_text": "Xin Zhou, Elena Sergeeva, Nan Bi, Wenyu Song, Lijun Yin, Hao Deng",
+      "abstract": "Historically automated electroencephalography (EEG) systems was done using task-specific supervised models trained on purposely annotated data. A more recent modeling paradigm relies on creating a unified representation, or a 'foundation model', for multiple modality-specific tasks through large-scale domain-specific pretraining on the unannotated EEG signal. The quality of this unified representation directly depends on the availability of the modality-specific datasets. At the same time, generalist Vision Language Models (VLMs) exhibit broad few-shot learning capacities as well as good fine-tuning adaptability to different visual and language tasks. Can VLMs learn how to read and interpret EEG visually, emulating to a degree the way human clinicians inspect the EEG patterns? In this work we make a case that they can: we show that generalist VLMs without large-scale EEG pretraining perform competitively across a collection of clinical neuro-diagnostic tasks, can adapt to different tasks in a few-shot learning setting better than specialist foundation models, and exhibit better performance with model scaling when modality-specific models fail to exhibit.",
+      "url": "http://arxiv.org/abs/2611.05538v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05538v1",
+      "tldr": "Generalist vision-language models can serve as effective EEG foundation models for clinical neurodiagnostics, matching or outperforming EEG-specific foundation models on several tasks while showing stronger few-shot adaptability and model-size scaling without large-scale EEG pretraining.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvard Medical School",
+        "Brigham and Women's Hospital",
+        "Massachusetts General Hospital",
+        "Binghamton University"
+      ],
+      "affiliations_text": "Harvard Medical School, Brigham and Women's Hospital, Massachusetts General Hospital, Binghamton University",
+      "score": 3.861312689673047,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.05436v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105436v1-constraint-preserving-flow-matching-for-spectral-graph-generation",
+      "source": "arxiv",
+      "title": "Constraint-Preserving Flow Matching for Spectral Graph Generation",
+      "authors": [
+        "Anita Yang",
+        "Ken-ichi Kawarabayashi",
+        "Yohan Jung"
+      ],
+      "authors_text": "Anita Yang, Ken-ichi Kawarabayashi, Yohan Jung",
+      "abstract": "Spectral graph generation models graphs through the eigenvalues and eigenvectors of their Laplacians, providing a compact and continuous alternative to direct graph construction. However, these eigensystems must retain the structural properties of graph Laplacians. Existing approaches preserve eigenvector orthonormality but do not enforce the Laplacian nullspace constraint, potentially producing eigensystems inconsistent with Laplacian structure. To address this, we introduce Laplacian-Constrained Stiefel Flow Matching (LaSFM), which preserves the nullspace condition alongside eigenvector orthonormality and positive eigenvalues during generation. We characterize the underlying constrained Stiefel manifold and formulate flow matching on it. We further extend LaSFM to property-guided generation, steering samples toward desired graph properties while maintaining these constraints. Experiments demonstrate improved performance on both spectral and graph-level metrics, along with better alignment with target properties.",
+      "url": "http://arxiv.org/abs/2611.05436v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05436v1",
+      "tldr": "The paper introduces Laplacian-Constrained Stiefel Flow Matching (LaSFM), a flow-matching method for spectral graph generation that preserves eigenvector orthonormality, the Laplacian nullspace constraint, and positive eigenvalues—and extends to property-guided generation—thereby improving spectral/graph-level fidelity and target-property alignment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Tokyo",
+        "National Institute of Informatics",
+        "Jeonbuk National University"
+      ],
+      "affiliations_text": "The University of Tokyo, National Institute of Informatics, Jeonbuk National University",
+      "score": 3.783107622983853,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.05515v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105515v1-tsfm-meets-llm-context-as-covariates",
+      "source": "arxiv",
+      "title": "TSFM Meets LLM: Context as Covariates",
+      "authors": [
+        "Hemanth Ram",
+        "Sai Shankar Narasimhan",
+        "Shubhankar Agarwal",
+        "Sandeep Chinchali"
+      ],
+      "authors_text": "Hemanth Ram, Sai Shankar Narasimhan, Shubhankar Agarwal, Sandeep Chinchali",
+      "abstract": "Textual information is ubiquitous in real-world time series datasets, appearing as news, reports, and annotations that hold key predictive signals not deducible from numerical history alone. Large Language Models (LLMs) interpret text but lack numerical precision, while Time Series Foundation Models (TSFMs) are quantitatively accurate but cannot reason about the effects of text. Moreover, the lack of large-scale paired multimodal datasets limits progress in bridging this gap. In this work, we address this challenge by providing a scalable approach for generating realistic multimodal datasets by annotating real-world time series with LLMs. Building on this, we propose Context as Covariates (CoCo), a forecasting framework in which an LLM distills its textual reasoning into numerically grounded forecast and confidence covariates that guide a TSFM backbone, thereby exploiting the strengths of both LLMs and TSFMs. We align the two models in stages, first fine-tuning the LLM via Group Relative Policy Optimization (GRPO) with a reward tied to covariate-induced improvement in forecasting performance, and then fine-tuning the TSFM on covariates generated by the aligned LLM. Our experiments show that models trained on our synthetic multimodal corpus generalize to real benchmarks spanning finance, economics, weather, traffic, and security. Notably, CoCo with Qwen3-4B-Instruct-2507 as the LLM and Chronos2 as the TSFM achieves up to 12% MAE improvement over state-of-the-art TSFMs and LLM forecasters, such as GPT-4o. Code, checkpoints, and the evaluation datasets are publicly available.",
+      "url": "http://arxiv.org/abs/2611.05515v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05515v1",
+      "tldr": "The paper proposes CoCo, a staged LLM–TSFM framework that distills textual context into forecast and confidence covariates to guide a time-series foundation model, enabled by scalable synthetic multimodal data and achieving up to 12% MAE improvement over state-of-the-art forecasters.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Austin"
+      ],
+      "affiliations_text": "The University of Texas at Austin",
+      "score": 3.7491595266254993,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.05582v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105582v1-exploring-the-privacy-size-tradeoff-for-differentially-private-self-attentive-variational-autoencoders",
+      "source": "arxiv",
+      "title": "Exploring the Privacy--Size Tradeoff for Differentially Private Self-Attentive Variational Autoencoders",
+      "authors": [
+        "Rohit Sadavarte",
+        "Dhruvi Kothari",
+        "Sparsh Gupta",
+        "Eric Van Oeveren"
+      ],
+      "authors_text": "Rohit Sadavarte, Dhruvi Kothari, Sparsh Gupta, Eric Van Oeveren",
+      "abstract": "Data tends to be most useful when it is shared, and the data most worth sharing is often the data that privacy obligations restrict. Synthetic data from a generator trained under differential privacy (DP) is one way to reconcile the two, but its utility depends on the privacy budget $\\varepsilon$ and on how much data the generator sees - a parameter that most data sharing applications of synthetic data control. We present SAVANT, a self-attentive variational autoencoder for tabular data trained with DP-SGD that, to our knowledge, is the first to combine attention, a VAE, and DP in one tabular model. We evaluate it against two marginal mechanisms, PrivBayes and MST, jointly over the privacy budget and the dataset size on two public datasets, measuring the utility a downstream classifier loses by training on synthetic rather than real data. We find that, under the same DP guarantee, more data generally means more utility. For the marginal mechanisms it absorbs most of what a strict budget costs, and a noise-scaling argument suggests DP-SGD exchanges data fo budget at a worse rate. Two independent membership-inference attacks, judged against a measured null, found no aggregate membership signal.",
+      "url": "http://arxiv.org/abs/2611.05582v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05582v1",
+      "tldr": "The paper introduces SAVANT, a differentially private self-attentive variational autoencoder for tabular data, and jointly evaluates privacy budget versus dataset size to show that more data generally improves utility under a fixed DP guarantee, with marginal mechanisms absorbing strict-budget costs better than DP-SGD, while membership-inference audits find no aggregate privacy leakage signal.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Intuit"
+      ],
+      "affiliations_text": "Intuit",
+      "score": 3.735993207356852,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.05442v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105442v1-matched-but-not-better-an-equivalence-tested-benchmark-of-quantum-machine-learning-on-six-clinical-datasets-and-the-qml-health-ready-reporting-framework",
+      "source": "arxiv",
+      "title": "Matched but Not Better: An Equivalence-Tested Benchmark of Quantum Machine Learning on Six Clinical Datasets and the QML-Health-READY Reporting Framework",
+      "authors": [
+        "Mohammed Siraj B",
+        "Gousia Habib",
+        "Ruban S"
+      ],
+      "authors_text": "Mohammed Siraj B, Gousia Habib, Ruban S",
+      "abstract": "Background: Quantum machine learning (QML) is promoted for clinical prediction, but comparisons with classical models are rarely paired or tested for equivalence. Methods: We compared a quantum-kernel support vector machine (QSVM; 4 qubits, tuned bandwidth) and a variational quantum classifier (VQC) with five tuned classical models across six public clinical datasets. All models used identical four-component inputs and 25 cross-validation splits. Paired AUROC differences were assessed using a corrected resampled t-test, Holm-adjusted equivalence tests (margins: +/-0.02 and +/-0.05), and random-effects pooling. Ablation, noise, finite-shot, and implementation-fault analyses were conducted. We propose QML-Health-READY, an eight-domain reporting framework. Results: Neither quantum model significantly outperformed any classical comparator. Pooled across datasets, QSVM differed from the kernel-matched radial basis function (RBF) SVM by -0.006 AUROC (95% CI: -0.017 to +0.004), equivalent to +/-0.02. VQC differed from the best classical model by -0.007 (95% CI: -0.019 to +0.004). QSVM was equivalent to RBF SVM within +/-0.05 in four of six datasets but was significantly worse than the best classical model on NHANES 2017-18 (-0.076). A classically trivial product-state kernel performed as well as the entangling kernel. With depolarizing noise (p = 0.01) and 1,024 shots per kernel entry, QSVM AUROC decreased by 0.054 (95% CI: 0.036 to 0.071). Untuned bandwidth produced near-chance AUROC (0.48-0.59). Conclusions: Correctly configured quantum classifiers approached but did not exceed tuned classical models. Finite-shot estimation, rather than gate noise, was their main practical cost, while configuration errors could reverse conclusions. QML-Health-READY defines reporting requirements for credible claims.",
+      "url": "http://arxiv.org/abs/2611.05442v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05442v1",
+      "tldr": "In a paired, equivalence-tested benchmark across six clinical datasets, correctly configured quantum classifiers matched but did not outperform tuned classical models—finite-shot estimation was their main practical cost and configuration errors could reverse conclusions—prompting the QML-Health-READY reporting framework for credible QML claims.",
+      "detailed_reading": null,
+      "affiliations": [
+        "St Aloysius (Deemed to be University)",
+        "Bahrain Polytechnic"
+      ],
+      "affiliations_text": "St Aloysius (Deemed to be University), Bahrain Polytechnic",
+      "score": 3.0659743350072266,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.05528v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/05/261105528v1-the-confidence-score-a-new-measure-on-kernels",
+      "source": "arxiv",
+      "title": "The Confidence Score: a New Measure on Kernels",
+      "authors": [
+        "Elizabeth Hofer",
+        "Martin v. Mohrenschildt"
+      ],
+      "authors_text": "Elizabeth Hofer, Martin v. Mohrenschildt",
+      "abstract": "Across a wide range of applications, kernel measures are used to tune hyperparameters, select among candidate kernels, and assess the suitability of kernels for specific learning tasks. For classification, kernel measures are used to predict which kernels may produce accurate kernel classifiers. Many existing kernel measures, such as alignment to the ideal kernel, are designed to reward kernels which captures all samples from the same class as similar. While effective in many settings, this requirement is unnecessarily restrictive for classification, where classes may exhibit substantial internal structure. In this work, the \"Confidence Score\", a new kernel measure, is proposed. Unlike alignment-to-the-ideal kernel measures, the Confidence Score measures the alignment between an encoding of the ground truth and that ground truth projected by the kernel, allowing kernels that preserve intra-class structure to achieve high scores. Through experiments, it is demonstrated that the Confidence Score exhibits a higher correlation with classification accuracy across a variety of kernels on both real-world and synthetic datasets, compared to select other kernel measures.",
+      "url": "http://arxiv.org/abs/2611.05528v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05528v1",
+      "tldr": "The paper proposes the **Confidence Score**, a new kernel measure that assesses how well a kernel preserves ground-truth structure—including intra-class structure—and shows it correlates more strongly with classification accuracy than existing kernel measures across real and synthetic datasets.",
+      "detailed_reading": null,
+      "affiliations": [
+        "McMaster University"
+      ],
+      "affiliations_text": "McMaster University",
+      "score": 3.0292383470674804,
+      "score_text": "3.0"
+    }
+  ]
+}
