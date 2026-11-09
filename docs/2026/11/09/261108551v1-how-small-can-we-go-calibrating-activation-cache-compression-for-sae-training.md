@@ -1,0 +1,15 @@
+# How Small Can We Go? Calibrating Activation-Cache Compression for SAE Training
+
+- 区域：速读区
+- 排名：8
+- 匹配度：3.7/10
+- 来源：arxiv
+- 作者：Abraham Yeung
+- 机构：Stanford University
+- 链接：[arXiv / Source](http://arxiv.org/abs/2611.08551v1) · [PDF](https://arxiv.org/pdf/2611.08551v1)
+
+## TLDR
+The paper shows that activation-cache compression for SAE training should be evaluated against calibrated same-process controls—identical-byte retraining as the ceiling and reseeding as the floor—because absolute feature-retention percentages are unstable while codec rankings are reliable, and it finds that per-channel standardization can make int4 viable whereas a bf16 forward pass can lose more features than rotated int8 storage.
+
+## Abstract
+To train a sparse autoencoder (SAE), you need a massive cache of model activations. We look into the effects that compression has on an SAE in two ways: we keep the original fp32-trained SAE and pass the compressed cache into the same SAE to see how many feature activations stay the same (the frozen-SAE test), and we retrain an SAE on the compressed cache and see how many of the original features still exist (the retraining test). We found that in the retraining test, there is no clear scale for retained features. On a GPT-2 cache, rounding everything to fp16 keeps 60.6% of features, but changing one value in a million by the smallest step fp32 allows (a change eight orders of magnitude smaller) keeps only 70.5%. Meanwhile, changing the random seed keeps 23.0%. For the frozen-SAE test, the frozen SAE's correlation with the original increases in order of how precise the codecs are, but plain $L_2$ distance gives nearly the same ordering. We also see the same frozen reading correspond to different percentages retained at different sites. This leaves the question of the right measurement. We build one by calibrating: retraining on identical bytes sets the ceiling, and a reseed sets the floor. We then measure the effect of each compressed codec against its own site's floor. With TopK SAEs on GPT-2 small and Pythia-1.4B at research-scale budgets, naïve per-token int4 loses more features than a reseed everywhere we tested, as do PCA and random projection on GPT-2. Standardizing each channel before quantizing brings int4 back above the floor in terms of retained features, at the same raw file size. At our smallest budget, a bf16 forward pass, which some pipelines use to save memory, loses slightly more features than rotated 8-bit storage. Calibrating a site costs four training runs and two evaluation passes.
