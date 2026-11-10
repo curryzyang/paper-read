@@ -1,0 +1,15 @@
+# Topological Deep Learning Challenge 2026: Bridging the Gap
+
+- 区域：速读区
+- 排名：11
+- 匹配度：3.6/10
+- 来源：arxiv
+- 作者：Guillermo Bernárdez, Lev Telyatnikov, Mathilde Papillon, Marco Montagna, Louisa Cornelis, Louis Van Langendonck, Antonio Purificato, Bruno Neri, David Leko, Donatella Genovese, Eleonora Grassucci, Jan-Willem Van Looy, Johan Mathe, Lucia Testa, Luka Benić, Melanie Weber, Olga Zaghen, Pavlo Vasylenko, Raffael Theiler, Scott Mahan, Gaurav Khanal, Valentina Sánchez, Dario Loi, Gabriele Onorato, Prasanna Devadiga, Taejin Paik, Anier Velasco Sotomayor, Jonas Müller, Aarav Gupta, Riyan Patel, Grold Otieno Mboya, Pushparaj Devadiga, Adam Gohain, Dominik Filipiak, Michael Banf, Alireza Mohammadian, Amirreza Akbari, Gabriel Chaviano Díaz, Marcos Chávez Mesa, Ankit Grover, Rémi Bourgerie, Alessio Comparini, Ankit Kumar, Mohammad Yusuf, Devesh Kaushal, Francesco Orsi, Ghazal Mostofi, Kolya Lettl, Salwa Khattami, Gabriel Franco, Yelizaveta Falkouskaya, Jorge Luiz Franco, Kajal Singla, Fernando David Espinosa Iñiguez, Raj Patil, Eric Dolores-Cuenca, Luigi Petti, Chenguang Xu, Stefano Blando, Christine Zeh, Lennart Bastian, Kaden Zheng, Vihan Tiwari, Sud Athreya, Hisataka Kajita, Hugo Micheron, Rémi Devaux, Antoine Jardin, Tegan Emerson, Olga Fink, Nina Miolane
+- 机构：Unknown affiliation
+- 链接：[arXiv / Source](http://arxiv.org/abs/2611.10046v1) · [PDF](https://arxiv.org/pdf/2611.10046v1)
+
+## TLDR
+TLDR: The 2026 Topological Deep Learning Challenge benchmarked GNNs and TNNs side by side in a shared TopoBench/GraphUniverse pipeline across 68 submissions, finding that their performance differences are strongly task-dependent—TNNs notably outperform GNNs on triangle counting, while the gap is modest on community detection.
+
+## Abstract
+This paper describes the 2026 edition of the Topological Deep Learning Challenge: Bridging the Gap, hosted at the second Topology, Algebra, and Geometry in Data Science (TAG-DS) Conference. Where previous editions grew the modelling and data ecosystem of Topological Deep Learning (TDL), this edition set out to place Graph Neural Networks (GNNs) and Topological Neural Networks (TNNs) side by side under a single evaluation pipeline. Participants implemented recent state-of-the-art architectures in TopoBench, with Track 1 covering GNNs and Track 2 covering TNNs. They evaluated these implementations on shared synthetic benchmarks generated with GraphUniverse, which independently controls homophily, average degree and degree-distribution heaviness. The challenge yielded 68 qualifying submissions from 34 teams, spanning the graph, simplicial, cellular, hypergraph and combinatorial domains. For the first time, submissions were also tracked on a public leaderboard, which we summarize and analyze here. Our analysis finds that the differences between the submitted tracks are strongly task-dependent: the mean accuracy gap is modest on community detection, while on triangle counting the Track 1 mean error is 1.85 times the Track 2 mean. Several structurally informed GNNs also outperform the Track 2 mean on triangle counting.
