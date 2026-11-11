@@ -1,0 +1,742 @@
+{
+  "label": "2026-11-11",
+  "date": "2026-11-11",
+  "generated_at": "2026-11-11T18:33:44",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2611.13043v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113043v1-proportional-neuro-impulsive-control-of-siso-lti-systems",
+      "source": "arxiv",
+      "title": "Proportional Neuro-Impulsive Control of SISO LTI Systems",
+      "authors": [
+        "Christian Fernandez Lorden",
+        "Elena Petri",
+        "W. P. M. H. Heemels",
+        "Alessio Franci"
+      ],
+      "authors_text": "Christian Fernandez Lorden, Elena Petri, W. P. M. H. Heemels, Alessio Franci",
+      "abstract": "This paper explores a controller that is at the crossroads of neuromorphic, i.e., spike-based, and impulsive control systems. The controller consists of a single integrate-and-fire-like neuron that generates an input proportional to the system output when the neuron variable reaches a threshold. We prove that any static output-feedback stabilizable single-input single-output (SISO) linear time-invariant (LTI) plant can be made semi-globally asymptotically stable (sGAS) in closed loop with the proposed neuro-impulsive controller. This improves on existing fixed-amplitude neuromorphic controllers, which only achieve practical stability, but at the price of using graded spiking inputs. Moreover, we provide an algorithm for choosing appropriate controller parameters given a set of admissible initial conditions. A numerical example of an inverted pendulum linearized around its upright equilibrium illustrates the method.",
+      "url": "http://arxiv.org/abs/2611.13043v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13043v1",
+      "tldr": "This paper proves that a proportional neuro-impulsive controller—an integrate-and-fire neuron whose spike amplitude scales with the plant output—can semi-globally asymptotically stabilize any static output-feedback stabilizable SISO LTI system, and provides a parameter-selection algorithm illustrated on a linearized inverted pendulum.",
+      "detailed_reading": {
+        "motivation": "现有固定幅值神经形态脉冲控制器在目标附近只能实现实际稳定，因为每次脉冲的修正量不随系统输出缩放，导致振荡与远距离脉冲频率之间存在矛盾。比例型、状态依赖的脉冲有望像连续控制一样随状态缩放修正量，从而获得渐近稳定并减少远距离所需脉冲次数。已有脉冲控制工具通常要求跳变矩阵严格收缩或在流动-跳变循环上满足离散 Lyapunov LMI，不适用于本文的神经形态控制场景。",
+        "method": "针对静态输出反馈可稳定的 SISO LTI 系统，构建由单个类积分-发放神经元驱动的混合闭环 NICS，其流动阶段为 xdot=Ax、xidot=|Cx|+Ib，跳变阶段为 x+=(I-alpha BC)x、xi+=0，参数为阈值 Delta、偏置电流 Ib 和脉冲增益 alpha。控制器在神经元变量达到阈值时产生与输出 y=Cx 成比例的脉冲输入，用脉冲序列逼近连续静态输出反馈 K 的作用。由于 BC 为秩一矩阵且 I-alpha BC 通常非收缩，分析采用冲击映射并借鉴 emulation 思路，证明对任意 SOF 可稳定的 SISO LTI 被控对象均可通过选择 Delta、Ib、alpha 使闭环半全局渐近稳定。给定紧凑的容许初始条件集合，算法返回使 NICS 从该集合 sGAS 的控制器参数，并用线性化倒立摆进行数值验证。",
+        "result": "论文证明任何静态输出反馈可稳定的 SISO LTI 系统都可由所提出的比例神经脉冲控制器实现半全局渐近稳定，而现有固定幅值神经形态控制器通常只能达到实际稳定。该优势的代价是需要使用幅值随输出分级变化的脉冲输入，单个神经元即可携带输出符号并避免用两个神经元表示正负脉冲。作者给出了按给定初始条件集合选取 Delta、Ib、alpha 的算法，并通过倒立摆直立平衡点线性化模型的数值例子说明方法有效。",
+        "conclusion": "比例神经脉冲控制把神经形态脉冲控制与脉冲控制联系起来，在保留单个积分-发放神经元结构的同时，用输出比例脉冲消除了固定幅值脉冲导致的实际稳定限制。由于分级脉冲执行器可能不易获得，该工作被视为迈向由不同输出尺度固定幅值神经元阵列实现类似设计的第一步。整体结果强调比例脉冲可实现半全局渐近稳定，但远距离脉冲频率仍随距离增长，只是每次脉冲修正更大、所需脉冲更少。",
+        "key_details": "模型要求 A 非 Hurwitz 且存在正 K 使 A-BKC Hurwitz，若仅负 K 可稳定则可交换反馈符号；Ib>0 用于保证最大驻留时间 Delta/Ib，并防止原点附近有效增益 alpha/T 趋零。分析关键点是 BC 秩一导致跳变矩阵 I-alpha BC 对 n>1 不可能收缩，且开环流动也不收缩，因此稳定性来自流动与跳变的联合效应并用冲击映射处理。算法根据容许初始条件集合选择 Delta、Ib、alpha，理论上保证 sGAS 而非全局渐近稳定；数值例子为倒立摆线性化模型，代码与数据公开。局限包括需要比例分级脉冲、远离目标时脉冲频率仍会增大，以及结论依赖静态输出反馈可稳定性和半全局框架。"
+      },
+      "affiliations": [
+        "WEL Research Institute",
+        "Eindhoven University of Technology",
+        "University of Liège"
+      ],
+      "affiliations_text": "WEL Research Institute, Eindhoven University of Technology, University of Liège",
+      "score": 5.550148491331692,
+      "score_text": "5.6"
+    },
+    {
+      "id": "2611.13067v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113067v1-control-barrier-functions-for-counting-tasks-in-multi-agent-systems",
+      "source": "arxiv",
+      "title": "Control Barrier Functions for Counting Tasks in Multi-Agent Systems",
+      "authors": [
+        "Georgios Mitsos",
+        "Sofie Haesaert",
+        "Siyuan Liu"
+      ],
+      "authors_text": "Georgios Mitsos, Sofie Haesaert, Siyuan Liu",
+      "abstract": "Multi-agent systems increasingly operate in dynamic environments and execute complex tasks that require coordination, posing significant computational challenges. Counting tasks, which require a minimum number of agents to satisfy a given condition, arise naturally in such systems. Examples include surveillance tasks, where at least m drones must continuously monitor a critical area, and emergency-response tasks, where at least m robots must converge to an incident location. The identities of the agents assigned to these tasks may change dynamically depending on their states, input bounds, and individual objectives. In this work, we propose a control barrier function (CBF)-based framework for enforcing counting invariance and counting convergence tasks, without explicitly assigning agents or enumerating all possible subteams. We develop a recursion-based method for constructing differentiable CBFs for counting tasks. The resulting CBF constraints are incorporated into quadratic programs, enabling online controller synthesis. Numerical experiments demonstrate scalability to large multi-agent systems, while a multi-drone emergency-response case study illustrates the satisfaction of counting tasks.",
+      "url": "http://arxiv.org/abs/2611.13067v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13067v1",
+      "tldr": "This paper proposes a control barrier function framework that uses recursion-based differentiable CBFs in quadratic programs to enforce counting invariance and counting convergence tasks in multi-agent systems—requiring at least \\(m\\) agents to satisfy a condition—without explicit agent assignment or combinatorial subteam enumeration.",
+      "detailed_reading": {
+        "motivation": "多智能体系统在动态环境中常需完成计数任务，即至少 m 个智能体持续或最终满足某条件，且满足条件的智能体身份可随状态、输入能力和个体目标动态变化。预先分配智能体或枚举所有子队会造成分配低效、不可行或组合爆炸，而现有计数时序逻辑方法多依赖离散模型和离线综合，组合CBF方法虽避免枚举但需每个智能体一个约束，在大规模团队中带来计算与QP可行性挑战。",
+        "method": "针对每个智能体定义C1标量函数 h(x_i)，其非负当且仅当该智能体满足任务条件；计数任务等价于第 m 大值 h_(m)≥0。由于 h_(m) 通常不可微，方法用LogSumExp对前 k 大值之和 σ_k 构造C1近似，并以下界 \bar h_(m)=hatσ_m-τln binom(M,m)-hatσ_(m-1) 作为候选CBF；通过前向递推高效评估该CBF值、后向递推计算梯度，避免显式任务分配和子队枚举。随后将计数不变与计数收敛对应的聚合CBF约束加入二次规划，在线求解各智能体在非线性输入仿射动力学下的控制输入。",
+        "result": "数值实验表明该方法可扩展到较大规模多智能体系统，多无人机应急响应案例验证了计数任务约束的满足。与每智能体一个CBF约束的组合式方法相比，该方法对每个计数任务仅使用一个聚合CBF约束，避免枚举组合数量子队并降低QP规模。",
+        "conclusion": "论文提出了统一的CBF框架，同时处理计数不变和计数收敛任务，允许满足条件的智能体身份动态变化，并通过在线QP实现无需显式分配的控制器综合。在标准可行性与正则假设下，还给出了QP控制器局部Lipschitz连续性的充分条件，适用于监视、应急响应等计数型多智能体任务。",
+        "key_details": "关键点包括：用 h_i 的非负性编码单智能体条件，用第 m 大值编码至少 m 个智能体满足条件；排序值不可微，因此构造可微下近似，保证 \bar h_(m)≥0 可推出 h_(m)≥0，近似保守度由 τ 和 ln binom(M,m) 项控制；采用集中式CBF定义，控制器可依赖联合状态，需满足标准可行性与正则性以保证局部Lipschitz；主要局限是LogSumExp近似的保守性、τ选择影响紧度与数值行为，以及集中式计算和通信依赖。"
+      },
+      "affiliations": [
+        "Eindhoven University of Technology"
+      ],
+      "affiliations_text": "Eindhoven University of Technology",
+      "score": 5.330591296182056,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2611.12949v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/11/261112949v1-maze-runner-autonomous-maze-navigation-with-line-based-localization-and-control-barrier-functions",
+      "source": "arxiv",
+      "title": "Maze Runner: Autonomous Maze Navigation with Line-Based Localization and Control Barrier Functions",
+      "authors": [
+        "Alvaro J. Gaona",
+        "Lucas Gómez-Velayos",
+        "Peter Pasuy-Quevedo"
+      ],
+      "authors_text": "Alvaro J. Gaona, Lucas Gómez-Velayos, Peter Pasuy-Quevedo",
+      "abstract": "Maze navigation requires localization from sparse, repetitive geometry, planning through narrow corridors, and control that stays safe when the estimate or the map is wrong. We present Maze Runner, an open autonomy stack in C++ and ROS 2 that addresses these needs end to end on a simulated Husarion ROSbot XL with a 2D LiDAR in Gazebo. Perception extracts wall lines from each scan with RANSAC and total least squares, with per-line uncertainty. The same line front end feeds two estimators: an Extended Kalman Filter (EKF) that localizes against a line map built from the maze mesh, and an EKF SLAM variant that builds the line map online. Planning runs online on an inflated occupancy grid with A* plus line-of-sight shortcutting, or with a forward-only Hybrid A*. A nonlinear Model Predictive Controller (NMPC) tracks the plan while discrete-time Control Barrier Functions (CBFs) on world-frame LiDAR points keep the robot clear of walls and unmapped obstacles. The algorithms live in a ROS-free, unit-tested core library, and the whole stack builds and runs from a single reproducible environment. In simulation, the robot drives a 135 m route through the maze with 1.0 cm localization RMSE against the known map and 24 cm in SLAM mode, the planner returns a path in 6 ms, and the NMPC solves in 11.7 ms on average, never exceeding its 80 ms budget.",
+      "url": "http://arxiv.org/abs/2611.12949v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12949v1",
+      "tldr": "**TLDR:** Maze Runner is an open ROS 2 autonomy stack for simulated maze navigation that combines line-based EKF localization/SLAM, grid and Hybrid A* planning, and NMPC with control barrier functions for safety, achieving a 135 m autonomous route with 1.0 cm localization RMSE and real-time planning/control performance.",
+      "detailed_reading": {
+        "motivation": "迷宫导航同时面临稀疏重复几何下的实时定位、狭窄走廊中的可行路径规划，以及估计或地图出错时仍保持安全的控制问题。本文旨在提供一个开源、可复现的端到端自主导航栈，在仿真平台上统一解决感知、定位与建图、规划和安全控制。",
+        "method": "系统在Gazebo中以搭载2D LiDAR的Husarion ROSbot XL为平台，采用C++和ROS 2实现，算法置于无ROS依赖且单元测试的核心库。感知端用RANSAC从每帧扫描提取墙面线并做总体最小二乘精化及逐线不确定性估计；同一线特征前端同时驱动两种估计器：基于迷宫网格生成线地图的EKF定位，以及在线构建线地图的EKF SLAM。规划在膨胀占据栅格上运行8邻接A*加视线捷径化，或采用仅前进的Hybrid A*；控制层用NMPC跟踪参考路径，并以作用在世界坐标系LiDAR点上的离散时间CBF约束保证避墙和避让未建图障碍，且通过扇区式障碍选择限制问题规模。",
+        "result": "仿真中机器人完成了135 m的迷宫路线；对已知地图定位RMSE为1.0 cm，SLAM模式下为24 cm；规划器约6 ms返回路径；NMPC平均求解11.7 ms，且从未超过80 ms预算。",
+        "conclusion": "结果表明，基于线特征的EKF定位/SLAM、在线栅格规划和带离散时间CBF约束的NMPC可以组成实时、端到端且可复现的迷宫自主导航栈，并在定位精度、规划速度和控制实时性上满足仿真实验要求。",
+        "key_details": "线地图用Hesse法向式表示，由迷宫网格中竖向且水平跨度足够的墙面提取并合并共线重复线，运行时按机器人预测位置调整线的可见朝向；EKF预测采用中点圆弧里程计模型，并在过程噪声中加入随运动增长的横向与航向滑移项以适配滑移平台。RANSAC参数为每轮30次采样、点对最小间距5 cm、内点阈值3 cm、最少10个内点，固定随机种子保证确定性；参考生成按0.5 m/s和0.1 s控制周期加密路径，并采用前向窗口路径跟踪防止跨墙跳点。规划栅格分辨率0.1 m、膨胀半径0.6 m，Hybrid A*用5条0.3 m前进弧、最小转弯半径1 m、72个航向分箱及障碍感知Dijkstra启发式；主要局限是仅在Gazebo仿真验证，依赖LiDAR线特征与已知或在线构建的几何地图，真实平台上的动态障碍、噪声和计算约束仍需进一步评估。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.814442004486118,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.13003v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113003v1-branch-and-commit-for-frozen-rl-agents-when-and-where-to-spend-test-time-compute",
+      "source": "arxiv",
+      "title": "Branch-and-Commit for Frozen RL Agents: When and Where to Spend Test-Time Compute",
+      "authors": [
+        "Sahar Admoni",
+        "Assaf Hallak",
+        "Yftah Ziser",
+        "Ofra Amir"
+      ],
+      "authors_text": "Sahar Admoni, Assaf Hallak, Yftah Ziser, Ofra Amir",
+      "abstract": "Reinforcement learning agents are often deployed with policies that cannot be retrained or modified. In digital environments whose states can be copied and resumed, an operator has another option: sample several continuations from the current state, evaluate them, and continue from the endpoint of the selected branch. We call this procedure branch-and-commit. We study when it improves return, what produces the improvement, and where its computational budget should be spent. Across four environments, two frozen policies, five continuation verifiers, and a model-free selection rule, we find that the benefit of branching depends on dispersion: the difference between the best candidate return and the mean candidate return. Branching provides no benefit in low-dispersion settings, while increasing return by 12.8% in our main Craftax-Medium setting. Most of this gain comes not from selecting better actions, but from selecting among different stochastic realizations of the same action. Several competent verifiers achieve similar episode returns, suggesting that verifier quality is not the main constraint at our operating budget. Instead, computation is better allocated to states where useful dispersion is likely. On held-out seeds, gating branching using predicted dispersion retains 69% of the improvement from uniform branching while using 48% as many branching calls. These results characterize when branch-and-commit is useful and clarify what its gains represent.",
+      "url": "http://arxiv.org/abs/2611.13003v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13003v1",
+      "tldr": "This paper shows that for frozen RL agents, branch-and-commit—sampling multiple continuations, scoring them, and continuing from the selected branch—improves return mainly in high-dispersion states and largely by selecting among stochastic realizations of the same action, so test-time compute is best allocated to states predicted to have useful dispersion rather than uniformly.",
+      "detailed_reading": {
+        "motivation": "部署后的强化学习策略常常被冻结、不可重训，但在状态可复制和恢复的数字环境中，操作者可以在测试时从当前状态采样多条延续、评估并择优提交。论文研究这种branch-and-commit何时提升回报、提升由什么产生，以及测试时算力应分配到哪些状态，并试图用候选回报的离散度解释其收益边界。",
+        "method": "在可复制状态的决策点，用冻结策略采样K条长度为H的候选轨迹并计算各自回报，再用延续验证器对候选打分并选择一条提交，随后从选中分支继续执行，整个过程不更新策略。实验覆盖Craftax-Symbolic的Medium、Easy、Hard，Asterix-MinAtar，以及XLand-MiniGrid的DoorKey-8x8和R9-19x19等环境、两种冻结策略和五类验证器（包括价值头、仅评论家、仅奖励的无模型选择规则和LLM选择等），并与无分支、随机选择等基线比较；对每个决策点记录离散度Δ(s)=最优候选回报减候选平均回报，按单元拟合ℓ_c≈β_{v,e}Δ_c，并进一步用预测离散度做门控，仅在可能产生有用离散度的状态执行分支。",
+        "result": "低离散度设置中分支没有收益，而在主设置Craftax-Medium中回报提升12.8%；大部分增益并非来自选择更好的动作，而是来自在同一动作的不同随机实现之间选择。多个有能力的验证器取得相近的回合回报，说明在当前操作预算下验证器质量不是主要约束；在留出种子上，用预测离散度门控分支保留了均匀分支69%的改进，同时只使用48%的分支调用。",
+        "conclusion": "Branch-and-commit的有效性主要取决于状态处候选回报的离散度，而不是普遍适用；测试时算力应优先投入可预测高离散度的状态。该结果澄清了分支收益的本质是测试时对随机性的重采样与选择，并为冻结策略部署提供了状态级的算力分配原则。",
+        "key_details": "关键实现包括候选分支长度约H=15到20步、从记录回报直接测量离散度、采用比例模型ℓ_c≈βΔ_c和顺序统计量启发κ(K)，其理论解释依赖选择非对抗以及分支回报近似可交换或高斯的假设，但零离散度处的点质量会违背高斯理想化。短回合环境存在奖励记账伪影：DoorKey回合约23步而H=15，需用alive-step掩码移除自动重置后的奖励，否则离散度会从约0.02被夸大到2.19；近零离散度时commit成本会使分支收益略负，过度分支在高触发率下可低于基线。LLM验证器只接收候选分支的自然语言渲染，不接收价值头、策略logits或符号状态向量，种子与超参在复现附录中给出。"
+      },
+      "affiliations": [
+        "Technion, Israel Institute of Technology",
+        "Nvidia Research"
+      ],
+      "affiliations_text": "Technion, Israel Institute of Technology, Nvidia Research",
+      "score": 4.6632080384685555,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.13047v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113047v1-state-constrained-optimal-control-with-the-theory-of-functional-connections-squared-slacks-and-junction-exponents",
+      "source": "arxiv",
+      "title": "State-constrained optimal control with the theory of functional connections: squared slacks and junction exponents",
+      "authors": [
+        "Emmanuel Tr{é}lat",
+        "Daniele Mortari"
+      ],
+      "authors_text": "Emmanuel Tr{é}lat, Daniele Mortari",
+      "abstract": "For optimal control problems with an affine state constraint, we combine the theory of functional connections (TFC), which writes every function satisfying prescribed linear conditions as an explicit expression in terms of a free function, with the squared-slack substitution $b - a^\\top x(t) = s(t)^2$. Every trial trajectory then satisfies the endpoint conditions and the path constraint identically. The accuracy depends on the regularity of the slack function at the junctions with a boundary arc. Along an optimal trajectory, the constraint residual vanishes like $(t_1 - t)^m$, where the junction exponent $m$ is equal to the order $p$ of the constraint if and only if the $p$-th derivative of the constraint jumps at the junction, and thus a single polynomial slack converges algebraically. The \\emph{multiple-arc TFC method} that we introduce, with unknown junction times and with residuals $(t_1 - t)^m σ(t)^2$ on the free arcs, represents the optimal trajectory exactly and converges geometrically when the arcs are analytic. In a linear-quadratic class, an exact cost identity shows that the cost of every trial trajectory is an upper bound of the optimal cost. We compare both approaches with direct collocation and indirect shooting on the Bryson-Denham problem, on a rendezvous problem with an approach corridor and on the six-dimensional atmospheric reentry of a space shuttle with three state constraints.",
+      "url": "http://arxiv.org/abs/2611.13047v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13047v1",
+      "tldr": "The paper combines the theory of functional connections with squared-slack substitutions to enforce affine state constraints identically in optimal control, introduces a multiple-arc TFC method with unknown junction times and junction exponents that can represent optimal trajectories exactly with geometric convergence, and benchmarks it against direct collocation and indirect shooting on Bryson–Denham, rendezvous, and shuttle reentry examples.",
+      "detailed_reading": {
+        "motivation": "带仿射状态约束的最优控制广泛存在于航空航天任务中，其最优解常包含未知交会时刻连接的边界弧与自由弧，直接法受离散精度限制且节点间约束不受控，间接法依赖弧结构和好的协态初值。作者希望利用TFC把端点条件与路径约束显式嵌入试探轨迹，并用平方松弛处理不等式，从而同时获得可行轨迹表示、高精度和可分析的收敛性。",
+        "method": "对仿射约束a^T x(t)≤b作适配坐标变换y=b-a^T x≥0并引入平方松弛y=s(t)^2，再用TFC约束表达式构造满足端点条件和路径约束的显式轨迹，自由函数用多项式基展开并由最小二乘/优化确定。单弧TFC在整个时域用一个松弛函数，分析其在边界弧交会处的正则性，证明约束残差按(t1-t)^m消失并定义交会指数m；多弧TFC在未知交会时刻切分时域，边界弧精确满足约束，自由弧采用(t1-t)^m σ(t)^2残差并联合求解未知交会时刻。流程上先用单弧法及松弛阈值粗略定位边界弧数量与交会时刻，再初始化多弧法，并在Bryson-Denham、带接近走廊的交会及航天飞机六维再入算例上与直接配点（IpOpt/CasADi）和间接打靶比较。",
+        "result": "核心发现是单弧法中多项式松弛对最优松弛的逼近受交会指数控制，最优一致误差约为N^{-m/2}，因而仅代数收敛；若约束在交会处第p阶导数发生跳变，则m=p，否则m>p。提出的多弧TFC在解析弧段上可精确表示最优轨迹并实现几何收敛；在线性二次类中，精确代价恒等式表明每个试探轨迹的代价都是最优代价的上界，且自由弧上的平方残差必须保持非负而不仅是交会处相切。三个算例验证了两种TFC方法与直接配点、间接打靶的对比表现及约束表示能力。",
+        "conclusion": "将平方松弛与TFC结合可使试探轨迹在构造上满足端点条件和仿射状态约束，其精度关键取决于松弛函数在交会处的正则性，交会指数决定了单弧多项式表示的收敛阶。多弧TFC通过未知交会时刻和带交会指数的残差表示克服单弧法在表示、精度和条件数上的障碍，在解析情形下几何收敛；虽然非线性非LQ情形下试探轨迹不再必然可行、代价上界性质丢失，但仍可精确表示各约束在相邻弧段上的结构，并可由单弧残差形式或直接法/几何分析获得弧结构初值。",
+        "key_details": "关键细节包括：约束阶p与交会指数m满足m≥p，且m=p当且仅当约束沿轨迹的第p阶导数在交会处跳变，最优松弛s=√y表现为(t1-t)^{m/2}的Hölder正则性；适配坐标用a^⊥的正交基Q消去法向，端点条件经Hermite型TFC切换函数处理，活动端点对应s=0且需注意平方参数化在边界处的一阶奇异性和乘子符号的二阶恢复；有限维中给出二阶平稳性与KKT条件的对应引理。实现上自由函数的多项式阶数N、单弧松弛阈值、交会时刻初值以及交会指数候选选择是关键超参/先验，多弧法需预先知道边界弧数量、顺序和指数，非线性情形下试探轨迹不保证可行且失去代价上界，这是主要局限性。"
+      },
+      "affiliations": [
+        "Texas A&M University",
+        "Sorbonne Université"
+      ],
+      "affiliations_text": "Texas A&M University, Sorbonne Université",
+      "score": 4.626368330349491,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.13013v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113013v1-fast-factored-synthesis-of-transitions-for-offline-reinforcement-learning",
+      "source": "arxiv",
+      "title": "FaST: Factored Synthesis of Transitions for Offline Reinforcement Learning",
+      "authors": [
+        "Daniel Campa",
+        "Spandan Das",
+        "Srinjoy Das"
+      ],
+      "authors_text": "Daniel Campa, Spandan Das, Srinjoy Das",
+      "abstract": "Synthetic data augmentation promises to scale offline reinforcement learning beyond fixed logged datasets, but leading diffusion-based generators model the transition tuple (state, action, next state, reward, terminal) as a monolith: no single factor can be natively redrawn in isolation. We present FaST (Factored Synthesis of Transitions), which factors transitions via the chain rule into state, action, dynamics, reward, and terminal stages, fitting each with an estimator matched to its statistical properties. Across twelve D4RL locomotion and maze benchmarks, TD3+BC and IQL agents trained on FaST transitions match the SynthER diffusion baseline while generating transitions over 90x faster. The explicit action-given-state conditional can also be re-queried for a fixed state, enabling targeted action synthesis: drawing N candidate actions per generated state and keeping the highest-advantage one under a value function fit to the same data, thereby synthesizing improved behavior during generation rather than filtering for it post-hoc. Best-of-10 synthesis beats training on real data on 11 of 12 medium and medium-replay settings (+8.9 D4RL points on average, up to +28.4), and is competitive with advantage-filtered SynthER at a fraction of its generation cost. On expert mixtures both mechanisms degrade identically, tracing the failure to the advantage estimate itself rather than to either targeting mechanism.",
+      "url": "http://arxiv.org/abs/2611.13013v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13013v1",
+      "tldr": "FaST is a factored offline-RL transition generator that decomposes transitions into separately modeled state, action, dynamics, reward, and terminal stages with tailored estimators, enabling over 90× faster synthesis than diffusion baselines and targeted best-of-N action resampling that can improve downstream policy performance.",
+      "detailed_reading": {
+        "motivation": "现有离线强化学习数据增强多用扩散模型把转移元组整体建模，无法单独重抽某个因子，生成成本高且难以在生成时控制动作质量；同时，单纯增加合成数据只会复现行为策略而未必提升策略。FaST旨在通过链式分解实现可复用、快速且可定向合成的转移生成器。",
+        "method": "给定真实数据集D，将转移联合分布按链式法则分解为P(S)P(A|S)P(S'|S,A)P(R|S,A,S')P(d|S,A,S',R)，并分别拟合与各因子统计形态匹配的估计器：状态用分位数-logit变换后的自回归高斯混合MDN，动作用logit空间15分量MDN，动力学用预测S'-S的7成员bootstrap集成，奖励用128×128 MLP回归，终止用Extra Trees分类。各阶段独立在真实D上训练，采样时祖先式依次生成S、A、S'、R、d；可选定向动作合成对固定生成状态从P(A|S)抽N个候选，用同一D拟合的IQL价值函数计算A_IQL=min(Q1,Q2)-V并保留最高优势动作，再继续后续阶段，N=1即普通祖先采样。",
+        "result": "在12个D4RL locomotion和maze基准上，用FaST转移训练的TD3+BC和IQL达到与SynthER扩散基线相当的下游分数，同时生成转移速度超过90倍。best-of-10定向动作合成在11/12个medium和medium-replay设置上超过真实数据训练，平均提升8.9个D4RL点，最高提升28.4，并以远低于advantage-filtered SynthER的生成成本取得有竞争力结果。专家混合数据上两种定向机制同样退化，说明失败源于优势估计而非定向机制本身。",
+        "conclusion": "FaST表明链式分解配合阶段专用估计器可在保持下游性能的同时显著降低合成成本，并把动作条件显式暴露为可控接口，使生成阶段直接合成更优行为而非事后筛选。该方法提供可复用的离线RL数据增强管线，但其定向收益依赖IQL优势估计质量，在专家混合等优势估计不可靠场景会失效。",
+        "key_details": "实现上各阶段仅用真实D训练，状态与动作阶段通过有界支撑变换保持合成输入在训练流形附近，动力学采用delta参数化限制S'漂移以缓解训练-采样输入不匹配；奖励阶段为128×128 MLP加MSE，动作MDN为15分量，动力学集成为7个bootstrap模型，终止器为Extra Trees，IQL优势定义min(Q1,Q2)-V。best-of-N只重抽动作阶段且不重训其他阶段，因此状态边际保持不变，但会牺牲动作多样性；单步生成没有MBRL式rollout horizon需调，但存在级联误差。局限包括逐因子独立拟合不保证级联合成联合分布精确、专家混合上优势估计失败、以及未在摘要中给出各阶段完整参数量与墙钟成本（正文附录给出）。"
+      },
+      "affiliations": [
+        "West Virginia University",
+        "Jadavpur University"
+      ],
+      "affiliations_text": "West Virginia University, Jadavpur University",
+      "score": 4.602307631981932,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.12964v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/11/261112964v1-exploration-via-exploitation-the-blessing-of-reward-diversity-in-personalized-federated-rl",
+      "source": "arxiv",
+      "title": "Exploration via Exploitation: The Blessing of Reward Diversity in Personalized Federated RL",
+      "authors": [
+        "Jiin Woo",
+        "Gauri Joshi",
+        "Yuejie Chi"
+      ],
+      "authors_text": "Jiin Woo, Gauri Joshi, Yuejie Chi",
+      "abstract": "While federated reinforcement learning (RL) has traditionally guaranteed high efficiency in homogeneous environments, collaboration is often hindered when agents possess distinct goals. In this paper, we flip this paradigm, framing reward heterogeneity not as a hurdle to consensus, but as a structural asset that catalyzes exploration. We first propose Personalized Federated Upper Confidence Bound Value Iteration (PF-UCBVI), which achieves optimal linear speedup by decoupling shared dynamics from personalized objectives. To eliminate the risks of explicit exploration, we then introduce Personalized Federated Exploration-Free Value Iteration (PF-EFVI), a purely greedy algorithm that leverages reward diversity to ensure state-action coverage. We prove that PF-EFVI attains logarithmic regret without explicit exploration bonuses under sufficient reward diversity. Our results reveal that agent disagreement shifts the exploration burden from temporal complexity to spatial diversity, enabling efficient collective learning without explicit exploration.",
+      "url": "http://arxiv.org/abs/2611.12964v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12964v1",
+      "tldr": "The paper shows that reward heterogeneity in personalized federated RL can be exploited as a structural asset for exploration, proposing PF-UCBVI for optimal linear speedup and PF-EFVI, a purely greedy algorithm that achieves logarithmic regret without explicit exploration under sufficient reward diversity.",
+      "detailed_reading": {
+        "motivation": "传统联邦强化学习多在同质环境中实现高效协作，而智能体目标不同导致的奖励异质性常被视为达成共识的障碍。本文反转这一视角，将奖励异质性视为催化探索的结构性资源，并针对机器人、临床试验等显式探索高风险或高成本场景，提出无需显式探索的个性化联邦强化学习思路。",
+        "method": "考虑多个智能体在共享转移动力学但拥有个性化奖励的回合制MDP中协作：PF-UCBVI由服务器聚合所有智能体的经验转移以估计共享动力学，各智能体仅在本地维护面向自身奖励的UCB奖励项与Bellman备份，从而解耦共享动力学与个性化目标；PF-EFVI进一步去除UCB奖励项和乐观初始化，采用纯贪心策略，依赖群体奖励多样性使联合贪心执行自然覆盖状态-动作空间，流程为每回合收集轨迹、更新全局转移统计或局部值函数并按各自策略执行。",
+        "result": "理论证明PF-UCBVI达到关于智能体数量的最优线性加速，平均每智能体regret不受奖励异质性影响；PF-EFVI在奖励多样性充分时无需任何显式探索奖励即可获得对数regret。结果揭示智能体目标分歧把探索负担从时间维度的显式试探转移到群体空间多样性，从而实现高效集体学习。",
+        "conclusion": "奖励异质性并非联邦强化学习的障碍，而是可被利用的结构资源；通过共享动力学与个性化目标解耦，可在任意目标差异下实现无惩罚协作，并在目标足够多样时用纯贪心替代显式探索，为个性化联邦强化学习提供了无需高风险探索的高效学习范式。",
+        "key_details": "关键实现与理论要点包括表格型回合制MDP、共享转移核与个性化奖励、服务器端经验转移聚合、本地UCB奖励与Bellman备份、PF-EFVI去除乐观项和乐观初始化、充分奖励多样性下的状态-动作覆盖条件，以及平均每智能体regret的线性加速和对数regret保证；局限是理论保证主要依赖共享动力学、表格型设定与足够奖励多样性，若奖励多样性不足或动力学不共享则覆盖与加速优势可能失效。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.482259481075146,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.13034v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113034v1-roboace-adversarial-co-evolution-for-robot-self-improvement",
+      "source": "arxiv",
+      "title": "RoboACE: Adversarial Co-Evolution for Robot Self-Improvement",
+      "authors": [
+        "Delin Zhao",
+        "Zhengrong Yue",
+        "Junlin He",
+        "Yali Wang"
+      ],
+      "authors_text": "Delin Zhao, Zhengrong Yue, Junlin He, Yali Wang",
+      "abstract": "Robot agents can improve reusable skills, planning procedures, and recovery strategies from execution feedback, yet a fixed practice source leaves the search for new weaknesses unchanged. Useful practice depends on the agent's current capabilities, so the procedure that chooses practice must also be revisable. We present RoboACE (Robot Adversarial Co-Evolution), a framework that jointly evolves curriculum and execution harnesses around frozen foundation models. The curriculum harness uses accumulated capability evidence to propose informative challenges, while the execution harness responds with reusable revisions that expand execution capabilities. Alternating updates hold one side fixed as the other changes, and admitted challenges form fixed snapshots for comparing execution revisions. Starting from a compact set of LIBERO practice conditions, the resulting frozen deployment outperforms the evaluated controllers and agent systems across four LIBERO-family panels. On LIBERO-PRO, it reaches 74.0% success, exceeding the initial deployment by 15.0 percentage points and direct execution by its VLA controller by 13.5 points. Case studies document changes to evidence-guided practice selection, drawer-skill grounding, and controller intervention.",
+      "url": "http://arxiv.org/abs/2611.13034v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13034v1",
+      "tldr": "RoboACE is an adversarial co-evolution framework that jointly revises a curriculum harness—which selects capability-revealing practice—and an execution harness—which learns reusable robot-control improvements—around frozen foundation models, yielding stronger self-improving robot deployments that outperform evaluated controllers and agent systems across LIBERO benchmarks.",
+      "detailed_reading": {
+        "motivation": "机器人智能体虽能利用执行反馈改进技能、规划与恢复策略，但固定练习源不会改变对新弱点的搜索；有效练习取决于当前能力，因此选择练习的程序本身也必须可修订，才能形成持续自我改进闭环。",
+        "method": "RoboACE围绕冻结基础模型联合进化课程harness与执行harness：harness包含提示、技能、工具、接口和可读记忆；每轮先固定执行端，课程智能体读取能力画像P_k，保留、替换或新增练习条件，经物理有效性、可达性和Judge一致性准入后形成固定任务快照T_k；随后固定快照，执行智能体用代码技能与π0.5 VLA控制尝试任务，优化器依据结果、轨迹和工具反馈诊断并独立测试候选修订，按成功、回归、复用和成本决定采用Candidate或保留Stable；执行证据经Experience Consolidator汇总为P_{k+1}，Strategic Advisor定期跨轮审查方向。实现使用GPT-6.1 Terra、SAM 3和冻结π0.5，30个练习条件、最多40个内部基准条件、27轮记录，不训练LLM或VLA权重。",
+        "result": "最终冻结部署在四个LIBERO族面板上优于所评估控制器与智能体系统；相对初始部署，LIBERO提升35.5个百分点、LIBERO-Plus提升30.0、LIBERO-PRO提升15.0、LIBERO-X提升11.0。LIBERO-PRO达到74.0%成功率，比初始部署高15.0个百分点，比同一VLA控制器直接执行高13.5个百分点。案例还记录了证据引导的练习选择、抽屉技能落地和控制器介入的变化。",
+        "conclusion": "RoboACE给出了一个可运行的机器人自我改进实现：课程选择程序与执行软件都可持久修订，而基础模型权重保持冻结；最终部署在保留LIBERO及三个迁移面板上均取得提升，说明联合对抗进化能带来可复用的系统级收益。研究结果刻画了一条开发轨迹及其部署表现，而非完整官方基准结论。",
+        "key_details": "关键实现细节包括：开发仅使用LIBERO条件，保留LIBERO面板与条件不相交，LIBERO-Plus、LIBERO-PRO和LIBERO-X不参与开发；每面板200条件，每回合8000个20Hz控制步，成功由环境原生谓词判定，超时和基础设施错误计失败。交替更新与准入快照保证课程提案和执行修订可比，准入不预筛VLA难度、也不保证完整可执行解；最终评估不反馈进循环。局限性是结果仅代表单条开发轨迹，四面板为固定子集而非完整官方协议，且未训练或微调LLM或VLA权重。"
+      },
+      "affiliations": [
+        "SIAT"
+      ],
+      "affiliations_text": "SIAT",
+      "score": 4.465505019769181,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.12983v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/11/261112983v1-cafe-closed-loop-autonomous-task-formulation-and-execution-without-instance-specific-instructions",
+      "source": "arxiv",
+      "title": "CAFE: Closed-Loop Autonomous Task Formulation and Execution without Instance-Specific Instructions",
+      "authors": [
+        "Mingjia Chen",
+        "Xuewen Zhao",
+        "Philip Dames",
+        "Qi Mao",
+        "Fei Xie",
+        "Jun Chen"
+      ],
+      "authors_text": "Mingjia Chen, Xuewen Zhao, Philip Dames, Qi Mao, Fei Xie, Jun Chen",
+      "abstract": "Scene-driven robot autonomy requires selecting tasks from observations as well as executing them. We study scene-driven task formulation and execution under predefined cleaning, safety, and storage/organization categories, without instance-specific goals or action sequences. CAFE maintains online memory of objects, functional zones, and execution states. A rule-guided Trigger-LLM admits formulation from accumulated evidence; Draft, Complete, and Audit propose goals, resolve execution details, and check dependencies. Outcomes update memory for correction and subsequent discovery. Evaluation in 12 AI2-THOR scenes compares three backbones and task-complexity tiers using coverage, constraint, and execution metrics. Tri-LLM records higher GCR scores than the evaluated baselines across three backbones and task-complexity tiers. Controls examine completion, auditing, zones, feedback, triggering, and prompt examples. LimoCobot traces illustrate storage, cleanup, and recovery from a failed grasp. The study examines how shared scene state connects task discovery to execution and outcome-driven revision.",
+      "url": "http://arxiv.org/abs/2611.12983v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12983v1",
+      "tldr": "CAFE is a closed-loop robot autonomy framework that uses online semantic memory and a Trigger-LLM-guided Draft–Complete–Audit pipeline to discover, formulate, and execute scene-appropriate tasks without instance-specific instructions, then feeds execution outcomes back into memory for recovery and future task discovery.",
+      "detailed_reading": {
+        "motivation": "场景驱动的机器人自主性不仅要求执行任务，还要求从观察中决定该做什么；现有语言/视觉语言规划多依赖给定目标、目标清单或动作序列，难以覆盖无实例指令下的任务发现与执行衔接。CAFE针对预定义的清洁、安全和收纳/整理类别，研究如何把场景证据、可执行计划形成与执行结果修正连成闭环。",
+        "method": "CAFE以在线语义记忆为共享接口，记忆包含对象及状态、功能区、时间戳/置信度/执行状态，并用功能区地标在地面的包围盒把对象分配给区域。每个心跳由Trigger-LLM比较当前记忆与冻结参考，依据新增对象、对象-区域关联、状态/可供性变化和执行结果判断是否启动，规则为候选数不少于4或相对参考新增至少20个对象；启动后Draft提出包含动作、目标、区域、前置条件、优先级和几何的任务元组，Complete在单次前向中补齐目标、空间关联、几何和原子步骤，Audit检查语义一致性、对象可用性、安全与前置依赖并修复或拒绝，执行器按审计顺序执行并监控结果，成功或失败均回写记忆以支持恢复、去重和后续发现。",
+        "result": "在12个AI2-THOR场景、DeepSeek-V3/Qwen3-Max/Gemini-2.5-Pro三个骨干及简单/复合/复杂任务层级上，Tri-LLM的GCR分数高于所评估基线，覆盖度、约束满足和执行指标被联合用于比较。控制实验考察了Complete、Audit、功能区、执行反馈、触发策略和提示示例的作用；LimoCobot轨迹进一步展示了收纳、清理以及抓取失败后的恢复。",
+        "conclusion": "CAFE表明，以持久场景记忆为中心的闭环可以把任务发现、可执行计划生成和执行结果修正连接起来，使机器人在无实例级目标或动作序列时仍能按清洁、安全和收纳类别自主形成并执行任务。执行结果回写同一记忆既支持局部恢复，也影响后续任务发现与去重，说明共享场景状态是连接发现与执行的关键。",
+        "key_details": "评估不训练或微调模型，语义记忆从空开始，类别先验与技能固定，场景特定目标清单、参考动作序列和完整布局均不提供给机器人；12个场景每任务重复10次，控制实验使用Qwen3-Max，各变体共享观察接口、动作空间、输出格式、执行器、触发与反馈基础设施、步数预算和评测协议。触发采用冻结参考与显式阈值，失败修正可绕过发现门；关键局限是任务类别预定义、主要评估在仿真中进行，实机LimoCobot仅用于收纳、清理和抓取恢复演示。"
+      },
+      "affiliations": [
+        "Nanjing Normal University",
+        "Temple University"
+      ],
+      "affiliations_text": "Nanjing Normal University, Temple University",
+      "score": 4.310565248786799,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.13039v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/11/261113039v1-robo-mlt-dual-system-robotic-manipulation-for-long-horizon-medical-laboratory-tasks",
+      "source": "arxiv",
+      "title": "Robo-MLT: Dual-System Robotic Manipulation for Long-Horizon Medical Laboratory Tasks",
+      "authors": [
+        "Zequan Zeng",
+        "Kai Wang",
+        "Delvin Ce Zhang",
+        "Huaping Liu",
+        "Zhipeng Yuan",
+        "Junqin Yang",
+        "YunLong Zhang"
+      ],
+      "authors_text": "Zequan Zeng, Kai Wang, Delvin Ce Zhang, Huaping Liu, Zhipeng Yuan, Junqin Yang, YunLong Zhang",
+      "abstract": "Reliable medical laboratory automation requires robots to complete entire workflows in protocol order while handling changes during execution. A robot may execute each motion correctly yet fail the workflow by confusing visually similar stages or stalling after human intervention. We present Robo-MLT, a dual-system framework that couples explicit workflow monitoring with learned action generation. A vision--language planner composes an ordered atomic-skill sequence from the protocol and the initial workspace observation. A multiframe execution monitor detects when the active skill has completed or become infeasible, then advances the workflow or triggers replanning. A skill-conditioned vision--language--action policy generates the manipulation trajectories, and an asynchronous runtime coordinates it with the monitor. We evaluate Robo-MLT against four policy baselines and a VLM-based monitor baseline on blood gas analysis and blood sample tube sorting, with 50 nominal configurations per method and 20 sample-removal configurations. Robo-MLT achieves task success rates of 82\\% and 70\\%, exceeding $π_{0.5}$ by 30 and 22 percentage points, respectively. After an operator removes the sample being handled, the system revises the remaining plan and continues processing the other samples. These results indicate that, under the evaluated conditions, explicit workflow monitoring makes long-horizon laboratory manipulation more reliable and recoverable.",
+      "url": "http://arxiv.org/abs/2611.13039v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13039v1",
+      "tldr": "Robo-MLT is a dual-system framework that couples a vision-language planner and multiframe execution monitor—for explicit workflow-stage tracking, completion detection, and replanning—with a skill-conditioned VLA policy for action generation, enabling more reliable and recoverable long-horizon medical laboratory manipulation and outperforming baselines on blood gas analysis and blood sample tube sorting.",
+      "detailed_reading": {
+        "motivation": "医疗实验室自动化要求机器人按协议顺序完成长流程操作，但不同阶段可能视觉高度相似，且执行中可能发生人工干预或场景变化，导致机器人动作正确却流程失败。现有端到端策略缺少显式流程状态，难以判断当前步骤是否完成或已不可行，因此需要把显式工作流监控与学习型动作生成结合，提高长程操作的可靠性和可恢复性。",
+        "method": "Robo-MLT采用双系统分层方案：输入任务指令、仪器协议、初始工作区观测和原子技能库（血气分析7个、试管分拣5个），由冻结的Qwen3.7-Max零样本规划器生成有序技能序列；System 2以M帧多视角观测滑窗和当前技能文本为输入，用冻结SigLIP2图像/文本编码器提取特征，经带位置编码的因果时序编码器和以文本为查询的交叉注意力得到技能 grounding 表示，再由两个独立两层MLP头输出完成概率与恢复概率，经阈值和连续k次去抖返回stay、advance或recover，recover时由同一VLM基于协议、已完成步骤和当前观测重规划剩余步骤，超时作为后备触发；System 1为技能条件Qwen3-VL流匹配VLA策略，生成动作块，异步运行时以机器人控制频率流式执行并与低频监控协调。",
+        "result": "在血气分析和血样试管分拣两个真实任务上，Robo-MLT任务成功率分别为82%和70%，分别比π0.5高30和22个百分点；实验对比了四个策略基线和VLM监控基线，每种方法50个常规配置并设置20个样本移除配置。操作员移除正在处理的样本后，系统能修改剩余计划并继续处理其他样本，表明显式流程监控带来更好的长程可靠性和干预后恢复能力。",
+        "conclusion": "结果表明，在评估条件下，将显式、低频的工作流监控与高频生成控制分离，可缓解视觉相似阶段导致的错步和停滞，使长程实验室操作更可靠且可恢复。由于规划器冻结、监控器只移动计划指针，对已知技能的重复或重排无需重新训练；但真正新增技能仍需遥操作示范并重训监控器。",
+        "key_details": "关键实现点包括：规划器与SigLIP2编码器冻结，监控器为轻量双头二分类并用连续多帧观测和技能指令消歧，完成/恢复概率采用阈值加连续更新次数去抖，重规划输入包含协议、已完成步骤和当前场景；系统需双臂机械臂、三路RGB相机和单块工作站级GPU，异步运行时避免慢速监控阻塞动作流。局限是仅在两个实验室协议、单一工作区和一类外部干预下验证，未在生产实验室部署，且预览未给出具体损失函数、阈值数值及监控器训练数据规模。"
+      },
+      "affiliations": [
+        "Chongqing University",
+        "University of Sheffield",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Chongqing University, University of Sheffield, Tsinghua University",
+      "score": 4.122587863128526,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.12980v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112980v1-madsnet-a-multi-scale-axial-attentive-dense-spiking-network-for-spike-camera-image-reconstruction",
+      "source": "arxiv",
+      "title": "MADSNet: A Multi-Scale Axial-Attentive Dense Spiking Network for Spike Camera Image Reconstruction",
+      "authors": [
+        "Sirui Li",
+        "Rui Zhao",
+        "Siqi Cai",
+        "Haizhou Li",
+        "Tiejun Huang",
+        "Yajing Zheng"
+      ],
+      "authors_text": "Sirui Li, Rui Zhao, Siqi Cai, Haizhou Li, Tiejun Huang, Yajing Zheng",
+      "abstract": "Spike cameras encode dynamic scenes into high-temporal-resolution binary spike streams for efficient high-speed vision. Although spiking neural networks (SNNs) can process such signals with sparse and accumulate-only computation, existing SNN-based reconstruction methods are typically shallow and still lag behind ANN-based models in reconstruction fidelity. This paper proposes MADSNet, a Multi-scale Axial-attentive Dense Spiking Network for spike camera image reconstruction. MADSNet adopts a hierarchical spiking encoder--decoder, where a multi-scale spike stem extracts early features, axial spike attention captures long-range dependencies, a dense spiking bottleneck enhances feature reuse, and a spike-to-continuous decoder reconstructs continuous intensity images from spike-domain representations. Experiments on gray-scale and color spike reconstruction show that MADSNet outperforms SSIR by 4.3 dB PSNR and Spk2ImgNet by 1.94 dB on SREDS. Compared with Spk2ImgNet, it achieves about 15$\\times$ lower latency and uses only about 1/40 of the estimated energy, demonstrating that carefully designed SNN architectures can improve reconstruction quality while preserving computational efficiency.",
+      "url": "http://arxiv.org/abs/2611.12980v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12980v1",
+      "tldr": "MADSNet is a hierarchical multi-scale axial-attentive dense spiking encoder–decoder for spike-camera image reconstruction that improves reconstruction fidelity over prior SNN and ANN baselines while preserving low latency and energy efficiency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The Chinese University of Hong Kong, Shenzhen",
+        "Harbin Institute of Technology",
+        "Nanyang Technological University",
+        "Peking University"
+      ],
+      "affiliations_text": "The Chinese University of Hong Kong, Shenzhen, Harbin Institute of Technology, Nanyang Technological University, Peking University",
+      "score": 4.02717571990383,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.12927v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112927v1-an-ensemble-of-graph-generative-models-for-assisted-history-matching-of-the-brugge-field-case",
+      "source": "arxiv",
+      "title": "An ensemble of graph generative models for assisted history matching of the Brugge field case",
+      "authors": [
+        "Gleb Shishaev",
+        "Anton Shirokov",
+        "Shadfar Davoodi",
+        "Mohammed Al-Shargabi",
+        "Vasily Demyanov",
+        "Daniel Arnold"
+      ],
+      "authors_text": "Gleb Shishaev, Anton Shirokov, Shadfar Davoodi, Mohammed Al-Shargabi, Vasily Demyanov, Daniel Arnold",
+      "abstract": "Assisted history matching remains non-unique because many geological realisations can reproduce equivalent production responses with substantial differences between individual well matches. This ambiguity increases when a field comprises several depositional settings and modelling strategies. The paper applied a graph autoencoder approach to history matching of a benchmark Brugge field that comprises different depositional zones. Each stratigraphic zone is modelled with its dedicated generative model that comprises a joint latent space for optimisation history matching loops. Graph-based generators operate directly on the active cells of the corner-point grid, so its irregular geometry is handled without conversion to a regular lattice. The optimisation search in the 160-dimensional joint latent space is done with the Covariance Matrix Adaptation Evolution Strategy. The multi-component objective function includes static well data mismatch, dynamic production mismatch, and a geological realism penalty based on the Decoder induced latent metric. Latent space diagnostics with topological data analysis are applied prior to history matching to test whether one generator is sufficient or whether a multiple generator formulation is required. The results show that the zone-based formulation gives coherent latent spaces, preserves the main porosity and permeability relations that vary from one zone to another, and supports history matching while keeping the solutions within the learned geological manifold. The matched models reproduce field oil and water production within the prior uncertainty range and provide a comparable well-level match to previously published Brugge studies based on Ensemble Kalman Filter, Particle Swarm Optimisation with principal component analysis of parameterisation, and Multiple Kernel Learning with Particle Swarm Optimisation.",
+      "url": "http://arxiv.org/abs/2611.12927v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12927v1",
+      "tldr": "The paper presents a zone-wise ensemble of graph generative models with a joint latent space, optimized via CMA-ES using static, dynamic, and geological-realism objectives, to perform assisted history matching directly on the irregular corner-point grid of the Brugge field while preserving geological consistency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Heriot-Watt University",
+        "Tomsk Polytechnic University",
+        "Skolkovo Institute of Science and Technology"
+      ],
+      "affiliations_text": "Heriot-Watt University, Tomsk Polytechnic University, Skolkovo Institute of Science and Technology",
+      "score": 3.980962142218185,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.13016v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113016v1-permutation-based-pre-trained-model-merging-via-reciprocal-orthogonality",
+      "source": "arxiv",
+      "title": "Permutation-Based Pre-trained Model Merging via Reciprocal Orthogonality",
+      "authors": [
+        "Akira Ito",
+        "Daiki Chijiwa",
+        "Atsutoshi Kumagai"
+      ],
+      "authors_text": "Akira Ito, Daiki Chijiwa, Atsutoshi Kumagai",
+      "abstract": "Ito et al. (2026) showed that sufficiently wide, independently trained neural networks can exhibit linear mode connectivity (LMC) with softmax temperature calibration, even without permutation. LMC means that a low-loss linear path connects the models' parameters. This behavior is explained by layerwise exponentially weighted connectivity (LEWC), whereby each merged layer outputs an exponentially weighted sum of the original models' corresponding representations, yielding ensemble-like predictions. However, prior work observed LEWC with substantial widening, such as 8192 units per hidden layer for MLPs and $16\\times$ width for VGG-11, raising the question of whether such widths are necessary. We therefore search for permutations that encourage reciprocal orthogonality (RO), which suppresses interference between each model's weights and the other model's representations. This allows both models' computations to coexist in the merged network, promoting LEWC at smaller widths. We formulate the search as independent layerwise quadratic assignment problems and approximately solve their continuous relaxations using Frank--Wolfe. Experiments show that our method facilitates LMC with less width expansion. It also merges models trained on different data distributions, where weight matching, which maximizes weight similarity through permutations, struggles. The merged predictions approximate those of a logit ensemble of the original models.",
+      "url": "http://arxiv.org/abs/2611.13016v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13016v1",
+      "tldr": "The paper proposes a permutation-search method that encourages reciprocal orthogonality to enable linear mode connectivity and parameter-addition model merging at smaller widths, even across different training distributions, yielding predictions that approximate a logit ensemble of the original models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NTT Computer and Data Science Laboratories",
+        "Tohoku University"
+      ],
+      "affiliations_text": "NTT Computer and Data Science Laboratories, Tohoku University",
+      "score": 3.959877208925806,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.12955v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112955v1-predictive-surprise-as-self-grounding-concept-bottleneck-for-interpretable-time-series",
+      "source": "arxiv",
+      "title": "Predictive Surprise as Self-Grounding Concept Bottleneck for Interpretable Time Series",
+      "authors": [
+        "Sachith Abeywickrama",
+        "Emadeldeen Eldele",
+        "Min Wu",
+        "Xiaoli Li",
+        "Chau Yuen"
+      ],
+      "authors_text": "Sachith Abeywickrama, Emadeldeen Eldele, Min Wu, Xiaoli Li, Chau Yuen",
+      "abstract": "Time-series classifiers deployed in risk-sensitive domains must be (1) accurate, (2) interpretable, and (3) able to abstain when evidence is weak. Existing methods do not deliver all 3 at once, and the obstacle is structural, rather than logistical. Meaningful temporal patterns cannot be defined without knowing segment boundaries, yet meaningful boundaries cannot be placed without knowing which patterns to expect. Existing approaches break this circularity by using fixed windows or expert-annotated vocabularies, thereby sacrificing at least one of the 3 properties. We introduce ConceptTime, which closes the loop through a single self-supervised signal. A frozen probabilistic forecaster predicts a distribution over the next observation at every timestep of the sequence. We call the mismatch between its prediction and the realized signal the predictive surprise. This signal both locates segment boundaries and characterizes each resulting segment through the forecaster. Segments are thus grounded by how they behaved relative to expectation, not by what they look like. These summaries cluster into a vocabulary of dynamical regimes that we call concepts. A lightweight head classifies from the concept sequence, and the distance to the nearest concept yields reliability by design. Across 17 public benchmarks, ConceptTime is competitive with state-of-the-art black-box accuracy, beats every interpretable baseline, and retains near-98% accuracy on Epilepsy with 1% of labels. It further remains competitive with softmax, prototype-distance, and SHAP/TimeX/TimeX++ on OOD detection and deletion faithfulness, without a single annotation, language model call, or domain expert. Code is available at: https://github.com/Sachithx/ConceptTime.git.",
+      "url": "http://arxiv.org/abs/2611.12955v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12955v1",
+      "tldr": "ConceptTime uses predictive surprise from a frozen probabilistic forecaster as a single self-supervised signal to jointly segment time series and ground an interpretable concept vocabulary, enabling accurate, interpretable, and abstention-capable classification without expert annotations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "A*STAR",
+        "Khalifa University",
+        "Nanyang Technological University",
+        "Singapore University of Technology and Design"
+      ],
+      "affiliations_text": "A*STAR, Khalifa University, Nanyang Technological University, Singapore University of Technology and Design",
+      "score": 3.7689214587816506,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.13053v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113053v1-opacity-of-discrete-event-systems-under-sensor-attacks",
+      "source": "arxiv",
+      "title": "Opacity of Discrete Event Systems under Sensor Attacks",
+      "authors": [
+        "Shengbao Zheng",
+        "Yu Liu",
+        "Shaolong Shu",
+        "Feng Lin"
+      ],
+      "authors_text": "Shengbao Zheng, Yu Liu, Shaolong Shu, Feng Lin",
+      "abstract": "Many information control problems in discrete event systems can be addressed using strong opacity, weak opacity, and non-opacity. These opacities depend on observations. If cyber attackers can attack sensors (or observation channels), then opacities will change. An opaque system may become not opaque, or a not opaque system may become opaque. Therefore, it is important to investigate opacities under sensor attacks. In this paper, we consider opacities under sensor attacks for two settings. The first one is the user has prior knowledge of sensor attacks in which the opacities are called as W-CA-opacities. The second one is the user has no prior knowledge of sensor attacks, and opacities are called as N-CA-opacities. For the former, we construct an augmented automaton that integrates the information of sensor attacks and then converts W-CA-opacities into classical opacities to solve the verification problem. For the latter, we construct the observers for the given system without sensor attacks and with sensor attacks, respectively. We then do the parallel operation on these two observers to obtain a method of verifying N-CA opacities. Furthermore, by adopting the detector technique, we find polynomial algorithms for verifying weak opacity and non opacity for both settings.",
+      "url": "http://arxiv.org/abs/2611.13053v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13053v1",
+      "tldr": "The paper investigates opacity of discrete event systems under sensor attacks in both settings where the user does or does not know the attack model, and develops augmented-automaton and observer-based verification methods, including polynomial algorithms using detectors for weak opacity and non-opacity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tongji University",
+        "Shenyang Ligong University",
+        "Wayne State University"
+      ],
+      "affiliations_text": "Tongji University, Shenyang Ligong University, Wayne State University",
+      "score": 3.768586267840554,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.12990v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112990v1-multimodal-graph-learning-a-survey-of-models-benchmarks-and-frontiers",
+      "source": "arxiv",
+      "title": "Multimodal Graph Learning: A Survey of Models, Benchmarks, and Frontiers",
+      "authors": [
+        "Rui Xue",
+        "Tianfu Wu"
+      ],
+      "authors_text": "Rui Xue, Tianfu Wu",
+      "abstract": "Multimodal attributed graphs (MAGs), in which nodes carry text, images, and other modalities while edges encode relations among entities, underlie e-commerce, social media, content platforms, and creative applications. Learning on MAGs has developed along two complementary lines: graph-centric methods redesign how modalities are fused, propagated, and connected within message passing, while foundation-model-centric methods pretrain transferable multimodal graph encoders or bring graph context into multimodal large language models for prediction and generation. In parallel, several benchmarks have appeared with different datasets and evaluation protocols. This survey takes an algorithm-centric and evaluation-grounded view of the field and makes three contributions. Modeling: we introduce a unified message-passing formulation and organize methods into five integration levels (feature, propagation, topology, learning, and foundation model), covering discriminative and graph-conditioned generative models; within this formulation we derive representative methods as special cases, compare their assumptions, expressiveness, and cost, and identify cross-modal sensitivity as a property that separates otherwise similar architectures. Datasets and evaluation: we review recent benchmarks, summarize their datasets and metrics, define model-independent descriptors (label homophily, average degree, clustering, and edge provenance), and map each evaluation protocol to the baselines it uses. Frontiers: we connect multimodal graph learning to AI agents, covering the multimodal graphs that agents perceive and remember and graph engineering, the practice of organizing agent workflows as explicit graphs; we then discuss open problems, concrete efforts for the community, and research directions, including when graph structure helps in the presence of strong multimodal foundation models.",
+      "url": "http://arxiv.org/abs/2611.12990v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12990v1",
+      "tldr": "This survey provides an algorithm-centric, evaluation-grounded overview of multimodal graph learning, unifying graph-centric and foundation-model-centric methods through a common message-passing framework with five integration levels, while reviewing benchmarks and evaluation protocols and outlining connections to AI agents and future research directions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "North Carolina State University"
+      ],
+      "affiliations_text": "North Carolina State University",
+      "score": 3.731824792045229,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.13057v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113057v1-continuous-time-set-transformers-for-asynchronous-wifi-imu-indoor-localization",
+      "source": "arxiv",
+      "title": "Continuous-Time Set-Transformers for Asynchronous WiFi-IMU Indoor Localization",
+      "authors": [
+        "Mohamed Bachar",
+        "Ilyass Abouelaziz",
+        "Yuehua Ding"
+      ],
+      "authors_text": "Mohamed Bachar, Ilyass Abouelaziz, Yuehua Ding",
+      "abstract": "Indoor localization commonly combines WiFi received signal strength indicator (RSSI) fingerprints with inertial measurements. However, these sensor streams are sampled asynchronously at different rates; therefore, observations rarely align in time and may be missing or stale. Most existing methods resample the data onto a shared clock and process each modality using a separate branch. We instead present a continuous-time transformer that represents observations as an unordered set of timestamped tokens. Each token encodes its measurement, modality, and elapsed time since acquisition. A single attention block jointly fuses information across modalities and time, avoiding both resampling and modality-specific branches while remaining invariant to token order. During training, we randomly mask entire modalities and individual observations, enabling the model to operate under missing or outdated inputs. We validate the modality-specific encoders on their respective benchmarks and evaluate the fused model on both simulated and real datasets, including a crosssession dataset collected on unseen days. The proposed approach improves upon an open WiFi fingerprinting baseline under cross-session drift, remains competitive with learned fusion and dead-reckoning baselines, and degrades gracefully as observations become missing or stale. These results suggest that a single continuoustime transformer provides a practical framework for indoor localization from asynchronous sensors.",
+      "url": "http://arxiv.org/abs/2611.13057v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13057v1",
+      "tldr": "The paper proposes a continuous-time set-transformer for asynchronous WiFi-IMU indoor localization that encodes each timestamped observation as a token and uses a single permutation-invariant attention block to fuse modalities without resampling or separate branches, while remaining robust to missing or stale sensor inputs.",
+      "detailed_reading": null,
+      "affiliations": [
+        "CESI"
+      ],
+      "affiliations_text": "CESI",
+      "score": 3.696527340707101,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.12974v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112974v1-statprompt-llm-a-lightweight-statistical-refinement-for-foundation-style-time-series-forecasting",
+      "source": "arxiv",
+      "title": "StatPrompt-LLM: A Lightweight Statistical Refinement for Foundation-Style Time-Series Forecasting",
+      "authors": [
+        "Aniket Sinha",
+        "Veronica W. Tsou"
+      ],
+      "authors_text": "Aniket Sinha, Veronica W. Tsou",
+      "abstract": "Time-series forecasting has recently seen a paradigm shift with the introduction of foundation-style models that adapt large pretrained language architectures to sequential data. However, effectively exposing fundamental temporal structures, such as trend, scale, and temporal dependence, to these models remains an open challenge, particularly when the available observations are limited. In this paper, we conduct an exploratory empirical study across different generations of forecasting architectures and propose StatPrompt-LLM, a lightweight statistical refinement of Time-LLM. StatPrompt-LLM augments the existing Time-LLM prompting mechanism with dataset-level statistical information and introduces a zero-initialised autoregressive bypass as a complementary linear forecasting pathway. We evaluate our framework on electricity and meteorological time-series benchmarks, including ETTh1, ETTh2, and Weather, under full-prefix and reduced-prefix configurations. Under the 10% reduced-prefix configuration, StatPrompt-LLM achieved lower in-sample prediction errors than Time-LLM, with unweighted average relative reductions across datasets of 40.2% in MSE and 21.4% in MAE. Full-prefix results were more dataset-dependent. Ablation analyses revealed relatively modest and dataset-dependent changes when selected additional statistical descriptor groups were masked within the combined architecture. Computational profiling indicated additional model parameters and runtime overhead relative to Time-LLM.",
+      "url": "http://arxiv.org/abs/2611.12974v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12974v1",
+      "tldr": "StatPrompt-LLM is a lightweight refinement of Time-LLM that augments its prompts with dataset-level statistical descriptors and adds a zero-initialized autoregressive linear bypass, substantially reducing in-sample errors under a 10% reduced-prefix setting (average 40.2% MSE and 21.4% MAE) while full-prefix gains remain dataset-dependent and computational overhead increases.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Sydney"
+      ],
+      "affiliations_text": "The University of Sydney",
+      "score": 3.6733952386019824,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.13005v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113005v1-the-shape-of-a-program-path-signatures-for-trace-to-program-induction",
+      "source": "arxiv",
+      "title": "The Shape of a Program: Path Signatures for Trace-to-Program Induction",
+      "authors": [
+        "Mohamed Ghanem",
+        "Bernd Finkbeiner"
+      ],
+      "authors_text": "Mohamed Ghanem, Bernd Finkbeiner",
+      "abstract": "Synthesizing programs from execution traces is a fundamental challenge in algorithmic interpretability and the reverse engineering of complex systems. We bring a rough-path-theoretic perspective to program induction, treating execution traces as high-dimensional rough paths and encoding them with the path signature transform, a tool from stochastic analysis whose expectation provably characterizes the distribution of traces a program induces. On three program-induction domains, Karel, List, and RASP, our log-signature trace encoder outperforms LSTM, Transformer, and Fourier baselines in almost every setting, with its largest margins when training data is scarce. We further observe that the trace-to-program pipeline is naturally contractive: it often produces valid programs that are shorter than the ground truth. We turn this into a bootstrapping procedure that exposes redundancy in the ground-truth supervision without any external oracle, which we demonstrate on redundancy-injected versions of our datasets. Finally, the log-signature encoder induces a markedly more interpretable latent geometry than the baselines, in which the nearest neighbors of every state lie on its own execution trace.",
+      "url": "http://arxiv.org/abs/2611.13005v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13005v1",
+      "tldr": "By treating execution traces as rough paths and encoding them with log-signatures, this paper improves trace-to-program induction—especially with scarce data—while enabling shorter valid program discovery and more interpretable latent geometry.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Munich",
+        "CISPA Helmholtz Center for Information Security"
+      ],
+      "affiliations_text": "Technical University of Munich, CISPA Helmholtz Center for Information Security",
+      "score": 3.634423675709935,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.13001v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113001v1-one-table-many-queries-benchmarking-generalist-tabular-models-across-generation-imputation-and-prediction",
+      "source": "arxiv",
+      "title": "One Table, Many Queries: Benchmarking Generalist Tabular Models Across Generation, Imputation, and Prediction",
+      "authors": [
+        "Yuanrui Wang",
+        "Kaifang Li",
+        "Xuanyue Li",
+        "Ziyun Li",
+        "Yan Lu",
+        "Xingxuan Zhang",
+        "Peng Cui"
+      ],
+      "authors_text": "Yuanrui Wang, Kaifang Li, Xuanyue Li, Ziyun Li, Yan Lu, Xingxuan Zhang, Peng Cui",
+      "abstract": "Generation, imputation, and prediction query different aspects of the same tabular distribution, but are usually evaluated separately. This leaves unclear which capabilities they share, how their training objectives interact, and whether one model can perform all three well. We introduce the One Table Benchmark (\\ours{}), spanning 56 datasets, 46 registered methods, and 20 capability axes under aligned data splits and explicit task contracts. We compare task ranks on aligned support, train five backbones under all seven non-empty objective combinations on five datasets with three seeds, and contrast fixed-model profiles with specialist portfolios. Rank comparisons connect imputation and prediction through numerical recovery and dependence preservation, and link generation to both through predictive utility; distributional fidelity follows different, sometimes opposing, rankings. Objective interventions show the largest pooled gains from including the recipient's own objective. Generation has the broadest coverage of positive pooled auxiliary effects, while prediction shows potential to improve imputation and synthetic-data utility, with responses that vary across backbones. Cross-addition effects reveal that objective benefits need not add and depend on the objectives already present. Fixed-model comparisons expose corresponding utility--fidelity trade-offs: some generalists surpass specialist portfolios on utility, while fidelity continues to favor specialization. Frozen foundation models show strong prediction and numerical point imputation, together with promising synthetic-data utility, highlighting their potential across all three tasks. These findings motivate unified tabular models that share useful conditional information while improving categorical reconstruction and faithful joint sampling.",
+      "url": "http://arxiv.org/abs/2611.13001v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13001v1",
+      "tldr": "This paper introduces the One Table Benchmark to evaluate generalist tabular models jointly across generation, imputation, and prediction, revealing shared capabilities, objective interactions, and utility–fidelity trade-offs that motivate unified tabular models.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5038306541083926,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.12956v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112956v1-adindex-layer-adaptive-sparse-attention-indexing-via-group-level-distillation",
+      "source": "arxiv",
+      "title": "ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation",
+      "authors": [
+        "Jin-Fei Qi",
+        "Yiduo Li",
+        "Jiang-Xin Shi",
+        "Kan Liu",
+        "Tao Lan",
+        "Hanlin Tang",
+        "Yu-Feng Li"
+      ],
+      "authors_text": "Jin-Fei Qi, Yiduo Li, Jiang-Xin Shi, Kan Liu, Tao Lan, Hanlin Tang, Yu-Feng Li",
+      "abstract": "DeepSeek Sparse Attention (DSA) reduces the computational cost of attention through token-level selection. However, its indexer still scores the entire causal prefix for each query, making indexing a dominant source of latency in long-context inference. Notably, the indexer alone can account for more than 50% of total prefill GPU time at long context lengths. To address this bottleneck, we propose ADIndex, an Adaptive and Distillation-driven Indexing method for token-level sparse attention. ADIndex integrates three key components: (i) a layer-wise calibration strategy that adaptively accommodates cross-query retrieval overlap, motivated by our observation of pronounced inter-layer heterogeneity; (ii) a group-level distillation scheme that leverages this heterogeneity to efficiently train adaptive layer-wise group indexers, capturing salient retrieval signals from individual queries; and (iii) a low-latency inference strategy that reduces repeated full-prefix scans through token bank sharing within query groups while retaining query-specific refinement. Experiments on DeepSeek-V3.2 and GLM-5.1 demonstrate that ADIndex preserves near-lossless task performance on LongBench, LongBench v2, and RULER while delivering substantial efficiency gains over standard DSA, including prefill and decoding kernel speedups of up to 6.22x and 3.40x, respectively, at a context length of 256K across the layer-wise reuse configurations, as well as an end-to-end serving speedup of 1.54x at a context length of 128K.",
+      "url": "http://arxiv.org/abs/2611.12956v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12956v1",
+      "tldr": "ADIndex is a layer-adaptive, distillation-driven sparse-attention indexing method that uses calibrated per-layer query groups and shared token banks with lightweight distilled group indexers to reduce repeated full-prefix scans, preserving near-lossless long-context performance while achieving up to 6.22× prefill and 3.40× decoding kernel speedups and 1.54× end-to-end serving speedup.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanjing University",
+        "Alibaba Group"
+      ],
+      "affiliations_text": "Nanjing University, Alibaba Group",
+      "score": 3.3321046789723026,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.13069v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113069v1-intent-out-of-sample-out-of-time-and-cold-start-evaluation-on-user-event-sequences",
+      "source": "arxiv",
+      "title": "INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences",
+      "authors": [
+        "Mattias Kvist",
+        "Erik Lidman Hillbom",
+        "Edoardo de Cal",
+        "Davis Siemens",
+        "Adam Fredriksson",
+        "Rickard Brüel-Gabrielsson"
+      ],
+      "authors_text": "Mattias Kvist, Erik Lidman Hillbom, Edoardo de Cal, Davis Siemens, Adam Fredriksson, Rickard Brüel-Gabrielsson",
+      "abstract": "Banks now train foundation models on ordered sequences of customer events such as transactions, app sessions, and authorizations. Deployed, such a model predicts forward in time, often for customers and merchants absent from training, yet each is evaluated on private data, so no two can be compared. Public benchmarks for such sequences rarely test a period the model has not seen; recommendation studies usually hold out each user's last events instead. We present INTENT (INTEraction, Novelty, and Transfer evaluation for next-action prediction), a public benchmark that scores a model in seven cells defined by whether the user, the period, and the target item appeared in training. An audit of 59 public dataset families retains five datasets; the most common defect is the lack of a calendar timestamp that orders events. No date lies within the time span of all five datasets, so each is split at its own cutoff, chosen by one rule fixed before any model is evaluated. Summed over the datasets, every cell holds at least 111,769 users. In reference results the cell determines the best model: a transformer leads on seen items after the cutoff but scores zero on new items, a variant that embeds item metadata helps mainly on MicroLens, and repeating the user's last item leads on new items in four of five datasets. This parameter-free control also shows that on three datasets most of the score lost after the cutoff reflects changed behavior rather than the model. The pipeline, the cutoff rule, and the per-cell user counts are publicly available.",
+      "url": "http://arxiv.org/abs/2611.13069v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13069v1",
+      "tldr": "INTENT is a public next-action benchmark that evaluates sequence models across seven cells separating seen vs. new users, pre- vs. post-cutoff time, and seen vs. new items on five audited datasets with per-dataset temporal cutoffs, showing that the evaluation cell changes which model wins and that simply repeating a user’s last item is a strong cold-start baseline.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Unbox AI",
+        "KTH AI Society",
+        "MIT"
+      ],
+      "affiliations_text": "Unbox AI, KTH AI Society, MIT",
+      "score": 3.213860637463232,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.12998v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112998v1-linear-probes-to-bayesian-manifolds-geometry-of-arithmetic-in-large-language-models",
+      "source": "arxiv",
+      "title": "Linear Probes to Bayesian Manifolds: Geometry of Arithmetic in Large Language Models",
+      "authors": [
+        "Anshul Kumar",
+        "Neha Prasad",
+        "Manoj Kumar",
+        "Barnabás Póczos",
+        "Deeksha Varshney"
+      ],
+      "authors_text": "Anshul Kumar, Neha Prasad, Manoj Kumar, Barnabás Póczos, Deeksha Varshney",
+      "abstract": "Linear probes are a standard method to study geometric structures, such as helices and circles, from the activations of large language models (LLMs), and such structure is often taken as evidence that the model computes with it. Probe accuracy alone cannot establish this, because it conflates four separate claims. These are (1) that the concept is decodable from the activations, (2) that they form a specific shape, (3) that the shape belongs to the probed concept rather than to a related concept the model also represents, and (4) that the output of the model depends on the shape. We call these claims decodability, shape, ownership, and causal use, and we test them separately with a four-stage Bayesian pipeline. Stage 2 compares candidate shapes and selects the best one only when its evidence passes a predefined threshold. Stage 3 removes a set of related concepts, specified in advance, and tests whether the shape is owned or inherited. Stage 4 intervenes on the shape to test whether the output of the model depends on it. We apply the pipeline to two-digit addition and multiplication in GPT-J 6B, Llama 3.1 8B, and Pythia 6.9B. Nearly every concept is decodable, but the decoded directions overlap substantially across concepts. Every strongly supported comparison selects a ribbon, which is a helix whose radius changes with the value, or a torus. Of 1,330 cells with an ownership verdict, 19% of shapes are owned and 81% are inherited. Owned and inherited shapes move the output about equally often. Intervening on the shape retains approximately 61% of the effect of intervening on the full probe while using at most five dimensions, against a median of nine for the probe. Our results indicate that a probe verdict alone overstates what a model computes with, and we propose that probe results be reported as verdicts on all four claims rather than as a single accuracy.",
+      "url": "http://arxiv.org/abs/2611.12998v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12998v1",
+      "tldr": "The paper introduces a four-stage Bayesian pipeline that disentangles decodability, shape, ownership, and causal use in linear-probe analyses of LLM activations, showing in arithmetic tasks across three models that most decoded geometric structures are inherited from related concepts rather than owned by the target concept—so probe accuracy alone overstates what the model actually computes with.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.1494062470186703,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.12988v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/11/261112988v1-third-eye-beyond-immediate-gains-in-recursive-self-improvement",
+      "source": "arxiv",
+      "title": "Third Eye: Beyond Immediate Gains in Recursive Self-Improvement",
+      "authors": [
+        "Sujato Dutta",
+        "Padala Indira Sneha",
+        "Kypu Mahitha",
+        "Shashank Vanga",
+        "Neeraj Choudhary"
+      ],
+      "authors_text": "Sujato Dutta, Padala Indira Sneha, Kypu Mahitha, Shashank Vanga, Neeraj Choudhary",
+      "abstract": "Does a useful self-update remain useful after the model updates again? Third Eye separates immediate performance from the outcome of a further native update. We evaluate five 3-8B backbones on math and code: 64 fresh runs, three candidates per run, and three continuations per candidate. Selection and final scoring use disjoint items. In the balanced Qwen3-4B/Llama-3.2-3B comparison, immediate-selected utility is near zero, but continuation reduces it by 1.78 percentage points (simultaneous 95% interval [0.68, 2.88]). Candidate-averaged immediate utility is already negative: selection partly accounts for the apparently neutral first step. Continuation also lowers utility for SmolLM3-3B and Llama-3.1-8B; Qwen3-8B remains inconclusive. Target and out-of-distribution losses dominate retention changes. Matched recipe and recipient-donor controls identify neither a reliable mitigation nor a single mechanism. The results support evaluating persistent self-updates as adaptation transitions, with independent scoring and a no-update baseline, rather than interpreting immediate performance as their full value.",
+      "url": "http://arxiv.org/abs/2611.12988v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.12988v1",
+      "tldr": "**TLDR:** Third Eye shows that language-model self-updates which appear neutral or useful immediately often degrade after a further native update, so recursive self-improvement should be evaluated as a multi-step adaptation transition against a no-update baseline rather than by immediate performance alone.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Mahindra University"
+      ],
+      "affiliations_text": "Mahindra University",
+      "score": 3.1010144713546635,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.13052v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/11/261113052v1-explanation-aware-fairness-beyond-output-parity-joint-output-attribution-regularization-for-medical-image-classification",
+      "source": "arxiv",
+      "title": "Explanation-Aware Fairness Beyond Output Parity: Joint Output-Attribution Regularization for Medical Image Classification",
+      "authors": [
+        "Gökhan Özbulak",
+        "Oscar Jimenez-del-Toro",
+        "Lilian Berton",
+        "André Anjos"
+      ],
+      "authors_text": "Gökhan Özbulak, Oscar Jimenez-del-Toro, Lilian Berton, André Anjos",
+      "abstract": "Output-level fairness does not constrain whether demographic groups rely on similar predictive contributions in representation space. For a nonlinear encoder with a linear head, we show that outcome-conditioned output score disparity equals the signed sum of feature attribution differences across subgroups by allowing small prediction gaps to arise through cancellation effect. We test whether an attribution disparity penalty complements output-level equalized odds based fairness surrogates. Across 960 DINOv2-LoRA models on HAM10000 and Harvard-GF datasets for gender and race fairness, attribution augmentation increases utility-fairness trade-off performance for hypervolume in six different settings with paired 95% confidence intervals and relative gains of 1.49-10.57%. Under a predefined utility constraint, augmented model families also achieve 9.0-38.7% lower equalized odds difference, lower attribution disparity, and reduced cancellation ratio while preserving predictive utility. These results support attribution fairness as a complementary explanation-aware constraint on output fairness.",
+      "url": "http://arxiv.org/abs/2611.13052v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.13052v1",
+      "tldr": "Adding an attribution-disparity penalty to output-level equalized-odds fairness regularization improves utility–fairness trade-offs and reduces hidden attribution disparities/cancellation in medical image classifiers, validated across 960 DINOv2-LoRA models on HAM10000 and Harvard-GF.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade Federal de São Paulo",
+        "Idiap Research Institute",
+        "École Polytechnique Fédérale de Lausanne"
+      ],
+      "affiliations_text": "Universidade Federal de São Paulo, Idiap Research Institute, École Polytechnique Fédérale de Lausanne",
+      "score": 2.97538435017038,
+      "score_text": "3.0"
+    }
+  ],
+  "errors": []
+}
