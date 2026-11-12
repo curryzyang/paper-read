@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-11-12
+  - [日报](/2026/11/12/README)
 - 2026-11-11
   - [日报](/2026/11/11/README)
   - [精读 · Proportional Neuro-Impulsive Control of SISO LTI Systems](/2026/11/11/261113043v1-proportional-neuro-impulsive-control-of-siso-lti-systems)
