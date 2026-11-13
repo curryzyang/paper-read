@@ -1,0 +1,703 @@
+{
+  "label": "2026-11-13",
+  "date": "2026-11-13",
+  "generated_at": "2026-11-13T18:31:16",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2611.14715v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114715v1-robust-decoupled-input-filtering-for-internal-model-principle-based-output-regulation-of-polynomial-exogenous-signals",
+      "source": "arxiv",
+      "title": "Robust Decoupled Input Filtering for Internal Model Principle-Based Output Regulation of Polynomial Exogenous Signals",
+      "authors": [
+        "Venanzio Cichella",
+        "Lorenzo Marconi"
+      ],
+      "authors_text": "Venanzio Cichella, Lorenzo Marconi",
+      "abstract": "Internal model principle-based controllers regulate polynomial references and disturbances exactly, but only asymptotically, and their transient input can peak and oscillate, increasingly so as the degree of the exogenous signals grows. A filter placed in series with the plant smooths the command but alters the closed-loop spectrum and can destroy stability. We propose an architecture that keeps the filter outside the loop the regulator stabilizes: the internal model is driven by the error of an ideal, unfiltered copy of the plant, the physical plant receives the filtered command, and an auxiliary plant copy absorbs the mismatch between the two inputs. If the filter satisfies blocking conditions at the origin, any gains that stabilize the unfiltered loop can be combined with any such filter without losing regulation of the true error. Under additive plant uncertainty, we derive a small-gain condition that guarantees robust stability and regulation. On a scalar plant, the proposed controller produces a smoother input and a larger input-delay margin than the unfiltered one, and it maintains regulation under a large loss of actuator effectiveness. On a three-mass chain, its tolerance to unmodeled actuator dynamics and delay stays essentially constant as the regulator is made more aggressive.",
+      "url": "http://arxiv.org/abs/2611.14715v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14715v1",
+      "tldr": "The paper proposes a decoupled input-filtering architecture for internal-model-principle-based output regulation of polynomial exogenous signals, keeping the filter outside the stabilized loop via an ideal unfiltered plant copy and an auxiliary mismatch-absorbing copy, thereby preserving asymptotic regulation and robust stability under a small-gain condition while producing smoother inputs and larger delay margins.",
+      "detailed_reading": {
+        "motivation": "基于内模原理的输出调节可对多项式参考与扰动实现精确渐近调节，但暂态输入会随外源信号阶数增加而出现峰值和高频振荡；直接在对象前串联滤波器虽可平滑指令，却会改变闭环谱并可能破坏稳定性。",
+        "method": "论文将滤波器置于调节器所稳定环路之外：内模由未滤波的理想对象副本误差驱动，物理对象接收滤波后的指令，辅助对象副本吸收滤波与未滤波输入之间的失配；只要滤波器在原点满足阻塞条件，任何可使未滤波环路稳定的增益都可与任意此类滤波器组合，且不损失真实误差的调节。针对对象矩阵的加性不确定性，论文把不确定性视为围绕标称级联回路的反馈，并推导小增益条件以保证鲁棒稳定与调节。",
+        "result": "在标量对象上，所提控制器产生更平滑的输入，输入延迟裕度比未滤波方案大数倍（部分情形超过一个数量级），并在约55%执行器有效性损失下仍保持调节，而未滤波控制器失效；在三质量链上，其对未建模执行器动态和延迟的容忍度在调节器变得更激进时基本保持不变。",
+        "conclusion": "该架构把内模控制设计与输入滤波器设计解耦，在保留内模原理调节能力的同时抑制暂态输入峰值，并给出加性不确定性下的小增益鲁棒性保证；更大的延迟与执行器失配裕度主要是数值观察，其解析刻画仍留待未来工作。",
+        "key_details": "多项式外源由N+1维幂零微分矩阵D_N描述，内模对每个误差通道复制一份外源动态，阶数为(N+1)p，控制为u=K_x x+K_eta eta；假设包括(A,B)可镇定及原点非谐振秩条件（要求p≤m）。关键先验是滤波器在原点满足阻塞条件，使辅助状态在稳态消失，从而调节理想误差等价于调节真实误差；鲁棒性通过加性不确定性闭环的小增益条件保证。数值验证覆盖标量对象与轻阻尼三质量链，并与未滤波内模控制和朴素串联滤波比较；局限性在于鲁棒裕度的解析解释尚未完成，且结果依赖线性对象、多项式外源及相应假设。"
+      },
+      "affiliations": [
+        "University of Iowa",
+        "University of Bologna"
+      ],
+      "affiliations_text": "University of Iowa, University of Bologna",
+      "score": 5.6538128211890495,
+      "score_text": "5.7"
+    },
+    {
+      "id": "2611.14790v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114790v1-compactness-uniqueness-method-for-null-controllability",
+      "source": "arxiv",
+      "title": "Compactness-uniqueness method for null controllability",
+      "authors": [
+        "Guillaume Olive"
+      ],
+      "authors_text": "Guillaume Olive",
+      "abstract": "We develop the compactness--uniqueness method for the null controllability of abstract linear control systems on Banach spaces. Our first main result characterizes the null controllable states for systems that are null controllable up to finite dimensional spaces, and shows that null controllability is then equivalent to the Fattorini--Hautus test. Our second main result gives a dual counterpart of this assumption, an observability inequality with a suitable compact remainder. These results unify and extend several known results, such as those on heat equations with nonlocal terms and on the simultaneous controllability of systems. Finally, for a transport equation with nonlocal terms from population dynamics, we characterize the null controllable states after a sharp time, including in the non-reflexive space $L^1$.",
+      "url": "http://arxiv.org/abs/2611.14790v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14790v1",
+      "tldr": "The paper develops a compactness–uniqueness framework for null controllability of abstract linear systems on Banach spaces, characterizing null controllable states via null controllability up to finite-dimensional spaces and the Fattorini–Hautus test, with a dual compact-remainder observability inequality and applications to nonlocal heat equations, simultaneous controllability, and an \\(L^1\\) population-dynamics transport model.",
+      "detailed_reading": {
+        "motivation": "针对Banach空间上抽象线性控制系统 y'=Ay+Bu 的零可控性，现有紧性—唯一性方法多按具体方程逐个改造，尤其零可控只估计伴随终态这一半范数，Peetre引理不能直接适用；本文旨在给出一般形式，把紧性步骤与唯一性步骤分离，并统一处理非局部热方程、同时可控性和非自反空间中的输运方程。",
+        "method": "在Banach空间Y、U上考虑 y'=Ay+Bu，A生成C0半群，B∈L(U,D(A*)')，以转置解定义控制映射；核心假设是系统在时刻T0“至有限维空间零可控”，即有限余维子空间中的任意状态可被控制到固定有限维子空间。第一主定理对T>T0完全刻画零可控状态：它们等于(A*,B*)不可观测广义特征向量张成空间的预零化子，从而是有限维的，并证明有限时间零可控当且仅当Fattorini-Hautus检验成立。第二主定理给出对偶形式：带紧余项KLz的可观测不等式，同时估计伴随终态与Lz；用Peetre引理作用于L加观测而非半范数，当控制空间自反时与第一假设等价。证明关键是解耦自由演化时长与控制窗口长度，避免直接使用紧性或可观测不等式。",
+        "result": "第一主结果给出T>T0时零可控状态的精确描述，并在Fattorini-Hautus检验成立时推出系统在任意T>T0零可控，否则零可控状态仍可由有限维不可观测广义特征空间刻画；由于“至有限维零可控”对零可控性也是必要的，问题被约化为两个独立条件。第二主结果刻画可容忍的紧余项，在控制空间自反时给出与第一假设等价的可观测不等式。应用上，非局部热方程可在检验而非核解析性下得到零可控性，同时可控性在A1*与A2*无共同特征值时成立，年龄结构种群输运方程在显式尖锐时间后于所有L^r（1≤r<∞，含非自反L1）中零可控状态被完全描述。",
+        "conclusion": "本文建立了Banach空间抽象线性系统零可控性的紧性—唯一性一般框架，将零可控性分解为至有限维零可控与Fattorini-Hautus唯一性检验两个独立问题，并给出对偶的带紧余项可观测不等式。该框架统一并推广了非局部热方程、同时可控性等已有结果，并在非自反L1空间中给出种群动力学输运方程尖锐时间后的零可控状态刻画。",
+        "key_details": "关键实现细节包括：全程允许Y、U为Banach空间且不要求自反，控制算子可无界并取L1控制，但需B*S(t)*z弱*可测以保证转置解；核心先验是有限余维/有限维分解与预零化子对偶，余项维数等于余维数，时间参数要求T>T0且断言在T0之后不依赖具体T。第一定理只讨论控制而不依赖可观测不等式，因而可直接用于L1；第二定理的紧余项可观测形式在控制空间自反时才与第一假设等价，非自反情形不能走该对偶路线，这是方法的主要适用边界。"
+      },
+      "affiliations": [
+        "Jagiellonian University"
+      ],
+      "affiliations_text": "Jagiellonian University",
+      "score": 5.321436110650203,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2611.14716v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114716v1-a-three-stage-unsupervised-online-physics-informed-neural-network-for-microgrid-optimal-power-flow",
+      "source": "arxiv",
+      "title": "A Three-Stage Unsupervised Online Physics-Informed Neural Network for Microgrid Optimal Power Flow",
+      "authors": [
+        "Abinash Giri",
+        "Yi Hu"
+      ],
+      "authors_text": "Abinash Giri, Yi Hu",
+      "abstract": "Optimal allocation of generators is a key challenge in power systems to achieve economical dispatch while satisfying operational constraints. Conventional optimization techniques can be computationally expensive, limiting their applicability in real-time environments, and neural networks often require offline retraining under new operating conditions. This paper proposes a three-stage unsupervised online physics-informed neural network (PINN) framework for optimal power flow (OPF). Simulation results demonstrate that the proposed framework satisfies load demand and system constraints while achieving a $43,665 lower operating cost than fmincon-based optimization under the same operating conditions. The training process analysis further demonstrate the framework's ability to adapt its parameters online to variations in load demand and renewable generation in real time.",
+      "url": "http://arxiv.org/abs/2611.14716v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14716v1",
+      "tldr": "The paper proposes a three-stage unsupervised online physics-informed neural network framework for microgrid optimal power flow that adapts in real time without offline retraining, satisfies system constraints, and achieves $43,665 lower operating cost than fmincon-based optimization under the same conditions.",
+      "detailed_reading": {
+        "motivation": "微电网经济调度需要实时求解AC-OPF，但AC-OPF非线性非凸，随场景反复求解计算昂贵；传统神经网络依赖代表性标注数据且不保证物理约束，现有无监督PINN又通常需要离线预训练，并在新工况下性能退化或成本高于基准。本文旨在构建无需预训练、可在线适应负荷与可再生波动的微电网OPF框架，同时兼顾经济性与AC潮流可行性。",
+        "method": "提出三阶段无监督在线PINN框架。Stage I用全连接网络接收顺序输入[有功负荷,无功负荷,可用光伏,可用风电,电池SOC]，输出发电机与电池有功/无功及母线电压幅值和相角；每个时间步用Adam在线反向传播K次，冷启动150次，后续迭代次数按相邻输入相对变化自适应，损失含潮流、成本、爬坡、电池SOC、线损、功率平衡和KKT边际成本项。Stage II基于等增量成本原则重分配常规机组有功，P_g*=clip((λ-b_g)/(2a_g),下限,上限)。Stage III在再调度后功率失配超过容差时，以PINN电压幅值和相角为初值执行牛顿-拉夫逊潮流校正，直至失配低于容差；电池SOC按效率和充放电功率逐步更新。",
+        "result": "在修改IEEE 14节点孤岛系统上，最大负荷85 MW，机组容量为[10,47,28,6,4.8,2.5] MW，框架满足负荷需求和系统约束，并在相同条件下比fmincon基准运行成本低43,665美元。训练分析显示冷启动150次时首样本损失最低且后续稳定，5/10/15/25/150次迭代耗时约0.05/0.09/0.13/0.23/1.23 s，在线过程能跟踪负荷与可再生变化。335天成本对比中仅PINN已低于fmincon，加入等增量成本再调度后节省约翻倍，加入NR后成本略升但保证可行运行点。",
+        "conclusion": "三阶段无监督在线PINN可在不依赖标注OPF解和离线预训练的情况下实现微电网AC-OPF在线求解，在保持物理与运行约束的同时获得优于fmincon的经济性，并具备实时自适应能力；NR校正是以轻微经济代价换取可行性的保障，整体适合变化工况下的在线经济调度。",
+        "key_details": "关键实现包括全连接网络4隐层128/256/512/256、ReLU、学习率1e-4、Adam、每步多次迭代并将参数保留到下一时刻；输入27维、输出50维；损失权重λ_PF、λ_cost、λ_ramp、λ_batt、λ_line、λ_bal、λ_KKT需调节，KKT项以边际成本与λ偏差惩罚。数据为顺序运行场景而非标注OPF解，约束含爬坡、电池SOC上下限、线损与功率平衡。局限是仅在修改IEEE 14节点孤岛微网验证，基线为MATLAB fmincon，未与现有需预训练的PINN方法直接对比，且NR校正会略增成本。"
+      },
+      "affiliations": [
+        "Michigan Technological University"
+      ],
+      "affiliations_text": "Michigan Technological University",
+      "score": 5.305842598801865,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2611.14599v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114599v1-structrl-model-free-reinforcement-learning-with-replay-graphs",
+      "source": "arxiv",
+      "title": "StructRL: Model-Free Reinforcement Learning with Replay Graphs",
+      "authors": [
+        "Ivo Nowak"
+      ],
+      "authors_text": "Ivo Nowak",
+      "abstract": "StructRL turns the experience collected during reinforcement learning into an explicit replay graph. Once the graph contains a path to the task goal, dynamic programming selects actions on the observed part of the state space; these actions form a graph policy that is defined only where the required transitions have been observed. StructRL transfers these actions to model-free learners: as action preferences for a DQN Q-model and as target directions along shortest observed paths for a SAC actor. For DQN on three sparse-reward MiniGrid tasks, final success rises from 0.10 to 0.90 (DoorKey), 0.10 to 0.80 (KeyCorridor) and 0 to 0.50 (ObstructedMaze); plain DQN does not catch up with three times the budget. For SAC on continuous PointMaze, graph-derived direction labels raise final success from 0.17 to 1.0 on seven matched runs that reached the goal. Distilling the graph policy into a fresh Q-model gives a DoorKey 6x6 controller that reaches the goal from 91% of reachable states, against 38% for plain DQN. Scaling experiments identify three bottlenecks: incomplete graph support, structural aliasing, and loss of graph information in high-dimensional inputs.",
+      "url": "http://arxiv.org/abs/2611.14599v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14599v1",
+      "tldr": "StructRL improves model-free reinforcement learning by building an explicit replay graph from experience, extracting a dynamic-programming graph policy on observed transitions, and transferring it to DQN as action preferences or to SAC as shortest-path targets, yielding large success gains on sparse-reward MiniGrid and continuous PointMaze tasks.",
+      "detailed_reading": {
+        "motivation": "稀疏奖励强化学习通常需要大量交互才能发现有用策略；在机器人和生产控制中任务目标与奖励已知，但转移动力学和通往目标的路径未知。标准回放缓冲区只把经验存为独立转移，丢失了转移之间的图结构关系。StructRL 的动机是把学习过程中已收集的转移显式组织成回放图，并相对任务目标评估这些已观测结构，以加速无模型学习。",
+        "method": "StructRL 将交互经验构建为显式回放图，节点是由任务知识指定的结构状态投影 phi（如位置、朝向、携带物、门状态），边来自已观测转移与动作。当图中存在通向任务目标的路径时，用动态规划在已观测状态空间上选出动作，形成仅在所需转移被观测到的图上定义的图策略 pi_G。随后把图策略动作迁移给无模型学习器：对 DQN 作为 Q 模型的动作偏好，对 SAC actor 作为沿最短已观测路径的目标方向，并可把图策略蒸馏进新的 Q 模型；推理时图策略只在支持集内给出决策。",
+        "result": "在三个稀疏奖励 MiniGrid 任务上，DQN 最终成功率从 0.10 提升到 0.90（DoorKey）、从 0.10 提升到 0.80（KeyCorridor）、从 0 提升到 0.50（ObstructedMaze），而普通 DQN 即使三倍预算也未追上。连续 PointMaze 上，SAC 使用图导出方向标签后，在七个达到目标的匹配运行中把最终成功率从 0.17 提升到 1.0。将图策略蒸馏到新 Q 模型后，DoorKey 6x6 控制器可从 91% 的可达状态到达目标，普通 DQN 为 38%。",
+        "conclusion": "StructRL 表明，把回放经验显式图化并由动态规划生成受限图策略，可以为无模型 DQN 和 SAC 提供有效的结构化监督，显著改善稀疏奖励与连续迷宫任务的成功率和策略覆盖。图策略还可蒸馏为独立控制器。方法的主要扩展瓶颈是图支持不完整、结构别名以及高维输入中图信息丢失。",
+        "key_details": "关键实现点是结构状态投影 phi 由任务知识指定而非学习，图策略仅在已观测转移支持上定义，动作标签来自图上动态规划或最短已观测路径；DQN 侧用动作偏好注入，SAC 侧用方向标签注入，模型仍按原无模型损失训练。实验覆盖稀疏奖励 MiniGrid 与连续 PointMaze，并用最终成功率和可达状态覆盖评估，蒸馏实验使用 DoorKey 6x6。摘要未给出具体网络结构、损失权重与超参；局限性包括支持集不足导致无决策、结构投影引发别名、以及高维输入下图信息在迁移中丢失。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.046593817024992,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2611.14683v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114683v1-trait-hitchhiking-in-llm-post-training",
+      "source": "arxiv",
+      "title": "Trait Hitchhiking in LLM Post-Training",
+      "authors": [
+        "Adil Soubki",
+        "Elizabeth S. Z. Tan",
+        "Miles Cranmer"
+      ],
+      "authors_text": "Adil Soubki, Elizabeth S. Z. Tan, Miles Cranmer",
+      "abstract": "Reinforcement learning (RL) is now a standard stage of language model post-training, and the compute devoted to it is growing rapidly. While it has been shown to improve capabilities, particularly for tasks with verifiable rewards, it can also change behaviours and internal properties that the reward does not explicitly target. We present a formalism to describe the evolution of \"traits\" during RL post-training and, in doing so, recover the Price equation from evolutionary biology. We use this to develop a mathematical model for what we call \"trait hitchhiking\": the amplification or suppression of non-targeted traits as training redistributes probability across completions. We evaluate this Price update expression on language models trained with GRPO and show that the Price estimates closely track the sampled trait dynamics. These results identify trait hitchhiking as a mechanism by which RL post-training can silently amplify undesirable traits.",
+      "url": "http://arxiv.org/abs/2611.14683v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14683v1",
+      "tldr": "The paper formalizes “trait hitchhiking” in RL post-training using the Price equation, showing that GRPO can silently amplify or suppress non-targeted traits as training redistributes probability across completions.",
+      "detailed_reading": {
+        "motivation": "强化学习已成为语言模型后训练的标配阶段，算力投入快速增长，并在可验证奖励任务上提升能力；但它也可能改变奖励未显式针对的行为和内部属性。作者因此需要形式化描述RL后训练中“性状”的演化，并解释非目标性状为何会被静默放大或抑制。",
+        "method": "作者将每个完成样本上的非目标属性定义为性状，基于当前策略采样完成、计算奖励或优势与性状值，并推导出与进化生物学Price方程对应的性状均值更新表达式；该表达式把性状变化分解为训练导致完成概率重分布带来的选择项与传递或修正项。随后在GRPO训练的语言模型上，用采样统计估计Price更新，并与实际观测到的性状动态进行对比。",
+        "result": "在GRPO训练的模型上，Price估计能够紧密跟踪采样得到的性状动态，说明训练对完成概率的重分布会系统性地放大或抑制非目标性状。摘要未给出具体数值指标，但核心可复现结论是Price更新表达式可预测观测到的性状变化趋势。",
+        "conclusion": "作者将这一机制命名为trait hitchhiking，即非目标性状搭便车于奖励驱动的完成概率重分布而被放大或抑制。该工作表明RL后训练可能静默放大不良性状，因此需要监控和评估奖励未显式针对的属性。",
+        "key_details": "关键实现点包括：以完成样本为粒度计算性状分数，结合奖励或优势估计Price更新中的协方差/选择项，并在GRPO训练过程中比较预测更新与采样性状均值变化；其方法属于描述性机制分析，依赖性状定义与采样估计质量。摘要未披露数据集、模型规模、超参和具体损失细节，复现需参考正文；该框架不直接等同于因果干预，但为监测非目标性状提供了可计算工具。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.672359491992351,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.14685v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114685v1-terrain-aware-thompson-sampling-for-multi-drone-search-and-rescue",
+      "source": "arxiv",
+      "title": "Terrain-Aware Thompson Sampling for Multi-Drone Search and Rescue",
+      "authors": [
+        "Riana Gagnon Souleiman",
+        "Giovanni Beltrame"
+      ],
+      "authors_text": "Riana Gagnon Souleiman, Giovanni Beltrame",
+      "abstract": "In this work, we propose a decentralized terrain-aware multi-drone Thompson Sampling algorithm tailored for search and rescue (SAR) applications. A probability distribution of locating a lost person is informed by terrain data, using established SAR models (displacement ring, elevation, watershed, dispersion angle, and track offset) derived from historical SAR case data on lost person behavior. Exploration is conducted by a team of drones using Thompson Sampling, where candidate actions are selected by drawing samples from this probability distribution, represented by a per-cell Gaussian posterior whose mean and variance are updated through Bayesian inference. This approach balances exploration of uncertain regions with exploitation of high-probability areas to locate a lost person. Observation uncertainty is incorporated through fractional forest coverage, which measures the percentage of an observation occluded by tree coverage and accounts for reduced detection performance in densely vegetated areas. Simulations using real SAR case data (YOSAR) evaluate the proposed method against a coverage planner and a probabilistic active search method in search regions of 1.5 and 3.8 square kilometers, with 5, 10, 15, and 20 agents flying at 50 km/hr. We demonstrate that our method achieves a success rate of approximately 87% within 60 to 247 seconds in the 1.5 square kilometer region, and success rates of approximately 75% to 91% within 161 to 466 seconds in the 3.8 square kilometer region, across different agent configurations.",
+      "url": "http://arxiv.org/abs/2611.14685v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14685v1",
+      "tldr": "The paper proposes a decentralized terrain-aware Thompson Sampling algorithm for multi-drone search and rescue that combines terrain-informed lost-person priors with forest-occlusion uncertainty to balance exploration and exploitation, and demonstrates high success rates in YOSAR-based simulations across different search-area and drone-team configurations.",
+      "detailed_reading": {
+        "motivation": "野外搜救中失踪者生存率随时间快速下降，而大范围远程区域搜索耗时且资源密集；多无人机虽可并行搜索，但集中式协调受通信与单点故障限制。因此需要一种去中心化、能利用地形与失踪者行为先验、并兼顾不确定区域探索与高概率区域利用的多无人机主动搜索方法。",
+        "method": "方法将搜索区离散为30 m×30 m网格，用位移环、海拔、流域、散布角和轨迹偏移等SAR模型的历史数据构造每格高斯先验均值，并以5个模型等权α=0.2归一化混合；每架无人机维护局部后验，在10×10局部窗口内通过Thompson Sampling从每格高斯后验采样候选动作，用Dijkstra规划轨迹并加入300 m范围内斥力项减少重复搜索；观测通过贝叶斯推断更新均值与方差，并用分数森林覆盖度构造观测权重W_tt=1−λσ²以反映植被遮挡导致的不确定性，执行后与其他无人机共享观测并重复规划直至发现目标或达到1800 s电池约束。",
+        "result": "在基于YOSAR真实SAR案例的仿真中，所提方法在1.5 km²区域、5至20架无人机、50 km/h飞行条件下约60至247 s内达到约87%成功率；在3.8 km²区域约161至466 s内达到约75%至91%成功率。实验将该方法与覆盖规划器和概率主动搜索方法在相同搜索区域与不同无人机数量配置下进行比较。",
+        "conclusion": "结果表明，地形感知的去中心化Thompson Sampling能够利用SAR先验优先搜索高概率区域，同时通过后验采样探索不确定区域，并在多无人机配置下较快定位失踪者。该方法面向大范围远程搜救，具有去中心化、可扩展和减少冗余搜索的潜力。",
+        "key_details": "关键实现包括：使用YOSAR历史案例、NASA SRTM高程、线性特征与流域提取构建先验；每格先验方差初始化为1，后验更新采用期望最大化与对角观测权重，超参a=0.1、α=0.2、斥力η=1000、斥力半径d0=300 m；网格尺寸对应80 m高度、21°视场相机。局限性包括假设无人机间持续全局通信、模型权重为固定默认值而非学习得到、遮挡不确定性以森林覆盖度近似，且验证主要基于仿真环境。"
+      },
+      "affiliations": [
+        "Polytechnique Montreal"
+      ],
+      "affiliations_text": "Polytechnique Montreal",
+      "score": 4.513617474167458,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.14656v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114656v1-thompson-sampling-using-prior-fitted-diffusion-transformers",
+      "source": "arxiv",
+      "title": "Thompson Sampling using Prior-fitted Diffusion Transformers",
+      "authors": [
+        "Sihwa Park",
+        "Jingsen Zhu",
+        "Vinamr Jain",
+        "Sheng-Yen Chou",
+        "Alexander Terenin"
+      ],
+      "authors_text": "Sihwa Park, Jingsen Zhu, Vinamr Jain, Sheng-Yen Chou, Alexander Terenin",
+      "abstract": "Thompson sampling is natural randomized strategy for optimizing unknown functions in a black-box manner. In continuous global optimization, Thompson sampling has largely been restricted to Gaussian process priors, as these are essentially the only class for which computing the posterior distribution has been tractable in practice. In this work, we introduce \\emph{prior-fitted diffusion transformers}, which are diffusion models that perform Thompson sampling in-context at inference time, after being pre-trained using the prior-fitted network paradigm. To apply these models, we develop a set of practical non-Gaussian priors for general black-box functions---including those that have characteristics that cannot be achieved under Gaussianity, such as priors over unimodal functions. We also quantify the tradeoff between model size and the number of pre-training iterations, and show that these models follow scaling laws akin to those observed in transformers defined over other modalities. Across a set of global optimization benchmarks, we show that prior-fitted diffusion transformers with non-Gaussian priors can achieve improved performance compared to traditional pipelines built on Gaussian processes.",
+      "url": "http://arxiv.org/abs/2611.14656v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14656v1",
+      "tldr": "The paper introduces prior-fitted diffusion transformers that perform Thompson sampling in-context for black-box global optimization, enabling practical non-Gaussian priors and outperforming traditional Gaussian-process-based pipelines on benchmarks.",
+      "detailed_reading": {
+        "motivation": "连续黑箱全局优化中的 Thompson sampling 长期受限于高斯过程先验，因为只有这类先验的后验计算在实践中较易处理，导致难以表达非高斯、单峰等更贴近实际目标的函数先验。作者希望把 Thompson sampling 嵌入可扩展的生成式基础模型，在保持决策论解释的同时利用扩散模型和标准生成训练流程提升优化性能。",
+        "method": "作者提出 prior-fitted diffusion transformers：预训练时从用户指定的函数先验 p(f) 采样函数，均匀采样上下文数据点 x_{1:n} 并计算 y_i=f(x_i)，以全局最大值点 x^*_f=argmax f 为目标；若最大值无解析解则用梯度优化近似。模型将上下文数据集 (x_i,y_i) 编码为序列，经无位置编码、无因果掩码的全连接注意力 transformer 编码，再用交叉注意力条件化扩散 transformer，通过 flow matching 学习从噪声生成 x^*_f 的条件分布，该分布即 Thompson sampling 分布；推理时输入观测数据即可采样候选点。",
+        "result": "在多个全局优化基准上，使用非高斯先验的 prior-fitted diffusion transformers 能够匹配并有时优于基于高斯过程的传统 Thompson sampling 流程，说明该方法在样本高效黑箱优化中具有竞争力。作者还量化了模型规模与预训练迭代数之间的权衡，并发现这些模型呈现出与其他模态 transformer 类似的 scaling laws。",
+        "conclusion": "该工作表明，prior-fitted diffusion transformer 可以在推理阶段以 in-context 方式执行 Thompson sampling，并将非高斯先验、单峰函数等传统高斯过程难以表达的先验自然纳入贝叶斯优化。相比既有扩散优化方法，它不依赖专门损失、正则项或空间离散化，而是通过合成数据生成过程控制不确定性与探索，提供了更简洁且决策论 grounded 的端到端管线。",
+        "key_details": "关键实现包括：上下文样本数 n 随机采样，通常 n~U{1,...,N} 且 x_i~U([0,1]^d)；先验函数需可采样和逐点求值，并具有解析或可微近似最大值；训练目标为标准 flow matching 损失而非回归损失，以学习完整条件分布；架构采用全连接注意力且不使用位置编码或因果掩码，以匹配贝叶斯规则对数据顺序的不变性。局限在于性能依赖先验选择与可采样性，无解析最大值时目标需近似计算，且结论主要基于所选取的全局优化基准。"
+      },
+      "affiliations": [
+        "Cornell University"
+      ],
+      "affiliations_text": "Cornell University",
+      "score": 4.481202216288864,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.14834v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114834v1-learning-low-latency-action-verification-for-frozen-vision-language-action-models",
+      "source": "arxiv",
+      "title": "Learning Low-Latency Action Verification for Frozen Vision-Language-Action Models",
+      "authors": [
+        "Wen-Han Hsieh",
+        "Ken Jiankun Zheng",
+        "Chia-Chien Chen",
+        "David M. Chan",
+        "Trevor Darrell"
+      ],
+      "authors_text": "Wen-Han Hsieh, Ken Jiankun Zheng, Chia-Chien Chen, David M. Chan, Trevor Darrell",
+      "abstract": "Vision-language-action (VLA) models have made significant progress in general-purpose robotic manipulation. However, sampled action sequences can be ineffective, while evaluating alternatives with computationally expensive verifiers adds latency at each policy query. In this work, we propose HDH, a lightweight framework that uses hindsight from a frozen VLA's own deployments to improve action verification. The framework has three stages. First, we deploy the policy and collect its autonomous rollouts. We then train a compact action verifier to assign each action chunk a predicted task-success score. Finally, the frozen VLA generates action candidates, and the verifier selects the candidate with the highest score for execution. Across four LIBERO-10 tasks, HDH achieves an average success rate of 82.3\\% and on three real-world manipulation tasks, HDH improves average success over the baseline policy by 22.6\\%.",
+      "url": "http://arxiv.org/abs/2611.14834v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14834v1",
+      "tldr": "HDH trains a lightweight, history-conditioned action verifier from terminal outcomes of a frozen VLA’s own rollouts to rank sampled action chunks at deployment, improving manipulation success while avoiding costly large-model verification.",
+      "detailed_reading": {
+        "motivation": "VLA 模型虽能生成多样动作，但单次采样可能无效，而用昂贵验证器评估候选会在每次策略查询时增加延迟。作者希望利用冻结 VLA 自身部署 rollout 的终局成败作为 hindsight 监督，学习轻量动作验证器，在不更新策略的前提下实现低延迟候选选择。",
+        "method": "方法分三阶段：先部署冻结的 π0.5 策略并收集自主 rollout；再把每个保留查询的当前观测、已执行动作前缀与该回合终局成败配对，用蒙特卡洛 BCEWithLogits 训练紧凑验证器预测最终任务成功概率；部署时由冻结 VLA 用独立 flow-matching 噪声采样 K=2 个动作块，验证器对每个候选前缀打分并执行最高分候选的前 H 步。验证器输入包括两路相机 SigLIP 早期特征、8 维本体状态和 H×7 动作前缀，动作 token 先做自注意力再对观测 token 做交叉注意力，经动作 token 均值池化和 128→64→1 MLP 输出失败 logit；HDH 额外用小型 GRU 将最多三个此前查询的观测、本体状态和已执行动作编码为因果历史 token。",
+        "result": "在四个 LIBERO-10 任务上，HDH 平均成功率为 82.3%，高于仅用当前观测的 HDM 的 80.3%，说明执行历史带来约 2 个百分点提升；相对冻结基线平均成功率提高约 3.5 个百分点，并优于从同一候选集随机选择，表明收益来自学习到的候选排序而非额外采样。三个真实机器人操作任务上，HDH 将平均成功率从基线的 44.7% 提升到 67.3%，即提高 22.6 个百分点。与 GPT-5、GPT-6 等大型 VLM 验证器相比，HDH 取得更高或最有竞争力的成功率，同时推理延迟显著更低；但 GPT-5 因推理较慢只使用了更少试验。",
+        "conclusion": "仅使用冻结策略自身 rollout 的终局成败作为监督，就足以训练轻量动作验证器并改善闭环操作性能。HDH 通过历史条件评分和候选排序提升冻结 VLA 的部署成功率，同时保持低推理成本，是替代大型 VLM 验证器进行实时动作选择的一种实用方案。",
+        "key_details": "每个任务用冻结基线策略收集 100 条 rollout，按回合划分 80 条训练和 20 条验证，并用三个训练种子分别训练 HDM 和 HDH；预测动作块长度为 10，实际执行前 H=8 步，候选数 K=2，且每个候选使用独立随机种子生成。训练目标把失败标签设为 1 减终局成功，同一回合所有保留查询共享该标签，并排除已执行长度小于 H 的查询以避免监督未执行动作。验证器约 481K 可训练参数，每个任务单独训练，评分输入不含语言提示 token，历史最多覆盖三个已完成查询且在回合间重置，推理时可复用观测编码和冻结前缀的 KV cache。局限性包括依赖稀疏终局标签、每任务单独验证器、仅评估 K=2、仿真仅四个 LIBERO-10 任务和真实仅三个任务，且 VLM 对照在输入模态与试验数量上不完全对等。"
+      },
+      "affiliations": [
+        "National Tsing Hua University",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "National Tsing Hua University, University of California, Berkeley",
+      "score": 4.438075520903222,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.14668v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114668v1-learning-of-lpv-models-with-linear-fractional-representations-initialization-optimization-and-conditioning",
+      "source": "arxiv",
+      "title": "Learning of LPV Models With Linear Fractional Representations: Initialization, Optimization, and Conditioning",
+      "authors": [
+        "Roel Drenth",
+        "Maarten Schoukens",
+        "Roland Tóth"
+      ],
+      "authors_text": "Roel Drenth, Maarten Schoukens, Roland Tóth",
+      "abstract": "Linear Parameter-Varying (LPV) models with Linear Fractional Representation (LFR) can describe a wide class of nonlinear systems with a control-friendly structure. However, identifying these models together with their scheduling map from input-output data requires solving a non-convex optimization problem that is highly sensitive to initialization. Consequently, existing methods often rely on many random initializations. Instead, our work proposes an initialization strategy based on the Best Linear Approximator (BLA). Furthermore, motivated by an analysis of the impact of rational-dependency LPV-LFR models on the conditioning of the non-convex cost, two multiple shooting methods that improve the conditioning, unconstrained multiple shooting (UMS) and encoder-based multiple shooting (EBMS), are compared. The initialization and multiple shooting methods are evaluated on a nonlinear mass-spring-damper example, showing that BLA initialization consistently yields accurate results, whereas random initialization has a large spread. The results also show that both UMS and EBMS reduce the spread for randomly initialized models. UMS is simple to tune and well suited to few sub-records, whereas EBMS can exploit many short sub-records to further improve conditioning, at the cost of training an encoder and tuning additional hyperparameters.",
+      "url": "http://arxiv.org/abs/2611.14668v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14668v1",
+      "tldr": "This paper improves the reliability of learning LPV-LFR models by proposing a Best Linear Approximator (BLA)-based initialization and comparing unconstrained and encoder-based multiple shooting methods to mitigate ill-conditioning in the non-convex identification problem.",
+      "detailed_reading": {
+        "motivation": "LPV-LFR模型能以控制友好的结构描述广泛非线性系统，但联合辨识模型与调度映射需解强非凸优化问题，对初始化高度敏感，现有方法常依赖大量随机初始化。尤其有理依赖LPV-LFR会恶化代价函数条件数，而BLA初始化及多 shooting 方法在该模型类中的可靠性和复杂度权衡尚缺乏系统分析。",
+        "method": "论文考虑离散非线性状态空间数据生成系统，在输出加性白噪声和准平稳输入假设下，联合估计ResNet神经网络调度映射与LPV-LFR状态空间模型，采用预测误差/仿真误差最小化并用以Dzw=e^{-Psi S}构造的适定有理参数化保证LFR良定。方法上先用最佳线性近似BLA给出模型初值，再优化非凸代价；同时比较无约束多shooting UMS（将各子记录初态作为无约束可学习变量）与基于编码器的EBMS（用编码器从输入输出历史估计子记录初态，从而支持重叠子记录和小批量训练），并在非线性质量-弹簧-阻尼仿真算例上评估初始化与shooting策略。",
+        "result": "理论分析表明，有理调度依赖会通过LFR增益放大状态转移函数的Lipschitz常数，而仿真误差代价的Lipschitz常数随仿真长度T可能呈O(L_f^{2T})增长，因此限制递归深度可改善条件数。算例结果显示，BLA初始化稳定获得准确结果，而随机初始化结果散布很大；UMS和EBMS均能降低随机初始化模型的性能散布。UMS调参简单、适合少量子记录，EBMS可利用大量短子记录进一步改善条件数，但需训练编码器并调节额外超参数。",
+        "conclusion": "对LPV-LFR模型与调度映射的联合学习，BLA初始化可作为提高可复现性和降低随机重启依赖的默认策略；当仍存在病态条件时，应结合多shooting方法。实际选择上，数据较少或子记录数少时优先UMS，数据充足且可接受额外编码器训练与调参成本时可用EBMS以获得更好的条件数和小批量利用能力。",
+        "key_details": "关键实现包括离散时间非线性状态空间数据、准平稳输入和输出白噪声假设，调度映射采用带线性旁路的ResNet结构，LFR调度矩阵Delta(p)为分块对角且||p||∞≤1，适定参数化中Dzw=e^{-Psi S}、Psi=diag(e^{D_d})、S=D_A^T D_A+D_B-D_B^T+epsilon_S I。理论部分依赖有界状态输入、紧参数集及存在与Delta交换的W满足||W^{-1}DzwW||≤1-epsilon和条件数上界kappa_W，用于界定LFR有理增益gamma=kappa_W/epsilon并推导L_f各分量；分析为简化采用外部调度情形，自调度下p依赖x预计会更恶化条件。UMS的初态参数数随子记录数线性增长，EBMS需选择编码器维度、历史窗口长度等超参数并可能需较多短子记录，二者均避免约束优化器但存在复杂度与调参负担的取舍。"
+      },
+      "affiliations": [
+        "HUN-REN Institute for Computer Science and Control",
+        "Eindhoven University of Technology"
+      ],
+      "affiliations_text": "HUN-REN Institute for Computer Science and Control, Eindhoven University of Technology",
+      "score": 4.37705304711958,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.14659v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/13/261114659v1-closing-the-loop-co-evolving-em-for-irregular-time-series-generation-in-lifted-representations",
+      "source": "arxiv",
+      "title": "Closing the Loop: Co-Evolving EM for Irregular Time Series Generation in Lifted Representations",
+      "authors": [
+        "Idan Arbiv",
+        "Gal Fadlon",
+        "Omri Azencot"
+      ],
+      "authors_text": "Idan Arbiv, Gal Fadlon, Omri Azencot",
+      "abstract": "Regular time-series generation from irregular time series is typically reduced to one-shot imputation: complete each partial sequence once, freeze the completions, and train a generator on the resulting surrogate dataset. We show that this open-loop strategy is structurally flawed. Point imputers collapse ambiguous missing regions to conditional averages, while stochastic imputers become stale as the generator evolves; the binding constraint is therefore iteration, not imputer design. We introduce a co-evolving Monte Carlo EM framework that closes the imputer-generator loop. Each E-step samples missing values from the posterior of the current generator, and each M-step retrains the generator on these completions, preserving unconditional generator training. Since our diffusion prior operates in a lifted 2D representation while observations live in time-series space, we further introduce Posterior Sampling for Lifted Representations (PSLR), which enforces operator-consistent conditioning, uncertainty preservation, and manifold consistency during the E-step. Across ten datasets and four corruption regimes, our method achieves state-of-the-art performance, improving over the strongest baselines by 59% in discriminative score, 15% in predictive score, 73% in Context-FID, and 71% in feature-correlation error. Ablations show that our approach reduces average discriminative score by 73% over single-step baselines, closing most of the remaining gap to the clean-data oracle. Code is available at https://github.com/azencot-group/PSLR.",
+      "url": "http://arxiv.org/abs/2611.14659v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14659v1",
+      "tldr": "**TLDR:** The paper introduces a co-evolving Monte Carlo EM framework that closes the imputer–generator loop for irregular time-series generation by repeatedly sampling missing values from the current lifted-representation diffusion generator via PSLR and retraining it on those completions, showing that iterative posterior-based imputation—not one-shot imputation—drives state-of-the-art generative fidelity.",
+      "detailed_reading": {
+        "motivation": "不规则时间序列生成通常被简化为一次性插补的开环流程：先补全每条部分序列并冻结补全结果，再在其上训练生成器。论文指出这种策略存在结构性缺陷，点插补会把歧义缺失区域坍缩为条件均值，随机插补则会随生成器演化而过时。因此真正约束性能的是迭代闭环，而不是插补器设计本身。",
+        "method": "论文提出共同演化的蒙特卡洛EM框架来闭合插补器与生成器回路：每个E步从当前生成器的后验中采样缺失值，每个M步在这些补全序列上重新训练生成器，并保持无条件生成器训练形式。由于扩散先验运行在提升后的二维表示中而观测位于原始时间序列空间，作者进一步提出PSLR用于提升表示的后验采样，在E步中强制算子一致条件、不确定性保持和流形一致性。实现上以MMPS实例化该采样器，交替执行少量E步与增量M步，训练后可直接用标准扩散采样生成完整规则序列。",
+        "result": "在十个数据集和四种损坏机制上，该方法取得当前最优性能，相比最强基线在判别分数上提升59%、预测分数提升15%、Context-FID提升73%、特征相关误差提升71%。消融显示，相比单步基线，其平均判别分数降低73%，并缩小了与干净数据oracle的大部分差距。方法还表现出快速收敛，并在逐单元异步缺失、连续块缺失和连续时间分数重采样三类额外损坏上同样达到最优。",
+        "conclusion": "论文结论是，在缺失条件下提升生成保真度的主要驱动因素是闭环迭代，而非更强插补器或更复杂架构；冻结插补器会留下不可消除的偏差，而用当前生成器反复采样补全可消除该偏差。PSLR使跨空间后验采样在提升表示中正确工作，避免E步求解错误逆问题导致EM收敛到有偏解。由此得到的无条件生成器可在推理时通过后验采样处理条件约束，并接近干净数据训练的效果。",
+        "key_details": "关键实现细节包括：观测过程用统一算子A覆盖时间戳级掩码、逐单元异步通道缺失、连续块缺口和连续时间分数重采样；序列通过线性提升映射T进入二维图像表示并以T逆回到时间序列空间，扩散去噪在提升空间训练。E步后验采样必须满足C1至C3的跨空间条件，PSLR可即插即用地改造现有采样器，论文以MMPS为例并指出单空间采样器在提升设定下会失效。理论部分表明理想精确E步具有观测数据似然单调改进保证，而冻结插补器目标存在不可消除偏差；M步退化为标准全观测训练，无需掩码或辅助条件模块。局限与约束在于理论依赖线性提升，且方法效果与扩散先验、后验采样近似质量及EM迭代次数相关。"
+      },
+      "affiliations": [
+        "Ben-Gurion University of The Negev"
+      ],
+      "affiliations_text": "Ben-Gurion University of The Negev",
+      "score": 4.257503772551276,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.14748v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114748v1-unipipe-unified-inference-serving-and-fine-tuning-for-deadline-constrained-dnn-surrogate-workflows",
+      "source": "arxiv",
+      "title": "UniPipe: Unified Inference Serving and Fine-Tuning for Deadline-Constrained DNN Surrogate Workflows",
+      "authors": [
+        "Jaiaid Mobin",
+        "Avinash Maurya",
+        "M. Mustafa Rafique",
+        "Bogdan Nicolae"
+      ],
+      "authors_text": "Jaiaid Mobin, Avinash Maurya, M. Mustafa Rafique, Bogdan Nicolae",
+      "abstract": "DNN surrogates are increasingly used to accelerate scientific workflows that must process high-rate sensor streams in near real time, exemplified by Ptychographic imaging at next-generation X-ray light sources. Such surrogates deliver 100-1000x higher throughput than iterative solvers, enabling faster steering of experiments. To preserve surrogate accuracy during an experiment, as the input distribution evolves, state-of-the-art deployments freeze the pretrained surrogate or run a separate CUDA context that fine-tunes concurrently with serving. However, multi-context concurrency causes significant contention on the GPU, inflating both the mean and the variance of inference latency, triggering deadline misses in workflows where sensor data has to be processed within a hard per-unit deadline. To address this challenge, we propose UniPipe, a single-context system that unifies inference serving and fine-tuning of a DNN surrogate on a single edge GPU. UniPipe is driven by three key insights: both serving and fine-tuning require a forward pass and can be fused into one; the per-sample latency of modern GPUs is non-linear in batch size; and the workload is repetitive across intervals, enabling offline scheduling. Specifically, UniPipe fuses training and inference data in a single forward pass with a selective backward pass on the training subset, and uses a polynomial-time scheduler that exploits the latency curve to compute the batch composition. We evaluate UniPipe on a real-world Ptychographic reconstruction workflow with sensor rates up to 5000 patterns/sec.; UniPipe lowers reconstruction MSE by up to 30% and inference MSE by up to 50% over a pretrained baseline, and reduces the deadline-miss rate by 13%-22% over a multi-context baseline. UniPipe's unified deployment reduces the latency spread from 106% to 57% of the mean, and increases total throughput compared to multi-context baseline.",
+      "url": "http://arxiv.org/abs/2611.14748v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14748v1",
+      "tldr": "**TLDR:** UniPipe is a single-context edge-GPU system that unifies DNN surrogate inference and fine-tuning by fusing serving and training data in one forward pass and using a deadline-aware scheduler, thereby improving accuracy and throughput while reducing latency variance and deadline misses in high-rate scientific workflows such as ptychographic imaging.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Rochester Institute of Technology",
+        "Argonne National Laboratory"
+      ],
+      "affiliations_text": "Rochester Institute of Technology, Argonne National Laboratory",
+      "score": 4.127616594285975,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.14604v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114604v1-kernelmosaic-an-open-dataset-and-agentic-framework-for-cuda-kernel-generation",
+      "source": "arxiv",
+      "title": "KernelMosaic: An Open Dataset and Agentic Framework for CUDA Kernel Generation",
+      "authors": [
+        "Ningyuan Xi",
+        "Yuhang Lai",
+        "Ning Miao"
+      ],
+      "authors_text": "Ningyuan Xi, Yuhang Lai, Ning Miao",
+      "abstract": "Training large language models to generate efficient CUDA kernels requires supervision spanning diverse computational requirements and iterative code optimization. Constructing this supervision is challenging because of heterogeneous specifications, and useful implementations emerge through iterative complicated testing and refinement. We introduce KernelMosaic, an open dataset pairing diverse CUDA tasks with verified solutions and trajectories. Human-guided review and diversity-aware selection curate tasks expressed as natural-language descriptions, reference programs, mathematical specifications, and their intersections. To build the solutions and trajectories, our agentic framework guides a strong LLM through implementation, correctness repair, and performance optimization with reusable CUDA guidance and execution feedback. Supervised fine-tuning of a small open-source model on KernelMosaic raises correctness from 4%, 0%, and 0% to 88%, 82%, and 16% on KernelBench L1, L2, and L3, respectively, while increasing the fraction of tasks with kernels faster than PyTorch eager at every level. Further training experiments show that supervision from the curated trajectories substantially outperforms direct responses and promotes sustained testing and revision. These results demonstrate that KernelMosaic enables a general-purpose model to achieve substantial gains in CUDA kernel generation.",
+      "url": "http://arxiv.org/abs/2611.14604v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14604v1",
+      "tldr": "KernelMosaic is an open dataset and agentic framework that pairs diverse CUDA tasks with verified solutions and iterative development trajectories, enabling supervised fine-tuning of a small open-source LLM to substantially improve CUDA kernel correctness and performance on KernelBench.",
+      "detailed_reading": null,
+      "affiliations": [
+        "City University of Hong Kong"
+      ],
+      "affiliations_text": "City University of Hong Kong",
+      "score": 4.11506500015261,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.14589v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114589v1-cafin-cuda-accelerated-adaptive-fisher-information-matrix-network-optimization-via-gpu-native-kernel-fusion",
+      "source": "arxiv",
+      "title": "CAFIN: CUDA-accelerated Adaptive Fisher Information Matrix Network Optimization via GPU-Native Kernel Fusion",
+      "authors": [
+        "Maryam Arshad",
+        "Muhammad Khuram Shahzad"
+      ],
+      "authors_text": "Maryam Arshad, Muhammad Khuram Shahzad",
+      "abstract": "Second-order optimizers improve deep neural network training using curvature information, but their practical efficiency is limited by GPU execution overhead. AdaFisher reduces Fisher Information Matrix (FIM) approximation costs through diagonal Kronecker structures and exponential moving averages, yet its PyTorch implementation requires sequential CUDA kernel launches, intermediate tensor allocations, and repeated memory accesses. We introduce CAFIN, a GPU-native CUDA kernel fusion framework that improves AdaFisher execution efficiency without changing its optimization formulation. The proposed approach progressively integrates FIM preconditioner construction, exponential moving average updates, gradient preconditioning, momentum accumulation, weight decay, and parameter updates into fused CUDA kernels. Shared-memory reuse, register-resident computation, and in-place operations further reduce memory traffic and intermediate allocations. Experiments using ResNet-18 on CIFAR-10, CIFAR-100, and Tiny ImageNet across NVIDIA GTX 1660 Ti and RTX 3060 Laptop GPUs demonstrate up to 78.4% lower isolated FIM construction latency and 2.1-26.9% lower optimizer-step latency. The implementation also eliminates approximately 18.91 MB of intermediate GPU memory allocations per optimizer step. Numerical validation confirms consistency within the predefined FP32 tolerance, while convergence accuracy remains comparable across evaluated datasets and random seeds. These findings demonstrate that CUDA kernel fusion can substantially accelerate second-order optimization while preserving AdaFisher's underlying mathematical formulation and learning behavior.",
+      "url": "http://arxiv.org/abs/2611.14589v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14589v1",
+      "tldr": "CAFIN is a GPU-native CUDA kernel-fusion framework that accelerates AdaFisher second-order optimization by fusing preconditioner construction, EMA updates, gradient preconditioning, momentum, weight decay, and parameter updates into integrated kernels, reducing latency and intermediate GPU memory while preserving numerical consistency and convergence.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National University of Sciences and Technology (NUST)"
+      ],
+      "affiliations_text": "National University of Sciences and Technology (NUST)",
+      "score": 4.114793118747761,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.14729v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114729v1-sunlightbots-turning-sunlight-into-self-sustained-high-power-motion-in-soft-robots",
+      "source": "arxiv",
+      "title": "SunLightBots: Turning sunlight into self-sustained, high-power motion in soft robots",
+      "authors": [
+        "Yoo Jin Lee",
+        "Melanie Torres Crespo",
+        "Zhongxiao Deng",
+        "Andrew Tejada-Vega",
+        "Rebecca Kramer-Bottiglio",
+        "Wenzhong Yan",
+        "Yimin Luo"
+      ],
+      "authors_text": "Yoo Jin Lee, Melanie Torres Crespo, Zhongxiao Deng, Andrew Tejada-Vega, Rebecca Kramer-Bottiglio, Wenzhong Yan, Yimin Luo",
+      "abstract": "Soft robots built from active materials can directly convert environmental stimuli into motion, offering a route to energy autonomy and embodied control. However, environmental energy is generally harvested at low power, whereas rapid, mechanically demanding actions require high mechanical output power. Reconciling this mismatch while sustaining self-regulated cyclic actuation is challenging, particularly at the subgram scale, where limited payload capacity constrains the integration of conventional power and control hardware. Here, we present SunLightBots, a class of subgram, sunlight-powered, untethered soft robots that achieve autonomous locomotion under continuous illumination near 1 Sun (100 mW/cm2). Their operation is enabled by a self-resetting snapping (SRS) mechanism that integrates liquid crystal elastomers (LCEs) with snap-through instability to accumulate solar energy supplied at low power, release it as rapid, high-power motion, and reset through photothermal-mechanical feedback. Through coordinated optimization of the LCE actuation temperature, photothermal conversion, actuation stress, and structural energy barrier, the system operates near 1 Sun and achieves a peak mass-specific mechanical power of 89 W/kg. At this irradiance, the optimized LCE generates an actuation stress of 0.1 MPa at approximately 60 deg C. SunLightBots demonstrate sustained swimming, crawling, and repeated impulsive jumping. Under 1.5 Suns, the swimmer advances more than three body lengths per cycle. This work provides a materials-mechanics route toward autonomous soft robots powered entirely by the environment.",
+      "url": "http://arxiv.org/abs/2611.14729v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14729v1",
+      "tldr": "SunLightBots are subgram, untethered soft robots that use a self-resetting snapping mechanism combining liquid crystal elastomers with snap-through instability to convert low-power sunlight near 1 Sun into self-sustained, high-power cyclic motion such as swimming, crawling, and jumping.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California, Davis",
+        "Princeton University",
+        "Yale University"
+      ],
+      "affiliations_text": "University of California, Davis, Princeton University, Yale University",
+      "score": 3.7285020558113797,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.14750v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114750v1-from-nodes-to-pixels-topological-and-structural-two-view-graph-imaging",
+      "source": "arxiv",
+      "title": "From Nodes to Pixels: Topological and Structural Two-View Graph Imaging",
+      "authors": [
+        "Md Joshem Uddin",
+        "Soham Changani",
+        "Sai Karthik Navuluru",
+        "Cuneyt Gurcan Akcora",
+        "Baris Coskunuzer"
+      ],
+      "authors_text": "Md Joshem Uddin, Soham Changani, Sai Karthik Navuluru, Cuneyt Gurcan Akcora, Baris Coskunuzer",
+      "abstract": "Graph learning still lacks a broadly reusable input interface comparable to patches in vision or tokens in language. Unlike images or text, graphs are irregular, vary in size and density, and are invariant under many equivalent node labelings, making it difficult to standardize inputs across tasks and architectures. We introduce G2Image, a fixed-budget graph imaging framework that converts each graph into two complementary image-like views. TopoGrid provides a stable topological view by encoding an intrinsic bifiltration as a compact multipersistence surface grid, while GraphGrid provides a higher-bandwidth structural view by aggregating edge densities between groups defined by intrinsic node scores. Both views are permutation-invariant and come with resolution-controlled stability guarantees. Because the resulting representations are fixed-size tensors, they can be processed by lightweight 2D encoders and aligned through a supervised cross-view contrastive objective. Across graph classification and molecular prediction benchmarks, G2Image achieves strong average performance among the compared methods, improves over single-view and standard fusion variants, and extends to attribute-rich molecular graphs without changing the overall architecture. These results suggest that fixed-budget graph images offer a practical and reusable interface for graph representation learning.",
+      "url": "http://arxiv.org/abs/2611.14750v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14750v1",
+      "tldr": "G2Image is a fixed-budget, permutation-invariant graph imaging framework that converts each graph into complementary topological and structural image-like views processed by lightweight 2D encoders and aligned with supervised cross-view contrastive learning, achieving strong graph and molecular classification performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Central Florida",
+        "University of Georgia",
+        "University of Texas at Dallas"
+      ],
+      "affiliations_text": "University of Central Florida, University of Georgia, University of Texas at Dallas",
+      "score": 3.688286928224781,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.14594v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114594v1-adversarial-risk-in-the-generative-ai-era-necessitates-dropping-the-small-epsilon-ball",
+      "source": "arxiv",
+      "title": "Adversarial Risk in the Generative AI Era Necessitates Dropping the Small Epsilon Ball",
+      "authors": [
+        "Andrew C. Cullen",
+        "Neil G. Marchant",
+        "Paul Montague",
+        "Jiani Xie",
+        "Benjamin I. P. Rubinstein"
+      ],
+      "authors_text": "Andrew C. Cullen, Neil G. Marchant, Paul Montague, Jiani Xie, Benjamin I. P. Rubinstein",
+      "abstract": "Adversarial Machine Learning research is currently centered on the search for the epsilon-ball: minimal perturbations designed to fool models while remaining imperceptible to humans. We argue that this fixation on $\\ell_p$ norms is a metrological trap that communicates a distorted perception of risk to defenders, one that is unaligned with real-world system vulnerabilities. This paradigm misleads defenders into optimizing for narrow, mathematical robustness at the expense of systemic security, while simultaneously incentivizing attackers to exploit non-overlapping alternative adversarial pathways. Ultimately, we argue that the dominance of the $\\ell_p$ ball does not just fail to reduce harm---it may actively facilitate it by communicating a false sense of security against the wrong threats.",
+      "url": "http://arxiv.org/abs/2611.14594v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14594v1",
+      "tldr": "This position paper argues that adversarial ML’s fixation on small ℓp epsilon-ball perturbations distorts real-world risk, misdirects defenders toward narrow mathematical robustness while attackers exploit other pathways, and should be replaced by a systemic, deployment-aware understanding of adversarial harm.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Melbourne",
+        "DST Group"
+      ],
+      "affiliations_text": "University of Melbourne, DST Group",
+      "score": 3.661967865499788,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.14704v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114704v1-code-as-explanations-executable-and-verifiable-llm-explanations",
+      "source": "arxiv",
+      "title": "Code as Explanations: Executable and Verifiable LLM Explanations",
+      "authors": [
+        "Nhi Nguyen",
+        "Shauli Ravfogel",
+        "Rajesh Ranganath"
+      ],
+      "authors_text": "Nhi Nguyen, Shauli Ravfogel, Rajesh Ranganath",
+      "abstract": "As large language models (LLMs) increasingly make consequential decisions and solve problems alongside humans, we must understand how models arrive at their conclusions. Understanding how an LLM behaves requires observing it across multiple inputs, yet free-text explanations such as chain-of-thought (CoT) are generated per instance and cannot be easily verified on new inputs. We propose {code explanations to address the mismatch in how LLM explanations are generated versus how they are evaluated: a program explains LLM behavior across a dataset of inputs, and its execution enables automatic verification. We define Consistency metric that measures the fraction of inputs on which the program reproduces the LLM's outputs, and use it to evaluate and select candidate programs. Across three open-source code-capable LLMs and eight tasks, we find that LLMs can produce highly consistent code explanations in several settings. Code explanations are also 6$\\times$ to 100$\\times$ shorter than CoT, and better align with model behavior in 9 out of 24 settings. However, consistency is significantly lower on tasks with more complex linguistic components, where generated programs reproduce model outputs no more frequently than an uninformative explanation baseline, and these programs often rely on longer hard-coded patterns. In experiments with Claude Opus 5.5, providing the model with consistency feedback and code execution improves explanation consistency across tasks, but consistency remains significantly lower on more complex tasks. Our findings establish executable code as a novel, verifiable, and compact approach to explaining LLM behavior and highlight verification feedback as a promising direction for improving explanation consistency. The code for this paper is at https://github.com/rajesh-lab/code-as-explanations.",
+      "url": "http://arxiv.org/abs/2611.14704v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14704v1",
+      "tldr": "The paper proposes executable code programs as verifiable LLM explanations, using a Consistency metric to measure how often a program reproduces model outputs across inputs, and finds they can be compact and sometimes more faithful than chain-of-thought but remain unreliable on complex linguistic tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "New York University"
+      ],
+      "affiliations_text": "New York University",
+      "score": 3.443118357621531,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.14829v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114829v1-a-family-of-alternating-projection-examples-whose-cesro-means-fail-to-converge-strongly",
+      "source": "arxiv",
+      "title": "A family of alternating projection examples whose Cesàro means fail to converge strongly",
+      "authors": [
+        "Heinz H. Bauschke",
+        "Tran Thanh Tung"
+      ],
+      "authors_text": "Heinz H. Bauschke, Tran Thanh Tung",
+      "abstract": "In 1965, Bregman proved that the sequence of iterates of the method of alternating projections applied to two closed convex sets with nonempty intersection in a Hilbert space converges weakly to a point in the intersection. The question whether this convergence may actually fail to be strong was settled in a seminal paper by Hundal in 2004. He provided a counterexample featuring a halfspace and a closed convex cone generated by a certain curve. While largely elementary, the details of Hundal's construction and analysis are quite involved.\n  We revisit this seminal example and present a family of such examples that allows for simpler proofs. Our generating curve combines unit vectors with Gaussian inner products and a height determined by a scalar function. The orbits converge weakly --- but not strongly --- to the origin, while their norms have a positive limit for which we give explicit lower bounds. We also prove that the associated Cesàro means behave likewise; in fact, this is generalized to alternating proximal mappings whose composition has a fixed point. Finally, these orbits allow interpretations in the context of projected-gradient, proximal-point, and gradient-descent algorithms.",
+      "url": "http://arxiv.org/abs/2611.14829v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14829v1",
+      "tldr": "This paper introduces a simpler family of counterexamples to strong convergence of the method of alternating projections—and of its Cesàro means and alternating proximal mappings—whose orbits converge weakly but not strongly to the origin while maintaining a positive limiting norm, with explicit lower bounds and algorithmic interpretations.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.3505069318935785,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.14837v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114837v1-two-stage-mixed-integer-quadratic-programming-in-polynomial-time",
+      "source": "arxiv",
+      "title": "Two-Stage Mixed-Integer Quadratic Programming in Polynomial Time",
+      "authors": [
+        "Alberto Del Pia"
+      ],
+      "authors_text": "Alberto Del Pia",
+      "abstract": "Lenstra showed that mixed-integer linear programming can be solved in polynomial time when the number of integer variables is fixed and the number of continuous variables is arbitrary. Mixed-integer quadratic programming (MIQP) can be solved in polynomial time when the total number of variables is fixed. However, since MIQP is NP-hard already without integer variables, the analog of Lenstra's result fails unless P = NP. Hence, polynomial-time algorithms for MIQP with an arbitrary number of continuous variables must exploit additional structure. We study MIQPs with two-stage structure, which underlies Benders decomposition and two-stage stochastic programming. A few linking variables, including all integer variables, are coupled with many blocks of continuous variables that interact only through them, both in the constraints and in the objective. We give a polynomial-time algorithm for MIQP with an arbitrary quadratic objective when the number of linking variables and the block size are fixed, while the number of blocks, and hence the number of variables, is arbitrary. The case with no blocks is MIQP in fixed dimension. None of our assumptions can be dropped. Unless P = NP, the number of linking variables and the block size must both be fixed, the blocks cannot interact or contain integer variables, and large blocks cannot be allowed even if their objective is linear. Unless FPT = W[1], the exponent of the running time must depend on both the number of linking variables and the block size.",
+      "url": "http://arxiv.org/abs/2611.14837v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14837v1",
+      "tldr": "The paper presents a polynomial-time algorithm for nonconvex two-stage mixed-integer quadratic programming with arbitrary quadratic objectives when the number of linking variables and the block size are fixed—while the number of blocks is arbitrary—and establishes that these assumptions are essentially necessary unless P = NP.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Wisconsin--Madison"
+      ],
+      "affiliations_text": "University of Wisconsin--Madison",
+      "score": 3.2118676212992314,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.14590v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114590v1-an-asynchronous-federated-learning-platform-for-lung-adenocarcinoma-grading-via-foundation-models-and-structural-pruning",
+      "source": "arxiv",
+      "title": "An Asynchronous Federated Learning Platform for Lung Adenocarcinoma Grading via Foundation Models and Structural Pruning",
+      "authors": [
+        "Moon-Il Joo",
+        "Md Ariful Islam Mozumder",
+        "Hee-Cheol Kim"
+      ],
+      "authors_text": "Moon-Il Joo, Md Ariful Islam Mozumder, Hee-Cheol Kim",
+      "abstract": "Classification of lung adenocarcinoma into poorly differentiated (PD) and well-to-moderately differentiated (WMD) subtypes plays an important role in patient survival; however, consistent classification is difficult due to inter-observer variability among pathologists. Collecting data from multiple hospitals is also challenging due to patient privacy concerns. This study proposes a web-based federated learning system that shares only locally trained model weights without sharing patient data between institutions. The UNI2 foundation model and CLAM-SB were used to classify pathological whole slide images. A four-client federated learning system was constructed, and the NLST cohort was reserved exclusively for external validation. In centralized evaluation, joint training with CPTAC and TCGA outperformed single-institution training on external validation, confirming the necessity of multi-institutional data integration. FedAvg, FedProx, FedBN, and FedNova were compared as federated learning algorithms under identical experimental conditions. Test AUC ranked as FedBN, FedProx, FedNova, and FedAvg. FedNova showed the most balanced classification performance between PD and WMD. L1-norm structural pruning at 20%, 30%, and 40% sparsity was applied to reduce model transmission size. FedAvg, FedProx, and FedBN showed a tendency of decreasing Test AUC under pruning, while FedNova achieved improved Test AUC across all sparsity levels. A web-based application was developed supporting slide upload, local training, AI classification, and attention heatmap-based visualization. The combination of FedNova and 40% pruning was confirmed as a practical approach that improves communication efficiency and classification performance while protecting patient privacy.",
+      "url": "http://arxiv.org/abs/2611.14590v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14590v1",
+      "tldr": "This paper presents a web-based asynchronous federated learning platform that combines the UNI2 foundation model and CLAM-SB MIL for privacy-preserving lung adenocarcinoma PD/WMD grading, showing that FedNova with 40% L1-norm structural pruning offers the best practical trade-off between communication efficiency and classification performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Inje University"
+      ],
+      "affiliations_text": "Inje University",
+      "score": 3.169789946340373,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.14778v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114778v1-an-inductively-assisted-n-1-switched-capacitor-ladder-converter",
+      "source": "arxiv",
+      "title": "An Inductively Assisted N :1 Switched-Capacitor Ladder Converter",
+      "authors": [
+        "Sandeep Reddy Kukunuru",
+        "M Mahmudul Hasan Sajeeb",
+        "Rohit Reddy Karnaty",
+        "Loai G. Salem"
+      ],
+      "authors_text": "Sandeep Reddy Kukunuru, M Mahmudul Hasan Sajeeb, Rohit Reddy Karnaty, Loai G. Salem",
+      "abstract": "This paper proposes an inductively assisted N:1 switched-capacitor ladder buck (D-SCLB) converter that replaces the output-side switch in the bottom half-bridge of an N:1 SCLB with a small inductor placed in parallel with the ladder capacitors during the demagnetization phase. The flying capacitors share the load current delivery, lowering the average inductor current to (1-M)Iout and enabling continuous regulation with M=D/(N-1+D). A closed-form output-impedance model, valid for arbitrary N under both optimal and uniform switch sizing, is derived and compared against SC, SCLB, FCMC, and DPSC topologies. For a 4:1 48V-to-PoL design, the D-SCLB reduces the average inductor current by up to 20% and improves the equivalent output impedance by up to 30% relative to the SCLB. Two hardware prototypes on a low-cost two-layer PCB achieve a peak efficiency of 96.2%, with the D-SCLB using 49% smaller inductor volume than the SCLB at comparable efficiency. Model predictions agree with measurements to within 1.5% under heavy load.",
+      "url": "http://arxiv.org/abs/2611.14778v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14778v1",
+      "tldr": "TLDR: The paper introduces an inductively assisted N:1 switched-capacitor ladder buck converter that replaces a bottom-half-bridge output switch with a small parallel inductor during demagnetization, lowering average inductor current and equivalent output impedance while enabling continuous regulation and achieving up to 96.2% peak efficiency with a much smaller inductor in a 4:1 48 V-to-PoL design.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of California at Santa Barbara"
+      ],
+      "affiliations_text": "University of California at Santa Barbara",
+      "score": 3.0003345863127233,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2611.14759v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114759v1-us-data-center-growth-through-2030-a-critical-review-of-grid-adequacy-and-transmission-expansion-planning",
+      "source": "arxiv",
+      "title": "U.S. Data Center Growth Through 2030: A Critical Review of Grid Adequacy and Transmission Expansion Planning",
+      "authors": [
+        "Babak Porkar",
+        "Mona Ghassemi"
+      ],
+      "authors_text": "Babak Porkar, Mona Ghassemi",
+      "abstract": "The growth of large data centers raises questions about both supply adequacy and the suitability of load representations used in connection studies. This paper critically reviews the U.S. demand, generation, and transmission outlook through 2030 and examines the implications for transmission expansion planning (TEP). Comparison of public forecasts highlights distinctions among annual average demand, peak demand, and grid connection capacity. National generating-capacity totals cannot establish a dependable surplus because resource availability, regional adequacy, transmission constraints, and project timing determine supply capability. Recent grid events and published dynamic studies demonstrate that faults can trigger substantial data-center transfers to backup supply, followed by delayed or coordinated demand recovery. These behaviors require appropriate representation within the conventional planning framework, alongside assessment of the requested maximum grid import. The selected literature reveals limited integration of validated data-center dynamic models into the technical screening and economic comparison of expansion alternatives. The review identifies the need to establish whether fault response and recovery change feasible connection capacity, required reinforcement, or the preferred transmission investment.",
+      "url": "http://arxiv.org/abs/2611.14759v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14759v1",
+      "tldr": "This paper critically reviews U.S. data center growth and grid/transmission outlook through 2030, arguing that transmission expansion planning must incorporate validated data-center fault-response and demand-recovery dynamics—not just aggregate demand forecasts—to determine feasible connection capacity, required reinforcements, and preferred transmission investments.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Dallas"
+      ],
+      "affiliations_text": "The University of Texas at Dallas",
+      "score": 2.9673816108435505,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2611.14760v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114760v1-graph-label-alignment-a-diagnostic-atlas-for-graph-classification",
+      "source": "arxiv",
+      "title": "Graph Label Alignment: A Diagnostic Atlas for Graph Classification",
+      "authors": [
+        "Neelam Akula",
+        "Varun Shiralkar",
+        "Murat Kantarcioglu",
+        "Baris Coskunuzer"
+      ],
+      "authors_text": "Neelam Akula, Varun Shiralkar, Murat Kantarcioglu, Baris Coskunuzer",
+      "abstract": "Graph classification benchmarks vary widely in difficulty: some are solved by simple pooled baselines, while others remain challenging for GNNs and graph transformers. We take a data-centric view and ask whether benchmark success is driven by genuine structure--feature reasoning or by label signal already accessible from restricted marginal views. We introduce graph label alignment, a lightweight diagnostic that measures label accessibility through two supervised probes computed without training a graph encoder: structural label alignment (SLA), based on permutation-invariant topological and spectral summaries, and feature label alignment (FLA), based on pooled node features with edges removed. Across real graph classification benchmarks and multiple pooled backbones, the resulting SLA--FLA plane strongly organizes test accuracy, with low-alignment datasets forming a consistent regime where standard pooled pipelines struggle. To probe what lies beyond marginal accessibility, we introduce controlled interaction-dominated stress tests, including heterophilic ego-graphs and synthetic Twins tasks whose structural and feature marginals are matched across classes but whose role--feature couplings differ. These results show that high alignment explains much of easy benchmark performance, while low alignment reveals regimes where success requires preserving structure--feature correspondence beyond standard pooled representations.",
+      "url": "http://arxiv.org/abs/2611.14760v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14760v1",
+      "tldr": "The paper introduces graph label alignment—a lightweight diagnostic using structural (SLA) and feature-only (FLA) label-predictability probes—and shows that the resulting SLA–FLA plane explains when graph classification benchmarks are easy for pooled models versus when success depends on interaction-dependent structure–feature reasoning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Virginia Tech",
+        "University of Texas at Dallas"
+      ],
+      "affiliations_text": "Virginia Tech, University of Texas at Dallas",
+      "score": 2.9326728503371022,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2611.14697v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114697v1-beyond-row-level-prediction-evaluating-and-learning-composition-for-reusable-table-representations",
+      "source": "arxiv",
+      "title": "Beyond Row-Level Prediction: Evaluating and Learning Composition for Reusable Table Representations",
+      "authors": [
+        "Ali Younes",
+        "Saeed Ghoorchian",
+        "Maximilian Schambach",
+        "Georgia Chalvatzaki",
+        "Johannes Höhne"
+      ],
+      "authors_text": "Ali Younes, Saeed Ghoorchian, Maximilian Schambach, Georgia Chalvatzaki, Johannes Höhne",
+      "abstract": "Tables are compositional, with content spread across a schema, cell values, rows, and columns. Large-scale operations such as retrieval, overlap estimation, deduplication, and data curation need these local signals composed into one reusable embedding vector per table. Table representation methods, however, are mostly evaluated through row-level prediction or supervised downstream tasks, which do not measure table-level embedding quality directly. We introduce a benchmark that evaluates table-level embeddings through four desiderata: consistency under partial views, discriminability across label granularities, robustness to benign perturbations, and efficiency. Across twelve methods on synthetic and real corpora, lightweight schema- and text-based fingerprints are among the strongest. The sharpest contrast comes from two tabular foundation models, TabPFN and ConTextTab: although both are strong row-level predictors, their states, composed by mean, max, or three further parameter-free pooling rules, trail the strongest fingerprints. We therefore ask whether the gap lies in the encoder or in the compositional rule. Keeping ConTextTab frozen, we learn only the compositional rule over its cell states, using support-conditioned distribution matching (SCDM), a self-supervised loss we propose that matches the distribution of embedding similarities to the distribution of partition overlaps within and across tables. Across all fifteen head configurations, the learned rule raises the Spearman correlation between embedding similarity and partial-view overlap from 0.04 to 0.43-0.50 on synthetic data and improves triplet ranking, clustering, and retrieval, with smaller but systematic gains on real data. A downstream parent-table retrieval task confirms these findings. How local states are composed, and with what objective, substantially affects the quality of table-level embeddings.",
+      "url": "http://arxiv.org/abs/2611.14697v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14697v1",
+      "tldr": "The paper introduces a table-level embedding benchmark and shows that the compositional rule used to aggregate local cell/schema states—learned via self-supervised support-conditioned distribution matching (SCDM)—is critical for reusable table representations, substantially improving partial-view consistency, clustering, and retrieval over strong row-level models and simple fingerprints.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 2.9216799418328416,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2611.14762v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/13/261114762v1-open-source-transtibial-prosthetic-bypass-preserving-joint-alignment-gait-learning-and-kinematic-evaluation",
+      "source": "arxiv",
+      "title": "Open-Source Transtibial Prosthetic Bypass Preserving Joint Alignment: Gait Learning and Kinematic Evaluation",
+      "authors": [
+        "Apolline de Vaulchier",
+        "Pablo Nocito",
+        "Yann Corbel",
+        "Nathanaël Jarrassé"
+      ],
+      "authors_text": "Apolline de Vaulchier, Pablo Nocito, Yann Corbel, Nathanaël Jarrassé",
+      "abstract": "Prosthetic bypasses allow able-bodied individuals to walk with a prosthesis, enabling safe early-stage testing of new prosthetic devices before clinical trials. However, existing transtibial bypasses impose constraints, such as a contralateral shoe lift or a lateral offset of the prosthesis, and their effects on gait remain poorly documented. We present an open-source transtibial prosthetic bypass that preserves part of the sagittal knee mobility without these constraints. Six able-bodied participants familiarized themselves with the bypass for approximately 10~min, then walked on a treadmill with and without it, and joint kinematics were recorded with motion capture and then extracted with OpenSim. All participants were able to walk without handrail support, although single stance remained shorter on the bypass side (27% vs. 45% of the gait cycle). Bypass-side ankle kinematics were consistent with those reported for transtibial prosthesis users, whereas peak knee flexion during swing decreased from 61° to 36° (p<0.001) and hip range of the sound leg increased from 35° to 51° (p<0.01). Although gait with the bypass does not fully replicate that of prosthesis users, it yielded consistent gait patterns after only 10~min of learning. This bypass therefore provides a useful tool for the lower-limb prosthetics research community, facilitating preliminary experiments with able-bodied participants.",
+      "url": "http://arxiv.org/abs/2611.14762v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.14762v1",
+      "tldr": "This paper presents an open-source transtibial prosthetic bypass that preserves sagittal knee mobility without a shoe lift or lateral offset, and shows that able-bodied users can achieve consistent gait patterns after about 10 minutes of learning, although bypass gait only partially replicates that of prosthesis users.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ker Ortho",
+        "Sorbonne Université"
+      ],
+      "affiliations_text": "Ker Ortho, Sorbonne Université",
+      "score": 2.3661605210980388,
+      "score_text": "2.4"
+    }
+  ],
+  "errors": []
+}
