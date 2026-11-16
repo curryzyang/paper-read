@@ -1,0 +1,17 @@
+# Talk to Act: A Synthetic Multi-Turn Dialogue Benchmark for Human Intent Extraction and Action Planning in Robotics
+
+- 区域：速读区
+- 排名：12
+- 匹配度：3.4/10
+- 来源：arxiv
+- 作者：Deepu Krishnareddy, Mohammad Haziq Khan, Michael Danner, Matthias Rätsch
+- 机构：Bochum University of Applied Sciences, Reutlingen University
+- 链接：[arXiv / Source](http://arxiv.org/abs/2611.17549v1) · [PDF](https://arxiv.org/pdf/2611.17549v1)
+
+## TLDR
+This paper introduces a synthetic multi-turn human–robot dialogue benchmark for intent extraction and action planning, showing that small open-weight LLMs (270M–8B) can perform the task via structured tool-calling reasonably well without task-specific fine-tuning.
+
+## Abstract
+Multi-turn conversational human-robot interaction (HRI) continues to be a challenging problem in robotics, as many existing systems rely on rigid, command-driven interfaces that can be unintuitive for users. Recent advances in Large Language Models (LLMs) provide a promising direction, given their ability to process natural language, generate structured outputs, and support tool-based reasoning, all of which are relevant for interpreting user intent in robotic settings. However, progress in this area is constrained by the limited availability of datasets and benchmarks that capture the nuances of real-world human communication, such as multi-turn dialogue, ambiguity, and context-dependent requests.
+  In this work, we present a synthetically generated multi-turn dialogue dataset for HRI, annotated with action intents, object references, and task plans across a range of scenarios and user personas. Our primary focus is on evaluating the capability of small, open-weight language models for robotic tasks, particularly in settings where local deployment and efficiency are important. To this end, we frame intent extraction as a tool-calling problem where each predicted action corresponds to a structured function call with arguments grounded in the dialogue and benchmark models ranging from 270M to 8B parameters on their ability to perform intent extraction and action planning without task-specific fine-tuning.
+  Our results show that these models can achieve reasonable performance on the task even at relatively small scales and without any task-specific fine-tuning. This suggests that compact, locally deployable models already provide a useful baseline for conversational robotic systems. We expect that task-specific fine-tuning and more realistic training data will enhance performance further and make such models increasingly suitable for real-world robotic applications.

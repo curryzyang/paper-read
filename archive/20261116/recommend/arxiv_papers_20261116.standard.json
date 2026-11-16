@@ -1,0 +1,733 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-16T20:57:44.185376",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.17397v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117397v1-admissibility-preserving-control-for-block-strict-feedback-systems-under-time-varying-asymmetric-actuator-and-state-constraints",
+      "source": "arxiv",
+      "title": "Admissibility-Preserving Control for Block Strict-Feedback Systems Under Time-Varying Asymmetric Actuator and State Constraints",
+      "authors": [
+        "Saurabh Kumar",
+        "Lohitvel Gopikannan",
+        "Shashi Ranjan Kumar",
+        "Abhinav Sinha"
+      ],
+      "authors_text": "Saurabh Kumar, Lohitvel Gopikannan, Shashi Ranjan Kumar, Abhinav Sinha",
+      "abstract": "This paper addresses the tracking control of block strict-feedback nonlinear systems subject to time-varying asymmetric actuator and full state constraints. To that end, we develop a time-varying Admissibility-Preserving Control (APC) framework, in which the Admissibility-Preserving Input Realization (APIR) generates the plant input through a dynamic realization. The APIR guarantees input admissibility under the moving actuator set whenever each actuator bound contracts slower than the decay rate of the realization, and a closed-form lower bound on its gain is derived. The state constraints are handled by a logarithmic barrier coordinate at every backstepping step, with widths measured from the virtual control to the moving envelope of the corresponding state. We prove that every state lies inside its envelope, with each virtual control only required to remain inside the envelope of the next state, while the tracking error converges to zero exponentially. Simulations demonstrate the efficacy of the proposed safety-critical control scheme.",
+      "url": "http://arxiv.org/abs/2611.17397v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17397v1",
+      "tldr": "The paper proposes a time-varying admissibility-preserving control framework that combines a dynamic input realization for moving asymmetric actuator constraints with logarithmic-barrier backstepping for full state constraints, proving exponential tracking convergence while keeping all states and inputs admissible.",
+      "detailed_reading": {
+        "motivation": "工程系统中执行器限幅与状态约束常随时间变化，例如执行器降额、故障和工况变化；现有饱和/抗饱和、障碍Lyapunov反步、漏斗/预设性能及CBF-QP方法多针对定常或对称执行器约束，或依赖离线可行性检验、在线QP可行性或性能放宽。本文旨在为块状严格反馈非线性系统建立统一的时变APC框架，用单一显式条件同时认证输入容许性与全状态安全。",
+        "method": "针对块状严格反馈系统在时变非对称执行器集和全状态包络下的跟踪控制，构造APIR以微分方程动态生成实际输入，其有效增益在边界处消失，从而在每执行器界收缩慢于实现衰减速率时保持移动执行器集合前向不变，并推导实现增益的闭式下界。反步递推每一步采用对数障碍坐标，以虚拟控制到对应状态移动包络的宽度度量，替代传统BLF中为误差预留障碍宽度的可行性条件；将虚拟控制位于下一状态包络内的分离条件与APIR命令有界性合并为Lyapunov子水平集上的APC兼容性检验。闭环分析通过精确Lyapunov恒等式给出跟踪误差显式指数衰减率与幅值，并可经收紧执行器集将输入容许性传递到有界偏差的物理执行器。",
+        "result": "理论结果表明，在APC兼容条件下每个状态始终位于其移动包络内，移动执行器集合保持前向不变，所有闭环信号有界，跟踪误差以显式速率指数收敛到零且具有显式幅值；虚拟控制只需保持在下一状态包络内的分离条件。APIR在每执行器界收缩慢于实现衰减速率时保证输入容许性，并给出实现增益的闭式下界。仿真验证了所提安全关键控制方案的有效性，但未报告硬件实验。",
+        "conclusion": "本文将APC从定常非对称执行器集推广到时变非对称执行器与全状态约束下的块状严格反馈系统，用APIR保证输入容许性、用逐步对数障碍坐标保证全状态安全，并以单一兼容性条件统一认证两类约束。该结果给出指数跟踪收敛与前向不变性的可证明保证，为执行器降额、故障等时变安全约束控制提供了一种可解释的递归设计思路。",
+        "key_details": "实现上无需训练和损失函数，输入为光滑的块状严格反馈模型、时变非对称状态/执行器上下界及初始条件；关键条件是执行器界收缩率慢于APIR实现衰减率、APIR增益存在闭式下界，以及分离条件与命令有界性构成的APC兼容性在Lyapunov子水平集上可验证。误差与障碍坐标的闭式比值携带相邻坐标交叉项，使闭环Lyapunov恒等式精确并给出显式衰减率；在线复杂度主要来自n步反步障碍坐标与兼容性集检验，APIR为一阶动态实现。局限包括速率与兼容性条件可能保守、依赖模型光滑性和时变边界信息，当前仅仿真验证，物理执行器需采用收紧集并允许有界输入偏差，兼容性不满足时不能无条件保证。\\n"
+      },
+      "affiliations": [
+        "Indian Institute of Technology Bombay",
+        "University of Cincinnati"
+      ],
+      "affiliations_text": "Indian Institute of Technology Bombay, University of Cincinnati",
+      "score": 5.7573538087297225,
+      "score_text": "5.8"
+    },
+    {
+      "id": "2611.17504v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117504v1-learning-monotone-game-theoretic-linear-mpc",
+      "source": "arxiv",
+      "title": "Learning monotone game-theoretic linear MPC",
+      "authors": [
+        "Alberto Bemporad",
+        "Tatiana Tatarenko"
+      ],
+      "authors_text": "Alberto Bemporad, Tatiana Tatarenko",
+      "abstract": "We propose a method to learn a game-theoretic model predictive control (GT-MPC) law by imitation from input and output data of a running multi-agent system. By interpreting the recorded inputs as the first moves of the equilibria of a game played by the agents, we learn the GT-MPC weights under hard input constraints and soft output constraints, without requiring the agents to reveal their objectives. We also impose that the resulting generalized Nash equilibrium (GNE) problem is strongly monotone, which ensures the existence and uniqueness of the equilibrium and, hence, that the learned GT-MPC law is well defined and can be evaluated efficiently online by variational GNE-seeking algorithms for linear-quadratic games. Moreover, strong monotonicity implies that the equilibrium is almost everywhere differentiable with respect to the references and the weights, which enables automatic differentiation for gradient-based optimization. In addition, we promote closed-loop stability of the unconstrained equilibrium feedback by incorporating a penalty that involves a jointly learned quadratic Lyapunov function. Learning a GT-MPC formulation enables us to explain the agents' objectives, reproduce their behavior in simulation in new scenarios, optimize their set-points, design mechanisms, and enforce additional constraints. A numerical example illustrates the approach.",
+      "url": "http://arxiv.org/abs/2611.17504v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17504v1",
+      "tldr": "The paper proposes a bilevel imitation-learning method that learns a strongly monotone game-theoretic linear MPC law from recorded multi-agent input/output data—without requiring agents’ objectives—while enforcing hard input constraints, soft output constraints, and closed-loop stability via a jointly learned quadratic Lyapunov penalty.",
+      "detailed_reading": {
+        "motivation": "多智能体系统中各智能体往往不愿公开自身目标，且实际运行可能由分散控制回路甚至人工操作完成，因此仅凭观测输入输出学习一个可复现其行为的博弈论MPC律很有价值。学习到的GT-MPC还能继承MPC处理输入/输出约束的能力，并用于闭环仿真、设定点优化、机制设计和附加约束实施。",
+        "method": "先从多次实验采集参考、输入和输出数据，用带ℓ2正则的输出误差辨识线性离散状态空间模型并估计初始状态，再用卡尔曼滤波得到状态估计。将记录输入解释为智能体博弈广义纳什均衡的第一步，构建含智能体特定跟踪权重、输入增量权重和共享输出约束松弛惩罚的参数化线性二次GT-MPC，并把参数设为状态估计、上一输入和参考。学习采用双层优化：内层对每个数据点求解变分GNE，外层拟合权重使均衡第一步逼近期望输入；同时通过对称部分正定约束按构造保证强单调性，利用均衡对参数几乎处处可微进行自动微分，并用L-BFGS-B优化，另加联合学习的二次Lyapunov函数惩罚促进无约束均衡反馈的闭环稳定性。",
+        "result": "该方法无需智能体公开目标即可学习GT-MPC权重，强单调性保证每个参数下变分GNE存在且唯一，使学习到的控制律定义良好并可用线性二次博弈的变分GNE算法高效在线求解。数值算例表明能够较精确地重建智能体背后的博弈，并可通过参考优化塑造闭环行为。",
+        "conclusion": "学习强单调的博弈论线性MPC可从输入输出数据中解释智能体目标、在新场景中复现其行为，并支持设定点优化、机制设计及附加约束实施；其核心是以唯一可微均衡为内层、以模仿第一步为外层进行可扩展的逆博弈学习。",
+        "key_details": "关键实现包括：以输出误差最小化加小ℓ2正则辨识(A,B,C)及各实验初始状态，卡尔曼滤波噪声协方差为调参量；GT-MPC含预测/控制/约束时域T、Tu、Tc，输入与增量约束为硬约束、共享输出约束通过各智能体松弛变量软约束；参数p=(ξ̂k,uk−1,rk)，决策含输入增量和松弛变量；强单调性条件为sym(Ā)⪰μI，μ>0；稳定性由联合学习的二次Lyapunov函数惩罚项促进；外层用L-BFGS-B和自动微分，且未知量规模不随样本数线性增长。局限包括线性时不变模型与线性二次成本假设、强单调性限制、仅观测均衡第一步、噪声与卡尔曼滤波调参影响，以及主要数值算例验证。"
+      },
+      "affiliations": [
+        "Technische Universität Darmstadt",
+        "IMT School for Advanced Studies Lucca"
+      ],
+      "affiliations_text": "Technische Universität Darmstadt, IMT School for Advanced Studies Lucca",
+      "score": 5.355904020630474,
+      "score_text": "5.4"
+    },
+    {
+      "id": "2611.17487v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117487v1-identifying-latent-neural-dynamics-with-recognition-parametrised-gaussian-process-dynamical-systems",
+      "source": "arxiv",
+      "title": "Identifying Latent Neural Dynamics with Recognition-Parametrised Gaussian Process Dynamical Systems",
+      "authors": [
+        "Arielle Rosinski",
+        "Qianqian Feng",
+        "Lior Fox",
+        "Maneesh Sahani"
+      ],
+      "authors_text": "Arielle Rosinski, Qianqian Feng, Lior Fox, Maneesh Sahani",
+      "abstract": "Neural circuits are densely interconnected systems, and many neural computations are thought to be mediated by the dynamical evolution of activity within these recurrent networks, a hypothesis often referred to as \"computation through dynamics\". Under this view, understanding computation within real neural populations depends on building models of the dynamical rules governing the temporal evolution of recorded high-dimensional neural activity. Most commonly, such models depend on explicit generative parameterisations of (i) the (nonlinear) intrinsic dynamical flow field and stochasticity, (ii) the (nonlinear) mapping from dynamical state to neuronal activity, and (iii) the variability of individual neural responses given that dynamical state. Misspecification of any of these components can bias estimates of dynamics and latent trajectories. In this paper, we circumvent generation-related issues by introducing the Recognition-Parametrised Gaussian Process dynamics (RP-GPdyn) model. RP-GPdyn models the dynamical flow field using a nonparametric Gaussian Process-defined transition function and models the relationship of dynamics to neural activity implicitly using the Recognition-Parametrised Model (RPM) framework. We show that this generation-free approach uncovers meaningful, behaviourally relevant latent variables and dynamics from both synthetic and experimental datasets.",
+      "url": "http://arxiv.org/abs/2611.17487v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17487v1",
+      "tldr": "The paper introduces RP-GPdyn, a generation-free latent dynamical systems model that combines a Gaussian-process transition function with recognition-parametrised inference to uncover meaningful, behaviorally relevant neural dynamics without relying on explicit generative observation models.",
+      "detailed_reading": {
+        "motivation": "神经计算常被认为由群体活动的低维动力学介导，因此需要从高维神经记录中估计潜在动力系统。现有潜变量动力模型通常显式参数化非线性流场、状态到神经活动的嵌入以及观测噪声，任一组件设定错误都会使动力学和潜在轨迹估计产生偏差。本文旨在构建一种无需显式生成观测模型、同时保留动力学可解释性的框架。",
+        "method": "RP-GPdyn将潜在马尔可夫动力学建模为非参数高斯过程定义的转移函数，并采用稀疏变分诱导点进行近似推断；GP先验进一步以学习到的固定点和局部雅可比矩阵为条件，使流场显式暴露固定点、局部稳定性和流几何。观测关系不通过参数化发射分布或噪声模型给出，而由Recognition-Parametrised Model框架隐式建模：联合分布为潜在先验乘以各时刻经验边际p0(x_t)与归一化识别因子g_phi(z_t|x_t)/G_phi(z_t)的乘积。训练时优化识别因子和GP变分后验，支持时间池化或时间特异的经验参考分布，并可自然纳入异质数据模态。",
+        "result": "作者在合成数据和实验神经数据上报告，RP-GPdyn能够恢复有意义且与行为相关的潜在变量和动力学。该生成无关方法避免了对观测噪声分布的显式假设，从而减轻噪声模型误设对潜在轨迹和动力学估计的影响。预览材料未给出具体定量指标或基线对比数值。",
+        "conclusion": "RP-GPdyn提供了一种兼具非线性随机动力学表达能力和机制可解释性的潜变量动力建模途径。它通过GP流场保留固定点与局部稳定性等可解释结构，并通过RPM避免 restrictive 的观测似然假设，适用于神经群体活动及异质观测数据的动力学分析。",
+        "key_details": "关键实现包括：GP核及其对输入的一阶、二阶导数构成联合协方差，以条件化固定点和雅可比矩阵；诱导点数量M固定计算成本；RPM用经验边际p0和归一化项G_phi保证联合分布归一化，因而不隐含Poisson观测假设；参考分布可选时间池化或时间特异，选择会影响模型行为。局限包括变分近似、核函数与参考分布选择、固定点/雅可比超参数优化及GP计算约束，且预览中缺少定量基准结果。"
+      },
+      "affiliations": [
+        "University College London"
+      ],
+      "affiliations_text": "University College London",
+      "score": 4.942214806404642,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.17492v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117492v1-pf-exec-large-scale-uav-relay-load-balancing-with-an-anchored-potential-direction-decider-and-a-per-dimension-gain-learning-executor",
+      "source": "arxiv",
+      "title": "PF-Exec: Large-Scale UAV Relay Load Balancing with an Anchored Potential Direction Decider and a Per-Dimension Gain-Learning Executor",
+      "authors": [
+        "Liheng Zeng",
+        "Hanzhang Jia",
+        "Yiran Li",
+        "Yi Gao",
+        "Bo Ma"
+      ],
+      "authors_text": "Liheng Zeng, Hanzhang Jia, Yiran Li, Yi Gao, Bo Ma",
+      "abstract": "Relay load balancing in large-scale UAV networks requires joint decisions on association, bandwidth, power and hovering position, while the dimension grows with the number of UAVs and each UAV sees only its local state. This paper splits the decision into two layers. An anchored potential direction decider emits a closed-form target at every instant and returns its direction only. A gain-learning executor maps a local observation into a positive gain per dimension, composes gain and target, and clips the action against the physical single-step bound; the two layers form PF-Exec. The unit gain is the default start, so the executor reduces to the pure potential policy before training. The load is first-order homogeneous in bandwidth, making the bandwidth target closed form, and the position target is the demand-weighted centroid of the served users. The system uses a two-hop access and millimetre-wave backhaul link with soft association, a 3GPP UMa-AV channel with two shadowing layers, an OU-type social-force crowd and a quadrotor physical layer. Evaluation spans all fleet sizes, two crowd scenarios, independent seeds, the published baselines in their own settings and a degraded-information line. In the highest-pressure burst setting the fixed-step comparison breaks down on part of the seeds, losing fairness and mean load at once, while PF-Exec holds fairness near one. Among the ten comparison methods only the greedy heuristic survives that setting; its load variance stays far higher. Under stale global state and position noise the fairness index stays high at both largest-scale scenarios. Flight energy is nearly identical between the learned and the fixed-step executor, and three constants are fixed once across all settings. The convergence properties of both layers, from the truncated gain iteration to the perturbed tracking bound, are proved in the companion analysis.",
+      "url": "http://arxiv.org/abs/2611.17492v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17492v1",
+      "tldr": "PF-Exec is a two-layer UAV relay load-balancing method that combines a closed-form anchored potential-direction decider with a per-dimension gain-learning executor to achieve scalable, robust fairness across large fleets and demanding crowd/load conditions.",
+      "detailed_reading": {
+        "motivation": "大规模无人机中继负载均衡需联合决定关联、带宽、功率和悬停位置，决策维度随无人机数量增长，且每架无人机只能看到局部状态；同时人群移动会造成负载严重偏斜，少数无人机过载而整体均值掩盖偏斜，且负载超过5意味着无法服务用户，因此平衡是独立的一等目标。现有集中式非凸重解随规模增长，端到端学习又缺乏可解释方向且中心评估成本随编队增长，系统需在线秒级运行并具备与编队规模无关的运行时保证。",
+        "method": "PF-Exec把决策拆成两层：锚定势方向决策器在每个时刻输出闭式目标并只返回方向，利用负载对带宽的一阶齐次性给出闭式带宽目标，利用位置目标可分离性给出被服务用户的需求加权质心位置目标；增益学习执行器把22维局部观测经投影残差块映射为五个逐维正增益，增益硬约束在[0.50,2.01]，用TD3训练，将增益与目标组合后按物理单步界裁剪动作。初始单位增益使执行器在训练前严格退化为纯势策略，因此学习只改进速度而不经过不安全中间策略。系统采用两跳接入与毫米波回传、阻尼softmax软关联、3GPP UMa-AV信道与双层阴影、OU型社会力人群和四旋翼物理层；环境步长0.1 s、回合2000步，评估扩展到4000步。",
+        "result": "在最高压力突发设置中，固定步长对比方法在部分随机种子上失效，同时损失公平性和平均负载，而PF-Exec把Jain公平指数保持在接近1；十种对比方法中仅贪心启发式在该设置下存活，但其负载方差仍远高于PF-Exec。在过期全局状态和位置噪声下，两个最大规模场景的公平指数仍保持较高。学习执行器与固定步长执行器的飞行能耗几乎相同，且三个常数在所有设置中固定一次；评估覆盖3、12、30、60、100架无人机、flow与burst场景、三个种子、十种比较方法、四种已发表基线原生设置及信息退化线，共602次运行。",
+        "conclusion": "论文表明可将负载均衡中的闭式势方向与学习到的逐维速度分离：方向由锚定势闭式给出，执行器仅学习每维增益，从而在保持可解释性和安全初始化的同时提升高压力下的公平性与鲁棒性。该方法以局部观测和逐无人机小网络实现在线运行，运行时保证不随编队规模增长，且不带来额外飞行能耗；收敛性由伴随分析中的截断增益迭代和扰动跟踪界证明，本文侧重行为测量。",
+        "key_details": "负载在接入受限区对带宽一阶齐次，需求尺度c_i=u_i b_i相对带宽漂移约1e-16，带宽目标为需求尺度除以负载锚点；方向势采用对数拐点视图的等权完全图势，保持全负载域排序并在深度过载时梯度严格为正，价格信号通过被视负载差分的次梯度一步更新。关联阻尼softmax取τ_u=5、α=1.0、κ=0.5、ε=0.1，功率24 dBm且乘子[0.5,2]，带宽预算B且单机下限1e-3；回传28 GHz、100 MHz、43 dBm，接入2 GHz、高度50 m，路损离线10 m网格烘焙，运行时阴影标准差每回合从[0,13.2] dB抽取并每100步刷新。执行器输入22维局部观测、输出5个正增益，硬界[0.50,2.01]，TD3训练，单位增益初始化等价纯势策略；局限性包括收敛依赖增益界与截断而非谱证书，伴随分析报告60/60个实测状态的谱充分条件失败，且策略仅依赖局部状态。"
+      },
+      "affiliations": [
+        "Zhejiang Gongshang University",
+        "University of Sussex",
+        "Shanghai Shuyuan Information Technology Co., Ltd."
+      ],
+      "affiliations_text": "Zhejiang Gongshang University, University of Sussex, Shanghai Shuyuan Information Technology Co., Ltd.",
+      "score": 4.823201111027322,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.17394v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117394v1-agentic-teacher-an-agentic-data-engine-for-failure-driven-vla-post-training",
+      "source": "arxiv",
+      "title": "Agentic-Teacher: An Agentic Data Engine for Failure-Driven VLA Post-Training",
+      "authors": [
+        "Gongyue Teng",
+        "Yuqing Xie",
+        "Yixian Zhang",
+        "Feng Gao",
+        "Shu'ang Yu",
+        "Jiaji Rao",
+        "Sukai Wang",
+        "Guanghui Ren",
+        "Ya Zhang",
+        "Maoqing Yao",
+        "Yu Wang",
+        "Chao Yu",
+        "Xinlei Chen"
+      ],
+      "authors_text": "Gongyue Teng, Yuqing Xie, Yixian Zhang, Feng Gao, Shu'ang Yu, Jiaji Rao, Sukai Wang, Guanghui Ren, Ya Zhang, Maoqing Yao, Yu Wang, Chao Yu, Xinlei Chen",
+      "abstract": "Improving a pretrained vision-language-action (VLA) model requires demonstrations that address its weaknesses and provide effective supervision for learning. Coding agents can autonomously generate demonstrations through environment interaction, yet successful execution alone does not ensure effective supervision for VLA learning. We introduce Agentic-Teacher, an autonomous data engine for failure-driven VLA post-training. Given a VLA checkpoint, a task specification, and configured environment tools, the engine analyzes failed rollouts, selects intervention states, and iteratively develops closed-loop code policies through execution feedback. Validated policies become reusable demonstration generators that collect successful continuations from states where the VLA struggles. To make these demonstrations suitable for learning, Agentic-Teacher introduces temporally correlated action noise to broaden state-action coverage, removes idle frames while preserving gripper transitions, and filters trajectories using the frozen base model's flow-matching loss. The resulting demonstrations are combined with successful VLA rollouts for post-training, yielding an updated policy that operates without coding-agent assistance. Agentic-Teacher thus connects the weaknesses of a target VLA to both the generation and curation of its training data. In simulation, it improves $π_0$ success rates from 79.4% to 87.8% on LIBERO-10, from 80.4% to 90.6% on MetaWorld-10, and from 0% to 30.0% across three RoboCasa tasks.",
+      "url": "http://arxiv.org/abs/2611.17394v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17394v1",
+      "tldr": "Agentic-Teacher is an autonomous failure-driven data engine that uses coding agents to generate, refine, and curate targeted demonstrations from a VLA model’s failed rollouts, enabling effective post-training that improves task success without requiring agent assistance at inference time.",
+      "detailed_reading": {
+        "motivation": "提升预训练视觉-语言-动作（VLA）模型需要能够针对其薄弱环节提供有效监督的示范数据，但仅靠编码智能体与环境交互生成成功轨迹，并不保证这些数据对 VLA 学习有效。为此，作者提出面向失败驱动的 VLA 后训练数据引擎，将目标模型的失败模式同时连接到训练数据的生成与筛选。",
+        "method": "给定 VLA 检查点、任务说明和环境工具，Agentic-Teacher 先分析失败 rollout，选择需要干预的状态，再借助执行反馈迭代开发闭环代码策略；验证通过的策略作为可复用示范生成器，从 VLA 失败状态收集成功后续轨迹。为使示范适合学习，方法引入时间相关动作噪声扩大状态-动作覆盖，删除空闲帧但保留夹爪切换，并用冻结基模型的流匹配损失过滤轨迹，最后将筛选后的示范与成功 VLA rollout 合并用于后训练，部署时更新后的策略不再需要编码智能体辅助。",
+        "result": "在仿真中，该方法将 π0 的成功率从 79.4% 提升到 87.8%（LIBERO-10），从 80.4% 提升到 90.6%（MetaWorld-10），并在三个 RoboCasa 任务上从 0% 提升到 30.0%。这些结果说明失败驱动生成与筛选的数据能改善目标 VLA 的后训练效果，尤其在基模型完全失败的任务上带来非零成功。",
+        "conclusion": "Agentic-Teacher 将目标 VLA 的失败弱点与训练数据的生成、增强和筛选闭环连接起来，形成可自主运行的后训练数据引擎。后训练后的策略无需编码智能体参与即可执行任务，表明该方法有潜力把失败分析转化为可复用的监督数据；但当前证据主要来自仿真基准，RoboCasa 上 30.0% 的成功率也显示复杂任务仍有明显提升空间。",
+        "key_details": "关键实现包括基于失败 rollout 选择干预状态、用执行反馈迭代闭环代码策略、以时间相关动作噪声扩展覆盖、保留夹爪转换的空闲帧删除，以及用冻结基模型的流匹配损失进行轨迹过滤。方法依赖任务说明、可配置环境工具和可执行反馈，数据由验证策略生成的成功续接与原有成功 rollout 混合构成；摘要未披露噪声强度、过滤阈值、轨迹数量和后训练超参数。局限性在于目前仅报告仿真结果，缺少真实机器人验证，且对需要复杂长程操作的任务提升有限。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.734798521855789,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.17459v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117459v1-classification-with-large-step-gradient-descent-unifying-self-stabilization-and-convergence-rates",
+      "source": "arxiv",
+      "title": "Classification with Large-Step Gradient Descent: Unifying Self-Stabilization and Convergence Rates",
+      "authors": [
+        "Salma Tarmoun",
+        "Lachlan Ewen MacDonald",
+        "Konstantinos Emmanouilidis",
+        "Ziqing Xu",
+        "René Vidal"
+      ],
+      "authors_text": "Salma Tarmoun, Lachlan Ewen MacDonald, Konstantinos Emmanouilidis, Ziqing Xu, René Vidal",
+      "abstract": "Neural networks are often trained with gradient descent (GD) using step sizes that exceed classical stability thresholds, a regime where standard convergence theory no longer applies. Despite exhibiting non-monotonic loss and oscillatory dynamics, this regime frequently leads to faster convergence and better generalization. Existing theoretical perspectives offer complementary but incomplete insights: one identifies a self-stabilization mechanism that drives GD toward flat regions but does not yield convergence rates; another derives rigorous rates for specific losses but does not explain the underlying stabilization mechanism; and a third unifies these views for overparameterized least squares, but relies on the existence of a minimizer manifold, which is absent in classification settings. In this work, we extend this unified geometric perspective to exponential-tail losses, including logistic and cross-entropy losses in separable linear classification, where the loss infimum is not attained at any finite parameter. We identify a curvature-defined reference subspace that replaces the role of the minimizer manifold, yielding a coupled dynamical system in which orthogonal oscillations are damped by parallel progress along directions of decreasing sharpness. Under regularity conditions, which we verify for logistic and multiclass cross-entropy losses on symmetric data models, we derive explicit bounds for the iterates, not just the loss, covering both the unstable and stable regimes, and revealing a three-phase damping structure in the latter. Our analysis further uncovers a transient implicit bias induced by large step sizes: although GD converges asymptotically to the max-margin direction, large steps can leave persistent orthogonal residuals and, in certain geometries, amplify them, affecting finite-time alignment with the max-margin direction.",
+      "url": "http://arxiv.org/abs/2611.17459v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17459v1",
+      "tldr": "This paper unifies self-stabilization and convergence-rate analysis for large-step gradient descent in separable linear classification with exponential-tail losses, using a curvature-defined reference subspace to derive explicit iterate bounds and reveal a transient large-step implicit bias toward the max-margin direction.",
+      "detailed_reading": {
+        "motivation": "大步长梯度下降常突破经典稳定阈值，虽损失非单调且轨迹振荡，却常带来更快收敛和更好泛化，但现有理论各执一端：自稳定机制缺乏收敛率，特定损失的速率分析不解释稳定化机制，最小二乘的统一分析又依赖分类问题中不存在的极小值流形。本文旨在把统一的几何视角推广到指数尾损失，为可分离线性分类中的大步长GD同时刻画自稳定机制与迭代收敛率。",
+        "method": "论文研究可分离线性分类中的逻辑损失和多类交叉熵等指数尾损失，其下确界不在任何有限参数处达到；作者用由损失曲率定义的参考子空间替代极小值流形，将GD轨迹分解为平行于该子空间的分量和正交振荡分量，得到一个耦合动力系统，其中正交振荡被沿低锐度方向的平行推进所阻尼，三阶耦合对应曲率的隐式梯度下降。作者在正则条件下推导迭代点而非仅损失的显式上界，覆盖不稳定与稳定两类步长区间，并在对称数据模型上验证逻辑损失和多类交叉熵损失满足条件，同时用实验检验理论预测。",
+        "result": "分析给出迭代点的显式收敛界，并在稳定区揭示振荡阻尼的三相结构；同时发现大步长会引入瞬态隐式偏置：尽管GD渐近收敛到最大间隔方向，有限时间仍可能留下持续的正交残差，并在某些数据几何下放大这些残差，从而影响与最大间隔方向的有限时间对齐。",
+        "conclusion": "该工作将大步长GD的自稳定机制与收敛率统一到指数尾损失的几何分析框架中，说明曲率参考子空间可替代分类设定中缺失的极小值流形，并揭示稳定区的三相阻尼和由步长与几何决定的瞬态隐式偏置。其结论为理解大学习率下分类训练的快速收敛、振荡行为及有限时间方向偏置提供了可检验的理论依据。",
+        "key_details": "关键实现依赖曲率定义的参考子空间、平行-正交分解以及三阶耦合项，核心假设包括谷几何和衰减剖面等正则条件，并在对称可分离数据的逻辑回归与多类交叉熵上验证；分析同时给出不稳定与稳定步长区的迭代界，而不只约束损失值。局限在于理论主要覆盖指数尾损失和满足正则条件的对称数据模型，尚未直接适用于一般深度网络或任意数据几何，且大步长导致的正交残差和有限时间最大间隔对齐偏差是几何相关的瞬态现象。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.672457562202881,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.17469v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117469v1-improved-regret-via-variance-aware-policy-optimization-in-adversarial-mdps",
+      "source": "arxiv",
+      "title": "Improved Regret via Variance-Aware Policy Optimization in Adversarial MDPs",
+      "authors": [
+        "Ofir Schlisselberg",
+        "Alon Cohen",
+        "Yishay Mansour"
+      ],
+      "authors_text": "Ofir Schlisselberg, Alon Cohen, Yishay Mansour",
+      "abstract": "We study episodic adversarial MDPs with unknown dynamics and full-information rewards and achieve regret with leading term $\\widetilde O(\\sqrt{H^3SAK})$. Here $H$ is the horizon, $S$ the total number of states across decision layers, $A$ the number of actions, and $K$ the number of episodes. This improves the two incomparable prior leading terms by factors $\\sqrt{S/H}$ and $\\sqrt{H^3}$, leaving a factor $\\sqrt H$ to the lower-bound scale. We give a reduction from unknown to known dynamics for \\emph{downstream-dependent} algorithms, whose policy at step $h$ is computed only from information at steps $h+1$ and onward. This reduces the remaining leading-order gap to finding a downstream-dependent known-dynamics algorithm with $\\widetilde O(H\\sqrt K)$ regret, which would yield the tight $\\widetilde O(H\\sqrt{SAK})$ leading term for unknown dynamics. We instantiate the reduction with VOPO, a policy optimization (PO) algorithm. Its improved guarantees follow from a variance-aware analysis enabled by a novel bonus, which we call the Stability-Matching Bonus (SMB). VOPO achieves $\\widetilde O(\\sqrt{H^3K})$ regret under known dynamics with full information; its $\\sqrt H$ gap to the target $H\\sqrt K$ rate is inherited by our unknown-dynamics guarantee. We also show that with known dynamics and trajectory bandit feedback, VOPO achieves $\\widetilde O(\\sqrt{H^2SAK})$ regret. Both known-dynamics guarantees improve the corresponding state-of-the-art PO bounds by a factor $\\sqrt H$. A matching lower bound establishes that the full-information rate is tight in one parameter regime.",
+      "url": "http://arxiv.org/abs/2611.17469v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17469v1",
+      "tldr": "This paper introduces a variance-aware policy optimization algorithm, VOPO, with a Stability-Matching Bonus and a downstream-dependent unknown-to-known dynamics reduction, achieving improved regret \\(\\widetilde O(\\sqrt{H^3SAK})\\) for adversarial MDPs with unknown dynamics and full-information rewards.",
+      "detailed_reading": {
+        "motivation": "论文针对未知动力学、全信息奖励的回合制对抗性MDP，目标是改进遗憾界并缩小与标准下界Omega(H√(SAK))的差距。此前两个最优领先项O(HS√(AK))与O(√(H^6SAK))互不可比，因此需要新的方差感知策略优化分析来同时改善状态数和视野依赖。",
+        "method": "方法先给出从未知动力学到已知动力学的归约，适用于“下游依赖”算法，即第h步策略仅由h+1步及以后的信息计算。内层采用VOPO策略优化算法，交替进行策略评估与局部软策略改进，并引入新的Stability-Matching Bonus（SMB）精确匹配局部更新中的稳定性项；结合方差敏感分析、Profiles处理模型偏差以及适配的quasi-optimism型bonus控制探索，反向计算保证归约所需的下游依赖性。",
+        "result": "在未知动力学与全信息奖励下取得领先项Õ(√(H^3SAK))的期望遗憾，较O(HS√(AK))改进√(S/H)，较O(√(H^6SAK))改进√(H^3)，距下界尺度仅差√H。已知动力学全信息下VOPO达到Õ(√(H^3K))，轨迹bandit反馈下达到Õ(√(H^2SAK))，均较对应策略优化界改进√H；全信息情形还给出匹配下界，说明该速率在一个参数区域是紧的。",
+        "conclusion": "论文通过未知到已知动力学的归约和VOPO的方差感知策略优化，显著改进了对抗性MDP未知动力学遗憾界，并把剩余差距具体化为寻找下游依赖的已知动力学Õ(H√K)算法。SMB与方差敏感稳定性分析是获得改进视野依赖的关键，已知动力学策略优化保证也具有独立价值。",
+        "key_details": "关键设定为无环回合制MDP、oblivious对抗奖励、S为各决策层状态总数、A为动作数、H为视野、K为回合数，奖励为全信息或轨迹bandit反馈。技术要点包括下游依赖归约、VOPO局部软策略改进、SMB与稳定性项匹配、方差敏感分析、Profiles控制模型偏差和适配quasi-optimism型bonus；理论工作无实验超参，复杂度以忽略对数因子的遗憾标度表述。局限性是未知动力学结果仍比Omega(H√(SAK))多√H因子，归约依赖尚未实现的下游依赖Õ(H√K)已知动力学算法。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.639455639658841,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.17442v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117442v1-racing-the-clock-teaching-vlns-budget-conditioned-object-search",
+      "source": "arxiv",
+      "title": "Racing the Clock: Teaching VLNs Budget-Conditioned Object Search",
+      "authors": [
+        "Maitree Meher",
+        "Siming He",
+        "S. Shankar Sastry",
+        "Jitendra Malik",
+        "Claire Tomlin",
+        "Jonas Frey"
+      ],
+      "authors_text": "Maitree Meher, Siming He, S. Shankar Sastry, Jitendra Malik, Claire Tomlin, Jonas Frey",
+      "abstract": "A rescue robot entering a building with thirty seconds on the clock should sprint toward the single most promising room; given ten minutes, it should instead explore a broader tour. Yet vision-language-navigation (VLN) models are typically evaluated under a fixed episode limit that the policy never observes, even though time-critical missions require behavior to adapt to the available budget. We study budget-conditioned object search: given a target category and an explicit action budget, an agent must find as many distinct target instances as possible before the budget expires. We investigate how to supervise VLNs for this task by comparing a privileged TSP expert, which plans near-optimal routes using the full map and true target locations, with a room-level Bellman expert that maximizes expected return under partial observability using high-level cross-scene semantic priors. Despite the TSP expert achieving substantially higher expert performance, its demonstrations are less effective for learning exploration: on held-out HM3D scenes, the Bellman-supervised VLN consistently outperforms the TSP-supervised VLN, with the advantage becoming more pronounced at longer budgets. At 2000 steps (500m), the Bellman-supervised VLN finds 71.4% of reachable target instances, compared with 65.5% for the TSP-supervised VLN and 44.8% for the pretrained VLN. These results highlight a distinction between optimal routing and optimal exploration: effective exploration supervision should optimize decisions under partial observability rather than imitate routes that are optimal only once the environment is fully known.",
+      "url": "http://arxiv.org/abs/2611.17442v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17442v1",
+      "tldr": "This paper introduces budget-conditioned object search for vision-language navigation agents and shows that supervising them with a room-level Bellman expert that plans under partial observability yields better budget-aware exploration than imitating a privileged full-map TSP/object-level expert, because effective search supervision should optimize decisions under uncertainty rather than copy routes that are optimal only with complete environment knowledge.",
+      "detailed_reading": {
+        "motivation": "传统VLN通常在固定回合限制下评估，且策略本身看不到剩余预算，但时间敏感任务要求机器人依据可用时间在立即收集与探索远处房间之间调整行为。本文研究预算条件目标搜索：给定目标类别和显式动作预算，智能体需在预算耗尽前找到尽可能多的不同目标实例，并比较何种专家监督能最好地把预算感知搜索行为迁移给部分可观测的VLN。",
+        "method": "任务输入为RGB观测历史、目标类别指令和剩余预算倒计时，智能体输出基础动作，旅行、扫描与接近目标均消耗预算；实例按相机视场与距离的几何准则计为收集，无需物理拾取，奖励为每一步新收集的不同实例数。专家设计被形式化为对完整环境M的场景抽象z=φ(M)上的预算索引Bellman递推：对象级Bellman专家拥有完整地图和真实目标位置，将搜索退化为已知目标间的预算化路由/TSP式规划；房间级Bellman专家保留已观测房间连通性、门洞证据和跨场景语义先验，但不揭示未探索房间内容，在部分可观测下最大化期望回报并把未进入房间视为收益不确定、奖励延迟的搜索机会。两种专家在匹配场景、预算和记录数下蒸馏到同一Uni-NaVid学生，学生从RGB历史和语言预测基础动作，并额外与贪心frontier专家监督的VLN比较；评估时仅改变指令中的预算，并用倒计时干预和预算盲对照检验行为敏感性。",
+        "result": "尽管对象级/TSP专家自身的专家回报更高，其示范对学习探索反而更差：在留出HM3D场景上，房间级Bellman监督的VLN在每个测试预算下平均收集数最高，且优势在更长预算时更明显。在2000步（500m）预算下，房间级Bellman监督VLN找到71.4%的可达目标实例，TSP监督VLN为65.5%，预训练VLN为44.8%；仅改变声明预算即可使同一场景、同一初始位姿和确定性解码下的学习轨迹显著不同，而非简单延长同一轨迹。",
+        "conclusion": "结果表明最优路由不等于最优探索：有效探索监督应优化部分可观测下的决策，而不是模仿只有环境完全已知后才最优的路线。将剩余预算显式输入策略并提供房间级、不确定性感知的搜索示范，比全图全目标信息的路由示范更能把预算条件搜索行为迁移给视频VLN。",
+        "key_details": "实验在留出HM3D场景（文中为10个）上评估Uni-NaVid，测试预算包括50/150/400/800/2000步，2000步约500m；发现判定依赖相机视场和接近距离的几何准则，目标值统一为1、基础动作成本统一为1，以隔离目标优先级和成本权重影响。房间级专家仅用严格跨场景转移估计Bellman递推，门洞证据估计房间类别、跨场景先验预测发现率，未探索房间内容保持隐藏；两个Bellman学生共享架构、场景、预算、记录数和优化设置。局限性包括聚焦固定视频VLN架构与两类Bellman/贪心frontier监督，非均匀目标价值和非单位成本虽可扩展但监督优势需进一步验证，且目标是研究监督与预算使用而非替代显式地图frontier规划。"
+      },
+      "affiliations": [
+        "University of California, Berkeley",
+        "Stanford University"
+      ],
+      "affiliations_text": "University of California, Berkeley, Stanford University",
+      "score": 4.415035927260896,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.17462v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117462v1-diffusion-tree-sampling-for-inference-time-adaptation-of-crystal-generative-models",
+      "source": "arxiv",
+      "title": "Diffusion Tree Sampling for Inference Time Adaptation of Crystal Generative Models",
+      "authors": [
+        "Daniel T. Levy",
+        "Vineet Jain",
+        "Tara Akhound-Sadegh",
+        "Sékou-Oumar Kaba",
+        "Siamak Ravanbakhsh"
+      ],
+      "authors_text": "Daniel T. Levy, Vineet Jain, Tara Akhound-Sadegh, Sékou-Oumar Kaba, Siamak Ravanbakhsh",
+      "abstract": "Diffusion-based generative models have become strong priors over plausible crystal structures, but turning that prior into promising candidates requires steering toward several conflicting properties at once. Fine-tuning is expensive and produces a new model for every new objective, while differentiable guidance is not applicable to many real-world tasks. We instead adapt these generative models at inference time using Diffusion Tree Sampling (DTS), a Monte Carlo tree search procedure over the denoising trajectory. We make two technical contributions on top of DTS that are particularly relevant for AI-for-science applications. First, we show how to use existing property-conditional generative models (e.g., models fine-tuned for classifier-free guidance) as guided proposals inside DTS, without distorting the target distribution. Second, we extend DTS to multi-objective sampling, so that a single search produces samples spanning an entire Pareto front. We instantiate both adaptations on de novo crystal generation: improving the stability of crystals generated by different models, using pretrained conditional models to generate crystals belonging to rare space groups or with high bulk modulus, and generating crystals along a Pareto front of high dielectric constant and high bandgap materials. Across these tasks, DTS-based inference-time adaptation successfully improves model outputs without modifying the models themselves.",
+      "url": "http://arxiv.org/abs/2611.17462v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17462v1",
+      "tldr": "The paper introduces inference-time adaptations to Diffusion Tree Sampling for pretrained crystal generative models, enabling distribution-correct use of property-conditional guidance and multi-objective Pareto-front sampling to improve generated crystals without fine-tuning or modifying model weights.",
+      "detailed_reading": {
+        "motivation": "晶体扩散生成模型虽能采样化学上合理的结构，但无条件先验难以直接产生稳定、满足特定性质并在多目标间权衡的候选；为每个新目标微调代价高且产生新模型，可微引导又受限于不可微或昂贵的性质评估。材料发现中DFT验证与合成远比生成昂贵，因此应在推理期把算力用于提升候选质量而非增加低质量样本量。",
+        "method": "方法以Diffusion Tree Sampling为基础，把反向去噪轨迹组织成有限深度树，用MCTS式选择、扩展、rollout和soft Bellman log-sum-exp回传估计软价值，从而采样奖励倾斜分布。针对条件模型，保留无条件模型为目标，把条件/CFG模型作为提议分布，并在扩展、rollout和选择中用重要性权重η=pθ/qc修正，避免“双重倾斜”。针对多目标，将Pareto前沿采样形式化为先采样偏好w~p(w)再对多个奖励倾斜分布做混合，在单棵树中为每个目标维护价值向量，选择时用标量化价值s(v|w)，从而一次搜索共享计算并覆盖整个Pareto前沿。实例化于晶体去新生生成，输入为原子类型、晶格和坐标的联合扩散，奖励可为稳定性、空间群、体模量、介电常数/带隙等。",
+        "result": "在多个晶体生成任务上，DTS推理期适配无需修改模型权重即可提升输出：提高不同模型生成晶体的稳定性，利用预训练条件模型生成稀有空间群或高体模量晶体，并沿高介电常数与高带隙的Pareto前沿产生候选。摘要强调这些改进跨任务成功，且单次搜索可覆盖整个Pareto前沿；可复现结论是推理期适配可在固定基础模型上改善样本质量，避免逐目标微调和奖励梯度。",
+        "conclusion": "DTS可作为晶体生成基础模型的通用推理期适配层，将条件生成模型和多目标偏好纳入同一树搜索框架，在不训练新模型、不使用可微奖励梯度的条件下把先验引导到稳定性和目标性质区域。该工作表明对材料发现应把额外算力投入推理搜索以提升候选质量，并为条件模型复用和多目标Pareto采样提供原则性方案。",
+        "key_details": "关键实现包括：在MatterGen与DiffCSP等联合扩散模型上，以λ为逆温度定义π*∝pθ exp(λr)，节点价值用soft Bellman递推和log-sum-exp备份；条件提议的重要性权重η为基模型与提议转移的似然比，备份和子节点选择均需乘η；CFG模型便于同时给出条件和无条件转移。多目标中对每个目标分别备份价值向量，每次遍历采样偏好w并用线性或可选标量化s(·|w)选择扩展，p(w)可取Dirichlet；奖励仅在完整去噪后获得，树搜索以anytime方式自适应分配算力。局限包括价值估计在高噪声早期可能不准、结果依赖标量化与偏好分布选择、搜索计算开销以及奖励/条件模型质量。"
+      },
+      "affiliations": [
+        "McGill University",
+        "Mila - Quebec Artificial Intelligence Institute"
+      ],
+      "affiliations_text": "McGill University, Mila - Quebec Artificial Intelligence Institute",
+      "score": 4.38173135568401,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.17500v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/16/261117500v1-adversarially-batched-online-learning",
+      "source": "arxiv",
+      "title": "Adversarially Batched Online Learning",
+      "authors": [
+        "Mingda Qiao",
+        "Kerui Wu"
+      ],
+      "authors_text": "Mingda Qiao, Kerui Wu",
+      "abstract": "We introduce adversarially batched online learning, where the learner may update its decision rule only at a restricted set of time steps. Equivalently, the time horizon is partitioned into batches, within which the learner must use a fixed policy. We study this model for four canonical problems: stochastic bandits, online convex optimization, prediction with expert advice, and adversarial bandits. For stochastic bandits, we identify a universal complexity measure based on relative batch growth and establish both gap-dependent and gap-independent regret bounds. We show that the multiplicative penalty relative to the standard gap-dependent complexity can grow superlinearly in batch hardness. For the remaining three, we show that the optimal regret is tightly characterized by the 2-norm of the batch-length sequence. The upper bound is achieved by a batch-oblivious learner who does not know the batch structure, via a generic adaptive doubling trick tailored to this complexity measure. In contrast, the lower bound holds even for batch-aware learners.",
+      "url": "http://arxiv.org/abs/2611.17500v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17500v1",
+      "tldr": "The paper introduces adversarially batched online learning, where a learner can update only at adversarially chosen batch boundaries, and characterizes the resulting regret for stochastic bandits, OCO, experts, and adversarial bandits via batch-structure complexity measures, with matching bounds showing that optimal regret is governed by relative batch growth for stochastic bandits and by the 2-norm of batch lengths for the other problems.",
+      "detailed_reading": {
+        "motivation": "标准在线学习通常假设每轮后都能立即更新策略，但临床试验、众包标注、分布式系统同步等场景只在少数时间点提供反馈或允许部署更新，策略必须在批内保持不变。已有 batched 学习多由学习者自行设计批次以权衡后悔与批数，本文转而研究更新时点由环境或对手决定且不可更改的 adversarially batched 情形，刻画批次结构对可学习性的根本影响。",
+        "method": "作者把时间域划分为长度 b_1,...,b_B 的批次，学习者在每个批次内使用固定策略或动作，仅在批末获得累计反馈并更新，并区分预先知道批次结构的 batch-aware 与只知道当前批结束、不知道未来边界的 batch-oblivious。针对随机多臂老虎机定义批次硬度 α=max_j b_j/t_{j-1}（t_{j-1} 为此前累计长度），提出带合并操作的逐次消除算法并给出 gap-dependent 与 gap-independent 分析；针对 OCO、专家建议和对抗老虎机，分别用 OGD、Hedge、EXP3 等凸优化或在线学习算法处理批内累计损失或次梯度，并用面向 2-范数复杂度的通用自适应倍增技巧实现 batch-oblivious 上界。下界侧通过对对手构造和批次结构实例化，证明即使允许学习者知道批次结构也无法突破相应复杂度。",
+        "result": "随机老虎机得到 gap-dependent 期望后悔 O(min{T, α^2 log(NT) Σ_{i:Δ_i>0}1/Δ_i}) 与 gap-independent 后悔 Õ(min{T,√(αTN)})；下界在适当条件下给出 Ω(α Σ1/Δ) 与 Ω(√(αNT))，并进一步构造 Ω(α^{3/2}Σ1/Δ) 的 gap-dependent 下界，说明相对标准 UCB 复杂度的乘性惩罚可随批次硬度超线性增长。对 OCO、专家问题和对抗老虎机，最优后悔被批次长度序列的 2-范数 ∥b∥_2 紧致刻画，上界由不知道未来批次边界的 batch-oblivious 学习器通过自适应倍增达到，下界即使对 batch-aware 学习器也成立；当批次硬度为常数时，随机老虎机结果可恢复非批处理速率（最多多对数因子），且相比已有工作适用于任意批次结构并把 N/Δ_min 型依赖改进为 UCB 型 gap 求和。",
+        "conclusion": "该文表明，在更新受外部批次约束的在线学习中，批次结构不是常数级修正，而是决定后悔阶的核心复杂度：随机老虎机由相对批次增长 α 控制，凸优化型三类问题由批次长度 2-范数控制。结果同时说明，学习者在不知道未来更新时点的情况下，借助自适应倍增仍可达到与 batch-aware 下界近匹配的最优速率，为反馈延迟和部署受限的实际系统提供了理论依据。",
+        "key_details": "关键细节包括：随机老虎机奖励在 [0,1]、对抗老虎机损失在 [0,1]、OCO 的动作集紧凸且损失 G-Lipschitz，后悔分别按伪后悔或静态最优固定动作定义；α 取最大 b_j/t_{j-1} 并约定 t_0=1，非批处理对应 ∥b∥_2=√T 而单批次对应线性上界；算法上随机老虎机采用逐次消除与批次合并，其他问题采用 OGD、Hedge、EXP3 加自适应倍增，学习率或步长不需预知完整批次结构；下界构造覆盖 batch-aware 学习者并依赖 t_{j*-1}≥CN、t_{j*-1}≥C_2T/α 等条件；局限是随机老虎机 gap-dependent 的 α^2 上界与 α^{3/2} 下界之间仍有差距，文中还指出其分析会带来 Ω(α^{7/4}) 因子，且结论依赖有界损失或奖励与 Lipschitz 等标准假设。"
+      },
+      "affiliations": [
+        "University of Massachusetts Amherst"
+      ],
+      "affiliations_text": "University of Massachusetts Amherst",
+      "score": 4.369670206859126,
+      "score_text": "4.4"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.17479v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117479v1-razer-representation-aware-zonotope-reduction",
+      "source": "arxiv",
+      "title": "RAZeR: Representation Aware Zonotope Reduction",
+      "authors": [
+        "Vladimir Krsmanovic",
+        "Tobias Ladner",
+        "Bernd Finkbeiner"
+      ],
+      "authors_text": "Vladimir Krsmanovic, Tobias Ladner, Bernd Finkbeiner",
+      "abstract": "Reachability analysis is a popular technique for verifying the safety of a dynamical system under uncertainty, where the uncertainty is often represented by zonotopes. As the size of the zonotope representation typically grows as the reachability analysis progresses, it must be repeatedly reduced at the cost of additional conservatism. While various methods exist to reduce the size of the representation, combined advantages are not fully leveraged as only a single reduction method is typically used throughout the analysis. In this work, we show how dynamically choosing which method to use can yield significantly tighter results, thereby easing verification. This is realized by introducing a heuristic, derived from model predictive control, that accounts for upcoming propagation of the current zonotope. We argue that order reduction is not merely a post-processing step after propagation but also a pre-processing step that shapes how the zonotope evolves under the system dynamics. We evaluate our approach, RAZeR, on nonlinear benchmarks taken from the ARCH-COMP, where we demonstrate that RAZeR produces tighter zonotopes at a negligible performance overhead.",
+      "url": "http://arxiv.org/abs/2611.17479v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17479v1",
+      "tldr": "RAZeR dynamically selects zonotope reduction methods using a model-predictive-control-inspired heuristic that accounts for future propagation, yielding tighter reachable sets in nonlinear reachability analysis with negligible runtime overhead.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Munich",
+        "CISPA Helmholtz Center for Information Security"
+      ],
+      "affiliations_text": "Technical University of Munich, CISPA Helmholtz Center for Information Security",
+      "score": 4.299250086371117,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.17488v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117488v1-convergence-properties-of-pf-exec-homogeneous-structure-anchored-closed-form-and-gain-dynamics",
+      "source": "arxiv",
+      "title": "Convergence Properties of PF-Exec: Homogeneous Structure, Anchored Closed Form, and Gain Dynamics",
+      "authors": [
+        "Hanzhang Jia",
+        "Liheng Zeng",
+        "Yiran Li",
+        "Yi Gao",
+        "Bo Ma"
+      ],
+      "authors_text": "Hanzhang Jia, Liheng Zeng, Yiran Li, Yi Gao, Bo Ma",
+      "abstract": "This paper establishes a layered mathematical char acterisation of PF-Exec, the algorithm of the companion system paper. Demand-proportional bandwidth allocation yields an exact first-order homogeneous decomposition, from which the equal-load bandwidth target and its feasibility bound follow in closed form. The logarithmic knee view preserves strict load order and shares its global optimum with the Jain fairness index, while the demand-weighted centroid minimises the position potential. The damped softmax association block possesses a fixed point on the product of simplices. The truncated one-dimensional gain iteration admits a complete characterisation, with geomet ric convergence below the critical gain, initial-value-dependent bounded oscillation at it, and a family of bounded two-state cycles above it. A global invariant error ball and an explicit tracking recursion complete the execution guarantee. A numerical audit confirms the structural identities on every measured state and quantifies the local amplification of the coupled association and resource dynamics. Together, the results explain how closed form recovery directions and bounded adaptive gains provide stable execution without requiring a global Euclidean contraction assumption.",
+      "url": "http://arxiv.org/abs/2611.17488v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17488v1",
+      "tldr": "This paper provides a layered convergence analysis of PF-Exec, showing that demand-proportional bandwidth allocation yields closed-form equal-load targets and feasibility bounds, the damped softmax association admits a fixed point, and the one-dimensional gain iteration is globally bounded with geometric convergence or bounded oscillations/cycles depending on the gain, thereby guaranteeing stable execution through closed-form recovery directions and bounded adaptive gains without requiring a global Euclidean contraction assumption.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Zhejiang Gongshang University",
+        "University of Sussex",
+        "Shanghai Shuyuan Information Technology Co., Ltd."
+      ],
+      "affiliations_text": "Zhejiang Gongshang University, University of Sussex, Shanghai Shuyuan Information Technology Co., Ltd.",
+      "score": 4.229487877525587,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.17484v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117484v1-surface-preference-distribution-matching-on-pareto-fronts-via-scalarization-steering",
+      "source": "arxiv",
+      "title": "SURFACE: Preference Distribution Matching on Pareto Fronts via Scalarization Steering",
+      "authors": [
+        "Liuyuan Jiang",
+        "Prasanna Sattigeri",
+        "Lisha Chen"
+      ],
+      "authors_text": "Liuyuan Jiang, Prasanna Sattigeri, Lisha Chen",
+      "abstract": "Constructing a finite Pareto representation requires allocating a limited number of solutions across the Pareto front (PF). A desired preference distribution specifies this allocation by assigning more solutions to some PF regions and fewer to others. Scalarization generates Pareto solutions by varying objective weights and solving single-objective problems. However, a distribution of scalarization weights generally does not translate into the same distribution of Pareto solutions along the PF, because the weight-to-solution map is nonlinear and unknown in advance.To account for this distortion, we introduce SURFACE (Scalarization Updates for Redistributing Finite Approximations with Chart Estimation}), which adaptively updates scalarization weights to match a desired PF distribution. SURFACE estimates how each region of the weight grid corresponds to an area of the PF from the current scalarized solutions, then redistributes the weights accordingly. The method supports parallel, warm-started, inexact optimization with standard single-objective solvers. Theoretically, we establish that, under the stated regularity conditions, SURFACE achieves linear convergence of the preference distribution mismatch to a finite-resolution error floor of $\\mathcal{O}(N^{-2/(M-1)})$, where $N$ is the number of adaptive weights and $M$ is the number of objectives. Empirically, experiments across multiple benchmarks demonstrate improved target-mass balance and PF coverage compared with established baselines.",
+      "url": "http://arxiv.org/abs/2611.17484v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17484v1",
+      "tldr": "SURFACE adaptively steers scalarization weights using estimated weight-to-Pareto-front geometry to match a desired preference distribution, achieving provable convergence and improved balance and coverage in finite Pareto approximations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Rochester",
+        "IBM Research"
+      ],
+      "affiliations_text": "University of Rochester, IBM Research",
+      "score": 4.167611759890456,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.17398v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117398v1-alignment-with-reflect-reasoning-learning-how-to-follow-principles",
+      "source": "arxiv",
+      "title": "Alignment with Reflect-Reasoning: Learning How To Follow Principles",
+      "authors": [
+        "Henry Bell",
+        "Caroline Zhang",
+        "Dhaval Potdar",
+        "Mohammed Mobasserul Haque",
+        "Brandon Fain"
+      ],
+      "authors_text": "Henry Bell, Caroline Zhang, Dhaval Potdar, Mohammed Mobasserul Haque, Brandon Fain",
+      "abstract": "The appropriate governing norms and principles for the alignment of Large Language Models (LLMs) often depend on cultural context and deployment application. However, most alignment techniques focus on training models to conform to human preferences or constitutional principles specified at training time and subsequently fixed. In practice, many deployers rely on system prompting to implement contextual norms and guardrails at inference time. Prior work has shown that post-generation reflective reasoning with critique and revision can improve conformance compared to simple system prompting, but such methods are limited to the reasoning abilities inherent in the trained model. We introduce Reflect-Reasoning, a training method that teaches models how to reason about alignment to principles, rather than simply which principles to follow. Across five models, Reflect-Reasoning consistently outperforms both system prompting and explicit prompting strategies for in-context reflective reasoning. These improvements extend and generalize to entirely out-of-distribution domains of medical and financial principles. We additionally demonstrate that Reflect-Reasoning reduces the occurrence of rare but serious principle violations. Finally, we show that Reflect-Reasoning does not erode the safety engineering of a model and is robust against jailbreaking attempts using adversarial constitutions. Overall, our results demonstrate that Reflect-Reasoning is a scalable method for training constitutional alignment as a generalizable reasoning capability, enabling models to adapt to novel principles and produce transparent reasoning traces without additional fine-tuning.",
+      "url": "http://arxiv.org/abs/2611.17398v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17398v1",
+      "tldr": "**TLDR:** Reflect-Reasoning is a training method that teaches LLMs how to reason about and revise responses according to arbitrary in-context alignment principles—rather than hardcoding specific principles—enabling better conformance to novel and out-of-distribution constitutions, fewer serious violations, and maintained safety without additional fine-tuning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Duke University",
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Duke University, Independent Researcher",
+      "score": 4.118394142881597,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.17478v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117478v1-ergo-energy-efficient-hybrid-graph-neural-network-training-on-processing-in-memory-architectures",
+      "source": "arxiv",
+      "title": "ERGo: Energy-Efficient Hybrid Graph Neural Network Training on Processing-In-Memory Architectures",
+      "authors": [
+        "Pratyush Dhingra",
+        "Chibuike E. Ugwu",
+        "Janardhan Rao Doppa",
+        "Partha Pratim Pande"
+      ],
+      "authors_text": "Pratyush Dhingra, Chibuike E. Ugwu, Janardhan Rao Doppa, Partha Pratim Pande",
+      "abstract": "Processing-in-memory (PIM) has been proposed as an alternative computing paradigm for training Deep Neural Networks, including Graph Neural Networks (GNNs). Despite these advancements, training GNN workloads on PIM devices necessitates off-chip memory access. This off-chip access is expensive in terms of performance and energy, thereby impacting the overall energy efficiency of the training process on PIM platforms. In this paper, we propose a novel hybrid training framework called ERGo that automatically switches from a full-parameter phase to a parameter-efficient phase during the training process with negligible loss in predictive accuracy. The parameter-efficient phase employs low-rank representations of GNN weights, effectively reducing the number of trainable parameters. This helps in reducing the off-chip access during the end-to-end training process on PIM architectures, leading to notable improvements in both performance and energy efficiency. ERGo outperforms the conventional full-parameter GNN training on a PIM-based platform by up to 3.15x in speedup and enhances energy efficiency by 10.5x. Furthermore, ERGo offers additional advantages when utilized on heterogeneous architectures incorporating non-volatile memory (NVM) and static random-access memory (SRAM). Training on the heterogeneous NVM-SRAM architecture typically utilizes NVM for the forward-pass and SRAM for the backward-pass. However, NVM cells suffer from low device endurance and repeated write operations due to weight updates can lead to poor lifetime. ERGo improves the lifetime of NVM devices by freezing the weights and preventing weight updates in the parameter-efficient phase. Experimental results demonstrate that ERGo improves the lifetime of heterogeneous NVM-SRAM architecture by up to 33x in comparison to full-parameter implementation.",
+      "url": "http://arxiv.org/abs/2611.17478v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17478v1",
+      "tldr": "ERGo is a hybrid GNN training framework for processing-in-memory architectures that uses conformal prediction to automatically switch from full-parameter training to a low-rank parameter-efficient phase, reducing off-chip memory access to improve speed and energy efficiency while extending NVM lifetime with negligible accuracy loss.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Washington State University"
+      ],
+      "affiliations_text": "Washington State University",
+      "score": 4.063138574067156,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.17477v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117477v1-first-order-characterizations-of-strong-quasiconvexity-with-the-exact-modulus",
+      "source": "arxiv",
+      "title": "First-order characterizations of strong quasiconvexity with the exact modulus",
+      "authors": [
+        "John Matos Ascona",
+        "Jackeline C. Huaccha Neyra",
+        "Lizet Santa Cruz Calderón",
+        "Heraclio López-Lázaro"
+      ],
+      "authors_text": "John Matos Ascona, Jackeline C. Huaccha Neyra, Lizet Santa Cruz Calderón, Heraclio López-Lázaro",
+      "abstract": "In this paper, we study first-order characterizations of strong quasiconvexity for functions defined on convex subsets of real normed spaces. For functions that are continuous along segments, an inequality involving the lower Dini derivative is a known necessary condition for strong quasiconvexity with a given modulus, whereas the established converse guarantees only half of that modulus. By means of a one-dimensional lemma, we prove that this inequality, and even its weaker version with the upper Dini derivative, ensures strong quasiconvexity with the same modulus, without requiring the domain to be open; this answers a question raised in the recent literature. The main result leads to a characterization with the same modulus in terms of the Clarke subdifferential for locally Lipschitz functions on Banach spaces, which answers another open question, and to a formula for the exact modulus of radial functions defined on Hilbert spaces. We also present some consequences in optimization, such as an optimality condition without Clarke regularity, an error bound with optimal constant and, for the projected subgradient method, the same convergence rate as in the strongly convex case, together with the exponential convergence of the associated flow. Finally, we show that the converse of a relation between proximal points and strong subdifferentials fails in general, but holds for a truncation of the function.",
+      "url": "http://arxiv.org/abs/2611.17477v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17477v1",
+      "tldr": "The paper proves that Dini-derivative and Clarke-subdifferential inequalities with constant \\(\\gamma\\) characterize strong quasiconvexity with the exact same modulus \\(\\gamma\\), rather than only \\(\\gamma/2\\), resolving several open questions and yielding sharp optimization consequences.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Universidade Federal de Santa Catarina",
+        "Universidade Estadual de Mato Grosso do Sul",
+        "Universidade Federal de São Paulo",
+        "Universidade Federal de Mato Grosso do Sul"
+      ],
+      "affiliations_text": "Universidade Federal de Santa Catarina, Universidade Estadual de Mato Grosso do Sul, Universidade Federal de São Paulo, Universidade Federal de Mato Grosso do Sul",
+      "score": 4.014916606073594,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.17529v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117529v1-learning-latent-goal-costs-for-visual-world-model-planning-with-an-expanding-curriculum",
+      "source": "arxiv",
+      "title": "Learning Latent Goal Costs for Visual World-Model Planning with an Expanding Curriculum",
+      "authors": [
+        "Konstantinos Mylonas",
+        "Thrasyvoulos Spyropoulos"
+      ],
+      "authors_text": "Konstantinos Mylonas, Thrasyvoulos Spyropoulos",
+      "abstract": "Image-goal planning with a frozen visual world model depends on how predicted observations are scored against the goal. Mean-squared error (MSE) between embeddings from a pretrained visual encoder can provide a useful signal near a goal, yet favor states across an obstacle that are visually similar to the goal and difficult to reach. We fit a small residual adapter on top of frozen I-JEPA embeddings to improve this latent goal cost. Starting near each goal, a planner collects trajectories from progressively wider regions of initial states. The adapter learns from the order of observations along successful trajectories, with additional comparisons inferred from failed rollouts. No task-specific progress labels are used for fitting, so the procedure can be applied to other goal-reaching tasks. DotWall and PointMaze are used in this work. In paired 50-case evaluations with identical starts, goals, world models, and planner settings, success increases from 54% to 98% in DotWall and from 82% to 96% in PointMaze. On 16 unseen DotWall layout-goal cases, the adapter fitted on one fixed layout improves agreement between latent-cost ordering and shortest legal-path ordering from 71.9% to 85.8%. The results indicate that planning experience can improve a frozen visual representation's goal cost without retraining the encoder or the world model.",
+      "url": "http://arxiv.org/abs/2611.17529v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17529v1",
+      "tldr": "This paper learns a small residual adapter on frozen I-JEPA embeddings—using an expanding curriculum of successful and failed trajectories instead of expert progress labels—to improve latent goal costs for visual world-model planning, raising success from 54% to 98% on DotWall and 82% to 96% on PointMaze without retraining the encoder or world model.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technical University of Crete"
+      ],
+      "affiliations_text": "Technical University of Crete",
+      "score": 3.88102422766859,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.17447v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117447v1-distributionally-robust-risk-evaluation-with-low-rank-perturbations",
+      "source": "arxiv",
+      "title": "Distributionally Robust Risk Evaluation with Low-Rank Perturbations",
+      "authors": [
+        "Linglingzhi Zhu",
+        "Dongze Wu",
+        "Yao Xie"
+      ],
+      "authors_text": "Linglingzhi Zhu, Dongze Wu, Yao Xie",
+      "abstract": "We study distributionally robust risk under perturbations restricted to low-rank matrices whose row and column spaces are shared across observations, focusing on how much worst-case risk this restriction sacrifices and how to compute the restricted worst case. Under moment or Wasserstein budgets, we derive quantitative bounds on the gap between the unrestricted and low-rank worst-case risks, characterize when the gap vanishes, and identify the smallest lossless row and column dimensions. To generate worst-case perturbations, we apply projected gradient ascent to a curvature-corrected concave problem and derive computable risk certificates. We establish global sublinear convergence for the corrected objective and linear convergence to a worst-case distribution when the budget constraint is sufficiently active.",
+      "url": "http://arxiv.org/abs/2611.17447v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17447v1",
+      "tldr": "This paper quantifies the worst-case risk lost by restricting distributionally robust perturbations to shared low-rank row–column subspaces under moment or Wasserstein budgets, characterizes when this restriction is lossless, and develops a curvature-corrected projected gradient ascent with convergence guarantees and computable risk certificates.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "affiliations_text": "Georgia Institute of Technology",
+      "score": 3.794996859628053,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.17472v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117472v1-do-mixture-of-experts-routers-benefit-from-ensembling",
+      "source": "arxiv",
+      "title": "Do Mixture-of-Experts Routers Benefit from Ensembling?",
+      "authors": [
+        "Viktor Veselý",
+        "Sebastian Jitaru"
+      ],
+      "authors_text": "Viktor Veselý, Sebastian Jitaru",
+      "abstract": "Ensembles of neural networks have repeatedly been shown to outperform single networks. Ensemble theory attributes this gain to the accuracy of the individual members and the diversity among them. Mixture-of-experts models already combine many experts, but a single router decides how the experts are weighted for each input. Motivated by ensemble theory, we apply ensembling to the routing step: an ensemble of routers, trained jointly with the experts, proposes the expert weights. We systematically evaluate this approach using underparameterized networks on two image-classification and two tabular-regression tasks. We analyse each experiment with a performance-diversity decomposition of the router ensemble, which, to our knowledge, has not previously been developed for routers. We report four findings. First, more routers lower the validation loss. Second, training routers to explicitly maximize expert diversity improves the mean performance on three of the four tasks. Third, explicitly maximizing router diversity has no effect on performance. Fourth, combining router weights with the arithmetic mean works better than combining them with the geometric mean. Routing benefits mildly from ensembling, but this benefit is offset by the computational cost of training additional routers.",
+      "url": "http://arxiv.org/abs/2611.17472v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17472v1",
+      "tldr": "Ensembling mixture-of-experts routers mildly improves performance—more routers reduce validation loss and encouraging expert diversity helps on three of four tasks—but the benefit is offset by the added computational cost of training multiple routers.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6433730305223793,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.17556v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117556v1-a-synthetic-benchmark-for-target-centric-causal-discovery-in-industrial-processes",
+      "source": "arxiv",
+      "title": "A Synthetic Benchmark for Target-Centric Causal Discovery in Industrial Processes",
+      "authors": [
+        "Angelo Ziletti"
+      ],
+      "authors_text": "Angelo Ziletti",
+      "abstract": "Causal discovery promises to find which recorded variables drive a process target such as product quality, yield or energy use. Process data with known causes are rare, and in existing benchmarks the difficulty of identifying the causes of a target is either fixed by the recorded data or set for the whole graph. We present a synthetic benchmark for target-centric causal discovery in industrial processes. Its generator is a two-level structural causal model inspired by batch production, assembled from components that each model one phenomenon of process data, such as a control loop or a delayed effect. The graph is built around the target: without sensor error, every non-cause can be distinguished from the direct causes by conditioning on them or by time order. Each component is set independently, so the difficulty can be varied one condition at a time. We evaluate eight methods, from association measures to effect estimation, with an error analysis by the role of the selected candidate; all degrade as the difficulties combine, each in a way consistent with its assumptions.",
+      "url": "http://arxiv.org/abs/2611.17556v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17556v1",
+      "tldr": "The paper presents a modular synthetic benchmark based on a two-level structural causal model of batch production that enables controlled, target-centric variation of causal-discovery difficulty and evaluates eight methods, showing that performance degrades as difficulties combine in ways consistent with each method’s assumptions.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5831272029367685,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.17460v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117460v1-unfinished-bench-measuring-rule-violations-by-persistent-agents-in-realistic-work-environments",
+      "source": "arxiv",
+      "title": "Unfinished-Bench: Measuring Rule Violations by Persistent Agents in Realistic Work Environments",
+      "authors": [
+        "Seunghyun Lee",
+        "Jaehui Hwang",
+        "Dongyoon Han",
+        "Sangdoo Yun"
+      ],
+      "authors_text": "Seunghyun Lee, Jaehui Hwang, Dongyoon Han, Sangdoo Yun",
+      "abstract": "AI agents are increasingly equipped with persistence toward task completion to run delegated work autonomously for long periods, under many unstated constraints from internal documents and other people's authority. When completion requires violating a rule, the agent must decide alone, yet benchmarks of instruction-rule conflicts state the rule in the prompt or keep it hidden and do not evaluate persistence. We present Unfinished-Bench, a benchmark that gives models persistence in autonomous runs without a user, in realistic work environments with embedded rules. In each of its 97 scenarios across 7 organizations and 7 risk categories, the goal and the rule cannot both hold. We find that persistence raised violations of a rule in an internal document from 32.2% to 43.6%, five times the 8.5% for the same rule stated by the user. Of the document-rule violations, 98.3% occurred after the rule was displayed, and in 89% of a judged sample the agent first wrote down the rule. Violations of rules placed in the environment without user oversight can lead to serious incidents, so persistence-driven risks need to be evaluated. Benchmark documentation: https://francis21c.github.io/unfinished-bench/",
+      "url": "http://arxiv.org/abs/2611.17460v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17460v1",
+      "tldr": "**TLDR:** Unfinished-Bench is a 97-scenario benchmark showing that persistent autonomous agents in realistic work environments violate rules embedded in internal documents more often than identical rules stated by the user—and that persistence itself increases rule violations—highlighting the need to evaluate persistence-driven risks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NAVER AI Lab"
+      ],
+      "affiliations_text": "NAVER AI Lab",
+      "score": 3.463411860996341,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.17549v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117549v1-talk-to-act-a-synthetic-multi-turn-dialogue-benchmark-for-human-intent-extraction-and-action-planning-in-robotics",
+      "source": "arxiv",
+      "title": "Talk to Act: A Synthetic Multi-Turn Dialogue Benchmark for Human Intent Extraction and Action Planning in Robotics",
+      "authors": [
+        "Deepu Krishnareddy",
+        "Mohammad Haziq Khan",
+        "Michael Danner",
+        "Matthias Rätsch"
+      ],
+      "authors_text": "Deepu Krishnareddy, Mohammad Haziq Khan, Michael Danner, Matthias Rätsch",
+      "abstract": "Multi-turn conversational human-robot interaction (HRI) continues to be a challenging problem in robotics, as many existing systems rely on rigid, command-driven interfaces that can be unintuitive for users. Recent advances in Large Language Models (LLMs) provide a promising direction, given their ability to process natural language, generate structured outputs, and support tool-based reasoning, all of which are relevant for interpreting user intent in robotic settings. However, progress in this area is constrained by the limited availability of datasets and benchmarks that capture the nuances of real-world human communication, such as multi-turn dialogue, ambiguity, and context-dependent requests.\n  In this work, we present a synthetically generated multi-turn dialogue dataset for HRI, annotated with action intents, object references, and task plans across a range of scenarios and user personas. Our primary focus is on evaluating the capability of small, open-weight language models for robotic tasks, particularly in settings where local deployment and efficiency are important. To this end, we frame intent extraction as a tool-calling problem where each predicted action corresponds to a structured function call with arguments grounded in the dialogue and benchmark models ranging from 270M to 8B parameters on their ability to perform intent extraction and action planning without task-specific fine-tuning.\n  Our results show that these models can achieve reasonable performance on the task even at relatively small scales and without any task-specific fine-tuning. This suggests that compact, locally deployable models already provide a useful baseline for conversational robotic systems. We expect that task-specific fine-tuning and more realistic training data will enhance performance further and make such models increasingly suitable for real-world robotic applications.",
+      "url": "http://arxiv.org/abs/2611.17549v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17549v1",
+      "tldr": "This paper introduces a synthetic multi-turn human–robot dialogue benchmark for intent extraction and action planning, showing that small open-weight LLMs (270M–8B) can perform the task via structured tool-calling reasonably well without task-specific fine-tuning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Bochum University of Applied Sciences",
+        "Reutlingen University"
+      ],
+      "affiliations_text": "Bochum University of Applied Sciences, Reutlingen University",
+      "score": 3.4073964200112683,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.17412v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117412v1-wetw-learning-pair-specific-weighted-euclidean-distances-for-efficient-dtw-search",
+      "source": "arxiv",
+      "title": "WETW: Learning Pair-Specific Weighted Euclidean Distances for Efficient DTW Search",
+      "authors": [
+        "Christos Panourgias",
+        "Qitong Wang",
+        "George Tzagkarakis",
+        "Themis Palpanas"
+      ],
+      "authors_text": "Christos Panourgias, Qitong Wang, George Tzagkarakis, Themis Palpanas",
+      "abstract": "Dynamic Time Warping (DTW) is the standard distance for similarity search over time series that are misaligned in time, but its cost is quadratic in the series length and lower bounds often prune few candidates, so search over large collections of long series is slow. Learned approximations embed the series to make comparisons cheap, yet compare every pair with the same fixed rule, usually the Euclidean distance, although DTW aligns each pair differently. We observe that, once a pair is aligned, DTW is a Euclidean distance over coordinates selected for that pair. Building on this view, we propose Weighted Euclidean Time Warping (WETW), a learned distance that adapts the comparison of fixed-length embeddings to each pair. A small symmetric network predicts one weight per embedding di- mension and pair without computing an alignment, which halves the error of the best static distance on the same embeddings. The embeddings come from the Weighted Euclidean SEries Encoder (WESEE), whose multi-scale Temporal Feature Extractor keeps the timing information that global pooling removes and raises recall@1 from 0.90 to 0.95, although WETW works with any encoder. We also show that fitting DTW distances is not enough for search, as regression alone misorders the closest neighbours, and that ranking regularization raises recall@1 from 0.79 to 0.95. Our filter-and-verify pipeline, WETW-FV, uses WETW to build a shortlist and exact DTW to check it, so the search is approximate but every returned distance is exact. Over eight datasets, WETW-FV is 11.4x faster than the fastest exact method among the UCR Suite, lower bounds and MESSI-DTW, at a mean recall@10 of 0.93, while the best learned baseline reaches 0.59 at the same speed. On 48K-point series, WETW- FV remains 40x faster than the UCR Suite at a recall@10 of 0.91.",
+      "url": "http://arxiv.org/abs/2611.17412v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17412v1",
+      "tldr": "The paper proposes WETW, a learned pair-specific weighted Euclidean distance over fixed-length series embeddings that approximates DTW without computing alignments, and combines it with a filter-and-verify pipeline (WETW-FV) that uses WETW for shortlisting and exact DTW for verification, achieving up to 11.4× faster search (40× on long series) at high recall.",
+      "detailed_reading": null,
+      "affiliations": [
+        "FORTH-ICS",
+        "Harvard University",
+        "Université Paris Cité"
+      ],
+      "affiliations_text": "FORTH-ICS, Harvard University, Université Paris Cité",
+      "score": 3.298630033889667,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.17463v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117463v1-availability-aware-historical-feedback-learning-for-electric-arc-furnace-temperature-and-chemical-composition-prediction",
+      "source": "arxiv",
+      "title": "Availability-Aware Historical Feedback Learning for Electric Arc Furnace Temperature and Chemical Composition Prediction",
+      "authors": [
+        "Ahmed Shoyeb Raihan",
+        "Farzana Islam",
+        "Ashish Nimbarte",
+        "Imtiaz Ahmed"
+      ],
+      "authors_text": "Ahmed Shoyeb Raihan, Farzana Islam, Ashish Nimbarte, Imtiaz Ahmed",
+      "abstract": "Electric arc furnace (EAF) steelmaking plays an increasingly important role in recycled and lower-carbon steel production. However, variability in charged materials, energy input, and operating conditions makes accurate prediction of molten steel temperature and final chemical composition challenging. Intermittent or delayed measurements limit the information available for timely prediction. This study develops an availability-aware historical-feedback learning framework for predicting EAF endpoint temperature and the final concentrations of twelve chemical elements. Eight industrial data sources are integrated into three progressively enriched predictor representations comprising 19 static, 39 temporal, and 47 history-informed features. Historical outcomes are incorporated only when eligible under an assumed 60-minute measurement-release delay. Using 19,738 temperature heats and 3,341 chemistry heats, twelve tuned regression algorithms are evaluated through chronological forward validation. The proposed historical-feedback representation reduces root mean squared error (RMSE) in 147 of 156 matched algorithm-target comparisons. For temperature prediction, ExtraTrees achieves an RMSE of 12.290 degrees C, representing a 5.54 percent reduction compared with its temporal-only counterpart. Historical-feature ablation and feedback-delay sensitivity analyses demonstrate the importance of recent outcome information and its availability. In a separate retrospective later-period evaluation, lightweight adaptive residual correction reduces temperature RMSE from 12.502 to 12.275 degrees C without retraining the underlying model. Exploratory deep learning comparisons and target-specific feature-attribution analyses provide additional insights into predictive behavior. The results establish historical outcome availability and sequential feedback as important considerations for EAF endpoint prediction.",
+      "url": "http://arxiv.org/abs/2611.17463v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17463v1",
+      "tldr": "The paper proposes an availability-aware historical-feedback learning framework that uses only previously released EAF outcome measurements under a measurement-delay rule and shows across twelve tuned regressors that this history-informed representation improves endpoint temperature and chemical composition prediction over temporal-only features.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.168260429562597,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.17550v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/16/261117550v1-sub-synchronous-control-interaction-risk-of-large-data-center-loads-a-frequency-scan-assessment-with-cross-model-validation",
+      "source": "arxiv",
+      "title": "Sub-Synchronous Control Interaction Risk of Large Data Center Loads: A Frequency-Scan Assessment with Cross-Model Validation",
+      "authors": [
+        "Salish Maharjan",
+        "Junyuan Zheng",
+        "Lung-An Lee",
+        "Min Lwin",
+        "Zhaoyu Wang"
+      ],
+      "authors_text": "Salish Maharjan, Junyuan Zheng, Lung-An Lee, Min Lwin, Zhaoyu Wang",
+      "abstract": "Data centers are now one of the fastest-growing loads on the bulk power system, and most of their demand reaches the grid through power converters inside uninterruptible power supplies (UPS). Whether these loads can take part in sub-synchronous control interaction (SSCI), as wind and HVDC converters do, has not been studied extensively. We examine this question with impedance-based frequency scans at the point of common coupling (PCC). Using a detailed proprietary model (INS-ISU), we scan the motor, variable-frequency-drive (VFD), lighting, and UPS-fed information-technology (IT) branches of a representative facility separately. Only the UPS in double-conversion mode shows negative resistance; it covers the whole sub-synchronous band and continues up to about 170 Hz. The other branches, and the UPS in bypass mode, stay passive. We then repeat the scans on three public models from PNNL, TAMU, and NLR. None of them shows negative resistance in bypass mode, while three of the four models do in double-conversion mode. Lowering the load from rated to light load makes the negative resistance deeper, as expected for a constant-power load, so a lightly loaded facility in double-conversion mode is the worst case. Raising the UPS DC-link capacitance pushes the negative resistance into a narrow band around the fundamental. These findings give a basis for screening data centers for SSCI during interconnection studies.",
+      "url": "http://arxiv.org/abs/2611.17550v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.17550v1",
+      "tldr": "Frequency-scan impedance assessments of one proprietary and three public data-center models show that only UPSs in double-conversion mode present negative resistance across the sub-synchronous band—making lightly loaded data centers the worst SSCI case—while bypass-mode UPSs and other facility branches remain passive, providing a basis for screening data centers during interconnection studies.",
+      "detailed_reading": null,
+      "affiliations": [
+        "INS Engineering",
+        "Iowa State University"
+      ],
+      "affiliations_text": "INS Engineering, Iowa State University",
+      "score": 3.056769785178381,
+      "score_text": "3.1"
+    }
+  ]
+}
