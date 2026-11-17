@@ -1,0 +1,756 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-17T20:26:28.989039",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.18597v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118597v1-skill-latent-rewards-llm-guided-reward-formulation-for-hierarchical-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Skill-Latent Rewards: LLM-Guided Reward Formulation for Hierarchical Reinforcement Learning",
+      "authors": [
+        "Maryam Shoaeinaeini",
+        "Brent Harrison"
+      ],
+      "authors_text": "Maryam Shoaeinaeini, Brent Harrison",
+      "abstract": "Long-horizon reinforcement learning under sparse and delayed feedback remains an open challenge. Existing return-decomposition methods redistribute episodic rewards to ease credit assignment, but they operate on raw state--action transitions and disregard the subgoal structure that governs meaningful progress in complex tasks. We propose Skill-LR, a hierarchical reinforcement learning framework in which a vision--language model identifies the agent's active subgoal at each timestep and a large language model generates a matching latent reward formulation through a two-stage prompting process. By conditioning reward signals on the currently active subgoal, Skill-LR produces stage-specific credit that evolves with the hierarchical plan, reducing temporal variance and improving sample efficiency. On multi-stage MiniGrid and BabyAI benchmarks, including DoorKey and Unlock-to-Unlock, Skill-LR converges faster and more reliably than sparse environmental rewards and strong credit-assignment baselines such as RUDDER and LaRe, demonstrating that subgoal-aligned latent rewards offer a principled path toward stable, interpretable credit assignment in long-horizon tasks.",
+      "url": "http://arxiv.org/abs/2611.18597v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18597v1",
+      "tldr": "Skill-LR is a hierarchical reinforcement learning framework that uses a vision-language model to identify the current subgoal and an LLM to generate subgoal-conditioned latent rewards, enabling more stable, sample-efficient credit assignment for long-horizon sparse-reward tasks and outperforming baselines such as RUDDER and LaRe on MiniGrid and BabyAI benchmarks.",
+      "detailed_reading": {
+        "motivation": "长时程强化学习在稀疏或延迟反馈下难以完成时间信用分配，现有RUDDER、LaRe等回报分解方法主要基于原始状态—动作转移，忽视复杂任务中决定有效进展的子目标层级结构；而传统分层强化学习多依赖人工设计的内在奖励，只能提供粗粒度指导。因此，论文希望把LLM潜在奖励的语义可解释性与分层强化学习的子目标结构对齐，实现随层级计划演化的稳定信用分配。",
+        "method": "Skill-LR先用LLM作为层级规划器，根据环境描述和角色指令生成多个候选子目标序列，并通过实际RL训练评估平均回报来选择最优层级；随后用视觉—语言模型在每个时刻将图像状态与候选子目标文本编码到共享空间，以兼容度最大者预测当前活动子目标。奖励侧采用两阶段提示：第一阶段让LLM生成n个与子目标对齐的候选潜在奖励函数并在环境中验证，第二阶段让LLM比较候选并选出最符合子目标进展语义的奖励R*；训练时收集带子目标标签的轨迹并存入回放与奖励缓冲，用Phi(s_t,a_t,g_t;R*)生成语义潜变量，由LSTM回报预测器F_psi估计累计潜在回报，并以rhat_{t+1}=F_psi(z_{t+1})-F_psi(z_t)做RUDDER式奖励重分配，周期性用RD损失更新F_psi直至阈值以下，再用重分配奖励更新策略。",
+        "result": "在DoorKey、Unlock-to-Unlock等多阶段MiniGrid和BabyAI基准上，Skill-LR比稀疏环境奖励以及RUDDER、LaRe等强信用分配基线收敛更快、更稳定，论文还声称其优于基于真实环境奖励的信用分配方式。预览未给出具体回报曲线数值、样本效率倍数或置信区间，因此可复现结论主要是相对收敛速度和可靠性优势。",
+        "conclusion": "结果表明，将LLM生成的潜在奖励条件化到当前活动子目标，可以把语义奖励与层级计划的阶段结构同步起来，降低回报方差并改善长时程任务的样本效率和收敛稳定性。该方向为可解释、子目标一致的信用分配提供了有前景的框架，但其理论保证依赖较强假设，且当前证据主要来自离散网格类多阶段基准。",
+        "key_details": "关键实现包括LLM生成候选子目标层级并按实际RL平均回报筛选、VLM按图像—文本兼容度逐时刻预测活动子目标、两阶段提示生成并二次筛选奖励函数，以及LSTM回报预测器以F_psi差分产生密集潜在奖励；RD损失、候选数n、最大回合数、奖励更新频率、损失阈值和学习率alpha在预览中未给出具体值。理论分析假设不同子目标潜空间近似正交且重分配奖励时间近似独立，从而把回报方差量级从O(TD)降至O(TD_g)，并给出含子目标数|G|和子目标潜维D_g的遗憾界。限制在于LLM/VLM推理和候选奖励的环境验证带来额外计算开销，候选子目标需通过多次RL训练评估，且实验局限于MiniGrid/BabyAI类离散环境，对连续控制和开放任务的泛化性尚未验证。"
+      },
+      "affiliations": [
+        "University of Kentucky"
+      ],
+      "affiliations_text": "University of Kentucky",
+      "score": 4.79836825343301,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.18649v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118649v1-algebraic-interaction-a-recipe-for-neural-architecture-generation",
+      "source": "arxiv",
+      "title": "Algebraic Interaction: A Recipe for Neural Architecture Generation",
+      "authors": [
+        "Haonan Dong",
+        "Angelica I Aviles-Rivero"
+      ],
+      "authors_text": "Haonan Dong, Angelica I Aviles-Rivero",
+      "abstract": "We introduce an algebraic foundation for neural architecture design in which convolution, attention, state-space models, and equivariant layers are expressed through compositions of bilinear product operators over two structures: a position algebra governing positional routing and a feature algebra governing feature interactions. This decomposition makes routing, feature algebra, and operator composition explicit design variables.We focus on the feature-algebra axis through an Algebraic Recipe: fix the routing and operator composition of an existing architecture while replacing its feature algebra. This preserves the information-flow structure while allowing computational and symmetry properties to be modified through algebraic specification.We instantiate the recipe in linear attention, Mamba, and equivariant networks. Structure-constant and Clifford algebras improve accuracy at comparable parameter count in linear attention; structure-constant algebras yield up to $3\\times$ faster training and inference in Vision Mamba at competitive accuracy; and an $\\mathrm{SO}(3)$-representation algebra provides rotational equivariance by construction. These results demonstrate that feature algebra alone can control accuracy, efficiency, and symmetry without redesigning positional routing.This turns algebraic structure into an explicit design variable and reduces architecture design, within our framework, to algebraic specification.",
+      "url": "http://arxiv.org/abs/2611.18649v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18649v1",
+      "tldr": "The paper proposes an algebraic framework that separates positional routing from feature algebra and shows that replacing only the feature algebra in existing architectures can improve accuracy, efficiency, and symmetry without redesigning information flow.",
+      "detailed_reading": {
+        "motivation": "现有卷积、注意力、状态空间模型与等变网络通常作为彼此独立的架构族来设计，缺乏统一代数视角，导致位置路由、特征交互与算子组合混在一起，难以把代数结构作为显式设计变量来控制精度、效率与对称性。",
+        "method": "论文将上述算子统一表示为双线性乘积算子在两个结构上的复合：位置代数负责位置路由，特征代数负责特征交互。提出的Algebraic Recipe在固定已有架构的位置路由与算子组合、保持信息流结构不变的前提下，仅替换其特征代数，从而通过代数规格修改计算与对称性质；作者在线性注意力、Mamba和等变网络中实例化该配方。",
+        "result": "在参数量相当的条件下，结构常代数与Clifford代数可提升线性注意力的精度；结构常代数使Vision Mamba在保持有竞争力精度的同时实现最高约3倍的训练与推理加速；SO(3)表示代数则按构造提供旋转等变性。",
+        "conclusion": "结果表明仅改变特征代数即可在不重新设计位置路由的情况下控制精度、效率与对称性，因而代数结构可成为显式架构设计变量，并在该框架内把架构设计约化为代数规格选择。",
+        "key_details": "关键点是把架构分解为位置代数、特征代数与算子组合三个显式变量，并通过保持路由和组合不变来隔离特征代数的作用；等变性由SO(3)表示代数按构造保证，效率收益来自特征代数带来的计算性质变化。摘要未给出具体数据集、损失函数与超参数，且实验覆盖线性注意力、Vision Mamba和等变网络三类实例，尚未说明大规模架构搜索或更广泛任务的适用边界。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.59255430205917,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.18648v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118648v1-rethinking-offline-on-policy-distillation-from-scalar-advantages-to-distributional-supervision",
+      "source": "arxiv",
+      "title": "Rethinking Offline On-Policy Distillation: From Scalar Advantages to Distributional Supervision",
+      "authors": [
+        "Qi Sun",
+        "Siyue Zhang",
+        "Tingyu Song",
+        "Yilun Zhao",
+        "Chen Zhao"
+      ],
+      "authors_text": "Qi Sun, Siyue Zhang, Tingyu Song, Yilun Zhao, Chen Zhao",
+      "abstract": "On-policy distillation (OPD) transfers teacher capabilities through token-level feedback on student-generated trajectories, but repeatedly evaluating fresh rollouts with the teacher is computationally expensive. Offline methods such as Lightning OPD reduce this cost by caching recorded tokens' teacher log-probabilities on fixed reference rollouts. By extending the idea to a multi-turn agentic search setup, we find that it consistently underperforms the SFT starting point trained by the same teacher. We empirically observe greater teacher--reference mismatch than in mathematical reasoning and post-training distributional flattening, and theoretically show that scalar advantage supervision on fixed rollouts admits solutions with flattened output distributions under suitable conditions. Motivated by these findings, we propose Distributional On-Policy Distillation (DistOPD), a simple yet effective offline OPD method that retains candidate-token probabilities from both reference and teacher at selected positions and aggregates the remaining parts into a residual token. On agentic search, DistOPD achieves performance comparable to online OPD while improving student--teacher alignment and using training GPU-hours comparable to Lightning OPD.",
+      "url": "http://arxiv.org/abs/2611.18648v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18648v1",
+      "tldr": "The paper shows that offline on-policy distillation via scalar advantages can flatten the student distribution and underperform on agentic search, and proposes DistOPD, which uses compact cached distributional teacher supervision to match online OPD performance at much lower training cost while improving student–teacher alignment.",
+      "detailed_reading": {
+        "motivation": "在线策略蒸馏需反复调用教师评估新轨迹，成本高；离线Lightning OPD通过缓存固定参考轨迹上记录token的教师对数概率来降本，但在多轮智能体检索中反而低于同教师SFT起点。作者将其归因于更大的教师-参考不匹配和标量优势监督导致的输出分布扁平化，因此希望用紧凑的分布监督替代标量优势。",
+        "method": "DistOPD沿用SFT初始化与固定参考rollout，在选定位置缓存参考策略和教师对紧凑候选集的概率，并将剩余词表聚合为残差token；候选集覆盖两分布的高概率token且必含记录token，未选位置仅保留记录token与残差桶。训练时以这些缓存的教师/参考候选概率构造固定插值分布目标，对学生输出做前向KL约束；训练中不再调用教师，只更新学生。关键流程包括固定rollout采样、离线缓存候选分布与残差、按分布目标优化。",
+        "result": "在五个多跳QA基准上，Lightning OPD相对SFT平均F1分别下降3.3和3.1分（两个教师），而DistOPD在两个教师下均超过SFT，平均F1较Lightning OPD提高6.0和7.4分，并达到与在线OPD相当的性能。诊断显示DistOPD降低学生-教师KL、缓解熵升高和logit margin缩小；其训练GPU小时与Lightning OPD相当，相比在线OPD在智能体检索和数学推理上分别约少10.6倍和11.5倍（Qwen3-32B教师）。",
+        "conclusion": "离线OPD在长程智能体任务中不能只回归记录token的标量优势，因为该目标对完整输出分布欠定并可能收敛到收缩/扁平解，应恢复分布级监督。DistOPD用候选集加残差桶的紧凑分布目标，在保持离线效率的同时提升学生-教师对齐与任务性能，并可泛化到数学推理。",
+        "key_details": "实验以Qwen3-4B-Base为学生，教师为MiroThinker-1.7-mini和Qwen3-32B；先用同一教师轨迹SFT得到参考策略以满足teacher consistency，训练用HotpotQA/MuSiQue，评测HotpotQA、MuSiQue、2Wiki、Bamboogle、FRAMES，主指标为F1/EM并记录GPU-hours。理论设定固定有限rollout、每上下文一个记录续写、状态级独立logit，显示未裁剪离线目标等价于记录token优势平方回归，仅约束记录token概率、保留V-2个自由度且可由logit收缩满足；在线期望更新则需全分布匹配。局限包括理论仅解释可能性而非因果、候选/残差为近似、依赖教师一致性与选定位置策略，实验覆盖两个教师和有限基准。"
+      },
+      "affiliations": [
+        "Yale",
+        "NYU Shanghai",
+        "NTU",
+        "UCAS"
+      ],
+      "affiliations_text": "Yale, NYU Shanghai, NTU, UCAS",
+      "score": 4.537369448244267,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.18656v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118656v1-ecod-experience-calibrated-on-policy-distillation-for-multi-turn-agents",
+      "source": "arxiv",
+      "title": "ECOD: Experience-Calibrated On-Policy Distillation for Multi-Turn Agents",
+      "authors": [
+        "Jie Jin",
+        "Shengqin Wang",
+        "Yan Gao",
+        "Xin Tan",
+        "Yuan Xie"
+      ],
+      "authors_text": "Jie Jin, Shengqin Wang, Yan Gao, Xin Tan, Yuan Xie",
+      "abstract": "Sparse and delayed rewards make reinforcement learning challenging for long-horizon language agents. On-policy distillation (OPD) complements environmental rewards with dense teacher feedback on student-generated contexts. Standard OPD can misalign supervision with relative teacher competence, student trajectory outcomes, and the temporal structure of task execution. Recent variants adjust guidance through divergence-based weighting and temporal schedules, while joint calibration from task-completion experience remains underexplored. We introduce Experience-Calibrated On-Policy Distillation (ECOD), which allocates teacher supervision at the task, trajectory, and turn levels. ECOD compares teacher and student success-rate posteriors under matched task conditions, restricts direct supervision to failed student trajectories, and derives a temporal prior from successful teacher lengths. The resulting weight applies to teacher losses or teacher-derived advantages. We evaluate ECOD on ALFWorld and WebShop with Qwen2.5-1.5B-Instruct and Qwen2.5-7B-Instruct. Under matched teacher settings, ECOD improves standard OPD by up to 4.06% in relative ALFWorld unseen success. Across both model scales, ECOD-assisted SOD, TCOD-F2B, and ATOD configurations yield average paired relative gains of 6.20% on ALFWorld unseen and 7.05% on WebShop, with WebShop gains ranging from 2.29% to 21.60%. These results support experience-calibrated supervision allocation as a reusable mechanism across distinct distillation objectives.",
+      "url": "http://arxiv.org/abs/2611.18656v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18656v1",
+      "tldr": "ECOD is an experience-calibrated on-policy distillation method that allocates teacher supervision across task, trajectory, and turn levels using matched teacher–student success outcomes, failed student trajectories, and successful teacher lengths, improving multi-turn agents on ALFWorld and WebShop over standard OPD and its variants.",
+      "detailed_reading": {
+        "motivation": "长程语言智能体面临稀疏且延迟的环境奖励，强化学习难以对多轮决策进行有效信用分配；on-policy distillation 虽能在学生生成的上下文上提供密集教师监督，但标准 OPD 的监督分配可能与教师相对能力、学生轨迹结果及任务执行的时间结构不匹配。现有基于散度权重和时间调度的变体多依赖单一信号，仍缺乏从任务完成经验出发对任务、轨迹和轮次三个层级进行联合校准的机制。",
+        "method": "ECOD 在任务级、轨迹级和轮次级为教师监督分配权重：任务级用匹配任务条件下教师与学生的成功率后验比较教师相对能力，以 Beta(1,1) 先验得到后验均值，并计算 q(u)=Pr(p_T>p_S) 及成功率均值差，形成 C(u)=[2q(u)-1]_+×[μ_T(u)-μ_S(u)]_+；轨迹级仅对失败的学生轨迹开放直接教师监督，即 F(u,k)=1[Y_S,u,k=0]，成功轨迹仍参与奖励学习；轮次级由成功教师轨迹长度构造时间先验 H_T(u,t)，即成功教师轨迹中包含第 t 轮的经验比例。三者相乘得到 g(u,k,t)=C(u)F(u,k)H_T(u,t)，并以 stop-gradient 方式加权教师损失，或加权教师派生优势后与奖励优势结合，同时保留基础 RL 目标、奖励优势构造和在线学生 rollout 流程。",
+        "result": "在 ALFWorld 与 WebShop 上使用 Qwen2.5-1.5B-Instruct 和 Qwen2.5-7B-Instruct 评估，匹配教师设置下 ECOD 相对标准 OPD 在 ALFWorld unseen 上最高提升 4.06% 相对成功率。ECOD 辅助的 SOD、TCOD-F2B 和 ATOD 配置在 ALFWorld unseen 与 WebShop 上分别取得平均配对相对增益 6.20% 和 7.05%，其中 WebShop 增益范围为 2.29% 至 21.60%，且六项 WebShop 比较均优于对应基线。ECOD 辅助的 GRPO 与 GiGPO 在两个基准上也高于纯 RL 对应方法，表明其可跨不同蒸馏目标复用。",
+        "conclusion": "ECOD 将教师监督分配统一为任务级能力校准、失败轨迹选择和轮次级时间先验的乘积权重，可同时用于教师损失加权和教师优势加权两类 OPD 形式。实验支持经验校准的监督分配能缓解多轮 OPD 中的监督错配，并在不同模型规模、RL 骨干和蒸馏目标上稳定带来相对增益，且推理阶段仅使用学生模型。",
+        "key_details": "关键实现包括使用缓存教师 rollout 与当前学生 rollout 估计成功率后验，学生统计仅来自当前 rollout 策略；权重各因子均在 [0,1] 内，乘积有界，优化期间固定并作用于教师贡献，基础教师系数 λ 和各方法原有调度仍保留。实验训练 150 次更新，每 5 次更新在 128 个任务上验证，主结果使用指定 checkpoint，消融使用第 150 次更新；除部分 seen 条目外，均值与样本标准差来自固定权重下的 8 次解码运行。WebShop 采用 1000 产品合成目标配置，教师为同规模冻结模型；局限包括每个配置仅训练一次、教师规模匹配且评估依赖指定 checkpoint，结论主要覆盖 ALFWorld/WebShop 与 Qwen2.5 系列。"
+      },
+      "affiliations": [
+        "East China Normal University",
+        "Shanghai Artificial Intelligence Laboratory",
+        "Shanghai Innovation Institute"
+      ],
+      "affiliations_text": "East China Normal University, Shanghai Artificial Intelligence Laboratory, Shanghai Innovation Institute",
+      "score": 4.532793562211514,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.18643v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118643v1-fedfit-federated-dynamic-sparse-training-via-fisher-information-scoring",
+      "source": "arxiv",
+      "title": "FedFit: Federated Dynamic Sparse Training via Fisher Information scoring",
+      "authors": [
+        "Meng Bi",
+        "Hong Huang",
+        "Jinlong Song",
+        "Charles Wang",
+        "Chengming Hu",
+        "Xi Chen",
+        "Ting Yu",
+        "Xue Liu"
+      ],
+      "authors_text": "Meng Bi, Hong Huang, Jinlong Song, Charles Wang, Chengming Hu, Xi Chen, Ting Yu, Xue Liu",
+      "abstract": "Cross-device Federated Learning (FL) is frequently bottlenecked by the prohibitive memory and communication costs of training deep neural networks on resource-constrained edge hardware. While federated dynamic sparse training aims to alleviate these costs by adjusting sparse structures during training, existing methods rely on magnitude-based heuristics that are fundamentally ill-suited for the non-convergent, heterogeneous environments inherent to FL. To address this challenge, we propose FedFit, a federated dynamic sparse training framework that replaces simple heuristics with optimization-centric criteria for structure adjustment. By leveraging a second-order approximation of the loss landscape via the Fisher Information Matrix, FedFit enables precise and efficient structure adjustment without the overhead of explicit Hessian computation. Empirical evaluations across computer vision and natural language processing benchmarks demonstrate that FedFit significantly narrows the sparse-to-dense accuracy gap, outperforming state-of-the-art methods while maintaining high communication efficiency. Our code is available at https://github.com/Serena-28/Fedfit.git .",
+      "url": "http://arxiv.org/abs/2611.18643v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18643v1",
+      "tldr": "FedFit is a federated dynamic sparse training framework that replaces magnitude-based heuristics with Fisher Information Matrix–based, optimization-centric scoring to adjust sparse structures during training, thereby narrowing the sparse-to-dense accuracy gap while maintaining communication efficiency.",
+      "detailed_reading": {
+        "motivation": "跨设备联邦学习在资源受限边缘硬件上训练深度网络时受内存与通信成本瓶颈；联邦动态稀疏训练虽可降低开销，但现有方法依赖权重幅值和梯度幅值等启发式，这些准则继承自后训练范式，假设模型近收敛且Hessian局部稳定，在FL非收敛、非IID异构环境中会产生高偏差和高方差的重要性估计，导致稀疏结构调整收益不可靠、稀疏与稠密模型精度差距持续存在。",
+        "method": "FedFit在每轮客户端先以当前稀疏掩码做本地稀疏训练，然后依据二阶泰勒展开导出的优化准则调整结构：剪枝分数为P_k等于负的梯度乘权重加上二分之一权重平方乘Fisher对角项，优先剪掉分数小的参数；增长分数为G_j等于二分之一梯度平方除以经验Fisher对角项，优先激活分数大的参数。为避开显式Hessian，方法用Fisher信息矩阵近似曲率，并采用K-FAC按层以输入激活二阶矩与反传预激活梯度二阶矩的Kronecker积近似Fisher块；客户端调整后服务器聚合权重并对掩码取并集，可选地按全局分数剪枝恢复目标密度。",
+        "result": "在计算机视觉和自然语言处理基准上，FedFit显著缩小了稀疏模型与稠密模型之间的精度差距，并持续优于现有联邦剪枝SOTA，同时保持较高通信效率；正文预览显示在SVHN的ResNet-18实验中报告了7.04%的提升。可复现结论是Fisher驱动剪枝与增长比幅值或梯度启发式更稳定，尤其在非IID和低密度设置下更能保留关键参数。",
+        "conclusion": "FedFit将联邦动态稀疏训练的结构调整从启发式规则推进到基于损失二阶近似的优化中心准则，利用Fisher信息在不显式计算Hessian的情况下实现在线剪枝与增长；实验表明其能缩小稀疏到稠密精度差距并优于SOTA，且计算与通信开销可忽略。论文贡献还包括对FDST剪枝与增长准则的理论分析以及近似误差上界和开销分析，为资源受限FL中的稀疏结构学习提供了理论与实证依据。",
+        "key_details": "关键实现细节包括：以目标密度rho约束的稀疏权重和二进制掩码为状态，客户端非IID数据上执行本地稀疏训练后按每轮或周期性比例进行剪枝和等量增长；采用经验Fisher和K-FAC逐层近似，Fisher半正定保证增长分数中二次型凹性并可解析求最优步长；理论依赖小扰动二阶泰勒截断和H约等于F两个假设，并给出逐层二阶分解、交互残差与近似误差上界。局限在于K-FAC统计与稀疏掩码和权重通信仍带来额外开销，低密度与强异构下近似稳定性、剪枝增长率、频率、增长步长等超参敏感性需关注，且预览未给出完整超参表。"
+      },
+      "affiliations": [
+        "McGill University",
+        "Mohamed bin Zayed University of Artificial Intelligence",
+        "City University of Hong Kong"
+      ],
+      "affiliations_text": "McGill University, Mohamed bin Zayed University of Artificial Intelligence, City University of Hong Kong",
+      "score": 4.4441123404717215,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.18644v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118644v1-minari-infrastructure-for-collaborative-reinforcement-learning-datasets",
+      "source": "arxiv",
+      "title": "Minari: Infrastructure for Collaborative Reinforcement Learning Datasets",
+      "authors": [
+        "Omar G. Younis",
+        "Rodrigo Perez-Vicente",
+        "John U. Balis",
+        "Alex Davey",
+        "Will Dudley",
+        "Jordan K. Terry"
+      ],
+      "authors_text": "Omar G. Younis, Rodrigo Perez-Vicente, John U. Balis, Alex Davey, Will Dudley, Jordan K. Terry",
+      "abstract": "Offline reinforcement learning (RL) depends on shared datasets, but sharing them is still hard. Each benchmark ships its own format, documentation is thin, and most datasets cannot be regenerated once the environment code moves on. We introduce Minari, an open-source Python library for creating, sharing, and loading RL datasets. Its API follows Gymnasium, so recording a dataset means wrapping an environment and stepping through it as usual. From there, users can attach metadata, filter, combine, and shuffle datasets, and publish or download them with one command through the HuggingFace Hub. Every dataset stores the environment specification, seeds, applied wrappers, and pinned package requirements needed to rebuild the environment and regenerate the data. TorchRL, AgileRL, and d3rlpy already load Minari datasets natively, so switching datasets in those libraries takes one line of code. Minari also hosts 338 reproducible datasets (350K trajectories, 55M steps) covering robotic locomotion and manipulation, maze and grid navigation, language-conditioned instruction following, Atari, and web navigation, including a full regeneration of D4RL with public generation scripts. We report baseline scores for six offline RL algorithms on the regenerated D4RL and MuJoCo datasets.",
+      "url": "http://arxiv.org/abs/2611.18644v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18644v1",
+      "tldr": "Minari is an open-source Python library and dataset infrastructure that standardizes the creation, sharing, loading, and reproducibility of offline reinforcement learning datasets through a Gymnasium-style API, HuggingFace Hub integration, and built-in environment/seed/wrapper/package metadata for regeneration.",
+      "detailed_reading": {
+        "motivation": "离线强化学习依赖可共享的数据集，但现有基准格式各异、文档不足，且环境代码演进后多数数据难以重新生成，D4RL 还依赖已弃用的 MuJoCo/Gym 版本。Minari 旨在为 RL 数据集提供统一、可复现、可协作发布与加载的基础设施。",
+        "method": "Minari 是开源 Python 库，定义与环境无关的轨迹数据格式，数据集 ID 采用 namespace/environment/dataset_name-version，并在数据集与 episode 两级保存元数据。数据创建可通过 DataCollector 包装 Gymnasium 环境并正常步进记录，或用 create_dataset_from_buffers 导入外部 episode 缓冲；加载后支持采样、迭代、按 episode 谓词过滤、合并与打乱，存储默认 HDF5、可选 Arrow/Parquet，并通过 HuggingFace Hub 一条命令上传下载。每个数据集记录环境规格、随机种子、所用 wrapper 与固定 pip 依赖，可用 recover_environment 重建采集环境，也支持独立评估环境；同时提供 CLI 及 TorchRL、AgileRL、d3rlpy 原生集成。",
+        "result": "Minari 托管 338 个可复现数据集，约 35 万条轨迹、5500 万步、56 GB，覆盖 D4RL、MuJoCo、BabyAI、Atari、MetaWorld、WebAgents 六类集合，包含状态、网格、像素和文本观测及离散/连续动作。论文完成并公开了 D4RL 在维护版本 MuJoCo 与 Gymnasium 上的完整重生成脚本，并用 CORL 在重生成 D4RL 和 MuJoCo 数据集上报告了六种离线 RL 算法的基线分数。",
+        "conclusion": "Minari 为 RL 数据集提供了类似 Gymnasium 对环境的统一接口，使数据集创建、共享、加载和复现可在同一生态内完成。其按构造保证可复现的设计和与主流离线 RL 库的集成，有助于新数据集发布后直接被兼容训练库使用，并支持社区重新生成或扩展数据。",
+        "key_details": "数据格式以 episode 为序列，保存观测、动作、奖励、终止与截断标志及可选 info，终止和截断分开存储以避免离线 RL 价值估计偏差；episode 元数据含奖励最小值、最大值、均值、标准差与总和，便于按回报等条件过滤，像素观测可选 JPEG 编码以减小体积。复现机制包括保存环境规格、采集种子、wrapper、生成代码、作者、生成算法和固定 pip 依赖，并在恢复环境时校验安装包，还可用 recover_environment(eval_env=True) 返回独立评估环境。论文未给出算法损失或超参细节，基线仅说明使用 CORL 在重生成 D4RL 与 MuJoCo 上评测，摘要和预览未列出具体分数；实现依赖 HuggingFace Hub 作为共享后端，并需要公开生成脚本与元数据来保证可复现性。"
+      },
+      "affiliations": [
+        "Mila",
+        "INRIA",
+        "Farama Foundation"
+      ],
+      "affiliations_text": "Mila, INRIA, Farama Foundation",
+      "score": 4.2663185141519575,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.18657v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118657v1-sart-sign-absolute-reformulation-theory-for-binary-variable-reduction-in-neural-network-verification",
+      "source": "arxiv",
+      "title": "SART: Sign-Absolute Reformulation Theory for Binary Variable Reduction in Neural Network Verification",
+      "authors": [
+        "Jin Xu",
+        "Miaomiao Zhang",
+        "Bowen Du"
+      ],
+      "authors_text": "Jin Xu, Miaomiao Zhang, Bowen Du",
+      "abstract": "Complete formal verification of neural networks is crucial for their deployment in safety-critical domains. A key bottleneck stems from encoding complexity: traditional methods assign one binary variable per unstable ReLU neuron. We propose the Sign-Absolute Reformulation Theory (SART), which fundamentally breaks the conventional one-to-one mapping between unstable neurons and binary variables by establishing formal reducibility criteria. This allows for finer-grained modeling, where each unstable neuron corresponds on average to fewer than one binary variable, thereby reducing verification complexity at its source. Based on SART, we derive a theoretical lower bound on the number of binary variables required for complete verification and, under the assumption that $P \\neq NP$, prove that variables in the final layer can be compressed by 50\\%, while the number of variables in intermediate layers cannot be further reduced. To overcome the apparent ``last-layer-only'' limitation, we recast verification as a sequential process and, crucially, show that the gain lifts to the entire network: LayerABS, a SART-based progressive tightening verifier, iteratively treats intermediate layers as temporary final layers and propagates tight bounds that shrink the global search space and binary-variable counts. Furthermore, we reveal a structural law influencing verification complexity: when the signs of weights of unstable neurons satisfy numerical symmetry, with positive and negative weights equal or differing by at most one, the worst-case verification complexity achieves the theoretical optimum, offering theoretical guidance for the design of verification-friendly architectures. As a general-purpose underlying encoding, the value of SART is independent of specific algorithms.",
+      "url": "http://arxiv.org/abs/2611.18657v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18657v1",
+      "tldr": "SART is a sign-absolute reformulation for neural network verification that breaks the one-binary-variable-per-unstable-ReLU mapping, proves a 50% final-layer variable reduction under \\(P \\neq NP\\), and lifts this gain network-wide via the LayerABS progressive-tightening verifier to reduce search complexity and outperform state-of-the-art baselines.",
+      "detailed_reading": {
+        "motivation": "完整形式化验证是ReLU神经网络进入安全关键场景的关键保障，但其核心瓶颈在编码复杂度：传统SMT、MILP和BaB方法通常为每个不稳定ReLU神经元引入一个二值变量，导致组合爆炸。论文旨在从编码源头打破“不稳定神经元—二值变量”的一一刚性映射，降低完整验证的搜索空间与求解复杂度。",
+        "method": "输入为前馈ReLU网络及l∞扰动下的鲁棒性验证问题，目标是最小化正确类与竞争类的输出margin并编码为MILP。SART对每层权重做正负分解与0/1掩码、拆分偏置，将ReLU激活等价改写为绝对值形式，依据绝对值项系数的符号及其位于目标函数还是约束中的线性化准则建立可归约判据，仅对不可消去的绝对项引入二值变量；由此实现无抽象的PureSART编码。进一步将验证重铸为顺序过程，提出LayerABS：逐层把中间层临时视为“最终层”，迭代应用SART并传播更紧的边界，构造完整验证器LayerABS及不完整变体Incomplete-LayerABS。",
+        "result": "理论上，SART在区间完备边界计算下达到二值变量数的理论下界：最终层不稳定神经元对应的二值变量可压缩50%，而中间层在保持完备性下不能进一步压缩；整体上每个不稳定神经元平均对应少于一个二值变量。LayerABS通过渐进收紧把末层压缩收益扩展到全网，显著缩小全局搜索空间和二值变量数；实验显示PureSART相较标准MILP提高成功率并将验证时间最多降低34.4%，LayerABS等SART实例在多个基准上优于相关SOTA方法。",
+        "conclusion": "SART首次从理论上表明不稳定ReLU神经元与二值变量并非必须一一对应，并给出完整验证所需二值变量的下界及末层50%压缩结论；其作为通用底层编码不依赖特定验证算法。LayerABS说明静态看仅末层受益的局限可通过顺序验证转化为全网收益；权重符号数值对称时最坏情况复杂度可达理论最优，为验证友好架构设计提供指导。",
+        "key_details": "关键实现包括：不稳定神经元由预计算区间l_i、u_i是否跨零判定，稳定激活或稳定抑制神经元无需二值变量；Big-M取M=max(|l_i|,|u_i|)；绝对值线性化是否引入二值变量取决于系数符号及绝对项出现在目标还是约束中；理论结论依赖区间完备边界计算及P≠NP假设。局限在于中间层在完备性下不可再压缩，LayerABS的实际收益受边界收紧与抽象质量影响，且符号对称性是最坏情况复杂度最优的结构条件。"
+      },
+      "affiliations": [
+        "Tongji University"
+      ],
+      "affiliations_text": "Tongji University",
+      "score": 4.221449331368934,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.18662v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118662v1-stagewise-adaptive-boosting",
+      "source": "arxiv",
+      "title": "Stagewise Adaptive Boosting",
+      "authors": [
+        "Valerie R. Fu",
+        "Brayden Lu",
+        "Lu Tian"
+      ],
+      "authors_text": "Valerie R. Fu, Brayden Lu, Lu Tian",
+      "abstract": "Stagewise algorithms and sparsity-inducing regularization are two influential approaches to high-dimensional modeling. Existing stagewise theory, however, largely centers on convex regularization, whereas stronger sparsity and other structural preferences are often pursued through fixed-level nonconvex optimization rather than generating an entire adaptive solution path. We develop stagewise adaptive boosting, a general framework that builds a monotone path by selecting the update consistent with structural preference. The framework can encourage sparsity along the path itself and also admits extensions that promote other properties of the solution, including group selection, similarity across models for multiple outcomes, and known priorities or prerequisite relations among predictors. We study its theoretical property as well as finite sample performance using simulations and real-data analyses. Across these studies, the proposed pathwise approach often achieves predictive performance comparable to commonly used baselines while selecting substantially smaller models. These results suggest that adaptive stagewise learning provides a practical route to stronger sparsity and richer structural control without repeatedly solving separate weighted or nonconvex optimization problems.",
+      "url": "http://arxiv.org/abs/2611.18662v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18662v1",
+      "tldr": "**TLDR:** The paper proposes **stagewise adaptive boosting**, a general pathwise framework that adaptively selects coordinate updates to build a monotone solution path encouraging stronger sparsity and flexible structural preferences—such as group selection, multi-outcome similarity, and predictor priorities—while often matching baseline predictive performance with substantially smaller models.",
+      "detailed_reading": {
+        "motivation": "高维建模中，stagewise算法与稀疏正则化各自重要，但现有stagewise理论主要围绕凸正则（尤其ℓ1），难以在生成整条解路径的同时实现更强稀疏性和结构偏好；非凸惩罚虽可增强稀疏，却多用于固定正则水平的优化而非自适应路径。本文旨在提出一个统一的逐阶段自适应提升框架，在单条单调路径上持续鼓励稀疏性，并扩展到组选择、多结局模型相似性和预测变量优先级等结构约束。",
+        "method": "设数据为(x_i,y_i)，损失L(β)为凸且二阶可微，梯度g(β)=∇L(β)。SAB每步对每个坐标计算候选步长Δβ_j=p(|β_j|)，其中p(·)为单调递增且下界为δ0的函数；用自适应得分S_j=|g_j|p(|β_j|)评估新激活或符号一致方向，对已激活且与梯度同号的坐标设为负无穷以避免符号翻转，然后选择得分最大的坐标并沿保持符号的下降方向更新，输出从零开始的单调系数路径。实现上可由bridge约束P_γ(β)=Σ|β_j|^γ的预算增量δ0导出p(|β_j|)=(|β_j|^γ+δ0)^{1/γ}-|β_j|，γ<1时更强稀疏；训练流程包括用交叉验证或信息准则选γ、用验证误差和停止迭代K控制路径长度，并可选学习率ν、子采样观测或坐标等稳定化措施，框架还可通过修改更新优先级扩展至组选择、多结局相似性和变量先验/前置关系。",
+        "result": "理论部分比较了SAB在递增权重p(·)下与常数权重经典forward stagewise路径的局部更新和活跃集差异，给出切换权重的局部展开性质，用以刻画路径自身带来的稀疏性差异。模拟和真实数据分析显示，该路径式方法在预测性能上常与常用基线相当，但会选择显著更小的模型；摘要强调这种优势跨多项研究一致出现。",
+        "conclusion": "自适应stagewise学习为获得更强稀疏性和更丰富结构控制提供了一条实用路径，无需反复求解单独的加权或非凸优化问题。它把结构偏好直接嵌入单条单调解路径的更新选择中，因此可作为传统凸正则stagewise和非凸固定水平优化之间的通用替代方案，尤其适合需要小模型和先验结构约束的高维建模场景。",
+        "key_details": "关键实现点包括：以bridge泛函增量δ0定义步长，γ控制稀疏强度并需调参，δ0控制路径分辨率且建议按标准化特征尺度选取，学习率ν和子采样可加速稳定，停止规则依赖验证误差以防过拟合；计算上每步评分所有坐标至少O(p)并需梯度，光滑损失通常O(np)，平方误差损失可用预计算Gram矩阵实现每步O(n+p)增量更新。方法不依赖先验拟合权重，与adaptive lasso等两步加权法不同，而是在路径中连续重分配预算；局限是非凸bridge约束的精确路径可能不连续，SAB路径不保证等于某个固定非凸正则解，且对p(·)、γ、δ0和停止点较敏感。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.219734946617796,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.18654v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118654v1-earth-world-model-physics-constrained-latent-dynamics-for-forecasting-and-environmental-scenario-analysis",
+      "source": "arxiv",
+      "title": "Earth World Model: Physics-constrained latent dynamics for forecasting and environmental scenario analysis",
+      "authors": [
+        "Huijun Qiao",
+        "Ziqiang Zhang",
+        "Jinnong Liao"
+      ],
+      "authors_text": "Huijun Qiao, Ziqiang Zhang, Jinnong Liao",
+      "abstract": "World models have been widely applied to multi-agent planning and forecasting, but exogenous environmental changes are rarely incorporated as replaceable drivers in a unified state-evolution process. This limits assessment of whether environmental perturbations propagate through physical systems with faithful dynamics. We propose the Earth World Model (EWM), an Earth-centred forecasting framework that compresses heterogeneous multi-source observations into a reusable low-dimensional latent state representing the system's history and current condition. Given explicit exogenous drivers, a shared transition operator recursively updates the latent state, and physics-constrained decoding produces multi-step forecasts. Replacing the drivers enables environmental scenario analysis and evaluation of dynamic-response fidelity. We evaluated EWM for power forecasting and environmental-perturbation response at six photovoltaic sites and one wind-power site. Across four photovoltaic sites and three forecast horizons, three independent training runs yielded mean $R^2$ values of 0.8578-0.9095. In a separate six-site decoder ablation, the mean net per-unit response $ρ$ under the prescribed irradiance intervention increased from 0.180 with a multilayer perceptron decoder to 0.922 with an analytic physical decoder, close to site- and horizon-specific analytic references. The wind model achieved an injection elasticity of $0.9990 \\pm 0.0006$, while pre-intervention outputs remained unchanged. These results show that forecast fit and intervention response should be evaluated separately and that the tested EWM configurations preserved response amplitude and temporal boundaries under the prescribed interventions.",
+      "url": "http://arxiv.org/abs/2611.18654v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18654v1",
+      "tldr": "The paper proposes the Earth World Model (EWM), a physics-constrained latent-dynamics framework that compresses multi-source observations into a reusable low-dimensional state and uses replaceable exogenous drivers with a shared transition operator and physical decoder to support multi-step forecasting and environmental scenario analysis, validated on photovoltaic and wind power forecasting with strong predictive accuracy and faithful perturbation-response behavior.",
+      "detailed_reading": {
+        "motivation": "现有世界模型多面向多智能体规划与预测，未将外生环境变化作为统一状态演化过程中的可替换驱动，天气模型通常把未来气象变量当条件输入而非可替换控制，物理约束方法又常仅以损失惩罚引入。由此难以评估环境扰动是否按可信动力学在物理系统中传播，也限制了可再生能源预测与环境情景分析。",
+        "method": "EWM定义为(Z,T,C,D)：BRC编码器先按可用时间过滤、时间对齐、归一化和特征构造，将多源观测与历史驱动经Patch局部标记化、Pool聚合和Proj投影压缩为低维潜状态z_t；未来驱动不进入初始编码。共享转移算子T以GRU实现，按发布的未来外生驱动递推更新潜状态，物理解码器D将演化状态与当前驱动映射为决策输出。训练目标为L_task+λ_repr L_repr+λ_phys L_phys，其中表示预测器用训练期目标表示做监督，物理约束同时进入结构与损失；预测时历史只编码一次，按H步递推生成，情景查询保持z_t、T、D不变，仅替换声明驱动并重算由查询控制导出的特征。",
+        "result": "在4个光伏站点、3个预测时域和3次独立训练中，EWM平均R²为0.8578—0.9095，跨站点与时域表现稳定。六站点解码器消融中，规定辐照干预下平均净单位响应ρ由MLP解码器的0.180提升到解析物理解码器的0.922，接近站点和时域特定的解析参考。风电模型注入弹性达0.9990±0.0006，且干预前输出保持不变，说明扰动幅度传递和时间边界保持较好。",
+        "conclusion": "EWM在保持光伏与风电预测性能的同时，能在规定干预下保持响应幅度与时间边界，支持将预测与环境情景分析统一到同一潜状态演化框架中。结果强调预测拟合优度与干预响应保真度应分开评估；但所测为模型层面的响应一致性与时间局部性，物理因果结论仍需来自实际系统的独立证据。",
+        "key_details": "关键实现包括：多源异构观测按可用时间过滤并固定训练集归一化参数，历史窗口只编码一次，递推中共享转移参数且不喂入未来真值；查询路径与基线共享z_t、T、D，中性替换应复现基线，最早改变步之前输出用于时间局部性检查。物理先验通过夜间钳制、运行门控等结构规则及L_phys体现，而非仅作损失惩罚；表示目标仅在训练期使用，推理不依赖目标表示。实验以R²、净单位响应ρ和注入弹性分别刻画拟合与干预响应，并用MLP与解析物理解码器消融隔离解码器作用。局限性在于结论属模型界面内的响应评估，依赖确定性推理和域特定编码器/转移权重，λ_repr、λ_phys、H、L、d_z等需按实验配置设定，且未证明真实物理因果。"
+      },
+      "affiliations": [
+        "Beijing Latent Vector Technology Co., Ltd.",
+        "Beijing University of Technology"
+      ],
+      "affiliations_text": "Beijing Latent Vector Technology Co., Ltd., Beijing University of Technology",
+      "score": 4.048163051910132,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.18702v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/17/261118702v1-robustness-as-a-transferable-skill-cross-task-adversarial-defense-for-vision-language-action-policies",
+      "source": "arxiv",
+      "title": "Robustness as a Transferable Skill: Cross-Task Adversarial Defense for Vision-Language-Action Policies",
+      "authors": [
+        "Jinquan Zhang",
+        "Run Yang",
+        "Dongfu Yin",
+        "Qiang Lai",
+        "Yufeng Yan",
+        "Pengshuai Yin",
+        "F. Richard Yu"
+      ],
+      "authors_text": "Jinquan Zhang, Run Yang, Dongfu Yin, Qiang Lai, Yufeng Yan, Pengshuai Yin, F. Richard Yu",
+      "abstract": "Vision-Language-Action (VLA) policies are vulnerable to adversarial visual perturbations, while defenses often require task-specific adversarial fine-tuning. We investigate whether robustness learned on source manipulation tasks can protect independently specialized target policies without target-side adversarial training. We first show that even a single source defense update improves robustness on held-out tasks, establishing cross-task defense reuse independently of multi-source aggregation. To combine source updates, we introduce Source-Norm Transferable Robustness Vector (SN-TRV), which retains the direction of their mean while calibrating its magnitude using source-update norms. The resulting update is applied to the target visual encoder without target adversarial data, target-side gradient optimization, or additional inference modules. Evaluations across three VLA backbones, fixed and adaptive attacks, and different source defense recipes show improved robustness over naive averaging and identify limits in attack coverage. Physical PiPER trials increase average success under printed adversarial patches from 20.3% to 45.8%.",
+      "url": "http://arxiv.org/abs/2611.18702v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18702v1",
+      "tldr": "The paper shows that adversarial-defense updates learned on source vision-language-action manipulation tasks can be reused as a transferable robustness skill for independently specialized target policies, with a new SN-TRV composition method improving robustness without target-side adversarial training—raising physical patch-attack success from 20.3% to 45.8%.",
+      "detailed_reading": {
+        "motivation": "VLA策略依赖视觉观测，易受可物理实现的对抗视觉扰动影响，而现有防御多需针对被保护任务进行对抗微调。本文探究在源操作任务上学到的对抗鲁棒性能否作为一种可迁移技能，在不对目标策略做目标侧对抗训练的情况下保护独立专门化的目标策略，并进一步解决多源防御更新如何组合的问题。",
+        "method": "将策略参数分为视觉编码器θ与其余组件ψ；对每个源任务先做EDPA对抗微调50k步，得到防御更新Δ_i=θ_i^R−θ_i，目标策略不参与更新构造。多源时先取均值方向u_def=Δ̄/||Δ̄||_2，再用源更新平均范数r_src=mean||Δ_i||_2校准幅度，构造SN-TRV更新Δ_SN=r_src u_def=(r_src/||Δ̄||_2)Δ̄，并将其仅加到独立专门化目标策略的视觉编码器θ_T上。该过程不需要目标对抗数据、目标侧梯度优化或额外推理模块，且目标动作头、本体感知模块等非视觉组件保持不变。",
+        "result": "在LIBERO的Goal和Long留出目标上，原始OpenVLA-OFT在EDPA Dual攻击下成功率仅22.2%和10.0%，单源Spatial防御更新可提升至87.2%和68.6%，单源Object更新达80.0%和60.6%，表明单源防御即可跨任务复用。多源朴素平均Mean-Δ仅76.6%和62.0%，SN-TRV提升至95.4%和79.4%，分别比Mean-Δ高18.8和17.4个百分点，比Spatial单源高8.2和10.8个百分点，同时保持清洁成功率97.2%和92.4%。在三种VLA骨干、固定与自适应攻击以及不同源防御配方上，SN-TRV优于朴素平均，物理PiPER试验在印刷对抗贴片下平均成功率由20.3%提高到45.8%，但也暴露攻击覆盖范围有限。",
+        "conclusion": "研究表明对抗鲁棒性可作为跨任务迁移的防御增量，源任务上学到的视觉编码器防御更新能保护独立专门化的目标VLA策略，而无需目标侧对抗微调。SN-TRV通过分离防御方向估计与幅度校准，缓解多源更新方向不一致导致的范数衰减，是一种无需额外推理模块的源侧防御复用方案。其效果依赖源-目标视觉编码器的架构、初始化和参数化对齐，并受攻击类型覆盖限制，物理场景成功率仍不高，不能替代目标侧对抗微调的全部收益。",
+        "key_details": "实验以LIBERO四个套件Spatial、Object、Goal、Long为数据，每个套件10个任务、每任务默认50次rollout即每条件500回合，Spatial和Object作为源、Goal和Long作为留出目标；主要骨干为OpenVLA-OFT，并测试OpenVLA与π0，攻击包括EDPA的Primary、Wrist、Dual及自适应攻击、SARF衍生更新和AGSD。关键实现是只迁移视觉编码器参数，源更新由EDPA-AF 50k步得到，比较Original、直接Spatial/Object迁移、Mean-Δ、Cos-Select、Cos-Select+SN、SN-TRV及WSC基线；Cos-Select按53个参数组的符号余弦相似度选择并保持源侧掩码。SN-TRV的参考幅度仅由源更新范数确定，等价于在固定源范数约束下最小化到各源更新的平方距离，是对几何一致性的刻画而非目标鲁棒性最优保证。局限包括源与目标需共享视觉编码器架构、初始化和参数化，目标侧无对抗优化使防御受攻击覆盖范围约束，物理试验成功率45.8%仍明显有限且计算主要涉及参数向量范数与方向组合、无需额外推理开销。"
+      },
+      "affiliations": [
+        "Guangdong Laboratory of Artificial Intelligence and Digital Economy (SZ)",
+        "Shenzhen University",
+        "Carleton University"
+      ],
+      "affiliations_text": "Guangdong Laboratory of Artificial Intelligence and Digital Economy (SZ), Shenzhen University, Carleton University",
+      "score": 4.044626494559164,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.18636v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118636v1-predictive-maintenance-in-manufacturing-the-operational-value-of-continual-machine-learning",
+      "source": "arxiv",
+      "title": "Predictive maintenance in manufacturing: The operational value of continual machine learning",
+      "authors": [
+        "Pascal Janetzky",
+        "Michael Klar",
+        "Manuel Wenzel",
+        "Tobias Schlagenhauf",
+        "Stefan Feuerriegel"
+      ],
+      "authors_text": "Pascal Janetzky, Michael Klar, Manuel Wenzel, Tobias Schlagenhauf, Stefan Feuerriegel",
+      "abstract": "Predictive maintenance in high-volume manufacturing often faces a domain-incremental learning problem: as new product configurations enter production, prediction models must learn from newly available data while preserving performance on earlier configurations that remain in operation. In this paper, we empirically study the operational value of continual machine learning methods for addressing this challenge in predictive maintenance, using real-world maintenance data from Bosch. The setting at Bosch covers 25 product configurations over five years, which creates a practical challenge for predictive maintenance models, as such models must be updated with data from newly introduced configurations without reducing performance on configurations learned earlier, a phenomenon known as \"forgetting\". At the same time, retaining all historical sensor data and repeatedly retraining models is often infeasible in high-volume manufacturing since industrial machines generate too large data volumes. To address this challenge, we combine continual machine learning with robust optimization to support predictive maintenance. We then compare continual machine learning with a broad set of baselines, including fine-tuning, domain-adaptation methods, online learning methods, and configuration-specific models. Across experiments, continual machine learning methods achieve stronger predictive performance and lower maintenance costs than the baselines, with a reduction of cost-related indicators of more than 40 % relative to the baselines. Our results demonstrate the operational value of continual machine learning for decision support in maintenance when product portfolios grow over time and historical manufacturing data cannot be fully retained.",
+      "url": "http://arxiv.org/abs/2611.18636v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18636v1",
+      "tldr": "Using five years of Bosch maintenance data across 25 product configurations, the paper shows that continual machine learning combined with robust optimization mitigates forgetting in domain-incremental predictive maintenance and reduces cost-related indicators by over 40% versus fine-tuning, domain adaptation, online learning, and configuration-specific baselines.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Munich Center for Machine Learning",
+        "Bosch Center for Artificial Intelligence",
+        "Albstadt-Sigmaringen University",
+        "LMU Munich"
+      ],
+      "affiliations_text": "Munich Center for Machine Learning, Bosch Center for Artificial Intelligence, Albstadt-Sigmaringen University, LMU Munich",
+      "score": 3.9673631202108597,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.18638v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118638v1-graft-cross-backbone-lora-reuse-for-continual-language-and-multimodal-learning",
+      "source": "arxiv",
+      "title": "GRAFT: Cross-Backbone LoRA Reuse for Continual Language and Multimodal Learning",
+      "authors": [
+        "Ha Pham Thien Dinh",
+        "Ming Liu",
+        "Jiesi Guo",
+        "Matteo Vergani",
+        "Kewen Liao"
+      ],
+      "authors_text": "Ha Pham Thien Dinh, Ming Liu, Jiesi Guo, Matteo Vergani, Kewen Liao",
+      "abstract": "In continual learning, parameter-efficient fine-tuning enables large language models to acquire new capabilities through lightweight adapters such as LoRA, yet the reuse of pretrained adapters is typically restricted to models sharing the same backbone. This limits the transfer of learned capabilities from language models to multimodal models. We propose GRAFT (Generalist Reuse of Adapters via Feature-space Transfer), a framework for cross-backbone LoRA reuse. GRAFT retrieves the most relevant pretrained LoRA adapter from a modality-aware library and maps it into the target backbone through a learned linear bridge between corresponding source and target feature spaces. We evaluate GRAFT on ten Super-NaturalInstructions text tasks, transferring Qwen2.5 LoRAs to Qwen2.5-VL, and five multimodal tasks, where Qwen2.5-VL LoRAs are directly reused. Compared with randomly initialized LoRA adapters, GRAFT improves performance on most evaluated tasks. These results show that GRAFT provides a simple and effective mechanism for reusing learned capabilities across language and multimodal models in continual learning.",
+      "url": "http://arxiv.org/abs/2611.18638v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18638v1",
+      "tldr": "GRAFT enables cross-backbone LoRA reuse in continual language and multimodal learning by retrieving relevant pretrained adapters and transferring them to a target backbone through a learned linear feature-space bridge, outperforming randomly initialized LoRA adapters on most evaluated tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Deakin University",
+        "Australian Catholics University"
+      ],
+      "affiliations_text": "Deakin University, Australian Catholics University",
+      "score": 3.9129068125150956,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.18639v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118639v1-synthdcb-world-distillation-for-scalable-device-control-benchmarking",
+      "source": "arxiv",
+      "title": "SynthDCB: World Distillation for Scalable Device Control Benchmarking",
+      "authors": [
+        "Zichen Zhu",
+        "Dingye Liu",
+        "Nan Jiang",
+        "Danyang Zhang",
+        "Hang Zheng",
+        "Shijie Zheng",
+        "Situo Zhang",
+        "Kunyao Lan",
+        "Yingzi Ma",
+        "Sheng Jiang",
+        "Lu Chen",
+        "Kai Yu"
+      ],
+      "authors_text": "Zichen Zhu, Dingye Liu, Nan Jiang, Danyang Zhang, Hang Zheng, Shijie Zheng, Situo Zhang, Kunyao Lan, Yingzi Ma, Sheng Jiang, Lu Chen, Kai Yu",
+      "abstract": "Scaling device-control evaluation requires scaling both the worlds agents interact with and the tasks they must solve. We introduce SynthDCB, a scalable benchmark for environment awareness and device control built through world distillation. World distillation transforms knowledge of device behaviors, interaction constraints, and environmental effects into modular executable components, which are composed into interactive worlds with explicit states, actions, and temporal dynamics. A unified capability representation connects tool discovery, world execution, and task synthesis, allowing new capabilities to enter evaluation through a shared construction pipeline. SynthDCB instantiates Home, Car, and Phone domains with 114 device classes, 1,166 functions, and 95 events, supporting five task families with 32 subtypes. The stateful design enables task validation and agent evaluation through state correctness and tool-call traces. We evaluate seven models on 2,560 test tasks; the best achieves 68.2% Pass@1. Error analysis reveals challenges in answer delivery, feasibility diagnosis, and temporal coordination. Construction experiments demonstrate scalability across domains and token efficiency: world distillation reduces token consumption by 0.9-66.0% and 46.2-92.5% relative to Codex with low and xhigh reasoning effort, respectively, while achieving broader capability coverage. SynthDCB makes executable world construction the basis of scalable device-control benchmarking, connecting an expanding space of capabilities and interactions to verifiable agent evaluation.",
+      "url": "http://arxiv.org/abs/2611.18639v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18639v1",
+      "tldr": "SynthDCB is a scalable device-control benchmark that uses “world distillation” to convert device-behavior knowledge into modular executable worlds and validated tasks across Home, Car, and Phone domains, enabling efficient, extensible, and verifiable evaluation of agents’ environment awareness and control capabilities.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Nanyang Technological University",
+        "Jiangsu Key Lab of Language Computing",
+        "Shanghai Jiao Tong University",
+        "Shanghai Innovation Institution",
+        "University of Wisconsin–Madison",
+        "AISpeech Co., Ltd."
+      ],
+      "affiliations_text": "Nanyang Technological University, Jiangsu Key Lab of Language Computing, Shanghai Jiao Tong University, Shanghai Innovation Institution, University of Wisconsin–Madison, AISpeech Co., Ltd.",
+      "score": 3.83767230292705,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.18658v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118658v1-rethinking-the-verification-of-machine-unlearning",
+      "source": "arxiv",
+      "title": "Rethinking the Verification of Machine Unlearning",
+      "authors": [
+        "Lei Zhou",
+        "Youwen zhu",
+        "Rongke Liu"
+      ],
+      "authors_text": "Lei Zhou, Youwen zhu, Rongke Liu",
+      "abstract": "Machine unlearning claims require evidence that a model has removed the influence of specified training data. Yet widely deployable post hoc verifiers. infer unlearning largely from predictive behavior, the final model response that remains under the provider's control. We make this limitation concrete through Output-Level Deceptive Response (ODR), an attack that produces responses accepted by output based verifiers while preserving the original representation state. By separating output conformity from internal unlearning, ODR motivates a rethinking of machine unlearning verification, shifting the audit target from what the model returns to what changes inside it. We operationalize this shift through Representation Unlearning Verification (RUV), a gray box verifier that compares intermediate forward representations in the original and unlearned models. RUV traces a four-stage response through activation reorganization, representation displacement, neighborhood disruption, and loss of manifold support. Matched retained controls distinguish target specific responses from global model drift, while joint permutation calibration combines the four evidence views into an adaptive decision. Experiments spanning exact and approximate unlearning, class and sample level requests, multiple datasets, and diverse architectures show mean ODR deception success rates of $97.0\\%$ and $97.7\\%$, respectively. RUV achieves mean verification accuracies of $98.9\\%$ and $94.9\\%$, while rejecting $99.5\\%$ and $99.8\\%$ of the corresponding ODR submissions.",
+      "url": "http://arxiv.org/abs/2611.18658v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18658v1",
+      "tldr": "The paper demonstrates that output-based machine-unlearning verifiers are vulnerable to Output-Level Deceptive Response (ODR), and proposes Representation Unlearning Verification (RUV), a gray-box verifier that audits intermediate forward representations with retained controls and joint calibration to reliably distinguish genuine unlearning from deceptive outputs.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.6979274829195803,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.18599v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118599v1-mechanistic-interpretability-of-mambas-selective-gate-in-financial-markets-a-leakage-controlled-study",
+      "source": "arxiv",
+      "title": "Mechanistic Interpretability of Mambas Selective Gate in Financial Markets: A Leakage-Controlled Study",
+      "authors": [
+        "Dip Roy",
+        "Rajiv Misra",
+        "Sanjay Kumar Singh",
+        "Anisha Roy"
+      ],
+      "authors_text": "Dip Roy, Rajiv Misra, Sanjay Kumar Singh, Anisha Roy",
+      "abstract": "Selectively gated state-space models (SSMs), notably Mamba, are increasingly used for financial time series, yet how they internally represent market regimes (bull, bear, sideways) remains opaque. This paper applies Mechanistic Interpretability (MI) to a six-layer Mamba trained on approximately twenty-one years of daily data for a point-in-time set of S&P 500 constituents plus macroeconomic and Fama-French factors, decomposing per-layer hidden states with Top-K Sparse Autoencoders (SAEs). Our central contribution is methodological and cautionary. A prior, uncontrolled configuration recovered market regimes from SAE features at F1 = 1.00. Under a controlled protocol that (i) removes the three input features that overlap the HMM label definition, (ii) disables the auxiliary regime-classification head, (iii) uses a point-in-time constituent universe, and (iv) evaluates against labels disjoint from the inputs, the same regime label is recovered at only F1 = 0.398, indistinguishable from a logistic baseline on raw inputs (0.435) and from an SAE trained on a randomly initialized, untrained Mamba (0.364). A 2x2 attribution grid shows the near-perfect result is an interaction of auxiliary supervision and label-defining inputs: neither factor alone exceeds F1 ~ 0.40. Effect sizes with block-bootstrap inference show the residual selective-gate (Delta t) regime effect is statistically detectable but economically negligible and uniform across layers rather than layer-specialized; the apparent polysemanticity gradient disappears under continuous, theory-grounded measures. We contribute a reproducible leakage-control protocol for interpretability evaluation of financial SSMs, a quantified demonstration that previously reported regime structure is a label-contamination artifact, and a modest economically grounded feature subset that genuinely survives the controls.",
+      "url": "http://arxiv.org/abs/2611.18599v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18599v1",
+      "tldr": "This leakage-controlled mechanistic interpretability study shows that Mamba’s previously reported near-perfect market-regime recovery from sparse-autoencoder features is an artifact of label leakage and auxiliary supervision, while residual selective-gate effects are statistically detectable but economically negligible, and it contributes a reproducible protocol for evaluating financial SSM interpretability claims.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Rajarshi School of Management Technology",
+        "Indian Institute of Technology, Patna",
+        "Jaypee Institute of Information Technology"
+      ],
+      "affiliations_text": "Rajarshi School of Management Technology, Indian Institute of Technology, Patna, Jaypee Institute of Information Technology",
+      "score": 3.6737326136604103,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.18635v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118635v1-multimodal-fusion-with-pre-trained-models-for-psychotherapy-outcome-prediction-from-emotional-dynamics",
+      "source": "arxiv",
+      "title": "Multimodal Fusion with Pre-trained Models for Psychotherapy Outcome Prediction from Emotional Dynamics",
+      "authors": [
+        "Tobias Hallmen",
+        "Marius Funk",
+        "Antonia Vehlen",
+        "Jeanne Hierse",
+        "Gerhard Prinz",
+        "Steffen Eberhardt",
+        "Wolfgang Lutz",
+        "Elisabeth André"
+      ],
+      "authors_text": "Tobias Hallmen, Marius Funk, Antonia Vehlen, Jeanne Hierse, Gerhard Prinz, Steffen Eberhardt, Wolfgang Lutz, Elisabeth André",
+      "abstract": "In-session emotional dynamics are associated with psychotherapy outcomes but difficult to measure at scale. Pretrained multimodal models provide automated access to facial, vocal, and textual signals, yet clinical datasets remain small. Our research question is how pretrained multimodal representations can best support psychotherapy outcome prediction under data scarcity. Three studies use 106 sessions from 88 patients and nine session-level outcome scales (HSCL-11, EPO-1, POMS). Study 1 asks whether deep learning outperforms classical machine learning: a two-stage deep pipeline, first predicting window-level valence/arousal and then session outcomes, transferred poorly (best single configuration, $r=.078$). Study 2 asks which representation and preprocessing choices work best: statistical pooling of frozen pretrained embeddings with regularized classical models achieved average $r=.406$ across nine scales under per-scale configuration selection, up to $r=.490$ for symptom distress, with complementary modalities and no significant benefit from manual affect annotations or therapist features. Study 3 asks whether deep learning remains inferior under these choices: classical models outperformed an optimized single-stage deep model at the single-configuration level ($r=.281$ vs. $.222$) and on all nine scales under matched per-scale selection ($.406$ vs. $.252$). The results suggest that under clinical data scarcity, pretrained representations with fixed statistical pooling and regularized classical models are more reliable than learned aggregation.",
+      "url": "http://arxiv.org/abs/2611.18635v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18635v1",
+      "tldr": "Under clinical data scarcity, frozen pretrained multimodal embeddings summarized by statistical pooling and fed to regularized classical models predict psychotherapy outcomes more reliably than learned deep temporal or attention-based aggregation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Augsburg",
+        "University of Trier"
+      ],
+      "affiliations_text": "University of Augsburg, University of Trier",
+      "score": 3.5092018822039868,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.18641v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118641v1-himx-mixed-format-matrix-multiplication-based-on-customized-hifloat4-representations",
+      "source": "arxiv",
+      "title": "HIMX: mixed-format matrix multiplication based on customized HIFLOAT4 representations",
+      "authors": [
+        "Zhiyuan Zhang",
+        "Yanzhao Li",
+        "Hui Dong",
+        "Sifan Cheng",
+        "Jingwei Zhang"
+      ],
+      "authors_text": "Zhiyuan Zhang, Yanzhao Li, Hui Dong, Sifan Cheng, Jingwei Zhang",
+      "abstract": "4-bit weight-activation quantization (W4A4) is an important approach for efficient large language model (LLM) inference. Recent hierarchical formats such as HiFloat4 (HIF4) improve the representational range of 4-bit quantization through multi-level scaling. However, the same local mantissa representation in HIF4 may not be equally suitable for weights and activations, which exhibit distinct distribution characteristics. To address this limitation, we propose HiMX, a mixed-mantissa framework built upon the hierarchical scaling structure of HIF4. Our key observation is that the two HIF4-compatible mantissa representations, S1P2 and E2M1, exhibit complementary quantization behavior: the denser S1P2 format provides higher resolution for concentrated weight distributions, while the wider-spaced E2M1 format provides complementary quantization characteristics for activation tensors. HiMX enables operand-tailored mantissa representations while converting heterogeneous mantissas into fixed-point integer operands with operand-specific widths, allowing different operand formats to share a unified integer multiply-accumulate (MAC) array. Block-level analysis on Qwen3-8B shows that HIF4-S1P2 is better suited for weights while HIF4 E2M1 is better suited for activations, and their mixed-format combination achieves lower output MSE than homogeneous configurations. Across multiple benchmarks, HiMX reduces the average end-to-end accuracy loss from 2.38 to 1.77 points on Qwen3-8B and from 2.23 to 1.85 points on Qwen3-30B-A3B, demonstrating the potential benefit of heterogeneous mantissa representations for W4A4 LLM inference.",
+      "url": "http://arxiv.org/abs/2611.18641v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18641v1",
+      "tldr": "HiMX is a mixed-mantissa W4A4 quantization framework that uses HIF4-S1P2 for weights and HIF4-E2M1 for activations, maps the heterogeneous formats to fixed-point integer operands for a shared MAC array, and improves LLM inference accuracy over homogeneous HIF4 quantization.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huawei Technology"
+      ],
+      "affiliations_text": "Huawei Technology",
+      "score": 3.504278569664069,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.18646v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118646v1-rsimed-scaling-medical-foundation-models-beyond-limited-clinical-data-via-retrieval-grounded-self-evolution",
+      "source": "arxiv",
+      "title": "RSIMed: Scaling Medical Foundation Models beyond Limited Clinical Data via Retrieval-Grounded Self-Evolution",
+      "authors": [
+        "Wei Dai",
+        "Qianchu Liu",
+        "Guanghui Qin",
+        "Xing Han",
+        "Tristan Naumann",
+        "Sheng Zhang",
+        "Paul Pu Liang"
+      ],
+      "authors_text": "Wei Dai, Qianchu Liu, Guanghui Qin, Xing Han, Tristan Naumann, Sheng Zhang, Paul Pu Liang",
+      "abstract": "Rare diseases are hard to diagnose, and the labeled clinical records needed to train models for them are few, private, and slow to extend, since a specialist must read every case. A model that writes its own training tasks could learn beyond these records, but no program can check a model-written diagnosis, and a wrong answer key corrupts training. To tackle this dilemma between data scarcity and difficulty of data annotations, we introduce RSIMed, Recursive Self-Improvement in Medicine, one of the first self-evolving pipelines in which a task proposer co-evolves in context with a diagnostic solver on real clinical records. Seeded by training admissions, a frozen copy of the solver writes each clinical question from retrieved medical evidence, so its answer rests on a source, and steers topics and difficulty toward what the solver still gets wrong. On rare-disease diagnosis from MIMIC-IV admissions, the accuracy of RSIMed-27B grows linearly with training compute, while a static pool of generated tasks collapses. Without any external model, RSIMed-27B and RSIMed-9B reach 0.516 and 0.488 diagnostic accuracy, above every off-the-shelf GPT-5.6 setting, whose best reaches 0.399 at 38 times the inference cost of RSIMed-27B. Tasks written by four external teachers, including GPT-5.5, train a less accurate diagnostician than the solver's own. Trained only on diagnosis, RSIMed-RL-27B also improves on the physician-written tasks of HealthBench Professional, from 0.291 to 0.303 in adjusted score.",
+      "url": "http://arxiv.org/abs/2611.18646v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18646v1",
+      "tldr": "RSIMed is a retrieval-grounded, self-evolving medical foundation model pipeline in which a task proposer co-evolves with a diagnostic solver to generate source-grounded clinical questions from real records, enabling scalable rare-disease diagnosis beyond limited labeled data and outperforming larger off-the-shelf models at lower inference cost.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.5026723728692772,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.18652v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118652v1-meltkv-memory-aligned-kv-cache-compression-via-variable-bit-packed-vector-quantization-for-long-context-llms",
+      "source": "arxiv",
+      "title": "MeltKV: Memory-Aligned KV Cache Compression via Variable-Bit Packed Vector Quantization for Long-Context LLMs",
+      "authors": [
+        "Jiyun Han",
+        "Seongjoon Cho",
+        "Seungkyu Choi"
+      ],
+      "authors_text": "Jiyun Han, Seongjoon Cho, Seungkyu Choi",
+      "abstract": "Large Language Models (LLMs) increasingly rely on long contexts, making Key-Value (KV) caches dominate memory usage and inference latency. Existing vector quantization (VQ) methods effectively compress KV caches to sub-4-bit levels but often overlook inefficiencies in memory alignment and decoding speed. This work introduces MeltKV, a memory-latency co-optimized KV cache quantization framework for long-context LLM serving. MeltKV employs a memory-aligned variable-bit index packing scheme that adaptively assigns bit-widths to grouped key channels and compactly stores indices within standard data-types, eliminating redundant bits. Additionally, head-wise codebook sharing reduces the total codebook size while maintaining accuracy. Experiments demonstrate that MeltKV effectively compresses KV representations to sub-4-bit levels down to 1 bit and, at comparable perplexity, achieves 48.1% lower memory usage and 52.9% lower latency than state-of-the-art VQ methods.",
+      "url": "http://arxiv.org/abs/2611.18652v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18652v1",
+      "tldr": "MeltKV is a memory- and latency-optimized KV-cache vector-quantization framework for long-context LLMs that uses memory-aligned variable-bit index packing and head-wise codebook sharing to achieve sub-4-bit (down to 1-bit) compression with 48.1% lower memory and 52.9% lower latency than state-of-the-art VQ methods at comparable perplexity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Yonsei University",
+        "Kyung Hee University"
+      ],
+      "affiliations_text": "Yonsei University, Kyung Hee University",
+      "score": 3.4212693828983927,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.18647v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118647v1-screen-before-you-add-reducing-candidate-inference-in-model-ensembles",
+      "source": "arxiv",
+      "title": "Screen Before You Add: Reducing Candidate Inference in Model Ensembles",
+      "authors": [
+        "Davide Mambelli",
+        "Alessandro Rozza",
+        "Steven Motta"
+      ],
+      "authors_text": "Davide Mambelli, Alessandro Rozza, Steven Motta",
+      "abstract": "As new models become available, existing ensembles must be updated to be competitive, making them intrinsically dynamic. Deciding whether to add a candidate model can require inference on an entire annotated dataset. Such a screening becomes prohibitive for models with costly inference especially when they ultimately add no value. Even under simple convex aggregation, relying on benchmark scores can be misleading as strong standalone performance does not guarantee ensemble improvement, and fitted ensemble weights can hurt test performance. In this work, we study candidate screening and show how early rejection can be achieved safely, exploiting residual geometry for stratification and rejecting the candidate when the best possible remaining predictions cannot achieve the necessary improvement. The key result that justifies this approach is that, under convex aggregation and squared or Brier loss, the population optimum improves if and only if a candidate induces a prediction change positively aligned with the residuals of the population-optimal existing ensemble. An optimistic quadratic program (QP) provides certified early rejection, while posterior-scenario sampling offers an alternative heuristic. We evaluate the approach by showing the tradeoff between saved calls and screening accuracy, which refers to recovering the same accept/reject result as for the entire annotated dataset. We assess empirically whether full-dataset decisions predict candidate usefulness on a held-out test set. On two LLM panels, stratified screening with certified QP rejection saves 21-23% of candidate calls while keeping 100% screening accuracy. In our experiments, sampling posterior scenarios further increases call savings to approximately 37%, with a loss of less than one percentage point in screening accuracy.",
+      "url": "http://arxiv.org/abs/2611.18647v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18647v1",
+      "tldr": "The paper proposes a safe early-rejection screening method that uses residual geometry and an optimistic quadratic program to reduce candidate-model inference in convex ensembles while largely preserving full-dataset accept/reject decisions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "distributed cognition"
+      ],
+      "affiliations_text": "distributed cognition",
+      "score": 3.3286740521038,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.18564v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118564v1-check-token-real-time-self-verification-and-precise-truncation-in-llm-reasoning",
+      "source": "arxiv",
+      "title": "Check Token: Real-Time Self-Verification and Precise Truncation in LLM Reasoning",
+      "authors": [
+        "Fei Ding",
+        "Yongkang Zhang",
+        "Yuhao Liao",
+        "Zijian Zeng",
+        "Huiming Yang"
+      ],
+      "authors_text": "Fei Ding, Yongkang Zhang, Yuhao Liao, Zijian Zeng, Huiming Yang",
+      "abstract": "ECC memory embeds 8 parity bits for every 64 data bits and automatically detects and corrects errors on each read. The parity bits carry no data and only safeguard integrity, at ~12.5% overhead. Yet the reasoning chains of large language models lack such built-in self-verification: once an error occurs it propagates along the chain, and existing methods can only verify externally after generation completes. We propose the check token, establishing built-in self-verification for language model generation streams for the first time: a functional marker <CHECK> is added to the vocabulary, and the model triggers self-checking (analysis, localization, truncation, rewriting) by outputting it at any position. The check token carries no reasoning content (discarded after triggering) and only safeguards reasoning correctness, directly corresponding to the role of ECC parity bits, also at only ~13% overhead. Speculative forking further eliminates false-positive latency, and segmented reward makes trigger timing end-to-end learnable. Experiments (Qwen3-32B / Qwen3-Next) show that the check token achieves +10.8 pp improvement on HMMT25 at 1.13x overhead, with token efficiency 88x that of Best-of-8, and the precise truncation advantage monotonically increases with chain length.",
+      "url": "http://arxiv.org/abs/2611.18564v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18564v1",
+      "tldr": "The paper proposes a **Check Token** added to the LLM vocabulary that enables real-time in-generation self-verification, precise error localization/truncation, and rewriting—analogous to ECC parity bits—achieving +10.8 pp on HMMT25 at ~1.13× overhead with 88× the token efficiency of Best-of-8.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Alibaba Group",
+        "Tsinghua University"
+      ],
+      "affiliations_text": "Alibaba Group, Tsinghua University",
+      "score": 3.314117862802268,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.18587v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118587v1-quantize-qualify-rerank-a-recipe-for-compressing-llms-without-losing-quality",
+      "source": "arxiv",
+      "title": "Quantize, Qualify, Rerank: A Recipe for Compressing LLMs Without Losing Quality",
+      "authors": [
+        "Thamme Gowda"
+      ],
+      "authors_text": "Thamme Gowda",
+      "abstract": "Compressing large language models lowers serving cost, but a single automatic metric may miss quality loss. For the WMT26 Model Compression constrained track, we compress google/gemma-3-12b-it (24.4 GB in bf16) for three translation directions on one H100. Paired bootstrap analysis exposes metric disagreement on 4-bit quantization; guided by WMT24 human meta-evaluation, we use MetricX24-XXL as primary and CometKiwi-XXL as a cross-check. Removing the unused vision stack and non-task vocabulary and using int8 weights or fp8 activations causes no resolved loss, whereas int4 leaves a small residual. QLoRA healing overfits its calibration domain. A Cometoid best-of-4 reranker at $T=0.3$ improves both the 8-bit and 4-bit systems under WMT25 test set. On post-submission WMT26, both remain competitive with bf16 under reference-free metrics; the small difference between the reranked variants is treated as noise.",
+      "url": "http://arxiv.org/abs/2611.18587v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18587v1",
+      "tldr": "The paper presents a metric-qualified compression recipe for Gemma-3-12B translation that removes unused vision/vocabulary components, uses int8/fp8 quantization without resolved quality loss, avoids int4 residual loss and overfitting QLoRA healing, and applies best-of-4 reranking to stay competitive with bf16.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Microsoft"
+      ],
+      "affiliations_text": "Microsoft",
+      "score": 3.1696367543443964,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.18655v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118655v1-beveridge-open-weight-system-one-decision-models-with-calibrated-probabilities",
+      "source": "arxiv",
+      "title": "Beveridge: Open Weight System One Decision Models with Calibrated Probabilities",
+      "authors": [
+        "Sathiskumar Jothi"
+      ],
+      "authors_text": "Sathiskumar Jothi",
+      "abstract": "Many production systems need a model to make a narrow decision about a document (route a ticket, check a limit, refuse a request, pick the next step of a browser agent) rather than to write text about it. We present Beveridge, a family of open weight System One decision models that take a document and up to 15 typed questions (yes/no, choice among described options, or a level on an ordered scale) and return, in one forward pass without generating text, an answer with a calibrated probability for every option. Beveridge-Large-C (398M parameters) adds a 3.5M parameter decision network to ModernBERT-large: typed number and date features in the input, exact facts from a rule engine, question-to-document evidence attention, a three-step recursive core with learned halting and an exact yes/no path. Beveridge-Pro-C adapts Gemma 4 26B-A4B with LoRA to score option letters, and Beveridge-Pro-C-Web extends it to the next step of a browser agent. On held-out tests the 0.4B model reaches 93.0% on our operations-document benchmark against 91.1% for the best of five general LLMs (31B-675B) and 87.9% for a commercial System One API, and, because its confidences are calibrated (ECE 0.029 on that benchmark), it can hand over 76% of decisions automatically at 95% accuracy, where no general LLM we tested can hand over any. It answers in 4.9 ms per decision on one NVIDIA H200 GPU and 60 ms on the 14 core CPU of an Apple M4 Pro laptop. Beveridge-Pro-C-Web raises next-step accuracy on web pages from unseen site types from 49.4% to 98.2% and completes live browsing tasks without losing document accuracy. We describe the models, the training recipes and an evaluation on 19 held-out test sets against a commercial System One API and five general LLMs, including where the models are weak. Weights and inference code are released under Apache 2.0.",
+      "url": "http://arxiv.org/abs/2611.18655v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18655v1",
+      "tldr": "Beveridge introduces open-weight System One decision models that answer up to 15 typed document questions in a single forward pass with calibrated per-option probabilities, outperforming larger general LLMs and a commercial API on operations-document decisions while enabling fast, high-confidence automation and releasing weights and code under Apache 2.0.",
+      "detailed_reading": null,
+      "affiliations": [
+        "BDST: Big Data Science & Technology Ltd"
+      ],
+      "affiliations_text": "BDST: Big Data Science & Technology Ltd",
+      "score": 3.1130887019974014,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.18598v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118598v1-not-all-data-leakage-is-equal-a-controlled-benchmark-of-evaluation-inflation-in-tabular-classification",
+      "source": "arxiv",
+      "title": "Not All Data Leakage Is Equal: A Controlled Benchmark of Evaluation Inflation in Tabular Classification",
+      "authors": [
+        "Ankit Sharma"
+      ],
+      "authors_text": "Ankit Sharma",
+      "abstract": "Data leakage is widely recognized as a threat to trustworthy machine-learning evaluation, yet the phrase covers mechanisms with very different statistical consequences. We present a controlled empirical benchmark that measures the inflation in held-out ROC-AUC caused by five common leakage mechanisms: global standardization, global median imputation, duplicate contamination, supervised feature selection before splitting, and target encoding before splitting. The benchmark spans six public datasets and two synthetic stress tests, three model families, and five repeated stratified train/test splits, yielding 600 paired clean-versus-leaked comparisons. To avoid pseudo-replication, inference is performed on dataset-level effects with cluster bootstrap confidence intervals and Holm-corrected one-sided Wilcoxon tests. Label-dependent or direct data-reuse mechanisms produced systematic optimism: global target encoding increased ROC-AUC by 2.42 percentage points on average (95% cluster-bootstrap CI 0.62--4.89), global supervised feature selection by 1.93 points (0.63--3.39), and duplicate contamination by 1.52 points (0.40--2.80). All three remained significant after multiplicity correction. In contrast, global scaling and global median imputation had near-zero average effects under the i.i.d. settings studied here. A controlled target-encoding stress test further shows that leakage becomes sharply worse as categories become sparse. The results support a severity-aware view of leakage: evaluation pipelines should prevent all held-out-data dependence, but label-dependent transformations and observation reuse deserve especially aggressive auditing.",
+      "url": "http://arxiv.org/abs/2611.18598v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18598v1",
+      "tldr": "In a controlled tabular benchmark, label-dependent leakage and observation reuse—especially target encoding, supervised feature selection, and duplicate contamination—systematically inflate held-out ROC-AUC, whereas label-free global scaling and median imputation have near-zero average effects.",
+      "detailed_reading": null,
+      "affiliations": [
+        "International Institute of Information Technology Bangalore"
+      ],
+      "affiliations_text": "International Institute of Information Technology Bangalore",
+      "score": 2.899368323845925,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2611.18640v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/17/261118640v1-serag-semantical-and-relational-approach-for-anomaly-detection-on-knowledge-graphs",
+      "source": "arxiv",
+      "title": "SERAG: SEmantical and Relational approach for Anomaly detection on knowledge Graphs",
+      "authors": [
+        "Ludovic Moncla",
+        "Antoine Salazar",
+        "Yassir Lairgi",
+        "Khalid Benabdeslem",
+        "Rémy Cazabet"
+      ],
+      "authors_text": "Ludovic Moncla, Antoine Salazar, Yassir Lairgi, Khalid Benabdeslem, Rémy Cazabet",
+      "abstract": "Knowledge graphs constructed from text can contain facts that are individually plausible yet inconsistent with their relational context. We introduce SERAG, a supervised anomaly detector that combines two complementary plausibility estimates: a semantic score computed from separately encoded subject, relation, and object labels, and a relational score obtained through a relational graph convolutional network. The scores are standardized, calibrated, and fused. We evaluate the method on a subset of ICEWS18 with vocabulary-constrained synthetic anomalies generated by an LLM, using pooled and chronological splits. At 10% anomaly prevalence, SERAG achieves test AUPRCs of 0.321 and 0.258, respectively, compared with 0.159 and 0.146 for the strongest adapted baseline. Fusion improves mean test AUPRC over either branch alone, with a larger gain in the pooled protocol and a smaller validation-selected gain in the chronological protocol. Additional anomaly supervision improves performance. These results support the complementarity of textual and relational signals for detecting synthetic anomalies under the evaluated protocols.",
+      "url": "http://arxiv.org/abs/2611.18640v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.18640v1",
+      "tldr": "SERAG is a supervised knowledge-graph anomaly detector that fuses a semantic score from separately encoded subject–relation–object labels with a relational score from an R-GCN, improving detection of plausible but contextually inconsistent facts on an ICEWS18 benchmark with LLM-generated synthetic anomalies.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Sorbonne Université",
+        "INSA Lyon"
+      ],
+      "affiliations_text": "Sorbonne Université, INSA Lyon",
+      "score": 2.8091272799229654,
+      "score_text": "2.8"
+    }
+  ]
+}
