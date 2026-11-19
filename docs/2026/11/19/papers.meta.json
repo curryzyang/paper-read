@@ -1,0 +1,706 @@
+{
+  "label": "2026-11-19",
+  "date": "2026-11-19",
+  "generated_at": "2026-11-19T19:54:15",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2611.23246v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123246v1-chebyshev-polynomial-zonotope-abstractions-for-certified-reachability-of-learning-enabled-systems",
+      "source": "arxiv",
+      "title": "Chebyshev Polynomial Zonotope Abstractions for Certified Reachability of Learning-Enabled Systems",
+      "authors": [
+        "Peng Xie",
+        "Amr Alanwar"
+      ],
+      "authors_text": "Peng Xie, Amr Alanwar",
+      "abstract": "Nearly all current methods for computing reachable sets of nonlinear dynamics propagate them with truncated Taylor expansions plus rigorous remainders. The expansion is pointwise: once its argument is a whole set rather than a point, one polynomial must stay accurate across that set, and it reaches only as far as its disc of convergence. The limit binds hardest on the rational terms and sigmoid gates of modern controllers: smooth as these look on the real line, in the complex plane they blow up at points just off the real axis, closer as a gate sharpens, and those points cap the set width a Taylor expansion can cover, most tightly on the switching surface where the controller decides. We prove a dichotomy: no Taylor degree certifies sets wider than that cap, while a Chebyshev abstraction of equal degree, anchored to the whole set in the same polynomial-zonotope pipeline, has no cap and gains width at a geometric rate in degree. Measured walls match the formulas to between 89 and 94 percent. We give closed-form rigorous remainders, among them the first polynomial softmax transformer; existing sound treatments are linear relaxations. On closed loops, certificates survive where the Taylor ones diverge, and specifications flip from unknown to proven; on trained classifiers up to real MNIST digits, the Chebyshev frontier certifies input territory the Taylor basis surrenders. Every certified claim passed large Monte-Carlo harnesses with zero violations, and an applicability map states in advance where the basis provably cannot matter.",
+      "url": "http://arxiv.org/abs/2611.23246v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23246v1",
+      "tldr": "This paper shows that replacing Taylor expansions with Chebyshev polynomial-zonotope abstractions removes the convergence-radius cap caused by complex poles near the real axis, enabling provably wider and more accurate certified reachability analysis for nonlinear and learning-enabled systems.",
+      "detailed_reading": {
+        "motivation": "现有非线性可达集传播几乎都依赖截断 Taylor 展开加严格余项，但 Taylor 是点式展开，要求一个多项式在整个集合上同时准确，因此受收敛圆盘和复平面极点限制。该限制对现代控制器中的有理项、sigmoid/softmax 门最严重：门越尖锐，复极点越靠近实轴，切换面附近的集合宽度越难认证。",
+        "method": "保持现有稀疏多项式 zonotope 管线不变，仅把标量抽象基从 Taylor 换成集合锚定的 Chebyshev：对每个超越原语在当前整个参数区间上计算 Chebyshev 系数，并配套闭式严格余项，同时评估多个独立可靠界并取最紧者，再与多项式像做 Minkowski 和得到一步过近似。初始集可为盒或任意多项式 zonotope，逐步传播 K 步；闭环中神经控制器逐层精确组合，softmax 走 log-sum-exp 路径构造多项式可靠余项，连续时间模型用 RK4 一步离散并另计流缺陷与步内时间包络。",
+        "result": "理论证明二分：Taylor 认证半宽被 d·tol^(1/N) 封顶，任何阶数都不能认证更宽集合；等阶 Chebyshev 无此上限，认证宽度随阶数线性增长、误差几何下降，sigmoid 门满足温度律 d=sqrt(m^2+π^2τ^2)，且切换面处认证半径最小。实验测得 Taylor 墙从上方收敛到预测上限，N=32 时约在 2% 内，Chebyshev 墙在 N≈20 穿越，公式符合度 89%–94%；闭环中 Taylor 证书发散而 Chebyshev 证书存活，规范从 unknown 翻为 proven，softmax 决策半径 Chebyshev 1 阶达到而 Taylor 需 8 阶，MNIST/螺旋边界分类器恢复 5–7 个输入平面面积点，所有认证声明经大规模 Monte-Carlo 检验零违例。",
+        "conclusion": "Chebyshev 多项式 zonotope 是可插入现有认证管线的基替换，能在 Taylor 受复极点限制的场景显著扩大可认证范围并保持可靠性。但它并非普适增益：多项式动力学两者逐位相同，整函数型非线性只获常数因子，高阶收益受盒表示限制，适用性图可提前预判基选择无效的场景。",
+        "key_details": "关键点包括：输入为盒或多项式 zonotope 的初始集，每步 Chebyshev 多项式锚定当前整个 enclosure 而非中心点，余项族含闭式严格界、奇异性感知界和 interval-Lagrange 界，Chebyshev 节点因首一多项式极小性可再获 2^N 因子；softmax 用 log-sum-exp 保持多项式共享符号表示。核心超参为多项式阶数 N、容差 tol、门温度 τ 和 RK4 步长 h，无训练损失，实验预注册并用密集 Monte-Carlo 与角点校验。复杂度/约束来自多项式 zonotope 的符号维度、盒表示和余项族多次评估，局限性是离散时间证书仅针对 Φ，连续流需额外 validated RK 流缺陷与步内包络，且高维盒表示会限制高阶收益。"
+      },
+      "affiliations": [
+        "Technical University of Munich"
+      ],
+      "affiliations_text": "Technical University of Munich",
+      "score": 5.088832648304491,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2611.23240v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123240v1-neural-network-based-modeling-of-hysteretic-systems-from-prandtl-and-preisach-neural-networks-to-neuro-madelung-and-neuroplastic-continuous-models",
+      "source": "arxiv",
+      "title": "Neural Network-Based Modeling of Hysteretic Systems: From Prandtl and Preisach Neural Networks to Neuro-Madelung and Neuroplastic Continuous Models",
+      "authors": [
+        "Mehrdad Shafiei Dizaji",
+        "Farzad Shafiei Dizaji"
+      ],
+      "authors_text": "Mehrdad Shafiei Dizaji, Farzad Shafiei Dizaji",
+      "abstract": "Hysteresis is a complex nonlinear phenomenon characterized by memory dependence, path dependence, and, in many physical systems, degradation, non-congruency, asymmetry, and rate dependence. This review examines the development and capabilities of Prandtl neural networks (PNNs), Preisach neural networks (PreisachNNs), generalized Prandtl neural networks (GPNNs), the neuro-Madelung model (NMM), extended Preisach neural networks (EPNNs), and dynamic plastic continuous neural networks (DPCNNs). Particular attention is given to their mechanisms for representing memory, network architectures, activation functions, training algorithms, treatment of deterioration and rate dependence, and applications to nonlinear structural and material systems. The PNN introduced hysteretic memory directly into neural activation through stop operators and demonstrated accurate nonlinear dynamic analysis of structures. Preisach-NNs subsequently extended this concept through an additional nonlinear hidden layer to represent non-Masing hysteresis. GPNNs introduced deteriorating-stop neurons to capture stiffness and strength degradation and non-congruent hysteresis. A different generalization was provided by the NMM, which combined Madelung's hysteresis rules with multilayer feedforward neural networks to represent diverse rate-independent and rate-dependent behaviors. These developments culminated in the EPNN, which combines deteriorating hysteretic operators, nonlinear neural mappings, and input-rate information to accommodate Masing and nonMasing, symmetric and asymmetric, congruent and noncongruent, and rate-independent and rate-dependent hysteresis.",
+      "url": "http://arxiv.org/abs/2611.23240v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23240v1",
+      "tldr": "This review traces the development of specialized neural-network architectures that embed hysteresis-specific memory mechanisms—from Prandtl and Preisach neural networks to generalized, neuro-Madelung, extended Preisach, and dynamic plastic continuous models—for modeling complex path-, degradation-, and rate-dependent hysteretic systems.",
+      "detailed_reading": {
+        "motivation": "滞回系统具有记忆依赖、路径依赖以及退化、非一致性、不对称和速率依赖等复杂特征，传统前馈神经网络本质无记忆，而NARX、循环或时滞网络主要依赖历史输入输出且递归预测易误差累积。因此，需要把滞回物理机制直接嵌入神经网络结构，而不仅是做黑箱函数逼近。",
+        "method": "本文系统综述PNN、Preisach-NN、GPNN、NMM、EPNN和DPCNN六类模型：PNN以stop算子作为隐层神经元并采用连续遗传算法优化连接权重与屈服点；Preisach-NN在stop神经元后增加sigmoid隐层并用空间扩张次梯度法训练；GPNN用stop与play算子构造退化stop神经元，以累积滑移表征损伤并用退化参数控制刚度/强度退化；NMM用Madelung转折点与擦除规则管理记忆，剩余非线性映射由两层各15个sigmoid神经元的MLFFNN经Levenberg-Marquardt训练，输入含当前输入、相关历史转折点和输入速率；EPNN组合退化/衰减stop神经元、sigmoid映射和输入速率项，采用遗传算法与次梯度法混合训练；DPCNN则让神经元通过连续非线性塑性介质耦合，用有限元模拟波传播，并以灵敏度分析和最速下降优化神经权重及介质材料属性。",
+        "result": "PNN在白噪声训练、El Centro和Gilroy地震记录测试下能准确复现强非线性滞回 shear frame 的动力响应；Preisach-NN在非Masing算例中报告MSE约2.41×10^-5；GPNN能复现严重损伤、非一致滞回并优于原PNN；EPNN在含速率项时误差降至约7×10^-5，去除速率项误差显著增大，异频测试MSE约0.002，并能同时处理混凝土等材料的非Masing、不对称、非一致和速率相关行为；DPCNN展示了塑性连续介质中波传播与材料塑性参与学习记忆的新范式。",
+        "conclusion": "该综述表明滞回神经网络正从单纯逼近输入输出关系，转向将记忆、塑性、退化和速率依赖等物理机制直接嵌入计算模型，形成早期物理引导神经网络。不同模型在通用性与复杂度之间存在权衡：算子型网络逐步扩展至非Masing、非一致、退化和速率依赖，但训练与结构复杂度上升；DPCNN提供空间连续介质记忆的新思路，但有限元框架计算密集且理论实现仍处早期。未来方向包括可微滞回算子、自动微分与PINN/神经算子融合、不确定性量化、跨材料迁移学习及更高效可解释模型。",
+        "key_details": "关键实现细节包括：PNN以stop算子作为历史依赖激活，GA直接优化非光滑目标；Preisach-NN用第二sigmoid隐层实现非线性记忆组合，并以次梯度法处理大量权重；GPNN的退化stop由stop与play组合，累积滑移作为损伤指标，退化参数越大越接近普通stop；NMM依赖Madelung转折点与wipe-out规则，固定两层15个sigmoid神经元、LM训练，并可构造隐式逆模型用于开环补偿；EPNN输入含x(t)与x_dot(t)，采用GA定位参数区域后用次梯度加速收敛；DPCNN用FEM波传播与灵敏度梯度，分阶段优化连接权重和介质属性，主要局限为算子非光滑、显式历史管理、通用性增加带来结构与训练成本、DPCNN计算密集及不确定性量化与跨材料迁移尚不充分。"
+      },
+      "affiliations": [
+        "University of Virginia"
+      ],
+      "affiliations_text": "University of Virginia",
+      "score": 4.943579362197683,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.23415v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123415v1-verifiably-safe-decentralized-control-via-event-triggered-topology-switching",
+      "source": "arxiv",
+      "title": "Verifiably Safe Decentralized Control via Event-Triggered Topology Switching",
+      "authors": [
+        "Amber He Wei",
+        "Shiyu Cheng",
+        "Andrew Clark",
+        "Bruno Sinopoli"
+      ],
+      "authors_text": "Amber He Wei, Shiyu Cheng, Andrew Clark, Bruno Sinopoli",
+      "abstract": "This paper proposes a decentralized event-triggered topology-switching protocol for multi-agent systems under estimation uncertainty. We consider an intermittent communication setting in which each agent switches between connected and disconnected modes and makes communication decisions using locally computable certificates, while the closed-loop state is required to remain safe. The proposed protocol follows a safety-driven triggering principle in which agents reconnect before their certificates reach the safety boundary and disconnect only after recovering to a stricter bound below the safety limit. Our design enables intermittent connectivity while maintaining the estimation error within a certified safety bound and excluding Zeno behavior. We evaluate the proposed protocol on a quadruple-tank example, showing that it keeps all tank deviations within the safety bound while allowing agents to remain disconnected for most of the run.",
+      "url": "http://arxiv.org/abs/2611.23415v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23415v1",
+      "tldr": "This paper proposes a decentralized event-triggered topology-switching protocol that lets multi-agent systems intermittently connect and disconnect based on local safety certificates while guaranteeing the estimation error stays within a certified safety bound and Zeno behavior is excluded.",
+      "detailed_reading": {
+        "motivation": "多智能体系统通常依赖周期性状态交换来保证协调与安全，带来显著通信开销；已有事件触发方法虽降低传输频率，但仍需保持网络连接并持续监听，且静态拓扑易受攻击。本文关注在估计不确定性下，通过间歇式、事件触发的拓扑切换实现可验证安全，要求估计误差在包括断连期间在内的所有时刻均满足安全界。",
+        "method": "针对连续时间线性多智能体系统，各智能体采用基于局部估计的静态状态反馈，并运行分布式Luenberger型观测器：断连时使用基于可观测性分解的本地增益，连边时使用网络耦合增益更新全局状态估计。每个智能体维护局部可计算的估计误差上界证书，并按安全驱动触发协议切换拓扑：当证书接近安全边界前自主重连，连接受限内所有可达智能体仅在同时恢复到严格低于安全限的内层门限后才同步断连。作者进一步推导触发参数约束，以保证全连接下恢复以及安全违反前重连，并排除Zeno行为。",
+        "result": "四水箱算例表明，该协议能使所有水箱偏差始终保持在安全界内，同时智能体在大部分运行时间内处于断连状态，说明间歇连接可在不破坏安全认证的前提下显著减少通信。",
+        "conclusion": "该工作提出了一种可验证安全的分散式事件触发拓扑切换协议，将估计误差证书、安全障碍函数与间歇通信决策结合，在保持闭环安全的同时实现按需连接，并给出避免Zeno行为的理论保证。",
+        "key_details": "关键细节包括：过程和测量扰动由已知二次有界紧集描述；底层图连通且实际拓扑为其子图，智能体依据潜在邻居和当前连接集合确定有效邻居；观测器增益随连接度切换，安全通过多项式障碍函数定义的可认证内近似集合刻画；触发设计区分安全边界与更严格的内层恢复门限，断连需活跃链路可达智能体同步满足条件；理论保证依赖已知模型、扰动界和局部证书，实验为四水箱仿真，未给出大规模或非线性场景验证。"
+      },
+      "affiliations": [
+        "Arizona State University",
+        "Washington University in St. Louis"
+      ],
+      "affiliations_text": "Arizona State University, Washington University in St. Louis",
+      "score": 4.86259869737057,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.23440v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123440v1-conformally-calibrated-adaptive-computation-in-neural-operators",
+      "source": "arxiv",
+      "title": "Conformally Calibrated Adaptive Computation in Neural Operators",
+      "authors": [
+        "Abdul Qadir Ibrahim",
+        "Martin Burger",
+        "Abel Maviano Jonathan"
+      ],
+      "authors_text": "Abdul Qadir Ibrahim, Martin Burger, Abel Maviano Jonathan",
+      "abstract": "Selecting less computation in a neural operator need not reduce inference time. We study this gap using conformal calibration to choose Fourier modes or channel width per input subject to a fixed error budget. A triangle-inequality envelope bounds all candidates simultaneously; a direct-score rule handles non-monotone candidate errors and, with an input-independent score, calibrates a static baseline under the same marginal guarantee. Under frozen-model and exchangeability assumptions, both rules bound the probability of issuing a prediction outside the budget and abstain when calibration is infeasible. On Burgers and Darcy flow across three training seeds, mode selection reduces active spectral support without a measurable latency reduction, because full-grid transforms and channel mixing dominate the cost. Narrowing channels does reduce Darcy forward cost, but reference-based selection must first compute the dense prediction. An input-only binary width selector avoids that pass and runs at 0.52-0.95 times dense latency; yet static widths calibrated under the same rule are often as fast or faster, and on a separately generated 1,000-example test set they generally achieve higher coverage, while the selector falls below its 90% target in more than half of the settings. Adaptive computation in neural operators should therefore be judged by achieved coverage and complete runtime against a matched static comparator.",
+      "url": "http://arxiv.org/abs/2611.23440v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23440v1",
+      "tldr": "Conformal calibration can adapt Fourier modes or channel widths in neural operators to meet an error budget, but measured runtime gains are often absent and calibrated static baselines are frequently as fast or faster with better coverage, so adaptive computation should be judged by achieved coverage and end-to-end runtime against a matched static comparator.",
+      "detailed_reading": {
+        "motivation": "傅里叶神经算子（FNO）对每个输入都使用相同的谱带宽与通道宽度，但不同PDE实例的复杂度差异很大，因此自然要问：某个输入究竟需要多少计算量。更关键的是，作者指出“选中更少的计算”并不等于“推理更快”，因为全网格变换与逐点通道混合等固定开销可能主导耗时。于是本文在固定误差预算下逐输入选择Fourier模态数或通道宽度，并追问这种自适应选择在计入参考pass、打分与调度的完整运行时后，是否仍优于匹配的静态基线。",
+        "method": "用分裂共形校准在绝对误差预算τ与风险水平δ下为每个输入选择模态数K或通道宽度w。规则一构造三角不等式包络：候选误差满足 e_K ≤ η(x,K)+e_max，其中η为候选与全模型输出的L2不一致度（部署时可算），e_max由校准集上全模型参考误差的(1−δ)共形分位数统一上界，从而一次性同时约束所有候选；规则二直接用带标签分数校准各候选误差，不假设误差随成本单调，并可用输入无关的分数退化为具有同一边际保证的静态基线，校准不可行时按约定弃权。模态候选族由训练好的FNO按前缀截断Fourier乘子得到（无需重训，全支撑下精确复现稠密前向），宽度候选族用slimmable训练与三明治规则得到{8,16,24,32}的嵌套宽度。为规避“先算稠密预测”的开销，作者另设一个仅依赖输入的二值门，用输入有限差分均值TV(x)在{8,32}之间路由，再在Burgers与Darcy（各3个训练种子）上按覆盖率与完整延迟评估。",
+        "result": "模态选择确实降低了活跃谱支撑比例，但没有带来可测量的延迟下降，因为全网格FFT与通道混合主导了Burgers和Darcy的成本；通道收窄能降低Darcy前向成本，但基于参考的宽度选择必须先算出稠密预测，因此没有净收益。纯输入二值宽度选择器全流程耗时为稠密推理的0.52–0.95倍，但在独立生成的1000例Darcy测试集上，用同一规则校准的静态宽度往往同样快甚至更快，且覆盖率普遍更高，而选择器在超过一半的设置中达不到其90%的目标覆盖率。",
+        "conclusion": "在神经算子中，逐输入自适应计算应当以实际达成的覆盖率和对匹配静态比较器的完整运行时来评判，而不能以名义稀疏度或减少的计算量来评判。在这套FNO基准上，参考pass与打分、调度开销常常抵消甚至超过自适应节省的计算，因此“少算”未必“更快”，也未必更可靠。",
+        "key_details": "误差预算采用固定输出网格上未归一化数组的绝对L2范数（而非相对误差），因为部署时无法获知目标范数，这使不一致度与参考误差可进入同一三角界；数据上验证集只用于选checkpoint，共形校准与评估分离（Darcy主结果为624例校准池加新生成1000例测试集），但作者明确承认打分函数与预算曾利用原测试集开发、存在复用。超参与构件包括：候选模态K∈{2,4,…,16}(Burgers)、{2,…,12}(Darcy)，谱实验τ分别为{0.02,0.03,0.05,0.10}与{0.05,0.08,0.12,0.18}，宽度实验τ∈{0.020,0.024,0.028}，宽度阶梯{8,16,24,32}，计时为RTX A6000上20次预热加100次同步重复且全流程含CPU打分、阈值传输、调度与重组。局限在于：运行时结论只适用于所测FNO与硬件，覆盖率仅在固定网格成立而非函数空间，静态对照因Bonferroni式保守处理而偏向自适应有利，且二值门与四宽度静态模型的动作空间并不对称。"
+      },
+      "affiliations": [
+        "Deutsches Elektronen-Synchrotron DESY",
+        "University of L'Aquila"
+      ],
+      "affiliations_text": "Deutsches Elektronen-Synchrotron DESY, University of L'Aquila",
+      "score": 4.778552723241642,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.23242v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123242v1-biologically-inspired-spike-encoding-and-optimization-for-spiking-neural-networks",
+      "source": "arxiv",
+      "title": "Biologically-Inspired Spike Encoding and Optimization for Spiking Neural Networks",
+      "authors": [
+        "Ayaan Qayyum",
+        "Bruce Yi Bu",
+        "Zicong Li",
+        "Jingfeng Zhou"
+      ],
+      "authors_text": "Ayaan Qayyum, Bruce Yi Bu, Zicong Li, Jingfeng Zhou",
+      "abstract": "Spiking Neural Networks (SNNs) offer theoretical energy-efficiency advantages over conventional deep networks, but realizing these advantages on vision tasks requires sparse spike representations that naive rate-coding methods fail to provide. We combine biologically motivated spike-encoding schemes with two training improvements: Rouser adaptive-threshold surrogate gradients and Kronecker-Factored Approximate Curvature (K-FAC) second-order optimization. The spike encoding schemes experimented with are rate coding, latency coding, DVS-style delta modulation, and Difference-of-Gaussians (DoG) filtering. Experiments on MNIST and Fashion-MNIST demonstrate that biologically inspired encoders yield the largest accuracy gains in capacity-constrained regimes and serve as an effective parameter-efficiency lever. DoG and delta modulation encoders produce significantly sparser spike trains than rate coding. K-FAC yields modest but consistent accuracy improvements over Adam-trained baselines, and Rouser's learnable per-neuron thresholds improve Fashion-MNIST accuracy from 87.37% to 88.13% by enabling homeostatic firing-rate regulation. Biologically grounded pre-processing methods can help close the accuracy gap between SNNs and non-spiking baselines without increasing model size.",
+      "url": "http://arxiv.org/abs/2611.23242v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23242v1",
+      "tldr": "Biologically inspired spike encoders—especially DoG and delta modulation—combined with Rouser adaptive-threshold surrogate gradients and K-FAC optimization improve spiking neural network accuracy and parameter efficiency on MNIST/Fashion-MNIST while producing sparser spike trains than rate coding.",
+      "detailed_reading": {
+        "motivation": "脉冲神经网络（SNN）理论上比常规深度网络更节能，但在视觉任务上要兑现这一优势，需要稀疏的脉冲表示，而朴素的率编码会产生密集脉冲、削弱能效优势。论文关注的核心问题是：能否通过生物学启发的输入脉冲编码与训练优化，在不增加模型尺寸的情况下缩小SNN与非脉冲基线的精度差距，并提升参数效率。",
+        "method": "研究在MNIST和Fashion-MNIST归一化图像上比较四种编码器：率编码、延迟编码、DVS式差分调制和DoG中心-周围滤波编码，其中差分与DoG采用ON/OFF双极性整流，使有效输入维度D'翻倍。下游为三层SpikingMLP，输入经SparseLinear映射到256和128维隐藏层、再线性投影到类别数，每层接LIF神经元；LIF采用β=0.9、固定阈值1和减法重置，默认全连接，权重用Kaiming均匀初始化并按fan-in缩放。训练使用替代梯度，基线为snntorch快速Sigmoid替代导数（k=25）；Rouser将阈值变为每神经元可学习参数，并对膜电位和阈值分别赋予形状相同、符号相反的替代梯度，通过阈值学习率更新。读出支持脉冲计数、膜电位求和和末时刻膜电位三种模式，并对比Adam与K-FAC二阶优化。",
+        "result": "实验表明，生物启发编码器在容量受限的小网络中带来最大精度增益，编码器选择可在匹配精度下最多节省约8倍可训练参数；DoG和差分调制编码产生的脉冲串显著比率编码更稀疏。K-FAC相对Adam基线带来 modest 但一致的精度提升；Rouser的可学习逐神经元阈值通过稳态放电率调节，将Fashion-MNIST精度从87.37%提升到88.13%。MNIST上常规SNN已接近饱和（≥98%），因此Fashion-MNIST更能暴露朴素率编码SNN的弱点。",
+        "conclusion": "生物学 grounded 的预处理与编码方法能够在不增加模型尺寸的前提下，帮助SNN缩小与非脉冲基线的精度差距，并提升参数效率与脉冲稀疏性。可学习阈值和二阶优化是较小但一致的训练侧增益，说明输入编码是SNN视觉任务中独立且重要的优化面。",
+        "key_details": "关键先验包括视网膜中心-周围DoG滤波对应自然图像1/f^2冗余抑制、ON/OFF双通道在零均值信号下可提升每脉冲Fisher信息、微眼跳启发帧差/DVS式差分编码；实现超参为T=25、β=0.9、阈值1、快速Sigmoid k=25、隐藏层256/128、默认连接概率1.0。DoG和差分编码的双极性使首层参数翻倍，K-FAC带来曲率近似开销，Rouser仅增加每神经元一个阈值参数但对阈值学习率敏感。局限是仅在MNIST/Fashion-MNIST和小型MLP上验证，尚未覆盖复杂视觉任务、真实神经形态硬件能耗及更大规模网络。"
+      },
+      "affiliations": [
+        "Columbia University"
+      ],
+      "affiliations_text": "Columbia University",
+      "score": 4.5800196158542175,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.23245v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123245v1-response-relevant-information-is-not-sufficient-for-neural-training-state-equivalence",
+      "source": "arxiv",
+      "title": "Response-Relevant Information Is Not Sufficient for Neural Training-State Equivalence",
+      "authors": [
+        "Truong Xuan Khanh"
+      ],
+      "authors_text": "Truong Xuan Khanh",
+      "abstract": "Response-relevant information is not sufficient evidence that two neural networks are in the same training state. We define training-state equivalence operationally: two checkpoints are equivalent, relative to an intervention family and horizon, if they respond alike when training is perturbed and continues. On fresh runs of a one-layer transformer learning modular addition, response to a weight-decay pulse is highly reproducible relative to between-checkpoint differences (rho_state = 0.934 at 500 steps), establishing the target as measurable. Fifteen descriptors of weight spectra, representation geometry and optimiser geometry carry within-run response-relevant information beyond weight norm and loss on a development dataset, predicting held-out response deviation across seed blocks. But their apparent 16.1% advantage at matching checkpoints by future response does not separate from a conditional placebo preserving each descriptor's fitted dependence on the conventional observables, and a calibrated positive control makes simple insensitivity an unlikely explanation. Information a decoder can extract need not be organised in the pairwise geometry that similarity judgments require.",
+      "url": "http://arxiv.org/abs/2611.23245v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23245v1",
+      "tldr": "The paper shows that response-relevant information is insufficient for neural training-state equivalence: although weight, representation, and optimiser descriptors can predict future response deviations, they do not yield the pairwise geometry needed to match checkpoints by training state beyond controls.",
+      "detailed_reading": {
+        "motivation": "论文关注如何判定两个神经网络检查点是否处于同一训练状态：仅凭与响应相关的信息是否足以支持这种等价性仍不清楚。作者主张采用可操作定义，即相对于给定干预族和预测时域，两个检查点在训练被扰动并继续后应产生相似响应，并据此检验常用权重谱、表示几何与优化器几何描述符能否超越权重范数和损失来识别等价状态。",
+        "method": "在单层 Transformer 学习模加法的全新训练运行中采集检查点，施加权重衰减脉冲作为干预并继续训练到固定时域，以响应偏差衡量训练状态；先估计该响应目标在运行内的可重复性。随后用十五个权重谱、表示几何和优化器几何描述符，在开发集上预测跨种子块的留出响应偏差，并在按未来响应匹配检查点的任务中评估其相对常规观测量的增益；关键对照是保留各描述符对常规观测量拟合依赖的条件安慰剂，以及校准的正对照。",
+        "result": "在 500 步时，权重衰减脉冲响应相对于检查点间差异高度可重复，rho_state=0.934，说明目标可测。十五个描述符在开发集上携带超出权重范数和损失的运行内响应相关信息，并能预测跨种子块的留出响应偏差；按未来响应匹配检查点时出现 16.1% 的表观优势，但该优势无法与条件安慰剂区分，校准正对照使简单不敏感性不太可能解释结果。",
+        "conclusion": "因此，响应相关信息即使可被解码器提取，也不足以证明两个检查点训练状态等价；这类信息未必组织成相似性判断所需的成对几何结构。论文提示用描述符或未来响应信息推断检查点等价性时需谨慎，并应将等价性限定在具体干预族和时域下进行成对响应检验。",
+        "key_details": "实验基于单层 Transformer 的模加法任务、多次全新运行和按种子块划分的检查点，干预为权重衰减脉冲，评价指标为继续训练后的响应偏差，核心可重复性为 500 步时 rho_state=0.934；描述符覆盖权重谱、表示几何与优化器几何共十五项，并控制权重范数和损失。方法上的关键约束是条件安慰剂保留每个描述符对常规观测量的拟合依赖，正对照用于排除度量不敏感；局限在于结论来自单一任务、架构和干预族，且等价性是相对于给定干预与时域的操作性定义。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.064198889783959,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.23397v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123397v1-which-tokens-in-what-order-and-how-fast-a-theoretical-analysis-of-on-policy-distillation-objectives",
+      "source": "arxiv",
+      "title": "Which Tokens, in What Order, and How Fast? A Theoretical Analysis of On-Policy Distillation Objectives",
+      "authors": [
+        "Hubert Strauss",
+        "Liam Fowl",
+        "Noam Razin"
+      ],
+      "authors_text": "Hubert Strauss, Liam Fowl, Noam Razin",
+      "abstract": "On-policy distillation (OPD) trains a student language model to match a teacher model based on its own generations. When using OPD, one must choose whether to apply it at the sequence or token level and which divergence to minimize. However, despite the wide adoption of OPD in practice, the formal understanding of which OPD objective is appropriate for a given setting is limited. Toward addressing this gap, we theoretically analyze how the choice of OPD objective governs which tokens are prioritized, in what order, and how efficiently. Our analysis reveals that sequence-level OPD exhibits a future agreement bias, which myopic token-level objectives avoid. This bias induces a reverse learning order, in which sequence-level OPD first matches the teacher at later token positions, while at earlier positions it can favor tokens that are improbable under the teacher, and thus often undesirable. As for the choice of divergence, we prove that it strongly influences the amenability of OPD to gradient-based optimization. In particular, while the forward KL divergence enjoys a well-behaved objective landscape, other $f$-divergences, such as reverse KL, can suffer from vanishing gradients even when the student and teacher are far apart. Across language model post-training settings, we demonstrate the implications of these theoretical findings for which OPD objective is preferable, highlighting the importance of accounting for the interplay between the student, teacher, and task at hand.",
+      "url": "http://arxiv.org/abs/2611.23397v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23397v1",
+      "tldr": "This paper theoretically shows that sequence-level on-policy distillation introduces a future-agreement bias and reverse token-learning order that token-level objectives avoid, while the choice of divergence critically affects optimization behavior—with forward KL being better behaved than reverse KL—thereby guiding which OPD objective is appropriate for a given student–teacher–task setting.",
+      "detailed_reading": {
+        "motivation": "On-policy distillation（OPD）已广泛用于语言模型后训练，但序列级与词元级目标以及散度函数的选择缺乏形式化理解；本文关注不同OPD目标如何决定优先匹配哪些词元、以何种顺序学习以及优化效率如何。",
+        "method": "本文将OPD建模为学生模型在其自身生成序列上匹配教师分布，系统比较序列级目标与myopic词元级目标，并对f-散度（包括前向KL与反向KL）分析目标景观和梯度性质；理论上刻画目标对词元位置与概率的加权、序列级未来一致性偏差及学习顺序，并在多种语言模型后训练设置中验证这些理论含义。",
+        "result": "分析表明序列级OPD存在未来一致性偏差，导致反向学习顺序：先匹配教师在后部词元的行为，而前部位置可能偏向教师低概率甚至不期望的词元；myopic词元级目标可避免该偏差。散度选择显著影响优化，前向KL具有较良好目标景观，而反向KL等f-散度即使学生与教师相距较远也可能出现梯度消失。",
+        "conclusion": "OPD目标不存在普适最优选择，需综合考虑学生、教师与具体任务的交互来决定序列级或词元级目标及散度函数；理论结果强调未来一致性偏差与梯度可优化性是后训练目标设计的关键因素。",
+        "key_details": "分析以学生自身生成序列和教师分布为输入，围绕序列级与词元级目标、f-散度（含前向KL、反向KL）及梯度行为展开；关键点包括myopic词元级分解、未来一致性偏差、反向学习顺序和梯度消失条件；局限在于结论依赖理论设定与假设，实验主要用于验证理论含义而非提出全新算法。"
+      },
+      "affiliations": [
+        "Princeton University",
+        "Bar-Ilan University"
+      ],
+      "affiliations_text": "Princeton University, Bar-Ilan University",
+      "score": 4.018034231127382,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.23241v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123241v1-gridforge-an-open-physics-informed-digital-twin-and-benchmark-suite-for-uk-11-kv-underground-distribution-cables",
+      "source": "arxiv",
+      "title": "GridForge: An Open Physics-Informed Digital Twin and Benchmark Suite for UK 11 kV Underground Distribution Cables",
+      "authors": [
+        "Lilliane Linnet Musoke"
+      ],
+      "authors_text": "Lilliane Linnet Musoke",
+      "abstract": "The UK distribution-cable monitoring sector is data-rich but framework-poor: each Distribution Network Operator (DNO) collects megabytes of telemetry per asset per day, but there is no public benchmark dataset, no shared reference model, and no commonly agreed evaluation protocol for benchmarking sectoral, data-intensive models for operational decision support; notably for maintenance planning and prioritisation. We address this gap with GridForge, an open-source physics-informed digital twin and benchmark suite for fault diagnosis and prediction, integrating four building blocks: (i) a verified steady state and transient thermal model based on IEC 60287 and IEC 60853; (ii) a calibrated synthetic dataset of 64 cables (covering 320 cable-years) representing four canonical UK 11 kV thermal archetypes and four condition modes; (iii) a Physics-Informed Neural Network (PINN) surrogate that satisfies the algebraic balance defined by IEC 60287 during training and reaches an RMSE of 0.148 °C on an independent held out set against the reference analytical oracle; and (iv) a five-task benchmark suite that includes three reference baseline models (pure physics, gradient-boosted trees, and the PINN). All numerical parameters are sourced from public standards, the code is licensed under the MIT licence, and the trained PINN converges in only two minutes (as run on the computing platform in Section 10.1), enabling independent verification by DNO engineering and research practitioners. At present only the virtual-sensor task (T4) discriminates between the reference baselines; the other tasks tie or are undefined on this test split, so extending the baselines with task-specific logic is a priority future enhancement. For open validation, the dataset, test sets and models are made available at https://github.com/mlily2024/Gridforge",
+      "url": "http://arxiv.org/abs/2611.23241v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23241v1",
+      "tldr": "GridForge is an open-source, physics-informed digital twin and benchmark suite for UK 11 kV underground distribution cables that combines verified IEC thermal models, a calibrated 64-cable synthetic dataset, a fast PINN surrogate (0.148 °C RMSE), and a five-task benchmark with baselines to enable reproducible cable fault diagnosis and maintenance decision support.",
+      "detailed_reading": {
+        "motivation": "英国配电电缆监测领域数据丰富但框架缺失：各配电网络运营商每天采集大量遥测数据，却没有公开基准数据集、共享参考模型和统一评估协议，难以为维护规划与更换优先级提供可复现的决策支持。与此同时，11 kV 地下电缆更换成本高、故障后抢修更昂贵，且监管框架将停机惩罚与可靠性指标挂钩，因此亟需开放、物理可信且可独立验证的数字孪生与基准套件。",
+        "method": "GridForge 由四部分组成：首先实现并验证基于 IEC 60287 的稳态热模型、IEC 60853-2 的暂态集总热模型、同轴电场解和 Crine 介电老化动力学的物理 oracle；其次用该 oracle 生成 64 条电缆、320 电缆年、小时级遥测的合成数据集，覆盖四种英国 11 kV 热学原型和四种状态模式，并采用 SHA-256 确定性 70/15/15 划分及密封测试标签；然后训练 PINN 代理模型，输入为电流、环境温度和土壤热阻率，输出导体温度，采用四层 64 单元 tanh MLP、4 个 octave 的 Fourier 位置编码和 softplus 约束保证温度不低于环境温度，损失为 oracle 数据 MSE 与 IEC 60287 代数平衡物理残差之和，并用梯度范数平衡自适应权重，Adam 学习率 2×10^-3、批大小 256、1500 轮、4000 训练对和 800 验证对；最后在五个密封标签任务上以纯物理、梯度提升树和 PINN 三个基线按固定协议评估。",
+        "result": "PINN 在独立留出集上的导体温度预测 RMSE 为 0.148 °C，最佳验证检查点为 0.064 °C、最终轮验证 RMSE 为 0.131 °C，均显著低于预先设定的 0.5 °C 验收目标，且训练约 2 分钟即可收敛。基准套件目前只有虚拟传感器任务 T4 能区分三个参考基线，其余任务在该测试划分上打平或未定义，说明任务特定基线逻辑仍需扩展。",
+        "conclusion": "GridForge 提供了首个面向英国 11 kV 地下配电电缆的开放物理信息数字孪生与基准套件，集成了经标准验证的物理 oracle、可复现合成数据集、快速 PINN 代理和五任务密封评测协议，并以 MIT 许可和公开参数支持 DNO 与研究者独立复核。其核心价值在于把维护决策支持从私有数据和不可比方法推进到公开、物理约束、可复现的基准框架，但当前判别力有限，未来需扩展任务特定基线并扩大到约 1000 电缆年的生产规模。",
+        "key_details": "所有数值参数均引用公开标准（如 BS EN 60228、BS 7870、IEC 60287-2-1、Met Office 土壤气候和 IEEE 1407），不含雇主数据、NDA 数据或商业机密；数据集约 280 万样本、200 MB 未压缩 CSV，按电缆原子性划分并单独保存 failure_times.csv 密封标签。PINN 共 14,337 参数，物理损失为 IEC 60287 代数平衡残差，权重平衡采用 α=0.9、K=50、初始 w_p=10^-3，未做超参搜索；稳态求解用 5–10 步不动点迭代，典型 240 mm² XLPE 三芯电缆时间常数约 64 分钟，Crine 默认设计点为 4 MV/m、90 °C、40 年并按 Miner 规则累积损伤。局限性包括数据为合成数据、只有 T4 具判别力、基线较简单、未覆盖现场噪声与商业数据偏差，生产级规模仍属未来工作。"
+      },
+      "affiliations": [
+        "Independent Researcher"
+      ],
+      "affiliations_text": "Independent Researcher",
+      "score": 3.976400908923905,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.23388v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123388v1-qda-closed-loop-llm-quantization-design-with-agents",
+      "source": "arxiv",
+      "title": "QDA: Closed-Loop LLM Quantization Design with Agents",
+      "authors": [
+        "Xingyang Li",
+        "Tianlang Zhao",
+        "Song Han",
+        "Ligeng Zhu"
+      ],
+      "authors_text": "Xingyang Li, Tianlang Zhao, Song Han, Ligeng Zhu",
+      "abstract": "Post-training quantization is the standard way to serve large language models at low cost. However, the best quantization recipe differs across models and precisions. As a result, experts must redesign it for every new model, which is time-consuming and often sub-optimal. Fortunately, an LLM agent can take over this design by refining the recipe over rounds of building and evaluating candidates, so that more rounds lead to better recipes. However, evaluating one quantized reasoning model takes tens of GPU-hours, and combining methods from different codebases means porting each to the new architecture by hand. We present QDA, a system in which an agent designs the recipe for each model and precision. To make evaluation fast, QDA scores each candidate in minutes by its output KL divergence from the original model on reasoning traces that the agent never sees, and checks promising ones with long generations to catch failures such as repetition loops. To make building fast, QDA provides a library of public PTQ methods that are compatible with one another and with new model architectures. Across four reasoning models, QDA improves accuracy over the strongest public recipe by 0.9, 1.4 and 2.2 percentage points on average at W4A16, W4A8 and W3A16, using 64 GPU-hours per search. On the 320B-parameter MoE model GLM-5.3-Flash at NVFP4 W4A4, it recovers 98.3% of the FP8 model's accuracy, against 96.9% for the best vendor checkpoint. Every QDA checkpoint also runs on existing serving kernels with no inference overhead. We will release the library, the evaluator and the harness.",
+      "url": "http://arxiv.org/abs/2611.23388v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23388v1",
+      "tldr": "QDA is a closed-loop system in which an LLM agent automatically designs per-model and per-precision quantization recipes, using a fast KL-divergence proxy and a unified PTQ library to find recipes that outperform the strongest public baselines without adding inference overhead.",
+      "detailed_reading": {
+        "motivation": "大语言模型（尤其是长链推理模型）部署成本高，后训练量化（PTQ）是标准降本手段，但最优量化配方会随模型和精度变化而不同，公开配方无法直接迁移，专家需为每个新模型和新精度手工设计，耗时且常非最优。现有 LLM 编码智能体可通过多轮构建与评估候选来接管配方设计，但完整评估一个量化推理模型需数十 GPU 小时，且跨代码库组合 PTQ 方法需手工移植到新架构，导致搜索难以扩展。",
+        "method": "QDA 将量化配方设计建模为智能体驱动的闭环“构建—评估”搜索：智能体针对给定模型和精度提出由变换、舍入方法、scale 及其调优、校准数据组成的 recipe，并调用统一 PTQ 库中 21 种可互相兼容、输入输出均为量化 checkpoint 的方法按任意顺序堆叠构建候选。为加速评估，QDA 在原始模型生成的参考推理轨迹上计算候选与原始模型下一 token 分布的 KL 散度，并缓存原始分布，使单候选评分缩短到分钟级；对高分候选再执行长文本生成检查，以捕捉重复循环等罕见失败。搜索由 harness 自动运行，并将测试基准和参考轨迹对智能体隔离，防止过拟合或污染。",
+        "result": "在四个推理模型（覆盖稠密 Transformer、线性注意力混合架构和 MoE）上，QDA 在 W4A16、W4A8、W3A16 下相对最强公开配方平均提升 0.9、1.4、2.2 个百分点，每次搜索约用 64 GPU 小时。在 320B 参数 MoE 模型 GLM-5.3-Flash 的 NVFP4 W4A4 上，单次 6.5 小时搜索恢复 FP8 模型 98.3% 的准确率，高于最佳厂商 checkpoint 的 96.9%；在相同库和预算下，QDA 比贪心搜索和 ASHA 在 W4A8/W3A16 上最多高 1.2 个百分点，且优于使用 ModelOpt 配方搜索技能的智能体 0.5–1.3 个百分点。所有 QDA checkpoint 均可直接运行在现有 serving kernel 上，无额外推理开销。",
+        "conclusion": "QDA 表明，LLM 智能体可以通过闭环配方搜索，在有限 GPU 预算下为不同模型和精度自动设计出优于强公开配方的 PTQ recipe，并生成可直接部署、无推理开销的量化 checkpoint。该工作为快速到达的新模型提供了一种可扩展的量化设计范式，降低了对手工专家配方和逐模型移植的依赖。",
+        "key_details": "关键实现包括：以原始模型在推理轨迹上的下一 token 分布 KL 散度作为快速代理指标，并缓存原始分布，官方称比完整评估便宜 350–990 倍；代理指标之外增加长生成验证以发现重复循环等失败，但代理指标仍可能漏检罕见失败。统一库覆盖 21 种 PTQ 方法并支持 checkpoint-to-checkpoint 堆叠，配方空间受库覆盖范围约束；测试基准与参考轨迹对智能体隐藏，以避免污染。搜索预算为每次约 64 GPU 小时，GLM-5.3-Flash 单次搜索为 6.5 小时；方法支持 W4A16、W4A8、W3A16 和 NVFP4 W4A4，并保持与现有 serving kernel 兼容。"
+      },
+      "affiliations": [
+        "NVIDIA",
+        "MIT"
+      ],
+      "affiliations_text": "NVIDIA, MIT",
+      "score": 3.8957507297317253,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.23414v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/19/261123414v1-incremental-roseland-batch-wise-landmark-diffusion-via-kernelized-sequential-karhunen-love-update",
+      "source": "arxiv",
+      "title": "Incremental Roseland: Batch-wise Landmark Diffusion via Kernelized Sequential Karhunen--Loève Update",
+      "authors": [
+        "Jeanie Schreiber"
+      ],
+      "authors_text": "Jeanie Schreiber",
+      "abstract": "Landmark diffusion (Roseland) computes a diffusion-map-style spectral embedding from the singular value decomposition of a degree-normalized data-to-landmark kernel matrix, at a cost far below that of full diffusion maps. It assumes, however, that all data are available at once. We introduce incremental Roseland (iRoseland), which casts the landmark affinity as a row-growing matrix whose SVD can be updated with a kernelized Sequential Karhunen--Loève (SKL) scheme. Degre correction is handled by a first order expansion about a reference mean kernel row and so that the landmark-side eigenbasis may be recovered from a single landmark-by-landmark eigendecomposition at each step. The presented method requires only a single pass over the data and runs in bounded-memory with state independent of the number of points processed. A forgetting factor lets the method track drifting distributions, and a sample-size-invariant embedding keeps outputs comparable across time. Experiments show agreement with Roseland to round-off on stationary data, and accuracy that exceeds equal-memory Roseland by an order of magnitude on long streams. On drifting data, we observe large gains from forgetting with a window matched to the drift.",
+      "url": "http://arxiv.org/abs/2611.23414v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23414v1",
+      "tldr": "**TLDR:** The paper introduces **iRoseland**, a single-pass, bounded-memory streaming extension of landmark diffusion that uses a kernelized Sequential Karhunen–Loève SVD update with first-order degree correction and optional forgetting to track drifting data, matching Roseland on stationary streams and substantially outperforming equal-memory Roseland on long or drifting streams.",
+      "detailed_reading": {
+        "motivation": "Roseland 通过地标把扩散映射的谱嵌入成本降到远低于全量扩散映射，但它假设所有数据一次性可用。流式数据分批到达且不能反复读取或存储，逐批重拟合 Roseland 的成本为 O(nm^2) 且内存随流增长，因此需要一种每批更新成本只依赖批大小和地标数、能在每批后立即给出当前嵌入并可选跟踪分布漂移的增量方法。",
+        "method": "输入是分批到达的数据点、固定 m 个地标、高斯核带宽 epsilon、嵌入维数 q、扩散时间 t 和遗忘因子 f；每批计算数据到地标的核行 W_B，并更新列和 c 与加权统计，把度归一化亲和 Ahat=D^{-1/2}W 的转置视为按列增长的矩阵，用 kernelized Sequential Karhunen–Loève 方案维护其截断 SVD。度归一化会使旧行随 c 变化而需要按 sqrt(d_i^old/d_i^new) 重缩放，主版本用围绕参考均值核行的一阶展开累积 T0 与 T1 并周期重参考，每步组装 m×m 矩阵做一次特征分解得到地标侧特征基，再按 Roseland 公式输出样本量不变的嵌入。精确版本显式重缩放并重分解存储行作为小流正确性参考，遗忘通过样本权重 omega_i=f^{2a_i} 一致作用于度与统计，每批后即可输出当前嵌入。",
+        "result": "在平稳数据上，iRoseland 与 Roseland 的嵌入一致到舍入误差；在长流且资源限制为相同 5.0 MB 内存预算时，其精度比等内存 Roseland 高一个数量级。实验在 S^1 与 S^2 数据上验证，并在漂移数据上观察到采用与漂移尺度匹配的遗忘窗口相比不遗忘有明显增益。",
+        "conclusion": "iRoseland 将 Roseland 扩展为单遍、有界内存的增量谱嵌入，适用于生理记录、床旁监测和可穿戴传感器等流式场景。f=1 时平稳数据下它与 Roseland 是同一估计器，优势主要在资源效率和无需重读数据；f<1 时可跟踪漂移但会引入由有效样本量决定的采样误差底。当前方法固定地标集，尚不跟踪地标几何漂移。",
+        "key_details": "该方法无监督训练损失，核心是 SVD 与特征分解；状态包括 m×m 的 T0 和 m×m×m 的 T1，内存不随已处理点数 n 增长但随地标数 m 立方增长，每批成本依赖批大小和 m 而非历史流长。平稳情形一阶线性化误差的理论启发式为 O(log n/n)，f=1 时有效样本量 n_ess=n，f<1 时采样误差约按 1/sqrt(n_ess) 下降并与滞后误差折中，epsilon、q、t、m、f 和重参考周期是主要超参。精确增量版本需保留每点信息或重读数据，累计成本不低于 Roseland；固定地标不跟踪地标漂移，数据远离地标会造成小且病态的度，f<1 有永久采样误差底，漂移下线性化误差随窗口长度和漂移率增长。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.82633722194907,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.23244v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123244v1-goemanss-unsplittable-flow-conjecture-the-anatomy-of-ai-assisted-counterexample-discovery",
+      "source": "arxiv",
+      "title": "Goemans's Unsplittable-Flow Conjecture: The Anatomy of AI-Assisted Counterexample Discovery",
+      "authors": [
+        "Jingwei Ge",
+        "Na Xie",
+        "Li Li",
+        "Jiayang Li"
+      ],
+      "authors_text": "Jingwei Ge, Na Xie, Li Li, Jiayang Li",
+      "abstract": "Goemans conjectured that any fractional single-source flow could be converted into an unsplittable flow without increasing total cost and while increasing any arc load by at most the largest demand. Recently, Dmitry Rybin announced a seven-vertex counterexample found through an interaction with ChatGPT, which disproved this long-standing conjecture. However, the interaction did not reveal why this particular topology and its demand, fractional-flow, and cost choices work together, whether the example belongs to a broader family, or which structural features determine where counterexamples can occur. It also left unclear why the AI-assisted search succeeded where earlier human efforts had not. In this paper, we develop a forward counterexample construction pipeline. It starts from an arborescence on which failure is impossible and adds terminal-entering shortcut arcs. The resulting load constraints define a finite set of admissible route choices; their convex hull, the conflict polytope, yields exact conditions for demands, fractional flows, and costs. Starting from a simple arborescence, the pipeline selects Rybin's topology and characterizes all counterexamples it supports. Experiments further demonstrate the pipeline's transferability: when instructed to follow it while varying the initial arborescence and shortcut placement, ChatGPT produced counterexamples on topologies genuinely different from Rybin's and found valid constructions starting from 93 other rooted arborescence shapes. The theory also explains why the original example was difficult to discover through blind enumeration and suggests that Rybin's interaction lies between blind enumeration and a complete theory-guided construction.",
+      "url": "http://arxiv.org/abs/2611.23244v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23244v1",
+      "tldr": "This paper explains and generalizes the ChatGPT-assisted counterexample to Goemans’s unsplittable-flow conjecture by providing a forward construction pipeline that characterizes all counterexamples on Rybin’s topology and shows how theory-guided AI search transfers to many other arborescence topologies.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7899471613935227,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.23472v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123472v1-a-graph-theoretic-framework-for-identifying-mathematical-programming-decompositions",
+      "source": "arxiv",
+      "title": "A Graph-Theoretic Framework for Identifying Mathematical Programming Decompositions",
+      "authors": [
+        "Nicholas N. Kalamaris",
+        "Christos T. Maravelias"
+      ],
+      "authors_text": "Nicholas N. Kalamaris, Christos T. Maravelias",
+      "abstract": "We develop a framework for identifying combinations of complicating variables and/or constraints that can be used to formulate mathematical programming decompositions. A mathematical program is represented by a graph which accounts for the structural and functional relationship between variables and constraints. Graph projections are used to focus on variable- or constraint-based decompositions. A series of coarsening operations is used to generate a reduced graph based on the original or projected graph. On the reduced graph, we use integer programming to identify different combinations of complicating variables and/or constraints. Specifically, variables and constraints are identified as complicating based on their structural role and/or their functionality (contribution to nonlinearity) in the mathematical program. The framework allows us to assess the viability of different decomposition types (variable, constraint, cross) and identify multiple potential decomposition formulations of the same type (e.g. different combinations of complicating variables for Benders decomposition). The systematic nature of our framework facilitates broader studies into the efficacy of different decompositions across a range of problems including energy markets, process design, and machine learning.",
+      "url": "http://arxiv.org/abs/2611.23472v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23472v1",
+      "tldr": "The paper proposes a graph-theoretic framework that represents a mathematical program as a bipartite variable–constraint graph, applies projections and coarsening, and uses integer programming to identify complicating variables and/or constraints, enabling systematic discovery and comparison of variable, constraint, and cross decompositions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Princeton University"
+      ],
+      "affiliations_text": "Princeton University",
+      "score": 3.7895453318918086,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.23427v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123427v1-stability-does-not-mirror-plasticity-a-module-level-view-of-declarative-and-procedural-learning-in-transformers",
+      "source": "arxiv",
+      "title": "Stability Does Not Mirror Plasticity: A Module-Level View of Declarative and Procedural Learning in Transformers",
+      "authors": [
+        "Jinjun Peng",
+        "Wailiang Zhao",
+        "Baishakhi Ray",
+        "Zhou Yu",
+        "Jufeng Yang"
+      ],
+      "authors_text": "Jinjun Peng, Wailiang Zhao, Baishakhi Ray, Zhou Yu, Jufeng Yang",
+      "abstract": "Plasticity and stability in continual learning are typically studied at the entire-model level and in a task-agnostic manner, yet prior work has reported divergent conclusions across settings. Inspired by cognitive distinctions between declarative and procedural memory, we instead study how plasticity and stability vary across transformer modules and task types. In a controlled synthetic environment with clean measurement, we show a double dissociation: query-key (QK) and value-output (VO) projections are the most plastic on procedural tasks, whereas MLPs are the most plastic on declarative memorization. Stability, however, does not simply mirror plasticity: when learning a new procedure, updating QK retains over half of the stored declarative memory, while updating MLPs retains far less and updating VO loses roughly four-fifths. Targeted module reset-and-recovery experiments explain this asymmetry: plasticity tracks which module is best suited to a task's primary computation or storage, whereas stability depends on all ways the existing capability relies on that module, including access to information stored in other modules. Experiments on a realistic model and tasks broadly echo these asymmetric dynamics. Overall, our work shows that plasticity and stability depend on different aspects of a module's functional role, offering a task-dependent, module-level perspective on continual learning.",
+      "url": "http://arxiv.org/abs/2611.23427v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23427v1",
+      "tldr": "This paper shows at the transformer-module level that plasticity and stability are governed by different aspects of a module’s functional role—QK/VO projections are most plastic for procedural tasks and MLPs for declarative memorization, yet stability depends on broader functional dependencies rather than simply mirroring plasticity.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7590184846720653,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.23423v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123423v1-adaptive-line-switching-for-cascade-mitigation-in-power-systems-via-graph-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Adaptive Line Switching for Cascade Mitigation in Power Systems via Graph Reinforcement Learning",
+      "authors": [
+        "Naeem Md Sami",
+        "Soumav Biswas",
+        "Mia Naeini"
+      ],
+      "authors_text": "Naeem Md Sami, Soumav Biswas, Mia Naeini",
+      "abstract": "Although cascading failures are relatively rare events in power systems, they pose significant risks and can lead to severe economic and societal consequences within a short period. Therefore, developing effective mitigation strategies to prevent cascade propagation and to minimize their impacts is essential. This paper presents a deep reinforcement learning (DRL)-based framework for adaptive transmission line switching to mitigate cascading failures. Given the important role of network topology and component interactions in cascading failure propagation in power systems, graph-based DRL approaches, including Graph-DQN, Graph-A2C, and Graph-PPO frameworks, are developed to capture and utilize the topological information of power systems. The proposed frameworks are evaluated on the IEEE 39, 57, and 118 bus systems and benchmarked against the unmitigated case, random and heuristic-based switching strategies as baselines, as well as their corresponding graph-agnostic DRL counterparts. The results demonstrate the importance of incorporating graph information into these mitigation frameworks, leading to reduced cascade size, load loss, and network clustering.",
+      "url": "http://arxiv.org/abs/2611.23423v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23423v1",
+      "tldr": "This paper develops graph-aware deep reinforcement learning frameworks (Graph-DQN, Graph-A2C, and Graph-PPO) for adaptive transmission line switching to mitigate cascading failures in power systems, showing that incorporating network topology reduces cascade size, load loss, and network clustering across IEEE 39-, 57-, and 118-bus systems.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of South Florida"
+      ],
+      "affiliations_text": "University of South Florida",
+      "score": 3.75720507316296,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.23247v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123247v1-budgeted-proper-loss-design-for-uncertain-decision-thresholds",
+      "source": "arxiv",
+      "title": "Budgeted Proper Loss Design for Uncertain Decision Thresholds",
+      "authors": [
+        "Ankit Sharma"
+      ],
+      "authors_text": "Ankit Sharma",
+      "abstract": "A binary probability estimate may be used by several decision makers with different error costs. Proper scoring rules can emphasize selected probability thresholds, but a single average threshold distribution need not give a good worst-case regret guarantee. We study the choice of a proper loss when the threshold distribution belongs to a finite specified family. Among integrable loss weights with a positive pointwise floor and a fixed total mass, we derive the weight that minimizes the sharp, distribution-free multiplier from surrogate regret to threshold-averaged decision regret. The solution clips a rescaled upper envelope of the threshold densities at the prescribed floor; its normalization is found by a one-dimensional root search. We give proofs of sharpness, optimality, and stability under density misspecification, as well as a limitation for atomic threshold laws. An exact histogram implementation and two synthetic experiments across 20 seeds verify the construction. The optimized multiplier improves over uniform and average-density weights, while fitted-model performance does not improve uniformly. The result is a loss-design guarantee under an explicit budget, rather than a general claim of predictive superiority.",
+      "url": "http://arxiv.org/abs/2611.23247v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23247v1",
+      "tldr": "The paper derives an optimal budgeted proper loss for uncertain decision thresholds by clipping a rescaled upper envelope of the candidate threshold densities at a fixed floor, yielding a sharp worst-case regret multiplier that can be computed by a one-dimensional root search.",
+      "detailed_reading": null,
+      "affiliations": [
+        "International Institute of Information Technology Bangalore"
+      ],
+      "affiliations_text": "International Institute of Information Technology Bangalore",
+      "score": 3.742739903299112,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.23362v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123362v1-trace-mas-diagnosing-and-repairing-collaboration-failures-in-multi-agent-systems",
+      "source": "arxiv",
+      "title": "TRACE-MAS: Diagnosing and Repairing Collaboration Failures in Multi-Agent Systems",
+      "authors": [
+        "Zekai Chen",
+        "Yihan Sun",
+        "Xunkai Li",
+        "Xun Wu",
+        "Xinmo Jin",
+        "Yinlin Zhu",
+        "Haodong Lu",
+        "Xuaner Chen",
+        "Rong-Hua Li"
+      ],
+      "authors_text": "Zekai Chen, Yihan Sun, Xunkai Li, Xun Wu, Xinmo Jin, Yinlin Zhu, Haodong Lu, Xuaner Chen, Rong-Hua Li",
+      "abstract": "LLM-based multi-agent systems (MAS) rely on not only individual agent behaviors but also the interactions that connect agents, including message exchanges and task dependencies. Existing MAS safeguards mainly perform agent-level anomaly detection, which becomes insufficient when failures originate from agent interactions and detected anomalies do not necessarily reveal their true sources. To address this limitation, we propose \\textbf{TRACE-MAS}, a finer-grained framework for diagnosing and repairing MAS failures. TRACE-MAS learns normal collaborative execution patterns from benign trajectories and detects deviations in agent state changes, message transitions, and task dependency evolutions. It further identifies responsible execution elements through source-aware attribution and selects minimal interventions to restore collaboration while preserving task-critical capabilities. Experiments on five MAS benchmarks demonstrate that TRACE-MAS significantly improves root-cause localization accuracy by \\textbf{60.2}\\% and achieves consistent gains in task recovery over strong MAS safeguards.",
+      "url": "http://arxiv.org/abs/2611.23362v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23362v1",
+      "tldr": "TRACE-MAS is a fine-grained framework that learns normal collaboration patterns in LLM-based multi-agent systems to detect execution-level deviations, trace failures to their true sources rather than propagated symptoms, and apply minimal repairs, improving root-cause localization by 60.2% and task recovery across five benchmarks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Shandong University",
+        "Minzu University of China",
+        "Sun Yat-sen University",
+        "Beijing Institute of Technology"
+      ],
+      "affiliations_text": "Shandong University, Minzu University of China, Sun Yat-sen University, Beijing Institute of Technology",
+      "score": 3.5887909788025407,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.23339v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123339v1-optimize-the-cob-then-the-kernel-optimizing-beam-search-for-generative-recommendation-inference",
+      "source": "arxiv",
+      "title": "Optimize the Cob, Then the Kernel: Optimizing Beam Search for Generative Recommendation Inference",
+      "authors": [
+        "Shing Wai Pun",
+        "Kai Wu",
+        "Pengfei Xia",
+        "Hui Zang",
+        "Wei Guo",
+        "Yong Liu"
+      ],
+      "authors_text": "Shing Wai Pun, Kai Wu, Pengfei Xia, Hui Zang, Wei Guo, Yong Liu",
+      "abstract": "Generative recommendation (GR) inference differs substantially from conventional LLM serving, featuring long input sequences, wide beam search, and only a few fixed output tokens. Existing LLM serving engines such as vLLM process beams as batched independent sequences, causing redundant KV cache accesses over the shared prompt prefix. Furthermore, vLLM executes each beam search generation step as a separate engine invocation, incurring host-side beam processing overhead between decoding steps and substantial runtime KV block management in PagedAttention. Using Tree Attention, we concatenate beams along the sequence dimension to eliminate redundant KV accesses, and further optimize execution through pre-generated partial-attention masks, static KV cache allocation, loop-unrolled generation dispatch, TorchAir graph compilation, automatic operator fusion, and vocabulary-constrained decoding. Without the use of custom kernels, our approach reduces end-to-end latency by up to 25x over vLLM on Ascend NPUs, and achieves generation latency comparable to a SOTA solution using custom kernels, showing that the generation pipeline should be optimized holistically before resorting to custom kernel development.",
+      "url": "http://arxiv.org/abs/2611.23339v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23339v1",
+      "tldr": "By holistically optimizing the beam search inference pipeline with Tree Attention, static KV cache allocation, pre-generated masks, graph compilation, and operator fusion before resorting to custom kernels, the paper achieves up to 25× lower end-to-end latency than vLLM on Ascend NPUs while matching custom-kernel performance, demonstrating that system-level pipeline optimization should precede kernel-level development for generative recommendation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Huawei Technologies Co., Ltd."
+      ],
+      "affiliations_text": "Huawei Technologies Co., Ltd.",
+      "score": 3.5558462757844413,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.23358v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123358v1-implementing-binary-transformers-with-approximate-memories-with-permutation-invariance-enabled-selective-pies-protection",
+      "source": "arxiv",
+      "title": "Implementing Binary Transformers with Approximate Memories with Permutation Invariance Enabled Selective (PIES) Protection",
+      "authors": [
+        "Zhen Gao",
+        "Xiao Yin",
+        "Kexin Liang",
+        "Pedro Reviriego",
+        "Shanshan Liu",
+        "Fabrizio Lombardi"
+      ],
+      "authors_text": "Zhen Gao, Xiao Yin, Kexin Liang, Pedro Reviriego, Shanshan Liu, Fabrizio Lombardi",
+      "abstract": "Quantization is an effective technique to reduce memory storage, computation complexity and power for Transformers, and the binarization of the weights is important for meeting these requirements. Approximate memory can further reduce the power for memory, but it also introduces errors. Current research for binary Transformers focuses on task performance, but the model dependable operation against errors on the memory has not been well studied. In this paper, we first evaluate the dependability of binary Transformers with the Bidirectional Encoder Representations from Transformers (BERT) as a case study. A large accuracy loss occurs only at high Bit Error Rates (e.g. BER = 5% or 10%). Then we propose a novel Permutation Invariance Enabled Selective (PIES) scheme to protect the binary weights at very low overhead. This scheme exploits the invariance of Transformers to permutations in the rows and columns to group the critical weights and perform selective protection on those weights. Simulation results show that PIES can recover most of the performance loss caused by bit errors at BERs as high as 10%, at an overhead significantly lower than traditional error correction schemes. These results confirm the feasibility of running binary Transformers using approximate memory with aggressive voltage scaling on resource-limited low power edge devices. The code for PIES is released on github (https://github.com/YangZhutian/binary-transformer-prefix-repair).",
+      "url": "http://arxiv.org/abs/2611.23358v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23358v1",
+      "tldr": "The paper proposes PIES, a low-overhead selective protection scheme that exploits Transformer permutation invariance to group and protect critical binary weights, recovering most accuracy loss from approximate-memory bit errors at BERs up to 10% in binary BERT models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Northeastern University",
+        "Universidad Politécnica de Madrid",
+        "Tianjin University",
+        "University of Electronic Science and Technology of China"
+      ],
+      "affiliations_text": "Northeastern University, Universidad Politécnica de Madrid, Tianjin University, University of Electronic Science and Technology of China",
+      "score": 3.5390573646342376,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.23463v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123463v1-fact-fixed-budget-allocation-and-cross-step-training-for-speculative-decoding",
+      "source": "arxiv",
+      "title": "FACT: Fixed-Budget Allocation and Cross-Step Training for Speculative Decoding",
+      "authors": [
+        "Hadi Fares",
+        "Mayssa Hajj Hassan",
+        "Ali Salman",
+        "Ammar Mohanna"
+      ],
+      "authors_text": "Hadi Fares, Mayssa Hajj Hassan, Ali Salman, Ammar Mohanna",
+      "abstract": "Speculative decoding accelerates language-model generation by verifying multiple draft tokens in a single target-model pass. However, better draft predictions and longer accepted continuations do not necessarily produce faster generation. To examine this gap, we present FACT (Fixed-Budget Allocation and Cross-Step Training), an experimental framework for studying how drafter training, candidate allocation, and execution conditions jointly affect acceptance and latency. Using a lightweight feature-prediction drafter with a frozen Llama-3-8B-Instruct target under greedy decoding, we first examine how training translates into accepted tokens. Backpropagating through predicted-feature rollouts with greater weight on early steps improves acceptance by 15-24% over uniformly weighted detached training, yet average rollout proxy cross-entropy does not reliably rank drafters by acceptance. Beyond prediction quality, the placement of draft candidates also matters: with a fixed 256-node budget and matched per-depth widths, replacing static allocation with confidence-guided allocation increases speedup over autoregressive decoding from $1.46\\times$ to $2.02\\times$ on HumanEval and from $1.31\\times$ to $1.75\\times$ on MT-Bench. This allocation benefit extends to an independently trained drafter, but stronger training does not consistently amplify it, showing that the two improvements do not necessarily reinforce each other. Even these speed gains depend on execution conditions: changing only host-thread settings can nearly eliminate speedup without changing acceptance. Together, these findings show why training and allocation must be evaluated jointly using both acceptance and end-to-end latency under controlled execution conditions.",
+      "url": "http://arxiv.org/abs/2611.23463v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23463v1",
+      "tldr": "FACT shows that speculative decoding speedups depend jointly on drafter training, confidence-guided fixed-budget candidate allocation, and execution settings, so these factors must be evaluated together using both acceptance and end-to-end latency.",
+      "detailed_reading": null,
+      "affiliations": [
+        "American University of Beirut"
+      ],
+      "affiliations_text": "American University of Beirut",
+      "score": 3.4193063987355687,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.23342v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123342v1-confidence-based-materials-data-quality-assessment-via-domain-knowledge-and-graph-structured-learning",
+      "source": "arxiv",
+      "title": "Confidence-Based Materials Data Quality Assessment via Domain Knowledge and Graph-Structured Learning",
+      "authors": [
+        "Sihan Liaing",
+        "Ji Zhang",
+        "Kehan Wang",
+        "Zihao Gao",
+        "Wei Ma",
+        "Yangang Wang",
+        "Zongguo Wang"
+      ],
+      "authors_text": "Sihan Liaing, Ji Zhang, Kehan Wang, Zihao Gao, Wei Ma, Yangang Wang, Zongguo Wang",
+      "abstract": "The rapid development of materials machine learning relies on large-scale, heterogeneous datasets, yet model reliability is often compromised by imperfect data from diverse experiments, simulations, and database integration. Real-world materials databases may contain measurement errors, failed calculations, missing or duplicate records, and hidden violations of physicochemical constraints. Such problems are difficult to identify because corrupted samples may remain statistically plausible rather than appearing as explicit outliers. In this paper, we propose a confidence-based materials data quality assessment framework that integrates domain knowledge with graph-structured learning. Data quality is formulated as a continuous confidence estimation problem rather than a binary anomaly identification task, enabling sample-level assessment and historical-reference-based batch comparison. A nine-dimensional feature-quality prior and duplicate-aware sample initialization are calibrated using materials domain rules and statistical evidence. Confidence is further refined through sample-feature bipartite graph propagation and weakly supervised graph attention, while a Memory-GAT module provides historical reference scoring. Experiments on 23 ODDS benchmark datasets show that the generic module achieves an average AUC-ROC of 0.866. In five repeated mixed-contamination experiments on mp\\_20, rule calibration improves HistGradientBoostingRegressor test $R^2$ from $0.538\\pm0.008$ to $0.616\\pm0.014$. Graph refinement increases average precision from $0.943\\pm0.004$ to 0.953\\pm0.004$, while the rule-calibrated configuration has the highest mean test $R^2$ among the evaluated screening configurations. Five repeated MACE subset experiments further show an increase in $R^2$ from $0.590\\pm0.053$ to $0.880\\pm0.027$ after rule-based screening.",
+      "url": "http://arxiv.org/abs/2611.23342v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23342v1",
+      "tldr": "The paper proposes a confidence-based materials data quality assessment framework that combines domain-informed quality priors with graph-structured learning to continuously score sample and feature reliability, enabling interpretable screening and improved downstream model performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chinese Academy of Sciences",
+        "University of Chinese Academy of Sciences",
+        "Ningxia University"
+      ],
+      "affiliations_text": "Chinese Academy of Sciences, University of Chinese Academy of Sciences, Ningxia University",
+      "score": 3.2777680815015797,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.23428v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123428v1-when-does-subspace-direction-matter-for-lora-regime-analysis-of-the-magnitude-principle-in-few-shot-adaptation",
+      "source": "arxiv",
+      "title": "When Does Subspace Direction Matter for LoRA? Regime Analysis of the Magnitude Principle in Few-Shot Adaptation",
+      "authors": [
+        "Nischal Subedi",
+        "Cencheng Shen",
+        "Peng Zhao"
+      ],
+      "authors_text": "Nischal Subedi, Cencheng Shen, Peng Zhao",
+      "abstract": "We show that the importance of a LoRA adapter's initial input-subspace direction is regime-dependent, and we characterize this dependence in theory and experiment. This refines the recent view that spectral initializers help through update magnitude alone. Direction matters most when labeled data are scarce relative to the representation dimension and the activation subspace used for initialization captures supervised task structure. In this regime, the adapter's row span remains sensitive to its starting point, making task-aligned initialization especially useful. A spiked-covariance perturbation analysis characterizes the finite-sample stability of the estimated subspace. A first-step analysis of LoRA training explains why the subspace's alignment with the task matters and motivates an alignment coefficient $ρ$ that closely tracks gains across classification tasks. We test this account with PivotLoRA, which initializes adapters from activation PCA at prediction-relevant positions and applies one output-preserving orthogonal pivot early in training. In few-shot BERT-base classification, PivotLoRA achieves the best average rank among 13 methods and improves over vanilla LoRA in 29 of 30 settings, even though it starts from a smaller input-factor initialization norm. Additional classification experiments extend the evaluation to 7B and 8B Llama decoders. Classification gains diminish with more labeled data, consistent with the proposed regime dependence. A targeted extension to completion-only reasoning also shows improvements on GSM8K and StrategyQA. These findings identify conditions under which initialization direction matters, with subspace-task alignment offering a low-cost diagnostic before training for classification.",
+      "url": "http://arxiv.org/abs/2611.23428v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23428v1",
+      "tldr": "TLDR: LoRA initialization direction matters mainly in few-shot, high-dimension regimes where the initial activation subspace aligns with task structure, and PivotLoRA exploits this via prediction-relevant activation-PCA initialization plus an output-preserving orthogonal pivot, improving few-shot classification and some reasoning tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Univ. of Delaware",
+        "Microsoft Research"
+      ],
+      "affiliations_text": "Univ. of Delaware, Microsoft Research",
+      "score": 3.2681952006033432,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.23461v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123461v1-beyond-area-perimeter-optimization-in-the-planar-skorokhod-embedding-problem",
+      "source": "arxiv",
+      "title": "Beyond Area: Perimeter Optimization in the Planar Skorokhod Embedding Problem",
+      "authors": [
+        "Maher Boudabra"
+      ],
+      "authors_text": "Maher Boudabra",
+      "abstract": "The planar Skorokhod embedding problem asks for a simply connected planar domain whose Brownian exit distribution has a prescribed real marginal $μ$. We investigate the minimization of conformal perimeter over the class of all such embeddings.\n  We first establish the main existence theorem showing that whenever a finite-perimeter embedding exists, the infimum is attained (and vice versa). We derive necessary conditions for finiteness and sufficient conditions based on logarithmic integrability of the density. In particular, we demonstrate that finite area does not guarantee the existence of an embedding with finite perimeter.\n  Although Gross's canonical embedding minimizes area, we construct an explicit family of domains for which Brownian symmetrization strictly increases perimeter, disproving its universal perimeter minimality. On the positive side, using Pruss's containment theorem and inequalities from convex geometry, we establish a general lower bound in terms of the convex hull of the Gross domain. Consequently, whenever the Gross embedding is bounded and convex, it is the unique perimeter minimizer.\n  Finally, we formulate an open problem concerning the relationship between the existence of finite-perimeter embeddings and the regularity of Gross's canonical embedding.",
+      "url": "http://arxiv.org/abs/2611.23461v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23461v1",
+      "tldr": "This paper studies conformal-perimeter minimization among planar Skorokhod embeddings of a prescribed real marginal, establishing existence and finiteness criteria, showing that finite area does not guarantee finite perimeter and that Gross’s area-minimizing embedding is not universally perimeter-minimizing (though it is uniquely so when bounded and convex), and posing an open regularity question.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Monastir Preparatory Engineering Institute"
+      ],
+      "affiliations_text": "Monastir Preparatory Engineering Institute",
+      "score": 3.2371335282976057,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.23345v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123345v1-bima-ecgsr-reconstructing-the-12-lead-ecg-from-reduced-lead-sets-with-bidirectional-state-space-models",
+      "source": "arxiv",
+      "title": "BiMa-ECGSR: reconstructing the 12-lead ECG from reduced lead sets with bidirectional state-space models",
+      "authors": [
+        "Ugo Lomoio",
+        "Pierangelo Veltri",
+        "Pietro Hiram Guzzi"
+      ],
+      "authors_text": "Ugo Lomoio, Pierangelo Veltri, Pietro Hiram Guzzi",
+      "abstract": "Wearables and monitors record few electrocardiogram (ECG) leads; most diagnostic tools assume 12 leads. BiMa-ECGSR reconstructs the 12-lead ECG from reduced lead sets with a bidirectional Mamba state-space encoder--decoder, as regression (BiMa-SR) or diffusion (DiBiMa-SR). Models were trained on PTB-XL for six input sets (I; II; I+II; I+II+V1; I+II+V2; I+II+V1+V4), see only the measured leads at inference, and were tested on the PTB-XL test fold (2,198 records) and two external cohorts (Georgia, 10,275 records; Chapman-Shaoxing/Ningbo, 43,559). From lead II alone, the pooled median Pearson correlation (PCC) over the 11 predicted leads was 0.914 on PTB-XL, against 0.784 for a least-squares linear filter (lead I: 0.906 against 0.789). As limb leads are exactly derivable from I and II, multi-lead inputs were compared on predicted chest leads: 0.939 against 0.849 for I+II and 0.979 against 0.962 for I+II+V1+V4. BiMa-SR exceeded the linear comparator in all 18 configuration--cohort pairs (by 0.012--0.136), a margin that shrank as chest leads were added. From lead II, regression was more accurate than diffusion (DiBiMa-SR: 0.903 one-step, 0.862 with six DDIM steps). A 12-lead classifier trained only on real ECGs reached a superclass macro AUROC of 0.912 on real PTB-XL ECGs, 0.843 on reconstructions from lead II and 0.908 from I+II+V1+V4; externally, reconstructions from three or four leads scored within 0.004 of real ECGs. BiMa-SR (2.68\\,M parameters) takes 45.8 ms per 10-s record on a GPU. Reconstruction makes reduced-lead recordings usable by 12-lead tools; it cannot add information absent from the measured leads.",
+      "url": "http://arxiv.org/abs/2611.23345v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23345v1",
+      "tldr": "BiMa-ECGSR is a bidirectional Mamba state-space encoder–decoder that reconstructs 12-lead ECGs from reduced lead sets—outperforming linear filters across PTB-XL and external cohorts and enabling 12-lead diagnostic classifiers to read reduced-lead recordings.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Calabria",
+        "Magna Graecia University of Catanzaro"
+      ],
+      "affiliations_text": "University of Calabria, Magna Graecia University of Catanzaro",
+      "score": 3.125048652276971,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.23248v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123248v1-exploring-parkinsons-diagnosis-using-machine-learning-techniques",
+      "source": "arxiv",
+      "title": "Exploring Parkinson's Diagnosis Using Machine Learning Techniques",
+      "authors": [
+        "Farhaan Qazi"
+      ],
+      "authors_text": "Farhaan Qazi",
+      "abstract": "In recent years, machine learning (ML) techniques have emerged as promising tools for accurate and timely diagnosis of Parkinson's disease (PD) which is an incurable neurodegenerative disorder. This study explores the integration of ML algorithms and PD diagnosis, highlighting their potential applications in various aspects of the disease. ML methods such as support vector machines, decision trees, multilayer perceptron, k-nearest neighbours, logistic regression and random forest (with and without particle swarm optimisation) were applied on a PD dataset obtained from Leeds Teaching Hospitals NHS Trust containing data from 58 people. In terms of accuracy, the Decision Tree and Logistic Regression performed the best with scores of 72-76% while multilayer perceptron was least effective. All the models were remarkable in classifying positive PD cases with sensitivity scores going up to 97.56%, with SVM classifier at the pinnacle. However, ability to classify healthy controls from PD cases was insignificant throughout the board. Although, all the employed models delivered reasonable results in categorising PD patients in the presented dataset; access to more data, further study and advancement of these ML approaches could lead to enhanced diagnostic outcomes, supplementing to an improved understanding of Parkinson's disease.",
+      "url": "http://arxiv.org/abs/2611.23248v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23248v1",
+      "tldr": "This study applies multiple machine-learning models to a 58-person Parkinson’s disease dataset and finds that Decision Tree and Logistic Regression achieve the best accuracy (72–76%) while most models detect positive PD cases with high sensitivity (up to 97.56%) but perform poorly at distinguishing healthy controls, suggesting ML is promising for PD diagnosis but requires more data and refinement.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Heriot-Watt University"
+      ],
+      "affiliations_text": "Heriot-Watt University",
+      "score": 2.824802189706621,
+      "score_text": "2.8"
+    },
+    {
+      "id": "2611.23474v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/19/261123474v1-allotnet-an-interpretable-mixture-of-experts-choice-model-for-moral-judgement-in-humanitarian-aid-allocation-validated-against-a-planted-synthetic-population",
+      "source": "arxiv",
+      "title": "AllotNet: an Interpretable Mixture-of-Experts Choice Model for Moral Judgement in Humanitarian Aid Allocation, Validated against a Planted Synthetic Population",
+      "authors": [
+        "Mark Nowak"
+      ],
+      "authors_text": "Mark Nowak",
+      "abstract": "Official development assistance fell by 23.1 per cent in 2025, and the decision of who is helped first when there is not enough for everyone is moving into software. A leading published machine-learning targeting system excluded 53 per cent of eligible households as deployed. If the rule of distribution ends up in code, it should carry the judgement of many cultures, and the machine should execute while a person judges. AllotNet is an interpretable mixture-of-experts conditional logit for the allocation judgements elicited by Allot, a pre-registered six-language instrument: eight linear taste experts over seven ethical criteria, weighted by a gate over participant context, with a damped residual, an encoder for household intake, an outcome head and a budget-constrained planner that builds a review queue and never rejects anyone. A model of human judgement has no answer key on real data, so we wrote one first: a planted synthetic population of 5.6 million sessions and 104 million responses (98 million usable choices), generated by the production code path from a ground truth hidden from the loss. All sixteen pre-specified checks passed: criterion ranking $ρ= 1.000$, hidden segments recovered (ARI 0.671), outcome head at 99 per cent of the noise ceiling, planner at 99.4 per cent of oracle. The caveats are reported with them: two checks are weaker than their titles, and a live-generation failure cost 260,712 seeds. The model has 23,550 parameters, is trained quantisation-aware for NVFP4 with its interpretable core in fp32 (welfare-rank parity $ρ= 0.9937$ at W4A16 on the shipped bundle; one parity threshold was relaxed post hoc), and ships as a 125 KB bundle with C11, Java, Rust and Python runtimes. Nothing has been trained on real data yet; at the study's real scale a hierarchical Bayesian mixed logit is the registered comparator.",
+      "url": "http://arxiv.org/abs/2611.23474v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.23474v1",
+      "tldr": "The paper introduces AllotNet, an interpretable mixture-of-experts conditional-logit model for multicultural moral judgments in humanitarian aid allocation that builds a human-review queue rather than rejecting anyone, validated against a pre-specified planted synthetic population of 5.6 million sessions where all 16 checks passed, though it has not yet been trained on real data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Conflux Laboratory"
+      ],
+      "affiliations_text": "Conflux Laboratory",
+      "score": 2.7171334633761,
+      "score_text": "2.7"
+    }
+  ],
+  "errors": []
+}
