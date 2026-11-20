@@ -1,0 +1,725 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-20T19:06:07.751386",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.25161v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125161v1-small-gain-analysis-of-robust-event-triggered-extremum-seeking-for-scalar-maps",
+      "source": "arxiv",
+      "title": "Small-Gain Analysis of Robust Event-Triggered Extremum Seeking for Scalar Maps",
+      "authors": [
+        "Victor Hugo Pereira Rodrigues",
+        "Tiago Roux Oliveira",
+        "Miroslav Krstic",
+        "Zhong-Ping Jiang"
+      ],
+      "authors_text": "Victor Hugo Pereira Rodrigues, Tiago Roux Oliveira, Miroslav Krstic, Zhong-Ping Jiang",
+      "abstract": "We study a sample-and-hold implementation of gradient extremum seeking for a scalar quadratic map in which the control signal is refreshed only when an event occurs. The event generator acts on the demodulated gradient signal as it is actually measured, rather than on its averaged version, and contains a strictly positive offset, following the small-gain philosophy for robust event-triggered control. Rather than invoking averaging theorems, we work directly with the exact dynamics of the parameter estimation error. In the scalar setting, the demodulated gradient has an explicit sinusoidal structure, which is exploited through a change of variables that absorbs the zero-mean oscillatory perturbation, together with a quadratic Lyapunov function and the persistence of excitation of the probing signal. For a sufficiently fast dither, the estimation error is shown to decay exponentially to a residual neighborhood of the origin whose size is quantified by the dither amplitude and frequency, and by the relative threshold and the offset of the event generator. All constants, including the input-to-state stability gain of the extremum seeking loop, the admissible dither frequency and the positive lower bound on the time between two consecutive events, are given in closed form, so that Zeno behavior is excluded. A simulation example illustrates the results.",
+      "url": "http://arxiv.org/abs/2611.25161v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25161v1",
+      "tldr": "This paper presents a small-gain, averaging-free analysis of sample-and-hold event-triggered gradient extremum seeking for scalar quadratic maps, showing that triggering on the measured demodulated gradient with a positive offset achieves exponential practical convergence with closed-form residual bounds and a positive minimum inter-event time, thereby excluding Zeno behavior.",
+      "detailed_reading": {
+        "motivation": "事件触发极值搜索可减少嵌入式或网络平台的控制刷新与带宽消耗，但已有方法多在平均模型上设计触发器，难以直接保证真实振荡回路在持续扰动下的鲁棒性；本文旨在用ISS小增益框架直接分析精确的事件触发极值搜索动力学，处理解调梯度中的振荡和采样误差。",
+        "method": "针对标量二次映射，采用正弦探测与解调得到梯度估计Ĝ=M y，估计器为积分器并使用零阶保持，仅在事件时刻更新u=kĜ(t_k)；事件发生器基于实际测量的解调梯度设置|e|>σ|Ĝ|+ε，其中e=Ĝ(t_k)-Ĝ(t)。分析上不调用平均定理，而是写出参数估计误差的精确闭环，将周期零均值扰动通过变量变换吸收，结合二次Lyapunov函数、探测信号持续激励以及事件发生器作为线性增益加偏置的ISS小增益条件推导稳定性。",
+        "result": "在抖动频率足够快时证明估计误差局部指数实用稳定，收敛到原点邻域，其残差大小由抖动幅值、频率、事件触发相对阈值σ和正偏置ε以及映射参数显式量化；所有常数包括极值搜索回路的ISS增益、允许频率和连续事件最小时间下界均给出闭式表达，从而排除Zeno行为。仿真示例验证了结果。",
+        "conclusion": "论文表明无需平均近似即可用精确动力学和小增益思想稳健地分析标量事件触发极值搜索，并在保证事件间隔正下界的同时获得可调残差收敛。该结果为资源受限平台上的极值搜索事件触发实现提供理论依据，但结论主要限于标量二次型局部模型，多变量情形需另作处理。",
+        "key_details": "关键实现只需输出测量和上次发送的Ĝ(t_k)来评估触发条件，不依赖θ*、Q*、H*；仅已知H*符号，增益k满足sgn(k)=-sgn(H*)，β(t)=1-cos(2ωt)保证适应增益符号与持续激励，并利用Δ的周期零均值原函数ΨΔ吸收振荡。分析中将采样误差和二次项合并为χ=e+d_q，并用|χ|≤ρ_R|θ̃|+δ得到小增益，δ=σd̄+ε，ρ_R含R项；主要局限是标量二次映射、局部结果、需要足够快抖动和已知曲率符号，且验证以仿真为主。"
+      },
+      "affiliations": [
+        "State University of Rio de Janeiro (UERJ)",
+        "University of California San Diego (UCSD)",
+        "New York University (NYU)"
+      ],
+      "affiliations_text": "State University of Rio de Janeiro (UERJ), University of California San Diego (UCSD), New York University (NYU)",
+      "score": 5.512471318369819,
+      "score_text": "5.5"
+    },
+    {
+      "id": "2611.25130v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125130v1-temporal-extrapolation-of-elastic-seismic-wave-propagation-in-layered-media-using-neural-operators",
+      "source": "arxiv",
+      "title": "Temporal Extrapolation of Elastic Seismic Wave Propagation in Layered Media Using Neural Operators",
+      "authors": [
+        "Dibyajyoti Nayak",
+        "Yuze Pu",
+        "Kami Mohammadi",
+        "Somdatta Goswami"
+      ],
+      "authors_text": "Dibyajyoti Nayak, Yuze Pu, Kami Mohammadi, Somdatta Goswami",
+      "abstract": "Temporal prediction of seismic velocity fields beyond the time interval represented in training remains challenging for neural operator models. This study develops a coupled neural operator framework for stress-conditioned temporal prediction in layered elastic media. A time-integrator-embedded Deep Operator Network (TI-DeepONet) advances the velocity field through an embedded fourth-order Runge-Kutta (RK4) scheme, while a Fourier Neural Operator (FNO) learns a residual correction to the predicted spatial field. The two components are trained jointly in a predictor-corrector configuration. Prediction is initialized with reference velocity fields at the first two time levels and proceeds autoregressively, with reference stress fields and prescribed excitation supplied throughout rollout, including beyond the training interval. Four cases consider horizontally polarized shear (SH) waves in four-layer soil columns with fixed total depths of 50 and 280 m, excited by third-order Gaussian-derivative (DOG3) wavelets with central frequencies between 0.5 and 6 Hz. Layer thicknesses and shear-wave velocities vary across profiles. Evaluations on test profiles extend beyond the training interval by up to twice its duration. The predictions reproduce principal velocity arrivals and depth-dependent response patterns, with accuracy varying across profiles. Across the four cases, mean peak-normalized root-mean-square errors (NRMSEs) range from 0.53% to 2.31% over the full evaluation windows and from 0.61% to 2.82% over the extrapolation intervals. Both metrics use each profile's peak absolute reference velocity over the full evaluation window as the normalizer. These results demonstrate temporal velocity prediction under reference-stress conditioning for the tested configurations; autonomous continuation of the coupled velocity-stress wavefield remains to be established.",
+      "url": "http://arxiv.org/abs/2611.25130v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25130v1",
+      "tldr": "This paper proposes a jointly trained predictor–corrector neural-operator framework—TI-DeepONet with an embedded RK4 time integrator plus an FNO residual spatial corrector—for autoregressive, stress-conditioned extrapolation of elastic SH-wave velocity fields in layered media beyond the training interval, achieving peak-normalized RMSEs of about 0.53–2.31% across four test cases while leaving fully autonomous velocity–stress continuation for future work.",
+      "detailed_reading": {
+        "motivation": "地震速度场在训练时间窗之外的时序外推对神经算子仍很困难，自回归 rollout 中局部误差会累积并导致幅值失真、相位漂移或失稳。本文聚焦层状弹性介质中 SH 波传播，将问题设为在全程提供参考应力与给定基底激励条件下的速度场时序预测，作为检验时间更新与空间修正能力的受控第一步，而非自主推进耦合速度—应力系统。",
+        "method": "框架学习一步神经算子，将当前与前一时刻的速度场、参考应力场、基底牵引 q 及时间坐标映射到下一时刻速度场；TI-DeepONet 用四个分支分别编码应力、速度、牵引和时间的两级历史，经乘加融合生成分支系数，主干网络对深度坐标做 Fourier 特征编码并采用可学习小波激活，输出速度变化率并通过内嵌四阶 Runge–Kutta 格式推进得到初步预测，FNO 再学习空间残差修正，二者以 predictor–corrector 方式联合训练。推理时用前两个时间层的参考速度初始化，之后以模型预测速度自回归输入，参考应力与给定激励在整个 rollout 中持续提供，包括训练区间之外。算例为一维 SH 波在总厚 50 m 与 280 m 的四层土柱中传播，层厚与剪切波速变化，采用中心频率 0.5、3.5、6 Hz 的 DOG3 子波激励。",
+        "result": "在测试剖面上，预测能复现主要速度到时和随深度变化的响应形态，但精度随剖面而异。四个算例在全评估窗口上的平均峰值归一化 NRMSE 为 0.53%–2.31%，在外推区间上为 0.61%–2.82%，归一化因子为各剖面全评估窗口内参考速度峰值绝对值；评估外推长度可达训练时长的两倍。",
+        "conclusion": "结果表明，在测试配置下，所提耦合 TI-DeepONet–FNO 框架能够在参考应力条件下进行速度场时序预测并外推到训练区间之外。当前框架尚未实现速度—应力耦合波场的自主延续，材料属性也未作为显式输入，因此结论限于应力条件化的速度预测，完整自主正向模拟仍需后续建立。",
+        "key_details": "关键实现点包括两级时间历史输入、应力/速度/牵引/时间四分支编码、b_sigma⊙b_v+b_q 与时间嵌入拼接后的线性融合、深度坐标的 Fourier 特征与自适应小波激活主干、内嵌 RK4 的速率参数化，以及 FNO 残差修正和联合训练。层状介质信息由参考应力场隐式携带，材料属性不是显式网络输入；评估采用峰值归一化 NRMSE 并覆盖全窗口与外推窗口。可见文本未给出损失函数具体形式、权重、网络宽度与训练超参，且框架依赖参考应力与给定激励、限于一维 SH 波和四层土柱配置，尚未验证自主耦合速度—应力演化。"
+      },
+      "affiliations": [
+        "Johns Hopkins University",
+        "University of Utah"
+      ],
+      "affiliations_text": "Johns Hopkins University, University of Utah",
+      "score": 5.103757084376373,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2611.25138v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125138v1-old-school-planners-drive-sometimes-better-than-learned-ones",
+      "source": "arxiv",
+      "title": "Old-School Planners Drive (Sometimes) Better Than Learned Ones",
+      "authors": [
+        "Andreas Look"
+      ],
+      "authors_text": "Andreas Look",
+      "abstract": "End-to-end driving models learn to plan from data, and hand-written planners are widely treated as a thing of the past. We test whether this is justified: we implement sixteen textbook planners, each combining a path source (reference line, A*, hybrid A*, RRT*) with a trajectory method (Frenet lattice, nonlinear optimization, $s$--$t$ search, dynamic window), and evaluate them on three benchmarks: open loop on nuScenes, closed loop on nuPlan with ground-truth perception, and photorealistic closed loop on HUGSIM. On HUGSIM, they replace only the planner of the end-to-end model UniAD and read its frozen perception, without an HD map or other privileged information. On nuScenes and nuPlan, the best textbook planners are competitive (L2 error of 0.735\\,m against 0.947\\,m for UniAD's planner; a nuPlan score of 79.3 against 76.1 for the rule-based PDM-Closed on Test14-hard with reactive agents). On HUGSIM, nine of the sixteen score above UniAD's learned planner on the same perception,. The best, a hybrid A* path followed by nonlinear trajectory optimization, raises HUGSIM's driving score (HD-Score) from 32.0 to 41.8. The gain is largest with standing and oncoming cars; against cars that steer at the ego, there is none. In 31 of the 182 runs in which UniAD's planner hits a car, the best textbook planner completes the route on the same perception: these crashes are due to the planner, not the perception.",
+      "url": "http://arxiv.org/abs/2611.25138v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25138v1",
+      "tldr": "Sixteen textbook hand-written planners can match or outperform learned end-to-end planners such as UniAD across nuScenes, nuPlan, and HUGSIM when using the same frozen perception—with hybrid A* plus nonlinear trajectory optimization improving HUGSIM driving score from 32.0 to 41.8—showing that many crashes stem from planning rather than perception.",
+      "detailed_reading": {
+        "motivation": "端到端驾驶模型从数据中学习规划，而人工编写的教科书式规划器常被视为过时；作者要检验这一判断是否成立，并厘清 UniAD 在真实感闭环模拟器中的碰撞究竟源于感知还是规划。",
+        "method": "作者实现 16 个教科书式规划器，由 4 种路径源（参考线、A*、hybrid A*、RRT*）与 4 种轨迹方法（Frenet lattice、非线性优化、s-t 搜索、动态窗口 DWA）组合而成。规划器读取 UniAD 的跟踪智能体与 6 秒运动预测、占据预测、BEV 可行驶区域掩码、自车速度/加速度/横摆角速度及导航指令，输出与 UniAD 相同格式的 6 个 0.5 秒间隔路点，并在 HUGSIM 中只替换冻结 UniAD 的规划器、保留其感知和同一控制器，不使用 HD 地图或其他特权信息。参考线由可行驶掩码生成，目标点为 3 秒可达范围之外且最多前方 50 米处，静态智能体作为路径源障碍物，动态智能体交由轨迹方法按预测位置逐步碰撞检查。评估覆盖 nuScenes 开环、nuPlan 带真值感知的闭环以及 HUGSIM 照片级闭环；代价权重和间隙通过随机搜索在 nuScenes 与 nuPlan 训练集上调参，HUGSIM 不调参并直接沿用 nuScenes 配置。",
+        "result": "在 nuScenes 上，参考线加 Frenet lattice 的 L2 误差为 0.735 米，优于 UniAD 规划器的 0.947 米；在 nuPlan 上 Val14 得分为 90.0，比 PDM-Closed 低 2.8 分，而在含反应式智能体的 Test14-hard 上得分为 79.3，高于 PDM-Closed 的 76.1。HUGSIM 上 16 个规划器中有 9 个在相同感知下超过 UniAD 学习规划器，最佳组合 hybrid A* 路径加非线性轨迹优化将 HD-Score 从 32.0 提升到 41.8。增益主要来自静止车辆和迎面车辆场景，对朝自车转向的车辆没有增益；在 UniAD 规划器撞车的 182 次运行中，有 31 次最佳教科书规划器在相同感知下完成路线，说明这些碰撞应归因于规划器而非感知。",
+        "conclusion": "最佳教科书式规划器在开环和闭环基准上具有竞争力，并能在 UniAD 的噪声感知下有时显著优于学习规划器，表明手工规划器不应被简单视为过时基线。结果同时显示这种优势并非普遍存在：组合方式与场景类型决定成败，尤其对朝自车转向的车辆没有改善，因此端到端系统的失败不能一概归因于感知。",
+        "key_details": "HUGSIM 使用官方 UniAD v2.0 检查点并冻结感知，仅替换最终规划输出，HD-Score 按源数据集和难度层级等权平均，增益以逐场景差值均值±标准误报告。nuScenes 同时采用 UniAD 的粗碰撞框指标和 Li 等的更严格指标，两者不可直接比较；开环 L2 会奖励从实测速度/加速度起步的规划器。nuPlan 使用真值目标、恒速预测和 HD 地图路线中心线，因此与 HUGSIM 的无地图设置不同；HUGSIM 未调参，存在配置迁移限制。方法局限还包括 s-t 搜索平均仅 29.4、加速不足，且没有单一规划器处处最优，例如 hybrid A* 加优化在 nuScenes 为 0.871 米、Val14 为 81.6。"
+      },
+      "affiliations": [
+        "Coburg University of Applied Sciences and Arts"
+      ],
+      "affiliations_text": "Coburg University of Applied Sciences and Arts",
+      "score": 4.956032941954097,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2611.25067v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125067v1-mapping-the-wind-to-find-the-source-online-physics-informed-gas-source-localization-with-mobile-robots",
+      "source": "arxiv",
+      "title": "Mapping the Wind to Find the Source: Online Physics-Informed Gas Source Localization with Mobile Robots",
+      "authors": [
+        "Wanting Jin",
+        "Thomas Wiedemann",
+        "Han Fan",
+        "Achim Lilienthal",
+        "Alcherio Martinoli"
+      ],
+      "authors_text": "Wanting Jin, Thomas Wiedemann, Han Fan, Achim Lilienthal, Alcherio Martinoli",
+      "abstract": "Gas Source Localization (GSL) with mobile robots is challenging because wind and gas measurements are spatially sparse, noisy, and potentially affected by robot motion. Indoor airflow can vary substantially across space, while detailed environmental layouts, boundary conditions, or precomputed airflow fields are often unavailable. Moreover, hazardous sources must be localized as quickly as possible, making exhaustive exploration impractical. This paper presents a lightweight physics-informed probabilistic framework for efficient GSL under spatially varying indoor airflow. As the robot navigates, it continuously collects wind and gas measurements and reconstructs the spatially varying airflow field online. The estimated wind field drives a forward dispersion model that predicts the gas pattern for each candidate source location. These predictions are compared with the measured gas pattern to update a probabilistic belief over the source location. As the wind field is reconstructed incrementally, the framework also accounts for the spatially non-uniform reliability of wind field estimation and its influence on the source estimation. The resulting belief map is then used for informative path planning to guide the robot toward informative regions. High-fidelity simulations provide a comprehensive evaluation of the individual components and their integrations within the complete system, while physical indoor experiments assess the system performance under realistic sensing, motion, and airflow conditions. The results demonstrate that incorporating lightweight physical knowledge significantly improves localization robustness under spatially complex airflow and enables more efficient exploration.",
+      "url": "http://arxiv.org/abs/2611.25067v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25067v1",
+      "tldr": "The paper presents a lightweight physics-informed probabilistic framework that reconstructs indoor airflow online from sparse robot measurements and uses an advection–diffusion forward model with wind-support-aware Bayesian inference and informative path planning to efficiently localize gas sources, validated through high-fidelity simulations and physical experiments.",
+      "detailed_reading": {
+        "motivation": "室内气体源定位中风与气体测量稀疏、含噪且受机器人运动影响，气流随空间显著变化，而详细布局、边界条件或预计算风场通常不可得；危险源又要求尽快定位，穷举探索不现实。现有模型法常依赖均匀气流或先验环境信息，在线重建风场时又常忽略其空间非均匀可靠性，可能导致过度自信的后验和低效探索。",
+        "method": "机器人连续采集气体浓度、平面风矢量和位置，在线用核方法增量重建细预测网格上的空间变化风场；对粗估计网格中的每个候选源，以重建风场驱动二维ADE前向扩散模型预测气体分布，并与实测气体模式比较构造贝叶斯似然以更新源位置信念图。框架引入风支持感知不确定性，根据风图局部测量支持程度调节各候选源预测对似然的影响，再用信念图进行信息增益路径规划，并依据置信终止准则输出MAP源估计。整个过程无需入口/出口、边界条件或预计算风场，障碍几何可未知并可选用在线地图信息。",
+        "result": "高保真仿真对扩散模型、在线风估计、风支持感知推断及其与IPP的集成进行了消融，物理室内实验在真实传感、运动和气流条件下评估系统；结果表明引入轻量物理知识可显著提升空间复杂气流下的定位鲁棒性并实现更高效探索。可见摘要未给出具体定位误差或成功率数值，定量对比需参考原文实验表格。",
+        "conclusion": "该工作提出一种轻量、物理信息驱动的在线概率GSL框架，将增量风场重建、ADE前向扩散预测、风支持感知贝叶斯更新和信息路径规划结合，在缺乏详细环境先验的室内场景中实现高效源定位。结果支持任务导向的轻量物理模型足以改善复杂气流下的鲁棒性与探索效率，但方法仍受二维、单源和准稳态气流假设约束。",
+        "key_details": "关键实现包括双网格设计：较细预测网格表示风场和源条件气体分布，较粗估计网格表示候选源并排除障碍及边界附近单元；风场采用核方法局部增量更新以支持在线计算，ADE在预测网格上数值求解以在保真度和成本间折中，风支持感知似然用风图局部测量支持度修正预测可靠性。方法假设二维、单一静止源、时间平均气流和气体分布近似稳态且任务期间缓慢变化，不显式建模垂直变化；可见文本未给出具体损失函数或超参数，且核重建的局部支持、ADE简化与稀疏噪声测量会带来模型失配和不确定性，是主要局限。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.63342149682311,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.25105v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125105v1-mawam-a-multi-agent-world-action-model-for-coordinated-manipulation",
+      "source": "arxiv",
+      "title": "MAWAM: A Multi-Agent World-Action Model for Coordinated Manipulation",
+      "authors": [
+        "Xianzhe Fan",
+        "Chi-Pin Huang",
+        "Fu-En Yang",
+        "Jing Wang",
+        "Yecheng Wu",
+        "Yu-Cheng Chou",
+        "Johan Bjorck",
+        "Linxi \"Jim\" Fan",
+        "Jan Kautz",
+        "Yu-Chiang Frank Wang",
+        "Zhiding Yu",
+        "Hengshuang Zhao",
+        "Zhiqi Li"
+      ],
+      "authors_text": "Xianzhe Fan, Chi-Pin Huang, Fu-En Yang, Jing Wang, Yecheng Wu, Yu-Cheng Chou, Johan Bjorck, Linxi \"Jim\" Fan, Jan Kautz, Yu-Chiang Frank Wang, Zhiding Yu, Hengshuang Zhao, Zhiqi Li",
+      "abstract": "Every move in a robot team changes the world in which its teammates must act. Coordinated manipulation therefore calls for predicting the team's actions together with the physical future they jointly create. We introduce MAWAM, a multi-agent world-action model that jointly generates each robot's future views and executable action chunks in a single sample. Built from a pretrained single-robot world-action backbone, MAWAM jointly denoises all robots' action and future-view tokens through cross-agent attention, while preserving a separate control interface for each robot. MAWAM achieves the highest success on all three real-robot tasks (laundry-bag collection, bath-towel folding, and umbrella handover), with 67.8% mean success, 18.9 percentage points above MA-VLA trained on the same demonstrations and cameras. In simulation, MAWAM reaches 90.3% mean success on eight tasks with teams of up to four arms. Ablations show that cross-agent attention and team-stage future-video supervision both improve coordinated control: without attention, a four-arm relay falls from 95.0% to 39.0%, and without this supervision, Place Food falls from 78.0% to 47.0%.",
+      "url": "http://arxiv.org/abs/2611.25105v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25105v1",
+      "tldr": "MAWAM is a multi-agent world-action model that jointly predicts all robots’ future views and executable action chunks via cross-agent attention, enabling coordinated manipulation and achieving 67.8% real-robot and 90.3% simulated average success.",
+      "detailed_reading": {
+        "motivation": "多机器人协同操作中，任一机器人的动作都会改变队友所处的物理世界，因此仅预测各自动作而忽略彼此造成的未来观测变化，难以实现真正协调。现有基于单机器人的世界-动作模型或视觉-语言-动作策略缺乏对团队联合未来的显式建模，导致在交接、折叠、收集等需要紧密配合的任务中成功率受限。作者因此提出同时生成“团队动作”与“团队共同创造的物理未来”的多智能体世界-动作模型。",
+        "method": "MAWAM 以预训练的单机器人世界-动作模型为骨干，输入为各机器人当前观测（多相机视图）与任务条件，将每个机器人的未来视图 token 与可执行动作 chunk token 放入同一去噪序列，通过跨智能体注意力在所有机器人的动作与未来视图 token 之间联合去噪，单次采样即同时输出各机器人的未来视图和动作块。模型为每个机器人保留独立的控制接口以输出各自动作，同时在训练中引入团队阶段（team-stage）的未来视频监督，使联合预测不仅拟合动作标签，也约束团队共同造成的视觉未来。推理时从噪声出发联合迭代去噪，得到各机器人可直接执行的动作 chunk，并在执行中按观测更新继续预测。",
+        "result": "在三项真实机器人任务（收集洗衣袋、折叠浴巾、雨伞交接）上，MAWAM 全部取得最高成功率，平均成功率 67.8%，比在相同示教数据与相同相机配置下训练的 MA-VLA 高 18.9 个百分点。仿真中在多达四只机械臂的八个任务上平均成功率达 90.3%。消融显示跨智能体注意力与团队阶段未来视频监督都对协同控制有实质贡献：去掉注意力后四臂接力任务从 95.0% 降到 39.0%，去掉该监督后 Place Food 从 78.0% 降到 47.0%。",
+        "conclusion": "结果说明，把多机器人动作与联合未来观测放在统一生成过程中建模，并借助跨智能体注意力共享彼此意图，是提升协同操作成功率的有效途径；团队层面的未来视频监督提供了额外的物理一致性约束，二者缺一都会显著削弱多臂协调能力。该工作表明世界-动作模型可从单机器人自然扩展到多智能体团队，并保持各机器人独立的控制接口。",
+        "key_details": "方法复用预训练单机器人世界-动作骨干以降低数据需求，训练数据为与 MA-VLA 完全相同的多相机示教，保证对比公平；核心实现是动作 token 与未来视图 token 的联合去噪加跨智能体注意力，并以团队阶段未来视频预测作为辅助监督，各机器人保持独立动作解码头。需要关注的是联合去噪的序列长度与注意力复杂度随机器人数增加而增长，实验覆盖最多四臂、真实任务仅三项，向更多智能体、更长时域与异构机器人团队的扩展性及对示教规模与相机配置的敏感性仍需进一步验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.616859159264893,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.25100v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125100v1-hapbo-harnessed-bayesian-optimization-via-expert-natural-language-priors",
+      "source": "arxiv",
+      "title": "HapBO: Harnessed $α$-$π$ Bayesian Optimization via Expert Natural Language Priors",
+      "authors": [
+        "Jean-Sébastien Giroux",
+        "Rose Guay Hottin",
+        "Marco Bonizzato"
+      ],
+      "authors_text": "Jean-Sébastien Giroux, Rose Guay Hottin, Marco Bonizzato",
+      "abstract": "Bayesian Optimization (BO) can be substantially more sample-efficient when informed by prior knowledge about the problem. In practice, however, such knowledge is often available only in natural language, e.g., expert intuitions or documentation, rather than as the explicit probability distribution landscape that prior-guided BO methods may require. Leveraging it effectively demands both an expressive mapping from language to priors and robustness to information that may be misleading. We propose HapBO (Harnessed $α$-$π$ Bayesian Optimization), which elicits beliefs once from a human expert, a large language model (LLM), or both, and deterministically compiles a structured specification into a reusable belief function ($π: \\mathcal{X} \\to[0,1]$), with a rich representation not restricted to a Gaussian family. Building on $α$-$π$BO, HapBO applies this belief function through a bounded positive multiplier on any nonnegative acquisition, preserving positive acquisition support and requiring no LLM calls during optimization. We prove that, for the Expected Improvement acquisition function (EI), HapBO preserves the standard simple-regret rate up to a bounded factor, even under adversarial beliefs. We evaluate HapBO on 40 HPOBench tasks, a synthetic suite in 6-15 dimensions and two real-world applications: cortical neurostimulation and constrained solar design. HapBO achieves the lowest aggregate HPOBench regret and strong real-world task performance, with zero in-loop token cost. In real-world applications it improves the optimization outcome even at budgets of 12-20 queries, and at a small fraction of the wall-clock and token costs of other LLM-based methods.",
+      "url": "http://arxiv.org/abs/2611.25100v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25100v1",
+      "tldr": "HapBO converts one-time natural-language expert and/or LLM priors into a reusable, non-Gaussian belief function that multiplicatively reweights any nonnegative acquisition function, enabling robust, sample-efficient Bayesian optimization without in-loop LLM calls while preserving standard regret-rate guarantees under adversarial beliefs.",
+      "detailed_reading": {
+        "motivation": "贝叶斯优化在有先验知识时能显著提升样本效率，但实际问题中的先验往往以专家直觉、文档等自然语言形式存在，并非先验引导型贝叶斯优化方法所需的显式概率分布或函数形态。要把这类知识有效用起来，既需要把语言映射为富有表达力的先验，又必须对可能误导的信息保持鲁棒性。",
+        "method": "HapBO 只向人类专家、大语言模型或两者同时一次性征询信念，将得到的结构化说明确定性地编译为可复用的信念函数 π:X→[0,1]，其表示不受高斯族限制。在 α-π 贝叶斯优化框架上，HapBO 用有界正乘子把该信念函数作用于任意非负采集函数，即采集值乘以一个有界正系数，从而保持采集函数的正支撑集。由于编译是离线的确定性过程，优化循环内不再调用大语言模型，整个优化过程只使用这一个固定信念函数做采集最大化与常规高斯过程更新。",
+        "result": "在 40 个 HPOBench 任务、6–15 维合成测试集以及皮质神经刺激与带约束太阳能设计两个真实应用上评估，HapBO 取得最低的 HPOBench 聚合遗憾，并在真实任务上表现强劲且循环内 token 成本为零。在真实应用中，即便预算仅 12–20 次查询也能改善优化结果，且实际耗时与 token 开销仅为其他基于大语言模型方法的很小一部分。",
+        "conclusion": "结果表明，自然语言先验可以被一次性编译为可复用的信念函数，并通过有界乘子安全地注入贝叶斯优化，从而在保持理论保证的同时获得显著的样本效率与计算效率收益。HapBO 为把专家知识与大模型知识低成本、可复现地用于黑箱优化提供了实用范式。",
+        "key_details": "关键实现点在于：信念函数取值归一化到 [0,1]，通过有界正乘子作用于采集函数，保证正支撑不被破坏；理论上证明对期望改进（EI）采集函数，即使信念是对抗性的，HapBO 仍保持标准简单遗憾率至多相差一个有界因子。实验覆盖 40 个 HPOBench 任务、6–15 维合成任务与两个真实场景（含带约束的太阳能设计），并考察 12–20 次查询的小预算情形；成本上仅在初始征询阶段消耗一次 token，循环内为零。局限包括信念只在开始时获取一次、不随观测在线更新，乘子的有界性限制了先验影响力，且最终效果依赖一次性征询与编译所得信念函数的质量。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.2338056291933786,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.24999v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/20/261124999v1-psyworld-profile-conditioned-world-modeling-for-human-behavior-prediction",
+      "source": "arxiv",
+      "title": "PsyWorld: Profile-Conditioned World Modeling for Human Behavior Prediction",
+      "authors": [
+        "Ziyuan Qin",
+        "Yang Qiao",
+        "Summer B. Frandsen",
+        "Michael T. Treadway",
+        "Liang Zhao"
+      ],
+      "authors_text": "Ziyuan Qin, Yang Qiao, Summer B. Frandsen, Michael T. Treadway, Liang Zhao",
+      "abstract": "Understanding how stable psychometric traits and time-varying states jointly inform behavior is an important problem in computational behavioral science. Existing personalized agents commonly condition actions directly on a static profile, leaving realized state transitions unused as an explicit source of supervision. We introduce a profile-conditioned state world model that uses observed environment--behavior state transitions to learn transition-informed representations for behavioral prediction. During training, a posterior encoder quantizes realized transitions, while a prior predicts the resulting codes from the psychometric profile and pre-transition context. The prior code and predicted next state then condition macro-level behavior and simulator-grounded execution. Thus, the world model provides structured transition supervision instead of treating personality as a direct action descriptor. We evaluate the framework in VEET, a controlled behavioral simulator with human trajectories, and in AgentSociety as a structurally different synthetic environment. A participant-disjoint split of 240 training, 25 validation, and 48 test participants evaluates generalization to unseen people. On VEET, the model reaches 0.904 Top-1 accuracy (95\\% CI: [0.895, 0.913]) and 0.0033 Macro KL. Ablations associate continuous next-state modeling with most of the Top-1 gain, while discrete codes and prior alignment mainly improve Top-3 and distributional alignment. These results establish transition-informed world-model supervision as useful for subject-generalized behavior prediction, without implying causal psychological mechanisms or calibrated long-horizon state dynamics.",
+      "url": "http://arxiv.org/abs/2611.24999v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.24999v1",
+      "tldr": "PsyWorld introduces a profile-conditioned world model that learns from observed environment–behavior state transitions to predict human behavior for unseen participants, using transition-informed latent codes rather than treating personality as a direct action descriptor.",
+      "detailed_reading": {
+        "motivation": "现有面向个性化行为预测的智能体多将静态心理测量画像直接作为动作条件，未把已实现的环境—行为状态转移作为显式监督信号，因而难以刻画同一参与者在任务与环境变化中的状态动态。论文旨在利用稳定心理测量特质与随时间变化状态的区分，通过状态转移监督提升对未见参与者的行为预测泛化能力。",
+        "method": "论文将每位参与者的问卷画像q_i、49维环境—行为状态s_t和宏观行为a_t输入上下文编码器得到h_t，并联合建模下一状态与下一宏观行为。训练时，后验编码器利用已实现状态变化Δs_t=s_{t+1}-s_t生成连续潜变量，经K=128、维度64的码本向量量化得到后验转移码；先验仅由h_t经softmax预测码分布，并以硬argmax选取先验码，推理阶段只使用先验码以避免未来信息泄漏。世界模型解码器由h_t和转移码预测下一状态；宏行为解码器将转移条件分支与上下文分支用学习门控融合，输出下一宏观行为；随后由模拟器相关执行策略将宏观行为落实为短时程动作段，并以DPO按与人类轨迹偏差构造偏好对训练执行策略。",
+        "result": "在参与者不重叠的VEET划分（240训练、25验证、48测试）上，模型达到0.904的Top-1准确率（95% CI：[0.895,0.913]）和0.0033的Macro KL。消融显示，连续下一状态建模贡献了大部分Top-1增益，而离散转移码与先验对齐主要改善Top-3和分布对齐；AgentSociety作为结构不同的合成环境用于检验同一分解的可操作性。",
+        "conclusion": "结果表明，将已实现状态转移作为结构化世界模型监督，有助于面向未见参与者的行为预测，并把心理测量画像从直接动作描述子转化为条件化状态转移表示。作者强调该结论不意味着学习到了因果心理机制，也不声称具备校准良好的长时程状态动力学。",
+        "key_details": "关键实现包括：VEET提供问卷画像与人类行为轨迹并作为主要评测，AgentSociety提供LLM驱动的城市级合成环境且宏观动作集为work、consume、rest、leisure、move；联合损失由状态重构MSE（分别使用后验码和先验码）、VQ码本与承诺损失、先验对后验硬分配的交叉熵/KL对齐以及类平衡宏行为交叉熵组成，VQ变体额外使用轻量码使用正则以缓解码本坍塌；执行策略以DPO训练，正负样本按与对应人类轨迹的偏差排序，β控制偏好强度。局限性在于转移码是预测性摘要而非人格或临床构念，AgentSociety仅提供合成操作化而非独立心理验证，且长时程状态动力学未做校准保证。"
+      },
+      "affiliations": [
+        "Emory University"
+      ],
+      "affiliations_text": "Emory University",
+      "score": 4.2155322552804515,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.25119v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125119v1-auditing-learned-dynamics-in-weather-models",
+      "source": "arxiv",
+      "title": "Auditing Learned Dynamics in Weather Models",
+      "authors": [
+        "Skylar Gu",
+        "Christina Last"
+      ],
+      "authors_text": "Skylar Gu, Christina Last",
+      "abstract": "Learned weather models are experimentally accessible computational systems whose internal representations can be inspected and manipulated. Using sparse autoencoder features from GraphCast, DeepMind's autoregressive weather forecasting model, we test whether causal relevance requires physical semantics, a question that matters for auditing whether AI forecasters used in high-assurance settings rely on reliable mechanisms. We also look at whether physically associated latent directions can be steered to improve extreme-event forecasts, where interventions are applied to the model's internal activations during the rollout. We find that ablating a feature locked to GraphCast's computational mesh increases global geopotential height error despite lacking conventional physical semantics. Second, suppressing convection- and low-level-vorticity-associated features weakens predicted tropical-cyclone deepening (the fall in central pressure during intensification), while amplifying them reduces intensity error, with amplification of convection features through feature scaling achieving a median of 51\\% error reduction over seven storms. Together, these results separate interpretable, physical association from causal utility and establish sparse features as experimental coordinates for auditing and intervening on learned weather dynamics.",
+      "url": "http://arxiv.org/abs/2611.25119v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25119v1",
+      "tldr": "Using sparse autoencoder features in GraphCast, the paper shows that causally important internal features need not have physical semantics, while physically associated convection and vorticity features can be steered to improve tropical-cyclone intensity forecasts, reducing error by a median of 51%.",
+      "detailed_reading": {
+        "motivation": "学习型天气预报模型开始进入高保障决策，需审计其是否依赖可靠机制，而先前SAE特征虽能标出热带气旋等概念，却不清楚因果重要性是否必须伴随可识别物理语义。论文进一步检验与物理过程相关的潜方向能否在自回归滚动中被操控，以改善热带气旋快速增强等极端事件预报。",
+        "method": "基于0.25°、37层GraphCast，在2007–2018年每6小时ERA5分析态上教师强制运行，采集第8层后40,962个网格节点的512维状态，并使用预训练第8层SAE而不重新训练模型；对每个特征计算其在24个独立再分析窗口中对8个ERA5标准场的平均标准化异常，结合127次经度旋转零分布与BH FDR校准物理标签。将输入经度旋转下激活仍固定于计算网格的特征定义为grid-locked，比较其消融对+48小时全球z500 RMSE的影响。对7个快速增强热带气旋，从ERA5初始场做96小时自回归滚动，在每个6小时步对初始风暴中心1500km圆盘内第8层SAE特征按 f' = f+(α-1)max(f-f_normal,0) 修改后解码，并与未扰动预报、ERA5、firing-rate匹配特征、范数匹配随机方向及统计偏差订正比较。",
+        "result": "消融一个锁定在GraphCast计算网格上的特征，虽无常规物理语义，却使+48小时全球z500 RMSE增加1.50m；将对流特征和低层涡度特征恢复到无风暴常态分别去掉中位2.5hPa和3.0hPa的加深，而firing-rate匹配对照中位小于0.1hPa。按各风暴最优α放大对流特征在7个风暴上取得中位51%的MSLP误差降低，放大涡度特征也可降低误差，但最优α随风暴而异；加倍两类特征组可把TC特征激活提升到163和190，接近ERA5教师强制下的213。统计偏差订正的中位MSLP误差为2.3hPa，优于对流特征的7.4hPa和涡度特征的2.5hPa，但放大干预通过内部状态调整整个滚动轨迹，且leave-one-out选α时对流放大不再优于未修正预报（7.43 vs 6.40hPa）。",
+        "conclusion": "研究结论是因果相关性与物理可解释性可分离：架构或网格锁定的特征也能承载预报技能，而具有物理统计关联的特征可作为干预坐标对特定失败模式提供状态依赖的因果杠杆。SAE特征更适合作为模型状态坐标而非固定物理变量，需结合周围配置理解其因果效应；它们可用于审计、预报修正和极端事件内部结构探索，但物理标签与观测一致性及跨模型、跨风暴可迁移性仍需验证。",
+        "key_details": "实现上使用0.25°、37层GraphCast及预训练第8层SAE（512维、40,962个网格节点），在2007–2018年ERA5上每6小时教师强制采集状态，不重新训练模型；特征标签由24个独立再分析窗口、8个ERA5标准场的平均标准化异常、127次经度旋转零分布和BH FDR q=0.05校准。干预超参为 f' = f+(α-1)max(f-f_normal,0)，α=0去除超过无风暴类比日参考水平的激活、α>1放大，1500km圆盘掩膜在96小时滚动中每6小时重复且不重定中心；对照包括firing-rate匹配特征、5个与对流解码方向正交的范数匹配随机方向及leave-one-out偏差订正。主要约束与局限是标签只表征统计关联而非机制、7个快速增强风暴（对流另加5个南半球样本）剂量响应差异大且无统一最优α，leave-one-out选α后对流放大中位MSLP误差7.43hPa不优于未修正6.40hPa，ERA5最小气压比最佳观测浅40hPa以上。因此结果证明的是GraphCast内部因果杠杆和审计坐标，而非扰动表示更接近真实观测或可实时业务迁移的技能。"
+      },
+      "affiliations": [
+        "McGill University",
+        "Mila",
+        "Haziel"
+      ],
+      "affiliations_text": "McGill University, Mila, Haziel",
+      "score": 4.195256389103717,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.25160v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125160v1-bayesian-explorer-for-minimax-model-estimation-in-mdps",
+      "source": "arxiv",
+      "title": "Bayesian $κ$-Explorer for Minimax Model Estimation in MDPs",
+      "authors": [
+        "Xihe Gu",
+        "Urbashi Mitra",
+        "Tara Javidi"
+      ],
+      "authors_text": "Xihe Gu, Urbashi Mitra, Tara Javidi",
+      "abstract": "We study active exploration for minimax transition estimation in unknown Markov decision processes (MDPs). Frequentist $κ$-Explorer~\\citep{gu2026kappa} addresses this problem through a parameterized family of exploration objectives, but requires confidence-bound constructions and joint optimization over plausible transition kernels and occupancy measures, introducing a computational burden that limits its practical applicability. We develop Bayesian $κ$-Explorer, which simplifies this procedure by placing Dirichlet priors on the transition distributions. Under the posterior mean estimator, the posterior expected squared $\\ell_2$ error equals the total posterior variance, providing a closed-form exploration signal. The algorithm plans under the posterior mean model, eliminating confidence-set optimization. Under the stated assumptions, this simpler planning procedure retains the $\\widetilde{O}(T^{-1/3})$ surrogate convergence rate of frequentist $κ$-Explorer. We further bound the maximum posterior variance relative to the optimal asymptotic minimax allocation benchmark. Experiments on Pendulum, Mountain Car, and Taxi demonstrate lower worst-case transition-estimation errors than the tested baselines.",
+      "url": "http://arxiv.org/abs/2611.25160v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25160v1",
+      "tldr": "**TLDR:** The paper introduces Bayesian κ-Explorer, a simplified posterior-variance-driven active exploration algorithm for minimax transition estimation in MDPs that uses Dirichlet priors and posterior-mean planning to eliminate confidence-set optimization while retaining the frequentist κ-Explorer’s convergence rate and improving worst-case estimation error.",
+      "detailed_reading": {
+        "motivation": "未知MDP中的极小极大转移估计需要在有限交互预算下最小化所有状态-动作对上最坏的转移估计误差，但访问频率通过动力学耦合且目标非光滑。此前的频率派κ-Explorer虽通过参数化探索目标逼近该问题，却需要构造置信界并在可行转移核与占用测度上联合优化，计算负担较大。本文旨在保留其核心探索原则与收敛保证的同时，给出更易实现的后验方差驱动方案。",
+        "method": "作者在每条转移分布上放置独立Dirichlet先验，利用共轭性得到后验均值μ_t与后验集中度β_t，并采用后验均值作为转移核估计。后验期望平方ℓ2误差等于总后验方差，具有闭式V_t(s,a)=c_t(s,a)/(β_t(s,a)+1)，其中c_t由后验均值直接计算，形成无需额外置信界的探索信号。算法按回合运行：每回合用当前计数计算V_t，设探索奖励r_m(s,a)=V_t(s,a)^κ（κ≥1），在后验均值模型的带占用下限η的稳态占用域内求解最大化Σr_m d的占用测度并导出策略π_m，执行τ_m步后更新计数，最终返回后验均值μ_T。",
+        "result": "理论分析表明，在通信性与稳定性等假设下，该简化规划流程仍保留频率派κ-Explorer的Õ(T^{-1/3})替代目标收敛率，并给出最大后验方差M_T相对于最优渐近极小极大分配基准C*/T的显式上界。界中包含有限κ近似项、分配优化项与后验估计项，其中分配优化误差为Õ(T^{-1/3})，对后验方差的贡献为Õ(T^{-4/3})，后验估计项在访问下限下为Õ(T^{-3/2})。在Pendulum、Mountain Car和Taxi的离散表格实验中，该方法相比所测基线取得更低的最坏情形转移估计误差。",
+        "conclusion": "Bayesian κ-Explorer用Dirichlet后验方差替代频率派置信集构造，将联合优化转移核与占用测度简化为在后验均值模型下的单模型规划，同时保持可证明的收敛率与极小极大分配基准 bound。该工作给出了首个结合后验均值规划与最大后验期望平方转移估计误差定量保证的后验方差驱动探索算法，并在基准环境中验证了实用有效性。",
+        "key_details": "关键实现包括独立Dirichlet先验（如Jeffreys先验）、后验均值MMSE估计、由c_t与β_t构成的闭式后验方差，以及κ≥1的幂次探索奖励和η∈(0,1/(2SA))的占用下限；规划需在每个回合求解带稳态占用约束的线性目标，并按预设回合长度执行。理论依赖通信MDP与稳定性假设、足够大的T阈值和适当选择η与τ_m，保证以至少1-δ概率成立；局限在于主要针对有限表格MDP，实验为离散化环境，且性能受先验、κ、η和回合调度影响。"
+      },
+      "affiliations": [
+        "University of Southern California",
+        "University of California, San Diego"
+      ],
+      "affiliations_text": "University of Southern California, University of California, San Diego",
+      "score": 4.0992647716377215,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.25001v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/20/261125001v1-density-feedback-control-for-transferability-of-generative-sparse-adversarial-attacks",
+      "source": "arxiv",
+      "title": "Density Feedback Control for Transferability of Generative Sparse Adversarial Attacks",
+      "authors": [
+        "Dongsu Song",
+        "Jay Hoon Jung"
+      ],
+      "authors_text": "Dongsu Song, Jay Hoon Jung",
+      "abstract": "Generator-based sparse adversarial attacks train encoder--decoder networks to produce transferable sparse perturbations for black-box robustness evaluation. Their perturbation density, however, is set only indirectly by a fixed sparsity coefficient whose mapping to density is unknown and shifts during training, so reaching a target density requires re-tuning; this fixed pressure also yields little transferability gain once density reduction begins. We propose Density Feedback Control (DFC), which tightens or relaxes this coefficient at the end of each epoch according to the gap between the observed hard-mask density and the target, without changing the generator architecture or loss. At a 10\\% target density, DFC brings the mean density of three base attacks within one percentage point of the target in a single run and improves the transfer attack success rate (ASR) of two of them on CNN and Transformer targets, including under per-image $\\ell_0$ budgets, while perturbing fewer pixels. Tracing GPG's training, we observe that as DFC relaxes the coefficient, the transfer ASR recovers with the density and overtakes the fixed-coefficient baseline with fewer pixels. For EGS-TSSA, which restricts perturbations to source-model feature-importance regions, DFC yields no consistent gain; we analyze how this restriction interacts with density feedback.",
+      "url": "http://arxiv.org/abs/2611.25001v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25001v1",
+      "tldr": "**TLDR:** Density Feedback Control (DFC) dynamically adjusts the sparsity coefficient each epoch based on the gap between observed and target perturbation density, allowing generator-based sparse adversarial attacks to hit a desired density in one run without changing the generator or loss and improving transfer attack success for several base attacks.",
+      "detailed_reading": {
+        "motivation": "基于生成器的稀疏对抗攻击通过编码器—解码器网络生成可迁移稀疏扰动，但其扰动密度仅由固定稀疏系数间接控制，该系数与密度的映射未知且会在训练中漂移，导致达到目标密度需要反复调参；同时固定压力在密度下降后带来的迁移性收益有限。",
+        "method": "论文提出密度反馈控制（DFC）：在每轮训练结束时计算生成扰动硬掩码的实际密度与目标密度之间的差距，并据此收紧或放松稀疏系数，下一轮继续训练；该方法不改变生成器架构，也不改变原有损失函数，仅对稀疏系数做轮级反馈调节，从而在单次训练中把硬掩码密度推向目标值。",
+        "result": "在10%目标密度下，DFC在单次运行中使三个基础攻击的平均密度进入目标值一个百分点以内，并提升其中两个攻击在CNN与Transformer目标模型上的迁移攻击成功率，包括逐图像ℓ0预算场景，同时扰动像素更少；追踪GPG训练可见，随着DFC放松系数，迁移ASR随密度恢复并超过固定系数基线且使用更少像素。",
+        "conclusion": "DFC通过密度反馈直接控制生成式稀疏攻击的扰动密度，在不改网络与损失的情况下改善密度可控性和迁移性，并减少像素扰动；但对于将扰动限制在源模型特征重要性区域的EGS-TSSA，DFC没有稳定增益，说明该区域限制会与密度反馈产生交互并限制其效果。",
+        "key_details": "关键实现是以硬掩码密度作为反馈信号，在每个epoch末根据观测密度与目标密度的差距调节稀疏系数；实验围绕10%目标密度、三个基础攻击、CNN和Transformer目标以及逐图像ℓ0预算展开，强调单次运行达到目标密度并减少扰动像素；局限性在于EGS-TSSA的源模型特征重要性区域限制与密度反馈的交互会导致不一致收益。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.074672139637619,
+      "score_text": "4.1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.25133v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125133v1-a-modified-quasi-newton-method-for-unconstrained-optimization-with-nonpositive-curvature-detection-and-structured-complexity",
+      "source": "arxiv",
+      "title": "A Modified Quasi-Newton Method for Unconstrained Optimization with Nonpositive Curvature Detection and Structured Complexity",
+      "authors": [
+        "Farhad Rahbarnia",
+        "Dominique Monnet",
+        "Dominique Orban"
+      ],
+      "authors_text": "Farhad Rahbarnia, Dominique Monnet, Dominique Orban",
+      "abstract": "We consider the convergence, worst-case complexity, and implementation of R2N, a modified quasi-Newton method for large-scale unconstrained smooth optimization. At each iteration, we compute a step that approximately minimizes the sum of a quadratic model of the objective with an adaptive quadratic regularization, and that results in sufficient decrease. The objective is only assumed to be $C^1$, although second derivatives may be used if they are available. The implementation features a broad range of step-computation strategies, from sparse factorization to matrix-free Krylov methods, that satisfy global convergence requirements. When detected, directions of nonpositive curvature are exploited. Our analysis allows unbounded model Hessians, provided they satisfy a mild growth condition. We derive a worst-case evaluation complexity bound that separates the progress made along positive- and nonpositive-curvature directions. By forcing the regularization parameter to vanish near isolated local minimizers, we obtain superlinear local convergence. The implementation specializes naturally to nonlinear least-squares problems. We provide a modular Julia implementation, and use it in a numerical study on the CUTEst test set that assesses the treatment of nonpositive curvature, the subproblem solver, the update of the regularization parameter, and direct versus iterative subproblem solves. An Armijo-Goldstein line search along nonpositive-curvature directions, MINRES-QLP as subproblem solver, and a regularization parameter driven to zero near a solution form our recommended configuration. With exact second derivatives, R2N is competitive with a trust-region method, solving slightly more problems with fewer objective and gradient evaluations. With convex models, the trust-region method performs as well or better.",
+      "url": "http://arxiv.org/abs/2611.25133v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25133v1",
+      "tldr": "The paper presents R2N, a regularized modified quasi-Newton method for large-scale unconstrained smooth optimization that detects and exploits nonpositive curvature, establishes global convergence and structured worst-case complexity, and demonstrates via a modular Julia implementation and CUTEst experiments that its recommended configuration is competitive with trust-region methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Polytechnique Montréal",
+        "Université de Rennes"
+      ],
+      "affiliations_text": "Polytechnique Montréal, Université de Rennes",
+      "score": 4.036420302863981,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.25165v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125165v1-separating-interpretability-and-reconstruction-in-sparse-autoencoders",
+      "source": "arxiv",
+      "title": "Separating Interpretability and Reconstruction in Sparse Autoencoders",
+      "authors": [
+        "Anh Tien Nguyen",
+        "Dimitris Samaras",
+        "Mahdi S. Hosseini"
+      ],
+      "authors_text": "Anh Tien Nguyen, Dimitris Samaras, Mahdi S. Hosseini",
+      "abstract": "Sparse Autoencoders (SAEs) are effective tools for mechanistic interpretability by decomposing neural representations into sparse and interpretable features. However, a single sparse representation in traditional SAEs is responsible for both reconstruction fidelity and interpretability, which are not guaranteed to align. To separate these objectives, we propose DualSAE, a modular framework that augments standard SAEs with a plug-in Residual Branch. A standard SAE serves as the Sparse Branch, learning a sparse code that contains the dominant semantics of the input. The added Residual Branch models the non-semantic information omitted by the Sparse Branch. We ensure that the contributions of the two branches towards the overall reconstruction have minimal overlap through a decorrelation loss. We also adopt a two-stage training strategy that first stabilizes sparse representation learning before coupling with the Residual Branch. Across diverse encoder-SAE configurations on two vision datasets and two language corpora, DualSAE achieves mean relative improvements of approximately 29% in reconstruction fidelity and 34% in interpretability (measured by monosemanticity score). Moreover, with more interpretable representations, DualSAE yields consistent performance gains in the downstream applications of topic modeling, hypothesis generation, and LLM steering. Qualitative analysis further suggests that the Sparse Branch indeed preserves dominant semantic content, whereas the Residual Branch captures non-semantic information to improve reconstruction fidelity.",
+      "url": "http://arxiv.org/abs/2611.25165v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25165v1",
+      "tldr": "DualSAE separates sparse interpretable semantic features from non-semantic residual information by augmenting standard sparse autoencoders with a plug-in Residual Branch, a decorrelation loss, and two-stage training, thereby improving both reconstruction fidelity and interpretability.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Mila--Quebec AI Institute",
+        "Concordia University",
+        "Stony Brook University"
+      ],
+      "affiliations_text": "Mila--Quebec AI Institute, Concordia University, Stony Brook University",
+      "score": 3.98365860253703,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.25149v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125149v1-an-potential-linear-approximation-for-lq-differential-games",
+      "source": "arxiv",
+      "title": "An α-potential linear approximation for LQ differential games",
+      "authors": [
+        "Balint Varga",
+        "Gergely Lorant Kiss",
+        "Andreas Schwung"
+      ],
+      "authors_text": "Balint Varga, Gergely Lorant Kiss, Andreas Schwung",
+      "abstract": "Feedback Nash equilibria of infinite-horizon linear-quadratic (LQ) differential games are characterized by coupled algebraic Riccati equations (cAREs), whose numerical solution generally relies on iterative algorithms and can be highly sensitive to their initialization. Motivated by the $α$-potential-game framework, this letter proposes an $α$-potential linear approximation for constructing a systematic, game-dependent initialization. For an N-player LQ game, a reference potential game is constructed. Its equilibrium requires solving only one standard algebraic Riccati equation. The original cAREs are subsequently linearized around this reference solution, yielding a coupled linear system whose solution provides player-specific corrections and hence an approximate feedback Nash equilibrium. The resulting approximation is used to initialize three standard cARE solvers. Numerical experiments on $10^4$ randomly generated two-player games show that the proposed initialization reduces the mean number of iterations. Further experiments for $N=2,\\ldots,13$ show that the reduction in iteration count persists as the number of players increases.",
+      "url": "http://arxiv.org/abs/2611.25149v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25149v1",
+      "tldr": "The paper proposes an α-potential linear approximation that systematically initializes iterative solvers for coupled Riccati equations in infinite-horizon LQ differential games by solving one reference ARE and linearizing around it, thereby reducing iterations and computation time.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Karlsruhe Institute of Technology (KIT)",
+        "South Westphalia University of Applied Science"
+      ],
+      "affiliations_text": "Karlsruhe Institute of Technology (KIT), South Westphalia University of Applied Science",
+      "score": 3.9655975704474007,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.25102v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125102v1-compact-slack-free-penalty-functions-for-inequality-constraints-in-higher-order-unconstrained-binary-optimization",
+      "source": "arxiv",
+      "title": "Compact Slack-Free Penalty Functions for Inequality Constraints in Higher-Order Unconstrained Binary Optimization",
+      "authors": [
+        "Naoaki Mochida",
+        "Shoya Yasuda"
+      ],
+      "authors_text": "Naoaki Mochida, Shoya Yasuda",
+      "abstract": "Inequality constraints in higher-order unconstrained binary optimization (HUBO) are commonly handled using slack variables or by enumerating infeasible assignments, which respectively enlarge the search space or produce penalties whose size grows with the number of forbidden values. We construct exact slack-free penalty functions for upper- and lower-bound constraints on binary-encoded integers. Each function is constructed hierarchically from the threshold bits through a recursive addition-and-multiplication rule, and its correctness for arbitrary bit widths and representable thresholds is proved by mathematical induction. Equivalent explicit finite sum-product representations are also derived, enabling direct analysis of product-term count and polynomial degree. Interval constraints are obtained by adding the lower- and upper-bound penalties, while exclusion constraints are obtained by multiplying them. Compared with the trivial enumerative construction, the proposed method reduces the worst-case product-term count from linear to logarithmic in the representable range. Except at one non-vacuous boundary threshold for each bound, it also reduces both product-term count and degree. The resulting single-bound penalties have minimum positive value 1 and maximum value at most the bit width, which may simplify penalty-weight selection. The same construction also extends exactly to fixed-scale fractional variables through appropriate scaling of the integer thresholds.",
+      "url": "http://arxiv.org/abs/2611.25102v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25102v1",
+      "tldr": "The paper proposes compact, slack-free, exact hierarchical penalty functions for inequality constraints in HUBO that are constructed recursively from threshold bits, reduce worst-case product-term count from linear to logarithmic, lower polynomial degree, and compose via addition or multiplication for interval and exclusion constraints.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Quantum Fabric Inc.",
+        "Institute of Science Tokyo",
+        "Vignette & Clarity, Inc.",
+        "St. Mary's International School"
+      ],
+      "affiliations_text": "Quantum Fabric Inc., Institute of Science Tokyo, Vignette & Clarity, Inc., St. Mary's International School",
+      "score": 3.834501178268535,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.25005v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125005v1-inhabitant-an-agent-framework-for-long-horizon-human-scene-interaction-with-spatial-control-and-quantitative-feedback",
+      "source": "arxiv",
+      "title": "Inhabitant: An Agent Framework for Long-Horizon Human-Scene Interaction with Spatial Control and Quantitative Feedback",
+      "authors": [
+        "Yao Zhang",
+        "Zhuchenyang Liu",
+        "Yu Xiao"
+      ],
+      "authors_text": "Yao Zhang, Zhuchenyang Liu, Yu Xiao",
+      "abstract": "Recent work on human-scene interaction (HSI) generation moves from single interactions to long-horizon interaction, where a language-model agent plans and executes a sequence of interactions in a 3D scene under one instruction. However, existing agents struggle in challenging everyday scenarios (e.g., picking up a toy and throwing it into a basket) because they lack spatial control over the motion and quantitative feedback on its execution, and they often fail to complete the interaction sequence. To address these gaps, we present Inhabitant, a training-free agent framework in which the agent specifies each motion through positions, paths and poses, measures how the executed interaction deviates from its intent, and revises the control specification accordingly. For an extensive evaluation in such scenarios, we build Inhabit, a benchmark of 75 household tasks in 31 furniture layouts of an apartment, in which every task chains one to three goals on movable objects and is carried out by the whole body, excluding fingers. On Inhabit, Inhabitant completes 98.7\\% of the tasks with Claude Opus 5.5, and 93.3\\% and 82.7\\% with Claude Sonnet 5.5 and Gemini 4 Argon, respectively. Ablations confirm that without spatial control the agent fails most tasks, and without quantitative feedback its motion becomes less precise. Code is available on the project page.",
+      "url": "http://arxiv.org/abs/2611.25005v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25005v1",
+      "tldr": "Inhabitant is a training-free agent framework for long-horizon whole-body human-scene interaction that closes the loop between spatially grounded motion control and quantitative simulator feedback, letting an agent iteratively revise motion specifications to complete multi-step household tasks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Aalto University"
+      ],
+      "affiliations_text": "Aalto University",
+      "score": 3.8292882265739343,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.25167v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125167v1-game-theoretic-data-allocation-for-expert-specialization-and-routing",
+      "source": "arxiv",
+      "title": "Game-Theoretic Data Allocation for Expert Specialization and Routing",
+      "authors": [
+        "Mark Lovett",
+        "Denis Lim",
+        "Soroush Vosoughi"
+      ],
+      "authors_text": "Mark Lovett, Denis Lim, Soroush Vosoughi",
+      "abstract": "Can the allocation used to train experts also predict which expert will perform best on a prompt? Such a connection would make the intended division of labor inspectable before training and allow the allocation itself to guide inference. We introduce InflEns, a mixture of LoRA experts whose training weights and inference routes come from the same location game in a fixed prompt-trait space. Players choose positions to maximize their expected shares of the prompt distribution, without using expert losses. We utilize the game's kernel-general theoretical criterion for when co-located positions become locally unstable to separation. We evaluate InflEns on a corpus assembled from seven safety-related benchmarks, which demonstrates that the highest-share expert has the lowest held-out response negative log-likelihood (NLL) on approximately 90% of prompts across four kernels under a sharpened simplex representation, compared with approximately 15% after permuting allocations across prompts. We demonstrate that the method performs comparably to published learned gates without having to train an explicit gate on the experts. Because the router is fixed, we can trace harmful behavior to a single expert and retrain only that expert, which lowers HarmBench attack success from 0.51 to 0.02 while keeping instruction following. The game also gives us several controls over how the experts specialize, including the kernel choice and its parameters, the trait-space geometry, and the number of experts. Importantly, InflEns is a general framework that can be extended to any encoder and data distribution.",
+      "url": "http://arxiv.org/abs/2611.25167v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25167v1",
+      "tldr": "InflEns is a mixture-of-LoRA-experts framework in which expert training allocations and inference routing both arise from the same game-theoretic location game in a fixed prompt-trait space, enabling inspectable, gate-free expert specialization that matches learned gates and allows targeted safety retraining.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.8014685391439738,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.25134v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125134v1-gems-generation-and-experience-memory-for-subgoal-guided-long-horizon-world-model-planning",
+      "source": "arxiv",
+      "title": "GEMS: Generation and Experience Memory for Subgoal-Guided Long-Horizon World Model Planning",
+      "authors": [
+        "Yangchen Zhao",
+        "Ali Payani",
+        "Caiwen Ding"
+      ],
+      "authors_text": "Yangchen Zhao, Ali Payani, Caiwen Ding",
+      "abstract": "Visual world models enable effective short-horizon goal-conditioned planning, such as reaching nearby targets and pushing objects over short distances, by predicting candidate action outcomes and comparing their representations with a goal representation. However, extending this approach to long-horizon tasks is challenging: prediction errors accumulate over extended rollouts, while latent-space similarity to distant goals provides limited guidance for ranking candidate outcomes. Existing methods address these limitations by introducing intermediate subgoals, either generated by learned models or selected from experience memory. Generated subgoals can contain hallucinations or be inaccurate in aspects such as object positions and timing. Memory-based approaches are constrained by experience coverage and may lack precise guidance for selecting appropriate intermediate states from stored observations. We introduce GEMS, which generates temporally structured subgoals to guide action search and state selection from Latent Experience Memory (LEM). A distance gate determines whether predicted outcomes are evaluated against the generated subgoal or the selected memory state. Experiments across six tasks and task suites spanning manipulation, navigation, and reaching demonstrate the effectiveness of GEMS for long-horizon planning. GEMS outperforms state-of-the-art world-model planning baselines across different manipulation settings, achieving success rates of 92.8% on Cube, 68.4% on Push-T, and 54.1% on Meta-World. It improves over the strongest evaluated baseline on these tasks by 24.0, 7.3, and 22.2 percentage points, respectively. These results demonstrate that generated subgoals and experience memory can jointly strengthen long-horizon planning with a frozen world model.",
+      "url": "http://arxiv.org/abs/2611.25134v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25134v1",
+      "tldr": "GEMS improves long-horizon world-model planning by combining temporally structured generated subgoals with experience-memory grounding, using a distance gate to decide whether to score predicted outcomes against a generated subgoal or a selected memory state.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Minnesota, Twin Cities",
+        "Cisco"
+      ],
+      "affiliations_text": "University of Minnesota, Twin Cities, Cisco",
+      "score": 3.7903821827023556,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.25000v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125000v1-watch-where-you-linearize-predicting-and-correcting-model-merging-interference",
+      "source": "arxiv",
+      "title": "Watch Where You Linearize: Predicting and Correcting Model-Merging Interference",
+      "authors": [
+        "Ido Nitzan Hidekel",
+        "Dan Raviv"
+      ],
+      "authors_text": "Ido Nitzan Hidekel, Dan Raviv",
+      "abstract": "Model merging combines separately fine-tuned models by adding their task vectors to a shared backbone. Interference is typically assessed only after constructing and evaluating a candidate merge, making coefficient search expensive. We show that a first-order directional derivative of task A's outputs along task B's vector can predict interference, but only when evaluated at the appropriate model.\n  At the receiver model, this derivative forecasts nearby merges per task and per example, halves the accuracy error of a no-change baseline, and identifies most examples whose predictions flip. For full multi-task merges, a single evaluation is insufficient; two evaluations along the merge path are needed. At the shared pretrained backbone, however, the derivative is nearly orthogonal to realized changes in our vision experiments and only partly predictive in LoRA language-model pilots. Controls link this failure to displacement along the receiver's own task vector, not simply parameter distance; the mismatch appears within the first few dozen fine-tuning steps.\n  Freezing receiver-local responses produces a surrogate affine in the merge coefficients. We use it to construct LR-Merge, a label-free correction that optimizes coefficients through convex teacher matching on unlabeled probes, without backpropagation through merged networks. LR-Merge improves all tested closed-form, isotropic, and sparsified base mergers, with gains generally increasing as more tasks are merged. Using pretrained rather than receiver-local responses instead degrades the base merge. LR-Merge matches exact teacher matching through a merged network, which takes roughly three times longer to converge and performs similarly at an equal compute budget. Once built, the surrogate answers new coefficient and task-subset queries in seconds.",
+      "url": "http://arxiv.org/abs/2611.25000v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25000v1",
+      "tldr": "The paper shows that model-merging interference is predictable via a first-order directional derivative only when linearized at the receiver model rather than the shared pretrained backbone, and leverages frozen receiver-local responses to build a label-free affine surrogate whose convex teacher-matching optimization, LR-Merge, improves merge coefficients without backpropagating through merged networks.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7430719396846817,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.25151v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125151v1-rate-distortion-assessment-for-hierarchical-content-summarization",
+      "source": "arxiv",
+      "title": "Rate-distortion Assessment for Hierarchical Content Summarization",
+      "authors": [
+        "Yunye Gong",
+        "Indranil Sur",
+        "Jared Claypoole",
+        "Pritish Sahu",
+        "Ajay Divakaran"
+      ],
+      "authors_text": "Yunye Gong, Indranil Sur, Jared Claypoole, Pritish Sahu, Ajay Divakaran",
+      "abstract": "Powerful generative models including large language and vision models have demonstrated success across a wide range of content generation, editing and manipulation tasks via end-to-end prompt-based generation. However, current assessment of the quality of generative content manipulation remains subjective, limiting scientific understanding of model capabilities. Inspired by rate-distortion theory from Shannon information compression theory, in this work we formalize hierarchical content summarization as an information encoding problem. We design a principled framework to extract the semantic hierarchy of the source content to support quantitative characterization of the rate-distortion trade-off between compression efficiency (rate) against information loss (distortion) during generative content manipulation, which allows us to benchmark various models with respect to performance conditional on rate budget of interest. We demonstrate the use of the framework with empirical experiments on content summarization for long-context question-answering with state-of-the-art large language models, offering new insights into their efficiency and comprehension capabilities. We further demonstrate the use of the semantic hierarchy as guidance for performing effective retrieval augmented generation, showing improved rate-distortion characteristics against current baselines.",
+      "url": "http://arxiv.org/abs/2611.25151v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25151v1",
+      "tldr": "The paper proposes a QA-based semantic-hierarchy framework inspired by rate-distortion theory to quantitatively assess generative content summarization, benchmark LLMs’ compression–comprehension trade-offs, and guide more efficient retrieval-augmented generation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "SRI International"
+      ],
+      "affiliations_text": "SRI International",
+      "score": 3.641514802837321,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.25003v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125003v1-a-model-of-diverse-sampling-from-language-models",
+      "source": "arxiv",
+      "title": "A Model of Diverse Sampling from Language Models",
+      "authors": [
+        "Manuel Prada-Corral",
+        "Yahya Emara",
+        "Timothy J. O'Donnell",
+        "Ryan Cotterell",
+        "Tim Vieira"
+      ],
+      "authors_text": "Manuel Prada-Corral, Yahya Emara, Timothy J. O'Donnell, Ryan Cotterell, Tim Vieira",
+      "abstract": "Language models often produce high-quality individual samples but poor sets, with repeated samples clustering around the same semantic modes. We formalize diverse generation as sampling a size-$K$ subset of complete strings from a determinantal point process (DPP), where the likelihood encodes item quality, and the embedding geometry encodes repulsion between similar outputs. Exact inference over all strings is intractable, so we propose PoolDPP: draw a finite candidate pool from a tractable proposal, importance-weight the candidates toward the target quality, and run a $K$-DPP sampler on the induced pool kernel; a greedy MAP variant provides deterministic selection. We prove a finite-sample bound with an explicit constant: the KL divergence between the sampler's output and the target $K$-DPP decays as O(1/N) in the pool size. Empirically, PoolDPP extends the quality--diversity frontier on open-ended generation and the precision--recall frontier on ambiguous text-to-SQL (Ambrosia), and on mathematical reasoning (GSM8K), it raises diversity at about the same pass@$K$.",
+      "url": "http://arxiv.org/abs/2611.25003v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25003v1",
+      "tldr": "The paper proposes PoolDPP, a tractable finite-pool importance-weighted K-DPP sampler (with a greedy MAP variant) for diverse language-model generation that provably approaches the target K-DPP as pool size grows and improves quality–diversity and precision–recall trade-offs on open-ended generation, text-to-SQL, and mathematical reasoning.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.426027605769444,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.25011v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125011v1-near-quadratic-sample-compression-for-all-vc-classes",
+      "source": "arxiv",
+      "title": "Near-Quadratic Sample Compression for All VC Classes",
+      "authors": [
+        "Yang Cai",
+        "Vineet Gupta",
+        "Yanchen Jiang",
+        "Christopher Liaw",
+        "Aranyak Mehta",
+        "Shay Moran",
+        "Grigoris Velegkas",
+        "Di Wang",
+        "Manfred K. Warmuth"
+      ],
+      "authors_text": "Yang Cai, Vineet Gupta, Yanchen Jiang, Christopher Liaw, Aranyak Mehta, Shay Moran, Grigoris Velegkas, Di Wang, Manfred K. Warmuth",
+      "abstract": "The sample compression conjecture is a longstanding open problem in learning theory, originating in the work of Littlestone and Warmuth in the 1980s. At its heart is a connection between simplification and generalization: if a predictor consistent with a training sample is defined using only a small part of that sample, then it is likely to generalize. Sample compression schemes formalize this idea, and many natural learning algorithms can be analyzed this way.\n  The sample compression conjecture of Floyd and Warmuth (1995) asserts that every binary concept class of VC dimension $d$ admits a sample compression scheme of size $O(d)$; a weaker conjecture asks only for size polynomial in $d$. Both have remained open: the first bound depending only on $d$, due to Moran and Yehudayoff (2016), is exponential in $d$. We prove the weaker conjecture by constructing a sample compression scheme of size $O(d^2 \\log^2 d)$.",
+      "url": "http://arxiv.org/abs/2611.25011v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25011v1",
+      "tldr": "The paper proves the polynomial sample-compression conjecture for all binary VC classes by constructing, for any class of VC dimension \\(d\\), a labeled sample compression scheme using \\(O(d^2\\log^2 d)\\) examples and \\(O(d\\log^2 d)\\) side-information bits—the first polynomial and near-quadratic improvement over the previous exponential-in-\\(d\\) bound.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technion",
+        "Google",
+        "Yale University"
+      ],
+      "affiliations_text": "Technion, Google, Yale University",
+      "score": 3.4158024962097193,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.25108v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125108v1-long-range-video-presentation-attack-detection-a-three-class-benchmark-across-1-100-m-and-two-sensor-types",
+      "source": "arxiv",
+      "title": "Long-Range Video Presentation Attack Detection: A Three-Class Benchmark Across 1-100 m and Two Sensor Types",
+      "authors": [
+        "Lambert Igene",
+        "Mohammad Zahir Uddin Chowdhury",
+        "Afzal Hossain",
+        "Sandip Purnapatra",
+        "Peter Johnson",
+        "Stephanie Schuckers"
+      ],
+      "authors_text": "Lambert Igene, Mohammad Zahir Uddin Chowdhury, Afzal Hossain, Sandip Purnapatra, Peter Johnson, Stephanie Schuckers",
+      "abstract": "Face presentation attack detection (PAD) systems deployed in border control and airport surveillance are constrained by a critical assumption: subjects are captured at close range, typically under one meter. No existing benchmark systematically addresses multi-distance capture, diverse environmental conditions, and concurrent spoofing and occlusion-based attacks, leaving deployed models underprepared for real-world scenarios. We introduce a video-based PAD dataset of 374,000+ frames from 261 unique identities collected across five standoff distances (1 m-100 m) under indoor and outdoor conditions using a DSLR camera (C) and a mobile sensor (M), with three-class labels: live, spoof, and props (occlusions); models are trained and evaluated on video clips rather than single frames. We fine-tune and benchmark four CNN architectures: MobileNetV3, MobileNet, EfficientNet, and ResNet-50. The higher-resolution DSLR maintains near-perfect spoof classification rate across all distances, while the lower-resolution mobile sensor degrades sharply beyond 50 m, with props classification rate dropping to 55% at 75 m for MobileNetV3. EfficientNet achieves the best overall performance (98.48% accuracy, ACER 2.01%). Generalization tests on unseen attack datasets yield 89-94% accuracy, validating cross-domain robustness. These results establish capture distance and sensor resolution as critical but underexplored axes of PAD difficulty. The dataset will be publicly released under an End-User License Agreement to support reproducible long-range PAD research.",
+      "url": "http://arxiv.org/abs/2611.25108v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25108v1",
+      "tldr": "This paper introduces a long-range video face presentation attack detection benchmark of 374,000+ frames from 261 identities across 1–100 m, indoor/outdoor conditions, and two sensor types with three-class labels (live, spoof, props), benchmarks four CNN architectures, and shows that capture distance and sensor resolution are critical factors, with EfficientNet achieving the best overall performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Ombra LLC",
+        "UNC at Charlotte",
+        "Clarkson University"
+      ],
+      "affiliations_text": "Ombra LLC, UNC at Charlotte, Clarkson University",
+      "score": 3.192489965886746,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.25004v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125004v1-on-the-impact-of-feature-reduction-techniques-on-adversarial-attacks",
+      "source": "arxiv",
+      "title": "On the Impact of Feature Reduction Techniques on Adversarial Attacks",
+      "authors": [
+        "Mohammad Meymani",
+        "Roozbeh Razavi-Far"
+      ],
+      "authors_text": "Mohammad Meymani, Roozbeh Razavi-Far",
+      "abstract": "Adversarial attacks have posed significant threats to machine learning models by exploiting their inherent vulnerabilities. Researchers have established an interdisciplinary field called adversarial machine learning to explore these vulnerabilities and develop corresponding defense strategies. Feature reduction strategies are used to decrease the dimensionality of the data in order to reduce training time, avoid the curse of dimensionality, prevent overfitting, and mitigate redundant features. However, their effect on adversarial robustness across different classifiers and attack scenarios remains insufficiently explored. This study aims to analyze the effect of feature reduction techniques on the adversarial robustness of a diverse set of machine learning models under poisoning, backdoor, and universal adversarial perturbation attacks on the APT dataset. These models include support vector machine, decision tree, random forest, multi-layer perceptron, and k-nearest neighbors. The attained results are compared with scenarios where different feature reduction techniques are applied, including principal component analysis, permutation importance ranking, recursive feature elimination, and univariate mutual information. Metrics such as accuracy, F1-score, and mitigation score are employed to evaluate the effect of these techniques on adversarial robustness. The results demonstrate that permutation importance ranking and univariate mutual information generally provide the most consistent robustness improvements, while other methods exhibit more variable effects depending on the classifier and attack scenario.",
+      "url": "http://arxiv.org/abs/2611.25004v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25004v1",
+      "tldr": "This paper evaluates four feature-reduction techniques across five machine learning classifiers under poisoning, backdoor, and universal adversarial perturbation attacks on the APT dataset, finding that permutation importance ranking and univariate mutual information generally provide the most consistent adversarial-robustness improvements while other methods vary by classifier and attack scenario.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of New Brunswick"
+      ],
+      "affiliations_text": "University of New Brunswick",
+      "score": 3.183393031402429,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.25114v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125114v1-fast-and-memory-light-evaluation-of-density-based-clusterings-with-the-disco-index-in-r",
+      "source": "arxiv",
+      "title": "Fast and Memory-Light Evaluation of Density-Based Clusterings with the DISCO Index in R",
+      "authors": [
+        "Amin Entezari"
+      ],
+      "authors_text": "Amin Entezari",
+      "abstract": "DISCO is a recent internal cluster validity index for density-based clustering that, unlike earlier indices, also evaluates the quality of noise labels. The discoCVI package makes DISCO available in R. This article describes the design of the package and a typical workflow, in which DISCO is used to compare clusterings and to choose the parameters of HDBSCAN without ground truth, followed by the implementation introduced in version 0.2.0. DISCO is defined through density-connectivity distances between all pairs of points, so direct implementations store several n-by-n matrices. We show that every quantity DISCO needs can be read off the single-linkage merge tree of the mutual-reachability minimum spanning tree, so that the index can be computed exactly with memory that grows linearly with the number of points, while the running time remains quadratic as in the original definition. The implementation is tested against the previous version, agrees with the original Python implementation to within $3 \\times 10^{-13}$, and corrects the score of singleton clusters to match the published definition. In benchmarks, discoCVI is 23 to 138 times faster than its previous version for 500 to 4,000 points and 3 to 9 times faster than the Python reference for 500 to 8,000 points, using a fraction of the memory of both, and it scores 100,000 points in about 50 seconds with less than 200 MB of memory.",
+      "url": "http://arxiv.org/abs/2611.25114v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25114v1",
+      "tldr": "The discoCVI R package’s version 0.2.0 computes the DISCO density-based clustering validity index exactly from the single-linkage merge tree of the mutual-reachability MST, achieving linear memory use and large speed and memory improvements over previous R and Python implementations while correctly handling noise labels.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Università di Milano-Bicocca"
+      ],
+      "affiliations_text": "Università di Milano-Bicocca",
+      "score": 2.9791109063214067,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2611.25096v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/20/261125096v1-asymmetric-transistor-aging-under-thermal-gradients",
+      "source": "arxiv",
+      "title": "Asymmetric Transistor Aging Under Thermal Gradients",
+      "authors": [
+        "Alex Grinshpun",
+        "Firas Ramadan",
+        "Freddy Gabbay"
+      ],
+      "authors_text": "Alex Grinshpun, Firas Ramadan, Freddy Gabbay",
+      "abstract": "Advanced technology nodes improve performance but increase susceptibility to BTI-induced aging. Using aging- aware circuit simulations, we show that realistic on-chip thermal gradients can cause significant asymmetric transistor degradation in 16 nm FinFET circuits, leading to setup and hold time violations. These results highlight the necessity of incorporating thermal-gradient-aware aging analysis into timing signoff to ensure chip reliability.",
+      "url": "http://arxiv.org/abs/2611.25096v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.25096v1",
+      "tldr": "This paper shows that realistic 10–15°C on-chip thermal gradients cause asymmetric BTI-induced transistor aging in 16 nm FinFET circuits, producing setup and hold timing violations that conventional uniform-temperature signoff misses, so thermal-gradient-aware aging analysis must be included in timing signoff.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Technion",
+        "The Hebrew University"
+      ],
+      "affiliations_text": "Technion, The Hebrew University",
+      "score": 2.525103170798238,
+      "score_text": "2.5"
+    }
+  ]
+}
