@@ -1,0 +1,734 @@
+{
+  "label": "2026-11-23",
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T23:14:29",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2611.26802v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126802v1-nonholonomic-event-triggered-source-seeking",
+      "source": "arxiv",
+      "title": "Nonholonomic Event-Triggered Source Seeking",
+      "authors": [
+        "Victor Hugo Pereira Rodrigues",
+        "Tiago Roux Oliveira",
+        "Miroslav Krstic"
+      ],
+      "authors_text": "Victor Hugo Pereira Rodrigues, Tiago Roux Oliveira, Miroslav Krstic",
+      "abstract": "This paper introduces an event-triggered source seeking control (ET-SSC) strategy for autonomous vehicles modeled as nonholonomic unicycles. The key feature of the proposed design is the separation between the continuous probing motion required for gradient extraction and the event-triggered update of the source-seeking correction. This separation enables aperiodic computation and transmission of the correction while the periodic probing signals remain continuously active. The triggering mechanism acts on a low-pass-filtered gradient estimate, obtained by high-pass (washout) filtering, demodulation, and low-pass filtering of the measured signal, and combines a relative and an absolute threshold. Stability is proved with a time-periodic Lyapunov function constructed along the exponentially stable periodic solution of the filtered closed loop, establishing practical exponential convergence of the vehicle to a neighborhood of the unknown source. The guaranteed minimum dwell time is strictly positive and independent of the probing frequency, which excludes Zeno behavior. Unlike available Lie-bracket analyses of the forward-velocity design, the proposed averaging-based analysis accommodates anisotropic quadratic source fields with distinct spatial curvatures. The resulting ET-SSC framework therefore provides a resource-aware implementation in which the source-seeking correction is updated aperiodically while the information-generating probing motion remains continuous.",
+      "url": "http://arxiv.org/abs/2611.26802v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26802v1",
+      "tldr": "The paper proposes an event-triggered source-seeking controller for nonholonomic unicycle vehicles that keeps continuous probing active while aperiodically updating the source-seeking correction from a filtered gradient estimate, guaranteeing practical exponential convergence to the unknown source, a positive minimum dwell time excluding Zeno behavior, and applicability to anisotropic quadratic source fields.",
+      "detailed_reading": {
+        "motivation": "非完整无人车在GPS拒止环境中只能依靠局部标量场测量寻找未知源，而现有源搜索控制通常需要连续或快速周期更新控制修正；事件触发控制可降低计算与通信资源，但如何在不打断用于提取梯度的连续探测运动的前提下实现非周期修正更新，仍缺乏理论框架。论文旨在解决非完整独轮车源搜索中探测运动连续性与修正更新事件触发化之间的耦合问题。",
+        "method": "将被控对象建模为独轮车，采用前向速度调谐方案：角速度恒定为omega0，线速度由小振幅周期抖动和事件触发修正项组成，即v=a1 omega1 cos(omega1 t)+2L^T u，其中L由omega0 t+theta0构造，探测频率满足omega1=mu omega0且mu>3。车辆测得标量场信号后，先经高通洗出滤波、与探测信号解调，再经低通滤波得到梯度估计；触发机制作用于该低通滤波后的梯度估计，结合相对阈值与绝对阈值决定是否非周期地计算并传输源搜索修正u，而周期探测信号始终连续运行。稳定性分析采用平均化方法，并沿滤波闭环的指数稳定周期解构造时间周期Lyapunov函数，证明车辆位置实用指数收敛到未知源邻域。",
+        "result": "理论结果表明，在未知各向异性二次源场中，即使两个空间方向曲率不同，所提ET-SSC仍能保证车辆实用指数收敛到源点附近的小邻域。触发机制保证的最小驻留时间严格为正且与探测频率无关，从而排除Zeno行为；与依赖Lie括号分析的前向速度设计相比，该平均化分析可直接容纳具有不同空间曲率的方向异性二次场。",
+        "conclusion": "论文给出了首个面向非完整车辆的 event-triggered source-seeking 框架，使控制器侧源搜索修正可以非周期更新且具有可保证的最小更新间隔，同时保持用于信息生成的快速探测运动连续。该框架实现了资源感知的源搜索：节省的是修正的计算与通信资源，而不是车辆探测运动本身。",
+        "key_details": "关键实现细节包括：源场建模为具有唯一未知最大值的各向异性二次函数，Hessian为diag(-fx,-fy)；假设源位置、强度和曲率未知；探测频率比mu>3、抖动振幅a1和角速度omega0需满足平均化与收敛条件。触发判据基于低通滤波后的梯度估计而非含快速旋转的解调信号，因此最小驻留时间不随探测频率缩小。证明采用平均化与时间周期Lyapunov函数，依赖滤波闭环周期解的指数稳定性；主要局限是源场局部二次、参数调谐和传感器中心布置假设，且方法只降低修正更新频率，不减少连续探测能耗。"
+      },
+      "affiliations": [
+        "State University of Rio de Janeiro",
+        "University of California San Diego"
+      ],
+      "affiliations_text": "State University of Rio de Janeiro, University of California San Diego",
+      "score": 5.288963766156556,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2611.26847v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126847v1-a-sparsity-analysis-of-traffic-forecasting-architectures-how-much-missing-data-is-too-much",
+      "source": "arxiv",
+      "title": "A Sparsity Analysis of Traffic Forecasting Architectures: How Much Missing Data is Too Much?",
+      "authors": [
+        "Mohamed Hamad",
+        "Bilal Mutahir",
+        "Mohamed Mabrok",
+        "Nizar Zorba",
+        "Hamid Saeedi",
+        "Halim Yanikomeroglu"
+      ],
+      "authors_text": "Mohamed Hamad, Bilal Mutahir, Mohamed Mabrok, Nizar Zorba, Hamid Saeedi, Halim Yanikomeroglu",
+      "abstract": "Traffic forecasting models are typically evaluated under ideal conditions with complete data. This evaluation does not reflect the frequent sensor failures and communication outages common in real-world deployments. This paper presents a comprehensive analysis of multivariate traffic prediction models to evaluate their performance under varying levels of sensor data loss during inference. We benchmark several architectural paradigms, including graph neural networks, attention-based Transformers, and selective state-space models, across sparsity levels ranging from zero to complete sensor loss, using two widely used multi-channel traffic benchmarks. To ensure consistent comparison across traffic variables, we use normalized metrics and define a usability threshold to identify when predictions become unreliable. Our results show a clear trade-off between baseline accuracy and robustness: models with the highest accuracy under full-data conditions often degrade most sharply as data becomes sparse, while less accurate models maintain more stable performance. These findings show that model selection should be based on the expected reliability of the sensor network rather than peak accuracy alone. This work provides a practical framework for assessing traffic forecasting models and highlights the importance of robustness in real-world applications.",
+      "url": "http://arxiv.org/abs/2611.26847v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26847v1",
+      "tldr": "This paper benchmarks GNN, Transformer, and state-space traffic forecasting models under increasing inference-time sensor sparsity and finds a trade-off in which higher full-data accuracy often comes with sharper degradation, implying that model selection should prioritize robustness to expected sensor reliability rather than peak accuracy alone.",
+      "detailed_reading": {
+        "motivation": "真实部署中的交通传感器网络常因故障、通信中断或维护而出现数据缺失，但现有交通预测模型多在全数据理想条件下评测，无法反映推理阶段传感器失效时的可靠性。论文旨在系统评估多变量交通预测模型在不同传感器缺失程度下的性能退化，回答“缺失多少数据会导致预测不可用”，并强调模型选择不能只看全数据峰值精度。",
+        "method": "研究在PEMS04和PEMS08两个多通道交通基准上评测GNN、注意力Transformer和选择性状态空间模型（Mamba类）等架构。输入为5分钟分辨率、历史与预测窗口均为12步的多变量张量，包含流量、速度和占有率三个目标通道；推理时按稀疏度ρ随机屏蔽k=round(ρN)个传感器，仅对三个交通目标通道做零值填充，填充值在z-score标准化空间取−μc/σc，辅助协变量保持不变，且不重新训练模型。每个稀疏度用固定种子43、44、45生成三个独立掩码，同一掩码贯穿全部时间步和测试集；用z-score空间的分通道vMAE/vRMSE及通道平均指标评估，并做12个预测步的逐horizon分析和相对基线的退化分析，再依据应用误差阈值定义可用性崩溃点。",
+        "result": "结果显示存在明显的精度—鲁棒性权衡：全数据条件下精度最高的模型在传感器变稀疏时往往退化最剧烈，而基线精度较低的模型性能更稳定。跨GNN、Transformer和状态空间模型的对比表明，模型排名会随稀疏度变化，仅凭全数据vMAE/vRMSE无法判断部署可靠性；归一化指标和可用性阈值能够识别预测何时超过应用可接受误差并变得不可用。",
+        "conclusion": "论文提出了一套可复现的推理阶段稀疏性基准框架，用于比较多变量交通预测模型在传感器缺失下的鲁棒性。结论是模型选择应结合预期传感器网络可靠性、应用误差阈值和稀疏条件下的退化曲线，而不能只追求全数据峰值精度；该工作为实际部署中的鲁棒性评估提供了操作化依据。",
+        "key_details": "关键实现包括：使用PEMS04/PEMS08三通道数据，t_in=t_out=12、5分钟粒度；掩码只作用于流量、速度、占有率三个目标通道，按训练集均值方差做z-score并采用归一化零填充；推理阶段不重训，每个稀疏度固定三个随机掩码以隔离掩码波动；评估排除易在近零真值处失真的百分比误差，采用vMAE/vRMSE、通道平均、逐预测步和相对基线退化，并以NCHRP指南选定的10%误差阈值定义崩溃点。局限性是主要采用均匀随机掩码和零填充，未覆盖空间/时间相关故障、恒定值或异常高值等故障模式，且未系统比较前向填充或均值填充等替代处理。"
+      },
+      "affiliations": [
+        "University of Doha for Science and Technology",
+        "Qatar University",
+        "Carleton University"
+      ],
+      "affiliations_text": "University of Doha for Science and Technology, Qatar University, Carleton University",
+      "score": 5.151742660022494,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2611.26855v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126855v1-coherent-moment-propagation-epistemic-uncertainty-for-pre-trained-robot-policies",
+      "source": "arxiv",
+      "title": "Coherent Moment Propagation: Epistemic Uncertainty for Pre-trained Robot Policies",
+      "authors": [
+        "Miguel Saavedra-Ruiz",
+        "Anqi Li",
+        "Claudia D'Arpino",
+        "Alperen Degirmenci",
+        "Tucker Hermans",
+        "Fabio Ramos"
+      ],
+      "authors_text": "Miguel Saavedra-Ruiz, Anqi Li, Claudia D'Arpino, Alperen Degirmenci, Tucker Hermans, Fabio Ramos",
+      "abstract": "Flow matching policies underpin the state-of-the-art in robot learning, with impressive results ranging from long-horizon planning to dexterous manipulation. However, they provide no measure of whether their predicted commands can be trusted, particularly in novel situations outside their training set. Epistemic uncertainty reflects uncertainty about the model's weights and quantifies this ignorance, but calculating it at inference time from a flow matching policy is not trivial. Actions are produced by an ODE solver, requiring uncertainty to be propagated through the entire integration process. BayesDiff addresses this problem for diffusion models by propagating the mean and variance of the state through the denoising chain under a last-layer Laplace posterior approximation, but it severely underestimates the epistemic uncertainty. In this paper we: i) prove that, for flow matching and diffusion ODEs, BayesDiff's total variance decays at rate $O(1/T)$ as the number of Euler steps $T$ used by the solver increases; ii) introduce Coherent Moment Propagation (CoMP), two recursions inspired by the extended and unscented Kalman filters that fix this problem by carrying the cross-covariance between state and weights; and iii) widen the last-layer posterior with observation embeddings the policy already computes, improving uncertainty estimates without retraining for CoMP and several test-time estimators alike. We demonstrate these benefits on three manipulation benchmarks with applications in failure detection and demonstration selection for fine-tuning, where CoMP corrects BayesDiff's variance collapse while matching or outperforming several uncertainty estimators.",
+      "url": "http://arxiv.org/abs/2611.26855v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26855v1",
+      "tldr": "The paper introduces Coherent Moment Propagation (CoMP), a test-time epistemic uncertainty estimator for flow-matching robot policies that propagates state–weight cross-covariance through the ODE solver to correct BayesDiff’s variance collapse and improve failure detection and demonstration selection.",
+      "detailed_reading": {
+        "motivation": "Flow matching 策略在机器人学习中表现突出，但推理时无法判断预测动作是否可信，尤其在训练分布外的新情境中。 epistemic uncertainty 可量化模型对权重的无知，但要从 flow matching 策略的 ODE 采样过程中计算并不直接，现有 BayesDiff 对扩散模型会严重低估该不确定性。",
+        "method": "论文先将 flow matching/diffusion ODE 的欧拉积分视为状态转移，在最后一层 Laplace 后验近似下分析动作状态均值与方差传播，并证明 BayesDiff 的总方差随欧拉步数 T 以 O(1/T) 衰减。为此提出 CoMP：用扩展卡尔曼滤波和无迹卡尔曼滤波启发的两条递推，在每步积分中同时传播动作状态均值、方差以及状态与最后一层权重之间的交叉协方差，从而把权重不确定性正确注入最终动作。推理时以观测、采样噪声和策略 ODE 求解器为输入，输出带 epistemic uncertainty 的动作分布；同时用策略已计算的观测嵌入扩宽最后一层后验，CoMP 无需重训练即可使用。",
+        "result": "理论结果表明，BayesDiff 的方差会随欧拉步数增加而塌缩，衰减率为 O(1/T)，而 CoMP 通过保留状态-权重交叉协方差修正该问题。在三个机器人操作基准上，CoMP 在失败检测和用于微调的示范选择任务中纠正了 BayesDiff 的方差塌缩，并与多种测试时不确定性估计器相当或更优。",
+        "conclusion": "CoMP 为预训练 flow matching 机器人策略提供了一种推理时可行的 epistemic uncertainty 传播方法，能更可靠地识别不可信动作并服务于失败检测与示范筛选。利用已有观测嵌入扩宽最后一层后验是一种无需重训练的通用增强，可同时改善 CoMP 和多种测试时估计器。",
+        "key_details": "关键实现点包括：采用最后一层 Laplace 后验、欧拉离散 ODE 和状态-权重交叉协方差递推，分别对应 EKF/UKF 风格的两条 CoMP 递归；观测嵌入用于扩宽后验且不引入额外训练；推理需在 T 步积分中传播均值、方差和交叉协方差，计算与存储开销高于单次 ODE。评估覆盖三个操作基准及失败检测、示范选择两个下游应用；局限性是仍依赖最后一层后验、线性化/矩近似和欧拉离散，摘要未报告真实机器人或强非高斯后验下的验证。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.861973153976378,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.26706v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126706v1-latent-space-planning-with-sequential-monte-carlo",
+      "source": "arxiv",
+      "title": "Latent Space Planning with Sequential Monte Carlo",
+      "authors": [
+        "Hrishikesh Viswanath",
+        "Anindita Ghosh",
+        "Uttaran Bhattacharya",
+        "Aniket Bera"
+      ],
+      "authors_text": "Hrishikesh Viswanath, Anindita Ghosh, Uttaran Bhattacharya, Aniket Bera",
+      "abstract": "Planning with learned world models amounts to finding action sequences whose predicted rollouts reach a goal. Sampling-based planners often struggle at longer horizons, while gradient-based methods can become trapped in local minima. Meanwhile, model predictive path integral control (MPPI), a complementary approach, alternates between estimating an expectation under a cost-weighted distribution from samples and updating the plan from this estimate. Its samples, however, are drawn afresh at every iteration from a Gaussian proposal and reach the target distribution only through importance weights. Moreover, a target distribution favoring goal-reaching trajectories can be difficult to define directly, motivating a sequence of intermediate distributions. Sequential Monte Carlo (SMC) provides a natural mechanism for evolving such a sequence through importance weighting and resampling. Motivated by this, we formulate latent-space planning as optimization guided by SMC, which moves a population of action sequences while a gradient-based optimizer updates the plan. Inspired by classical planning, we further introduce a PDE-derived cost-to-go that guides the evolution of the sample distribution using the structure of the latent state space. On navigation and manipulation tasks with visual and proprioceptive world models, our formulation outperforms gradient-based planners by $29$ and $50$, sampling-based planners by $35$ and MPPI by $7$ percentage points in average success rate, while succeeding in fewer iterations than gradient-based planners and within 4\\% of MPPI.",
+      "url": "http://arxiv.org/abs/2611.26706v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26706v1",
+      "tldr": "The paper proposes an SMC-guided latent-space planner that evolves a population of action sequences alongside gradient-based plan updates and uses a PDE-derived cost-to-go over the latent state space, outperforming gradient-based, sampling-based, and MPPI planners on visual and proprioceptive navigation and manipulation tasks.",
+      "detailed_reading": {
+        "motivation": "基于学习世界模型的规划本质是搜索能使预测轨迹到达目标的操作序列。采样规划器在较长时域上容易失效，梯度方法则可能陷入局部极小；MPPI虽交替进行代价加权期望估计与规划更新，但每轮从高斯提议重新采样，仅靠重要性权重逼近目标分布，且直接定义偏好目标到达的目标分布较困难，因此需要一串中间分布。",
+        "method": "本文将潜空间规划表述为由序贯蒙特卡洛（SMC）引导的优化：维护一组操作序列种群，通过重要性加权与重采样沿中间分布序列演化，同时用基于梯度的优化器更新规划。受经典规划启发，引入由PDE推导的cost-to-go，利用潜状态空间结构引导样本分布演化。在带视觉与本体检知世界模型的导航和操作任务上，将所提方法与梯度规划器、采样规划器和MPPI进行对比。",
+        "result": "在导航与操作任务上，所提方法平均成功率相较梯度规划器高29和50个百分点、相较采样规划器高35个百分点、相较MPPI高7个百分点；同时达到成功所需迭代次数少于梯度规划器，并与MPPI的迭代次数相差在4%以内。",
+        "conclusion": "将SMC的种群演化与梯度规划更新结合，并利用潜空间结构构造PDE导出的cost-to-go，可显著提升世界模型潜空间规划的成功率与迭代效率，说明序贯中间分布和结构化代价引导是改善长时域目标到达规划的有效途径。",
+        "key_details": "关键实现包括：以操作序列种群为SMC样本，通过重要性权重和重采样实现中间分布序列演化；以梯度优化器持续更新规划；用PDE导出的cost-to-go依据潜状态空间结构引导样本分布。实验覆盖视觉与本体检知世界模型下的导航和操作任务，比较梯度规划、采样规划和MPPI，指标为平均成功率与迭代次数。局限在于方法依赖学习到的潜世界模型及cost-to-go构造，SMC种群、重采样和PDE代价会带来计算/内存开销与超参调节需求；摘要未给出具体网络架构、损失、种群规模、分布调度和精确迭代数。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.816923828119522,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.26811v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126811v1-connectivity-constrained-linear-system-realization-feasibility-and-realizable-sets",
+      "source": "arxiv",
+      "title": "Connectivity-Constrained Linear System Realization: Feasibility and Realizable Sets",
+      "authors": [
+        "Yaozhi Du",
+        "Jing Shuang",
+        "Li"
+      ],
+      "authors_text": "Yaozhi Du, Jing Shuang, Li",
+      "abstract": "In this paper, we first study the problem of finding a state-space realization of a given transfer function that adheres to a given connectivity pattern (i.e., support). While variants of this problem have been studied in distributed and structured control, existing work typically focuses on connectivity patterns relating to some networked plant. In contrast, we are interested in arbitrary connectivity patterns, which are relevant to modeling problems in sensorimotor neuroscience. We show that this problem is equivalent to solving a system of multivariate polynomial equations, and can be solved exactly without relaxation or approximation. We then study the reverse problem: given a connectivity pattern, what transfer functions have a state-space realization that adheres to this pattern? In other words, what transfer functions can this pattern realize? A surprising finding is that any given pattern can realize nearly all transfer functions, or very few transfer functions. We provide rigorous results and algorithms for both problems, leveraging technical machinery from algebraic geometry. The efficacy of our approach is demonstrated in examples at the end of the paper.",
+      "url": "http://arxiv.org/abs/2611.26811v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26811v1",
+      "tldr": "This paper shows that finding a state-space realization of a transfer function under an arbitrary connectivity pattern is equivalent to solving multivariate polynomial equations and can be solved exactly using algebraic geometry, while also proving the surprising dichotomy that any connectivity pattern can realize either nearly all transfer functions or very few.",
+      "detailed_reading": {
+        "motivation": "论文关注线性控制器或线性动力学系统在任意给定连接模式（支撑集）上的状态空间实现问题，动机来自感觉运动神经科学中神经动力学需在解剖约束的稀疏连接下实现控制计算。与分布式/结构化控制通常要求控制器连接模式与网络化被控对象相关不同，本文允许连接模式完全任意，并进一步研究反向问题：一个连接模式究竟能实现哪些传递函数。",
+        "method": "输入为传递函数矩阵K与支撑S=(A,B,C,D)，先利用最小实现的相似变换不变性，将寻找满足支撑的实现转化为寻找可逆变换T，使T^{-1}AT、T^{-1}B、CT满足给定稀疏支撑；D=lim_{s→∞}K在所有最小实现中固定，故先检查D与D支撑兼容，再分析严格真部分。将支撑约束展开为关于T元素的多元多项式方程组，并用初等置换、行相加和非零缩放矩阵参数化T，从而在复数域/实数域上精确求解，不采用松弛或近似。反向问题则把可实现传递函数视为实现映射的像集，借助代数几何中的消元、投影与维数分析刻画给定支撑的可实现集，并给出判定其是否能实现“几乎全体”传递函数的必要充分条件与算法。",
+        "result": "论文证明连接约束可实现性等价于多元多项式方程组可解性，并给出复数与实数实现的存在性必要充分条件及对应精确算法；对反向问题发现给定支撑的可实现集呈现二分现象：要么能实现几乎全体传递函数，要么只能实现非常少的传递函数。进一步给出判定一个支撑是否“泛型可实现”的必要充分条件和算法，并通过示例验证方法有效性。",
+        "conclusion": "该工作将任意连接模式下的线性系统实现问题统一到代数几何框架中，既能精确判定和构造给定传递函数的连接约束实现，也能刻画连接模式本身的可实现能力。其核心结论表明连接约束对可实现传递函数集合的影响具有强二分性，为神经科学建模和结构化控制中的稀疏实现分析提供了严格工具。",
+        "key_details": "关键假设包括仅考虑无零极点相消的最小实现，且D必须满足支撑约束，否则不可实现；实值实现要求相似变换T为实可逆矩阵。技术上利用最小实现间相似变换、初等矩阵参数化、多元多项式方程组、Gröbner基/消元与代数簇维数等代数几何工具；复杂度主要随状态维数、支撑稀疏度和多项式系统规模增长，精确求解可能在大规模问题上昂贵。局限在于聚焦线性、因果、最小实现，连接模式为二进制支撑而非幅值约束，未直接处理噪声、非线性或非最小实现。"
+      },
+      "affiliations": [
+        "University of Michigan"
+      ],
+      "affiliations_text": "University of Michigan",
+      "score": 4.784455259697007,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.26763v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126763v1-search-informed-mppi-for-kinodynamic-motion-planning-via-monte-carlo-tree-expansion",
+      "source": "arxiv",
+      "title": "Search-Informed MPPI for Kinodynamic Motion Planning via Monte Carlo Tree Expansion",
+      "authors": [
+        "Ihab S. Mohamed",
+        "Lantao Liu"
+      ],
+      "authors_text": "Ihab S. Mohamed, Lantao Liu",
+      "abstract": "Kinodynamic motion planning in large-scale, cluttered environments remains challenging, as dynamically feasible, collision-free trajectories must be computed efficiently over long horizons. Monte Carlo Tree Search (MCTS) can strategically explore long-horizon alternatives but faces large branching factors in continuous control spaces and often relies on random default-policy rollouts, whereas Model Predictive Path Integral (MPPI) efficiently optimizes local trajectories yet remains susceptible to obstacle-induced local minima. To overcome these challenges, we propose Search-Informed MPPI (SI-MPPI), a unified framework that embeds MPPI trajectory optimization within MCTS-based tree search. The core concept is to fuse the expansion and default-policy simulation stages of MCTS into a single MPPI expansion stage guided by structured intermediate targets, termed baits. During each expansion, an adaptive bait-handling rule retains geometrically valid baits as local targets for GPU-batched MPPI optimizations that generate dynamically feasible candidate motion segments. Feasibility gating then checks these candidates for collision safety and sufficient progress, and top-$k$ selection admits the lowest-cost accepted candidates as tree edges, yielding sparse, directed tree growth; thereafter, effective sample size (ESS)-guided adaptation warm-starts subsequent expansions, while cost-based backpropagation updates tree statistics. Extensive simulations across four large-scale, cluttered 2D occupancy-grid maps demonstrate that SI-MPPI consistently produces the smallest search trees and smoothest angular control profiles compared with three kinodynamic baselines, while maintaining competitive planning times and path lengths. Ablation results further highlight the importance of GPU batching, adaptive bait handling, and retaining multiple expansion candidates for planning efficiency and robustness.",
+      "url": "http://arxiv.org/abs/2611.26763v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26763v1",
+      "tldr": "SI-MPPI integrates GPU-batched MPPI trajectory optimization into MCTS tree search, using structured intermediate targets called “baits” to guide expansion and feasibility-gated candidate selection, enabling efficient kinodynamic motion planning with smaller search trees and smoother controls in cluttered environments.",
+      "detailed_reading": {
+        "motivation": "大规模杂乱环境中的kinodynamic运动规划需要在长时域内高效生成动态可行且无碰撞的轨迹。MCTS能策略性探索长时域备选方案，但在连续控制空间中分支因子大且常依赖随机默认策略rollout；MPPI能高效优化局部轨迹，却易陷入障碍物导致的局部极小。为此，作者希望融合MCTS的长时域搜索能力与MPPI的局部轨迹优化能力，以克服二者单独使用时的瓶颈。",
+        "method": "SI-MPPI以标准2D占据栅格地图、机器人运动模型和足迹碰撞检查为输入，将MPPI轨迹优化嵌入MCTS树搜索。其核心是把MCTS的扩展与默认策略仿真阶段融合为单一的MPPI扩展阶段：每次扩展时，自适应bait处理规则保留几何有效的中间目标baits，作为GPU批量MPPI优化的局部目标，并行优化有限时域控制序列并生成动态可行的候选运动段；随后通过可行性门控检查碰撞安全与足够进展，并用top-k选择将最低代价的已接受候选作为树边，形成稀疏有向树增长；再用有效样本量ESS引导的名义控制自适应为后续扩展提供热启动，并通过基于代价的反向传播更新树统计。整个规划循环由UCB引导的树选择、bait引导的GPU批量MPPI扩展、候选准入和ESS自适应与代价反传组成，无学习训练过程，属于采样优化式规划器。",
+        "result": "在四个100 m×100 m的大规模杂乱2D占据栅格地图仿真中，SI-MPPI相较三个kinodynamic基线始终产生最小的搜索树和最平滑的角控制曲线，同时保持有竞争力的规划时间与路径长度。实践者摘要进一步给出，平均而言其搜索树约比基线小7–15倍，规划速度约比基于RRT*的规划器快10–27倍，路径长度相当或更短。消融结果表明，GPU批处理、自适应bait处理和保留多个扩展候选对规划效率与鲁棒性均很重要。",
+        "conclusion": "SI-MPPI通过将MCTS的长时域计算分配与GPU批量MPPI的局部非线性轨迹优化紧密结合，用bait引导的MPPI扩展替代传统MCTS扩展与默认策略仿真，实现了稀疏、有向且动态可行的树增长。该方法在大型杂乱地图上以更小搜索树和更平滑控制取得高效规划，说明搜索与优化互补可有效缓解连续控制分支大和局部极小问题。未来工作将扩展到更复杂动力学和速度感知规划。",
+        "key_details": "方法不依赖精确BVP steering、预定义运动基元或纯随机控制传播，而以MPPI作为代价感知的局部扩展算子，直接在搜索树中前向仿真机器人动力学；每条树边须经显式可行性与碰撞检查后才被接纳。关键实现点包括UCB树选择、bait几何有效性规则、GPU批量MPPI有限时域控制优化、碰撞安全与进展门控、top-k候选保留、ESS引导的名义控制热启动以及代价反向传播；关键超参涉及top-k、UCB探索项、MPPI采样数与视界、ESS触发阈值等。当前框架面向静态已知地图，不保证最短路径，规划轨迹速度较低；高速执行需另用滚动时域MPPI控制器跟踪路点，且尚未覆盖更复杂动力学。"
+      },
+      "affiliations": [
+        "Indiana University"
+      ],
+      "affiliations_text": "Indiana University",
+      "score": 4.450507875553581,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.26807v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126807v1-nitrogen-observations-on-the-action-dynamics-visual-instruction-following-and-spatial-exploration",
+      "source": "arxiv",
+      "title": "NitroGen: Observations on the Action Dynamics, Visual Instruction Following, and Spatial Exploration",
+      "authors": [
+        "Shengyuan Lin",
+        "Zhiling Li",
+        "Haoyu Nie",
+        "Ozan K. Tonguz"
+      ],
+      "authors_text": "Shengyuan Lin, Zhiling Li, Haoyu Nie, Ozan K. Tonguz",
+      "abstract": "NitroGen is an open vision-action foundation model for game control. It is trained by behavior cloning on online gameplay videos. In this paper, we study the frozen controller in Hollow Knight and Trackmania as examples along three dimensions: action adaptation, visual instruction following, and spatial exploration. Our results indicate that NitroGen can adapt its actions to local context, but it lacks the planning, recovery, and exploration needed for longer-horizon game control.",
+      "url": "http://arxiv.org/abs/2611.26807v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26807v1",
+      "tldr": "NitroGen, a vision-action game-control model behavior-cloned from online gameplay videos, can adapt actions to local context and visual instructions but lacks the planning, recovery, and exploration needed for long-horizon control in Hollow Knight and Trackmania.",
+      "detailed_reading": {
+        "motivation": "通用游戏智能体是研究像素级控制的重要场景，要求智能体直接读屏输出动作，并在犯错后恢复、持续朝目标推进。NitroGen 作为开放视觉-动作基础模型，需要通过冻结控制器在真实游戏中的表现，诊断其局部动作能力与长时程控制短板。",
+        "method": "NitroGen 以在线游戏视频为数据，通过行为克隆学习从屏幕视觉输入到控制动作的映射，形成开放的视觉-动作基础模型；评测时保持控制器冻结，不针对下游游戏微调。实验在 Hollow Knight 和 Trackmania 中进行五个独立六分钟试验，围绕动作适配、视觉指令跟随和空间探索三个维度，统计不同游戏上下文下的动作分布并观察空间行为。",
+        "result": "核心发现是动作分布会随游戏上下文变化，例如水平移动占比从53.4%下降，表明模型能进行局部动作适配；但在视觉指令跟随和空间探索上，冻结控制器仍缺少长时程规划、错误恢复与主动探索能力。",
+        "conclusion": "NitroGen 具备根据局部上下文调整动作的能力，可作为视觉-动作基础模型的控制先验，但尚不具备长时程游戏控制所需的规划、恢复和探索能力。后续需要引入记忆与规划、失败恢复和主动探索机制，或在目标游戏上进一步适配，才能从局部反应式控制走向长时程目标达成。",
+        "key_details": "方法上仅用在线游戏视频做行为克隆，输入为屏幕像素、输出为控制动作，评估时冻结参数；在 Hollow Knight 与 Trackmania 上做五个独立六分钟试验，统计动作分布（如水平移动占比）并考察视觉指令跟随与空间探索。局限是试验时长短、游戏仅两款、无微调且为观察性分析，难以覆盖复杂长时程任务。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.332353705689414,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.26853v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126853v1-loco-wam-test-time-training-as-long-context-for-world-action-models",
+      "source": "arxiv",
+      "title": "LoCo-WAM: Test-Time Training as Long Context for World-Action Models",
+      "authors": [
+        "Sheng Cheng",
+        "Deqian Kong"
+      ],
+      "authors_text": "Sheng Cheng, Deqian Kong",
+      "abstract": "World-action models guide robot actions by predicting what happens next, but typically condition on a short observation history. Extending this history increases computation at every decision and can require a separately trained model. We introduce LoCo-WAM, which learns from the outcomes of its actions through test-time training while keeping the same short history length. It uses newly observed frames to update a low-rank adapter in the video expert, whose adapted predictions guide subsequent actions. The updates accumulate within each episode and are reset between episodes, allowing past observations to influence decisions after they leave the input window. LoCo-WAM thus learns from a longer stream of experience without expert action labels, additional data or meta-training. Experiments on two world-action models show improved task success across four simulation benchmarks. On RoboCasa GR-1, a model with 2.4,s of history matches one trained with 9.6,s, while a model with 4.8,s exceeds it by 4.8 percentage points. Our analysis shows that the updates improve prediction of upcoming frames, affect the action mainly through adaptation of the imagined future, and have an increasing effect on actions as the episode unfolds.",
+      "url": "http://arxiv.org/abs/2611.26853v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26853v1",
+      "tldr": "LoCo-WAM is a test-time training method that updates a low-rank adapter in a world-action model’s video expert using newly observed frames within each episode, allowing short-history robot policies to benefit from longer experience and improve task success without labels, additional data, or meta-training.",
+      "detailed_reading": {
+        "motivation": "世界动作模型通常仅以短观测历史为条件，而延长历史会在每次决策增加计算并可能需要单独训练模型；因此作者希望在不改变短历史长度、不依赖专家动作标签、额外数据或元训练的情况下，让过去观测在离开输入窗口后仍能影响决策。",
+        "method": "LoCo-WAM 在每个决策使用最近一段已被完整观测的帧构造自监督样本：输入为这段帧之前的历史 H，目标为这段帧的 latent z；在视频专家上加入低秩适配器，用预训练的 flow-matching 视频损失对适配器做带梯度裁剪的若干步更新，动作专家保持不变。更新得到的适配器在回合内累积、回合间重置；推理时用适配后的视频专家先 rollout 想象未来，再由动作专家以该未来和历史特征 denoise 出动作块。更新也可异步地与当前动作块执行并行，以隐藏延迟。",
+        "result": "在 Long-WAM 和 LingBot-VA 两个世界动作模型、四个仿真基准上均提升任务成功率；RoboCasa GR-1 上 2.4 s 历史的模型达到与 9.6 s 历史基线相当的水平，4.8 s 历史模型高出 4.8 个百分点，LIBERO-Mem 上 8-chunk 历史匹配默认 30-chunk 历史。分析表明更新能提升未来帧预测，且若用模型自身预测替代真实观测作为目标则成功率增益消失；增益主要通过想象未来影响动作，并随回合推进累积，且仅更新视频专家优于同时更新动作专家，并优于 AdaWorldPolicy 与 RoboTTT 等测试时方法。",
+        "conclusion": "LoCo-WAM 表明测试时训练可作为世界动作模型的长上下文机制：通过在线视频自监督把回合内经验写入低秩适配器，短历史模型即可匹配或超过长历史模型，而无需改历史长度、增加新层、使用奖励或元训练。该结果支持把预测误差和动作结果作为机器人执行中持续适应的信号。",
+        "key_details": "关键实现包括：LoRA 形式 W'=W+(α/r)BA，B 初始化为零以保证回合开始时等价于预训练模型；只更新视频专家的适配器 Θ_v，损失为预训练 flow-matching 视频损失，目标来自环境观测帧，学习率 η_v、步数 S_v 和梯度裁剪独立设置；适配器在回合内跨决策保留、每回合重置。实验按官方协议在 RoboCasa GR-1、RoboCasa365、LIBERO-Mem 和 RoboTwin 2.0 上各设置运行三次并报告成功率均值与标准差；异步更新要求 S_v 步在一个动作块执行时间内完成。局限性是仍需每个决策的额外前后向计算/延迟管理，且效果依赖回合内观测与当前任务的动态一致性。"
+      },
+      "affiliations": [
+        "Amazon AGI",
+        "University of California, Los Angeles"
+      ],
+      "affiliations_text": "Amazon AGI, University of California, Los Angeles",
+      "score": 4.2564022626405285,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.26827v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126827v1-mathcalhinfty-grid-forming-control-in-dc-microgrids",
+      "source": "arxiv",
+      "title": "$\\mathcal{H}_\\infty$ Grid-Forming Control in DC Microgrids",
+      "authors": [
+        "Jovan Krajacic",
+        "Ognjen Stanojev",
+        "Mario Schweizer",
+        "Gabriela Hug"
+      ],
+      "authors_text": "Jovan Krajacic, Ognjen Stanojev, Mario Schweizer, Gabriela Hug",
+      "abstract": "The growing share of DC-based generation, storage and loads has increased interest in DC microgrids. As a result, DC-bus voltage regulation and stability have become active research topics, with considerable effort directed at improving the transient performance of conventional droop control. Although numerous variants of droop algorithms have been proposed, many rely on increasingly complex control structures with multiple tuning parameters and measurements, thereby increasing the commissioning burden. Moreover, stable interaction with the surrounding microgrid is not guaranteed by design. To address these issues, this paper develops a passivity-constrained $\\mathcal{H}_\\infty$ synthesis method for the DC-bus voltage controller. The proposed $\\mathcal{H}_\\infty$ controller emulates the desired grid-forming behavior of the converter by minimizing the $\\mathcal{H}_\\infty$ error norm between device-level performance indices and their desired values, while additionally enforcing passivity during the optimization. The novel $\\mathcal{H}_\\infty$ control scheme is benchmarked in the frequency domain against representative droop-based and virtual-DC-machine algorithms from the literature, while experiments on a four-converter DC microgrid corroborate the frequency-domain analysis and validate the practical applicability of the algorithm.",
+      "url": "http://arxiv.org/abs/2611.26827v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26827v1",
+      "tldr": "The paper proposes a passivity-constrained \\(\\mathcal{H}_\\infty\\) synthesis method for DC-bus voltage control in DC microgrids that shapes converter output impedance and current-forming behavior to achieve desired grid-forming performance, validated via frequency-domain benchmarking and experiments on a four-converter DC microgrid.",
+      "detailed_reading": {
+        "motivation": "直流微电网中分布式电源、储能与负荷的直流化程度不断提高，使直流母线电压调节与稳定性成为研究热点。传统下垂控制虽可实现无通信的分散功率分配，但其改进方案普遍依赖多参数、多测量的复杂控制结构，调试负担大，且与周边微电网的稳定交互无法在设计阶段得到保证。现有针对直流微电网的 H∞ 设计多集中于双有源桥或负荷侧变换器，或仅以幅值要求整定固定结构下垂，既未把输出阻抗作为设计变量，也未处理无源性。",
+        "method": "论文提出面向 I-V 型直流母线电压控制器的无源性约束 H∞ 综合方法：保留仅用直流母线电压测量的单环 I-V 架构，但把传统静态下垂增益替换为待设计的低阶动态控制器 R_H∞，由内环 PI 电流控制器（按内模控制整定，带宽取开关频率的约七分之一以下）跟踪其电流参考并经 PWM 驱动半桥。建模上以双向 Boost 变换器的小信号平均模型为基础，给出 G_di、G_oi、G_dv 与开环输出阻抗 Z_o，并构建含串联输出阻抗 Z_out' 与并联电容导纳 Y_dc 的等效电路以推导闭环 Z_out。以既有工作定义的器件级指标——输出阻抗指标 OII 与电流形成指标 CFI——的期望频域曲线为参考，通过频域加权函数把指标与其期望值之间的 H∞ 误差范数作为目标最小化，并在优化过程中同时施加输出阻抗无源性约束，同时采用结构化/固定阶形式预先锁定控制器复杂度；最后在频域与代表性下垂及虚拟直流电机方案对比，并在四变换器直流微电网实验平台上验证。",
+        "result": "综合得到的 H∞ 控制器使闭环输出阻抗指标与电流形成指标在所关心的频段内贴合预设的期望曲线，并在设计阶段即满足输出阻抗无源性，从而保证与周边网络的稳定互联。频域基准测试表明，相较于文献中典型的下垂控制与虚拟直流电机方案，该方法在暂态性能与阻抗匹配上更具优势且无需多参数整定；四变换器直流微电网实验复现了频域分析的结论，验证了算法的实际可行性与较低的上线调试工作量。",
+        "conclusion": "将期望的构网型端子行为直接写成频域指标、并把无源性作为综合约束而非事后校验，可在保持 I-V 单环简单结构、仅需直流母线电压测量的前提下获得低阶动态控制器，实现电压支撑与电流形成兼顾的构网行为。该 H∞ 整定框架不依赖具体拓扑，可推广到其他控制结构与变换器类型，相较依赖非线性结构与大量电机类比参数的虚拟直流电机方案更易调试。",
+        "key_details": "关键点包括：以 Boost 变换器小信号模型为被控对象，忽略电感与开关损耗，稳态工作点由 I_o、V_in、V_dc、D 确定，电容以 C_dc 串联 r_dc 的导纳建模；性能由 OII（|OII|≤1 判为构网）与 CFI（CFI=1 为跟流、|CFI|<1 为构流）两项器件级指标刻画；目标函数为指标与期望值之间的 H∞ 误差范数加权最小化，无源性作为综合期约束以提供稳定互联的充分条件；控制器阶数与结构先验固定，输出电容视为既定而非自由设计变量，问题因此转为给定电容下可实现何种端子行为；内环 PI 带宽需显著低于开关频率并受控制带宽限制。局限性在于分析基于小信号线性化与特定 Boost 拓扑案例，无源性条件为充分非必要，且未涵盖大信号暂态与多工况鲁棒性评估。"
+      },
+      "affiliations": [
+        "ABB Corporate Research Center",
+        "ETH Zurich"
+      ],
+      "affiliations_text": "ABB Corporate Research Center, ETH Zurich",
+      "score": 4.216889912289049,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.26744v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/23/261126744v1-forth-grounding-tactile-vla-execution-via-forward-only-proxy-control-pairing",
+      "source": "arxiv",
+      "title": "FORTH: Grounding Tactile VLA Execution via Forward-Only Proxy-Control Pairing",
+      "authors": [
+        "Junde Li",
+        "Wei-Han Yu",
+        "Xiangyi Chu",
+        "Yaoxin Li",
+        "Jiawei Xu",
+        "Ka-Fai Un",
+        "Pui-In Mak"
+      ],
+      "authors_text": "Junde Li, Wei-Han Yu, Xiangyi Chu, Yaoxin Li, Jiawei Xu, Ka-Fai Un, Pui-In Mak",
+      "abstract": "Vision-Language-Action (VLA) policies are widely credited with force control, operating on the unverified assumption that proxy loss minimization implies physical force grounding. In this work, we demonstrate that this assumption breaks down at three core deployment levels: frozen visual backbones discard contact geometry, downstream losses mask token-level gradient alignment, and discrete indicators trigger optimization collapse. To address these disconnections, we present FORTH, a forward-only measurement harness and execution framework that explicitly pairs the optimization objective at each level with its physical control observable. FORTH incorporates three grounded pillars: a layer-local, forward-only tactile encoder that preserves spatial contact geometry without backpropagation, a token-parallel zeroth-order adapter enabling activation-space updates, and SlipGuard, a continuous tactile verification gate that fires on incipient slip. On an elasto-plastic structural shell, FORTH's closed-loop gate peaks at 29 times lower grip force than a monotone reflex ramp, preventing structural crush where the baseline leaves permanent deformation. Furthermore, FORTH matches state-of-the-art execution performance with a 97.6% average success rate across three evaluated LIBERO suites, while reducing peak activation memory by 7.12 times compared to a backpropagated step on the same backbone. Enhanced perception enables deeper physical intelligence.",
+      "url": "http://arxiv.org/abs/2611.26744v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26744v1",
+      "tldr": "FORTH is a forward-only tactile VLA execution framework that pairs proxy optimization objectives with physical control observables—through a forward-only tactile encoder, token-parallel zeroth-order adapter, and slip-triggered SlipGuard—to prevent object crush, achieve 97.6% success on LIBERO suites, and reduce peak activation memory by 7.12×.",
+      "detailed_reading": {
+        "motivation": "触觉VLA被广泛认为具备力控能力，但现有工作默认代理损失最小化就等于物理力接地，论文指出该假设在冻结视觉主干丢弃接触几何、下游损失掩盖token级梯度对齐、离散指标导致优化崩溃三个部署层面均不成立。因此需要把每一层的优化目标与其物理控制可观测量显式配对，并在边缘硬件上实现可测量、可纠正的触觉执行。",
+        "method": "FORTH将触觉VLA执行分为表示、更新规则和控制器三层，并采用成对评估协议：按成本顺序执行floor、readout、validity、mechanism四项检查，用符号一致性和失配度量判断代理目标与物理量是否同步。表示层使用两个Forward-Forward块构成的层局部前向触觉主干，输入为48×d的patch token（d=128），以tanh激活、零中心化特征和平方和goodness计算局部logistic损失，正样本为真实接触、负样本为反事实触觉状态，阈值固定为2.0且不进行全局反向传播；更新层在动作头上挂接rank-8的token并行零阶适配器，仅用前向查询在激活空间更新，每次更新需16次前向（T=8 tokens）；控制器层SlipGuard用一类剪切比连续触觉验证门检测初现滑移，并以两帧去抖触发有界实时修正。推理与训练均在冻结4-bit VLA主干上前向执行，触觉伺服500 Hz、适配器1 Hz、策略30 Hz。",
+        "result": "在弹性-塑性结构壳上，SlipGuard闭环门控的峰值抓取力比单调反射斜坡低29倍，避免了基线造成的永久形变和结构压溃；在橡胶、塑料、金属三种材料越过摩擦极限时均能动态恢复稳定抓取。三个LIBERO套件上平均成功率达97.6%，与当前最优执行性能相当，同时同一主干上峰值激活内存比反向传播步骤降低7.12倍。前向触觉主干在接触相位任务和时间顺序任务上的trunk parity分别为0.0004和0.012，表明层局部前向表示可接近反向传播表示精度。",
+        "conclusion": "代理损失下降并不自动保证物理力接地，必须逐层报告优化量与受控物理量并在二者同步时接受策略；FORTH以纯前向、层局部的方式把触觉表示、动作头适配和滑移控制统一到可配对的执行框架中，在保持SOTA级任务成功率的同时显著降低峰值激活内存并防止物理损伤。该工作说明增强触觉感知可以转化为更深的物理智能，并为边缘部署的触觉VLA提供了可测量、可纠正的执行范式。",
+        "key_details": "关键实现包括冻结4-bit VLA主干、无全局反向传播、两个FF块、patch维度48×128、goodness阈值2.0、层局部正负样本logistic损失、rank-8 token并行零阶适配器、每次更新16次前向、SlipGuard的一类剪切比门与两帧去抖，以及500 Hz触觉伺服、1 Hz适配器和30 Hz策略的分层频率。评估采用成本非递减的四步诊断协议和符号一致性/失配度量，并报告代理指标与物理控制量；方法复杂度优势来自仅前向查询和低秩激活空间更新。局限性在于实验主要覆盖三个LIBERO套件及特定弹性-塑性壳与三种材料的滑移测试台，阈值τ_rank、去抖帧数和FF阈值等超参对跨硬件、跨任务泛化的影响仍需更广验证。"
+      },
+      "affiliations": [
+        "University of Macau"
+      ],
+      "affiliations_text": "University of Macau",
+      "score": 4.163740002211166,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.26825v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126825v1-skill-jepa-learning-planner-aligned-action-spaces-for-world-models",
+      "source": "arxiv",
+      "title": "Skill-JEPA: Learning Planner-Aligned Action Spaces for World Models",
+      "authors": [
+        "Tomás Couso Coddou",
+        "Christ Devia",
+        "Rex G. Liu",
+        "Rodrigo Toro Icarte"
+      ],
+      "authors_text": "Tomás Couso Coddou, Christ Devia, Rex G. Liu, Rodrigo Toro Icarte",
+      "abstract": "World models based on Joint-Embedding Predictive Architectures (JEPAs) learn from pixels to predict the outcome of actions in a latent space. To reach a goal, a planner samples many candidate action sequences, uses the model to predict where each one leads, and executes the best one. However, standard planners draw their candidates from a Gaussian, while the model has only seen the structured, state-dependent actions of its training data. Its predictions for such candidates are unreliable, and planning fails more often as goals move farther away. We propose Skill-JEPA, which learns an action space aligned with the planner. A variational autoencoder conditioned on the current state encodes short action sequences into latent skills with a standard Gaussian prior, and decodes them back into actions. The world model predicts the effect of skills rather than raw actions, and the planner searches over skills starting from that same Gaussian, so its candidates resemble the model's training data. Skill-JEPA adds a single module, trained end-to-end with the world model, and leaves the planner untouched, with no subgoals, hierarchy, or hand-designed skills. Across three JEPA world models and four benchmarks, average success on goals 80 steps away rises from 42% with raw actions to 62%; the gains grow with goal distance and hold across four planners. On AntMaze, a quadruped locomotion task, success on goals two maze cells away rises from 0.4% to 38%. This suggests that part of the difficulty of reaching distant goals lies in the action space, and can be removed without changing the planner.",
+      "url": "http://arxiv.org/abs/2611.26825v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26825v1",
+      "tldr": "Skill-JEPA improves JEPA world-model planning by learning a state-conditioned latent skill space whose Gaussian prior matches the planner’s sampling distribution, enabling planners to search over realistic action-sequence candidates and substantially increase success on distant goals without changing the planner.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Pontificia Universidad Católica de Chile",
+        "Centro Nacional De Inteligencia Artificial"
+      ],
+      "affiliations_text": "Pontificia Universidad Católica de Chile, Centro Nacional De Inteligencia Artificial",
+      "score": 4.11224006944691,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.26803v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126803v1-dont-discard-your-rollouts-reusing-teacher-rl-traces-for-student-distillation",
+      "source": "arxiv",
+      "title": "Don't Discard Your Rollouts: Reusing Teacher RL Traces for Student Distillation",
+      "authors": [
+        "Vashisth Tiwari",
+        "Emma Strubell",
+        "J. Zico Kolter"
+      ],
+      "authors_text": "Vashisth Tiwari, Emma Strubell, J. Zico Kolter",
+      "abstract": "RL post-training methods such as PPO and GRPO are computationally expensive, with substantial resources devoted to sampling rollouts, which contain multiple completions per prompt along with their respective rewards. Canonical distillation, however, discards these traces and uses more compute to regenerate data from the final teacher. We ask if and how we can reuse the saved teacher RL rollouts to distil student models. Reusing rollouts is non-trivial: naive SFT on the rollouts underperforms canonical distillation, and naive DPO, while performant, is unstable, collapsing on weaker students. We show that treating rollout reuse as a data selection problem using metadata already recorded during GRPO substantially reduces this gap. We use prompt pass rates to order the data, using the easiest prompts for an SFT warm start prior to using mixed-success prompts for DPO. For each prompt, we use saved teacher log-likelihoods as a proxy for selecting student-compatible completions. Across mathematical reasoning and Python coding tasks, with students from multiple model families, our two-stage recipe achieves comparable average performance to canonical distillation, while incurring no additional inference cost for dataset construction.",
+      "url": "http://arxiv.org/abs/2611.26803v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26803v1",
+      "tldr": "The paper shows that teacher RL rollouts can be effectively reused for student distillation by selecting data with GRPO metadata—using easy all-correct prompts for an SFT warm start, then mixed-success prompts for DPO ordered by difficulty, and choosing completions via cached teacher log-likelihoods—matching canonical distillation without extra generation cost.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Carnegie Mellon University",
+      "score": 4.094519763326981,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.26805v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126805v1-lean-library-based-adaptation-for-asynchronous-federated-fine-tuning",
+      "source": "arxiv",
+      "title": "LEAN: Library-Based Adaptation for Asynchronous, Federated Fine-Tuning",
+      "authors": [
+        "Erdong Hu",
+        "Zhimin Ding",
+        "Yuxin Tang",
+        "Chris Jermaine"
+      ],
+      "authors_text": "Erdong Hu, Zhimin Ding, Yuxin Tang, Chris Jermaine",
+      "abstract": "Federated fine-tuning of foundation models with low-rank adapters (LoRA) is typically reconciled by averaging locally trained adapters. In cross-device settings, where participants hold heterogeneous data and join or leave asynchronously, averaging is poorly suited: locally trained adapters are not identifiable up to permutation, and averages of adapters trained on dissimilar data can be uninformative or unstable. We propose a simple idea called federated library-based adaptation (LEAN), which replaces averaging altogether. The server maintains a library of rank-1 basis pairs; participants check out random subsets, fine-tune them locally as a LoRA adapter, and check them back in, so that each pair is shuffled across sites and trained on many participants' data. Because no aggregation step is required, LEAN operates fully asynchronously and communicates only low-rank parameters. We prove that, in a synchronous setting, LEAN converges to a neighborhood of a stationary point, with the shuffle canceling data heterogeneity at first order. Across image and text fine-tuning benchmarks, LEAN outperforms averaging-based baselines in most settings with substantially less communication, and remains effective under heavy data heterogeneity, where averaging-based methods fail to reach nontrivial accuracy, and under heavy asynchrony, where they degrade substantially.",
+      "url": "http://arxiv.org/abs/2611.26805v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26805v1",
+      "tldr": "LEAN replaces adapter averaging in federated LoRA fine-tuning with a server-maintained library of rank-1 basis pairs that participants randomly check out, locally fine-tune, and check back in, enabling fully asynchronous, communication-efficient adaptation that is robust to data heterogeneity and asynchrony.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Rice University",
+        "Amazon AGI Lab"
+      ],
+      "affiliations_text": "Rice University, Amazon AGI Lab",
+      "score": 4.066468646393021,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.26752v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126752v1-depth-linked-residual-tokens-for-multimodal-retrieval-and-generation",
+      "source": "arxiv",
+      "title": "Depth-Linked Residual Tokens for Multimodal Retrieval and Generation",
+      "authors": [
+        "Jiangfan Zhang",
+        "Wentao Bao",
+        "Xian Wu",
+        "Xiangjun Fan",
+        "Jianpeng Cheng",
+        "Jun Xiao"
+      ],
+      "authors_text": "Jiangfan Zhang, Wentao Bao, Xian Wu, Xiangjun Fan, Jianpeng Cheng, Jun Xiao",
+      "abstract": "Iterative architectures such as looped language models improve parameter efficiency and reasoning capacity of transformers, yet their sequential backbone iterations introduce substantial computational latency. Conversely, parallelizable learnable special tokens (such as the register tokens in Vision Transformer) enable efficient single-pass inference, but often suffer from the absence of sequential refinement and exhibit redundant representations across tokens. To address these challenges, we introduce Depth-Linked Residual Tokens (DepThink), an efficient framework designed for multimodal retrieval and generation. Operating within a single pre-filling forward pass, DepThink appends a sequence of K learnable residual tokens whose hidden states are coupled through a lightweight, learnable residual recurrence. This mechanism enables each residual token to progressively capture complementary information missed by preceding tokens. Theoretically, we prove that DepThink provides strictly expanded geometric directional reachability over standard learnable tokens and guarantees a provable one-step descent advantage. We evaluate DepThink across multimodal retrieval and generation tasks. DepThink consistently outperforms learnable-token baselines and matches or exceeds looped architectures across dense (2B, 8B) and sparse mixture-of-experts (30B-A3B) backbones under both LoRA and full-parameter fine-tuning, while accelerating training by up to 11.9 and inference by 4.3 over looped architectures.",
+      "url": "http://arxiv.org/abs/2611.26752v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26752v1",
+      "tldr": "**TLDR:** Depth-Linked Residual Tokens (DepThink) is a single-pass multimodal framework that appends K learnable residual tokens coupled by a lightweight learned recurrence to progressively capture complementary information, matching or outperforming looped architectures for retrieval and generation while significantly accelerating training and inference.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.058404769270171,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.26676v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126676v1-one-behavior-out-of-order-deterministic-execution-and-parallel-simulation-of-ros-2-applications",
+      "source": "arxiv",
+      "title": "One Behavior, Out of Order: Deterministic Execution and Parallel Simulation of ROS 2 Applications",
+      "authors": [
+        "Chengzi Huang",
+        "Behnam Khodabandeloo",
+        "Duc Anh Nguyen",
+        "Chuanchao Gao",
+        "Wang Yi"
+      ],
+      "authors_text": "Chengzi Huang, Behnam Khodabandeloo, Duc Anh Nguyen, Chuanchao Gao, Wang Yi",
+      "abstract": "System-level simulation is widely used to validate robotic applications before hardware deployment. However, Robot Operating System 2 (ROS 2), a popular middleware for such applications, uses asynchronous publish-subscribe communication, which can make application behavior depend on scheduling and the platform. The behavior can then vary across runs and machines even with the same inputs. This nondeterminism makes faults hard to reproduce and tests unreliable. In this paper, we first give ROS 2 applications a lightweight coordination scheme in which every component, including event-driven ones, reads its inputs and writes its outputs at predefined time instants. By decoupling computation and communication, the scheme makes an application deterministic, that is, it always has one behavior for given inputs. Tests are thus repeatable, but for large applications they still take a long time. To speed up these tests, we then present an out-of-order parallel simulation algorithm. From the predefined read and write instants, it knows before the run which activations of components depend on which. It starts each activation as soon as those it depends on have finished. Finally, we implement the algorithm in a simulator that runs existing ROS 2 applications without any change to them or to ROS 2. We evaluate the simulator on industrial use cases and synthetic graphs. On the industrial use cases, it is up to 2.6 times faster than synchronous parallel simulation and needs an order of magnitude less memory for messages than asynchronous parallel simulation.",
+      "url": "http://arxiv.org/abs/2611.26676v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26676v1",
+      "tldr": "The paper proposes a lightweight coordination scheme that makes ROS 2 applications deterministic by fixing when components read and write, and leverages these known dependencies for an out-of-order parallel simulator that preserves this single behavior while speeding up testing.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Uppsala University"
+      ],
+      "affiliations_text": "Uppsala University",
+      "score": 4.013411596629032,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.26828v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126828v1-graph-xgb-a-hybrid-gnn-framework-for-outdoor-to-indoor-5g-signal-reconstruction-via-aerial-only-uav-rf-sensing",
+      "source": "arxiv",
+      "title": "Graph-XGB: A Hybrid GNN Framework for Outdoor-to-Indoor 5G Signal Reconstruction via Aerial-Only UAV RF Sensing",
+      "authors": [
+        "David Hason Rudd",
+        "Eunkwang Shin",
+        "Nithiwat Pattrapong",
+        "Huan Huo",
+        "Xiangmeng Wang"
+      ],
+      "authors_text": "David Hason Rudd, Eunkwang Shin, Nithiwat Pattrapong, Huan Huo, Xiangmeng Wang",
+      "abstract": "Delivering robust In-Building Coverage (IBC) is critically impeded by severe Outdoor-to-Indoor (O2I) attenuation, a constraint that intensifies as deployments move from 5G mid-band towards mmWave and prospective 6G sub-THz carriers, where losses of 60-80 dB have been reported across modern building envelopes. While Unmanned Aerial Vehicles (UAVs) offer scalable exterior RF sensing platforms, a fundamental inversion problem persists: interior 3D signal states cannot be directly sampled from constrained exterior flight paths. This paper proposes Graph-XGB, a hybrid inference framework that decouples spatial topology reasoning from non-linear signal regression to resolve this challenge. A modified SpiderGNN encoder, operating on a topology-aware graph constructed with a physically grounded Floor-Aware 3D Distance metric and Bridge Edge Guarantees, propagates UAV boundary measurements into 128-dimensional indoor embeddings. Principal Component Analysis (PCA) compresses these into a 10-dimensional manifold retaining 96.6% of embedding variance, fused with raw spatial features and decoded by independent, physics-tailored XGBoost regressors. This decoupling mitigates the optimization conflict between smoothly decaying path-loss signals and volatile interference-dependent metrics. Evaluated on a real-world 5G NR dataset of 613 verified nodes spanning the 10 floors of a single building, Graph-XGB attains the strongest accuracy among the architectures compared, with $R^2$ of 0.759 (RSSI) and 0.770 (RSRP), improvements of 35.5% and 64.9% over the SimpleGNN baseline, using no interior RF measurement as a model input; indoor observations enter only as training supervision, with evaluation on held-out internal nodes. Interference-dependent targets (RSRQ, SNR and CQI) remain bounded well below the path-loss metrics, delimiting the reach of purely spatial inference.",
+      "url": "http://arxiv.org/abs/2611.26828v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26828v1",
+      "tldr": "Graph-XGB is a hybrid GNN–XGBoost framework that reconstructs multi-floor indoor 5G signal metrics from aerial-only UAV exterior RF measurements by using a floor-aware graph encoder and PCA to create indoor embeddings that are decoded by target-specific XGBoost regressors, achieving strong RSSI/RSRP prediction without any interior RF input.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Technology Sydney",
+        "The Hong Kong Polytechnic University"
+      ],
+      "affiliations_text": "University of Technology Sydney, The Hong Kong Polytechnic University",
+      "score": 3.9426679600025585,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.26745v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126745v1-momentmem-memorizing-key-moments-for-robot-manipulation",
+      "source": "arxiv",
+      "title": "MomentMem: Memorizing Key Moments for Robot Manipulation",
+      "authors": [
+        "Guangyu Zhao",
+        "Yongchang Zhang",
+        "Ruizhang Jiang",
+        "Zhihong Yu",
+        "Yuhao Zhang",
+        "Tao Wu",
+        "Qimin Zhou",
+        "Kunsong Shi",
+        "Haoran Wen",
+        "Zeyu Zhang",
+        "Yin Li",
+        "Kun Zhan",
+        "Yiwu Zhong"
+      ],
+      "authors_text": "Guangyu Zhao, Yongchang Zhang, Ruizhang Jiang, Zhihong Yu, Yuhao Zhang, Tao Wu, Qimin Zhou, Kunsong Shi, Haoran Wen, Zeyu Zhang, Yin Li, Kun Zhan, Yiwu Zhong",
+      "abstract": "Robotic manipulation often requires remembering visual information that is no longer observable, such as the original location of an object. Existing approaches typically rely on full observation histories, which become redundant over long horizons, or text summaries, which may omit precise visual details. We study visual moment memory, the ability to retain such details from key moments for subsequent manipulation. To support this study, we introduce VMBench, a suite of long-horizon manipulation tasks requiring memory of spatial locations, visual appearances, and their associations. We further propose MomentMem, a hierarchical architecture in which a VLM-based memorizer selects keyframes and an executor predicts actions conditioned on the selected memories. This separation enables us to evaluate memory selection alongside closed-loop task success and to study memorizer generalization independently of the executor. On VMBench, MomentMem achieves 49.9% average success, outperforming the strongest evaluated baseline by 31.7 percentage points. Moreover, we find that the memorizer transfers well to unseen appearances zero-shot. It can also adapt to an unseen task with only a few memory annotations, reaching 43.7% success, close to the 44.3% obtained with full memory supervision. Further experiments show competitive performance on RMBench and improvements in real-robot manipulation. These results highlight the value of retaining sparse visual evidence for memory-dependent manipulation. Our code is available at https://github.com/PKU-VaLuE-Lab/MomentMem.",
+      "url": "http://arxiv.org/abs/2611.26745v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26745v1",
+      "tldr": "The paper introduces MomentMem, a hierarchical robot manipulation approach where a VLM-based memorizer selects sparse keyframes and an executor acts on them, along with VMBench, a long-horizon benchmark for visual moment memory, achieving 49.9% success and outperforming the strongest baseline by 31.7 percentage points.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tsinghua University",
+        "Li Auto Inc.",
+        "University of Wisconsin - Madison",
+        "Beijing Institute for General Artificial Intelligence",
+        "Beijing University of Posts and Telecommunications",
+        "Nanyang Technological University",
+        "Peking University"
+      ],
+      "affiliations_text": "Tsinghua University, Li Auto Inc., University of Wisconsin - Madison, Beijing Institute for General Artificial Intelligence, Beijing University of Posts and Telecommunications, Nanyang Technological University, Peking University",
+      "score": 3.7899495626791206,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.26671v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126671v1-on-the-loss-landscape-of-the-linear-neural-network-beyond-critical-points",
+      "source": "arxiv",
+      "title": "On the loss landscape of the linear neural network: beyond critical points",
+      "authors": [
+        "Antoine Lejay",
+        "Lionel Lenotre",
+        "Sa{ï}d Toubra"
+      ],
+      "authors_text": "Antoine Lejay, Lionel Lenotre, Sa{ï}d Toubra",
+      "abstract": "While the critical points of the loss landscape in linear neural networks have been extensively studied since the seminal work of Baldi \\& Hornik in the late 1980s, a description of this landscape at an intermediate or global scale is still lacking. Such a characterization is crucial, particularly as a substantial body of literature indicates that gradient descent circumvents critical points. The present article introduces an intermediate structure, termed the critical thalweg, which encompasses all critical points and exhibits key geometric properties. Beyond providing a geometric proof of Baldi \\& Hornik's results using simpler assumptions than the existing literature, this framework offers a global view of the loss landscape that can be easily visualized in a two-dimensional plane. Empirical observations suggest that gradient descent is attracted toward the critical thalweg, along which the loss continues to decrease to its global minimum.",
+      "url": "http://arxiv.org/abs/2611.26671v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26671v1",
+      "tldr": "The paper introduces the “critical thalweg,” an intermediate geometric structure encompassing all critical points of a linear neural network’s loss landscape, provides a simpler proof of the absence of spurious local minima, and offers a global 2D visualization suggesting gradient descent is attracted along this valley toward the global minimum.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.7644585675899354,
+      "score_text": "3.8"
+    },
+    {
+      "id": "2611.26731v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126731v1-cross-attack-robust-aggregation-for-federated-learning",
+      "source": "arxiv",
+      "title": "Cross-Attack Robust Aggregation for Federated Learning",
+      "authors": [
+        "Eyhab Al-Masri"
+      ],
+      "authors_text": "Eyhab Al-Masri",
+      "abstract": "Federated learning (FL) lets resource-constrained IoT and edge devices train a shared model without exchanging raw data, but compromised or faulty devices can poison the global model. Existing robust aggregators each fail in some regime: naive averaging (FedAvg) collapses under high-magnitude attacks, whereas distance- and statistics-based defenses (Krum, median, trimmed mean) sacrifice accuracy on non-IID data and remain vulnerable to stealthy attacks. We present FedTether, which reweights client updates by their deviation from a coordinatewise median through a robust, dead-zoned score applied as a server-side optimizer step. Across three datasets, three attack types, and Byzantine fractions up to 40%, FedTether is the only method top-tier in every regime: it matches FedAvg under stealthy attacks with no robustness tax, exceeds robust baselines by up to 42 accuracy points, and stays accurate where high-magnitude attacks reduce FedAvg to near-random. These properties persist at 50 clients under partial participation, with no shared data or validation set.",
+      "url": "http://arxiv.org/abs/2611.26731v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26731v1",
+      "tldr": "FedTether is a federated-learning aggregation method that reweights client updates by their robust, MAD-normalized deviation from a coordinate-wise median with a dead-zone, suppressing only clear outliers and otherwise reducing exactly to FedAvg, thereby achieving cross-attack robustness under non-IID data without shared data or a validation set.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Washington"
+      ],
+      "affiliations_text": "University of Washington",
+      "score": 3.7361321878174407,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.26764v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126764v1-tachoi-contact-aware-object-reconstruction-and-tracking-for-egocentric-videos",
+      "source": "arxiv",
+      "title": "TacHOI: Contact-Aware Object Reconstruction and Tracking for Egocentric Videos",
+      "authors": [
+        "Jackson Codd",
+        "Haoyu Li",
+        "Xianyi Cheng"
+      ],
+      "authors_text": "Jackson Codd, Haoyu Li, Xianyi Cheng",
+      "abstract": "Egocentric videos offer a scalable source of human demonstrations for robot learning. However, recovering metric object geometry and motion from monocular video is hindered by scale-depth ambiguity and hand-induced occlusion, while image-derived contact and shape priors alone cannot uniquely determine metric scale. We introduce TacHOI, a training-free framework that integrates tactile contact with monocular vision for joint hand-object reconstruction and tracking, without requiring object templates or depth sensors. Starting from pretrained visual estimates, TacHOI uses tactile contact to constrain object depth relative to the estimated hand, while spatially separated contacts on a metrically calibrated hand provide a physical ruler for object extent. It incorporates these constraints into a joint optimization of hand poses, object trajectories, and anisotropic object scale alongside visual alignment. Across 100 ARCTIC and HO3D sequences with synthesized tactile observations, TacHOI achieves the lowest median ADD-S* among the evaluated baselines, reducing error from 15.6 to 3.6 cm on ARCTIC and achieving 2.8 cm on HO3D. Additional experiments on OpenTouch demonstrate its applicability to measured tactile observations.",
+      "url": "http://arxiv.org/abs/2611.26764v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26764v1",
+      "tldr": "TacHOI is a training-free framework that fuses tactile contact with monocular egocentric video to jointly reconstruct and track hands and unknown objects—using the calibrated hand as a physical ruler to resolve scale–depth ambiguity without templates or depth sensors—reducing object pose error from 15.6 to 3.6 cm on ARCTIC and achieving 2.8 cm on HO3D.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.516418208590995,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.26711v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126711v1-parasite-features-causal-abstraction-through-spurious-pathways",
+      "source": "arxiv",
+      "title": "Parasite Features: Causal Abstraction Through Spurious Pathways",
+      "authors": [
+        "Denis Sutter",
+        "Qing Yao",
+        "Sasha Boguraev",
+        "Julian Minder",
+        "Antonio Di Maio",
+        "Thomas Hofmann",
+        "Kyle Mahowald",
+        "Tiago Pimentel"
+      ],
+      "authors_text": "Denis Sutter, Qing Yao, Sasha Boguraev, Julian Minder, Antonio Di Maio, Thomas Hofmann, Kyle Mahowald, Tiago Pimentel",
+      "abstract": "Causal Abstraction defines a notion of \\emph{equivalence} between a neural network and an algorithm, thus serving as a powerful framework for mechanistic interpretability. In this paper, however, we show the existence of a class of \\emph{spurious features} which straightforwardly pass such equivalence tests. Suppose there are two directions in a model's representation space where: (i) one discriminates the input based on some feature, and (ii) the other steers the model towards a certain output. Interpretability methods based on Causal Abstraction (e.g., Distributed Alignment Search) can \\emph{spuriously} simulate these directions' combined behavior by leveraging pathways passing through them, giving the impression that the model implements this feature. In such cases, we say the method discovered a \\defn{parasite feature}. Experimentally, we show that Distributed Alignment Search finds parasite features using linear alignment maps in two tasks: syntactic agreement and two-digit addition. Our paper highlights an important consideration for Causal Abstraction and contributes to the ongoing debate about best practices for mechanistic interpretability.",
+      "url": "http://arxiv.org/abs/2611.26711v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26711v1",
+      "tldr": "This paper shows that causal-abstraction interpretability methods such as Distributed Alignment Search can falsely identify “parasite features” by exploiting spurious pathways that combine feature-discriminating and output-steering directions, making it appear that a model implements a feature when it does not.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.475352393601374,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.26826v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126826v1-a-column-generation-approach-to-length-constrained-shortest-paths-under-cascading-causal-failures",
+      "source": "arxiv",
+      "title": "A Column-Generation Approach to Length-Constrained Shortest Paths under Cascading Causal Failures",
+      "authors": [
+        "Nicolò Aicardi",
+        "Zuyuan Zhang",
+        "Sridhar Radhakrishnan",
+        "Kash Barker",
+        "Dritan Nace"
+      ],
+      "authors_text": "Nicolò Aicardi, Zuyuan Zhang, Sridhar Radhakrishnan, Kash Barker, Dritan Nace",
+      "abstract": "In the study of cascading causal node failures, the failure of one set of nodes can trigger the failure of another, possibly non-adjacent, set, and these triggers can propagate in cascades. Given a graph, a set of causal failures, a source-terminal pair, and a constant $α\\geq 1$, we study the length-constrained shortest-path problem of finding the maximum subset of causalities whose application preserves a source-terminal path of length at most $α$ times the original distance. We show that the problem is NP-hard, a hardness that reflects the non-local, cascading nature of causal failures. We propose a mixed-integer linear programming formulation with explicit node-integrity variables that decouple the node state from routing, a column-generation algorithm built on a path-based reformulation whose pricing subproblem is solved by a three-level cascade (beam search, label-capped $A^*$, and exact $A^*$ with warm start), and a greedy heuristic as a fast baseline. On the IEEE 300 and Power 5000 benchmarks, all three methods are competitive. In dense synthetic networks of 10,000 to 15,000 nodes, the exact model exhausts its time budget or returns an order of magnitude fewer causalities, whereas column generation remains fast and accurate, emerging as the method of choice for large instances.",
+      "url": "http://arxiv.org/abs/2611.26826v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26826v1",
+      "tldr": "The paper studies the NP-hard problem of selecting the maximum set of cascading causal node failures while preserving a source–terminal path within an α-factor of the original shortest distance, and proposes a MILP formulation, a column-generation algorithm with a three-level pricing cascade, and a greedy heuristic, showing column generation is the most effective for large networks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Université de Technologie de Compiègne",
+        "University of Oklahoma",
+        "Università degli Studi di Genova"
+      ],
+      "affiliations_text": "Université de Technologie de Compiègne, University of Oklahoma, Università degli Studi di Genova",
+      "score": 3.425333466785976,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.26818v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126818v1-realistic-robustness-evaluation-of-tabular-data-driven-models",
+      "source": "arxiv",
+      "title": "Realistic Robustness Evaluation of Tabular Data Driven Models",
+      "authors": [
+        "Miguel Silva",
+        "Eva Maia",
+        "João Vitorino",
+        "Isabel Praça"
+      ],
+      "authors_text": "Miguel Silva, Eva Maia, João Vitorino, Isabel Praça",
+      "abstract": "The increasing adoption of Machine Learning (ML) models in high-stakes applications has raised critical concerns regarding their robustness against adversarial attacks. While extensive research has focused on adversarial example generation in image and text domains, the study of such examples in tabular data remains comparatively limited, despite its widespread use in real-world systems. This work introduces AURORA, a modular, open-source tool for evaluating the robustness of ML models on tabular data classification. It integrates multiple adversarial perturbation methods and evaluation metrics within a unified framework to systematically assess model behavior under adversarial conditions. Central to AURORA is its evaluation report, which focuses on robustness analysis by quantifying performance degradation, comparing the impact of different perturbation strategies, and identifying model vulnerabilities across features and input regions. The report is complemented by visual artifacts that facilitate the interpretability of robustness patterns. Additionally, AURORA incorporates a distance adjustment mechanism that penalizes implausible adversarial samples based on feature-level constraints, ensuring that the robustness assessment remains grounded in realistic perturbations and is therefore more reliable.",
+      "url": "http://arxiv.org/abs/2611.26818v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26818v1",
+      "tldr": "The paper introduces AURORA, an open-source modular tool that evaluates the robustness of tabular-data ML classification models using multiple adversarial perturbation methods and metrics, with a distance-adjustment mechanism that penalizes unrealistic adversarial samples to ensure more reliable robustness assessment.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Polytechnic of Porto"
+      ],
+      "affiliations_text": "Polytechnic of Porto",
+      "score": 3.255798622290191,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.26770v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126770v1-who-should-verify-reviewer-selection-with-partial-information-and-outcome-audits",
+      "source": "arxiv",
+      "title": "Who Should Verify? Reviewer Selection with Partial Information and Outcome Audits",
+      "authors": [
+        "The Viet Bui",
+        "Tien Mai"
+      ],
+      "authors_text": "The Viet Bui, Tien Mai",
+      "abstract": "Selecting an AI reviewer requires evidence about what it does after reading a draft. On a fixed batch of items, a team can keep the original answers or adopt one reviewer's answers throughout. We ask how much it costs to certify that the chosen procedure falls at most a specified number of correct answers short of the best available procedure, for every completion of the unobserved evidence. When all reviews are available and only verified answer keys cost money, we give an exact stopping rule and an integer program for the cheapest certificate in hindsight. When reviews and keys both have prices, a polynomial-time algorithm using the completed record approximates the minimum certificate cost within a factor logarithmic in the number of procedures. This dependence is tight to leading order unless P equals NP. Finding a certificate can be much more expensive. We exhibit a two-procedure family with $n$ unresolved items where one purchase suffices in hindsight but the exact minimax expected search cost is $(n+1)/2$. For two binary procedures under a known independent and identically distributed item law, five counts suffice to compute an optimal search policy. We replay reviews on 2,000 MMLU questions, 896 numerical reports, and 48 Singapore electricity forecast reports. With reviews available, a targeted audit used 6.9% fewer keys on MMLU and 1.2% fewer on numerical reports than a fixed order selected on development data. Compared with selection by stand-alone accuracy, the chosen procedures gained 2.94 percentage points on held-out MMLU questions and zero on numerical reports. On electricity reports, five checks certified a tie across all 48, yet each procedure was correct only eight times.",
+      "url": "http://arxiv.org/abs/2611.26770v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26770v1",
+      "tldr": "The paper studies how to choose among AI review procedures for a batch by purchasing costly reviews and answer keys until the choice is provably within a tolerated shortfall of the best procedure, providing near-optimal auditing algorithms and experiments showing targeted audits can certify choices with fewer keys while sometimes improving held-out accuracy.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Singapore Management University"
+      ],
+      "affiliations_text": "Singapore Management University",
+      "score": 2.95519826107109,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2611.26810v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/23/261126810v1-acoustic-markers-of-engagement-in-children-with-autism-spectrum-disorder-and-their-caregivers",
+      "source": "arxiv",
+      "title": "Acoustic Markers of Engagement in Children with Autism Spectrum Disorder and Their Caregivers",
+      "authors": [
+        "Young Suh Hong",
+        "Kaleen Shrestha",
+        "Austin Joel Dympep",
+        "Maja Matarić"
+      ],
+      "authors_text": "Young Suh Hong, Kaleen Shrestha, Austin Joel Dympep, Maja Matarić",
+      "abstract": "Characterizing user engagement is essential for developing effective human-computer interaction (HCI) applications, particularly for children with autism spectrum disorder (ASD). Because home-based HCI naturally involves caregivers as conversational facilitators, analyzing both child and caregiver vocalizations can provide critical insights into characterizing interaction dynamics. Using a dataset of home-based socially assistive robot (SAR) interventions, this work demonstrates how child and caregiver vocalization patterns can model engagement in HCI contexts. We employed linear mixed-effects models (LMMs) with child and caregiver acoustic data to identify acoustic features that significantly differentiated engagement from disengagement. The results demonstrated that children and caregivers share three significant acoustic markers of engagement: mean Alpha Ratio (AlphaRatio), mean Harmonics-to-Noise Ratio (HNR), and mean Spectral Slope 500-1500 (SlopeV500-1500). This reflects cleaner and smoother vocalizations during engagement across both groups. Furthermore, we evaluated a State x Group interaction model to compare the magnitudes of standardized state-dependent differences between children and caregivers. The results indicated that children exhibit significantly greater state-related variation than caregivers in three acoustic features: AlphaRatio, HNR, and SlopeV500-1500.",
+      "url": "http://arxiv.org/abs/2611.26810v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.26810v1",
+      "tldr": "Using home-based socially assistive robot intervention audio and linear mixed-effects models, this study identifies shared acoustic markers of engagement in children with ASD and their caregivers—mean Alpha Ratio, Harmonics-to-Noise Ratio, and Spectral Slope 500–1500—with children showing significantly larger engagement-related shifts in these features than caregivers.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Institute of Technology Meghalaya",
+        "University of Virginia",
+        "University of Southern California"
+      ],
+      "affiliations_text": "National Institute of Technology Meghalaya, University of Virginia, University of Southern California",
+      "score": 2.3348861089376785,
+      "score_text": "2.3"
+    }
+  ],
+  "errors": []
+}
