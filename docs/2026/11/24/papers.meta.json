@@ -1,0 +1,740 @@
+{
+  "label": "2026-11-24",
+  "date": "2026-11-24",
+  "generated_at": "2026-11-24T21:06:45",
+  "count": 25,
+  "papers": [
+    {
+      "id": "2611.28200v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128200v1-control-barrier-functions-in-motion-control",
+      "source": "arxiv",
+      "title": "Control Barrier Functions in Motion Control",
+      "authors": [
+        "Stijn Hanegraaf",
+        "Giannis Delimpaltadakis",
+        "Hoang Chu",
+        "W. P. M. H.",
+        "Heemels"
+      ],
+      "authors_text": "Stijn Hanegraaf, Giannis Delimpaltadakis, Hoang Chu, W. P. M. H., Heemels",
+      "abstract": "Projection-based controllers (PBCs) have significant engineering success in industrial high-precision motion systems by restricting their input-output behavior to performance-enhancing sector-sets thereby overcoming fundamental limitations of linear control. The projection results in continuous control signals, but their vector fields are discontinuous, potentially causing unwanted excitation of higher-order dynamics in the plant. Inspired by these projected controllers and the recent interest in control barrier functions (CBFs), we propose a new class of CBF-based motion controllers that (i) can mimic and exceed the performance benefits demonstrated by PBCs and (ii) have continuous dynamics thereby resulting in smooth control signals. We specialize our novel CBF-based control design to integrator dynamics, essentially connecting to a projected integrator, called Hybrid Integrator-Gain System (HIGS), thereby introducing CBF-HIGS. We analyze the CBF-HIGS's behavior using a describing function analysis, which reveals improved phase characteristics and a favorable trade-off in higher-order harmonic distortion compared to HIGS. Simulation and experimental results demonstrate that CBF-HIGS enhances disturbance attenuation and reduces the excitation of higher-order harmonics compared to HIGS due to its continuous vector field, without compromising robustness properties. The paper provides the first use of CBFs for performance improvement of mechatronic motion systems.",
+      "url": "http://arxiv.org/abs/2611.28200v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28200v1",
+      "tldr": "The paper introduces control-barrier-function-based motion controllers, specifically CBF-HIGS, as a continuous alternative to projection-based controllers, yielding smoother control signals, improved disturbance attenuation, and reduced higher-order harmonic excitation without compromising robustness in mechatronic motion systems.",
+      "detailed_reading": {
+        "motivation": "工业高精度运动系统中，基于投影的控制器（PBC/HIGS）通过将输入输出限制在提升性能的扇区集合内，克服线性控制的基本限制并取得显著工程成功；但投影导致向量场不连续，可能激发被控对象的高阶动态与谐波。控制屏障函数（CBF）可产生连续向量场，却尚未被用于机电运动系统的性能提升，因此本文探索以CBF作为不连续PBC的连续替代方案。",
+        "method": "论文提出一类基于CBF的运动控制框架：给定标称控制器和由h(ξ)≥0定义的安全/扇区集合，通过二次规划在满足Lf h+Lg h μ+αh≥0的CBF约束下最小化||μ−knom||²，从而仅在必要处平滑修正标称控制。作者将该设计专门化到积分器动态，构造HIGS的连续对应物CBF-HIGS；随后用描述函数分析其频域行为，并在四阶运动系统和晶圆台原型上进行仿真与实验，与LTI控制器及HIGS对比。",
+        "result": "描述函数分析表明CBF-HIGS相较HIGS具有改善的相位特性，并在高阶谐波失真上呈现有利折衷；仿真与实验显示，由于向量场连续，CBF-HIGS增强了扰动抑制并减少高阶谐波激发，同时不牺牲鲁棒性。",
+        "conclusion": "本文首次将CBF用于机电运动系统的性能改进，证明CBF-based控制器可模仿并超越PBC/HIGS的部分性能优势，同时以连续动态获得更平滑的控制信号和更低的谐波激励。CBF-HIGS因此可作为HIGS的连续对应方案，为高性能运动控制提供新设计路径。",
+        "key_details": "关键实现包括：针对SISO LTI被控对象与输入输出扇区约束建立CBF-QP，参数α调节CBF动态偏离标称动态的程度，α越大越接近集合边界并趋近投影动态；利用局部Lipschitz性质保证前向不变性与连续性分析。方法论上采用描述函数评估相位与谐波，实验覆盖四阶系统和晶圆台原型；局限在于既有PDS收敛条件可能被保持符号等价的PBC违反，且CBF-HIGS需在相位优势与谐波/参数调节之间折衷。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 5.340268924011121,
+      "score_text": "5.3"
+    },
+    {
+      "id": "2611.28289v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128289v1-intervention-robust-vla-diverse-demonstrations-for-robot-deployment-with-safety-filters",
+      "source": "arxiv",
+      "title": "Intervention-Robust VLA: Diverse Demonstrations for Robot Deployment with Safety Filters",
+      "authors": [
+        "Tzu-Yuan Huang",
+        "Shao-Hsuan Chang",
+        "Dai-Jie Wu",
+        "Ralf Römer",
+        "Yung-Hui Li",
+        "Stefan Sosnowski",
+        "Angela P. Schoellig",
+        "Kenneth Marino",
+        "Sandra Hirche"
+      ],
+      "authors_text": "Tzu-Yuan Huang, Shao-Hsuan Chang, Dai-Jie Wu, Ralf Römer, Yung-Hui Li, Stefan Sosnowski, Angela P. Schoellig, Kenneth Marino, Sandra Hirche",
+      "abstract": "Vision-Language-Action models (VLAs) have shown strong potential for learning complex robotic behaviors from demonstrations. However, learning safe behavior directly from data requires extensive coverage of safety-critical situations, which is often impractical in real-world settings. Test-time safety filters provide an alternative by correcting unsafe actions during deployment, but these interventions can drive the robot into states poorly covered by the training data, thereby degrading task performance. We introduce InteR-VLA, an intervention-robust framework for VLAs that leverages diverse task-completing demonstrations to broaden task-relevant state coverage and maintain competence under safety interventions. By better aligning the training distribution with safety-filtered deployment under the same data budget, our approach mitigates intervention-induced distribution shift while preserving task performance. Real-world experiments across in-distribution and out-of-distribution settings show that InteR-VLA maintains safety, increases Safe Success Rate up to 90% from 0% for nominal policies, and consistently outperforms nominal-data training on both evaluated VLAs.",
+      "url": "http://arxiv.org/abs/2611.28289v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28289v1",
+      "tldr": "**TLDR:** InteR-VLA improves robot safety and task success under test-time safety filters by training vision-language-action models on diverse task-completing demonstrations that broaden state coverage and mitigate intervention-induced distribution shift, achieving up to 90% Safe Success Rate in real-world experiments.",
+      "detailed_reading": {
+        "motivation": "VLA通过模仿学习从示教中获取复杂机器人行为，但直接在数据中学习安全行为需要覆盖大量安全关键场景，现实采集往往不可行。测试时安全过滤器可在部署阶段修正不安全动作，但其干预会把机器人推向训练数据覆盖不足的状态，造成干预诱发的协变量偏移并降低任务成功率。路径一致的制动式干预虽能减小偏移，却在必须绕开原路径才能完成任务时过于受限，因此需要一种在安全干预下仍保持任务能力的VLA框架。",
+        "method": "提出InteR-VLA：在固定示教数据预算下，不重复采集标称轨迹，而是将预算分配给多种完成任务的行为模式，以扩大任务相关状态覆盖并使其更接近安全过滤后的部署分布。具体提供两类离线采集策略：无障碍的多样化完成任务示教用于拓宽任务相关覆盖；当采集时已知危险源时，使用路径阻挡障碍的多模态避障示教提供直接干预覆盖。训练仍采用VLA模仿学习，输入语言指令、相机观测与机器人本体状态，输出相对笛卡尔位移等高层动作；部署时在每个时间步用CBF安全过滤器对VLA动作做最小修正，使执行动作满足安全集约束，整个流程不需要策略rollout或针对过滤器专门调参。",
+        "result": "真实世界实验覆盖分布内和分布外设置，并在两种VLA模型上验证。结果表明InteR-VLA在保持安全的同时，将Safe Success Rate从标称策略的0%提升至最高90%，并在两个受评估VLA上持续优于仅用标称数据训练的策略。",
+        "conclusion": "安全过滤与多样化任务示教具有互补作用：过滤器在部署时提供硬安全约束，多样化示教则让VLA在过滤干预导致的状态偏移下仍具备完成任务的能力。因此在相同数据预算下，通过增加行为模式而非数据量来对齐训练分布与安全过滤部署分布，是提升VLA干预鲁棒性和实际部署安全成功率的有效途径。",
+        "key_details": "方法将状态定义为语言指令加观测（相机和本体感知），动作为高层相对位移；VLA常以动作块预测并按滚动时域执行前若干步。安全侧用连续可微函数h(x)定义安全集，碰撞避免可由机器人椭球近似与感知障碍间的距离构造CBF约束，过滤器算子S在满足安全约束下尽量贴近原始VLA动作；关键分析是过滤后的动作分布rho_S与示教分布rho不一致，导致未见状态。实现要点包括固定数据预算下以多样化行为模式替代重复标称示教、离线采集无需反复rollout和重训、多模态避障示教依赖采集时已知危险源，且实验主要基于两种VLA和真实世界ID/OOD设置，未给出具体损失函数与超参数细节。"
+      },
+      "affiliations": [
+        "Technical University of Munich",
+        "Hon Hai Research Institute",
+        "University of Utah"
+      ],
+      "affiliations_text": "Technical University of Munich, Hon Hai Research Institute, University of Utah",
+      "score": 5.2208333215163725,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2611.28234v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128234v1-learning-the-projection-onto-the-data-support-distribution-learning-that-avoids-memorization",
+      "source": "arxiv",
+      "title": "Learning the Projection onto the Data Support: Distribution Learning that Avoids Memorization",
+      "authors": [
+        "Lin Chen",
+        "Dejan Slepčev"
+      ],
+      "authors_text": "Lin Chen, Dejan Slepčev",
+      "abstract": "We introduce a framework for learning distributions supported on manifolds based on estimating the nearest-point projection onto the data support. Specifically, we define an objective functional over a class of functions whose minimizer recovers this projection. The proposed framework automatically adapts to the intrinsic dimension and allows for data supported on unions of manifolds with varying dimensions. The resulting objective can be optimized using standard neural network architectures. We present population-level results establishing recovery of the manifold projection and prove finite-sample Wasserstein generalization bounds. Furthermore, we validate the approach empirically across a range of settings. In contrast to widely used generative models such as diffusion models, whose objectives can be minimized by memorizing training samples, our formulation excludes such behavior. We also introduce a direct memorization metric to verify that the learned projection generates new samples rather than reproducing the training set.",
+      "url": "http://arxiv.org/abs/2611.28234v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28234v1",
+      "tldr": "This paper introduces a variational framework that learns the nearest-point projection onto a data manifold, whose ideal optimizer recovers the underlying support rather than memorizing training samples, with theoretical guarantees and empirical validation as a non-memorizing generative approach.",
+      "detailed_reading": {
+        "motivation": "高维数据常近似位于低维流形或其并集上，但现有扩散模型等生成方法在有限样本下可能在目标函数上偏向记忆训练点，而不是恢复几何支撑。本文追问能否用灵活神经网络表示，同时设计一个理想优化器会恢复数据流形投影而非经验训练集的目标。作者因此提出直接学习到数据支撑的最近点投影，以避免把生成建模建立在记忆训练样本的机制上。",
+        "method": "在总体层面，对定义在流形管状邻域上的光滑映射T构造变分目标：E1强制流形上T(x)=x，E2强制T沿x到T(x)的线段保持不变以匹配法向纤维，E3把远离流形的点拉回，E4强制正交性；实际优化E=E1+E2+E3，理论分析用E'=E1+E2+E3+E4。证明E的极小值映射的像为流形，E'的极小值映射为正交投影Π_M。有限样本实现用标准神经网络参数化T，在流形样本及噪声扰动样本上估计目标并用常规梯度训练；生成时对训练样本或新采样点加噪声δ，再经学习到的T映射回学习支撑，并用投影误差与直接记忆度量评估。",
+        "result": "总体结果表明E的极小值映射的像恢复数据流形，E'的极小值映射恰为正交投影，并给出投影误差到分布恢复的Wasserstein界，形式为W2(μ,Π_{M#}(μ*η_δ))≲δ^2。有限样本结果证明每个极小值映射的像都是接近真实支撑的流形，且比样本分辨率更精细，而不是把训练集作为像；标准神经网络可优化该目标。实验覆盖合成流形、不同维数流形并集、样本复杂度缩放和MNIST；单位圆示例中40个训练点加1000个噪声样本学习投影可准确识别圆且记忆可忽略，而扩散模型减小终止时间会改善几何但增强训练点附近记忆。",
+        "conclusion": "学习数据支撑上的最近点投影提供了一种以几何支撑为理想解的分布学习框架，其目标在优化器层面排除了返回训练样本的记忆解，不依赖容量限制、切线估计或坐标图。该投影可直接作为生成器，也可作为扩散生成末端的几何校正组件。作者认为相比需要靠早停、数据增强或后处理控制记忆的扩散模型，这种让目标本身偏向流形恢复的设计更可取。",
+        "key_details": "理论假设数据支撑为具有正reach的紧致光滑嵌入流形，单流形分析要求0<δ<r_M/3且0<underline δ<δ/2，实践建议underline δ取训练样本最大最近邻距离；不相交且维数不同的流形并集在δ小于reach时可逐分量处理。E1、E2、E3已足以实践，E4主要用于排除斜投影并保证正交投影；E2是关键几何项，也使返回训练点的解不最优，且无需限制网络容量。分布误差通过先平滑再投影的测度Π_{M#}(μ*η_δ)分析，给出W2≲δ^2的显式界；有限样本恢复定理来自配套工作，依赖光滑性与reach等假设，噪声带宽δ和underline δ的选择及E4的实践必要性是主要限制与待注意点。"
+      },
+      "affiliations": [
+        "Carnegie Mellon University"
+      ],
+      "affiliations_text": "Carnegie Mellon University",
+      "score": 5.1710536735366155,
+      "score_text": "5.2"
+    },
+    {
+      "id": "2611.28023v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128023v1-integrating-a-one-dimensional-convolutional-neural-network-with-nonlinear-model-predictive-control-for-slug-flow-modeling-and-control",
+      "source": "arxiv",
+      "title": "Integrating a one-dimensional convolutional neural network with nonlinear model predictive control for slug flow modeling and control",
+      "authors": [
+        "Asli Karacelik",
+        "Christian Holden"
+      ],
+      "authors_text": "Asli Karacelik, Christian Holden",
+      "abstract": "Severe slugging in pipeline--riser systems degrades production efficiency and threatens equipment integrity, motivating the development of accurate yet deployable control models. This paper presents a lightweight, data-driven modeling and control framework specifically designed for slug flow. First, we revisit a commonly used low-order mechanistic model and introduce two changes that improve physical plausibility and numerical robustness: (i) an explicit zero-outflow boundary during the starvation period at the riser top, and (ii) a reformulated expression for the liquid volume fraction at the riser top that enforces admissible bounds. Synthetic input--output trajectories generated by this model are then used to train a one-dimensional convolutional neural network (1D CNN) that parameterizes a neural ODE with an affine-in-control. Training employs an 8-step free-roll objective on standardized data; a differential sensitivity check confirms an explicit control channel. The learned model is embedded in a shooting-based nonlinear model predictive control (NMPC) scheme with bounded and rate-smoothed actuation. In closed-loop simulations at Δt = 0.1 second, the controller drives the output to a constant setpoint within approximately 15--18 seconds while maintaining smooth, bounded inputs and non-oscillatory transients. The results indicate that a simple 1D CNN, coupled with NMPC, can capture the characteristic oscillations and regime transitions of slug flow and deliver effective regulation with modest computational cost. Although training is conducted offline to ensure reproducibility, the architecture and identification procedure are designed for extension to online learning, providing a practical path toward adaptive slug-flow mitigation.",
+      "url": "http://arxiv.org/abs/2611.28023v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28023v1",
+      "tldr": "The paper presents a lightweight slug-flow modeling and control framework that trains a 1D CNN-parameterized, affine-in-control neural ODE on synthetic data from an improved low-order mechanistic model and embeds it in shooting-based NMPC to effectively regulate severe slugging with smooth, bounded inputs and modest computational cost.",
+      "detailed_reading": {
+        "motivation": "严重段塞流会降低油气产量并威胁设备完整性，因此需要既准确又可部署的模型来支撑NMPC。常用低阶机理模型存在物理一致性和数值鲁棒性不足，而纯数据驱动模型又需兼顾预测能力与计算成本。",
+        "method": "作者先修正Jahanshahi低阶机理模型：在段塞饥饿期对立管顶部施加显式零流出边界，并重写顶部液相体积分数表达式以保证有界；再用该模型生成合成输入-输出轨迹，标准化后训练1D CNN，由网络参数化带控制仿射项的神经ODE，采用8步自由滚动预测误差训练，并用微分灵敏度检查确认控制通道；最后将学习模型嵌入基于打靶法的NMPC，执行有界且速率平滑的输入动作。",
+        "result": "闭环仿真在Δt=0.1 s下约15–18 s将输出驱动到恒定设定值，输入平滑且有界，瞬态无振荡；学习模型能够再现段塞流特征振荡和流型转变，且计算成本适中。",
+        "conclusion": "简单的1D CNN耦合神经ODE与NMPC即可捕获段塞流关键动态并实现有效调节，为轻量、可部署的段塞流抑制提供路径；虽然训练离线以保证可复现，其架构和辨识流程面向在线学习扩展。",
+        "key_details": "训练数据来自修正低阶机理模型的合成轨迹而非现场数据，模型常数固定，数值上气体质量、液体质量和液位下限对求解稳定性关键；损失为8步自由滚动，NMPC采用打靶优化和速率平滑约束；主要局限是训练分布覆盖有限、对分布漂移泛化不足，且尚未开展在线或现场验证。"
+      },
+      "affiliations": [
+        "Norwegian University of Science and Technology"
+      ],
+      "affiliations_text": "Norwegian University of Science and Technology",
+      "score": 5.0540441097097375,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2611.28274v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128274v1-neural-fidelity-calibration-for-informative-sim-to-real-adaptation",
+      "source": "arxiv",
+      "title": "Neural Fidelity Calibration for Informative Sim-to-Real Adaptation",
+      "authors": [
+        "Youwei Yu",
+        "Lantao Liu"
+      ],
+      "authors_text": "Youwei Yu, Lantao Liu",
+      "abstract": "Deep reinforcement learning (RL) can transfer agile robot skills from simulation to the real world, but closing the sim-to-real gap by domain randomization requires expert physics knowledge, and simulator calibration from real data typically targets a few hand-picked parameters. Even then, simulators miss real-world effects, and environments reconstructed from onboard perception inherit sensing errors that limit policy improvement. We propose Neural Fidelity Calibration (NFC), which uses conditional flow matching to calibrate simulator physical parameters and residual fidelity domains online during deployment. Residual fidelity captures sim-to-real dynamics discrepancies and perception-induced environment uncertainty. NFC operates in a latent space so that realistic environments can be sampled from the inferred posterior for real-to-sim policy fine-tuning. The framework is informative: the pretrained policy is fine-tuned only when an anomaly is detected, sequential NFC seeds its proposal from the simulation-pretrained estimator, and a hallucination policy modulates posterior uncertainty following optimism in the face of uncertainty. NFC attains the most accurate posteriors among established simulation-based inference methods on five robots with up to 39 physical parameters and a 128x128 residual terrain. On a wheeled robot with a broken wheel axle deployed on snow, mud, and wet grass, NFC raises success on rough terrain from 26% to 70% and reduces orientation jerk by 88%. Code and videos will be released upon publication.",
+      "url": "http://arxiv.org/abs/2611.28274v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28274v1",
+      "tldr": "Neural Fidelity Calibration (NFC) uses conditional flow matching to jointly infer simulator physical parameters and residual sim-to-real/perception uncertainties online, enabling informative real-to-sim policy fine-tuning only when anomalies occur and substantially improving robot adaptation on challenging real-world terrain.",
+      "detailed_reading": {
+        "motivation": "深度强化学习可将敏捷机器人技能从仿真迁移到现实，但域随机化依赖专家物理知识，基于真实数据的仿真器校准通常只调少数人工挑选参数；即使校准后，仿真器仍遗漏真实效应，且机载感知重建环境会继承传感误差，限制策略改进。论文因此要解决两个障碍：仿真器并非良校准，以及现有核方法或优化式仿真推断难以扩展到部署中的高维参数与丰富条件。",
+        "method": "NFC将真实转移分解为标称仿真器项、残差保真项和噪声项，其中物理参数ψ描述质量、摩擦等，残差保真φ同时包含仿真与真实状态差Δs及感知与真实环境差Δe，并对ψ、φ和轨迹τ学习联合后验。核心用条件流匹配训练条件密度估计器qθ(ψ,φ|τ)，在仿真生成的参数—轨迹对上最大化对数密度，采样时从高斯经少量Euler步积分速度场得到后验样本；在线采用顺序NFC，以仿真预训练估计器作为提案先验，用新模拟轨迹热启动更新。为处理128×128残差地形等高维目标，潜NFC用TCN编码状态—动作历史、MLP编码融合感知图，并在仿真中利用噪声观测轨迹与特权干净轨迹的嵌入差定义潜残差φz，估计器推断q(ψ,φz|·)，MLP解码器Z映射回φ，速度场、编码器和解码器联合训练负对数密度与重构损失并交替更新。策略侧从NFC后验采样N个域重置并行仿真器，幻觉策略πh按历史嵌入采样每坐标门g∈(0,1]，以x̃=μ+g⊙(x-μ)调制样本扩散，控制策略与πh用PPO联合优化；部署时仅当Siamese异常检测器在最新H步窗口上超过阈值η时触发一轮自适应：推断后验、门控扩散、重置并行仿真器、微调策略并用门控样本更新顺序NFC，任务结束后离线复用真实数据精炼NFC、检测器和策略。",
+        "result": "在五个机器人、最多39个物理参数及128×128残差地形的仿真评测中，NFC相较已有基于仿真的推断方法取得最准确的后验。真实实验使用轮轴断裂的Jackal轮式机器人，在雪、泥和湿草等野外地形上部署，NFC将粗糙地形成功率从26%提升到70%，并将方向抖动降低88%。",
+        "conclusion": "论文表明，将仿真器校准与残差保真显式分离，并在潜空间用条件流匹配在线联合推断，可把仿真器无法建模的动力学差异和感知诱导环境不确定性纳入real-to-sim微调。配合异常触发的信息性策略自适应和乐观不确定性调制的幻觉策略，NFC能在高维参数与复杂野外条件下显著提升真实机器人任务成功率与运动平稳性。",
+        "key_details": "关键实现包括：残差保真同时建模残差动力学与残差环境，轮式机器人示例中ψ为13维、残差动力学15维、残差高程图为128×128；训练目标为负对数密度加权重构损失α||Z(φz)-φ||²，异常检测用仅仿真数据训练的二元交叉熵Siamese分类器，阈值取保留名义样本对的第99百分位；在线每轮用最新H步窗口推断并以门控样本作为下一轮提案，N个并行仿真器由后验样本重置，流匹配少步Euler采样利于在线使用。约束与局限是假设ψ、φ和τ具有紧支撑与有界密度以保持物理合理性，依赖仿真预训练、感知图或高程输入以及可学习的残差结构，需要选择窗口长度、并行环境数、重构权重和异常阈值，且仿真预算与真实数据有限，目标是部署期信息性微调而非穷举预训练。"
+      },
+      "affiliations": [
+        "Indiana University"
+      ],
+      "affiliations_text": "Indiana University",
+      "score": 4.955130789149211,
+      "score_text": "5.0"
+    },
+    {
+      "id": "2611.28267v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128267v1-failure-modes-and-data-efficient-remedies-for-transformer-based-prediction-of-viscoplastic-flows",
+      "source": "arxiv",
+      "title": "Failure Modes and Data-Efficient Remedies for Transformer-Based Prediction of Viscoplastic Flows",
+      "authors": [
+        "Maedeh Saberi",
+        "Hugo Franca",
+        "Maziyar Jalaal",
+        "Safa Jamali"
+      ],
+      "authors_text": "Maedeh Saberi, Hugo Franca, Maziyar Jalaal, Safa Jamali",
+      "abstract": "Fast and accurate prediction of viscoplastic flows remains a challenge in computational rheology due to yield surfaces, discontinuous gradients, and strongly nonlinear transitions between yielded and unyielded regions. Transformer-based neural operators such as RheOFormer have recently shown strong potential for surrogate modeling of non-Newtonian flows. However, their applicability to viscoplastic systems and their efficacy in recovering realistic flows remain poorly understood. In this work, we present the first systematic investigation of RheOFormer applied to steady Bingham channel flow. By isolating the problem to a simple geometry and constitutive model, we examine how dataset structure, numerical value range, and input representation govern the model's ability to interpolate and extrapolate within the parameter space. The data regimes in which RheOFormer remains accurate and those in which errors emerge are identified, particularly for plug-dominated flows and for conditions outside the velocity scales or flow structures represented during training. Upon identifying these failure modes, targeted enhancements to the input representation and loss formulation are introduced to better predict low-gradient plug regions. Logarithmic velocity representations and gradient-aware loss formulations substantially improve accuracy in challenging regimes where the baseline formulation fails. In addition, extrapolation errors are reduced by augmenting the training set with only a few strategically selected cases spanning the missing physical regimes. Finally, a single partially developed snapshot suffices for an accurate steady-state prediction, and the model outperforms simply copying its input throughout flow development. These results highlight the importance of appropriate field representation and parameter-space coverage for data-efficient neural-operator prediction of viscoplastic flows.",
+      "url": "http://arxiv.org/abs/2611.28267v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28267v1",
+      "tldr": "This paper systematically identifies the failure modes of the transformer-based RheOFormer surrogate for steady Bingham channel flows—particularly in plug-dominated and out-of-distribution regimes—and shows that logarithmic velocity representations, gradient-aware losses, and a few strategically selected training cases substantially improve accuracy and data efficiency.",
+      "detailed_reading": {
+        "motivation": "黏塑性流动的屈服面、梯度间断以及屈服区与非屈服塞流区之间的强非线性转变，使高保真数值模拟和快速代理预测都很困难；Transformer类神经算子RheOFormer已在非牛顿流中显示潜力，但其对黏塑性系统是否适用、何时失效以及如何以少量数据补救仍缺乏系统认识。本文因此以稳态Bingham槽道流为可控基准，剥离几何和本构复杂性，专门考察数据集结构、数值范围和输入表示如何支配插值与外推能力。",
+        "method": "以二维压力驱动Bingham槽道流为数据来源，用Basilisk求解器生成由Re、Bi和固定无量纲压力梯度Kbar=10定义的数据集：Re取0.01至1的9个值，每个Re对应21个从0到8Re均匀分布的Bi；模型输入为早期若干时刻的速度场快照及空间坐标，目标为稳态速度场，且不显式输入Re或Bi。RheOFormer先用前馈嵌入将快照投影到潜空间，经带残差连接和层归一化的多头自注意力编码全局空间耦合，再由随机傅里叶特征坐标嵌入和交叉注意力解码到任意空间网格，最终输出稳态ux。训练比较四种输入表示：原始ux、ux加横向梯度∂ux/∂y、ux加对数梯度log|∂ux/∂y|、以及对输入和目标均取log|ux|；损失采用相对L2损失，并进一步测试联合速度与梯度误差的Sobolev型梯度感知损失。基线使用前5个Δt=0.03的快照（t=0至0.12），训练后稳态预测通过一次前向完成，不积分后续瞬态。",
+        "result": "基线RheOFormer在训练参数范围内可较好插值，但在塞流主导的低梯度区域会系统性低估平台速度，并在训练未覆盖的速度尺度或流动结构上出现外推误差。采用对数速度表示和梯度感知/Sobolev损失可显著改善这些困难区域中塞流速度与屈服—非屈服过渡的预测；仅加入少量策略性选取、覆盖缺失物理区域的锚点案例，就能明显降低外推误差。时间输入实验表明，单个部分发展阶段的快照已足以获得较准确的稳态预测，且模型优于简单复制最后输入这一平凡预测器。",
+        "conclusion": "研究表明，对黏塑性流的神经算子代理而言，速度场的数值表示和训练参数空间覆盖与网络架构同等关键；合适的对数变换、梯度信息融入损失以及少量锚点数据，可把基线失效区转化为可接受甚至准确的预测区。该工作为数据高效、可解释地构建屈服应力流体代理模型提供了系统诊断框架，并强调需针对塞流低梯度和外推尺度分别设计表示与采样策略。",
+        "key_details": "关键实现细节包括：数据为二维稳态Bingham槽道流，具有已知精确稳态解和固定平直屈服面，速度场刻意保持未归一化以暴露速度尺度外推失败；对数变换使用log(|·|+δ)，δ=1e-8以避免壁面、静止初始场和塞流内部奇异性，但所有误差均在物理速度场上计算以便跨表示比较。损失以批内相对L2为主并加小常数ε防止除零，Sobolev损失中的预测梯度在训练时数值计算且与真值梯度采用同一差分格式。模型依赖自注意力的全局非局部交互、残差与层归一化、傅里叶特征坐标解码；基线超参为5帧输入、Δt=0.03、单输出稳态场，且不提供Re/Bi标签。局限性在于基准限于简单几何和Bingham本构、仅评估稳态单场预测，外推补救依赖锚点案例选择，梯度计算和表示变换也引入额外数值约束。"
+      },
+      "affiliations": [
+        "University of Amsterdam",
+        "Northeastern University",
+        "University of Cambridge"
+      ],
+      "affiliations_text": "University of Amsterdam, Northeastern University, University of Cambridge",
+      "score": 4.917832577206951,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.28260v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128260v1-neural-fidelity-calibration-turning-field-anomalies-into-simulation-fine-tuning",
+      "source": "arxiv",
+      "title": "Neural Fidelity Calibration: Turning Field Anomalies into Simulation Fine-Tuning",
+      "authors": [
+        "Youwei Yu",
+        "Lantao Liu"
+      ],
+      "authors_text": "Youwei Yu, Lantao Liu",
+      "abstract": "A policy that transfers from simulation to a lab robot often fails in the field. Calibrating a simulator from real-world data typically targets only a few hand-picked parameters, and even calibrated simulators fail to capture unmodeled dynamics, while environments reconstructed via onboard perception inherit sensing noise and artifacts. We propose Neural Fidelity Calibration (NFC), a framework based on conditional flow matching that infers online, directly from a robot's execution data, both simulator physical parameters and residual fidelity - the remaining dynamics discrepancy and the gap between perceived and true environment geometry. A simulation-trained anomaly detector determines when recalibration or fine-tuning is required using onboard sensory signals alone, while an exploration policy actively modulates posterior uncertainty using optimism in the face of uncertainty. Across five robot platforms with up to 39 calibrated parameters and a 128x128 residual terrain map, NFC achieves the most accurate posterior distributions compared to established simulation-based inference baselines. In physical outdoor experiments with a wheeled robot suffering an axle failure across snow, mud, and wet grass, NFC increases rough-terrain navigation success from 26% to 70% while reducing orientation jerk by 88%.",
+      "url": "http://arxiv.org/abs/2611.28260v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28260v1",
+      "tldr": "**TLDR:** Neural Fidelity Calibration (NFC) uses conditional flow matching to jointly infer simulator parameters and residual sim-to-real discrepancies online from a robot’s execution data, then triggers anomaly-based simulation fine-tuning to improve field robustness.",
+      "detailed_reading": {
+        "motivation": "从仿真迁移到实验室机器人的策略在野外常因未建模动力学、感知噪声和硬件故障而失败；传统校准只针对少量手工参数，且假设仿真器能完全匹配现实。作者希望仅凭机器人自身执行数据在线同时推断仿真物理参数与残余保真度，并在异常出现时触发仿真微调。",
+        "method": "NFC将真实转移分解为标称仿真器、残余动力学与噪声，并用条件流匹配从状态动作历史及高程或深度图中联合推断物理参数和残余保真度；因果TCN加MLP编码执行数据，以仿真中带噪与特权干净轨迹的嵌入差定义潜在残余，解码器重建残余动力学与128×128残差地形。训练目标为负对数密度加重建损失，部署时以仿真预训练估计器作提议先验并在线更新；仿真训练的TCN两样本检验异常检测器在99百分位阈值触发校准，幻觉策略按坐标门控后验样本围绕均值生成N个并行仿真域，与PPO联合训练并仅在被触发时微调策略。",
+        "result": "在五个机器人平台、最多39个参数和128×128残差地形上，NFC在全部十个仿真到仿真设置中取得最优后验平均对数密度，例如Jackal平坦/崎岖为1.21/0.69，而最强基线FM-MLP为0.26/-1.10；异常检测器在MuJoCo测试中达到0.97/0.80真阳性率，野外标记全部2160条异常轨迹。带NFC的PPO在全部十个设置中归一化回报最高，如Jackal崎岖0.82对0.69；在断左前轮轴的真实轮式机器人雪地、泥地和湿草地实验中，崎岖地形成功率从26%提升到70%，朝向抖动降低88%，平坦场景各方法均达100%。",
+        "conclusion": "NFC通过显式建模校准后残余动力学与感知环境误差，并把异常检测、后验推断和仿真微调闭环结合，使仿真器能跟随现场故障与分布偏移。结果表明该方法在高维参数和残差地形下后验更准确，并能显著提升真实野外故障机器人的rough-terrain导航成功率与运动平稳性。",
+        "key_details": "关键实现包括对参数与残余采用紧支撑有界密度先验，例如四轮机器人最多两个轮子损坏，无需真实异常标签或故障分类；用N个后验样本重置并行仿真器，在线单轮微调约0.2秒，在线NFC训练约1.75秒并与2秒执行窗口并行，CMA-ES需100次而非10次仿真迭代故不适合在线。异常门限按99%特异性校准，幻觉门控逐坐标在0到1之间缩放后验散布，策略与门控用PPO优化；局限是崎岖环境中感知进入条件后精度下降，参数维度增大也降低后验精度，固定随机基方法难以适应高维条件。"
+      },
+      "affiliations": [
+        "Indiana University"
+      ],
+      "affiliations_text": "Indiana University",
+      "score": 4.727447878052324,
+      "score_text": "4.7"
+    },
+    {
+      "id": "2611.28305v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128305v1-algebraic-observability-for-power-system-dynamic-state-estimation",
+      "source": "arxiv",
+      "title": "Algebraic Observability for Power System Dynamic State Estimation",
+      "authors": [
+        "Akhila Kandivalasa",
+        "Marcos Netto"
+      ],
+      "authors_text": "Akhila Kandivalasa, Marcos Netto",
+      "abstract": "Existing observability methods for dynamic state estimation are developed for ordinary differential equation (ODE) models, whereas power systems are naturally described by differential-algebraic equations (DAEs). Applying these methods generally requires a DAE-to-ODE transformation, usually Kron reduction, which may obscure the role of algebraic variables and network constraints. This paper presents an algebraic observability framework that operates directly on nonlinear power system DAEs and preserves their structure. A Jacobian rank test constructed from the model relations and their successive derivatives certifies the algebraic dependence of differential and algebraic variables on the known inputs and measurements. A reduced prolongation that differentiates only the stator relations keeps the number of latent indeterminates fixed as the prolongation order grows, which makes the test scalable. We establish the relationship between this rank test and hyper-regularity, an alternative framework for algebraic observability, and show that algebraic observability relates to local observability. We demonstrate algebraic observability on a single-machine decentralized setup, the WSCC 9-bus 3-machine system, and the IEEE 39-bus 10-machine system. The 39-bus test, with 257 latent indeterminates, completes in about 30 s.",
+      "url": "http://arxiv.org/abs/2611.28305v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28305v1",
+      "tldr": "This paper proposes a scalable algebraic observability framework that tests power system dynamic state estimation directly on nonlinear differential-algebraic equation models—without Kron reduction—using a Jacobian rank test with reduced prolongation, and connects it to hyper-regularity and local observability while demonstrating it on standard power system test cases.",
+      "detailed_reading": {
+        "motivation": "现有动态状态估计的可观测性方法主要针对ODE模型，而电力系统天然由DAE描述；通常需先做Kron reduction等DAE-to-ODE变换，这会掩盖代数变量和网络约束的作用并破坏稀疏结构。因此需要一种不依赖变换、直接在非线性电力系统DAE上判定可观测性的框架。",
+        "method": "本文基于Diop-Fliess微分代数可观测性理论，将系统变量划分为已知变量w（输入与量测）和潜变量ℓ（未测状态及未测代数变量），通过模型关系及其有限阶时间导数构造Jacobian秩检验，以判定ℓ是否代数依赖于w。为使检验可扩展，作者将转子角、母线电压角和电流相量角替换为正余弦对并由单位圆约束联系，形成微分多项式DAE模型；同时采用仅对定子关系求导的约化延拓，并利用电机方程消去高阶导数，使每台电机的潜变量数保持固定。文中还建立该秩检验与Sato超正则性框架的等价关系，并说明其与局部可观测性的联系。",
+        "result": "在单机分散式设置、WSCC 9-bus 3-machine系统和IEEE 39-bus 10-machine系统上验证了所提代数可观测性方法，全程无需Kron reduction。IEEE 39-bus系统含257个潜变量，秩检验约30秒完成；相比之下，Lie导数法在仅21个状态的Kron约化WSCC模型上约需2小时。",
+        "conclusion": "该框架可直接在保留网络约束和代数变量的电力系统DAE上联合判定微分变量与代数变量的可观测性，避免了DAE-to-ODE变换带来的结构失真。由于代数可观测性与超正则性等价，通过秩检验还可在正则轨迹上推出非线性DAE的局部可观测性，为动态状态估计提供可扩展的前置分析工具。",
+        "key_details": "方法针对半显式index-1 DAE，要求∂g/∂y局部非奇异，并在正则轨迹条件下讨论局部可观测性；核心检验是有限阶延拓后Jacobian的列满秩。微分多项式化通过正余弦变量和单位圆约束处理角度非线性，约化延拓只对定子关系求导，并通过电机方程消去高阶导数，从而将每台电机的潜变量数固定为17。关键优势是无需Kron reduction且计算可扩展，39-bus、257个潜变量的算例约30秒完成；局限在于结论依赖模型正则性与局部微分代数条件，主要给出可观测性判定而非估计器设计。"
+      },
+      "affiliations": [
+        "New Jersey Institute of Technology"
+      ],
+      "affiliations_text": "New Jersey Institute of Technology",
+      "score": 4.589407733473421,
+      "score_text": "4.6"
+    },
+    {
+      "id": "2611.28256v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128256v1-flowpac-flow-guided-visual-pruning-and-action-caching-for-efficient-vla-inference",
+      "source": "arxiv",
+      "title": "FlowPAC: Flow-Guided Visual Pruning and Action Caching for Efficient VLA Inference",
+      "authors": [
+        "Jintao Cheng",
+        "Yipu Zhang",
+        "Haozhe Wang",
+        "Lin Jiang",
+        "Jiang Xu",
+        "Wei Zhang"
+      ],
+      "authors_text": "Jintao Cheng, Yipu Zhang, Haozhe Wang, Lin Jiang, Jiang Xu, Wei Zhang",
+      "abstract": "Vision-Language-Action (VLA) models have emerged as a powerful paradigm for embodied AI, yet their high inference latency and memory footprint remain major barriers to edge deployment. Existing training-free acceleration techniques, such as visual token pruning and action caching, typically rely on static resource allocation. This mismatch with dynamic robotic interactions not only degrades control performance but also causes severe hardware inefficiencies, including fragmented KV-cache layouts and wasted compute on non-critical regions. To address this, we propose FlowPAC, a locality-aware framework that leverages task-aware optical flow as a shared physical signal to jointly optimize visual and action computation. Specifically, we introduce Direction-Aware Trajectory Propagation (DATP) and Locality-Aware Contiguous Token Selection (LACT) to jointly handle visual token dynamics and enforce spatial locality, reducing memory fragmentation and enabling efficient KV-cache compression. This is complemented by Flow-Conditioned Action-Block Refresh (FCAR) for adaptive action computation based on motion dynamics. Extensive closed-loop evaluations on LIBERO demonstrate that FlowPAC achieves a 2.13$\\times$ end-to-end speedup over the dense baseline while essentially maintaining the success rate with 30% visual-token retention. These results validate that aligning computation allocation with both physical dynamics and hardware constraints is essential for efficient VLA deployment on edge systems.",
+      "url": "http://arxiv.org/abs/2611.28256v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28256v1",
+      "tldr": "FlowPAC is a training-free, locality-aware VLA acceleration framework that uses task-aware optical flow as a shared signal to jointly guide future-aware visual token pruning and adaptive action caching, achieving a 2.13× end-to-end speedup while essentially maintaining success rate with only 30% visual-token retention.",
+      "detailed_reading": {
+        "motivation": "VLA模型在具身智能中表现强，但推理延迟和内存占用阻碍边缘部署；现有免训练视觉token剪枝与动作缓存多采用静态资源分配，与机器人交互的动态性不匹配，导致当前帧剪枝丢弃未来关键区域、固定刷新在平稳期浪费算力而在剧变期引入控制滞后，并造成KV-cache布局碎片化和非关键区域计算浪费。",
+        "method": "FlowPAC以任务感知光流为共享物理信号联合优化视觉与动作计算：DATP对相邻观测计算稠密光流并聚合为patch级运动矢量，结合指令条件语义相关性经语义加权池化估计运动中心与主方向，沿符号光流传播H步形成未来关键走廊，再以高斯核和折扣κ计算轨迹分数，并与语义分数、运动幅值归一化加权排序，按每视角固定预算K_v选token；LACT将token划分为对齐b×b块，在高分轨迹区域搜索一/二组件块模板，先选完整块再用相邻高分patch补齐精确预算，并在前缀层L_w才执行单次gather物理打包，语言token顺序与保留视觉token的旋转位置ID不变，KV按同一索引压缩，使后续前缀长度变为K_g+K_w+N_lang；FCAR用语义加权双视角光流幅值r_t=max(r_t^g,r_t^w)，转为当前episode内的因果经验百分位q_t，再按B_t=clip(round[D(ρ_min+q_t(ρ_max−ρ_min))],2,D)决定动作专家刷新次数，刷新点均匀分布于D步轨迹并包含边界，刷新处计算并缓存各层attention/FFN残差，复用处跳过算子并加回最近残差，但不改变flow-matching求解步数、动作状态和时间步嵌入更新。",
+        "result": "在LIBERO闭环评测中，FlowPAC相对稠密π0.5基线取得2.13×端到端加速，并在仅保留30%视觉token时基本维持成功率；当前帧剪枝方法FastV和VLA-ADP在紧预算下难以保留后续交互关键区域，尤其在LIBERO-Long长时任务上成功率下降更明显，而FlowPAC通过未来感知token选择和动作刷新调度在匹配保留率比较中表现更稳。",
+        "conclusion": "结果表明，将计算分配同时对齐物理动态与硬件约束，是VLA边缘高效部署的关键；以任务感知光流作为共享信号，可在一个免训练框架内联合决定视觉计算“保留在哪里”和动作计算“何时刷新”，在显著降低前缀KV与动作专家重复计算的同时保持控制性能。",
+        "key_details": "关键实现包括：对π0.5的profiling显示动作去噪占77.6%运行时间（236.3 ms），视觉token占968个前缀token中的768个（79.3%）；DATP无需额外训练或显式轨迹预测，弱运动信号时禁用空间先验以避免不可靠偏置，LACT以精确预算约束最大化得分并惩罚空间/内存碎片，延迟物理打包保留早期跨token交互；FCAR不缩短原10步求解轨迹，仅选择性复用动作专家块残差，首个query设q_0=1且新episode清空运动历史；评测使用官方π0.5 LIBERO checkpoint、双相机视角、每任务50次试验共2000 episodes、A100-PCIE-40GB BF16 batch size 1并报告P50/P95延迟；局限是主要在单一模型与LIBERO仿真验证，依赖光流和指令条件语义相关性质量，H、Δ、σ、κ、α/β/γ、b、L_w、ρ_min/ρ_max等超参在预览中未完整给出，真实机器人部署与光流开销仍需进一步评估。"
+      },
+      "affiliations": [
+        "The Hong Kong University of Science and Technology (Guangzhou)",
+        "Northeastern University",
+        "South China Normal University",
+        "The Hong Kong University of Science and Technology"
+      ],
+      "affiliations_text": "The Hong Kong University of Science and Technology (Guangzhou), Northeastern University, South China Normal University, The Hong Kong University of Science and Technology",
+      "score": 4.510382242490159,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.28308v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/24/261128308v1-probing-invisible-actuation-shifts-for-test-time-calibration-of-visuomotor-policies",
+      "source": "arxiv",
+      "title": "Probing Invisible Actuation Shifts for Test-time Calibration of Visuomotor Policies",
+      "authors": [
+        "Jie Liu",
+        "Hui Xie",
+        "Qinfeng Feng",
+        "Joaquin Vanschoren"
+      ],
+      "authors_text": "Jie Liu, Hui Xie, Qinfeng Feng, Joaquin Vanschoren",
+      "abstract": "Visuomotor policies such as vision-language-action models (VLAs) and world action models (WAMs) are increasingly deployed on robots whose cameras and controllers differ from those used to collect their training data. Such deployment introduces two kinds of shifts. Visual shifts, such as a moved camera, change the observed images; actuation shifts, such as a retuned controller, latency or an added payload, change only how commanded actions translate into robot motion. Invisible to the policy, actuation shifts sharply degrade its success, even under domain randomization. In this work, we propose PEA, a test-time calibration method that identifies actuation shifts through active probing before task execution. Specifically, before each episode, the robot executes a short probe that moves one arm axis at a time with known commands, so that gain, delay and drift leave separable traces. A closed-form identifier estimates them from the response, and PEA compensates every subsequent command so that the robot executes the motion the policy intends. The identifier requires no policy training and thus applies to any frozen visuomotor policy. Since visual shifts remain visible to the policy, PEA further adapts the frozen policy with a removable low-rank adapter, addressing coupled visual and actuation shifts. Experiments on LIBERO with a WAM and a VLA show that, without any policy training, the identifier of PEA recovers most of the success lost to actuation shifts and generalizes to shifts unseen during training (e.g., from 61.0% to 89.7% on LIBERO-Spatial with Cosmos-Policy).",
+      "url": "http://arxiv.org/abs/2611.28308v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28308v1",
+      "tldr": "The paper proposes PEA, a test-time calibration method that uses a short active probe to identify and compensate for invisible actuation shifts (e.g., gain, delay, and drift) in frozen visuomotor policies, while a removable low-rank adapter handles visual shifts.",
+      "detailed_reading": {
+        "motivation": "部署时相机与控制器常与训练数据不一致，带来视觉偏移和驱动偏移；视觉偏移改变图像，而驱动偏移只改变指令到运动的映射，首帧与指令不变，因此对策略不可见，即使域随机化也会显著降低成功率。现有测试时自适应多在执行中或失败后推断动力学，或依赖随机激励与学习模块，证据晚且难辨识，因此需要任务前主动探测。",
+        "method": "PEA在每回合前用30步自由空间探针：先2步静止，随后对6个机械臂轴逐一施加零和双脉冲+c,+c,-c,-c（c=0.5），最后开合空夹爪；记录末端每步位置与旋转增量，按轴取4个推动步及后3步组成L=7响应。用低维模型Δx_(t,i)≈k_i g_i a_(t−δ,i)+β_i建模各轴增益g_i、共享延迟δ（≤3）和漂移β_i，闭式辨识器从响应估计参数。随后对每个指令做增益与漂移逆补偿a'_t,i=a_t,i/g_i+b_i（b_i=−β_i/(k_i g_i)），延迟用保持规则处理；对视觉偏移在冻结策略上附加可移除LoRA适配器，并用同一探针条件化，离线仅用训练偏移族和特权教师校准，测试时不调参。",
+        "result": "在LIBERO上使用WAM Cosmos-Policy和VLA OpenVLA-OFT，PEA无需策略训练即可恢复大部分因驱动偏移损失的成功率：Cosmos-Policy在LIBERO-Spatial未见偏移下从61.0%提升到89.7%，并对刚度、负载和延迟等训练中未见的偏移泛化。视觉与驱动耦合偏移下，可移除LoRA适配器进一步改善，例如Cosmos-Policy在LIBERO-Spatial耦合偏移下从42.8%显著提升，且基本保持标称性能。",
+        "conclusion": "PEA将驱动偏移视为需要主动激励才能观测的系统辨识问题，用任务前短探针、闭式估计和指令补偿解决不可见执行偏移，用LoRA处理可见视觉偏移，且保持策略冻结、策略无关、每回合仅30步交互。实验表明该方法能显著提升WAM/VLA在多种未见偏移及耦合偏移下的鲁棒性，具有部署期校准价值；但模型对刚度仅作有效增益与滞后近似，未覆盖跨轴耦合与时变负载。",
+        "key_details": "关键实现包括：探针采用零和双脉冲且逐轴激励以分离增益、延迟和漂移；测量末端位置差乘100、旋转向量乘10，响应窗口为4个推动步加后3步以捕获≤3步延迟；闭式辨识器由经典系统辨识组件组装并离线校准一次，测试时不更新策略权重也不在测试偏移上调参。约束为冻结策略、每回合最多K=30步自由空间交互、离线仅用训练偏移族和特权教师；主要局限是低维一阶模型对刚度、载荷、跨轴耦合和时变动力学近似有限。"
+      },
+      "affiliations": [
+        "Eindhoven University of Technology",
+        "The University of Hong Kong"
+      ],
+      "affiliations_text": "Eindhoven University of Technology, The University of Hong Kong",
+      "score": 4.494565458971796,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.28286v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128286v1-scalable-beckmann-maps-improve-one-step-generation",
+      "source": "arxiv",
+      "title": "Scalable Beckmann Maps Improve One-step Generation",
+      "authors": [
+        "Ulrik Unneberg",
+        "Shiyi Wang",
+        "Lee Cheuk-Kit",
+        "Felix Berg",
+        "Boris Kozinsky",
+        "Yilun Du",
+        "Michael S. Albergo",
+        "Eric Vanden-Eijnden"
+      ],
+      "authors_text": "Ulrik Unneberg, Shiyi Wang, Lee Cheuk-Kit, Felix Berg, Boris Kozinsky, Yilun Du, Michael S. Albergo, Eric Vanden-Eijnden",
+      "abstract": "Beckmann Transport Models (BTM) learn one-step generative maps end-to-end from data, without a teacher, a distillation stage, or pretrained features. We introduce Scalable Beckmann Maps (SBM), which bring to BTM the two ingredients behind the quality of modern multistep generators: classifier-free guidance (CFG) and a training recipe that scales, while keeping sampling at a single network evaluation. CFG combines conditional and unconditional velocity or score predictions, which a Beckmann map does not have. Our guidance rests on one observation: the BTM current is a positive multiple of an autonomous denoising field, to which CFG applies as it does to a velocity. With exact denoisers this gives guided BTM. In practice we substitute the map's own conditional and null predictions for the denoisers, which requires no additional network and introduces a bias that we characterize. We show that the guided update is consistent with a guided conservation equation, and that guidance can move the boundaries between basins, sending more noise to the modes a condition favors. Trained from scratch in the latent of a representation autoencoder, SBM reaches a one-step FID of 1.6 on ImageNet 256x256 without a teacher or a feature loss, outperforming the Improved-MeanFlow baseline with 3.2x fewer FLOPs. In text-to-image generation it reaches a GenEval score of 0.86 with one network evaluation. As a world model, where we train without guidance, the recipe alone outperforms DriftWorld on all five metrics of two robot-manipulation benchmarks, with 1.9-2.8x less training compute and no pretrained auxiliary feature encoder.",
+      "url": "http://arxiv.org/abs/2611.28286v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28286v1",
+      "tldr": "Scalable Beckmann Maps (SBM) add classifier-free guidance and a scalable training recipe to one-step Beckmann Transport Models, enabling high-quality single-network-evaluation generation without a teacher or distillation and achieving strong image, text-to-image, and world-model results.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Harvard University",
+        "Capital Fund Management",
+        "Imperial College London",
+        "New York University"
+      ],
+      "affiliations_text": "Harvard University, Capital Fund Management, Imperial College London, New York University",
+      "score": 4.434410252908229,
+      "score_text": "4.4"
+    },
+    {
+      "id": "2611.28319v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128319v1-learning-a-food-world-model-that-predicts-the-next-state-from-production-data",
+      "source": "arxiv",
+      "title": "Learning a Food World Model That Predicts the Next State from Production Data",
+      "authors": [
+        "Inkyu Sa",
+        "Gaurav Kuppa",
+        "Steve Van der Hoeven",
+        "Konstantin Stulov",
+        "Rajat Bhageria",
+        "Luis Rayas"
+      ],
+      "authors_text": "Inkyu Sa, Gaurav Kuppa, Steve Van der Hoeven, Konstantin Stulov, Rajat Bhageria, Luis Rayas",
+      "abstract": "Food assembly robots pick ingredients from a pan, and every pick must deliver a target weight. We learn a world model of food picking from 61,773 production picks, labeled automatically by a camera and a scale (self-supervised learning). From the pre-pick heightmap of the pan on a 2.5 mm grid, the commanded pick action, the food and the utensil, the model predicts the post-pick heightmap and the picked mass with uncertainty. We evaluate the mass prediction on 12,294 held-out picks of nine foods. The production controller keeps each pick near its commanded target. The model's root-mean-square error (RMSE) of 10.93 g is 9% lower than that of the commanded target or of a per-food mean. This RMSE is 24% lower than that of the controller's internal mass estimate. Gradient-boosted trees on 20 hand-crafted features have a 0.2 g lower RMSE, but they predict only the mass, not the next state that planning and policy learning need. Using the predicted uncertainty, we decline the most uncertain picks and answer 89.4% of picks with an RMSE of 10.28 g. The prediction barely responds to the commanded volume and depth, because they vary little in closed-loop production. The model also fails without warning at target weights not seen in training. Future directions include action-primitive conditioning and a more general model across foods and utensils. We give recommendations for learning world models from production data.",
+      "url": "http://arxiv.org/abs/2611.28319v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28319v1",
+      "tldr": "The paper learns a self-supervised food-picking world model from 61,773 production picks that predicts the post-pick heightmap and picked mass with uncertainty, achieving a 10.93 g RMSE on held-out picks—9% better than the commanded target or per-food mean and 24% better than the controller’s internal estimate—while using predicted uncertainty to decline unreliable picks.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Chef Robotics"
+      ],
+      "affiliations_text": "Chef Robotics",
+      "score": 4.07431981509101,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.28310v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128310v1-scheduling-of-variable-speed-pumped-storage-via-hierarchical-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Scheduling of Variable-Speed Pumped Storage via Hierarchical Reinforcement Learning",
+      "authors": [
+        "SangWoo Park",
+        "Kyung-bin Kwon",
+        "Dam Kim"
+      ],
+      "authors_text": "SangWoo Park, Kyung-bin Kwon, Dam Kim",
+      "abstract": "Variable-speed pumped storage hydropower (VSPSH) plants modulate power continuously in both generation and pumping, a match for the net-load ramps of rising wind and solar. Their flexibility is bounded by hydraulics rather than by a power rating, so the deliverable power range shifts with net head and excludes small outputs entirely. This paper addresses bidding and dispatch for such a plant across a two-settlement market with a hierarchical reinforcement-learning formulation. Its two layers are circularly dependent: a real-time (RT) bid is defined only against a cleared day-ahead (DA) commitment, and the DA reward only against an RT dispatch policy. Our proposed feasibility-constrained domain randomization breaks the cycle by training the RT layer on generated deliverable DA schedules before any bidding policy exists; the DA layer then optimizes against that frozen RT behavior, and the two alternate. Learning a policy at once profitable and deliverable is obstructed by the nonconvex operating region: penalizing infeasibility competes against the revenue the offer earns, discouraging an undeliverable offer without preventing one. We therefore pursue safety through action-space modification rather than through the reward, combining action masking of the bid space, projection of each commitment before settlement, and replacement by a fail-safe controller. Over 48 out-of-sample days it earns $3,313/day more than an equivalent penalty formulation while holding undeliverable commitment at a median of zero, which the penalty formulation does not, and no ablation improves on it without giving up deliverability or the storage target.",
+      "url": "http://arxiv.org/abs/2611.28310v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28310v1",
+      "tldr": "This paper proposes a hierarchical reinforcement-learning framework for bidding and dispatching variable-speed pumped storage in two-settlement electricity markets, using feasibility-constrained domain randomization to resolve the day-ahead/real-time circular dependency and action-space modification—rather than reward penalties—to ensure profitable and deliverable commitments.",
+      "detailed_reading": null,
+      "affiliations": [
+        "New Jersey Institute of Technology",
+        "Chungnam National University",
+        "Pacific Northwest National Laboratory"
+      ],
+      "affiliations_text": "New Jersey Institute of Technology, Chungnam National University, Pacific Northwest National Laboratory",
+      "score": 4.040482186289429,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.28053v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128053v1-5g-nr-sensing-of-robotic-arm-motion-in-indoor-factory-environments",
+      "source": "arxiv",
+      "title": "5G NR Sensing of Robotic Arm Motion in Indoor Factory Environments",
+      "authors": [
+        "Neeraj Varshney",
+        "Anuraag Bodi",
+        "Steve Blandino",
+        "Jian Wang",
+        "Camillo Gentile",
+        "Nada Golmie"
+      ],
+      "authors_text": "Neeraj Varshney, Anuraag Bodi, Steve Blandino, Jian Wang, Camillo Gentile, Nada Golmie",
+      "abstract": "This paper investigates the performance of monostatic Integrated Sensing and Communication (ISAC) systems for tracking robotic arm kinematics in industrial factory (InF) environments. Building on a part-specific quasi-deterministic channel model previously derived from high-resolution robotic-arm measurements using our context-aware channel sounder and digital twin, we develop a framework for generating arbitrary articulated motion profiles through hierarchical kinematic transformations. By integrating this high-fidelity target model with the standardized 3GPP InF channel model, we employ 5G New Radio (NR) Positioning Reference Signals (PRS) as the sensing waveform to enable comprehensive system-level evaluation. Simulations are conducted for both sparse clutters (InF-SH) and dense clutters (InF-DH) scenarios using 3GPP-compliant antenna radiation patterns and analog beamforming, allowing us to assess the impact of industrial clutter on sensing performance. The results show that while high estimation accuracy is achievable under Line-of-Sight (LOS) conditions, dense clutter in InF-DH environments introduces severe blockage that significantly limits sensing reliability. In particular, the effective sensing coverage in InF-DH is drastically reduced, with detection probability dropping to approximately \\(P_d \\approx 10\\,\\%\\) even when the robotic arm is located directly beneath the Transmission Reception Point (TRP). Furthermore, in InF-SH, achieving a high detection probability (e.g., \\(P_d \\geq 90\\,\\%\\)) requires the target to remain in close proximity to the TRP, with an effective coverage radius of approximately 13 m.",
+      "url": "http://arxiv.org/abs/2611.28053v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28053v1",
+      "tldr": "This paper evaluates 5G NR PRS-based monostatic ISAC sensing of an articulated robotic arm in 3GPP indoor factory environments using a measurement-derived kinematic target model, showing high LOS accuracy but severe dense-clutter blockage that reduces detection probability to about 10% and limits ≥90% detection coverage to roughly 13 m in sparse clutter.",
+      "detailed_reading": null,
+      "affiliations": [
+        "National Institute of Standards and Technology",
+        "Prometheus Computing LLC"
+      ],
+      "affiliations_text": "National Institute of Standards and Technology, Prometheus Computing LLC",
+      "score": 3.978661628513263,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.28158v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128158v1-measuring-and-teaching-language-model-agents-to-act-on-delayed-consequences",
+      "source": "arxiv",
+      "title": "Measuring and Teaching Language Model Agents to Act on Delayed Consequences",
+      "authors": [
+        "Shardul Bansal",
+        "Seth Schilbe",
+        "Jarrod Barnes"
+      ],
+      "authors_text": "Shardul Bansal, Seth Schilbe, Jarrod Barnes",
+      "abstract": "Language model agents are increasingly asked to run ongoing multi-day operations rather than finish isolated single-turn tasks. In daily operations, today's choices reshape later observations and cash constraints because empty shelves hide lost walk-in demand, short-shipped customers quietly shrink future orders weeks later, and emergency buying drains working capital. We introduce SMB Bench, a calibrated 90-day wholesale simulator with 18 causally paired tasks and an 859-run frontier trace dataset, to ask what experience and learning signal make an agent better at noticing, attributing, and acting on the delayed consequences of its own decisions in unseen businesses. Across 16 frontier models, only 3 outperform a fixed buying rule; models often record a relevant diagnosis in their notes without changing later purchases in time, showing that diagnosing a problem, changing behavior, and improving a business are separate achievements. To study how experience improves those failures in an open model (Qwen3.8-27B), we used training-business records to identify operational rules and archived frontier quarters as starting states to continue from rather than transcripts to copy. On an unseen test business under identical evaluation instructions, the trained policy followed customer-protection commitments more consistently and reduced severe-loss quarters, while the additional profit benefit remained uncertain. Carrying those commitments through the quarter exposed the cost of fulfilling them, as early-quarter stocking habits left the buyer relying on emergency supply and a deteriorating supplier. The results separate recognizing a delayed effect, acting on it consistently, and coordinating surrounding decisions so that the response improves profit. SMB Bench connects these observations to a learning method by turning archived decisions and their consequences into reusable training experience.",
+      "url": "http://arxiv.org/abs/2611.28158v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28158v1",
+      "tldr": "The paper introduces SMB Bench, a 90-day wholesale simulator and 859-run frontier trace dataset showing that language-model agents often diagnose but fail to act on delayed consequences, and it demonstrates that training on archived decision–consequence experience can improve consistency and reduce severe losses, though profit gains remain uncertain.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Oro AI"
+      ],
+      "affiliations_text": "Oro AI",
+      "score": 3.9753113573798817,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.28272v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128272v1-what-do-differentiable-rule-learners-need-flare-fuzzy-rules-with-additive-evidence",
+      "source": "arxiv",
+      "title": "What Do Differentiable Rule Learners Need? FLARE: Fuzzy Rules with Additive Evidence",
+      "authors": [
+        "Javier Fumanal-Idocin",
+        "Javier Andreu-Perez"
+      ],
+      "authors_text": "Javier Fumanal-Idocin, Javier Andreu-Perez",
+      "abstract": "Rule learners are used where transparency and accountability are required, because they give practitioners patterns they can read. Learning rules is a discrete problem, so neurosymbolic pipelines that use rules as explanations rely on relaxations such as the straight-through estimator. However, these differentiable rule learners often lag behind both classical rule learners and black-box classifiers in terms of performance. We study which parts of a rule-based classifier affect performance, and how well gradient-based training learns each of them. We found that most of the performance comes from how the rules are weighted: random rules with learned weights are already more accurate than every published differentiable rule learner we tested. Based on our results, we propose FLARE (Fuzzy Learned-Antecedent Rule Evidence), a differentiable rule learner that learns simple rules that combine to make the final decision. We also propose a learned encoding for variables with thousands of categories. We test FLARE on tabular data, using 42 datasets of OpenML-CC18 and the 38 classification tasks of TabArena. On CC18, FLARE exceeds the compared rule learners by 7.69 to 12.38 macro-F1 points and performs comparably to random forests, while remaining 1.00 to 1.11 points below tuned gradient-boosted trees. On TabArena it ranks at the same level as random forests and ahead of the other rule learners. As the concept-to-label head of a concept bottleneck model, FLARE is the best rule-based head in five of six settings. On graphs, it is competitive on PubMed and EMOGI but falls behind graph neural networks on Cora and Citeseer. Our code is available at https://github.com/Fuminides/FLARE",
+      "url": "http://arxiv.org/abs/2611.28272v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28272v1",
+      "tldr": "This paper shows that rule weighting, rather than complex rule learning, drives most of the performance of differentiable rule learners, and introduces FLARE, a differentiable fuzzy rule learner with additive rule evidence and a learned categorical encoding that matches random forests on tabular benchmarks and outperforms existing rule learners.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Essex"
+      ],
+      "affiliations_text": "University of Essex",
+      "score": 3.94858489609996,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.28171v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128171v1-refinekv-query-adaptive-kv-cache-compression-via-attention-error-bounds",
+      "source": "arxiv",
+      "title": "RefineKV: Query-Adaptive KV Cache Compression via Attention-Error Bounds",
+      "authors": [
+        "Kewei Lian",
+        "Jiayi Zhai",
+        "Anji Liu"
+      ],
+      "authors_text": "Kewei Lian, Jiayi Zhai, Anji Liu",
+      "abstract": "Repeatedly accessing the full key--value (KV) cache is a major bottleneck in long-context language model decoding. We find that small query-specific subsets can accurately approximate full attention, yet their union covers nearly the entire cache, motivating query-adaptive access for the KV cache. A natural approach is to split the KV cache into clusters, using compact representatives for clusters that incur negligible error while expanding the rest to their original KV entries. We derive a selection criterion from an upper bound on attention-output error, which reveals two complementary factors governing the error: importance measures the impact of a cluster, while distortion measures how faithfully the cluster can be represented. Based on this criterion, we propose RefineKV, a decoding-time query-adaptive KV compression method. Experiments on two models and three benchmarks demonstrate that RefineKV retains near-full-attention quality while achieving up to 7.6x speedup in the attention phase and 1.66x faster decoding, establishing a new quality-latency Pareto frontier.",
+      "url": "http://arxiv.org/abs/2611.28171v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28171v1",
+      "tldr": "RefineKV is a decoding-time query-adaptive KV cache compression method that uses an attention-output error bound combining cluster importance and distortion to selectively keep compact representatives or expand clusters, retaining near-full-attention quality while achieving up to 7.6× attention speedup and 1.66× faster decoding.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.660727805202408,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.28227v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128227v1-feedback-shortcut-speculative-decoding-for-latent-feedback-transformers",
+      "source": "arxiv",
+      "title": "Feedback Shortcut: Speculative Decoding for Latent Feedback Transformers",
+      "authors": [
+        "Benhao Huang",
+        "Xuezhe Ma",
+        "Hector Liu"
+      ],
+      "authors_text": "Benhao Huang, Xuezhe Ma, Hector Liu",
+      "abstract": "Feeding each position's top-layer hidden state back into the next position's input improves Transformer performance. However, this feedback breaks speculative decoding, since verifying a drafted token requires the top-layer state from its preceding position, which forces the draft to rely on an approximate stand-in. Training the model to adapt to this stand-in can lower the exact-decoding performance ceiling, while using it at inference time further introduces approximation error. We propose Feedback Shortcut to address both bottlenecks. First, state alignment trains a lightweight projection from multi-token prediction head states to stand-ins, leaving base model training untouched. Second, pipelined correction re-evaluates each draft using its predecessor's newly computed state, a much closer proxy to true feedback. Running this correction inside the verification pass of subsequent drafts improves accuracy with zero extra calls. Across 135M and 780M scales, Feedback Shortcut stays within $10^{-4}$ bits per byte of the exact-decoding ceiling on Paloma and accelerates decoding by 2.4-2.8x with about 2% more training compute than the latent feedback Transformer. At large batch sizes, skipping correction still preserves Transformer speed and over 80% of latent feedback's gains.",
+      "url": "http://arxiv.org/abs/2611.28227v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28227v1",
+      "tldr": "**Feedback Shortcut enables speculative decoding for latent feedback Transformers by aligning lightweight projections from multi-token-prediction head states to approximate missing feedback and pipelining draft correction with predecessors’ newly computed states, achieving near-exact decoding quality with 2.4–2.8× speedup at only ~2% extra training compute.**",
+      "detailed_reading": null,
+      "affiliations": [
+        "Institute of Foundation Models",
+        "USC"
+      ],
+      "affiliations_text": "Institute of Foundation Models, USC",
+      "score": 3.6266380771588995,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.28270v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128270v1-sonati-spatio-temporal-ocean-neighbourhood-asymmetric-transformer-for-imputation-of-sparse-tabular-data-with-uncertainty",
+      "source": "arxiv",
+      "title": "SONATI: Spatio-temporal ocean neighbourhood asymmetric transformer for imputation of sparse, tabular data with uncertainty",
+      "authors": [
+        "Yvonne Jenniges",
+        "Boris Peter Koch",
+        "Maike Sonnewald",
+        "Sebastian Maneth"
+      ],
+      "authors_text": "Yvonne Jenniges, Boris Peter Koch, Maike Sonnewald, Sebastian Maneth",
+      "abstract": "Missing value imputation is often a prerequisite for downstream analyses. In oceanography, observational data are frequently structured in a tabular manner, highly sparse and exhibit spatio-temporal structures that classical imputers such as k-nearest neighbours or MissForest are not suited to exploit. We present the Spatio-temporal Ocean Neighbourhood Asymmetric Transformer for Imputation (SONATI), a masked, factorised time-space transformer operating on pre-computed, local time and space neighbourhoods, which reduces computational complexity compared to global attention. SONATI is designed to work with tabular data and is thus in principle able to work on both gridded and unstructured data, though evaluation here was performed on gridded North Atlantic data only. It provides aleatoric and epistemic uncertainties through a negative log-likelihood loss and multiple forward passes with Monte Carlo dropout. Systematic ablations on attention type and masking strategies guided the final architecture design. The results showed that SONATI outperformed classical and transformer-based methods by at least 12.5% in terms of root mean squared error (RMSE) on a large observational oceanographic dataset with key biogeochemical and physical parameters in the North Atlantic (potential temperature, salinity, oxygen, nitrate, silicate and phosphate). Attention type and masking strategy strongly affected imputation accuracy and smoothness of the produced oceanographic fields. Best results were achieved by factorised time-space attention and combined geographic and per-sample masking. The combined masking strategy reduced the imputation error by 14.3% compared to per-sample masking only. Uncertainties were moderately well calibrated (miscalibration area at observed locations $0.074\\pm0.012$) and moderately correlated with the imputation error.",
+      "url": "http://arxiv.org/abs/2611.28270v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28270v1",
+      "tldr": "SONATI is a factorized time-space transformer that imputes sparse tabular oceanographic data using local spatio-temporal neighborhoods and quantifies aleatoric and epistemic uncertainty, outperforming classical and transformer-based methods by at least 12.5% RMSE on North Atlantic observations.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Bremen",
+        "Alfred-Wegener-Institut, Helmholtz-Zentrum für Polar- und Meeresforschung",
+        "University of California",
+        "University of Washington",
+        "University of Applied Sciences"
+      ],
+      "affiliations_text": "University of Bremen, Alfred-Wegener-Institut, Helmholtz-Zentrum für Polar- und Meeresforschung, University of California, University of Washington, University of Applied Sciences",
+      "score": 3.328457636045287,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.28262v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128262v1-fogconcept-identifying-interpretable-movement-concepts-for-freezing-of-gait-detection-from-multi-scale-imu-signals",
+      "source": "arxiv",
+      "title": "FoGConcept: Identifying Interpretable Movement Concepts for Freezing-of-Gait Detection from Multi-Scale IMU Signals",
+      "authors": [
+        "Chuntian Chi",
+        "John Clapham",
+        "GinaMari Blackwell",
+        "Leslie Cloud",
+        "Ingrid Pretzer-Aboff",
+        "Yanfu Zhang",
+        "Huajie Shao",
+        "Gang Zhou"
+      ],
+      "authors_text": "Chuntian Chi, John Clapham, GinaMari Blackwell, Leslie Cloud, Ingrid Pretzer-Aboff, Yanfu Zhang, Huajie Shao, Gang Zhou",
+      "abstract": "Freezing of gait (FoG) is a disabling motor symptom of Parkinson's disease, characterized by an episodic inability to initiate or sustain effective stepping. Current inertial measurement unit (IMU)-based models can detect FoG accurately, but they fail to explain their predictions in terms of human-understandable movement concepts. A major contribution of this work is to identify nine human-understandable movement concepts encoded by a multi-scale FoG model, including gait initiation, rhythmic bilateral gait, trembling in place, shuffling steps, and pivot turns. These concepts recur across subjects, are functionally linked to the model's FoG decisions, and exhibit emergent specialization across short and long temporal contexts. Repeating the concept-discovery procedure on a new FoG dataset, wider temporal contexts, and a deeper backbone recovers the same comparatively stable set of movement concepts. Accordingly, we propose FoGConcept, a mechanism-based interpretability framework for learning movement concepts from multi-scale IMU signals. Domain experts independently recognize 88.9% of the identified concepts, while the proposed model achieves an F1 score of 94.2% for FoG detection. Our findings show that accurate FoG detection can be understood through human-recognizable movement patterns, providing new insight into what a detection model learns to distinguish FoG from non-FoG movement.",
+      "url": "http://arxiv.org/abs/2611.28262v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28262v1",
+      "tldr": "FoGConcept is a mechanism-based interpretability framework that discovers nine stable, expert-recognizable movement concepts from multi-scale IMU signals to explain and accurately detect freezing of gait in Parkinson’s disease, achieving a 94.2% F1 score.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.163041931268637,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.28327v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128327v1-av-flare-feature-level-reliability-estimation-for-multimodal-emotion-recognition",
+      "source": "arxiv",
+      "title": "AV-FLARE: Feature-Level Reliability Estimation for Multimodal Emotion Recognition",
+      "authors": [
+        "Ines Jemmali",
+        "Alaa Nfissi",
+        "Wassim Bouachir",
+        "Nizar Bouguila"
+      ],
+      "authors_text": "Ines Jemmali, Alaa Nfissi, Wassim Bouachir, Nizar Bouguila",
+      "abstract": "Multimodal emotion recognition (MMER) systems typically rely on learned feature representations and attention mechanisms that implicitly weight information across time and modalities. However, these mechanisms do not explicitly incorporate input reliability, despite the presence of noise in audio, occlusions in visual data, and the sparse and event-driven nature of affective cues. We propose AV-FLARE, a framework that explicitly estimates fine-grained reliability scores across both temporal and feature dimensions prior to temporal modeling and uses them to modulate feature representations. Reliability is computed using two complementary components: (i) a supervised network trained jointly with the classification objective, and (ii) an unsupervised Gaussian Mixture Model that models global feature distributions. These signals are combined to provide both task-driven and distribution-aware reliability estimates. To integrate modalities, we introduce a hierarchical cross-modal attention mechanism in which textual features are used to guide audio-visual fusion as a semantic reference modality. Experiments on the IEMOCAP dataset show that AV-FLARE improves over a no-reliability baseline, achieving 90.81\\% accuracy and 81.69\\% F1-score, corresponding to gains of +4.41% and +8.56%, respectively. These results suggest that incorporating explicit input reliability estimation may improve robustness in multimodal emotion recognition under the evaluated setting.",
+      "url": "http://arxiv.org/abs/2611.28327v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28327v1",
+      "tldr": "AV-FLARE explicitly estimates fine-grained audio-visual feature reliability using a supervised network and an unsupervised Gaussian Mixture Model to modulate features before temporal modeling, then fuses modalities via text-guided hierarchical cross-modal attention, improving multimodal emotion recognition robustness and performance.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Concordia University",
+        "Université TÉLUQ"
+      ],
+      "affiliations_text": "Concordia University, Université TÉLUQ",
+      "score": 3.1087611421204038,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.28175v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128175v1-a-world-model-for-longitudinal-health-trajectory-prediction-in-older-adults-across-multinational-cohorts",
+      "source": "arxiv",
+      "title": "A world model for longitudinal health-trajectory prediction in older adults across multinational cohorts",
+      "authors": [
+        "Jingyi Wu",
+        "Chenghua Guo",
+        "Qianlin Zuo",
+        "Pengfei Li",
+        "Luxia Zhang"
+      ],
+      "authors_text": "Jingyi Wu, Chenghua Guo, Qianlin Zuo, Pengfei Li, Luxia Zhang",
+      "abstract": "Aging is characterized by continuously evolving health states, yet most existing prediction models focus on static health risk at isolated time points rather than explicitly modelling how health trajectories unfold over time. We developed a health world model based on the Joint-Embedding Predictive Architecture to represent evolving health states and simulate future trajectories under specified actions. The model combines a state encoder, an action- and context-conditioned predictor, a stop-gradient target encoder, and clinical outcome heads. We trained the model on the US Health and Retirement Study (HRS) and evaluated it without refitting in the English Longitudinal Study of Ageing (ELSA) and the China Health and Retirement Longitudinal Study (CHARLS). Open-loop evaluation assessed discrimination and calibration for mortality and worsening of activities of daily living (ADL) and instrumental activities of daily living (IADL). In the held-out HRS test set, the areas under the receiver operating characteristic curve (AUROCs) for mortality, ADL worsening, and IADL worsening were 0.89, 0.93, and 0.93 at the first horizon and 0.84, 0.84, and 0.85 at the fifth horizon, respectively. Predicted risks stratified subsequent outcomes across horizons. Across the evaluated horizons, mortality AUROC ranged from 0.867 to 0.881 in ELSA and from 0.796 to 0.801 in CHARLS. Simulated trajectories preserved the expected risk ordering across predefined action regimes. In counterfactual simulations, changes in lifestyle actions shifted predicted risks in directions consistent with observed associations. The model provides a framework for longitudinal risk prediction and action-conditioned simulation in older adults.",
+      "url": "http://arxiv.org/abs/2611.28175v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28175v1",
+      "tldr": "This study introduces a Joint-Embedding Predictive Architecture–based health world model trained on the US HRS and externally validated in ELSA and CHARLS that represents evolving health states in older adults, predicts multi-horizon mortality and ADL/IADL worsening, and simulates action-conditioned counterfactual health trajectories.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Peking University",
+        "Peking University First Hospital"
+      ],
+      "affiliations_text": "Peking University, Peking University First Hospital",
+      "score": 2.9495392771778617,
+      "score_text": "2.9"
+    },
+    {
+      "id": "2611.28259v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128259v1-the-cross-context-threshold-test-detecting-discrimination-under-environmental-shifts",
+      "source": "arxiv",
+      "title": "The Cross-Context Threshold Test: Detecting Discrimination Under Environmental Shifts",
+      "authors": [
+        "Jun Yuan",
+        "Xinyue Ye"
+      ],
+      "authors_text": "Jun Yuan, Xinyue Ye",
+      "abstract": "We study how threshold tests for detecting discrimination under environmental shifts, focusing on the Veil-of-Darkness (VoD) setting where visibility changes between daylight and darkness. We show that standard threshold tests, when applied separately to daylight and darkness data, violate key assumptions: risk distributions drift across contexts and thresholds fluctuate arbitrarily. We propose a cross-context threshold test that enforces distributional invariance and monotonic threshold decay. Using New York City stop-and-frisk data and synthetic experiments, we demonstrate that this model yields more reliable thresholds, improves bias detection, and aligns with the counterfactual logic of the VoD test. Our framework generalizes to fairness auditing whenever environmental context influences decisions.",
+      "url": "http://arxiv.org/abs/2611.28259v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28259v1",
+      "tldr": "The paper proposes a cross-context threshold test that enforces distributional invariance and monotonic threshold decay to more reliably detect discrimination under environmental shifts, improving bias detection in Veil-of-Darkness settings such as NYC stop-and-frisk data.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Virginia",
+        "University of Alabama"
+      ],
+      "affiliations_text": "University of Virginia, University of Alabama",
+      "score": 2.719156284199817,
+      "score_text": "2.7"
+    },
+    {
+      "id": "2611.28033v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128033v1-wisp-composable-representations-for-wrist-worn-activity-recognition",
+      "source": "arxiv",
+      "title": "WISP: Composable Representations for Wrist-Worn Activity Recognition",
+      "authors": [
+        "Zipeng Wu",
+        "Shiqiao Zhou",
+        "Fabian Spill",
+        "James Andrews"
+      ],
+      "authors_text": "Zipeng Wu, Shiqiao Zhou, Fabian Spill, James Andrews",
+      "abstract": "Smartwatches and fitness bands are among the most common wearable devices, and large national health studies record movement at the wrist. Yet existing human activity recognition benchmarks mix sensors worn on different parts of the body, so they do not show how well activities can be recognised from the wrist alone. We introduce WristHARBench, a benchmark that standardises participant-disjoint evaluation across nine wrist-acceleration datasets and two additional multichannel inertial datasets. We hypothesise that different human activities leave complementary patterns in wrist motion, such as local shape, rhythm, temporal order and cross-axis relationships, and propose WISP (Wrist-Informed Space of Predictive Representations), a composable representation space that combines representations of these patterns with compatible classifiers. Across the nine primary datasets, WISP with random search achieves 70.20% mean Macro-F1, compared with 59.62% for the strongest of 18 external baselines. Controlled ablations and baseline comparisons indicate that recognition improves mainly when a representation adds motion patterns that the others lack, rather than when it represents the same pattern in a different way.",
+      "url": "http://arxiv.org/abs/2611.28033v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28033v1",
+      "tldr": "WISP introduces a wrist-only HAR benchmark and a composable representation space that combines complementary wrist-motion patterns—such as local shape, rhythm, temporal order, and cross-axis relationships—to outperform external baselines on wrist-worn activity recognition (70.20% vs. 59.62% mean Macro-F1).",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Birmingham"
+      ],
+      "affiliations_text": "University of Birmingham",
+      "score": 2.612481654296302,
+      "score_text": "2.6"
+    },
+    {
+      "id": "2611.28299v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/24/261128299v1-benchmarking-eeg-feature-families-for-adhd-research-in-children-and-adolescents-performance-and-explainability-across-attention-tasks",
+      "source": "arxiv",
+      "title": "Benchmarking EEG feature families for ADHD research in children and adolescents: performance and explainability across attention tasks",
+      "authors": [
+        "Javier Sanchis",
+        "Jorge García-Carrasco",
+        "Álvaro Navarro",
+        "Tahar Kechadi",
+        "Juan Trujillo"
+      ],
+      "authors_text": "Javier Sanchis, Jorge García-Carrasco, Álvaro Navarro, Tahar Kechadi, Juan Trujillo",
+      "abstract": "Attention Deficit Hyperactivity Disorder varies in presentation. Diagnosis requires clinical and developmental assessment. Reproducible electroencephalography measures may complement clinical and behavioural characterisation, but differing feature definitions and evaluation methods hinder comparison. We compared seven feature families and four combinations across attention tasks and assessed the stability of held-out explanations. Two serious games yielded four overlapping attention-task cohorts of 123-140 participants each. Repeated nested participant-held-out evaluation assessed recruitment-group discrimination. Exploratory paired participant-cluster bootstrap tests corrected for multiplicity in two separate families: 72 individual-task contrasts and 18 fusion contrasts. For eight configurations selected after inspecting predictive results, we explained held-out native probabilities before calibration. In the strongest task context, the highest configuration mean AUROC over three repetitions was 0.773, with a fixed-prediction 95% interval of 0.692-0.854 unadjusted for selecting the maximum. Precision, sensitivity and specificity were 0.740, 0.556 and 0.861. In that task, the paired AUROC difference for connectivity minus spectral features averaged +0.2083 across six classifiers and the common 8 s and 16 s durations, with pointwise 95% CI 0.1076-0.3072 and adjusted p = 0.0036. F4-AF4 beta-band coherence led repetition-level attribution summaries in five selected procedures and was selected in every fit. Other contexts showed weaker discrimination and less consistent retention of leading scientific inputs. No general classifier winner emerged. Connectivity and its recurring coherence input warrant independent replication, but do not justify a universal feature recommendation. These exploratory findings do not establish causal task effects, disease mechanisms or diagnostic validity.",
+      "url": "http://arxiv.org/abs/2611.28299v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.28299v1",
+      "tldr": "This benchmark of seven EEG feature families and four combinations across attention tasks in children and adolescents with ADHD found that connectivity features, especially F4–AF4 beta-band coherence, showed the strongest but task-specific discrimination over spectral features (best mean AUROC 0.773), with no universal classifier or feature recommendation and no established diagnostic validity.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University College Dublin",
+        "University of Alicante"
+      ],
+      "affiliations_text": "University College Dublin, University of Alicante",
+      "score": 2.362480256098969,
+      "score_text": "2.4"
+    }
+  ],
+  "errors": []
+}
