@@ -1,0 +1,726 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-11-26T20:47:55.144987",
+  "stats": {
+    "deep_selected": 10,
+    "quick_selected": 15,
+    "daily_total": 25,
+    "deep_count": 10,
+    "quick_count": 15
+  },
+  "deep_dive": [
+    {
+      "id": "2611.33178v1",
+      "rank": 1,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133178v1-geophysics-informed-invertible-operator-network-for-bayesian-geophysical-inversion",
+      "source": "arxiv",
+      "title": "Geophysics-informed invertible operator network for Bayesian geophysical inversion",
+      "authors": [
+        "Yangwen Zhang",
+        "Xintong Wang",
+        "Xiaofei Guan",
+        "Peng Yu"
+      ],
+      "authors_text": "Yangwen Zhang, Xintong Wang, Xiaofei Guan, Peng Yu",
+      "abstract": "Geophysical inverse problems are inherently ill-posed because of sparse observations and measurement noise. Classical sampling-based Bayesian inference methods, such as Markov chain Monte Carlo (MCMC), are computationally prohibitive because they require many forward simulations. Data-driven machine-learning methods often struggle to produce physically consistent solutions when training data are limited. To address these issues, we propose a geophysics-informed invertible operator network (GI-ION) that integrates an invertible neural network (INN) within a deep operator-learning framework for efficient Bayesian geophysical inversion. The INN serves as the branch network and transforms the model parameters into branch coefficients that represent the forward solution and a latent variable that captures uncertainty in the inverse problem. By learning the forward operator and enforcing statistical independence between the branch coefficients and the latent variable, GI-ION enables efficient sampling from a learned conditional approximation, even with sparse boundary observations. We validated GI-ION on three representative cases: 1D surface-wave dispersion and travel-time tomography for a 2D synthetic random-field model and a seismic-slice model. Numerical experiments demonstrate robust performance across diverse problem settings and efficient conditional sampling.",
+      "url": "http://arxiv.org/abs/2611.33178v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33178v1",
+      "tldr": "The paper proposes GI-ION, a geophysics-informed invertible operator network that integrates an invertible neural network into a DeepONet-style operator-learning framework with physics-informed and independence-oriented training to efficiently approximate Bayesian posteriors and enable uncertainty sampling for geophysical inversion under sparse, noisy observations.",
+      "detailed_reading": {
+        "motivation": "地球物理反演常因观测稀疏、含噪且间接而严重不适定，传统MCMC类贝叶斯采样需要大量正演模拟，计算代价高；纯数据驱动深度学习方法在训练数据有限时又难以保证物理一致性。为此，作者希望构建一个既能嵌入地球物理控制方程、又能在离线训练后高效进行条件后验采样的算子学习框架。",
+        "method": "GI-ION在DeepONet式算子学习框架中用可逆神经网络INN替换确定性branch网络：输入模型参数m被双射映射为前向解的分支系数b(m)和捕获反演非唯一性的潜变量z(m)，并满足维度平衡d_m=P+d_z；前向场由b(m)与trunk网络T(x)的内积表示。训练时联合数据损失与物理损失，数据项约束观测点处前向输出与观测d一致，物理项在整个域查询点上施加控制方程约束；同时引入面向独立性的训练目标，惩罚分支系数与潜变量之间的统计依赖，使给定b后z仍近似服从标准正态先验。反演时先用trunk在观测点形成的矩阵T_o的Moore–Penrose伪逆估计b*=T_o†d，再从z~N(0,I)采样并经INN逆映射m=B^{-1}(b*,z)生成条件样本，从而避免在线迭代MCMC采样。",
+        "result": "作者在三个代表性算例上验证了GI-ION：一维面波频散反演、二维合成随机场模型的走时层析以及地震切片模型的走时层析。数值实验表明，该方法在多种问题设置下具有稳健表现，并能在稀疏边界观测条件下进行高效条件采样；同时实验中传统INN常用的MMD损失表现出更强的残余依赖，而所提出的独立性导向目标改善了条件不确定性估计。",
+        "conclusion": "GI-ION将可逆网络、DeepONet算子学习、物理约束和独立性约束结合，能够在离线训练后同时学习前向算子并构造贝叶斯后验的条件近似，从而以较低在线成本实现地球物理反演的不确定性采样。该方法为观测稀疏、训练数据有限且需要物理一致性的贝叶斯地球物理反演提供了一条可行途径。",
+        "key_details": "关键实现包括：以模型参数样本和对应观测数据训练，trunk网络以空间查询坐标为输入并输出P维基函数，branch网络输出P维系数与d_z维潜变量；潜变量先验取标准正态N(0,I)，贝叶斯框架中模型参数另有先验p0(m)；观测系数通过T_o†d获得，矩阵满列秩时为唯一最小二乘解，否则为最小范数最小二乘解；损失由观测点L2数据项、全域物理残差项及分支系数—潜变量独立性惩罚组成，物理项含加权系数α、β。在线反演只需一次伪逆投影、潜变量采样和一次可逆映射，避免重复正演；主要约束是d_m=P+d_z的维度平衡以及T_o的秩条件，且qθ(m|d)只是学习到的条件后验近似而非精确闭式后验，高维地球物理场景中MMD类正则可能不稳定，这也是作者改用独立性目标的原因之一。"
+      },
+      "affiliations": [
+        "Shanghai Normal University",
+        "Tongji University"
+      ],
+      "affiliations_text": "Shanghai Normal University, Tongji University",
+      "score": 5.0986515903835645,
+      "score_text": "5.1"
+    },
+    {
+      "id": "2611.33229v1",
+      "rank": 2,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133229v1-effect-driven-skill-abstractions-for-offline-reinforcement-learning",
+      "source": "arxiv",
+      "title": "Effect-Driven Skill Abstractions for Offline Reinforcement Learning",
+      "authors": [
+        "Burcu Kilic",
+        "David Drexel",
+        "Emre Ugur",
+        "Justus Piater"
+      ],
+      "authors_text": "Burcu Kilic, David Drexel, Emre Ugur, Justus Piater",
+      "abstract": "We seek to learn discrete skill abstractions to facilitate long-horizon, goal-conditioned reinforcement-learning (RL) tasks. Recent approaches have shown success by quantizing actions via clustering or reconstruction. However, these objectives lead to skills that are not directly related to what the current state affords or what the goal requires. Instead, we argue that goal-directed skills should be driven by \\emph{how they affect the state} of the agent. To realize this, we introduce a novel quantization method for action chunks that optimizes next-state predictions conditioned on the current state and action. This objective encourages skills to be distinguished by the future states they lead to, resulting in a vocabulary that spans diverse outcomes reachable from a given state. Our framework can easily be paired with common offline RL methods by replacing their continuous actor head with a discrete one that selects among the learned skills. We can execute these skills in the environment by converting them back to continuous actions using a trained low-level controller. Experiments on benchmark navigation and manipulation tasks largely show substantial and consistent improvements over both the continuous-actor baselines and reconstruction-based discretizations. Our project page can be found at: https://burcukilic.github.io/projects/effect-driven-skill-abstractions/.",
+      "url": "http://arxiv.org/abs/2611.33229v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33229v1",
+      "tldr": "The paper introduces an effect-driven action-chunk quantization method that learns discrete, reusable skills by predicting their next-state effects, enabling improved long-horizon goal-conditioned offline reinforcement learning when paired with standard offline RL policies.",
+      "detailed_reading": {
+        "motivation": "长时程目标条件离线强化学习需要可复用的时序技能抽象；现有基于聚类或重构的动作块量化方法关注动作序列本身，未直接联系当前状态可提供的结果或目标所需结果。本文主张目标导向技能应由其对状态的影响来定义，从而形成能覆盖当前状态可达多样结果的可复用离散技能词表。",
+        "method": "提出三阶段框架：阶段I用一维卷积编码动作块，经有限标量量化（FSQ）得到离散技能码，并由解码器在给定当前状态下预测执行该动作块后的任务相关下一状态特征，以MSE训练；阶段II训练低层控制器，将技能码与当前状态映射为单步连续动作，以MSE拟合数据动作；阶段III用阶段I编码器把全数据集转成离散转移(s_t,k,s_{t+L})，结合hindsight目标训练输出K类技能码的高层目标条件策略，并实例化为D-GCBC、D-GCIQL、D-GCIVL和D-QRL，评估时高层选码、低层控制器执行。",
+        "result": "在OGBench的Maze、Puzzle及视觉导航与操作任务、Push-T和D4RL Kitchen等基准上，该方法相较连续actor基线和基于重构的离散化方法取得一致且显著提升；学习到的技能在不同状态下对应不同方向性结果，同一低层控制器可服务四种离散离线RL变体。",
+        "conclusion": "以技能对下一状态的影响驱动动作块量化，可得到与目标条件任务更匹配、策略无关且可复用的离散技能抽象，并优于连续动作策略和重构式离散化。",
+        "key_details": "采用FSQ形成容量K=∏N_d的隐式码本，并用直通估计器回传梯度，避免VQ码本坍缩；仅预测任务相关下一状态特征而非完整状态，以减少与任务成功无关的噪声；阶段I编解码器只用于构造技能词表，评估时仅用高层离散策略和共享低层控制器；高层为MLP输出K类logits，训练目标因D-GCBC交叉熵、D-GCIQL/GCIVL优势加权及D-QRL拟度量值学习而异；潜在约束是技能效果依赖任务相关特征定义与离线数据覆盖。"
+      },
+      "affiliations": [
+        "Middle East Technical University",
+        "Bogazici University",
+        "University of Innsbruck"
+      ],
+      "affiliations_text": "Middle East Technical University, Bogazici University, University of Innsbruck",
+      "score": 4.870670762872368,
+      "score_text": "4.9"
+    },
+    {
+      "id": "2611.33179v1",
+      "rank": 3,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133179v1-deep-learning-based-mesoscopic-emission-modeling",
+      "source": "arxiv",
+      "title": "Deep Learning-Based Mesoscopic Emission Modeling",
+      "authors": [
+        "Abdelkader Dib",
+        "Milos Balac",
+        "Antonio Sciarretta"
+      ],
+      "authors_text": "Abdelkader Dib, Milos Balac, Antonio Sciarretta",
+      "abstract": "Traffic-related emissions are a major contributor to urban air pollution. However, existing emission models face a fundamental trade-off: macroscopic models are computationally efficient but rely on average speeds, leading to systematic errors, while microscopic models achieve high accuracy but are computationally prohibitive for large scale simulations. To bridge this gap, this study introduces Direct Emission Prediction (DEP), a Gated Recurrent Unit (GRU)-based deep learning model. DEP was trained on over one million synthetic trips generated by coupling real-world GNSS speed profiles with the microscopic emission model MOBSim. By processing sequential link-level inputs, including vehicle characteristics, road attributes, and ambient temperature, DEP predicts CO$_2$ and NOx emissions. We integrated DEP into a MATSim-based workflow and applied it to the Ile-de-France region. DEP matches the accuracy of SPG-M, a hybrid mesoscopic-microscopic reference model, within 0.35% for CO$_2$ and 1.87% for NOx across both hot and cold-start scenarios, while reducing computational runtime to just 2.2%. Furthermore, validation against empirical remote sensing data confirms that DEP accurately reproduces real-world NOx emission levels across Euro 2-6 diesel vehicles, whereas traditional macroscopic tools like COPERT and HBEFA systematically underestimate them. Finally, DEP effectively captures the spatial distribution of cold-start emissions, identifying key hotspots in dense urban areas. This work demonstrates that deep learning-based mesoscopic frameworks can achieve microscopic accuracy at a fraction of the computational cost, enabling scalable, high-resolution urban emission modeling without relying on pre-computed emission factor databases.",
+      "url": "http://arxiv.org/abs/2611.33179v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33179v1",
+      "tldr": "The paper introduces DEP, a GRU-based deep learning mesoscopic emission model trained on synthetic GNSS/MOBSim trips, which predicts CO₂ and NOx emissions with near-microscopic accuracy at about 2.2% of the runtime of a hybrid reference workflow, enabling scalable high-resolution urban emission modeling.",
+      "detailed_reading": {
+        "motivation": "交通排放是城市空气污染的重要来源，但现有排放模型存在宏观模型计算高效却依赖平均速度、易产生系统误差，微观模型精度高却难以支撑大规模仿真的根本权衡。研究旨在弥合这一差距，在保持微观尺度排放精度的同时显著降低区域级交通排放建模的计算成本。",
+        "method": "作者提出直接排放预测模型DEP，以门控循环单元GRU为核心，输入车辆沿路径逐路段的平均速度序列及车辆属性、道路属性和环境温度，直接预测每个车辆在每个路段上的CO2与NOx排放。训练数据由真实GNSS速度剖面与微观排放模型MOBSim耦合生成：随机匹配速度剖面和车辆，随机设置0至90°C初始发动机温度及0至40°C且不高于初始机温的环境温度，经MOBSim秒级仿真后按路段聚合，形成超过100万次合成出行。DEP被嵌入基于MATSim的Île-de-France工作流，在eqasim合成人口、HERE路网和车辆属性基础上跟踪每辆车全行程并逐路段推理，不使用预计算排放因子数据库。",
+        "result": "在冷启动和热启动情景下，DEP与混合介观-微观参考模型SPG-M的精度差距仅为CO2约0.35%、NOx约1.87%，而计算运行时间降至SPG-M的2.2%。与实测遥感数据对比，DEP能较准确复现Euro 2至Euro 6柴油车的真实NOx排放水平，而COPERT和HBEFA等传统宏观工具系统性低估。DEP还刻画了冷启动排放的空间分布，识别出高密度城区的关键热点。",
+        "conclusion": "研究表明，基于深度学习的介观排放框架能够以远低于微观模型的计算成本达到接近微观模型的精度，从而支持可扩展、高分辨率的城市排放建模。该方法在保留车辆全行程速度和加速度相关排放动态的同时，具备区域级部署能力，并可显式追踪冷启动排放的空间归属，为交通政策评估和污染热点识别提供更可靠工具。",
+        "key_details": "关键实现包括使用超过44万条、采样率1 Hz的GecoAir GNSS速度剖面和超过1.1万辆车辆数据，覆盖Île-de-France与里昂地区及5800余名驾驶者；NOx因老旧柴油车与汽油车或新后处理车辆差异大且呈右偏分布，按燃料类型和Euro标准分配缩放因子以统一尺度。模型精度本质上受MOBSim参考模型上限约束，训练数据为合成数据；MATSim工作流采用5%人口样本、五种出行方式和HERE路网，跨境交通依赖2013至2016年调查数据，存在时效性限制。DEP以逐路段序列输入替代速度剖面生成与微观排放计算两步，是其实现2.2%运行时间的关键。"
+      },
+      "affiliations": [
+        "ETHZ",
+        "IFP Energies nouvelles"
+      ],
+      "affiliations_text": "ETHZ, IFP Energies nouvelles",
+      "score": 4.75213424545862,
+      "score_text": "4.8"
+    },
+    {
+      "id": "2611.33305v1",
+      "rank": 4,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133305v1-fuel-efficient-formation-flying-via-constrained-extremum-seeking",
+      "source": "arxiv",
+      "title": "Fuel-Efficient Formation Flying via Constrained Extremum Seeking",
+      "authors": [
+        "Kwang Hak Kim",
+        "Luis G. Crespo",
+        "Michael J. Acheson"
+      ],
+      "authors_text": "Kwang Hak Kim, Luis G. Crespo, Michael J. Acheson",
+      "abstract": "This paper presents a model-free autonomous guidance architecture for minimal drag of a trailing aircraft in formation flight. Realizing the fuel savings resulting from such a formation requires learning and tracking a time-varying vortex while avoiding locations where the aircraft experiences an abrupt rolling moment disturbance. A guidance architecture for fuel-efficient safe flight, called Adaptive Plateau-seeking Optimal Guidance with ModulatEd Excitations (APOGEE), is proposed herein. Key features of APOGEE are its ability to modulate the amplitude of the excitation required to learn the unknown objective and constraint functions, to adaptively adjust the learning rates, and to keep the flight safe during the search for the optimal formation. A threshold-gated modulation reduces the amplitude of excitation when the objective function reaches an acceptably large value, thus improving flying qualities and further reducing fuel consumption. Furthermore, a Newton-based learning rule, whose estimate of the inverse of the Hessian is spectrally clamped, adapts the learning rates to the local curvature of the objective function in order to accelerate convergence and lower the chance of overshooting the optimum. Finally, a safety filter having an unknown constraint function is used to prevent a loss of control event prompted by the above mentioned disturbance. The efficacy of APOGEE is demonstrated by using a high-fidelity model of an F-16 jet and an experimentally obtained vortex model. Being model-free, APOGEE does not require modeling the dependence of the unknown functions on the characteristics of the leading aircraft, the flight condition, the crosswind, and the vortex-induced turbulence.",
+      "url": "http://arxiv.org/abs/2611.33305v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33305v1",
+      "tldr": "This paper proposes APOGEE, a model-free constrained extremum-seeking guidance architecture that enables a trailing aircraft to safely learn and track a time-varying vortex for fuel-efficient formation flight while modulating excitation, adapting learning rates, and enforcing safety constraints to avoid abrupt rolling disturbances.",
+      "detailed_reading": {
+        "motivation": "编队飞行中后机可利用前机涡流显著减阻，但最优相对位置未知、时变，且靠近下洗或滚转反扭区域会引发突发滚转力矩甚至失控。基于涡模型的估计方法受模型偏差影响，传统极值搜索又存在激励抖动耗油、收敛慢和暂态不安全等问题，因此需要一种无模型、安全且燃油高效的自主引导架构。",
+        "method": "APOGEE作为外环制导生成相对横侧向与垂向位置指令，经PD控制器映射为滚转角与俯仰角指令，再由LQG加L1自适应内环控制F-16；内环被视为黑箱，并通过离线辨识的延迟按β_i=-ω_iτ_i补偿解调相位。外环对未知目标函数施加正弦抖动，解调测量输出以估计梯度，并采用Newton型学习规则更新位置，其中Hessian逆估计经Riccati型更新和谱截断限制；同时用阈值门控调制激励幅值，并用含未知约束函数的CBF-QP安全滤波器修正指令。目标函数取涡致滚转力矩系数C_l最大作为最小阻力的代理，实时实现中可用Kalman滤波器或干扰观测器获得较平滑的C_l估计。",
+        "result": "论文以F-16高保真模型和实验获得的涡模型验证APOGEE的有效性，表明该架构能够在未知时变涡场中搜索并跟踪有利编队位置。阈值门控在目标函数达到可接受值后降低激励幅值，从而改善飞行品质并进一步减少油耗；Newton型学习规则依据局部曲率调整学习率，加快收敛并降低越过最优点的风险；安全滤波器则防止突发滚转力矩扰动导致失控。文中还引用NASA Armstrong飞行实验背景指出最优编队位置可减阻约22%，但APOGEE本身的核心验证结论是无模型搜索、收敛改善与安全保持。",
+        "conclusion": "APOGEE将无模型极值搜索、曲率自适应Newton学习和未知约束安全滤波结合，为后机提供了一种无需对前机特性、飞行条件、侧风及涡致湍流建模的燃油高效编队制导方案。其优势在于能在线学习时变涡场、在接近安全边界时保持可控，并在获得可接受性能后减少持续激励带来的燃油代价。各机制的保证是局部且实践性的，论文没有给出组合系统的形式化稳定性证明。",
+        "key_details": "关键实现包括：以C_l最大值近似最小阻力，要求目标映射二阶连续可微、有界并存在局部极大值；抖动频率需与内环跟踪、估计和更新时间尺度分离，内环延迟需在激励频率处可辨识并用于相位补偿；Newton更新需对Hessian逆估计进行谱截断以避免病态曲率导致过大步长；安全滤波器使用未知约束函数h(p)并以CBF-QP形式防止进入滚转反扭或下洗危险区；阈值门控根据目标值切换激励幅值。局限性在于依赖可测代理信号、C_l最优与阻力最小存在小偏差、噪声和速率限制会影响估计，且理论保证为局部实际保证，未覆盖多机制组合的全局稳定性。"
+      },
+      "affiliations": [
+        "NASA Langley Research Center",
+        "UC San Diego"
+      ],
+      "affiliations_text": "NASA Langley Research Center, UC San Diego",
+      "score": 4.5215546599796435,
+      "score_text": "4.5"
+    },
+    {
+      "id": "2611.33332v1",
+      "rank": 5,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133332v1-online-prediction-system-for-proactive-autoscaling",
+      "source": "arxiv",
+      "title": "Online Prediction System for Proactive Autoscaling",
+      "authors": [
+        "Jun Gao",
+        "Areg Poghosyan",
+        "Pavel Paulau",
+        "Sumit Mohanty",
+        "Tengfei Mu",
+        "Shawn Chen"
+      ],
+      "authors_text": "Jun Gao, Areg Poghosyan, Pavel Paulau, Sumit Mohanty, Tengfei Mu, Shawn Chen",
+      "abstract": "We present an online learning system for short-term time series forecasting that enables proactive autoscaling in large-scale distributed systems. Unlike traditional forecasting methods that focus on modeling seasonality and long-term trends, the system targets high-accuracy, low-latency predictions for immediate future intervals for dynamic resource management in internet-scale infrastructures. The system employs a two-stage architecture: a seasonality decomposition stage followed by a residual correction stage using lightweight linear models with engineered features. By retraining models on-the-fly for every prediction cycle, the online prediction system continuously adapts to changing demand patterns without requiring persistent model storage or feature drift monitoring. Deployed across many heterogeneous services, the system processes over 900K predictions per hour; in an offline evaluation on production traffic, its STL-based configuration reduces prediction error (MAPE) by 18.6\\% relative to the previous production model. In production, the system has saved an estimated 118K servers daily.",
+      "url": "http://arxiv.org/abs/2611.33332v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33332v1",
+      "tldr": "This paper presents a production online learning system that combines STL seasonality decomposition with lightweight linear residual correction, retraining each prediction cycle to enable high-accuracy, low-latency proactive autoscaling and saving an estimated 118K servers daily.",
+      "detailed_reading": {
+        "motivation": "生产环境中的自动扩缩容长期以反应式为主：先检测到负载升高再扩容，此时尖峰往往已造成性能退化，而需求下降时又难以及时释放资源，导致持续过度供给。基于短时时间序列预测的主动扩缩容可以缓解这一滞后，但既有生产方案主要是对按天聚合数据拟合的四次多项式回归，其函数形式刚性、无法适应产品发布等突发变化、提高时间分辨率也无明显收益、高阶还在边界处出现过拟合振荡，并且无法判断需求在预测窗口内是加速还是减速。此外，在大规模异构服务上落地还面临模型维护成本、亚秒级预测延迟、跨服务泛化与可解释性等运维约束，这构成了本文设计在线预测系统的出发点。",
+        "method": "系统由三部分组成：Smart Data Aggregator 从遥测流按 30 分钟粒度聚合吞吐量，为每个服务实体维护约 4 天（192 点）的滚动窗口，缺失点用线性插值补齐，偏离滚动均值 3σ 以上的异常值做截断；预测服务是无状态 RPC 端点，可独立横向扩展；结果回传给扩缩容系统。建模采用两阶段：第一阶段用 STL（周期 P=48，对应 24 小时）把序列分解为季节项 S、趋势项 T 与残差 R，并用外推得到下一时刻的 S、T；第二阶段不直接建模残差，而对其一阶差分 ΔR_t 构造滞后特征 LAG_{10,15,20,25,30} 与动量特征 MOM_{10,15,20,25,30}，z-score 归一化后拟合线性回归 ΔR̂_{t+1}=wᵀx_t+b，最终预测为 ŷ_{t+1}=(S_{t+1}+T_{t+1})+λ·(R_t+ΔR̂_{t+1})，λ∈[0,1] 平衡响应性与稳定性。推理流程上每个预测周期都在最新窗口上重新训练模型、用完即弃，无需模型存储、版本管理与特征漂移监控；预测目标为未来一个 30 分钟区间的需求，训练损失为平方误差（RMSE），下游扩缩容按 ŷ_{t+1}+α·σ 配置资源，σ 取训练残差标准差、α 为可配置安全系数；窗口长度、滞后集合、STL 周期与平滑因子等超参在离线用多周生产流量与多类服务做网格搜索确定。",
+        "result": "在来自生产扩缩容集群的 9 个代表性服务实体（覆盖平滑日周期、突发事件驱动与缓慢趋势型负载）上，用 4 天 30 分钟粒度序列按 80/20 划分，对比了沿两个改进维度（第一阶段多项式 vs STL、第二阶段人工 LAG/MOM 特征 vs CNN 学习特征）组织的 7 种配置。离线评估显示，基于 STL 的配置相对原生产多项式模型将预测误差（MAPE）降低 18.6%；同时 STL+线性回归（LAG/MOM）的精度优于所有 CNN 变体，说明在每实体仅约 192 个点的数据规模下复杂模型更易过拟合。系统整体每完整训练-预测周期（取数、STL 分解、特征计算、拟合、预测）在 500 毫秒内完成，每小时处理超过 90 万次预测，生产中估计每天节省约 11.8 万台服务器。",
+        "conclusion": "在面向自动扩缩容的短时预测场景中，关键约束是延迟、可维护性与跨异构服务的泛化，而非模型容量；因此“STL 季节分解 + 轻量线性残差校正 + 每周期在线重训”的简单方案不仅够用，而且在精度上优于更复杂的 CNN 方案，同时更可靠、更易部署。该无状态在线学习设计免去了模型持久化与漂移监控，已在大量异构服务上稳定运行并带来可量化的资源节省，说明分解式简单模型是生产级主动扩缩容预测的务实首选。",
+        "key_details": "数据侧为 30 分钟桶、约 4 天（192 点）滚动窗口，含线性插值与 3σ 截断清洗；先验侧用 STL（P=48）显式分离日周期与趋势，并把残差一阶差分作为更平稳的建模对象，特征只用 LAG/MOM（滞后 10/15/20/25/30），基于残差导数而非原始残差水平，实测比变化率、滑动平均等候选特征更有信息量。损失为平方误差（预测条件均值），风险控制放在下游：以训练残差标准差 σ 配合可配置安全系数 α 计算 ŷ+α·σ 的供给目标，λ 平滑因子权衡响应与稳定，窗口长度、滞后集合、STL 周期与 λ 均通过离线网格搜索确定。复杂度与约束方面，全流程亚秒级（<500ms）、无需 GPU 与模型仓库，可按实体水平扩展；局限在于单实体样本量小限制了模型容量，预测仅覆盖下一个 30 分钟区间、超参数离线调优难以逐实体自适应，且安全性依赖下游缓冲系数的人工设定。"
+      },
+      "affiliations": [
+        "Meta Platforms, Inc."
+      ],
+      "affiliations_text": "Meta Platforms, Inc.",
+      "score": 4.34672801518391,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.33259v1",
+      "rank": 6,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133259v1-fast-and-scalable-abstract-interpretation-for-deep-neural-networks",
+      "source": "arxiv",
+      "title": "Fast and Scalable Abstract Interpretation for Deep Neural Networks",
+      "authors": [
+        "Avaljot Singh",
+        "Dushyant Bharadwaj",
+        "Yasmin Chandini Sarita",
+        "Heng Zhong",
+        "Charith Mendis",
+        "Gagandeep Singh"
+      ],
+      "authors_text": "Avaljot Singh, Dushyant Bharadwaj, Yasmin Chandini Sarita, Heng Zhong, Charith Mendis, Gagandeep Singh",
+      "abstract": "Abstract interpretation can certify properties of Deep Neural Networks (DNNs), but precise analyses remain expensive. General implementations repeat work when analyzing the same architecture under different inputs and properties. Interleaving this work with numerical operations limits GPU utilization and restricts how much of the analysis a tensor compiler can process together.\n  We present Scepter, a framework for specializing DNN abstract interpreters through structural semantics. The semantics determine the structure of intermediate abstract values while deferring their numerical evaluation. Structural computations from successive operations can therefore be performed together before certification, generating an executable tensor program. With the abstract interpreter and DNN architecture fixed, the program can be reused with different weights and input regions. We prove that it computes the same bounds as the general interpreter in exact arithmetic. The generated program also exposes operations and their dependencies for tensor compilation and memory planning. We implement Scepter for the tensor programs that Neuton generates from ConstraintFlow specifications.\n  We evaluate Scepter on eight abstract interpreters and 44 DNNs against six baseline systems on GPUs and CPUs. Scepter handles networks with up to 153x as many neurons as the largest completed by the corresponding baselines. It completes DeepPoly on ResNet50 and VGG-16, whereas none of the evaluated DeepPoly baselines completes either network. On configurations completed by both systems, GPU geometric-mean speedups over Neuton range from 11.9x to 44.4x across eight analyses, with a 2.60x geometric-mean reduction in peak memory. In an input-splitting case study, Scepter proves 68 properties for which the baselines time out.\n  Code: https://github.com/uiuc-focal-lab/constraintflow.git",
+      "url": "http://arxiv.org/abs/2611.33259v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33259v1",
+      "tldr": "Scepter specializes DNN abstract interpreters by separating architecture-determined structural computation from numerical evaluation and compiling it into reusable tensor programs, enabling much faster and more scalable certification of large networks while computing the same bounds.",
+      "detailed_reading": {
+        "motivation": "深度神经网络（DNN）的精确抽象解释认证仍然开销很大，而通用解释器在分析同一架构的不同权重、输入区域和性质时会重复进行大量非数值的结构性决策；这些工作与数值运算交错，既限制 GPU 利用率，也限制张量编译器对分析的整体优化。因此，需要把由网络架构决定、可复用的结构计算从每次认证的数值求值中分离出来，以将精确分析扩展到更大网络。",
+        "method": "Scepter 为 DNN 抽象解释器引入结构语义：对固定的解释器与网络架构，显式表示中间抽象值的结构，定义各操作如何从输入结构推导输出结构，同时推迟系数的数值求值并记录后续数值计算代码；将连续操作的结构计算合并，在认证前生成可执行的张量程序，并把仍依赖数值结果的控制决策保留在生成代码中。作者在 Neuton 从 ConstraintFlow 规范生成的张量程序上实现该方法，基于 g-BCSR 统一表示结构模式，使生成程序可暴露操作及依赖供张量编译和内存规划，并证明在精确算术下其计算结果与通用解释器得到相同边界。固定解释器、架构及输入/批形状后，生成程序可复用不同权重和输入区域。",
+        "result": "在 GPU 和 CPU 上对 8 种抽象解释器、44 个 DNN 与 6 个基线系统进行评估，Scepter 可处理的最大网络神经元数最高为对应基线已完成最大网络的 153 倍；它完成了 DeepPoly 对 ResNet50 和 VGG-16 的分析，而所评估的 DeepPoly 基线均未完成。两者均完成的配置上，GPU 相对 Neuton 的几何平均加速为 11.9 倍至 44.4 倍，峰值内存几何平均降低 2.60 倍；在输入分裂案例中，Scepter 证明了 68 个基线超时的性质。DeepPoly 下 Scepter 相对 auto_LiRPA、GPUPoly、IVAN 分别快 5.69、6.57、22.3 倍，CPU 上相对 ERAN 在 DeepPoly 和 DeepZ 下分别快 87.4 和 522 倍。",
+        "conclusion": "Scepter 通过结构语义将可复用的结构计算与数值认证分离，并生成架构专用的可执行张量程序，从而显著提升精确 DNN 抽象解释的规模、速度和内存效率，尤其适合输入分裂等需对同一网络反复认证的场景。该方法在保持精确算术下边界一致性的同时，为不同抽象域和认证算法提供统一专门化路径，推动精确认证在大模型上的实用化。",
+        "key_details": "关键实现点包括：专门化条件为固定抽象解释器、DNN 架构以及输入和批形状，权重与输入区域可变化；结构语义需覆盖可组合操作并跨抽象域/变换器工作，显式区分结构描述与数值载荷，改写依赖系数的控制流以允许结构执行先行；采用 Neuton 的 g-BCSR 表示网络结构模式；生成程序暴露操作依赖以支持算子融合、内存规划和独立神经元组提前释放大中间张量；正确性证明依赖精确算术，实际浮点执行及仍需数值决定的分支由生成代码中单独专门化的计算处理，且复用受固定架构与形状约束。"
+      },
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 4.2999138908544134,
+      "score_text": "4.3"
+    },
+    {
+      "id": "2611.33236v1",
+      "rank": 7,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133236v1-kira-kronecker-input-gated-rank-adaptation-for-parameter-efficient-fine-tuning-of-pretrained-models",
+      "source": "arxiv",
+      "title": "KiRA: Kronecker Input-Gated Rank Adaptation for Parameter-Efficient Fine-Tuning of Pretrained Models",
+      "authors": [
+        "Akil Ahmad Taki",
+        "Shaikh Anowarul Fattah"
+      ],
+      "authors_text": "Akil Ahmad Taki, Shaikh Anowarul Fattah",
+      "abstract": "Full fine-tuning of large pretrained models is expensive, and parameter-efficient fine-tuning (PEFT) is the standard alternative. Most PEFT methods use low-rank updates, whose rank lies far below that of full fine-tuning and is the same for every input. Input-adaptive variants vary the capacity per input but remain within the low-rank bottleneck, and whether a task benefits from input conditioning is not known before training. This paper introduces Kronecker input-gated rank adaptation (KiRA). Instead of the conventional low-rank product, the update $ΔW$ is the Kronecker product of a frozen random $p\\times p$ matrix $A$ and a trainable factor $M(x)$, which overcomes the rank ceiling: because rank is multiplicative under this product, $A$ multiplies the rank of $M(x)$ by $p$ without adding trainable parameters. The factor $M(x)$ is further decomposed as $B_1\\,\\mathrm{diag}(g(x))\\,B_2$, where the input gate $g(x)$, computed once per sample by a network shared across all adapted layers, adjusts the rank of the update to each input in steps of $p$. Where input conditioning is unnecessary, the gate is folded into $B_1$ at deployment. Because the gate changes the rank only in discrete steps, the benefit of input conditioning can be predicted before training from a few hundred labeled inputs. Across six medical imaging and language benchmarks, KiRA attains the highest mean score against five published baselines with 8.7--9.7 times fewer trainable parameters than low-rank adaptation, and the pre-training criterion agrees with the measured benefit of input conditioning on all six tasks.",
+      "url": "http://arxiv.org/abs/2611.33236v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33236v1",
+      "tldr": "KiRA is a parameter-efficient fine-tuning method that uses a frozen random Kronecker factor to multiply the rank of a trainable input-gated low-rank update without adding trainable parameters, and it includes a pre-training criterion to predict when input conditioning will help, outperforming baselines with 8.7–9.7× fewer trainable parameters.",
+      "detailed_reading": {
+        "motivation": "全量微调大模型成本高，PEFT 常用低秩更新，但低秩瓶颈导致更新秩远低于全量微调且对所有输入相同；现有输入自适应方法虽按样本调整容量，仍受低秩限制，而且任务是否能从输入条件化中获益在训练前未知。该文因此希望在显著减少可训练参数的同时突破低秩秩上限，并提供训练前判断是否值得引入输入门控的准则。",
+        "method": "KiRA 将适配更新设为 ΔW(x)=A⊗M(x)，其中 A 为冻结的 p×p 随机高斯满秩矩阵，M(x)=B1 diag(g(x)) B2 为可训练低秩因子，q=d/p，B1∈R^{q×r}、B2∈R^{r×q}。门控 g(x)=σ(Wg2 φ(Wg1 x̄)) 由所有适配层共享的瓶颈网络对样本均值池化表示 x̄ 计算一次，h=64，输出 r 维[0,1]门值；训练时冻结预训练权重 W0 与 A，仅学习 B1、B2 和门控网络，推理时若无需输入条件化可把门折叠进 B1。作者还采用低秩/克罗内克与静态/输入门控的因子实验，并设置参数匹配的常数门控对照，以分离门控网络参数与输入访问的贡献，同时在训练前用几百个标注输入计算自适应性比率决定是否启用输入门控。",
+        "result": "在六个医学影像与语言基准上，KiRA 相对五个已发表基线取得最高平均分，且可训练参数比低秩适配少 8.7–9.7 倍；参数匹配的常数门控对照表明精度优势主要来自克罗内克基底，输入条件化仅在准则选中的三个任务上带来增益。训练前准则在全部六个任务上与实测的输入条件化收益一致，说明门控是否有效可提前预测。",
+        "conclusion": "KiRA 通过冻结随机克罗内克因子为可训练低秩因子放大秩而不增加可训练参数，从而在更小参数预算下超过 LoRA 类基线，并用精确秩恒等式刻画硬门控的 rank(ΔW)=p k(x) 与软门控的有效秩/稳定秩乘法关系。其离散秩步长机制还导出了训练前可测的输入条件化判据，使是否采用更复杂输入自适应设计有据可依，并有利于在共享硬件上维护大量任务适配器。方法的主要约束是 p 必须整除维度、随机因子需满秩且谱分布良好，门控收益依赖任务且秩调节粒度较粗。",
+        "key_details": "关键实现细节包括：A 仅保存随机种子，取独立标准高斯且近似满秩，p 整除 d；每层可训练参数约 2dr/p，门控网络共享且仅增加 h(d+r) 个参数，h=64；硬门控下 rank(ΔW(x))=p k(x)，软门控给出有效秩与稳定秩的乘法式，放大秩会缩小可达子空间维度，形成秩放大与子空间维度间的权衡。输入为图像或句对，门值按样本计算一次；门控以 p 为步长改变秩，因此只有每样本秩需求变化超过一个步长的任务才可能受益。训练前判据只需几百个标注输入，并在预训练模型上测量；实验用参数匹配常数门控控制变量，覆盖六个医学影像和语言任务，但结论仍受限于这些基准、维度整除约束和随机因子谱条件。"
+      },
+      "affiliations": [
+        "Bangladesh University of Engineering and Technology (BUET)"
+      ],
+      "affiliations_text": "Bangladesh University of Engineering and Technology (BUET)",
+      "score": 4.235287166380578,
+      "score_text": "4.2"
+    },
+    {
+      "id": "2611.33188v1",
+      "rank": 8,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133188v1-one-neural-operator-for-re-planning-low-thrust-cislunar-transfers-after-thrust-outages-at-the-original-or-a-later-arrival",
+      "source": "arxiv",
+      "title": "One Neural Operator for Re-planning Low-Thrust Cislunar Transfers after Thrust Outages, at the Original or a Later Arrival",
+      "authors": [
+        "Selim Olgu Pilav"
+      ],
+      "authors_text": "Selim Olgu Pilav",
+      "abstract": "Safe-mode events causing thrust outages are common in missions with electric propulsion. To demonstrate mission feasibility in such an event, missed-thrust margin studies are performed where thousands of outage scenarios need an exact re-plan solved. We train a neural operator that maps a nominal trajectory with an outage profile to a re-planned trajectory and to the probability that the recovery exists, for 270 low-thrust near-rectilinear halo orbit (NRHO) to distant retrograde orbit (DRO) transfers, at an allowed slip of up to 10 days. On unseen transfers and zero slip, its median control error on the severe half of outages is 1.20% compared to 14.0% for the best cheap re-planner benchmark. With the arrival slip as an input, the error is 1.67% against 23.2%. It also predicts the recoverability of an outage for a given arrival slip with an area under the receiver operating characteristic curve (AUC) of 0.997, while the minimum recoverable slip prediction is optimistic by more than half a day on only 6 of the 84 checked outages needing slip. At the original arrival, the ensemble spread of an operator variant with solver inputs has a rank correlation of 0.91 with the actual error, and performing exact solves on the 31% most uncertain severe outages reduces the 90th-percentile error from 8.5% to 2.3%. A query takes milliseconds without a solver, making this a useful tool for large outage studies where the cost of thousands of exact solves outweighs the time to train the operator.",
+      "url": "http://arxiv.org/abs/2611.33188v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33188v1",
+      "tldr": "The paper trains a Fourier neural operator ensemble to rapidly map nominal low-thrust NRHO-to-DRO cislunar transfers with thrust outages to re-planned trajectories and recovery probabilities—at the original arrival or with up to 10 days’ slip—enabling fast, accurate missed-thrust margin studies without thousands of exact re-optimizations.",
+      "detailed_reading": {
+        "motivation": "电推进深空任务常因安全模式事件发生推力中断，任务可行性评估需要进行大量错过推力裕度研究，而每个中断场景都要精确重规划恢复轨迹，精确求解中位耗时约14.5 s、平均约71 s，数千次求解成本很高。因此需要一种快速工具，能同时给出重规划轨迹、Δv裕度、最近月面距离以及给定到达延迟下恢复是否存在，以加速大规模中断研究。",
+        "method": "作者构建了270条低推力NRHO到DRO转移族，在200节点网格上把可用推力历史、已飞行节点标志、标称控制与状态、时间分数、飞行时间和太阳相位等输入映射到重规划控制与状态，并用10个Fourier神经算子成员组成集成；混合算子分别校正单步凸优化R1和单步SQP R3，无求解器算子直接校正标称轨迹，联合算子额外输出恢复存在概率。训练损失为重新规划节点上的控制相对L2误差加λx=0.1的状态MSE，恢复概率用权重0.1的交叉熵训练，晚到达研究还输入到达延迟、有效性掩码并补齐到329节点。固定到达研究生成6750个精确重规划标签，晚到达研究生成13500个标签，并与R0至R3及带学习校正的R5至R7等廉价重规划器在未见过转移和严重中断上比较。",
+        "result": "在未见过转移且不允许到达延迟时，混合算子在严重中断半区的中位控制误差为1.20%，最佳廉价重规划基准为14.0%；允许最晚10天到达时，联合算子误差为1.67%，基准为23.2%。恢复存在性预测的AUC达0.997，在84个需要延迟的抽查中断中仅6个的最小可恢复延迟预测乐观超过半天；固定到达下集成离散度与实际误差的Spearman秩相关为0.91，对31%最不确定的严重中断做精确求解可把90分位误差从8.5%降至2.3%。无求解器查询为毫秒级且比带R1/R3输入的混合算子快16倍，Δv增量误差中位0.14 m/s、90分位7.2 m/s，而R3为2.2和58 m/s。",
+        "conclusion": "该工作表明，一个神经算子即可在原始或延迟到达条件下快速重规划低推力地月转移中断恢复，并以高精度预测恢复可行性和最小可恢复延迟。其毫秒级无求解器查询适合数千次中断场景筛查，而集成离散度可用于挑选少量最不确定案例做精确求解，从而在训练成本与大量精确求解成本之间取得实用折中。",
+        "key_details": "数据由Sobol序列采样270条最小控制能量转移，按210/30/30划分训练、验证和测试，测试转移限制在15.6至19.1天飞行时间包络内；中断按Weibull形状1.17、尺度2.41天再乘1.5生成0.5至10天全关机，至多三次并含推力下降。精确标签用IPOPT从标称轨迹和R1两个起点求解，控制相对L2差小于0.1%视为唯一；FNO每节点64特征、4个Fourier层、保留32个低阶模态、GELU激活，10成员集成输出均值与离散度。关键局限包括常质量与固定0.82 mm/s²推力加速度上界、无燃料上限、合成中断分布、仅30条测试转移，以及主要在严重中断子集上评估。"
+      },
+      "affiliations": [
+        "Independent researcher"
+      ],
+      "affiliations_text": "Independent researcher",
+      "score": 4.126093775248259,
+      "score_text": "4.1"
+    },
+    {
+      "id": "2611.33333v1",
+      "rank": 9,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133333v1-a-hierarchy-of-risk-certificates-for-representation-based-prediction",
+      "source": "arxiv",
+      "title": "A Hierarchy of Risk Certificates for Representation-Based Prediction",
+      "authors": [
+        "Mohit Kumar",
+        "Somayeh Kargaran"
+      ],
+      "authors_text": "Mohit Kumar, Somayeh Kargaran",
+      "abstract": "Representation-based prediction underlies many machine-learning systems. Yet a fitted predictor's failure to meet an accuracy requirement does not establish that its representation-decoder class cannot meet it. We study optimal population mean squared error (MSE) over Lipschitz decoders acting on a fixed representation. For blocks of $b\\geq2$ independent and identically distributed (iid) observations, we minimize total squared error (normalized by $b-1$) under pairwise Lipschitz constraints. We prove that expected block scores form nondecreasing lower bounds on optimal class risk and converge to that risk on compact metric feature spaces, although no fixed block size provides a uniform relative guarantee. Verified dual lower bounds and iid calibration observations independent of model development, with bounded targets and predictions, yield simultaneous lower confidence bounds on optimal class risk and upper confidence bounds on fitted-predictor risk. These bounds can establish that every admissible decoder exceeds a prescribed MSE threshold or that an admissible fitted predictor meets it. Controlled experiments illustrate population-risk certification; fixed PTB-XL and Bike Sharing experiments provide deterministic empirical-risk conclusions. The results support principled assessment and selection of representation-decoder configurations. Efficient certification at scale and extensions to dependent observations remain open problems.",
+      "url": "http://arxiv.org/abs/2611.33333v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33333v1",
+      "tldr": "The paper develops a hierarchy of blockwise Lipschitz-constrained lower bounds on the optimal population MSE of a representation–decoder class, turning them into calibrated confidence certificates that can prove whether every admissible decoder fails—or some fitted predictor meets—a prescribed MSE threshold.",
+      "detailed_reading": {
+        "motivation": "论文关注基于表示预测中一个关键缺口：拟合预测器未达到精度要求，并不能证明其表示-解码器类整体无法达标。因此需要研究固定表示加Lipschitz解码器类的最优总体MSE，并给出可用于阈值判定和配置选择的风险证书。",
+        "method": "设定历史X、标量目标Y属于已知有界区间I=[y-,y+]，表示U=Γ(X)及伪度量d，候选解码器类G_κ(d)为满足|g(u)-g(v)|≤κd(u,v)且输出截断到I的可测函数，风险R(g)=E[(Y-g(Γ(X)))^2]，目标为R_κ^*=inf_g R(g)。对b≥2个iid观测构成块，在全部两两Lipschitz约束下最小化总平方误差并除以b-1得到块分数T_b，证明期望W_b=E[T_b]构成非降下界并在紧特征空间收敛到R_κ^*；计算上用与所选两两约束对应的数值乘子验证对偶下界，无需精确优化。校准时先固定候选类、拟合预测器、置信界类型和失败概率分配，再用独立于模型开发的iid校准样本，通过两种构造（独立不重叠块的Lblock和全样本最小经验风险下界的Lemp及复用块计算）给出同时下置信界L≤R_κ^*和拟合预测器风险上置信界R(g_hat)≤U_fit。",
+        "result": "理论结果给出0≤W_2≤W_3≤…≤R_κ^*且W_b→R_κ^*（紧度量特征空间），但任何固定b都不能提供一致的相对保证，W_b/R_κ^*可任意小；在1-δ概率下同时有L≤R_κ^*和R(g_hat)≤U_fit，若g_hat∈G_κ(d)则L≤R_κ^*≤R(g_hat)≤U_fit。实验用KAHM、原始历史和Nyström特征：有限状态实验比较校准界与已知最优总体类风险并展示拟合预测器可满足阈值但违反Lipschitz；PTB-XL中两坐标KAHM类κ=1的计算下界超过经验MSE阈值（在特征距离数值上界有效前提下排除该类所有解码器）；Bike Sharing的54个类（3目标×18表示）全部存在满足经验MSE阈值的可行预测向量，但39个类中两个拟合预测器（截断仿射岭回归和截断Lipschitz延拓）均超阈值。",
+        "conclusion": "结论是应评估表示-解码器类的能力而不仅看单个拟合预测器；下界超过阈值可排除整个类，可允许拟合器的上界满足阈值可认证类达标，否则判定未决。结果支持原则性评估与选择表示-解码器配置，并提醒仅凭拟合预测器失败可能错误拒绝含可行解码器的类；大规模高效认证和依赖观测扩展仍开放。",
+        "key_details": "关键细节：目标与预测均有界使平方损失上界B=D^2，截断到I保持Lipschitz且不增风险，常值解码器给出R_κ^*≤Var(Y)≤B/4；R_κ^*分解为未来不确定性、条件均值信息损失和Lipschitz逼近误差，但下界不定位来源。置信保证要求校准观测iid且独立于模型开发、候选类与阈值等预先指定；第一构造用floor(n/b)个独立块可能随b增大而不改善置信界，第二构造可复用块计算但保留样本量n；对偶界依赖数值乘子和特征距离上界有效性。局限包括固定块无统一相对保证、需紧空间才能保证收敛、PTB-XL与Bike Sharing仅经验MSE结论、计算复杂度与依赖观测未解决。"
+      },
+      "affiliations": [
+        "Software Competence Center Hagenberg",
+        "University of Rostock"
+      ],
+      "affiliations_text": "Software Competence Center Hagenberg, University of Rostock",
+      "score": 4.012686947196575,
+      "score_text": "4.0"
+    },
+    {
+      "id": "2611.33257v1",
+      "rank": 10,
+      "section": "deep",
+      "paper_id": "2026/11/26/261133257v1-one-token-many-lessons-sliding-window-attention-within-gated-delta-networks",
+      "source": "arxiv",
+      "title": "One Token, Many Lessons: Sliding-Window Attention within Gated Delta Networks",
+      "authors": [
+        "Yuchen Song",
+        "Yangbin Chen"
+      ],
+      "authors_text": "Yuchen Song, Yangbin Chen",
+      "abstract": "Linear attention compresses historical context into a fixed-size recurrent state, reducing the computational and memory costs of long-sequence modeling. From the perspective of test-time regression (TTR), the state matrix can be viewed as an online-learned regression model, where keys and values serve as inputs and targets respectively, and queries are used to read from the model. From this perspective, the effectiveness of state learning depends not only on the update rule but also on how the key-value learning pairs used for state updates are constructed. While existing work has largely focused on how the state is updated and organized, we investigate how the learning pairs used for state updates are constructed. To this end, we propose Sliding-Window Gated DeltaNet (SWGDN), which replaces short convolutions in Delta-Rule linear attention with sliding-window attention to perform content-dependent local aggregation of projected queries, keys, and values. Our experiments show that SWGDN makes the key-value pairs used in consecutive updates more similar in both GDN2 and KDA. In SWGDN, carrying information from the same token across updates can help the recurrent state reinforce a previously learned association. The local mixing strategy can be incorporated into any Delta-Rule-based linear attention architecture without changing its state update equations or chunkwise parallel algorithms. We apply this strategy to two Delta-Rule variants, GDN2 and KDA, and experimental results demonstrate that SWGDN outperforms the original Delta-Rule baseline across multiple benchmarks.",
+      "url": "http://arxiv.org/abs/2611.33257v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33257v1",
+      "tldr": "The paper proposes Sliding-Window Gated DeltaNet (SWGDN), which replaces short convolutions in Delta-Rule linear attention with sliding-window attention for content-dependent local mixing of queries, keys, and values—improving key–value learning-pair construction and benchmark performance while preserving the original recurrent update rules and chunkwise parallel algorithms.",
+      "detailed_reading": {
+        "motivation": "线性注意力将历史上下文压缩到固定大小的循环状态中，以降低长序列建模的计算与内存开销；从测试时回归（TTR）视角看，状态矩阵是在线学习的回归模型，键和值分别作为输入与目标，查询用于读取。已有工作主要关注状态如何更新与组织，却较少研究用于状态更新的键–值学习对如何构造。作者指出，Delta-Rule 线性注意力中更新前的短卷积使用固定相对位置系数，无法根据当前局部窗口内容自适应地构造查询、键和值，因此希望在保持原始循环更新规则与分块并行算法的前提下改进线性注意力。",
+        "method": "SWGDN 将 GDN2/KDA 中作用于投影后 Q、K、V 的短卷积替换为伪查询驱动的滑动窗口注意力。每个头在每个分支（Q、K、V）学习形状为 G×d 的伪查询张量，每个通道组对应一个 d 维伪查询；在因果局部窗口内，三个分支都用同一组投影键作为候选进行打分，伪查询和键先经 RMSNorm 与 RoPE，再计算缩放点积并做 softmax，得到各分支、各组的内容相关混合权重。各分支用自身权重聚合本分支的投影 Q、K、V，经 SiLU 后拼接，混合后的查询用于状态读取，混合后的键和值送入骨干原有的门控 Delta 更新；状态更新方程和 chunkwise 并行算法均不变。作者在窗口大小 W=4（与原短卷积核大小一致）下实现 SWGDN2 与 SWKDA，并比较 G1、G16、G64 等不同通道组粒度。",
+        "result": "在 340M/15B 规模上，伪查询滑动窗口注意力将权重集中在少数偏移位置：SWKDA-G1 的 Q 分支偏向当前位置，K/V 分支更常选择前一位置；SWGDN2-G1 的 V 分支约有 42% 质量给前一位置。分析表明，SWGDN 使 GDN2 和 KDA 中连续更新所使用的键–值学习对在 K 与 V 表示上更相似；对单一源 token 的干预显示，跨重叠窗口携带同一 token 信息可让后续写入持续降低同一早期关联的残差，表现为近似多步学习。实验上 SWGDN 在多个基准上优于原始 Delta-Rule 基线，且 G1 的共享伪查询组已能获得大部分性能增益。",
+        "conclusion": "SWGDN 表明，除改进状态更新规则外，构造更合适的键–值学习对也是提升 Delta-Rule 线性注意力的有效方向。由于方法只改变循环更新前的局部混合，不改变状态更新方程和分块并行算法，因此可直接嫁接到任意基于 Delta-Rule 的线性注意力架构并复用现有核。内容相关的局部聚合使重要 token 能在连续窗口中反复参与学习对构造，从而强化已学关联并带来稳定性能提升。",
+        "key_details": "关键实现包括：窗口 W=4 与原短卷积核一致；每个头每个分支学习 G 个伪查询，G=1 时全通道共享权重，G=16/64 时按通道组细化；所有分支复用投影键打分，但各自使用独立 softmax 权重混合 Q、K 或 V；伪查询和键使用 RMSNorm 与 RoPE 以增强窗口内相对偏移敏感性；聚合后经 SiLU。分析使用 340M/15B 最终检查点、160 条 2048 token 验证序列、18 层统计，并只考虑完整窗口；相邻学习对距离在局部混合后、写门之前度量。局限性在于“多步学习”是近似解释，实际学习对、衰减和门控随时间变化，且 K/V 分支权重不一定相同；分析也集中在部分层和设定规模上。"
+      },
+      "affiliations": [
+        "Xi'an Jiaotong-Liverpool University"
+      ],
+      "affiliations_text": "Xi'an Jiaotong-Liverpool University",
+      "score": 4.005606022526668,
+      "score_text": "4.0"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2611.33325v1",
+      "rank": 1,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133325v1-sparse-adaptation-for-in-context-learning-on-data-streams",
+      "source": "arxiv",
+      "title": "Sparse Adaptation for In-Context Learning on Data Streams",
+      "authors": [
+        "João Neves",
+        "Afonso Lourenço",
+        "Lizy K. John",
+        "Eric P. Xing",
+        "João Gama"
+      ],
+      "authors_text": "João Neves, Afonso Lourenço, Lizy K. John, Eric P. Xing, João Gama",
+      "abstract": "The Internet of Things (IoT) generates massive data streams, making edge computing essential for low-latency applications and 5G networks. Tabular foundation models (TFMs) enable adaptation through in-context examples rather than parameter updates, but evolving streams challenge context relevance and computational efficiency. This work introduces SAIL, a framework for sparse adaptation of TFMs that reuses the model's key--value cache between adaptation events. SAIL reconstructs its support set only when drifts in stream structure indicate potential context inadequacy, while the structural representation itself is updated by changes in predictive performance. SAIL combines prequential error monitoring with online, class-specific micro-clustering to detect changes in cluster mass, class separability, and feature-space coverage. Upon adaptation, a context budget is allocated proportionally to class mass, and the most recently updated micro-clusters provide representative observations for refitting. This limits context redundancy and computational cost while preserving recent structural information.",
+      "url": "http://arxiv.org/abs/2611.33325v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33325v1",
+      "tldr": "SAIL is a sparse-adaptation framework for tabular foundation models on evolving data streams that reuses the KV cache and only rebuilds a class-balanced, micro-cluster-based in-context support set when structural or predictive-performance drift signals indicate the current context is inadequate, reducing redundancy and computation while preserving recent structural information.",
+      "detailed_reading": null,
+      "affiliations": [
+        "The University of Texas at Austin",
+        "University of Porto",
+        "Carnegie Mellon University",
+        "Polytechnic of Porto"
+      ],
+      "affiliations_text": "The University of Texas at Austin, University of Porto, Carnegie Mellon University, Polytechnic of Porto",
+      "score": 3.9323642951987425,
+      "score_text": "3.9"
+    },
+    {
+      "id": "2611.33300v1",
+      "rank": 2,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133300v1-voltage-feedback-backoff-and-restoration-for-priority-based-ev-charging-control",
+      "source": "arxiv",
+      "title": "Voltage-Feedback Backoff and Restoration for Priority-Based EV Charging Control",
+      "authors": [
+        "Eyad Alsulayhim",
+        "Ning Lu"
+      ],
+      "authors_text": "Eyad Alsulayhim, Ning Lu",
+      "abstract": "Uncoordinated residential electric vehicle (EV) charging can cause sustained undervoltage in distribution networks. This paper proposes a centralized voltage-feedback backoff and restoration (VFBR) framework that separates concurrent charging-count control from EV selection. The controller adjusts the allowable charging count using monitored critical-bus voltages, without load forecasts, online power-flow calculations, or optimization. Initial charging suspension relieves undervoltage, followed by group-wise restoration and backoff as voltage conditions permit. A complementary priority score combines charging urgency with voltage sensitivity precomputed offline to balance time-critical requests against their location-dependent voltage impacts. One-week simulations on the unbalanced IEEE 123-bus feeder with 500 EVs show that VFBR reduces the proportion of charging-period bus-time samples below 0.95 p.u. from 15% to less than 1%. Among the evaluated strategies, combined allocation with urgency and sensitivity weights of 0.75 and 0.25 delivers 25% more energy than random allocation and achieves the highest mean departure state of charge and fairness. These results demonstrate that simple voltage-feedback control, coupled with urgency- and sensitivity-based allocation, effectively mitigates undervoltage while improving charging service.",
+      "url": "http://arxiv.org/abs/2611.33300v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33300v1",
+      "tldr": "The paper proposes a voltage-feedback backoff and restoration (VFBR) framework that separates the number of allowed concurrent EV chargers from EV selection—adjusting charging based on monitored critical-bus voltages without forecasts or optimization—and uses an urgency-plus-voltage-sensitivity priority score to mitigate undervoltage while improving charging service and fairness.",
+      "detailed_reading": null,
+      "affiliations": [
+        "North Carolina State University"
+      ],
+      "affiliations_text": "North Carolina State University",
+      "score": 3.7443027806612097,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.33182v1",
+      "rank": 3,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133182v1-neighbor-crowding-predicts-feature-stability-in-sparse-autoencoders",
+      "source": "arxiv",
+      "title": "Neighbor Crowding Predicts Feature Stability in Sparse Autoencoders",
+      "authors": [
+        "Denis Federico Lim",
+        "Naveen Dasari",
+        "George Flint",
+        "Kevin Zhu"
+      ],
+      "authors_text": "Denis Federico Lim, Naveen Dasari, George Flint, Kevin Zhu",
+      "abstract": "Sparse Autoencoders (SAEs) offer an approach to identify language model representations by breaking apart polysemantic features into more sparse, interpretable ones. Yet, it is challenging to identify which of the learned features are actually stable, rather than artifacts of initialization. One approach is to train multiple SAE seeds, and compare the learned features across seeds by cosine similarity, but this is notably costly. This raises the question of whether stable features can be identified without the computational expense of training multiple seeds. In this work, we examine cross-seed feature stability across differing levels of training tokens, and demonstrate that in TopK SAEs, it is highly predictable using six computationally cheap statistics derived from a single training run. Neighbor crowding, a geometric property of the dictionary, is the strongest single predictor, with features that sit in dense regions of the unit sphere more likely to be stable than isolated ones.",
+      "url": "http://arxiv.org/abs/2611.33182v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33182v1",
+      "tldr": "In TopK sparse autoencoders, cross-seed feature stability can be predicted cheaply from a single training run, with neighbor crowding—how densely a feature sits among nearby decoder directions—being the strongest single predictor.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of Cambridge",
+        "Korea Advanced Institute of Science and Technology (KAIST)",
+        "University of Pennsylvania",
+        "University of California, Berkeley"
+      ],
+      "affiliations_text": "University of Cambridge, Korea Advanced Institute of Science and Technology (KAIST), University of Pennsylvania, University of California, Berkeley",
+      "score": 3.7419935925286945,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.33238v1",
+      "rank": 4,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133238v1-sequential-testing-on-complex-and-high-dimensional-data-streams-leveraging-unsupervised-model-errors",
+      "source": "arxiv",
+      "title": "Sequential Testing on Complex and High Dimensional Data Streams Leveraging Unsupervised Model Errors",
+      "authors": [
+        "George Stamatelis",
+        "Iordanis Koutsopoulos"
+      ],
+      "authors_text": "George Stamatelis, Iordanis Koutsopoulos",
+      "abstract": "We propose two general, distribution-free test statistics for binary Sequential Hypothesis Testing (SHT) and Sequential Change Point Detection (SCPD) respectively, in streaming environments where the data (e.g., network traffic metadata) are too complicated for the exact probabilistic modeling required by conventional likelihood ratio-driven tests. Our framework also addresses the challenge of information asymmetry, where data is available only from the null/pre-change regime and not from the alternative/post-change one such as zero-day attacks or emerging disease related regimes. The proposed statistics monitor the errors of a predictive or reconstructive machine learning model trained solely on null/pre-change data, relying on imperfect generalization (the model's performance will degrade when deployed on data from the alternative/post-change class). Under mild assumptions on the model's errors, we establish rigorous analytical guarantees: strict non-asymptotic error control for SHT, and explicit bounds on the Average Run Length (ARL) and the Expected Detection Delay (EDD) for SCPD. Extensive evaluations in target tracking, chaotic dynamical systems, and real-world network security datasets, demonstrate that our framework consistently satisfies prescribed constraints where existing algorithms succumb to inflated missed detections and/or false alarms. Finally, because our methods operate on scalar errors without requiring online retraining or kernel evaluations, they are highly scalable.",
+      "url": "http://arxiv.org/abs/2611.33238v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33238v1",
+      "tldr": "The paper proposes distribution-free sequential hypothesis testing and change-point detection methods for complex, high-dimensional data streams that require only null/pre-change data and monitor the clipped errors of an unsupervised model trained on that data, leveraging performance degradation on out-of-distribution data to provide rigorous error and detection-delay guarantees while remaining highly scalable.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Athens University of Economics and Business"
+      ],
+      "affiliations_text": "Athens University of Economics and Business",
+      "score": 3.6858495486506944,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.33302v1",
+      "rank": 5,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133302v1-two-timescales-of-forgetting-in-fine-tuning-of-language-models-fast-behavioral-suppression-and-slow-representational-drift",
+      "source": "arxiv",
+      "title": "Two Timescales of Forgetting in Fine-tuning of Language Models: Fast Behavioral Suppression and Slow Representational Drift",
+      "authors": [
+        "Yilin Luo",
+        "Jin Hwa Lee",
+        "Andrew M. Saxe",
+        "Antonio Sclocchi"
+      ],
+      "authors_text": "Yilin Luo, Jin Hwa Lee, Andrew M. Saxe, Antonio Sclocchi",
+      "abstract": "Today, a core pipeline of artificial intelligence systems is pretraining on a broad range of text corpora and then fine-tuning on specific tasks or desired behaviors. Yet we still have limited understanding of how fine-tuning on a restricted data distribution modifies representations acquired during pretraining. In particular, it remains unclear whether surface behavioral suppression happens together with the erasure of latent representations that support it. In this work, we study supervised fine-tuning (SFT) by pretraining transformers on a controlled context-free grammar with hierarchical latent structure, the Random Hierarchy Model (RHM), and fine-tuning with a restricted subset of its generative rules. While during pretraining the model's ability to generate with the correct grammar rules coincides with building the internal representations of the corresponding latent, we find that SFT exhibits a very different dynamics: (i) the generation of deleted rules changes on a fast timescale inversely proportional to the magnitude of the token-latent correlation; meanwhile, their corresponding representations stay intact; (ii) the hidden representations of the deleted rules become forgotten on a much longer timescale, associated with a slow drift of the network parameters. Finally, we observe analogous results in a realistic setup with natural language, suggesting that this timescale separation in forgetting is a more general phenomenon of fine-tuning language models.",
+      "url": "http://arxiv.org/abs/2611.33302v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33302v1",
+      "tldr": "Fine-tuning language models on restricted data causes two-timescale forgetting: deleted-rule behavior is suppressed quickly while its underlying representations remain intact, and those representations are erased only later through slow parameter drift—a pattern also observed in natural-language fine-tuning.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University College London",
+        "Université Paris-Saclay",
+        "Principia"
+      ],
+      "affiliations_text": "University College London, Université Paris-Saclay, Principia",
+      "score": 3.677443168864537,
+      "score_text": "3.7"
+    },
+    {
+      "id": "2611.33168v1",
+      "rank": 6,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133168v1-temporal-exposure-to-byzantine-vulnerability-under-intermittent-participation-in-federated-learning",
+      "source": "arxiv",
+      "title": "Temporal Exposure to Byzantine Vulnerability Under Intermittent Participation in Federated Learning",
+      "authors": [
+        "Sasa Maric Robert Abbas"
+      ],
+      "authors_text": "Sasa Maric Robert Abbas",
+      "abstract": "In this paper, we study the effect of participation variability on per-round Byzantine vulnerability. We formalise Dynamic Participation Exposure (DPE), a phenomenon in which the global Byzantine fraction remains below an aggregation rule's tolerance threshold, while a participating client set violates, or approaches violation of, the assumptions required for robust aggregation. Under stochastic participation, we derive the probability of per round exposure and analyse how active-set size affects the variability of the observed Byzantine fraction. We further examine the accumulation of exposure over multiple rounds and consider adversaries that selectively participate during favourable rounds. Our analysis shows that intermittent participation does not automatically imply aggregation failure. Rather, it transforms Byzantine robustness from a static population-level property into a stochastic and temporal property. To mitigate this risk, we outline actionable design recommendations based on minimum active-set constraints, temporal monitoring, participation history, and adaptive aggregation.",
+      "url": "http://arxiv.org/abs/2611.33168v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33168v1",
+      "tldr": "This paper formalizes Dynamic Participation Exposure (DPE), showing that intermittent and stochastic client participation can cause per-round Byzantine fractions to exceed robust aggregation thresholds even when the global Byzantine fraction is below tolerance, thereby turning Byzantine robustness into a stochastic and temporal property and motivating participation-aware defenses such as minimum active-set constraints, temporal monitoring, participation history, and adaptive aggregation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of New South Wales",
+        "Victoria University"
+      ],
+      "affiliations_text": "University of New South Wales, Victoria University",
+      "score": 3.603268597860886,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.33237v1",
+      "rank": 7,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133237v1-resource-efficient-multimodal-fusion-for-early-rice-blast-forecasting-in-sustainable-agriculture",
+      "source": "arxiv",
+      "title": "Resource-Efficient Multimodal Fusion for Early Rice Blast Forecasting in Sustainable Agriculture",
+      "authors": [
+        "Shubhajyoti Das",
+        "Pritam Bikram",
+        "Arindam Biswas",
+        "Samrat Paul",
+        "Parimal Sinha",
+        "Bhargab B. Bhattacharya"
+      ],
+      "authors_text": "Shubhajyoti Das, Pritam Bikram, Arindam Biswas, Samrat Paul, Parimal Sinha, Bhargab B. Bhattacharya",
+      "abstract": "Resource-efficient artificial intelligence has become increasingly important for sustainable agriculture, where timely disease forecasting must be achieved under computational and energy constraints. Early estimation of rice blast can enhance food security by optimizing crop management practices while reducing excessive pesticide use. However, existing frameworks often suffer from high computational overhead and limited capability to model the complex spectral-temporal dependencies present in heterogeneous meteorological and remote sensing data. To address these challenges, this paper proposes a lightweight multimodal fusion framework comprising an attentive positional encoding-based Transformer and a convolutional neural network (CNN)-embedded gated recurrent unit (GRU) for efficient spectral-temporal representation learning. The attention-enhanced positional encoding assigns adaptive importance to sequential meteorological tokens, enabling effective modelling of temporal characteristics. In parallel, the lightweight CNN extracts discriminative spectral features, while the GRU captures temporal dynamics from remote sensing imagery acquired over two time-instances. A multimodal fusion layer integrates these heterogeneous representations to forecast rice blast risk 5-10 days before symptom manifestation across diverse agro-climatic zones. Extensive experiments demonstrate that the proposed framework outperforms state-of-the-art methods, achieving a validation accuracy of 96.93% and an F1-score of 95.79%. In addition to its predictive performance, the lightweight multimodal architecture substantially reduces computational complexity, inference latency, and carbon emissions, making it an energy-efficient solution for large-scale disease forecasting. The proposed framework provides a practical foundation for resource-efficient artificial intelligence in sustainable agriculture.",
+      "url": "http://arxiv.org/abs/2611.33237v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33237v1",
+      "tldr": "The paper proposes a lightweight multimodal fusion framework combining an attention-enhanced positional-encoding Transformer for meteorological sequences with a CNN-GRU for spectral-temporal remote sensing features to forecast rice blast risk 5–10 days before symptoms while reducing computational cost and carbon emissions.",
+      "detailed_reading": null,
+      "affiliations": [
+        "ICAR-Indian Agricultural Research Institute, New Delhi",
+        "Indian Institute of Engineering Science and Technology, Shibpur"
+      ],
+      "affiliations_text": "ICAR-Indian Agricultural Research Institute, New Delhi, Indian Institute of Engineering Science and Technology, Shibpur",
+      "score": 3.589456988504533,
+      "score_text": "3.6"
+    },
+    {
+      "id": "2611.33162v1",
+      "rank": 8,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133162v1-attributing-agentic-failure-in-reasoning-vision-language-models-with-interactive-2d-environments",
+      "source": "arxiv",
+      "title": "Attributing Agentic Failure in Reasoning Vision-Language Models with Interactive 2D Environments",
+      "authors": [
+        "Pranav Guruprasad",
+        "Sean Rivera",
+        "Helen Lu",
+        "Arushi Jain",
+        "Hangliang Ren",
+        "Harshvardhan Sikka"
+      ],
+      "authors_text": "Pranav Guruprasad, Sean Rivera, Helen Lu, Arushi Jain, Hangliang Ren, Harshvardhan Sikka",
+      "abstract": "Agentic benchmarks report a success rate that confounds distinct causes of failure: misreading the environment, never working out how components of the environment operates, operating the components in the wrong order, and failing to recover from a mistake, each of which calls for a different fix. We present an early preview of MultiNet v2.0-Gridworld - an interactive maze environment built for attribution rather than ranking. Four different types of mechanisms, namely key-door pairs, switch-gate pairs, distractors and decoys, and ordered combinations of these mechanisms, can be added, modified, or removed independently while the renderer, the action space, and the scoring function stay fixed. A breadth-first search over the joint state of position, facing direction, inventory, and mechanism state gives every instance an exact optimal action count, which sets its difficulty and grades unfinished episodes. We fix the evaluation protocol on 15 held-out mazes over 540 episodes, then evaluate three vision-language models on 50 mazes. They solve 6 of 150 episodes, 45 of the 50 mazes were not solved by any model, and no episode containing a switch-gate mechanism was solved.",
+      "url": "http://arxiv.org/abs/2611.33162v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33162v1",
+      "tldr": "The paper introduces MultiNet v2.0-Gridworld, an interactive maze benchmark with independently controllable mechanisms and an exact BFS oracle to attribute vision-language models’ agentic failures to specific causes such as affordance discovery, ordering, execution, and recovery, revealing very low success and distinct failure modes across three models.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Tufts University",
+        "Georgia Institute of Technology",
+        "Fig",
+        "Manifold Research Group"
+      ],
+      "affiliations_text": "Tufts University, Georgia Institute of Technology, Fig, Manifold Research Group",
+      "score": 3.5480471486960115,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.33183v1",
+      "rank": 9,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133183v1-rei-learning-ideation-from-repository-evolution",
+      "source": "arxiv",
+      "title": "REI: Learning Ideation from Repository Evolution",
+      "authors": [
+        "Muyu Zou",
+        "Xiang Feng",
+        "Yufei Xu",
+        "Shanshan Ye",
+        "Zulong Chen",
+        "Lingyu Mu",
+        "Jinxin Hu",
+        "Jing Zhang"
+      ],
+      "authors_text": "Muyu Zou, Xiang Feng, Yufei Xu, Shanshan Ye, Zulong Chen, Lingyu Mu, Jinxin Hu, Jing Zhang",
+      "abstract": "As AI systems become increasingly capable of executing and evaluating experiments, ideation is emerging as a bottleneck in automated scientific and engineering iteration. In many real-world domains, useful ideas are sparse and their validation is costly, making direct online exploration inefficient. We observe that repository evolution provides a scalable source of reusable technical experience: code changes record concrete technical hypotheses, while subsequent revisions, adoption, and reuse provide signals about their utility. Based on this observation, we propose REI, a Repository Evolution-driven Ideation framework that learns reusable ideation policies from repository evolution, injecting domain-specific technical experience into model parameters and reducing reliance on costly trial-and-error. We further identify a hidden failure mode in quality-driven ideation optimization: semantic diversity collapse. Although generated ideas can remain lexically diverse, they increasingly concentrate in a small number of dominant method families, limiting cross-task generalization and long-tail exploration. To address this problem, we introduce Semantic Prior Optimization and Debiasing (SPOD), a diversity-preserving alignment mechanism that makes method identity explicit, corrects category-level reward bias, and limits redundant accumulation within the same method family while retaining strong representatives. Experiments on public benchmarks and a real-world industrial setting demonstrate improvements in ideation quality, method diversity, cross-task generalization, and long-tail exploration.",
+      "url": "http://arxiv.org/abs/2611.33183v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33183v1",
+      "tldr": "The paper proposes REI, a repository-evolution-driven ideation framework that learns reusable ideation policies from code changes and their subsequent utility signals, and introduces Semantic Prior Optimization and Debiasing (SPOD) to prevent semantic diversity collapse and improve ideation quality, method diversity, cross-task generalization, and long-tail exploration.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.4887721563209135,
+      "score_text": "3.5"
+    },
+    {
+      "id": "2611.33184v1",
+      "rank": 10,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133184v1-semantic-density-does-not-predict-agent-memory-collapse",
+      "source": "arxiv",
+      "title": "Semantic Density Does Not Predict Agent-Memory Collapse",
+      "authors": [
+        "Saksham Gupta",
+        "Yash Choudhary",
+        "Arpit Upadhyay"
+      ],
+      "authors_text": "Saksham Gupta, Yash Choudhary, Arpit Upadhyay",
+      "abstract": "Persistent textual memory can improve LLM agents, but repeated updates can erode task performance. We ask whether memory-store statistics warn before held-out accuracy declines. We registered mean pairwise cosine similarity ($ρ$) and 13 additional geometry, retrieval, and graph statistics on 805 snapshots from 13 memory methods across ALFWorld, AppWorld, ScienceWorld, WebShop, and two ARC-AGI settings. These methods store trajectories, rules, workflows, strategies, or linked records, using selective retrieval or whole-store prompting. No such statistic reliably predicted early signs of task accuracy decline, and $ρ$ had zero median lead. With the checkpoint after peak accuracy as a secondary decline point, measures of highly similar pairs and nearest-neighbor crowding changed earlier but did not consistently outperform stored-item count. We trained classifiers on this corpus and applied them unchanged to PropWorld runs of up to 5,000 crafting tasks. They falsely flagged 56.9% of checkpoints from size-limited stores with stable accuracy and detected only 18% of checkpoints after task success fell to zero. Thus, global semantic density did not provide a reliable warning, while local crowding did not transfer consistently across memory designs. In these long-horizon runs, size-limited stores remained stable, while the sole failure arose when unbounded whole-store prompting exceeded model input capacity, which token growth predicted directly.",
+      "url": "http://arxiv.org/abs/2611.33184v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33184v1",
+      "tldr": "**TLDR:** Across 805 memory snapshots and long-horizon runs, memory-store statistics—especially global semantic density—do not reliably predict when LLM-agent memory will collapse, local crowding signals do not transfer consistently, and the main observed failure is unbounded whole-store prompting exceeding model input capacity, which token growth predicts directly.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Independent Researcher",
+        "Vasuki Inc.",
+        "Piramal Finance"
+      ],
+      "affiliations_text": "Independent Researcher, Vasuki Inc., Piramal Finance",
+      "score": 3.414141972189638,
+      "score_text": "3.4"
+    },
+    {
+      "id": "2611.33249v1",
+      "rank": 11,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133249v1-ferrets-a-scalable-symbolic-transform-for-time-series-classification",
+      "source": "arxiv",
+      "title": "FERRETS: A Scalable Symbolic Transform for Time Series Classification",
+      "authors": [
+        "Antoine Guillaume"
+      ],
+      "authors_text": "Antoine Guillaume",
+      "abstract": "Dictionary methods for time series build bags of symbolic words from subsequences, but the accurate ones scale poorly. Against other families of methods, their accuracy no longer pays for their cost. We present FERRETS, a label-free dictionary transform built on WEASEL~2. It keys windows of random length and dilation into exact eight-bit words, adds a level word of each window's mean and spread, and on multivariate data adds cross-channel words. We compare it with leading classifiers, deep networks and foundation models included, on the UCR, Multiverse and MONSTER archives. FERRETS is the fastest of the eleven methods timed on UCR under a ten-thread budget. Of the ten others, only MultiRocket-Hydra is significantly more accurate, taking 24.7 times as long. FERRETS is not significantly different from WEASEL~2, the most accurate earlier dictionary method, which takes 125 times as long, and is significantly ahead of the other dictionary methods. On the Multiverse core, it is not significantly different in accuracy from HIVE-COTE~2 and MultiRocket-Hydra, though behind both on UCR. It is also significantly more accurate than five frozen foundation models on UCR's published split. On the MONSTER problems both complete, MiniRocket takes 3.7 times as long to fit as the streaming FERRETS classifier, which is significantly more accurate.",
+      "url": "http://arxiv.org/abs/2611.33249v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33249v1",
+      "tldr": "FERRETS is a fast, label-free symbolic dictionary transform for time series classification that encodes random windows into exact 8-bit words with additional level and cross-channel words, enabling linear-time/streaming training and competitive accuracy while being substantially faster than leading methods.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Novahe"
+      ],
+      "affiliations_text": "Novahe",
+      "score": 3.3193961254496718,
+      "score_text": "3.3"
+    },
+    {
+      "id": "2611.33308v1",
+      "rank": 12,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133308v1-change-partners-at-every-layer-balanced-random-regrouping-for-model-merging",
+      "source": "arxiv",
+      "title": "Change Partners at Every Layer: Balanced Random Regrouping for Model Merging",
+      "authors": [
+        "Kaiyang Li",
+        "Shaobo Han",
+        "Shihao Ji"
+      ],
+      "authors_text": "Kaiyang Li, Shaobo Han, Shihao Ji",
+      "abstract": "Model merging combines fine-tuned experts into one model that serves many tasks without retraining, but merging many experts this way substantially reduces accuracy. Grouping offers a middle ground: at every layer or weight matrix, the $N$ experts are divided into $K<N$ groups, the experts in a group are merged into one shared module, and a task uses the module merged from its expert's group. Natural choices are to keep the same partners across layers or to group similar experts. Surprisingly, we find that randomly changing partners at every layer outperforms both. We call this Balanced Random Regrouping (BRR): it independently partitions the experts into $K$ equal-sized random groups at each layer (BRR-layer) or weight matrix (BRR-matrix) and merges each group with an existing method. With validation-selected merge scales, both BRR variants outperform reusing one grouping across layers in all 24 CLIP settings, by 1.0-6.8 points, and BRR-matrix also outperforms the similarity-based FlexMerge in every setting. A first-order analysis explains this gain. At each layer, merging a task's expert with its partners shifts the task's output features; when the partners are the same at every layer, these shifts tend to point in similar directions and add up, whereas with new partners at every layer they vary independently and add up less on average. A series of experiments supports this analysis, which further guides a grouping search that can outperform BRR.",
+      "url": "http://arxiv.org/abs/2611.33308v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33308v1",
+      "tldr": "**TLDR:** The paper shows that, for model merging across many fine-tuned experts, independently and randomly regrouping experts into equal-sized groups at every layer or weight matrix—Balanced Random Regrouping (BRR)—outperforms reusing one grouping or grouping similar experts, because layer-wise partner changes make merge-induced feature shifts vary independently rather than accumulate.",
+      "detailed_reading": null,
+      "affiliations": [
+        "NEC Laboratories America",
+        "University of Connecticut"
+      ],
+      "affiliations_text": "NEC Laboratories America, University of Connecticut",
+      "score": 3.164011595509077,
+      "score_text": "3.2"
+    },
+    {
+      "id": "2611.33167v1",
+      "rank": 13,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133167v1-code-availability-is-not-enough-schemas-for-documenting-and-extending-data-analysis",
+      "source": "arxiv",
+      "title": "Code availability is not enough: schemas for documenting and extending data analysis",
+      "authors": [
+        "H. Sherry Zhang",
+        "Roger D. Peng"
+      ],
+      "authors_text": "H. Sherry Zhang, Roger D. Peng",
+      "abstract": "A data analysis involves a sequence of decisions, from data cleaning to model specification, each of which can affect the reported result. Reproducing that result is not the same as understanding the sequence of decisions that produced it and the reasons for each: the code mixes those decisions with implementation details, while the manuscript states the major decisions and their rationale but scatters them across its sections and often leaves out the minor ones. A reader may then ask how the result would change under a different decision: the question itself is easy to pose, but implementing it is often non-trivial in practice. In this work, we propose a schema that represents a data analysis as a collection of decisions in natural language, from which large language models (LLMs) can generate and validate analysis scripts directly. This workflow can also expand a single analysis into a full multiverse of alternatives, specified in an alternative file, ready for comparison. We demonstrate the proposed workflow in two applications. In the first, we construct a schema for a published regression analysis of heaped smoking data and show that it reproduces the reported estimates, and that a reviewer-suggested alternative can be specified through the alternative file and turned into code automatically. In the second, where no schema is provided, we show how the workflow serves instead as a reproducibility check, applied to the many-analysts football study. As an intermediate representation between the manuscript and code scripts, our schema gives a self-contained account of an analysis and makes it extensible from a reader's perspective.",
+      "url": "http://arxiv.org/abs/2611.33167v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33167v1",
+      "tldr": "The paper proposes a natural-language schema for documenting a data analysis as a sequence of decisions, enabling LLMs to generate and validate analysis code and extend results into alternative multiverses—showing that reproducibility requires more than code availability.",
+      "detailed_reading": null,
+      "affiliations": [],
+      "affiliations_text": "Unknown affiliation",
+      "score": 3.0515267192870663,
+      "score_text": "3.1"
+    },
+    {
+      "id": "2611.33163v1",
+      "rank": 14,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133163v1-quantum-machine-learning-for-signature-forgery-detection",
+      "source": "arxiv",
+      "title": "Quantum Machine Learning for Signature Forgery Detection",
+      "authors": [
+        "Nabila",
+        "Md Farhan Shahriyar",
+        "Nowshin Tabassum Puspa"
+      ],
+      "authors_text": "Nabila, Md Farhan Shahriyar, Nowshin Tabassum Puspa",
+      "abstract": "Offline handwritten signatures remain a primary behavioural biometric in legal and financial documents. Detecting skilled forgeries from a static raster image is hard because pen pressure, timing and stroke order are missing. This work studies a family of quantum machine learning pipelines for offline signature forgery detection on a public Kaggle corpus of images split into two classes. We pair a ZZ feature map quantum kernel with three classical learners: K-Nearest Neighbours, Support Vector Machine and Random Forest. We then propose a deeper hybrid that uses EfficientNetB0 as a frozen feature extractor, reduces the resulting 1280 dimensional representation to a qubit register sized subspace through a quantum compatible principal component projection and decides class membership with a nearest neighbour rule. On a single held out test fold the proposed hybrid reaches 92.62 percent accuracy. On stratified five fold cross validation the same pipeline yields a mean accuracy of 91.26 percent with a standard deviation of 1.13 percent. The pipeline keeps a quantum embedding step that is portable to NISQ hardware. We report a controlled ablation across six quantum variants, confusion matrices, a t SNE projection and per class precision, recall and F1 score.",
+      "url": "http://arxiv.org/abs/2611.33163v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33163v1",
+      "tldr": "This paper proposes a hybrid quantum-classical pipeline for offline signature forgery detection that combines a frozen EfficientNetB0 feature extractor, quantum-compatible PCA, and nearest-neighbor/quantum-kernel classifiers, achieving 92.62% accuracy on a held-out fold and 91.26% mean accuracy in stratified five-fold cross-validation.",
+      "detailed_reading": null,
+      "affiliations": [
+        "Southern University Bangladesh",
+        "Hajee Mohammad Danesh Science and Technology University"
+      ],
+      "affiliations_text": "Southern University Bangladesh, Hajee Mohammad Danesh Science and Technology University",
+      "score": 2.9774959633290585,
+      "score_text": "3.0"
+    },
+    {
+      "id": "2611.33248v1",
+      "rank": 15,
+      "section": "quick",
+      "paper_id": "2026/11/26/261133248v1-typical-angina-reversed-a-long-standing-documentation-error-in-the-uci-heart-disease-data",
+      "source": "arxiv",
+      "title": "Typical Angina, Reversed: A Long-Standing Documentation Error in the UCI Heart Disease Data",
+      "authors": [
+        "Tejas Tovinkere Pattabhi"
+      ],
+      "authors_text": "Tejas Tovinkere Pattabhi",
+      "abstract": "The UCI Heart Disease data are a widely used machine-learning benchmark. We show that their chest-pain variable is stored in reverse of its documentation. At all four sites, the code documented as \"asymptomatic\" (4) marks patients with typical angina, and the code documented as \"typical angina\" (1) marks patients with almost none of the classical angina features (at Cleveland, no chest pain).\n  Two complementary checks establish this: (i) the chest-pain table and regression coefficients of the original 1986 Cleveland study are reproduced only under the corrected reading; (ii) in the Budapest, Switzerland and Long Beach files, 93-96% of patients coded 4 have all three classical angina features. A 1990 word-labeled Cleveland file already uses the documented labels, and Statlog (Heart), a Cleveland subset, stores the same codes. OpenML, PMLB and two highly voted Kaggle copies that name the categories use the same documented labels (about 400,000 downloads combined).\n  We audited a seeded random sample of 150 records from a pre-specified Scholar query for SHAP studies of these data mentioning asymptomatic chest pain (124 readable). Of 32 papers that state a direction for a named category, 25 (78%; 95% CI 61-89%) state one inconsistent with the corrected category identities; 22 (69%; 51-82%; post hoc) are attributable to the documentation error, and nine of these explain it clinically. None of the 124 readable papers identifies the reversal.\n  Conventional models are essentially unaffected, one reason the error went unnoticed. Interpretations that attach the documented names to model effects are reversed, and zero-shot language-model classifiers that read the labels are misled: with the documented labels, three open-weight models lose 0.12-0.33 in area under the receiver operating characteristic curve (AUC) given age, sex and chest-pain type. We give the corrected mapping, evidence and code.",
+      "url": "http://arxiv.org/abs/2611.33248v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.33248v1",
+      "tldr": "The UCI Heart Disease dataset’s chest-pain variable is stored in reverse of its documentation—code 4 labeled “asymptomatic” actually denotes typical angina and code 1 labeled “typical angina” denotes asymptomatic/no chest pain—a long-standing error that barely affects conventional model accuracy but reverses clinical interpretations and misleads label-reading models, so the paper provides the corrected mapping, evidence, and code.",
+      "detailed_reading": null,
+      "affiliations": [
+        "University of the Cumberlands"
+      ],
+      "affiliations_text": "University of the Cumberlands",
+      "score": 2.2784316712818944,
+      "score_text": "2.3"
+    }
+  ]
+}
