@@ -1,5 +1,7 @@
 - [首页](/README)
 
+- 2026-11-27
+  - [日报](/2026/11/27/README)
 - 2026-11-26
   - [日报](/2026/11/26/README)
   - [精读 · Geophysics-informed invertible operator network for Bayesian geophysical inversion](/2026/11/26/261133178v1-geophysics-informed-invertible-operator-network-for-bayesian-geophysical-inversion)
